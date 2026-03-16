@@ -1,0 +1,424 @@
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|1290|二進制鏈表轉整數|convert-binary-number-in-a-linked-list-to-integer|null|false
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|2058|找出臨界點之間的最小和最大距離|find-the-minimum-and-maximum-number-of-nodes-between-critical-points|null|false
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|2181|合併零之間的節點|merge-nodes-in-between-zeros|null|false
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|725|分隔鏈表|split-linked-list-in-parts|null|false
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|817|鏈表組件|linked-list-components|null|false
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|3263|將雙鏈錶轉換為數組 I|convert-doubly-linked-list-to-array-i|null|true
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|3294|將雙鏈錶轉換為數組 II|convert-doubly-linked-list-to-array-ii|null|true
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|3062|鏈表遊戲的獲勝者|winner-of-the-linked-list-game|null|true
+PROBLEM|一、鏈表 > §1.1 遍歷鏈表|3063|鏈表頻率|linked-list-frequency|null|true
+PROBLEM|一、鏈表 > §1.2 刪除節點|203|移除鏈表元素|remove-linked-list-elements|null|false
+PROBLEM|一、鏈表 > §1.2 刪除節點|3217|從鏈表中移除在數組中存在的節點|delete-nodes-from-linked-list-present-in-array|null|false
+PROBLEM|一、鏈表 > §1.2 刪除節點|83|刪除排序鏈表中的重複元素|remove-duplicates-from-sorted-list|null|false
+PROBLEM|一、鏈表 > §1.2 刪除節點|82|刪除排序鏈表中的重複元素 II|remove-duplicates-from-sorted-list-ii|null|false
+PROBLEM|一、鏈表 > §1.2 刪除節點|237|刪除鏈表中的節點|delete-node-in-a-linked-list|null|false
+PROBLEM|一、鏈表 > §1.2 刪除節點|1669|合併兩個鏈表|merge-in-between-linked-lists|null|false
+PROBLEM|一、鏈表 > §1.2 刪除節點|2487|從鏈表中移除節點|remove-nodes-from-linked-list|null|false
+PROBLEM|一、鏈表 > §1.2 刪除節點|1836|從未排序的鏈表中移除重複元素|remove-duplicates-from-an-unsorted-linked-list|null|true
+PROBLEM|一、鏈表 > §1.3 插入節點|2807|在鏈表中插入最大公約數|insert-greatest-common-divisors-in-linked-list|null|false
+PROBLEM|一、鏈表 > §1.3 插入節點|147|對鏈表進行插入排序|insertion-sort-list|null|false
+PROBLEM|一、鏈表 > §1.3 插入節點|LCR 029|循環有序列表的插入|4ueAj6|null|false
+PROBLEM|一、鏈表 > §1.3 插入節點|708|循環有序列表的插入|insert-into-a-sorted-circular-linked-list|null|true
+PROBLEM|一、鏈表 > §1.3 插入節點|2046|給按照絕對值排序的鏈表排序|sort-linked-list-already-sorted-using-absolute-values|null|true
+PROBLEM|一、鏈表 > §1.4 反轉鏈表|206|反轉鏈表|reverse-linked-list|null|false
+PROBLEM|一、鏈表 > §1.4 反轉鏈表|92|反轉鏈表 II|reverse-linked-list-ii|null|false
+PROBLEM|一、鏈表 > §1.4 反轉鏈表|24|兩兩交換鏈表中的節點|swap-nodes-in-pairs|null|false
+PROBLEM|一、鏈表 > §1.4 反轉鏈表|25|K 個一組翻轉鏈表|reverse-nodes-in-k-group|null|false
+PROBLEM|一、鏈表 > §1.4 反轉鏈表|2074|反轉偶數長度組的節點|reverse-nodes-in-even-length-groups|null|false
+PROBLEM|一、鏈表 > §1.5 前後指針|19|刪除鏈表的倒數第 N 個結點|remove-nth-node-from-end-of-list|null|false
+PROBLEM|一、鏈表 > §1.5 前後指針|61|旋轉鏈表|rotate-list|null|false
+PROBLEM|一、鏈表 > §1.5 前後指針|1721|交換鏈表中的節點|swapping-nodes-in-a-linked-list|null|false
+PROBLEM|一、鏈表 > §1.5 前後指針|1474|刪除鏈表 M 個節點之後的 N 個節點|delete-n-nodes-after-m-nodes-of-a-linked-list|null|true
+PROBLEM|一、鏈表 > §1.6 快慢指針|876|鏈表的中間結點|middle-of-the-linked-list|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|2095|刪除鏈表的中間節點|delete-the-middle-node-of-a-linked-list|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|234|迴文鏈表|palindrome-linked-list|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|2130|鏈表最大孿生和|maximum-twin-sum-of-a-linked-list|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|143|重排鏈表|reorder-list|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|141|環形鏈表|linked-list-cycle|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|142|環形鏈表 II|linked-list-cycle-ii|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|457|環形數組是否存在循環|circular-array-loop|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針|2674|拆分循環鏈表|split-a-circular-linked-list|null|true
+PROBLEM|一、鏈表 > §1.6 快慢指針思維擴展|287|尋找重複數|find-the-duplicate-number|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針思維擴展|1015|可被 K 整除的最小整數|smallest-integer-divisible-by-k|null|false
+PROBLEM|一、鏈表 > §1.6 快慢指針思維擴展|3790|最小全 1 倍數|smallest-all-ones-multiple|null|false
+PROBLEM|一、鏈表 > §1.7 雙指針|328|奇偶鏈表|odd-even-linked-list|null|false
+PROBLEM|一、鏈表 > §1.7 雙指針|86|分隔鏈表|partition-list|null|false
+PROBLEM|一、鏈表 > §1.7 雙指針|160|相交鏈表|intersection-of-two-linked-lists|null|false
+PROBLEM|一、鏈表 > §1.8 合併鏈表|2|兩數相加|add-two-numbers|null|false
+PROBLEM|一、鏈表 > §1.8 合併鏈表|445|兩數相加 II|add-two-numbers-ii|null|false
+PROBLEM|一、鏈表 > §1.8 合併鏈表|2816|翻倍以鏈表形式表示的數字|double-a-number-represented-as-a-linked-list|null|false
+PROBLEM|一、鏈表 > §1.8 合併鏈表|21|合併兩個有序鏈表|merge-two-sorted-lists|null|false
+PROBLEM|一、鏈表 > §1.8 合併鏈表|369|給單鏈表加一|plus-one-linked-list|null|true
+PROBLEM|一、鏈表 > §1.8 合併鏈表|1634|求兩個多項式鏈表的和|add-two-polynomials-represented-as-linked-lists|null|true
+PROBLEM|一、鏈表 > §1.9 分治|23|合併 K 個升序鏈表|merge-k-sorted-lists|null|false
+PROBLEM|一、鏈表 > §1.9 分治|148|排序鏈表|sort-list|null|false
+PROBLEM|一、鏈表 > §1.10 綜合應用|1019|鏈表中的下一個更大節點|next-greater-node-in-linked-list|null|false
+PROBLEM|一、鏈表 > §1.10 綜合應用|1171|從鏈表中刪去總和值為零的連續節點|remove-zero-sum-consecutive-nodes-from-linked-list|null|false
+PROBLEM|一、鏈表 > §1.10 綜合應用|707|設計鏈表|design-linked-list|null|false
+PROBLEM|一、鏈表 > §1.10 綜合應用|146|LRU 緩存|lru-cache|null|false
+PROBLEM|一、鏈表 > §1.10 綜合應用|460|LFU 緩存|lfu-cache|null|false
+PROBLEM|一、鏈表 > §1.10 綜合應用|432|全 O(1) 的數據結構|all-oone-data-structure|null|false
+PROBLEM|一、鏈表 > §1.10 綜合應用|1206|設計跳錶|design-skiplist|null|false
+PROBLEM|一、鏈表 > §1.11 其他|138|隨機鏈表的複製|copy-list-with-random-pointer|null|false
+PROBLEM|一、鏈表 > §1.11 其他|382|鏈表隨機節點|linked-list-random-node|null|false
+PROBLEM|一、鏈表 > §1.11 其他|430|扁平化多級雙向鏈表|flatten-a-multilevel-doubly-linked-list|null|false
+PROBLEM|一、鏈表 > §1.11 其他|1265|逆序打印不可變鏈表|print-immutable-linked-list-in-reverse|null|true
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|144|二叉樹的前序遍歷|binary-tree-preorder-traversal|null|false
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|94|二叉樹的中序遍歷|binary-tree-inorder-traversal|null|false
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|145|二叉樹的後序遍歷|binary-tree-postorder-traversal|null|false
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|872|葉子相似的樹|leaf-similar-trees|1288|false
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|LCP 44|開幕式焰火|sZ59z6|null|false
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|404|左葉子之和|sum-of-left-leaves|null|false
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|671|二叉樹中第二小的節點|second-minimum-node-in-a-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|1469|尋找所有的獨生節點|find-all-the-lonely-nodes|null|true
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|1214|查找兩棵二叉搜索樹之和|two-sum-bsts|null|true
+PROBLEM|二、二叉樹 > §2.1 遍歷二叉樹|2764|數組是否表示某二叉樹的前序遍歷|is-array-a-preorder-of-some-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|104|二叉樹的最大深度|maximum-depth-of-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|111|二叉樹的最小深度|minimum-depth-of-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|112|路徑總和|path-sum|null|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|129|求根節點到葉節點數字之和|sum-root-to-leaf-numbers|null|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|199|二叉樹的右視圖|binary-tree-right-side-view|null|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|1448|統計二叉樹中好節點的數目|count-good-nodes-in-binary-tree|1360|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|1315|祖父節點值為偶數的節點和|sum-of-nodes-with-even-valued-grandparent|1427|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|988|從葉結點開始的最小字符串|smallest-string-starting-from-leaf|1429|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|1026|節點與其祖先之間的最大差值|maximum-difference-between-node-and-ancestor|1446|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|1022|從根到葉的二進制數之和|sum-of-root-to-leaf-binary-numbers|1462|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|623|在二叉樹中增加一行|add-one-row-to-tree|null|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|1372|二叉樹中的最長交錯路徑|longest-zigzag-path-in-a-binary-tree|1713|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|971|翻轉二叉樹以匹配先序遍歷|flip-binary-tree-to-match-preorder-traversal|1787|false
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|2689|從 Rope 樹中提取第 K 個字符|extract-kth-character-from-the-rope-tree|null|true
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|298|二叉樹最長連續序列|binary-tree-longest-consecutive-sequence|null|true
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|1430|判斷給定的序列是否是二叉樹從根到葉的路徑|check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.2 自頂向下 DFS|545|二叉樹的邊界|boundary-of-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|104|二叉樹的最大深度|maximum-depth-of-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|111|二叉樹的最小深度|minimum-depth-of-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|965|單值二叉樹|univalued-binary-tree|1178|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|100|相同的樹|same-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|101|對稱二叉樹|symmetric-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|951|翻轉等價二叉樹|flip-equivalent-binary-trees|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1379|找出克隆二叉樹中的相同節點|find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|110|平衡二叉樹|balanced-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|226|翻轉二叉樹|invert-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|617|合併二叉樹|merge-two-binary-trees|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|2331|計算布爾二叉樹的值|evaluate-boolean-binary-tree|1304|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|508|出現次數最多的子樹元素和|most-frequent-subtree-sum|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|563|二叉樹的坡度|binary-tree-tilt|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|606|根據二叉樹創建字符串|construct-string-from-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|2265|統計值等於子樹平均值的節點數|count-nodes-equal-to-average-of-subtree|1473|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1026|節點與其祖先之間的最大差值|maximum-difference-between-node-and-ancestor|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|3319|第 K 大的完美二叉子樹的大小|k-th-largest-perfect-subtree-size-in-binary-tree|1603|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1339|分裂二叉樹的最大乘積|maximum-product-of-splitted-binary-tree|1675|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1372|二叉樹中的最長交錯路徑|longest-zigzag-path-in-a-binary-tree|1713|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1145|二叉樹着色遊戲|binary-tree-coloring-game|1741|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|572|另一棵樹的子樹|subtree-of-another-tree|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1530|好葉子節點對的數量|number-of-good-leaf-nodes-pairs|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|LCP 67|裝飾樹|KnLfVT|null|false
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|298|二叉樹最長連續序列|binary-tree-longest-consecutive-sequence|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|250|統計同值子樹|count-univalue-subtrees|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1973|值等於子節點值之和的節點數量|count-nodes-equal-to-sum-of-descendants|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|663|均勻樹劃分|equal-tree-partition|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1120|子樹的最大平均值|maximum-average-subtree|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|2792|計算足夠大的節點數|count-nodes-that-are-great-enough|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|333|最大二叉搜索子樹|largest-bst-subtree|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|366|尋找二叉樹的葉子節點|find-leaves-of-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|156|上下翻轉二叉樹|binary-tree-upside-down|null|true
+PROBLEM|二、二叉樹 > §2.3 自底向上 DFS|1612|檢查兩棵二叉表達式樹是否等價|check-if-two-expression-trees-are-equivalent|null|true
+PROBLEM|二、二叉樹 > §2.4 自底向上 DFS：刪點|814|二叉樹剪枝|binary-tree-pruning|1380|false
+PROBLEM|二、二叉樹 > §2.4 自底向上 DFS：刪點|1325|刪除給定值的葉子節點|delete-leaves-with-a-given-value|1407|false
+PROBLEM|二、二叉樹 > §2.4 自底向上 DFS：刪點|1110|刪點成林|delete-nodes-and-return-forest|1511|false
+PROBLEM|二、二叉樹 > §2.5 有遞有歸|538|把二叉搜索樹轉換為累加樹|convert-bst-to-greater-tree|1375|false
+PROBLEM|二、二叉樹 > §2.5 有遞有歸|1038|從二叉搜索樹到更大和樹|binary-search-tree-to-greater-sum-tree|null|false
+PROBLEM|二、二叉樹 > §2.5 有遞有歸|865|具有所有最深節點的最小子樹|smallest-subtree-with-all-the-deepest-nodes|1534|false
+PROBLEM|二、二叉樹 > §2.5 有遞有歸|1080|根到葉路徑上的不足節點|insufficient-nodes-in-root-to-leaf-paths|1805|false
+PROBLEM|二、二叉樹 > §2.6 二叉樹的直徑|543|二叉樹的直徑|diameter-of-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.6 二叉樹的直徑|687|最長同值路徑|longest-univalue-path|null|false
+PROBLEM|二、二叉樹 > §2.6 二叉樹的直徑|124|二叉樹中的最大路徑和|binary-tree-maximum-path-sum|null|false
+PROBLEM|二、二叉樹 > §2.6 二叉樹的直徑|2385|感染二叉樹需要的總時間|amount-of-time-for-binary-tree-to-be-infected|1711|false
+PROBLEM|二、二叉樹 > §2.6 二叉樹的直徑|549|二叉樹最長連續序列 II|binary-tree-longest-consecutive-sequence-ii|null|true
+PROBLEM|二、二叉樹 > §2.7 回溯|257|二叉樹的所有路徑|binary-tree-paths|null|false
+PROBLEM|二、二叉樹 > §2.7 回溯|113|路徑總和 II|path-sum-ii|null|false
+PROBLEM|二、二叉樹 > §2.7 回溯|1457|二叉樹中的僞迴文路徑|pseudo-palindromic-paths-in-a-binary-tree|1405|false
+PROBLEM|二、二叉樹 > §2.7 回溯|437|路徑總和 III|path-sum-iii|null|false
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|235|二叉搜索樹的最近公共祖先|lowest-common-ancestor-of-a-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|236|二叉樹的最近公共祖先|lowest-common-ancestor-of-a-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|1123|最深葉節點的最近公共祖先|lowest-common-ancestor-of-deepest-leaves|1607|false
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|2096|從二叉樹一個節點到另一個節點每一步的方向|step-by-step-directions-from-a-binary-tree-node-to-another|1805|false
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|1740|找到二叉樹中的距離|find-distance-in-a-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|1644|二叉樹的最近公共祖先 II|lowest-common-ancestor-of-a-binary-tree-ii|null|true
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|1650|二叉樹的最近公共祖先 III|lowest-common-ancestor-of-a-binary-tree-iii|null|true
+PROBLEM|二、二叉樹 > §2.8 最近公共祖先|1676|二叉樹的最近公共祖先 IV|lowest-common-ancestor-of-a-binary-tree-iv|null|true
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|700|二叉搜索樹中的搜索|search-in-a-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|530|二叉搜索樹的最小絕對差|minimum-absolute-difference-in-bst|1303|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|783|二叉搜索樹節點最小距離|minimum-distance-between-bst-nodes|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|938|二叉搜索樹的範圍和|range-sum-of-bst|1335|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|501|二叉搜索樹中的衆數|find-mode-in-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|230|二叉搜索樹中第 K 小的元素|kth-smallest-element-in-a-bst|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|98|驗證二叉搜索樹|validate-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|1305|兩棵二叉搜索樹中的所有元素|all-elements-in-two-binary-search-trees|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|99|恢復二叉搜索樹|recover-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|897|遞增順序搜索樹|increasing-order-search-tree|1473|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|2476|二叉搜索樹最近節點查詢|closest-nodes-queries-in-a-binary-search-tree|1597|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|653|兩數之和 IV - 輸入二叉搜索樹|two-sum-iv-input-is-a-bst|null|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|1373|二叉搜索子樹的最大鍵值和|maximum-sum-bst-in-binary-tree|1914|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|1932|合併多棵二叉搜索樹|merge-bsts-to-create-single-bst|2484|false
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|285|二叉搜索樹中的中序後繼|inorder-successor-in-bst|null|true
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|510|二叉搜索樹中的中序後繼 II|inorder-successor-in-bst-ii|null|true
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|270|最接近的二叉搜索樹值|closest-binary-search-tree-value|null|true
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|272|最接近的二叉搜索樹值 II|closest-binary-search-tree-value-ii|null|true
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|255|驗證二叉搜索樹的前序遍歷序列|verify-preorder-sequence-in-binary-search-tree|null|true
+PROBLEM|二、二叉樹 > §2.9 二叉搜索樹|1902|給定二叉搜索樹的插入順序求深度|depth-of-bst-given-insertion-order|null|true
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|108|將有序數組轉換為二叉搜索樹|convert-sorted-array-to-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|654|最大二叉樹|maximum-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|998|最大二叉樹 II|maximum-binary-tree-ii|1498|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|1008|前序遍歷構造二叉搜索樹|construct-binary-search-tree-from-preorder-traversal|1563|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|1382|將二叉搜索樹變平衡|balance-a-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|2196|根據描述創建二叉樹|create-binary-tree-from-descriptions|1644|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|105|從前序與中序遍歷序列構造二叉樹|construct-binary-tree-from-preorder-and-inorder-traversal|null|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|106|從中序與後序遍歷序列構造二叉樹|construct-binary-tree-from-inorder-and-postorder-traversal|null|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|889|根據前序和後序遍歷構造二叉樹|construct-binary-tree-from-preorder-and-postorder-traversal|1732|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|1028|從先序遍歷還原二叉樹|recover-a-tree-from-preorder-traversal|1797|false
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|536|從字符串生成二叉樹|construct-binary-tree-from-string|null|true
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|1628|設計帶解析函數的表達式樹|design-an-expression-tree-with-evaluate-function|null|true
+PROBLEM|二、二叉樹 > §2.10 創建二叉樹|1597|根據中綴表達式構造二叉表達式樹|build-binary-expression-tree-from-infix-expression|null|true
+PROBLEM|二、二叉樹 > §2.11 插入/刪除節點|701|二叉搜索樹中的插入操作|insert-into-a-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.11 插入/刪除節點|450|刪除二叉搜索樹中的節點|delete-node-in-a-bst|null|false
+PROBLEM|二、二叉樹 > §2.11 插入/刪除節點|669|修剪二叉搜索樹|trim-a-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.11 插入/刪除節點|776|拆分二叉搜索樹|split-bst|null|true
+PROBLEM|二、二叉樹 > §2.11 插入/刪除節點|1666|改變二叉樹的根節點|change-the-root-of-a-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.12 樹形 DP|337|打家劫舍 III|house-robber-iii|null|false
+PROBLEM|二、二叉樹 > §2.12 樹形 DP|968|監控二叉樹|binary-tree-cameras|null|false
+PROBLEM|二、二叉樹 > §2.12 樹形 DP|LCP 10|二叉樹任務調度|er-cha-shu-ren-wu-diao-du|null|false
+PROBLEM|二、二叉樹 > §2.12 樹形 DP|LCP 34|二叉樹染色|er-cha-shu-ran-se-UGC|null|false
+PROBLEM|二、二叉樹 > §2.12 樹形 DP|LCP 64|二叉樹燈飾|U7WvvU|null|false
+PROBLEM|二、二叉樹 > §2.12 樹形 DP|2313|二叉樹中得到結果所需的最少翻轉次數|minimum-flips-in-binary-tree-to-get-result|null|true
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|102|二叉樹的層序遍歷|binary-tree-level-order-traversal|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|103|二叉樹的鋸齒形層序遍歷|binary-tree-zigzag-level-order-traversal|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|107|二叉樹的層序遍歷 II|binary-tree-level-order-traversal-ii|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|199|二叉樹的右視圖|binary-tree-right-side-view|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|513|找樹左下角的值|find-bottom-left-tree-value|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|515|在每個樹行中找最大值|find-largest-value-in-each-tree-row|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|637|二叉樹的層平均值|average-of-levels-in-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|1161|最大層內元素和|maximum-level-sum-of-a-binary-tree|1250|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|993|二叉樹的堂兄弟節點|cousins-in-binary-tree|1288|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|2583|二叉樹中的第 K 大層和|kth-largest-sum-in-a-binary-tree|1374|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|1302|層數最深葉子節點的和|deepest-leaves-sum|1388|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|2415|反轉二叉樹的奇數層|reverse-odd-levels-of-binary-tree|1431|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|1609|奇偶樹|even-odd-tree|1438|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|623|在二叉樹中增加一行|add-one-row-to-tree|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|2471|逐層排序二叉樹所需的最少操作數目|minimum-number-of-operations-to-sort-a-binary-tree-by-level|1635|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|2641|二叉樹的堂兄弟節點 II|cousins-in-binary-tree-ii|1677|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|919|完全二叉樹插入器|complete-binary-tree-inserter|1691|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|958|二叉樹的完全性檢驗|check-completeness-of-a-binary-tree|1703|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|863|二叉樹中所有距離為 K 的結點|all-nodes-distance-k-in-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|662|二叉樹最大寬度|maximum-width-of-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|3157|找到具有最小和的樹的層數|find-the-level-of-tree-with-minimum-sum|null|true
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|3831|二叉搜索樹某一層的中位數|median-of-a-binary-search-tree-level|null|true
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|1602|找到二叉樹中最近的右側節點|find-nearest-right-node-in-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|742|二叉樹最近的葉節點|closest-leaf-in-a-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.13 二叉樹 BFS|1660|糾正二叉樹|correct-a-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.14 鏈表+二叉樹|114|二叉樹展開為鏈表|flatten-binary-tree-to-linked-list|null|false
+PROBLEM|二、二叉樹 > §2.14 鏈表+二叉樹|1367|二叉樹中的鏈表|linked-list-in-binary-tree|1650|false
+PROBLEM|二、二叉樹 > §2.14 鏈表+二叉樹|109|有序鏈表轉換二叉搜索樹|convert-sorted-list-to-binary-search-tree|null|false
+PROBLEM|二、二叉樹 > §2.14 鏈表+二叉樹|116|填充每個節點的下一個右側節點指針|populating-next-right-pointers-in-each-node|null|false
+PROBLEM|二、二叉樹 > §2.14 鏈表+二叉樹|117|填充每個節點的下一個右側節點指針 II|populating-next-right-pointers-in-each-node-ii|null|false
+PROBLEM|二、二叉樹 > §2.14 鏈表+二叉樹|426|將二叉搜索樹轉化為排序的雙向鏈表|convert-binary-search-tree-to-sorted-doubly-linked-list|null|true
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|589|N 叉樹的前序遍歷|n-ary-tree-preorder-traversal|null|false
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|590|N 叉樹的後序遍歷|n-ary-tree-postorder-traversal|null|false
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|559|N 叉樹的最大深度|maximum-depth-of-n-ary-tree|null|false
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|429|N 叉樹的層序遍歷|n-ary-tree-level-order-traversal|null|false
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|427|建立四叉樹|construct-quad-tree|null|false
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|558|四叉樹交集|logical-or-of-two-binary-grids-represented-as-quad-trees|null|false
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|428|序列化和反序列化 N 叉樹|serialize-and-deserialize-n-ary-tree|null|true
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|1490|克隆 N 叉樹|clone-n-ary-tree|null|true
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|1506|找到 N 叉樹的根節點|find-root-of-n-ary-tree|null|true
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|1522|N 叉樹的直徑|diameter-of-n-ary-tree|null|true
+PROBLEM|二、二叉樹 > §2.15 N 叉樹|1516|移動 N 叉樹的子樹|move-sub-tree-of-n-ary-tree|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|1261|在受污染的二叉樹中查找元素|find-elements-in-a-contaminated-binary-tree|1440|false
+PROBLEM|二、二叉樹 > §2.16 其他|1104|二叉樹尋路|path-in-zigzag-labelled-binary-tree|1545|false
+PROBLEM|二、二叉樹 > §2.16 其他|987|二叉樹的垂序遍歷|vertical-order-traversal-of-a-binary-tree|1676|false
+PROBLEM|二、二叉樹 > §2.16 其他|655|輸出二叉樹|print-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|979|在二叉樹中分配硬幣|distribute-coins-in-binary-tree|1709|false
+PROBLEM|二、二叉樹 > §2.16 其他|222|完全二叉樹的節點個數|count-complete-tree-nodes|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|297|二叉樹的序列化與反序列化|serialize-and-deserialize-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|449|序列化和反序列化二叉搜索樹|serialize-and-deserialize-bst|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|331|驗證二叉樹的前序序列化|verify-preorder-serialization-of-a-binary-tree|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|652|尋找重複的子樹|find-duplicate-subtrees|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|173|二叉搜索樹迭代器|binary-search-tree-iterator|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|2049|統計最高分的節點數目|count-nodes-with-the-highest-score|1912|false
+PROBLEM|二、二叉樹 > §2.16 其他|2673|使二叉樹所有路徑值相等的最小代價|make-costs-of-paths-equal-in-a-binary-tree|1917|false
+PROBLEM|二、二叉樹 > §2.16 其他|2509|查詢樹中環的長度|cycle-length-queries-in-a-tree|1948|false
+PROBLEM|二、二叉樹 > §2.16 其他|2458|移除子樹後的二叉樹高度|height-of-binary-tree-after-subtree-removal-queries|2299|false
+PROBLEM|二、二叉樹 > §2.16 其他|LCP 26|導航裝置|hSRGyL|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|LCP 60|力扣泡泡龍|WInSav|null|false
+PROBLEM|二、二叉樹 > §2.16 其他|314|二叉樹的垂直遍歷|binary-tree-vertical-order-traversal|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|666|路徑總和 IV|path-sum-iv|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|1586|二叉搜索樹迭代器 II|binary-search-tree-iterator-ii|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|2773|特殊二叉樹的高度|height-of-special-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|1485|克隆含隨機指針的二叉樹|clone-binary-tree-with-random-pointer|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|2445|值為 1 的節點數|number-of-nodes-with-value-one|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|431|將 N 叉樹編碼為二叉樹|encode-n-ary-tree-to-binary-tree|null|true
+PROBLEM|二、二叉樹 > §2.16 其他|2005|斐波那契樹的移除子樹遊戲|subtree-removal-game-with-fibonacci-tree|null|true
+PROBLEM|三、一般樹 > §3.1 遍歷|2368|受限條件下可到達節點的數目|reachable-nodes-with-restrictions|1477|false
+PROBLEM|三、一般樹 > §3.1 遍歷|1466|重新規劃路線|reorder-routes-to-make-all-paths-lead-to-the-city-zero|1634|false
+PROBLEM|三、一般樹 > §3.1 遍歷|582|殺掉進程|kill-process|null|true
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|1376|通知所有員工所需的時間|time-needed-to-inform-all-employees|1561|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|3528|單位轉換 I|unit-conversion-i|1580|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|1443|收集樹上所有蘋果的最少時間|minimum-time-to-collect-all-apples-in-a-tree|1683|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|3820|樹上的勾股距離節點|pythagorean-distance-nodes-in-a-tree|1725|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|1377|T 秒後青蛙的位置|frog-position-after-t-seconds|1824|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|3067|在帶權樹網絡中統計可連接服務器對數目|count-pairs-of-connectable-servers-in-a-weighted-tree-network|1909|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|3372|連接兩棵樹後最大目標節點數目 I|maximize-the-number-of-target-nodes-after-connecting-trees-i|1927|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|2467|樹上最大得分和路徑|most-profitable-path-in-a-tree|2053|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|3373|連接兩棵樹後最大目標節點數目 II|maximize-the-number-of-target-nodes-after-connecting-trees-ii|2162|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|1766|互質樹|tree-of-coprimes|2232|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|2791|樹中可以形成迴文的路徑數|count-paths-that-can-form-a-palindrome-in-a-tree|2677|false
+PROBLEM|三、一般樹 > §3.2 自頂向下 DFS|3535|單位轉換 II|unit-conversion-ii|null|true
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|690|員工的重要性|employee-importance|null|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|3249|統計好節點的數目|count-the-number-of-good-nodes|1566|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|1519|子樹中標籤相同的節點數|number-of-nodes-in-the-sub-tree-with-the-same-label|1809|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|3558|給邊賦權值的方案數 I|number-of-ways-to-assign-edge-weights-i|1845|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|3593|使葉子路徑成本相等的最小增量|minimum-increments-to-equalize-leaf-paths|1959|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|2872|可以被 K 整除連通塊的最大數目|maximum-number-of-k-divisible-components|1968|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|2477|到達首都的最少油耗|minimum-fuel-cost-to-report-to-the-capital|2012|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|3812|翻轉樹上最少邊|minimum-edge-toggles-on-a-tree|2179|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|2973|樹中每個節點放置的金幣數目|find-number-of-coins-to-place-in-tree-nodes|2277|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|2440|創建價值相同的連通塊|create-components-with-same-value|2460|false
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|1273|刪除樹節點|delete-tree-nodes|null|true
+PROBLEM|三、一般樹 > §3.3 自底向上 DFS|3004|相同顏色的最大子樹|maximum-subtree-of-the-same-color|null|true
+PROBLEM|三、一般樹 > §3.4 有遞有歸|3593|使葉子路徑成本相等的最小增量|minimum-increments-to-equalize-leaf-paths|1959|false
+PROBLEM|三、一般樹 > §3.4 有遞有歸|3331|修改後子樹的大小|find-subtree-sizes-after-changes|2046|false
+PROBLEM|三、一般樹 > §3.5 樹的直徑|2246|相鄰字符不同的最長路徑|longest-path-with-different-adjacent-characters|2126|false
+PROBLEM|三、一般樹 > §3.5 樹的直徑|3203|合併兩棵樹後的最小直徑|find-minimum-diameter-after-merging-two-trees|2266|false
+PROBLEM|三、一般樹 > §3.5 樹的直徑|1617|統計子樹中城市之間最大距離|count-subtrees-with-max-distance-between-cities|2309|false
+PROBLEM|三、一般樹 > §3.5 樹的直徑|2538|最大價值和與最小价值和的差值|difference-between-maximum-and-minimum-price-sum|2398|false
+PROBLEM|三、一般樹 > §3.5 樹的直徑|1245|樹的直徑|tree-diameter|null|true
+PROBLEM|三、一般樹 > §3.5 樹的直徑|3787|查找樹的直徑端點|find-diameter-endpoints-of-a-tree|null|true
+PROBLEM|三、一般樹 > §3.5 樹的直徑|3313|查找樹中最後標記的節點|find-the-last-marked-nodes-in-tree|null|true
+PROBLEM|三、一般樹 > §3.6 樹的拓撲排序|310|最小高度樹|minimum-height-trees|null|false
+PROBLEM|三、一般樹 > §3.6 樹的拓撲排序|3812|翻轉樹上最少邊|minimum-edge-toggles-on-a-tree|2179|false
+PROBLEM|三、一般樹 > §3.6 樹的拓撲排序|2603|收集樹中金幣|collect-coins-in-a-tree|2712|false
+PROBLEM|三、一般樹 > §3.7 DFS 時間戳|3515|帶權樹中的最短路徑|shortest-path-in-a-weighted-tree|2312|false
+PROBLEM|三、一般樹 > §3.7 DFS 時間戳|LCP 05|發 LeetCoin|coin-bonus|null|false
+PROBLEM|三、一般樹 > §3.7 DFS 時間戳|2322|從樹中刪除邊的最小分數|minimum-score-after-removals-on-a-tree|2392|false
+PROBLEM|三、一般樹 > §3.7 DFS 時間戳|3327|判斷 DFS 字符串是否是迴文串|check-if-dfs-strings-are-palindromes|2454|false
+PROBLEM|三、一般樹 > §3.7 DFS 時間戳|3590|第 K 小的路徑異或和|kth-smallest-path-xor-sum|2646|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先|1483|樹節點的第 K 個祖先|kth-ancestor-of-a-tree-node|2115|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先|3559|給邊賦權值的方案數 II|number-of-ways-to-assign-edge-weights-ii|2146|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先|3553|包含給定路徑的最小帶權子樹 II|minimum-weighted-subgraph-with-the-required-paths-ii|2411|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先|3585|樹中找到帶權中位節點|find-weighted-median-node-in-tree|2429|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先|2846|邊權重均等查詢|minimum-edge-weight-equilibrium-queries-in-a-tree|2508|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先|2646|最小化旅行的價格總和|minimize-the-total-price-of-the-trips|null|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先|2277|樹中最接近路徑的節點|closest-node-to-path-in-tree|null|true
+PROBLEM|三、一般樹 > §3.8 最近公共祖先數組上的倍增|3534|針對圖的路徑存在性查詢 II|path-existence-queries-in-a-graph-ii|2507|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先數組上的倍增|2836|在傳球遊戲中最大化函數值|maximize-value-of-function-in-a-ball-passing-game|2769|false
+PROBLEM|三、一般樹 > §3.8 最近公共祖先數組上的倍增|3464|正方形上的點之間的最大距離|maximize-the-distance-between-points-on-a-square|null|false
+PROBLEM|三、一般樹 > §3.9 虛樹|3786|樹組的交互代價總和|total-sum-of-interaction-cost-in-tree-groups|null|false
+PROBLEM|三、一般樹 > §3.10 樹上啓發式合併|2003|每棵子樹內缺失的最小基因值|smallest-missing-genetic-value-in-each-subtree|2415|false
+PROBLEM|三、一般樹 > §3.10 樹上啓發式合併|3590|第 K 小的路徑異或和|kth-smallest-path-xor-sum|2646|false
+PROBLEM|三、一般樹 > §3.10 樹上啓發式合併|3575|最大好子樹分數|maximum-good-subtree-score|null|false
+PROBLEM|三、一般樹 > §3.11 點分治|3372|連接兩棵樹後最大目標節點數目 I|maximize-the-number-of-target-nodes-after-connecting-trees-i|null|false
+PROBLEM|三、一般樹 > §3.12 樹上滑動窗口|3425|最長特殊路徑|longest-special-path|2435|false
+PROBLEM|三、一般樹 > §3.12 樹上滑動窗口|3486|最長特殊路徑 II|longest-special-path-ii|2925|false
+PROBLEM|三、一般樹 > §3.13 其他|2867|統計樹中的合法路徑數目|count-valid-paths-in-a-tree|2428|false
+PROBLEM|三、一般樹 > §3.13 其他|2421|好路徑的數目|number-of-good-paths|2445|false
+PROBLEM|三、一般樹 > §3.13 其他|1719|重構一棵樹的方案數|number-of-ways-to-reconstruct-a-tree|3018|false
+PROBLEM|三、一般樹 > §3.13 其他|2479|兩個不重疊子樹的最大異或值|maximum-xor-of-two-non-overlapping-subtrees|null|true
+PROBLEM|四、回溯 > §4.1 入門回溯|17|電話號碼的字母組合|letter-combinations-of-a-phone-number|null|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|78|子集|subsets|null|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|1863|找出所有子集的異或總和再求和|sum-of-all-subset-xor-totals|1372|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|784|字母大小寫全排列|letter-case-permutation|null|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|3566|等積子集的劃分方案|partition-array-into-two-equal-product-subsets|1459|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|2044|統計按位或能得到最大值的子集數目|count-number-of-maximum-bitwise-or-subsets|1568|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|LCP 51|烹飪料理|UEcfPD|null|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|2397|被列覆蓋的最多行數|maximum-rows-covered-by-columns|1719|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|1239|串聯字符串的最大長度|maximum-length-of-a-concatenated-string-with-unique-characters|1720|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|2212|射箭比賽中的最大得分|maximum-points-in-an-archery-competition|1869|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|1255|得分最高的單詞集合|maximum-score-words-formed-by-letters|1882|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|2151|基於陳述統計最多好人數|maximum-good-people-based-on-statements|1980|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|2597|美麗子集的數目|the-number-of-beautiful-subsets|2023|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|2959|關閉分部的可行集合數目|number-of-possible-sets-of-closing-branches|2077|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|1601|最多可達成的換樓請求數目|maximum-number-of-achievable-transfer-requests|2119|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|1617|統計子樹中城市之間最大距離|count-subtrees-with-max-distance-between-cities|2309|false
+PROBLEM|四、回溯 > §4.2 子集型回溯|2174|通過翻轉行或列來去除所有的 1 II|remove-all-ones-with-row-and-column-flips-ii|null|true
+PROBLEM|四、回溯 > §4.2 子集型回溯|320|列舉單詞的全部縮寫|generalized-abbreviation|null|true
+PROBLEM|四、回溯 > §4.2 子集型回溯|254|因子的組合|factor-combinations|null|true
+PROBLEM|四、回溯 > §4.2 子集型回溯思維擴展|39|組合總和|combination-sum|null|false
+PROBLEM|四、回溯 > §4.2 子集型回溯思維擴展|2002|兩個迴文子序列長度的最大乘積|maximum-product-of-the-length-of-two-palindromic-subsequences|1869|false
+PROBLEM|四、回溯 > §4.3 劃分型回溯|131|分割回文串|palindrome-partitioning|null|false
+PROBLEM|四、回溯 > §4.3 劃分型回溯|2698|求一個整數的懲罰數|find-the-punishment-number-of-an-integer|1679|false
+PROBLEM|四、回溯 > §4.3 劃分型回溯|1593|拆分字符串使唯一子字符串的數目最大|split-a-string-into-the-max-number-of-unique-substrings|1740|false
+PROBLEM|四、回溯 > §4.3 劃分型回溯|1849|將字符串拆分為遞減的連續值|splitting-a-string-into-descending-consecutive-values|1747|false
+PROBLEM|四、回溯 > §4.3 劃分型回溯|93|復原 IP 地址|restore-ip-addresses|null|false
+PROBLEM|四、回溯 > §4.3 劃分型回溯|140|單詞拆分 II|word-break-ii|null|false
+PROBLEM|四、回溯 > §4.3 劃分型回溯|291|單詞規律 II|word-pattern-ii|null|true
+PROBLEM|四、回溯 > §4.4 組合型回溯|77|組合|combinations|null|false
+PROBLEM|四、回溯 > §4.4 組合型回溯|216|組合總和 III|combination-sum-iii|null|false
+PROBLEM|四、回溯 > §4.4 組合型回溯|1286|字母組合迭代器|iterator-for-combination|1591|false
+PROBLEM|四、回溯 > §4.4 組合型回溯|22|括號生成|generate-parentheses|null|false
+PROBLEM|四、回溯 > §4.4 組合型回溯|301|刪除無效的括號|remove-invalid-parentheses|null|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|46|全排列|permutations|null|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|3799|單詞方塊 II|word-squares-ii|1606|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|3376|破解鎖的最少時間 I|minimum-time-to-break-locks-i|1793|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|51|N 皇后|n-queens|null|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|52|N 皇后 II|n-queens-ii|null|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|2850|將石頭分散到網格圖的最少移動次數|minimum-moves-to-spread-stones-over-grid|2001|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|1718|構建字典序最大的可行序列|construct-the-lexicographically-largest-valid-sequence|2080|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|1307|口算難題|verbal-arithmetic-puzzle|2250|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|37|解數獨|sudoku-solver|null|false
+PROBLEM|四、回溯 > §4.5 排列型回溯|3437|全排列 III|permutations-iii|null|true
+PROBLEM|四、回溯 > §4.5 排列型回溯|267|迴文排列 II|palindrome-permutation-ii|null|true
+PROBLEM|四、回溯 > §4.6 有重複元素的回溯|90|子集 II|subsets-ii|null|false
+PROBLEM|四、回溯 > §4.6 有重複元素的回溯|40|組合總和 II|combination-sum-ii|null|false
+PROBLEM|四、回溯 > §4.6 有重複元素的回溯|491|非遞減子序列|non-decreasing-subsequences|null|false
+PROBLEM|四、回溯 > §4.6 有重複元素的回溯|47|全排列 II|permutations-ii|null|false
+PROBLEM|四、回溯 > §4.6 有重複元素的回溯|1079|活字印刷|letter-tile-possibilities|1741|false
+PROBLEM|四、回溯 > §4.6 有重複元素的回溯|3646|下一個特殊迴文數|next-special-palindrome-number|2445|false
+PROBLEM|四、回溯 > §4.6 有重複元素的回溯|2014|重複 K 次的最長子序列|longest-subsequence-repeated-k-times|2558|false
+PROBLEM|四、回溯 > §4.7 搜索|3211|生成不含相鄰零的二進制字符串|generate-binary-strings-without-adjacent-zeros|1353|false
+PROBLEM|四、回溯 > §4.7 搜索|967|連續差相同的數字|numbers-with-same-consecutive-differences|1433|false
+PROBLEM|四、回溯 > §4.7 搜索|2094|找出 3 位偶數|finding-3-digit-even-numbers|null|false
+PROBLEM|四、回溯 > §4.7 搜索|1415|長度為 n 的開心字符串中字典序第 k 小的字符串|the-k-th-lexicographical-string-of-all-happy-strings-of-length-n|1576|false
+PROBLEM|四、回溯 > §4.7 搜索|1219|黃金礦工|path-with-maximum-gold|1663|false
+PROBLEM|四、回溯 > §4.7 搜索|79|單詞搜索|word-search|null|false
+PROBLEM|四、回溯 > §4.7 搜索|980|不同路徑 III|unique-paths-iii|1830|false
+PROBLEM|四、回溯 > §4.7 搜索|2002|兩個迴文子序列長度的最大乘積|maximum-product-of-the-length-of-two-palindromic-subsequences|1869|false
+PROBLEM|四、回溯 > §4.7 搜索|1255|得分最高的單詞集合|maximum-score-words-formed-by-letters|1882|false
+PROBLEM|四、回溯 > §4.7 搜索|3669|K 因數分解|balanced-k-factor-decomposition|1917|false
+PROBLEM|四、回溯 > §4.7 搜索|756|金字塔轉換矩陣|pyramid-transition-matrix|1990|false
+PROBLEM|四、回溯 > §4.7 搜索|473|火柴拼正方形|matchsticks-to-square|null|false
+PROBLEM|四、回溯 > §4.7 搜索|212|單詞搜索 II|word-search-ii|null|false
+PROBLEM|四、回溯 > §4.7 搜索|638|大禮包|shopping-offers|null|false
+PROBLEM|四、回溯 > §4.7 搜索|1240|鋪瓷磚|tiling-a-rectangle-with-the-fewest-squares|2242|false
+PROBLEM|四、回溯 > §4.7 搜索|679|24 點遊戲|24-game|null|false
+PROBLEM|四、回溯 > §4.7 搜索|282|給表達式添加運算符|expression-add-operators|null|false
+PROBLEM|四、回溯 > §4.7 搜索|126|單詞接龍 II|word-ladder-ii|null|false
+PROBLEM|四、回溯 > §4.7 搜索|691|貼紙拼詞|stickers-to-spell-word|null|false
+PROBLEM|四、回溯 > §4.7 搜索|2056|棋盤上有效移動組合的數目|number-of-valid-move-combinations-on-chessboard|2611|false
+PROBLEM|四、回溯 > §4.7 搜索|2386|找出數組的第 K 大和|find-the-k-sum-of-an-array|2648|false
+PROBLEM|四、回溯 > §4.7 搜索|3509|最大化交錯和為 K 的子序列乘積|maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k|2703|false
+PROBLEM|四、回溯 > §4.7 搜索|488|祖瑪遊戲|zuma-game|null|false
+PROBLEM|四、回溯 > §4.7 搜索|LCP 58|積木拼接|De4qBB|null|false
+PROBLEM|四、回溯 > §4.7 搜索|面試題 17.25|單詞矩陣|word-rectangle-lcci|null|false
+PROBLEM|四、回溯 > §4.7 搜索|2664|巡邏的騎士|the-knights-tour|null|true
+PROBLEM|四、回溯 > §4.7 搜索|3565|順序網格路徑覆蓋|sequential-grid-path-cover|null|true
+PROBLEM|四、回溯 > §4.7 搜索|247|中心對稱數 II|strobogrammatic-number-ii|null|true
+PROBLEM|四、回溯 > §4.7 搜索|248|中心對稱數 III|strobogrammatic-number-iii|null|true
+PROBLEM|四、回溯 > §4.7 搜索|411|最短獨佔單詞縮寫|minimum-unique-word-abbreviation|null|true
+PROBLEM|四、回溯 > §4.7 搜索|1088|易混淆數 II|confusing-number-ii|null|true
+PROBLEM|四、回溯 > §4.8 折半枚舉|805|數組的均值分割|split-array-with-same-average|1983|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|494|目標和|target-sum|null|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|3566|等積子集的劃分方案|partition-array-into-two-equal-product-subsets|null|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|1755|最接近目標值的子序列和|closest-subsequence-sum|2364|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|956|最高的廣告牌|tallest-billboard|2381|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|2035|將數組分成兩個數組並最小化數組和的差|partition-array-into-two-arrays-to-minimize-sum-difference|2490|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|3801|合併有序列表的最小成本|minimum-cost-to-merge-sorted-lists|null|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|3267|統計近似相等數對 II|count-almost-equal-pairs-ii|null|false
+PROBLEM|四、回溯 > §4.8 折半枚舉|LCP 82|萬靈之樹|cnHoX6|null|false
+PROBLEM|五、其他遞歸/分治|3537|填充特殊網格|fill-a-special-grid|1542|false
+PROBLEM|五、其他遞歸/分治|215|數組中的第K個最大元素|kth-largest-element-in-an-array|null|false
+PROBLEM|五、其他遞歸/分治|912|排序數組|sort-an-array|null|false
+PROBLEM|五、其他遞歸/分治|880|索引處的解碼字符串|decoded-string-at-index|2011|false
+PROBLEM|五、其他遞歸/分治|3307|找出第 K 個字符 II|find-the-k-th-character-in-string-game-ii|2232|false
+PROBLEM|五、其他遞歸/分治|1545|找出第 N 個二進制字符串中的第 K 位|find-kth-bit-in-nth-binary-string|null|false
+PROBLEM|五、其他遞歸/分治|3614|用特殊操作處理字符串 II|process-string-with-special-operations-ii|null|false
+PROBLEM|五、其他遞歸/分治|932|漂亮數組|beautiful-array|null|false

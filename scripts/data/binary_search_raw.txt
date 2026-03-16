@@ -1,0 +1,131 @@
+PROBLEM|一、二分查找 > §1.1 基礎|34|在排序數組中查找元素的第一個和最後一個位置|find-first-and-last-position-of-element-in-sorted-array|null|false
+PROBLEM|一、二分查找 > §1.1 基礎|35|搜索插入位置|search-insert-position|null|false
+PROBLEM|一、二分查找 > §1.1 基礎|704|二分查找|binary-search|null|false
+PROBLEM|一、二分查找 > §1.1 基礎|744|尋找比目標字母大的最小字母|find-smallest-letter-greater-than-target|null|false
+PROBLEM|一、二分查找 > §1.1 基礎|2529|正整數和負整數的最大計數|maximum-count-of-positive-integer-and-negative-integer|null|false
+PROBLEM|一、二分查找 > §1.2 進階|1385|兩個數組間的距離值|find-the-distance-value-between-two-arrays|1235|false
+PROBLEM|一、二分查找 > §1.2 進階|2389|和有限的最長子序列|longest-subsequence-with-limited-sum|1388|false
+PROBLEM|一、二分查找 > §1.2 進階|1170|比較字符串最小字母出現頻次|compare-strings-by-frequency-of-the-smallest-character|1432|false
+PROBLEM|一、二分查找 > §1.2 進階|2300|咒語和藥水的成功對數|successful-pairs-of-spells-and-potions|1477|false
+PROBLEM|一、二分查找 > §1.2 進階|2080|區間內查詢數字的頻率|range-frequency-queries|1702|false
+PROBLEM|一、二分查找 > §1.2 進階|3488|距離最小相等元素查詢|closest-equal-element-queries|null|false
+PROBLEM|一、二分查找 > §1.2 進階|2563|統計公平數對的數目|count-the-number-of-fair-pairs|1721|false
+PROBLEM|一、二分查找 > §1.2 進階|2070|每一個查詢的最大美麗值|most-beautiful-item-for-each-query|1724|false
+PROBLEM|一、二分查找 > §1.2 進階|1146|快照數組|snapshot-array|1771|false
+PROBLEM|一、二分查找 > §1.2 進階|981|基於時間的鍵值存儲|time-based-key-value-store|null|false
+PROBLEM|一、二分查找 > §1.2 進階|3508|設計路由器|implement-router|1851|false
+PROBLEM|一、二分查找 > §1.2 進階|658|找到 K 個最接近的元素|find-k-closest-elements|null|false
+PROBLEM|一、二分查找 > §1.2 進階|1818|絕對差值和|minimum-absolute-sum-difference|1934|false
+PROBLEM|一、二分查找 > §1.2 進階|911|在線選舉|online-election|2001|false
+PROBLEM|一、二分查找 > §1.2 進階|LCP 08|劇情觸發時間|ju-qing-hong-fa-shi-jian|null|false
+PROBLEM|一、二分查找 > §1.2 進階|1182|與目標顏色間的最短距離|shortest-distance-to-target-color|null|true
+PROBLEM|一、二分查找 > §1.2 進階|2819|購買巧克力後的最小相對損失|minimum-relative-loss-after-buying-chocolates|null|true
+PROBLEM|一、二分查找 > §1.2 進階 > 思維擴展|1287|有序數組中出現次數超過 25% 的元素|element-appearing-more-than-25-in-sorted-array|null|false
+PROBLEM|一、二分查找 > §1.2 進階 > 思維擴展|2476|二叉搜索樹最近節點查詢|closest-nodes-queries-in-a-binary-search-tree|1597|false
+PROBLEM|一、二分查找 > §1.2 進階 > 思維擴展|1150|檢查一個數是否在數組中佔絕大多數|check-if-a-number-is-majority-element-in-a-sorted-array|null|true
+PROBLEM|二、二分答案 > §2.1 求最小|1283|使結果不超過閾值的最小除數|find-the-smallest-divisor-given-a-threshold|1542|false
+PROBLEM|二、二分答案 > §2.1 求最小|2187|完成旅途的最少時間|minimum-time-to-complete-trips|1641|false
+PROBLEM|二、二分答案 > §2.1 求最小|3824|減小數組使其滿足條件的最小 K 值|minimum-k-to-reduce-array-within-limit|null|false
+PROBLEM|二、二分答案 > §2.1 求最小|1011|在 D 天內送達包裹的能力|capacity-to-ship-packages-within-d-days|1725|false
+PROBLEM|二、二分答案 > §2.1 求最小|875|愛喫香蕉的珂珂|koko-eating-bananas|1766|false
+PROBLEM|二、二分答案 > §2.1 求最小|3296|移山所需的最少秒數|minimum-number-of-seconds-to-make-mountain-height-zero|null|false
+PROBLEM|二、二分答案 > §2.1 求最小|3639|變為活躍狀態的最小時間|minimum-time-to-activate-string|1853|false
+PROBLEM|二、二分答案 > §2.1 求最小|475|供暖器|heaters|null|false
+PROBLEM|二、二分答案 > §2.1 求最小|2594|修車的最少時間|minimum-time-to-repair-cars|1915|false
+PROBLEM|二、二分答案 > §2.1 求最小|1482|製作 m 束花所需的最少天數|minimum-number-of-days-to-make-m-bouquets|1946|false
+PROBLEM|二、二分答案 > §2.1 求最小|3048|標記所有下標的最早秒數 I|earliest-second-to-mark-indices-i|2263|false
+PROBLEM|二、二分答案 > §2.1 求最小|3807|修復邊以遍歷圖的最小成本|minimum-cost-to-repair-edges-to-traverse-a-graph|null|true
+PROBLEM|二、二分答案 > §2.1 求最小|2604|喫掉所有穀子的最短時間|minimum-time-to-eat-all-grains|null|true
+PROBLEM|二、二分答案 > §2.1 求最小|2702|使數字變為非正數的最小操作次數|minimum-operations-to-make-numbers-non-positive|null|true
+PROBLEM|二、二分答案 > §2.1 求最小 > 思維擴展|1870|準時到達的列車最小時速|minimum-speed-to-arrive-on-time|1676|false
+PROBLEM|二、二分答案 > §2.1 求最小 > 思維擴展|3453|分割正方形 I|separate-squares-i|1735|false
+PROBLEM|二、二分答案 > §2.2 求最大|275|H 指數 II|h-index-ii|null|false
+PROBLEM|二、二分答案 > §2.2 求最大|2226|每個小孩最多能分到多少糖果|maximum-candies-allocated-to-k-children|1646|false
+PROBLEM|二、二分答案 > §2.2 求最大|2982|找出出現至少三次的最長特殊子字符串 II|find-longest-special-substring-that-occurs-thrice-ii|1773|false
+PROBLEM|二、二分答案 > §2.2 求最大|2576|求出最多標記下標|find-the-maximum-number-of-marked-indices|1843|false
+PROBLEM|二、二分答案 > §2.2 求最大|1898|可移除字符的最大數目|maximum-number-of-removable-characters|1913|false
+PROBLEM|二、二分答案 > §2.2 求最大|1802|有界數組中指定下標處的最大值|maximum-value-at-a-given-index-in-a-bounded-array|1929|false
+PROBLEM|二、二分答案 > §2.2 求最大|1642|可以到達的最遠建築|furthest-building-you-can-reach|1962|false
+PROBLEM|二、二分答案 > §2.2 求最大|2861|最大合金數|maximum-number-of-alloys|1981|false
+PROBLEM|二、二分答案 > §2.2 求最大|3007|價值和小於等於 K 的最大數字|maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k|2258|false
+PROBLEM|二、二分答案 > §2.2 求最大|2141|同時運行 N 臺電腦的最長時間|maximum-running-time-of-n-computers|2265|false
+PROBLEM|二、二分答案 > §2.2 求最大|2258|逃離火災|escape-the-spreading-fire|2347|false
+PROBLEM|二、二分答案 > §2.2 求最大|2071|你可以安排的最多任務數目|maximum-number-of-tasks-you-can-assign|2648|false
+PROBLEM|二、二分答案 > §2.2 求最大|LCP 78|城牆防線|Nsibyl|null|false
+PROBLEM|二、二分答案 > §2.2 求最大|1618|找出適應屏幕的最大字號|maximum-font-to-fit-a-sentence-in-a-screen|null|true
+PROBLEM|二、二分答案 > §2.2 求最大|1891|割繩子|cutting-ribbons|null|true
+PROBLEM|二、二分答案 > §2.2 求最大|2137|通過倒水操作讓所有的水桶所含水量相等|pour-water-between-buckets-to-make-water-levels-equal|null|true
+PROBLEM|二、二分答案 > §2.2 求最大|3344|最大尺寸數組|maximum-sized-array|null|true
+PROBLEM|二、二分答案 > §2.2 求最大|644|子數組最大平均數 II|maximum-average-subarray-ii|null|true
+PROBLEM|二、二分答案 > §2.3 二分間接值|3143|正方形中的最多點數|maximum-points-inside-the-square|1697|false
+PROBLEM|二、二分答案 > §2.3 二分間接值|1648|銷售價值減少的顏色球|sell-diminishing-valued-colored-balls|2050|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|410|分割數組的最大值|split-array-largest-sum|null|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|2064|分配給商店的最多商品的最小值|minimized-maximum-of-products-distributed-to-any-store|1886|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|3613|最小化連通分量的最大成本|minimize-maximum-component-cost|null|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|1760|袋子裏最少數目的球|minimum-limit-of-balls-in-a-bag|1940|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|1631|最小體力消耗路徑|path-with-minimum-effort|1948|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|2439|最小化數組中的最大值|minimize-maximum-of-array|1965|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|2560|打家劫舍 IV|house-robber-iv|2081|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|778|水位上升的泳池中游泳|swim-in-rising-water|2097|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|2616|最小化數對的最大差值|minimize-the-maximum-difference-of-pairs|2155|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|3419|圖的最大邊權的最小值|minimize-the-maximum-edge-weight-of-graph|2243|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|2513|最小化兩個數組中的最大值|minimize-the-maximum-of-two-arrays|2302|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|3733|完成所有送貨任務的最少時間|minimum-time-to-complete-all-deliveries|null|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|3399|字符相同的最短子字符串 II|smallest-substring-with-identical-characters-ii|2376|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|3605|數組的最小穩定性因子|minimum-stability-factor-of-array|2410|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|LCP 12|小張刷題計劃|xiao-zhang-shua-ti-ji-hua|null|false
+PROBLEM|二、二分答案 > §2.4 最小化最大值|774|最小化去加油站的最大距離|minimize-max-distance-to-gas-station|null|true
+PROBLEM|二、二分答案 > §2.5 最大化最小值|3281|範圍內整數的最大得分|maximize-score-of-numbers-in-ranges|1768|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|3620|恢復網絡路徑|network-recovery-pathways|1998|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|2517|禮盒的最大甜蜜度|maximum-tastiness-of-candy-basket|2021|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|1552|兩球之間的磁力|magnetic-force-between-two-balls|null|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|3710|最大劃分因子|maximum-partition-factor|2135|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|2812|找出最安全路徑|find-the-safest-path-in-a-grid|2154|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|2528|最大化城市的最小電量|maximize-the-minimum-powered-city|2236|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|3600|升級後最大生成樹穩定性|maximize-spanning-tree-stability-with-upgrades|2301|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|3449|最大化遊戲分數的最小值|maximize-the-minimum-game-score|2748|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|3464|正方形上的點之間的最大距離|maximize-the-distance-between-points-on-a-square|2806|false
+PROBLEM|二、二分答案 > §2.5 最大化最小值|1102|得分最高的路徑|path-with-maximum-minimum-value|null|true
+PROBLEM|二、二分答案 > §2.5 最大化最小值|1231|分享巧克力|divide-chocolate|null|true
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|668|乘法表中第 K 小的數|kth-smallest-number-in-multiplication-table|null|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|378|有序矩陣中第 K 小的元素|kth-smallest-element-in-a-sorted-matrix|null|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|719|找出第 K 小的數對距離|find-k-th-smallest-pair-distance|null|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|878|第 N 個神奇數字|nth-magical-number|1897|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|1201|醜數 III|ugly-number-iii|2039|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|793|階乘函數後 K 個零|preimage-size-of-factorial-zeroes-function|2100|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|373|查找和最小的 K 對數字|find-k-pairs-with-smallest-sums|null|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|1439|有序矩陣中的第 k 個最小數組和|find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows|2134|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|786|第 K 個最小的質數分數|k-th-smallest-prime-fraction|2169|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|3116|單面值組合的第 K 小金額|kth-smallest-amount-with-single-denomination-combination|2387|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|3134|找出唯一性數組的中位數|find-the-median-of-the-uniqueness-array|2451|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|2040|兩個有序數組的第 K 小乘積|kth-smallest-product-of-two-sorted-arrays|2518|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|2386|找出數組的第 K 大和|find-the-k-sum-of-an-array|2648|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|1508|子數組和排序後的區間和|range-sum-of-sorted-subarray-sums|null|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|3691|最大子數組總值 II|maximum-total-subarray-value-ii|null|false
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|3520|逆序對計數的最小閾值|minimum-threshold-for-inversion-pairs-count|null|true
+PROBLEM|二、二分答案 > §2.6 第 K 小/大|1918|第 K 小的子數組和|kth-smallest-subarray-sum|null|true
+PROBLEM|三、三分法|1515|服務中心的最佳位置|best-position-for-a-service-centre|2157|false
+PROBLEM|四、其他|69|x 的平方根|sqrtx|null|false
+PROBLEM|四、其他|74|搜索二維矩陣|search-a-2d-matrix|null|false
+PROBLEM|四、其他|278|第一個錯誤的版本|first-bad-version|null|false
+PROBLEM|四、其他|374|猜數字大小|guess-number-higher-or-lower|null|false
+PROBLEM|四、其他|162|尋找峰值|find-peak-element|null|false
+PROBLEM|四、其他|1901|尋找峰值 II|find-a-peak-element-ii|null|false
+PROBLEM|四、其他|852|山脈數組的峰頂索引|peak-index-in-a-mountain-array|null|false
+PROBLEM|四、其他|1095|山脈數組中查找目標值|find-in-mountain-array|1827|false
+PROBLEM|四、其他|153|尋找旋轉排序數組中的最小值|find-minimum-in-rotated-sorted-array|null|false
+PROBLEM|四、其他|154|尋找旋轉排序數組中的最小值 II|find-minimum-in-rotated-sorted-array-ii|null|false
+PROBLEM|四、其他|33|搜索旋轉排序數組|search-in-rotated-sorted-array|null|false
+PROBLEM|四、其他|81|搜索旋轉排序數組 II|search-in-rotated-sorted-array-ii|null|false
+PROBLEM|四、其他|222|完全二叉樹的節點個數|count-complete-tree-nodes|null|false
+PROBLEM|四、其他|1539|第 k 個缺失的正整數|kth-missing-positive-number|null|false
+PROBLEM|四、其他|540|有序數組中的單一元素|single-element-in-a-sorted-array|null|false
+PROBLEM|四、其他|4|尋找兩個正序數組的中位數|median-of-two-sorted-arrays|null|false
+PROBLEM|四、其他|1064|不動點|fixed-point|null|true
+PROBLEM|四、其他|702|搜索長度未知的有序數組|search-in-a-sorted-array-of-unknown-size|null|true
+PROBLEM|四、其他|2936|包含相等值數字塊的數量|number-of-equal-numbers-blocks|null|true
+PROBLEM|四、其他|1060|有序數組中的缺失元素|missing-element-in-sorted-array|null|true
+PROBLEM|四、其他|1198|找出所有行中最小公共元素|find-smallest-common-element-in-all-rows|null|true
+PROBLEM|四、其他|1428|至少有一個 1 的最左端列|leftmost-column-with-at-least-a-one|null|true
+PROBLEM|四、其他|1533|找到最大整數的索引|find-the-index-of-the-large-integer|null|true
+PROBLEM|四、其他|2387|行排序矩陣的中位數|median-of-a-row-wise-sorted-matrix|null|true

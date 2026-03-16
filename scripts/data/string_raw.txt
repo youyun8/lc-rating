@@ -1,0 +1,92 @@
+PROBLEM|一、KMP（前綴的後綴）|28|找出字符串中第一個匹配項的下標|find-the-index-of-the-first-occurrence-in-a-string|null|false
+PROBLEM|一、KMP（前綴的後綴）|796|旋轉字符串|rotate-string|null|false
+PROBLEM|一、KMP（前綴的後綴）|1392|最長快樂前綴|longest-happy-prefix|1876|false
+PROBLEM|一、KMP（前綴的後綴）|3036|匹配模式數組的子數組數目 II|number-of-subarrays-that-match-a-pattern-ii|1895|false
+PROBLEM|一、KMP（前綴的後綴）|1764|通過連接另一個數組的子數組得到一個數組|form-array-by-concatenating-subarrays-of-another-array|null|false
+PROBLEM|一、KMP（前綴的後綴）|1668|最大重複子字符串|maximum-repeating-substring|null|false
+PROBLEM|一、KMP（前綴的後綴）|459|重複的子字符串|repeated-substring-pattern|null|false
+PROBLEM|一、KMP（前綴的後綴）|2800|包含三個字符串的最短字符串|shortest-string-that-contains-three-strings|null|false
+PROBLEM|一、KMP（前綴的後綴）|3008|找出數組中的美麗下標 II|find-beautiful-indices-in-the-given-array-ii|2016|false
+PROBLEM|一、KMP（前綴的後綴）|214|最短迴文串|shortest-palindrome|null|false
+PROBLEM|一、KMP（前綴的後綴）|3529|統計水平子串和垂直子串重疊格子的數目|count-cells-in-overlapping-horizontal-and-vertical-substrings|2105|false
+PROBLEM|一、KMP（前綴的後綴）|686|重複疊加字符串匹配|repeated-string-match|2200|false
+PROBLEM|一、KMP（前綴的後綴）|3455|最短匹配子字符串|shortest-matching-substring|2303|false
+PROBLEM|一、KMP（前綴的後綴）|1397|找到所有好字符串|find-all-good-strings|2667|false
+PROBLEM|一、KMP（前綴的後綴）|3037|在無限流中尋找模式 II|find-pattern-in-infinite-stream-ii|null|true
+PROBLEM|一、KMP（前綴的後綴）|3571|最短超級串 II|find-the-shortest-superstring-ii|null|true
+PROBLEM|二、Z 函數（後綴的前綴）|2223|構造字符串的總得分和|sum-of-scores-of-built-strings|2220|false
+PROBLEM|二、Z 函數（後綴的前綴）|3031|將單詞恢復初始狀態所需的最短時間 II|minimum-time-to-revert-word-to-initial-state-ii|2278|false
+PROBLEM|二、Z 函數（後綴的前綴）|3045|統計前後綴下標對 II|count-prefix-and-suffix-pairs-ii|2328|false
+PROBLEM|二、Z 函數（後綴的前綴）|3303|第一個幾乎相等子字符串的下標|find-the-occurrence-of-first-almost-equal-substring|2509|false
+PROBLEM|二、Z 函數（後綴的前綴）|3292|形成目標字符串需要的最少字符串數 II|minimum-number-of-valid-strings-to-form-target-ii|2662|false
+PROBLEM|二、Z 函數（後綴的前綴）|3474|字典序最小的生成字符串|lexicographically-smallest-generated-string|null|false
+PROBLEM|二、Z 函數（後綴的前綴）> LCP 數組|2430|對字母串可執行的最大刪除數|maximum-deletions-on-a-string|2102|false
+PROBLEM|二、Z 函數（後綴的前綴）> LCP 數組|3388|統計數組中的美麗分割|count-beautiful-splits-in-an-array|2365|false
+PROBLEM|二、Z 函數（後綴的前綴）> LCP 數組|1977|劃分數字的方案數|number-of-ways-to-separate-numbers|2817|false
+PROBLEM|三、Manacher 算法（迴文串）|5|最長迴文子串|longest-palindromic-substring|null|false
+PROBLEM|三、Manacher 算法（迴文串）|647|迴文子串|palindromic-substrings|null|false
+PROBLEM|三、Manacher 算法（迴文串）|214|最短迴文串|shortest-palindrome|null|false
+PROBLEM|三、Manacher 算法（迴文串）|3327|判斷 DFS 字符串是否是迴文串|check-if-dfs-strings-are-palindromes|2454|false
+PROBLEM|三、Manacher 算法（迴文串）|1745|分割回文串 IV|palindrome-partitioning-iv|null|false
+PROBLEM|三、Manacher 算法（迴文串）|1960|兩個迴文子字符串長度的最大乘積|maximum-product-of-the-length-of-two-palindromic-substrings|2691|false
+PROBLEM|三、Manacher 算法（迴文串）|3504|子字符串連接後的最長迴文串 II|longest-palindrome-after-substring-concatenation-ii|null|false
+PROBLEM|三、Manacher 算法（迴文串）> 中心擴展法|2472|不重疊迴文子字符串的最大數目|maximum-number-of-non-overlapping-palindrome-substrings|2013|false
+PROBLEM|三、Manacher 算法（迴文串）> 中心擴展法|3615|圖中的最長迴文路徑|longest-palindromic-path-in-graph|2463|false
+PROBLEM|三、Manacher 算法（迴文串）> 中心擴展法|3579|字符串轉換需要的最小操作數|minimum-steps-to-convert-string-with-operations|null|false
+PROBLEM|四、字符串哈希|28|找出字符串中第一個匹配項的下標|find-the-index-of-the-first-occurrence-in-a-string|null|false
+PROBLEM|四、字符串哈希|2156|查找給定哈希值的子串|find-substring-with-given-hash-value|null|false
+PROBLEM|四、字符串哈希|3756|拼接非零數位並乘以位數和 II|concatenate-non-zero-digits-and-multiply-by-sum-ii|null|false
+PROBLEM|四、字符串哈希|187|重複的 DNA 序列|repeated-dna-sequences|null|false
+PROBLEM|四、字符串哈希|1316|不同的循環子字符串|distinct-echo-substrings|1837|false
+PROBLEM|四、字符串哈希|1297|子串的最大出現次數|maximum-number-of-occurrences-of-a-substring|null|false
+PROBLEM|四、字符串哈希|2261|含最多 K 個可整除元素的子數組|k-divisible-elements-subarrays|null|false
+PROBLEM|四、字符串哈希|3722|反轉後字典序最小的字符串|lexicographically-smallest-string-after-reverse|null|false
+PROBLEM|四、字符串哈希|3213|最小代價構造字符串|construct-string-with-minimum-cost|2171|false
+PROBLEM|四、字符串哈希|1367|二叉樹中的鏈表|linked-list-in-binary-tree|null|false
+PROBLEM|四、字符串哈希|1044|最長重複子串|longest-duplicate-substring|2429|false
+PROBLEM|四、字符串哈希|718|最長重複子數組|maximum-length-of-repeated-subarray|null|false
+PROBLEM|四、字符串哈希|1923|最長公共子路徑|longest-common-subpath|2661|false
+PROBLEM|四、字符串哈希|3292|形成目標字符串需要的最少字符串數 II|minimum-number-of-valid-strings-to-form-target-ii|2662|false
+PROBLEM|四、字符串哈希|2168|每個數字的頻率都相同的獨特子字符串的數量|unique-substrings-with-equal-digit-frequency|null|true
+PROBLEM|四、字符串哈希|1554|只有一個不同字符的字符串|strings-differ-by-one-character|null|true
+PROBLEM|四、字符串哈希|1062|最長重複子串|longest-repeating-substring|null|true
+PROBLEM|五、最小表示法|1163|按字典序排在最後的子串|last-substring-in-lexicographical-order|null|false
+PROBLEM|五、最小表示法|899|有序隊列|orderly-queue|null|false
+PROBLEM|五、最小表示法|3403|從盒子中找出字典序最大的字符串 I|find-the-lexicographically-largest-string-from-the-box-i|null|false
+PROBLEM|五、最小表示法|1625|執行操作後字典序最小的字符串|lexicographically-smallest-string-after-applying-operations|null|false
+PROBLEM|五、最小表示法|3406|從盒子中找出字典序最大的字符串 II|find-the-lexicographically-largest-string-from-the-box-ii|null|true
+PROBLEM|五、最小表示法|1708|長度為 K 的最大子數組|largest-subarray-length-k|null|true
+PROBLEM|七、AC 自動機|1032|字符流|stream-of-characters|1970|false
+PROBLEM|七、AC 自動機|面試題 17.17|多次搜索|multi-search-lcci|null|false
+PROBLEM|七、AC 自動機|1408|數組中的字符串匹配|string-matching-in-an-array|null|false
+PROBLEM|七、AC 自動機|3213|最小代價構造字符串|construct-string-with-minimum-cost|2171|false
+PROBLEM|七、AC 自動機|2781|最長合法子字符串的長度|length-of-the-longest-valid-substring|2204|false
+PROBLEM|七、AC 自動機|3292|形成目標字符串需要的最少字符串數 II|minimum-number-of-valid-strings-to-form-target-ii|2662|false
+PROBLEM|七、AC 自動機|3758|將數字詞轉換為數字|convert-number-words-to-digits|null|true
+PROBLEM|八、後綴數組/後綴自動機|1163|按字典序排在最後的子串|last-substring-in-lexicographical-order|1864|false
+PROBLEM|八、後綴數組/後綴自動機|1754|構造字典序最大的合併字符串|largest-merge-of-two-strings|null|false
+PROBLEM|八、後綴數組/後綴自動機|2904|最短且字典序最小的美麗子字符串|shortest-and-lexicographically-smallest-beautiful-string|null|false
+PROBLEM|八、後綴數組/後綴自動機|3722|反轉後字典序最小的字符串|lexicographically-smallest-string-after-reverse|null|false
+PROBLEM|八、後綴數組/後綴自動機|3213|最小代價構造字符串|construct-string-with-minimum-cost|2171|false
+PROBLEM|八、後綴數組/後綴自動機|1044|最長重複子串|longest-duplicate-substring|2429|false
+PROBLEM|八、後綴數組/後綴自動機|718|最長重複子數組|maximum-length-of-repeated-subarray|null|false
+PROBLEM|八、後綴數組/後綴自動機|1923|最長公共子路徑|longest-common-subpath|2661|false
+PROBLEM|八、後綴數組/後綴自動機|1408|數組中的字符串匹配|string-matching-in-an-array|null|false
+PROBLEM|八、後綴數組/後綴自動機|3729|統計有序數組中可被 K 整除的子數組數量|count-distinct-subarrays-divisible-by-k-in-sorted-array|null|false
+PROBLEM|八、後綴數組/後綴自動機|3076|數組中的最短非公共子字符串|shortest-uncommon-substring-in-an-array|null|false
+PROBLEM|八、後綴數組/後綴自動機|3504|子字符串連接後的最長迴文串 II|longest-palindrome-after-substring-concatenation-ii|null|false
+PROBLEM|八、後綴數組/後綴自動機|1316|不同的循環子字符串|distinct-echo-substrings|null|false
+PROBLEM|八、後綴數組/後綴自動機|3388|統計數組中的美麗分割|count-beautiful-splits-in-an-array|null|false
+PROBLEM|八、後綴數組/後綴自動機|2564|子字符串異或查詢|substring-xor-queries|null|false
+PROBLEM|八、後綴數組/後綴自動機|面試題 16.18|模式匹配|pattern-matching-lcci|null|false
+PROBLEM|八、後綴數組/後綴自動機|1698|字符串的不同子字符串個數|number-of-distinct-substrings-in-a-string|null|true
+PROBLEM|八、後綴數組/後綴自動機|1062|最長重複子串|longest-repeating-substring|null|true
+PROBLEM|八、後綴數組/後綴自動機|3135|通過添加或刪除結尾字符來同化字符串|equalize-strings-by-adding-or-removing-characters-at-ends|null|true
+PROBLEM|九、子序列自動機|792|匹配子序列的單詞數|number-of-matching-subsequences|1695|false
+PROBLEM|九、子序列自動機|514|自由之路|freedom-trail|2400|false
+PROBLEM|九、子序列自動機|2014|重複 K 次的最長子序列|longest-subsequence-repeated-k-times|2558|false
+PROBLEM|九、子序列自動機|1055|形成字符串的最短路徑|shortest-way-to-form-string|null|true
+PROBLEM|九、子序列自動機|727|最小窗口子序列|minimum-window-subsequence|null|true
+PROBLEM|十、其他|3485|刪除元素後 K 個字符串的最長公共前綴|longest-common-prefix-of-k-strings-after-removal|2290|false
+PROBLEM|十、其他|466|統計重複個數|count-the-repetitions|null|false
+PROBLEM|十、其他|3491|電話號碼前綴|phone-number-prefix|null|true

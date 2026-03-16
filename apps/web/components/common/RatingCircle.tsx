@@ -37,10 +37,10 @@ const RatingCircle = React.memo(
     return (
       <div className={cn("flex items-center gap-1", "relative", "group")}>
         <div
-          className="inline-block size-[1em] rounded-full"
+          className="inline-block size-[1.1em] rounded-full"
           style={{
             borderColor: color,
-            borderWidth: "0.1em",
+            borderWidth: "0.15em",
             backgroundImage: `linear-gradient(to top, ${color} ${percent}%, rgba(0, 0, 0, 0) ${percent}%)`,
           }}
         />
@@ -51,6 +51,7 @@ const RatingCircle = React.memo(
             "top-0 -translate-y-full",
             "opacity-0 group-hover:opacity-100",
             "transition-all duration-500 ease-in-out",
+            "text-base font-bold pointer-events-none z-50 bg-background/80 px-1 rounded"
           )}
           style={{
             color: color,

@@ -133,11 +133,11 @@ function ProblemSet() {
   }, [tableData, similarties]);
 
   return (
-    <div className="p-8 flex flex-col gap-4">
-      <div className="w-4/5 xl:w-3/4 2xl:w-2/3 m-auto">
+    <div className="p-2 sm:p-4 md:p-8 flex flex-col gap-4 font-song">
+      <div className="w-full md:w-4/5 xl:w-3/4 2xl:w-2/3 m-auto">
         <Search data={tableData} onSearch={handleSearch}></Search>
       </div>
-      <div className="w-full 2xl:w-2/3  m-auto">
+      <div className="w-full 2xl:w-2/3 m-auto overflow-x-hidden">
         <ProblemsTable tableData={searchedData} isPending={isPending} />
       </div>
     </div>

@@ -1,5 +1,5 @@
 {
-  "extends": "@huxulm/typescript-config/nextjs.json",
+  "extends": "@asyncchang/typescript-config/nextjs.json",
   "compilerOptions": {
     "plugins": [
       {

@@ -32,7 +32,7 @@ export const getColumns = () => [
       return (
         <I18NLink
           link={problem.link}
-          title={`${problem.id}. ${problem.title}`}
+          title={problem.id === "1000000000" ? problem.title : `${problem.id}. ${problem.title}`}
           className="text-pretty"
         />
       );
@@ -48,13 +48,13 @@ export const getColumns = () => [
       const rating = row.getValue<number>("rating");
       const info = ratingInfo(rating);
       return (
-        <div className="flex items-center justify-center gap-1">
+        <div className="flex items-center justify-center gap-2 text-base">
           <RatingCircle
             rating={rating}
             color={info.color}
             percent={info.percent}
           />
-          <div>{rating.toFixed(0)}</div>
+          <div className="font-mono">{rating.toFixed(0)}</div>
         </div>
       );
     },
@@ -65,7 +65,7 @@ export const getColumns = () => [
     cell: ({ row }) => {
       const tags = row.getValue<TableCol["tags"]>("tags");
       return (
-        <div className="flex flex-wrap justify-center items-center gap-1 text-pretty w-75 m-auto">
+        <div className="flex flex-wrap justify-center items-center gap-1 text-pretty max-w-[200px] md:max-w-[300px] m-auto">
           {tags.map((tag) => (
             <I18NTag key={tag.id} label={tag.label} />
           ))}

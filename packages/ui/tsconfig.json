@@ -1,5 +1,5 @@
 {
-  "extends": "@huxulm/typescript-config/react-library.json",
+  "extends": "@asyncchang/typescript-config/react-library.json",
   "compilerOptions": {
     "outDir": "dist"
   },

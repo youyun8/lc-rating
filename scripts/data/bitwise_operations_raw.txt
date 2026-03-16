@@ -1,0 +1,121 @@
+PROBLEM|一、基礎題|3370|僅含置位位的最小整數|smallest-number-with-all-set-bits|1199|false
+PROBLEM|一、基礎題|3827|統計單比特整數|count-monobit-integers|null|false
+PROBLEM|一、基礎題|3226|使兩個整數相等的位更改次數|number-of-bit-changes-to-make-two-integers-equal|1247|false
+PROBLEM|一、基礎題|1356|根據數字二進制下 1 的數目排序|sort-integers-by-the-number-of-1-bits|1258|false
+PROBLEM|一、基礎題|461|漢明距離|hamming-distance|1282|false
+PROBLEM|一、基礎題|2220|轉換數字的最少位翻轉次數|minimum-bit-flips-to-convert-number|1282|false
+PROBLEM|一、基礎題|1342|將數字變成 0 的操作次數|number-of-steps-to-reduce-a-number-to-zero|null|false
+PROBLEM|一、基礎題|476|數字的補數|number-complement|null|false
+PROBLEM|一、基礎題|1009|十進制整數的反碼|complement-of-base-10-integer|null|false
+PROBLEM|一、基礎題|868|二進制間距|binary-gap|1307|false
+PROBLEM|一、基礎題|2917|找出數組中的 K-or 值|find-the-k-or-of-an-array|1389|false
+PROBLEM|一、基礎題|693|交替位二進制數|binary-number-with-alternating-bits|null|false
+PROBLEM|一、基礎題|2657|找到兩個數組的前綴公共數組|find-the-prefix-common-array-of-two-arrays|null|false
+PROBLEM|一、基礎題|面試題 05.01|插入|insert-into-bits-lcci|null|false
+PROBLEM|一、基礎題|231|2 的冪|power-of-two|null|false
+PROBLEM|一、基礎題|342|4 的冪|power-of-four|null|false
+PROBLEM|一、基礎題|191|位 1 的個數|number-of-1-bits|null|false
+PROBLEM|一、基礎題|338|比特位計數|counting-bits|null|false
+PROBLEM|一、基礎題|2595|奇偶位數|number-of-even-and-odd-bits|null|false
+PROBLEM|一、基礎題|2154|將找到的值乘以 2|keep-multiplying-found-values-by-two|null|false
+PROBLEM|一、基礎題|3211|生成不含相鄰零的二進制字符串|generate-binary-strings-without-adjacent-zeros|null|false
+PROBLEM|一、基礎題 > 用位運算代替數組操作|3690|拆分合並數組|split-and-merge-array-transformation|null|false
+PROBLEM|一、基礎題 > 反轉二進制數|190|顛倒二進制位|reverse-bits|null|false
+PROBLEM|一、基礎題 > 反轉二進制數|3750|最少反轉次數得到翻轉二進制字符串|minimum-number-of-flips-to-reverse-binary-string|1289|false
+PROBLEM|一、基礎題 > 反轉二進制數|3769|二進制反射排序|sort-integers-by-binary-reflection|1364|false
+PROBLEM|二、異或（XOR）的性質|1486|數組異或操作|xor-operation-in-an-array|1181|false
+PROBLEM|二、異或（XOR）的性質|1720|解碼異或後的數組|decode-xored-array|1284|false
+PROBLEM|二、異或（XOR）的性質|2433|找出前綴異或的原始數組|find-the-original-array-of-prefix-xor|1367|false
+PROBLEM|二、異或（XOR）的性質|1310|子數組異或查詢|xor-queries-of-a-subarray|1460|false
+PROBLEM|二、異或（XOR）的性質|3702|按位異或非零的最長子序列|longest-subsequence-with-non-zero-bitwise-xor|1489|false
+PROBLEM|二、異或（XOR）的性質|2683|相鄰值的按位異或|neighboring-bitwise-xor|1518|false
+PROBLEM|二、異或（XOR）的性質|1829|每個查詢的最大異或值|maximum-xor-for-each-query|1523|false
+PROBLEM|二、異或（XOR）的性質|2997|使數組異或和等於 K 的最少操作次數|minimum-number-of-operations-to-make-array-xor-equal-to-k|1525|false
+PROBLEM|二、異或（XOR）的性質|1442|形成兩個異或相等數組的三元組數目|count-triplets-that-can-form-two-arrays-of-equal-xor|1525|false
+PROBLEM|二、異或（XOR）的性質|2429|最小異或|minimize-xor|1532|false
+PROBLEM|二、異或（XOR）的性質|2527|查詢數組異或美麗值|find-xor-beauty-of-array|1550|false
+PROBLEM|二、異或（XOR）的性質|2317|操作後的最大異或和|maximum-xor-after-operations|1679|false
+PROBLEM|二、異或（XOR）的性質|2588|統計美麗子數組數目|count-the-number-of-beautiful-subarrays|1697|false
+PROBLEM|二、異或（XOR）的性質|2564|子字符串異或查詢|substring-xor-queries|1959|false
+PROBLEM|二、異或（XOR）的性質|1734|解碼異或後的排列|decode-xored-permutation|2024|false
+PROBLEM|二、異或（XOR）的性質|2857|統計距離為 k 的點對|count-pairs-of-points-with-distance-k|2082|false
+PROBLEM|二、異或（XOR）的性質|1803|統計異或值在範圍內的數對有多少|count-pairs-with-xor-in-a-range|2479|false
+PROBLEM|二、異或（XOR）的性質|3215|用偶數異或設置位計數三元組 II|count-triplets-with-even-xor-set-bits-ii|null|true
+PROBLEM|三、與或（AND/OR）的性質|2980|檢查按位或是否存在尾隨零|check-if-bitwise-or-has-trailing-zeros|1234|false
+PROBLEM|三、與或（AND/OR）的性質|1318|或運算的最小翻轉次數|minimum-flips-to-make-a-or-b-equal-to-c|1383|false
+PROBLEM|三、與或（AND/OR）的性質|2419|按位與最大的最長子數組|longest-subarray-with-maximum-bitwise-and|1496|false
+PROBLEM|三、與或（AND/OR）的性質|2871|將數組分割成最多數目的子數組|split-array-into-maximum-number-of-subarrays|1750|false
+PROBLEM|三、與或（AND/OR）的性質|2401|最長優雅子數組|longest-nice-subarray|1750|false
+PROBLEM|三、與或（AND/OR）的性質|2680|最大或值|maximum-or|1912|false
+PROBLEM|三、與或（AND/OR）的性質|3133|數組最後一個元素的最小值|minimum-array-end|1935|false
+PROBLEM|三、與或（AND/OR）的性質|3108|帶權圖裏旅途的最小代價|minimum-cost-walk-in-weighted-graph|2109|false
+PROBLEM|三、與或（AND/OR）的性質|3117|劃分數組得到最小的值之和|minimum-sum-of-values-by-dividing-array|2735|false
+PROBLEM|三、與或（AND/OR）的性質|3125|使得按位與結果為 0 的最大數字|maximum-number-that-makes-result-of-bitwise-and-zero|null|true
+PROBLEM|三、與或（AND/OR）的性質 > AND/OR LogTrick|3171|找到按位或最接近 K 的子數組|find-subarray-with-bitwise-or-closest-to-k|null|false
+PROBLEM|三、與或（AND/OR）的性質 > AND/OR LogTrick|1521|找到最接近目標值的函數值|find-a-value-of-a-mysterious-function-closest-to-target|null|false
+PROBLEM|三、與或（AND/OR）的性質 > AND/OR LogTrick|3097|或值至少為 K 的最短子數組 II|shortest-subarray-with-or-at-least-k-ii|1891|false
+PROBLEM|三、與或（AND/OR）的性質 > AND/OR LogTrick|2411|按位或最大的最小子數組長度|smallest-subarrays-with-maximum-bitwise-or|1938|false
+PROBLEM|三、與或（AND/OR）的性質 > AND/OR LogTrick|3209|子數組按位與值為 K 的數目|number-of-subarrays-with-and-value-of-k|2050|false
+PROBLEM|三、與或（AND/OR）的性質 > AND/OR LogTrick|898|子數組按位或操作|bitwise-ors-of-subarrays|null|false
+PROBLEM|三、與或（AND/OR）的性質 > GCD LogTrick|2447|最大公因數等於 K 的子數組數目|number-of-subarrays-with-gcd-equal-to-k|null|false
+PROBLEM|三、與或（AND/OR）的性質 > GCD LogTrick|2654|使數組所有元素變成 1 的最少操作次數|minimum-number-of-operations-to-make-all-array-elements-equal-to-1|null|false
+PROBLEM|三、與或（AND/OR）的性質 > GCD LogTrick|3605|數組的最小穩定性因子|minimum-stability-factor-of-array|2410|false
+PROBLEM|三、與或（AND/OR）的性質 > GCD LogTrick|3574|最大子數組 GCD 分數|maximize-subarray-gcd-score|null|false
+PROBLEM|三、與或（AND/OR）的性質 > GCD LogTrick|2941|子數組的最大 GCD-Sum|maximum-gcd-sum-of-a-subarray|null|true
+PROBLEM|四、拆位 / 貢獻法|477|漢明距離總和|total-hamming-distance|null|false
+PROBLEM|四、拆位 / 貢獻法|1863|找出所有子集的異或總和再求和|sum-of-all-subset-xor-totals|null|false
+PROBLEM|四、拆位 / 貢獻法|2425|所有數對的異或和|bitwise-xor-of-all-pairings|1622|false
+PROBLEM|四、拆位 / 貢獻法|2275|按位與結果大於零的最長組合|largest-combination-with-bitwise-and-greater-than-zero|1642|false
+PROBLEM|四、拆位 / 貢獻法|1835|所有數對按位與結果的異或和|find-xor-sum-of-all-pairs-bitwise-and|1825|false
+PROBLEM|四、拆位 / 貢獻法|3688|偶數的按位或運算|bitwise-or-of-even-numbers-in-an-array|null|false
+PROBLEM|四、拆位 / 貢獻法|2505|所有子序列和的按位或|bitwise-or-of-all-subsequence-sums|null|true
+PROBLEM|四、拆位 / 貢獻法 > 十進制拆位|3153|所有數對中數位不同之和|sum-of-digit-differences-of-all-pairs|1645|false
+PROBLEM|五、試填法|421|數組中兩個數的最大異或值|maximum-xor-of-two-numbers-in-an-array|null|false
+PROBLEM|五、試填法|3806|增加操作後最大按位與的結果|maximum-bitwise-and-after-increment-operations|2259|false
+PROBLEM|五、試填法|2935|找出強數對的最大異或值 II|maximum-strong-pair-xor-ii|2349|false
+PROBLEM|五、試填法|3007|價值和小於等於 K 的最大數字|maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k|null|false
+PROBLEM|五、試填法|3145|大數組元素的乘積|find-products-of-elements-of-big-array|2859|false
+PROBLEM|五、試填法|3022|給定操作次數內使剩餘元素的或值最小|minimize-or-of-remaining-elements-using-operations|2918|false
+PROBLEM|五、試填法|3287|求出數組中最大序列值|find-the-maximum-sequence-value-of-array|null|false
+PROBLEM|五、試填法|3344|最大尺寸數組|maximum-sized-array|null|true
+PROBLEM|六、恆等式|1835|所有數對按位與結果的異或和|find-xor-sum-of-all-pairs-bitwise-and|1825|false
+PROBLEM|六、恆等式|2354|優質數對的數目|number-of-excellent-pairs|2076|false
+PROBLEM|七、線性基|3681|子序列最大 XOR 值|maximum-xor-of-subsequences|null|false
+PROBLEM|七、線性基|3630|劃分數組得到最大異或運算和與運算之和|partition-array-for-maximum-xor-and-and|2744|false
+PROBLEM|八、思維題|2546|執行逐位運算使字符串相等|apply-bitwise-operations-to-make-strings-equal|1605|false
+PROBLEM|八、思維題|1558|得到目標數組的最少函數調用次數|minimum-numbers-of-function-calls-to-make-target-array|1637|false
+PROBLEM|八、思維題|2571|將整數減少到零需要的最少操作數|minimum-operations-to-reduce-an-integer-to-0|1649|false
+PROBLEM|八、思維題|3315|構造最小位運算數組 II|construct-the-minimum-bitwise-array-ii|1715|false
+PROBLEM|八、思維題|2568|最小無法得到的或值|minimum-impossible-or|1754|false
+PROBLEM|八、思維題|3644|排序排列|maximum-k-to-sort-a-permutation|1775|false
+PROBLEM|八、思維題|2509|查詢樹中環的長度|cycle-length-queries-in-a-tree|1948|false
+PROBLEM|八、思維題|2939|最大異或乘積|maximum-xor-product|2128|false
+PROBLEM|八、思維題|2749|得到整數零需要執行的最少操作數|minimum-operations-to-make-the-integer-zero|2132|false
+PROBLEM|八、思維題|2835|使子序列的和等於目標的最少操作次數|minimum-operations-to-form-subsequence-with-target-sum|2207|false
+PROBLEM|八、思維題|2897|對數組執行操作使平方和最大|apply-operations-on-array-to-maximize-sum-of-squares|2301|false
+PROBLEM|八、思維題|810|黑板異或遊戲|chalkboard-xor-game|2341|false
+PROBLEM|八、思維題|3064|使用按位查詢猜測數字 I|guess-the-number-using-bitwise-questions-i|null|true
+PROBLEM|八、思維題|3094|使用按位查詢猜測數字 II|guess-the-number-using-bitwise-questions-ii|null|true
+PROBLEM|九、其他|136|只出現一次的數字|single-number|null|false
+PROBLEM|九、其他|260|只出現一次的數字 III|single-number-iii|null|false
+PROBLEM|九、其他|2965|找出缺失和重複的數字|find-missing-and-repeated-values|null|false
+PROBLEM|九、其他|137|只出現一次的數字 II|single-number-ii|null|false
+PROBLEM|九、其他|645|錯誤的集合|set-mismatch|null|false
+PROBLEM|九、其他|371|兩整數之和|sum-of-two-integers|null|false
+PROBLEM|九、其他|201|數字範圍按位與|bitwise-and-of-numbers-range|null|false
+PROBLEM|九、其他|2438|二的冪數組中查詢範圍內的乘積|range-product-queries-of-powers|1610|false
+PROBLEM|九、其他|1680|連接連續二進制數字|concatenation-of-consecutive-binary-numbers|1630|false
+PROBLEM|九、其他|1261|在受污染的二叉樹中查找元素|find-elements-in-a-contaminated-binary-tree|null|false
+PROBLEM|九、其他|89|格雷編碼|gray-code|null|false
+PROBLEM|九、其他|1238|循環碼排列|circular-permutation-in-binary-representation|1775|false
+PROBLEM|九、其他|3766|將數字變成二進制迴文數的最少操作|minimum-operations-to-make-binary-palindrome|null|false
+PROBLEM|九、其他|3782|交替刪除操作後最後剩下的整數|last-remaining-integer-after-alternating-deletion-operations|2074|false
+PROBLEM|九、其他|390|消除遊戲|elimination-game|null|false
+PROBLEM|九、其他|982|按位與為零的三元組|triples-with-bitwise-and-equal-to-zero|2085|false
+PROBLEM|九、其他|3307|找出第 K 個字符 II|find-the-k-th-character-in-string-game-ii|2232|false
+PROBLEM|九、其他|1611|使整數變為 0 的最少操作次數|minimum-one-bit-operations-to-make-integers-zero|2345|false
+PROBLEM|九、其他|3514|不同 XOR 三元組的數目 II|number-of-unique-xor-triplets-ii|null|false
+PROBLEM|九、其他|LCP 81|與非的謎題|ryfUiz|null|false
+PROBLEM|九、其他|751|IP 到 CIDR|ip-to-cidr|null|true
+PROBLEM|九、其他|3595|一次或兩次|once-twice|null|true
+PROBLEM|九、其他|3141|最大漢明距離|maximum-hamming-distances|null|true

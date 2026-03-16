@@ -1,32 +1,7 @@
 "use client";
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { useStudyPlan } from "@/hooks/useStudyPlan";
-import { StudyPlanData } from "@/types";
-// import "highlight.js/styles/github-dark.css";
-import { useMemo } from "react";
 import { SectionContainer } from "./SectionContainer";
-import { TableOfContent } from "./TableOfContent";
-import { TOC } from "./types";
-
-function generateToc(sub: StudyPlanData.Section, level: number = 1): TOC {
-  if (!sub.children || sub.children.length === 0) {
-    return {
-      title: sub.title,
-      count: 0,
-      level,
-      children: [],
-    };
-  }
-  const children = sub.children.map((child) => generateToc(child, level + 1));
-  const count = children.reduce((acc, child) => acc + child.count, 0);
-  return {
-    title: sub.title,
-    count,
-    level,
-    children,
-  };
-}
 
 interface StudyPlanProps {
   plan: string;
@@ -35,34 +10,33 @@ interface StudyPlanProps {
 function StudyPlan({ plan }: StudyPlanProps) {
   const { studyPlan, isPending, error } = useStudyPlan(plan);
 
-  const toc = useMemo(() => {
-    if (!studyPlan) return null;
-    const res = studyPlan && studyPlan.children.map(generateToc, 1);
-    return (
-      studyPlan && {
-        title: plan,
-        level: 0,
-        count: res.reduce((acc, child) => acc + child.count, 0),
-        children: res,
-      }
-    );
-  }, [studyPlan, plan]);
-
-  console.log("StudyPlan render", { studyPlan, toc });
+  console.log("StudyPlan render", { studyPlan, isPending, error });
 
   return (
-    <SidebarProvider>
-      {toc && <TableOfContent toc={toc} />}
-      <div className="flex flex-col">
-        {/* 导航栏高度是60px */}
-        <SidebarTrigger className="fixed top-[var(--navbar-height)]" />
-        <div className="flex flex-row flex-wrap gap-8 px-8">
+    <div className="flex flex-col w-full min-h-screen bg-background font-song">
+      {studyPlan && (
+        <div className="py-8 px-4 md:px-8 border-b mb-8">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-3xl font-extrabold tracking-tight mb-2">{studyPlan.title}</h1>
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <a href={studyPlan.src} target="_blank" rel="noopener noreferrer" className="hover:text-primary underline decoration-primary/30">
+                查看原文
+              </a>
+              <span>•</span>
+              <span>最後更新: {new Date(studyPlan.last_update).toLocaleDateString()}</span>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      <div className="max-w-7xl mx-auto w-full px-4 md:px-8 pb-20">
+        <div className="flex flex-col gap-8">
           {studyPlan?.children.map((section) => (
             <SectionContainer key={section.title} section={section} />
           ))}
         </div>
       </div>
-    </SidebarProvider>
+    </div>
   );
 }
 

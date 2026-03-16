@@ -1,0 +1,318 @@
+PROBLEM|一、數論 > §1.1 判斷質數|3115|質數的最大距離|maximum-prime-difference|1294|false
+PROBLEM|一、數論 > §1.1 判斷質數|2614|對角線上的質數|prime-in-diagonal|1375|false
+PROBLEM|一、數論 > §1.1 判斷質數|3765|完全質數|complete-prime-number|1378|false
+PROBLEM|一、數論 > §1.1 判斷質數|762|二進制表示中質數個計算置位|prime-number-of-set-bits-in-binary-representation|1383|false
+PROBLEM|一、數論 > §1.1 判斷質數|3556|最大質數子字符串之和|sum-of-largest-prime-substrings|1440|false
+PROBLEM|一、數論 > §1.1 判斷質數|3044|出現頻率最高的質數|most-frequent-prime|1737|false
+PROBLEM|一、數論 > §1.1 判斷質數|866|迴文質數|prime-palindrome|1938|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|204|計數質數|count-primes|null|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|3618|根據質數下標分割數組|split-array-by-prime-indices|1227|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|3591|檢查元素頻次是否為質數|check-if-any-element-has-prime-frequency|1235|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|2761|和等於目標值的質數對|prime-pairs-with-target-sum|1505|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|3233|統計不是特殊數字的數字數量|find-the-count-of-numbers-which-are-not-special|1509|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|3770|可表示為連續質數和的最大質數|largest-prime-from-consecutive-prime-sum|1547|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|2523|範圍內最接近的兩個質數|closest-prime-numbers-in-range|1650|false
+PROBLEM|一、數論 > §1.2 預處理質數（篩質數）|2601|質數減法運算|prime-subtraction-operation|1779|false
+PROBLEM|一、數論 > §1.3 質因數分解|2521|數組乘積中的不同質因數數目|distinct-prime-factors-of-product-of-array|1413|false
+PROBLEM|一、數論 > §1.3 質因數分解|2507|使用質因數之和替換後可以取到的最小值|smallest-value-after-replacing-with-sum-of-prime-factors|1500|false
+PROBLEM|一、數論 > §1.3 質因數分解|3326|使數組非遞減的最少除法操作次數|minimum-division-operations-to-make-array-non-decreasing|1864|false
+PROBLEM|一、數論 > §1.3 質因數分解|3629|通過質數傳送到達終點的最少跳躍次數|minimum-jumps-to-reach-end-via-prime-teleportation|2139|false
+PROBLEM|一、數論 > §1.3 質因數分解|2584|分割數組使乘積互質|split-the-array-to-make-coprime-products|2159|false
+PROBLEM|一、數論 > §1.3 質因數分解|2709|最大公約數遍歷|greatest-common-divisor-traversal|2172|false
+PROBLEM|一、數論 > §1.3 質因數分解|3715|完全平方數的祖先個數總和|sum-of-perfect-square-ancestors|2235|false
+PROBLEM|一、數論 > §1.3 質因數分解|2862|完全子集的最大元素和|maximum-element-sum-of-a-complete-subset-of-indices|2292|false
+PROBLEM|一、數論 > §1.3 質因數分解|2818|操作使得分最大|apply-operations-to-maximize-score|2397|false
+PROBLEM|一、數論 > §1.3 質因數分解|1998|數組的最大公因數排序|gcd-sort-of-an-array|2429|false
+PROBLEM|一、數論 > §1.3 質因數分解|1735|生成乘積數組的方案數|count-ways-to-make-array-with-product|2500|false
+PROBLEM|一、數論 > §1.3 質因數分解|2338|統計理想數組的數目|count-the-number-of-ideal-arrays|2615|false
+PROBLEM|一、數論 > §1.3 質因數分解|LCP 14|切分數組|qie-fen-shu-zu|null|false
+PROBLEM|一、數論 > §1.4 階乘分解|172|階乘後的零|factorial-trailing-zeroes|null|false
+PROBLEM|一、數論 > §1.4 階乘分解|793|階乘函數後 K 個零|preimage-size-of-factorial-zeroes-function|2100|false
+PROBLEM|一、數論 > §1.5 因子|2427|公因子的數目|number-of-common-factors|1172|false
+PROBLEM|一、數論 > §1.5 因子|1952|三除數|three-divisors|1204|false
+PROBLEM|一、數論 > §1.5 因子|1492|n 的第 k 個因子|the-kth-factor-of-n|1232|false
+PROBLEM|一、數論 > §1.5 因子|507|完美數|perfect-number|null|false
+PROBLEM|一、數論 > §1.5 因子|1390|四因數|four-divisors|1478|false
+PROBLEM|一、數論 > §1.5 因子|1362|最接近的因數|closest-divisors|1534|false
+PROBLEM|一、數論 > §1.5 因子|829|連續整數求和|consecutive-numbers-sum|1694|false
+PROBLEM|一、數論 > §1.5 因子|3447|將元素分配給有約束條件的組|assign-elements-to-groups-with-constraints|1731|false
+PROBLEM|一、數論 > §1.5 因子|3164|優質數對的總數 II|find-the-number-of-good-pairs-ii|1777|false
+PROBLEM|一、數論 > §1.5 因子|2176|統計數組中相等且可以被整除的數對|count-equal-and-divisible-pairs-in-an-array|null|false
+PROBLEM|一、數論 > §1.5 因子|2183|統計可以被 K 整除的下標對數目|count-array-pairs-divisible-by-k|2246|false
+PROBLEM|一、數論 > §1.5 因子|952|按公因數計算最大組件大小|largest-component-size-by-common-factor|2272|false
+PROBLEM|一、數論 > §1.5 因子|1627|帶閾值的圖連通性|graph-connectivity-with-threshold|2221|false
+PROBLEM|一、數論 > §1.5 因子|2198|單因數三元組|number-of-single-divisor-triplets|null|true
+PROBLEM|一、數論 > §1.5 因子|625|最小因式分解|minimum-factorization|null|true
+PROBLEM|一、數論 > §1.5 因子|2847|給定數字乘積的最小數字|smallest-number-with-given-digit-product|null|true
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|1979|找出數組的最大公約數|find-greatest-common-divisor-of-array|1184|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|3658|奇數和與偶數和的最大公約數|gcd-of-odd-and-even-sums|1220|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2169|得到 0 的操作數|count-operations-to-obtain-zero|null|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|914|卡牌分組|x-of-a-kind-in-a-deck-of-cards|1371|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|1071|字符串的最大公因子|greatest-common-divisor-of-strings|1398|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2344|使數組可以被整除的最少刪除次數|minimum-deletions-to-make-array-divisible|1641|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|365|水壺問題|water-and-jug-problem|null|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2654|使數組所有元素變成 1 的最少操作次數|minimum-number-of-operations-to-make-all-array-elements-equal-to-1|1929|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|1250|檢查「好數組」|check-if-it-is-a-good-array|1983|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|1625|執行操作後字典序最小的字符串|lexicographically-smallest-string-after-applying-operations|1992|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2607|使子數組元素和相等|make-k-subarray-sums-equal|2071|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2447|最大公因數等於 K 的子數組數目|number-of-subarrays-with-gcd-equal-to-k|null|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2543|判斷一個點是否可以到達|check-if-point-is-reachable|2221|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|3574|最大子數組 GCD 分數|maximize-subarray-gcd-score|2300|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|3312|查詢排序後的最大公約數|sorted-gcd-pair-queries|2533|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|3725|統計每一行選擇互質整數的方案數|count-ways-to-choose-coprime-integers-from-rows|null|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|1819|序列中不同最大公約數的數目|number-of-different-subsequences-gcds|2540|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|3671|子序列美麗值求和|sum-of-beautiful-subsequences|2647|false
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2436|使子數組最大公約數大於一的最小分割數|minimum-split-into-subarrays-with-gcd-greater-than-one|null|true
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2464|有效分割中的最少子數組數目|minimum-subarrays-in-a-valid-split|null|true
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）|2941|子數組的最大 GCD-Sum|maximum-gcd-sum-of-a-subarray|null|true
+PROBLEM|一、數論 > §1.6 最大公約數（GCD）擴展|2807|在鏈表中插入最大公約數|insert-greatest-common-divisors-in-linked-list|1279|false
+PROBLEM|一、數論 > §1.7 最小公倍數（LCM）|2413|最小偶倍數|smallest-even-multiple|1145|false
+PROBLEM|一、數論 > §1.7 最小公倍數（LCM）|3334|數組的最大因子得分|find-the-maximum-factor-score-of-array|1519|false
+PROBLEM|一、數論 > §1.7 最小公倍數（LCM）|858|鏡面反射|mirror-reflection|1881|false
+PROBLEM|一、數論 > §1.7 最小公倍數（LCM）|2197|替換數組中的非互質數|replace-non-coprime-numbers-in-array|2057|false
+PROBLEM|一、數論 > §1.7 最小公倍數（LCM）|2470|最小公倍數為 K 的子數組數目|number-of-subarrays-with-lcm-equal-to-k|null|false
+PROBLEM|一、數論 > §1.8 互質|2748|美麗下標對的數目|number-of-beautiful-pairs|1301|false
+PROBLEM|一、數論 > §1.8 互質|1447|最簡分數|simplified-fractions|null|false
+PROBLEM|一、數論 > §1.8 互質|1766|互質樹|tree-of-coprimes|2232|false
+PROBLEM|一、數論 > §1.8 互質|3411|最長乘積等價子數組|maximum-subarray-with-equal-products|null|false
+PROBLEM|一、數論 > §1.9 同餘|2453|摧毀一系列目標|destroy-sequential-targets|1762|false
+PROBLEM|一、數論 > §1.9 同餘|2598|執行操作後的最大 MEX|smallest-missing-non-negative-integer-after-operations|1846|false
+PROBLEM|一、數論 > §1.9 同餘|1590|使數組和能被 P 整除|make-sum-divisible-by-p|2039|false
+PROBLEM|一、數論 > §1.10 數論分塊|1925|統計平方和三元組的數目|count-square-sum-triples|null|false
+PROBLEM|一、數論 > §1.11 其他|1018|可被 5 整除的二進制前綴|binary-prefix-divisible-by-5|1376|false
+PROBLEM|一、數論 > §1.11 其他|326|3 的冪|power-of-three|null|false
+PROBLEM|一、數論 > §1.11 其他|1387|將整數按權重排序|sort-integers-by-the-power-value|1507|false
+PROBLEM|一、數論 > §1.11 其他|372|超級次方|super-pow|null|false
+PROBLEM|一、數論 > §1.11 其他|1015|可被 K 整除的最小整數|smallest-integer-divisible-by-k|null|false
+PROBLEM|一、數論 > §1.11 其他|3790|最小全 1 倍數|smallest-all-ones-multiple|null|false
+PROBLEM|一、數論 > §1.11 其他|633|平方數之和|sum-of-square-numbers|null|false
+PROBLEM|一、數論 > §1.11 其他|279|完全平方數|perfect-squares|null|false
+PROBLEM|一、數論 > §1.11 其他|2240|買鋼筆和鉛筆的方案數|number-of-ways-to-buy-pens-and-pencils|null|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|3128|直角三角形|right-triangles|1541|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|1573|分割字符串的方案數|number-of-ways-to-split-a-string|1591|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2750|將數組劃分成若干好子數組的方式|ways-to-split-array-into-good-subarrays|1598|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2316|統計無向圖中無法互相到達點對數|count-unreachable-pairs-of-nodes-in-an-undirected-graph|1604|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2550|猴子碰撞的方法數|count-collisions-of-monkeys-on-a-polygon|1663|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|1922|統計好數字的數目|count-good-numbers|1675|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|3067|在帶權樹網絡中統計可連接服務器對數目|count-pairs-of-connectable-servers-in-a-weighted-tree-network|1909|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2147|分隔長廊的方案數|number-of-ways-to-divide-a-long-corridor|1915|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2963|統計好分割方案的數目|count-the-number-of-good-partitions|1985|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2306|公司命名|naming-a-company|2305|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2867|統計樹中的合法路徑數目|count-valid-paths-in-a-tree|2428|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|1617|統計子樹中城市之間最大距離|count-subtrees-with-max-distance-between-cities|null|false
+PROBLEM|二、組合數學 > §2.1 乘法原理|2450|應用操作後不同二進制字符串的數量|number-of-distinct-binary-strings-after-applying-operations|null|true
+PROBLEM|二、組合數學 > §2.2 組合計數|62|不同路徑|unique-paths|null|false
+PROBLEM|二、組合數學 > §2.2 組合計數|357|統計各位數字都不同的數字個數|count-numbers-with-unique-digits|null|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1175|質數排列|prime-arrangements|1489|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3179|K 秒後第 N 個元素的值|find-the-n-th-value-after-k-seconds|null|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1359|有效的快遞序列數目|count-all-valid-pickup-and-delivery-options|1723|false
+PROBLEM|二、組合數學 > §2.2 組合計數|2400|恰好移動 k 步到達某一位置的方法數目|number-of-ways-to-reach-a-position-after-exactly-k-steps|1751|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3558|給邊賦權值的方案數 I|number-of-ways-to-assign-edge-weights-i|1845|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3821|二進制中恰好K個1的第N小整數|find-nth-smallest-integer-with-k-one-bits|2069|false
+PROBLEM|二、組合數學 > §2.2 組合計數|2514|統計同位異構字符串數目|count-anagrams|2070|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3154|到達第 K 級臺階的方案數|find-number-of-ways-to-reach-the-k-th-stair|2071|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1643|第 K 條最小指令|kth-smallest-instructions|2080|false
+PROBLEM|二、組合數學 > §2.2 組合計數|2842|統計一個字符串的 k 子序列美麗值最大的數目|count-k-subsequences-of-a-string-with-maximum-beauty|2092|false
+PROBLEM|二、組合數學 > §2.2 組合計數|2221|數組的三角和|find-triangular-sum-of-an-array|null|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3463|判斷操作後字符串中的數字是否相等 II|check-if-digits-are-equal-in-string-after-operations-ii|2286|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3519|統計逐位非遞減的整數|count-numbers-with-non-decreasing-digits|2246|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1569|將子數組重新排序得到同一個二叉搜索樹的方案數|number-of-ways-to-reorder-array-to-get-same-bst|2288|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3405|統計恰好有 K 個相等相鄰元素的數組數目|count-the-number-of-arrays-with-k-matching-adjacent-elements|2310|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1866|恰有 K 根木棍可以看到的排列數目|number-of-ways-to-rearrange-sticks-with-k-sticks-visible|2333|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1467|兩個盒子中球的顏色數相同的概率|probability-of-a-two-boxes-having-the-same-number-of-distinct-balls|2357|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3518|最小回文排列 II|smallest-palindromic-rearrangement-ii|2375|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3272|統計好整數的數目|find-the-count-of-good-integers|2382|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3317|安排活動的方案數|find-the-number-of-possible-ways-for-an-event|2414|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3470|全排列 IV|permutations-iv|2474|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1916|統計為蟻羣構築房間的不同順序|count-ways-to-build-rooms-in-an-ant-colony|2486|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3343|統計平衡排列的數目|count-number-of-balanced-permutations|2615|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1830|使字符串有序的最少操作次數|minimum-number-of-operations-to-make-string-sorted|2620|false
+PROBLEM|二、組合數學 > §2.2 組合計數|2954|統計感冒序列的數目|count-the-number-of-infection-sequences|2645|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3539|魔法序列的數組乘積之和|find-sum-of-array-product-of-magical-sequences|2694|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3395|唯一中間衆數子序列 I|subsequences-with-a-unique-middle-mode-i|2800|false
+PROBLEM|二、組合數學 > §2.2 組合計數|1575|統計所有可行路徑|count-all-possible-routes|null|false
+PROBLEM|二、組合數學 > §2.2 組合計數|3251|單調數組對的數目 II|find-the-count-of-monotonic-pairs-ii|null|false
+PROBLEM|二、組合數學 > §2.2 組合計數|LCP 25|古董鍵盤|Uh984O|null|false
+PROBLEM|二、組合數學 > §2.2 組合計數|2539|好子序列的個數|count-the-number-of-good-subsequences|null|true
+PROBLEM|二、組合數學 > §2.2 組合計數|634|尋找數組的錯位排列|find-the-derangement-of-an-array|null|true
+PROBLEM|二、組合數學 > §2.2 組合計數|1692|計算分配糖果的不同方式|count-ways-to-distribute-candies|null|true
+PROBLEM|二、組合數學 > §2.3 放球問題|1641|統計字典序元音字符串的數目|count-sorted-vowel-strings|1519|false
+PROBLEM|二、組合數學 > §2.3 放球問題|1621|大小為 K 的不重疊線段的數目|number-of-sets-of-k-non-overlapping-line-segments|2198|false
+PROBLEM|二、組合數學 > §2.3 放球問題|1735|生成乘積數組的方案數|count-ways-to-make-array-with-product|2500|false
+PROBLEM|二、組合數學 > §2.3 放球問題|2338|統計理想數組的數目|count-the-number-of-ideal-arrays|2615|false
+PROBLEM|二、組合數學 > §2.3 放球問題思維擴展|3669|K 因數分解|balanced-k-factor-decomposition|null|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|2652|倍數求和|sum-multiples|null|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|878|第 N 個神奇數字|nth-magical-number|1897|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|1201|醜數 III|ugly-number-iii|2039|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|2929|給小朋友們分糖果 II|distribute-candies-among-children-ii|null|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|2930|重新排列後包含指定子字符串的字符串數目|number-of-strings-which-can-be-rearranged-to-contain-substring|null|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|2513|最小化兩個數組中的最大值|minimize-the-maximum-of-two-arrays|2302|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|3733|完成所有送貨任務的最少時間|minimum-time-to-complete-all-deliveries|null|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|3116|單面值組合的第 K 小金額|kth-smallest-amount-with-single-denomination-combination|2387|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|3757|有效子序列的數量|number-of-effective-subsequences|2519|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|3130|找出所有穩定的二進制數組 II|find-all-possible-stable-binary-arrays-ii|2825|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|920|播放列表的數量|number-of-music-playlists|null|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|3336|最大公約數相等的子序列數量|find-the-number-of-subsequences-with-equal-gcd|null|false
+PROBLEM|二、組合數學 > §2.4 容斥原理|2927|給小朋友們分糖果 III|distribute-candies-among-children-iii|null|true
+PROBLEM|二、組合數學 > §2.5 生成函數（母函數）|1155|擲骰子等於目標和的方法數|number-of-dice-rolls-with-target-sum|null|false
+PROBLEM|二、組合數學 > §2.5 生成函數（母函數）|629|K 個逆序對數組|k-inverse-pairs-array|null|false
+PROBLEM|二、組合數學 > §2.5 生成函數（母函數）|3193|統計逆序對的數目|count-the-number-of-inversions|null|false
+PROBLEM|二、組合數學 > §2.5 生成函數（母函數）|3082|求出所有子序列的能量和|find-the-sum-of-the-power-of-all-subsequences|null|false
+PROBLEM|二、組合數學 > §2.5 生成函數（母函數）|2518|好分區的數目|number-of-great-partitions|null|false
+PROBLEM|二、組合數學 > §2.5 生成函數（母函數）|3333|找到初始輸入字符串 II|find-the-original-typed-string-ii|null|false
+PROBLEM|三、概率期望|1227|飛機座位分配概率|airplane-seat-assignment-probability|null|false
+PROBLEM|三、概率期望|688|騎士在棋盤上的概率|knight-probability-in-chessboard|null|false
+PROBLEM|三、概率期望|837|新 21 點|new-21-game|2350|false
+PROBLEM|三、概率期望|1467|兩個盒子中球的顏色數相同的概率|probability-of-a-two-boxes-having-the-same-number-of-distinct-balls|2357|false
+PROBLEM|三、概率期望|808|分湯|soup-servings|2397|false
+PROBLEM|三、概率期望|LCR 185|統計結果概率|nge-tou-zi-de-dian-shu-lcof|null|false
+PROBLEM|三、概率期望|LCP 11|期望個數統計|qi-wang-ge-shu-tong-ji|null|false
+PROBLEM|三、概率期望|九坤-04|籌碼遊戲|I3Gm2h|null|false
+PROBLEM|三、概率期望|1230|拋擲硬幣|toss-strange-coins|null|true
+PROBLEM|三、概率期望隨機數據下顯著更快的算法|3494|釀造藥水需要的最少總時間|find-the-minimum-amount-of-time-to-brew-potions|null|false
+PROBLEM|四、博弈論|292|Nim 遊戲|nim-game|null|false
+PROBLEM|四、博弈論|1025|除數博弈|divisor-game|1435|false
+PROBLEM|四、博弈論|3227|字符串元音遊戲|vowels-game-in-a-string|1452|false
+PROBLEM|四、博弈論|2038|如果相鄰兩個顏色均相同則刪除當前顏色|remove-colored-pieces-if-both-neighbors-are-the-same-color|1468|false
+PROBLEM|四、博弈論|877|石子游戲|stone-game|1590|false
+PROBLEM|四、博弈論|3828|刪除子數組後的最終元素|final-element-after-subarray-deletions|1591|false
+PROBLEM|四、博弈論|1510|石子游戲 IV|stone-game-iv|1787|false
+PROBLEM|四、博弈論|486|預測贏家|predict-the-winner|null|false
+PROBLEM|四、博弈論|1690|石子游戲 VII|stone-game-vii|1951|false
+PROBLEM|四、博弈論|1686|石子游戲 VI|stone-game-vi|2001|false
+PROBLEM|四、博弈論|1927|求和遊戲|sum-game|2005|false
+PROBLEM|四、博弈論|1406|石子游戲 III|stone-game-iii|2027|false
+PROBLEM|四、博弈論|1140|石子游戲 II|stone-game-ii|2035|false
+PROBLEM|四、博弈論|1563|石子游戲 V|stone-game-v|2087|false
+PROBLEM|四、博弈論|464|我能贏嗎|can-i-win|null|false
+PROBLEM|四、博弈論|2029|石子游戲 IX|stone-game-ix|2277|false
+PROBLEM|四、博弈論|810|黑板異或遊戲|chalkboard-xor-game|2341|false
+PROBLEM|四、博弈論|1872|石子游戲 VIII|stone-game-viii|2440|false
+PROBLEM|四、博弈論|913|貓和老鼠|cat-and-mouse|null|false
+PROBLEM|四、博弈論|1728|貓和老鼠 II|cat-and-mouse-ii|2849|false
+PROBLEM|四、博弈論|LCP 48|無限棋局|fsa7oZ|null|false
+PROBLEM|四、博弈論|294|翻轉游戲 II|flip-game-ii|null|true
+PROBLEM|四、博弈論|1908|Nim 遊戲 II|game-of-nim|null|true
+PROBLEM|四、博弈論|2005|斐波那契樹的移除子樹遊戲|subtree-removal-game-with-fibonacci-tree|null|true
+PROBLEM|四、博弈論|2868|單詞遊戲|the-wording-game|null|true
+PROBLEM|五、計算幾何 > §5.1 點、線|1232|綴點成線|check-if-it-is-a-straight-line|1247|false
+PROBLEM|五、計算幾何 > §5.1 點、線|2280|表示一個折線圖的最少線段數|minimum-lines-to-represent-a-line-chart|1681|false
+PROBLEM|五、計算幾何 > §5.1 點、線|1610|可見點的最大數目|maximum-number-of-visible-points|2147|false
+PROBLEM|五、計算幾何 > §5.1 點、線|面試題 16.03|交點|intersection-lcci|null|false
+PROBLEM|五、計算幾何 > §5.1 點、線|面試題 16.13|平分正方形|bisect-squares-lcci|null|false
+PROBLEM|五、計算幾何 > §5.1 點、線|面試題 16.14|最佳直線|best-line-lcci|null|false
+PROBLEM|五、計算幾何 > §5.1 點、線|LCP 37|最小矩形面積|zui-xiao-ju-xing-mian-ji|null|false
+PROBLEM|五、計算幾何 > §5.1 點、線|2152|穿過所有點的所需最少直線數量|minimum-number-of-lines-to-cover-points|null|true
+PROBLEM|五、計算幾何 > §5.2 圓|1401|圓和矩形是否有重疊|circle-and-rectangle-overlapping|1709|false
+PROBLEM|五、計算幾何 > §5.2 圓|1453|圓形靶內的最大飛鏢數量|maximum-number-of-darts-inside-of-a-circular-dartboard|2202|false
+PROBLEM|五、計算幾何 > §5.2 圓|LCP 42|玩具套圈|vFjcfV|null|false
+PROBLEM|五、計算幾何 > §5.2 圓|3235|判斷矩形的兩個角落是否可達|check-if-the-rectangle-corner-is-reachable|null|false
+PROBLEM|五、計算幾何 > §5.2 圓|1924|安裝柵欄 II|erect-the-fence-ii|null|true
+PROBLEM|五、計算幾何 > §5.3 矩形、多邊形|836|矩形重疊|rectangle-overlap|1443|false
+PROBLEM|五、計算幾何 > §5.3 矩形、多邊形|223|矩形面積|rectangle-area|null|false
+PROBLEM|五、計算幾何 > §5.3 矩形、多邊形|593|有效的正方形|valid-square|null|false
+PROBLEM|五、計算幾何 > §5.3 矩形、多邊形|939|最小面積矩形|minimum-area-rectangle|1752|false
+PROBLEM|五、計算幾何 > §5.3 矩形、多邊形|963|最小面積矩形 II|minimum-area-rectangle-ii|1991|false
+PROBLEM|五、計算幾何 > §5.3 矩形、多邊形|3625|統計梯形的數目 II|count-number-of-trapezoids-ii|2643|false
+PROBLEM|五、計算幾何 > §5.3 矩形、多邊形|469|凸多邊形|convex-polygon|null|true
+PROBLEM|五、計算幾何 > §5.4 凸包|587|安裝柵欄|erect-the-fence|null|false
+PROBLEM|五、計算幾何 > §5.4 凸包|812|最大三角形面積|largest-triangle-area|null|false
+PROBLEM|五、計算幾何 > §5.4 凸包|LCP 15|遊樂園的迷宮|you-le-yuan-de-mi-gong|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|398|隨機數索引|random-pick-index|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|382|鏈表隨機節點|linked-list-random-node|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|384|打亂數組|shuffle-an-array|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|380|O(1) 時間插入、刪除和獲取隨機元素|insert-delete-getrandom-o1|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|381|O(1) 時間插入、刪除和獲取隨機元素 - 允許重複|insert-delete-getrandom-o1-duplicates-allowed|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|528|按權重隨機選擇|random-pick-with-weight|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|470|用 Rand7() 實現 Rand10()|implement-rand10-using-rand7|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|710|黑名單中的隨機數|random-pick-with-blacklist|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|478|在圓內隨機生成點|generate-random-point-in-a-circle|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|497|非重疊矩形中的隨機點|random-point-in-non-overlapping-rectangles|null|false
+PROBLEM|六、隨機算法 > §6.1 隨機數|519|隨機翻轉矩陣|random-flip-matrix|null|false
+PROBLEM|六、隨機算法 > §6.2 隨機化技巧|961|在長度 2N 的數組中找出重複 N 次的元素|n-repeated-element-in-size-2n-array|1162|false
+PROBLEM|六、隨機算法 > §6.2 隨機化技巧|1317|將整數轉換為兩個無零整數的和|convert-integer-to-the-sum-of-two-no-zero-integers|1278|false
+PROBLEM|六、隨機算法 > §6.2 隨機化技巧|1968|構造元素不等於兩相鄰元素平均值的數組|array-with-elements-not-equal-to-average-of-neighbors|1499|false
+PROBLEM|六、隨機算法 > §6.2 隨機化技巧|1157|子數組中佔絕大多數的元素|online-majority-element-in-subarray|2205|false
+PROBLEM|六、隨機算法 > §6.2 隨機化技巧|3680|生成賽程|generate-schedule|2378|false
+PROBLEM|七、雜項 > §7.1 迴文數|9|迴文數|palindrome-number|null|false
+PROBLEM|七、雜項 > §7.1 迴文數|2396|嚴格迴文的數字|strictly-palindromic-number|1329|false
+PROBLEM|七、雜項 > §7.1 迴文數|2217|找到指定長度的迴文數|find-palindrome-with-fixed-length|1822|false
+PROBLEM|七、雜項 > §7.1 迴文數|866|迴文質數|prime-palindrome|1938|false
+PROBLEM|七、雜項 > §7.1 迴文數|3766|將數字變成二進制迴文數的最少操作|minimum-operations-to-make-binary-palindrome|null|false
+PROBLEM|七、雜項 > §7.1 迴文數|564|尋找最近的迴文數|find-the-closest-palindrome|null|false
+PROBLEM|七、雜項 > §7.1 迴文數|2967|使數組成為等數數組的最小代價|minimum-cost-to-make-array-equalindromic|2116|false
+PROBLEM|七、雜項 > §7.1 迴文數|906|超級迴文數|super-palindromes|2140|false
+PROBLEM|七、雜項 > §7.1 迴文數|2081|k 鏡像數字的和|sum-of-k-mirror-numbers|2210|false
+PROBLEM|七、雜項 > §7.1 迴文數|3677|統計二進制迴文數字的數目|count-binary-palindromic-numbers|2223|false
+PROBLEM|七、雜項 > §7.1 迴文數|3260|找出最大的 N 位 K 迴文數|find-the-largest-palindrome-divisible-by-k|2370|false
+PROBLEM|七、雜項 > §7.1 迴文數|3272|統計好整數的數目|find-the-count-of-good-integers|2382|false
+PROBLEM|七、雜項 > §7.1 迴文數|3646|下一個特殊迴文數|next-special-palindrome-number|2445|false
+PROBLEM|七、雜項 > §7.1 迴文數|479|最大回文數乘積|largest-palindrome-product|null|false
+PROBLEM|七、雜項 > §7.2 整數拆分|343|整數拆分|integer-break|null|false
+PROBLEM|七、雜項 > §7.2 整數拆分|1808|好因子的最大數目|maximize-number-of-nice-divisors|2070|false
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|1266|訪問所有點的最小時間|minimum-time-visiting-all-points|1303|false
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|3443|K 次修改後的最大曼哈頓距離|maximum-manhattan-distance-after-k-changes|1856|false
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|1131|絕對值表達式的最大值|maximum-of-absolute-value-expression|2059|false
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|3102|最小化曼哈頓距離|minimize-manhattan-distances|2216|false
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|1330|翻轉子數組得到最大的數組值|reverse-subarray-to-maximize-array-value|2482|false
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|3464|正方形上的點之間的最大距離|maximize-the-distance-between-points-on-a-square|2806|false
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|1956|感染 K 種病毒所需的最短時間|minimum-time-for-k-virus-variants-to-spread|null|true
+PROBLEM|七、雜項 > §7.3 曼哈頓距離與切比雪夫距離|2613|美數對|beautiful-pairs|null|true
+PROBLEM|七、雜項 > §7.4 多項式|611|有效三角形的個數|valid-triangle-number|null|false
+PROBLEM|七、雜項 > §7.4 多項式|923|三數之和的多種可能|3sum-with-multiplicity|null|false
+PROBLEM|七、雜項 > §7.4 多項式|835|圖像重疊|image-overlap|null|false
+PROBLEM|七、雜項 > §7.4 多項式|3549|兩個多項式相乘|multiply-two-polynomials|null|true
+PROBLEM|七、雜項 > §7.4 多項式|259|較小的三數之和|3sum-smaller|null|true
+PROBLEM|七、雜項 > §7.4 多項式|3078|矩陣中的字母數字模式匹配 I|match-alphanumerical-pattern-in-matrix-i|null|true
+PROBLEM|七、雜項 > §7.4 多項式|3400|右移後的最大匹配索引數|maximum-number-of-matching-indices-after-right-shifts|null|true
+PROBLEM|七、雜項 > §7.5 快速沃爾什變換（FWT）|3514|不同 XOR 三元組的數目 II|number-of-unique-xor-triplets-ii|null|false
+PROBLEM|七、雜項 > §7.5 快速沃爾什變換（FWT）|1723|完成所有工作的最短時間|find-minimum-time-to-finish-all-jobs|null|false
+PROBLEM|七、雜項 > §7.7 摩爾投票法|169|多數元素|majority-element|null|false
+PROBLEM|七、雜項 > §7.7 摩爾投票法|961|在長度 2N 的數組中找出重複 N 次的元素|n-repeated-element-in-size-2n-array|null|false
+PROBLEM|七、雜項 > §7.7 摩爾投票法|2780|合法分割的最小下標|minimum-index-of-a-valid-split|1550|false
+PROBLEM|七、雜項 > §7.7 摩爾投票法|229|多數元素 II|majority-element-ii|null|false
+PROBLEM|七、雜項 > §7.7 摩爾投票法|1157|子數組中佔絕大多數的元素|online-majority-element-in-subarray|2205|false
+PROBLEM|七、雜項 > §7.8 其他|1523|在區間範圍內統計奇數數目|count-odd-numbers-in-an-interval-range|1209|false
+PROBLEM|七、雜項 > §7.8 其他|1716|計算力扣銀行的錢|calculate-money-in-leetcode-bank|1295|false
+PROBLEM|七、雜項 > §7.8 其他|2829|k-avoiding 數組的最小總和|determine-the-minimum-sum-of-a-k-avoiding-array|1347|false
+PROBLEM|七、雜項 > §7.8 其他|2579|統計染色格子數|count-total-number-of-colored-cells|1356|false
+PROBLEM|七、雜項 > §7.8 其他|3648|覆蓋網格的最少傳感器數目|minimum-sensors-to-cover-grid|1396|false
+PROBLEM|七、雜項 > §7.8 其他|2834|找出美麗數組的最小和|find-the-minimum-possible-sum-of-a-beautiful-array|1409|false
+PROBLEM|七、雜項 > §7.8 其他|1414|和為 K 的最少斐波那契數字數目|find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k|1466|false
+PROBLEM|七、雜項 > §7.8 其他|319|燈泡開關|bulb-switcher|null|false
+PROBLEM|七、雜項 > §7.8 其他|1780|判斷一個數字是否可以表示成三的冪的和|check-if-number-is-a-sum-of-powers-of-three|1506|false
+PROBLEM|七、雜項 > §7.8 其他|3091|執行操作使數據元素之和大於等於 K|apply-operations-to-make-sum-of-array-greater-than-or-equal-to-k|1522|false
+PROBLEM|七、雜項 > §7.8 其他|3468|可行數組的數目|find-the-number-of-copy-arrays|1545|false
+PROBLEM|七、雜項 > §7.8 其他|2310|個位數字為 K 的整數之和|sum-of-numbers-with-units-digit-k|1559|false
+PROBLEM|七、雜項 > §7.8 其他|2145|統計隱藏數組數目|count-the-hidden-sequences|1614|false
+PROBLEM|七、雜項 > §7.8 其他|2541|使數組中所有元素相等的最小操作數 II|minimum-operations-to-make-array-equal-ii|1620|false
+PROBLEM|七、雜項 > §7.8 其他|1502|判斷能否形成等差數列|can-make-arithmetic-progression-from-sequence|null|false
+PROBLEM|七、雜項 > §7.8 其他|2195|向數組中追加 K 個整數|append-k-integers-with-minimal-sum|1659|false
+PROBLEM|七、雜項 > §7.8 其他|2457|美麗整數的最小增量|minimum-addition-to-make-integer-beautiful|1680|false
+PROBLEM|七、雜項 > §7.8 其他|1017|負二進制轉換|convert-to-base-2|1698|false
+PROBLEM|七、雜項 > §7.8 其他|3649|完美對的數目|number-of-perfect-pairs|1716|false
+PROBLEM|七、雜項 > §7.8 其他|1954|收集足夠蘋果的最小花園周長|minimum-garden-perimeter-to-collect-enough-apples|1759|false
+PROBLEM|七、雜項 > §7.8 其他|1073|負二進制數相加|adding-two-negabinary-numbers|1807|false
+PROBLEM|七、雜項 > §7.8 其他|1823|找出遊戲的獲勝者|find-the-winner-of-the-circular-game|null|false
+PROBLEM|七、雜項 > §7.8 其他|166|分數到小數|fraction-to-recurring-decimal|null|false
+PROBLEM|七、雜項 > §7.8 其他|3012|通過操作使數組長度最小|minimize-length-of-array-using-operations|1833|false
+PROBLEM|七、雜項 > §7.8 其他|483|最小好進制|smallest-good-base|null|false
+PROBLEM|七、雜項 > §7.8 其他|3782|交替刪除操作後最後剩下的整數|last-remaining-integer-after-alternating-deletion-operations|2074|false
+PROBLEM|七、雜項 > §7.8 其他|390|消除遊戲|elimination-game|null|false
+PROBLEM|七、雜項 > §7.8 其他|972|相等的有理數|equal-rational-numbers|2121|false
+PROBLEM|七、雜項 > §7.8 其他|1515|服務中心的最佳位置|best-position-for-a-service-centre|2157|false
+PROBLEM|七、雜項 > §7.8 其他|1862|向下取整數對和|sum-of-floored-pairs|2170|false
+PROBLEM|七、雜項 > §7.8 其他|1739|放置盒子|building-boxes|2198|false
+PROBLEM|七、雜項 > §7.8 其他|2443|反轉之後的數字和|sum-of-number-and-its-reverse|null|false
+PROBLEM|七、雜項 > §7.8 其他|1806|還原排列的最少操作步數|minimum-number-of-operations-to-reinitialize-a-permutation|null|false
+PROBLEM|七、雜項 > §7.8 其他|458|可憐的小豬|poor-pigs|null|false
+PROBLEM|七、雜項 > §7.8 其他|60|排列序列|permutation-sequence|null|false
+PROBLEM|七、雜項 > §7.8 其他|2117|一個區間內所有數乘積的縮寫|abbreviating-the-product-of-a-range|2477|false
+PROBLEM|七、雜項 > §7.8 其他|3666|使二進制字符串全為 1 的最少操作次數|minimum-operations-to-equalize-binary-string|2477|false
+PROBLEM|七、雜項 > §7.8 其他|LCP 02|分式化簡|deep-dark-fraction|null|false
+PROBLEM|七、雜項 > §7.8 其他|LCP 29|樂團站位|SNJvJP|null|false
+PROBLEM|七、雜項 > §7.8 其他|LCP 46|志願者調配|05ZEDJ|null|false
+PROBLEM|七、雜項 > §7.8 其他|800|相似 RGB 顏色|similar-rgb-color|null|true
+PROBLEM|七、雜項 > §7.8 其他|660|移除 9|remove-9|null|true
+PROBLEM|七、雜項 > §7.8 其他|2979|最貴的無法購買的商品|most-expensive-item-that-can-not-be-bought|null|true
+PROBLEM|七、雜項 > §7.8 其他|2647|把三角形染成紅色|color-the-triangle-red|null|true

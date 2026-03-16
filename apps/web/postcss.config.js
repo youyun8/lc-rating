@@ -1,3 +1,3 @@
-import { postcssConfig } from "@huxulm/tailwind-config/postcss";
+import { postcssConfig } from "@asyncchang/tailwind-config/postcss";
 
 export default postcssConfig;

@@ -13,7 +13,7 @@ export function useSiteStorage() {
     setPremium,
   } = useGlobalSettingsStore();
   const { options, setOptions } = useOptions();
-  const { progress, setAllProgress } = useProgressStore();
+  const { progress, progressUpdatedAt, setAllProgress } = useProgressStore();
 
   const siteStorage = useMemo(
     () => ({
@@ -22,23 +22,25 @@ export function useSiteStorage() {
       premium,
       options,
       progress,
+      progressUpdatedAt,
     }),
-    [tagLanguage, linkLanguage, premium, options, progress]
+    [tagLanguage, linkLanguage, premium, options, progress, progressUpdatedAt]
   );
 
   const setSiteStorage = useCallback(
-    (siteStorage: {
-      tagLanguage: "zh" | "en";
-      linkLanguage: "zh" | "en";
-      premium: boolean;
-      options: Options;
-      progress: Record<string, string>;
+    (data: {
+      tagLanguage?: "zh" | "en";
+      linkLanguage?: "zh" | "en";
+      premium?: boolean;
+      options?: Options;
+      progress?: Record<string, string>;
+      progressUpdatedAt?: Record<string, number>;
     }) => {
-      setTagLanguage(siteStorage.tagLanguage);
-      setLinkLanguage(siteStorage.linkLanguage);
-      setPremium(siteStorage.premium);
-      setOptions(siteStorage.options);
-      setAllProgress(siteStorage.progress);
+      if (data.tagLanguage !== undefined) setTagLanguage(data.tagLanguage);
+      if (data.linkLanguage !== undefined) setLinkLanguage(data.linkLanguage);
+      if (data.premium !== undefined) setPremium(data.premium);
+      if (data.options !== undefined) setOptions(data.options);
+      if (data.progress !== undefined) setAllProgress(data.progress, data.progressUpdatedAt);
     },
     []
   );

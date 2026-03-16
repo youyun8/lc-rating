@@ -38,17 +38,17 @@ const OptionsForm = React.memo(({ form, onSubmit }: OptionsFormProps) => {
               <div key={index} className="flex gap-2 items-start">
                 <div className="space-y-1">
                   <Input
-                    placeholder="主键 Key"
+                    placeholder="主鍵 Key"
                     {...form.register(`options.${index}.key`, {
                       validate: (value) => {
                         if (value.trim() === "") {
-                          return "Key不能为空";
+                          return "Key 不能為空";
                         }
                         const isDuplicate = options.some(
                           (opt, i) => i !== index && opt.key === value
                         );
                         if (isDuplicate) {
-                          return "Key已存在";
+                          return "Key 已存在";
                         }
                         return true;
                       },
@@ -62,7 +62,7 @@ const OptionsForm = React.memo(({ form, onSubmit }: OptionsFormProps) => {
 
                 <div className="">
                   <Input
-                    placeholder="标签 Label"
+                    placeholder="標籤 Label"
                     {...form.register(`options.${index}.label`)}
                   />
                 </div>
@@ -79,7 +79,7 @@ const OptionsForm = React.memo(({ form, onSubmit }: OptionsFormProps) => {
                     onClick={() => fieldArray.remove(index)}
                     type="button"
                   >
-                    删除
+                    刪除
                   </Button>
                 </div>
               </div>
@@ -89,9 +89,9 @@ const OptionsForm = React.memo(({ form, onSubmit }: OptionsFormProps) => {
 
         <div className="flex gap-2">
           <Button variant="secondary" onClick={handleAdd} type="button">
-            添加新行
+            新增
           </Button>
-          <Button type="submit">保存配置</Button>
+          <Button type="submit">儲存設定</Button>
         </div>
       </form>
     </Form>

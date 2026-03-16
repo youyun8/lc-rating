@@ -9,7 +9,7 @@ const Preference = () => {
   return (
     <div className="">
       <div className="flex items-center gap-2">
-        <span>超链接:</span>
+        <span>超連結:</span>
         <Label htmlFor="airplane-mode">中文</Label>
         <Switch
           id="airplane-mode"
@@ -20,7 +20,7 @@ const Preference = () => {
         <Label htmlFor="airplane-mode">英文</Label>
       </div>
       <div className="flex items-center gap-2">
-        <span>标签:</span>
+        <span>標籤:</span>
         <Label htmlFor="airplane-mode">中文</Label>
         <Switch
           id="airplane-mode"

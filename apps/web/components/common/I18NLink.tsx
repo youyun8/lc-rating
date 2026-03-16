@@ -1,6 +1,5 @@
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import React from "react";
 
 interface I18NLinkProps {
@@ -19,14 +18,15 @@ const I18NLink = React.memo(
     const linkLocal = linkLanguage === "zh" ? link.zh : link.en;
 
     return (
-      <Link
+      <a
         href={linkLocal}
         target="_blank"
+        rel="noopener noreferrer"
         className={cn("text-left hover:underline", className)}
         style={style}
       >
         {title}
-      </Link>
+      </a>
     );
   }
 );

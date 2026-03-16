@@ -38,7 +38,7 @@ export type TableCol = {
 };
 
 export const key2Label: { [K in keyof TableCol]: string } = {
-  contest: "比赛",
+  contest: "比賽",
   Q1: "Q1",
   Q2: "Q2",
   Q3: "Q3",

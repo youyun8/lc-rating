@@ -5,7 +5,7 @@ const LC_RATING_PROGRESS_KEY_PREFIX = "lc-rating-zen-progress-";
 
 export const migrateFromLocalStorage = (): ProgressStoreState => {
   if (!isBrowser()) {
-    return { progress: {} };
+    return { progress: {}, progressUpdatedAt: {} };
   }
 
   try {
@@ -22,9 +22,9 @@ export const migrateFromLocalStorage = (): ProgressStoreState => {
         progress[questID] = value;
       }
     });
-    return { progress };
+    return { progress, progressUpdatedAt: {} };
   } catch (error) {
     console.error("Progress migration from localStorage failed:", error);
-    return { progress: {} };
+    return { progress: {}, progressUpdatedAt: {} };
   }
 };

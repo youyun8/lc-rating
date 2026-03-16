@@ -1,0 +1,259 @@
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|1456|定長子串中元音的最大數目|maximum-number-of-vowels-in-a-substring-of-given-length|1263|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|643|子數組最大平均數 I|maximum-average-subarray-i|null|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|1343|大小為 K 且平均值大於等於閾值的子數組數目|number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold|1317|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|2090|半徑為 k 的子數組平均值|k-radius-subarray-averages|1358|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|2379|得到 K 個黑塊的最少塗色次數|minimum-recolors-to-get-k-consecutive-black-blocks|1360|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|2841|幾乎唯一子數組的最大和|maximum-sum-of-almost-unique-subarray|1546|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|2461|長度為 K 子數組中的最大和|maximum-sum-of-distinct-subarrays-with-length-k|1553|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|1423|可獲得的最大點數|maximum-points-you-can-obtain-from-cards|1574|false
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|1176|健身計劃評估|diet-plan-performance|null|true
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|1100|長度為 K 的無重複字符子串|find-k-length-substrings-with-no-repeated-characters|null|true
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|1852|每個子數組的數字種類數|distinct-numbers-in-each-subarray|null|true
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|1151|最少交換次數來組合所有的 1|minimum-swaps-to-group-all-1s-together|null|true
+PROBLEM|一、定長滑動窗口 > §1.1 基礎|2107|分享 K 個糖果後獨特口味的數量|number-of-unique-flavors-after-sharing-k-candies|null|true
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|3679|使庫存平衡的最少丟棄次數|minimum-discards-to-balance-inventory|1639|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|1052|愛生氣的書店老闆|grumpy-bookstore-owner|null|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|3439|重新安排會議得到最多空餘時間 I|reschedule-meetings-for-maximum-free-time-i|1729|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|3694|刪除子字符串後不同的終點|distinct-points-reachable-after-substring-removal|1739|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|2134|最少交換次數來組合所有的 1 II|minimum-swaps-to-group-all-1s-together-ii|1748|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|1652|拆炸彈|defuse-the-bomb|null|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|1297|子串的最大出現次數|maximum-number-of-occurrences-of-a-substring|1748|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|3652|按策略買賣股票的最佳時機|best-time-to-buy-and-sell-stock-using-strategy|null|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|1888|使二進制字符串字符交替的最少反轉次數|minimum-number-of-flips-to-make-the-binary-string-alternating|2006|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|567|字符串的排列|permutation-in-string|null|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|438|找到字符串中所有字母異位詞|find-all-anagrams-in-a-string|null|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|30|串聯所有單詞的子串|substring-with-concatenation-of-all-words|null|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|2156|查找給定哈希值的子串|find-substring-with-given-hash-value|2063|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|2953|統計完全子字符串|count-complete-substrings|2449|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|1016|子串能表示從 1 到 N 數字的二進制串|binary-string-with-substrings-representing-1-to-n|null|false
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|3672|子數組中加權衆數的總和|sum-of-weighted-modes-in-subarrays|null|true
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|2067|等計數子串的數量|number-of-equal-count-substrings|null|true
+PROBLEM|一、定長滑動窗口 > §1.2 進階（選做）|2524|子數組的最大頻率分數|maximum-frequency-score-of-a-subarray|null|true
+PROBLEM|一、定長滑動窗口 > §1.3 其他（選做）|2200|找出數組中的所有 K 近鄰下標|find-all-k-distant-indices-in-an-array|1266|false
+PROBLEM|一、定長滑動窗口 > §1.3 其他（選做）|2269|找到一個數字的 K 美麗值|find-the-k-beauty-of-a-number|1280|false
+PROBLEM|一、定長滑動窗口 > §1.3 其他（選做）|1461|檢查一個字符串是否包含所有長度為 K 的二進制子串|check-if-a-string-contains-all-binary-codes-of-size-k|1504|false
+PROBLEM|一、定長滑動窗口 > §1.3 其他（選做）|220|存在重複元素 III|contains-duplicate-iii|null|false
+PROBLEM|一、定長滑動窗口 > §1.3 其他（選做）|2653|滑動子數組的美麗值|sliding-subarray-beauty|1786|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|3|無重複字符的最長子串|longest-substring-without-repeating-characters|null|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|3090|每個字符最多出現兩次的最長子字符串|maximum-length-substring-with-two-occurrences|1329|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|1493|刪掉一個元素以後全為 1 的最長子數組|longest-subarray-of-1s-after-deleting-one-element|1423|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|3634|使數組平衡的最少移除數目|minimum-removals-to-balance-array|1453|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|1208|儘可能使字符串相等|get-equal-substrings-within-budget|1497|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|904|水果成籃|fruit-into-baskets|1516|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|1695|刪除子數組的最大得分|maximum-erasure-value|1529|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|2958|最多 K 個重複元素的最長子數組|length-of-longest-subarray-with-at-most-k-frequency|1535|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|2024|考試的最大困擾度|maximize-the-confusion-of-an-exam|1643|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|1004|最大連續 1 的個數 III|max-consecutive-ones-iii|1656|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.1 基礎|3641|最長半重複子數組|longest-semi-repeating-subarray|null|true
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2730|找到最長的半重複子字符串|find-the-longest-semi-repetitive-substring|null|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2779|數組的最大美麗值|maximum-beauty-of-an-array-after-applying-operation|1638|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|1658|將 x 減到 0 的最小操作數|minimum-operations-to-reduce-x-to-zero|1817|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|1838|最高頻元素的頻數|frequency-of-the-most-frequent-element|1876|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2516|每種字符至少取 K 個|take-k-of-each-character-from-left-and-right|1948|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2831|找出最長等值子數組|find-the-longest-equal-subarray|1976|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2271|毯子覆蓋的最多白色磚塊數|maximum-white-tiles-covered-by-a-carpet|2022|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2106|摘水果|maximum-fruits-harvested-after-at-most-k-steps|2062|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2555|兩個線段獲得的最多獎品|maximize-win-from-two-segments|2081|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2009|使數組連續的最少操作數|minimum-number-of-operations-to-make-array-continuous|2084|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|1610|可見點的最大數目|maximum-number-of-visible-points|2147|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2781|最長合法子字符串的長度|length-of-the-longest-valid-substring|2204|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|3411|最長乘積等價子數組|maximum-subarray-with-equal-products|null|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|3413|收集連續 K 個袋子可以獲得的最多硬幣數量|maximum-coins-from-k-consecutive-bags|2374|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|395|至少有 K 個重複字符的最長子串|longest-substring-with-at-least-k-repeating-characters|null|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|1763|最長的美好子字符串|longest-nice-substring|null|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|2968|執行操作使頻率分數最大|apply-operations-to-maximize-frequency-score|2444|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|1040|移動石子直到連續 II|moving-stones-until-consecutive-ii|2456|false
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|487|最大連續 1 的個數 II|max-consecutive-ones-ii|null|true
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|159|至多包含兩個不同字符的最長子串|longest-substring-with-at-most-two-distinct-characters|null|true
+PROBLEM|二、不定長滑動窗口 > §2.1 越短越合法/求最長/最大 > §2.1.2 進階（選做）|340|至多包含 K 個不同字符的最長子串|longest-substring-with-at-most-k-distinct-characters|null|true
+PROBLEM|二、不定長滑動窗口 > §2.2 越長越合法/求最短/最小|209|長度最小的子數組|minimum-size-subarray-sum|null|false
+PROBLEM|二、不定長滑動窗口 > §2.2 越長越合法/求最短/最小|3795|不同元素和至少為 K 的最短子數組長度|minimum-subarray-length-with-distinct-sum-at-least-k|1505|false
+PROBLEM|二、不定長滑動窗口 > §2.2 越長越合法/求最短/最小|2904|最短且字典序最小的美麗子字符串|shortest-and-lexicographically-smallest-beautiful-string|null|false
+PROBLEM|二、不定長滑動窗口 > §2.2 越長越合法/求最短/最小|1234|替換子串得到平衡字符串|replace-the-substring-for-balanced-string|1878|false
+PROBLEM|二、不定長滑動窗口 > §2.2 越長越合法/求最短/最小|2875|無限數組的最短子數組|minimum-size-subarray-in-infinite-array|1914|false
+PROBLEM|二、不定長滑動窗口 > §2.2 越長越合法/求最短/最小|76|最小覆蓋子串|minimum-window-substring|null|false
+PROBLEM|二、不定長滑動窗口 > §2.2 越長越合法/求最短/最小|632|最小區間|smallest-range-covering-elements-from-k-lists|null|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法|713|乘積小於 K 的子數組|subarray-product-less-than-k|null|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法|3258|統計滿足 K 約束的子字符串數量 I|count-substrings-that-satisfy-k-constraint-i|null|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法|2302|統計得分小於 K 的子數組數目|count-subarrays-with-score-less-than-k|1808|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法|2762|不間斷子數組|continuous-subarrays|1940|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法|LCP 68|美觀的花束|1GxJYY|null|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法|2743|計算沒有重複字符的子字符串數量|count-substrings-without-repeating-character|null|true
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法 > 思維擴展（選做）|3134|找出唯一性數組的中位數|find-the-median-of-the-uniqueness-array|2451|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.1 越短越合法 > 思維擴展（選做）|3261|統計滿足 K 約束的子字符串數量 II|count-substrings-that-satisfy-k-constraint-ii|2659|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.2 越長越合法|1358|包含所有三種字符的子字符串數目|number-of-substrings-containing-all-three-characters|1646|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.2 越長越合法|2962|統計最大元素出現至少 K 次的子數組|count-subarrays-where-max-element-appears-at-least-k-times|1701|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.2 越長越合法|3325|字符至少出現 K 次的子字符串 I|count-substrings-with-k-frequency-characters-i|null|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.2 越長越合法|2799|統計完全子數組的數目|count-complete-subarrays-in-an-array|null|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.2 越長越合法|2537|統計好子數組的數目|count-the-number-of-good-subarrays|1892|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.2 越長越合法|3298|統計重新排列後包含另一個字符串的子字符串數目 II|count-substrings-that-can-be-rearranged-to-contain-a-string-ii|1909|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.2 越長越合法|2495|乘積為偶數的子數組數|number-of-subarrays-having-even-product|null|true
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.3 恰好型滑動窗口|930|和相同的二元子數組|binary-subarrays-with-sum|1592|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.3 恰好型滑動窗口|1248|統計「優美子數組」|count-number-of-nice-subarrays|1624|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.3 恰好型滑動窗口|3306|元音輔音字符串計數 II|count-of-substrings-containing-every-vowel-and-k-consonants-ii|2200|false
+PROBLEM|二、不定長滑動窗口 > §2.3 求子數組個數 > §2.3.3 恰好型滑動窗口|992|K 個不同整數的子數組|subarrays-with-k-different-integers|2210|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|825|適齡的朋友|friends-of-appropriate-ages|1697|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|2401|最長優雅子數組|longest-nice-subarray|1750|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|1156|單字符重複子串的最大長度|swap-for-longest-repeated-character-substring|1787|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|424|替換後的最長重複字符|longest-repeating-character-replacement|null|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|438|找到字符串中所有字母異位詞|find-all-anagrams-in-a-string|null|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|1712|將數組分成三個子數組的方案數|ways-to-split-array-into-three-subarrays|2079|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|LCR 180|文件組合|he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof|null|false
+PROBLEM|二、不定長滑動窗口 > §2.4 其他（選做）|1918|第 K 小的子數組和|kth-smallest-subarray-sum|null|true
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|344|反轉字符串|reverse-string|null|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|3794|反轉字符串前綴|reverse-string-prefix|null|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|2000|反轉單詞前綴|reverse-prefix-of-word|1199|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|3643|垂直翻轉子矩陣|flip-square-submatrix-vertically|1235|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|832|翻轉圖像|flipping-an-image|1243|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|3823|反轉一個字符串裏的字母后反轉特殊字符|reverse-letters-then-special-characters-in-a-string|1250|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|541|反轉字符串 II|reverse-string-ii|null|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|557|反轉字符串中的單詞 III|reverse-words-in-a-string-iii|null|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|151|反轉字符串中的單詞|reverse-words-in-a-string|null|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|3775|反轉元音數相同的單詞|reverse-words-with-same-vowel-count|1392|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|917|僅僅反轉字母|reverse-only-letters|null|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|345|反轉字符串中的元音字母|reverse-vowels-of-a-string|null|false
+PROBLEM|三、單序列雙指針 > §3.1 反轉字符串|186|反轉字符串中的單詞 II|reverse-words-in-a-string-ii|null|true
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|2697|字典序最小回文串|lexicographically-smallest-palindrome|1304|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|125|驗證迴文串|valid-palindrome|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|1750|刪除字符串兩端相同字符後的最短長度|minimum-length-of-string-after-deleting-similar-ends|1502|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|2105|給植物澆水 II|watering-plants-ii|1507|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|977|有序數組的平方|squares-of-a-sorted-array|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|658|找到 K 個最接近的元素|find-k-closest-elements|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|1471|數組中的 K 個最強值|the-k-strongest-values-in-an-array|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|167|兩數之和 II - 輸入有序數組|two-sum-ii-input-array-is-sorted|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|633|平方數之和|sum-of-square-numbers|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|2824|統計和小於目標的下標對數目|count-pairs-whose-sum-is-less-than-target|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|2563|統計公平數對的數目|count-the-number-of-fair-pairs|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|LCP 28|採購方案|4xy4Wx|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|15|三數之和|3sum|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|16|最接近的三數之和|3sum-closest|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|18|四數之和|4sum|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|611|有效三角形的個數|valid-triangle-number|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|1577|數的平方等於兩數乘積的方法數|number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|923|三數之和的多種可能|3sum-with-multiplicity|1711|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|948|令牌放置|bag-of-tokens|1762|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|11|盛最多水的容器|container-with-most-water|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|42|接雨水|trapping-rain-water|null|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|1616|分割兩個字符串得到迴文串|split-two-strings-to-make-palindrome|1868|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|1498|滿足條件的子序列數目|number-of-subsequences-that-satisfy-the-given-sum-condition|2276|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|1782|統計點對的數目|count-pairs-of-nodes|2457|false
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|1099|小於 K 的兩數之和|two-sum-less-than-k|null|true
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|360|有序轉化數組|sort-transformed-array|null|true
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|2422|使用合併操作將數組轉換為迴文序列|merge-operations-to-turn-array-into-a-palindrome|null|true
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|259|較小的三數之和|3sum-smaller|null|true
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針|3802|給紙張塗色的方式數量|number-of-ways-to-paint-sheets|null|true
+PROBLEM|三、單序列雙指針 > §3.2 相向雙指針 > 思維擴展|3814|預算下的最大總容量|maximum-capacity-within-budget|1796|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|2200|找出數組中的所有 K 近鄰下標|find-all-k-distant-indices-in-an-array|null|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|611|有效三角形的個數|valid-triangle-number|null|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|3649|完美對的數目|number-of-perfect-pairs|1716|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|1574|刪除最短的子數組使剩餘數組有序|shortest-subarray-to-be-removed-to-make-array-sorted|1932|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|2972|統計移除遞增子數組的數目 II|count-the-number-of-incremovable-subarrays-ii|2153|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|2122|還原原數組|recover-the-original-array|2159|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|2234|花園的最大總美麗值|maximum-total-beauty-of-the-gardens|2562|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|1989|捉迷藏中可捕獲的最大人數|maximum-number-of-people-that-can-be-caught-in-tag|null|true
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針|3323|通過插入區間最小化連通組|minimize-connected-groups-by-inserting-interval|null|true
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針 > 相似題目|581|最短無序連續子數組|shortest-unsorted-continuous-subarray|null|false
+PROBLEM|三、單序列雙指針 > §3.3 同向雙指針 > 相似題目|3555|排序每個滑動窗口中最小的子數組|smallest-subarray-to-sort-in-every-sliding-window|null|true
+PROBLEM|三、單序列雙指針 > §3.4 背向雙指針|1793|好子數組的最大分數|maximum-score-of-a-good-subarray|1946|false
+PROBLEM|三、單序列雙指針 > §3.4 背向雙指針|976|三角形的最大周長|largest-perimeter-triangle|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|27|移除元素|remove-element|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|26|刪除有序數組中的重複項|remove-duplicates-from-sorted-array|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|80|刪除有序數組中的重複項 II|remove-duplicates-from-sorted-array-ii|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|2273|移除字母異位詞後的結果數組|find-resultant-array-after-removing-anagrams|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|3684|至多 K 個不同元素的最大和|maximize-sum-of-at-most-k-distinct-elements|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|283|移動零|move-zeroes|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|905|按奇偶排序數組|sort-array-by-parity|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|922|按奇偶排序數組 II|sort-array-by-parity-ii|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|3467|將數組按照奇偶性轉化|transform-array-by-parity|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|2460|對數組執行操作|apply-operations-to-an-array|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|1089|複寫零|duplicate-zeros|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改|75|顏色分類|sort-colors|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改 > 思維擴展（選做）|1920|基於排列構建數組|build-array-from-permutation|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改 > 思維擴展（選做）|442|數組中重複的數據|find-all-duplicates-in-an-array|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改 > 思維擴展（選做）|448|找到所有數組中消失的數字|find-all-numbers-disappeared-in-an-array|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改 > 思維擴展（選做）|41|缺失的第一個正數|first-missing-positive|null|false
+PROBLEM|三、單序列雙指針 > §3.5 原地修改 > 思維擴展（選做）|2784|檢查數組是否是好的|check-if-array-is-good|null|false
+PROBLEM|三、單序列雙指針 > §3.6 矩陣上的雙指針|240|搜索二維矩陣 II|search-a-2d-matrix-ii|null|false
+PROBLEM|三、單序列雙指針 > §3.6 矩陣上的雙指針|1351|統計有序矩陣中的負數|count-negative-numbers-in-a-sorted-matrix|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|2109|向字符串添加空格|adding-spaces-to-a-string|1315|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|2540|最小公共值|minimum-common-value|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|88|合併兩個有序數組|merge-sorted-array|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|2570|合併兩個二維數組 - 求和法|merge-two-2d-arrays-by-summing-values|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|350|兩個數組的交集 II|intersection-of-two-arrays-ii|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|LCP 18|早餐組合|2vYnGI|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|1855|下標對中的最大距離|maximum-distance-between-a-pair-of-values|1515|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|1385|兩個數組間的距離值|find-the-distance-value-between-two-arrays|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|925|長按鍵入|long-pressed-name|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|809|情感豐富的文字|expressive-words|1605|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|2337|移動片段得到字符串|move-pieces-to-obtain-a-string|1693|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|777|在 LR 字符串中交換相鄰字符|swap-adjacent-in-lr-string|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|844|比較含退格的字符串|backspace-string-compare|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|986|區間列表的交集|interval-list-intersections|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|面試題 16.06|最小差|smallest-difference-lcci|null|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|1537|最大得分|get-the-maximum-score|1961|false
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|244|最短單詞距離 II|shortest-word-distance-ii|null|true
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|2838|英雄可以獲得的最大金幣數|maximum-coins-heroes-can-collect|null|true
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|1229|安排會議日程|meeting-scheduler|null|true
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|1570|兩個稀疏向量的點積|dot-product-of-two-sparse-vectors|null|true
+PROBLEM|四、雙序列雙指針 > §4.1 雙指針|1868|兩個行程編碼數組的積|product-of-two-run-length-encoded-arrays|null|true
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|392|判斷子序列|is-subsequence|null|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|524|通過刪除字母匹配到字典裏最長單詞|longest-word-in-dictionary-through-deleting|null|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|2486|追加字符以獲得子序列|append-characters-to-string-to-make-subsequence|1363|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|2825|循環增長使字符串子序列等於另一個字符串|make-string-a-subsequence-using-cyclic-increments|1415|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|1023|駝峰式匹配|camelcase-matching|1537|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|3132|找出與數組相加的整數 II|find-the-integer-added-to-array-ii|1620|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|522|最長特殊序列 II|longest-uncommon-subsequence-ii|null|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列|1826|有缺陷的傳感器|faulty-sensor|null|true
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列 > 進階|1898|可移除字符的最大數目|maximum-number-of-removable-characters|1913|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列 > 進階|2565|最少得分子序列|subsequence-with-the-minimum-score|2432|false
+PROBLEM|四、雙序列雙指針 > §4.2 判斷子序列 > 進階|3302|字典序最小的合法序列|find-the-lexicographically-smallest-valid-sequence|2474|false
+PROBLEM|五、三指針|2367|等差三元組的數目|number-of-arithmetic-triplets|null|false
+PROBLEM|五、三指針|2563|統計公平數對的數目|count-the-number-of-fair-pairs|1721|false
+PROBLEM|五、三指針|795|區間子數組個數|number-of-subarrays-with-bounded-maximum|1817|false
+PROBLEM|五、三指針|2444|統計定界子數組的數目|count-subarrays-with-fixed-bounds|2093|false
+PROBLEM|五、三指針|3347|執行操作後元素的最高頻率 II|maximum-frequency-of-an-element-after-performing-operations-ii|2156|false
+PROBLEM|五、三指針|1213|三個有序數組的交集|intersection-of-three-sorted-arrays|null|true
+PROBLEM|五、三指針 > 思維擴展|3464|正方形上的點之間的最大距離|maximize-the-distance-between-points-on-a-square|2806|false
+PROBLEM|六、分組循環|485|最大連續 1 的個數|max-consecutive-ones|null|false
+PROBLEM|六、分組循環|1446|連續字符|consecutive-characters|1165|false
+PROBLEM|六、分組循環|1869|哪種連續子字符串更長|longer-contiguous-segments-of-ones-than-zeros|1205|false
+PROBLEM|六、分組循環|2414|最長的字母序連續子字符串的長度|length-of-the-longest-alphabetical-continuous-substring|1222|false
+PROBLEM|六、分組循環|3456|找出長度為 K 的特殊子字符串|find-special-substring-of-length-k|1244|false
+PROBLEM|六、分組循環|2273|移除字母異位詞後的結果數組|find-resultant-array-after-removing-anagrams|1295|false
+PROBLEM|六、分組循環|2348|全 0 子數組的數目|number-of-zero-filled-subarrays|1316|false
+PROBLEM|六、分組循環|1513|僅含 1 的子串數|number-of-substrings-with-only-1s|1351|false
+PROBLEM|六、分組循環|1957|刪除字符使字符串變好|delete-characters-to-make-fancy-string|1358|false
+PROBLEM|六、分組循環|674|最長連續遞增序列|longest-continuous-increasing-subsequence|null|false
+PROBLEM|六、分組循環|3708|最長斐波那契子數組|longest-fibonacci-subarray|1381|false
+PROBLEM|六、分組循環|696|計數二進制子串|count-binary-substrings|null|false
+PROBLEM|六、分組循環|978|最長湍流子數組|longest-turbulent-subarray|1393|false
+PROBLEM|六、分組循環|2110|股票平滑下跌階段的數目|number-of-smooth-descent-periods-of-a-stock|1408|false
+PROBLEM|六、分組循環|228|彙總區間|summary-ranges|null|false
+PROBLEM|六、分組循環|2760|最長奇偶子數組|longest-even-odd-subarray-with-threshold|1420|false
+PROBLEM|六、分組循環|1887|使數組元素相等的減少操作次數|reduction-operations-to-make-the-array-elements-equal|1428|false
+PROBLEM|六、分組循環|845|數組中的最長山脈|longest-mountain-in-array|1437|false
+PROBLEM|六、分組循環|2038|如果相鄰兩個顏色均相同則刪除當前顏色|remove-colored-pieces-if-both-neighbors-are-the-same-color|1468|false
+PROBLEM|六、分組循環|2900|最長相鄰不相等子序列 I|longest-unequal-adjacent-groups-subsequence-i|1469|false
+PROBLEM|六、分組循環|1759|統計同質子字符串的數目|count-number-of-homogenous-substrings|1491|false
+PROBLEM|六、分組循環|3011|判斷一個數組是否可以變為有序|find-if-array-can-be-sorted|1497|false
+PROBLEM|六、分組循環|1578|使繩子變成彩色的最短時間|minimum-time-to-make-rope-colorful|1574|false
+PROBLEM|六、分組循環|1839|所有元音按順序排布的最長子字符串|longest-substring-of-all-vowels-in-order|1580|false
+PROBLEM|六、分組循環|2765|最長交替子數組|longest-alternating-subarray|1581|false
+PROBLEM|六、分組循環|3255|長度為 K 的子數組的能量值 II|find-the-power-of-k-size-subarrays-ii|1595|false
+PROBLEM|六、分組循環|3350|檢測相鄰遞增子數組 II|adjacent-increasing-subarrays-detection-ii|1600|false
+PROBLEM|六、分組循環|3105|最長的嚴格遞增或遞減子數組|longest-strictly-increasing-or-strictly-decreasing-subarray|null|false
+PROBLEM|六、分組循環|838|推多米諾|push-dominoes|1638|false
+PROBLEM|六、分組循環|467|環繞字符串中唯一的子字符串|unique-substrings-in-wraparound-string|null|false
+PROBLEM|六、分組循環|3499|操作後最大活躍區段數 I|maximize-active-section-with-trade-i|1729|false
+PROBLEM|六、分組循環|413|等差數列劃分|arithmetic-slices|null|false
+PROBLEM|六、分組循環|2147|分隔長廊的方案數|number-of-ways-to-divide-a-long-corridor|1915|false
+PROBLEM|六、分組循環|68|文本左右對齊|text-justification|null|false
+PROBLEM|六、分組循環|135|分發糖果|candy|null|false
+PROBLEM|六、分組循環|2948|交換得到字典序最小的數組|make-lexicographically-smallest-array-by-swapping-elements|2047|false
+PROBLEM|六、分組循環|2593|標記所有元素後數組的分數|find-score-of-an-array-after-marking-all-elements|null|false
+PROBLEM|六、分組循環|3640|三段式數組 II|trionic-array-ii|2278|false
+PROBLEM|六、分組循環|2393|嚴格遞增的子數組個數|count-strictly-increasing-subarrays|null|true
+PROBLEM|六、分組循環|3773|最大等長連續字符組|maximum-number-of-equal-length-runs|null|true
+PROBLEM|六、分組循環|2436|使子數組最大公約數大於一的最小分割數|minimum-split-into-subarrays-with-gcd-greater-than-one|null|true
+PROBLEM|六、分組循環|2495|乘積為偶數的子數組數|number-of-subarrays-having-even-product|null|true
+PROBLEM|六、分組循環|3063|鏈表頻率|linked-list-frequency|null|true

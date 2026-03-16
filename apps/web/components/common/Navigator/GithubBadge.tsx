@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 
 const GithubBadge = () => {
   const { data, isPending, error } = useQuery<number>({
@@ -14,9 +13,9 @@ const GithubBadge = () => {
   });
 
   return (
-    <Link
+    <a
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="inline-flex items-center gap-2 rounded-md p-2 bg-gray-100 dark:bg-black group"
       href="https://github.com/huxulm/lc-rating"
     >
@@ -41,7 +40,7 @@ const GithubBadge = () => {
       </svg>
 
       {data ? <span className="text-sm">{data}</span> : null}
-    </Link>
+    </a>
   );
 };
 

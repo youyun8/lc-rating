@@ -47,6 +47,11 @@ function ProblemSet() {
   }, [isPending]);
 
   const tableData: TableCol[] = useMemo(() => {
+    // Return empty array if data is still loading
+    if (isPending) {
+      return [];
+    }
+
     const contests = Object.values(contestMap);
 
     return contests.map((contest) => {
@@ -61,6 +66,23 @@ function ProblemSet() {
       const generate = (index: 0 | 1 | 2 | 3) => {
         const problem = problems[index];
         const solution = solutions[index];
+
+        // Handle case where problem might be undefined
+        if (!problem) {
+          return {
+            problem: {
+              id: "0",
+              title: "Unknown",
+              link: {
+                zh: "#",
+                en: "#",
+              },
+              rating: 0,
+              premium: false,
+            },
+            solution: undefined,
+          };
+        }
 
         return {
           problem: {
@@ -101,11 +123,11 @@ function ProblemSet() {
         Q4: generate(3),
       };
     });
-  }, [isPending]);
+  }, [isPending, problemMap, contestMap, solutionMap]);
 
   return (
-    <div className="p-8 flex flex-col gap-4 font-song font-bold">
-      <div className="w-full m-auto">
+    <div className="p-2 sm:p-4 md:p-8 flex flex-col gap-4 font-song">
+      <div className="w-full m-auto overflow-x-hidden">
         <ProblemsTable tableData={tableData} isPending={isPending} />
       </div>
     </div>

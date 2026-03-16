@@ -1,0 +1,506 @@
+PROBLEM|§1.1 從最小/最大開始貪心|3074|重新分裝蘋果|apple-redistribution-into-boxes|1198|false
+PROBLEM|§1.1 從最小/最大開始貪心|3545|不同字符數量最多為 K 時的最少刪除數|minimum-deletions-for-at-most-k-distinct-characters|1211|false
+PROBLEM|§1.1 從最小/最大開始貪心|3745|三元素表達式的最大值|maximize-expression-of-three-elements|1218|false
+PROBLEM|§1.1 從最小/最大開始貪心|2279|裝滿石頭的背包的最大數量|maximum-bags-with-full-capacity-of-rocks|1249|false
+PROBLEM|§1.1 從最小/最大開始貪心|1833|雪糕的最大數量|maximum-ice-cream-bars|1253|false
+PROBLEM|§1.1 從最小/最大開始貪心|1005|K 次取反後最大化的數組和|maximize-sum-of-array-after-k-negations|1275|false
+PROBLEM|§1.1 從最小/最大開始貪心|1481|不同整數的最少數目|least-number-of-unique-integers-after-k-removals|1284|false
+PROBLEM|§1.1 從最小/最大開始貪心|1403|非遞增順序的最小子序列|minimum-subsequence-in-non-increasing-order|1288|false
+PROBLEM|§1.1 從最小/最大開始貪心|3010|將數組分成最小總代價的子數組 I|divide-an-array-into-subarrays-with-minimum-cost-i|1292|false
+PROBLEM|§1.1 從最小/最大開始貪心|1338|數組大小減半|reduce-array-size-to-the-half|1303|false
+PROBLEM|§1.1 從最小/最大開始貪心|1710|卡車上的最大單元數|maximum-units-on-a-truck|1310|false
+PROBLEM|§1.1 從最小/最大開始貪心|3075|幸福值最大化的選擇方案|maximize-happiness-of-selected-children|1326|false
+PROBLEM|§1.1 從最小/最大開始貪心|2554|從一個範圍內選擇最多整數 I|maximum-number-of-integers-to-choose-from-a-range-i|1333|false
+PROBLEM|§1.1 從最小/最大開始貪心|2126|摧毀小行星|destroying-asteroids|1335|false
+PROBLEM|§1.1 從最小/最大開始貪心|2587|重排數組以得到最大前綴分數|rearrange-array-to-maximize-prefix-score|1337|false
+PROBLEM|§1.1 從最小/最大開始貪心|976|三角形的最大周長|largest-perimeter-triangle|1341|false
+PROBLEM|§1.1 從最小/最大開始貪心|1561|你可以獲得的最大硬幣數目|maximum-number-of-coins-you-can-get|1406|false
+PROBLEM|§1.1 從最小/最大開始貪心|3627|中位數之和的最大值|maximum-median-sum-of-subsequences-of-size-3|null|false
+PROBLEM|§1.1 從最小/最大開始貪心|3462|提取至多 K 個元素的最大總和|maximum-sum-with-at-most-k-elements|1416|false
+PROBLEM|§1.1 從最小/最大開始貪心|2099|找到和最大的長度為 K 的子序列|find-subsequence-of-length-k-with-the-largest-sum|1447|false
+PROBLEM|§1.1 從最小/最大開始貪心|3301|高度互不相同的最大塔高和|maximize-the-total-height-of-unique-towers|1448|false
+PROBLEM|§1.1 從最小/最大開始貪心|945|使數組唯一的最小增量|minimum-increment-to-make-array-unique|1448|false
+PROBLEM|§1.1 從最小/最大開始貪心|1846|減小和重新排列數組後的最大元素|maximum-element-after-decreasing-and-rearranging|1454|false
+PROBLEM|§1.1 從最小/最大開始貪心|3727|最大交替平方和|maximum-alternating-sum-of-squares|1455|false
+PROBLEM|§1.1 從最小/最大開始貪心|1647|字符頻次唯一的最小刪除次數|minimum-deletions-to-make-character-frequencies-unique|1510|false
+PROBLEM|§1.1 從最小/最大開始貪心|2971|找到最大周長的多邊形|find-polygon-with-the-largest-perimeter|1521|false
+PROBLEM|§1.1 從最小/最大開始貪心|2178|拆分成最多數目的正偶數之和|maximum-split-of-positive-even-integers|1538|false
+PROBLEM|§1.1 從最小/最大開始貪心|1578|使繩子變成彩色的最短時間|minimum-time-to-make-rope-colorful|1574|false
+PROBLEM|§1.1 從最小/最大開始貪心|2567|修改兩個元素的最小分數|minimum-score-by-changing-two-elements|1609|false
+PROBLEM|§1.1 從最小/最大開始貪心|1509|三次操作後最大值與最小值的最小差|minimum-difference-between-largest-and-smallest-value-in-three-moves|1653|false
+PROBLEM|§1.1 從最小/最大開始貪心|2611|老鼠和奶酪|mice-and-cheese|1663|false
+PROBLEM|§1.1 從最小/最大開始貪心|3397|執行操作後不同元素的最大數量|maximum-number-of-distinct-elements-after-operations|1687|false
+PROBLEM|§1.1 從最小/最大開始貪心|3457|喫披薩|eat-pizzas|1704|false
+PROBLEM|§1.1 從最小/最大開始貪心|3767|選擇 K 個任務的最大總分數|maximize-points-after-choosing-k-tasks|1704|false
+PROBLEM|§1.1 從最小/最大開始貪心|LCP 40|心算挑戰|uOAnQW|null|false
+PROBLEM|§1.1 從最小/最大開始貪心|1262|可被三整除的最大和|greatest-sum-divisible-by-three|1762|false
+PROBLEM|§1.1 從最小/最大開始貪心|948|令牌放置|bag-of-tokens|1762|false
+PROBLEM|§1.1 從最小/最大開始貪心|1775|通過最少操作次數使數組的和相等|equal-sum-arrays-with-minimum-number-of-operations|1850|false
+PROBLEM|§1.1 從最小/最大開始貪心|2333|最小差值平方和|minimum-sum-of-squared-difference|2011|false
+PROBLEM|§1.1 從最小/最大開始貪心|3645|最優激活順序得到的最大總和|maximum-total-from-optimal-activation-order|2019|false
+PROBLEM|§1.1 從最小/最大開始貪心|2141|同時運行 N 臺電腦的最長時間|maximum-running-time-of-n-computers|2265|false
+PROBLEM|§1.1 從最小/最大開始貪心|1196|最多可以買到的蘋果數量|how-many-apples-can-you-put-into-the-basket|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|2214|通關遊戲所需的最低生命值|minimum-health-to-beat-game|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|3763|帶閾值約束的最大總和|maximum-total-sum-with-threshold-constraints|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|3730|跳躍燃燒的最大卡路里|maximum-calories-burnt-from-jumps|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|3476|最大化任務分配的利潤|maximize-profit-from-task-assignment|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|2098|長度為 K 的最大偶數和子序列|subsequence-of-size-k-with-the-largest-even-sum|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|2548|填滿背包的最大價格|maximum-price-to-fill-a-bag|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|3119|最大數量的可修復坑窪|maximum-number-of-potholes-that-can-be-fixed|null|true
+PROBLEM|§1.1 從最小/最大開始貪心|2557|從一個範圍內選擇最多整數 II|maximum-number-of-integers-to-choose-from-a-range-ii|null|true
+PROBLEM|§1.1 從最小/最大開始貪心 > 思維擴展|LCS 02|完成一半題目|WqXACV|null|false
+PROBLEM|§1.1 從最小/最大開始貪心 > 思維擴展|1984|學生分數的最小差值|minimum-difference-between-highest-and-lowest-of-k-scores|1306|false
+PROBLEM|§1.1 從最小/最大開始貪心 > 思維擴展|624|數組列表中的最大距離|maximum-distance-in-arrays|null|false
+PROBLEM|§1.1 從最小/最大開始貪心 > 思維擴展|910|最小差值 II|smallest-range-ii|2135|false
+PROBLEM|§1.1 從最小/最大開始貪心 > 思維擴展|2835|使子序列的和等於目標的最少操作次數|minimum-operations-to-form-subsequence-with-target-sum|2207|false
+PROBLEM|§1.1 從最小/最大開始貪心 > 思維擴展|3366|最小數組和|minimum-array-sum|null|false
+PROBLEM|§1.2 單序列配對|2144|打折購買糖果的最小開銷|minimum-cost-of-buying-candies-with-discount|1261|false
+PROBLEM|§1.2 單序列配對|561|數組拆分|array-partition|null|false
+PROBLEM|§1.2 單序列配對|1877|數組中最大數對和的最小值|minimize-maximum-pair-sum-in-array|1301|false
+PROBLEM|§1.2 單序列配對|881|救生艇|boats-to-save-people|1530|false
+PROBLEM|§1.2 單序列配對|2592|最大化數組的偉大值|maximize-greatness-of-an-array|1569|false
+PROBLEM|§1.2 單序列配對|2576|求出最多標記下標|find-the-maximum-number-of-marked-indices|1843|false
+PROBLEM|§1.3 雙序列配對|2037|使每位學生都有座位的最少移動次數|minimum-number-of-moves-to-seat-everyone|1357|false
+PROBLEM|§1.3 雙序列配對|455|分發餅乾|assign-cookies|1381|false
+PROBLEM|§1.3 雙序列配對|2410|運動員和訓練師的最大匹配數|maximum-matching-of-players-with-trainers|1381|false
+PROBLEM|§1.3 雙序列配對|1433|檢查一個字符串是否可以打破另一個字符串|check-if-a-string-can-break-another-string|1436|false
+PROBLEM|§1.3 雙序列配對|870|優勢洗牌|advantage-shuffle|1648|false
+PROBLEM|§1.3 雙序列配對|826|安排工作以達到最大收益|most-profit-assigning-work|1709|false
+PROBLEM|§1.3 雙序列配對|2449|使數組相似的最少操作次數|minimum-number-of-operations-to-make-arrays-similar|2076|false
+PROBLEM|§1.3 雙序列配對|1889|裝包裹的最小浪費空間|minimum-space-wasted-from-packaging|2214|false
+PROBLEM|§1.3 雙序列配對|2561|重排水果|rearranging-fruits|2222|false
+PROBLEM|§1.3 雙序列配對|2071|你可以安排的最多任務數目|maximum-number-of-tasks-you-can-assign|2648|false
+PROBLEM|§1.3 雙序列配對|2323|完成所有工作的最短時間 II|find-minimum-time-to-finish-all-jobs-ii|null|true
+PROBLEM|§1.4 從最左/最右開始貪心|3402|使每一列嚴格遞增的最少操作次數|minimum-operations-to-make-columns-strictly-increasing|1246|false
+PROBLEM|§1.4 從最左/最右開始貪心|3191|使二進制數組全部等於 1 的最少操作次數 I|minimum-operations-to-make-binary-array-elements-equal-to-one-i|1312|false
+PROBLEM|§1.4 從最左/最右開始貪心|1827|最少操作使數組遞增|minimum-operations-to-make-the-array-increasing|1315|false
+PROBLEM|§1.4 從最左/最右開始貪心|2027|轉換字符串的最少操作次數|minimum-moves-to-convert-string|1346|false
+PROBLEM|§1.4 從最左/最右開始貪心|605|種花問題|can-place-flowers|null|false
+PROBLEM|§1.4 從最左/最右開始貪心|3111|覆蓋所有點的最少矩形數目|minimum-rectangles-to-cover-points|1401|false
+PROBLEM|§1.4 從最左/最右開始貪心|2957|消除相鄰近似相等字符|remove-adjacent-almost-equal-characters|1430|false
+PROBLEM|§1.4 從最左/最右開始貪心|3192|使二進制數組全部等於 1 的最少操作次數 II|minimum-operations-to-make-binary-array-elements-equal-to-one-ii|1433|false
+PROBLEM|§1.4 從最左/最右開始貪心|1529|最少的後綴翻轉次數|minimum-suffix-flips|null|false
+PROBLEM|§1.4 從最左/最右開始貪心|2789|合併後數組中的最大元素|largest-element-in-an-array-after-merge-operations|1485|false
+PROBLEM|§1.4 從最左/最右開始貪心|3576|數組元素相等轉換|transform-array-to-all-equal-elements|1489|false
+PROBLEM|§1.4 從最左/最右開始貪心|1144|遞減元素使數組呈鋸齒狀|decrease-elements-to-make-array-zigzag|1559|false
+PROBLEM|§1.4 從最左/最右開始貪心|3228|將 1 移動到末尾的最大操作次數|maximum-number-of-operations-to-move-ones-to-the-end|1593|false
+PROBLEM|§1.4 從最左/最右開始貪心|2086|餵食倉鼠的最小食物桶數|minimum-number-of-food-buckets-to-feed-the-hamsters|1623|false
+PROBLEM|§1.4 從最左/最右開始貪心|2571|將整數減少到零需要的最少操作數|minimum-operations-to-reduce-an-integer-to-0|1649|false
+PROBLEM|§1.4 從最左/最右開始貪心|3776|使循環數組餘額非負的最少移動次數|minimum-moves-to-balance-circular-array|1740|false
+PROBLEM|§1.4 從最左/最右開始貪心|861|翻轉矩陣後的得分|score-after-flipping-matrix|1818|false
+PROBLEM|§1.4 從最左/最右開始貪心|3326|使數組非遞減的最少除法操作次數|minimum-division-operations-to-make-array-non-decreasing|1864|false
+PROBLEM|§1.4 從最左/最右開始貪心|955|刪列造序 II|delete-columns-to-make-sorted-ii|1876|false
+PROBLEM|§1.4 從最左/最右開始貪心|1536|排布二進制網格的最少交換次數|minimum-swaps-to-arrange-a-binary-grid|1881|false
+PROBLEM|§1.4 從最左/最右開始貪心|2673|使二叉樹所有路徑值相等的最小代價|make-costs-of-paths-equal-in-a-binary-tree|1917|false
+PROBLEM|§1.4 從最左/最右開始貪心|1488|避免洪水氾濫|avoid-flood-in-the-city|1974|false
+PROBLEM|§1.4 從最左/最右開始貪心|2366|將數組排序的最少替換次數|minimum-replacements-to-sort-the-array|2060|false
+PROBLEM|§1.4 從最左/最右開始貪心|2528|最大化城市的最小電量|maximize-the-minimum-powered-city|2236|false
+PROBLEM|§1.4 從最左/最右開始貪心|3449|最大化遊戲分數的最小值|maximize-the-minimum-game-score|2748|false
+PROBLEM|§1.4 從最左/最右開始貪心|2422|使用合併操作將數組轉換為迴文序列|merge-operations-to-turn-array-into-a-palindrome|null|true
+PROBLEM|§1.5 劃分型貪心|1221|分割平衡字符串|split-a-string-in-balanced-strings|1220|false
+PROBLEM|§1.5 劃分型貪心|2405|子字符串的最優劃分|optimal-partition-of-string|1355|false
+PROBLEM|§1.5 劃分型貪心|2294|劃分數組使最大差為 K|partition-array-such-that-maximum-difference-is-k|1416|false
+PROBLEM|§1.5 劃分型貪心|2358|分組的最大數量|maximum-number-of-groups-entering-a-competition|1503|false
+PROBLEM|§1.5 劃分型貪心|2522|將字符串分割成值不超過 K 的子字符串|partition-string-into-substrings-with-values-at-most-k|1605|false
+PROBLEM|§1.5 劃分型貪心|3557|不相交子字符串的最大數量|find-maximum-number-of-non-intersecting-substrings|1720|false
+PROBLEM|§1.5 劃分型貪心|1546|和為目標值且不重疊的非空子數組的最大數目|maximum-number-of-non-overlapping-subarrays-with-sum-equals-target|1855|false
+PROBLEM|§1.5 劃分型貪心|2436|使子數組最大公約數大於一的最小分割數|minimum-split-into-subarrays-with-gcd-greater-than-one|null|true
+PROBLEM|§1.5 劃分型貪心|2892|將相鄰元素相乘後得到最小化數組|minimizing-array-after-replacing-pairs-with-their-product|null|true
+PROBLEM|§1.6 先枚舉，再貪心|2171|拿出最少數目的魔法豆|removing-minimum-number-of-magic-beans|1748|false
+PROBLEM|§1.6 先枚舉，再貪心|3085|成為 K 特殊字符串需要刪除的最少字符數|minimum-deletions-to-make-string-k-special|1765|false
+PROBLEM|§1.6 先枚舉，再貪心|1727|重新排列後的最大子矩陣|largest-submatrix-with-rearrangements|1927|false
+PROBLEM|§1.6 先枚舉，再貪心|2749|得到整數零需要執行的最少操作數|minimum-operations-to-make-the-integer-zero|2132|false
+PROBLEM|§1.6 先枚舉，再貪心|2910|合法分組的最少組數|minimum-number-of-groups-to-create-a-valid-assignment|2132|false
+PROBLEM|§1.6 先枚舉，再貪心|2234|花園的最大總美麗值|maximum-total-beauty-of-the-gardens|2562|false
+PROBLEM|§1.7 交換論證法|1877|數組中最大數對和的最小值|minimize-maximum-pair-sum-in-array|1301|false
+PROBLEM|§1.7 交換論證法|2895|最小處理時間|minimum-processing-time|1352|false
+PROBLEM|§1.7 交換論證法|3457|喫披薩|eat-pizzas|1704|false
+PROBLEM|§1.7 交換論證法|1665|完成所有任務的最少初始能量|minimum-initial-energy-to-finish-tasks|1901|false
+PROBLEM|§1.7 交換論證法|3273|對 Bob 造成的最少傷害|minimum-amount-of-damage-dealt-to-bob|2013|false
+PROBLEM|§1.7 交換論證法|2136|全部開花的最早一天|earliest-possible-day-of-full-bloom|2033|false
+PROBLEM|§1.7 交換論證法|2561|重排水果|rearranging-fruits|2222|false
+PROBLEM|§1.7 交換論證法 > 思維擴展|179|最大數|largest-number|null|false
+PROBLEM|§1.7 交換論證法 > 思維擴展|3309|連接二進制表示可形成的最大數值|maximum-possible-number-by-binary-concatenation|null|false
+PROBLEM|§1.7 交換論證法 > 相似題目|2412|完成所有交易的初始最少錢數|minimum-money-required-before-transactions|2092|false
+PROBLEM|§1.8 相鄰不同|2335|裝滿杯子需要的最短總時長|minimum-amount-of-time-to-fill-cups|1360|false
+PROBLEM|§1.8 相鄰不同|3659|數組元素分組|partition-array-into-k-distinct-groups|1440|false
+PROBLEM|§1.8 相鄰不同|1753|移除石子的最大得分|maximum-score-from-removing-stones|1488|false
+PROBLEM|§1.8 相鄰不同|767|重構字符串|reorganize-string|null|false
+PROBLEM|§1.8 相鄰不同|1054|距離相等的條形碼|distant-barcodes|1702|false
+PROBLEM|§1.8 相鄰不同|2856|刪除數對後的最小數組長度|minimum-array-length-after-pair-removals|1750|false
+PROBLEM|§1.8 相鄰不同|1953|你可以工作的最大週數|maximum-number-of-weeks-for-which-you-can-work|1804|false
+PROBLEM|§1.8 相鄰不同|3785|避免禁用值的最小交換次數|minimum-swaps-to-avoid-forbidden-values|2052|false
+PROBLEM|§1.8 相鄰不同|3664|兩個字母卡牌遊戲|two-letter-card-game|2158|false
+PROBLEM|§1.8 相鄰不同|3495|使數組元素都變為零的最少操作次數|minimum-operations-to-make-array-elements-zero|2206|false
+PROBLEM|§1.8 相鄰不同|3139|使數組中所有元素相等的最小開銷|minimum-cost-to-equalize-array|2666|false
+PROBLEM|§1.8 相鄰不同|621|任務調度器|task-scheduler|null|false
+PROBLEM|§1.8 相鄰不同|358|K 距離間隔重排字符串|rearrange-string-k-distance-apart|null|true
+PROBLEM|§1.8 相鄰不同 > 思維擴展|984|不含 AAA 或 BBB 的字符串|string-without-aaa-or-bbb|null|false
+PROBLEM|§1.8 相鄰不同 > 思維擴展|1405|最長快樂字符串|longest-happy-string|1821|false
+PROBLEM|§1.9 反悔貪心|LCP 30|魔塔遊戲|p0NxJO|null|false
+PROBLEM|§1.9 反悔貪心|1642|可以到達的最遠建築|furthest-building-you-can-reach|1962|false
+PROBLEM|§1.9 反悔貪心|630|課程表 III|course-schedule-iii|null|false
+PROBLEM|§1.9 反悔貪心|871|最低加油次數|minimum-number-of-refueling-stops|2074|false
+PROBLEM|§1.9 反悔貪心|3362|零數組變換 III|zero-array-transformation-iii|2424|false
+PROBLEM|§1.9 反悔貪心|2813|子序列最大優雅度|maximum-elegance-of-a-k-length-subsequence|2582|false
+PROBLEM|§1.9 反悔貪心|3049|標記所有下標的最早秒數 II|earliest-second-to-mark-indices-ii|3111|false
+PROBLEM|§1.9 反悔貪心|3711|不出現負餘額的最大交易額|maximum-transactions-without-negative-balance|null|true
+PROBLEM|§1.9 反悔貪心|2599|使前綴和數組非負|make-the-prefix-sum-non-negative|null|true
+PROBLEM|§2.1 不相交區間|435|無重疊區間|non-overlapping-intervals|null|false
+PROBLEM|§2.1 不相交區間|646|最長數對鏈|maximum-length-of-pair-chain|null|false
+PROBLEM|§2.1 不相交區間|1520|最多的不重疊子字符串|maximum-number-of-non-overlapping-substrings|2363|false
+PROBLEM|§2.1 不相交區間|3458|選擇 K 個互不重疊的特殊子字符串|select-k-disjoint-special-substrings|null|false
+PROBLEM|§2.2 區間分組|2406|將區間分為最少組數|divide-intervals-into-minimum-number-of-groups|1713|false
+PROBLEM|§2.2 區間分組|253|會議室 II|meeting-rooms-ii|null|true
+PROBLEM|§2.3 區間選點|452|用最少數量的箭引爆氣球|minimum-number-of-arrows-to-burst-balloons|null|false
+PROBLEM|§2.3 區間選點|757|設置交集大小至少為2|set-intersection-size-at-least-two|2379|false
+PROBLEM|§2.3 區間選點|2589|完成所有任務的最少時間|minimum-time-to-complete-all-tasks|2381|false
+PROBLEM|§2.3 區間選點|LCP 32|批量處理任務|t3fKg1|null|false
+PROBLEM|§2.4 區間覆蓋|45|跳躍遊戲 II|jump-game-ii|null|false
+PROBLEM|§2.4 區間覆蓋|1024|視頻拼接|video-stitching|1746|false
+PROBLEM|§2.4 區間覆蓋|1326|灌溉花園的最少水龍頭數目|minimum-number-of-taps-to-open-to-water-a-garden|1885|false
+PROBLEM|§2.5 合併區間|56|合併區間|merge-intervals|null|false
+PROBLEM|§2.5 合併區間|57|插入區間|insert-interval|null|false
+PROBLEM|§2.5 合併區間|2848|與車相交的點|points-that-intersect-with-cars|null|false
+PROBLEM|§2.5 合併區間|55|跳躍遊戲|jump-game|null|false
+PROBLEM|§2.5 合併區間|763|劃分字母區間|partition-labels|1443|false
+PROBLEM|§2.5 合併區間|3169|無需開會的工作日|count-days-without-meetings|1483|false
+PROBLEM|§2.5 合併區間|2580|統計將重疊區間合併成組的方案數|count-ways-to-group-overlapping-ranges|1632|false
+PROBLEM|§2.5 合併區間|3394|判斷網格圖能否被切割成塊|check-if-grid-can-be-cut-into-sections|1916|false
+PROBLEM|§2.5 合併區間|2963|統計好分割方案的數目|count-the-number-of-good-partitions|1985|false
+PROBLEM|§2.5 合併區間|2584|分割數組使乘積互質|split-the-array-to-make-coprime-products|2159|false
+PROBLEM|§2.5 合併區間|616|給字符串添加加粗標籤|add-bold-tag-in-string|null|true
+PROBLEM|§2.5 合併區間|758|字符串中的加粗單詞|bold-words-in-string|null|true
+PROBLEM|§2.5 合併區間|3323|通過插入區間最小化連通組|minimize-connected-groups-by-inserting-interval|null|true
+PROBLEM|§2.5 合併區間|759|員工空閒時間|employee-free-time|null|true
+PROBLEM|§2.5 合併區間|2655|尋找最大長度的未覆蓋區間|find-maximal-uncovered-ranges|null|true
+PROBLEM|§2.6 其他區間貪心|1288|刪除被覆蓋區間|remove-covered-intervals|null|false
+PROBLEM|§2.6 其他區間貪心|2054|兩個最好的不重疊活動|two-best-non-overlapping-events|1883|false
+PROBLEM|§2.6 其他區間貪心|1705|喫蘋果的最大數目|maximum-number-of-eaten-apples|1930|false
+PROBLEM|§2.6 其他區間貪心|1353|最多可以參加的會議數目|maximum-number-of-events-that-can-be-attended|2016|false
+PROBLEM|§3.1 字典序最小/最大|1323|6 和 9 組成的最大數字|maximum-69-number|1194|false
+PROBLEM|§3.1 字典序最小/最大|3216|交換後字典序最小的字符串|lexicographically-smallest-string-after-a-swap|1243|false
+PROBLEM|§3.1 字典序最小/最大|2697|字典序最小回文串|lexicographically-smallest-palindrome|1304|false
+PROBLEM|§3.1 字典序最小/最大|3517|最小回文排列 I|smallest-palindromic-rearrangement-i|1357|false
+PROBLEM|§3.1 字典序最小/最大|1881|插入後的最大值|maximum-value-after-insertion|1381|false
+PROBLEM|§3.1 字典序最小/最大|2734|執行子串操作後的字典序最小字符串|lexicographically-smallest-string-after-substring-operation|1405|false
+PROBLEM|§3.1 字典序最小/最大|1432|改變一個整數能得到的最大差值|max-difference-you-can-get-from-changing-an-integer|1427|false
+PROBLEM|§3.1 字典序最小/最大|1946|子字符串突變後可能得到的最大整數|largest-number-after-mutating-substring|1445|false
+PROBLEM|§3.1 字典序最小/最大|1663|具有給定數值的最小字符串|smallest-string-with-a-given-numeric-value|1461|false
+PROBLEM|§3.1 字典序最小/最大|1328|破壞迴文串|break-a-palindrome|1474|false
+PROBLEM|§3.1 字典序最小/最大|2259|移除指定數字得到的最大結果|remove-digit-from-number-to-maximize-result|null|false
+PROBLEM|§3.1 字典序最小/最大|2566|替換一個數字後的最大差值|maximum-difference-by-remapping-a-digit|null|false
+PROBLEM|§3.1 字典序最小/最大|670|最大交換|maximum-swap|null|false
+PROBLEM|§3.1 字典序最小/最大|3106|滿足距離約束且字典序最小的字符串|lexicographically-smallest-string-after-operations-with-constraint|1515|false
+PROBLEM|§3.1 字典序最小/最大|3723|數位平方和的最大值|maximize-sum-of-squares-of-digits|1537|false
+PROBLEM|§3.1 字典序最小/最大|1053|交換一次的先前排列|previous-permutation-with-one-swap|1633|false
+PROBLEM|§3.1 字典序最小/最大|2375|根據模式串構造最小數字|construct-smallest-number-from-di-string|1642|false
+PROBLEM|§3.1 字典序最小/最大|2182|構造限制重複的字符串|construct-string-with-repeat-limit|1680|false
+PROBLEM|§3.1 字典序最小/最大|738|單調遞增的數字|monotone-increasing-digits|null|false
+PROBLEM|§3.1 字典序最小/最大|3403|從盒子中找出字典序最大的字符串 I|find-the-lexicographically-largest-string-from-the-box-i|1762|false
+PROBLEM|§3.1 字典序最小/最大|3170|刪除星號以後字典序最小的字符串|lexicographically-minimum-string-after-removing-stars|1772|false
+PROBLEM|§3.1 字典序最小/最大|1363|形成三的最大倍數|largest-multiple-of-three|1823|false
+PROBLEM|§3.1 字典序最小/最大|3752|字典序最小和為目標值且絕對值是排列的數組|lexicographically-smallest-negated-permutation-that-sums-to-target|1827|false
+PROBLEM|§3.1 字典序最小/最大|1754|構造字典序最大的合併字符串|largest-merge-of-two-strings|1829|false
+PROBLEM|§3.1 字典序最小/最大|1202|交換字符串中的元素|smallest-string-with-swaps|1855|false
+PROBLEM|§3.1 字典序最小/最大|2434|使用機器人打印字典序最小的字符串|using-a-robot-to-print-the-lexicographically-smallest-string|1953|false
+PROBLEM|§3.1 字典序最小/最大|2948|交換得到字典序最小的數組|make-lexicographically-smallest-array-by-swapping-elements|2047|false
+PROBLEM|§3.1 字典序最小/最大|1505|最多 K 次交換相鄰數位後得到的最小整數|minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits|2337|false
+PROBLEM|§3.1 字典序最小/最大|3474|字典序最小的生成字符串|lexicographically-smallest-generated-string|2605|false
+PROBLEM|§3.1 字典序最小/最大|555|分割連接字符串|split-concatenated-strings|null|true
+PROBLEM|§3.1 字典序最小/最大|3088|使字符串反迴文|make-string-anti-palindrome|null|true
+PROBLEM|§3.1 字典序最小/最大 > 倒序貪心|3720|大於目標字符串的最小字典序排列|lexicographically-smallest-permutation-greater-than-target|1958|false
+PROBLEM|§3.1 字典序最小/最大 > 倒序貪心|3734|大於目標字符串的最小字典序迴文排列|lexicographically-smallest-palindromic-permutation-greater-than-target|2330|false
+PROBLEM|§3.1 字典序最小/最大 > 倒序貪心|2663|字典序最小的美麗字符串|lexicographically-smallest-beautiful-string|2416|false
+PROBLEM|§3.1 字典序最小/最大 > 倒序貪心|2048|下一個更大的數值平衡數|next-greater-numerically-balanced-number|null|false
+PROBLEM|§3.1 字典序最小/最大 > 倒序貪心|3646|下一個特殊迴文數|next-special-palindrome-number|null|false
+PROBLEM|§3.1 字典序最小/最大 > 倒序貪心|3348|最小可整除數位乘積 II|smallest-divisible-digit-product-ii|3101|false
+PROBLEM|§3.2 迴文串貪心|409|最長迴文串|longest-palindrome|null|false
+PROBLEM|§3.2 迴文串貪心|2697|字典序最小回文串|lexicographically-smallest-palindrome|1304|false
+PROBLEM|§3.2 迴文串貪心|3517|最小回文排列 I|smallest-palindromic-rearrangement-i|1357|false
+PROBLEM|§3.2 迴文串貪心|680|驗證迴文串 II|valid-palindrome-ii|null|false
+PROBLEM|§3.2 迴文串貪心|1328|破壞迴文串|break-a-palindrome|1474|false
+PROBLEM|§3.2 迴文串貪心|1400|構造 K 個迴文字符串|construct-k-palindrome-strings|1530|false
+PROBLEM|§3.2 迴文串貪心|2131|連接兩字母單詞得到的最長迴文串|longest-palindrome-by-concatenating-two-letter-words|1557|false
+PROBLEM|§3.2 迴文串貪心|2384|最大回文數字|largest-palindromic-number|1636|false
+PROBLEM|§3.2 迴文串貪心|3035|迴文字符串的最大數量|maximum-palindromes-after-operations|1857|false
+PROBLEM|§3.2 迴文串貪心|1616|分割兩個字符串得到迴文串|split-two-strings-to-make-palindrome|1868|false
+PROBLEM|§3.2 迴文串貪心|1147|段式迴文|longest-chunked-palindrome-decomposition|1912|false
+PROBLEM|§3.2 迴文串貪心|2193|得到迴文串的最少操作次數|minimum-number-of-moves-to-make-palindrome|2091|false
+PROBLEM|§3.2 迴文串貪心|3734|大於目標字符串的最小字典序迴文排列|lexicographically-smallest-palindromic-permutation-greater-than-target|2330|false
+PROBLEM|§3.2 迴文串貪心|3646|下一個特殊迴文數|next-special-palindrome-number|null|false
+PROBLEM|§3.2 迴文串貪心|266|迴文排列|palindrome-permutation|null|true
+PROBLEM|§3.2 迴文串貪心|2422|使用合併操作將數組轉換為迴文序列|merge-operations-to-turn-array-into-a-palindrome|null|true
+PROBLEM|§3.2 迴文串貪心|1842|下個由相同數字構成的迴文串|next-palindrome-using-same-digits|null|true
+PROBLEM|§3.2 迴文串貪心|3088|使字符串反迴文|make-string-anti-palindrome|null|true
+PROBLEM|§4.1 基礎|2160|拆分數位後四位數字的最小和|minimum-sum-of-four-digit-number-after-splitting-digits|1314|false
+PROBLEM|§4.1 基礎|2578|最小和分割|split-with-minimum-sum|1351|false
+PROBLEM|§4.1 基礎|2244|完成所有任務需要的最少輪數|minimum-rounds-to-complete-all-tasks|1372|false
+PROBLEM|§4.1 基礎|2870|使數組為空的最少操作次數|minimum-number-of-operations-to-make-array-empty|1392|false
+PROBLEM|§4.1 基礎|1217|玩籌碼|minimum-cost-to-move-chips-to-the-same-position|1408|false
+PROBLEM|§4.1 基礎|3091|執行操作使數據元素之和大於等於 K|apply-operations-to-make-sum-of-array-greater-than-or-equal-to-k|1522|false
+PROBLEM|§4.1 基礎|LCS 01|下載插件|Ju9Xwi|null|false
+PROBLEM|§4.1 基礎|397|整數替換|integer-replacement|null|false
+PROBLEM|§4.2 乘積貪心|628|三個數的最大乘積|maximum-product-of-three-numbers|null|false
+PROBLEM|§4.2 乘積貪心|3732|一次替換後的三元素最大乘積|maximum-product-of-three-elements-after-one-replacement|1529|false
+PROBLEM|§4.2 乘積貪心|1567|乘積為正數的最長子數組長度|maximum-length-of-subarray-with-positive-product|1710|false
+PROBLEM|§4.3 排序不等式|2285|道路的最大總重要性|maximum-total-importance-of-roads|1496|false
+PROBLEM|§4.3 排序不等式|3016|輸入單詞需要的最少按鍵次數 II|minimum-number-of-pushes-to-type-word-ii|1534|false
+PROBLEM|§4.3 排序不等式|1402|做菜順序|reducing-dishes|1679|false
+PROBLEM|§4.3 排序不等式|2931|購買物品的最大開銷|maximum-spending-after-buying-items|1822|false
+PROBLEM|§4.3 排序不等式|1589|所有排列中的最大和|maximum-sum-obtained-of-any-permutation|1871|false
+PROBLEM|§4.3 排序不等式|1874|兩個數組的最小乘積和|minimize-product-sum-of-two-arrays|null|true
+PROBLEM|§4.3 排序不等式|2268|最少按鍵次數|minimum-number-of-keypresses|null|true
+PROBLEM|§4.3 排序不等式 > 思維擴展|2561|重排水果|rearranging-fruits|2222|false
+PROBLEM|§4.3 排序不等式 > 思維擴展|3547|圖中邊值的最大和|maximum-sum-of-edge-values-in-a-graph|null|false
+PROBLEM|§4.4 均值不等式|3081|替換字符串中的問號使分數最小|replace-question-marks-in-string-to-minimize-its-value|1905|false
+PROBLEM|§4.4 均值不等式|1969|數組元素的最小非零乘積|minimum-non-zero-product-of-the-array-elements|1967|false
+PROBLEM|§4.4 均值不等式|2939|最大異或乘積|maximum-xor-product|2128|false
+PROBLEM|§4.4 均值不等式|3723|數位平方和的最大值|maximize-sum-of-squares-of-digits|1537|false
+PROBLEM|§4.4 均值不等式|2897|對數組執行操作使平方和最大|apply-operations-on-array-to-maximize-sum-of-squares|2301|false
+PROBLEM|§4.5 中位數貪心|462|最小操作次數使數組元素相等 II|minimum-moves-to-equal-array-elements-ii|null|false
+PROBLEM|§4.5 中位數貪心|2033|獲取單值網格的最小操作數|minimum-operations-to-make-a-uni-value-grid|1672|false
+PROBLEM|§4.5 中位數貪心|2448|使數組相等的最小開銷|minimum-cost-to-make-array-equal|2005|false
+PROBLEM|§4.5 中位數貪心|2607|使子數組元素和相等|make-k-subarray-sums-equal|2071|false
+PROBLEM|§4.5 中位數貪心|2967|使數組成為等數數組的最小代價|minimum-cost-to-make-array-equalindromic|2116|false
+PROBLEM|§4.5 中位數貪心|1478|安排郵筒|allocate-mailboxes|2190|false
+PROBLEM|§4.5 中位數貪心|2968|執行操作使頻率分數最大|apply-operations-to-maximize-frequency-score|2444|false
+PROBLEM|§4.5 中位數貪心|1703|得到連續 K 個 1 的最少相鄰交換次數|minimum-adjacent-swaps-for-k-consecutive-ones|2467|false
+PROBLEM|§4.5 中位數貪心|3762|使數組元素相等的最小操作次數|minimum-operations-to-equalize-subarrays|2497|false
+PROBLEM|§4.5 中位數貪心|3086|拾起 K 個 1 需要的最少行動次數|minimum-moves-to-pick-k-ones|2673|false
+PROBLEM|§4.5 中位數貪心|LCP 24|數字遊戲|5TxKeK|null|false
+PROBLEM|§4.5 中位數貪心|3441|變成好標題的最少代價|minimum-cost-good-caption|null|false
+PROBLEM|§4.5 中位數貪心|296|最佳的碰頭地點|best-meeting-point|null|true
+PROBLEM|§4.6 歸納法|2952|需要添加的硬幣的最小數量|minimum-number-of-coins-to-be-added|1784|false
+PROBLEM|§4.6 歸納法|330|按要求補齊數組|patching-array|null|false
+PROBLEM|§4.6 歸納法|1798|你能構造出連續值的最大數目|maximum-number-of-consecutive-values-you-can-make|1931|false
+PROBLEM|§4.7 其他數學貪心|1414|和為 K 的最少斐波那契數字數目|find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k|1466|false
+PROBLEM|§4.7 其他數學貪心|3107|使數組中位數等於 K 的最少操作數|minimum-operations-to-make-median-of-array-equal-to-k|1605|false
+PROBLEM|§4.7 其他數學貪心|754|到達終點數字|reach-a-number|null|false
+PROBLEM|§4.7 其他數學貪心|1058|最小化舍入誤差以滿足目標|minimize-rounding-error-to-meet-target|null|true
+PROBLEM|§5.1 從特殊到一般|2745|構造最長的新字符串|construct-the-longest-new-string|1607|false
+PROBLEM|§5.1 從特殊到一般|2611|老鼠和奶酪|mice-and-cheese|1663|false
+PROBLEM|§5.1 從特殊到一般|1029|兩地調度|two-city-scheduling|null|false
+PROBLEM|§5.1 從特殊到一般|2645|構造有效字符串的最少插入數|minimum-additions-to-make-valid-string|null|false
+PROBLEM|§5.1 從特殊到一般|2202|K 次操作後最大化頂端元素|maximize-the-topmost-element-after-k-moves|1717|false
+PROBLEM|§5.1 從特殊到一般|2568|最小無法得到的或值|minimum-impossible-or|1754|false
+PROBLEM|§5.1 從特殊到一般|1702|修改後的最大二進制字符串|maximum-binary-string-after-change|1825|false
+PROBLEM|§5.1 從特殊到一般|3012|通過操作使數組長度最小|minimize-length-of-array-using-operations|1833|false
+PROBLEM|§5.1 從特殊到一般|2350|不可能得到的最短骰子序列|shortest-impossible-sequence-of-rolls|1961|false
+PROBLEM|§5.1 從特殊到一般|3660|跳躍遊戲 IX|jump-game-ix|2187|false
+PROBLEM|§5.1 從特殊到一般|517|超級洗衣機|super-washing-machines|null|false
+PROBLEM|§5.1 從特殊到一般|2499|讓數組不相等的最小總代價|minimum-total-cost-to-make-arrays-unequal|2633|false
+PROBLEM|§5.1 從特殊到一般|3357|最小化相鄰元素的最大差值|minimize-the-maximum-adjacent-element-difference|3077|false
+PROBLEM|§5.1 從特殊到一般|3431|對數字排序的最小解鎖下標|minimum-unlocked-indices-to-sort-nums|null|true
+PROBLEM|§5.2 腦筋急轉彎|2733|既不是最小值也不是最大值|neither-minimum-nor-maximum|1148|false
+PROBLEM|§5.2 腦筋急轉彎|3432|統計元素和差值為偶數的分區方案|count-partitions-with-even-sum-difference|1200|false
+PROBLEM|§5.2 腦筋急轉彎|1903|字符串中的最大奇數|largest-odd-number-in-string|1249|false
+PROBLEM|§5.2 腦筋急轉彎|2549|統計桌面上的不同數字|count-distinct-numbers-on-board|1266|false
+PROBLEM|§5.2 腦筋急轉彎|3746|等量移除後的字符串最小長度|minimum-string-length-after-balanced-removals|1327|false
+PROBLEM|§5.2 腦筋急轉彎|2396|嚴格迴文的數字|strictly-palindromic-number|1329|false
+PROBLEM|§5.2 腦筋急轉彎|1689|十-二進制數的最少數目|partitioning-into-minimum-number-of-deci-binary-numbers|1355|false
+PROBLEM|§5.2 腦筋急轉彎|3760|不同首字母的子字符串數目|maximum-substrings-with-distinct-start|1364|false
+PROBLEM|§5.2 腦筋急轉彎|3674|數組元素相等的最小操作次數|minimum-operations-to-equalize-array|1369|false
+PROBLEM|§5.2 腦筋急轉彎|3689|最大子數組總值 I|maximum-total-subarray-value-i|1371|false
+PROBLEM|§5.2 腦筋急轉彎|598|區間加法 II|range-addition-ii|null|false
+PROBLEM|§5.2 腦筋急轉彎|521|最長特殊序列 Ⅰ|longest-uncommon-subsequence-i|null|false
+PROBLEM|§5.2 腦筋急轉彎|3675|轉換字符串的最小操作次數|minimum-operations-to-transform-string|1414|false
+PROBLEM|§5.2 腦筋急轉彎|3227|字符串元音遊戲|vowels-game-in-a-string|1452|false
+PROBLEM|§5.2 腦筋急轉彎|3638|平衡裝運的最大數量|maximum-balanced-shipments|1463|false
+PROBLEM|§5.2 腦筋急轉彎|3702|按位異或非零的最長子序列|longest-subsequence-with-non-zero-bitwise-xor|1489|false
+PROBLEM|§5.2 腦筋急轉彎|3810|變成目標數組的最少操作次數|minimum-operations-to-reach-target-array|1492|false
+PROBLEM|§5.2 腦筋急轉彎|2419|按位與最大的最長子數組|longest-subarray-with-maximum-bitwise-and|1496|false
+PROBLEM|§5.2 腦筋急轉彎|3424|將數組變相同的最小代價|minimum-cost-to-make-arrays-identical|1503|false
+PROBLEM|§5.2 腦筋急轉彎|1992|找到所有的農場組|find-all-groups-of-farmland|1539|false
+PROBLEM|§5.2 腦筋急轉彎|1007|行相等的最少多米諾旋轉|minimum-domino-rotations-for-equal-row|1541|false
+PROBLEM|§5.2 腦筋急轉彎|2811|判斷是否能拆分數組|check-if-it-is-possible-to-split-array|1543|false
+PROBLEM|§5.2 腦筋急轉彎|463|島嶼的周長|island-perimeter|null|false
+PROBLEM|§5.2 腦筋急轉彎|2211|統計道路上的碰撞次數|count-collisions-on-a-road|1581|false
+PROBLEM|§5.2 腦筋急轉彎|3207|與敵人戰鬥後的最大分數|maximum-points-after-enemy-battles|1591|false
+PROBLEM|§5.2 腦筋急轉彎|3828|刪除子數組後的最終元素|final-element-after-subarray-deletions|1591|false
+PROBLEM|§5.2 腦筋急轉彎|3471|找出最大的幾近缺失整數|find-the-largest-almost-missing-integer|null|false
+PROBLEM|§5.2 腦筋急轉彎|2546|執行逐位運算使字符串相等|apply-bitwise-operations-to-make-strings-equal|1605|false
+PROBLEM|§5.2 腦筋急轉彎|1503|所有螞蟻掉下來前的最後一刻|last-moment-before-all-ants-fall-out-of-a-plank|1619|false
+PROBLEM|§5.2 腦筋急轉彎|2860|讓所有學生保持開心的分組方法數|happy-students|1626|false
+PROBLEM|§5.2 腦筋急轉彎|1332|刪除迴文子序列|remove-palindromic-subsequences|1629|false
+PROBLEM|§5.2 腦筋急轉彎|1975|最大方陣和|maximum-matrix-sum|1648|false
+PROBLEM|§5.2 腦筋急轉彎|1145|二叉樹着色遊戲|binary-tree-coloring-game|1741|false
+PROBLEM|§5.2 腦筋急轉彎|1297|子串的最大出現次數|maximum-number-of-occurrences-of-a-substring|1748|false
+PROBLEM|§5.2 腦筋急轉彎|3577|統計計算機解鎖順序排列數|count-the-number-of-computer-unlocking-permutations|1750|false
+PROBLEM|§5.2 腦筋急轉彎|3282|到達數組末尾的最大得分|reach-end-of-array-with-max-score|1772|false
+PROBLEM|§5.2 腦筋急轉彎|3644|排序排列|maximum-k-to-sort-a-permutation|1775|false
+PROBLEM|§5.2 腦筋急轉彎|2712|使所有字符相等的最小成本|minimum-cost-to-make-all-characters-equal|1791|false
+PROBLEM|§5.2 腦筋急轉彎|3148|矩陣中的最大得分|maximum-difference-score-in-a-grid|1820|false
+PROBLEM|§5.2 腦筋急轉彎|2311|小於等於 K 的最長二進制子序列|longest-binary-subsequence-less-than-or-equal-to-k|1840|false
+PROBLEM|§5.2 腦筋急轉彎|2332|坐上公交的最晚時間|the-latest-time-to-catch-a-bus|1841|false
+PROBLEM|§5.2 腦筋急轉彎|2680|最大或值|maximum-or|1912|false
+PROBLEM|§5.2 腦筋急轉彎|2731|移動機器人|movement-of-robots|1923|false
+PROBLEM|§5.2 腦筋急轉彎|2556|二進制矩陣中翻轉最多一次使路徑不連通|disconnect-path-in-a-binary-matrix-by-at-most-one-flip|2369|false
+PROBLEM|§5.2 腦筋急轉彎|3353|最小總操作數|minimum-total-operations|null|true
+PROBLEM|§5.2 腦筋急轉彎|1708|長度為 K 的最大子數組|largest-subarray-length-k|null|true
+PROBLEM|§5.2 腦筋急轉彎|3596|最少花費路徑交替方向 I|minimum-cost-path-with-alternating-directions-i|null|true
+PROBLEM|§5.2 腦筋急轉彎|3496|最大化配對刪除後的得分|maximize-score-after-pair-deletions|null|true
+PROBLEM|§5.2 腦筋急轉彎|3125|使得按位與結果為 0 的最大數字|maximum-number-that-makes-result-of-bitwise-and-zero|null|true
+PROBLEM|§5.2 腦筋急轉彎|1794|統計距離最小的子串對個數|count-pairs-of-equal-substrings-with-minimum-difference|null|true
+PROBLEM|§5.3 等價轉換|453|最小操作次數使數組元素相等|minimum-moves-to-equal-array-elements|null|false
+PROBLEM|§5.3 等價轉換|3375|使數組的值全部為 K 的最少操作次數|minimum-operations-to-make-array-values-equal-to-k|1383|false
+PROBLEM|§5.3 等價轉換|2914|使二進制字符串變美麗的最少修改次數|minimum-number-of-changes-to-make-binary-string-beautiful|1480|false
+PROBLEM|§5.3 等價轉換|3365|重排子字符串以形成目標字符串|rearrange-k-substrings-to-form-target-string|1514|false
+PROBLEM|§5.3 等價轉換|1657|確定兩個字符串是否接近|determine-if-two-strings-are-close|1530|false
+PROBLEM|§5.3 等價轉換|2551|將珠子放入背包中|put-marbles-in-bags|2042|false
+PROBLEM|§5.3 等價轉換|391|完美矩形|perfect-rectangle|null|false
+PROBLEM|§5.3 等價轉換|1585|檢查字符串是否可以通過排序子字符串得到另一個字符串|check-if-string-is-transformable-with-substring-sort-operations|2333|false
+PROBLEM|§5.3 等價轉換|1040|移動石子直到連續 II|moving-stones-until-consecutive-ii|2456|false
+PROBLEM|§5.3 等價轉換|249|移位字符串分組|group-shifted-strings|null|true
+PROBLEM|§5.3 等價轉換|49|字母異位詞分組|group-anagrams|null|false
+PROBLEM|§5.3 等價轉換|1183|矩陣中 1 的最大數量|maximum-number-of-ones|null|true
+PROBLEM|§5.4 逆向思維|2139|得到目標值的最少行動次數|minimum-moves-to-reach-target-score|1417|false
+PROBLEM|§5.4 逆向思維|3779|得到互不相同元素的最少操作次數|minimum-number-of-operations-to-have-distinct-elements|1444|false
+PROBLEM|§5.4 逆向思維|3396|使數組元素互不相同所需的最少操作次數|minimum-number-of-operations-to-make-elements-in-array-distinct|null|false
+PROBLEM|§5.4 逆向思維|3147|從魔法師身上吸取的最大能量|taking-maximum-energy-from-the-mystic-dungeon|1460|false
+PROBLEM|§5.4 逆向思維|869|重新排序得到 2 的冪|reordered-power-of-2|1505|false
+PROBLEM|§5.4 逆向思維|1558|得到目標數組的最少函數調用次數|minimum-numbers-of-function-calls-to-make-target-array|1637|false
+PROBLEM|§5.4 逆向思維|554|磚牆|brick-wall|null|false
+PROBLEM|§5.4 逆向思維|780|到達終點|reaching-points|1897|false
+PROBLEM|§5.4 逆向思維|417|太平洋大西洋水流問題|pacific-atlantic-water-flow|null|false
+PROBLEM|§5.4 逆向思維|991|壞了的計算器|broken-calculator|1909|false
+PROBLEM|§5.4 逆向思維|2227|加密解密字符串|encrypt-and-decrypt-strings|1945|false
+PROBLEM|§5.4 逆向思維|1354|多次求和構造目標數組|construct-target-array-with-multiple-sums|2015|false
+PROBLEM|§5.4 逆向思維|2543|判斷一個點是否可以到達|check-if-point-is-reachable|2221|false
+PROBLEM|§5.4 逆向思維|3307|找出第 K 個字符 II|find-the-k-th-character-in-string-game-ii|2232|false
+PROBLEM|§5.4 逆向思維|3614|用特殊操作處理字符串 II|process-string-with-special-operations-ii|null|false
+PROBLEM|§5.4 逆向思維|3419|圖的最大邊權的最小值|minimize-the-maximum-edge-weight-of-graph|2243|false
+PROBLEM|§5.4 逆向思維|1611|使整數變為 0 的最少操作次數|minimum-one-bit-operations-to-make-integers-zero|2345|false
+PROBLEM|§5.4 逆向思維|3609|到達目標點的最小移動次數|minimum-moves-to-reach-target-in-grid|2419|false
+PROBLEM|§5.4 逆向思維|936|戳印序列|stamping-the-sequence|2583|false
+PROBLEM|§5.4 逆向思維|782|變為棋盤|transform-to-chessboard|null|false
+PROBLEM|§5.4 逆向思維|683|K 個關閉的燈泡|k-empty-slots|null|true
+PROBLEM|§5.4 逆向思維|3141|最大漢明距離|maximum-hamming-distances|null|true
+PROBLEM|§5.4 逆向思維 > 時光倒流|3607|電網維護|power-grid-maintenance|1700|false
+PROBLEM|§5.4 逆向思維 > 時光倒流|2718|查詢後矩陣的和|sum-of-matrix-after-queries|1769|false
+PROBLEM|§5.4 逆向思維 > 時光倒流|3639|變為活躍狀態的最小時間|minimum-time-to-activate-string|1853|false
+PROBLEM|§5.4 逆向思維 > 時光倒流|1970|你能穿過矩陣的最後一天|last-day-where-you-can-still-cross|2124|false
+PROBLEM|§5.4 逆向思維 > 時光倒流|2382|刪除操作後的最大子段和|maximum-segment-sum-after-removals|2136|false
+PROBLEM|§5.4 逆向思維 > 時光倒流|803|打磚塊|bricks-falling-when-hit|2765|false
+PROBLEM|§5.5 貢獻法|2063|所有子字符串中的元音|vowels-of-all-substrings|1663|false
+PROBLEM|§5.5 貢獻法|979|在二叉樹中分配硬幣|distribute-coins-in-binary-tree|1709|false
+PROBLEM|§5.5 貢獻法|1588|所有奇數長度子數組的和|sum-of-all-odd-length-subarrays|null|false
+PROBLEM|§5.5 貢獻法|3771|探索地牢的得分|total-score-of-dungeon-runs|1981|false
+PROBLEM|§5.5 貢獻法|2477|到達首都的最少油耗|minimum-fuel-cost-to-report-to-the-capital|2012|false
+PROBLEM|§5.5 貢獻法|2681|英雄的力量|power-of-heroes|2060|false
+PROBLEM|§5.5 貢獻法|3786|樹組的交互代價總和|total-sum-of-interaction-cost-in-tree-groups|2139|false
+PROBLEM|§5.5 貢獻法|891|子序列寬度之和|sum-of-subsequence-widths|2183|false
+PROBLEM|§5.5 貢獻法|3428|最多 K 個元素的子序列的最值之和|maximum-and-minimum-sums-of-at-most-size-k-subsequences|null|false
+PROBLEM|§5.5 貢獻法|3426|所有安放棋子方案的曼哈頓距離|manhattan-distances-of-all-arrangements-of-pieces|2443|false
+PROBLEM|§5.5 貢獻法|2763|所有子數組中不平衡數字之和|sum-of-imbalance-numbers-of-all-subarrays|null|false
+PROBLEM|§5.6 兩次掃描|135|分發糖果|candy|null|false
+PROBLEM|§5.6 兩次掃描|3796|找到帶限制序列的最大值|find-maximum-value-in-a-constrained-sequence|1833|false
+PROBLEM|§5.6 兩次掃描|3494|釀造藥水需要的最少總時間|find-the-minimum-amount-of-time-to-brew-potions|2042|false
+PROBLEM|§5.6 兩次掃描|1840|最高建築高度|maximum-building-height|2374|false
+PROBLEM|§5.7 分類討論|2525|根據規則將箱子分類|categorize-box-according-to-criteria|1301|false
+PROBLEM|§5.7 分類討論|860|檸檬水找零|lemonade-change|null|false
+PROBLEM|§5.7 分類討論|2165|重排數字的最小值|smallest-value-of-the-rearranged-number|1362|false
+PROBLEM|§5.7 分類討論|2091|從數組中移除最大值和最小值|removing-minimum-and-maximum-from-array|1384|false
+PROBLEM|§5.7 分類討論|2078|兩棟顏色不同且距離最遠的房子|two-furthest-houses-with-different-colors|null|false
+PROBLEM|§5.7 分類討論|1033|移動石子直到連續|moving-stones-until-consecutive|1421|false
+PROBLEM|§5.7 分類討論|2918|數組的最小相等和|minimum-equal-sum-of-two-arrays-after-replacing-zeros|1526|false
+PROBLEM|§5.7 分類討論|2591|將錢分給最多的兒童|distribute-money-to-maximum-children|1531|false
+PROBLEM|§5.7 分類討論|2131|連接兩字母單詞得到的最長迴文串|longest-palindrome-by-concatenating-two-letter-words|1557|false
+PROBLEM|§5.7 分類討論|3789|採購的最小花費|minimum-cost-to-acquire-required-items|1580|false
+PROBLEM|§5.7 分類討論|2844|生成特殊數字的最少操作|minimum-operations-to-make-a-special-number|1588|false
+PROBLEM|§5.7 分類討論|1247|交換字符使得字符串相同|minimum-swaps-to-make-strings-equal|1597|false
+PROBLEM|§5.7 分類討論|838|推多米諾|push-dominoes|1638|false
+PROBLEM|§5.7 分類討論|2170|使數組變成交替數組的最少操作數|minimum-operations-to-make-the-array-alternating|1663|false
+PROBLEM|§5.7 分類討論|2202|K 次操作後最大化頂端元素|maximize-the-topmost-element-after-k-moves|1717|false
+PROBLEM|§5.7 分類討論|2982|找出出現至少三次的最長特殊子字符串 II|find-longest-special-substring-that-occurs-thrice-ii|1773|false
+PROBLEM|§5.7 分類討論|3724|轉換數組的最少操作次數|minimum-operations-to-transform-array|1790|false
+PROBLEM|§5.7 分類討論|3001|捕獲黑皇后需要的最少移動次數|minimum-moves-to-capture-the-queen|1797|false
+PROBLEM|§5.7 分類討論|2423|刪除字符使頻率相同|remove-letter-to-equalize-frequency|null|false
+PROBLEM|§5.7 分類討論|2934|最大化數組末位元素的最少操作次數|minimum-operations-to-maximize-last-elements-in-arrays|1803|false
+PROBLEM|§5.7 分類討論|3800|使二進制字符串相等的最小成本|minimum-cost-to-make-two-binary-strings-equal|1841|false
+PROBLEM|§5.7 分類討論|2162|設置時間的最少代價|minimum-cost-to-set-cooking-time|1852|false
+PROBLEM|§5.7 分類討論|3440|重新安排會議得到最多空餘時間 II|reschedule-meetings-for-maximum-free-time-ii|1998|false
+PROBLEM|§5.7 分類討論|2508|添加邊使所有節點度數都為偶數|add-edges-to-make-degrees-of-all-nodes-even|2060|false
+PROBLEM|§5.7 分類討論|3240|最少翻轉次數使二進制矩陣迴文 II|minimum-number-of-flips-to-make-binary-grid-palindromic-ii|2080|false
+PROBLEM|§5.7 分類討論|3548|等和矩陣分割 II|equal-sum-grid-partition-ii|2245|false
+PROBLEM|§5.7 分類討論|2468|根據限制分割消息|split-message-based-on-limit|2382|false
+PROBLEM|§5.7 分類討論|420|強密碼檢驗器|strong-password-checker|null|false
+PROBLEM|§5.7 分類討論|3609|到達目標點的最小移動次數|minimum-moves-to-reach-target-in-grid|2419|false
+PROBLEM|§5.7 分類討論|1040|移動石子直到連續 II|moving-stones-until-consecutive-ii|2456|false
+PROBLEM|§5.7 分類討論|335|路徑交叉|self-crossing|null|false
+PROBLEM|§5.7 分類討論|1330|翻轉子數組得到最大的數組值|reverse-subarray-to-maximize-array-value|2482|false
+PROBLEM|§5.7 分類討論|3197|包含所有 1 的最小矩形面積 II|find-the-minimum-area-to-cover-all-ones-ii|2541|false
+PROBLEM|§5.7 分類討論|3366|最小數組和|minimum-array-sum|null|false
+PROBLEM|§5.7 分類討論|2499|讓數組不相等的最小總代價|minimum-total-cost-to-make-arrays-unequal|2633|false
+PROBLEM|§5.7 分類討論|3311|構造符合圖結構的二維矩陣|construct-2d-grid-matching-graph-layout|2664|false
+PROBLEM|§5.7 分類討論|3139|使數組中所有元素相等的最小開銷|minimum-cost-to-equalize-array|2666|false
+PROBLEM|§5.7 分類討論|3017|按距離統計房屋對數目 II|count-the-number-of-houses-at-a-certain-distance-ii|2709|false
+PROBLEM|§5.7 分類討論|2983|迴文串重新排列查詢|palindrome-rearrangement-queries|2780|false
+PROBLEM|§5.7 分類討論|3395|唯一中間衆數子序列 I|subsequences-with-a-unique-middle-mode-i|2800|false
+PROBLEM|§5.7 分類討論|3357|最小化相鄰元素的最大差值|minimize-the-maximum-adjacent-element-difference|3077|false
+PROBLEM|§5.7 分類討論|1900|最佳運動員的比拼回合|the-earliest-and-latest-rounds-where-players-compete|null|false
+PROBLEM|§5.7 分類討論|LCP 48|無限棋局|fsa7oZ|null|false
+PROBLEM|§5.7 分類討論|LCP 21|追逐遊戲|Za25hA|null|false
+PROBLEM|§6 構造題|1304|和為零的 N 個不同整數|find-n-unique-integers-sum-up-to-zero|1167|false
+PROBLEM|§6 構造題|942|增減字符串匹配|di-string-match|1444|false
+PROBLEM|§6 構造題|1968|構造元素不等於兩相鄰元素平均值的數組|array-with-elements-not-equal-to-average-of-neighbors|1499|false
+PROBLEM|§6 構造題|1253|重構 2 行二進制矩陣|reconstruct-a-2-row-binary-matrix|1506|false
+PROBLEM|§6 構造題|1317|將整數轉換為兩個無零整數的和|convert-integer-to-the-sum-of-two-no-zero-integers|null|false
+PROBLEM|§6 構造題|3513|不同 XOR 三元組的數目 I|number-of-unique-xor-triplets-i|1663|false
+PROBLEM|§6 構造題|2182|構造限制重複的字符串|construct-string-with-repeat-limit|1680|false
+PROBLEM|§6 構造題|3592|硬幣面值還原|inverse-coin-change|1701|false
+PROBLEM|§6 構造題|969|煎餅排序|pancake-sorting|null|false
+PROBLEM|§6 構造題|1605|給定行和列的和求可行矩陣|find-valid-matrix-given-row-and-column-sums|1868|false
+PROBLEM|§6 構造題|2375|根據模式串構造最小數字|construct-smallest-number-from-di-string|1642|false
+PROBLEM|§6 構造題|324|擺動排序 II|wiggle-sort-ii|null|false
+PROBLEM|§6 構造題|667|優美的排列 II|beautiful-arrangement-ii|null|false
+PROBLEM|§6 構造題|2122|還原原數組|recover-the-original-array|2159|false
+PROBLEM|§6 構造題|3680|生成賽程|generate-schedule|2378|false
+PROBLEM|§6 構造題|932|漂亮數組|beautiful-array|null|false
+PROBLEM|§6 構造題|2790|長度遞增組的最大數目|maximum-number-of-groups-with-increasing-length|2620|false
+PROBLEM|§6 構造題|3311|構造符合圖結構的二維矩陣|construct-2d-grid-matching-graph-layout|2664|false
+PROBLEM|§6 構造題|2573|找出對應 LCP 矩陣的字符串|find-the-string-with-lcp|2682|false
+PROBLEM|§6 構造題|1982|從子集的和還原數組|find-array-given-subset-sums|2872|false
+PROBLEM|§6 構造題|280|擺動排序|wiggle-sort|null|true
+PROBLEM|§6 構造題|484|尋找排列|find-permutation|null|true
+PROBLEM|§6 構造題|1980|找出不同的二進制字符串|find-unique-binary-string|null|false
+PROBLEM|§7 交互題|278|第一個錯誤的版本|first-bad-version|null|false
+PROBLEM|§7 交互題|374|猜數字大小|guess-number-higher-or-lower|null|false
+PROBLEM|§7 交互題|1237|找出給定方程的正整數解|find-positive-integer-solution-for-a-given-equation|null|false
+PROBLEM|§7 交互題|1095|山脈數組中查找目標值|find-in-mountain-array|1827|false
+PROBLEM|§7 交互題|843|猜猜這個單詞|guess-the-word|2078|false
+PROBLEM|§7 交互題|2728|計算一個環形街道上的房屋數量|count-houses-in-a-circular-street|null|true
+PROBLEM|§7 交互題|277|搜尋名人|find-the-celebrity|null|true
+PROBLEM|§7 交互題|2782|唯一類別的數量|number-of-unique-categories|null|true
+PROBLEM|§7 交互題|3064|使用按位查詢猜測數字 I|guess-the-number-using-bitwise-questions-i|null|true
+PROBLEM|§7 交互題|3094|使用按位查詢猜測數字 II|guess-the-number-using-bitwise-questions-ii|null|true
+PROBLEM|§7 交互題|1428|至少有一個 1 的最左端列|leftmost-column-with-at-least-a-one|null|true
+PROBLEM|§7 交互題|702|搜索長度未知的有序數組|search-in-a-sorted-array-of-unknown-size|null|true
+PROBLEM|§7 交互題|1533|找到最大整數的索引|find-the-index-of-the-large-integer|null|true
+PROBLEM|§7 交互題|2936|包含相等值數字塊的數量|number-of-equal-numbers-blocks|null|true
+PROBLEM|§7 交互題|1618|找出適應屏幕的最大字號|maximum-font-to-fit-a-sentence-in-a-screen|null|true
+PROBLEM|§7 交互題|1538|找出隱藏數組中出現次數最多的元素|guess-the-majority-in-a-hidden-array|null|true
+PROBLEM|§7 交互題|489|掃地機器人|robot-room-cleaner|null|true
+PROBLEM|§7 交互題|1778|未知網格中的最短路徑|shortest-path-in-a-hidden-grid|null|true
+PROBLEM|§7 交互題|1810|隱藏網格下的最小消耗路徑|minimum-path-cost-in-a-hidden-grid|null|true
+PROBLEM|§7 交互題|1274|矩形內船隻的數目|number-of-ships-in-a-rectangle|null|true
+PROBLEM|§8 其他|2740|找出分區值|find-the-value-of-the-partition|1302|false
+PROBLEM|§8 其他|3523|非遞減數組的最大長度|make-array-non-decreasing|1435|false
+PROBLEM|§8 其他|781|森林中的兔子|rabbits-in-forest|1453|false
+PROBLEM|§8 其他|3587|最小相鄰交換至奇偶交替|minimum-adjacent-swaps-to-alternate-parity|1548|false
+PROBLEM|§8 其他|1864|構成交替字符串需要的最少交換次數|minimum-number-of-swaps-to-make-the-binary-string-alternating|1601|false
+PROBLEM|§8 其他|1899|合併若干三元組以形成目標三元組|merge-triplets-to-form-target-triplet|1636|false
+PROBLEM|§8 其他|2498|青蛙過河 II|frog-jump-ii|1759|false
+PROBLEM|§8 其他|134|加油站|gas-station|null|false
+PROBLEM|§8 其他|3443|K 次修改後的最大曼哈頓距離|maximum-manhattan-distance-after-k-changes|1856|false
+PROBLEM|§8 其他|3635|最早完成陸地和水上游樂設施的時間 II|earliest-finish-time-for-land-and-water-rides-ii|1870|false
+PROBLEM|§8 其他|3002|移除後集合的最多元素數|maximum-size-of-a-set-after-removals|1917|false
+PROBLEM|§8 其他|1733|需要教語言的最少人數|minimum-number-of-people-to-teach|1984|false
+PROBLEM|§8 其他|659|分割數組為連續子序列|split-array-into-consecutive-subsequences|null|false
+PROBLEM|§8 其他|2732|找到矩陣中的好子集|find-a-good-subset-of-the-matrix|2240|false
+PROBLEM|§8 其他|LCP 03|機器人大冒險|programmable-robot|null|false
+PROBLEM|§8 其他|LCP 26|導航裝置|hSRGyL|null|false
+PROBLEM|§8 其他|LCP 70|沙地治理|XxZZjK|null|false
+PROBLEM|§8 其他|2340|生成有效數組的最少交換次數|minimum-adjacent-swaps-to-make-a-valid-array|null|true
+PROBLEM|§8 其他|3460|最多刪除一次後的最長公共前綴|longest-common-prefix-after-at-most-one-removal|null|true
+PROBLEM|§8 其他|2753|計算一個環形街道上的房屋數量 II|count-houses-in-a-circular-street-ii|null|true

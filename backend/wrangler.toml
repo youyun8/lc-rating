@@ -1,0 +1,19 @@
+name = "lc-rating-backend"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# KV Namespace for storing user progress data
+[[kv_namespaces]]
+binding = "LC_RATING_DATA"
+id = "376e14658e2a4687891ca743c1dd3394"
+
+# Environment variables (set these with wrangler secret put)
+[vars]
+# GitHub OAuth App credentials - DO NOT put actual values here
+# Use: wrangler secret put GITHUB_CLIENT_ID
+# Use: wrangler secret put GITHUB_CLIENT_SECRET
+# Use: wrangler secret put JWT_SECRET
+# Use: wrangler secret put ALLOWED_ORIGINS
+
+# CORS settings
+ALLOWED_ORIGINS = "https://asyncchang.github.io,http://localhost:3001"

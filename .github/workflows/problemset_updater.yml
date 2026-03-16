@@ -2,36 +2,43 @@ name: Problemset Updater
 
 on:
   schedule:
-    - cron: "0 9 * * 1" # 每周一 UTC 时间 09:00 / Beijing 时间 17:00 执行
+    - cron: "10 4 * * 1" # 每週一 UTC 時間 04:10 / Beijing 時間 12:10 執行
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   public-data-updater:
     runs-on: ubuntu-latest
-    environment: lc-maker
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      MONGO_URI: ${{ secrets.MONGO_URI }}
-      DB_NAME: ${{ secrets.DB_NAME }}
-      DB_USER: ${{ secrets.DB_USER }}
-      DB_PASS: ${{ secrets.DB_PASS }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Configure Git
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Fetching data
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
         run: |
-          # echo "Operating system:"
-          uname -a
-          # download binary from github release
-          sudo wget -O /usr/bin/lc https://github.com/huxulm/lc-rating/releases/download/lc-maker/lc-maker-v2
-          sudo chmod +x /usr/bin/lc
-          lc --latest --exemask 15 --loglevel 5 --out ./apps/web/public/problemset
+          cd apps/web/lc-maker
+          pip install -r requirements.txt
+
+      - name: Fetch latest problemset data
+        run: |
+          cd apps/web/lc-maker
+          python fetch_data.py --latest --scope problemset --out ../public/problemset
+
+      - name: Translate to Traditional Chinese
+        run: |
+          cd apps/web/lc-maker
+          python translate_to_traditional.py
 
       - name: Commit changes
         run: |

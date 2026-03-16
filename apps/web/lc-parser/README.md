@@ -1,61 +1,61 @@
 # HTML to Markdown Converter
 
-这个工具用于将 LeetCode 讨论页面的 HTML 转换为 Markdown 格式。
+這個工具用於將 LeetCode 討論頁面的 HTML 轉換為 Markdown 格式。
 
-## 文件说明
+## 檔案說明
 
 - `extract_html2md.py` - Python 版本（使用 markdownify）
 - `extract_html2md.ts` - TypeScript 版本（使用 turndown）
 
 ## TypeScript 版本使用方法
 
-### 安装依赖
+### 安裝依賴
 
 ```bash
 cd apps/web
 pnpm install
 ```
 
-### 运行脚本
+### 運行腳本
 
 ```bash
 npx tsx lc-parser/extract_html2md.ts
 ```
 
-## 主要依赖
+## 主要依賴
 
 ### Python 版本
 - `beautifulsoup4` - HTML 解析
-- `markdownify` - HTML 转 Markdown
-- `requests` - HTTP 请求
+- `markdownify` - HTML 轉 Markdown
+- `requests` - HTTP 請求
 
 ### TypeScript 版本
-- `cheerio` - HTML 解析（类似 BeautifulSoup）
-- `turndown` - HTML 转 Markdown（类似 markdownify）
-- `axios` - HTTP 请求（类似 requests）
+- `cheerio` - HTML 解析（類似 BeautifulSoup）
+- `turndown` - HTML 轉 Markdown（類似 markdownify）
+- `axios` - HTTP 請求（類似 requests）
 
-## 功能对比
+## 功能對比
 
-两个版本实现了完全相同的功能：
+兩個版本實現了完全相同的功能：
 
-1. 从指定 URL 下载 HTML 文件
-2. 解析 HTML 并提取标题和内容
-3. 将 HTML 转换为 Markdown 格式
-4. 保存为 `.md` 文件
+1. 從指定 URL 下載 HTML 檔案
+2. 解析 HTML 並提取標題和內容
+3. 將 HTML 轉換為 Markdown 格式
+4. 儲存為 `.md` 檔案
 
 ## 配置
 
-脚本会处理以下 LeetCode 算法题单：
+腳本會處理以下 LeetCode 演算法題單：
 
-- 滑动窗口与双指针
-- 二分算法
-- 单调栈
-- 网格图
-- 位运算
-- 图论算法
-- 动态规划
-- 常用数据结构
-- 数学算法
-- 贪心算法
-- 链表、二叉树与回溯
-- 字符串
+- 滑動窗口與雙指標
+- 二分演算法
+- 單調棧
+- 網格圖
+- 位元運算
+- 圖論演算法
+- 動態規劃
+- 常用資料結構
+- 數學演算法
+- 貪心演算法
+- 鏈結串列、二元樹與回溯
+- 字串

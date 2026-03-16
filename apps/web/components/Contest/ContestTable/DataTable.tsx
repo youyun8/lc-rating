@@ -58,7 +58,7 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
 
   return (
     <div>
-      <div className="flex items-center justify-center p-2">
+      <div className="flex flex-col sm:flex-row items-center justify-center p-2 gap-2">
         <PageControl
           pageSize={tableState.pagination.pageSize}
           onPageSizeChange={table.setPageSize}
@@ -70,65 +70,66 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
           previousPage={table.previousPage}
           nextPage={table.nextPage}
         />
-        <VisibilityControl table={table} />
+        <div className="hidden sm:block">
+          <VisibilityControl table={table} />
+        </div>
       </div>
 
       <Separator />
 
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id} className="border border-gray-200">
-                  <div
-                    className={cn(
-                      "flex items-center justify-center font-extrabold",
-                      {
-                        "cursor-pointer": header.column.getCanSort(),
-                      }
-                    )}
-                    onClick={header.column.getToggleSortingHandler()}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </div>
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="border border-gray-200">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
+      <div className="overflow-x-auto">
+        <Table className="min-w-[900px]">
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id} className="border border-muted-foreground">
+                    <div
+                      className={cn(
+                        "flex items-center justify-center font-extrabold",
+                        {
+                          "cursor-pointer": header.column.getCanSort(),
+                        }
+                      )}
+                      onClick={header.column.getToggleSortingHandler()}
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </div>
+                  </TableHead>
                 ))}
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                暂无数据
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id} className="border border-muted-foreground/50">
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center">
+                  暫無資料
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
 
       <Separator />
 
-      <div className="flex items-center justify-center p-2">
+      <div className="flex flex-col sm:flex-row items-center justify-center p-2 gap-2">
         <PageControl
           pageSize={tableState.pagination.pageSize}
           onPageSizeChange={table.setPageSize}
@@ -140,7 +141,9 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
           previousPage={table.previousPage}
           nextPage={table.nextPage}
         />
-        <VisibilityControl table={table} />
+        <div className="sm:hidden">
+          <VisibilityControl table={table} />
+        </div>
       </div>
     </div>
   );

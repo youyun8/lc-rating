@@ -77,22 +77,23 @@ const WordFilter = React.memo(
     );
 
     return (
-      <div className="w-full flex flex-col justify-center items-left gap-1">
+      <div className="w-full flex flex-col justify-center items-start gap-1">
         <Input
           type="text"
-          placeholder="竞赛、题目、题解搜索"
+          placeholder="競賽、題目、題解搜尋"
           value={value}
           onChange={handleChange}
+          className="w-full"
         />
-        <div className="flex items-center gap-1 p-1">
+        <div className="flex items-center gap-2 p-1">
           <Checkbox
             checked={useFuse}
             onClick={() => {
               setUseFuse((v) => !v);
             }}
-            className=""
+            id="fuse-search"
           />
-          <Label>模糊搜索</Label>
+          <Label htmlFor="fuse-search" className="text-sm cursor-pointer">模糊搜尋</Label>
         </div>
       </div>
     );

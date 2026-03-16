@@ -48,13 +48,13 @@ const PageJumper = React.memo(
           value={localPage}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className="w-1/3"
+          className="w-20 sm:w-24"
         />
         <Button
           onClick={jump}
           disabled={parsedPage < 1 || parsedPage > pageCount}
         >
-          <span>跳转</span>
+          <span>跳轉</span>
         </Button>
       </div>
     );

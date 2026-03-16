@@ -1,0 +1,299 @@
+PROBLEM|三、背包 > §3.1 0-1 背包|416|分割等和子集|partition-equal-subset-sum|null|false
+PROBLEM|三、背包 > §3.1 0-1 背包|494|目標和|target-sum|null|false
+PROBLEM|三、背包 > §3.1 0-1 背包|2915|和為目標值的最長子序列的長度|length-of-the-longest-subsequence-that-sums-to-target|1659|false
+PROBLEM|三、背包 > §3.1 0-1 背包|2787|將一個數字表示成冪的和的方案數|ways-to-express-an-integer-as-sum-of-powers|1818|false
+PROBLEM|三、背包 > §3.1 0-1 背包|3180|執行操作可獲得的最大總獎勵 I|maximum-total-reward-using-operations-i|1849|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|474|一和零|ones-and-zeroes|null|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|3489|零數組變換 IV|zero-array-transformation-iv|2068|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|3685|含上限元素的子序列和|subsequence-sum-after-capping-elements|2073|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|1049|最後一塊石頭的重量 II|last-stone-weight-ii|2092|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|1774|最接近目標價格的甜點成本|closest-dessert-cost|null|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|879|盈利計劃|profitable-schemes|2204|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|3082|求出所有子序列的能量和|find-the-sum-of-the-power-of-all-subsequences|2242|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|956|最高的廣告牌|tallest-billboard|2381|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|2518|好分區的數目|number-of-great-partitions|2415|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|2742|給牆壁刷油漆|painting-the-walls|2425|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|3287|求出數組中最大序列值|find-the-maximum-sequence-value-of-array|2545|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|3181|執行操作可獲得的最大總獎勵 II|maximum-total-reward-using-operations-ii|2688|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|LCP 47|入場安檢|oPs9Bm|null|false
+PROBLEM|三、背包 > §3.1 0-1 背包進階|2291|最大股票收益|maximum-profit-from-trading-stocks|null|true
+PROBLEM|三、背包 > §3.1 0-1 背包進階|2431|最大限度地提高購買水果的口味|maximize-total-tastiness-of-purchased-fruits|null|true
+PROBLEM|三、背包 > §3.1 0-1 背包進階|3647|兩個袋子中的最大重量|maximum-weight-in-two-bags|null|true
+PROBLEM|三、背包 > §3.1 0-1 背包進階|2189|建造紙牌屋的方法數|number-of-ways-to-build-house-of-cards|null|true
+PROBLEM|三、背包 > §3.2 完全背包|322|零錢兌換|coin-change|null|false
+PROBLEM|三、背包 > §3.2 完全背包|518|零錢兌換 II|coin-change-ii|null|false
+PROBLEM|三、背包 > §3.2 完全背包|279|完全平方數|perfect-squares|null|false
+PROBLEM|三、背包 > §3.2 完全背包|3610|目標和所需的最小質數個數|minimum-number-of-primes-to-sum-to-target|null|true
+PROBLEM|三、背包 > §3.2 完全背包|3183|達到總和的方法數量|the-number-of-ways-to-make-the-sum|null|true
+PROBLEM|三、背包 > §3.2 完全背包思維擴展|3592|硬幣面值還原|inverse-coin-change|1701|false
+PROBLEM|三、背包 > §3.2 完全背包思維擴展|1449|數位成本和為目標值的最大數字|form-largest-integer-with-digits-that-add-up-to-target|1927|false
+PROBLEM|三、背包 > §3.3 多重背包|2585|獲得分數的方法數|number-of-ways-to-earn-points|1910|false
+PROBLEM|三、背包 > §3.3 多重背包|3333|找到初始輸入字符串 II|find-the-original-typed-string-ii|2629|false
+PROBLEM|三、背包 > §3.3 多重背包|2902|和帶限制的子多重集合的數目|count-of-sub-multisets-with-bounded-sum|2759|false
+PROBLEM|三、背包 > §3.3 多重背包二進制優化|3489|零數組變換 IV|zero-array-transformation-iv|2068|false
+PROBLEM|三、背包 > §3.4 分組背包|1155|擲骰子等於目標和的方法數|number-of-dice-rolls-with-target-sum|1654|false
+PROBLEM|三、背包 > §3.4 分組背包|1981|最小化目標值與所選元素的差|minimize-the-difference-between-target-and-chosen-elements|2010|false
+PROBLEM|三、背包 > §3.4 分組背包|2218|從棧中取出 K 個硬幣的最大面值和|maximum-value-of-k-coins-from-piles|2158|false
+PROBLEM|三、背包 > §3.5 樹形背包|3562|折扣價交易股票的最大利潤|maximum-profit-from-trading-stocks-with-discounts|2458|false
+PROBLEM|五、劃分型 DP > §5.1 判定能否劃分|2369|檢查數組是否存在有效劃分|check-if-there-is-a-valid-partition-for-the-array|1780|false
+PROBLEM|五、劃分型 DP > §5.1 判定能否劃分|139|單詞拆分|word-break|null|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|132|分割回文串 II|palindrome-partitioning-ii|null|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2707|字符串中的額外字符|extra-characters-in-a-string|1736|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|3196|最大化子數組的總成本|maximize-total-cost-of-alternating-subarrays|1847|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2767|將字符串分割為最少的美麗子字符串|partition-string-into-minimum-beautiful-substrings|1865|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|91|解碼方法|decode-ways|null|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|639|解碼方法 II|decode-ways-ii|null|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|LCR 165|解密數字|ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof|null|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|1043|分隔數組以得到最大和|partition-array-for-maximum-sum|1916|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|3144|分割字符頻率相等的最少子字符串|minimum-substring-partition-of-equal-character-frequency|1917|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|1416|恢復數組|restore-the-array|1920|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2472|不重疊迴文子字符串的最大數目|maximum-number-of-non-overlapping-palindrome-substrings|2013|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|1105|填充書架|filling-bookcase-shelves|2014|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2547|拆分數組的最小代價|minimum-cost-to-split-an-array|2020|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|3578|統計極差最大為 K 的分割方式數|count-partitions-with-max-min-difference-at-most-k|2033|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2430|對字母串可執行的最大刪除數|maximum-deletions-on-a-string|2102|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2463|最小移動總距離|minimum-total-distance-traveled|2454|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|3579|字符串轉換需要的最少操作次數|minimum-steps-to-convert-string-with-operations|2493|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|3500|將數組分割為子數組的最小代價|minimum-cost-to-divide-array-into-subarrays|2569|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2977|轉換字符串的最小成本 II|minimum-cost-to-convert-string-ii|2696|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|3441|變成好標題的最少代價|minimum-cost-good-caption|2765|false
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2052|將句子分隔成行的最低成本|minimum-cost-to-separate-sentence-into-rows|null|true
+PROBLEM|五、劃分型 DP > §5.2 最優劃分|2464|有效分割中的最少子數組數目|minimum-subarrays-in-a-valid-split|null|true
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|813|最大平均值和的分組|largest-sum-of-averages|1937|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|3599|劃分數組得到最小 XOR|partition-array-to-minimize-xor|1955|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|410|分割數組的最大值|split-array-largest-sum|null|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|1278|分割回文串 III|palindrome-partitioning-iii|1979|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|1745|分割回文串 IV|palindrome-partitioning-iv|null|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|1335|工作計劃的最低難度|minimum-difficulty-of-a-job-schedule|2035|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|1473|粉刷房子 III|paint-house-iii|2056|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|2209|用地毯覆蓋後的最少白色磚塊|minimum-white-tiles-after-covering-with-carpets|2106|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|1478|安排郵筒|allocate-mailboxes|2190|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|3473|長度至少為 M 的 K 個子數組之和|sum-of-k-subarrays-with-length-at-least-m|2274|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|1959|K 次調整數組大小浪費的最小總空間|minimum-total-space-wasted-with-k-resizing-operations|2310|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|2478|完美分割的方案數|number-of-beautiful-partitions|2344|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|3538|合併得到最小旅行時間|merge-operations-for-minimum-travel-time|2461|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|3505|使 K 個子數組內元素相等的最少操作數|minimum-operations-to-make-elements-within-k-subarrays-equal|2539|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|3077|K 個不相交子數組的最大能量值|maximum-strength-of-k-disjoint-subarrays|2557|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|2911|得到 K 個半迴文串的最少修改次數|minimum-changes-to-make-k-semi-palindromes|2608|false
+PROBLEM|五、劃分型 DP > §5.3 約束劃分個數|3117|劃分數組得到最小的值之和|minimum-sum-of-values-by-dividing-array|2735|false
+PROBLEM|六、狀態機 DP > §6.1 買賣股票|121|買賣股票的最佳時機|best-time-to-buy-and-sell-stock|null|false
+PROBLEM|六、狀態機 DP > §6.1 買賣股票|122|買賣股票的最佳時機 II|best-time-to-buy-and-sell-stock-ii|null|false
+PROBLEM|六、狀態機 DP > §6.1 買賣股票|123|買賣股票的最佳時機 III|best-time-to-buy-and-sell-stock-iii|null|false
+PROBLEM|六、狀態機 DP > §6.1 買賣股票|188|買賣股票的最佳時機 IV|best-time-to-buy-and-sell-stock-iv|null|false
+PROBLEM|六、狀態機 DP > §6.1 買賣股票|3573|買賣股票的最佳時機 V|best-time-to-buy-and-sell-stock-v|1777|false
+PROBLEM|六、狀態機 DP > §6.1 買賣股票|309|買賣股票的最佳時機含冷凍期|best-time-to-buy-and-sell-stock-with-cooldown|null|false
+PROBLEM|六、狀態機 DP > §6.1 買賣股票|714|買賣股票的最佳時機含手續費|best-time-to-buy-and-sell-stock-with-transaction-fee|null|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|3259|超級飲料的最大強化能量|maximum-energy-boost-from-two-drinks|1484|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|2222|選擇建築的方案數|number-of-ways-to-select-buildings|1657|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|2708|一個小組的最大實力值|maximum-strength-of-a-group|null|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|1567|乘積為正數的最長子數組長度|maximum-length-of-subarray-with-positive-product|1710|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|2786|訪問數組中的位置使分數最大|visit-array-positions-to-maximize-score|1733|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|1911|最大交替子序列和|maximum-alternating-subsequence-sum|1786|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|376|擺動序列|wiggle-subsequence|null|false
+PROBLEM|六、狀態機 DP > §6.2 基礎|3466|最大硬幣收集量|maximum-coin-collection|null|true
+PROBLEM|六、狀態機 DP > §6.3 進階|3628|插入一個字母的最大子序列數|maximum-number-of-subsequences-after-one-inserting|1754|false
+PROBLEM|六、狀態機 DP > §6.3 進階|2771|構造最長非遞減子數組|longest-non-decreasing-subarray-from-two-arrays|1792|false
+PROBLEM|六、狀態機 DP > §6.3 進階|1186|刪除一次得到子數組最大和|maximum-subarray-sum-with-one-deletion|1799|false
+PROBLEM|六、狀態機 DP > §6.3 進階|1594|矩陣的最大非負積|maximum-non-negative-product-in-a-matrix|1807|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3738|替換至多一個元素後最長非遞減子數組|longest-non-decreasing-subarray-after-replacing-at-most-one-element|1811|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3196|最大化子數組的總成本|maximize-total-cost-of-alternating-subarrays|1847|false
+PROBLEM|六、狀態機 DP > §6.3 進階|935|騎士撥號器|knight-dialer|null|false
+PROBLEM|六、狀態機 DP > §6.3 進階|1537|最大得分|get-the-maximum-score|1961|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3811|交替按位異或分割的數目|number-of-alternating-xor-partitions|2006|false
+PROBLEM|六、狀態機 DP > §6.3 進階|2919|使數組變美的最小增量運算數|minimum-increment-operations-to-make-array-beautiful|2031|false
+PROBLEM|六、狀態機 DP > §6.3 進階|801|使序列遞增的最小交換次數|minimum-swaps-to-make-sequences-increasing|2066|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3434|子數組操作後的最大頻率|maximum-frequency-after-subarray-operation|2094|false
+PROBLEM|六、狀態機 DP > §6.3 進階|1955|統計特殊子序列的數目|count-number-of-special-subsequences|2125|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3830|移除至多一個元素後的最長交替子數組|longest-alternating-subarray-after-removing-at-most-one-element|2162|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3068|最大節點價值之和|find-the-maximum-sum-of-node-values|2268|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3640|三段式數組 II|trionic-array-ii|2278|false
+PROBLEM|六、狀態機 DP > §6.3 進階|2272|最大波動的子字符串|substring-with-largest-variance|2516|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3661|可以被機器人摧毀的最大牆壁數目|maximum-walls-destroyed-by-robots|2525|false
+PROBLEM|六、狀態機 DP > §6.3 進階|3743|循環劃分的最大得分|maximize-cyclic-partition-score|3125|false
+PROBLEM|六、狀態機 DP > §6.3 進階|LCP 19|秋葉收藏集|UlBDOe|null|false
+PROBLEM|六、狀態機 DP > §6.3 進階|276|柵欄塗色|paint-fence|null|true
+PROBLEM|六、狀態機 DP > §6.3 進階|1746|經過一次操作後的最大子數組和|maximum-subarray-sum-after-one-operation|null|true
+PROBLEM|六、狀態機 DP > §6.3 進階|2036|最大交替子數組和|maximum-alternating-subarray-sum|null|true
+PROBLEM|六、狀態機 DP > §6.3 進階|2361|乘坐火車路線的最少費用|minimum-costs-using-the-train-line|null|true
+PROBLEM|六、狀態機 DP > §6.3 進階|3269|構建兩個遞增數組|constructing-two-increasing-arrays|null|true
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|3147|從魔法師身上吸取的最大能量|taking-maximum-energy-from-the-mystic-dungeon|1460|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2944|購買水果需要的最少金幣數|minimum-number-of-coins-for-fruits|1709|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2140|解決智力問題|solving-questions-with-brainpower|1709|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|983|最低票價|minimum-cost-for-tickets|1786|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|368|最大整除子集|largest-divisible-subset|1800|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2901|最長相鄰不相等子序列 II|longest-unequal-adjacent-groups-subsequence-ii|1899|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|650|兩個鍵的鍵盤|2-keys-keyboard|2000|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|871|最低加油次數|minimum-number-of-refueling-stops|2074|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|32|最長有效括號|longest-valid-parentheses|null|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2167|移除所有載有違禁貨物車廂所需的最少時間|minimum-time-to-remove-all-cars-containing-illegal-goods|2219|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2188|完成比賽的最少時間|minimum-time-to-finish-the-race|2315|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2896|執行操作使兩個字符串相等|apply-operations-to-make-two-strings-equal|null|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|818|賽車|race-car|2392|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|3389|使字符頻率相等的最少操作次數|minimum-operations-to-make-character-frequencies-equal|2940|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|3464|正方形上的點之間的最大距離|maximize-the-distance-between-points-on-a-square|null|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|3205|最大數組跳躍得分 I|maximum-array-hopping-score-i|null|true
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|1259|不相交的握手|handshakes-that-dont-cross|null|true
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2597|美麗子集的數目|the-number-of-beautiful-subsets|null|false
+PROBLEM|七、其他線性 DP > §7.1 一維 DP|2638|統計 K-Free 子集的總數|count-the-number-of-k-free-subsets|null|true
+PROBLEM|七、其他線性 DP > §7.2 不相交區間|2830|銷售利潤最大化|maximize-the-profit-as-the-salesman|1851|false
+PROBLEM|七、其他線性 DP > §7.2 不相交區間|2008|出租車的最大盈利|maximum-earnings-from-taxi|1872|false
+PROBLEM|七、其他線性 DP > §7.2 不相交區間|2054|兩個最好的不重疊活動|two-best-non-overlapping-events|1883|false
+PROBLEM|七、其他線性 DP > §7.2 不相交區間|1235|規劃兼職工作|maximum-profit-in-job-scheduling|2023|false
+PROBLEM|七、其他線性 DP > §7.2 不相交區間|1751|最多可以參加的會議數目 II|maximum-number-of-events-that-can-be-attended-ii|2041|false
+PROBLEM|七、其他線性 DP > §7.2 不相交區間|3414|不重疊區間的最大得分|maximum-score-of-non-overlapping-intervals|2723|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP|53|最大子數組和|maximum-subarray|null|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP|152|乘積最大子數組|maximum-product-subarray|null|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP|1186|刪除一次得到子數組最大和|maximum-subarray-sum-with-one-deletion|1799|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP|3738|替換至多一個元素後最長非遞減子數組|longest-non-decreasing-subarray-after-replacing-at-most-one-element|1811|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP|3524|求出數組的 X 值 I|find-x-value-of-array-i|2008|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP|3448|統計可以被最後一個數位整除的子字符串數目|count-substrings-divisible-by-last-digit|2387|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP 思維擴展|2262|字符串的總引力|total-appeal-of-a-string|2033|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP 思維擴展|828|統計子串中的唯一字符|count-unique-characters-of-all-substrings-of-a-given-string|2034|false
+PROBLEM|七、其他線性 DP > §7.3 子數組 DP 思維擴展|467|環繞字符串中唯一的子字符串|unique-substrings-in-wraparound-string|null|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|2501|數組中最長的方波|longest-square-streak-in-an-array|1480|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|1218|最長定差子序列|longest-arithmetic-subsequence-of-given-difference|1597|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|2826|將三個組排序|sorting-three-groups|1721|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|1027|最長等差數列|longest-arithmetic-subsequence|1759|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|2370|最長理想子序列|longest-ideal-subsequence|1835|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|873|最長的斐波那契子序列的長度|length-of-longest-fibonacci-subsequence|1911|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3686|穩定子序列的數量|number-of-stable-subsequences|1969|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3202|找出有效子序列的最大長度 II|find-the-maximum-length-of-valid-subsequence-ii|1974|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|446|等差數列劃分 II - 子序列|arithmetic-slices-ii-subsequence|null|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3811|交替按位異或分割的數目|number-of-alternating-xor-partitions|2006|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3351|好子序列的元素之和|sum-of-good-subsequences|2086|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3041|修改數組後最大化數組中的連續元素數目|maximize-consecutive-elements-in-an-array-after-modification|2231|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3409|最長相鄰絕對差遞減子序列|longest-subsequence-with-decreasing-adjacent-difference|2500|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3098|求出所有子序列的能量和|find-the-sum-of-subsequence-powers|2553|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|2901|最長相鄰不相等子序列 II|longest-unequal-adjacent-groups-subsequence-ii|null|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP|3299|連續子序列的和|sum-of-consecutive-subsequences|null|true
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP 思維擴展|1048|最長字符串鏈|longest-string-chain|1599|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP 思維擴展|940|不同的子序列 II|distinct-subsequences-ii|1985|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP 思維擴展|1987|不同的好子序列數目|number-of-unique-good-subsequences|2422|false
+PROBLEM|七、其他線性 DP > §7.4 合法子序列 DP 思維擴展|730|統計不同迴文子序列|count-different-palindromic-subsequences|null|false
+PROBLEM|七、其他線性 DP > §7.5 子矩形 DP|3148|矩陣中的最大得分|maximum-difference-score-in-a-grid|1820|false
+PROBLEM|七、其他線性 DP > §7.5 子矩形 DP|221|最大正方形|maximal-square|null|false
+PROBLEM|七、其他線性 DP > §7.5 子矩形 DP|1277|統計全為 1 的正方形子矩陣|count-square-submatrices-with-all-ones|null|false
+PROBLEM|七、其他線性 DP > §7.5 子矩形 DP|2088|統計農場中肥沃金字塔的數目|count-fertile-pyramids-in-a-land|2105|false
+PROBLEM|七、其他線性 DP > §7.5 子矩形 DP|3197|包含所有 1 的最小矩形面積 II|find-the-minimum-area-to-cover-all-ones-ii|null|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2222|選擇建築的方案數|number-of-ways-to-select-buildings|1657|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2826|將三個組排序|sorting-three-groups|1721|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2400|恰好移動 k 步到達某一位置的方法數目|number-of-ways-to-reach-a-position-after-exactly-k-steps|1751|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1262|可被三整除的最大和|greatest-sum-divisible-by-three|1762|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3780|能被 3 整除的三元組最大和|maximum-sum-of-three-numbers-divisible-by-three|null|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3332|旅客可以得到的最多點數|maximum-points-tourist-can-earn|1828|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3176|求出最長好子序列 I|find-the-maximum-length-of-a-good-subsequence-i|1849|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1269|停在原地的方案數|number-of-ways-to-stay-in-the-same-place-after-some-steps|1854|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3250|單調數組對的數目 I|find-the-count-of-monotonic-pairs-i|1898|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3218|切蛋糕的最小總開銷 I|minimum-cost-for-cutting-cake-i|null|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3122|使矩陣滿足條件的最少操作次數|minimum-number-of-operations-to-satisfy-conditions|1905|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|576|出界的路徑數|out-of-boundary-paths|null|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|403|青蛙過河|frog-jump|null|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3725|統計每一行選擇互質整數的方案數|count-ways-to-choose-coprime-integers-from-rows|1982|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1223|擲骰子模擬|dice-roll-simulation|2008|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1320|二指輸入的的最小距離|minimum-distance-to-type-a-word-using-two-fingers|2028|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3366|最小數組和|minimum-array-sum|2040|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1575|統計所有可行路徑|count-all-possible-routes|2055|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3154|到達第 K 級臺階的方案數|find-number-of-ways-to-reach-the-k-th-stair|2071|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2318|不同骰子序列的數目|number-of-distinct-roll-sequences|2090|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3469|移除所有數組元素的最小代價|find-minimum-cost-to-remove-array-elements|2112|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2746|字符串連接刪減字母|decremental-string-concatenation|2126|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1444|切披薩的方案數|number-of-ways-of-cutting-a-pizza|2127|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3320|統計能獲勝的出招序列數|count-the-number-of-winning-sequences|2153|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3429|粉刷房子 IV|paint-house-iv|2166|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2896|執行操作使兩個字符串相等|apply-operations-to-make-two-strings-equal|2172|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1420|生成數組|build-array-where-you-can-find-the-maximum-exactly-k-comparisons|2176|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3193|統計逆序對的數目|count-the-number-of-inversions|2266|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2312|賣木頭塊|selling-pieces-of-wood|2363|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3177|求出最長好子序列 II|find-the-maximum-length-of-a-good-subsequence-ii|2365|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1884|雞蛋掉落-兩枚雞蛋|egg-drop-with-2-eggs-and-n-floors|null|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|887|雞蛋掉落|super-egg-drop|2377|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|920|播放列表的數量|number-of-music-playlists|2400|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|514|自由之路|freedom-trail|null|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3336|最大公約數相等的子序列數量|find-the-number-of-subsequences-with-equal-gcd|2403|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1388|3n 塊披薩|pizza-with-3n-slices|2410|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|903|DI 序列的有效排列|valid-permutations-for-di-sequence|2433|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1900|最佳運動員的比拼回合|the-earliest-and-latest-rounds-where-players-compete|2455|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1531|壓縮字符串 II|string-compression-ii|2576|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1883|準時抵達會議現場的最少跳過休息次數|minimum-skips-to-arrive-at-meeting-on-time|2588|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|964|表示數字的最少運算符|least-operators-to-express-number|2594|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1787|使所有區間的異或結果為零|make-the-xor-of-all-segments-equal-to-zero|2640|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3509|最大化交錯和為 K 的子序列乘積|maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k|2703|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3441|變成好標題的最少代價|minimum-cost-good-caption|2765|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2060|同源字符串檢測|check-if-an-original-string-exists-given-two-encoded-strings|2804|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2809|使數組和小於等於 x 的最少時間|minimum-time-to-make-array-sum-at-most-x|2979|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3003|執行操作後的最大分割數量|maximize-the-number-of-partitions-after-operations|3039|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3225|網格圖操作後的最大分數|maximum-score-from-grid-operations|3028|false
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|256|粉刷房子|paint-house|null|true
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|265|粉刷房子 II|paint-house-ii|null|true
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3339|查找 K 偶數數組的數量|find-the-number-of-k-even-arrays|null|true
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|568|最大休假天數|maximum-vacation-days|null|true
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|1692|計算分配糖果的不同方式|count-ways-to-distribute-candies|null|true
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|2143|在兩個數組的區間中選取數字|choose-numbers-from-two-arrays-in-range|null|true
+PROBLEM|七、其他線性 DP > §7.6 多維 DP|3269|構建兩個遞增數組|constructing-two-increasing-arrays|null|true
+PROBLEM|七、其他線性 DP > §7.6 多維 DP 思維擴展|638|大禮包|shopping-offers|null|false
+PROBLEM|七、其他線性 DP > §7.7 計數 DP|1079|活字印刷|letter-tile-possibilities|null|false
+PROBLEM|七、其他線性 DP > §7.7 計數 DP|1866|恰有 K 根木棍可以看到的排列數目|number-of-ways-to-rearrange-sticks-with-k-sticks-visible|2333|false
+PROBLEM|七、其他線性 DP > §7.7 計數 DP|3317|安排活動的方案數|find-the-number-of-possible-ways-for-an-event|2414|false
+PROBLEM|七、其他線性 DP > §7.7 計數 DP|3343|統計平衡排列的數目|count-number-of-balanced-permutations|2615|false
+PROBLEM|七、其他線性 DP > §7.7 計數 DP|3539|魔法序列的數組乘積之和|find-sum-of-array-product-of-magical-sequences|2694|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|526|優美的排列|beautiful-arrangement|null|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|3376|破解鎖的最少時間 I|minimum-time-to-break-locks-i|null|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|1879|兩個數組最小的異或值之和|minimum-xor-sum-of-two-arrays|2145|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|2850|將石頭分散到網格圖的最少移動次數|minimum-moves-to-spread-stones-over-grid|null|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|1947|最大兼容性評分和|maximum-compatibility-score-sum|null|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|1799|N 次操作後的最大分數和|maximize-score-after-n-operations|null|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|3533|判斷連接可整除性|concatenated-divisibility|2257|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|3530|有向無環圖中合法拓撲排序的最大利潤|maximum-profit-from-valid-topological-order-in-dag|2353|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|2172|數組的最大與和|maximum-and-sum-of-array|2392|false
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|2992|自整除排列的數量|number-of-self-divisible-permutations|null|true
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|2403|殺死所有怪物的最短時間|minimum-time-to-kill-all-monsters|null|true
+PROBLEM|九、狀態壓縮 DP > §9.1 排列型狀壓 DP ① 相鄰無關|1066|校園自行車分配 II|campus-bikes-ii|null|true
+PROBLEM|九、狀態壓縮 DP > §9.2 排列型狀壓 DP ② 相鄰相關|2741|特別的排列|special-permutations|2021|false
+PROBLEM|九、狀態壓縮 DP > §9.2 排列型狀壓 DP ② 相鄰相關|996|平方數組的數目|number-of-squareful-arrays|null|false
+PROBLEM|九、狀態壓縮 DP > §9.2 排列型狀壓 DP ② 相鄰相關|1681|最小不兼容性|minimum-incompatibility|2390|false
+PROBLEM|九、狀態壓縮 DP > §9.2 排列型狀壓 DP ② 相鄰相關|3615|圖中的最長迴文路徑|longest-palindromic-path-in-graph|2463|false
+PROBLEM|九、狀態壓縮 DP > §9.2 排列型狀壓 DP ② 相鄰相關|3283|喫掉所有兵需要的最多移動次數|maximum-number-of-moves-to-kill-all-pawns|2473|false
+PROBLEM|九、狀態壓縮 DP > §9.2 排列型狀壓 DP ② 相鄰相關|3149|找出分數最低的排列|find-the-minimum-cost-array-permutation|2642|false
+PROBLEM|九、狀態壓縮 DP > §9.3 旅行商問題|943|最短超級串|find-the-shortest-superstring|2186|false
+PROBLEM|九、狀態壓縮 DP > §9.3 旅行商問題|847|訪問所有節點的最短路徑|shortest-path-visiting-all-nodes|2201|false
+PROBLEM|九、狀態壓縮 DP > §9.3 旅行商問題|2247|K 條高速公路的最大旅行費用|maximum-cost-of-trip-with-k-highways|null|true
+PROBLEM|九、狀態壓縮 DP > §9.3 旅行商問題 相似問題|3568|清理教室的最少移動|minimum-moves-to-clean-the-classroom|2143|false
+PROBLEM|九、狀態壓縮 DP > §9.3 旅行商問題 相似問題|864|獲取所有鑰匙的最短路徑|shortest-path-to-get-all-keys|2259|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|2305|公平分發餅乾|fair-distribution-of-cookies|1887|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|1986|完成任務的最少工作時間段|minimum-number-of-work-sessions-to-finish-the-tasks|1995|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|3670|沒有公共位的整數最大乘積|maximum-product-of-two-integers-with-no-common-bits|2234|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|1723|完成所有工作的最短時間|find-minimum-time-to-finish-all-jobs|2284|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|1655|分配重複整數|distribute-repeating-integers|2307|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|3444|使數組包含目標值倍數的最少增量|minimum-increments-for-target-multiples-in-an-array|2337|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|3575|最大好子樹分數|maximum-good-subtree-score|2360|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|1349|參加考試的最大學生數|maximum-students-taking-exam|2386|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|1681|最小不兼容性|minimum-incompatibility|2390|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|3801|合併有序列表的最小成本|minimum-cost-to-merge-sorted-lists|2399|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|2572|無平方子集計數|count-the-number-of-square-free-subsets|2420|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|1994|好子集的數目|the-number-of-good-subsets|2465|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|1494|並行課程 II|parallel-courses-ii|null|false
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|465|最優賬單平衡|optimal-account-balancing|null|true
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP|2152|穿過所有點的所需最少直線數量|minimum-number-of-lines-to-cover-points|null|true
+PROBLEM|九、狀態壓縮 DP > §9.4 子集狀壓 DP 相關問題|3594|所有人渡河所需的最短時間|minimum-time-to-transport-all-individuals|2604|false
+PROBLEM|九、狀態壓縮 DP > §9.5 輪廓線 DP|1411|給 N x 3 網格圖塗色的方案數|number-of-ways-to-paint-n-3-grid|1845|false
+PROBLEM|九、狀態壓縮 DP > §9.5 輪廓線 DP|1931|用三種不同顏色為網格塗色|painting-a-grid-with-three-different-colors|2170|false
+PROBLEM|九、狀態壓縮 DP > §9.5 輪廓線 DP|1349|參加考試的最大學生數|maximum-students-taking-exam|2386|false
+PROBLEM|九、狀態壓縮 DP > §9.5 輪廓線 DP|1659|最大化網格幸福感|maximize-grid-happiness|2655|false
+PROBLEM|九、狀態壓縮 DP > §9.5 輪廓線 DP|980|不同路徑 III|unique-paths-iii|null|false
+PROBLEM|九、狀態壓縮 DP > §9.5 輪廓線 DP|2184|建造堅實的磚牆的方法數|number-of-ways-to-build-sturdy-brick-wall|null|true
+PROBLEM|九、狀態壓縮 DP > §9.5 輪廓線 DP 思維擴展|756|金字塔轉換矩陣|pyramid-transition-matrix|1990|false
+PROBLEM|九、狀態壓縮 DP > §9.6 SOS DP|3670|沒有公共位的整數最大乘積|maximum-product-of-two-integers-with-no-common-bits|2234|false
+PROBLEM|九、狀態壓縮 DP > §9.6 SOS DP|2002|兩個迴文子序列長度的最大乘積|maximum-product-of-the-length-of-two-palindromic-subsequences|null|false
+PROBLEM|九、狀態壓縮 DP > §9.6 SOS DP|2044|統計按位或能得到最大值的子集數目|count-number-of-maximum-bitwise-or-subsets|null|false
+PROBLEM|九、狀態壓縮 DP > §9.6 SOS DP|2732|找到矩陣中的好子集|find-a-good-subset-of-the-matrix|null|false
+PROBLEM|九、狀態壓縮 DP > §9.6 SOS DP|3757|有效子序列的數量|number-of-effective-subsequences|2519|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|473|火柴拼正方形|matchsticks-to-square|null|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|698|劃分為k個相等的子集|partition-to-k-equal-sum-subsets|null|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|1125|最小的必要團隊|smallest-sufficient-team|2251|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|1434|每個人戴不同帽子的方案數|number-of-ways-to-wear-different-hats-to-each-other|2273|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|464|我能贏嗎|can-i-win|null|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|691|貼紙拼詞|stickers-to-spell-word|null|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|3276|選擇矩陣中單元格的最大得分|select-cells-in-grid-with-maximum-score|2403|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|1595|連通兩組點的最小成本|minimum-cost-to-connect-two-groups-of-points|2538|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|1815|得到新鮮甜甜圈的最多組數|maximum-number-of-groups-getting-fresh-donuts|2559|false
+PROBLEM|九、狀態壓縮 DP > §9.7 其他狀壓 DP|351|安卓系統手勢解鎖|android-unlock-patterns|null|true

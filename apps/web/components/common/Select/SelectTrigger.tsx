@@ -44,7 +44,7 @@ const SelectTrigger = React.memo((props: TriggerProps) => {
 
   if (props.asChild) {
     if (!isValidElement(props.children)) {
-      throw new Error("Trigger的asChild为true时，必须传递一个有效的React元素");
+      throw new Error("Trigger 的 asChild 為 true 時，必須傳遞一個有效的 React 元素");
     }
 
     return cloneElement(props.children, {

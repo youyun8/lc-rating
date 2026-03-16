@@ -1,6 +1,6 @@
 import { I18NLink } from "@/components/common/I18NLink";
 import { RatingCircle, ratingInfo } from "@/components/common/RatingCircle";
-import { Input } from "@/components/ui/input"; // 确保导入Input组件
+import { Input } from "@/components/ui/input"; // 確保導入Input組件
 import {
   createColumnHelper,
   IdentifiedColumnDef,
@@ -90,7 +90,7 @@ const generate = (
       const info = ratingInfo(rating);
       return (
         <div className="flex items-center justify-between">
-          <div className="flex flex-row justify-left items-center  gap-1">
+          <div className="flex flex-row justify-left items-center gap-1.5">
             <RatingCircle
               rating={rating}
               color={info.color}
@@ -98,10 +98,11 @@ const generate = (
             />
             <I18NLink
               link={Q1.problem.link}
-              title={`${Q1.problem.id}. ${Q1.problem.title}`}
+              title={Q1.problem.id === "1000000000" ? Q1.problem.title : `${Q1.problem.id}. ${Q1.problem.title}`}
               style={{
                 color: info.color,
               }}
+              className="font-bold"
             />
           </div>
           {Q1.solution ? (

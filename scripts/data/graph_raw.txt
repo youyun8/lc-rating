@@ -1,0 +1,172 @@
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|547|省份數量|number-of-provinces|null|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|1971|尋找圖中是否存在路徑|find-if-path-exists-in-graph|null|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|797|所有可能的路徑|all-paths-from-source-to-target|1383|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|1306|跳躍遊戲 III|jump-game-iii|1397|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|841|鑰匙和房間|keys-and-rooms|1412|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|2316|統計無向圖中無法互相到達點對數|count-unreachable-pairs-of-nodes-in-an-undirected-graph|1604|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|1319|連通網絡的操作次數|number-of-operations-to-make-network-connected|1633|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|2492|兩個城市間路徑的最小分數|minimum-score-of-a-path-between-two-cities|1680|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|3310|移除可疑的方法|remove-methods-from-project|1711|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|2685|統計完全連通分量的數量|count-the-number-of-complete-components|1769|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|2192|有向無環圖中一個節點的所有祖先|all-ancestors-of-a-node-in-a-directed-acyclic-graph|1788|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|3387|兩天自由外匯交易後的最大貨幣數|maximize-amount-after-two-days-of-conversions|1788|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|924|儘量減少惡意軟件的傳播|minimize-malware-spread|1869|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|2101|引爆最多的炸彈|detonate-the-maximum-bombs|1880|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|721|賬戶合併|accounts-merge|null|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|207|課程表|course-schedule|null|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|802|找到最終的安全狀態|find-eventual-safe-states|1962|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|3695|交換元素後的最大交替和|maximize-alternating-sum-using-swaps|1984|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|928|儘量減少惡意軟件的傳播 II|minimize-malware-spread-ii|1985|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|2092|找出知曉祕密的所有專家|find-all-people-with-secret|2004|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|3108|帶權圖裏旅途的最小代價|minimum-cost-walk-in-weighted-graph|2109|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|LCP 07|傳遞信息|chuan-di-xin-xi|null|false
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|261|以圖判樹|graph-valid-tree|null|true
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）|323|無向圖中連通分量的數目|number-of-connected-components-in-an-undirected-graph|null|true
+PROBLEM|一、圖的遍歷 > §1.1 深度優先搜索（DFS）思維擴展|1298|你能從盒子裏獲得的最大糖果數|maximum-candies-you-can-get-from-boxes|1825|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|3243|新增道路查詢後的最短距離 I|shortest-distance-after-road-addition-queries-i|1568|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|1311|獲取你好友已觀看的視頻|get-watched-videos-by-your-friends|1653|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|3015|按距離統計房屋對數目 I|count-the-number-of-houses-at-a-certain-distance-i|1658|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|1129|顏色交替的最短路徑|shortest-path-with-alternating-colors|1780|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|2039|網絡空閒的時刻|the-time-when-the-network-becomes-idle|1865|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|2608|圖中的最短環|shortest-cycle-in-a-graph|1904|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|815|公交路線|bus-routes|1964|false
+PROBLEM|一、圖的遍歷 > §1.2 廣度優先搜索（BFS）|3807|修復邊以遍歷圖的最小成本|minimum-cost-to-repair-edges-to-traverse-a-graph|null|true
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|433|最小基因變化|minimum-genetic-mutation|null|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|1284|轉化為全零矩陣的最少反轉次數|minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix|1811|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|773|滑動謎題|sliding-puzzle|1815|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|752|打開轉盤鎖|open-the-lock|1878|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|3690|拆分合並數組|split-and-merge-array-transformation|1982|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|301|刪除無效的括號|remove-invalid-parentheses|null|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|514|自由之路|freedom-trail|null|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|847|訪問所有節點的最短路徑|shortest-path-visiting-all-nodes|2201|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|854|相似度為 K 的字符串|k-similar-strings|2377|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|127|單詞接龍|word-ladder|null|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|488|祖瑪遊戲|zuma-game|null|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|1197|進擊的騎士|minimum-knight-moves|null|true
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路|3141|最大漢明距離|maximum-hamming-distances|null|true
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路 > 專題：跳躍遊戲|2998|使 X 和 Y 相等的最少操作次數|minimum-number-of-operations-to-make-x-and-y-equal|1795|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路 > 專題：跳躍遊戲|1345|跳躍遊戲 IV|jump-game-iv|1810|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路 > 專題：跳躍遊戲|2059|轉化數字的最小運算數|minimum-operations-to-convert-number|1850|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路 > 專題：跳躍遊戲|1654|到家的最少跳躍次數|minimum-jumps-to-reach-home|2124|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路 > 專題：跳躍遊戲|3629|通過質數傳送到達終點的最少跳躍次數|minimum-jumps-to-reach-end-via-prime-teleportation|2139|false
+PROBLEM|一、圖的遍歷 > §1.3 圖論建模 + BFS 最短路 > 專題：跳躍遊戲|LCP 09|最小跳躍次數|zui-xiao-tiao-yue-ci-shu|null|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|1557|可以到達所有點的最少點數目|minimum-number-of-vertices-to-reach-all-nodes|null|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|210|課程表 II|course-schedule-ii|null|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|2115|從給定原材料中找到所有可以做出的菜|find-all-possible-recipes-from-given-supplies|1679|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|2392|給定條件下構造矩陣|build-a-matrix-with-conditions|1961|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|1591|奇怪的打印機 II|strange-printer-ii|2291|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|1203|項目管理|sort-items-by-groups-respecting-dependencies|2419|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|1632|矩陣轉換後的排名|rank-transform-of-a-matrix|2530|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|2603|收集樹中金幣|collect-coins-in-a-tree|2712|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|LCR 114|火星詞典|Jf1JuT|null|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|444|序列重建|sequence-reconstruction|null|true
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|3481|應用替換|apply-substitutions|null|true
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|269|火星詞典|alien-dictionary|null|true
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序|2371|最小化網格中的最大值|minimize-maximum-value-in-a-grid|null|true
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序思維擴展|310|最小高度樹|minimum-height-trees|null|false
+PROBLEM|二、拓撲排序 > §2.1 拓撲排序思維擴展|1361|驗證二叉樹|validate-binary-tree-nodes|null|false
+PROBLEM|二、拓撲排序 > §2.2 在拓撲序上 DP|851|喧鬧和富有|loud-and-rich|1783|false
+PROBLEM|二、拓撲排序 > §2.2 在拓撲序上 DP|2050|並行課程 III|parallel-courses-iii|2084|false
+PROBLEM|二、拓撲排序 > §2.2 在拓撲序上 DP|3620|恢復網絡路徑|network-recovery-pathways|null|false
+PROBLEM|二、拓撲排序 > §2.2 在拓撲序上 DP|1857|有向圖中最大顏色值|largest-color-value-in-a-directed-graph|2313|false
+PROBLEM|二、拓撲排序 > §2.2 在拓撲序上 DP|1136|並行課程|parallel-courses|null|true
+PROBLEM|二、拓撲排序 > §2.3 基環樹|2359|找到離給定兩個節點最近的節點|find-closest-node-to-given-two-nodes|1715|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|2360|圖中的最長環|longest-cycle-in-a-graph|1897|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|684|冗餘連接|redundant-connection|null|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|685|冗餘連接 II|redundant-connection-ii|null|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|2876|有向圖訪問計數|count-visited-nodes-in-a-directed-graph|2210|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|2127|參加會議的最多員工數|maximum-employees-to-be-invited-to-a-meeting|2449|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|2836|在傳球遊戲中最大化函數值|maximize-value-of-function-in-a-ball-passing-game|2769|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|LCP 21|追逐遊戲|Za25hA|null|false
+PROBLEM|二、拓撲排序 > §2.3 基環樹|2204|無向圖中到環的距離|distance-to-a-cycle-in-undirected-graph|null|true
+PROBLEM|二、拓撲排序 > §2.3 基環樹思維擴展|287|尋找重複數|find-the-duplicate-number|null|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|743|網絡延遲時間|network-delay-time|null|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3341|到達最後一個房間的最少時間 I|find-minimum-time-to-reach-last-room-i|1721|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3112|訪問消失節點的最少時間|minimum-time-to-visit-disappearing-nodes|1757|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2642|設計可以求最短路徑的圖類|design-graph-with-shortest-path-calculator|1811|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3604|有向圖中到達終點的最少時間|minimum-time-to-reach-destination-in-directed-graph|1845|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|1514|概率最大的路徑|path-with-maximum-probability|1846|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3650|邊反轉的最小路徑總成本|minimum-cost-path-with-edge-reversals|1854|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3342|到達最後一個房間的最少時間 II|find-minimum-time-to-reach-last-room-ii|1862|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|1631|最小體力消耗路徑|path-with-minimum-effort|1948|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|1786|從第一個節點出發到最後一個節點的受限路徑數|number-of-restricted-paths-from-first-to-last-node|2079|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3123|最短路徑中的邊|find-edges-in-shortest-paths|2093|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|1976|到達目的地的方案數|number-of-ways-to-arrive-at-destination|2095|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|778|水位上升的泳池中游泳|swim-in-rising-water|2097|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2662|前往目標的最小代價|minimum-cost-of-a-path-with-special-roads|2154|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3377|使兩個整數相等的數位操作|digit-operations-to-make-two-integers-equal|2186|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2045|到達目的地的第二短時間|second-minimum-time-to-reach-destination|2202|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|3419|圖的最大邊權的最小值|minimize-the-maximum-edge-weight-of-graph|2243|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|882|細分圖中的可到達節點|reachable-nodes-in-subdivided-graph|2328|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2203|得到要求路徑的最小帶權子圖|minimum-weighted-subgraph-with-the-required-paths|2364|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2577|在網格圖中訪問一個格子的最少時間|minimum-time-to-visit-a-cell-in-a-grid|2382|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|818|賽車|race-car|2392|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|1928|規定時間內到達終點的最小花費|minimum-cost-to-reach-destination-in-time|2413|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|787|K 站中轉內最便宜的航班|cheapest-flights-within-k-stops|null|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2699|修改圖中的邊權|modify-graph-edge-weights|2874|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|1810|隱藏網格下的最小消耗路徑|minimum-path-cost-in-a-hidden-grid|null|true
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2093|前往目標城市的最小費用|minimum-cost-to-reach-city-with-discounts|null|true
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2473|購買蘋果的最低成本|minimum-cost-to-buy-apples|null|true
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法|2737|找到最近的標記節點|find-the-closest-marked-node|null|true
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法 > 分層圖最短路|LCP 35|電動車遊城市|DFPeFJ|null|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法 > 分層圖最短路|3599|劃分數組得到最小 XOR|partition-array-to-minimize-xor|null|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法 > 分層圖最短路|3594|所有人渡河所需的最短時間|minimum-time-to-transport-all-individuals|2604|false
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法 > 分層圖最短路|3778|排除一個最大權重邊的最小距離|minimum-distance-excluding-one-maximum-weighted-edge|null|true
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法 > 分層圖最短路|2714|找到 K 次跨越的最短路徑|find-shortest-path-with-k-hops|null|true
+PROBLEM|三、最短路 > §3.1 單源最短路：Dijkstra 算法 > SPFA 與差分約束|2589|完成所有任務的最少時間|minimum-time-to-complete-all-tasks|2381|false
+PROBLEM|三、最短路 > §3.2 全源最短路：Floyd 算法|1334|閾值距離內鄰居最少的城市|find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance|1855|false
+PROBLEM|三、最短路 > §3.2 全源最短路：Floyd 算法|2976|轉換字符串的最小成本 I|minimum-cost-to-convert-string-i|1882|false
+PROBLEM|三、最短路 > §3.2 全源最短路：Floyd 算法|2959|關閉分部的可行集合數目|number-of-possible-sets-of-closing-branches|2077|false
+PROBLEM|三、最短路 > §3.2 全源最短路：Floyd 算法|2977|轉換字符串的最小成本 II|minimum-cost-to-convert-string-ii|2696|false
+PROBLEM|三、最短路 > §3.2 全源最短路：Floyd 算法 > Bitset 優化 Floyd|1462|課程表 IV|course-schedule-iv|1693|false
+PROBLEM|四、最小生成樹|1584|連接所有點的最小費用|min-cost-to-connect-all-points|1858|false
+PROBLEM|四、最小生成樹|3600|升級後最大生成樹穩定性|maximize-spanning-tree-stability-with-upgrades|2301|false
+PROBLEM|四、最小生成樹|1489|找到最小生成樹裏的關鍵邊和僞關鍵邊|find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree|2572|false
+PROBLEM|四、最小生成樹|1135|最低成本連通所有城市|connecting-cities-with-minimum-cost|null|true
+PROBLEM|四、最小生成樹|1168|水資源分配優化|optimize-water-distribution-in-a-village|null|true
+PROBLEM|四、最小生成樹思維擴展|3219|切蛋糕的最小總開銷 II|minimum-cost-for-cutting-cake-ii|null|false
+PROBLEM|五、歐拉路徑/歐拉回路|332|重新安排行程|reconstruct-itinerary|null|false
+PROBLEM|五、歐拉路徑/歐拉回路|753|破解保險箱|cracking-the-safe|2274|false
+PROBLEM|五、歐拉路徑/歐拉回路|2097|合法重新排列數對|valid-arrangement-of-pairs|2651|false
+PROBLEM|六、強連通分量/雙連通分量|1192|查找集羣內的關鍵連接|critical-connections-in-a-network|2085|false
+PROBLEM|六、強連通分量/雙連通分量|1568|使陸地分離的最少天數|minimum-number-of-days-to-disconnect-island|2209|false
+PROBLEM|六、強連通分量/雙連通分量|LCP 54|奪回據點|s5kipK|null|false
+PROBLEM|六、強連通分量/雙連通分量|3383|施法所需最低符文數量|minimum-runes-to-add-to-cast-spell|null|true
+PROBLEM|七、二分圖染色|785|判斷二分圖|is-graph-bipartite|1625|false
+PROBLEM|七、二分圖染色|886|可能的二分法|possible-bipartition|1795|false
+PROBLEM|七、二分圖染色|3710|最大劃分因子|maximum-partition-factor|2135|false
+PROBLEM|八、網絡流|1947|最大兼容性評分和|maximum-compatibility-score-sum|1704|false
+PROBLEM|八、網絡流|3376|破解鎖的最少時間 I|minimum-time-to-break-locks-i|1793|false
+PROBLEM|八、網絡流|2850|將石頭分散到網格圖的最少移動次數|minimum-moves-to-spread-stones-over-grid|2001|false
+PROBLEM|八、網絡流|1879|兩個數組最小的異或值之和|minimum-xor-sum-of-two-arrays|2145|false
+PROBLEM|八、網絡流|1349|參加考試的最大學生數|maximum-students-taking-exam|2386|false
+PROBLEM|八、網絡流|2172|數組的最大與和|maximum-and-sum-of-array|2392|false
+PROBLEM|八、網絡流|3276|選擇矩陣中單元格的最大得分|select-cells-in-grid-with-maximum-score|2403|false
+PROBLEM|八、網絡流|1595|連通兩組點的最小成本|minimum-cost-to-connect-two-groups-of-points|2538|false
+PROBLEM|八、網絡流|3257|放三個車的價值之和最大 II|maximum-value-sum-by-placing-three-rooks-ii|2553|false
+PROBLEM|八、網絡流|LCP 04|覆蓋|broken-board-dominoes|null|false
+PROBLEM|八、網絡流|LCP 38|守衛城堡|7rLGCR|null|false
+PROBLEM|八、網絡流|1820|最多邀請的個數|maximum-number-of-accepted-invitations|null|true
+PROBLEM|八、網絡流|2403|殺死所有怪物的最短時間|minimum-time-to-kill-all-monsters|null|true
+PROBLEM|八、網絡流|3385|破解鎖的最少時間 II|minimum-time-to-break-locks-ii|null|true
+PROBLEM|八、網絡流|1066|校園自行車分配 II|campus-bikes-ii|null|true
+PROBLEM|八、網絡流|2123|使矩陣中的 1 互不相鄰的最小操作數|minimum-operations-to-remove-adjacent-ones-in-matrix|null|true
+PROBLEM|八、網絡流 > 模擬費用流|2463|最小移動總距離|minimum-total-distance-traveled|null|false
+PROBLEM|九、其他|1042|不鄰接植花|flower-planting-with-no-adjacent|1712|false
+PROBLEM|九、其他|1761|一個圖中連通三元組的最小度數|minimum-degree-of-a-connected-trio-in-a-graph|2005|false
+PROBLEM|九、其他|2508|添加邊使所有節點度數都為偶數|add-edges-to-make-degrees-of-all-nodes-even|2060|false
+PROBLEM|九、其他|1579|保證圖可完全遍歷|remove-max-number-of-edges-to-keep-graph-fully-traversable|2132|false
+PROBLEM|九、其他|2065|最大化一張圖中的路徑價值|maximum-path-quality-of-a-graph|2178|false
+PROBLEM|九、其他|1697|檢查邊長度限制的路徑是否存在|checking-existence-of-edge-length-limited-paths|2300|false
+PROBLEM|九、其他|2242|節點序列的最大得分|maximum-score-of-a-node-sequence|2304|false
+PROBLEM|九、其他|2493|將節點分成儘可能多的組|divide-nodes-into-the-maximum-number-of-groups|2415|false
+PROBLEM|九、其他|1782|統計點對的數目|count-pairs-of-nodes|2457|false
+PROBLEM|九、其他|3666|使二進制字符串全為 1 的最少操作次數|minimum-operations-to-equalize-binary-string|2477|false
+PROBLEM|九、其他|2612|最少翻轉操作數|minimum-reverse-operations|2824|false
+PROBLEM|九、其他|3435|最短公共超序列的字母出現頻率|frequencies-of-shortest-supersequences|3028|false
+PROBLEM|九、其他|466|統計重複個數|count-the-repetitions|null|false
+PROBLEM|九、其他|LCP 16|遊樂園的遊覽計劃|you-le-yuan-de-you-lan-ji-hua|null|false
+PROBLEM|九、其他|277|搜尋名人|find-the-celebrity|null|true
+PROBLEM|九、其他|1724|檢查邊長度限制的路徑是否存在 II|checking-existence-of-edge-length-limited-paths-ii|null|true
+PROBLEM|九、其他|2077|殊途同歸|paths-in-maze-that-lead-to-same-room|null|true
+PROBLEM|九、其他|3656|判斷是否存在簡單圖|determine-if-a-simple-graph-exists|null|true

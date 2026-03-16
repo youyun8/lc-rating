@@ -1,0 +1,59 @@
+PROBLEM|一、單調棧 > §1.1 基礎|739|每日溫度|daily-temperatures|null|false
+PROBLEM|一、單調棧 > §1.1 基礎|1475|商品折扣後的最終價格|final-prices-with-a-special-discount-in-a-shop|null|false
+PROBLEM|一、單調棧 > §1.1 基礎|496|下一個更大元素 I|next-greater-element-i|null|false
+PROBLEM|一、單調棧 > §1.1 基礎|503|下一個更大元素 II|next-greater-element-ii|null|false
+PROBLEM|一、單調棧 > §1.1 基礎|901|股票價格跨度|online-stock-span|1709|false
+PROBLEM|一、單調棧 > §1.1 基礎|853|車隊|car-fleet|null|false
+PROBLEM|一、單調棧 > §1.2 進階|1019|鏈表中的下一個更大節點|next-greater-node-in-linked-list|1571|false
+PROBLEM|一、單調棧 > §1.2 進階|654|最大二叉樹|maximum-binary-tree|null|false
+PROBLEM|一、單調棧 > §1.2 進階|768|最多能完成排序的塊 II|max-chunks-to-make-sorted-ii|1788|false
+PROBLEM|一、單調棧 > §1.2 進階|3814|預算下的最大總容量|maximum-capacity-within-budget|1796|false
+PROBLEM|一、單調棧 > §1.2 進階|3676|碗子數組的數目|count-bowl-subarrays|1848|false
+PROBLEM|一、單調棧 > §1.2 進階|2054|兩個最好的不重疊活動|two-best-non-overlapping-events|1883|false
+PROBLEM|一、單調棧 > §1.2 進階|456|132 模式|132-pattern|null|false
+PROBLEM|一、單調棧 > §1.2 進階|3113|邊界元素是最大值的子數組數目|find-the-number-of-subarrays-where-boundary-elements-are-maximum|2046|false
+PROBLEM|一、單調棧 > §1.2 進階|2866|美麗塔 II|beautiful-towers-ii|2072|false
+PROBLEM|一、單調棧 > §1.2 進階|975|奇偶跳|odd-even-jump|2079|false
+PROBLEM|一、單調棧 > §1.2 進階|1944|隊列中可以看到的人數|number-of-visible-people-in-a-queue|2105|false
+PROBLEM|一、單調棧 > §1.2 進階|2454|下一個更大元素 IV|next-greater-element-iv|2175|false
+PROBLEM|一、單調棧 > §1.2 進階|1130|葉值的最小代價生成樹|minimum-cost-tree-from-leaf-values|null|false
+PROBLEM|一、單調棧 > §1.2 進階|2289|使數組按非遞減順序排列|steps-to-make-array-non-decreasing|2482|false
+PROBLEM|一、單調棧 > §1.2 進階|1776|車隊 II|car-fleet-ii|2531|false
+PROBLEM|一、單調棧 > §1.2 進階|2736|最大和查詢|maximum-sum-queries|2533|false
+PROBLEM|一、單調棧 > §1.2 進階|3420|統計 K 次操作以內得到非遞減子數組的數目|count-non-decreasing-subarrays-after-k-operations|2855|false
+PROBLEM|一、單調棧 > §1.2 進階|3221|最大數組跳躍得分 II|maximum-array-hopping-score-ii|null|true
+PROBLEM|一、單調棧 > §1.2 進階|1966|未排序數組中的可被二分搜索的數|binary-searchable-numbers-in-an-unsorted-array|null|true
+PROBLEM|一、單調棧 > §1.2 進階|2832|每個元素為最大值的最大範圍|maximal-range-that-each-element-is-maximum-in-it|null|true
+PROBLEM|一、單調棧 > §1.2 進階|1063|有效子數組的數目|number-of-valid-subarrays|null|true
+PROBLEM|一、單調棧 > §1.2 進階|1950|所有子數組最小值中的最大值|maximum-of-minimum-values-in-all-subarrays|null|true
+PROBLEM|一、單調棧 > §1.2 進階|2282|在一個網格中可以看到的人數|number-of-people-that-can-be-seen-in-a-grid|null|true
+PROBLEM|一、單調棧 > §1.2 進階|3555|排序每個滑動窗口中最小的子數組|smallest-subarray-to-sort-in-every-sliding-window|null|true
+PROBLEM|一、單調棧 > §1.2 進階|2355|你能拿走的最大圖書數量|maximum-number-of-books-you-can-take|null|true
+PROBLEM|一、單調棧 > 思維擴展|962|最大寬度坡|maximum-width-ramp|1608|false
+PROBLEM|一、單調棧 > 思維擴展|3542|將所有元素變為 0 的最少操作次數|minimum-operations-to-convert-all-elements-to-zero|1890|false
+PROBLEM|一、單調棧 > 思維擴展|1124|表現良好的最長時間段|longest-well-performing-interval|1908|false
+PROBLEM|一、單調棧 > 思維擴展|2863|最長半遞減子數組的長度|maximum-length-of-semi-decreasing-subarrays|null|true
+PROBLEM|二、矩形|84|柱狀圖中最大的矩形|largest-rectangle-in-histogram|null|false
+PROBLEM|二、矩形|1793|好子數組的最大分數|maximum-score-of-a-good-subarray|1946|false
+PROBLEM|二、矩形|85|最大矩形|maximal-rectangle|null|false
+PROBLEM|二、矩形|221|最大正方形|maximal-square|null|false
+PROBLEM|二、矩形|42|接雨水|trapping-rain-water|null|false
+PROBLEM|二、矩形|1504|統計全 1 子矩形|count-submatrices-with-all-ones|null|false
+PROBLEM|二、矩形|1277|統計全為 1 的正方形子矩陣|count-square-submatrices-with-all-ones|null|false
+PROBLEM|二、矩形|755|倒水|pour-water|null|true
+PROBLEM|三、貢獻法|907|子數組的最小值之和|sum-of-subarray-minimums|1976|false
+PROBLEM|三、貢獻法|2104|子數組範圍和（最大值-最小值）|sum-of-subarray-ranges|null|false
+PROBLEM|三、貢獻法|1856|子數組最小乘積的最大值|maximum-subarray-min-product|2051|false
+PROBLEM|三、貢獻法|2818|操作使得分最大|apply-operations-to-maximize-score|2397|false
+PROBLEM|三、貢獻法|2281|巫師的總力量和（最小值×和）|sum-of-total-strength-of-wizards|2621|false
+PROBLEM|三、貢獻法|3430|最多 K 個元素的子數組的最值之和|maximum-and-minimum-sums-of-at-most-size-k-subarrays|2645|false
+PROBLEM|三、貢獻法|3359|查找最大元素不超過 K 的有序子矩陣|find-sorted-submatrices-with-maximum-element-at-most-k|null|true
+PROBLEM|三、貢獻法 > 思維擴展|2334|元素值大於變化閾值的子數組|subarray-with-elements-greater-than-varying-threshold|2381|false
+PROBLEM|三、貢獻法 > 思維擴展|2962|統計最大元素出現至少 K 次的子數組|count-subarrays-where-max-element-appears-at-least-k-times|null|false
+PROBLEM|四、最小字典序|402|移掉 K 位數字|remove-k-digits|null|false
+PROBLEM|四、最小字典序|1673|找出最具競爭力的子序列|find-the-most-competitive-subsequence|1802|false
+PROBLEM|四、最小字典序|316|去除重複字母|remove-duplicate-letters|2185|false
+PROBLEM|四、最小字典序|1081|不同字符的最小子序列|smallest-subsequence-of-distinct-characters|null|false
+PROBLEM|四、最小字典序|3816|刪除重複字符後的字典序最小字符串|lexicographically-smallest-string-after-deleting-duplicate-characters|2377|false
+PROBLEM|四、最小字典序|321|拼接最大數|create-maximum-number|null|false
+PROBLEM|四、最小字典序|2030|含特定字母的最小子序列|smallest-k-length-subsequence-with-occurrences-of-a-letter|2562|false

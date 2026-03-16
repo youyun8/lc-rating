@@ -1,0 +1,555 @@
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|1|兩數之和|/two-sum/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|1512|好數對的數目|/number-of-good-pairs/|1161|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2441|與對應負數同時存在的最大正整數|/largest-positive-integer-that-exists-with-its-negative/|1168|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|121|買賣股票的最佳時機|/best-time-to-buy-and-sell-stock/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2016|增量元素之間的最大差值|/maximum-difference-between-increasing-elements/|1246|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|624|數組列表中的最大距離|/maximum-distance-in-arrays/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2342|數位和相等數對的最大和|/max-sum-of-a-pair-with-equal-sum-of-digits/|1309|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|1128|等價多米諾骨牌對的數量|/number-of-equivalent-domino-pairs/|1333|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|1679|K 和數對的最大數目|/max-number-of-k-sum-pairs/|1346|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|16.24|數對和|/pairs-with-sum-lcci/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|219|存在重複元素 II|/contains-duplicate-ii/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2260|必須拿起的最小連續卡牌數|/minimum-consecutive-cards-to-pick-up/|1365|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2001|可互換矩形的組數|/number-of-pairs-of-interchangeable-rectangles/|1436|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2815|數組中的最大數對和|/max-pair-sum-in-an-array/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|3623|統計梯形的數目 I|/count-number-of-trapezoids-i/|1580|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2364|統計壞數對的數目|/count-number-of-bad-pairs/|1622|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|3805|統計凱撒加密對數目|/count-caesar-cipher-pairs/|1624|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|3371|識別數組中的最大異常值|/identify-the-largest-outlier-in-an-array/|1644|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|3761|鏡像對之間最小絕對距離|/minimum-absolute-distance-between-mirror-pairs/|1669|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|1014|最佳觀光組合|/best-sightseeing-pair/|1730|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|1814|統計一個數組中好對子的數目|/count-nice-pairs-in-an-array/|1738|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|3584|子序列首尾元素的最大乘積|/maximum-product-of-first-and-last-elements-of-a-subsequence/|1763|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.1 基礎|2905|找出滿足差值條件的下標 II|/find-indices-with-index-and-value-difference-ii/|1764|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|1010|總持續時間可被 60 整除的歌曲|/pairs-of-songs-with-total-durations-divisible-by-60/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|3185|構成整天的下標對數目 II|/count-pairs-that-form-a-complete-day-ii/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|2748|美麗下標對的數目|/number-of-beautiful-pairs/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|2506|統計相似字符串對的數目|/count-pairs-of-similar-strings/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|2874|有序三元組中的最大值 II|/maximum-value-of-an-ordered-triplet-ii/|1583|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|1497|檢查數組對是否可以被 k 整除|/check-if-array-pairs-are-divisible-by-k/|1787|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|1031|兩個無重疊子數組的最大和|/maximum-sum-of-two-non-overlapping-subarrays/|2000|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|2555|兩個線段獲得的最多獎品|/maximize-win-from-two-segments/|2081|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|1995|統計特殊四元組|/count-special-quadruplets/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|3404|統計特殊子序列的數目|/count-special-subsequences/|2445|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|3267|統計近似相等數對 II|/count-almost-equal-pairs-ii/|2545|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|3480|刪除一個衝突對後最大子數組數目|/maximize-subarrays-after-removing-one-conflicting-pair/|2764|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|1214|查找兩棵二叉搜索樹之和|/two-sum-bsts/|null|true
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > §0.1.2 進階|2964|可被整除的三元組數量|/number-of-divisible-triplet-sums/|null|true
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > 思維擴展|454|四數相加 II|/4sum-ii/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > 思維擴展|3027|人員站位的方案數 II|/find-the-number-of-ways-to-place-people-ii/|2020|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > 思維擴展|3548|等和矩陣分割 II|/equal-sum-grid-partition-ii/|2245|false
+PROBLEM|零、常用枚舉技巧 > §0.1 枚舉右，維護左 > 思維擴展|3713|最長的平衡子串 I|/longest-balanced-substring-i/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|2909|元素和最小的山形三元組 II|/minimum-sum-of-mountain-triplets-ii/|1479|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|3583|統計特殊三元組|/count-special-triplets/|1510|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|1930|長度為 3 的不同迴文子序列|/unique-length-3-palindromic-subsequences/|1533|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|3128|直角三角形|/right-triangles/|1541|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|447|迴旋鏢的數量|/number-of-boomerangs/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|456|132 模式|/132-pattern/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|3067|在帶權樹網絡中統計可連接服務器對數目|/count-pairs-of-connectable-servers-in-a-weighted-tree-network/|1909|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|1534|統計好三元組|/count-good-triplets/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|3455|最短匹配子字符串|/shortest-matching-substring/|2303|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|2242|節點序列的最大得分|/maximum-score-of-a-node-sequence/|2304|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|2867|統計樹中的合法路徑數目|/count-valid-paths-in-a-tree/|2428|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|2552|統計上升四元組|/count-increasing-quadruplets/|2433|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|3257|放三個車的價值之和最大 II|/maximum-value-sum-by-placing-three-rooks-ii/|2553|false
+PROBLEM|零、常用枚舉技巧 > §0.2 枚舉中間|3073|最大遞增三元組|/maximum-increasing-triplet-value/|null|true
+PROBLEM|零、常用枚舉技巧 > §0.3 遍歷對角線|3446|按對角線進行矩陣排序|/sort-matrix-by-diagonals/|1373|false
+PROBLEM|零、常用枚舉技巧 > §0.3 遍歷對角線|2711|對角線上不同值的數量差|/difference-of-number-of-distinct-values-on-diagonals/|1429|false
+PROBLEM|零、常用枚舉技巧 > §0.3 遍歷對角線|1329|將矩陣按對角線排序|/sort-the-matrix-diagonally/|1548|false
+PROBLEM|零、常用枚舉技巧 > §0.3 遍歷對角線|498|對角線遍歷|/diagonal-traverse/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.3 遍歷對角線|17.23|最大黑方陣|/max-black-square-lcci/|null|false
+PROBLEM|零、常用枚舉技巧 > §0.3 遍歷對角線|562|矩陣中最長的連續1線段|/longest-line-of-consecutive-one-in-matrix/|null|true
+PROBLEM|一、前綴和 > §1.1 基礎|303|區域和檢索 - 數組不可變|/range-sum-query-immutable/|null|false
+PROBLEM|一、前綴和 > §1.1 基礎|3427|變長子數組求和|/sum-of-variable-length-subarrays/|null|false
+PROBLEM|一、前綴和 > §1.1 基礎|2559|統計範圍內的元音字符串數|/count-vowel-strings-in-ranges/|1435|false
+PROBLEM|一、前綴和 > §1.1 基礎|1310|子數組異或查詢|/xor-queries-of-a-subarray/|1460|false
+PROBLEM|一、前綴和 > §1.1 基礎|3152|特殊數組 II|/special-array-ii/|1523|false
+PROBLEM|一、前綴和 > §1.1 基礎|1749|任意子數組和的絕對值的最大值|/maximum-absolute-sum-of-any-subarray/|1542|false
+PROBLEM|一、前綴和 > §1.1 基礎|53|最大子數組和|/maximum-subarray/|null|false
+PROBLEM|一、前綴和 > §1.1 基礎|3652|按策略買賣股票的最佳時機|/best-time-to-buy-and-sell-stock-using-strategy/|1557|false
+PROBLEM|一、前綴和 > §1.1 基礎|3361|兩個字符串的切換距離|/shift-distance-between-two-strings/|null|false
+PROBLEM|一、前綴和 > §1.1 基礎|3511|構造正數組|/make-a-positive-array/|null|true
+PROBLEM|一、前綴和 > §1.1 基礎|3540|訪問所有房屋的最短時間|/minimum-time-to-visit-all-houses/|null|true
+PROBLEM|一、前綴和 > §1.1 基礎 > 思維擴展|1523|在區間範圍內統計奇數數目|/count-odd-numbers-in-an-interval-range/|1209|false
+PROBLEM|一、前綴和 > §1.1 基礎 > 思維擴展|848|字母移位|/shifting-letters/|1353|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|560|和為 K 的子數組|/subarray-sum-equals-k/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|930|和相同的二元子數組|/binary-subarrays-with-sum/|1592|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1524|和為奇數的子數組數目|/number-of-sub-arrays-with-odd-sum/|1611|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|974|和可被 K 整除的子數組|/subarray-sums-divisible-by-k/|1676|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|523|連續的子數組和|/continuous-subarray-sum/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2588|統計美麗子數組數目|/count-the-number-of-beautiful-subarrays/|1697|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|525|連續數組|/contiguous-array/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|17.05|字母與數字|/find-longest-subarray-lcci/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|3755|最大平衡異或子數組的長度|/find-maximum-balanced-xor-subarray-length/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|3026|最大好子數組和|/maximum-good-subarray-sum/|1817|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1477|找兩個和為目標值且不重疊的子數組|/find-two-non-overlapping-sub-arrays-each-with-target-sum/|1851|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1546|和為目標值且不重疊的非空子數組的最大數目|/maximum-number-of-non-overlapping-subarrays-with-sum-equals-target/|1855|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1124|表現良好的最長時間段|/longest-well-performing-interval/|1908|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|3728|邊界與內部和相等的穩定子數組|/stable-subarrays-with-equal-boundary-and-interior-sum/|1909|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|3381|長度可被 K 整除的子數組的最大元素和|/maximum-subarray-sum-with-length-divisible-by-k/|1943|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2488|統計中位數為 K 的子數組|/count-subarrays-with-median-k/|1999|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1590|使數組和能被 P 整除|/make-sum-divisible-by-p/|2039|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2845|統計趣味子數組的數目|/count-of-interesting-subarrays/|2073|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|3739|統計主要元素子數組數目 II|/count-subarrays-with-majority-element-ii/|2090|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1074|元素和為目標值的子矩陣數量|/number-of-submatrices-that-sum-to-target/|2189|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1442|形成兩個異或相等數組的三元組數目|/count-triplets-that-can-form-two-arrays-of-equal-xor/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|3714|最長的平衡子串 II|/longest-balanced-substring-ii/|2202|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2025|分割數組的最多方案數|/maximum-number-of-ways-to-partition-an-array/|2218|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|3729|統計有序數組中可被 K 整除的子數組數量|/count-distinct-subarrays-divisible-by-k-in-sorted-array/|2248|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2949|統計美麗子字符串 II|/count-beautiful-substrings-ii/|2445|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|325|和等於 k 的最長子數組長度|/maximum-size-subarray-sum-equals-k/|null|true
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|548|將數組分割成和相等的子數組|/split-array-with-equal-sum/|null|true
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|1983|範圍和相等的最寬索引對|/widest-pair-of-indices-with-equal-range-sum/|null|true
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2489|固定比率的子字符串數|/number-of-substrings-with-fixed-ratio/|null|true
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2031|1 比 0 多的子數組個數|/count-subarrays-with-more-ones-than-zeros/|null|true
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表|2950|可整除子串的數量|/number-of-divisible-substrings/|null|true
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表 > 前綴和與有序集合|3364|最小正和子數組|/minimum-positive-sum-subarray/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表 > 前綴和與有序集合|363|矩形區域不超過 K 的最大數值和|/max-sum-of-rectangle-no-larger-than-k/|null|false
+PROBLEM|一、前綴和 > §1.2 前綴和與哈希表 > 思維擴展|437|路徑總和 III|/path-sum-iii/|null|false
+PROBLEM|一、前綴和 > §1.3 距離和|1685|有序數組中差絕對值之和|/sum-of-absolute-differences-in-a-sorted-array/|1496|false
+PROBLEM|一、前綴和 > §1.3 距離和|2615|等值距離和|/sum-of-distances/|1793|false
+PROBLEM|一、前綴和 > §1.3 距離和|2602|使數組元素全部相等的最少操作次數|/minimum-operations-to-make-all-array-elements-equal/|1903|false
+PROBLEM|一、前綴和 > §1.3 距離和|2968|執行操作使頻率分數最大|/apply-operations-to-maximize-frequency-score/|2444|false
+PROBLEM|一、前綴和 > §1.3 距離和|1703|得到連續 K 個 1 的最少相鄰交換次數|/minimum-adjacent-swaps-for-k-consecutive-ones/|2467|false
+PROBLEM|一、前綴和 > §1.3 距離和|3086|拾起 K 個 1 需要的最少行動次數|/minimum-moves-to-pick-k-ones/|2673|false
+PROBLEM|一、前綴和 > §1.3 距離和|3422|將子數組元素變為相等所需的最小操作數|/minimum-operations-to-make-subarray-elements-equal/|null|true
+PROBLEM|一、前綴和 > §1.4 狀態壓縮前綴和|1177|構建迴文串檢測|/can-make-palindrome-from-substring/|1848|false
+PROBLEM|一、前綴和 > §1.4 狀態壓縮前綴和|1371|每個元音包含偶數次的最長子字符串|/find-the-longest-substring-containing-vowels-in-even-counts/|2041|false
+PROBLEM|一、前綴和 > §1.4 狀態壓縮前綴和|1542|找出最長的超讚子字符串|/find-longest-awesome-substring/|2222|false
+PROBLEM|一、前綴和 > §1.4 狀態壓縮前綴和|1915|最美子字符串的數目|/number-of-wonderful-substrings/|2235|false
+PROBLEM|一、前綴和 > §1.4 狀態壓縮前綴和|2791|樹中可以形成迴文的路徑數|/count-paths-that-can-form-a-palindrome-in-a-tree/|2677|false
+PROBLEM|一、前綴和 > §1.5 進階|2389|和有限的最長子序列|/longest-subsequence-with-limited-sum/|null|false
+PROBLEM|一、前綴和 > §1.5 進階|3709|設計考試分數記錄器|/design-exam-scores-tracker/|1648|false
+PROBLEM|一、前綴和 > §1.5 進階|1895|最大的幻方|/largest-magic-square/|1781|false
+PROBLEM|一、前綴和 > §1.5 進階|2055|蠟燭之間的盤子|/plates-between-candles/|1819|false
+PROBLEM|一、前綴和 > §1.5 進階|1744|你能在你最喜歡的那天喫到你最喜歡的糖果嗎？|/can-you-eat-your-favorite-candy-on-your-favorite-day/|1859|false
+PROBLEM|一、前綴和 > §1.5 進階|1878|矩陣中最大的三個菱形和|/get-biggest-three-rhombus-sums-in-a-grid/|1898|false
+PROBLEM|一、前綴和 > §1.5 進階|3756|連接非零數字並乘以其數字和 II|/concatenate-non-zero-digits-and-multiply-by-sum-ii/|1968|false
+PROBLEM|一、前綴和 > §1.5 進階|2245|轉角路徑的乘積中最多能有幾個尾隨零|/maximum-trailing-zeros-in-a-cornered-path/|2037|false
+PROBLEM|一、前綴和 > §1.5 進階|1712|將數組分成三個子數組的方案數|/ways-to-split-array-into-three-subarrays/|2079|false
+PROBLEM|一、前綴和 > §1.5 進階|1862|向下取整數對和|/sum-of-floored-pairs/|2170|false
+PROBLEM|一、前綴和 > §1.5 進階|3748|統計穩定子數組的數目|/count-stable-subarrays/|2209|false
+PROBLEM|一、前綴和 > §1.5 進階|2281|巫師的總力量和|/sum-of-total-strength-of-wizards/|2621|false
+PROBLEM|一、前綴和 > §1.5 進階|3445|奇偶頻次間的最大差值 II|/maximum-difference-between-even-and-odd-frequency-ii/|2694|false
+PROBLEM|一、前綴和 > §1.5 進階|2983|迴文串重新排列查詢|/palindrome-rearrangement-queries/|2780|false
+PROBLEM|一、前綴和 > §1.5 進階|2955|同端子串的數量|/number-of-same-end-substrings/|null|true
+PROBLEM|一、前綴和 > §1.5 進階|1788|最大化花園的美觀度|/maximize-the-beauty-of-the-garden/|null|true
+PROBLEM|一、前綴和 > §1.5 進階|2819|購買巧克力後的最小相對損失|/minimum-relative-loss-after-buying-chocolates/|null|true
+PROBLEM|一、前綴和 > §1.5 進階 > 思維擴展|2300|咒語和藥水的成功對數|/successful-pairs-of-spells-and-potions/|null|false
+PROBLEM|一、前綴和 > §1.6 二維前綴和|304|二維區域和檢索 - 矩陣不可變|/range-sum-query-2d-immutable/|null|false
+PROBLEM|一、前綴和 > §1.6 二維前綴和|1314|矩陣區域和|/matrix-block-sum/|1484|false
+PROBLEM|一、前綴和 > §1.6 二維前綴和|3070|元素和小於等於 k 的子矩陣的數目|/count-submatrices-with-top-left-element-and-sum-less-than-k/|1499|false
+PROBLEM|一、前綴和 > §1.6 二維前綴和|1738|找出第 K 大的異或座標值|/find-kth-largest-xor-coordinate-value/|1671|false
+PROBLEM|一、前綴和 > §1.6 二維前綴和|3212|統計 X 和 Y 頻數相等的子矩陣數量|/count-submatrices-with-equal-frequency-of-x-and-y/|1673|false
+PROBLEM|一、前綴和 > §1.6 二維前綴和|1292|元素和小於等於閾值的正方形的最大邊長|/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/|1735|false
+PROBLEM|一、前綴和 > §1.6 二維前綴和 > 二維前綴最小值|3148|矩陣中的最大得分|/maximum-difference-score-in-a-grid/|1820|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|2848|與車相交的點|/points-that-intersect-with-cars/|1230|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|1893|檢查是否區域內所有整數都被覆蓋|/check-if-all-the-integers-in-a-range-are-covered/|1307|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|1854|人口最多的年份|/maximum-population-year/|1370|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|16.10|生存人數|/living-people-lcci/|null|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|2960|統計已測試設備|/count-tested-devices-after-test-operations/|null|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|1094|拼車|/car-pooling/|1441|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|1109|航班預訂統計|/corporate-flight-bookings/|1570|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|3355|零數組變換 I|/zero-array-transformation-i/|1591|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.1 基礎|370|區間加法|/range-addition/|null|true
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3453|分割正方形 I|/separate-squares-i/|1735|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2381|字母移位 II|/shifting-letters-ii/|1793|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|995|K 連續位的最小翻轉次數|/minimum-number-of-k-consecutive-bit-flips/|1835|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|1589|所有排列中的最大和|/maximum-sum-obtained-of-any-permutation/|1871|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|1526|形成目標數組的子數組最少增加次數|/minimum-number-of-increments-on-subarrays-to-form-a-target-array/|1872|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3356|零數組變換 II|/zero-array-transformation-ii/|1913|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|1943|描述繪畫結果|/describe-the-painting/|1969|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3224|使差值相等的最少數組改動次數|/minimum-array-changes-to-make-differences-equal/|1996|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2327|知道祕密的人數|/number-of-people-aware-of-a-secret/|null|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2251|花期內花的數目|/number-of-flowers-in-full-bloom/|2022|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2772|使數組中的所有元素都等於零|/apply-operations-to-make-all-array-elements-equal-to-zero/|2029|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3229|使數組等於目標數組所需的最少操作次數|/minimum-operations-to-make-array-equal-to-target/|2067|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3529|統計水平子串和垂直子串重疊格子的數目|/count-cells-in-overlapping-horizontal-and-vertical-substrings/|2105|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|798|得分最高的最小輪調|/smallest-rotation-with-highest-score/|2130|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3347|執行操作後元素的最高頻率 II|/maximum-frequency-of-an-element-after-performing-operations-ii/|2156|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2528|最大化城市的最小電量|/maximize-the-minimum-powered-city/|2236|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|1674|使數組互補的最少操作次數|/minimum-moves-to-make-array-complementary/|2333|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3362|零數組變換 III|/zero-array-transformation-iii/|2424|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3655|區間乘法查詢後的異或 II|/xor-after-range-multiplication-queries-ii/|2454|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3017|按距離統計房屋對數目 II|/count-the-number-of-houses-at-a-certain-distance-ii/|2709|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2021|街上最亮的位置|/brightest-position-on-street/|null|true
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2015|每段建築物的平均高度|/average-height-of-buildings-in-each-segment/|null|true
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|2237|計算街道上滿足所需亮度的位置數量|/count-positions-on-street-with-required-brightness/|null|true
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3009|折線圖上的最大交點數量|/maximum-number-of-intersections-on-the-chart/|null|true
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階|3279|活塞佔據的最大總面積|/maximum-total-area-occupied-by-pistons/|null|true
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階 > 思維擴展|56|合併區間|/merge-intervals/|null|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階 > 思維擴展|57|插入區間|/insert-interval/|null|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階 > 思維擴展|732|我的日程安排表 III|/my-calendar-iii/|null|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階 > 思維擴展|2406|將區間分為最少組數|/divide-intervals-into-minimum-number-of-groups/|1713|false
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階 > 思維擴展|253|會議室 II|/meeting-rooms-ii/|null|true
+PROBLEM|二、差分 > §2.1 一維差分 > §2.1.2 進階 > 思維擴展|759|員工空閒時間|/employee-free-time/|null|true
+PROBLEM|二、差分 > §2.2 二維差分|2536|子矩陣元素加 1|/increment-submatrices-by-one/|1583|false
+PROBLEM|二、差分 > §2.2 二維差分|850|矩形面積 II|/rectangle-area-ii/|2236|false
+PROBLEM|二、差分 > §2.2 二維差分|2132|用郵票貼滿網格圖|/stamping-the-grid/|2364|false
+PROBLEM|二、差分 > §2.2 二維差分|LCP 74|最強祝福力場|/xepqZ5/|null|false
+PROBLEM|三、棧 > §3.1 基礎|1441|用棧操作構建數組|/build-an-array-with-stack-operations/|1180|false
+PROBLEM|三、棧 > §3.1 基礎|844|比較含退格的字符串|/backspace-string-compare/|1228|false
+PROBLEM|三、棧 > §3.1 基礎|682|棒球比賽|/baseball-game/|null|false
+PROBLEM|三、棧 > §3.1 基礎|2390|從字符串中移除星號|/removing-stars-from-a-string/|1348|false
+PROBLEM|三、棧 > §3.1 基礎|1472|設計瀏覽器歷史記錄|/design-browser-history/|1454|false
+PROBLEM|三、棧 > §3.1 基礎|946|驗證棧序列|/validate-stack-sequences/|1462|false
+PROBLEM|三、棧 > §3.1 基礎|3412|計算字符串的鏡像分數|/find-mirror-score-of-a-string/|1578|false
+PROBLEM|三、棧 > §3.1 基礎|71|簡化路徑|/simplify-path/|null|false
+PROBLEM|三、棧 > §3.2 進階|3170|刪除星號以後字典序最小的字符串|/lexicographically-minimum-string-after-removing-stars/|1772|false
+PROBLEM|三、棧 > §3.2 進階|155|最小棧|/min-stack/|null|false
+PROBLEM|三、棧 > §3.2 進階|1381|設計一個支持增量操作的棧|/design-a-stack-with-increment-operation/|null|false
+PROBLEM|三、棧 > §3.2 進階|636|函數的獨佔時間|/exclusive-time-of-functions/|null|false
+PROBLEM|三、棧 > §3.2 進階|2434|使用機器人打印字典序最小的字符串|/using-a-robot-to-print-the-lexicographically-smallest-string/|1953|false
+PROBLEM|三、棧 > §3.2 進階|895|最大頻率棧|/maximum-frequency-stack/|2028|false
+PROBLEM|三、棧 > §3.2 進階|1172|餐盤棧|/dinner-plate-stacks/|2110|false
+PROBLEM|三、棧 > §3.2 進階|2589|完成所有任務的最少時間|/minimum-time-to-complete-all-tasks/|2381|false
+PROBLEM|三、棧 > §3.2 進階|2524|子數組的最大頻率分數|/maximum-frequency-score-of-a-subarray/|null|true
+PROBLEM|三、棧 > §3.2 進階|716|最大棧|/max-stack/|null|true
+PROBLEM|三、棧 > §3.3 鄰項消除|2696|刪除子串後的字符串最小長度|/minimum-string-length-after-removing-substrings/|1282|false
+PROBLEM|三、棧 > §3.3 鄰項消除|1047|刪除字符串中的所有相鄰重複項|/remove-all-adjacent-duplicates-in-string/|1286|false
+PROBLEM|三、棧 > §3.3 鄰項消除|1544|整理字符串|/make-the-string-great/|1344|false
+PROBLEM|三、棧 > §3.3 鄰項消除|3561|移除相鄰字符|/resulting-string-after-adjacent-removals/|1397|false
+PROBLEM|三、棧 > §3.3 鄰項消除|1003|檢查替換後的詞是否有效|/check-if-word-is-valid-after-substitutions/|1427|false
+PROBLEM|三、棧 > §3.3 鄰項消除|2216|美化數組的最少刪除數|/minimum-deletions-to-make-array-beautiful/|1510|false
+PROBLEM|三、棧 > §3.3 鄰項消除|1209|刪除字符串中的所有相鄰重複項 II|/remove-all-adjacent-duplicates-in-string-ii/|1542|false
+PROBLEM|三、棧 > §3.3 鄰項消除|3703|移除K-平衡子字符串|/remove-k-balanced-substrings/|1802|false
+PROBLEM|三、棧 > §3.3 鄰項消除|1717|刪除子字符串的最大得分|/maximum-score-from-removing-substrings/|1868|false
+PROBLEM|三、棧 > §3.3 鄰項消除|2197|替換數組中的非互質數|/replace-non-coprime-numbers-in-array/|2057|false
+PROBLEM|三、棧 > §3.3 鄰項消除|735|小行星碰撞|/asteroid-collision/|null|false
+PROBLEM|三、棧 > §3.3 鄰項消除|2751|機器人碰撞|/robot-collisions/|2092|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|20|有效的括號|/valid-parentheses/|null|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|921|使括號有效的最少添加|/minimum-add-to-make-parentheses-valid/|1242|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|1021|刪除最外層的括號|/remove-outermost-parentheses/|1311|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|1614|括號的最大嵌套深度|/maximum-nesting-depth-of-the-parentheses/|1323|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|1190|反轉每對括號間的子串|/reverse-substrings-between-each-pair-of-parentheses/|1486|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|856|括號的分數|/score-of-parentheses/|1563|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|1249|移除無效的括號|/minimum-remove-to-make-valid-parentheses/|1657|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|1963|使字符串平衡的最小交換次數|/minimum-number-of-swaps-to-make-the-string-balanced/|1689|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|678|有效的括號字符串|/valid-parenthesis-string/|null|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|1111|有效括號的嵌套深度|/maximum-nesting-depth-of-two-valid-parentheses-strings/|1749|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|1541|平衡括號字符串的最少插入次數|/minimum-insertions-to-balance-a-parentheses-string/|1759|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|2116|判斷一個括號字符串是否有效|/check-if-a-parentheses-string-can-be-valid/|2038|false
+PROBLEM|三、棧 > §3.4 合法括號字符串|32|最長有效括號|/longest-valid-parentheses/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|1006|笨階乘|/clumsy-factorial/|1408|false
+PROBLEM|三、棧 > §3.5 表達式解析|150|逆波蘭表達式求值|/evaluate-reverse-polish-notation/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|394|字符串解碼|/decode-string/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|8|字符串轉換整數 (atoi)|/string-to-integer-atoi/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|224|基本計算器|/basic-calculator/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|227|基本計算器 II|/basic-calculator-ii/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|726|原子的數量|/number-of-atoms/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|1106|解析布爾表達式|/parsing-a-boolean-expression/|1880|false
+PROBLEM|三、棧 > §3.5 表達式解析|591|標籤驗證器|/tag-validator/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|736|Lisp 語法解析|/parse-lisp-expression/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|1096|花括號展開 II|/brace-expansion-ii/|2349|false
+PROBLEM|三、棧 > §3.5 表達式解析|1896|反轉表達式值的最少操作次數|/minimum-cost-to-change-the-final-value-of-expression/|2532|false
+PROBLEM|三、棧 > §3.5 表達式解析|65|有效數字|/valid-number/|null|false
+PROBLEM|三、棧 > §3.5 表達式解析|770|基本計算器 IV|/basic-calculator-iv/|2863|false
+PROBLEM|三、棧 > §3.5 表達式解析|439|三元表達式解析器|/ternary-expression-parser/|null|true
+PROBLEM|三、棧 > §3.5 表達式解析|3749|計算有效表達式|/evaluate-valid-expressions/|null|true
+PROBLEM|三、棧 > §3.5 表達式解析|772|基本計算器 III|/basic-calculator-iii/|null|true
+PROBLEM|三、棧 > §3.5 表達式解析|1087|花括號展開|/brace-expansion/|null|true
+PROBLEM|三、棧 > §3.5 表達式解析|1597|根據中綴表達式構造二叉表達式樹|/build-binary-expression-tree-from-infix-expression/|null|true
+PROBLEM|三、棧 > §3.5 表達式解析|1628|設計帶解析函數的表達式樹|/design-an-expression-tree-with-evaluate-function/|null|true
+PROBLEM|三、棧 > §3.6 對頂棧|2296|設計一個文本編輯器|/design-a-text-editor/|1912|false
+PROBLEM|四、隊列 > §4.1 基礎|933|最近的請求次數|/number-of-recent-calls/|1338|false
+PROBLEM|四、隊列 > §4.1 基礎|3829|設計共享出行系統|/design-ride-sharing-system/|1594|false
+PROBLEM|四、隊列 > §4.1 基礎|950|按遞增順序顯示卡牌|/reveal-cards-in-increasing-order/|1686|false
+PROBLEM|四、隊列 > §4.1 基礎|649|Dota2 參議院|/dota2-senate/|null|false
+PROBLEM|四、隊列 > §4.1 基礎|346|數據流中的移動平均值|/moving-average-from-data-stream/|null|true
+PROBLEM|四、隊列 > §4.1 基礎|362|敲擊計數器|/design-hit-counter/|null|true
+PROBLEM|四、隊列 > §4.1 基礎|379|電話目錄管理系統|/design-phone-directory/|null|true
+PROBLEM|四、隊列 > §4.1 基礎|1429|第一個唯一數字|/first-unique-number/|null|true
+PROBLEM|四、隊列 > §4.1 基礎|2534|通過門的時間|/time-taken-to-cross-the-door/|null|true
+PROBLEM|四、隊列 > §4.2 設計|1670|設計前中後隊列|/design-front-middle-back-queue/|1610|false
+PROBLEM|四、隊列 > §4.2 設計|3508|設計路由器|/implement-router/|1851|false
+PROBLEM|四、隊列 > §4.2 設計|225|用隊列實現棧|/implement-stack-using-queues/|null|false
+PROBLEM|四、隊列 > §4.2 設計|232|用棧實現隊列|/implement-queue-using-stacks/|null|false
+PROBLEM|四、隊列 > §4.2 設計|622|設計循環隊列|/design-circular-queue/|null|false
+PROBLEM|四、隊列 > §4.2 設計|641|設計循環雙端隊列|/design-circular-deque/|null|false
+PROBLEM|四、隊列 > §4.3 雙端隊列|2810|故障鍵盤|/faulty-keyboard/|null|false
+PROBLEM|四、隊列 > §4.3 雙端隊列|2071|你可以安排的最多任務數目|/maximum-number-of-tasks-you-can-assign/|2648|false
+PROBLEM|四、隊列 > §4.4 單調隊列|239|滑動窗口最大值|/sliding-window-maximum/|null|false
+PROBLEM|四、隊列 > §4.4 單調隊列|LCR 184|設計自助結算系統|/dui-lie-de-zui-da-zhi-lcof/|null|false
+PROBLEM|四、隊列 > §4.4 單調隊列|1438|絕對差不超過限制的最長連續子數組|/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/|1672|false
+PROBLEM|四、隊列 > §4.4 單調隊列|2762|不間斷子數組|/continuous-subarrays/|null|false
+PROBLEM|四、隊列 > §4.4 單調隊列|2398|預算內的最多機器人數目|/maximum-number-of-robots-within-budget/|1917|false
+PROBLEM|四、隊列 > §4.4 單調隊列|3589|計數質數間隔平衡子數組|/count-prime-gap-balanced-subarrays/|2235|false
+PROBLEM|四、隊列 > §4.4 單調隊列|862|和至少為 K 的最短子數組|/shortest-subarray-with-sum-at-least-k/|2307|false
+PROBLEM|四、隊列 > §4.4 單調隊列|1499|滿足不等式的最大值|/max-value-of-equation/|2456|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1046|最後一塊石頭的重量|/last-stone-weight/|1173|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|3264|K 次乘運算後的最終數組 I|/final-array-state-after-k-multiplication-operations-i/|1178|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|2558|從數量最多的堆取走禮物|/take-gifts-from-the-richest-pile/|1277|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|2336|無限集中的最小數字|/smallest-number-in-infinite-set/|1375|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|2530|執行 K 次操作後的最大分數|/maximal-score-after-applying-k-operations/|1386|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|3066|超過閾值的最少操作數 II|/minimum-operations-to-exceed-threshold-value-ii/|1400|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1962|移除石子使總數最小|/remove-stones-to-minimize-the-total/|1419|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|703|數據流中的第 K 大元素|/kth-largest-element-in-a-stream/|null|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|3275|第 K 近障礙物查詢|/k-th-nearest-obstacle-queries/|1420|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1845|座位預約管理系統|/seat-reservation-manager/|1429|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|2208|將數組和減半的最少操作次數|/minimum-operations-to-halve-array-sum/|1550|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|2233|K 次增加後的最大乘積|/maximum-product-after-k-increments/|1686|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|3296|移山所需的最少秒數|/minimum-number-of-seconds-to-make-mountain-height-zero/|1695|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1942|最小未被佔據椅子的編號|/the-number-of-the-smallest-unoccupied-chair/|1695|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1801|積壓訂單中的訂單總數|/number-of-orders-in-the-backlog/|1711|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|2406|將區間分為最少組數|/divide-intervals-into-minimum-number-of-groups/|1713|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|3478|選出和最大的 K 個元素|/choose-k-elements-with-maximum-sum/|1753|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|2462|僱傭 K 位工人的總代價|/total-cost-to-hire-k-workers/|1764|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1834|單線程 CPU|/single-threaded-cpu/|1798|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1792|最大平均通過率|/maximum-average-pass-ratio/|1818|false
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|1167|連接木棍的最低費用|/minimum-cost-to-connect-sticks/|null|true
+PROBLEM|五、堆（優先隊列） > §5.1 基礎|253|會議室 II|/meeting-rooms-ii/|null|true
+PROBLEM|五、堆（優先隊列） > §5.2 進階|23|合併 K 個升序鏈表|/merge-k-sorted-lists/|null|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2931|購買物品的最大開銷|/maximum-spending-after-buying-items/|1822|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|3781|二進制交換後的最大分數|/maximum-score-after-binary-swaps/|1823|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|502|IPO|/ipo/|null|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1705|喫蘋果的最大數目|/maximum-number-of-eaten-apples/|1930|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|778|水位上升的泳池中游泳|/swim-in-rising-water/|null|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1631|最小體力消耗路徑|/path-with-minimum-effort/|1948|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1882|使用服務器處理任務|/process-tasks-using-servers/|1979|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1354|多次求和構造目標數組|/construct-target-array-with-multiple-sums/|2015|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1353|最多可以參加的會議數目|/maximum-number-of-events-that-can-be-attended/|2016|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1235|規劃兼職工作|/maximum-profit-in-job-scheduling/|2023|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|632|最小區間|/smallest-range-covering-elements-from-k-lists/|null|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2542|最大子序列的分數|/maximum-subsequence-scores/|2056|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1383|最大的團隊表現值|/maximum-performance-of-a-team/|2091|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2402|會議室 III|/meeting-rooms-iii/|2093|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2503|矩陣查詢可獲得的最大分數|/maximum-number-of-points-from-grid-queries/|2196|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2163|刪除元素後和的最小差值|/minimum-difference-in-sums-after-removal-of-elements/|2225|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|857|僱傭 K 名工人的最低成本|/minimum-cost-to-hire-k-workers/|2260|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1606|找到處理最多請求的服務器|/find-servers-that-handled-most-number-of-requests/|2276|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1851|包含每個查詢的最小區間|/minimum-interval-to-include-each-query/|2286|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|407|接雨水 II|/trapping-rain-water-ii/|null|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2940|找到 Alice 和 Bob 可以相遇的建築|/find-building-where-alice-and-bob-can-meet/|2327|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|3399|字符相同的最短子字符串 II|/smallest-substring-with-identical-characters-ii/|2376|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2589|完成所有任務的最少時間|/minimum-time-to-complete-all-tasks/|2381|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|3266|K 次乘運算後的最終數組 II|/final-array-state-after-k-multiplication-operations-ii/|2509|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1675|數組的最小偏移量|/minimize-deviation-in-array/|2533|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2617|網格圖中最少訪問的格子數|/minimum-number-of-visited-cells-in-a-grid/|2582|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|2532|過橋的時間|/time-to-cross-a-bridge/|2589|false
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1500|設計文件分享系統|/design-a-file-sharing-system/|null|true
+PROBLEM|五、堆（優先隊列） > §5.2 進階|1199|建造街區的最短時間|/minimum-time-to-build-blocks/|null|true
+PROBLEM|五、堆（優先隊列） > §5.2 進階|3506|查找消除細菌菌株所需時間|/find-time-required-to-eliminate-bacterial-strains/|null|true
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|264|醜數 II|/ugly-number-ii/|null|false
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|378|有序矩陣中第 K 小的元素|/kth-smallest-element-in-a-sorted-matrix/|null|false
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|23|合併 K 個升序鏈表|/merge-k-sorted-lists/|null|false
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|373|查找和最小的 K 對數字|/find-k-pairs-with-smallest-sums/|null|false
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|1439|有序矩陣中的第 k 個最小數組和|/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/|2134|false
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|786|第 K 個最小的質數分數|/k-th-smallest-prime-fraction/|2169|false
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|3691|最大子數組總值 II|/maximum-total-subarray-value-ii/|2469|false
+PROBLEM|五、堆（優先隊列） > §5.3 第 K 小/大|2386|找出數組的第 K 大和|/find-the-k-sum-of-an-array/|2648|false
+PROBLEM|五、堆（優先隊列） > §5.4 重排元素|984|不含 AAA 或 BBB 的字符串|/string-without-aaa-or-bbb/|1474|false
+PROBLEM|五、堆（優先隊列） > §5.4 重排元素|767|重構字符串|/reorganize-string/|1681|false
+PROBLEM|五、堆（優先隊列） > §5.4 重排元素|1054|距離相等的條形碼|/distant-barcodes/|1702|false
+PROBLEM|五、堆（優先隊列） > §5.4 重排元素|1405|最長快樂字符串|/longest-happy-string/|1821|false
+PROBLEM|五、堆（優先隊列） > §5.4 重排元素|3081|替換字符串中的問號使分數最小|/replace-question-marks-in-string-to-minimize-its-value/|1905|false
+PROBLEM|五、堆（優先隊列） > §5.4 重排元素|621|任務調度器|/task-scheduler/|null|false
+PROBLEM|五、堆（優先隊列） > §5.4 重排元素|358|K 距離間隔重排字符串|/rearrange-string-k-distance-apart/|null|true
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|LCP 30|魔塔遊戲|/p0NxJO/|null|false
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|1642|可以到達的最遠建築|/furthest-building-you-can-reach/|1962|false
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|630|課程表 III|/course-schedule-iii/|null|false
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|871|最低加油次數|/minimum-number-of-refueling-stops/|2074|false
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|3362|零數組變換 III|/zero-array-transformation-iii/|2424|false
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|2813|子序列最大優雅度|/maximum-elegance-of-a-k-length-subsequence/|2582|false
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|3049|標記所有下標的最早秒數 II|/earliest-second-to-mark-indices-ii/|3111|false
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|3711|不出現負餘額的最大交易額|/maximum-transactions-without-negative-balance/|null|true
+PROBLEM|五、堆（優先隊列） > §5.5 反悔堆|2599|使前綴和數組非負|/make-the-prefix-sum-non-negative/|null|true
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|2349|設計數字容器系統|/design-a-number-container-system/|1540|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|3607|電網維護|/power-grid-maintenance/|1700|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|2353|設計食物評分系統|/design-a-food-rating-system/|1782|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|3092|最高頻率的 ID|/most-frequent-ids/|1793|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|3408|設計任務管理器|/design-task-manager/|1807|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|2034|股票價格波動|/stock-price-fluctuation/|1832|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|3815|設計拍賣系統|/design-auction-system/|1854|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|1172|餐盤棧|/dinner-plate-stacks/|2110|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|218|天際線問題|/the-skyline-problem/|null|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|3510|移除最小數對使數組有序 II|/minimum-pair-removal-to-sort-array-ii/|2608|false
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|3672|子數組中加權衆數的總和|/sum-of-weighted-modes-in-subarrays/|null|true
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|3391|設計一個高效的層跟蹤三維二進制矩陣|/design-a-3d-binary-matrix-with-efficient-layer-tracking/|null|true
+PROBLEM|五、堆（優先隊列） > §5.6 懶刪除堆|716|最大棧|/max-stack/|null|true
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|2102|序列順序查詢|/sequentially-ordinal-rank-tracker/|2159|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|295|數據流的中位數|/find-median-from-data-stream/|null|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|480|滑動窗口中位數|/sliding-window-median/|null|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|2653|滑動子數組的美麗值|/sliding-subarray-beauty/|null|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|1825|求出 MK 平均值|/finding-mk-average/|2396|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|3505|使 K 個子數組內元素相等的最少操作數|/minimum-operations-to-make-elements-within-k-subarrays-equal/|2539|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|3013|將數組分成最小總代價的子數組 II|/divide-an-array-into-subarrays-with-minimum-cost-ii/|2540|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|3321|計算子數組的 x-sum II|/find-x-sum-of-all-k-long-subarrays-ii/|2598|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|LCP 24|數字遊戲|/5TxKeK/|null|false
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|3369|設計數組統計跟蹤器|/design-an-array-statistics-tracker/|null|true
+PROBLEM|五、堆（優先隊列） > §5.7 對頂堆|3422|將子數組元素變為相等所需的最小操作數|/minimum-operations-to-make-subarray-elements-equal/|null|true
+PROBLEM|六、字典樹（trie） > §6.1 基礎|208|實現 Trie (前綴樹)|/implement-trie-prefix-tree/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|3597|分割字符串|/partition-string/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|648|單詞替換|/replace-words/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|720|詞典中最長的單詞|/longest-word-in-dictionary/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|2416|字符串的前綴分數和|/sum-of-prefix-scores-of-strings/|1725|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|677|鍵值映射|/map-sum-pairs/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|1268|搜索推薦系統|/search-suggestions-system/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|1233|刪除子文件夾|/remove-sub-folders-from-the-filesystem/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|820|單詞的壓縮編碼|/short-encoding-of-words/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|2261|含最多 K 個可整除元素的子數組|/k-divisible-elements-subarrays/|null|false
+PROBLEM|六、字典樹（trie） > §6.1 基礎|1804|實現 Trie （前綴樹） II|/implement-trie-ii-prefix-tree/|null|true
+PROBLEM|六、字典樹（trie） > §6.1 基礎|2168|每個數字的頻率都相同的獨特子字符串的數量|/unique-substrings-with-equal-digit-frequency/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|211|添加與搜索單詞 - 數據結構設計|/design-add-and-search-words-data-structure/|null|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|676|實現一個魔法字典|/implement-magic-dictionary/|null|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|212|單詞搜索 II|/word-search-ii/|null|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|3093|最長公共後綴查詢|/longest-common-suffix-queries/|2118|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|745|前綴和後綴搜索|/prefix-and-suffix-search/|null|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|3045|統計前後綴下標對 II|/count-prefix-and-suffix-pairs-ii/|2328|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|336|迴文對|/palindrome-pairs/|null|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|1948|刪除系統中的重複文件夾|/delete-duplicate-folders-in-system/|2534|false
+PROBLEM|六、字典樹（trie） > §6.2 進階|425|單詞方塊|/word-squares/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|527|單詞縮寫|/word-abbreviation/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|588|設計內存文件系統|/design-in-memory-file-system/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|616|給字符串添加加粗標籤|/add-bold-tag-in-string/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|758|字符串中的加粗單詞|/bold-words-in-string/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|642|設計搜索自動補全系統|/design-search-autocomplete-system/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|1065|字符串的索引對|/index-pairs-of-a-string/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|1166|設計文件系統|/design-file-system/|null|true
+PROBLEM|六、字典樹（trie） > §6.2 進階|1858|包含所有前綴的最長單詞|/longest-word-with-all-prefixes/|null|true
+PROBLEM|六、字典樹（trie） > §6.3 字典樹優化 DP|139|單詞拆分|/word-break/|null|false
+PROBLEM|六、字典樹（trie） > §6.3 字典樹優化 DP|140|單詞拆分 II|/word-break-ii/|null|false
+PROBLEM|六、字典樹（trie） > §6.3 字典樹優化 DP|面試題 17.13|恢復空格|/re-space-lcci/|null|false
+PROBLEM|六、字典樹（trie） > §6.3 字典樹優化 DP|472|連接詞|/concatenated-words/|null|false
+PROBLEM|六、字典樹（trie） > §6.3 字典樹優化 DP|2977|轉換字符串的最小成本 II|/minimum-cost-to-convert-string-ii/|2696|false
+PROBLEM|六、字典樹（trie） > §6.4 0-1 字典樹|421|數組中兩個數的最大異或值|/maximum-xor-of-two-numbers-in-an-array/|null|false
+PROBLEM|六、字典樹（trie） > §6.4 0-1 字典樹|2935|找出強數對的最大異或值 II|/maximum-strong-pair-xor-ii/|2349|false
+PROBLEM|六、字典樹（trie） > §6.4 0-1 字典樹|1707|與數組中元素的最大異或值|/maximum-xor-with-an-element-from-array/|2359|false
+PROBLEM|六、字典樹（trie） > §6.4 0-1 字典樹|1803|統計異或值在範圍內的數對有多少|/count-pairs-with-xor-in-a-range/|2479|false
+PROBLEM|六、字典樹（trie） > §6.4 0-1 字典樹|1938|查詢最大基因差|/maximum-genetic-difference-query/|2503|false
+PROBLEM|六、字典樹（trie） > §6.4 0-1 字典樹|3632|異或至少為 K 的子數組數目|/subarrays-with-xor-at-least-k/|null|true
+PROBLEM|六、字典樹（trie） > §6.4 0-1 字典樹|2479|兩個不重疊子樹的最大異或值|/maximum-xor-of-two-non-overlapping-subtrees/|null|true
+PROBLEM|七、並查集 > 無分類|684|冗餘連接|/redundant-connection/|null|false
+PROBLEM|七、並查集 > 無分類|3493|屬性圖|/properties-graph/|1565|false
+PROBLEM|七、並查集 > 無分類|990|等式方程的可滿足性|/satisfiability-of-equality-equations/|1638|false
+PROBLEM|七、並查集 > 無分類|721|賬戶合併|/accounts-merge/|null|false
+PROBLEM|七、並查集 > 無分類|3532|針對圖的路徑存在性查詢 I|/path-existence-queries-in-a-graph-i/|null|false
+PROBLEM|七、並查集 > 無分類|737|句子相似性 II|/sentence-similarity-ii/|null|true
+PROBLEM|七、並查集 > 無分類|1101|彼此熟識的最早時間|/the-earliest-moment-when-everyone-become-friends/|null|true
+PROBLEM|七、並查集 > 無分類|1258|近義詞句子|/synonymous-sentences/|null|true
+PROBLEM|七、並查集 > §7.2 進階|3551|數位和排序需要的最小交換次數|/minimum-swaps-to-sort-by-digit-sum/|1507|false
+PROBLEM|七、並查集 > §7.2 進階|2471|逐層排序二叉樹所需的最少操作數目|/minimum-number-of-operations-to-sort-a-binary-tree-by-level/|1635|false
+PROBLEM|七、並查集 > §7.2 進階|1202|交換字符串中的元素|/smallest-string-with-swaps/|1855|false
+PROBLEM|七、並查集 > §7.2 進階|1061|按字典序排列最小的等效字符串|/lexicographically-smallest-equivalent-string/|null|false
+PROBLEM|七、並查集 > §7.2 進階|1722|執行交換操作後的最小漢明距離|/minimize-hamming-distance-after-swap-operations/|1892|false
+PROBLEM|七、並查集 > §7.2 進階|3608|包含 K 個連通分量需要的最小時間|/minimum-time-for-k-connected-components/|1893|false
+PROBLEM|七、並查集 > §7.2 進階|3613|最小化連通分量的最大成本|/minimize-maximum-component-cost/|null|false
+PROBLEM|七、並查集 > §7.2 進階|778|水位上升的泳池中游泳|/swim-in-rising-water/|null|false
+PROBLEM|七、並查集 > §7.2 進階|3695|交換元素後的最大交替和|/maximize-alternating-sum-using-swaps/|1984|false
+PROBLEM|七、並查集 > §7.2 進階|765|情侶牽手|/couples-holding-hands/|1999|false
+PROBLEM|七、並查集 > §7.2 進階|2092|找出知曉祕密的所有專家|/find-all-people-with-secret/|2004|false
+PROBLEM|七、並查集 > §7.2 進階|947|移除最多的同行或同列石頭|/most-stones-removed-with-same-row-or-column/|2035|false
+PROBLEM|七、並查集 > §7.2 進階|839|相似字符串組|/similar-string-groups/|2054|false
+PROBLEM|七、並查集 > §7.2 進階|685|冗餘連接 II|/redundant-connection-ii/|null|false
+PROBLEM|七、並查集 > §7.2 進階|1970|你能穿過矩陣的最後一天|/last-day-where-you-can-still-cross/|2124|false
+PROBLEM|七、並查集 > §7.2 進階|2076|處理含限制條件的好友請求|/process-restricted-friend-requests/|2131|false
+PROBLEM|七、並查集 > §7.2 進階|1579|保證圖可完全遍歷|/remove-max-number-of-edges-to-keep-graph-fully-traversable/|2132|false
+PROBLEM|七、並查集 > §7.2 進階|959|由斜槓劃分區域|/regions-cut-by-slashes/|2136|false
+PROBLEM|七、並查集 > §7.2 進階|2812|找出最安全路徑|/find-the-safest-path-in-a-grid/|2154|false
+PROBLEM|七、並查集 > §7.2 進階|2503|矩陣查詢可獲得的最大分數|/maximum-number-of-points-from-grid-queries/|2196|false
+PROBLEM|七、並查集 > §7.2 進階|3600|升級後最大生成樹穩定性|/maximize-spanning-tree-stability-with-upgrades/|2301|false
+PROBLEM|七、並查集 > §7.2 進階|2867|統計樹中的合法路徑數目|/count-valid-paths-in-a-tree/|2428|false
+PROBLEM|七、並查集 > §7.2 進階|2421|好路徑的數目|/number-of-good-paths/|2445|false
+PROBLEM|七、並查集 > §7.2 進階|2157|字符串分組|/groups-of-strings/|2499|false
+PROBLEM|七、並查集 > §7.2 進階|1632|矩陣轉換後的排名|/rank-transform-of-a-matrix/|2530|false
+PROBLEM|七、並查集 > §7.2 進階|803|打磚塊|/bricks-falling-when-hit/|2765|false
+PROBLEM|七、並查集 > §7.2 進階|3235|判斷矩形的兩個角落是否可達|/check-if-the-rectangle-corner-is-reachable/|null|false
+PROBLEM|七、並查集 > §7.2 進階|LCP 71|集水器|/kskhHQ/|null|false
+PROBLEM|七、並查集 > §7.2 進階|2371|最小化網格中的最大值|/minimize-maximum-value-in-a-grid/|null|true
+PROBLEM|七、並查集 > §7.2 進階|2459|通過移動項目到空白區域來排序數組|/sort-array-by-moving-items-to-empty-space/|null|true
+PROBLEM|七、並查集 > §7.3 GCD 並查集|2709|最大公約數遍歷|/greatest-common-divisor-traversal/|2172|false
+PROBLEM|七、並查集 > §7.3 GCD 並查集|1627|帶閾值的圖連通性|/graph-connectivity-with-threshold/|2221|false
+PROBLEM|七、並查集 > §7.3 GCD 並查集|952|按公因數計算最大組件大小|/largest-component-size-by-common-factor/|2272|false
+PROBLEM|七、並查集 > §7.3 GCD 並查集|1998|數組的最大公因數排序|/gcd-sort-of-an-array/|2429|false
+PROBLEM|七、並查集 > §7.3 GCD 並查集|3378|統計最小公倍數圖中的連通塊數目|/count-connected-components-in-lcm-graph/|2532|false
+PROBLEM|七、並查集 > §7.4 數組上的並查集|1562|查找大小為 M 的最新分組|/find-latest-group-of-size-m/|1928|false
+PROBLEM|七、並查集 > §7.4 數組上的並查集|1488|避免洪水氾濫|/avoid-flood-in-the-city/|1974|false
+PROBLEM|七、並查集 > §7.4 數組上的並查集|1353|最多可以參加的會議數目|/maximum-number-of-events-that-can-be-attended/|2016|false
+PROBLEM|七、並查集 > §7.4 數組上的並查集|2382|刪除操作後的最大子段和|/maximum-segment-sum-after-removals/|2136|false
+PROBLEM|七、並查集 > §7.4 數組上的並查集|2334|元素值大於變化閾值的子數組|/subarray-with-elements-greater-than-varying-threshold/|2381|false
+PROBLEM|七、並查集 > §7.4 數組上的並查集|3666|使二進制字符串全為 1 的最少操作次數|/minimum-operations-to-equalize-binary-string/|2477|false
+PROBLEM|七、並查集 > §7.4 數組上的並查集|2612|最少翻轉操作數|/minimum-reverse-operations/|2824|false
+PROBLEM|七、並查集 > §7.5 區間並查集|3244|新增道路查詢後的最短距離 II|/shortest-distance-after-road-addition-queries-ii/|2270|false
+PROBLEM|七、並查集 > §7.5 區間並查集|1851|包含每個查詢的最小區間|/minimum-interval-to-include-each-query/|2286|false
+PROBLEM|七、並查集 > §7.5 區間並查集|LCP 52|二叉搜索樹染色|/QO5KpG/|null|false
+PROBLEM|七、並查集 > §7.5 區間並查集|2158|每天繪製新區域的數量|/amount-of-new-area-painted-each-day/|null|true
+PROBLEM|七、並查集 > §7.6 帶權並查集|399|除法求值|/evaluate-division/|null|false
+PROBLEM|七、並查集 > §7.6 帶權並查集|3710|最大劃分因子|/maximum-partition-factor/|2135|false
+PROBLEM|七、並查集 > §7.6 帶權並查集|2307|檢查方程中的矛盾之處|/check-for-contradictions-in-equations/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|307|區域和檢索 - 數組可修改|/range-sum-query-mutable/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3072|將元素分配到兩個數組中 II|/distribute-elements-into-two-arrays-ii/|2053|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3624|位計數深度為 K 的整數數目 II|/number-of-integers-with-popcount-depth-equal-to-k-ii/|2086|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3187|數組中的峰值|/peaks-in-array/|2154|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3777|使子字符串變交替的最少刪除次數|/minimum-deletions-to-make-alternating-substring/|2202|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|1649|通過指令創建有序數組|/create-sorted-array-through-instructions/|2208|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|1626|無矛盾的最佳球隊|/best-team-with-no-conflicts/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|1409|查詢帶鍵的排列|/queries-on-a-permutation/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2250|統計包含每個點的矩形數目|/count-number-of-rectangles-containing-each-point/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2179|統計數組中好三元組數目|/count-good-triplets-in-an-array/|2272|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|1395|統計作戰單位數|/count-number-of-teams/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2659|將數組清空|/make-array-empty/|2282|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2653|滑動子數組的美麗值|/sliding-subarray-beauty/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3515|帶權樹中的最短路徑|/shortest-path-in-a-weighted-tree/|2312|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|LCP 05|發 LeetCoin|/coin-bonus/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|1505|最多 K 次交換相鄰數位後得到的最小整數|/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/|2337|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2926|平衡子序列的最大和|/maximum-balanced-subsequence-sum/|2448|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2736|最大和查詢|/maximum-sum-queries/|2533|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3671|子序列美麗值求和|/sum-of-beautiful-subsequences/|2647|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3382|用點構造面積最大的矩形 II|/maximum-area-rectangle-with-point-constraints-ii/|2723|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3590|第 K 小的路徑異或和|/kth-smallest-path-xor-sum/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3245|交替組 III|/alternating-groups-iii/|3112|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3027|人員站位的方案數 II|/find-the-number-of-ways-to-place-people-ii/|2020|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|1756|設計最近使用（MRU）隊列|/design-most-recently-used-queue/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|60|排列序列|/permutation-sequence/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|3109|查找排列的下標|/find-the-index-of-permutation/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2519|統計 K-Big 索引的數量|/count-the-number-of-k-big-indices/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2613|美數對|/beautiful-pairs/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|2921|價格遞增的最大利潤三元組 II|/maximum-profitable-triplets-with-increasing-prices-ii/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.1 樹狀數組|308|二維區域和檢索 - 可變|/range-sum-query-2d-mutable/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|LCR 170|交易逆序對的總數|/shu-zu-zhong-de-ni-xu-dui-lcof/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|315|計算右側小於當前元素的個數|/count-of-smaller-numbers-after-self/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|493|翻轉對|/reverse-pairs/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|327|區間和的個數|/count-of-range-sum/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|2426|滿足不等式的數對數目|/number-of-pairs-satisfying-inequality/|2030|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|3768|固定長度子數組中的最小逆序對數目|/minimum-inversion-count-in-subarrays-of-fixed-length/|2158|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|1850|鄰位交換的最小次數|/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|2193|得到迴文串的最少操作次數|/minimum-number-of-moves-to-make-palindrome/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.2 逆序對|1885|統計數對|/count-pairs-in-two-arrays/|null|true
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|3479|水果成籃 III|/fruits-into-baskets-iii/|2178|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|2940|找到 Alice 和 Bob 可以相遇的建築|/find-building-where-alice-and-bob-can-meet/|2327|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|2286|以組為單位訂音樂會的門票|/booking-concert-tickets-in-groups/|2470|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|3161|物塊放置查詢|/block-placement-queries/|2513|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|2213|由單個字符重複的最長子字符串|/longest-substring-of-one-repeating-character/|2629|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|3525|求出數組的 X 值 II|/find-x-value-of-array-ii/|2645|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|3165|不包含相鄰元素的子序列的最大和|/maximum-sum-of-subsequence-with-non-adjacent-elements/|2697|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|3410|刪除所有值為某個元素後的最大子數組和|/maximize-subarray-sum-after-removing-all-occurrences-of-one-element/|2844|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|3501|操作後最大活躍區段數 II|/maximize-active-section-with-trade-ii/|2941|false
+PROBLEM|八、樹狀數組和線段樹 > §8.3 線段樹|LCP 81|與非的謎題|/ryfUiz/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|2569|更新數組後處理求和查詢|/handling-sum-queries-after-update/|2398|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|1622|奇妙序列|/fancy-sequence/|2476|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|2502|設計內存分配器|/design-memory-allocator/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|2589|完成所有任務的最少時間|/minimum-time-to-complete-all-tasks/|2381|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|2547|拆分數組的最小代價|/minimum-cost-to-split-an-array/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|850|矩形面積 II|/rectangle-area-ii/|2236|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|3454|分割正方形 II|/separate-squares-ii/|2671|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|3569|分割數組後不同質數的最大數目|/maximize-count-of-distinct-primes-after-split/|2697|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|3721|最長平衡子數組 II|/longest-balanced-subarray-ii/|2724|false
+PROBLEM|八、樹狀數組和線段樹 > §8.4 Lazy 線段樹|2916|子數組不同元素數目的平方和 II|/subarrays-distinct-element-sum-of-squares-ii/|2816|false
+PROBLEM|八、樹狀數組和線段樹 > §8.5 動態開點線段樹|699|掉落的方塊|/falling-squares/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.5 動態開點線段樹|715|Range 模塊|/range-module/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.5 動態開點線段樹|729|我的日程安排表 I|/my-calendar-i/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.5 動態開點線段樹|731|我的日程安排表 II|/my-calendar-ii/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.5 動態開點線段樹|732|我的日程安排表 III|/my-calendar-iii/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.5 動態開點線段樹|2276|統計區間中的整數數目|/count-integers-in-intervals/|2222|false
+PROBLEM|八、樹狀數組和線段樹 > §8.5 動態開點線段樹|2770|達到末尾下標所需的最大跳躍次數|/maximum-number-of-jumps-to-reach-the-last-index/|null|false
+PROBLEM|八、樹狀數組和線段樹 > §8.6 可持久化線段樹|3762|使數組元素相等的最小操作次數|/minimum-operations-to-equalize-subarrays/|2497|false
+PROBLEM|八、樹狀數組和線段樹 > §8.7 ST 表|3691|最大子數組總值 II|/maximum-total-subarray-value-ii/|2469|false
+PROBLEM|八、樹狀數組和線段樹 > §8.7 ST 表|3501|操作後最大活躍區段數 II|/maximize-active-section-with-trade-ii/|2941|false
+PROBLEM|九、伸展樹|2296|設計一個文本編輯器|/design-a-text-editor/|1912|false
+PROBLEM|九、伸展樹|3526|範圍異或查詢與子數組反轉|/range-xor-queries-with-subarray-reversals/|null|true
+PROBLEM|十、根號算法 > §8.1 根號分解|3655|區間乘法查詢後的異或 II|/xor-after-range-multiplication-queries-ii/|2454|false
+PROBLEM|十、根號算法 > §8.1 根號分解|LCP 16|遊樂園的遊覽計劃|/you-le-yuan-de-you-lan-ji-hua/|null|false
+PROBLEM|十、根號算法 > §8.1 根號分解|1714|數組中特殊等間距元素的和|/sum-of-special-evenly-spaced-elements-in-array/|null|true
+PROBLEM|十、根號算法 > §8.1 根號分解|3400|右移後的最大匹配索引數|/maximum-number-of-matching-indices-after-right-shifts/|null|true
+PROBLEM|十、根號算法 > §8.2 莫隊算法|3636|查詢超過閾值頻率最高元素|/threshold-majority-queries/|2451|false
+PROBLEM|十、根號算法 > §8.2 莫隊算法|3590|第 K 小的路徑異或和|/kth-smallest-path-xor-sum/|2646|false
+PROBLEM|十、根號算法 > §8.3 其他|3234|統計 1 顯著的字符串的數量|/count-the-number-of-substrings-with-dominant-ones/|2557|false

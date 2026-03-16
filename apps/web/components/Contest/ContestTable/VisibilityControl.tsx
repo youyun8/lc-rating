@@ -21,7 +21,7 @@ export function VisibilityControl<TData>({
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="ml-2">
           <EyeOff className="w-4 h-4 mr-2" />
-          列显示
+          顯示欄位
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

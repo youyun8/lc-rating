@@ -8,6 +8,8 @@ import {
 import { cn } from "@/lib/utils";
 import { StudyPlanData } from "@/types";
 import hljs from 'highlight.js';
+import katex from 'katex';
+import markedKatex from 'marked-katex-extension';
 import { Marked } from 'marked';
 import { markedHighlight } from "marked-highlight";
 import React, { useEffect, useRef } from "react";
@@ -21,6 +23,10 @@ const marked = new Marked(
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
       return hljs.highlight(code, { language }).value;
     }
+  }),
+  markedKatex({
+    throwOnError: false,
+    output: 'html'
   })
 );
 
@@ -35,57 +41,75 @@ const SectionContainer = React.memo(
     useEffect(() => {
       if (innerHtml.current) {
         innerHtml.current.querySelectorAll("a").forEach((link) => {
-          link.style = "";
+          link.removeAttribute("style");
           link.setAttribute("target", "_blank");
           link.className = "underline text-blue-500";
         });
         innerHtml.current.querySelectorAll("img").forEach((img) => {
-          img.style = "";
+          img.removeAttribute("style");
           img.className = "w-2/3 md:w-1/2";
         });
       }
     }, [innerHtml]);
 
     const createMarkup = (md: string) => {
-      return { __html: marked.parse(md) };
+      const parsed = marked.parse(md);
+      if (typeof parsed === 'string') {
+        return { __html: parsed };
+      }
+      console.error("marked.parse returned non-string:", parsed);
+      return { __html: "" };
     };
 
-    const cardClasses = cn("scroll-mt-[70px]", {
-      "w-full": section.children && section.children.length > 0,
-    }, section.isLeaf? "border": "", "h-fit");
+    const cardClasses = cn("scroll-mt-[70px] w-full", {
+      "border-none shadow-none bg-transparent": level > 0,
+      "border shadow-sm": level === 0,
+    }, "h-fit transition-all");
 
-    const contentClasses = cn("flex flex-row flex-wrap p-1 gap-3", {
-      "rounded dark:bg-muted/30": (section.problems && section.problems.length > 0),
+    const contentClasses = cn("flex flex-col p-0 gap-6", {
+      "pl-4 md:pl-8 border-l-2 border-muted ml-2 mt-4": level >= 0 && section.children && section.children.length > 0,
     });
 
     return (
       <Card
         id={`${section.title}`}
-        // 导航栏高度是 60px
         className={cardClasses}
       >
-        <CardHeader>
-          <CardTitle>{section.title}</CardTitle>
+        <CardHeader className={cn("pb-3", level > 0 ? "px-0" : "")}>
+          <CardTitle className={cn(
+            "font-bold tracking-tight",
+            level === 0 ? "text-2xl" : level === 1 ? "text-xl" : "text-lg"
+          )}>
+            {section.title}
+          </CardTitle>
           {(section.summary || section.content) ? (
-            <CardDescription>
-              <p
+            <CardDescription className="text-foreground mt-3">
+              <div
                 ref={innerHtml}
-                className="p-4 rounded dark:bg-gray-800 rounded-lg max-w-md overflow-x-auto"
+                className="prose prose-base dark:prose-invert max-w-none prose-pre:my-2"
                 dangerouslySetInnerHTML={createMarkup(section.summary || section.content || "")}
               />
             </CardDescription>
           ) : null}
         </CardHeader>
-        <CardContent>
+        <CardContent className={level > 0 ? "px-0" : ""}>
           <div className={contentClasses}>
-            {section.problems && section.problems.length ? <ProblemList problems={section.problems} /> : null}
-            { section.children && section.children.map((section) => (
-              <SectionContainer
-                key={section.title}
-                section={section}
-                level={level + 1}
-              />
-            ))}
+            {section.problems && section.problems.length ? (
+              <div className="w-full">
+                <ProblemList problems={section.problems} />
+              </div>
+            ) : null}
+            { section.children && section.children.length > 0 && (
+              <div className="flex flex-col gap-8 w-full">
+                {section.children.map((child) => (
+                  <SectionContainer
+                    key={child.title}
+                    section={child}
+                    level={level + 1}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -96,4 +120,3 @@ const SectionContainer = React.memo(
 SectionContainer.displayName = "SectionContainer";
 
 export { SectionContainer };
-

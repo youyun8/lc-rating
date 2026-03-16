@@ -42,10 +42,10 @@ export type TableCol = {
 };
 
 export const key2Label: { [K in keyof TableCol]: string } = {
-  contest: "比赛",
-  problem: "题目",
-  rating: "难度",
-  tags: "算法标签",
-  progress: "进度",
-  solution: "0x3F 题解",
+  contest: "比賽",
+  problem: "題目",
+  rating: "難度",
+  tags: "演算法標籤",
+  progress: "進度",
+  solution: "0x3F 題解",
 };
