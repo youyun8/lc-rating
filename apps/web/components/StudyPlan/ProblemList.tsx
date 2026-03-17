@@ -4,7 +4,6 @@ import { LC_HOST_EN, LC_HOST_ZH } from "@/config/constants";
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { useProblems } from "@/hooks/useProblems";
 import { StudyPlanData } from "@/types";
-import { cn } from "@/lib/utils";
 import React, { useMemo } from "react";
 
 interface ProblemListProps {

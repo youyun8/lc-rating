@@ -1,3 +1,5 @@
+/* global require, __dirname */
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require('fs');
 const path = require('path');
 

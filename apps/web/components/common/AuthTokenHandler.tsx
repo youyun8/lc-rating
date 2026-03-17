@@ -59,7 +59,7 @@ const AuthTokenHandler = () => {
         onClick: handleSync,
       },
     });
-  }, []);
+  }, [setAllProgress]);
 
   return null;
 };

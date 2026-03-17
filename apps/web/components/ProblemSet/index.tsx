@@ -108,29 +108,29 @@ function ProblemSet() {
         },
       };
     });
-  }, [isPending]);
+  }, [contestError, contestMap, problemError, problemMap, solutionError, solutionMap, tagError, tagMap]);
 
-  const [similarties, setSimilarties] = useState<number[] | undefined>();
+  const [similarities, setSimilarties] = useState<number[] | undefined>();
 
   const handleSearch = useCallback(
-    (similarties: number[]) => {
-      setSimilarties(similarties);
+    (similarities: number[]) => {
+      setSimilarties(similarities);
     },
     []
   );
 
   const searchedData = useMemo(() => {
-    if (similarties === undefined) {
+    if (similarities === undefined) {
       return tableData;
     }
     const indices = tableData
       .map((_, idx) => idx)
-      .filter((idx) => similarties[idx] && similarties[idx] > 0.5);
-    indices.sort((a, b) => Number(similarties[b]) - Number(similarties[a]));
+      .filter((idx) => similarities[idx] && similarities[idx] > 0.5);
+    indices.sort((a, b) => Number(similarities[b]) - Number(similarities[a]));
     const filtData = indices.map((idx) => tableData[idx] as TableCol);
 
     return filtData;
-  }, [tableData, similarties]);
+  }, [tableData, similarities]);
 
   return (
     <div className="p-2 sm:p-4 md:p-8 flex flex-col gap-4 font-song">

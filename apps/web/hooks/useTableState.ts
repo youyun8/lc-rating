@@ -18,14 +18,15 @@ export function createTableStore<S extends Partial<TableState>>(
 ): TableStateHook<S> {
   const store = create<S>()(
     persist(
-      (set, get) => ({
+      () => ({
         ...options.initialState,
       }),
       {
         name: options.key,
         version: STORAGE_VERSION,
         partialize: (state) => {
-          const { pagination: _, ...rest } = state;
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { pagination, ...rest } = state;
           return rest;
         },
       }

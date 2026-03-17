@@ -34,7 +34,7 @@ const options = {
 interface WordFilterProps {
   name: string;
   data: TableCol[];
-  onChange: (idx: string, similarties: number[]) => void;
+  onChange: (idx: string, similarities: number[]) => void;
   registerReset: (idx: string, reset: () => void) => void;
 }
 

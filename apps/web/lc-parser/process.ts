@@ -6,9 +6,11 @@ import { readFileSync, writeFileSync } from 'fs';
 import { globSync } from "glob";
 import { ProxyAgent, type RequestInit as UndiciRequestInit, fetch as undiciFetch } from 'undici';
 
+// eslint-disable-next-line turbo/no-undeclared-env-vars
 const HTTP_PROXY = process.env.HTTP_PROXY!; // eg. http://localhost:8080/
 
-function proxyFetch(input: RequestInfo | URL, init?: RequestInit) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function _proxyFetch(input: RequestInfo | URL, init?: RequestInit) {
   console.log('使用代理進行請求:', HTTP_PROXY);
   const dispatcher = new ProxyAgent({
     uri: HTTP_PROXY,
@@ -42,7 +44,9 @@ function proxyFetch(input: RequestInfo | URL, init?: RequestInit) {
 }
 
 const openai = createOpenAICompatible({
+  // eslint-disable-next-line turbo/no-undeclared-env-vars
   baseURL: process.env.BASE_URL!,
+  // eslint-disable-next-line turbo/no-undeclared-env-vars
   apiKey: process.env.MY_API_KEY!,
   name: 'qwen'
 });
@@ -53,9 +57,12 @@ const openai = createOpenAICompatible({
 // });
 
 // const model_id='qwen-plus-latest';
+// eslint-disable-next-line turbo/no-undeclared-env-vars
 const model_id=process.env.MODEL_ID!;
 
+// eslint-disable-next-line turbo/no-undeclared-env-vars
 console.log('🤖 使用的模型介面位址:', process.env.BASE_URL);
+// eslint-disable-next-line turbo/no-undeclared-env-vars
 console.log('🤖 使用的模型 API Key:', process.env.MY_API_KEY);
 
 const systemPrompt = `你是一個專業的技術文件整理助手。處理使用者輸入 Markdown 文件，嚴格按照指定的 JSON 格式輸出，輸出內容不要包含程式碼標籤。
@@ -148,6 +155,7 @@ const runProcess = async (input_file: string) => {
     iterationCount++;
     console.log(`\n🔄 第 ${iterationCount} 輪處理...`);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let messages: any[] = [];
     
     if (iterationCount === 1) {

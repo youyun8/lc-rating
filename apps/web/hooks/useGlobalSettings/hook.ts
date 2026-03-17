@@ -37,9 +37,9 @@ export const useGlobalSettingsStore = create<GlobalSettingsStore>()(
         setTagLanguage: (lang: "zh" | "en") => set({ tagLanguage: lang }),
 
         toggleLinkLanguage: () =>
-          set((state) => ({
+          set({
             linkLanguage: get().linkLanguage === "zh" ? "en" : "zh",
-          })),
+          }),
         setLinkLanguage: (lang: "zh" | "en") => set({ linkLanguage: lang }),
 
         togglePremium: () => set({ premium: !get().premium }),

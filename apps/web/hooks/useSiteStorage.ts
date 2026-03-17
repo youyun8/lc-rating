@@ -42,7 +42,7 @@ export function useSiteStorage() {
       if (data.options !== undefined) setOptions(data.options);
       if (data.progress !== undefined) setAllProgress(data.progress, data.progressUpdatedAt);
     },
-    []
+    [setTagLanguage, setLinkLanguage, setPremium, setOptions, setAllProgress]
   );
 
   return { siteStorage, setSiteStorage };

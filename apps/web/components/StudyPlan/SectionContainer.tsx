@@ -8,7 +8,6 @@ import {
 import { cn } from "@/lib/utils";
 import { StudyPlanData } from "@/types";
 import hljs from 'highlight.js';
-import katex from 'katex';
 import markedKatex from 'marked-katex-extension';
 import { Marked } from 'marked';
 import { markedHighlight } from "marked-highlight";
@@ -19,7 +18,7 @@ const marked = new Marked(
   markedHighlight({
 	emptyLangClass: 'hljs',
     langPrefix: 'hljs language-',
-    highlight(code, lang, info) {
+    highlight(code, lang) {
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
       return hljs.highlight(code, { language }).value;
     }

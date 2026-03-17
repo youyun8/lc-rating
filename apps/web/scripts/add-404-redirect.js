@@ -1,3 +1,4 @@
+/* global process */
 // This script adds client-side redirect logic to 404.html for GitHub Pages
 // It handles the case where users visit /problemset without trailing slash
 

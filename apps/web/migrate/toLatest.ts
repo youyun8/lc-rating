@@ -4,21 +4,24 @@ import { ProgressStoreState } from "@/hooks/useProgress";
 
 export const optionToLTS = (
   persistedState: unknown,
-  version: number
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _version: number
 ): OptionsStoreState => {
   return persistedState as OptionsStoreState;
 };
 
 export const progressToLTS = (
   persistedState: unknown,
-  version: number
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _version: number
 ): ProgressStoreState => {
   return persistedState as ProgressStoreState;
 };
 
 export const globalSettingToLTS = (
   persistedState: unknown,
-  version: number
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _version: number
 ): GlobalSettingsStoreState => {
   return persistedState as GlobalSettingsStoreState;
 };

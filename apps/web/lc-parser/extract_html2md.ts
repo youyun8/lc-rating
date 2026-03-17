@@ -11,13 +11,6 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 }
 
 /**
- * Sanitize filename by removing invalid characters
- */
-function sanitizeFilename(filename: string): string {
-  return filename.replace(/[\\/*?:"<>|]/g, '');
-}
-
-/**
  * Download file from URL
  */
 async function downloadFile(url: string, localFilename: string): Promise<string> {
@@ -101,8 +94,8 @@ async function main() {
     ['string.html', 'https://leetcode.cn/circle/discuss/SJFwQI/'],
   ];
 
-  for (let [filename, url] of lists) {
-    filename = OUTPUT_DIR + '/' + filename;
+  for (const [name, url] of lists) {
+    const filename = OUTPUT_DIR + '/' + name;
     try {
       const localFile = await downloadFile(url, filename);
       await extractAndConvert(localFile);

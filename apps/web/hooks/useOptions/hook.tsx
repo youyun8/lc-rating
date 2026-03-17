@@ -65,7 +65,7 @@ const useOptionsStore = create<OptionsStore>()(
           if (typeof key === "undefined") {
             return fullConfig.TODO;
           }
-          let option = fullConfig[key];
+          const option = fullConfig[key];
           if (option === undefined) {
             console.error(`[useOptionsStore] Invalid progress key: ${key}`);
             return {

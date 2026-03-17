@@ -14,12 +14,12 @@ import { WordFilter } from "./WordFilter";
 
 interface SearchProps {
   data: TableCol[];
-  onSearch: (similarties: number[]) => void;
+  onSearch: (similarities: number[]) => void;
 }
 
 const Search = React.memo(({ data, onSearch }: SearchProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [similartiesMap, setSimilartiesMap] = useState<
+  const [similaritiesMap, setSimilartiesMap] = useState<
     Record<string, number[]>
   >({});
   const [resets, setResets] = useState<Record<string, () => void>>({});
@@ -45,7 +45,7 @@ const Search = React.memo(({ data, onSearch }: SearchProps) => {
   }, []);
 
   const handleConfirm = useCallback(() => {
-    const results = Object.values(similartiesMap).reduce(
+    const results = Object.values(similaritiesMap).reduce(
       (total, arr) => {
         arr.forEach((val, idx) => {
           if (total[idx]) {
@@ -58,7 +58,7 @@ const Search = React.memo(({ data, onSearch }: SearchProps) => {
     );
 
     onSearch(results);
-  }, [similartiesMap, data.length, onSearch]);
+  }, [similaritiesMap, data.length, onSearch]);
 
   useEffect(() => {
     handleConfirmRef.current = handleConfirm;

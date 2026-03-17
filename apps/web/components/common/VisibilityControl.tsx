@@ -7,14 +7,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Table } from "@tanstack/react-table";
 import { EyeOff } from "lucide-react";
-import { key2Label, TableCol } from "./types";
 
 interface VisibilityControlProps<TData> {
   table: Table<TData>;
+  key2Label: Record<string, string>;
 }
 
 export function VisibilityControl<TData>({
   table,
+  key2Label,
 }: VisibilityControlProps<TData>) {
   return (
     <DropdownMenu>
@@ -34,7 +35,7 @@ export function VisibilityControl<TData>({
               checked={column.getIsVisible()}
               onCheckedChange={(value) => column.toggleVisibility(!!value)}
             >
-              {key2Label[column.id as keyof TableCol]}
+              {key2Label[column.id]}
             </DropdownMenuCheckboxItem>
           ))}
       </DropdownMenuContent>

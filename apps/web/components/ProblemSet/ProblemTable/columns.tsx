@@ -2,6 +2,7 @@ import { I18NLink } from "@/components/common/I18NLink";
 import { I18NTag } from "@/components/common/I18NTag";
 import { ProgressSelector } from "@/components/common/ProgressSelector";
 import { RatingCircle, ratingInfo } from "@/components/common/RatingCircle";
+import { SortIndicator } from "@/components/common/SortIndicator";
 import { createColumnHelper, InitialTableState } from "@tanstack/react-table";
 import { key2Label, TableCol } from "./types";
 
@@ -9,7 +10,7 @@ const columnHelper = createColumnHelper<TableCol>();
 
 export const getColumns = () => [
   columnHelper.accessor("contest", {
-    header: () => <div>{key2Label["contest"]}</div>,
+    header: ({ column }) => <div className="flex items-center gap-2">{key2Label["contest"]}<SortIndicator column={column} /></div>,
     cell: ({ row }) => {
       const contest = row.getValue<TableCol["contest"]>("contest");
       return (
@@ -26,7 +27,7 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("problem", {
-    header: () => <div>{key2Label["problem"]}</div>,
+    header: ({ column }) => <div className="flex items-center gap-2">{key2Label["problem"]}<SortIndicator column={column} /></div>,
     cell: ({ row }) => {
       const problem = row.getValue<TableCol["problem"]>("problem");
       return (
@@ -43,7 +44,7 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("rating", {
-    header: () => <div>{key2Label["rating"]}</div>,
+    header: ({ column }) => <div className="flex items-center gap-2">{key2Label["rating"]}<SortIndicator column={column} /></div>,
     cell: ({ row }) => {
       const rating = row.getValue<number>("rating");
       const info = ratingInfo(rating);

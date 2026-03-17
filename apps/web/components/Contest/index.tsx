@@ -21,7 +21,7 @@ function ProblemSet() {
     isPending: contestPending,
     error: contestError,
   } = useContests();
-  const { tagMap = {}, isPending: tagPending, error: tagError } = useTags();
+  const { isPending: tagPending, error: tagError } = useTags();
   const {
     solutionMap = {},
     isPending: solutionPending,
@@ -44,7 +44,7 @@ function ProblemSet() {
     if (solutionError) {
       console.error("[ProblemSet] solutions Error: ", solutionError);
     }
-  }, [isPending]);
+  }, [isPending, contestError, problemError, solutionError, tagError]);
 
   const tableData: TableCol[] = useMemo(() => {
     // Return empty array if data is still loading

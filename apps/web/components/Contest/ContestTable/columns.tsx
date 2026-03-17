@@ -1,13 +1,12 @@
 import { I18NLink } from "@/components/common/I18NLink";
 import { RatingCircle, ratingInfo } from "@/components/common/RatingCircle";
 import { Input } from "@/components/ui/input"; // 確保導入Input組件
+import { SortIndicator } from "@/components/common/SortIndicator";
 import {
   createColumnHelper,
   IdentifiedColumnDef,
   InitialTableState,
-  Row,
 } from "@tanstack/react-table";
-import { ArrowDownUp, MoveDown, MoveUp } from "lucide-react";
 import { key2Label, Q, TableCol } from "./types";
 
 const columnHelper = createColumnHelper<TableCol>();
@@ -38,17 +37,7 @@ const generate = (
       return (
         <div className="flex flex-row items-center gap-2">
           <div>{key2Label[key]}</div>
-          {(() => {
-            if (!column.getCanSort()) {
-              return null;
-            } else if (!column.getIsSorted()) {
-              return <ArrowDownUp size="1em" />;
-            } else if (column.getIsSorted() === "desc") {
-              return <MoveDown size="1em" />;
-            } else {
-              return <MoveUp size="1em" />;
-            }
-          })()}
+          <SortIndicator column={column} />
           <div className="flex gap-1">
             <Input
               type="number"
@@ -141,17 +130,7 @@ export const getColumns = () => [
     header: ({ column }) => (
       <div className="flex flex-row items-center gap-2">
         {key2Label["contest"]}
-        {(() => {
-          if (!column.getCanSort()) {
-            return null;
-          } else if (!column.getIsSorted()) {
-            return <ArrowDownUp size="1em" />;
-          } else if (column.getIsSorted() === "desc") {
-            return <MoveDown size="1em" />;
-          } else {
-            return <MoveUp size="1em" />;
-          }
-        })()}
+        <SortIndicator column={column} />
       </div>
     ),
     cell: ({ row }) => {

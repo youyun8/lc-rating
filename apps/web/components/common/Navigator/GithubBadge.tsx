@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 const GithubBadge = () => {
-  const { data, isPending, error } = useQuery<number>({
+  const { data } = useQuery<number>({
     queryKey: ["github-stars"],
     queryFn: () =>
       fetch("https://api.github.com/repos/huxulm/lc-rating")
