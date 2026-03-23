@@ -60,21 +60,14 @@ const SectionContainer = React.memo(
       return { __html: "" };
     };
 
-    const cardClasses = cn("scroll-mt-[70px] w-full", {
-      "border shadow-none bg-card": level === 0,
-      "border-none shadow-none bg-transparent": level > 0,
-    }, "h-fit");
-
-    const contentClasses = cn("flex flex-col p-0 gap-6", {
-      "pl-4 md:pl-6 border-l-2 border-border/40 ml-1 mt-4": level >= 0 && section.children && section.children.length > 0,
-    });
+    const cardClasses = cn("scroll-mt-[70px] w-full h-fit shadow-none border bg-card");
 
     return (
       <Card
         id={`${section.title}`}
         className={cardClasses}
       >
-        <CardHeader className={cn("pb-3", level > 0 ? "px-0" : "")}>
+        <CardHeader className="pb-3">
           <CardTitle className={cn(
             "font-bold tracking-tight",
             level === 0 ? "text-2xl" : level === 1 ? "text-xl" : "text-lg"
@@ -91,15 +84,15 @@ const SectionContainer = React.memo(
             </CardDescription>
           ) : null}
         </CardHeader>
-        <CardContent className={level > 0 ? "px-0" : ""}>
-          <div className={contentClasses}>
+        <CardContent>
+          <div className="flex flex-col gap-4">
             {section.problems && section.problems.length ? (
               <div className="w-full">
                 <ProblemList problems={section.problems} />
               </div>
             ) : null}
-            { section.children && section.children.length > 0 && (
-              <div className="flex flex-col gap-8 w-full">
+            {section.children && section.children.length > 0 && (
+              <div className="flex flex-col gap-4 w-full">
                 {section.children.map((child) => (
                   <SectionContainer
                     key={child.title}

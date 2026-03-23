@@ -52,7 +52,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-7 w-18 text-xs rounded-md"
+              className="h-7 w-14 text-xs rounded-md"
             />
             <Input
               type="number"
@@ -67,7 +67,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-7 w-18 text-xs rounded-md"
+              className="h-7 w-14 text-xs rounded-md"
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ const generate = (
             <I18NLink
               link={Q.problem.link}
               title={Q.problem.id === "1000000000" ? Q.problem.title : `${Q.problem.id}. ${Q.problem.title}`}
-              className="text-sm text-foreground hover:text-primary hover:underline transition-colors"
+              className="text-sm text-foreground hover:text-primary hover:underline transition-colors truncate min-w-0"
             />
             <span
               className="flex-shrink-0 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
@@ -141,7 +141,7 @@ export const getColumns = () => [
         <I18NLink
           link={contest.link}
           title={contest.title}
-          className="text-sm text-foreground hover:text-primary hover:underline transition-colors"
+          className="text-sm text-foreground hover:text-primary hover:underline transition-colors truncate block"
         />
       );
     },

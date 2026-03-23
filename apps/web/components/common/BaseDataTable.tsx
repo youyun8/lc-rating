@@ -23,6 +23,8 @@ interface BaseDataTableProps<TData> {
   rowClassName?: string;
   separator?: React.ReactNode;
   renderHeaderExtra?: (header: { column: { getCanSort: () => boolean; getToggleSortingHandler: () => ((event: unknown) => void) | undefined } }) => React.ReactNode;
+  /** When true, applies each column's TanStack size as an inline width style on <th> elements. Useful with table-fixed layout. */
+  applySizeStyles?: boolean;
 }
 
 export function BaseDataTable<TData>({
@@ -35,6 +37,7 @@ export function BaseDataTable<TData>({
   cellBorderClassName = "border border-muted-foreground/30",
   rowClassName,
   separator,
+  applySizeStyles = false,
 }: BaseDataTableProps<TData>) {
   const tableState = table.getState();
 
@@ -69,7 +72,7 @@ export function BaseDataTable<TData>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className={headerBorderClassName}>
+                  <TableHead key={header.id} className={headerBorderClassName} style={applySizeStyles ? { width: header.column.getSize() } : undefined}>
                     <div
                       className={cn(headerClassName, {
                         "cursor-pointer": header.column.getCanSort(),
