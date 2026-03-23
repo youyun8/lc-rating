@@ -24,10 +24,29 @@ const marked = new Marked(
     }
   }),
   markedKatex({
+    nonStandard: true,
     throwOnError: false,
     output: 'html'
   })
 );
+
+function createMarkup(md: string) {
+  const parsed = marked.parse(md);
+  if (typeof parsed === 'string') {
+    return { __html: parsed };
+  }
+  console.error("marked.parse returned non-string:", parsed);
+  return { __html: "" };
+}
+
+function createInlineMarkup(md: string) {
+  const parsed = marked.parseInline(md);
+  if (typeof parsed === 'string') {
+    return { __html: parsed };
+  }
+  console.error("marked.parseInline returned non-string:", parsed);
+  return { __html: "" };
+}
 
 interface SectionContainerProps {
   section: StudyPlanData.Section;
@@ -51,15 +70,6 @@ const SectionContainer = React.memo(
       }
     }, [innerHtml]);
 
-    const createMarkup = (md: string) => {
-      const parsed = marked.parse(md);
-      if (typeof parsed === 'string') {
-        return { __html: parsed };
-      }
-      console.error("marked.parse returned non-string:", parsed);
-      return { __html: "" };
-    };
-
     const cardClasses = cn("scroll-mt-[70px] w-full h-fit shadow-none border bg-card");
 
     return (
@@ -72,7 +82,7 @@ const SectionContainer = React.memo(
             "font-bold tracking-tight",
             level === 0 ? "text-2xl" : level === 1 ? "text-xl" : "text-lg"
           )}>
-            {section.title}
+            <span dangerouslySetInnerHTML={createInlineMarkup(section.title)} />
           </CardTitle>
           {(section.summary || section.content) ? (
             <CardDescription className="text-foreground mt-3">
