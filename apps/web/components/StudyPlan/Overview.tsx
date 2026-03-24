@@ -5,7 +5,7 @@ import { studyPlanIcons, studyPlanThemes, defaultTheme } from "@/config/studyPla
 import { Input } from "@/components/ui/input";
 import { BookOpen, Search, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ReactNode } from "react";
 import { StudyPlanData } from "@/types";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { useProgressStore } from "@/hooks/useProgress";
@@ -43,18 +43,95 @@ function collectProblemIds(sections: StudyPlanData.Section[]): string[] {
   return ids;
 }
 
-function matchesSearch(data: StudyPlanData.Root, title: string, query: string): boolean {
-  if (!query) return true;
-  const q = query.toLowerCase();
-  if (title.toLowerCase().includes(q)) return true;
-  function checkSection(section: StudyPlanData.Section): boolean {
-    if (section.title.toLowerCase().includes(q)) return true;
-    if (section.problems?.some((p) => p.id?.toString() === query || p.title.toLowerCase().includes(q)))
-      return true;
-    if (section.children?.some((child) => checkSection(child))) return true;
-    return false;
+type StudyPlanSearchMatch = {
+  kind: "plan" | "section" | "problem";
+  label: string;
+  text: string;
+  context?: string;
+};
+
+const MAX_VISIBLE_MATCHES = 4;
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function highlightMatch(text: string, query: string): ReactNode {
+  const trimmedQuery = query.trim();
+  if (!trimmedQuery) return text;
+
+  const pattern = new RegExp(`(${escapeRegExp(trimmedQuery)})`, "gi");
+  const parts = text.split(pattern);
+
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <mark
+        key={`${part}-${index}`}
+        className="rounded-sm bg-primary/15 px-0.5 text-foreground"
+      >
+        {part}
+      </mark>
+    ) : (
+      <span key={`${part}-${index}`}>{part}</span>
+    )
+  );
+}
+
+function getStudyPlanMatches(
+  data: StudyPlanData.Root,
+  title: string,
+  query: string
+): StudyPlanSearchMatch[] {
+  const trimmedQuery = query.trim();
+  if (!trimmedQuery) return [];
+
+  const normalizedQuery = trimmedQuery.toLowerCase();
+  const matches: StudyPlanSearchMatch[] = [];
+  const seen = new Set<string>();
+
+  const addMatch = (match: StudyPlanSearchMatch) => {
+    const key = `${match.kind}:${match.label}:${match.text}:${match.context ?? ""}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    matches.push(match);
+  };
+
+  if (title.toLowerCase().includes(normalizedQuery)) {
+    addMatch({ kind: "plan", label: "題單", text: title });
   }
-  return data.children.some((s) => checkSection(s));
+
+  const visitSection = (section: StudyPlanData.Section, parentTitles: string[] = []) => {
+    if (section.title.toLowerCase().includes(normalizedQuery)) {
+      addMatch({
+        kind: "section",
+        label: "章節",
+        text: section.title,
+        context: parentTitles.length > 0 ? parentTitles.join(" / ") : undefined,
+      });
+    }
+
+    const currentPath = [...parentTitles, section.title];
+
+    section.problems?.forEach((problem) => {
+      const problemId = problem.id?.toString();
+      const isProblemMatch =
+        problemId === trimmedQuery || problem.title.toLowerCase().includes(normalizedQuery);
+
+      if (!isProblemMatch) return;
+
+      addMatch({
+        kind: "problem",
+        label: problemId ? `題目 #${problemId}` : "題目",
+        text: problem.title,
+        context: currentPath.join(" / "),
+      });
+    });
+
+    section.children?.forEach((child) => visitSection(child, currentPath));
+  };
+
+  data.children.forEach((section) => visitSection(section));
+  return matches;
 }
 
 type FilterType = "all" | "in_progress" | "completed";
@@ -62,9 +139,11 @@ type FilterType = "all" | "in_progress" | "completed";
 interface StudyPlanCardProps {
   planKey: string;
   title: string;
+  searchQuery: string;
+  searchMatches: StudyPlanSearchMatch[];
 }
 
-function StudyPlanCard({ planKey, title }: StudyPlanCardProps) {
+function StudyPlanCard({ planKey, title, searchQuery, searchMatches }: StudyPlanCardProps) {
   const Icon = studyPlanIcons[planKey] ?? BookOpen;
   const theme = studyPlanThemes[planKey] ?? defaultTheme;
   const data = studyPlanDataMap[planKey];
@@ -86,6 +165,7 @@ function StudyPlanCard({ planKey, title }: StudyPlanCardProps) {
   }, [data, progress]);
 
   const pct = totalProblems > 0 ? Math.round((completedProblems / totalProblems) * 100) : 0;
+  const visibleMatches = searchMatches.slice(0, MAX_VISIBLE_MATCHES);
 
   if (!data) return null;
 
@@ -112,6 +192,51 @@ function StudyPlanCard({ planKey, title }: StudyPlanCardProps) {
           <p className="mt-1 text-sm text-muted-foreground">
             {totalProblems} 題 · {totalSections} 個章節
           </p>
+
+          {searchQuery.trim() && visibleMatches.length > 0 && (
+            <div className="mt-4 rounded-lg border border-border/60 bg-muted/40 p-3">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  匹配結果
+                </p>
+                {searchMatches.length > visibleMatches.length && (
+                  <span className="text-xs text-muted-foreground">
+                    +{searchMatches.length - visibleMatches.length} 項
+                  </span>
+                )}
+              </div>
+              <div className="space-y-2">
+                {visibleMatches.map((match, index) => (
+                  <div
+                    key={`${match.kind}-${match.label}-${match.text}-${index}`}
+                    className="rounded-md bg-background/80 px-2.5 py-2 text-sm"
+                  >
+                    <div className="flex items-start gap-2">
+                      <span
+                        className="inline-flex shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium"
+                        style={{
+                          backgroundColor: `${theme.accent}1A`,
+                          color: theme.accent,
+                        }}
+                      >
+                        {highlightMatch(match.label, searchQuery)}
+                      </span>
+                      <div className="min-w-0 space-y-1">
+                        <p className="break-words font-medium leading-snug text-foreground">
+                          {highlightMatch(match.text, searchQuery)}
+                        </p>
+                        {match.context && (
+                          <p className="break-words text-xs leading-snug text-muted-foreground">
+                            {highlightMatch(match.context, searchQuery)}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Progress */}
           <div className="mt-auto pt-4">
@@ -150,6 +275,7 @@ function StudyPlanOverview() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState<FilterType>("all");
   const progress = useProgressStore((state) => state.progress);
+  const trimmedQuery = searchQuery.trim();
 
   const planStats = useMemo(() => {
     const stats: Record<string, { pct: number }> = {};
@@ -167,19 +293,31 @@ function StudyPlanOverview() {
     return stats;
   }, [progress]);
 
-  const filteredPlans = useMemo(() => {
-    const query = searchQuery.trim();
-    return Object.entries(STUDYPLANS).filter(([key, title]) => {
-      if (query) {
+  const planSearchMatches = useMemo(() => {
+    if (!trimmedQuery) return {};
+
+    return Object.entries(STUDYPLANS).reduce<Record<string, StudyPlanSearchMatch[]>>(
+      (acc, [key, title]) => {
         const data = studyPlanDataMap[key];
-        if (!data || !matchesSearch(data, title, query)) return false;
+        acc[key] = data ? getStudyPlanMatches(data, title, trimmedQuery) : [];
+        return acc;
+      },
+      {}
+    );
+  }, [trimmedQuery]);
+
+  const filteredPlans = useMemo(() => {
+    return Object.entries(STUDYPLANS).filter(([key]) => {
+      if (trimmedQuery) {
+        const matches = planSearchMatches[key];
+        if (!matches || matches.length === 0) return false;
       }
       const stat = planStats[key];
       if (filter === "in_progress") return stat && stat.pct > 0 && stat.pct < 100;
       if (filter === "completed") return stat && stat.pct === 100;
       return true;
     });
-  }, [searchQuery, filter, planStats]);
+  }, [trimmedQuery, filter, planSearchMatches, planStats]);
 
   const counts = useMemo(() => {
     const all = Object.keys(STUDYPLANS).length;
@@ -255,12 +393,18 @@ function StudyPlanOverview() {
             <p className="text-sm mt-1">嘗試其他搜尋關鍵字或篩選條件</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPlans.map(([key, title]) => (
-              <StudyPlanCard key={key} planKey={key} title={title} />
-            ))}
-          </div>
-        )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredPlans.map(([key, title]) => (
+                <StudyPlanCard
+                  key={key}
+                  planKey={key}
+                  title={title}
+                  searchQuery={trimmedQuery}
+                  searchMatches={planSearchMatches[key] ?? []}
+                />
+              ))}
+            </div>
+          )}
       </div>
     </div>
   );
