@@ -22,6 +22,11 @@ except ImportError:
     print("Warning: opencc not installed, will not convert to Traditional Chinese")
     cc = None
 
+POST_CONVERT_MAP = {
+    '爲': '為',
+    '峯': '峰',
+}
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STUDYPLAN_DIR = REPO_ROOT / "apps" / "web" / "public" / "studyplan"
 PROBLEMS_JSON = REPO_ROOT / "apps" / "web" / "public" / "problemset" / "problems.json"
@@ -48,7 +53,10 @@ def to_traditional(text):
     """Convert Simplified Chinese to Traditional Chinese."""
     if cc is None:
         return text
-    return cc.convert(text)
+    result = cc.convert(text)
+    for wrong, correct in POST_CONVERT_MAP.items():
+        result = result.replace(wrong, correct)
+    return result
 
 
 def parse_problem_line(line):

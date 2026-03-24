@@ -22,6 +22,8 @@ converter = opencc.OpenCC('s2t')  # Simplified to Traditional
 # Keys are OpenCC s2t output; values are preferred Taiwan Traditional Chinese.
 POST_CONVERT_MAP = {
     '周賽': '週賽',
+    '爲': '為',
+    '峯': '峰',
     # Taiwan CS terminology
     '棧': '堆疊',
     '隊列': '佇列',

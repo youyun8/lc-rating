@@ -11,7 +11,7 @@ import { GlobalStudyPlanSidebar } from "@/components/common/GlobalStudyPlanSideb
 
 
 export const metadata: Metadata = {
-  title: "LC-Rating & Training",
+  title: "LeetCode Rating & Training",
   icons: `${BASE_PATH}/favico.svg`,
 };
 

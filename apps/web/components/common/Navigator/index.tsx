@@ -52,7 +52,7 @@ const Navigator = React.memo(() => {
 
           {/* Logo */}
           <Link href="/" className="font-bold text-base hover:text-primary transition-colors whitespace-nowrap">
-            LC Rating
+            LeetCode Rating
           </Link>
 
           {/* Desktop nav links */}
