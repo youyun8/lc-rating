@@ -22,7 +22,7 @@ const PageJumper = React.memo(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         setLocalPage(e.target.value);
       },
-      []
+      [],
     );
 
     const jump = useCallback(() => {
@@ -37,28 +37,30 @@ const PageJumper = React.memo(
           jump();
         }
       },
-      [jump]
+      [jump],
     );
 
     return (
-      <div className="flex flex-row items-center justify-center gap-2">
+      <div className="flex w-full items-center gap-2 sm:w-auto">
         <Input
           type="number"
+          min={1}
           max={pageCount}
           value={localPage}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className="w-20 sm:w-24"
+          className="h-9 w-full sm:w-24"
         />
         <Button
           onClick={jump}
           disabled={parsedPage < 1 || parsedPage > pageCount}
+          className="shrink-0"
         >
           <span>跳轉</span>
         </Button>
       </div>
     );
-  }
+  },
 );
 
 PageJumper.displayName = "PageJumper";

@@ -9,7 +9,6 @@ import "katex/dist/katex.min.css";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { GlobalStudyPlanSidebar } from "@/components/common/GlobalStudyPlanSidebar";
 
-
 export const metadata: Metadata = {
   title: "LeetCode Rating & Training",
   icons: `${BASE_PATH}/favico.svg`,
@@ -29,15 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden font-song`}>
+      <body
+        className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden pb-[calc(5.5rem+env(safe-area-inset-bottom))] font-song sm:pb-0`}
+      >
         <Provider>
           <AuthTokenHandler />
           <SidebarProvider defaultOpen={false}>
             <Navigator />
             <GlobalStudyPlanSidebar />
-            <SidebarInset>
-              {children}
-            </SidebarInset>
+            <SidebarInset>{children}</SidebarInset>
             <FloatingSyncButton />
           </SidebarProvider>
         </Provider>

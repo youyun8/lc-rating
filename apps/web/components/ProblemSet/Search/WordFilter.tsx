@@ -74,34 +74,43 @@ const WordFilter = React.memo(
         const newValue = e.target.value;
         setValue(newValue);
       },
-      []
+      [],
     );
 
     return (
-      <div className="w-full flex flex-col justify-center items-start gap-1">
-      <div className="relative w-full">
-        <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-        <Input
-          type="text"
-          placeholder="競賽、題目、題解搜尋"
-          value={value}
-          onChange={handleChange}
-          className="w-full pl-9"
-        />
-      </div>
-        <div className="flex items-center gap-2 p-1">
+      <div className="flex w-full flex-col items-start justify-center gap-2">
+        <div className="space-y-1">
+          <p className="text-sm font-medium text-foreground">關鍵字搜尋</p>
+          <p className="text-xs text-muted-foreground">
+            支援競賽、題號、題目名稱與題解名稱；多個關鍵字可用空白分隔。
+          </p>
+        </div>
+        <div className="relative w-full">
+          <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="例如：DP 301 binary search"
+            value={value}
+            onChange={handleChange}
+            className="h-11 w-full pl-9"
+          />
+        </div>
+        <div className="flex items-center gap-2 rounded-lg bg-muted/40 px-3 py-2">
           <Checkbox
             checked={useFuse}
-            onClick={() => {
-              setUseFuse((v) => !v);
-            }}
+            onCheckedChange={() => setUseFuse((v) => !v)}
             id="fuse-search"
           />
-          <Label htmlFor="fuse-search" className="text-sm cursor-pointer">模糊搜尋</Label>
+          <Label htmlFor="fuse-search" className="cursor-pointer text-sm">
+            模糊搜尋
+          </Label>
+          <span className="text-xs text-muted-foreground">
+            關閉後會改用精確關鍵字比對
+          </span>
         </div>
       </div>
     );
-  }
+  },
 );
 
 WordFilter.displayName = "WordFilter";

@@ -18,13 +18,13 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
   // Enrich problems with scores from problemMap
   const enrichedProblems = useMemo(() => {
     if (!problemMap) return problems;
-    
+
     return problems.map((problem) => {
       // If problem already has a score, use it
       if (problem.score !== null && problem.score !== undefined) {
         return problem;
       }
-      
+
       // Otherwise, look up the rating from problemMap using problem id
       const problemId = problem.id?.toString();
       if (problemId && problemMap[problemId]) {
@@ -33,7 +33,7 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
           score: problemMap[problemId].rating,
         };
       }
-      
+
       return problem;
     });
   }, [problems, problemMap]);
@@ -46,28 +46,32 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
         return (
           <div
             key={`${problem.slug}-${problemId}`}
-            className={`flex items-center justify-between gap-3 px-4 py-3 hover:bg-muted/20 transition-colors${idx < enrichedProblems.length - 1 ? " border-b border-border" : ""}`}
+            className={`flex flex-col gap-3 px-4 py-3 transition-colors hover:bg-muted/20 sm:flex-row sm:items-center sm:justify-between${idx < enrichedProblems.length - 1 ? " border-b border-border" : ""}`}
           >
             <a
               href={`${LC_HOST}/problems/${problem.slug}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors flex-1 min-w-0 truncate"
+              className="min-w-0 flex-1 text-sm font-medium leading-snug text-foreground transition-colors hover:text-primary sm:truncate"
             >
-              {problem.id?.toString() === "1000000000" || problem.title.startsWith(`${problem.id}`)
+              {problem.id?.toString() === "1000000000" ||
+              problem.title.startsWith(`${problem.id}`)
                 ? problem.title
                 : `${problem.id}. ${problem.title}`}
             </a>
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
               {problem.score ? (
                 <span
                   className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums"
-                  style={{ color: info.color, backgroundColor: `${info.color}1a` }}
+                  style={{
+                    color: info.color,
+                    backgroundColor: `${info.color}1a`,
+                  }}
                 >
                   {problem.score.toFixed(0)}
                 </span>
               ) : (
-                <span className="w-14" />
+                <span className="inline-block w-14" />
               )}
               {problemId ? <ProgressSelector problemId={problemId} /> : null}
             </div>

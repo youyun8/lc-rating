@@ -16,21 +16,20 @@ import React, { useCallback } from "react";
 
 interface PageResizerProps {
   options: number[];
+  value: number;
   onValueChange: (value: number) => void;
 }
 
 const PageResizer = React.memo(
-  ({ options, onValueChange }: PageResizerProps) => {
+  ({ options, value, onValueChange }: PageResizerProps) => {
     const [open, setOpen] = React.useState(false);
-    const [value, setValue] = React.useState(options[0]);
 
     const handleSelect = useCallback(
       (newValue: string) => {
-        setValue(parseInt(newValue));
         onValueChange(parseInt(newValue));
         setOpen(false);
       },
-      [onValueChange]
+      [onValueChange],
     );
 
     return (
@@ -40,13 +39,13 @@ const PageResizer = React.memo(
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[6em] justify-between"
+            className="h-9 w-[6.5rem] justify-between"
           >
             {value}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[6em] p-0">
+        <PopoverContent className="w-[6.5rem] p-0">
           <Command>
             <CommandList>
               <CommandGroup>
@@ -70,7 +69,7 @@ const PageResizer = React.memo(
         </PopoverContent>
       </Popover>
     );
-  }
+  },
 );
 
 PageResizer.displayName = "PageResizer";

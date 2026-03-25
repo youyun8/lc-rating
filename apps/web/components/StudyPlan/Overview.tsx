@@ -1,7 +1,11 @@
 "use client";
 
 import { STUDYPLANS } from "@/config/constants";
-import { studyPlanIcons, studyPlanThemes, defaultTheme } from "@/config/studyPlanThemes";
+import {
+  studyPlanIcons,
+  studyPlanThemes,
+  defaultTheme,
+} from "@/config/studyPlanThemes";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Search, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -13,7 +17,10 @@ import { useProgressStore } from "@/hooks/useProgress";
 function countProblems(section: StudyPlanData.Section): number {
   let count = section.problems?.length || 0;
   if (section.children) {
-    count += section.children.reduce((acc, child) => acc + countProblems(child), 0);
+    count += section.children.reduce(
+      (acc, child) => acc + countProblems(child),
+      0,
+    );
   }
   return count;
 }
@@ -21,7 +28,10 @@ function countProblems(section: StudyPlanData.Section): number {
 function countSections(section: StudyPlanData.Section): number {
   let count = 1;
   if (section.children) {
-    count += section.children.reduce((acc, child) => acc + countSections(child), 0);
+    count += section.children.reduce(
+      (acc, child) => acc + countSections(child),
+      0,
+    );
   }
   return count;
 }
@@ -73,14 +83,14 @@ function highlightMatch(text: string, query: string): ReactNode {
       </mark>
     ) : (
       <span key={`${part}-${index}`}>{part}</span>
-    )
+    ),
   );
 }
 
 function getStudyPlanMatches(
   data: StudyPlanData.Root,
   title: string,
-  query: string
+  query: string,
 ): StudyPlanSearchMatch[] {
   const trimmedQuery = query.trim();
   if (!trimmedQuery) return [];
@@ -100,7 +110,10 @@ function getStudyPlanMatches(
     addMatch({ kind: "plan", label: "題單", text: title });
   }
 
-  const visitSection = (section: StudyPlanData.Section, parentTitles: string[] = []) => {
+  const visitSection = (
+    section: StudyPlanData.Section,
+    parentTitles: string[] = [],
+  ) => {
     if (section.title.toLowerCase().includes(normalizedQuery)) {
       addMatch({
         kind: "section",
@@ -115,7 +128,8 @@ function getStudyPlanMatches(
     section.problems?.forEach((problem) => {
       const problemId = problem.id?.toString();
       const isProblemMatch =
-        problemId === trimmedQuery || problem.title.toLowerCase().includes(normalizedQuery);
+        problemId === trimmedQuery ||
+        problem.title.toLowerCase().includes(normalizedQuery);
 
       if (!isProblemMatch) return;
 
@@ -143,37 +157,54 @@ interface StudyPlanCardProps {
   searchMatches: StudyPlanSearchMatch[];
 }
 
-function StudyPlanCard({ planKey, title, searchQuery, searchMatches }: StudyPlanCardProps) {
+function StudyPlanCard({
+  planKey,
+  title,
+  searchQuery,
+  searchMatches,
+}: StudyPlanCardProps) {
   const Icon = studyPlanIcons[planKey] ?? BookOpen;
   const theme = studyPlanThemes[planKey] ?? defaultTheme;
   const data = studyPlanDataMap[planKey];
   const progress = useProgressStore((state) => state.progress);
 
   const { totalProblems, totalSections, completedProblems } = useMemo(() => {
-    if (!data) return { totalProblems: 0, totalSections: 0, completedProblems: 0 };
+    if (!data)
+      return { totalProblems: 0, totalSections: 0, completedProblems: 0 };
     const ids = collectProblemIds(data.children);
     return {
       totalProblems:
         ids.length ||
-        data.children.reduce((acc: number, child: StudyPlanData.Section) => acc + countProblems(child), 0),
+        data.children.reduce(
+          (acc: number, child: StudyPlanData.Section) =>
+            acc + countProblems(child),
+          0,
+        ),
       totalSections: data.children.reduce(
-        (acc: number, child: StudyPlanData.Section) => acc + countSections(child),
+        (acc: number, child: StudyPlanData.Section) =>
+          acc + countSections(child),
         0,
       ),
       completedProblems: ids.filter((id) => progress[id] === "AC").length,
     };
   }, [data, progress]);
 
-  const pct = totalProblems > 0 ? Math.round((completedProblems / totalProblems) * 100) : 0;
+  const pct =
+    totalProblems > 0
+      ? Math.round((completedProblems / totalProblems) * 100)
+      : 0;
   const visibleMatches = searchMatches.slice(0, MAX_VISIBLE_MATCHES);
 
   if (!data) return null;
 
   return (
     <Link href={`/studyplan/${planKey}`} className="block h-full">
-      <div className="group relative overflow-hidden rounded-xl border border-border/40 bg-card shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full flex flex-col">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/40 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         {/* Gradient Banner */}
-        <div className="relative h-28 overflow-hidden" style={{ background: theme.gradient }}>
+        <div
+          className="relative h-24 overflow-hidden sm:h-28"
+          style={{ background: theme.gradient }}
+        >
           <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-white/10" />
           <div className="absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-white/5" />
           <div className="absolute top-3 right-3 h-16 w-16 rounded-full bg-white/5" />
@@ -185,8 +216,8 @@ function StudyPlanCard({ planKey, title, searchQuery, searchMatches }: StudyPlan
         </div>
 
         {/* Card Body */}
-        <div className="flex flex-1 flex-col p-5">
-          <h3 className="text-lg font-bold tracking-tight group-hover:text-primary transition-colors">
+        <div className="flex flex-1 flex-col p-4 sm:p-5">
+          <h3 className="text-base font-bold tracking-tight transition-colors group-hover:text-primary sm:text-lg">
             {title}
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -194,7 +225,7 @@ function StudyPlanCard({ planKey, title, searchQuery, searchMatches }: StudyPlan
           </p>
 
           {searchQuery.trim() && visibleMatches.length > 0 && (
-            <div className="mt-4 rounded-lg border border-border/60 bg-muted/40 p-3">
+            <div className="mt-3 rounded-lg border border-border/60 bg-muted/40 p-3 sm:mt-4">
               <div className="mb-2 flex items-center justify-between gap-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   匹配結果
@@ -246,7 +277,10 @@ function StudyPlanCard({ planKey, title, searchQuery, searchMatches }: StudyPlan
                   <span className="text-muted-foreground">
                     已完成 {completedProblems} / {totalProblems} 題
                   </span>
-                  <span className="font-semibold" style={{ color: theme.accent }}>
+                  <span
+                    className="font-semibold"
+                    style={{ color: theme.accent }}
+                  >
                     {pct}%
                   </span>
                 </div>
@@ -261,7 +295,10 @@ function StudyPlanCard({ planKey, title, searchQuery, searchMatches }: StudyPlan
           </div>
 
           {/* CTA */}
-          <div className="mt-4 inline-flex items-center text-sm font-medium transition-colors" style={{ color: theme.accent }}>
+          <div
+            className="mt-4 inline-flex items-center text-sm font-medium transition-colors"
+            style={{ color: theme.accent }}
+          >
             {pct > 0 ? "繼續學習" : "開始學習"}
             <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </div>
@@ -288,7 +325,9 @@ function StudyPlanOverview() {
       const ids = collectProblemIds(data.children);
       const total = ids.length;
       const completed = ids.filter((id) => progress[id] === "AC").length;
-      stats[planKey] = { pct: total > 0 ? Math.round((completed / total) * 100) : 0 };
+      stats[planKey] = {
+        pct: total > 0 ? Math.round((completed / total) * 100) : 0,
+      };
     }
     return stats;
   }, [progress]);
@@ -296,14 +335,13 @@ function StudyPlanOverview() {
   const planSearchMatches = useMemo(() => {
     if (!trimmedQuery) return {};
 
-    return Object.entries(STUDYPLANS).reduce<Record<string, StudyPlanSearchMatch[]>>(
-      (acc, [key, title]) => {
-        const data = studyPlanDataMap[key];
-        acc[key] = data ? getStudyPlanMatches(data, title, trimmedQuery) : [];
-        return acc;
-      },
-      {}
-    );
+    return Object.entries(STUDYPLANS).reduce<
+      Record<string, StudyPlanSearchMatch[]>
+    >((acc, [key, title]) => {
+      const data = studyPlanDataMap[key];
+      acc[key] = data ? getStudyPlanMatches(data, title, trimmedQuery) : [];
+      return acc;
+    }, {});
   }, [trimmedQuery]);
 
   const filteredPlans = useMemo(() => {
@@ -313,7 +351,8 @@ function StudyPlanOverview() {
         if (!matches || matches.length === 0) return false;
       }
       const stat = planStats[key];
-      if (filter === "in_progress") return stat && stat.pct > 0 && stat.pct < 100;
+      if (filter === "in_progress")
+        return stat && stat.pct > 0 && stat.pct < 100;
       if (filter === "completed") return stat && stat.pct === 100;
       return true;
     });
@@ -321,8 +360,12 @@ function StudyPlanOverview() {
 
   const counts = useMemo(() => {
     const all = Object.keys(STUDYPLANS).length;
-    const inProgress = Object.values(planStats).filter((s) => s.pct > 0 && s.pct < 100).length;
-    const completed = Object.values(planStats).filter((s) => s.pct === 100).length;
+    const inProgress = Object.values(planStats).filter(
+      (s) => s.pct > 0 && s.pct < 100,
+    ).length;
+    const completed = Object.values(planStats).filter(
+      (s) => s.pct === 100,
+    ).length;
     return { all, inProgress, completed };
   }, [planStats]);
 
@@ -339,7 +382,9 @@ function StudyPlanOverview() {
         <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">題單</h1>
+              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                題單
+              </h1>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-xl">
                 由靈茶山艾府（0x3F）整理的演算法題單，涵蓋各種常見演算法與資料結構。
                 <br className="hidden sm:block" />
@@ -361,25 +406,27 @@ function StudyPlanOverview() {
           </div>
 
           {/* Filter Tabs */}
-          <div className="mt-6 flex items-center gap-1">
-            {filterTabs.map(({ key, label, count }) => (
-              <button
-                key={key}
-                onClick={() => setFilter(key)}
-                className={`cursor-pointer px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  filter === key
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                }`}
-              >
-                {label}
-                <span
-                  className={`ml-1.5 ${filter === key ? "text-primary-foreground/70" : "text-muted-foreground/60"}`}
+          <div className="mt-6 -mx-1 overflow-x-auto pb-1">
+            <div className="flex min-w-max items-center gap-2 px-1">
+              {filterTabs.map(({ key, label, count }) => (
+                <button
+                  key={key}
+                  onClick={() => setFilter(key)}
+                  className={`cursor-pointer whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                    filter === key
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
                 >
-                  {count}
-                </span>
-              </button>
-            ))}
+                  {label}
+                  <span
+                    className={`ml-1.5 ${filter === key ? "text-primary-foreground/70" : "text-muted-foreground/60"}`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -393,18 +440,18 @@ function StudyPlanOverview() {
             <p className="text-sm mt-1">嘗試其他搜尋關鍵字或篩選條件</p>
           </div>
         ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPlans.map(([key, title]) => (
-                <StudyPlanCard
-                  key={key}
-                  planKey={key}
-                  title={title}
-                  searchQuery={trimmedQuery}
-                  searchMatches={planSearchMatches[key] ?? []}
-                />
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {filteredPlans.map(([key, title]) => (
+              <StudyPlanCard
+                key={key}
+                planKey={key}
+                title={title}
+                searchQuery={trimmedQuery}
+                searchMatches={planSearchMatches[key] ?? []}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

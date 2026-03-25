@@ -9,7 +9,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { ColumnDef, flexRender, Table as TanstackTable } from "@tanstack/react-table";
+import {
+  ColumnDef,
+  flexRender,
+  Table as TanstackTable,
+} from "@tanstack/react-table";
 import React from "react";
 
 interface BaseDataTableProps<TData> {
@@ -22,7 +26,12 @@ interface BaseDataTableProps<TData> {
   cellBorderClassName?: string;
   rowClassName?: string;
   separator?: React.ReactNode;
-  renderHeaderExtra?: (header: { column: { getCanSort: () => boolean; getToggleSortingHandler: () => ((event: unknown) => void) | undefined } }) => React.ReactNode;
+  renderHeaderExtra?: (header: {
+    column: {
+      getCanSort: () => boolean;
+      getToggleSortingHandler: () => ((event: unknown) => void) | undefined;
+    };
+  }) => React.ReactNode;
   /** When true, applies each column's TanStack size as an inline width style on <th> elements. Useful with table-fixed layout. */
   applySizeStyles?: boolean;
 }
@@ -57,22 +66,36 @@ export function BaseDataTable<TData>({
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row items-center justify-center p-2 gap-2">
-        {pageControl}
-        <div className="hidden sm:block">
-          <VisibilityControl table={table} key2Label={key2Label} />
+      <div className="border-b border-border/60 bg-muted/20 px-3 py-3">
+        <div className="flex flex-col gap-3">
+          {pageControl}
+          <div className="hidden sm:flex sm:justify-end">
+            <VisibilityControl table={table} key2Label={key2Label} />
+          </div>
         </div>
       </div>
 
       {separator}
 
-      <div className="overflow-x-auto">
+      <div className="px-3 pt-2 text-xs text-muted-foreground sm:hidden">
+        可左右滑動查看完整表格
+      </div>
+
+      <div className="overflow-x-auto overscroll-x-contain">
         <Table className={minWidth}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className={headerBorderClassName} style={applySizeStyles ? { width: header.column.getSize() } : undefined}>
+                  <TableHead
+                    key={header.id}
+                    className={headerBorderClassName}
+                    style={
+                      applySizeStyles
+                        ? { width: header.column.getSize() }
+                        : undefined
+                    }
+                  >
                     <div
                       className={cn(headerClassName, {
                         "cursor-pointer": header.column.getCanSort(),
@@ -83,7 +106,7 @@ export function BaseDataTable<TData>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </div>
                   </TableHead>
@@ -94,17 +117,27 @@ export function BaseDataTable<TData>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className={rowClassName}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                  className={rowClassName}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className={cellBorderClassName}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   暫無資料
                 </TableCell>
               </TableRow>
@@ -115,10 +148,14 @@ export function BaseDataTable<TData>({
 
       {separator}
 
-      <div className="flex flex-col sm:flex-row items-center justify-center p-2 gap-2">
-        {pageControl}
+      <div className="border-t border-border/60 bg-muted/20 px-3 py-3">
+        <div className="flex flex-col gap-3">{pageControl}</div>
         <div className="sm:hidden">
-          <VisibilityControl table={table} key2Label={key2Label} />
+          <VisibilityControl
+            table={table}
+            key2Label={key2Label}
+            className="w-full justify-center"
+          />
         </div>
       </div>
     </div>

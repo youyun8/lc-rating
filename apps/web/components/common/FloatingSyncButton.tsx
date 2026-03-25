@@ -209,11 +209,11 @@ const FloatingSyncButton = () => {
 
   return (
     <div
-      className="fixed right-4 bottom-4 z-[9999] flex flex-col items-end gap-2 pointer-events-auto sm:right-6 sm:bottom-6"
+      className="fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-[9999] flex flex-col items-end gap-2 pointer-events-auto sm:right-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]"
       data-floating-sync
     >
       {open ? (
-        <div className="w-[min(88vw,280px)] space-y-3 rounded-xl border bg-background/95 p-3 shadow-xl backdrop-blur supports-[backdrop-filter]:bg-background/85">
+        <div className="w-[min(calc(100vw-2rem),320px)] space-y-3 rounded-2xl border bg-background/95 p-3.5 shadow-xl backdrop-blur supports-[backdrop-filter]:bg-background/85">
           <div className="flex items-start justify-between gap-2">
             <div>
               <p className="text-sm font-semibold">快速同步</p>
@@ -289,11 +289,12 @@ const FloatingSyncButton = () => {
         <Button
           size="icon"
           variant={isLoggedIn ? "default" : "outline"}
-          className={`h-12 w-12 rounded-full shadow-lg ${
+          className={`h-11 w-11 rounded-full shadow-lg sm:h-12 sm:w-12 ${
             isLoggedIn ? "bg-emerald-500 text-white hover:bg-emerald-600" : ""
           }`}
           onClick={() => setOpen((prev) => !prev)}
           aria-label="雲端同步"
+          aria-expanded={open}
           type="button"
         >
           {open ? (

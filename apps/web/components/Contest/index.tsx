@@ -10,7 +10,6 @@ import { useEffect, useMemo } from "react";
 import { ProblemsTable } from "./ContestTable";
 import { TableCol } from "./ContestTable/types";
 
-
 function ProblemSet() {
   const {
     problemMap = {},
@@ -56,11 +55,11 @@ function ProblemSet() {
 
     return contests.map((contest) => {
       const problems = contest.problemIds.map(
-        (problemId) => problemMap[problemId]
+        (problemId) => problemMap[problemId],
       ) as Quodra<Problem>;
 
       const solutions = problems.map((problem) =>
-        problem ? solutionMap[problem._hash] : undefined
+        problem ? solutionMap[problem._hash] : undefined,
       ) as Quodra<Solution | undefined>;
 
       const generate = (index: 0 | 1 | 2 | 3) => {
@@ -127,19 +126,23 @@ function ProblemSet() {
   const contestCount = Object.keys(contestMap).length;
 
   return (
-    <div className="px-4 md:px-8 py-6 flex flex-col gap-5">
+    <div className="flex flex-col gap-5 px-4 py-6 md:px-8">
       {/* Header */}
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">比賽題目</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            {isPending ? "\u00a0" : `${contestCount} 場比賽`}
+      <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-muted/20 p-4 sm:flex-row sm:items-end sm:justify-between sm:p-5">
+        <div className="space-y-1">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            比賽題目
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            {isPending
+              ? "\u00a0"
+              : `${contestCount} 場比賽 · 收錄每場競賽的四題與題解連結`}
           </p>
         </div>
-        <div className="text-xs text-muted-foreground shrink-0 pb-1">
-          題解：
+        <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 rounded-full border border-border/60 bg-background/80 px-3 py-1.5 text-xs text-muted-foreground">
+          <span className="shrink-0">題解來源</span>
           <a
-            className="text-red-600 dark:text-red-400 hover:underline"
+            className="font-medium text-red-600 hover:underline dark:text-red-400"
             href="https://space.bilibili.com/206214/"
             target="_blank"
             rel="noopener noreferrer"

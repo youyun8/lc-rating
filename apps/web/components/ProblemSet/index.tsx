@@ -1,10 +1,12 @@
 "use client";
 import { LC_HOST_EN, LC_HOST_ZH } from "@/config/constants";
+import { useProgressStore } from "@/hooks/useProgress";
 import { useContests } from "@/hooks/useContests";
 import { useProblems } from "@/hooks/useProblems";
 import { useSolutions } from "@/hooks/useSolutions";
 import { useTags } from "@/hooks/useTags";
 import { isTruthy } from "@/types/common";
+import { CheckCircle2, FileText, Tags } from "lucide-react";
 
 import { useCallback, useMemo, useState } from "react";
 import { ProblemsTable } from "./ProblemTable";
@@ -28,6 +30,7 @@ function ProblemSet() {
     isPending: solutionPending,
     error: solutionError,
   } = useSolutions();
+  const progress = useProgressStore((state) => state.progress);
 
   const isPending =
     problemPending || contestPending || tagPending || solutionPending;
@@ -109,16 +112,22 @@ function ProblemSet() {
         },
       };
     });
-  }, [contestError, contestMap, problemError, problemMap, solutionError, solutionMap, tagError, tagMap]);
+  }, [
+    contestError,
+    contestMap,
+    problemError,
+    problemMap,
+    solutionError,
+    solutionMap,
+    tagError,
+    tagMap,
+  ]);
 
   const [similarities, setSimilarties] = useState<number[] | undefined>();
 
-  const handleSearch = useCallback(
-    (similarities: number[]) => {
-      setSimilarties(similarities);
-    },
-    []
-  );
+  const handleSearch = useCallback((similarities: number[]) => {
+    setSimilarties(similarities);
+  }, []);
 
   const searchedData = useMemo(() => {
     if (similarities === undefined) {
@@ -134,37 +143,141 @@ function ProblemSet() {
   }, [tableData, similarities]);
 
   const problemCount = Object.keys(problemMap).length;
+  const visibleCount = searchedData.length;
+
+  const overviewStats = useMemo(() => {
+    const total = tableData.length || problemCount;
+    const solved = tableData.filter(
+      ({ problem }) => progress[problem.id] === "AC",
+    ).length;
+    const withSolutions = tableData.filter(({ solution }) =>
+      Boolean(solution.id),
+    ).length;
+    const totalTags = Object.keys(tagMap).length;
+
+    return {
+      total,
+      solved,
+      withSolutions,
+      totalTags,
+    };
+  }, [problemCount, progress, tableData, tagMap]);
 
   return (
-    <div className="px-4 md:px-8 py-6 flex flex-col gap-5">
+    <div className="flex flex-col gap-5 px-4 py-6 md:px-8">
       {/* Header */}
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">題庫</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            {isPending ? "\u00a0" : `${problemCount} 道題目`}
-          </p>
-        </div>
-        <div className="text-xs text-muted-foreground shrink-0 pb-1">
-          題解：
-          <a
-            className="text-red-600 dark:text-red-400 hover:underline"
-            href="https://space.bilibili.com/206214/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            靈茶山艾府（0x3F）@B站
-          </a>
+      <div className="overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-muted/40 via-background to-background">
+        <div className="flex flex-col gap-6 p-5 sm:p-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-2xl space-y-2">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                題庫
+              </h1>
+              <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                按題號、題名、競賽、難度、標籤與進度快速縮小範圍，並直接查看
+                0x3F 題解與個人解題進度。
+              </p>
+            </div>
+            <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
+              <span className="shrink-0">題解來源</span>
+              <a
+                className="font-medium text-red-600 hover:underline dark:text-red-400"
+                href="https://space.bilibili.com/206214/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                靈茶山艾府（0x3F）@B站
+              </a>
+            </div>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                題目總數
+              </p>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : overviewStats.total}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                涵蓋競賽題與常見演算法主題
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <CheckCircle2 className="h-4 w-4" />
+                已完成
+              </div>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : overviewStats.solved}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                已標記為 AC 的題目數
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <FileText className="h-4 w-4" />
+                題解數量
+              </div>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : overviewStats.withSolutions}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                可直接跳轉查看的 0x3F 題解
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <Tags className="h-4 w-4" />
+                標籤覆蓋
+              </div>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : overviewStats.totalTags}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                支援用演算法標籤快速篩選
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Search */}
-      <Search data={tableData} onSearch={handleSearch} />
+      <Search
+        data={tableData}
+        onSearch={handleSearch}
+        totalCount={problemCount}
+        resultCount={visibleCount}
+      />
 
       {/* Table */}
-      <div className="w-full overflow-x-hidden">
-        <ProblemsTable tableData={searchedData} isPending={isPending} />
-      </div>
+      <section className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
+        <div className="flex flex-col gap-3 border-b border-border/60 bg-muted/20 px-4 py-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="space-y-1">
+            <h2 className="text-lg font-semibold tracking-tight text-foreground">
+              搜尋結果
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {isPending
+                ? "正在載入題目資料..."
+                : `目前顯示 ${visibleCount} / ${problemCount} 道題目`}
+            </p>
+          </div>
+          {!isPending && visibleCount !== problemCount ? (
+            <div className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs text-muted-foreground">
+              已篩掉 {problemCount - visibleCount} 道題目
+            </div>
+          ) : null}
+        </div>
+
+        <div className="w-full overflow-x-hidden">
+          <ProblemsTable tableData={searchedData} isPending={isPending} />
+        </div>
+      </section>
     </div>
   );
 }

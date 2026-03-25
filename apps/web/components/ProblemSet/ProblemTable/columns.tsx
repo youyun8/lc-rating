@@ -10,14 +10,22 @@ const columnHelper = createColumnHelper<TableCol>();
 
 export const getColumns = () => [
   columnHelper.accessor("contest", {
-    header: ({ column }) => <div className="flex items-center gap-2">{key2Label["contest"]}<SortIndicator column={column} /></div>,
+    header: ({ column }) => (
+      <div className="flex items-center gap-2">
+        {key2Label["contest"]}
+        <SortIndicator column={column} />
+      </div>
+    ),
     cell: ({ row }) => {
       const contest = row.getValue<TableCol["contest"]>("contest");
+      if (!contest.id) {
+        return <span className="text-sm text-muted-foreground">-</span>;
+      }
       return (
         <I18NLink
           link={contest.link}
           title={contest.title}
-          className="text-sm text-foreground hover:text-primary transition-colors"
+          className="block max-w-[12rem] truncate text-sm text-muted-foreground transition-colors hover:text-foreground"
         />
       );
     },
@@ -27,14 +35,23 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("problem", {
-    header: ({ column }) => <div className="flex items-center gap-2">{key2Label["problem"]}<SortIndicator column={column} /></div>,
+    header: ({ column }) => (
+      <div className="flex items-center gap-2">
+        {key2Label["problem"]}
+        <SortIndicator column={column} />
+      </div>
+    ),
     cell: ({ row }) => {
       const problem = row.getValue<TableCol["problem"]>("problem");
       return (
         <I18NLink
           link={problem.link}
-          title={problem.id === "1000000000" ? problem.title : `${problem.id}. ${problem.title}`}
-          className="text-sm text-foreground hover:text-primary transition-colors"
+          title={
+            problem.id === "1000000000"
+              ? problem.title
+              : `${problem.id}. ${problem.title}`
+          }
+          className="block min-w-[14rem] max-w-[20rem] text-sm font-medium leading-6 text-foreground transition-colors hover:text-primary"
         />
       );
     },
@@ -71,7 +88,7 @@ export const getColumns = () => [
     cell: ({ row }) => {
       const tags = row.getValue<TableCol["tags"]>("tags");
       return (
-        <div className="flex flex-wrap justify-center items-center gap-1 max-w-[200px] md:max-w-[300px] mx-auto">
+        <div className="mx-auto flex max-w-[240px] flex-wrap items-center justify-center gap-1 md:max-w-[280px]">
           {tags.map((tag) => (
             <I18NTag key={tag.id} label={tag.label} />
           ))}
@@ -98,11 +115,14 @@ export const getColumns = () => [
     header: () => <div>{key2Label["solution"]}</div>,
     cell: ({ row }) => {
       const solution = row.getValue<TableCol["solution"]>("solution");
+      if (!solution.id) {
+        return <span className="text-xs text-muted-foreground">暫無</span>;
+      }
       return (
         <I18NLink
           link={solution.link}
           title={solution.title}
-          className="text-sm blur-xs hover:blur-none transition duration-300"
+          className="block max-w-[12rem] text-sm text-muted-foreground transition duration-300 hover:text-foreground"
         />
       );
     },
