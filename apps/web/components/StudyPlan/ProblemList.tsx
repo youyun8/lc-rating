@@ -74,11 +74,6 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
                     #{problemId}
                   </span>
                 ) : null}
-                {isCompleted ? (
-                  <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-700 dark:text-emerald-300">
-                    已完成
-                  </span>
-                ) : null}
               </div>
               <a
                 href={`${LC_HOST}/problems/${problem.slug}`}

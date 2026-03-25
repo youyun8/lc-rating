@@ -77,7 +77,7 @@ const Navigator = React.memo(() => {
             href="/"
             className="min-w-0 whitespace-nowrap text-sm font-bold transition-colors hover:text-primary sm:text-base"
           >
-            <span className="sm:hidden">LC Rating</span>
+            <span className="sm:hidden">LeetCode Rating</span>
             <span className="hidden sm:inline">LeetCode Rating</span>
           </Link>
 

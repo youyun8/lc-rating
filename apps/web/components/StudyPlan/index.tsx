@@ -130,9 +130,6 @@ function StudyPlan({ plan }: StudyPlanProps) {
                       <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
                         {studyPlan.title}
                       </h1>
-                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
-                        按章節逐步練習這份題單，直接開啟 LeetCode 題目並同步記錄你的解題進度。
-                      </p>
                       <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white/70">
                         <a
                           href={studyPlan.src}

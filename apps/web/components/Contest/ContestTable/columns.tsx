@@ -35,9 +35,11 @@ const generate = (
       const max = isRatingFilter(filterValue) ? filterValue.max : "";
 
       return (
-        <div className="flex flex-row items-center gap-2">
-          <div>{key2Label[key]}</div>
-          <SortIndicator column={column} />
+        <div className="flex min-w-[10rem] flex-col items-center gap-2 py-1">
+          <div className="flex items-center gap-2">
+            <div>{key2Label[key]}</div>
+            <SortIndicator column={column} />
+          </div>
           <div className="flex gap-1">
             <Input
               type="number"
@@ -46,13 +48,13 @@ const generate = (
               onChange={(e) => {
                 const value = e.target.value;
                 const min = value ? Number(value) : -Infinity;
-                column.setFilterValue((prev: RatingFilter | undefined) => ({
+               column.setFilterValue((prev: RatingFilter | undefined) => ({
                   min,
                   max: prev?.max ?? Infinity,
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-7 w-14 text-xs rounded-md"
+              className="h-8 w-16 rounded-md border-border/60 bg-background/80 text-center text-xs shadow-none"
             />
             <Input
               type="number"
@@ -67,7 +69,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-7 w-14 text-xs rounded-md"
+              className="h-8 w-16 rounded-md border-border/60 bg-background/80 text-center text-xs shadow-none"
             />
           </div>
         </div>
@@ -78,19 +80,21 @@ const generate = (
       const rating = Q.problem.rating;
       const info = ratingInfo(rating);
       return (
-        <div className="flex items-center justify-between gap-2 py-1">
-          <div className="flex items-center gap-2 min-w-0">
+        <div className="flex items-start justify-between gap-2 py-1.5">
+          <div className="min-w-0 space-y-1">
+            <div className="flex items-start gap-2">
+              <span
+                className="mt-1 h-2 w-2 shrink-0 rounded-full"
+                style={{ backgroundColor: info.color }}
+              />
+              <I18NLink
+                link={Q.problem.link}
+                title={Q.problem.id === "1000000000" ? Q.problem.title : `${Q.problem.id}. ${Q.problem.title}`}
+                className="line-clamp-2 text-sm font-medium leading-5 text-foreground transition-colors hover:text-primary hover:underline"
+              />
+            </div>
             <span
-              className="flex-shrink-0 w-2 h-2 rounded-full"
-              style={{ backgroundColor: info.color }}
-            />
-            <I18NLink
-              link={Q.problem.link}
-              title={Q.problem.id === "1000000000" ? Q.problem.title : `${Q.problem.id}. ${Q.problem.title}`}
-              className="text-sm text-foreground hover:text-primary hover:underline transition-colors truncate min-w-0"
-            />
-            <span
-              className="flex-shrink-0 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
+              className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
               style={{ color: info.color, backgroundColor: `${info.color}1a` }}
             >
               {rating.toFixed(0)}
@@ -130,7 +134,7 @@ const generate = (
 export const getColumns = () => [
   columnHelper.accessor("contest", {
     header: ({ column }) => (
-      <div className="flex flex-row items-center gap-2">
+      <div className="flex items-center gap-2 py-1">
         <span>{key2Label["contest"]}</span>
         <SortIndicator column={column} />
       </div>
@@ -141,7 +145,7 @@ export const getColumns = () => [
         <I18NLink
           link={contest.link}
           title={contest.title}
-          className="text-sm text-foreground hover:text-primary hover:underline transition-colors truncate block"
+          className="block max-w-[11rem] truncate text-sm font-medium text-foreground transition-colors hover:text-primary hover:underline"
         />
       );
     },

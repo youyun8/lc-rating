@@ -446,7 +446,7 @@ function StudyPlanOverview() {
                   題單
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  由靈茶山艾府（0x3F）整理的演算法題單，按主題分層規劃，方便你依照進度持續練習。
+                  由靈茶山艾府（0x3F）整理的演算法題單，按主題分層規劃。
                 </p>
               </div>
               <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">

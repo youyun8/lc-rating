@@ -6,11 +6,17 @@ import { useSolutions } from "@/hooks/useSolutions";
 import { useTags } from "@/hooks/useTags";
 import { Problem, Solution } from "@/types";
 import { Quodra } from "@/types/common";
+import {
+  FileText,
+  Gauge,
+  Sparkles,
+  Swords,
+} from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { ProblemsTable } from "./ContestTable";
 import { TableCol } from "./ContestTable/types";
 
-function ProblemSet() {
+function ContestPage() {
   const {
     problemMap = {},
     isPending: problemPending,
@@ -33,16 +39,16 @@ function ProblemSet() {
 
   useEffect(() => {
     if (problemError) {
-      console.error("[ProblemSet] problems Error: ", problemError);
+      console.error("[Contest] problems Error: ", problemError);
     }
     if (contestError) {
-      console.error("[ProblemSet] contests Error: ", contestError);
+      console.error("[Contest] contests Error: ", contestError);
     }
     if (tagError) {
-      console.error("[ProblemSet] tags Error: ", tagError);
+      console.error("[Contest] tags Error: ", tagError);
     }
     if (solutionError) {
-      console.error("[ProblemSet] solutions Error: ", solutionError);
+      console.error("[Contest] solutions Error: ", solutionError);
     }
   }, [isPending, contestError, problemError, solutionError, tagError]);
 
@@ -124,40 +130,142 @@ function ProblemSet() {
   }, [isPending, problemMap, contestMap, solutionMap]);
 
   const contestCount = Object.keys(contestMap).length;
+  const overviewStats = useMemo(() => {
+    const questions = tableData.flatMap((row) => [row.Q1, row.Q2, row.Q3, row.Q4]);
+    const totalProblems = questions.length;
+    const solutionCount = questions.filter((item) => Boolean(item.solution)).length;
+    const ratedProblems = questions.filter((item) => item.problem.rating > 0);
+    const averageRating =
+      ratedProblems.length > 0
+        ? Math.round(
+            ratedProblems.reduce((sum, item) => sum + item.problem.rating, 0) /
+              ratedProblems.length,
+          )
+        : 0;
+    const hardestRating =
+      ratedProblems.length > 0
+        ? Math.max(...ratedProblems.map((item) => item.problem.rating))
+        : 0;
+
+    return {
+      totalProblems,
+      solutionCount,
+      averageRating,
+      hardestRating,
+    };
+  }, [tableData]);
 
   return (
     <div className="flex flex-col gap-5 px-4 py-6 md:px-8">
-      {/* Header */}
-      <div className="flex flex-col gap-4 rounded-2xl border border-border/60 bg-muted/20 p-4 sm:flex-row sm:items-end sm:justify-between sm:p-5">
-        <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            比賽題目
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            {isPending
-              ? "\u00a0"
-              : `${contestCount} 場比賽 · 收錄每場競賽的四題與題解連結`}
-          </p>
-        </div>
-        <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 rounded-full border border-border/60 bg-background/80 px-3 py-1.5 text-xs text-muted-foreground">
-          <span className="shrink-0">題解來源</span>
-          <a
-            className="font-medium text-red-600 hover:underline dark:text-red-400"
-            href="https://space.bilibili.com/206214/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            靈茶山艾府（0x3F）@B站
-          </a>
-        </div>
-      </div>
+      <section className="overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-muted/40 via-background to-background">
+        <div className="flex flex-col gap-6 p-5 sm:p-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-2xl space-y-2">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                比賽題目
+              </h1>
+              <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                按場次查看每場比賽的四題難度分布，並用 Q1 到 Q4 的 rating 區間快速篩選適合練習的競賽。
+              </p>
+            </div>
+            <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
+              <span className="shrink-0">題解來源</span>
+              <a
+                className="font-medium text-red-600 hover:underline dark:text-red-400"
+                href="https://space.bilibili.com/206214/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                靈茶山艾府（0x3F）@B站
+              </a>
+            </div>
+          </div>
 
-      {/* Table */}
-      <div className="w-full overflow-x-hidden">
-        <ProblemsTable tableData={tableData} isPending={isPending} />
-      </div>
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <Swords className="h-4 w-4" />
+                比賽總數
+              </div>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : contestCount}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                收錄每場競賽的四題資料
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <FileText className="h-4 w-4" />
+                題目總數
+              </div>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : overviewStats.totalProblems}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                方便整批練習同場比賽的四題
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <Sparkles className="h-4 w-4" />
+                題解覆蓋
+              </div>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : overviewStats.solutionCount}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                可直接跳轉查看的對應題解數
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <Gauge className="h-4 w-4" />
+                難度概況
+              </div>
+              <p className="mt-2 text-2xl font-semibold text-foreground">
+                {isPending ? "--" : overviewStats.averageRating}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                平均 rating；最高約 {isPending ? "--" : overviewStats.hardestRating}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
+        <div className="flex flex-col gap-3 border-b border-border/60 bg-muted/20 px-4 py-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="space-y-1">
+            <h2 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
+              比賽列表
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              依預設由新到舊排序，並支援在表頭直接設定各題的 rating 範圍。
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+              Q1-Q4 可獨立篩選
+            </span>
+            <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+              支援欄位顯示切換
+            </span>
+            <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+              可左右滑動查看完整表格
+            </span>
+          </div>
+        </div>
+
+        <div className="w-full overflow-x-hidden">
+          <ProblemsTable tableData={tableData} isPending={isPending} />
+        </div>
+      </section>
     </div>
   );
 }
 
-export default ProblemSet;
+export default ContestPage;
