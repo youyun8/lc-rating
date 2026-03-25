@@ -21,8 +21,8 @@ const BASE_PX = 50;
 const CONTEST_CHAR_PX = 5;
 const CONTEST_BASE_PX = 16;
 const MIN_CONTEST_PX = 80;
-// Q headers contain two filter inputs (~120px), so enforce a larger minimum.
-const MIN_Q_PX = 160;
+// Q headers contain two wider filter inputs and inline rating badges.
+const MIN_Q_PX = 192;
 
 function avgLen(strs: string[]): number {
   return strs.reduce((sum, s) => sum + s.length, 0) / strs.length;

@@ -68,13 +68,6 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
             }${isCompleted ? " bg-emerald-500/5" : ""}`}
           >
             <div className="min-w-0 flex-1">
-              <div className="mb-1 flex flex-wrap items-center gap-2">
-                {problemId && problemId !== "1000000000" ? (
-                  <span className="inline-flex items-center rounded-full border border-border/60 bg-muted/30 px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-                    #{problemId}
-                  </span>
-                ) : null}
-              </div>
               <a
                 href={`${LC_HOST}/problems/${problem.slug}`}
                 target="_blank"

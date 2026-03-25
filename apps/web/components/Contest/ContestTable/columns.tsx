@@ -31,16 +31,22 @@ const generate = (
   return {
     header: ({ column }) => {
       const filterValue = column.getFilterValue();
-      const min = isRatingFilter(filterValue) ? filterValue.min : "";
-      const max = isRatingFilter(filterValue) ? filterValue.max : "";
+      const min =
+        isRatingFilter(filterValue) && Number.isFinite(filterValue.min)
+          ? filterValue.min
+          : "";
+      const max =
+        isRatingFilter(filterValue) && Number.isFinite(filterValue.max)
+          ? filterValue.max
+          : "";
 
       return (
-        <div className="flex min-w-[10rem] flex-col items-center gap-2 py-1">
+        <div className="flex min-w-[12rem] flex-col items-center gap-2 py-1">
           <div className="flex items-center gap-2">
             <div>{key2Label[key]}</div>
             <SortIndicator column={column} />
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1.5">
             <Input
               type="number"
               placeholder="Min"
@@ -54,7 +60,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-8 w-16 rounded-md border-border/60 bg-background/80 text-center text-xs shadow-none"
+              className="h-8 w-20 rounded-md border-border/60 bg-background/80 px-2 text-center text-xs shadow-none"
             />
             <Input
               type="number"
@@ -69,7 +75,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-8 w-16 rounded-md border-border/60 bg-background/80 text-center text-xs shadow-none"
+              className="h-8 w-20 rounded-md border-border/60 bg-background/80 px-2 text-center text-xs shadow-none"
             />
           </div>
         </div>
@@ -81,30 +87,37 @@ const generate = (
       const info = ratingInfo(rating);
       return (
         <div className="flex items-start justify-between gap-2 py-1.5">
-          <div className="min-w-0 space-y-1">
-            <div className="flex items-start gap-2">
-              <span
-                className="mt-1 h-2 w-2 shrink-0 rounded-full"
-                style={{ backgroundColor: info.color }}
-              />
+          <div className="flex min-w-0 flex-1 items-start gap-2">
+            <span
+              className="mt-1.5 h-2 w-2 shrink-0 rounded-full"
+              style={{ backgroundColor: info.color }}
+            />
+            <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
               <I18NLink
                 link={Q.problem.link}
-                title={Q.problem.id === "1000000000" ? Q.problem.title : `${Q.problem.id}. ${Q.problem.title}`}
-                className="line-clamp-2 text-sm font-medium leading-5 text-foreground transition-colors hover:text-primary hover:underline"
+                title={
+                  Q.problem.id === "1000000000"
+                    ? Q.problem.title
+                    : `${Q.problem.id}. ${Q.problem.title}`
+                }
+                className="min-w-0 line-clamp-2 text-sm font-medium leading-5 text-foreground transition-colors hover:text-primary hover:underline"
               />
+              <span
+                className="mt-0.5 inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
+                style={{
+                  color: info.color,
+                  backgroundColor: `${info.color}1a`,
+                }}
+              >
+                {rating.toFixed(0)}
+              </span>
             </div>
-            <span
-              className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
-              style={{ color: info.color, backgroundColor: `${info.color}1a` }}
-            >
-              {rating.toFixed(0)}
-            </span>
           </div>
           {Q.solution && (
             <I18NLink
               link={Q.solution.link}
               title="🎈"
-              className="flex-shrink-0 text-base hover:no-underline opacity-70 hover:opacity-100 transition-opacity"
+              className="mt-0.5 flex-shrink-0 text-base opacity-70 transition-opacity hover:opacity-100 hover:no-underline"
             />
           )}
         </div>
