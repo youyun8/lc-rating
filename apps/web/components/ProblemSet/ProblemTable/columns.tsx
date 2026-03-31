@@ -122,7 +122,7 @@ export const getColumns = () => [
         <I18NLink
           link={solution.link}
           title={solution.title}
-          className="block max-w-[12rem] text-sm text-muted-foreground transition duration-300 hover:text-foreground"
+          className="block max-w-[12rem] text-sm text-muted-foreground blur-xs transition duration-300 hover:text-foreground hover:blur-none"
         />
       );
     },

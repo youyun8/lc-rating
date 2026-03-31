@@ -174,8 +174,7 @@ function ProblemSet() {
                 題庫
               </h1>
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                按題號、題名、競賽、難度、標籤與進度快速縮小範圍，並直接查看
-                0x3F 題解與個人解題進度。
+                按題號、題名、競賽、難度、標籤與進度快速縮小範圍
               </p>
             </div>
             <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">

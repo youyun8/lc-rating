@@ -48,6 +48,17 @@ function createInlineMarkup(md: string) {
   return { __html: "" };
 }
 
+function countProblems(section: StudyPlanData.Section): number {
+  let count = section.problems?.length ?? 0;
+  if (section.children) {
+    count += section.children.reduce(
+      (acc, child) => acc + countProblems(child),
+      0,
+    );
+  }
+  return count;
+}
+
 interface SectionContainerProps {
   section: StudyPlanData.Section;
   level?: number;
@@ -61,22 +72,44 @@ const SectionContainer = React.memo(
         innerHtml.current.querySelectorAll("a").forEach((link) => {
           link.removeAttribute("style");
           link.setAttribute("target", "_blank");
-          link.className = "underline text-blue-500";
+          link.className =
+            "font-medium text-primary underline underline-offset-4";
         });
         innerHtml.current.querySelectorAll("img").forEach((img) => {
           img.removeAttribute("style");
-          img.className = "w-full sm:w-2/3 md:w-1/2";
+          img.className =
+            "w-full rounded-2xl border border-border/60 bg-background/80 shadow-sm sm:w-2/3 md:w-1/2";
         });
       }
     }, [innerHtml]);
 
+    const totalProblems = countProblems(section);
+    const childCount = section.children?.length ?? 0;
     const cardClasses = cn(
-      "scroll-mt-[70px] h-fit w-full rounded-xl border bg-card shadow-none sm:rounded-2xl",
+      "scroll-mt-[78px] h-fit w-full overflow-hidden border border-border/60 shadow-sm",
+      level === 0
+        ? "rounded-3xl bg-card"
+        : level === 1
+          ? "rounded-[1.5rem] bg-card/95"
+          : "rounded-2xl bg-muted/10",
     );
 
     return (
       <Card id={`${section.title}`} className={cardClasses}>
-        <CardHeader className="px-4 pb-3 pt-4 sm:px-6 sm:pt-6">
+        <CardHeader className="px-4 pb-4 pt-4 sm:px-6 sm:pt-6">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 font-medium">
+              {level === 0 ? "主章節" : level === 1 ? "子章節" : "細分章節"}
+            </span>
+            <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
+              {totalProblems} 題
+            </span>
+            {childCount > 0 && (
+              <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
+                {childCount} 個子章節
+              </span>
+            )}
+          </div>
           <CardTitle
             className={cn(
               "font-bold tracking-tight",
@@ -90,10 +123,10 @@ const SectionContainer = React.memo(
             <span dangerouslySetInnerHTML={createInlineMarkup(section.title)} />
           </CardTitle>
           {section.summary || section.content ? (
-            <CardDescription className="text-foreground mt-3">
+            <CardDescription className="mt-3 text-foreground">
               <div
                 ref={innerHtml}
-                className="prose prose-sm max-w-none dark:prose-invert prose-pre:my-2 sm:prose-base"
+                className="prose prose-sm max-w-none text-foreground dark:prose-invert prose-headings:text-foreground prose-p:leading-7 prose-li:leading-7 prose-pre:my-3 prose-pre:overflow-x-auto prose-img:mx-0 sm:prose-base"
                 dangerouslySetInnerHTML={createMarkup(
                   section.summary || section.content || "",
                 )}
@@ -109,7 +142,7 @@ const SectionContainer = React.memo(
               </div>
             ) : null}
             {section.children && section.children.length > 0 && (
-              <div className="flex flex-col gap-4 w-full">
+              <div className="flex w-full flex-col gap-4 border-t border-border/50 pt-1">
                 {section.children.map((child) => (
                   <SectionContainer
                     key={child.title}

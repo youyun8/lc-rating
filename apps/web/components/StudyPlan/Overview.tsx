@@ -6,8 +6,16 @@ import {
   studyPlanThemes,
   defaultTheme,
 } from "@/config/studyPlanThemes";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Search, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  FolderTree,
+  LayoutGrid,
+  Search,
+} from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo, type ReactNode } from "react";
 import { StudyPlanData } from "@/types";
@@ -51,6 +59,42 @@ function collectProblemIds(sections: StudyPlanData.Section[]): string[] {
   }
   for (const s of sections) walk(s);
   return ids;
+}
+
+type ProgressMap = Record<string, string | undefined>;
+
+function getPlanSummary(data: StudyPlanData.Root | undefined, progress: ProgressMap) {
+  if (!data) {
+    return {
+      totalProblems: 0,
+      totalSections: 0,
+      completedProblems: 0,
+      pct: 0,
+    };
+  }
+
+  const ids = collectProblemIds(data.children);
+  const totalProblems =
+    ids.length ||
+    data.children.reduce(
+      (acc: number, child: StudyPlanData.Section) => acc + countProblems(child),
+      0,
+    );
+  const totalSections = data.children.reduce(
+    (acc: number, child: StudyPlanData.Section) => acc + countSections(child),
+    0,
+  );
+  const completedProblems = ids.filter((id) => progress[id] === "AC").length;
+
+  return {
+    totalProblems,
+    totalSections,
+    completedProblems,
+    pct:
+      totalProblems > 0
+        ? Math.round((completedProblems / totalProblems) * 100)
+        : 0,
+  };
 }
 
 type StudyPlanSearchMatch = {
@@ -169,24 +213,7 @@ function StudyPlanCard({
   const progress = useProgressStore((state) => state.progress);
 
   const { totalProblems, totalSections, completedProblems } = useMemo(() => {
-    if (!data)
-      return { totalProblems: 0, totalSections: 0, completedProblems: 0 };
-    const ids = collectProblemIds(data.children);
-    return {
-      totalProblems:
-        ids.length ||
-        data.children.reduce(
-          (acc: number, child: StudyPlanData.Section) =>
-            acc + countProblems(child),
-          0,
-        ),
-      totalSections: data.children.reduce(
-        (acc: number, child: StudyPlanData.Section) =>
-          acc + countSections(child),
-        0,
-      ),
-      completedProblems: ids.filter((id) => progress[id] === "AC").length,
-    };
+    return getPlanSummary(data, progress);
   }, [data, progress]);
 
   const pct =
@@ -199,15 +226,20 @@ function StudyPlanCard({
 
   return (
     <Link href={`/studyplan/${planKey}`} className="block h-full">
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/40 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         {/* Gradient Banner */}
         <div
-          className="relative h-24 overflow-hidden sm:h-28"
+          className="relative h-28 overflow-hidden sm:h-32"
           style={{ background: theme.gradient }}
         >
           <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-white/10" />
           <div className="absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-white/5" />
           <div className="absolute top-3 right-3 h-16 w-16 rounded-full bg-white/5" />
+          <div className="absolute right-3 top-3">
+            <Badge className="border-white/15 bg-white/15 text-white backdrop-blur-sm">
+              {pct === 100 ? "已完成" : pct > 0 ? `${pct}% 進行中` : "未開始"}
+            </Badge>
+          </div>
           <div className="relative flex h-full items-center justify-center">
             <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/20">
               <Icon className="h-8 w-8 text-white drop-shadow-sm" />
@@ -220,15 +252,23 @@ function StudyPlanCard({
           <h3 className="text-base font-bold tracking-tight transition-colors group-hover:text-primary sm:text-lg">
             {title}
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {totalProblems} 題 · {totalSections} 個章節
-          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="inline-flex items-center rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+              {totalProblems} 題
+            </span>
+            <span className="inline-flex items-center rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+              {totalSections} 個章節
+            </span>
+            <span className="inline-flex items-center rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+              已完成 {completedProblems} 題
+            </span>
+          </div>
 
           {searchQuery.trim() && visibleMatches.length > 0 && (
-            <div className="mt-3 rounded-lg border border-border/60 bg-muted/40 p-3 sm:mt-4">
+            <div className="mt-4 rounded-2xl border border-border/60 bg-muted/30 p-3.5">
               <div className="mb-2 flex items-center justify-between gap-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  匹配結果
+                  搜尋命中
                 </p>
                 {searchMatches.length > visibleMatches.length && (
                   <span className="text-xs text-muted-foreground">
@@ -240,7 +280,7 @@ function StudyPlanCard({
                 {visibleMatches.map((match, index) => (
                   <div
                     key={`${match.kind}-${match.label}-${match.text}-${index}`}
-                    className="rounded-md bg-background/80 px-2.5 py-2 text-sm"
+                    className="rounded-xl border border-border/40 bg-background/80 px-3 py-2.5 text-sm"
                   >
                     <div className="flex items-start gap-2">
                       <span
@@ -272,19 +312,22 @@ function StudyPlanCard({
           {/* Progress */}
           <div className="mt-auto pt-4">
             {totalProblems > 0 && (
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-muted-foreground">
-                    已完成 {completedProblems} / {totalProblems} 題
-                  </span>
+              <div className="rounded-2xl border border-border/60 bg-muted/20 p-3.5">
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <p className="text-sm font-medium text-foreground">完成進度</p>
                   <span
-                    className="font-semibold"
+                    className="text-sm font-semibold"
                     style={{ color: theme.accent }}
                   >
                     {pct}%
                   </span>
                 </div>
-                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-muted-foreground">
+                    已完成 {completedProblems} / {totalProblems} 題
+                  </span>
+                </div>
+                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-muted">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{ width: `${pct}%`, backgroundColor: theme.accent }}
@@ -315,22 +358,36 @@ function StudyPlanOverview() {
   const trimmedQuery = searchQuery.trim();
 
   const planStats = useMemo(() => {
-    const stats: Record<string, { pct: number }> = {};
-    for (const planKey of Object.keys(STUDYPLANS)) {
-      const data = studyPlanDataMap[planKey];
-      if (!data) {
-        stats[planKey] = { pct: 0 };
-        continue;
+    const stats: Record<
+      string,
+      {
+        totalProblems: number;
+        totalSections: number;
+        completedProblems: number;
+        pct: number;
       }
-      const ids = collectProblemIds(data.children);
-      const total = ids.length;
-      const completed = ids.filter((id) => progress[id] === "AC").length;
-      stats[planKey] = {
-        pct: total > 0 ? Math.round((completed / total) * 100) : 0,
-      };
+    > = {};
+    for (const planKey of Object.keys(STUDYPLANS)) {
+      stats[planKey] = getPlanSummary(studyPlanDataMap[planKey], progress);
     }
     return stats;
   }, [progress]);
+
+  const overviewStats = useMemo(() => {
+    return Object.values(planStats).reduce(
+      (acc, stat) => {
+        acc.totalProblems += stat.totalProblems;
+        acc.totalSections += stat.totalSections;
+        acc.completedProblems += stat.completedProblems;
+        return acc;
+      },
+      {
+        totalProblems: 0,
+        totalSections: 0,
+        completedProblems: 0,
+      },
+    );
+  }, [planStats]);
 
   const planSearchMatches = useMemo(() => {
     if (!trimmedQuery) return {};
@@ -375,69 +432,171 @@ function StudyPlanOverview() {
     { key: "completed", label: "已完成", count: counts.completed },
   ];
 
+  const activeFilterLabel =
+    filterTabs.find((tab) => tab.key === filter)?.label ?? "全部";
+
   return (
     <div className="min-h-screen bg-background font-song">
-      {/* Page Header */}
-      <div className="border-b border-border/60 bg-muted/30">
-        <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                題單
-              </h1>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-xl">
-                由靈茶山艾府（0x3F）整理的演算法題單，涵蓋各種常見演算法與資料結構。
-                <br className="hidden sm:block" />
-                點擊任意題單查看詳細內容與題目列表。
-              </p>
+      <div className="mx-auto max-w-7xl px-4 py-6 md:px-8">
+        <section className="overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-muted/40 via-background to-background">
+          <div className="flex flex-col gap-6 p-5 sm:p-6">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-2xl space-y-2">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                  題單
+                </h1>
+                <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  由靈茶山艾府（0x3F）整理的演算法題單，按主題分層規劃，方便你依照進度持續練習。
+                </p>
+              </div>
+              <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
+                <span className="shrink-0">資料來源</span>
+                <span className="font-medium text-foreground">靈茶山艾府（0x3F）題單</span>
+              </div>
             </div>
-            <div className="w-full sm:w-80 flex-shrink-0">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-                <Input
-                  type="search"
-                  placeholder="搜尋題單、子章節或題目編號..."
-                  className="w-full pl-9 pr-4 py-2.5 border border-input rounded-lg bg-background hover:border-primary/30 focus:border-primary focus-visible:ring-1 focus-visible:ring-ring transition-colors text-sm"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  <LayoutGrid className="h-4 w-4" />
+                  題單總數
+                </div>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {counts.all}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  涵蓋常見演算法與資料結構主題
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  <BookOpen className="h-4 w-4" />
+                  題目總數
+                </div>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {overviewStats.totalProblems}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  所有題單合計可練習的題目數
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  <FolderTree className="h-4 w-4" />
+                  章節覆蓋
+                </div>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {overviewStats.totalSections}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  支援依章節層級快速定位學習路線
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  <CheckCircle2 className="h-4 w-4" />
+                  已完成題目
+                </div>
+                <p className="mt-2 text-2xl font-semibold text-foreground">
+                  {overviewStats.completedProblems}
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  依你的進度同步顯示已標記為 AC 的題目
+                </p>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Filter Tabs */}
-          <div className="mt-6 -mx-1 overflow-x-auto pb-1">
-            <div className="flex min-w-max items-center gap-2 px-1">
-              {filterTabs.map(({ key, label, count }) => (
-                <button
-                  key={key}
-                  onClick={() => setFilter(key)}
-                  className={`cursor-pointer whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                    filter === key
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
-                >
-                  {label}
-                  <span
-                    className={`ml-1.5 ${filter === key ? "text-primary-foreground/70" : "text-muted-foreground/60"}`}
-                  >
-                    {count}
+        <section className="mt-5 rounded-2xl border border-border/60 bg-card shadow-sm">
+          <div className="flex flex-col gap-4 p-4 sm:p-5">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="space-y-1">
+                <h2 className="text-sm font-semibold tracking-tight text-foreground sm:text-base">
+                  搜尋與篩選
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  搜尋題單、章節或題號，快速找到下一步想練的主題。
+                </p>
+              </div>
+              <div className="w-full lg:max-w-sm">
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    placeholder="搜尋題單、子章節或題目編號..."
+                    className="h-11 rounded-xl border-border/60 bg-background pl-9 pr-4 text-sm shadow-none transition-colors hover:border-primary/30 focus-visible:ring-2"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
+                  顯示 {filteredPlans.length} / {counts.all} 份題單
+                </span>
+                <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
+                  目前篩選：{activeFilterLabel}
+                </span>
+                {trimmedQuery && (
+                  <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
+                    搜尋：{trimmedQuery}
                   </span>
-                </button>
-              ))}
+                )}
+              </div>
+
+              <div className="-mx-1 overflow-x-auto pb-1">
+                <div className="flex min-w-max items-center gap-2 px-1">
+                  {filterTabs.map(({ key, label, count }) => (
+                    <button
+                      key={key}
+                      onClick={() => setFilter(key)}
+                      className={`cursor-pointer whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                        filter === key
+                          ? "bg-primary text-primary-foreground shadow-sm"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      }`}
+                    >
+                      {label}
+                      <span
+                        className={`ml-1.5 ${filter === key ? "text-primary-foreground/70" : "text-muted-foreground/60"}`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
 
       {/* Card Grid */}
-      <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
+      <div className="mx-auto max-w-7xl px-4 pb-8 md:px-8 md:pb-10">
+        <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-lg font-semibold tracking-tight text-foreground">
+              題單列表
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              按主題挑選題單，或直接從已開始的進度繼續練習。
+            </p>
+          </div>
+        </div>
         {filteredPlans.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
-            <Search className="h-12 w-12 mb-4 opacity-30" />
-            <p className="text-lg font-medium">沒有找到匹配的題單</p>
-            <p className="text-sm mt-1">嘗試其他搜尋關鍵字或篩選條件</p>
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border/70 bg-muted/20 px-6 py-16 text-center text-muted-foreground">
+            <Search className="mb-4 h-12 w-12 opacity-30" />
+            <p className="text-lg font-medium text-foreground">沒有找到匹配的題單</p>
+            <p className="mt-1 text-sm">
+              試試其他搜尋關鍵字，或切換回不同的進度篩選條件。
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">

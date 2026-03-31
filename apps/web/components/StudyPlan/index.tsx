@@ -10,7 +10,14 @@ import {
 } from "@/config/studyPlanThemes";
 import { SectionContainer } from "./SectionContainer";
 import { StudyPlanData } from "@/types";
-import { BookOpen, ChevronRight, ExternalLink } from "lucide-react";
+import {
+  BookOpen,
+  CheckCircle2,
+  ChevronRight,
+  ExternalLink,
+  FolderTree,
+  Layers3,
+} from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -56,7 +63,16 @@ function StudyPlan({ plan }: StudyPlanProps) {
   const theme = studyPlanThemes[plan] ?? defaultTheme;
 
   const stats = useMemo(() => {
-    if (!studyPlan) return { total: 0, completed: 0, sections: 0, pct: 0 };
+    if (!studyPlan) {
+      return {
+        total: 0,
+        completed: 0,
+        sections: 0,
+        rootSections: 0,
+        pct: 0,
+      };
+    }
+
     const ids = collectProblemIds(studyPlan.children);
     const total = ids.length;
     const completed = ids.filter((id) => progress[id] === "AC").length;
@@ -64,116 +80,187 @@ function StudyPlan({ plan }: StudyPlanProps) {
       (acc, child) => acc + countSections(child),
       0,
     );
+
     return {
       total,
       completed,
       sections,
+      rootSections: studyPlan.children.length,
       pct: total > 0 ? Math.round((completed / total) * 100) : 0,
     };
   }, [studyPlan, progress]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background font-song">
-      {/* Hero Header */}
       {studyPlan && (
-        <div
-          className="relative overflow-hidden"
-          style={{ background: theme.gradient }}
-        >
-          {/* Decorative elements */}
-          <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-white/10" />
-          <div className="absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-white/5" />
-          <div className="absolute top-8 right-1/4 h-24 w-24 rounded-full bg-white/5" />
+        <div className="mx-auto w-full max-w-7xl px-4 pt-6 md:px-8 md:pt-8">
+          <div
+            className="relative overflow-hidden rounded-[2rem]"
+            style={{ background: theme.gradient }}
+          >
+            <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-white/10" />
+            <div className="absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-white/5" />
+            <div className="absolute top-8 right-1/4 h-24 w-24 rounded-full bg-white/5" />
 
-          <div className="relative mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-10">
-            {/* Breadcrumb */}
-            <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-sm text-white/70">
-              <Link
-                href="/studyplan"
-                className="hover:text-white transition-colors"
-              >
-                題單
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5" />
-              <span className="text-white font-medium">{planTitle}</span>
-            </nav>
+            <div className="relative p-5 sm:p-6 md:p-8">
+              <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-sm text-white/70">
+                <Link
+                  href="/studyplan"
+                  className="transition-colors hover:text-white"
+                >
+                  題單
+                </Link>
+                <ChevronRight className="h-3.5 w-3.5" />
+                <span className="font-medium text-white">{planTitle}</span>
+              </nav>
 
-            <div className="flex flex-col gap-6 md:flex-row md:items-center">
-              {/* Icon + Title */}
-              <div className="flex items-center gap-4 flex-1 min-w-0">
-                <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/20 shrink-0">
-                  <Icon className="h-8 w-8 text-white drop-shadow-sm" />
-                </div>
-                <div className="min-w-0">
-                  <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl md:text-3xl">
-                    {studyPlan.title}
-                  </h1>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-sm text-white/70">
-                    <a
-                      href={studyPlan.src}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                    >
-                      <ExternalLink className="h-3.5 w-3.5" />
-                      查看原文
-                    </a>
-                    <span>·</span>
-                    <span>
-                      更新於{" "}
-                      {new Date(studyPlan.last_update).toLocaleDateString()}
-                    </span>
+              <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+                <div className="min-w-0 flex-1">
+                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white/85 backdrop-blur-sm">
+                    <span>0x3F 題單</span>
+                    <span className="text-white/50">·</span>
+                    <span>主題式學習路線</span>
                   </div>
-                </div>
-              </div>
 
-              {/* Stats cards */}
-              <div className="grid w-full grid-cols-3 gap-2 md:w-auto md:shrink-0 md:grid-cols-none md:auto-cols-fr md:grid-flow-col md:gap-4">
-                <div className="rounded-xl bg-white/15 px-3 py-2 text-center backdrop-blur-sm ring-1 ring-white/10 md:px-4 md:py-2.5">
-                  <div className="text-xl md:text-2xl font-bold text-white">
-                    {stats.total}
+                  <div className="flex items-start gap-4">
+                    <div className="shrink-0 rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/20">
+                      <Icon className="h-8 w-8 text-white drop-shadow-sm" />
+                    </div>
+                    <div className="min-w-0">
+                      <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                        {studyPlan.title}
+                      </h1>
+                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
+                        按章節逐步練習這份題單，直接開啟 LeetCode 題目並同步記錄你的解題進度。
+                      </p>
+                      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white/70">
+                        <a
+                          href={studyPlan.src}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 transition-colors hover:text-white"
+                        >
+                          <ExternalLink className="h-3.5 w-3.5" />
+                          查看原文
+                        </a>
+                        <span className="hidden sm:inline">·</span>
+                        <span>
+                          更新於{" "}
+                          {new Date(studyPlan.last_update).toLocaleDateString()}
+                        </span>
+                        <span className="hidden sm:inline">·</span>
+                        <span>{stats.rootSections} 個主章節</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs text-white/60">題目</div>
                 </div>
-                <div className="rounded-xl bg-white/15 px-3 py-2 text-center backdrop-blur-sm ring-1 ring-white/10 md:px-4 md:py-2.5">
-                  <div className="text-xl md:text-2xl font-bold text-white">
-                    {stats.sections}
+
+                <div className="flex flex-col gap-3 xl:w-[21rem] xl:shrink-0">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm ring-1 ring-white/10">
+                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
+                        <BookOpen className="h-4 w-4" />
+                        題目
+                      </div>
+                      <div className="mt-2 text-2xl font-bold text-white">
+                        {stats.total}
+                      </div>
+                    </div>
+                    <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm ring-1 ring-white/10">
+                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
+                        <FolderTree className="h-4 w-4" />
+                        章節
+                      </div>
+                      <div className="mt-2 text-2xl font-bold text-white">
+                        {stats.sections}
+                      </div>
+                    </div>
+                    <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm ring-1 ring-white/10">
+                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
+                        <CheckCircle2 className="h-4 w-4" />
+                        已完成
+                      </div>
+                      <div className="mt-2 text-2xl font-bold text-white">
+                        {stats.completed}
+                      </div>
+                    </div>
+                    <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm ring-1 ring-white/10">
+                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
+                        <Layers3 className="h-4 w-4" />
+                        完成率
+                      </div>
+                      <div className="mt-2 text-2xl font-bold text-white">
+                        {stats.pct}%
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs text-white/60">章節</div>
-                </div>
-                <div className="rounded-xl bg-white/15 px-3 py-2 text-center backdrop-blur-sm ring-1 ring-white/10 md:px-4 md:py-2.5">
-                  <div className="text-xl md:text-2xl font-bold text-white">
-                    {stats.pct}%
+
+                  <div className="rounded-2xl bg-white/12 p-4 backdrop-blur-sm ring-1 ring-white/10">
+                    <div className="mb-2 flex items-center justify-between gap-3 text-xs text-white/70">
+                      <span>
+                        已完成 {stats.completed} / {stats.total} 題
+                      </span>
+                      <span className="font-semibold text-white">{stats.pct}%</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-white/20">
+                      <div
+                        className="h-full rounded-full bg-white/90 transition-all duration-500"
+                        style={{ width: `${stats.pct}%` }}
+                      />
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-white/75">
+                      <Link
+                        href="/studyplan"
+                        className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
+                      >
+                        返回題單列表
+                      </Link>
+                      <a
+                        href={studyPlan.src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
+                      >
+                        原文連結
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </div>
                   </div>
-                  <div className="text-xs text-white/60">完成</div>
                 </div>
               </div>
             </div>
-
-            {/* Progress bar */}
-            {stats.total > 0 && (
-              <div className="mt-6 space-y-1.5">
-                <div className="flex items-center justify-between text-xs text-white/70">
-                  <span>
-                    已完成 {stats.completed} / {stats.total} 題
-                  </span>
-                  <span className="font-semibold text-white">{stats.pct}%</span>
-                </div>
-                <div className="h-2 w-full rounded-full bg-white/20 overflow-hidden">
-                  <div
-                    className="h-full rounded-full bg-white/90 transition-all duration-500"
-                    style={{ width: `${stats.pct}%` }}
-                  />
-                </div>
-              </div>
-            )}
           </div>
         </div>
       )}
 
-      {/* Content */}
       <div className="mx-auto w-full max-w-7xl px-4 py-6 pb-24 md:px-8 md:py-8 md:pb-20">
         <div className="flex flex-col gap-8">
+          {studyPlan && (
+            <section className="rounded-2xl border border-border/60 bg-muted/20 p-4 shadow-sm sm:p-5">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h2 className="text-base font-semibold tracking-tight text-foreground">
+                    章節導覽
+                  </h2>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    依照章節順序循序練習；桌面版也可使用左側導覽快速跳轉到指定章節。
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+                    {stats.rootSections} 個主章節
+                  </span>
+                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+                    {stats.sections} 個總章節
+                  </span>
+                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+                    {stats.total} 題
+                  </span>
+                </div>
+              </div>
+            </section>
+          )}
+
           {studyPlan?.children.map((section) => (
             <SectionContainer key={section.title} section={section} />
           ))}
