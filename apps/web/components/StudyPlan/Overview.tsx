@@ -84,7 +84,7 @@ function getPlanSummary(data: StudyPlanData.Root | undefined, progress: Progress
     (acc: number, child: StudyPlanData.Section) => acc + countSections(child),
     0,
   );
-  const completedProblems = ids.filter((id) => progress[id] === "AC").length;
+  const completedProblems = ids.filter((id) => progress[id] === "SOLVED").length;
 
   return {
     totalProblems,

@@ -7,8 +7,8 @@ import {
   LC_RATING_AUTH_TOKEN_KEY,
   LC_RATING_LAST_SYNC_AT_KEY,
 } from "@/config/constants";
-import { useProgressStore } from "@/hooks/useProgress";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
+import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
 import { decodeAuthToken, getErrorMessage } from "@/utils/auth";
 import { CloudDownload, CloudUpload, Loader2, LogIn, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -26,8 +26,7 @@ function formatTimestamp(timestamp: number | null) {
 }
 
 const FloatingSyncButton = () => {
-  const { siteStorage } = useSiteStorage();
-  const setAllProgress = useProgressStore((state) => state.setAllProgress);
+  const { siteStorage, setSiteStorage } = useSiteStorage();
   const [authToken, setAuthToken] = useState<string | null>(() => {
     if (typeof window === "undefined") {
       return null;
@@ -110,22 +109,8 @@ const FloatingSyncButton = () => {
 
     setIsPullingCloud(true);
     try {
-      const response = await fetch(`${API_BASE}/api/getprogress`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      if (!data?.success) {
-        throw new Error(data?.message ?? "拉取失敗");
-      }
-
-      const result = data?.result ?? {};
-      const progress: Record<string, string> = result.progress ?? {};
-      const progressUpdatedAt: Record<string, number> =
-        result.progressUpdatedAt ?? {};
-
-      setAllProgress(progress, progressUpdatedAt);
+      const cloudSiteStorage = await pullCloudSiteStorage(token);
+      setSiteStorage(cloudSiteStorage);
       const now = Date.now();
       localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(now));
       setLastSyncAt(now);
@@ -152,22 +137,7 @@ const FloatingSyncButton = () => {
 
     setIsPushingCloud(true);
     try {
-      const response = await fetch(`${API_BASE}/api/uploadprogress`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          progress: siteStorage.progress,
-          progressUpdatedAt: siteStorage.progressUpdatedAt ?? {},
-        }),
-      });
-      const data = await response.json();
-      if (!data?.success) {
-        throw new Error(data?.message ?? "上傳失敗");
-      }
-
+      await pushCloudSiteStorage(token, siteStorage);
       const now = Date.now();
       localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(now));
       setLastSyncAt(now);

@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { API_BASE, LC_RATING_AUTH_TOKEN_KEY } from "@/config/constants";
-import { useProgressStore } from "@/hooks/useProgress";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
+import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
 import { decodeAuthToken, getErrorMessage } from "@/utils/auth";
 import {
   CloudDownload,
@@ -37,8 +37,8 @@ function formatTimestamp(timestamp: number | null) {
 
 export default function SyncStorage() {
   const { siteStorage, setSiteStorage } = useSiteStorage();
-  const setAllProgress = useProgressStore((state) => state.setAllProgress);
-  const clearAllProgress = useProgressStore((state) => state.clearAllProgress);
+  const clearAllProgress = () =>
+    setSiteStorage({ progress: {}, progressUpdatedAt: {} });
   const progressStr = JSON.stringify(siteStorage, null, 2);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
@@ -242,22 +242,8 @@ export default function SyncStorage() {
 
     setIsPullingCloud(true);
     try {
-      const response = await fetch(`${API_BASE}/api/getprogress`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      if (!data?.success) {
-        throw new Error(data?.message ?? "拉取失敗");
-      }
-
-      const result = data?.result ?? {};
-      const progress: Record<string, string> = result.progress ?? {};
-      const progressUpdatedAt: Record<string, number> =
-        result.progressUpdatedAt ?? {};
-
-      setAllProgress(progress, progressUpdatedAt);
+      const cloudSiteStorage = await pullCloudSiteStorage(token);
+      setSiteStorage(cloudSiteStorage);
       setErrorMessage(null);
       toast(<span className="text-green-500">雲端同步成功</span>, {
         icon: <ThumbsUp className="text-green-500 size-full" />,
@@ -291,22 +277,7 @@ export default function SyncStorage() {
 
     setIsPushingCloud(true);
     try {
-      const response = await fetch(`${API_BASE}/api/uploadprogress`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          progress: siteStorage.progress,
-          progressUpdatedAt: siteStorage.progressUpdatedAt ?? {},
-        }),
-      });
-      const data = await response.json();
-      if (!data?.success) {
-        throw new Error(data?.message ?? "上傳失敗");
-      }
-
+      await pushCloudSiteStorage(token, siteStorage);
       setErrorMessage(null);
       toast(<span className="text-green-500">雲端上傳成功</span>, {
         icon: <ThumbsUp className="text-green-500 size-full" />,

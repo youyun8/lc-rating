@@ -1,85 +1,101 @@
 import {
   Select,
-  SelectOption,
+  SelectContent,
+  SelectItem,
   SelectTrigger,
-} from "@/components/common/Select";
+  SelectValue,
+} from "@/components/ui/select";
 import { OptionKey, useOptions } from "@/hooks/useOptions";
 import { useProgress } from "@/hooks/useProgress";
 import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
 import React, { useCallback, useMemo } from "react";
 
 interface ProgressSelectorProps {
   problemId: string;
+  triggerClassName?: string;
 }
 
-const ProgressSelector = React.memo(({ problemId }: ProgressSelectorProps) => {
-  const { optionKeys, getOption } = useOptions();
-  const { progress, setProgress, delProgress } = useProgress();
-  const todoOption = getOption();
-  const optValue = getOption(progress[problemId]);
+const ProgressSelector = React.memo(
+  ({ problemId, triggerClassName }: ProgressSelectorProps) => {
+    const { optionKeys, getOption } = useOptions();
+    const { progress, setProgress, delProgress } = useProgress();
+    const todoOption = getOption();
+    const optValue = getOption(progress[problemId]);
 
-  const handleSelect = useCallback(
-    (key: OptionKey) => {
-      if (key === todoOption.key) {
-        delProgress(problemId);
-      } else {
-        setProgress(problemId, key);
-      }
-    },
-    [problemId, todoOption, delProgress, setProgress]
-  );
+    const handleSelect = useCallback(
+      (key: OptionKey) => {
+        if (key === todoOption.key) {
+          delProgress(problemId);
+        } else {
+          setProgress(problemId, key);
+        }
+      },
+      [problemId, todoOption, delProgress, setProgress],
+    );
 
-  const selectGroup = useMemo(() => {
-    return optionKeys.map((key) => {
-      const option = getOption(key);
-      return (
-        <SelectOption
-          key={key}
-          value={key}
-          className="flex flex-row justify-between items-center gap-2"
-          style={{ color: option.color }}
-        >
-          {option.label}
-          <Check
-            size={16}
-            className={cn("ml-auto", {
-              "opacity-0": optValue.key !== key,
-            })}
-          />
-        </SelectOption>
-      );
-    });
-  }, [optionKeys, getOption, optValue.key]);
+    const isOptionKey = useCallback(
+      (value: string): value is OptionKey => {
+        return optionKeys.some((key) => key === value);
+      },
+      [optionKeys],
+    );
 
-  return (
-    <Select value={optValue.key} onChange={handleSelect}>
-      <SelectTrigger
-        className={cn(
-          "flex flex-row justify-between items-center gap-2",
-          "rounded-md w-24",
-          "relative",
-          "dark:bg-muted/30 dark:border-muted-foreground/20"
-        )}
-        style={{ color: optValue.color }}
-      >
-        <span className="truncate">{optValue.label}</span>
-        <ChevronsUpDown size={16} className="opacity-80 absolute right-1 dark:bg-muted/30 dark:text-muted-foreground/20" />
-      </SelectTrigger>
-      {selectGroup}
-      {!optionKeys.includes(optValue.key) && (
-        <SelectOption
-          value={optValue.key}
-          className="flex flex-row"
+    const handleValueChange = useCallback(
+      (value: string) => {
+        if (!isOptionKey(value)) {
+          console.error(`[ProgressSelector] Invalid option key: ${value}`);
+          return;
+        }
+
+        handleSelect(value);
+      },
+      [handleSelect, isOptionKey],
+    );
+
+    const selectItems = useMemo(() => {
+      return optionKeys.map((key) => {
+        const option = getOption(key);
+        return (
+          <SelectItem
+            key={key}
+            value={key}
+            className="flex items-center justify-between gap-2"
+            style={{ color: option.color }}
+          >
+            <span>{option.label}</span>
+          </SelectItem>
+        );
+      });
+    }, [optionKeys, getOption]);
+
+    return (
+      <Select value={optValue.key} onValueChange={handleValueChange}>
+        <SelectTrigger
+          className={cn(
+            "rounded-md dark:border-muted-foreground/20 dark:bg-muted/30",
+            triggerClassName ?? "min-w-[7rem] max-w-[12rem]",
+          )}
+          title={optValue.label || optValue.key}
           style={{ color: optValue.color }}
         >
-          <span>{optValue.label}</span>
-          <Check />
-        </SelectOption>
-      )}
-    </Select>
-  );
-});
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent
+          align="start"
+          className="w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)]"
+        >
+          {selectItems}
+          {!optionKeys.includes(optValue.key) && (
+            <SelectItem value={optValue.key} style={{ color: optValue.color }}>
+              <span>{optValue.label}</span>
+            </SelectItem>
+          )}
+        </SelectContent>
+      </Select>
+    );
+  },
+);
 
 ProgressSelector.displayName = "ProgressSelector";
+
 export { ProgressSelector };

@@ -10,7 +10,7 @@ export const LC_RATING_AUTH_TOKEN_KEY = "lc-rating-auth-token";
 export const LC_RATING_LAST_SYNC_AT_KEY = "lc-rating-last-sync-at";
 export const LC_RATING_PROBLEMSET_TABLE_KEY =
   "lc-rating-problemset-table-state";
-export const STORAGE_VERSION = 0;
+export const STORAGE_VERSION = 1;
 
 // ============================================
 // Backend Configuration for Cloud Sync

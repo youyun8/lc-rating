@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 
 // Types
 interface Bindings {
+  [key: string]: unknown;
   LC_RATING_DATA: KVNamespace;
   GITHUB_CLIENT_ID: string;
   GITHUB_CLIENT_SECRET: string;
@@ -10,17 +11,153 @@ interface Bindings {
   ALLOWED_ORIGINS: string;
 }
 
-interface UserProgress {
-  progress: Record<string, string>;
-  progressUpdatedAt: Record<string, number>;
+type Language = "zh" | "en";
+type ThemePreference = "system" | "light" | "dark";
+
+interface SiteOption {
+  key: string;
+  label: string;
+  color: string;
+}
+
+interface UserSiteSettings {
+  theme?: ThemePreference;
+  tagLanguage?: Language;
+  linkLanguage?: Language;
+  premium?: boolean;
+  options?: Record<string, SiteOption>;
+  progress?: Record<string, string>;
+  progressUpdatedAt?: Record<string, number>;
   updatedAt: string;
 }
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function hasOwn(record: Record<string, unknown>, key: string) {
+  return Object.prototype.hasOwnProperty.call(record, key);
+}
+
+function isLanguage(value: unknown): value is Language {
+  return value === "zh" || value === "en";
+}
+
+function isThemePreference(value: unknown): value is ThemePreference {
+  return value === "system" || value === "light" || value === "dark";
+}
+
+function toStringRecord(value: unknown) {
+  if (!isRecord(value)) {
+    return undefined;
+  }
+
+  return Object.entries(value).reduce<Record<string, string>>(
+    (acc, [key, item]) => {
+      if (typeof item === "string") {
+        acc[key] = item;
+      }
+      return acc;
+    },
+    {},
+  );
+}
+
+function toNumberRecord(value: unknown) {
+  if (!isRecord(value)) {
+    return undefined;
+  }
+
+  return Object.entries(value).reduce<Record<string, number>>(
+    (acc, [key, item]) => {
+      if (typeof item === "number") {
+        acc[key] = item;
+      }
+      return acc;
+    },
+    {},
+  );
+}
+
+function toOptions(value: unknown) {
+  if (!isRecord(value)) {
+    return undefined;
+  }
+
+  return Object.fromEntries(
+    Object.entries(value).flatMap(([key, item]) => {
+      if (!isRecord(item)) {
+        return [];
+      }
+
+      if (
+        typeof item.key !== "string" ||
+        typeof item.label !== "string" ||
+        typeof item.color !== "string"
+      ) {
+        return [];
+      }
+
+      return [[key, { key: item.key, label: item.label, color: item.color }]];
+    }),
+  );
+}
+
+function normalizeSiteSettings(
+  value: unknown,
+): Omit<UserSiteSettings, "updatedAt"> {
+  if (!isRecord(value)) {
+    return {};
+  }
+
+  const normalized: Omit<UserSiteSettings, "updatedAt"> = {};
+
+  if (hasOwn(value, "theme") && isThemePreference(value.theme)) {
+    normalized.theme = value.theme;
+  }
+
+  if (hasOwn(value, "tagLanguage") && isLanguage(value.tagLanguage)) {
+    normalized.tagLanguage = value.tagLanguage;
+  }
+
+  if (hasOwn(value, "linkLanguage") && isLanguage(value.linkLanguage)) {
+    normalized.linkLanguage = value.linkLanguage;
+  }
+
+  if (hasOwn(value, "premium") && typeof value.premium === "boolean") {
+    normalized.premium = value.premium;
+  }
+
+  if (hasOwn(value, "options")) {
+    const options = toOptions(value.options);
+    if (options !== undefined) {
+      normalized.options = options;
+    }
+  }
+
+  if (hasOwn(value, "progress")) {
+    const progress = toStringRecord(value.progress);
+    if (progress !== undefined) {
+      normalized.progress = progress;
+    }
+  }
+
+  if (hasOwn(value, "progressUpdatedAt")) {
+    const progressUpdatedAt = toNumberRecord(value.progressUpdatedAt);
+    if (progressUpdatedAt !== undefined) {
+      normalized.progressUpdatedAt = progressUpdatedAt;
+    }
+  }
+
+  return normalized;
+}
+
 // CORS middleware
 app.use("*", async (c, next) => {
-  const allowedOrigins = c.env.ALLOWED_ORIGINS?.split(",") || ["*"];
+  const env = c.env as Bindings;
+  const allowedOrigins = env.ALLOWED_ORIGINS?.split(",") || ["*"];
   const corsMiddleware = cors({
     origin: allowedOrigins,
     allowMethods: ["GET", "POST", "OPTIONS"],
@@ -32,7 +169,8 @@ app.use("*", async (c, next) => {
 
 // GitHub OAuth login endpoint
 app.get("/api/login/github", async (c) => {
-  const clientId = c.env.GITHUB_CLIENT_ID;
+  const env = c.env as Bindings;
+  const clientId = env.GITHUB_CLIENT_ID;
   const redirectUri = `${new URL(c.req.url).origin}/api/callback`;
 
   const githubAuthUrl =
@@ -48,6 +186,7 @@ app.get("/api/login/github", async (c) => {
 
 // GitHub OAuth callback endpoint
 app.get("/api/callback", async (c) => {
+  const env = c.env as Bindings;
   const code = c.req.query("code");
   if (!code) {
     return c.json({ success: false, message: "No code provided" }, 400);
@@ -64,8 +203,8 @@ app.get("/api/callback", async (c) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          client_id: c.env.GITHUB_CLIENT_ID,
-          client_secret: c.env.GITHUB_CLIENT_SECRET,
+          client_id: env.GITHUB_CLIENT_ID,
+          client_secret: env.GITHUB_CLIENT_SECRET,
           code,
         }),
       },
@@ -103,11 +242,11 @@ app.get("/api/callback", async (c) => {
         userId: userData.id.toString(),
         username: userData.login,
       },
-      c.env.JWT_SECRET,
+      env.JWT_SECRET,
     );
 
     // Redirect back to frontend with token
-    const allowedOrigins = c.env.ALLOWED_ORIGINS?.split(",") || [
+    const allowedOrigins = env.ALLOWED_ORIGINS?.split(",") || [
       "http://localhost:3001",
     ];
     const redirectOrigin = allowedOrigins[0].trim();
@@ -120,8 +259,9 @@ app.get("/api/callback", async (c) => {
   }
 });
 
-// Upload progress endpoint
+// Upload site data endpoint
 app.post("/api/uploadprogress", async (c) => {
+  const env = c.env as Bindings;
   const authHeader = c.req.header("Authorization");
   if (!authHeader?.startsWith("Bearer ")) {
     return c.json({ success: false, message: "Unauthorized" }, 401);
@@ -130,37 +270,40 @@ app.post("/api/uploadprogress", async (c) => {
   const token = authHeader.slice(7);
 
   try {
-    const payload = await verifyJWT(token, c.env.JWT_SECRET);
+    const payload = await verifyJWT(token, env.JWT_SECRET);
     if (!payload) {
       return c.json({ success: false, message: "Invalid token" }, 401);
     }
 
-    const body = (await c.req.json()) as {
-      progress: Record<string, string>;
-      progressUpdatedAt: Record<string, number>;
-    };
+    const body = await c.req.json();
+    const existingData = await env.LC_RATING_DATA.get(`user:${payload.userId}`);
+    const existingSettings = existingData
+      ? normalizeSiteSettings(JSON.parse(existingData))
+      : {};
+    const incomingSettings = normalizeSiteSettings(body);
 
-    const userProgress: UserProgress = {
-      progress: body.progress || {},
-      progressUpdatedAt: body.progressUpdatedAt || {},
+    const userSiteSettings: UserSiteSettings = {
+      ...existingSettings,
+      ...incomingSettings,
       updatedAt: new Date().toISOString(),
     };
 
     // Store in KV
-    await c.env.LC_RATING_DATA.put(
+    await env.LC_RATING_DATA.put(
       `user:${payload.userId}`,
-      JSON.stringify(userProgress),
+      JSON.stringify(userSiteSettings),
     );
 
-    return c.json({ success: true, message: "Progress saved" });
+    return c.json({ success: true, message: "Site data saved" });
   } catch (error) {
     console.error("Upload error:", error);
-    return c.json({ success: false, message: "Failed to save progress" }, 500);
+    return c.json({ success: false, message: "Failed to save site data" }, 500);
   }
 });
 
-// Get progress endpoint
+// Get site data endpoint
 app.get("/api/getprogress", async (c) => {
+  const env = c.env as Bindings;
   const authHeader = c.req.header("Authorization");
   if (!authHeader?.startsWith("Bearer ")) {
     return c.json({ success: false, message: "Unauthorized" }, 401);
@@ -169,33 +312,30 @@ app.get("/api/getprogress", async (c) => {
   const token = authHeader.slice(7);
 
   try {
-    const payload = await verifyJWT(token, c.env.JWT_SECRET);
+    const payload = await verifyJWT(token, env.JWT_SECRET);
     if (!payload) {
       return c.json({ success: false, message: "Invalid token" }, 401);
     }
 
     // Get from KV
-    const data = await c.env.LC_RATING_DATA.get(`user:${payload.userId}`);
+    const data = await env.LC_RATING_DATA.get(`user:${payload.userId}`);
 
     if (!data) {
       return c.json({
         success: true,
-        result: { progress: {}, progressUpdatedAt: {} },
+        result: {},
       });
     }
 
-    const userProgress: UserProgress = JSON.parse(data);
+    const userSiteSettings = normalizeSiteSettings(JSON.parse(data));
 
     return c.json({
       success: true,
-      result: {
-        progress: userProgress.progress,
-        progressUpdatedAt: userProgress.progressUpdatedAt,
-      },
+      result: userSiteSettings,
     });
   } catch (error) {
     console.error("Get progress error:", error);
-    return c.json({ success: false, message: "Failed to get progress" }, 500);
+    return c.json({ success: false, message: "Failed to get site data" }, 500);
   }
 });
 

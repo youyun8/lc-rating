@@ -1,7 +1,13 @@
 import { useCallback, useMemo } from "react";
 import { useGlobalSettingsStore } from "./useGlobalSettings";
-import { Options, useOptions } from "./useOptions";
+import { useOptions } from "./useOptions";
 import { useProgressStore } from "./useProgress";
+import { useTheme } from "next-themes";
+import {
+  isThemePreference,
+  SiteStorageData,
+  SiteStoragePatch,
+} from "@/types/siteStorage";
 
 export function useSiteStorage() {
   const {
@@ -13,10 +19,17 @@ export function useSiteStorage() {
     setPremium,
   } = useGlobalSettingsStore();
   const { options, setOptions } = useOptions();
-  const { progress, progressUpdatedAt, setAllProgress } = useProgressStore();
+  const { theme, setTheme } = useTheme();
+  const { progress, progressUpdatedAt, setAllProgress, clearAllProgress } =
+    useProgressStore();
+  const rawTheme = theme ?? "system";
+  const siteTheme: SiteStorageData["theme"] = isThemePreference(rawTheme)
+    ? rawTheme
+    : "system";
 
-  const siteStorage = useMemo(
+  const siteStorage = useMemo<SiteStorageData>(
     () => ({
+      theme: siteTheme,
       tagLanguage,
       linkLanguage,
       premium,
@@ -24,25 +37,38 @@ export function useSiteStorage() {
       progress,
       progressUpdatedAt,
     }),
-    [tagLanguage, linkLanguage, premium, options, progress, progressUpdatedAt]
+    [
+      siteTheme,
+      tagLanguage,
+      linkLanguage,
+      premium,
+      options,
+      progress,
+      progressUpdatedAt,
+    ],
   );
 
   const setSiteStorage = useCallback(
-    (data: {
-      tagLanguage?: "zh" | "en";
-      linkLanguage?: "zh" | "en";
-      premium?: boolean;
-      options?: Options;
-      progress?: Record<string, string>;
-      progressUpdatedAt?: Record<string, number>;
-    }) => {
+    (data: SiteStoragePatch) => {
+      if (data.theme !== undefined) setTheme(data.theme);
       if (data.tagLanguage !== undefined) setTagLanguage(data.tagLanguage);
       if (data.linkLanguage !== undefined) setLinkLanguage(data.linkLanguage);
       if (data.premium !== undefined) setPremium(data.premium);
       if (data.options !== undefined) setOptions(data.options);
-      if (data.progress !== undefined) setAllProgress(data.progress, data.progressUpdatedAt);
+      if (data.progress !== undefined || data.progressUpdatedAt !== undefined) {
+        clearAllProgress();
+        setAllProgress(data.progress ?? {}, data.progressUpdatedAt ?? {});
+      }
     },
-    [setTagLanguage, setLinkLanguage, setPremium, setOptions, setAllProgress]
+    [
+      clearAllProgress,
+      setAllProgress,
+      setLinkLanguage,
+      setOptions,
+      setPremium,
+      setTagLanguage,
+      setTheme,
+    ],
   );
 
   return { siteStorage, setSiteStorage };

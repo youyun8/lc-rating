@@ -60,7 +60,7 @@ export default function ProgressOverview() {
   }, [progressEntries, getOption]);
 
   const acCount =
-    statusSummary.find((status) => status.key === "AC")?.count ?? 0;
+    statusSummary.find((status) => status.key === "SOLVED")?.count ?? 0;
   const acRate = trackedCount > 0 ? (acCount / trackedCount) * 100 : 0;
   const coveredRate =
     totalProblemCount > 0 ? (trackedCount / totalProblemCount) * 100 : 0;

@@ -56,7 +56,7 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
       {enrichedProblems.map((problem, idx) => {
         const problemId = problem.id?.toString();
         const info = ratingInfo(problem.score || 0);
-        const isCompleted = problemId ? progress[problemId] === "AC" : false;
+        const isCompleted = problemId ? progress[problemId] === "SOLVED" : false;
         return (
           <div
             key={`${problem.slug}-${problemId}`}
@@ -95,7 +95,12 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
                   </span>
                 )}
               </div>
-              {problemId ? <ProgressSelector problemId={problemId} /> : null}
+              {problemId ? (
+                <ProgressSelector
+                  problemId={problemId}
+                  triggerClassName="min-w-[7.5rem] sm:min-w-[8rem] max-w-[12rem]"
+                />
+              ) : null}
             </div>
           </div>
         );

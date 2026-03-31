@@ -75,7 +75,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
     const ids = collectProblemIds(studyPlan.children);
     const total = ids.length;
-    const completed = ids.filter((id) => progress[id] === "AC").length;
+    const completed = ids.filter((id) => progress[id] === "SOLVED").length;
     const sections = studyPlan.children.reduce(
       (acc, child) => acc + countSections(child),
       0,

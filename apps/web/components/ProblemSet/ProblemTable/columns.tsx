@@ -101,13 +101,16 @@ export const getColumns = () => [
   columnHelper.accessor("progress", {
     header: () => <div>{key2Label["progress"]}</div>,
     cell: ({ row }) => {
-      const progress = row.getValue<TableCol["progress"]>("progress");
-      return (
-        <div className="w-fit mx-auto">
-          <ProgressSelector problemId={progress.problemId} />
-        </div>
-      );
-    },
+        const progress = row.getValue<TableCol["progress"]>("progress");
+        return (
+          <div className="w-fit mx-auto">
+            <ProgressSelector
+              problemId={progress.problemId}
+              triggerClassName="min-w-[6.5rem] max-w-[9rem]"
+            />
+          </div>
+        );
+      },
     enableSorting: false,
     enableHiding: true,
   }),

@@ -14,29 +14,29 @@ import {
 } from "./types_v2";
 
 export const defaultOptions = {
-  TODO: {
-    key: "TODO",
-    label: "",
+  PENDING: {
+    key: "PENDING",
+    label: "未開始",
     color: "#343a40",
   },
-  WORKING: {
-    key: "WORKING",
-    label: "攻略中",
+  IN_PROGRESS: {
+    key: "IN_PROGRESS",
+    label: "進行中",
     color: "#1E90FF",
   },
-  TOO_HARD: {
-    key: "TOO_HARD",
-    label: "太難了，不會",
+  SKIPPED: {
+    key: "SKIPPED",
+    label: "暫時跳過",
     color: "#dc3545",
   },
-  REVIEW_NEEDED: {
-    key: "REVIEW_NEEDED",
-    label: "回頭複習一下",
+  NEEDS_REVIEW: {
+    key: "NEEDS_REVIEW",
+    label: "需要複習",
     color: "#fd7e14",
   },
-  AC: {
-    key: "AC",
-    label: "通過了",
+  SOLVED: {
+    key: "SOLVED",
+    label: "已解題",
     color: "#28a745",
   },
 } as const;
@@ -63,7 +63,7 @@ const useOptionsStore = create<OptionsStore>()(
             ...get().options,
           };
           if (typeof key === "undefined") {
-            return fullConfig.TODO;
+            return fullConfig.PENDING;
           }
           const option = fullConfig[key];
           if (option === undefined) {

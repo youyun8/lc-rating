@@ -1,17 +1,17 @@
 "use client";
 
 import {
-  API_BASE,
   LC_RATING_AUTH_TOKEN_KEY,
   LC_RATING_LAST_SYNC_AT_KEY,
 } from "@/config/constants";
-import { useProgressStore } from "@/hooks/useProgress";
+import { useSiteStorage } from "@/hooks/useSiteStorage";
+import { pullCloudSiteStorage } from "@/utils/cloudSync";
 import { getErrorMessage } from "@/utils/auth";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
 const AuthTokenHandler = () => {
-  const setAllProgress = useProgressStore((state) => state.setAllProgress);
+  const { setSiteStorage } = useSiteStorage();
 
   useEffect(() => {
     const currentUrl = new URL(window.location.href);
@@ -27,22 +27,9 @@ const AuthTokenHandler = () => {
     window.history.replaceState({}, "", currentUrl.toString());
 
     const handleSync = () => {
-      fetch(`${API_BASE}/api/getprogress`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data?.success) {
-            throw new Error(data?.message ?? "拉取失敗");
-          }
-
-          const result = data?.result ?? {};
-          const progress: Record<string, string> = result.progress ?? {};
-          const progressUpdatedAt: Record<string, number> = result.progressUpdatedAt ?? {};
-
-          setAllProgress(progress, progressUpdatedAt);
+      pullCloudSiteStorage(token)
+        .then((siteStorage) => {
+          setSiteStorage(siteStorage);
           const now = Date.now();
           localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(now));
           toast("雲端同步成功");
@@ -53,13 +40,13 @@ const AuthTokenHandler = () => {
         });
     };
 
-    toast("已登入，可從雲端拉取進度", {
+    toast("已登入，可從雲端拉取站點資料", {
       action: {
         label: "拉取",
         onClick: handleSync,
       },
     });
-  }, [setAllProgress]);
+  }, [setSiteStorage]);
 
   return null;
 };

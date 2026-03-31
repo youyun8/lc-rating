@@ -148,7 +148,7 @@ function ProblemSet() {
   const overviewStats = useMemo(() => {
     const total = tableData.length || problemCount;
     const solved = tableData.filter(
-      ({ problem }) => progress[problem.id] === "AC",
+      ({ problem }) => progress[problem.id] === "SOLVED",
     ).length;
     const withSolutions = tableData.filter(({ solution }) =>
       Boolean(solution.id),
