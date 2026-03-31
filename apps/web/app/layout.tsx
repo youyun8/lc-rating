@@ -10,7 +10,7 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { GlobalStudyPlanSidebar } from "@/components/common/GlobalStudyPlanSidebar";
 
 export const metadata: Metadata = {
-  title: "LeetCode Rating & Training",
+  title: "LeetCode Rating",
   icons: `${BASE_PATH}/favico.svg`,
 };
 

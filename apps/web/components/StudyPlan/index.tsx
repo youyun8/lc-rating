@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
+import { StudyPlanMarkdownContent } from "./MarkdownContent";
+import { extractImageUrls } from "./dedupe";
 
 function collectProblemIds(sections: StudyPlanData.Section[]): string[] {
   const ids: string[] = [];
@@ -61,6 +63,11 @@ function StudyPlan({ plan }: StudyPlanProps) {
     STUDYPLANS[plan as keyof typeof STUDYPLANS] ?? studyPlan?.title ?? plan;
   const Icon = studyPlanIcons[plan] ?? BookOpen;
   const theme = studyPlanThemes[plan] ?? defaultTheme;
+
+  const topLevelImageUrls = useMemo(
+    () => (studyPlan?.summary ? extractImageUrls(studyPlan.summary) : new Set<string>()),
+    [studyPlan?.summary],
+  );
 
   const stats = useMemo(() => {
     if (!studyPlan) {
@@ -116,12 +123,6 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
               <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                 <div className="min-w-0 flex-1">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white/85 backdrop-blur-sm">
-                    <span>0x3F 題單</span>
-                    <span className="text-white/50">·</span>
-                    <span>主題式學習路線</span>
-                  </div>
-
                   <div className="flex items-start gap-4">
                     <div className="shrink-0 rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/20">
                       <Icon className="h-8 w-8 text-white drop-shadow-sm" />
@@ -232,6 +233,32 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
       <div className="mx-auto w-full max-w-7xl px-4 py-6 pb-24 md:px-8 md:py-8 md:pb-20">
         <div className="flex flex-col gap-8">
+          {studyPlan?.summary && (
+            <section className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm">
+              <div className="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-5">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                  <div>
+                    <h2 className="text-lg font-semibold tracking-tight text-foreground">
+                      學習摘要
+                    </h2>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      先掌握題單重點與刷題建議，再依章節順序往下練習。
+                    </p>
+                  </div>
+                  <span className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
+                    題單導讀
+                  </span>
+                </div>
+              </div>
+              <div className="p-4 sm:p-5 md:p-6">
+                <StudyPlanMarkdownContent
+                  content={studyPlan.summary}
+                  variant="plan"
+                />
+              </div>
+            </section>
+          )}
+
           {studyPlan && (
             <section className="rounded-2xl border border-border/60 bg-muted/20 p-4 shadow-sm sm:p-5">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -259,7 +286,11 @@ function StudyPlan({ plan }: StudyPlanProps) {
           )}
 
           {studyPlan?.children.map((section) => (
-            <SectionContainer key={section.title} section={section} />
+            <SectionContainer
+              key={section.title}
+              section={section}
+              parentImageUrls={topLevelImageUrls}
+            />
           ))}
         </div>
       </div>

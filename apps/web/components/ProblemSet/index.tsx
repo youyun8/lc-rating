@@ -6,6 +6,7 @@ import { useProblems } from "@/hooks/useProblems";
 import { useSolutions } from "@/hooks/useSolutions";
 import { useTags } from "@/hooks/useTags";
 import { isTruthy } from "@/types/common";
+import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import { CheckCircle2, FileText, Tags } from "lucide-react";
 
 import { useCallback, useMemo, useState } from "react";
@@ -50,18 +51,31 @@ function ProblemSet() {
     }
 
     const joinProblems = Object.values(problemMap).map((problem) => {
+      const contest =
+        problem.contestId !== undefined
+          ? contestMap[problem.contestId]
+          : undefined;
+      const solution = solutionMap[problem._hash];
+
       return {
         id: problem.id,
-        title: problem.title,
+        title: normalizeDisplayText(problem.title),
         rating: problem.rating,
         titleSlug: problem.titleSlug,
         premium: problem.premium,
-        contest:
-          problem.contestId !== undefined
-            ? contestMap[problem?.contestId]
-            : undefined,
+        contest: contest
+          ? {
+              ...contest,
+              title: normalizeDisplayText(contest.title),
+            }
+          : undefined,
         tags: problem.tagIds.map((tagId) => tagMap[tagId]).filter(isTruthy),
-        solution: solutionMap[problem._hash],
+        solution: solution
+          ? {
+              ...solution,
+              title: normalizeDisplayText(solution.title),
+            }
+          : undefined,
       };
     });
     return joinProblems.map((problem) => {

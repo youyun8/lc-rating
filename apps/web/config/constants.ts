@@ -61,7 +61,7 @@ export const STUDYPLANS = {
   grid: "網格圖",
   math: "數學",
   monotonic_stack: "單調堆疊",
-  sliding_window: "滑動窗口",
+  sliding_window: "滑動視窗",
   string: "字串",
   trees: "樹和二元樹",
 };

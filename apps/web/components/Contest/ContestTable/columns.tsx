@@ -41,12 +41,12 @@ const generate = (
           : "";
 
       return (
-        <div className="flex min-w-[12rem] flex-col items-center gap-2 py-1">
-          <div className="flex items-center gap-2">
+        <div className="flex min-w-[8.5rem] flex-col items-center gap-1.5 py-1">
+          <div className="flex items-center gap-1.5">
             <div>{key2Label[key]}</div>
             <SortIndicator column={column} />
           </div>
-          <div className="flex gap-1.5">
+          <div className="flex gap-1">
             <Input
               type="number"
               placeholder="Min"
@@ -60,7 +60,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-8 w-20 rounded-md border-border/60 bg-background/80 px-2 text-center text-xs shadow-none"
+              className="h-7 w-16 rounded-md border-border/60 bg-background/80 px-1.5 text-center text-xs shadow-none"
             />
             <Input
               type="number"
@@ -75,7 +75,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-8 w-20 rounded-md border-border/60 bg-background/80 px-2 text-center text-xs shadow-none"
+              className="h-7 w-16 rounded-md border-border/60 bg-background/80 px-1.5 text-center text-xs shadow-none"
             />
           </div>
         </div>
@@ -86,13 +86,13 @@ const generate = (
       const rating = Q.problem.rating;
       const info = ratingInfo(rating);
       return (
-        <div className="flex items-start justify-between gap-2 py-1.5">
-          <div className="flex min-w-0 flex-1 items-start gap-2">
+        <div className="flex items-start justify-between gap-1.5 py-1.5">
+          <div className="flex min-w-0 flex-1 items-start gap-1.5">
             <span
               className="mt-1.5 h-2 w-2 shrink-0 rounded-full"
               style={{ backgroundColor: info.color }}
             />
-            <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
+            <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] items-start gap-1.5">
               <I18NLink
                 link={Q.problem.link}
                 title={
@@ -103,7 +103,7 @@ const generate = (
                 className="min-w-0 line-clamp-2 text-sm font-medium leading-5 text-foreground transition-colors hover:text-primary hover:underline"
               />
               <span
-                className="mt-0.5 inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
+                className="mt-0.5 inline-flex shrink-0 items-center rounded-full px-1.5 py-0.5 text-xs font-semibold tabular-nums"
                 style={{
                   color: info.color,
                   backgroundColor: `${info.color}1a`,
@@ -158,7 +158,7 @@ export const getColumns = () => [
         <I18NLink
           link={contest.link}
           title={contest.title}
-          className="block max-w-[11rem] truncate text-sm font-medium text-foreground transition-colors hover:text-primary hover:underline"
+          className="block whitespace-normal text-sm font-medium leading-5 text-foreground transition-colors hover:text-primary hover:underline break-words"
         />
       );
     },

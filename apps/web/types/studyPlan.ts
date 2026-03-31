@@ -22,5 +22,6 @@ export interface Root {
   title: string;
   src: string;
   last_update: string;
+  summary?: string;
   children: Section[];
 }

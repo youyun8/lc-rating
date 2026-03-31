@@ -21,6 +21,7 @@ import { useState, useMemo, type ReactNode } from "react";
 import { StudyPlanData } from "@/types";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { useProgressStore } from "@/hooks/useProgress";
+import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 
 function countProblems(section: StudyPlanData.Section): number {
   let count = section.problems?.length || 0;
@@ -111,7 +112,7 @@ function escapeRegExp(value: string): string {
 }
 
 function highlightMatch(text: string, query: string): ReactNode {
-  const trimmedQuery = query.trim();
+  const trimmedQuery = normalizeDisplayText(query.trim());
   if (!trimmedQuery) return text;
 
   const pattern = new RegExp(`(${escapeRegExp(trimmedQuery)})`, "gi");
@@ -139,9 +140,10 @@ function getStudyPlanMatches(
   const trimmedQuery = query.trim();
   if (!trimmedQuery) return [];
 
-  const normalizedQuery = trimmedQuery.toLowerCase();
+  const normalizedQuery = normalizeDisplayText(trimmedQuery).toLowerCase();
   const matches: StudyPlanSearchMatch[] = [];
   const seen = new Set<string>();
+  const normalizedTitle = normalizeDisplayText(title);
 
   const addMatch = (match: StudyPlanSearchMatch) => {
     const key = `${match.kind}:${match.label}:${match.text}:${match.context ?? ""}`;
@@ -150,37 +152,39 @@ function getStudyPlanMatches(
     matches.push(match);
   };
 
-  if (title.toLowerCase().includes(normalizedQuery)) {
-    addMatch({ kind: "plan", label: "題單", text: title });
+  if (normalizedTitle.toLowerCase().includes(normalizedQuery)) {
+    addMatch({ kind: "plan", label: "題單", text: normalizedTitle });
   }
 
   const visitSection = (
     section: StudyPlanData.Section,
     parentTitles: string[] = [],
   ) => {
-    if (section.title.toLowerCase().includes(normalizedQuery)) {
+    const normalizedSectionTitle = normalizeDisplayText(section.title);
+    if (normalizedSectionTitle.toLowerCase().includes(normalizedQuery)) {
       addMatch({
         kind: "section",
         label: "章節",
-        text: section.title,
+        text: normalizedSectionTitle,
         context: parentTitles.length > 0 ? parentTitles.join(" / ") : undefined,
       });
     }
 
-    const currentPath = [...parentTitles, section.title];
+    const currentPath = [...parentTitles, normalizedSectionTitle];
 
     section.problems?.forEach((problem) => {
       const problemId = problem.id?.toString();
+      const normalizedProblemTitle = normalizeDisplayText(problem.title);
       const isProblemMatch =
         problemId === trimmedQuery ||
-        problem.title.toLowerCase().includes(normalizedQuery);
+        normalizedProblemTitle.toLowerCase().includes(normalizedQuery);
 
       if (!isProblemMatch) return;
 
       addMatch({
         kind: "problem",
         label: problemId ? `題目 #${problemId}` : "題目",
-        text: problem.title,
+        text: normalizedProblemTitle,
         context: currentPath.join(" / "),
       });
     });

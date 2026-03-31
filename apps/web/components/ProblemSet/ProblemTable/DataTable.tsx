@@ -55,7 +55,7 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
       minWidth="min-w-[760px]"
       headerClassName="flex items-center justify-center text-xs font-medium tracking-wider text-muted-foreground"
       headerBorderClassName="border-b border-border bg-muted/30"
-      cellBorderClassName="border-b border-border"
+      cellBorderClassName="border-b border-border align-middle"
       rowClassName="hover:bg-muted/20 transition-colors"
     />
   );

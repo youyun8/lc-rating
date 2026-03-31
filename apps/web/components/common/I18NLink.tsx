@@ -1,5 +1,6 @@
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { cn } from "@/lib/utils";
+import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import React from "react";
 
 interface I18NLinkProps {
@@ -25,7 +26,7 @@ const I18NLink = React.memo(
         className={cn("text-left hover:underline", className)}
         style={style}
       >
-        {title}
+        {normalizeDisplayText(title)}
       </a>
     );
   }

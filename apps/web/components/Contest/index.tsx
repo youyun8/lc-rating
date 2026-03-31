@@ -6,6 +6,7 @@ import { useSolutions } from "@/hooks/useSolutions";
 import { useTags } from "@/hooks/useTags";
 import { Problem, Solution } from "@/types";
 import { Quodra } from "@/types/common";
+import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import {
   FileText,
   Gauge,
@@ -91,7 +92,7 @@ function ContestPage() {
         return {
           problem: {
             id: problem.id,
-            title: problem.title,
+            title: normalizeDisplayText(problem.title),
             link: {
               zh: `${LC_HOST_ZH}/problems/${problem.titleSlug}`,
               en: `${LC_HOST_EN}/problems/${problem.titleSlug}`,
@@ -101,7 +102,7 @@ function ContestPage() {
           },
           solution: solution && {
             id: solution.id,
-            title: solution.title,
+            title: normalizeDisplayText(solution.title),
             link: {
               zh: `${LC_HOST_ZH}/problems/${problem.titleSlug}/solution/${solution.titleSlug}`,
               en: `${LC_HOST_EN}/problems/${problem.titleSlug}/solution/${solution.titleSlug}`,
@@ -115,7 +116,7 @@ function ContestPage() {
         contest: {
           id: contest.id,
           time: contest.time,
-          title: contest.title,
+          title: normalizeDisplayText(contest.title),
           link: {
             zh: `${LC_HOST_ZH}/contest/${contest.titleSlug}`,
             en: `${LC_HOST_EN}/contest/${contest.titleSlug}`,

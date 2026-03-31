@@ -5,8 +5,11 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { TableCol } from "../ProblemTable/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@radix-ui/react-label";
+import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 
 const preciseSearch = (data: TableCol[], keyword: string) => {
+  const normalizedKeyword = normalizeDisplayText(keyword);
+
   return data.map((row) => {
     const str = `${row.contest?.title || ""} ${row.problem.id} ${
       row.problem.title
@@ -14,7 +17,7 @@ const preciseSearch = (data: TableCol[], keyword: string) => {
       .map((t) => `${t.label.en} ${t.label.zh}`)
       ?.join(" ")}`.toLowerCase();
 
-    const kws = keyword
+    const kws = normalizedKeyword
       .toLowerCase()
       .split(" ")
       .map((kw) => kw.trim());
@@ -54,7 +57,7 @@ const WordFilter = React.memo(
 
     useEffect(() => {
       if (value && useFuse) {
-        const matches = fuse.search(value).map((r) => ({
+        const matches = fuse.search(normalizeDisplayText(value)).map((r) => ({
           score: 1 - (r.score ? r.score : 1),
           idx: r.refIndex,
         }));

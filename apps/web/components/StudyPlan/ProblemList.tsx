@@ -2,9 +2,11 @@ import { ProgressSelector } from "@/components/common/ProgressSelector";
 import { ratingInfo } from "@/components/common/RatingCircle";
 import { LC_HOST_EN, LC_HOST_ZH } from "@/config/constants";
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
+import { useOptions } from "@/hooks/useOptions";
 import { useProgressStore } from "@/hooks/useProgress";
 import { useProblems } from "@/hooks/useProblems";
 import { StudyPlanData } from "@/types";
+import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import React, { useMemo } from "react";
 
 interface ProblemListProps {
@@ -16,6 +18,8 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
   const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
   const { problemMap } = useProblems();
   const progress = useProgressStore((state) => state.progress);
+  const { getOption } = useOptions();
+  const pendingOption = getOption();
 
   // Enrich problems with scores from problemMap
   const enrichedProblems = useMemo(() => {
@@ -24,7 +28,10 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
     return problems.map((problem) => {
       // If problem already has a score, use it
       if (problem.score !== null && problem.score !== undefined) {
-        return problem;
+        return {
+          ...problem,
+          title: normalizeDisplayText(problem.title),
+        };
       }
 
       // Otherwise, look up the rating from problemMap using problem id
@@ -32,11 +39,15 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
       if (problemId && problemMap[problemId]) {
         return {
           ...problem,
+          title: normalizeDisplayText(problem.title),
           score: problemMap[problemId].rating,
         };
       }
 
-      return problem;
+      return {
+        ...problem,
+        title: normalizeDisplayText(problem.title),
+      };
     });
   }, [problems, problemMap]);
 
@@ -56,13 +67,24 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
       {enrichedProblems.map((problem, idx) => {
         const problemId = problem.id?.toString();
         const info = ratingInfo(problem.score || 0);
-        const isCompleted = problemId ? progress[problemId] === "SOLVED" : false;
+        const statusKey = problemId ? progress[problemId] : undefined;
+        const statusOption = getOption(statusKey);
+        const hasStarted =
+          typeof statusKey !== "undefined" && statusOption.key !== pendingOption.key;
+
         return (
           <div
             key={`${problem.slug}-${problemId}`}
             className={`flex flex-col gap-3 px-4 py-3.5 transition-colors hover:bg-muted/20 sm:flex-row sm:items-center sm:justify-between${
               idx < enrichedProblems.length - 1 ? " border-b border-border/60" : ""
-            }${isCompleted ? " bg-emerald-500/5" : ""}`}
+            }`}
+            style={
+              hasStarted
+                ? {
+                    backgroundColor: `color-mix(in srgb, ${statusOption.color} 10%, transparent)`,
+                  }
+                : undefined
+            }
           >
             <div className="min-w-0 flex-1">
               <a
