@@ -26,7 +26,7 @@ export function SettingsPanel({ show, onOpenChange }: SettingsPanelProps) {
   return (
     <Dialog open={show} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline">站點設定</Button>
+        <Button variant="ghost" size="sm">站點設定</Button>
       </DialogTrigger>
       <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-lg md:max-w-2xl lg:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>

@@ -4,8 +4,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Separator } from "@/components/ui/separator";
-import { ChevronsDownUp, ChevronsUpDown } from "lucide-react";
+import { ChevronsDownUp, ChevronsUpDown, Filter } from "lucide-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { TableCol } from "../ProblemTable/types";
 import { RatingFilter } from "./RatingFilter";
@@ -80,60 +79,73 @@ const Search = React.memo(({ data, onSearch }: SearchProps) => {
     <Collapsible
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="space-y-2 m-auto"
+      className="rounded-lg border border-border bg-card"
     >
-      <div className="flex justify-between space-x-4 px-4">
-        <WordFilter
-          name={"WordFilter"}
-          data={data}
-          registerReset={updateReset}
-          onChange={updateIndices}
-        />
-        <CollapsibleTrigger asChild>
-          {isOpen ? (
-            <Button variant="outline" size="sm">
-              <ChevronsDownUp className="h-4 w-4" />
-              <span>收起</span>
-            </Button>
-          ) : (
-            <Button variant="outline" size="sm">
-              <ChevronsUpDown className="h-4 w-4" />
-              <span>展開</span>
-            </Button>
-          )}
-        </CollapsibleTrigger>
-      </div>
-      <CollapsibleContent className="space-y-2">
-        <div className="flex flex-col items-start gap-4 p-4">
-          <Separator />
-          <RatingFilter
-            name={"RatingFilter"}
-            data={data}
-            registerReset={updateReset}
-            onChange={updateIndices}
-            onDebouncedConfirm={debouncedConfirm}
-          />
-          <Separator />
-          <TagFilter
-            name={"TagFilter"}
+      <div className="flex items-center gap-3 p-3">
+        <div className="flex-1">
+          <WordFilter
+            name={"WordFilter"}
             data={data}
             registerReset={updateReset}
             onChange={updateIndices}
           />
         </div>
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" size="sm" className="shrink-0 gap-1.5">
+            <Filter className="h-3.5 w-3.5" />
+            {isOpen ? (
+              <>
+                <span className="hidden sm:inline">收起篩選</span>
+                <ChevronsDownUp className="h-3.5 w-3.5" />
+              </>
+            ) : (
+              <>
+                <span className="hidden sm:inline">展開篩選</span>
+                <ChevronsUpDown className="h-3.5 w-3.5" />
+              </>
+            )}
+          </Button>
+        </CollapsibleTrigger>
+      </div>
+
+      <CollapsibleContent>
+        <div className="border-t border-border px-4 py-3 space-y-4">
+          <div>
+            <p className="text-xs font-medium text-muted-foreground mb-2">難度範圍</p>
+            <RatingFilter
+              name={"RatingFilter"}
+              data={data}
+              registerReset={updateReset}
+              onChange={updateIndices}
+              onDebouncedConfirm={debouncedConfirm}
+            />
+          </div>
+          <div className="border-t border-border pt-3">
+            <p className="text-xs font-medium text-muted-foreground mb-2">演算法標籤</p>
+            <TagFilter
+              name={"TagFilter"}
+              data={data}
+              registerReset={updateReset}
+              onChange={updateIndices}
+            />
+          </div>
+        </div>
       </CollapsibleContent>
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+
+      <div className="flex justify-center gap-3 p-3 border-t border-border">
         <Button
           onClick={handleConfirm}
           variant="default"
-          className="cursor-pointer"
+          size="sm"
+          className="cursor-pointer px-6"
         >
           確認
         </Button>
         <Button
           onClick={handleReset}
-          variant="destructive"
-          className="cursor-pointer"
+          variant="outline"
+          size="sm"
+          className="cursor-pointer px-6"
         >
           重置
         </Button>

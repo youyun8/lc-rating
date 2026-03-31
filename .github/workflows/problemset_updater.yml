@@ -1,4 +1,4 @@
-name: Problemset Updater
+name: Upstream Data Sync
 
 on:
   schedule:
@@ -9,7 +9,7 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  public-data-updater:
+  sync-upstream:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -30,15 +30,10 @@ jobs:
           cd apps/web/lc-maker
           pip install -r requirements.txt
 
-      - name: Fetch latest problemset data
+      - name: Sync from upstream and translate to Traditional Chinese
         run: |
           cd apps/web/lc-maker
-          python fetch_data.py --latest --scope problemset --out ../public/problemset
-
-      - name: Translate to Traditional Chinese
-        run: |
-          cd apps/web/lc-maker
-          python translate_to_traditional.py
+          python sync_upstream.py
 
       - name: Commit changes
         run: |

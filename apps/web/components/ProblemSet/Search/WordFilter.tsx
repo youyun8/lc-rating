@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui/input";
+import { Search as SearchIcon } from "lucide-react";
 import Fuse from "fuse.js";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { TableCol } from "../ProblemTable/types";
@@ -78,13 +79,16 @@ const WordFilter = React.memo(
 
     return (
       <div className="w-full flex flex-col justify-center items-start gap-1">
+      <div className="relative w-full">
+        <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
         <Input
           type="text"
           placeholder="競賽、題目、題解搜尋"
           value={value}
           onChange={handleChange}
-          className="w-full"
+          className="w-full pl-9"
         />
+      </div>
         <div className="flex items-center gap-2 p-1">
           <Checkbox
             checked={useFuse}

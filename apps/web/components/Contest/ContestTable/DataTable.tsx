@@ -1,5 +1,4 @@
 import { BaseDataTable } from "@/components/common/BaseDataTable";
-import { Separator } from "@/components/ui/separator";
 import { genericMemo } from "@/types/common";
 import {
   getCoreRowModel,
@@ -49,9 +48,10 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
       columns={columns}
       key2Label={key2Label}
       minWidth="min-w-[900px]"
-      headerClassName="flex items-center justify-center font-extrabold"
-      cellBorderClassName="border border-muted-foreground/50"
-      separator={<Separator />}
+      headerClassName="flex items-center justify-center text-xs font-medium tracking-wider text-muted-foreground"
+      headerBorderClassName="border-b border-border bg-muted/30"
+      cellBorderClassName="border-b border-border"
+      rowClassName="hover:bg-muted/20 transition-colors"
     />
   );
 });

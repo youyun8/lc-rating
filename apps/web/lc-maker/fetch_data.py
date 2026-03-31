@@ -161,6 +161,7 @@ query questionDetail($titleSlug: String!) {
         questionId
         questionFrontendId
         title
+        translatedTitle
         titleSlug
         isPaidOnly
         topicTags {
@@ -219,7 +220,7 @@ def fetch_problem_details(question_slugs, existing_problems):
                 continue
             details[slug] = {
                 "questionFrontendId": q["questionFrontendId"],
-                "title": q["title"],
+                "title": q["translatedTitle"] or q["title"],
                 "titleSlug": q["titleSlug"],
                 "isPaidOnly": q["isPaidOnly"],
                 "topicTags": q["topicTags"],

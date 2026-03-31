@@ -1,6 +1,6 @@
 import { I18NLink } from "@/components/common/I18NLink";
-import { RatingCircle, ratingInfo } from "@/components/common/RatingCircle";
-import { Input } from "@/components/ui/input"; // 確保導入Input組件
+import { ratingInfo } from "@/components/common/RatingCircle";
+import { Input } from "@/components/ui/input";
 import { SortIndicator } from "@/components/common/SortIndicator";
 import {
   createColumnHelper,
@@ -52,7 +52,7 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-8 w-20 text-xs"
+              className="h-7 w-18 text-xs rounded-md"
             />
             <Input
               type="number"
@@ -67,40 +67,42 @@ const generate = (
                 }));
               }}
               onClick={(e) => e.stopPropagation()}
-              className="h-8 w-20 text-xs"
+              className="h-7 w-18 text-xs rounded-md"
             />
           </div>
         </div>
       );
     },
     cell: ({ row }) => {
-      const Q1 = row.getValue<TableCol[typeof key]>(key);
-      const rating = Q1.problem.rating;
+      const Q = row.getValue<TableCol[typeof key]>(key);
+      const rating = Q.problem.rating;
       const info = ratingInfo(rating);
       return (
-        <div className="flex items-center justify-between">
-          <div className="flex flex-row justify-left items-center gap-1.5">
-            <RatingCircle
-              rating={rating}
-              color={info.color}
-              percent={info.percent}
+        <div className="flex items-center justify-between gap-2 py-1">
+          <div className="flex items-center gap-2 min-w-0">
+            <span
+              className="flex-shrink-0 w-2 h-2 rounded-full"
+              style={{ backgroundColor: info.color }}
             />
             <I18NLink
-              link={Q1.problem.link}
-              title={Q1.problem.id === "1000000000" ? Q1.problem.title : `${Q1.problem.id}. ${Q1.problem.title}`}
-              style={{
-                color: info.color,
-              }}
-              className="font-bold"
+              link={Q.problem.link}
+              title={Q.problem.id === "1000000000" ? Q.problem.title : `${Q.problem.id}. ${Q.problem.title}`}
+              className="text-sm text-foreground hover:text-primary hover:underline transition-colors"
             />
+            <span
+              className="flex-shrink-0 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums"
+              style={{ color: info.color, backgroundColor: `${info.color}1a` }}
+            >
+              {rating.toFixed(0)}
+            </span>
           </div>
-          {Q1.solution ? (
+          {Q.solution && (
             <I18NLink
-              link={Q1.solution?.link}
-              title={`🎈`}
-              className="text-xl hover:no-underline"
+              link={Q.solution.link}
+              title="🎈"
+              className="flex-shrink-0 text-base hover:no-underline opacity-70 hover:opacity-100 transition-opacity"
             />
-          ) : null}
+          )}
         </div>
       );
     },
@@ -129,13 +131,19 @@ export const getColumns = () => [
   columnHelper.accessor("contest", {
     header: ({ column }) => (
       <div className="flex flex-row items-center gap-2">
-        {key2Label["contest"]}
+        <span>{key2Label["contest"]}</span>
         <SortIndicator column={column} />
       </div>
     ),
     cell: ({ row }) => {
       const contest = row.getValue<TableCol["contest"]>("contest");
-      return <I18NLink link={contest.link} title={contest.title} />;
+      return (
+        <I18NLink
+          link={contest.link}
+          title={contest.title}
+          className="text-sm text-foreground hover:text-primary hover:underline transition-colors"
+        />
+      );
     },
     enableSorting: true,
     sortingFn: (a, b) =>

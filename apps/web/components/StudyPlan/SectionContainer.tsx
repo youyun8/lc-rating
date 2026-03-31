@@ -61,12 +61,12 @@ const SectionContainer = React.memo(
     };
 
     const cardClasses = cn("scroll-mt-[70px] w-full", {
+      "border shadow-none bg-card": level === 0,
       "border-none shadow-none bg-transparent": level > 0,
-      "border shadow-sm": level === 0,
-    }, "h-fit transition-all");
+    }, "h-fit");
 
     const contentClasses = cn("flex flex-col p-0 gap-6", {
-      "pl-4 md:pl-8 border-l-2 border-muted ml-2 mt-4": level >= 0 && section.children && section.children.length > 0,
+      "pl-4 md:pl-6 border-l-2 border-border/40 ml-1 mt-4": level >= 0 && section.children && section.children.length > 0,
     });
 
     return (

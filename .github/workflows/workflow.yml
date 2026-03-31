@@ -8,7 +8,7 @@ on:
 
   workflow_run:
     workflows:
-      ["StudyPlan Updater", "Problemset Updater", "Rating Solution Updater"]
+      ["StudyPlan Updater", "Upstream Data Sync"]
     types:
       - completed
 

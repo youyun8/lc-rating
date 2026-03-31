@@ -10,6 +10,7 @@ import { useEffect, useMemo } from "react";
 import { ProblemsTable } from "./ContestTable";
 import { TableCol } from "./ContestTable/types";
 
+
 function ProblemSet() {
   const {
     problemMap = {},
@@ -47,7 +48,6 @@ function ProblemSet() {
   }, [isPending, contestError, problemError, solutionError, tagError]);
 
   const tableData: TableCol[] = useMemo(() => {
-    // Return empty array if data is still loading
     if (isPending) {
       return [];
     }
@@ -67,7 +67,6 @@ function ProblemSet() {
         const problem = problems[index];
         const solution = solutions[index];
 
-        // Handle case where problem might be undefined
         if (!problem) {
           return {
             problem: {
@@ -125,9 +124,33 @@ function ProblemSet() {
     });
   }, [isPending, problemMap, contestMap, solutionMap]);
 
+  const contestCount = Object.keys(contestMap).length;
+
   return (
-    <div className="p-2 sm:p-4 md:p-8 flex flex-col gap-4 font-song">
-      <div className="w-full m-auto overflow-x-hidden">
+    <div className="px-4 md:px-8 py-6 flex flex-col gap-5">
+      {/* Header */}
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">比賽題目</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            {isPending ? "\u00a0" : `${contestCount} 場比賽`}
+          </p>
+        </div>
+        <div className="text-xs text-muted-foreground shrink-0 pb-1">
+          題解：
+          <a
+            className="text-red-600 dark:text-red-400 hover:underline"
+            href="https://space.bilibili.com/206214/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            靈茶山艾府（0x3F）@B站
+          </a>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="w-full overflow-x-hidden">
         <ProblemsTable tableData={tableData} isPending={isPending} />
       </div>
     </div>

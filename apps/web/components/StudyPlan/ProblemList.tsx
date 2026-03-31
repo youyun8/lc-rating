@@ -1,5 +1,5 @@
 import { ProgressSelector } from "@/components/common/ProgressSelector";
-import { RatingCircle, ratingInfo } from "@/components/common/RatingCircle";
+import { ratingInfo } from "@/components/common/RatingCircle";
 import { LC_HOST_EN, LC_HOST_ZH } from "@/config/constants";
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { useProblems } from "@/hooks/useProblems";
@@ -39,32 +39,36 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
   }, [problems, problemMap]);
 
   return (
-    <div className="flex flex-col w-full gap-1">
-      {enrichedProblems.map((problem) => {
+    <div className="rounded-xl border border-border overflow-hidden">
+      {enrichedProblems.map((problem, idx) => {
         const problemId = problem.id?.toString();
         const info = ratingInfo(problem.score || 0);
         return (
-          <div 
+          <div
             key={`${problem.slug}-${problemId}`}
-            className="group flex flex-col sm:flex-row sm:items-center justify-between rounded-lg px-3 py-2 bg-muted/30 hover:bg-muted/60 transition-colors gap-2"
+            className={`flex items-center justify-between gap-3 px-4 py-3 hover:bg-muted/20 transition-colors${idx < enrichedProblems.length - 1 ? " border-b border-border" : ""}`}
           >
             <a
               href={`${LC_HOST}/problems/${problem.slug}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm sm:text-base font-medium hover:text-primary hover:underline underline-offset-4 line-clamp-1 flex-1 mr-0 sm:mr-4"
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors flex-1 min-w-0 truncate"
             >
               {problem.id?.toString() === "1000000000" || problem.title.startsWith(`${problem.id}`)
                 ? problem.title
                 : `${problem.id}. ${problem.title}`}
             </a>
-            <div className="flex flex-row items-center gap-2 sm:gap-4 shrink-0 justify-between sm:justify-end">
+            <div className="flex items-center gap-3 shrink-0">
               {problem.score ? (
-                <div className="flex flex-row items-center gap-2 min-w-[60px] sm:min-w-[70px] justify-end text-sm sm:text-base">
-                  <RatingCircle rating={Number(problem.score || 0)} {...info} />
-                  <span className="font-mono text-muted-foreground">{problem.score?.toFixed(0)}</span>
-                </div>
-              ) : <div className="min-w-[60px] sm:min-w-[70px]" />}
+                <span
+                  className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums"
+                  style={{ color: info.color, backgroundColor: `${info.color}1a` }}
+                >
+                  {problem.score.toFixed(0)}
+                </span>
+              ) : (
+                <span className="w-14" />
+              )}
               {problemId ? <ProgressSelector problemId={problemId} /> : null}
             </div>
           </div>

@@ -18,7 +18,9 @@ interface BaseDataTableProps<TData> {
   key2Label: Record<string, string>;
   minWidth?: string;
   headerClassName?: string;
+  headerBorderClassName?: string;
   cellBorderClassName?: string;
+  rowClassName?: string;
   separator?: React.ReactNode;
   renderHeaderExtra?: (header: { column: { getCanSort: () => boolean; getToggleSortingHandler: () => ((event: unknown) => void) | undefined } }) => React.ReactNode;
 }
@@ -29,7 +31,9 @@ export function BaseDataTable<TData>({
   key2Label,
   minWidth = "min-w-[800px]",
   headerClassName = "flex items-center justify-center",
+  headerBorderClassName = "border border-muted-foreground",
   cellBorderClassName = "border border-muted-foreground/30",
+  rowClassName,
   separator,
 }: BaseDataTableProps<TData>) {
   const tableState = table.getState();
@@ -65,7 +69,7 @@ export function BaseDataTable<TData>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="border border-muted-foreground">
+                  <TableHead key={header.id} className={headerBorderClassName}>
                     <div
                       className={cn(headerClassName, {
                         "cursor-pointer": header.column.getCanSort(),
@@ -87,7 +91,7 @@ export function BaseDataTable<TData>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className={rowClassName}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className={cellBorderClassName}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

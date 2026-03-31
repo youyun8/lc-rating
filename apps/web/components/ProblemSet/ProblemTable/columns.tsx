@@ -1,7 +1,7 @@
 import { I18NLink } from "@/components/common/I18NLink";
 import { I18NTag } from "@/components/common/I18NTag";
 import { ProgressSelector } from "@/components/common/ProgressSelector";
-import { RatingCircle, ratingInfo } from "@/components/common/RatingCircle";
+import { ratingInfo } from "@/components/common/RatingCircle";
 import { SortIndicator } from "@/components/common/SortIndicator";
 import { createColumnHelper, InitialTableState } from "@tanstack/react-table";
 import { key2Label, TableCol } from "./types";
@@ -17,7 +17,7 @@ export const getColumns = () => [
         <I18NLink
           link={contest.link}
           title={contest.title}
-          className="text-pretty"
+          className="text-sm text-foreground hover:text-primary transition-colors"
         />
       );
     },
@@ -34,7 +34,7 @@ export const getColumns = () => [
         <I18NLink
           link={problem.link}
           title={problem.id === "1000000000" ? problem.title : `${problem.id}. ${problem.title}`}
-          className="text-pretty"
+          className="text-sm text-foreground hover:text-primary transition-colors"
         />
       );
     },
@@ -44,18 +44,23 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("rating", {
-    header: ({ column }) => <div className="flex items-center gap-2">{key2Label["rating"]}<SortIndicator column={column} /></div>,
+    header: ({ column }) => (
+      <div className="flex items-center gap-2">
+        {key2Label["rating"]}
+        <SortIndicator column={column} />
+      </div>
+    ),
     cell: ({ row }) => {
       const rating = row.getValue<number>("rating");
       const info = ratingInfo(rating);
       return (
-        <div className="flex items-center justify-center gap-2 text-base">
-          <RatingCircle
-            rating={rating}
-            color={info.color}
-            percent={info.percent}
-          />
-          <div className="font-mono">{rating.toFixed(0)}</div>
+        <div className="flex items-center justify-center">
+          <span
+            className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums"
+            style={{ color: info.color, backgroundColor: `${info.color}1a` }}
+          >
+            {rating.toFixed(0)}
+          </span>
         </div>
       );
     },
@@ -66,7 +71,7 @@ export const getColumns = () => [
     cell: ({ row }) => {
       const tags = row.getValue<TableCol["tags"]>("tags");
       return (
-        <div className="flex flex-wrap justify-center items-center gap-1 text-pretty max-w-[200px] md:max-w-[300px] m-auto">
+        <div className="flex flex-wrap justify-center items-center gap-1 max-w-[200px] md:max-w-[300px] mx-auto">
           {tags.map((tag) => (
             <I18NTag key={tag.id} label={tag.label} />
           ))}
@@ -81,7 +86,7 @@ export const getColumns = () => [
     cell: ({ row }) => {
       const progress = row.getValue<TableCol["progress"]>("progress");
       return (
-        <div className="w-fit m-auto">
+        <div className="w-fit mx-auto">
           <ProgressSelector problemId={progress.problemId} />
         </div>
       );
@@ -97,7 +102,7 @@ export const getColumns = () => [
         <I18NLink
           link={solution.link}
           title={solution.title}
-          className="text-pretty blur-xs hover:blur-none transition duration-300"
+          className="text-sm blur-xs hover:blur-none transition duration-300"
         />
       );
     },

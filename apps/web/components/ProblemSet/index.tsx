@@ -5,6 +5,7 @@ import { useProblems } from "@/hooks/useProblems";
 import { useSolutions } from "@/hooks/useSolutions";
 import { useTags } from "@/hooks/useTags";
 import { isTruthy } from "@/types/common";
+
 import { useCallback, useMemo, useState } from "react";
 import { ProblemsTable } from "./ProblemTable";
 import { TableCol } from "./ProblemTable/types";
@@ -132,12 +133,36 @@ function ProblemSet() {
     return filtData;
   }, [tableData, similarities]);
 
+  const problemCount = Object.keys(problemMap).length;
+
   return (
-    <div className="p-2 sm:p-4 md:p-8 flex flex-col gap-4 font-song">
-      <div className="w-full md:w-4/5 xl:w-3/4 2xl:w-2/3 m-auto">
-        <Search data={tableData} onSearch={handleSearch}></Search>
+    <div className="px-4 md:px-8 py-6 flex flex-col gap-5">
+      {/* Header */}
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">題庫</h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            {isPending ? "\u00a0" : `${problemCount} 道題目`}
+          </p>
+        </div>
+        <div className="text-xs text-muted-foreground shrink-0 pb-1">
+          題解：
+          <a
+            className="text-red-600 dark:text-red-400 hover:underline"
+            href="https://space.bilibili.com/206214/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            靈茶山艾府（0x3F）@B站
+          </a>
+        </div>
       </div>
-      <div className="w-full 2xl:w-2/3 m-auto overflow-x-hidden">
+
+      {/* Search */}
+      <Search data={tableData} onSearch={handleSearch} />
+
+      {/* Table */}
+      <div className="w-full overflow-x-hidden">
         <ProblemsTable tableData={searchedData} isPending={isPending} />
       </div>
     </div>
