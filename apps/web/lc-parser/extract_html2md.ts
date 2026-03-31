@@ -2,6 +2,7 @@ import * as TurndownPluginGfm from '@joplin/turndown-plugin-gfm';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import * as fs from 'fs';
+import { pathToFileURL } from 'node:url';
 import TurndownService from 'turndown';
 
 const OUTPUT_DIR = process.cwd() + '/dist';
@@ -28,16 +29,15 @@ async function downloadFile(url: string, localFilename: string): Promise<string>
 }
 
 /**
- * Extract and convert HTML to Markdown
+ * Convert a LeetCode discussion HTML document into markdown content.
  */
-async function extractAndConvert(htmlFile: string): Promise<void> {
-  const htmlContent = fs.readFileSync(htmlFile, 'utf-8');
+export function convertHtmlToMarkdown(htmlContent: string): string {
   const $ = cheerio.load(htmlContent);
 
   // Extract Title
   const titleClass = '.text-lc-text-primary';
   const titleElement = $(`${titleClass}`);
-  
+
   let title: string;
   if (titleElement.length > 0) {
     title = titleElement.text().trim();
@@ -52,22 +52,26 @@ async function extractAndConvert(htmlFile: string): Promise<void> {
 
   let markdownContent = '';
   if (contentElement.length > 0) {
-    // Initialize Turndown with ATX heading style
     const turndownService = new TurndownService({
       headingStyle: 'atx',
       codeBlockStyle: 'fenced',
     });
 
     turndownService.use(TurndownPluginGfm.gfm);
-
-    // Convert to Markdown
     markdownContent = turndownService.turndown(contentElement.html() || '');
   } else {
     console.warn('Warning: Content element not found.');
   }
 
-  // Combine Title and Content
-  const finalMarkdown = `# ${title}\n\n${markdownContent}`;
+  return `# ${title}\n\n${markdownContent}`;
+}
+
+/**
+ * Extract and convert HTML to Markdown
+ */
+async function extractAndConvert(htmlFile: string): Promise<void> {
+  const htmlContent = fs.readFileSync(htmlFile, 'utf-8');
+  const finalMarkdown = convertHtmlToMarkdown(htmlContent);
 
   // Save to file
   const outputFilename = htmlFile.replace('.html', '.md');
@@ -105,10 +109,10 @@ async function main() {
   }
 }
 
-// Run main function if this is the main module
-main().catch(console.error);
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(console.error);
+}
 
 // extractAndConvert('dynamic_programming.html').catch(console.error);
 
 // export { downloadFile, extractAndConvert, sanitizeFilename };
-

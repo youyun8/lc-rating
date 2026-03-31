@@ -16,6 +16,15 @@ cd apps/web
 pnpm install
 ```
 
+如果要驗證 `apps/web/lc-maker/` 的 Python 更新腳本，建議使用虛擬環境，避免系統 Python 的套件管理限制：
+
+```bash
+cd apps/web/lc-maker
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
 ### 運行腳本
 
 ```bash
@@ -34,6 +43,14 @@ npx tsx lc-parser/extract_html2md.ts
 - `turndown` - HTML 轉 Markdown（類似 markdownify）
 - `axios` - HTTP 請求（類似 requests）
 
+## 測試
+
+可以執行以下指令做 parser smoke test：
+
+```bash
+pnpm --filter web test
+```
+
 ## 功能對比
 
 兩個版本實現了完全相同的功能：
@@ -49,7 +66,7 @@ npx tsx lc-parser/extract_html2md.ts
 
 - 滑動窗口與雙指標
 - 二分演算法
-- 單調棧
+- 單調堆疊
 - 網格圖
 - 位元運算
 - 圖論演算法

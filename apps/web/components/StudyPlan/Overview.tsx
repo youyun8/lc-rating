@@ -519,7 +519,7 @@ function StudyPlanOverview() {
                   搜尋與篩選
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  搜尋題單、章節或題號，快速找到下一步想練的主題。
+                  搜尋題單、章節或題號
                 </p>
               </div>
               <div className="w-full lg:max-w-sm">

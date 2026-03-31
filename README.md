@@ -41,7 +41,7 @@
 - **📖 專題題單系統**
   - **二分查找** - 掌握高效查找算法
   - **滑動窗口** - 解決子數組/子串問題
-  - **單調棧** - 處理區間極值問題
+  - **單調堆疊** - 處理區間極值問題
   - **動態規劃** - 從入門到精通 DP
   - **圖論算法** - 掌握圖的遍歷與應用
   - **貪心算法** - 培養貪心思維
@@ -128,7 +128,6 @@ lc-rating/
 │       ├── hooks/            # React Hooks
 │       ├── types/            # TypeScript 類型定義
 │       ├── utils/            # 工具函數
-│       ├── lc-maker/         # 題單數據生成工具(Python)
 │       └── public/           # 靜態資源
 │           ├── problemset/   # 題庫數據
 │           └── studyplan/    # 題單數據
@@ -138,25 +137,6 @@ lc-rating/
     ├── typescript-config/    # TypeScript 配置
     └── ui/                   # UI 組件庫
 ```
-
-## 🔧 題單數據生成
-
-本項目包含 Python 工具用於從 LeetCode 討論區生成題單數據。
-
-### 安裝 Python 依賴
-
-```bash
-cd apps/web/lc-maker
-pip install -r requirements.txt
-```
-
-### 生成題單
-
-```bash
-python 0x3f_discuss.py --uuid <討論UUID> --o <輸出路徑>
-```
-
-詳見 [lc-maker/README.md](apps/web/lc-maker/README.md)
 
 ## 📄 開源協議
 

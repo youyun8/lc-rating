@@ -1,354 +1,337 @@
 #!/usr/bin/env python3
-"""Merge new upstream study plan problems and grouping summaries into local plans.
+"""Merge newly added upstream study-plan problems into local files."""
 
-This script handles the structural mismatch between upstream (Simplified Chinese,
-nested hierarchy with Chinese numerals like "一、二分查找" > "§1.1 基础") and local
-(Traditional Chinese, flat numbered structure like "1. 基礎", "2. 進階").
+from __future__ import annotations
 
-Strategy:
-  1. Normalize problem IDs (int/str, SC/TC) for comparison.
-  2. For each new upstream problem, find its section, then find the best-matching
-     local section by maximizing problem ID overlap.
-  3. Translate new problem fields from SC to TC.
-  4. Prepend upstream grouping section summaries (stripped of python code blocks)
-     to the first matching child local section.
-"""
-
+import argparse
 import json
-import re
-import subprocess
+import os
 import sys
+import urllib.request
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# Reuse translate_to_traditional.py's translation logic
-# ---------------------------------------------------------------------------
-sys.path.insert(0, str(Path(__file__).parent))
-from translate_to_traditional import translate_text, translate_dict
+from translate_to_traditional import translate_dict
 
 
-# ---------------------------------------------------------------------------
-# ID normalisation
-# ---------------------------------------------------------------------------
+DEFAULT_UPSTREAM_BASE = (
+    "https://raw.githubusercontent.com/huxulm/lc-rating"
+    "/main/apps/web/public/studyplan"
+)
+DEFAULT_LOCAL_DIR = Path(__file__).resolve().parent.parent / "public" / "studyplan"
+REQUEST_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; lc-rating-studyplan-sync/1.0)",
+}
+REQUEST_TIMEOUT = 30
+STUDY_PLANS = (
+    "binary_search",
+    "bitwise_operations",
+    "data_structure",
+    "dynamic_programming",
+    "graph",
+    "greedy",
+    "grid",
+    "math",
+    "monotonic_stack",
+    "sliding_window",
+    "string",
+    "trees",
+)
 
 _tc2sc_converter = None
 
 
-def _get_tc2sc():
+def fetch_json(url: str) -> dict | list:
+    """Download and parse a JSON file from a URL."""
+    request = urllib.request.Request(url, headers=REQUEST_HEADERS)
+    with urllib.request.urlopen(request, timeout=REQUEST_TIMEOUT) as response:
+        return json.loads(response.read())
+
+
+def get_tc2sc_converter():
+    """Lazily create the Traditional-Chinese-to-Simplified converter."""
     global _tc2sc_converter
     if _tc2sc_converter is None:
         try:
             import opencc
-            _tc2sc_converter = opencc.OpenCC("t2s")
         except ImportError:
-            pass
+            return None
+        _tc2sc_converter = opencc.OpenCC("t2s")
     return _tc2sc_converter
 
 
-def normalize_id(pid):
-    """Normalise a problem ID so that int/str and SC/TC variants match.
+def normalize_id(problem_id: object) -> str:
+    """Normalize problem identifiers so local and upstream IDs compare cleanly."""
+    if isinstance(problem_id, int):
+        return str(problem_id)
 
-    Converts to Simplified Chinese for uniform comparison.
-    """
-    if isinstance(pid, int):
-        return str(pid)
-    s = str(pid)
-    # If the ID contains any CJK characters, convert TC→SC for normalisation
-    if any("\u4e00" <= c <= "\u9fff" for c in s):
-        conv = _get_tc2sc()
-        if conv:
-            s = conv.convert(s)
+    value = str(problem_id)
+    if any("\u4e00" <= character <= "\u9fff" for character in value):
+        converter = get_tc2sc_converter()
+        if converter is not None:
+            value = converter.convert(value)
         else:
-            s = s.replace("面試題", "面试题")
-            s = s.replace("棋盤", "棋盘")
-    return s
+            value = value.replace("面試題", "面试题").replace("棋盤", "棋盘")
+
+    return value
 
 
-def collect_problem_ids(node):
-    """Return a set of *normalised* problem IDs in the tree rooted at node."""
-    ids = set()
+def collect_problem_ids(node: dict | list) -> set[str]:
+    """Collect normalized problem IDs from a study-plan tree."""
+    ids: set[str] = set()
+
     if isinstance(node, dict):
-        for p in node.get("problems", []):
-            pid = p.get("id") or p.get("slug")
-            if pid is not None:
-                ids.add(normalize_id(pid))
+        for problem in node.get("problems", []):
+            problem_id = problem.get("id") or problem.get("slug")
+            if problem_id is not None:
+                ids.add(normalize_id(problem_id))
         for child in node.get("children", []):
             ids.update(collect_problem_ids(child))
-    elif isinstance(node, list):
+    else:
         for item in node:
             ids.update(collect_problem_ids(item))
+
     return ids
 
 
-# ---------------------------------------------------------------------------
-# Section helpers
-# ---------------------------------------------------------------------------
+def collect_leaf_sections(node: dict | list, sections: list[dict] | None = None) -> list[dict]:
+    """Collect sections that directly contain problems."""
+    if sections is None:
+        sections = []
 
-def collect_leaf_sections(node, out=None):
-    """Collect all sections that directly contain problems (leaf sections)."""
-    if out is None:
-        out = []
     if isinstance(node, dict):
         if node.get("problems"):
-            out.append(node)
+            sections.append(node)
         for child in node.get("children", []):
-            collect_leaf_sections(child, out)
-    elif isinstance(node, list):
+            collect_leaf_sections(child, sections)
+    else:
         for item in node:
-            collect_leaf_sections(item, out)
-    return out
+            collect_leaf_sections(item, sections)
+
+    return sections
 
 
-def section_ids(section):
-    """Return set of normalised IDs for problems directly in this section."""
-    return {normalize_id(p.get("id") or p.get("slug"))
-            for p in section.get("problems", [])}
+def section_ids(section: dict) -> set[str]:
+    """Collect normalized IDs for problems directly inside a section."""
+    return {
+        normalize_id(problem.get("id") or problem.get("slug"))
+        for problem in section.get("problems", [])
+    }
 
 
-def find_best_local_section(upstream_section, local_sections):
-    """Find the local section with the most problem ID overlap."""
-    up_ids = section_ids(upstream_section)
-    if not up_ids:
+def find_best_local_section(upstream_section: dict, local_sections: list[dict]) -> dict | None:
+    """Find the local section with the highest problem-ID overlap."""
+    upstream_ids = section_ids(upstream_section)
+    if not upstream_ids:
         return None
 
     best_section = None
     best_overlap = 0
-    for local_sec in local_sections:
-        overlap = len(up_ids & section_ids(local_sec))
+    for local_section in local_sections:
+        overlap = len(upstream_ids & section_ids(local_section))
         if overlap > best_overlap:
             best_overlap = overlap
-            best_section = local_sec
+            best_section = local_section
+
     return best_section
 
 
-def _build_parent_map(node, parent=None, pmap=None):
-    """Build a dict mapping node id -> parent node."""
-    if pmap is None:
-        pmap = {}
+def build_parent_map(
+    node: dict | list,
+    parent: dict | None = None,
+    parent_map: dict[int, dict | None] | None = None,
+) -> dict[int, dict | None]:
+    """Build a map from node identity to parent node."""
+    if parent_map is None:
+        parent_map = {}
+
     if isinstance(node, dict):
-        pmap[id(node)] = parent
+        parent_map[id(node)] = parent
         for child in node.get("children", []):
-            _build_parent_map(child, node, pmap)
-    elif isinstance(node, list):
+            build_parent_map(child, node, parent_map)
+    else:
         for item in node:
-            _build_parent_map(item, parent, pmap)
-    return pmap
+            build_parent_map(item, parent, parent_map)
+
+    return parent_map
 
 
-def find_sibling_target(upstream_section, upstream_root, local_sections):
-    """Fallback: find local target via sibling sections that DO have overlap."""
-    parent_map = _build_parent_map(upstream_root)
+def find_sibling_target(
+    upstream_section: dict,
+    upstream_root: dict,
+    local_sections: list[dict],
+) -> dict | None:
+    """Find a local section via sibling overlap when direct matching fails."""
+    parent_map = build_parent_map(upstream_root)
     parent = parent_map.get(id(upstream_section))
     if parent is None:
         return None
+
     for sibling in parent.get("children", []):
         if id(sibling) == id(upstream_section):
             continue
         target = find_best_local_section(sibling, local_sections)
         if target is not None:
             return target
+
     return None
 
 
-# ---------------------------------------------------------------------------
-# Step 1: Merge new problems
-# ---------------------------------------------------------------------------
-
-def merge_new_problems(local_root, upstream_root):
-    """Merge problems from upstream not present in local.
-
-    Returns the number of problems added.
-    """
-    local_ids = collect_problem_ids(local_root)
-    local_sections = collect_leaf_sections(local_root)
-
-    added = 0
-
-    def walk(upstream_node):
-        nonlocal added
-        if isinstance(upstream_node, dict):
-            problems = upstream_node.get("problems", [])
-            new_problems = [
-                p for p in problems
-                if normalize_id(p.get("id") or p.get("slug")) not in local_ids
-            ]
-            if new_problems:
-                target = find_best_local_section(upstream_node, local_sections)
-                if target is None:
-                    # Fallback: find via sibling sections
-                    target = find_sibling_target(
-                        upstream_node, upstream_root, local_sections
-                    )
-                if target is not None:
-                    for p in new_problems:
-                        translated = translate_dict(p)
-                        target.setdefault("problems", []).append(translated)
-                        local_ids.add(normalize_id(p.get("id") or p.get("slug")))
-                        added += 1
-                else:
-                    titles = [p.get("title", "?") for p in new_problems]
-                    print(f"    WARNING: No matching local section for "
-                          f"{len(new_problems)} problem(s): {titles}")
-            for child in upstream_node.get("children", []):
-                walk(child)
-        elif isinstance(upstream_node, list):
-            for item in upstream_node:
-                walk(item)
-
-    walk(upstream_root)
-    return added
-
-
-# ---------------------------------------------------------------------------
-# Step 2: Merge grouping summaries
-# ---------------------------------------------------------------------------
-
-def strip_python_code_blocks(text):
-    """Remove ```py / ```python code blocks from markdown text."""
-    return re.sub(r"```(?:py|python)\b.*?```", "", text, flags=re.DOTALL)
-
-
-def collect_grouping_sections(node, out=None):
-    """Collect sections that have children but no direct problems and have a summary."""
-    if out is None:
-        out = []
-    if isinstance(node, dict):
-        children = node.get("children", [])
-        problems = node.get("problems", [])
-        summary = node.get("summary", "")
-        if children and not problems and summary and summary.strip():
-            out.append(node)
-        for child in children:
-            collect_grouping_sections(child, out)
-    elif isinstance(node, list):
-        for item in node:
-            collect_grouping_sections(item, out)
-    return out
-
-
-def find_first_matching_child(grouping_section, local_sections):
-    """For a grouping section, find its first child that maps to a local section."""
-    for child in grouping_section.get("children", []):
-        # If child is a leaf (has problems), match directly
-        if child.get("problems"):
-            match = find_best_local_section(child, local_sections)
-            if match:
-                return match
-        # If child is also a grouping, recurse into its first child
-        for grandchild in child.get("children", []):
-            if grandchild.get("problems"):
-                match = find_best_local_section(grandchild, local_sections)
-                if match:
-                    return match
-    return None
-
-
-def merge_grouping_summaries(local_root, upstream_root):
-    """Prepend upstream grouping summaries to the first matching local child section.
-
-    Returns the number of summaries prepended.
-    """
-    grouping_sections = collect_grouping_sections(upstream_root)
-    local_sections = collect_leaf_sections(local_root)
-
-    prepended = 0
-    for gs in grouping_sections:
-        target = find_first_matching_child(gs, local_sections)
-        if target is None:
-            continue
-
-        raw_summary = gs.get("summary", "")
-        cleaned = strip_python_code_blocks(raw_summary).strip()
-        if not cleaned:
-            continue
-
-        translated = translate_text(cleaned)
-
-        # Check if this summary is already present (avoid duplicate prepends)
-        existing = target.get("summary", "")
-        if translated in existing:
-            continue
-
-        if existing.strip():
-            target["summary"] = translated + "\n\n---\n\n" + existing
-        else:
-            target["summary"] = translated
-
-        prepended += 1
-
-    return prepended
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-STUDY_PLANS = [
-    "binary_search", "bitwise_operations", "data_structure",
-    "dynamic_programming", "graph", "greedy", "grid", "math",
-    "monotonic_stack", "sliding_window", "string", "trees",
-]
-
-
-def load_upstream(plan_name):
-    """Load the upstream version of a study plan from git."""
+def parse_score(score: object) -> float | None:
+    """Convert a score value to a sortable number."""
+    if score is None:
+        return None
+    if isinstance(score, (int, float)):
+        return float(score)
     try:
-        raw = subprocess.check_output(
-            ["git", "show", f"upstream/main:apps/web/public/studyplan/{plan_name}.json"],
-            stderr=subprocess.DEVNULL,
-        )
-        return json.loads(raw)
-    except (subprocess.CalledProcessError, json.JSONDecodeError):
+        return float(str(score))
+    except (TypeError, ValueError):
         return None
 
 
-def main():
-    local_dir = Path(__file__).parent.parent / "public" / "studyplan"
+def problem_sort_key(problem: dict) -> tuple[bool, float, str]:
+    """Sort problems by score ascending, with null scores first."""
+    score = parse_score(problem.get("score"))
+    tie_breaker = str(problem.get("id") or problem.get("slug") or "")
+    return (score is not None, score if score is not None else float("-inf"), tie_breaker)
 
+
+def sort_section_problems(section: dict) -> None:
+    """Sort a section's problems in ascending score order."""
+    section["problems"] = sorted(section.get("problems", []), key=problem_sort_key)
+
+
+def merge_new_problems(local_root: dict, upstream_root: dict) -> int:
+    """Merge new upstream problems into the best-matching local sections."""
+    local_ids = collect_problem_ids(local_root)
+    local_sections = collect_leaf_sections(local_root)
+    touched_sections: dict[int, dict] = {}
+    added = 0
+
+    def walk(upstream_node: dict | list) -> None:
+        nonlocal added
+
+        if isinstance(upstream_node, dict):
+            new_problems = [
+                problem
+                for problem in upstream_node.get("problems", [])
+                if normalize_id(problem.get("id") or problem.get("slug")) not in local_ids
+            ]
+
+            if new_problems:
+                target = find_best_local_section(upstream_node, local_sections)
+                if target is None:
+                    target = find_sibling_target(upstream_node, upstream_root, local_sections)
+
+                if target is not None:
+                    for problem in new_problems:
+                        translated_problem = translate_dict(problem)
+                        target.setdefault("problems", []).append(translated_problem)
+                        local_ids.add(normalize_id(problem.get("id") or problem.get("slug")))
+                        added += 1
+                    touched_sections[id(target)] = target
+                else:
+                    titles = [problem.get("title", "?") for problem in new_problems]
+                    print(
+                        "  warning: no matching local section for "
+                        f"{len(new_problems)} problem(s): {titles}"
+                    )
+
+            for child in upstream_node.get("children", []):
+                walk(child)
+            return
+
+        for item in upstream_node:
+            walk(item)
+
+    walk(upstream_root)
+
+    for section in touched_sections.values():
+        sort_section_problems(section)
+
+    return added
+
+
+def load_upstream(plan_name: str, base_url: str) -> dict | None:
+    """Load a single upstream study-plan file."""
+    try:
+        payload = fetch_json(f"{base_url.rstrip('/')}/{plan_name}.json")
+    except Exception as exc:  # noqa: BLE001
+        print(f"  {plan_name}: failed to load upstream data ({exc})", file=sys.stderr)
+        return None
+
+    if isinstance(payload, dict):
+        return payload
+
+    print(f"  {plan_name}: upstream payload is not a JSON object", file=sys.stderr)
+    return None
+
+
+def parse_args() -> argparse.Namespace:
+    """Parse CLI arguments."""
+    parser = argparse.ArgumentParser(
+        description="Merge upstream study-plan updates into local JSON files"
+    )
+    parser.add_argument(
+        "--base-url",
+        default=os.environ.get(
+            "LC_RATING_UPSTREAM_STUDYPLAN_BASE",
+            DEFAULT_UPSTREAM_BASE,
+        ),
+        help="Base URL for upstream study-plan JSON files (supports file://).",
+    )
+    parser.add_argument(
+        "--local-dir",
+        default=str(DEFAULT_LOCAL_DIR),
+        help="Local study-plan directory to update.",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Preview the merge without writing files.",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    """Merge only new upstream study-plan problems into the local repository."""
+    args = parse_args()
+    local_dir = Path(args.local_dir)
     total_problems = 0
-    total_summaries = 0
 
-    for plan in STUDY_PLANS:
-        local_file = local_dir / f"{plan}.json"
+    for plan_name in STUDY_PLANS:
+        local_file = local_dir / f"{plan_name}.json"
         if not local_file.exists():
-            print(f"  {plan}: local file not found, skipping")
+            print(f"  {plan_name}: local file not found, skipping")
             continue
 
-        upstream_data = load_upstream(plan)
+        upstream_data = load_upstream(plan_name, args.base_url)
         if upstream_data is None:
-            print(f"  {plan}: upstream not found, skipping")
             continue
 
-        with open(local_file, "r", encoding="utf-8") as f:
-            local_data = json.load(f)
+        with local_file.open("r", encoding="utf-8") as handle:
+            local_data = json.load(handle)
 
-        # Count before
         before = len(collect_problem_ids(local_data))
-
-        # Step 1: merge new problems
         added = merge_new_problems(local_data, upstream_data)
 
-        # Step 2: merge grouping summaries
-        summaries = merge_grouping_summaries(local_data, upstream_data)
-
-        if added or summaries:
-            with open(local_file, "w", encoding="utf-8") as f:
-                json.dump(local_data, f, ensure_ascii=False, separators=(",", ":"))
+        if added:
+            if not args.dry_run:
+                with local_file.open("w", encoding="utf-8") as handle:
+                    json.dump(local_data, handle, ensure_ascii=False, separators=(",", ":"))
 
             after = len(collect_problem_ids(local_data))
-            parts = []
-            if added:
-                parts.append(f"+{added} problem(s)")
-            if summaries:
-                parts.append(f"+{summaries} summary(ies)")
-            print(f"  {plan}: {', '.join(parts)}  ({before} → {after} total IDs)")
+            action = "would update" if args.dry_run else "updated"
+            print(
+                f"  {plan_name}: {action} +{added} problem(s) "
+                f"({before} -> {after} total IDs)"
+            )
             total_problems += added
-            total_summaries += summaries
         else:
-            print(f"  {plan}: up to date")
+            print(f"  {plan_name}: up to date")
 
-    print(f"\nTotal: +{total_problems} problem(s), +{total_summaries} summary(ies)")
+    print(f"Total study-plan changes: +{total_problems} problem(s)")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

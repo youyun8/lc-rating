@@ -47,9 +47,6 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
           <p className="text-sm font-semibold tracking-tight text-foreground">
             題目列表
           </p>
-          <p className="text-xs text-muted-foreground">
-            可直接前往 LeetCode 並同步更新進度
-          </p>
         </div>
         <span className="rounded-full border border-border/60 bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground">
           {enrichedProblems.length} 題

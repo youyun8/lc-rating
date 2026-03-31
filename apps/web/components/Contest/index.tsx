@@ -165,7 +165,7 @@ function ContestPage() {
                 比賽題目
               </h1>
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                按場次查看每場比賽的四題難度分布，並用 Q1 到 Q4 的 rating 區間快速篩選適合練習的競賽。
+                按場次查看每場比賽的四題難度分布
               </p>
             </div>
             <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
@@ -244,19 +244,8 @@ function ContestPage() {
               比賽列表
             </h2>
             <p className="text-sm text-muted-foreground">
-              依預設由新到舊排序，並支援在表頭直接設定各題的 rating 範圍。
+              依預設由新到舊排序
             </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-              Q1-Q4 可獨立篩選
-            </span>
-            <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-              支援欄位顯示切換
-            </span>
-            <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-              可左右滑動查看完整表格
-            </span>
           </div>
         </div>
 

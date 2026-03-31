@@ -1,159 +1,149 @@
 #!/usr/bin/env python3
-"""
-Sync problemset data from the upstream repository (huxulm/lc-rating) and
-translate Simplified Chinese to Traditional Chinese.
+"""Sync problemset data from the upstream repository."""
 
-This replaces the previous approach of fetching directly from the LeetCode
-GraphQL API, which is often blocked by rate-limits or IP restrictions.
-
-Usage:
-    python sync_upstream.py                     # sync all data
-    python sync_upstream.py --dry-run           # preview changes without writing
-    python sync_upstream.py --skip-translate     # sync without SC→TC translation
-"""
+from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import urllib.request
 from pathlib import Path
 
-try:
-    from translate_to_traditional import translate_dict
-except ImportError:
-    print("Error: translate_to_traditional module not found.")
-    print("Make sure you're running from the lc-maker directory.")
-    sys.exit(1)
+from translate_to_traditional import translate_dict
 
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
 
-UPSTREAM_BASE = (
+DEFAULT_UPSTREAM_BASE = (
     "https://raw.githubusercontent.com/huxulm/lc-rating"
     "/main/apps/web/public/problemset"
 )
-
-UPSTREAM_FILES = ["problems.json", "solutions.json", "contests.json", "tags.json"]
-
+DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "public" / "problemset"
+UPSTREAM_FILES = ("problems.json", "solutions.json", "contests.json", "tags.json")
+CONTEST_KEYWORDS = ("周赛", "双周赛", "週賽", "雙週賽")
 REQUEST_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; lc-rating-sync/1.0)",
+    "User-Agent": "Mozilla/5.0 (compatible; lc-rating-upstream-sync/1.0)",
 }
-
 REQUEST_TIMEOUT = 30
-
-OUTPUT_DIR = Path(__file__).parent.parent / "public" / "problemset"
-
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
 
 
 def fetch_json(url: str) -> dict | list:
     """Download and parse a JSON file from a URL."""
-    req = urllib.request.Request(url, headers=REQUEST_HEADERS)
-    with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
-        return json.loads(resp.read())
+    request = urllib.request.Request(url, headers=REQUEST_HEADERS)
+    with urllib.request.urlopen(request, timeout=REQUEST_TIMEOUT) as response:
+        return json.loads(response.read())
 
 
 def filter_contests(contests: dict) -> tuple[dict, int]:
-    """Keep only regular weekly/biweekly contests (週賽 / 雙週賽 in SC)."""
-    kept = {}
+    """Keep only regular weekly and biweekly contests."""
+    kept: dict[str, dict] = {}
     removed = 0
-    for cid, contest in contests.items():
+
+    for contest_id, contest in contests.items():
         title = contest.get("title", "")
-        if "周赛" in title or "双周赛" in title:
-            kept[cid] = contest
+        if any(keyword in title for keyword in CONTEST_KEYWORDS):
+            kept[contest_id] = contest
         else:
             removed += 1
+
     return kept, removed
 
 
 def write_json(path: Path, data: dict | list) -> None:
-    """Write JSON with compact formatting and no ASCII escaping."""
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
+    """Write JSON using the repository's compact formatting style."""
+    with path.open("w", encoding="utf-8") as handle:
+        json.dump(data, handle, ensure_ascii=False, separators=(",", ":"))
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
+def summarize_changes(local_path: Path, upstream_data: dict | list) -> None:
+    """Print a small summary of the difference against the local file."""
+    if not local_path.exists():
+        print(f"  {local_path.name}: new file")
+        return
+
+    with local_path.open("r", encoding="utf-8") as handle:
+        local_data = json.load(handle)
+
+    if isinstance(local_data, dict) and isinstance(upstream_data, dict):
+        new_keys = set(upstream_data) - set(local_data)
+        removed_keys = set(local_data) - set(upstream_data)
+        print(
+            f"  {local_path.name}: +{len(new_keys)} new, -{len(removed_keys)} removed"
+        )
+        return
+
+    if isinstance(local_data, list) and isinstance(upstream_data, list):
+        print(f"  {local_path.name}: {len(local_data)} -> {len(upstream_data)} item(s)")
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Sync upstream LeetCode data")
+def parse_args() -> argparse.Namespace:
+    """Parse CLI arguments."""
+    parser = argparse.ArgumentParser(description="Sync upstream problemset data")
+    parser.add_argument(
+        "--base-url",
+        default=os.environ.get("LC_RATING_UPSTREAM_BASE", DEFAULT_UPSTREAM_BASE),
+        help="Base URL for upstream JSON files (supports file:// for local tests).",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(DEFAULT_OUTPUT_DIR),
+        help="Directory where refreshed JSON files should be written.",
+    )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Preview changes without writing files",
+        help="Preview the sync without writing files.",
     )
     parser.add_argument(
         "--skip-translate",
         action="store_true",
-        help="Skip SC→TC translation (for debugging)",
+        help="Skip Simplified Chinese to Traditional Chinese translation.",
     )
-    args = parser.parse_args()
+    return parser.parse_args()
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Step 1: Fetch all upstream files
-    upstream: dict[str, dict | list] = {}
+def main() -> int:
+    """Sync upstream problemset files into the local public directory."""
+    args = parse_args()
+    base_url = args.base_url.rstrip("/")
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    upstream_payloads: dict[str, dict | list] = {}
+
     for filename in UPSTREAM_FILES:
-        url = f"{UPSTREAM_BASE}/{filename}"
-        print(f"Fetching {filename} ...")
+        url = f"{base_url}/{filename}"
+        print(f"Fetching {url}")
         try:
-            upstream[filename] = fetch_json(url)
-            if isinstance(upstream[filename], dict):
-                print(f"  ✓ {len(upstream[filename])} entries")
-            else:
-                print(f"  ✓ {len(upstream[filename])} items")
-        except Exception as e:
-            print(f"  ✗ Failed: {e}")
+            payload = fetch_json(url)
+        except Exception as exc:  # noqa: BLE001
+            print(f"Failed to fetch {filename}: {exc}", file=sys.stderr)
             return 1
 
-    # Step 2: Filter contests
-    if "contests.json" in upstream:
-        contests = upstream["contests.json"]
-        if isinstance(contests, dict):
-            filtered, removed = filter_contests(contests)
-            upstream["contests.json"] = filtered
-            print(f"\nFiltered contests: kept {len(filtered)}, removed {removed} non-regular")
+        if filename == "contests.json" and isinstance(payload, dict):
+            payload, removed = filter_contests(payload)
+            print(
+                f"  contests.json: kept {len(payload)} regular contest(s), "
+                f"removed {removed}"
+            )
 
-    # Step 3: Show diff summary
-    for filename in UPSTREAM_FILES:
-        local_path = OUTPUT_DIR / filename
-        if local_path.exists():
-            with open(local_path, "r", encoding="utf-8") as f:
-                local_data = json.load(f)
-            upstream_data = upstream[filename]
-            if isinstance(upstream_data, dict) and isinstance(local_data, dict):
-                new_keys = set(upstream_data.keys()) - set(local_data.keys())
-                removed_keys = set(local_data.keys()) - set(upstream_data.keys())
-                if new_keys or removed_keys:
-                    print(f"\n{filename}: +{len(new_keys)} new, -{len(removed_keys)} removed")
-        else:
-            print(f"\n{filename}: new file")
+        upstream_payloads[filename] = payload
+        summarize_changes(output_dir / filename, payload)
 
     if args.dry_run:
-        print("\n[Dry run] No files written.")
+        print("Dry run complete; no files were written.")
         return 0
 
-    # Step 4: Translate SC → TC
     if not args.skip_translate:
-        print("\nTranslating SC → TC ...")
-        for filename in UPSTREAM_FILES:
-            upstream[filename] = translate_dict(upstream[filename])
-            print(f"  ✓ {filename}")
+        print("Translating synced data to Traditional Chinese")
+        for filename, payload in upstream_payloads.items():
+            upstream_payloads[filename] = translate_dict(payload)
 
-    # Step 5: Write files
-    print("\nWriting files ...")
-    for filename in UPSTREAM_FILES:
-        out_path = OUTPUT_DIR / filename
-        write_json(out_path, upstream[filename])
-        print(f"  ✓ {out_path}")
+    print("Writing refreshed problemset files")
+    for filename, payload in upstream_payloads.items():
+        write_json(output_dir / filename, payload)
+        print(f"  wrote {output_dir / filename}")
 
-    print("\n✓ Sync complete!")
+    print("Problemset sync complete")
     return 0
 
 

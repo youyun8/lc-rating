@@ -60,7 +60,7 @@ export const STUDYPLANS = {
   greedy: "貪心",
   grid: "網格圖",
   math: "數學",
-  monotonic_stack: "單調棧",
+  monotonic_stack: "單調堆疊",
   sliding_window: "滑動窗口",
   string: "字串",
   trees: "樹和二元樹",

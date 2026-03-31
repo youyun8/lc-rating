@@ -1,47 +1,49 @@
-# LC Maker - Data Processing Tools
+# LC Maker
 
-This directory contains tools for processing LeetCode data and converting it to Traditional Chinese.
+This directory contains the Python tooling used by GitHub Actions to keep this
+fork's static LeetCode data up to date while translating new upstream content
+from Simplified Chinese to Traditional Chinese.
 
-## Files
+## Scripts
 
-- `translate_to_traditional.py` - Converts Simplified Chinese to Traditional Chinese in JSON data files
-- `requirements.txt` - Python dependencies
+- `sync_upstream.py`
+  - Syncs `apps/web/public/problemset/*.json` from
+    `huxulm/lc-rating`.
+  - Filters contest data down to weekly and biweekly contests.
+  - Translates fetched content to Traditional Chinese before writing.
+- `merge_upstream_to_local.py`
+  - Merges only newly added upstream study-plan problems into the local
+    `apps/web/public/studyplan/*.json` files.
+  - Leaves existing local summaries untouched.
+  - Re-sorts touched sections by `score` in ascending order, with `null`
+    scores first.
+- `translate_to_traditional.py`
+  - Shared translation helpers built on OpenCC.
 
-## Usage
+## Local verification
 
-### Manual Translation
+Install dependencies:
 
 ```bash
 cd apps/web/lc-maker
-pip install -r requirements.txt
-python translate_to_traditional.py
+python -m pip install -r requirements.txt
 ```
 
-### Automatic Translation (GitHub Actions)
+Dry-run the problemset sync against local files:
 
-The translation is automatically run by GitHub Actions workflows:
+```bash
+LC_RATING_UPSTREAM_BASE="file:///absolute/path/to/apps/web/public/problemset" \
+  python sync_upstream.py --dry-run
+```
 
-1. **Problemset Updater** (`.github/workflows/problemset_updater.yml`)
-   - Runs every Monday at 04:10 UTC
-   - Fetches latest problemset data
-   - Automatically translates to Traditional Chinese
-   - Commits and pushes changes
+Dry-run the study-plan merge against local files:
 
-2. **Rating Solution Updater** (`.github/workflows/rating_solution_updater.yml`)
-   - Runs every Monday at 05:00 UTC
-   - Fetches latest solution data
-   - Automatically translates to Traditional Chinese
-   - Commits and pushes changes
+```bash
+LC_RATING_UPSTREAM_STUDYPLAN_BASE="file:///absolute/path/to/apps/web/public/studyplan" \
+  python merge_upstream_to_local.py --dry-run
+```
 
-## Translation Details
+## GitHub Actions
 
-The script uses OpenCC (Open Chinese Convert) to convert:
-- `problems.json` - Problem titles
-- `contests.json` - Contest titles
-- `solutions.json` - Solution titles
-- `tags.json` - Tag names
-- `studyplan/*.json` - Study plan content
-
-## Dependencies
-
-- `opencc-python-reimplemented==0.1.7` - Chinese text conversion library
+- `.github/workflows/upstream_data_sync.yml`
+- `.github/workflows/studyplan_updater.yml`
