@@ -82,9 +82,16 @@ export function BaseDataTable<TData>({
       </div>
 
       <div className="overflow-x-auto overscroll-x-contain">
-        <Table className={minWidth}>
+        <Table className={cn(minWidth, applySizeStyles && "table-fixed")}>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map((headerGroup) => {
+              const totalSize = applySizeStyles
+                ? headerGroup.headers.reduce(
+                    (sum, h) => sum + h.column.getSize(),
+                    0,
+                  )
+                : 0;
+              return (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <TableHead
@@ -92,7 +99,9 @@ export function BaseDataTable<TData>({
                     className={headerBorderClassName}
                     style={
                       applySizeStyles
-                        ? { width: header.column.getSize() }
+                        ? {
+                            width: `${(header.column.getSize() / totalSize) * 100}%`,
+                          }
                         : undefined
                     }
                   >
@@ -112,7 +121,8 @@ export function BaseDataTable<TData>({
                   </TableHead>
                 ))}
               </TableRow>
-            ))}
+              );
+            })}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (

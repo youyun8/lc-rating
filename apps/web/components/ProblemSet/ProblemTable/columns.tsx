@@ -10,6 +10,7 @@ const columnHelper = createColumnHelper<TableCol>();
 
 export const getColumns = () => [
   columnHelper.accessor("contest", {
+    size: 110,
     header: ({ column }) => (
       <div className="flex items-center gap-2">
         {key2Label["contest"]}
@@ -35,6 +36,7 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("problem", {
+    size: 200,
     header: ({ column }) => (
       <div className="flex items-center gap-2">
         {key2Label["problem"]}
@@ -51,7 +53,7 @@ export const getColumns = () => [
               ? problem.title
               : `${problem.id}. ${problem.title}`
           }
-          className="block min-w-[14rem] max-w-[20rem] text-sm font-medium leading-6 text-foreground transition-colors hover:text-primary"
+          className="block max-w-full truncate text-sm font-medium leading-6 text-foreground transition-colors hover:text-primary"
         />
       );
     },
@@ -61,6 +63,7 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("rating", {
+    size: 80,
     header: ({ column }) => (
       <div className="flex items-center gap-2">
         {key2Label["rating"]}
@@ -84,11 +87,12 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("tags", {
+    size: 140,
     header: () => <div>{key2Label["tags"]}</div>,
     cell: ({ row }) => {
       const tags = row.getValue<TableCol["tags"]>("tags");
       return (
-        <div className="mx-auto flex max-w-[240px] flex-wrap items-center justify-center gap-1 md:max-w-[280px]">
+        <div className="mx-auto flex max-w-[160px] flex-wrap items-center justify-center gap-1 md:max-w-[200px]">
           {tags.map((tag) => (
             <I18NTag key={tag.id} label={tag.label} />
           ))}
@@ -99,6 +103,7 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("progress", {
+    size: 130,
     header: () => <div>{key2Label["progress"]}</div>,
     cell: ({ row }) => {
         const progress = row.getValue<TableCol["progress"]>("progress");
@@ -115,6 +120,7 @@ export const getColumns = () => [
     enableHiding: true,
   }),
   columnHelper.accessor("solution", {
+    size: 260,
     header: () => <div>{key2Label["solution"]}</div>,
     cell: ({ row }) => {
       const solution = row.getValue<TableCol["solution"]>("solution");
@@ -125,7 +131,7 @@ export const getColumns = () => [
         <I18NLink
           link={solution.link}
           title={solution.title}
-          className="block max-w-[12rem] text-sm text-muted-foreground blur-xs transition duration-300 hover:text-foreground hover:blur-none"
+          className="line-clamp-2 max-w-full whitespace-normal break-words text-sm leading-5 text-muted-foreground blur-xs transition duration-300 hover:text-foreground hover:blur-none"
         />
       );
     },
