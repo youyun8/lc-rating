@@ -17,41 +17,15 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { STUDYPLANS } from "@/config/constants";
+import { studyPlanIcons } from "@/config/studyPlanThemes";
 import {
   BookOpen,
-  Search,
-  Cpu,
-  Database,
-  Layers,
-  GitBranch,
-  Zap,
-  Grid,
-  Calculator,
-  Maximize,
-  Type,
-  Trees,
   ChevronRight,
-  LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useStudyPlan } from "@/hooks/useStudyPlan";
 import { StudyPlanData } from "@/types";
-
-const icons: Record<string, LucideIcon> = {
-  binary_search: Search,
-  bitwise_operations: Cpu,
-  data_structure: Database,
-  dynamic_programming: Layers,
-  graph: GitBranch,
-  greedy: Zap,
-  grid: Grid,
-  math: Calculator,
-  monotonic_stack: Maximize,
-  sliding_window: BookOpen,
-  string: Type,
-  trees: Trees,
-};
 
 interface SubTopicItemProps {
   section: StudyPlanData.Section;
@@ -90,60 +64,52 @@ function SubTopicItem({ section }: SubTopicItemProps) {
   );
 }
 
+/** Only renders a sidebar on study-plan detail pages (`/studyplan/[category]`). */
 export function GlobalStudyPlanSidebar() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname ?? "";
 
-  // Check if we're on a study plan page
-  const isStudyPlanPage = pathname.startsWith("/studyplan/");
-  const currentPlanKey = isStudyPlanPage
-    ? pathname.replace("/studyplan/", "").split("/")[0]
-    : null;
+  const planSegment = pathname.startsWith("/studyplan/")
+    ? (pathname.replace("/studyplan/", "").split("/")[0] ?? "")
+    : "";
+  const isDetailPage = planSegment.length > 0;
+  const currentPlanKey = isDetailPage ? planSegment : null;
 
   const { studyPlan } = useStudyPlan(currentPlanKey || "");
 
-  // Get current plan title
   const currentPlanTitle = currentPlanKey
     ? STUDYPLANS[currentPlanKey as keyof typeof STUDYPLANS] || currentPlanKey
     : null;
 
+  // No sidebar on overview, contest, problemset, etc.
+  if (!isDetailPage) return null;
+
   return (
     <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r">
       <SidebarHeader className="p-4">
-        {isStudyPlanPage && currentPlanTitle ? (
-          // Show back button and current plan title when on a study plan page
-          <div className="flex flex-col gap-2">
-            <SidebarMenuButton asChild className="w-fit -ml-2">
-              <Link href="/studyplan" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
-                <ChevronRight className="h-4 w-4 rotate-180" />
-                <span className="text-xs">返回題單列表</span>
-              </Link>
-            </SidebarMenuButton>
-            <div className="flex items-center gap-2 font-bold text-lg px-2">
-              {(() => {
-                const Icon =
-                  icons[currentPlanKey as keyof typeof icons] || BookOpen;
-                return <Icon className="h-6 w-6 text-primary" />;
-              })()}
-              <span className="truncate">{currentPlanTitle}</span>
-            </div>
+        <div className="flex flex-col gap-2">
+          <SidebarMenuButton asChild className="w-fit -ml-2">
+            <Link href="/studyplan" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
+              <ChevronRight className="h-4 w-4 rotate-180" />
+              <span className="text-xs">返回題單列表</span>
+            </Link>
+          </SidebarMenuButton>
+          <div className="flex items-center gap-2 font-bold text-lg px-2">
+            {(() => {
+              const Icon =
+                studyPlanIcons[currentPlanKey as string] || BookOpen;
+              return <Icon className="h-6 w-6 text-primary" />;
+            })()}
+            <span className="truncate">{currentPlanTitle}</span>
           </div>
-        ) : (
-          // Show default header when not on a study plan page
-          <div className="flex items-center gap-2 font-bold text-xl px-2">
-            <BookOpen className="h-6 w-6 text-primary" />
-            <span>題單</span>
-          </div>
-        )}
+        </div>
       </SidebarHeader>
       <SidebarSeparator />
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>
-            {isStudyPlanPage ? "章節導覽" : "演算法分類"}
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            {isStudyPlanPage && studyPlan ? (
-              // Show sub-topics when on a study plan page
+        {studyPlan && (
+          <SidebarGroup>
+            <SidebarGroupLabel>章節導覽</SidebarGroupLabel>
+            <SidebarGroupContent>
               <SidebarMenu>
                 {studyPlan.children.map((section) => (
                   <SidebarMenuItem key={section.title}>
@@ -170,41 +136,9 @@ export function GlobalStudyPlanSidebar() {
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
-            ) : (
-              // Show all study plan categories when not on a specific study plan page
-              <SidebarMenu>
-                {Object.entries(STUDYPLANS).map(([key, title]) => {
-                  const Icon = icons[key] || BookOpen;
-                  const href = `/studyplan/${key}`;
-                  const isActive = pathname === href;
-
-                  return (
-                    <SidebarMenuItem key={key}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={isActive}
-                        tooltip={title}
-                      >
-                        <Link
-                          href={href}
-                          className="flex items-center gap-3 py-2"
-                        >
-                          <Icon
-                            className={`h-4 w-4 ${isActive
-                                ? "text-primary"
-                                : "text-muted-foreground"
-                              }`}
-                          />
-                          <span className="font-medium">{title}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
-                })}
-              </SidebarMenu>
-            )}
-          </SidebarGroupContent>
-        </SidebarGroup>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
