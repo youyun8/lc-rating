@@ -15,11 +15,8 @@ export const STORAGE_VERSION = 1;
 // ============================================
 // Backend Configuration for Cloud Sync
 // ============================================
-// 
-// ⚠️ IMPORTANT: Cloud sync is currently DISABLED for asyncchang's deployment.
-// 
-// The original backend (kuangwinnie.workers.dev) is used by huxulm's repo.
-// To enable your own cloud sync, you need to:
+//
+// To enable cloud sync, you need to:
 // 1. Deploy your own Cloudflare Worker backend (see /backend/README.md)
 // 2. Update YOUR_BACKEND_URL below with your worker URL
 // 3. Set up GitHub OAuth App for authentication

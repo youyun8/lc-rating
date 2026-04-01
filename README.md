@@ -1,4 +1,4 @@
-# LC-Rating
+# LeetCode Rating
 
 <p align="center">
   <a href="https://github.com/huxulm/lc-rating/stargazers">
@@ -16,12 +16,12 @@
 
 一個專為算法新手和進階者設計的 LeetCode 題目瀏覽與學習平臺。通過科學的難度分級、系統化的題單分類和完善的進度跟蹤，幫助你建立紮實的算法基礎，從入門到精通，循序漸進提升解題能力。
 
-## 🎓 為什麼選擇 LC-Rating？
+## 🎓 為什麼選擇 LeetCode Rating？
 
 ### 適合算法新手的理由
 
 - **🎯 精準難度評分** - 基於真實競賽數據的難度評分系統，幫助你準確評估題目難度，避免盲目挑戰過難題目而打擊信心
-- **📚 系統化學習路徑** - 集成靈茶山艾府(0x3F)精心整理的算法題單，按知識點分類，從基礎到進階循序漸進
+- **📚 系統化學習路徑** - 集成靈茶山艾府 (0x3F) 精心整理的算法題單，按知識點分類，從基礎到進階循序漸進
 - **✅ 進度可視化** - 實時跟蹤做題進度，清晰瞭解每個知識點的掌握情況，讓學習成果一目瞭然
 - **🏷️ 智能標籤分類** - 按算法類型快速篩選題目，幫助你專注於特定領域的刷題訓練
 - **📊 競賽題目分級** - 通過 Q1-Q4 的分級展示，瞭解不同難度層次的題目特點，為參加競賽做準備
@@ -144,9 +144,8 @@ lc-rating/
 
 ## 🙏 致謝
 
-<<<<<<< HEAD
 - [zerotrac](https://github.com/zerotrac/leetcode_problem_rating) - 題目難度評分數據
-- [靈茶山艾府(0x3F)](https://space.bilibili.com/206214/) - 算法題單內容
+- [靈茶山艾府 (0x3F)](https://space.bilibili.com/206214/) - 算法題單內容
 - [LeetCode](https://leetcode.cn/) - 題目數據來源
 - [支持雲端數據的後端](https://wnykuang.github.io/lc-rating/contest/) - 提供雲端數據支持
 

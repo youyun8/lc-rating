@@ -8,9 +8,8 @@ import {
   LC_RATING_LAST_SYNC_AT_KEY,
 } from "@/config/constants";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
-import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
-import { decodeAuthToken, getErrorMessage } from "@/utils/auth";
-import { CloudDownload, CloudUpload, Loader2, LogIn, X } from "lucide-react";
+import { decodeAuthToken } from "@/utils/auth";
+import { Cloud, LogIn, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -26,7 +25,7 @@ function formatTimestamp(timestamp: number | null) {
 }
 
 const FloatingSyncButton = () => {
-  const { siteStorage, setSiteStorage } = useSiteStorage();
+  const { siteStorage } = useSiteStorage();
   const [authToken, setAuthToken] = useState<string | null>(() => {
     if (typeof window === "undefined") {
       return null;
@@ -34,8 +33,6 @@ const FloatingSyncButton = () => {
     return localStorage.getItem(LC_RATING_AUTH_TOKEN_KEY);
   });
   const [open, setOpen] = useState(false);
-  const [isPullingCloud, setIsPullingCloud] = useState(false);
-  const [isPushingCloud, setIsPushingCloud] = useState(false);
   const authPayload = useMemo(() => decodeAuthToken(authToken), [authToken]);
   const [lastSyncAt, setLastSyncAt] = useState<number | null>(() => {
     if (typeof window === "undefined") {
@@ -73,82 +70,12 @@ const FloatingSyncButton = () => {
     };
   }, []);
 
-  const latestLocalUpdate = useMemo(() => {
-    const timestamps = Object.values(siteStorage.progressUpdatedAt ?? {});
-    return timestamps.length ? Math.max(...timestamps) : null;
-  }, [siteStorage.progressUpdatedAt]);
-
-  const isOutOfSync = Boolean(
-    API_BASE &&
-      isLoggedIn &&
-      latestLocalUpdate &&
-      (!lastSyncAt || latestLocalUpdate > lastSyncAt),
-  );
-
-  const getToken = () =>
-    authToken ?? localStorage.getItem(LC_RATING_AUTH_TOKEN_KEY);
-
   const handleLogin = () => {
     if (!API_BASE) {
       toast(BACKEND_SETUP_HINT);
       return;
     }
     window.location.href = `${API_BASE}/api/login/github`;
-  };
-
-  const handlePullCloud = async () => {
-    if (!API_BASE) {
-      toast(BACKEND_SETUP_HINT);
-      return;
-    }
-    const token = getToken();
-    if (!token) {
-      toast("請先登入");
-      return;
-    }
-
-    setIsPullingCloud(true);
-    try {
-      const cloudSiteStorage = await pullCloudSiteStorage(token);
-      setSiteStorage(cloudSiteStorage);
-      const now = Date.now();
-      localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(now));
-      setLastSyncAt(now);
-      toast("雲端同步成功");
-      setOpen(false);
-    } catch (error) {
-      console.error("Error syncing from cloud:", error);
-      toast(`雲端同步失敗: ${getErrorMessage(error)}`);
-    } finally {
-      setIsPullingCloud(false);
-    }
-  };
-
-  const handlePushCloud = async () => {
-    if (!API_BASE) {
-      toast(BACKEND_SETUP_HINT);
-      return;
-    }
-    const token = getToken();
-    if (!token) {
-      toast("請先登入");
-      return;
-    }
-
-    setIsPushingCloud(true);
-    try {
-      await pushCloudSiteStorage(token, siteStorage);
-      const now = Date.now();
-      localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(now));
-      setLastSyncAt(now);
-      toast("雲端上傳成功");
-      setOpen(false);
-    } catch (error) {
-      console.error("Error syncing to cloud:", error);
-      toast(`雲端上傳失敗: ${getErrorMessage(error)}`);
-    } finally {
-      setIsPushingCloud(false);
-    }
   };
 
   const cloudState = useMemo(() => {
@@ -175,8 +102,6 @@ const FloatingSyncButton = () => {
     };
   }, [isLoggedIn]);
 
-  const isSyncing = isPullingCloud || isPushingCloud;
-
   return (
     <div
       className="fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-[9999] flex flex-col items-end gap-2 pointer-events-auto sm:right-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]"
@@ -186,7 +111,7 @@ const FloatingSyncButton = () => {
         <div className="w-[min(calc(100vw-2rem),320px)] space-y-3 rounded-2xl border bg-background/95 p-3.5 shadow-xl backdrop-blur supports-[backdrop-filter]:bg-background/85">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <p className="text-sm font-semibold">快速同步</p>
+              <p className="text-sm font-semibold">自動同步</p>
               <p className="text-xs text-muted-foreground">
                 {authPayload?.username ?? "尚未登入"}
               </p>
@@ -207,45 +132,15 @@ const FloatingSyncButton = () => {
             <p className="text-xs text-amber-600 dark:text-amber-300">
               {BACKEND_SETUP_HINT}
             </p>
-          ) : null}
-
-          {isLoggedIn ? (
-            <div className="grid gap-2 sm:grid-cols-2">
-              <Button
-                variant="outline"
-                className="w-full justify-center"
-                onClick={handlePullCloud}
-                disabled={!API_BASE || isSyncing}
-                type="button"
-              >
-                {isPullingCloud ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <CloudDownload className="h-4 w-4" />
-                )}
-                拉取
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-center"
-                onClick={handlePushCloud}
-                disabled={!API_BASE || isSyncing}
-                type="button"
-              >
-                {isPushingCloud ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <CloudUpload className="h-4 w-4" />
-                )}
-                上傳
-              </Button>
-            </div>
+          ) : isLoggedIn ? (
+            <p className="text-xs text-muted-foreground">
+              資料變更時會自動同步至雲端。
+            </p>
           ) : (
             <Button
               variant="outline"
               className="w-full justify-center"
               onClick={handleLogin}
-              disabled={!API_BASE}
               type="button"
             >
               <LogIn className="h-4 w-4" />
@@ -269,17 +164,12 @@ const FloatingSyncButton = () => {
         >
           {open ? (
             <X className="h-5 w-5" />
-          ) : isSyncing ? (
-            <Loader2 className="h-5 w-5 animate-spin" />
           ) : isLoggedIn ? (
-            <CloudUpload className="h-5 w-5" />
+            <Cloud className="h-5 w-5" />
           ) : (
             <LogIn className="h-5 w-5" />
           )}
         </Button>
-        {isOutOfSync ? (
-          <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-amber-400 ring-2 ring-background" />
-        ) : null}
       </div>
     </div>
   );

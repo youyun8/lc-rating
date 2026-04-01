@@ -6,6 +6,7 @@ import type {
   SiteStoragePatch,
   ThemePreference,
 } from "@/types/siteStorage";
+import { AuthExpiredError, clearAuthToken, isTokenValid } from "./auth";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -129,11 +130,22 @@ export function normalizeCloudSiteStorage(input: unknown): SiteStoragePatch {
 }
 
 export async function pullCloudSiteStorage(token: string) {
+  if (!isTokenValid(token)) {
+    clearAuthToken();
+    throw new AuthExpiredError();
+  }
+
   const response = await fetch(`${API_BASE}/api/getprogress`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  if (response.status === 401) {
+    clearAuthToken();
+    throw new AuthExpiredError();
+  }
+
   const data = await response.json();
   if (!data?.success) {
     throw new Error(data?.message ?? "拉取失敗");
@@ -146,6 +158,11 @@ export async function pushCloudSiteStorage(
   token: string,
   siteStorage: SiteStorageData,
 ) {
+  if (!isTokenValid(token)) {
+    clearAuthToken();
+    throw new AuthExpiredError();
+  }
+
   const response = await fetch(`${API_BASE}/api/uploadprogress`, {
     method: "POST",
     headers: {
@@ -154,8 +171,36 @@ export async function pushCloudSiteStorage(
     },
     body: JSON.stringify(siteStorage),
   });
+
+  if (response.status === 401) {
+    clearAuthToken();
+    throw new AuthExpiredError();
+  }
+
   const data = await response.json();
   if (!data?.success) {
     throw new Error(data?.message ?? "上傳失敗");
+  }
+}
+
+/** Check if the backend is reachable (for diagnostics). */
+export async function checkBackendHealth(): Promise<{
+  ok: boolean;
+  message: string;
+}> {
+  if (!API_BASE) {
+    return { ok: false, message: "未設定後端 (API_BASE)" };
+  }
+  try {
+    const response = await fetch(`${API_BASE}/api/health`, {
+      signal: AbortSignal.timeout(5000),
+    });
+    const data = await response.json();
+    return {
+      ok: data?.success === true,
+      message: data?.success ? "後端正常運作" : `後端回應異常: ${response.status}`,
+    };
+  } catch {
+    return { ok: false, message: "無法連線至後端" };
   }
 }

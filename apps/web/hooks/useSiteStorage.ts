@@ -9,6 +9,53 @@ import {
   SiteStoragePatch,
 } from "@/types/siteStorage";
 
+/**
+ * Per-item merge: for each problem ID keep the entry with the newer timestamp.
+ * Items only on one side are always kept.
+ */
+export function mergeProgress(
+  local: SiteStoragePatch,
+  cloud: SiteStoragePatch,
+): Pick<SiteStoragePatch, "progress" | "progressUpdatedAt"> {
+  const localProgress = local.progress ?? {};
+  const cloudProgress = cloud.progress ?? {};
+  const localTs = local.progressUpdatedAt ?? {};
+  const cloudTs = cloud.progressUpdatedAt ?? {};
+
+  const progress: Record<string, string> = {};
+  const progressUpdatedAt: Record<string, number> = {};
+
+  const allIds = new Set([
+    ...Object.keys(localProgress),
+    ...Object.keys(cloudProgress),
+  ]);
+
+  for (const id of allIds) {
+    const lVal = localProgress[id];
+    const cVal = cloudProgress[id];
+    const lTime = localTs[id] ?? 0;
+    const cTime = cloudTs[id] ?? 0;
+
+    if (lVal !== undefined && cVal !== undefined) {
+      if (lTime >= cTime) {
+        progress[id] = lVal;
+        progressUpdatedAt[id] = lTime || cTime;
+      } else {
+        progress[id] = cVal;
+        progressUpdatedAt[id] = cTime;
+      }
+    } else if (lVal !== undefined) {
+      progress[id] = lVal;
+      if (lTime) progressUpdatedAt[id] = lTime;
+    } else if (cVal !== undefined) {
+      progress[id] = cVal;
+      if (cTime) progressUpdatedAt[id] = cTime;
+    }
+  }
+
+  return { progress, progressUpdatedAt };
+}
+
 export function useSiteStorage() {
   const {
     tagLanguage,
@@ -71,5 +118,39 @@ export function useSiteStorage() {
     ],
   );
 
-  return { siteStorage, setSiteStorage };
+  /**
+   * Merge cloud data with local data per-item using timestamps,
+   * then apply non-progress settings from cloud.
+   */
+  const mergeSiteStorage = useCallback(
+    (cloud: SiteStoragePatch) => {
+      const merged = mergeProgress(
+        { progress, progressUpdatedAt },
+        cloud,
+      );
+
+      // Apply non-progress cloud settings
+      if (cloud.theme !== undefined) setTheme(cloud.theme);
+      if (cloud.tagLanguage !== undefined) setTagLanguage(cloud.tagLanguage);
+      if (cloud.linkLanguage !== undefined) setLinkLanguage(cloud.linkLanguage);
+      if (cloud.premium !== undefined) setPremium(cloud.premium);
+      if (cloud.options !== undefined) setOptions(cloud.options);
+
+      clearAllProgress();
+      setAllProgress(merged.progress ?? {}, merged.progressUpdatedAt ?? {});
+    },
+    [
+      progress,
+      progressUpdatedAt,
+      clearAllProgress,
+      setAllProgress,
+      setLinkLanguage,
+      setOptions,
+      setPremium,
+      setTagLanguage,
+      setTheme,
+    ],
+  );
+
+  return { siteStorage, setSiteStorage, mergeSiteStorage };
 }

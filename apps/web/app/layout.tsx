@@ -1,7 +1,7 @@
 import { Navigator } from "@/components/common/Navigator";
 import { Provider } from "@/components/common/Provider";
 import { AuthTokenHandler } from "@/components/common/AuthTokenHandler";
-import { FloatingSyncButton } from "@/components/common/FloatingSyncButton";
+import { AutoSync } from "@/components/common/AutoSync";
 import { BASE_PATH } from "@/config/constants";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
@@ -29,15 +29,15 @@ export default function RootLayout({
   return (
     <html lang="zh" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden pb-[calc(5.5rem+env(safe-area-inset-bottom))] font-song sm:pb-0`}
+        className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden font-song`}
       >
         <Provider>
           <AuthTokenHandler />
+          <AutoSync />
           <SidebarProvider defaultOpen={false}>
             <Navigator />
             <GlobalStudyPlanSidebar />
             <SidebarInset>{children}</SidebarInset>
-            <FloatingSyncButton />
           </SidebarProvider>
         </Provider>
       </body>

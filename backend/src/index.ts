@@ -154,6 +154,54 @@ function normalizeSiteSettings(
   return normalized;
 }
 
+/**
+ * Per-item merge: for each problem ID, keep the entry with the newer timestamp.
+ * Falls back to incoming when timestamps are missing.
+ */
+function mergeProgressByTimestamp(
+  existingProgress: Record<string, string> | undefined,
+  existingTimestamps: Record<string, number> | undefined,
+  incomingProgress: Record<string, string> | undefined,
+  incomingTimestamps: Record<string, number> | undefined,
+): {
+  progress: Record<string, string>;
+  progressUpdatedAt: Record<string, number>;
+} {
+  const progress: Record<string, string> = {};
+  const progressUpdatedAt: Record<string, number> = {};
+
+  const allIds = new Set([
+    ...Object.keys(existingProgress ?? {}),
+    ...Object.keys(incomingProgress ?? {}),
+  ]);
+
+  for (const id of allIds) {
+    const existingVal = existingProgress?.[id];
+    const incomingVal = incomingProgress?.[id];
+    const existingTs = existingTimestamps?.[id] ?? 0;
+    const incomingTs = incomingTimestamps?.[id] ?? 0;
+
+    if (existingVal !== undefined && incomingVal !== undefined) {
+      // Both have the item — keep the newer one
+      if (incomingTs >= existingTs) {
+        progress[id] = incomingVal;
+        progressUpdatedAt[id] = incomingTs || existingTs;
+      } else {
+        progress[id] = existingVal;
+        progressUpdatedAt[id] = existingTs;
+      }
+    } else if (incomingVal !== undefined) {
+      progress[id] = incomingVal;
+      if (incomingTs) progressUpdatedAt[id] = incomingTs;
+    } else if (existingVal !== undefined) {
+      progress[id] = existingVal;
+      if (existingTs) progressUpdatedAt[id] = existingTs;
+    }
+  }
+
+  return { progress, progressUpdatedAt };
+}
+
 // CORS middleware
 app.use("*", async (c, next) => {
   const env = c.env as Bindings;
@@ -179,6 +227,7 @@ app.get("/api/login/github", async (c) => {
       client_id: clientId,
       redirect_uri: redirectUri,
       scope: "read:user",
+      prompt: "consent",
     });
 
   return c.redirect(githubAuthUrl);
@@ -250,7 +299,7 @@ app.get("/api/callback", async (c) => {
       "http://localhost:3001",
     ];
     const redirectOrigin = allowedOrigins[0].trim();
-    const redirectUrl = `${redirectOrigin}/lc-rating?token=${jwtToken}`;
+    const redirectUrl = `${redirectOrigin}/lc-rating?token=${encodeURIComponent(jwtToken)}`;
 
     return c.redirect(redirectUrl);
   } catch (error) {
@@ -282,9 +331,19 @@ app.post("/api/uploadprogress", async (c) => {
       : {};
     const incomingSettings = normalizeSiteSettings(body);
 
+    // Per-item merge for progress using timestamps
+    const mergedProgress = mergeProgressByTimestamp(
+      existingSettings.progress,
+      existingSettings.progressUpdatedAt,
+      incomingSettings.progress,
+      incomingSettings.progressUpdatedAt,
+    );
+
     const userSiteSettings: UserSiteSettings = {
       ...existingSettings,
       ...incomingSettings,
+      progress: mergedProgress.progress,
+      progressUpdatedAt: mergedProgress.progressUpdatedAt,
       updatedAt: new Date().toISOString(),
     };
 

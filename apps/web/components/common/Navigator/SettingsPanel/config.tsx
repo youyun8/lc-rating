@@ -1,8 +1,13 @@
-import { BarChart3, List, RefreshCw, Settings } from "lucide-react";
+import { BarChart3, List, RefreshCw, Settings, Wrench } from "lucide-react";
 import CustomizeOptions from "./settingPages/CustomizeOption";
 import { Preference } from "./settingPages/Preference";
 import ProgressOverview from "./settingPages/ProgressOverview";
 import SyncStorage from "./settingPages/SyncStorage";
+import { lazy } from "react";
+
+const Troubleshooting = lazy(
+  () => import("./settingPages/Troubleshooting"),
+);
 
 export type SettingTabType = {
   key: string;
@@ -35,5 +40,11 @@ export const settingTabs: SettingTabType[] = [
     title: "進度總覽",
     icon: <BarChart3 />,
     component: <ProgressOverview />,
+  },
+  {
+    key: "Troubleshooting",
+    title: "故障排除",
+    icon: <Wrench />,
+    component: <Troubleshooting />,
   },
 ];

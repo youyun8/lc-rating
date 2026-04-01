@@ -1,10 +1,10 @@
-# Backend Setup Guide for asyncchang/lc-rating
+# Backend Setup Guide for lc-rating
 
 This guide explains how to set up your own backend infrastructure for the lc-rating project.
 
 ## Overview
 
-Two features have been customized for your GitHub account (`asyncchang`):
+Two features can be customized for your deployment:
 
 1. **Cloud Sync Backend** - Cloudflare Worker for syncing user progress data
 2. **Automated Problem Updates** - GitHub Actions workflows (already configured)
@@ -19,7 +19,7 @@ Two features have been customized for your GitHub account (`asyncchang`):
 2. Click **"New OAuth App"**
 3. Fill in the details:
    - **Application name**: `LC-Rating Sync`
-   - **Homepage URL**: `https://asyncchang.github.io/lc-rating`
+   - **Homepage URL**: `https://<your-github-username>.github.io/lc-rating`
    - **Authorization callback URL**: `https://lc-rating-backend.your-account.workers.dev/api/callback`
      - Replace `your-account` with your Cloudflare account subdomain
 4. Click **"Register application"**
@@ -93,7 +93,7 @@ Two features have been customized for your GitHub account (`asyncchang`):
 
    # Allowed Origins (your frontend URLs)
    npx wrangler secret put ALLOWED_ORIGINS
-   # Enter: https://asyncchang.github.io,http://localhost:3001
+   # Enter: https://<your-github-username>.github.io,http://localhost:3001
 
    ```
 
@@ -138,7 +138,7 @@ Two features have been customized for your GitHub account (`asyncchang`):
    Should return: `{"success":true,"message":"OK"}`
 
 2. **Test GitHub OAuth**:
-   - Visit your site: `https://asyncchang.github.io/lc-rating`
+   - Visit your site: `https://<your-github-username>.github.io/lc-rating`
    - Click the cloud sync button
    - Try to log in with GitHub
    - Your progress should sync successfully
@@ -161,10 +161,10 @@ The GitHub Actions workflows have been updated for your account. They will:
 
 ### To Enable GitHub Pages Deployment:
 
-1. Go to your repo settings: https://github.com/asyncchang/lc-rating/settings
+1. Go to your repo settings: `https://github.com/<your-github-username>/lc-rating/settings`
 2. Navigate to **Pages** in the sidebar
 3. Set **Source** to "GitHub Actions"
-4. The site will be deployed to: `https://asyncchang.github.io/lc-rating`
+4. The site will be deployed to: `https://<your-github-username>.github.io/lc-rating`
 
 ---
 

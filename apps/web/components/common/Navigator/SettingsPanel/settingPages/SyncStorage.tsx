@@ -4,15 +4,11 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { API_BASE, LC_RATING_AUTH_TOKEN_KEY } from "@/config/constants";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
-import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
 import { decodeAuthToken, getErrorMessage } from "@/utils/auth";
 import {
-  CloudDownload,
-  CloudUpload,
   Copy,
   Download,
   HeartCrack,
-  Loader2,
   LogIn,
   LogOut,
   ThumbsUp,
@@ -43,8 +39,6 @@ export default function SyncStorage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isPullingCloud, setIsPullingCloud] = useState(false);
-  const [isPushingCloud, setIsPushingCloud] = useState(false);
 
   /** Import JSON in either full site-data format or progress-only format. */
   const importData = (parsedData: Record<string, unknown>) => {
@@ -114,7 +108,7 @@ export default function SyncStorage() {
 
     return {
       label: "未登入",
-      description: "登入 GitHub 後即可拉取或上傳資料",
+      description: "登入 GitHub 後即可自動同步資料",
       className:
         "border-muted-foreground/20 bg-muted/60 text-muted-foreground dark:border-muted-foreground/40",
     };
@@ -220,78 +214,6 @@ export default function SyncStorage() {
     toast(<span className="text-green-500">已清除所有進度</span>, {
       icon: <ThumbsUp className="text-green-500 size-full" />,
     });
-  };
-
-  const getToken = () =>
-    authToken ?? localStorage.getItem(LC_RATING_AUTH_TOKEN_KEY);
-
-  const handlePullCloud = async () => {
-    if (!API_BASE) {
-      toast(<span className="text-amber-500">{BACKEND_SETUP_HINT}</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
-      return;
-    }
-    const token = getToken();
-    if (!token) {
-      toast(<span className="text-red-500">請先登入</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
-      return;
-    }
-
-    setIsPullingCloud(true);
-    try {
-      const cloudSiteStorage = await pullCloudSiteStorage(token);
-      setSiteStorage(cloudSiteStorage);
-      setErrorMessage(null);
-      toast(<span className="text-green-500">雲端同步成功</span>, {
-        icon: <ThumbsUp className="text-green-500 size-full" />,
-      });
-    } catch (error) {
-      console.error("Error syncing from cloud:", error);
-      const msg = getErrorMessage(error);
-      setErrorMessage(`雲端同步失敗: ${msg}`);
-      toast(<span className="text-red-500">雲端同步失敗: {msg}</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
-    } finally {
-      setIsPullingCloud(false);
-    }
-  };
-
-  const handlePushCloud = async () => {
-    if (!API_BASE) {
-      toast(<span className="text-amber-500">{BACKEND_SETUP_HINT}</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
-      return;
-    }
-    const token = getToken();
-    if (!token) {
-      toast(<span className="text-red-500">請先登入</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
-      return;
-    }
-
-    setIsPushingCloud(true);
-    try {
-      await pushCloudSiteStorage(token, siteStorage);
-      setErrorMessage(null);
-      toast(<span className="text-green-500">雲端上傳成功</span>, {
-        icon: <ThumbsUp className="text-green-500 size-full" />,
-      });
-    } catch (error) {
-      console.error("Error syncing to cloud:", error);
-      const msg = getErrorMessage(error);
-      setErrorMessage(`雲端上傳失敗: ${msg}`);
-      toast(<span className="text-red-500">雲端上傳失敗: {msg}</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
-    } finally {
-      setIsPushingCloud(false);
-    }
   };
 
   const onSubmit = (data: { progressData: string }) => {
@@ -405,44 +327,8 @@ export default function SyncStorage() {
         </div>
 
         <p className="text-xs text-muted-foreground">
-          先從雲端拉取可避免覆蓋其他裝置進度，上傳則會以目前資料為主。
+          登入後，資料變更時會自動同步至雲端，頁面載入時也會自動拉取最新資料。
         </p>
-
-        <div className="grid gap-2 sm:grid-cols-2">
-          <Button
-            variant="outline"
-            className="w-full justify-center"
-            onClick={handlePullCloud}
-            disabled={
-              !API_BASE || !isLoggedIn || isPullingCloud || isPushingCloud
-            }
-            type="button"
-          >
-            {isPullingCloud ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <CloudDownload className="h-4 w-4" />
-            )}
-            從雲端拉取
-          </Button>
-
-          <Button
-            variant="outline"
-            className="w-full justify-center"
-            onClick={handlePushCloud}
-            disabled={
-              !API_BASE || !isLoggedIn || isPullingCloud || isPushingCloud
-            }
-            type="button"
-          >
-            {isPushingCloud ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <CloudUpload className="h-4 w-4" />
-            )}
-            推送至雲端
-          </Button>
-        </div>
       </section>
 
       <section className="space-y-3 rounded-lg border bg-card p-4">
