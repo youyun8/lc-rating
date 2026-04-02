@@ -26,7 +26,7 @@ export const getColumns = () => [
         <I18NLink
           link={contest.link}
           title={contest.title}
-          className="block max-w-[12rem] truncate text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="block max-w-full whitespace-normal break-words text-sm text-muted-foreground transition-colors hover:text-foreground sm:max-w-[12rem] sm:truncate"
         />
       );
     },
@@ -53,7 +53,7 @@ export const getColumns = () => [
               ? problem.title
               : `${problem.id}. ${problem.title}`
           }
-          className="block max-w-full truncate text-sm font-medium leading-6 text-foreground transition-colors hover:text-primary"
+          className="block max-w-full whitespace-normal break-words text-sm font-medium leading-6 text-foreground transition-colors hover:text-primary sm:truncate"
         />
       );
     },

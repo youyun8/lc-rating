@@ -188,11 +188,24 @@ def parse_score(score: object) -> float | None:
         return None
 
 
-def problem_sort_key(problem: dict) -> tuple[bool, float, str]:
-    """Sort problems by score ascending, with null scores first."""
+def problem_index_sort_key(problem: dict) -> tuple[int, object]:
+    """Build a numeric-aware sort key for problem identifiers."""
+    value = str(problem.get("id") or problem.get("slug") or "")
+    digits = "".join(character for character in value if character.isdigit())
+    if digits:
+        return (0, int(digits))
+    return (1, value)
+
+
+def problem_sort_key(problem: dict) -> tuple[float, tuple[int, object], str]:
+    """Sort problems by score ascending with null first, then by problem index."""
     score = parse_score(problem.get("score"))
-    tie_breaker = str(problem.get("id") or problem.get("slug") or "")
-    return (score is not None, score if score is not None else float("-inf"), tie_breaker)
+    fallback = str(problem.get("slug") or "")
+    return (
+        score if score is not None else float("-inf"),
+        problem_index_sort_key(problem),
+        fallback,
+    )
 
 
 def sort_section_problems(section: dict) -> None:

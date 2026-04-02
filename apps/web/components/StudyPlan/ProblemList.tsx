@@ -13,6 +13,34 @@ interface ProblemListProps {
   problems: StudyPlanData.Item[];
 }
 
+function getSortableProblemIndex(problem: StudyPlanData.Item) {
+  return String(problem.id ?? problem.slug ?? "");
+}
+
+function getSortableProblemScore(problem: StudyPlanData.Item) {
+  return typeof problem.score === "number" ? problem.score : Number.NEGATIVE_INFINITY;
+}
+
+function compareStudyPlanProblems(a: StudyPlanData.Item, b: StudyPlanData.Item) {
+  const scoreDiff = getSortableProblemScore(a) - getSortableProblemScore(b);
+
+  if (scoreDiff !== 0) {
+    return scoreDiff;
+  }
+
+  const indexDiff = getSortableProblemIndex(a).localeCompare(
+    getSortableProblemIndex(b),
+    undefined,
+    { numeric: true, sensitivity: "base" },
+  );
+
+  if (indexDiff !== 0) {
+    return indexDiff;
+  }
+
+  return a.slug.localeCompare(b.slug);
+}
+
 const ProblemList = React.memo(({ problems }: ProblemListProps) => {
   const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
   const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
@@ -23,32 +51,27 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
 
   // Enrich problems with scores from problemMap
   const enrichedProblems = useMemo(() => {
-    if (!problemMap) return problems;
+    return problems
+      .map((problem) => {
+        const problemId = problem.id?.toString();
+        const fallbackScore =
+          problemId && problemMap ? problemMap[problemId]?.rating : undefined;
 
-    return problems.map((problem) => {
-      // If problem already has a score, use it
-      if (problem.score !== null && problem.score !== undefined) {
+        if (problem.score !== null && problem.score !== undefined) {
+          return {
+            ...problem,
+            title: normalizeDisplayText(problem.title),
+            score: problem.score,
+          };
+        }
+
         return {
           ...problem,
           title: normalizeDisplayText(problem.title),
+          score: fallbackScore ?? problem.score,
         };
-      }
-
-      // Otherwise, look up the rating from problemMap using problem id
-      const problemId = problem.id?.toString();
-      if (problemId && problemMap[problemId]) {
-        return {
-          ...problem,
-          title: normalizeDisplayText(problem.title),
-          score: problemMap[problemId].rating,
-        };
-      }
-
-      return {
-        ...problem,
-        title: normalizeDisplayText(problem.title),
-      };
-    });
+      })
+      .sort(compareStudyPlanProblems);
   }, [problems, problemMap]);
 
   return (

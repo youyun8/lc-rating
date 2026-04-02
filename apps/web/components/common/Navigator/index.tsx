@@ -7,16 +7,22 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { GithubBadge } from "./GithubBadge";
 import SettingsPanel from "./SettingsPanel";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 
 /** Only shows the sidebar toggle on study-plan detail pages. */
 function StudyPlanSidebarTrigger() {
   const pathname = usePathname() ?? "";
+  const { isMobile, open } = useSidebar();
   const isDetailPage =
     pathname.startsWith("/studyplan/") &&
     (pathname.replace("/studyplan/", "").split("/")[0] ?? "").length > 0;
 
   if (!isDetailPage) return null;
+
+  const shouldShowTrigger = isMobile || !open;
+
+  if (!shouldShowTrigger) return null;
+
   return <SidebarTrigger />;
 }
 

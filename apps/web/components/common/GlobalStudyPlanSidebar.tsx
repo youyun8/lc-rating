@@ -15,7 +15,9 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 import { STUDYPLANS } from "@/config/constants";
 import { studyPlanIcons } from "@/config/studyPlanThemes";
 import {
@@ -68,6 +70,7 @@ function SubTopicItem({ section }: SubTopicItemProps) {
 export function GlobalStudyPlanSidebar() {
   const rawPathname = usePathname();
   const pathname = rawPathname ?? "";
+  const { isMobile, open, openMobile, setOpen, setOpenMobile } = useSidebar();
 
   const planSegment = pathname.startsWith("/studyplan/")
     ? (pathname.replace("/studyplan/", "").split("/")[0] ?? "")
@@ -88,16 +91,37 @@ export function GlobalStudyPlanSidebar() {
     <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r">
       <SidebarHeader className="p-4">
         <div className="flex flex-col gap-2">
-          <SidebarMenuButton asChild className="w-fit -ml-2">
-            <Link href="/studyplan" className="flex items-center gap-1 text-muted-foreground hover:text-foreground">
-              <ChevronRight className="h-4 w-4 rotate-180" />
-              <span className="text-xs">返回題單列表</span>
-            </Link>
-          </SidebarMenuButton>
-          <div className="flex items-center gap-2 font-bold text-lg px-2">
+          <div className="flex items-start justify-between gap-2">
+            <SidebarMenuButton asChild className="w-fit -ml-2">
+              <Link
+                href="/studyplan"
+                className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
+              >
+                <ChevronRight className="h-4 w-4 rotate-180" />
+                <span className="text-xs">返回題單列表</span>
+              </Link>
+            </SidebarMenuButton>
+            {(isMobile ? openMobile : open) && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-8 border border-sidebar-border/60 bg-transparent px-2.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                onClick={() => {
+                  if (isMobile) {
+                    setOpenMobile(false);
+                    return;
+                  }
+                  setOpen(false);
+                }}
+              >
+                隱藏側欄
+              </Button>
+            )}
+          </div>
+          <div className="flex items-center gap-2 px-2 text-lg font-bold">
             {(() => {
-              const Icon =
-                studyPlanIcons[currentPlanKey as string] || BookOpen;
+              const Icon = studyPlanIcons[currentPlanKey as string] || BookOpen;
               return <Icon className="h-6 w-6 text-primary" />;
             })()}
             <span className="truncate">{currentPlanTitle}</span>

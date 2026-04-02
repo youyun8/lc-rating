@@ -441,9 +441,9 @@ function StudyPlanOverview() {
 
   return (
     <div className="min-h-screen bg-background font-song">
-      <div className="mx-auto max-w-7xl px-4 py-6 md:px-8">
+      <div className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 md:px-6 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
         <section className="overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-muted/40 via-background to-background">
-          <div className="flex flex-col gap-6 p-5 sm:p-6">
+          <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl space-y-2">
                 <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
@@ -459,7 +459,7 @@ function StudyPlanOverview() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:gap-4">
               <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   <LayoutGrid className="h-4 w-4" />
@@ -515,7 +515,7 @@ function StudyPlanOverview() {
           </div>
         </section>
 
-        <section className="mt-5 rounded-2xl border border-border/60 bg-card shadow-sm">
+        <section className="mt-4 rounded-2xl border border-border/60 bg-card shadow-sm sm:mt-5">
           <div className="flex flex-col gap-4 p-4 sm:p-5">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div className="space-y-1">
@@ -526,7 +526,7 @@ function StudyPlanOverview() {
                   搜尋題單、章節或題號
                 </p>
               </div>
-              <div className="w-full lg:max-w-sm">
+              <div className="w-full lg:max-w-sm xl:max-w-md">
                 <div className="relative">
                   <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
@@ -583,7 +583,7 @@ function StudyPlanOverview() {
       </div>
 
       {/* Card Grid */}
-      <div className="mx-auto max-w-7xl px-4 pb-8 md:px-8 md:pb-10">
+      <div className="mx-auto max-w-7xl px-3 pb-8 sm:px-4 md:px-6 md:pb-10 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-foreground">
@@ -603,7 +603,7 @@ function StudyPlanOverview() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3 2xl:grid-cols-4 2xl:gap-6">
             {filteredPlans.map(([key, title]) => (
               <StudyPlanCard
                 key={key}

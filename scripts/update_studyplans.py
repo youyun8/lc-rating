@@ -119,6 +119,51 @@ def build_problem_entry(parsed, slug_map, id_map, existing_problems_map):
     }
 
 
+def parse_score(score):
+    """Convert a score value to a sortable number."""
+    if score is None:
+        return None
+    if isinstance(score, (int, float)):
+        return float(score)
+    try:
+        return float(str(score))
+    except (TypeError, ValueError):
+        return None
+
+
+def problem_index_sort_key(problem):
+    """Build a numeric-aware sort key for problem identifiers."""
+    value = str(problem.get('id') or problem.get('slug') or '')
+    digits = ''.join(character for character in value if character.isdigit())
+    if digits:
+        return (0, int(digits))
+    return (1, value)
+
+
+def problem_sort_key(problem):
+    """Sort problems by score ascending with null first, then by problem index."""
+    score = parse_score(problem.get('score'))
+    fallback = str(problem.get('slug') or '')
+    return (
+        score if score is not None else float('-inf'),
+        problem_index_sort_key(problem),
+        fallback,
+    )
+
+
+def sort_section_tree(node):
+    """Recursively sort all problems in a study-plan tree."""
+    if isinstance(node, dict):
+        if 'problems' in node:
+            node['problems'] = sorted(node.get('problems', []), key=problem_sort_key)
+        for child in node.get('children', []):
+            sort_section_tree(child)
+        return
+
+    for item in node:
+        sort_section_tree(item)
+
+
 def build_section_tree(problems_data, existing_data=None):
     """Build a hierarchical section tree from flat problem data."""
     # Group problems by section
@@ -402,6 +447,8 @@ def update_studyplan(plan_name, problems_text, metadata=None, merge=False):
                 section['summary'] = to_traditional(summaries[section_title_sc])
 
         result['children'] = children
+
+    sort_section_tree(result.get('children', []))
 
     # Write output
     with open(json_path, 'w', encoding='utf-8') as f:
