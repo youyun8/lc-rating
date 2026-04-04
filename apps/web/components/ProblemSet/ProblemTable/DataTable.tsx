@@ -25,16 +25,19 @@ const { useTableState, setState } = createTableStore({
 
 interface DataTableProps<TData extends TableCol> {
   data: TData[];
+  highlightKey?: number;
 }
 
 export const DataTable = genericMemo(function <TData extends TableCol>({
   data,
+  highlightKey,
 }: DataTableProps<TData>) {
   const columns = useMemo(() => getColumns(), []);
 
   const table = useReactTable({
     data,
     columns,
+    getRowId: (row) => row.problem.id,
     state: useTableState(),
     onStateChange: (state) => setState(state),
     getCoreRowModel: getCoreRowModel(),
@@ -45,6 +48,7 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
 
   useEffect(() => {
     table.resetSorting();
+    table.setPageIndex(0);
   }, [data, table]);
 
   return (
@@ -52,6 +56,7 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
       table={table}
       columns={columns}
       key2Label={key2Label}
+      highlightKey={highlightKey}
       minWidth="min-w-[760px]"
       applySizeStyles
       headerClassName="flex items-center justify-center text-xs font-medium tracking-wider text-muted-foreground"

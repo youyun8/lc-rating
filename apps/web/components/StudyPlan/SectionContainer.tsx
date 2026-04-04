@@ -10,6 +10,7 @@ import React, { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { ProblemList } from "./ProblemList";
 import { extractImageUrls, stripDuplicateImages } from "./dedupe";
+import { sectionAnchor } from "@/utils/sectionAnchor";
 
 function countProblems(section: StudyPlanData.Section): number {
   let count = section.problems?.length ?? 0;
@@ -58,7 +59,7 @@ const SectionContainer = React.memo(
     );
 
     return (
-      <Card id={`${section.title}`} className={cardClasses}>
+      <Card id={sectionAnchor(section.title)} className={cardClasses}>
         <CardHeader className="px-4 pb-4 pt-4 sm:px-6 sm:pt-6">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 font-medium">

@@ -17,11 +17,13 @@ import {
   Search,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useMemo, type ReactNode } from "react";
 import { StudyPlanData } from "@/types";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { useProgressStore } from "@/hooks/useProgress";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
+import { sectionAnchor } from "@/utils/sectionAnchor";
 
 function countProblems(section: StudyPlanData.Section): number {
   let count = section.problems?.length || 0;
@@ -211,6 +213,7 @@ function StudyPlanCard({
   searchQuery,
   searchMatches,
 }: StudyPlanCardProps) {
+  const router = useRouter();
   const Icon = studyPlanIcons[planKey] ?? BookOpen;
   const theme = studyPlanThemes[planKey] ?? defaultTheme;
   const data = studyPlanDataMap[planKey];
@@ -227,6 +230,17 @@ function StudyPlanCard({
   const visibleMatches = searchMatches.slice(0, MAX_VISIBLE_MATCHES);
 
   if (!data) return null;
+
+  function getMatchHref(match: StudyPlanSearchMatch): string {
+    const base = `/studyplan/${planKey}`;
+    if (match.kind === "plan") return base;
+    if (match.kind === "section") return `${base}#${sectionAnchor(match.text)}`;
+    if (match.context) {
+      const parts = match.context.split(" / ");
+      return `${base}#${sectionAnchor(parts[parts.length - 1] ?? "")}`;
+    }
+    return base;
+  }
 
   return (
     <Link href={`/studyplan/${planKey}`} className="block h-full">
@@ -284,7 +298,20 @@ function StudyPlanCard({
                 {visibleMatches.map((match, index) => (
                   <div
                     key={`${match.kind}-${match.label}-${match.text}-${index}`}
-                    className="rounded-xl border border-border/40 bg-background/80 px-3 py-2.5 text-sm"
+                    className="rounded-xl border border-border/40 bg-background/80 px-3 py-2.5 text-sm transition-colors hover:bg-muted/50 cursor-pointer"
+                    role="link"
+                    tabIndex={0}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      router.push(getMatchHref(match));
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.stopPropagation();
+                        router.push(getMatchHref(match));
+                      }
+                    }}
                   >
                     <div className="flex items-start gap-2">
                       <span

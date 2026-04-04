@@ -14,7 +14,7 @@ import {
   flexRender,
   Table as TanstackTable,
 } from "@tanstack/react-table";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface BaseDataTableProps<TData> {
   table: TanstackTable<TData>;
@@ -34,6 +34,8 @@ interface BaseDataTableProps<TData> {
   }) => React.ReactNode;
   /** When true, applies each column's TanStack size as an inline width style on <th> elements. Useful with table-fixed layout. */
   applySizeStyles?: boolean;
+  /** Changing this value triggers a brief highlight animation on visible rows. */
+  highlightKey?: number;
 }
 
 export function BaseDataTable<TData>({
@@ -47,7 +49,17 @@ export function BaseDataTable<TData>({
   rowClassName,
   separator,
   applySizeStyles = false,
+  highlightKey,
 }: BaseDataTableProps<TData>) {
+  const [isHighlighted, setIsHighlighted] = useState(false);
+
+  useEffect(() => {
+    if (highlightKey && highlightKey > 0) {
+      setIsHighlighted(true);
+      const timer = setTimeout(() => setIsHighlighted(false), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [highlightKey]);
   const tableState = table.getState();
 
   const pageControl = (
@@ -130,7 +142,11 @@ export function BaseDataTable<TData>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className={rowClassName}
+                  data-problem-id={row.id}
+                  className={cn(
+                    rowClassName,
+                    isHighlighted && "animate-search-highlight",
+                  )}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className={cellBorderClassName}>

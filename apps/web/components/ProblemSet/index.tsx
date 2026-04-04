@@ -9,7 +9,7 @@ import { isTruthy } from "@/types/common";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import { CheckCircle2, FileText, Tags } from "lucide-react";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { ProblemsTable } from "./ProblemTable";
 import { TableCol } from "./ProblemTable/types";
 import { Search } from "./Search";
@@ -138,10 +138,24 @@ function ProblemSet() {
   ]);
 
   const [similarities, setSimilarties] = useState<number[] | undefined>();
+  const [searchKey, setSearchKey] = useState(0);
+  const tableRef = useRef<HTMLElement>(null);
 
-  const handleSearch = useCallback((similarities: number[]) => {
-    setSimilarties(similarities);
-  }, []);
+  const handleSearch = useCallback(
+    (similarities: number[], options?: { scroll?: boolean }) => {
+      setSimilarties(similarities);
+      if (options?.scroll) {
+        setSearchKey((k) => k + 1);
+        requestAnimationFrame(() => {
+          tableRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      }
+    },
+    [],
+  );
 
   const searchedData = useMemo(() => {
     if (similarities === undefined) {
@@ -268,7 +282,10 @@ function ProblemSet() {
       />
 
       {/* Table */}
-      <section className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
+      <section
+        ref={tableRef}
+        className="scroll-mt-20 overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm"
+      >
         <div className="flex flex-col gap-3 border-b border-border/60 bg-muted/20 px-4 py-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-1">
             <h2 className="text-lg font-semibold tracking-tight text-foreground">
@@ -288,7 +305,11 @@ function ProblemSet() {
         </div>
 
         <div className="w-full overflow-x-hidden">
-          <ProblemsTable tableData={searchedData} isPending={isPending} />
+          <ProblemsTable
+            tableData={searchedData}
+            isPending={isPending}
+            highlightKey={searchKey}
+          />
         </div>
       </section>
     </div>

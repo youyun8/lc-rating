@@ -13,7 +13,10 @@ import { WordFilter } from "./WordFilter";
 
 interface SearchProps {
   data: TableCol[];
-  onSearch: (similarities: number[]) => void;
+  onSearch: (
+    similarities: number[],
+    options?: { scroll?: boolean },
+  ) => void;
   totalCount: number;
   resultCount: number;
 }
@@ -46,21 +49,24 @@ const Search = React.memo(
       });
     }, []);
 
-    const handleConfirm = useCallback(() => {
-      const results = Object.values(similaritiesMap).reduce(
-        (total, arr) => {
-          arr.forEach((val, idx) => {
-            if (total[idx]) {
-              total[idx] *= val;
-            }
-          });
-          return total;
-        },
-        Array.from({ length: data.length }, () => 1),
-      );
+    const handleConfirm = useCallback(
+      (options?: { scroll?: boolean }) => {
+        const results = Object.values(similaritiesMap).reduce(
+          (total, arr) => {
+            arr.forEach((val, idx) => {
+              if (total[idx]) {
+                total[idx] *= val;
+              }
+            });
+            return total;
+          },
+          Array.from({ length: data.length }, () => 1),
+        );
 
-      onSearch(results);
-    }, [similaritiesMap, data.length, onSearch]);
+        onSearch(results, options);
+      },
+      [similaritiesMap, data.length, onSearch],
+    );
 
     useEffect(() => {
       handleConfirmRef.current = handleConfirm;
@@ -180,7 +186,7 @@ const Search = React.memo(
           <p className="text-sm text-muted-foreground">{resultCopy}</p>
           <div className="flex flex-col gap-2 sm:flex-row">
             <Button
-              onClick={handleConfirm}
+              onClick={() => handleConfirm({ scroll: true })}
               variant="default"
               size="sm"
               className="w-full cursor-pointer px-6 sm:w-auto"

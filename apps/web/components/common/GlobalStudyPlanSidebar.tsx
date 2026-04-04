@@ -28,6 +28,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useStudyPlan } from "@/hooks/useStudyPlan";
 import { StudyPlanData } from "@/types";
+import { sectionAnchor } from "@/utils/sectionAnchor";
 
 interface SubTopicItemProps {
   section: StudyPlanData.Section;
@@ -41,7 +42,7 @@ function SubTopicItem({ section }: SubTopicItemProps) {
       <>
         <SidebarMenuSubItem>
           <SidebarMenuSubButton asChild>
-            <a href={`#${section.title}`} className="truncate">
+            <a href={`#${sectionAnchor(section.title)}`} className="truncate">
               {section.title}
             </a>
           </SidebarMenuSubButton>
@@ -58,7 +59,7 @@ function SubTopicItem({ section }: SubTopicItemProps) {
   return (
     <SidebarMenuSubItem>
       <SidebarMenuSubButton asChild>
-        <a href={`#${section.title}`} className="truncate">
+        <a href={`#${sectionAnchor(section.title)}`} className="truncate">
           {section.title}
         </a>
       </SidebarMenuSubButton>
@@ -140,7 +141,7 @@ export function GlobalStudyPlanSidebar() {
                     {section.children && section.children.length > 0 ? (
                       <>
                         <SidebarMenuButton asChild>
-                          <a href={`#${section.title}`} className="font-medium">
+                          <a href={`#${sectionAnchor(section.title)}`} className="font-medium">
                             {section.title}
                           </a>
                         </SidebarMenuButton>
@@ -152,7 +153,7 @@ export function GlobalStudyPlanSidebar() {
                       </>
                     ) : (
                       <SidebarMenuButton asChild>
-                        <a href={`#${section.title}`} className="font-medium">
+                        <a href={`#${sectionAnchor(section.title)}`} className="font-medium">
                           {section.title}
                         </a>
                       </SidebarMenuButton>

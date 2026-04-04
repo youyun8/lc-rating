@@ -209,4 +209,21 @@
   @apply mb-1;
 }
 
+/* Search-result row highlight (plays once then stops) */
+@keyframes search-highlight-row {
+  0% {
+    background-color: oklch(0.75 0.1 250 / 0.18);
+  }
+  70% {
+    background-color: oklch(0.75 0.1 250 / 0.08);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-search-highlight {
+  animation: search-highlight-row 1.5s ease-out forwards;
+}
+
 @import "./hl.css";
