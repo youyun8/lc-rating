@@ -60,6 +60,8 @@ export function StudyPlanMarkdownContent({
   const innerHtml = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const CHEVRON_SVG =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
     if (!innerHtml.current) return;
 
     const imageClassName =
@@ -79,6 +81,60 @@ export function StudyPlanMarkdownContent({
       img.setAttribute("loading", "lazy");
       img.setAttribute("decoding", "async");
       img.className = imageClassName;
+    });
+
+    // Wrap each <pre> code block in a collapsible toggle container
+    innerHtml.current.querySelectorAll("pre").forEach((pre) => {
+      if (
+        pre.parentElement?.getAttribute("data-code-toggle") === "true"
+      )
+        return;
+
+      // Extract label from the first comment line
+      const codeEl = pre.querySelector("code");
+      const codeText = codeEl?.textContent ?? "";
+      const firstLine =
+        codeText.split("\n").find((l) => l.trim().length > 0) ?? "";
+      const commentMatch = firstLine.match(/^\/\/\s*(.+)/);
+      const label = commentMatch?.[1]?.trim() ?? "程式碼";
+
+      const wrapper = document.createElement("div");
+      wrapper.setAttribute("data-code-toggle", "true");
+      wrapper.className =
+        "not-prose my-4 overflow-hidden rounded-xl border border-border/60";
+
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className =
+        "flex w-full items-center gap-2 bg-muted/25 px-4 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-muted/40 cursor-pointer select-none";
+
+      const chevron = document.createElement("span");
+      chevron.className =
+        "shrink-0 transition-transform duration-200 flex items-center";
+      chevron.innerHTML = CHEVRON_SVG;
+
+      const labelEl = document.createElement("span");
+      labelEl.className = "font-medium truncate";
+      labelEl.textContent = label;
+
+      toggle.appendChild(chevron);
+      toggle.appendChild(labelEl);
+
+      // Start collapsed
+      pre.style.display = "none";
+      pre.style.margin = "0";
+      pre.style.borderRadius = "0";
+      pre.style.borderTop = "1px solid hsl(var(--border) / 0.6)";
+
+      toggle.addEventListener("click", () => {
+        const isHidden = pre.style.display === "none";
+        pre.style.display = isHidden ? "" : "none";
+        chevron.style.transform = isHidden ? "rotate(90deg)" : "";
+      });
+
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(toggle);
+      wrapper.appendChild(pre);
     });
   }, [content, variant]);
 
