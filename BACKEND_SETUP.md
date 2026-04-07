@@ -149,17 +149,17 @@ Two features can be customized for your deployment:
 
 The GitHub Actions workflows have been updated for your account. They will:
 
-- **Problemset Updater**: Run every Monday at 12:10 Beijing time
-- **Rating Solution Updater**: Run every Monday at 13:00 Beijing time
+- **Upstream Data Sync**: Run every Monday at 12:10 Taipei time
+- **StudyPlan Updater**: Run every Sunday at 08:00 Taipei time
 - Both will commit updates directly to your `main` branch
 
 ### Workflows Location:
 
-- `.github/workflows/problemset_updater.yml`
-- `.github/workflows/rating_solution_updater.yml`
+- `.github/workflows/upstream_data_sync.yml`
+- `.github/workflows/studyplan_updater.yml`
 - `.github/workflows/workflow.yml` (build & deploy)
 
-### To Enable GitHub Pages Deployment:
+### To enable GitHub Pages Deployment:
 
 1. Go to your repo settings: `https://github.com/<your-github-username>/lc-rating/settings`
 2. Navigate to **Pages** in the sidebar
@@ -181,9 +181,9 @@ The GitHub Actions workflows have been updated for your account. They will:
 
 ### Modified Files:
 
-- `apps/web/config/constants.ts` - Added YOUR_BACKEND_URL configuration
-- `.github/workflows/problemset_updater.yml` - Added comments
-- `.github/workflows/rating_solution_updater.yml` - Added comments
+- `apps/web/config/constants.ts` - Added `YOUR_BACKEND_URL` configuration
+- `.github/workflows/upstream_data_sync.yml` - Syncs upstream problemset data
+- `.github/workflows/studyplan_updater.yml` - Merges upstream study-plan updates
 
 ---
 

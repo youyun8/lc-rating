@@ -10,7 +10,7 @@ import sys
 import urllib.request
 from pathlib import Path
 
-from translate_to_traditional import translate_dict
+from translate_to_traditional import translate_dict, translate_text
 
 
 DEFAULT_UPSTREAM_BASE = (
@@ -264,6 +264,119 @@ def merge_new_problems(local_root: dict, upstream_root: dict) -> int:
     return added
 
 
+CROSS_REFERENCE_KEYWORDS = ("关联题单", "算法题单")
+
+
+def is_cross_reference_section(node: dict) -> bool:
+    """Return True if this section is a cross-reference link list (no real content)."""
+    title = node.get("title", "")
+    if not any(keyword in title for keyword in CROSS_REFERENCE_KEYWORDS):
+        return False
+    return not node.get("problems") and not node.get("children")
+
+
+def collect_all_sections(
+    node: dict | list,
+    result: list[tuple[dict, set[str]]] | None = None,
+) -> list[tuple[dict, set[str]]]:
+    """Collect all sections with their recursive problem IDs (including descendants)."""
+    if result is None:
+        result = []
+
+    if isinstance(node, dict):
+        ids = collect_problem_ids(node)
+        if ids:
+            result.append((node, ids))
+        for child in node.get("children", []):
+            collect_all_sections(child, result)
+    else:
+        for item in node:
+            collect_all_sections(item, result)
+
+    return result
+
+
+def collect_sections_with_summary(
+    node: dict | list,
+    result: list[tuple[dict, str, set[str]]] | None = None,
+) -> list[tuple[dict, str, set[str]]]:
+    """Collect upstream sections that have a non-empty summary.
+
+    Returns (section_node, summary_text, recursive_problem_ids) tuples.
+    Excludes cross-reference sections that only contain link lists.
+    """
+    if result is None:
+        result = []
+
+    if isinstance(node, dict):
+        if is_cross_reference_section(node):
+            return result
+        summary = node.get("summary") or ""
+        if summary:
+            ids = collect_problem_ids(node)
+            result.append((node, summary, ids))
+        for child in node.get("children", []):
+            collect_sections_with_summary(child, result)
+    else:
+        for item in node:
+            collect_sections_with_summary(item, result)
+
+    return result
+
+
+def find_best_section_by_ids(
+    upstream_ids: set[str],
+    local_sections_with_ids: list[tuple[dict, set[str]]],
+) -> dict | None:
+    """Find the local section with the best problem-ID overlap.
+
+    Prefers the most specific match: among sections with similar overlap counts,
+    pick the one with the highest overlap ratio (overlap / local size) to avoid
+    always matching the root which contains all IDs.
+    """
+    if not upstream_ids:
+        return None
+
+    best_section = None
+    best_overlap = 0
+    best_ratio = 0.0
+    for local_section, local_ids in local_sections_with_ids:
+        overlap = len(upstream_ids & local_ids)
+        if overlap == 0:
+            continue
+        ratio = overlap / len(local_ids)
+        if overlap > best_overlap or (overlap == best_overlap and ratio > best_ratio):
+            best_overlap = overlap
+            best_ratio = ratio
+            best_section = local_section
+
+    return best_section
+
+
+def merge_missing_summaries(local_root: dict, upstream_root: dict) -> int:
+    """Fill in missing summaries from upstream into matching local sections."""
+    local_sections_with_ids = collect_all_sections(local_root)
+    upstream_summaries = collect_sections_with_summary(upstream_root)
+    added = 0
+
+    for _upstream_section, summary_text, upstream_ids in upstream_summaries:
+        target = find_best_section_by_ids(upstream_ids, local_sections_with_ids)
+        if target is None:
+            continue
+        if target.get("summary") or target.get("content"):
+            continue
+        target["summary"] = translate_text(summary_text)
+        added += 1
+
+    # Handle root-level summary
+    upstream_root_summary = upstream_root.get("summary") or ""
+    if upstream_root_summary and not local_root.get("summary") and not local_root.get("content"):
+        local_root["summary"] = translate_text(upstream_root_summary)
+        added += 1
+
+    return added
+
+
 def load_upstream(plan_name: str, base_url: str) -> dict | None:
     """Load a single upstream study-plan file."""
     try:
@@ -306,10 +419,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    """Merge only new upstream study-plan problems into the local repository."""
+    """Merge upstream study-plan problems and summaries into the local repository."""
     args = parse_args()
     local_dir = Path(args.local_dir)
     total_problems = 0
+    total_summaries = 0
 
     for plan_name in STUDY_PLANS:
         local_file = local_dir / f"{plan_name}.json"
@@ -326,23 +440,33 @@ def main() -> int:
 
         before = len(collect_problem_ids(local_data))
         added = merge_new_problems(local_data, upstream_data)
+        summaries_added = merge_missing_summaries(local_data, upstream_data)
 
-        if added:
+        if added or summaries_added:
             if not args.dry_run:
                 with local_file.open("w", encoding="utf-8") as handle:
                     json.dump(local_data, handle, ensure_ascii=False, separators=(",", ":"))
 
             after = len(collect_problem_ids(local_data))
             action = "would update" if args.dry_run else "updated"
-            print(
-                f"  {plan_name}: {action} +{added} problem(s) "
-                f"({before} -> {after} total IDs)"
-            )
+            parts = []
+            if added:
+                parts.append(f"+{added} problem(s)")
+            if summaries_added:
+                parts.append(f"+{summaries_added} summary(ies)")
+            detail = ", ".join(parts)
+            print(f"  {plan_name}: {action} {detail}")
+            if added:
+                print(f"    ({before} -> {after} total IDs)")
             total_problems += added
+            total_summaries += summaries_added
         else:
             print(f"  {plan_name}: up to date")
 
-    print(f"Total study-plan changes: +{total_problems} problem(s)")
+    print(
+        f"Total study-plan changes: "
+        f"+{total_problems} problem(s), +{total_summaries} summary(ies)"
+    )
     return 0
 
 
