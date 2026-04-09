@@ -178,16 +178,20 @@ function StudyPlan({ plan }: StudyPlanProps) {
                         {studyPlan.title}
                       </h1>
                       <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-white/70 sm:text-sm">
-                        <a
-                          href={studyPlan.src}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 transition-colors hover:text-white"
-                        >
-                          <ExternalLink className="h-3.5 w-3.5" />
-                          查看原文
-                        </a>
-                        <span className="hidden sm:inline">·</span>
+                        {studyPlan.src && (
+                          <>
+                            <a
+                              href={studyPlan.src}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 transition-colors hover:text-white"
+                            >
+                              <ExternalLink className="h-3.5 w-3.5" />
+                              查看原文
+                            </a>
+                            <span className="hidden sm:inline">·</span>
+                          </>
+                        )}
                         <span>
                           更新於{" "}
                           {new Date(studyPlan.last_update).toLocaleDateString()}
@@ -261,15 +265,17 @@ function StudyPlan({ plan }: StudyPlanProps) {
                       >
                         返回題單列表
                       </Link>
-                      <a
-                        href={studyPlan.src}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
-                      >
-                        原文連結
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
+                      {studyPlan.src && (
+                        <a
+                          href={studyPlan.src}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
+                        >
+                          原文連結
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

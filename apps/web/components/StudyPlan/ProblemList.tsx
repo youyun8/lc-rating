@@ -98,7 +98,7 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
         return (
           <div
             key={`${problem.slug}-${problemId}`}
-            className={`flex flex-col gap-3 px-4 py-3.5 transition-colors hover:bg-muted/20 sm:flex-row sm:items-center sm:justify-between${
+            className={`flex flex-col gap-2 px-4 py-3 transition-colors hover:bg-muted/20 sm:flex-row sm:items-center sm:justify-between${
               idx < enrichedProblems.length - 1 ? " border-b border-border/60" : ""
             }`}
             style={
@@ -121,6 +121,13 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
                   ? problem.title
                   : `${problem.id}. ${problem.title}`}
               </a>
+              {problem.subsection && (
+                <div className="mt-1.5">
+                  <span className="inline-flex max-w-[32ch] items-center truncate rounded-md border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[11px] leading-tight text-muted-foreground">
+                    {problem.subsection}
+                  </span>
+                </div>
+              )}
             </div>
             <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
               <div className="flex items-center gap-2">

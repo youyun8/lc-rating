@@ -8,6 +8,7 @@ filters to problems with rating <= 2400, and organizes them into
 """
 
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -129,15 +130,24 @@ def load_problems_db():
 
 
 def collect_problems_from_plan(plan_path):
-    """Recursively collect all problems from a study plan JSON."""
+    """Recursively collect all (problem, section_title) pairs from a study plan JSON.
+
+    section_title is the direct parent section title with any leading numeric
+    prefix (e.g. "8. ", "2.1 ", "4.1.1 ") stripped for readability.
+    """
     with open(plan_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    problems = []
+    problems = []  # list of (problem_dict, section_title)
+
+    def strip_prefix(title: str) -> str:
+        # Matches "1. ", "10. ", "2.1 ", "4.1.1 ", "1.1.1.1 " etc.
+        return re.sub(r"^\d+(?:\.\d+)*\.?\s+", "", title)
 
     def walk(section):
+        section_title = strip_prefix(section.get("title", ""))
         for p in section.get("problems", []):
-            problems.append(p)
+            problems.append((p, section_title))
         for child in section.get("children", []):
             walk(child)
 
@@ -172,7 +182,7 @@ def main():
 
     # Collect all problems from all topic plans, tagged with their topic
     # Use (id or slug) as dedup key to avoid duplicates across plans
-    seen = {}  # dedup_key -> (problem_dict, topic_name, rating)
+    seen = {}  # dedup_key -> (problem_dict, topic_name, section_title, rating)
 
     for plan_key, topic_name in TOPIC_PLANS.items():
         plan_path = STUDYPLAN_DIR / f"{plan_key}.json"
@@ -181,7 +191,7 @@ def main():
             continue
 
         problems = collect_problems_from_plan(plan_path)
-        for p in problems:
+        for p, section_title in problems:
             pid = str(p.get("id", ""))
             slug = p.get("slug", "").strip("/")
             dedup_key = pid if pid else slug
@@ -199,14 +209,14 @@ def main():
 
             # If we've seen this problem, keep the first topic association
             if dedup_key not in seen:
-                seen[dedup_key] = (p, topic_name, rating)
+                seen[dedup_key] = (p, topic_name, section_title, rating)
 
     print(f"Total problems with rating <= 2400 (non-premium): {len(seen)}")
 
     # Organize into phases and topics
     phase_data = {i: {} for i in range(len(PHASES))}
 
-    for dedup_key, (problem, topic, rating) in seen.items():
+    for dedup_key, (problem, topic, section_title, rating) in seen.items():
         # Determine phase
         phase_idx = None
         for i, phase in enumerate(PHASES):
@@ -222,7 +232,7 @@ def main():
 
         if topic not in phase_data[phase_idx]:
             phase_data[phase_idx][topic] = []
-        phase_data[phase_idx][topic].append((problem, rating))
+        phase_data[phase_idx][topic].append((problem, section_title, rating))
 
     # Build the JSON structure
     children = []
@@ -237,10 +247,10 @@ def main():
         for topic_name in sorted_topics:
             problems_with_rating = topics[topic_name]
             # Sort problems by rating ascending
-            problems_with_rating.sort(key=lambda x: x[1])
+            problems_with_rating.sort(key=lambda x: x[2])
 
             problem_list = []
-            for p, _rating in problems_with_rating:
+            for p, section_title, _rating in problems_with_rating:
                 problem_list.append({
                     "id": p.get("id"),
                     "title": p.get("title", ""),
@@ -248,6 +258,7 @@ def main():
                     "src": p.get("src", ""),
                     "solution": p.get("solution"),
                     "score": p.get("score"),
+                    "subsection": section_title,
                     "isPremium": p.get("isPremium", False),
                 })
 

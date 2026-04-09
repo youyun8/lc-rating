@@ -7,6 +7,7 @@ export interface Item {
   score: number | null;
   difficulty?: number | null;
   isPremium: boolean;
+  subsection?: string;
 }
 
 export interface Section {
