@@ -49,6 +49,7 @@ export const BILIBILI_0X3F_SPACE = {
 };
 
 export const STUDYPLANS = {
+  rating_2400: "Rating 2400 精進計畫",
   binary_search: "二分搜尋",
   bitwise_operations: "位元運算",
   data_structure: "資料結構",
