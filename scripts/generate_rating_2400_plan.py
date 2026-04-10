@@ -244,7 +244,7 @@ def main():
         topic_order = list(TOPIC_PLANS.values())
         sorted_topics = sorted(topics.keys(), key=lambda t: topic_order.index(t))
 
-        for topic_name in sorted_topics:
+        for child_idx, topic_name in enumerate(sorted_topics, 1):
             problems_with_rating = topics[topic_name]
             # Sort problems by rating ascending
             problems_with_rating.sort(key=lambda x: x[2])
@@ -262,8 +262,9 @@ def main():
                     "isPremium": p.get("isPremium", False),
                 })
 
+            # Prefix with "N.M " so sectionAnchor generates a unique "s-N-M" anchor
             topic_section = {
-                "title": topic_name,
+                "title": f"{phase_idx + 1}.{child_idx} {topic_name}",
                 "summary": TOPIC_SUMMARIES.get(topic_name, ""),
                 "problems": problem_list,
                 "children": [],
@@ -271,8 +272,9 @@ def main():
             }
             topic_sections.append(topic_section)
 
+        # Prefix with "N. " so sectionAnchor generates a unique "s-N" anchor
         phase_section = {
-            "title": phase_info["title"],
+            "title": f"{phase_idx + 1}. {phase_info['title']}",
             "summary": phase_info["summary"],
             "children": topic_sections,
         }
