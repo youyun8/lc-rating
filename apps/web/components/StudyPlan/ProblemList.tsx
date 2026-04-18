@@ -5,6 +5,7 @@ import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { useOptions } from "@/hooks/useOptions";
 import { useProgressStore } from "@/hooks/useProgress";
 import { useProblems } from "@/hooks/useProblems";
+import type { ProblemMap } from "@/types";
 import { StudyPlanData } from "@/types";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import React, { useMemo } from "react";
@@ -41,6 +42,105 @@ function compareStudyPlanProblems(a: StudyPlanData.Item, b: StudyPlanData.Item) 
   return a.slug.localeCompare(b.slug);
 }
 
+function studyPlanProblemDedupeKey(problem: StudyPlanData.Item) {
+  const trimmed = problem.slug.replace(/^\/+|\/+$/g, "").toLowerCase();
+  return trimmed.length > 0 ? trimmed : `id:${String(problem.id ?? "")}`;
+}
+
+/** Prefer canonical CN ids (LCP/LCS/面試題) over numeric duplicates that share the same slug. */
+function studyPlanProblemCanonicalScore(problem: StudyPlanData.Item) {
+  let score = 0;
+  const { id, slug } = problem;
+  if (typeof id === "string") {
+    const upper = id.toUpperCase();
+    if (upper.startsWith("LCP") || upper.startsWith("LCS")) {
+      score += 4;
+    } else if (id.includes("面試")) {
+      score += 4;
+    } else {
+      score += 1;
+    }
+  } else if (typeof id === "number" && id === 1_000_000_000) {
+    score -= 2;
+  }
+  if (slug && !(slug.startsWith("/") && slug.endsWith("/"))) {
+    score += 1;
+  }
+  return score;
+}
+
+function dedupeStudyPlanProblems(problems: StudyPlanData.Item[]) {
+  const byKey = new Map<string, StudyPlanData.Item>();
+  for (const problem of problems) {
+    const key = studyPlanProblemDedupeKey(problem);
+    const existing = byKey.get(key);
+    if (
+      !existing ||
+      studyPlanProblemCanonicalScore(problem) > studyPlanProblemCanonicalScore(existing)
+    ) {
+      byKey.set(key, problem);
+    }
+  }
+  return Array.from(byKey.values()).sort(compareStudyPlanProblems);
+}
+
+function normalizedStudyPlanSlug(slug: string) {
+  return slug.replace(/^\/+|\/+$/g, "").toLowerCase();
+}
+
+/** Same numeric/LC id listed twice with different slugs (data typo or alternate URLs). */
+function mergeStudyPlanProblemsById(
+  problems: StudyPlanData.Item[],
+  problemMap: ProblemMap | undefined,
+) {
+  const fromSlug = dedupeStudyPlanProblems(problems);
+  if (!problemMap) {
+    return fromSlug;
+  }
+
+  const rank = (p: StudyPlanData.Item) => {
+    let score = studyPlanProblemCanonicalScore(p);
+    const pid = p.id?.toString();
+    const expected = pid ? problemMap[pid]?.titleSlug : undefined;
+    if (
+      expected &&
+      normalizedStudyPlanSlug(p.slug) === normalizedStudyPlanSlug(expected)
+    ) {
+      score += 6;
+    }
+    return score;
+  };
+
+  const groups = new Map<string, StudyPlanData.Item[]>();
+  for (const p of fromSlug) {
+    if (p.id === undefined || p.id === null) {
+      continue;
+    }
+    const k = String(p.id);
+    const g = groups.get(k);
+    if (g) {
+      g.push(p);
+    } else {
+      groups.set(k, [p]);
+    }
+  }
+
+  const losers = new Set<StudyPlanData.Item>();
+  for (const items of groups.values()) {
+    if (items.length < 2) {
+      continue;
+    }
+    const keep = items.reduce((a, b) => (rank(b) > rank(a) ? b : a));
+    for (const it of items) {
+      if (it !== keep) {
+        losers.add(it);
+      }
+    }
+  }
+
+  return fromSlug.filter((p) => !losers.has(p)).sort(compareStudyPlanProblems);
+}
+
 const ProblemList = React.memo(({ problems }: ProblemListProps) => {
   const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
   const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
@@ -51,27 +151,26 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
 
   // Enrich problems with scores from problemMap
   const enrichedProblems = useMemo(() => {
-    return problems
-      .map((problem) => {
-        const problemId = problem.id?.toString();
-        const fallbackScore =
-          problemId && problemMap ? problemMap[problemId]?.rating : undefined;
+    const mapped = problems.map((problem) => {
+      const problemId = problem.id?.toString();
+      const fallbackScore =
+        problemId && problemMap ? problemMap[problemId]?.rating : undefined;
 
-        if (problem.score !== null && problem.score !== undefined) {
-          return {
-            ...problem,
-            title: normalizeDisplayText(problem.title),
-            score: problem.score,
-          };
-        }
-
+      if (problem.score !== null && problem.score !== undefined) {
         return {
           ...problem,
           title: normalizeDisplayText(problem.title),
-          score: fallbackScore ?? problem.score,
+          score: problem.score,
         };
-      })
-      .sort(compareStudyPlanProblems);
+      }
+
+      return {
+        ...problem,
+        title: normalizeDisplayText(problem.title),
+        score: fallbackScore ?? problem.score,
+      };
+    });
+    return mergeStudyPlanProblemsById(mapped, problemMap);
   }, [problems, problemMap]);
 
   return (

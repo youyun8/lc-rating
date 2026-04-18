@@ -3266,15 +3266,6 @@
               "isPremium": false
             },
             {
-              "id": "2542",
-              "title": "最大子序列的分數",
-              "slug": "maximum-subsequence-scores",
-              "src": "https://leetcode.cn/problems/maximum-subsequence-scores",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "2589",
               "title": "完成所有任務的最少時間",
               "slug": "minimum-time-to-complete-all-tasks",
@@ -4862,15 +4853,6 @@
               "title": "統計作戰單位數",
               "slug": "count-number-of-teams",
               "src": "https://leetcode.cn/problems/count-number-of-teams/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1409",
-              "title": "查詢帶鍵的排列",
-              "slug": "queries-on-a-permutation",
-              "src": "https://leetcode.cn/problems/queries-on-a-permutation",
               "solution": null,
               "score": null,
               "isPremium": false
