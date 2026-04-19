@@ -2,6 +2,7 @@ import type { Contest, ContestMap } from "./contest";
 import type { Problem, ProblemMap } from "./problem";
 import type { Solution, SolutionMap } from "./solution";
 import type * as StudyPlanData from "./studyPlan";
+import type * as TutorialData from "./tutorial";
 import type { Tag, TagMap } from "./tag";
 
 export type {
@@ -13,6 +14,6 @@ export type {
   SolutionMap,
   StudyPlanData,
   Tag,
-  TagMap
+  TagMap,
+  TutorialData,
 };
-

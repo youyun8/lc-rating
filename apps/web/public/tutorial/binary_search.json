@@ -1,0 +1,80 @@
+{
+  "id": 1,
+  "title": "二分搜尋（二分答案/最小化最大值/最大化最小值/第K小）",
+  "src": "https://leetcode.cn/circle/discuss/SqopEo/",
+  "last_update": "2026-02-24T14:23:02.465505+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 基礎",
+      "summary": "講解：[二分查找 紅藍染色法【基礎算法精講 04】](/link/?target=https%3A%2F%2Fwww.bilibili.com%2Fvideo%2FBV1AP41137w7%2F)\n\n設 `nums` 為遞增（非遞減）陣列，長為 `n`。\n\n| **需求** | **寫法** | **如果不存在** |\n| --- | --- | --- |\n| $\\geq x$ 的第一個元素的下標 | `lowerBound(nums, x)` | 結果為 `n` |\n| $>x$ 的第一個元素的下標 | `lowerBound(nums, x + 1)` | 結果為 `n` |\n| $<x$ 的最後一個元素的下標 | `lowerBound(nums, x) - 1` | 結果為 `-1` |\n| $\\leq x$ 的最後一個元素的下標 | `lowerBound(nums, x + 1) - 1` | 結果為 `-1` |\n\n| **需求** | **寫法** |\n| --- | --- |\n| $<x$ 的元素個數 | `lowerBound(nums, x)` |\n| $\\leq x$ 的元素個數 | `lowerBound(nums, x + 1)` |\n| $\\geq x$ 的元素個數 | `n - lowerBound(nums, x)` |\n| $>x$ 的元素個數 | `n - lowerBound(nums, x + 1)` |\n\n注意 $<x$ 和 $\\geq x$ 互為補集，二者之和為 $n$。$\\leq x$ 和 $>x$ 同理。\n\n---\n\n![二分題單 二分查找 二分算法 二分入門 二分題目 力扣二分 leetcode 二分](https://pic.leetcode.cn/1711713491-SoiQWc-t2.png)\n\n> 圖：閉區間二分循環結束時的左右指標位置（查找第一個 8）\n\n**刷題建議**：初次刷題可以只刷難度低於 1700 分的題目。難度更高的題目常常結合其他算法（數據結構、圖論等），等學會其他算法再來刷本題單。\n\n---\n\n\n\n**二分搜尋核心**：\n- 適用於單調函式或有序序列\n- 每次將搜尋區間減半，時間複雜度 $O(\\log n)$",
+      "children": []
+    },
+    {
+      "id": 3,
+      "title": "2. 進階",
+      "summary": "\n\n**進階二分查詢技巧**：\n- 利用二分查詢解決「查詢滿足條件的最近元素」問題\n- 結合排序與雙指標，處理區間距離、頻次統計等\n- 適用於有序序列中的比較與計數操作\n\n```cpp\n// 查詢第一個 >= target 的位置（lowerBound）\nint lowerBound(vector<int>& nums, int target) {\n    int lo = 0, hi = nums.size(); // 左閉右開 [lo, hi)\n    while (lo < hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (nums[mid] < target) {\n            lo = mid + 1;\n        } else {\n            hi = mid;\n        }\n    }\n    return lo;\n}\n```",
+      "children": [
+        {
+          "id": 4,
+          "title": "2.1 進階 > 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "3. 求最小",
+      "summary": "> “花費一個 log 的時間，增加了一個條件。” —— 二分答案\n\n---\n\n\n\n**核心思路**：\n- 尋找滿足條件的第一個位置\n- 當 `check(mid)` 為真時，答案在左側或當前位置，`high = mid - 1`, `ans = mid`\n\n```cpp\n// 二分答案求最小值：check(mid) 為 true 時收縮右邊界\nwhile (low <= high) {\n    int mid = low + (high - low) / 2;\n    if (check(mid)) { // 滿足條件，嘗試更小的答案\n        ans = mid;\n        high = mid - 1;\n    } else {\n        low = mid + 1;\n    }\n}\n```",
+      "children": [
+        {
+          "id": 6,
+          "title": "3.1 求最小 > 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "4. 求最大",
+      "summary": "\n\n**核心思路**：\n- 尋找滿足條件的最後一個位置\n- 當 `check(mid)` 為真時，答案在右側或當前位置，`low = mid + 1`, `ans = mid`\n\n```cpp\n// 二分答案求最大值：check(mid) 為 true 時收縮左邊界\nwhile (low <= high) {\n    int mid = low + (high - low) / 2;\n    if (check(mid)) { // 滿足條件，嘗試更大的答案\n        ans = mid;\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 8,
+      "title": "5. 分間接值",
+      "summary": "\n\n**二分間接值**：\n- 不直接二分答案，而是二分某個「間接量」\n- 透過間接量推匯出最終答案\n- 適用於直接二分困難但存在單調關係的問題\n\n```cpp\n// 二分間接值模板\nint lo = min_val, hi = max_val;\nwhile (lo <= hi) {\n    int mid = lo + (hi - lo) / 2;\n    if (check(mid)) {\n        ans = mid;\n        hi = mid - 1;\n    } else {\n        lo = mid + 1;\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 9,
+      "title": "6. 最小化最大值",
+      "summary": "本質是二分答案求最小。二分的 mid 表示上界。\n\n好比用一個蓋子（上界）去壓住最大值，看看能否壓住（check 函式）。",
+      "children": []
+    },
+    {
+      "id": 10,
+      "title": "7. 最大化最小值",
+      "summary": "本質是二分答案求最大。二分的 mid 表示下界。",
+      "children": []
+    },
+    {
+      "id": 11,
+      "title": "8. 第 K 小/大",
+      "summary": "\n\n**第 K 小/大問題**：\n- 二分答案 x，計算 <= x 的元素個數是否 >= k\n- 適用於矩陣、乘法表等有規律的結構\n- 時間複雜度通常為 $O(n \\log(\\text{max}))$\n\n```cpp\n// 二分第 k 小模板\nint lo = min_val, hi = max_val;\nwhile (lo < hi) {\n    int mid = lo + (hi - lo) / 2;\n    if (countLessOrEqual(mid) >= k) {\n        hi = mid;\n    } else {\n        lo = mid + 1;\n    }\n}\n// lo 即為第 k 小的值\n```",
+      "children": []
+    },
+    {
+      "id": 12,
+      "title": "9. 三分法",
+      "summary": "\n\n**三分法 (Ternary Search)**：\n用於求單峰函式（先增後減或先減後增）的極值點。\n\n```cpp\n// 三分法求單峰函式極值\nwhile (r - l > eps) {\n    double m1 = l + (r - l) / 3; // 三等分點\n    double m2 = r - (r - l) / 3; // 三等分點\n    if (f(m1) < f(m2)) { // 極大值在右側，捨棄左段\n        l = m1;\n    } else {\n        r = m2;\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 13,
+      "title": "10. 其他",
+      "children": []
+    }
+  ],
+  "summary": "![二分題單](https://pic.leetcode.cn/1711713491-SoiQWc-t2.png)\n\n> 圖：閉區間二分迴圈結束時的左右指標位置（查詢第一個 8）\n\n**刷題建議**：初學者建議先刷難度 < 1700 分的題目，進階題目常結合資料結構、圖論等\n\n**本題單涵蓋**：\n- 基礎二分查詢（查詢元素、統計個數）\n- 二分答案（最小化最大值、最大化最小值、第 K 小）\n- 三分法與其他應用\n\n**C++ 模板**：\n\n```cpp\n// 閉區間 [left, right] 二分模板\nint search(vector<int>& nums, int target) {\n    int left = 0, right = nums.size() - 1; // 搜尋範圍 [left, right]\n    while (left <= right) {\n        int mid = left + (right - left) / 2; // 防溢位寫法\n        if (nums[mid] == target) {\n            return mid;\n        } else if (nums[mid] < target) {\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    return -1;\n}\n```"
+}

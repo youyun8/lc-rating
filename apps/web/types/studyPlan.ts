@@ -10,19 +10,24 @@ export interface Item {
   subsection?: string;
 }
 
+/**
+ * Problemset tree: the "what to practice" side of a study plan. Tutorial prose
+ * lives in the matching `TutorialData` tree and is joined to sections here by
+ * the stable numeric `id`.
+ */
 export interface Section {
+  id: number;
   title: string;
-  summary?: string;
-  content?: string;
+  src?: string | null;
   isLeaf?: boolean;
   children?: Section[];
   problems?: Item[];
 }
 
 export interface Root {
+  id: number;
   title: string;
-  src: string;
-  last_update: string;
-  summary?: string;
+  src: string | null;
+  last_update: string | null;
   children: Section[];
 }

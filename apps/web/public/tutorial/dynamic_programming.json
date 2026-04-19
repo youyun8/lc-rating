@@ -1,0 +1,475 @@
+{
+  "id": 1,
+  "title": "動態規劃（入門/背包/劃分/狀態機/區間/狀壓/數位/樹形/優化）",
+  "src": "https://leetcode.cn/circle/discuss/tXLS3i/",
+  "last_update": "2026-02-24T15:51:42.385346+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 入門 DP",
+      "summary": "```cpp\n// 入門 DP：爬樓梯 / 打家劫舍模板\n// dp[i] 表示到第 i 階的方案數（或最大收益）\nvector<int> dp(n + 1);\ndp[0] = 1; // 或其他初始值\nfor (int i = 1; i <= n; i++) {\n    dp[i] = dp[i - 1] + dp[i - 2]; // 根據題意修改轉移方程\n}\n// 打家劫舍：dp[i] = max(dp[i-1], dp[i-2] + nums[i])\n```",
+      "children": [
+        {
+          "id": 3,
+          "title": "1.1 爬樓梯",
+          "summary": "---\n\n[講解](https://leetcode.cn/problems/climbing-stairs/solution/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-7zm1/)",
+          "children": []
+        },
+        {
+          "id": 4,
+          "title": "1.2 打家劫舍",
+          "summary": "**問**：在 1:1 翻譯的過程中，如何根據記憶化搜尋，確定遞推陣列（DP 陣列）的大小？為什麼有時候要開 n+1 大小的陣列，有時候要開 n+2 大小的陣列？\n\n**答**：看記憶化搜尋的引數的範圍（最小值和最大值）。例如 i 最小是 −1（遞迴邊界也算），最大是 n−1（遞迴入口），那麼一共有 n+1 個不同的 i，就需要開 n+1 大小的 DP 陣列。如果 i 最小是 −2，最大是 n−1，一共有 n+2 個不同的 i，就需要開 n+2 大小的 DP 陣列。",
+          "children": []
+        },
+        {
+          "id": 5,
+          "title": "1.3 最大子陣列和（最大子段和）",
+          "summary": "有兩種做法：\n1. 定義狀態 `f[i]` 表示以 `a[i]` 結尾的最大子陣列和，不和 `i` 左邊拼起來就是 `f[i] = a[i]`，和 `i` 左邊拼起來就是 `f[i] = f[i - 1] + a[i]`，取最大值就得到了狀態轉移方程 `f[i] = max(f[i - 1], 0) + a[i]`，答案為 `max(f)`。這個做法也叫做 Kadane 演算法。\n2. 用 [字首和](https://leetcode.cn/problems/range-sum-query-immutable/solution/qian-zhui-he-ji-qi-kuo-zhan-fu-ti-dan-py-vaar/)，轉化成 [121. 買賣股票的最佳時機](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)。\n\n**C++ Kadane 演算法模板**：\n\n```cpp\n// Kadane 演算法：追蹤以當前位置結尾的最大子陣列和\nint maxSubArray(vector<int>& nums) {\n    int cur = 0, ans = INT_MIN;\n    for (int x : nums) {\n        cur = max(x, cur + x); // 重新開始 or 延伸前段\n        ans = max(ans, cur);\n    }\n    return ans;\n}\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "2. 網格圖 DP",
+      "summary": "對於一些二維 DP（例如背包、最長公共子序列），如果把 DP 矩陣畫出來，其實狀態轉移可以視作**在網格圖上的移動**。所以在學習相對更抽象的二維 DP 之前，做一些形象的網格圖 DP 會讓後續的學習更輕鬆（比如 0-1 背包的空間優化寫法為什麼要倒序遍歷）。\n\n[講解](https://leetcode.cn/problems/minimum-path-sum/solutions/3045828/jiao-ni-yi-bu-bu-si-kao-dpcong-ji-yi-hua-zfb2/)\n\n```cpp\n// 網格圖 DP（最小路徑和）\nvector<vector<int>> dp(m, vector<int>(n, INT_MAX));\ndp[0][0] = grid[0][0];\nfor (int i = 0; i < m; i++) {\n    for (int j = 0; j < n; j++) {\n        if (i > 0) {\n            dp[i][j] = min(dp[i][j], dp[i - 1][j] + grid[i][j]);\n        }\n        if (j > 0) {\n            dp[i][j] = min(dp[i][j], dp[i][j - 1] + grid[i][j]);\n        }\n    }\n}\n```",
+      "children": [
+        {
+          "id": 7,
+          "title": "2.1 基礎",
+          "summary": "**網格圖 DP 基礎**：\n- 從左上角走到右下角，只能向右或向下\n- `dp[i][j]` 表示從起點到 `(i, j)` 的最優值\n- 轉移方程：`dp[i][j] = f(dp[i - 1][j], dp[i][j - 1])`\n\n```cpp\n// 最小路徑和\nint minPathSum(vector<vector<int>>& grid) {\n    int m = grid.size(), n = grid[0].size();\n    vector<vector<int>> dp(m, vector<int>(n, 0));\n    dp[0][0] = grid[0][0];\n    for (int i = 1; i < m; ++i) {\n        dp[i][0] = dp[i - 1][0] + grid[i][0]; // 第一列只能從上方來\n    }\n    for (int j = 1; j < n; ++j) {\n        dp[0][j] = dp[0][j - 1] + grid[0][j]; // 第一行只能從左方來\n    }\n    for (int i = 1; i < m; ++i) {\n        for (int j = 1; j < n; ++j) {\n            dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]; // 取上或左的較小值\n        }\n    }\n    return dp[m - 1][n - 1];\n}\n```",
+          "children": []
+        },
+        {
+          "id": 8,
+          "title": "2.2 進階",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "3. 背包",
+      "summary": "講解：[0-1 背包 完全背包【基礎演算法精講 18】](https://www.bilibili.com/video/BV1Xj411K7oF/)\n\n```cpp\n// 0-1 背包（空間優化）\nvector<int> dp(capacity + 1, 0);\nfor (int i = 0; i < n; i++) {\n    for (int j = capacity; j >= w[i]; j--) {\n        dp[j] = max(dp[j], dp[j - w[i]] + v[i]);\n    }\n}\n```",
+      "children": [
+        {
+          "id": 10,
+          "title": "3.1 0-1 背包",
+          "summary": "講解：[0-1 背包 完全背包【基礎算法精講 18】](https://www.bilibili.com/video/BV1Xj411K7oF/)\n\n---\n\n每個物品只能選一次，即要麼選，要麼不選。\n\n所以 0-1 背包是「選或不選」的代表。關於「列舉選哪個」的代表，見本題單的「4.2 最長遞增子序列」。\n\n**核心特點**：\n- 每個物品只有一件，選或不選\n- 狀態轉移：`dp[j] = max(dp[j], dp[j - w] + v)`\n- **必須倒序遍歷**容量 j，以確保每個物品只被選一次。\n\n```cpp\n// 0-1 背包（一維空間優化）\nint knapsack01(vector<int>& w, vector<int>& v, int capacity) {\n    int n = w.size();\n    vector<int> dp(capacity + 1, 0);\n    for (int i = 0; i < n; ++i) {\n        for (int j = capacity; j >= w[i]; --j) {\n            // 倒序確保每個物品只選一次\n            dp[j] = max(dp[j], dp[j - w[i]] + v[i]);\n        }\n    }\n    return dp[capacity];\n}\n```",
+          "children": []
+        },
+        {
+          "id": 11,
+          "title": "3.2 完全背包",
+          "summary": "物品可以重複選，無個數限制。\n\n**核心特點**：\n- 每個物品有無數件，可以重複選\n- 狀態轉移：`dp[j] = max(dp[j], dp[j - w] + v)`\n- **必須正序遍歷**容量 j，以允許重複選擇同一個物品。\n\n```cpp\n// 完全背包（一維空間優化）\nint knapsackComplete(vector<int>& w, vector<int>& v, int capacity) {\n    int n = w.size();\n    vector<int> dp(capacity + 1, 0);\n    for (int i = 0; i < n; ++i) {\n        for (int j = w[i]; j <= capacity; ++j) { // 正序允許重複選取\n            dp[j] = max(dp[j], dp[j - w[i]] + v[i]);\n        }\n    }\n    return dp[capacity];\n}\n```",
+          "children": []
+        },
+        {
+          "id": 12,
+          "title": "3.3 多重背包（選做）",
+          "summary": "物品可以重複選，有個數限制。\n\n**求方案數**\n\n注意求方案數的題目不能用二進位制優化。比如從 6 個相同物品中選 3 個，只有一種選法。但按照二進位制優化，會把 6 分解為 1+2+3，有 1+2 和 3 兩種選法。\n\n如果要優化，可以考慮用 [同餘字首和](https://leetcode.cn/problems/count-of-sub-multisets-with-bounded-sum/solutions/2482876/duo-zhong-bei-bao-fang-an-shu-cong-po-su-f5ay/) 優化。\n\n```cpp\n// 多重背包（二進位制分組優化）\n// 將數量 c 拆為 1, 2, 4, ..., 餘數，轉為 0-1 背包\nvector<int> dp(capacity + 1, 0);\nfor (int i = 0; i < n; ++i) {\n    int cnt = c[i], wi = w[i], vi = v[i];\n    for (int k = 1; cnt > 0; k *= 2) {\n        int take = min(k, cnt); // 二進位制分組：1, 2, 4, ...\n        cnt -= take;\n        for (int j = capacity; j >= take * wi; --j) {\n            dp[j] = max(dp[j], dp[j - take * wi] + take * vi);\n        }\n    }\n}\n```",
+          "children": []
+        },
+        {
+          "id": 13,
+          "title": "3.4 分組背包",
+          "summary": "同一組內的物品至多/恰好選一個。\n\n```cpp\n// 分組背包\n// groups[g] = {{w, v}, ...} 表示第 g 組的物品\nvector<int> dp(capacity + 1, 0);\nfor (auto& group : groups) {\n    for (int j = capacity; j >= 0; --j) { // 倒序遍歷容量\n        for (auto& [wi, vi] : group) {\n            if (j >= wi) {\n                dp[j] = max(dp[j], dp[j - wi] + vi);\n            }\n        }\n    }\n}\n```",
+          "children": []
+        },
+        {
+          "id": 14,
+          "title": "3.5 樹形背包（選做）",
+          "summary": "也叫樹上背包、依賴背包等。\n\n> 注：目前力扣只有無依賴的背包，時間複雜度為 $O(nW^2)$。如果有依賴，可以優化到 $O(nW)$。\n\n```cpp\n// 樹形背包（在樹上做 0-1 背包）\n// dp[u][j] = 以 u 為根的子樹中，選 j 的容量的最大價值\nvoid dfs(int u, int fa) {\n    dp[u][0] = 0;\n    for (int v : adj[u]) {\n        if (v == fa) {\n            continue;\n        }\n        dfs(v, u);\n        // 倒序合併子節點 v 的背包\n        for (int j = capacity; j >= 0; --j) {\n            for (int k = 1; k <= j; ++k) {\n                dp[u][j] = max(dp[u][j], dp[u][j - k] + dp[v][k]);\n            }\n        }\n    }\n}\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "4. 經典線性 DP",
+      "summary": "講解：[最長公共子序列 編輯距離【基礎演算法精講 19】](https://www.bilibili.com/video/BV1TM4y1o7ug/)\n\n一般定義 `f[i][j]` 表示對 `(s[:i], t[:j])` 的求解結果。\n\n```cpp\n// 最長遞增子序列（二分優化 O(n log n)）\nvector<int> tails;\nfor (int x : nums) {\n    auto it = lower_bound(tails.begin(), tails.end(), x);\n    if (it == tails.end()) {\n        tails.push_back(x);\n    } else {\n        *it = x;\n    }\n}\n// tails.size() 即 LIS 長度\n```",
+      "children": [
+        {
+          "id": 16,
+          "title": "4.1 最長公共子序列（LCS）",
+          "summary": "\n\n**LCS 核心模板**：\n`dp[i][j]` 表示 `s1[:i]` 與 `s2[:j]` 的 LCS 長度。\n\n```cpp\n// LCS：dp[i][j] = s[:i] 與 t[:j] 的最長公共子序列長度\nvector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));\nfor (int i = 1; i <= m; ++i) {\n    for (int j = 1; j <= n; ++j) {\n        if (s_1[i - 1] == s_2[j - 1]) {\n            dp[i][j] = dp[i - 1][j - 1] + 1; // 字元相同，LCS 長度 +1\n        } else {\n            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); // 字元不同，取較優子問題\n        }\n    }\n}\n```",
+          "children": [
+            {
+              "id": 17,
+              "title": "4.1.1 基礎",
+              "summary": "**最長公共子序列（LCS）基礎**：\n- `dp[i][j]` 表示 `s[:i]` 和 `t[:j]` 的 LCS 長度\n- 若 `s[i - 1] == t[j - 1]`：`dp[i][j] = dp[i - 1][j - 1] + 1`\n- 否則：`dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])`\n\n```cpp\n// LCS 完整實作（含空間優化）\nint longestCommonSubsequence(string& s, string& t) {\n    int m = s.size(), n = t.size();\n    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));\n    for (int i = 1; i <= m; ++i) {\n        for (int j = 1; j <= n; ++j) {\n            if (s[i - 1] == t[j - 1]) {\n                dp[i][j] = dp[i - 1][j - 1] + 1; // 字元相同，LCS +1\n            } else {\n                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); // 字元不同，取較優\n            }\n        }\n    }\n    return dp[m][n];\n}\n```",
+              "children": []
+            },
+            {
+              "id": 18,
+              "title": "4.1.2 進階",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "title": "4.2 最長遞增子序列（LIS）",
+          "summary": "講解：[最長遞增子序列【基礎演算法精講 20】](https://www.bilibili.com/video/BV1ub411Q7sB/)\n\n做法有很多：\n\n1.  列舉選哪個。（見講解）\n2.  二分。（見講解）\n3.  計算 a 和把 a 排序後的陣列 sortedA 的最長公共子序列。（用 LCS 求 LIS）\n4.  資料結構最佳化。（見 [2407 題](https://leetcode.cn/problems/longest-increasing-subsequence-ii/)）",
+          "children": [
+            {
+              "id": 20,
+              "title": "4.2.1 基礎",
+              "summary": "講解：[最長遞增子序列【基礎演算法精講 20】](https://www.bilibili.com/video/BV1ub411Q7sB/)\n\n做法有很多：\n1. 列舉選哪個（見講解）\n2. 二分（見講解）\n3. 計算 a 和把 a 排序後的陣列 sortedA 的最長公共子序列（用 LCS 求 LIS）\n4. 資料結構優化（見 [2407 題](https://leetcode.cn/problems/longest-increasing-subsequence-ii/)）\n\n**最長遞增子序列（LIS）基礎**：\n- $O(n²)$ 做法：`dp[i]` 表示以 `nums[i]` 結尾的 LIS 長度\n- $O(n \\log n)$ 做法：維護一個遞增陣列，二分查詢插入位置\n\n```cpp\n// O(n log n) LIS\nint lengthOfLis(vector<int>& nums) {\n    vector<int> tails;\n    for (int x : nums) {\n        auto it = lower_bound(tails.begin(), tails.end(), x);\n        if (it == tails.end()) {\n            tails.push_back(x); // x 比所有末尾都大，延長序列\n        } else {\n            *it = x; // 替換為更小的值，使後續更容易延長\n        }\n    }\n    return tails.size();\n}\n```",
+              "children": []
+            },
+            {
+              "id": 21,
+              "title": "4.2.2 進階",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "title": "4.3 最長遞增子序列（LIS） > 進階",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "5. 劃分型 DP",
+      "summary": "```cpp\n// 劃分型 DP 模板\n// dp[i] 表示前 i 個元素的最優劃分結果\nvector<int> dp(n + 1, INT_MAX);\ndp[0] = 0;\nfor (int i = 1; i <= n; i++)\n    for (int j = 0; j < i; j++)\n        if (valid(j, i)) // 檢查 a[j..i-1] 是否為合法的一段\n            dp[i] = min(dp[i], dp[j] + cost(j, i));\n```",
+      "children": [
+        {
+          "id": 24,
+          "title": "5.1 判定能否劃分",
+          "summary": "一般定義 `f[i]` 表示長為 `i` 的前綴 `a[:i]` 能否劃分。\n\n枚舉最後一個子陣列的左端點 `L`，從 `f[L]` 轉移到 `f[i]`，並考慮 `a[L:i]` 是否滿足要求。",
+          "children": []
+        },
+        {
+          "id": 25,
+          "title": "5.2 最優劃分",
+          "summary": "計算最少（最多）可以劃分出多少段、最優劃分得分等。\n\n一般定義 `f[i]` 表示長為 `i` 的前綴 `a[:i]` 在題目約束下，分割出的最少（最多）子陣列個數（或者定義成分割方案數）。\n\n枚舉最後一個子陣列的左端點 `L`，從 `f[L]` 轉移到 `f[i]`，並考慮 `a[L:i]` 對最優解的影響。",
+          "children": []
+        },
+        {
+          "id": 26,
+          "title": "5.3 約束劃分個數",
+          "summary": "\n\n**劃分型 DP：約束劃分個數**：\n- 將陣列恰好劃分為 k 段，最小化/最大化目標值\n- `dp[i][k]` 表示前 i 個元素劃分為 k 段的最優值\n- 轉移：列舉最後一段的起點\n\n```cpp\n// dp[i][k] = min(dp[j][k-1] + cost(j+1, i)) for j < i\nvector<vector<int>> dp(n + 1, vector<int>(k_limit + 1, INT_MAX));\ndp[0][0] = 0; // 前 0 個元素分 0 段，代價為 0\nfor (int i = 1; i <= n; ++i) {\n    for (int k = 1; k <= k_limit; ++k) {\n        for (int j = k - 1; j < i; ++j) {\n            if (dp[j][k - 1] != INT_MAX) {\n                dp[i][k] = min(dp[i][k], dp[j][k - 1] + cost(j + 1, i));\n            }\n        }\n    }\n}\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "6. 狀態機 DP",
+      "summary": "**狀態機 DP**：將問題的狀態抽象為有限狀態機，每個位置在若干狀態之間轉移。一般定義 `dp[i][j]` 表示處理到第 i 個元素時，處於狀態 j 的最優值。\n\n**核心思路**：\n1. **畫出狀態轉移圖**：明確有哪些狀態、狀態之間如何轉移\n2. **定義 DP 陣列**：`dp[i][j]` 表示第 i 步處於狀態 j 時的最優值\n3. **根據轉移圖寫轉移方程**：每個狀態只能從它的前驅狀態轉移而來\n\n**典型狀態設計**：\n\n| 問題 | 狀態 | 說明 |\n|------|------|------|\n| 買賣股票 | 持有 / 未持有 | 買入=未持有→持有，賣出=持有→未持有 |\n| 含冷凍期 | 持有 / 未持有(可買) / 冷凍期 | 賣出後進入冷凍期，冷凍期後才能買 |\n| 粉刷房子 | 紅 / 藍 / 綠 | 相鄰房子不能同色 |\n| 字串匹配 | 匹配到第 j 個字元 | KMP / 正規表示式匹配 |\n\n**C++ 模板（買賣股票，最多 k 次交易）**：\n\n```cpp\n// prices: 每天的股價, k: 最多交易次數\n// 狀態：dp[j][0] = 第 j 次交易，未持有股票的最大利潤\n//       dp[j][1] = 第 j 次交易，持有股票的最大利潤\nint maxProfit(int k, vector<int>& prices) {\n    // dp[j][0]: 完成了 j 次交易，手上沒股票\n    // dp[j][1]: 正在進行第 j 次交易，手上有股票\n    vector<array<int, 2>> dp(k + 1, {0, INT_MIN / 2});\n    for (int price : prices) {\n        for (int j = k; j >= 1; --j) {\n            dp[j][0] = max(dp[j][0], dp[j][1] + price);     // 賣出\n            dp[j][1] = max(dp[j][1], dp[j - 1][0] - price); // 買入\n        }\n    }\n    return dp[k][0];\n}\n```\n\n**C++ 模板（含冷凍期，三狀態）**：\n\n```cpp\n// 狀態 0: 未持有（可以買入）\n// 狀態 1: 持有股票\n// 狀態 2: 冷凍期（剛賣出，下一天不能買）\nint maxProfit(vector<int>& prices) {\n    int n = prices.size();\n    // f0: 未持有, f1: 持有, f2: 冷凍期\n    int f0 = 0, f1 = INT_MIN / 2, f2 = 0;\n    for (int p : prices) {\n        int new_f_0 = max(f0, f2);     // 保持未持有，或從冷凍期恢復\n        int new_f_1 = max(f1, f0 - p); // 保持持有，或從未持有買入\n        int new_f_2 = f1 + p;          // 從持有賣出，進入冷凍期\n        f0 = new_f_0;\n        f1 = new_f_1;\n        f2 = new_f_2;\n    }\n    return max(f0, f2);\n}\n```",
+      "children": [
+        {
+          "id": 28,
+          "title": "6.1 買賣股票",
+          "summary": "一般定義 `f[i][j]` 表示前綴 `a[:i]` 在狀態 `j` 下的最優值。`j` 一般很小。\n\n---\n\n[講解【基礎演算法精講 21】](https://www.bilibili.com/video/BV1ho4y1W7QK/)\n\n買賣股票系列是狀態機 DP 的經典入門題。核心是定義「持有」與「未持有」兩個狀態，在每天做出買入、賣出或不動的決策。\n\n變形包含：限制交易次數（最多 k 次）、冷凍期（賣出後隔一天才能買）、手續費等。",
+          "children": []
+        },
+        {
+          "id": 29,
+          "title": "6.2 基礎",
+          "summary": "**狀態機 DP 基礎**：每個位置有若干狀態可供轉移，根據前一個位置的狀態和當前的選擇決定新狀態。\n\n**C++ 模板（粉刷房子 / 相鄰不同色）**：\n\n```cpp\n// costs[i][j] = 第 i 間房子塗第 j 種顏色的成本\n// 相鄰房子不能塗同色，求最小總成本\nint minCost(vector<vector<int>>& costs) {\n    int n = costs.size(), k = costs[0].size();\n    vector<int> dp = costs[0]; // dp[j] = 前 i 間房子，第 i 間塗色 j 的最小成本\n    for (int i = 1; i < n; ++i) {\n        vector<int> ndp(k, INT_MAX);\n        for (int j = 0; j < k; ++j) { // 第 i 間塗色 j\n            for (int p = 0; p < k; ++p) { // 第 i-1 間塗色 p\n                if (p != j) { // 相鄰不同色\n                    ndp[j] = min(ndp[j], dp[p] + costs[i][j]);\n                }\n            }\n        }\n        dp = ndp;\n    }\n    return *min_element(dp.begin(), dp.end());\n}\n```",
+          "children": []
+        },
+        {
+          "id": 30,
+          "title": "6.3 進階",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "title": "7. 其他線性 DP",
+      "summary": "### §7.1 一維 DP\n\n發生在字首/字尾之間的轉移，例如從 f[i−1] 轉移到 f[i]，或者從 f[j] 轉移到 f[i]。\n\n### §7.2 不相交區間\n\n### §7.3 子陣列 DP\n\n### §7.4 合法子序列 DP\n\n計算合法子序列的最長長度、個數、元素和等。\n\n一般定義 f[x] 表示以元素 x 結尾的合法子序列的最長長度/個數/元素和，從子序列的倒數第二個數轉移過來。\n\n注意這裡的 x 不是下標，是元素值。如果 x 不是整數，或者值域範圍很大，可以用雜湊表代替陣列。\n\n### §7.5 子矩形 DP\n\n### §7.6 多維 DP\n\n不會設計狀態？那你可要好好刷這一節了。",
+      "children": [
+        {
+          "id": 32,
+          "title": "7.1 一維 DP",
+          "summary": "\n一維 DP 是最基礎的線性 DP，狀態轉移發生在陣列的前綴/後綴之間，例如從 $f[i-1]$ 轉移到 $f[i]$，或者從 $f[j]$ 轉移到 $f[i]$。\n\n**核心思想**：\n- 定義 `f[i]` 表示考慮前 `i` 個元素的最優解\n- 從前面的狀態 `f[j]` 轉移到當前狀態 `f[i]`\n- 時間複雜度通常為 $O(n)$ 或 $O(n^2)$\n\n**常見模式**：\n\n1. **從前一個狀態轉移**：$f[i] = f[i-1] + ...$ （例如：爬樓梯）\n2. **從任意前面狀態轉移**：$f[i] = \\max_{j<i} (f[j] + ...)$ （例如：最長遞增子序列）\n3. **帶條件的轉移**：只有滿足某個條件才能從 $f[j]$ 轉移到 $f[i]$\n\n**C++ 模板**：\n\n```cpp\n// 一維 DP 基礎模板\nint solve(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> dp(n);\n    \n    // 初始化\n    dp[0] = nums[0];\n    \n    // 轉移\n    for (int i = 1; i < n; i++) {\n        dp[i] = dp[i - 1] + nums[i]; // 從前一個狀態轉移\n    }\n    \n    return dp[n - 1];\n}\n\n// 從多個前面狀態轉移\nint solveMulti(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> dp(n, INT_MIN);\n    \n    dp[0] = nums[0];\n    \n    for (int i = 1; i < n; i++) {\n        for (int j = 0; j < i; j++) {\n            if (滿足條件) {\n                dp[i] = max(dp[i], dp[j] + nums[i]);\n            }\n        }\n    }\n    \n    return *max_element(dp.begin(), dp.end());\n}\n\n// 最長遞增子序列（LIS）\nint lengthOfLis(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> dp(n, 1); // dp[i] = 以 nums[i] 結尾的 LIS 長度\n    \n    for (int i = 1; i < n; i++) {\n        for (int j = 0; j < i; j++) {\n            if (nums[j] < nums[i]) {\n                dp[i] = max(dp[i], dp[j] + 1);\n            }\n        }\n    }\n    \n    return *max_element(dp.begin(), dp.end());\n}\n\n// LIS 優化版（二分查找）- O(n log n)\nint lengthOfLisOptimized(vector<int>& nums) {\n    vector<int> tails; // tails[i] = 長度為 i+1 的 LIS 的最小尾部元素\n    \n    for (int num : nums) {\n        auto it = lower_bound(tails.begin(), tails.end(), num);\n        if (it == tails.end()) {\n            tails.push_back(num);\n        } else {\n            *it = num;\n        }\n    }\n    \n    return tails.size();\n}\n\n// 最大子陣列和（Kadane's Algorithm）\nint maxSubArray(vector<int>& nums) {\n    int n = nums.size();\n    int max_sum = nums[0];\n    int current_sum = nums[0];\n    \n    for (int i = 1; i < n; i++) {\n        current_sum = max(nums[i], current_sum + nums[i]);\n        max_sum = max(max_sum, current_sum);\n    }\n    \n    return max_sum;\n}\n\n// DP 版本的最大子陣列和\nint maxSubArrayDp(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> dp(n); // dp[i] = 以 nums[i] 結尾的最大子陣列和\n    \n    dp[0] = nums[0];\n    int max_sum = dp[0];\n    \n    for (int i = 1; i < n; i++) {\n        dp[i] = max(nums[i], dp[i - 1] + nums[i]);\n        max_sum = max(max_sum, dp[i]);\n    }\n    \n    return max_sum;\n}\n\n// 打家劫舍\nint rob(vector<int>& nums) {\n    int n = nums.size();\n    if (n == 0) {\n        return 0;\n    }\n    if (n == 1) {\n        return nums[0];\n    }\n    \n    vector<int> dp(n);\n    dp[0] = nums[0];\n    dp[1] = max(nums[0], nums[1]);\n    \n    for (int i = 2; i < n; i++) {\n        dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);\n    }\n    \n    return dp[n - 1];\n}\n\n// 空間優化版（滾動變量）\nint robOptimized(vector<int>& nums) {\n    int prev2 = 0, prev1 = 0;\n    \n    for (int num : nums) {\n        int current = max(prev1, prev2 + num);\n        prev2 = prev1;\n        prev1 = current;\n    }\n    \n    return prev1;\n}\n```\n",
+          "children": []
+        },
+        {
+          "id": 33,
+          "title": "7.2 不相交區間",
+          "summary": "\n不相交區間 DP 用於處理選擇若干個不相交的區間，使得某個指標最優的問題。\n\n**核心思想**：\n- 定義 f[i] 表示考慮前 i 個區間的最優解\n- 對於每個區間，選或不選\n- 如果選擇當前區間，需要找到與它不相交的最後一個區間\n\n**常見問題**：\n- 加權區間調度（Weighted Interval Scheduling）\n- 最多不相交區間數\n- 區間覆蓋問題\n\n**C++ 模板**：\n\n```cpp\n// 加權區間調度：選擇不相交區間使得權重和最大\nstruct Interval {\n    int start, end, weight;\n    bool operator<(const Interval& other) const {\n        return end < other.end; // 按結束時間排序\n    }\n};\n\nint maxWeight(vector<Interval>& intervals) {\n    int n = intervals.size();\n    sort(intervals.begin(), intervals.end());\n    \n    vector<int> dp(n); // dp[i] = 考慮前 i+1 個區間的最大權重\n    dp[0] = intervals[0].weight;\n    \n    for (int i = 1; i < n; i++) {\n        // 不選當前區間\n        int not_take = dp[i - 1];\n        \n        // 選當前區間：找最後一個不相交的區間\n        int take = intervals[i].weight;\n        int j = i - 1;\n        while (j >= 0 && intervals[j].end > intervals[i].start) {\n            j--;\n        }\n        if (j >= 0) {\n            take += dp[j];\n        }\n        \n        dp[i] = max(not_take, take);\n    }\n    \n    return dp[n - 1];\n}\n\n// 優化：二分查找最後一個不相交區間\nint findLastNonOverlapping(vector<Interval>& intervals, int i) {\n    int left = 0, right = i - 1;\n    int result = -1;\n    \n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (intervals[mid].end <= intervals[i].start) {\n            result = mid;\n            left = mid + 1;\n        } else {\n            right = mid - 1;\n        }\n    }\n    \n    return result;\n}\n\nint maxWeightOptimized(vector<Interval>& intervals) {\n    int n = intervals.size();\n    sort(intervals.begin(), intervals.end());\n    \n    vector<int> dp(n);\n    dp[0] = intervals[0].weight;\n    \n    for (int i = 1; i < n; i++) {\n        int not_take = dp[i - 1];\n        int take = intervals[i].weight;\n        \n        int j = findLastNonOverlapping(intervals, i);\n        if (j != -1) {\n            take += dp[j];\n        }\n        \n        dp[i] = max(not_take, take);\n    }\n    \n    return dp[n - 1];\n}\n\n// 最多不相交區間數（貪心 + DP）\nint maxDisjointIntervals(vector<vector<int>>& intervals) {\n    sort(intervals.begin(), intervals.end(), [](auto& a, auto& b) {\n        return a[1] < b[1]; // 按結束時間排序\n    });\n    \n    int count = 1;\n    int end = intervals[0][1];\n    \n    for (int i = 1; i < intervals.size(); i++) {\n        if (intervals[i][0] >= end) {\n            count++;\n            end = intervals[i][1];\n        }\n    }\n    \n    return count;\n}\n\n// 用 DP 實現\nint maxDisjointIntervalsDp(vector<vector<int>>& intervals) {\n    int n = intervals.size();\n    sort(intervals.begin(), intervals.end(), [](auto& a, auto& b) {\n        return a[1] < b[1];\n    });\n    \n    vector<int> dp(n, 1); // dp[i] = 以第 i 個區間結尾的最多不相交區間數\n    \n    for (int i = 1; i < n; i++) {\n        for (int j = 0; j < i; j++) {\n            if (intervals[j][1] <= intervals[i][0]) {\n                dp[i] = max(dp[i], dp[j] + 1);\n            }\n        }\n    }\n    \n    return *max_element(dp.begin(), dp.end());\n}\n\n// 會議室 II：最少需要多少個會議室\nint minMeetingRooms(vector<vector<int>>& intervals) {\n    vector<int> start, end;\n    \n    for (auto& interval : intervals) {\n        start.push_back(interval[0]);\n        end.push_back(interval[1]);\n    }\n    \n    sort(start.begin(), start.end());\n    sort(end.begin(), end.end());\n    \n    int rooms = 0, max_rooms = 0;\n    int i = 0, j = 0;\n    \n    while (i < start.size()) {\n        if (start[i] < end[j]) {\n            rooms++;\n            max_rooms = max(max_rooms, rooms);\n            i++;\n        } else {\n            rooms--;\n            j++;\n        }\n    }\n    \n    return max_rooms;\n}\n```\n",
+          "children": []
+        },
+        {
+          "id": 34,
+          "title": "7.3 子陣列 DP",
+          "summary": "\n子陣列 DP 處理連續子陣列的最優解問題，通常定義 $f[i]$ 表示以位置 $i$ 結尾的子陣列的最優值。\n\n**核心思想**：\n- `f[i]` 表示以 `nums[i]` 結尾的子陣列的某個屬性\n- 從 `f[i - 1]` 轉移到 `f[i]`\n- 通常需要維護前綴信息\n\n**常見問題**：\n- 最大/最小子陣列和\n- 最長連續遞增子陣列\n- 乘積最大子陣列\n\n**C++ 模板**：\n\n```cpp\n// 最大子陣列和\nint maxSubArray(vector<int>& nums) {\n    int n = nums.size();\n    int max_sum = nums[0];\n    int current_sum = nums[0];\n    \n    for (int i = 1; i < n; i++) {\n        current_sum = max(nums[i], current_sum + nums[i]);\n        max_sum = max(max_sum, current_sum);\n    }\n    \n    return max_sum;\n}\n\n// DP 陣列版本\nint maxSubArrayDp(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> dp(n); // dp[i] = 以 nums[i] 結尾的最大子陣列和\n    dp[0] = nums[0];\n    int max_sum = dp[0];\n    \n    for (int i = 1; i < n; i++) {\n        dp[i] = max(nums[i], dp[i - 1] + nums[i]);\n        max_sum = max(max_sum, dp[i]);\n    }\n    \n    return max_sum;\n}\n\n// 乘積最大子陣列\nint maxProduct(vector<int>& nums) {\n    int n = nums.size();\n    int max_prod = nums[0];\n    int current_max = nums[0]; // 以當前位置結尾的最大乘積\n    int current_min = nums[0]; // 以當前位置結尾的最小乘積（負數可能變最大）\n    \n    for (int i = 1; i < n; i++) {\n        if (nums[i] < 0) {\n            swap(current_max, current_min); // 負數會使最大變最小，最小變最大\n        }\n        \n        current_max = max(nums[i], current_max * nums[i]);\n        current_min = min(nums[i], current_min * nums[i]);\n        \n        max_prod = max(max_prod, current_max);\n    }\n    \n    return max_prod;\n}\n\n// DP 陣列版本\nint maxProductDp(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> dp_max(n), dp_min(n);\n    \n    dp_max[0] = dp_min[0] = nums[0];\n    int result = nums[0];\n    \n    for (int i = 1; i < n; i++) {\n        dp_max[i] = max({nums[i], dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i]});\n        dp_min[i] = min({nums[i], dp_max[i - 1] * nums[i], dp_min[i - 1] * nums[i]});\n        result = max(result, dp_max[i]);\n    }\n    \n    return result;\n}\n\n// 最長連續遞增子序列（子陣列）\nint findLengthOfLcis(vector<int>& nums) {\n    int n = nums.size();\n    if (n == 0) {\n        return 0;\n    }\n    \n    int max_len = 1;\n    int current_len = 1;\n    \n    for (int i = 1; i < n; i++) {\n        if (nums[i] > nums[i - 1]) {\n            current_len++;\n            max_len = max(max_len, current_len);\n        } else {\n            current_len = 1;\n        }\n    }\n    \n    return max_len;\n}\n\n// 環形子陣列的最大和\nint maxSubarraySumCircular(vector<int>& nums) {\n    int n = nums.size();\n    \n    // 情況 1：最大子陣列不跨越邊界\n    int max_kadane = kadane(nums);\n    \n    // 情況 2：最大子陣列跨越邊界 = 總和 - 最小子陣列\n    int total_sum = 0;\n    for (int i = 0; i < n; i++) {\n        total_sum += nums[i];\n        nums[i] = -nums[i]; // 取反\n    }\n    \n    int min_kadane = kadane(nums);\n    int max_wrap = total_sum + min_kadane; // 因為 min_kadane 是負的\n    \n    // 特殊情況：所有數都是負數\n    if (max_wrap == 0) {\n        return max_kadane;\n    }\n    \n    return max(max_kadane, max_wrap);\n}\n\nint kadane(vector<int>& nums) {\n    int max_sum = nums[0];\n    int current_sum = nums[0];\n    \n    for (int i = 1; i < nums.size(); i++) {\n        current_sum = max(nums[i], current_sum + nums[i]);\n        max_sum = max(max_sum, current_sum);\n    }\n    \n    return max_sum;\n}\n\n// K 次取反後最大化的陣列和\nint largestSumAfterKNegations(vector<int>& nums, int k) {\n    sort(nums.begin(), nums.end());\n    int n = nums.size();\n    \n    // 盡量翻轉負數\n    for (int i = 0; i < n && k > 0; i++) {\n        if (nums[i] < 0) {\n            nums[i] = -nums[i];\n            k--;\n        }\n    }\n    \n    // 如果還有剩餘次數，翻轉最小的數\n    if (k % 2 == 1) {\n        sort(nums.begin(), nums.end());\n        nums[0] = -nums[0];\n    }\n    \n    return accumulate(nums.begin(), nums.end(), 0);\n}\n```\n",
+          "children": []
+        },
+        {
+          "id": 35,
+          "title": "7.4 合法子序列 DP",
+          "summary": "\n合法子序列 DP 計算滿足某種條件的子序列的最長長度、個數、元素和等。\n\n**核心思想**：\n- 定義 `f[x]` 表示以元素 `x` 結尾的合法子序列的屬性\n- 注意 `x` 是元素值，不是下標\n- 從子序列的倒數第二個元素轉移過來\n\n**注意**：這裏的 $x$ 不是下標，是元素值。如果 $x$ 不是整數，或者值域範圍很大，可以用雜湊表代替陣列。\n- 如果值域很大，使用雜湊表代替陣列\n\n**常見問題**：\n- 等差數列子序列\n- 等比數列子序列\n- 特定規則的子序列\n\n**C++ 模板**：\n\n```cpp\n// 最長等差數列（值域較小時用陣列）\nint longestArithSeqLength(vector<int>& nums) {\n    int n = nums.size();\n    int max_len = 2;\n    \n    // dp[i][diff] = 以 nums[i] 結尾、公差為 diff 的最長等差數列長度\n    vector<unordered_map<int, int>> dp(n);\n    \n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < i; j++) {\n            int diff = nums[i] - nums[j];\n            dp[i][diff] = dp[j].count(diff) ? dp[j][diff] + 1 : 2;\n            max_len = max(max_len, dp[i][diff]);\n        }\n    }\n    \n    return max_len;\n}\n\n// 等差數列劃分 II：子序列\nlong long numberOfArithmeticSlices(vector<int>& nums) {\n    int n = nums.size();\n    long long count = 0;\n    \n    // dp[i][diff] = 以 nums[i] 結尾、公差為 diff 的等差子序列個數\n    vector<unordered_map<long long, int>> dp(n);\n    \n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < i; j++) {\n            long long diff = (long long)nums[i] - nums[j];\n            int prev = dp[j].count(diff) ? dp[j][diff] : 0;\n            dp[i][diff] += prev + 1;\n            count += prev; // 只計算長度 >= 3 的\n        }\n    }\n    \n    return count;\n}\n\n// 刪除一個元素使陣列嚴格遞增\nbool canBeIncreasing(vector<int>& nums) {\n    int n = nums.size();\n    int removed = 0;\n    \n    for (int i = 1; i < n; i++) {\n        if (nums[i] <= nums[i - 1]) {\n            removed++;\n            if (removed > 1) {\n                return false;\n            }\n            \n            // 刪除 nums[i] 或 nums[i-1]\n            if (i > 1 && nums[i] <= nums[i - 2]) {\n                nums[i] = nums[i - 1]; // 相當於刪除 nums[i-1]\n            }\n        }\n    }\n    \n    return true;\n}\n\n// 擺動序列\nint wiggleMaxLength(vector<int>& nums) {\n    int n = nums.size();\n    if (n < 2) {\n        return n;\n    }\n    \n    // up[i] = 以 nums[i] 結尾且最後是上升的擺動序列最大長度\n    // down[i] = 以 nums[i] 結尾且最後是下降的擺動序列最大長度\n    int up = 1, down = 1;\n    \n    for (int i = 1; i < n; i++) {\n        if (nums[i] > nums[i - 1]) {\n            up = down + 1; // 從下降轉為上升\n        } else if (nums[i] < nums[i - 1]) {\n            down = up + 1; // 從上升轉為下降\n        }\n    }\n    \n    return max(up, down);\n}\n\n// 使用雜湊表的示例：最長斐波那契子序列\nint lenLongestFibSubseq(vector<int>& arr) {\n    int n = arr.size();\n    unordered_set<int> s(arr.begin(), arr.end());\n    int max_len = 0;\n    \n    for (int i = 0; i < n; i++) {\n        for (int j = i + 1; j < n; j++) {\n            int a = arr[i], b = arr[j];\n            int len = 2;\n            \n            while (s.count(a + b)) {\n                int temp = b;\n                b = a + b;\n                a = temp;\n                len++;\n            }\n            \n            max_len = max(max_len, len);\n        }\n    }\n    \n    return max_len >= 3 ? max_len : 0;\n}\n\n// DP 優化版本\nint lenLongestFibSubseqDp(vector<int>& arr) {\n    int n = arr.size();\n    unordered_map<int, int> index;\n    for (int i = 0; i < n; i++) {\n        index[arr[i]] = i;\n    }\n    \n    // dp[i][j] = 以 arr[i], arr[j] 結尾的斐波那契序列長度\n    vector<vector<int>> dp(n, vector<int>(n, 2));\n    int max_len = 0;\n    \n    for (int j = 0; j < n; j++) {\n        for (int i = 0; i < j; i++) {\n            int prev = arr[j] - arr[i];\n            if (prev < arr[i] && index.count(prev)) {\n                int k = index[prev];\n                dp[i][j] = dp[k][i] + 1;\n            }\n            max_len = max(max_len, dp[i][j]);\n        }\n    }\n    \n    return max_len >= 3 ? max_len : 0;\n}\n```\n",
+          "children": []
+        },
+        {
+          "id": 36,
+          "title": "7.5 子矩形 DP",
+          "summary": "\n子矩形 DP 處理二維矩陣中的矩形區域問題，通常結合前綴和或壓縮維度技巧。\n\n**核心思想**：\n- 將二維問題壓縮為一維問題\n- 枚舉矩形的上下邊界，將問題轉化為一維陣列\n- 使用前綴和、雜湊表等輔助結構\n\n**常見問題**：\n- 最大矩形和\n- 子矩形和為 K 的個數\n- 最大正方形\n\n**C++ 模板**：\n\n```cpp\n// 最大矩形和\nint maxSumSubmatrix(vector<vector<int>>& matrix) {\n    int m = matrix.size(), n = matrix[0].size();\n    int max_sum = INT_MIN;\n    \n    // 枚舉上邊界\n    for (int top = 0; top < m; top++) {\n        vector<int> col_sum(n, 0); // 壓縮後的一維陣列\n        \n        // 枚舉下邊界\n        for (int bottom = top; bottom < m; bottom++) {\n            // 累加當前行到 col_sum\n            for (int col = 0; col < n; col++) {\n                col_sum[col] += matrix[bottom][col];\n            }\n            \n            // 在一維陣列上求最大子陣列和\n            int current_sum = 0;\n            for (int val : col_sum) {\n                current_sum = max(val, current_sum + val);\n                max_sum = max(max_sum, current_sum);\n            }\n        }\n    }\n    \n    return max_sum;\n}\n\n// 和不超過 K 的最大矩形和\nint maxSumSubmatrix(vector<vector<int>>& matrix, int k) {\n    int m = matrix.size(), n = matrix[0].size();\n    int result = INT_MIN;\n    \n    for (int top = 0; top < m; top++) {\n        vector<int> col_sum(n, 0);\n        \n        for (int bottom = top; bottom < m; bottom++) {\n            for (int col = 0; col < n; col++) {\n                col_sum[col] += matrix[bottom][col];\n            }\n            \n            // 找不超過 k 的最大子陣列和\n            set<int> prefix_sums;\n            prefix_sums.insert(0);\n            int sum = 0;\n            \n            for (int val : col_sum) {\n                sum += val;\n                // 找最小的 prefix >= sum - k\n                auto it = prefix_sums.lower_bound(sum - k);\n                if (it != prefix_sums.end()) {\n                    result = max(result, sum - *it);\n                }\n                prefix_sums.insert(sum);\n            }\n        }\n    }\n    \n    return result;\n}\n\n// 最大正方形\nint maximalSquare(vector<vector<char>>& matrix) {\n    int m = matrix.size(), n = matrix[0].size();\n    vector<vector<int>> dp(m, vector<int>(n, 0));\n    int max_side = 0;\n    \n    // dp[i][j] = 以 (i,j) 為右下角的最大正方形邊長\n    for (int i = 0; i < m; i++) {\n        for (int j = 0; j < n; j++) {\n            if (matrix[i][j] == '1') {\n                if (i == 0 || j == 0) {\n                    dp[i][j] = 1;\n                } else {\n                    dp[i][j] = min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]}) + 1;\n                }\n                max_side = max(max_side, dp[i][j]);\n            }\n        }\n    }\n    \n    return max_side * max_side;\n}\n\n// 最大矩形（柱狀圖法）\nint maximalRectangle(vector<vector<char>>& matrix) {\n    if (matrix.empty()) {\n        return 0;\n    }\n    \n    int m = matrix.size(), n = matrix[0].size();\n    vector<int> heights(n, 0);\n    int max_area = 0;\n    \n    for (int i = 0; i < m; i++) {\n        // 更新高度陣列\n        for (int j = 0; j < n; j++) {\n            heights[j] = (matrix[i][j] == '1') ? heights[j] + 1 : 0;\n        }\n        \n        // 計算當前柱狀圖的最大矩形\n        max_area = max(max_area, largestRectangleArea(heights));\n    }\n    \n    return max_area;\n}\n\n// 柱狀圖中最大矩形\nint largestRectangleArea(vector<int>& heights) {\n    int n = heights.size();\n    stack<int> stk;\n    int max_area = 0;\n    \n    for (int i = 0; i <= n; i++) {\n        int h = (i == n) ? 0 : heights[i];\n        \n        while (!stk.empty() && h < heights[stk.top()]) {\n            int height = heights[stk.top()];\n            stk.pop();\n            int width = stk.empty() ? i : (i - stk.top() - 1);\n            max_area = max(max_area, height * width);\n        }\n        \n        stk.push(i);\n    }\n    \n    return max_area;\n}\n\n// 統計全 1 子矩形\nint numSubmat(vector<vector<int>>& mat) {\n    int m = mat.size(), n = mat[0].size();\n    vector<vector<int>> heights(m, vector<int>(n, 0));\n    int count = 0;\n    \n    // 計算每個位置向上的連續 1 的高度\n    for (int i = 0; i < m; i++) {\n        for (int j = 0; j < n; j++) {\n            if (mat[i][j] == 1) {\n                heights[i][j] = (i == 0) ? 1 : heights[i - 1][j] + 1;\n            }\n        }\n    }\n    \n    // 對每一行，計算以該行為底的矩形數\n    for (int i = 0; i < m; i++) {\n        for (int j = 0; j < n; j++) {\n            int min_height = heights[i][j];\n            for (int k = j; k >= 0 && heights[i][k] > 0; k--) {\n                min_height = min(min_height, heights[i][k]);\n                count += min_height;\n            }\n        }\n    }\n    \n    return count;\n}\n```\n",
+          "children": []
+        },
+        {
+          "id": 37,
+          "title": "7.6 多維 DP",
+          "summary": "\n多維 DP 涉及多個維度的狀態，需要仔細設計狀態表示和轉移方程。\n\n**核心思想**：\n- 定義多維狀態 f[i][j][k][...] 表示多個維度的組合\n- 狀態數 = 每個維度的大小的乘積\n- 時間複雜度通常較高，需要優化\n\n**常見問題**：\n- 編輯距離（二維）\n- 多條件限制的 DP\n- 多個序列的匹配\n\n**C++ 模板**：\n\n```cpp\n// 編輯距離（二維 DP）\nint minDistance(string word_1, string word_2) {\n    int m = word_1.size(), n = word_2.size();\n    vector<vector<int>> dp(m + 1, vector<int>(n + 1));\n    \n    // 初始化\n    for (int i = 0; i <= m; i++) {\n        dp[i][0] = i; // 刪除所有字符\n    }\n    for (int j = 0; j <= n; j++) {\n        dp[0][j] = j; // 插入所有字符\n    }\n    \n    // 轉移\n    for (int i = 1; i <= m; i++) {\n        for (int j = 1; j <= n; j++) {\n            if (word_1[i - 1] == word_2[j - 1]) {\n                dp[i][j] = dp[i - 1][j - 1]; // 不需要操作\n            } else {\n                dp[i][j] = min({\n                    dp[i - 1][j] + 1,     // 刪除\n                    dp[i][j - 1] + 1,     // 插入\n                    dp[i - 1][j - 1] + 1  // 替換\n                });\n            }\n        }\n    }\n    \n    return dp[m][n];\n}\n\n// 最長公共子序列（二維 DP）\nint longestCommonSubsequence(string text_1, string text_2) {\n    int m = text_1.size(), n = text_2.size();\n    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));\n    \n    for (int i = 1; i <= m; i++) {\n        for (int j = 1; j <= n; j++) {\n            if (text_1[i - 1] == text_2[j - 1]) {\n                dp[i][j] = dp[i - 1][j - 1] + 1;\n            } else {\n                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);\n            }\n        }\n    }\n    \n    return dp[m][n];\n}\n\n// 不同的子序列（二維 DP）\nint numDistinct(string s, string t) {\n    int m = s.size(), n = t.size();\n    vector<vector<long long>> dp(m + 1, vector<long long>(n + 1, 0));\n    \n    // 空串是任何串的子序列\n    for (int i = 0; i <= m; i++) {\n        dp[i][0] = 1;\n    }\n    \n    for (int i = 1; i <= m; i++) {\n        for (int j = 1; j <= n; j++) {\n            dp[i][j] = dp[i - 1][j]; // 不使用 s[i-1]\n            if (s[i - 1] == t[j - 1]) {\n                dp[i][j] += dp[i - 1][j - 1]; // 使用 s[i-1]\n            }\n        }\n    }\n    \n    return dp[m][n];\n}\n\n// 三維 DP：交錯字串\nbool isInterleave(string s_1, string s_2, string s_3) {\n    int m = s_1.size(), n = s_2.size();\n    if (m + n != s_3.size()) {\n        return false;\n    }\n    \n    vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));\n    dp[0][0] = true;\n    \n    // 只使用 s_1\n    for (int i = 1; i <= m; i++) {\n        dp[i][0] = dp[i - 1][0] && (s_1[i - 1] == s_3[i - 1]);\n    }\n    \n    // 只使用 s_2\n    for (int j = 1; j <= n; j++) {\n        dp[0][j] = dp[0][j - 1] && (s_2[j - 1] == s_3[j - 1]);\n    }\n    \n    // 同時使用 s_1 和 s_2\n    for (int i = 1; i <= m; i++) {\n        for (int j = 1; j <= n; j++) {\n            bool match1 = (s_1[i - 1] == s_3[i + j - 1]) && dp[i - 1][j];\n            bool match2 = (s_2[j - 1] == s_3[i + j - 1]) && dp[i][j - 1];\n            dp[i][j] = match1 || match2;\n        }\n    }\n    \n    return dp[m][n];\n}\n\n// 四維 DP：兩個字串的最小 ASCII 刪除和\nint minimumDeleteSum(string s_1, string s_2) {\n    int m = s_1.size(), n = s_2.size();\n    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));\n    \n    // 刪除 s_1 的所有字符\n    for (int i = 1; i <= m; i++) {\n        dp[i][0] = dp[i - 1][0] + s_1[i - 1];\n    }\n    \n    // 刪除 s_2 的所有字符\n    for (int j = 1; j <= n; j++) {\n        dp[0][j] = dp[0][j - 1] + s_2[j - 1];\n    }\n    \n    for (int i = 1; i <= m; i++) {\n        for (int j = 1; j <= n; j++) {\n            if (s_1[i - 1] == s_2[j - 1]) {\n                dp[i][j] = dp[i - 1][j - 1];\n            } else {\n                dp[i][j] = min(\n                    dp[i - 1][j] + s_1[i - 1], // 刪除 s_1[i-1]\n                    dp[i][j - 1] + s_2[j - 1]  // 刪除 s_2[j-1]\n                );\n            }\n        }\n    }\n    \n    return dp[m][n];\n}\n\n// 空間優化：滾動陣列\nint minDistanceOptimized(string word_1, string word_2) {\n    int m = word_1.size(), n = word_2.size();\n    vector<int> prev(n + 1), curr(n + 1);\n    \n    for (int j = 0; j <= n; j++) {\n        prev[j] = j;\n    }\n    \n    for (int i = 1; i <= m; i++) {\n        curr[0] = i;\n        for (int j = 1; j <= n; j++) {\n            if (word_1[i - 1] == word_2[j - 1]) {\n                curr[j] = prev[j - 1];\n            } else {\n                curr[j] = min({prev[j], curr[j - 1], prev[j - 1]}) + 1;\n            }\n        }\n        swap(prev, curr);\n    }\n    \n    return prev[n];\n}\n```\n",
+          "children": [
+            {
+              "id": 38,
+              "title": "7.6.1 多維 DP 思維擴展",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 39,
+          "title": "7.7 計數 DP",
+          "summary": "\n計數 DP 用於計算滿足某種條件的方案數，通常涉及組合數學。\n\n**核心思想**：\n- $f[i]$ 表示到達狀態 $i$ 的方案數\n- 方案數相加：$f[i] = f[j_1] + f[j_2] + \\cdots$\n- 注意取模運算和大數處理\n\n**常見問題**：\n- 路徑計數\n- 組合方案數\n- 數位 DP\n\n**C++ 模板**：\n\n```cpp\n// 不同路徑\nint uniquePaths(int m, int n) {\n    vector<vector<int>> dp(m, vector<int>(n, 1));\n    \n    for (int i = 1; i < m; i++) {\n        for (int j = 1; j < n; j++) {\n            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];\n        }\n    }\n    \n    return dp[m - 1][n - 1];\n}\n\n// 空間優化版本\nint uniquePathsOptimized(int m, int n) {\n    vector<int> dp(n, 1);\n    \n    for (int i = 1; i < m; i++) {\n        for (int j = 1; j < n; j++) {\n            dp[j] += dp[j - 1];\n        }\n    }\n    \n    return dp[n - 1];\n}\n\n// 不同路徑 II（有障礙物）\nint uniquePathsWithObstacles(vector<vector<int>>& grid) {\n    int m = grid.size(), n = grid[0].size();\n    if (grid[0][0] == 1) {\n        return 0;\n    }\n    \n    vector<vector<int>> dp(m, vector<int>(n, 0));\n    dp[0][0] = 1;\n    \n    for (int i = 0; i < m; i++) {\n        for (int j = 0; j < n; j++) {\n            if (grid[i][j] == 1) {\n                dp[i][j] = 0;\n            } else if (i > 0 || j > 0) {\n                int from_up = (i > 0) ? dp[i - 1][j] : 0;\n                int from_left = (j > 0) ? dp[i][j - 1] : 0;\n                dp[i][j] = from_up + from_left;\n            }\n        }\n    }\n    \n    return dp[m - 1][n - 1];\n}\n\n// 爬樓梯（方案數）\nint climbStairs(int n) {\n    if (n <= 2) {\n        return n;\n    }\n    \n    int prev2 = 1, prev1 = 2;\n    \n    for (int i = 3; i <= n; i++) {\n        int curr = prev1 + prev2;\n        prev2 = prev1;\n        prev1 = curr;\n    }\n    \n    return prev1;\n}\n\n// 解碼方法（帶模運算）\nint numDecodings(string s) {\n    int n = s.size();\n    const int kMod = 1e9 + 7;\n    \n    if (s[0] == '0') {\n        return 0;\n    }\n    \n    vector<long long> dp(n + 1, 0);\n    dp[0] = 1;\n    dp[1] = 1;\n    \n    for (int i = 2; i <= n; i++) {\n        // 單個數字解碼\n        if (s[i - 1] != '0') {\n            dp[i] = dp[i - 1];\n        }\n        \n        // 兩個數字解碼\n        int two_digit = (s[i - 2] - '0') * 10 + (s[i - 1] - '0');\n        if (two_digit >= 10 && two_digit <= 26) {\n            dp[i] = (dp[i] + dp[i - 2]) % kMod;\n        }\n    }\n    \n    return dp[n];\n}\n\n// 目標和（方案數）\nint findTargetSumWays(vector<int>& nums, int target) {\n    int sum = accumulate(nums.begin(), nums.end(), 0);\n    \n    // sum - 2*neg = target => neg = (sum - target) / 2\n    if ((sum - target) % 2 != 0 || sum < target) {\n        return 0;\n    }\n    \n    int neg = (sum - target) / 2;\n    vector<int> dp(neg + 1, 0);\n    dp[0] = 1;\n    \n    for (int num : nums) {\n        for (int j = neg; j >= num; j--) {\n            dp[j] += dp[j - num];\n        }\n    }\n    \n    return dp[neg];\n}\n\n// 組合總和 IV（方案數）\nint combinationSum4(vector<int>& nums, int target) {\n    vector<unsigned int> dp(target + 1, 0);\n    dp[0] = 1;\n    \n    for (int i = 1; i <= target; i++) {\n        for (int num : nums) {\n            if (i >= num) {\n                dp[i] += dp[i - num];\n            }\n        }\n    }\n    \n    return dp[target];\n}\n\n// 整數拆分（最大乘積）\nint integerBreak(int n) {\n    if (n <= 3) {\n        return n - 1;\n    }\n    \n    vector<int> dp(n + 1, 0);\n    dp[1] = 1;\n    dp[2] = 2;\n    dp[3] = 3;\n    \n    for (int i = 4; i <= n; i++) {\n        for (int j = 1; j <= i / 2; j++) {\n            dp[i] = max(dp[i], dp[j] * dp[i - j]);\n        }\n    }\n    \n    return dp[n];\n}\n\n// 貪心優化\nint integerBreakGreedy(int n) {\n    if (n == 2) return 1;\n    if (n == 3) return 2;\n    \n    int product = 1;\n    while (n > 4) {\n        product *= 3;\n        n -= 3;\n    }\n    return product * n;\n}\n```\n",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "title": "8. 區間 DP",
+      "summary": "講解：[區間 DP【基礎演算法精講 22】](https://www.bilibili.com/video/BV1Gs4y1E7EU/)\n\n從陣列的左右兩端不斷縮短，求解關於某段下標區間的最優值。\n\n一般定義 f[i][j] 表示下標區間 [i,j] 的最優值。\n\n```cpp\n// 區間 DP 模板\nvector<vector<int>> dp(n, vector<int>(n, 0));\nfor (int len = 2; len <= n; len++) {\n    for (int i = 0; i + len - 1 < n; i++) {\n        int j = i + len - 1;\n        dp[i][j] = INT_MAX;\n        for (int k = i; k < j; k++) {\n            dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + cost(i, j));\n        }\n    }\n}\n```",
+      "children": [
+        {
+          "id": 41,
+          "title": "8.1 最長迴文子序列",
+          "summary": "**區間 DP：最長迴文子序列**：\n- `dp[i][j]` 表示 `s[i..j]` 中最長迴文子序列的長度\n- 若 `s[i] == s[j]`：`dp[i][j] = dp[i + 1][j - 1] + 2`\n- 否則：`dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])`\n\n```cpp\n// 區間 DP：dp[i][j] = s[i..j] 的最長迴文子序列長度\nint longestPalindromeSubseq(string& s) {\n    int n = s.size();\n    vector<vector<int>> dp(n, vector<int>(n, 0));\n    for (int i = n - 1; i >= 0; --i) {\n        dp[i][i] = 1;\n        for (int j = i + 1; j < n; ++j) {\n            if (s[i] == s[j]) {\n                dp[i][j] = dp[i + 1][j - 1] + 2; // 首尾相同，各貢獻 1\n            } else {\n                dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]); // 首尾不同，取較優\n            }\n        }\n    }\n    return dp[0][n - 1];\n}\n```",
+          "children": []
+        },
+        {
+          "id": 42,
+          "title": "8.2 區間 DP",
+          "summary": "對於類似合法括號字串（RBS）的消除問題，通常根據題意，會有如下性質：\n\n1.  可以消除相鄰的匹配字元。\n2.  相鄰匹配字元消除後，原本不相鄰的字元會變成相鄰，可以繼續消除。換句話說，設子串 `A = x + B + y`，如果 `x` 和 `y` 是匹配的（可以消除），且子串 `B` 可以完全消除，那麼子串 `A` 可以完全消除。\n3.  設子串 `A = B + C`，如果子串 `B` 和 `C` 可以完全消除，那麼子串 `A` 可以完全消除。\n\n滿足上述性質的題目（例如 3563 題），可以用區間 DP 解決。\n\n定義 `f(i, j)` 表示消除 `s[i]` 到 `s[j]` 的最優值。\n\n*   根據性質 2，可以把 `f(i, j)` 縮小成子問題 `f(i + 1, j - 1)`。\n*   根據性質 3，可以列舉子串 `B` 的右端點，即列舉 `k = i + 1, i + 3, i + 5, ..., j - 2`，把 `f(i, j)` 劃分成子問題 `f(i, k)` 和 `f(k + 1, j)`。注意這裡列舉 `k` 的步長是 2，因為每次消除 2 個字元，被消除的子串長度一定是偶數。\n\n邊界：`f(i + 1, i)`，即空串。\n\n答案：`f(0, n - 1)`。",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "title": "9. 狀態壓縮 DP（狀壓 DP）",
+      "summary": "**狀態壓縮 DP（狀壓 DP）**\n\n用位元遮罩（bitmask）表示集合狀態，將集合的選取情況壓縮為一個整數。\n\n**學習指南**：\n- [從集合論到位運算，常見位運算技巧分類總結](https://leetcode.cn/circle/discuss/CaOJ45/)\n- [教你一步步思考狀壓 DP：從記憶化搜尋到遞推](https://leetcode.cn/problems/beautiful-arrangement/solution/jiao-ni-yi-bu-bu-si-kao-zhuang-ya-dpcong-c6kd/)\n\n**常見位運算操作**：\n- 第 i 位置 1：`S | (1 << i)`\n- 第 i 位置 0：`S & ~(1 << i)`\n- 第 i 位取反：`S ^ (1 << i)`\n- 檢查第 i 位：`(S >> i) & 1`\n- 集合大小（popcount）：`__builtin_popcount(S)`\n- 最低位的 1：`S & (-S)`\n\n**分類**：\n\n| 型別 | 定義 | 時間複雜度 |\n|------|------|------------|\n| 排列型 ① 相鄰無關 | `f[S]`：已選集合為 `S` | $O(n \\cdot 2^n)$ |\n| 排列型 ② 相鄰相關 | `f[S][i]`：已選 `S`，末尾為 `i` | $O(n^2 \\cdot 2^n)$ |\n| 子集型 | `f[S]`：列舉 `S` 的子集轉移 | $O(3^n)$ |\n| 輪廓線 DP | 逐格轉移，遮罩記錄輪廓線 | 視題目而定 |\n\n**子集列舉的 $O(3^n)$ 證明**：\n\n對於 n 位的位元遮罩，每一位有三種情況：不在 S 中、在 S 中但不在子集中、在 S 和子集中。因此總狀態數為 $3^n$。\n\n即 $\\sum_{m=0}^{n} \\binom{n}{m} 2^m = (2+1)^n = 3^n$",
+      "children": [
+        {
+          "id": 44,
+          "title": "9.1 排列型狀壓 DP ① 相鄰無關",
+          "summary": "學習指南：\n\n- [從集合論到位運算，常見位運算技巧分類總結](https://leetcode.cn/circle/discuss/CaOJ45/)\n- [教你一步步思考狀壓 DP：從記憶化搜尋到遞推](https://leetcode.cn/problems/beautiful-arrangement/solution/jiao-ni-yi-bu-bu-si-kao-zhuang-ya-dpcong-c6kd/)\n\n暴力做法是枚舉所有排列，對每個排列計算和題目有關的值，時間複雜度（通常來說）是 $O(n!)$。可以解決 $n \\leq 10$ 的問題。\n\n狀壓 DP 可以把時間複雜度（通常來說）優化至 $O(n \\cdot 2^n)$。可以解決 $n \\leq 20$ 的問題。\n\n一般有兩種定義方式：\n\n1. 定義 $f[S]$ 表示已經排列好的元素（下標）集合為 $S$ 時，和題目有關的最優值。通過枚舉當前位置要填的元素（下標）來轉移。\n2. 定義 $f[S]$ 表示可以選的元素（下標）集合為 $S$ 時，和題目有關的最優值。通過枚舉當前位置要填的元素（下標）來轉移。\n\n> 注：部分題目由於暴搜+剪枝也能過，難度分僅供參考。",
+          "children": []
+        },
+        {
+          "id": 45,
+          "title": "9.2 排列型狀壓 DP ② 相鄰相關",
+          "summary": "一般定義 $f[S][i]$ 表示未選（或者已選）的集合為 $S$，且上一個填的元素（下標）為 $i$ 時，和題目有關的最優值。通過枚舉當前位置要填的元素（下標）來轉移。\n\n時間複雜度（通常來說）是 $O(n^2 \\cdot 2^n)$。",
+          "children": []
+        },
+        {
+          "id": 46,
+          "title": "9.3 旅行商問題（TSP）",
+          "summary": "本質上就是排列型 ②。",
+          "children": []
+        },
+        {
+          "id": 47,
+          "title": "9.4 子集狀壓 DP",
+          "summary": "一般定義 $f[S]$ 表示未選（或者已選）的集合為 $S$ 時，和題目有關的最優值。通過枚舉 $S$（或者 $S$ 的補集 $\\complement_U S$）的子集來轉移。\n\n時間複雜度（通常來說）是 $O(3^n)$，證明：\n\n對於大小為 $n$ 的集合，它的大小為 $m$ 的子集有 $\\binom{n}{m}$ 個，每個子集又有 $2^m$ 個子集。根據二項式定理：\n\n$$\\sum_{m=0}^{n} \\binom{n}{m} 2^m = (2+1)^n = 3^n$$\n\n所以「枚舉子集的子集」的總體時間複雜度為 $O(3^n)$。\n\n> 注：某些網格圖的題也可以用「選或不選」來做，從而減少狀態個數，詳見下一小節。",
+          "children": []
+        },
+        {
+          "id": 48,
+          "title": "9.5 輪廓線 DP",
+          "children": []
+        },
+        {
+          "id": 49,
+          "title": "9.6 SOS DP",
+          "summary": "子集和 DP（Sum Over Subsets DP，SOS DP），國內演算法競賽圈一般叫高維字首和。\n\n[原理講解（方法二）](https://leetcode.cn/problems/maximum-product-of-two-integers-with-no-common-bits/solutions/3768219/mo-ban-gao-wei-qian-zhui-he-sos-dppython-78fz/)\n\n**模板（從子集轉移過來）**：\n\n```cpp\n// 高維字首和：f[S] = S 的所有子集中 a 的計數之和\n// 時間複雜度 O(n + U log U)，其中 U = max(a)\nvector<int> sosDp(const vector<int>& a) {\n    if (a.empty()) {\n        return {};\n    }\n    int mx = *max_element(a.begin(), a.end());\n    int w = mx == 0 ? 1 : 32 - __builtin_clz(mx); // 位元寬度\n    int u = 1 << w;                               // 全集大小\n    vector<int> f(u, 0);\n    for (int x : a) {\n        f[x]++; // 初始化：每個值的出現次數\n    }\n    // 逐位合併：第 i 輪讓每個 S 吸收「第 i 位為 0」的子集\n    for (int i = 0; i < w; ++i) {\n        for (int s = 0; s < u; ++s) {\n            // 第 i 位為 1\n            if (s & (1 << i)) {\n                f[s] += f[s ^ (1 << i)]; // 加上第 i 位為 0 的子集\n            }\n        }\n    }\n    return f; // f[S] = 所有 T⊆S 的 a 計數之和\n}\n```\n\n**模板（從超集轉移過來）**：\n\n```cpp\n// 高維字尾和：f[S] = S 的所有超集中 a 的計數之和\nvector<int> sosDpSuperset(const vector<int>& a) {\n    if (a.empty()) {\n        return {};\n    }\n    int mx = *max_element(a.begin(), a.end());\n    int w = mx == 0 ? 1 : 32 - __builtin_clz(mx);\n    int u = 1 << w;\n    vector<int> f(u, 0);\n    for (int x : a) {\n        f[x]++;\n    }\n    // 逐位合併：第 i 輪讓每個 S 吸收「第 i 位為 1」的超集\n    for (int i = 0; i < w; ++i) {\n        for (int s = u - 1; s >= 0; --s) {\n            // 第 i 位為 0\n            if (!(s & (1 << i))) {\n                f[s] += f[s | (1 << i)]; // 加上第 i 位為 1 的超集\n            }\n        }\n    }\n    return f; // f[S] = 所有 T⊇S 的 a 計數之和\n}\n```",
+          "children": []
+        },
+        {
+          "id": 50,
+          "title": "9.7 其他狀壓 DP",
+          "summary": "暴力做法是列舉所有排列，時間複雜度 $O(n!)$，可解決 $n \\leq 10$。\n\n狀壓 DP 優化至 $O(n \\cdot 2^n)$，可解決 $n \\leq 20$。\n\n一般有兩種定義方式：\n1. $f[S]$ 表示已經排列好的元素集合為 $S$ 時的最優值。\n2. $f[S]$ 表示可以選的元素集合為 $S$ 時的最優值。\n\n> 注：部分題目由於暴搜+剪枝也能過，難度分僅供參考。\n\n```cpp\n// 排列型狀壓 DP（相鄰無關）\n// f[S] = 已選集合為 S 時的最優值\nvector<int> f(1 << n, 0);\nfor (int s = 0; s < (1 << n); ++s) {\n    int pos = __builtin_popcount(s); // s 中 1 的個數 = 當前要填的位置\n    for (int i = 0; i < n; ++i) {\n        if (s & (1 << i)) {\n            continue; // i 已選\n        }\n        f[s | (1 << i)] = max(f[s | (1 << i)], f[s] + cost(pos, i));\n    }\n}\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "title": "10. 數位 DP",
+      "summary": "**數位 DP（Digit DP）**：用於計算在某個數值範圍 `[low, high]` 內，滿足特定數位性質的整數個數（或價值總和）。\n\n**核心思路**：逐位構造數字，用記憶化搜尋避免重複計算。每一位需要追蹤：\n- **是否貼著上界/下界**（`limit_high` / `limit_low`）：決定當前位能填的數字範圍\n- **題目相關的狀態**：如已出現的數字集合、數位和、餘數等\n\n**通用框架**：\n1. 將 low 和 high 轉成字串\n2. 從高位到低位遞迴，每位嘗試填入合法數字\n3. 用 `memo` 陣列記憶化\n\n**常見變形**：\n- 統計個數（10.1）：回傳滿足條件的數字個數\n- 統計價值和（10.2）：回傳 {個數, 價值和}，用個數輔助計算貢獻\n- 構造型（10.3）：找出滿足條件的具體數字（如迴文數）\n\n```cpp\n// 數位 DP 模板\nint digitDp(const string& s) {\n    int n = s.size();\n    vector<vector<int>> memo(n, vector<int>(state_size, -1));\n    \n    // pos: 當前位置, state: 題目相關狀態, tight: 是否貼著上界, started: 是否已開始填數\n    function<int(int, int, bool, bool)> dfs = [&](int pos, int state, bool tight,\n                                                  bool started) -> int {\n        // 到達末尾，若已開始則計入答案\n        if (pos == n) {\n            return started ? 1 : 0;\n        }\n        // 記憶化剪枝（非貼界且已開始才能記憶化）\n        if (!tight && started && memo[pos][state] != -1) {\n            return memo[pos][state];\n        }\n        \n        int up = tight ? s[pos] - '0' : 9; // 當前位可填的最大值\n        int res = 0;\n        // 枚舉當前位可填的數字\n        for (int d = 0; d <= up; d++) {\n            res += dfs(pos + 1, new_state(state, d), tight && d == up, started || d > 0);\n        }\n        \n        // 記憶化\n        if (!tight && started) {\n            memo[pos][state] = res;\n        }\n        return res;\n    };\n    return dfs(0, 0, true, false);\n}\n```",
+      "children": [
+        {
+          "id": 52,
+          "title": "10.1 統計合法元素的數目",
+          "summary": "[數位 DP v1.0 模板講解](https://www.bilibili.com/video/BV1rS4y1s721/?t=19m36s)\n\n[數位 DP v2.0 模板講解](https://www.bilibili.com/video/BV1Fg4y1Q7wv/?t=31m28s)（上下界數位 DP）\n\n下面是數位 DP v2.1 模板。相比 v2.0，不需要寫 isNum 引數。\n\n> 注：只有上界約束的題目，相當於 `low = 0` 或者 `low = 1`。\n\n**C++ 模板（統計 [low, high] 中恰好包含 target 個 0 的數字個數）**：\n\n```cpp\n// 數位 DP：統計 [low, high] 中滿足條件的數字個數\nlong long digitDp(long long low, long long high, int target) {\n    string low_s = to_string(low);\n    string high_s = to_string(high);\n    int n = high_s.length();          // 以 high 的位數為基準\n    int diff_lh = n - low_s.length(); // low 和 high 的位數差\n\n    // memo[位置][已有的0個數][是否貼下界][是否貼上界]\n    vector memo(n, vector(target + 1, vector(2, vector<long long>(2, -1))));\n\n    // i: 當前填第幾位（從高位到低位，0-indexed）\n    // cnt0: 目前已經填了多少個 0\n    // limit_low: 前面的位是否都貼著 low 的下界\n    // limit_high: 前面的位是否都貼著 high 的上界\n    function<long long(int, int, bool, bool)> dfs = [&](int i, int cnt0, bool limit_low,\n                                                        bool limit_high) -> long long {\n        if (cnt0 > target) {\n            return 0; // 剪枝：0 的個數已超過目標\n        }\n        if (i == n) {\n            return cnt0 == target ? 1 : 0; // 所有位都填完，檢查是否恰好\n        }\n        if (memo[i][cnt0][limit_low][limit_high] != -1) {\n            return memo[i][cnt0][limit_low][limit_high]; // 已計算過\n        }\n\n        // 確定當前位可以填的數字範圍 [lo, hi]\n        // 若貼下界且當前位在 low 的範圍內，最小值為 low 對應位的數字\n        int lo = (limit_low && i >= diff_lh) ? low_s[i - diff_lh] - '0' : 0;\n        // 若貼上界，最大值為 high 對應位的數字；否則可以填 9\n        int hi = limit_high ? high_s[i] - '0' : 9;\n        long long res = 0;\n        int start = lo;\n\n        // 特殊處理：當前位在 low 的高位之前（即 high 比 low 多出來的高位）\n        // 這些高位可以填 0（代表實際數字位數較少）\n        if (limit_low && i < diff_lh) {\n            // 填 0：相當於這個高位不存在（數字位數 < high 的位數）\n            res = dfs(i + 1, 0, true, false);\n            start = 1; // 非零數字從 1 開始\n        }\n\n        // 列舉當前位填的數字 d\n        for (int d = start; d <= hi; ++d) {\n            res += dfs(i + 1,\n                       cnt0 + (d == 0 ? 1 : 0), // 更新 0 的計數\n                       limit_low && (d == lo),  // 仍然貼著下界？\n                       limit_high && (d == hi)  // 仍然貼著上界？\n            );\n        }\n        return memo[i][cnt0][limit_low][limit_high] = res;\n    };\n    return dfs(0, 0, true, true); // 初始：貼著上下界\n}\n```",
+          "children": []
+        },
+        {
+          "id": 53,
+          "title": "10.2 統計合法元素的價值總和",
+          "summary": "每個元素 `x` 都有一個相應的價值 `f(x)`，計算 `[low, high]` 中滿足題目約束的元素的價值總和。\n\n例如 `f(x) = x` 是計算滿足題目約束的元素和，`f(x) = digsum(x)` 是計算滿足題目約束的元素的數位和。\n\n**關鍵技巧**：回傳值改為 `$\\{\\text{cnt}, \\text{sum}\\}$`（個數和價值和）。每一位的貢獻為 $d \\times$ 後續子問題的個數。\n\n**C++ 模板（數位和，約束不同數字個數 $\\leq k$）**：\n\n```cpp\n// 數位 DP（貢獻法）：統計合法數字的價值總和\nlong long digitDpContribution(long long low, long long high, int k) {\n    string low_s = to_string(low);\n    string high_s = to_string(high);\n    int n = high_s.length();\n    int diff_lh = n - low_s.length();\n\n    // 回傳 {滿足條件的個數, 數位和的總和}\n    struct Node {\n        long long cnt, sum;\n    };\n    // memo[位置][已出現數字的 bitmask][貼下界][貼上界]\n    // mask 用 10 位 bitmask 記錄出現過哪些數字（0~9）\n    vector memo(n, vector(1024, vector(2, vector<Node>(2, {-1, -1}))));\n\n    function<Node(int, int, bool, bool)> dfs = [&](int i, int mask, bool limit_low,\n                                                   bool limit_high) -> Node {\n        if (i == n) {\n            return {1LL, 0LL}; // 構造完成，貢獻 1 個數，數位和由上層累加\n        }\n        if (memo[i][mask][limit_low][limit_high].cnt != -1) {\n            return memo[i][mask][limit_low][limit_high];\n        }\n\n        int lo = (limit_low && i >= diff_lh) ? low_s[i - diff_lh] - '0' : 0;\n        int hi = limit_high ? high_s[i] - '0' : 9;\n        long long cnt = 0, sum = 0;\n        int start = lo;\n\n        if (limit_low && i < diff_lh) {\n            auto res = dfs(i + 1, 0, true, false);\n            cnt += res.cnt;\n            sum += res.sum;\n            start = 1;\n        }\n\n        for (int d = start; d <= hi; ++d) {\n            // 更新 mask：前導零不記入（mask==0 且 d==0 時保持 0）\n            int new_mask = (mask == 0 && d == 0) ? 0 : (mask | (1 << d));\n            if (__builtin_popcount(new_mask) > k) {\n                continue; // 不同數字個數超過 k，剪枝\n            }\n            auto res = dfs(i + 1, new_mask, limit_low && (d == lo), limit_high && (d == hi));\n            cnt += res.cnt;\n            // 當前位填 d，對每個合法數字貢獻 d（乘以後續的個數）\n            sum += res.sum + (long long)d * res.cnt;\n        }\n        return memo[i][mask][limit_low][limit_high] = {cnt, sum};\n    };\n    return dfs(0, 0, true, true).sum;\n}\n```",
+          "children": []
+        },
+        {
+          "id": 54,
+          "title": "10.3 其他數位 DP",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "title": "11. 優化 DP",
+      "summary": "**優化 DP**：當樸素 DP 的時間或空間複雜度過高時，利用資料結構或數學技巧加速轉移。\n\n**常見優化手段**：\n\n| 技巧 | 適用場景 | 效果 |\n|------|----------|------|\n| 字首和 | 轉移涉及連續區間求和 | $O(n)$ → $O(1)$ 查詢 |\n| 單調堆疊/單調佇列 | 滑動視窗最值型轉移 | $O(n²)$ → $O(n)$ |\n| 線段樹/樹狀陣列 | 區間最值/區間求和型轉移 | $O(n)$ → $O(\\log n)$ 查詢 |\n| 矩陣快速冪 | 線性遞推式，n 極大 | $O(n)$ → $O(k³ \\log n)$ |\n| 斜率優化 | 轉移式含 i·j 交叉項 | $O(n²)$ → $O(n)$ |\n| WQS 二分 | 恰好選 k 個的最優化 | 消除一維狀態 |\n\n本節涵蓋各種 DP 加速技巧，包括字首和優化、單調堆疊/佇列優化、樹狀陣列/線段樹優化、矩陣快速冪、斜率優化（凸包優化）、WQS 二分等，用於將樸素 DP 的時間複雜度降低一個數量級。",
+      "children": [
+        {
+          "id": 56,
+          "title": "11.1 字首和優化 DP",
+          "children": []
+        },
+        {
+          "id": 57,
+          "title": "11.2 單調堆疊優化 DP",
+          "summary": "前置題單：[單調堆疊（矩形系列/字典序最小/貢獻法）](https://leetcode.cn/circle/discuss/9oZFK9/)",
+          "children": []
+        },
+        {
+          "id": 58,
+          "title": "11.3 單調佇列優化 DP",
+          "summary": "一般用來維護一段轉移來源的最值。\n\n1.  前提：區間右端點變大時，左端點也在變大（同滑動視窗）。\n2.  轉移前，去掉隊首無用資料。\n3.  計算轉移（直接從隊首轉移）。\n4.  把資料（一般是 f[i]）插入隊尾前，去掉隊尾無用資料。",
+          "children": []
+        },
+        {
+          "id": 59,
+          "title": "11.4 樹狀陣列/線段樹優化 DP",
+          "children": []
+        },
+        {
+          "id": 60,
+          "title": "11.5 字典樹優化 DP",
+          "children": []
+        },
+        {
+          "id": 61,
+          "title": "11.6 矩陣快速冪優化 DP",
+          "summary": "有兩種型別的矩陣快速冪優化 DP：\n\n1. 線性 DP（常係數齊次線性遞推），轉移係數寫在第一行，其餘行 $m_{i+1,i}=1$，例如 [70](https://leetcode.cn/problems/climbing-stairs/)，[1137](https://leetcode.cn/problems/n-th-tribonacci-number/)。[講解](https://leetcode.cn/problems/climbing-stairs/solutions/2560716/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-7zm1/)。\n2. 多維 DP 或者狀態機 DP，轉移係數可表示為一個 $k \\cdot k$ 大小的矩陣，例如 [935](https://leetcode.cn/problems/knight-dialer/)。[講解](https://leetcode.cn/problems/knight-dialer/solutions/3004116/jiao-ni-yi-bu-bu-si-kao-dpcong-ji-yi-hua-x06l/)。\n\n時間複雜度一般為 $O(k^3 \\log n)$。\n\n**進階做法**：先用 **Berlekamp-Massey 演算法**找規律，得到線性遞推式，然後用 **Kitamasa 演算法**（或者 Bostan-Mori 演算法）優化。\n\n請看我的知乎科普文章：\n\n[Berlekamp-Massey 演算法：如何預測數列的下一項？](https://zhuanlan.zhihu.com/p/1966417899825665440)\n\n[Kitamasa 演算法：更快地計算線性遞推的第 n 項](https://zhuanlan.zhihu.com/p/1964051212304364939)\n\n具體例子見 3700 題 [我的題解的方法二](https://leetcode.cn/problems/number-of-zigzag-arrays-ii/solutions/3794101/ju-zhen-kuai-su-mi-you-hua-dppythonnumpy-77e7/)。\n\n時間複雜度一般為 $O(k^2 \\log n)$。",
+          "children": []
+        },
+        {
+          "id": 62,
+          "title": "11.7 斜率優化 DP",
+          "summary": "也叫凸包最佳化/凸殼最佳化（CHT，Convex Hull Trick）。",
+          "children": []
+        },
+        {
+          "id": 63,
+          "title": "11.8 WQS 二分優化 DP",
+          "summary": "把最多選 k 個物品的問題（時間複雜度高）轉換成選任意個物品的問題（時間複雜度低）。\n\n一般時間複雜度為 $O(n\\log U)$ 或者 $O(n\\log n)$。\n\n此外「§5.3 約束劃分個數」的部分題目也可以用 WQS 二分最佳化。",
+          "children": []
+        },
+        {
+          "id": 64,
+          "title": "11.9 其他優化 DP",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "title": "12. 樹形 DP",
+      "summary": "**注**：可能有同學覺得樹形 DP 沒有重複訪問同一個狀態（重疊子問題），並不能算作 DP，而是算作普通的遞迴。這麼說也有一定道理，不過考慮到思維方式和 DP 是一樣的自底向上，所以仍然叫做樹形 DP。此外，如果是自頂向下的遞迴做法，是存在重疊子問題的，一般要結合記憶化搜尋實現。\n\n**樹形 DP 典型應用**：\n- 樹的直徑\n- 樹的最大獨立集 (沒有上司的舞會)\n- 樹的重心\n- 樹上背包 (依賴背包)\n\n```cpp\n// 樹形 DP（換根 DP 模板）\nvector<long long> down(n), up(n);\n// 第一遍 DFS：計算子樹貢獻\nvoid dfs1(int u, int fa) {\n    for (int v : adj[u])\n        if (v != fa) {\n            dfs1(v, u);\n            down[u] += down[v] + sz[v];\n        }\n}\n// 第二遍 DFS：換根\nvoid dfs2(int u, int fa) {\n    for (int v : adj[u])\n        if (v != fa) {\n            up[v] = up[u] + down[u] - down[v] - sz[v] + (n - sz[v]);\n            dfs2(v, u);\n        }\n}\n```",
+      "children": [
+        {
+          "id": 66,
+          "title": "12.1 樹的直徑",
+          "summary": "講解：[樹形 DP：樹的直徑【基礎演算法精講 23】](https://www.bilibili.com/video/BV17o4y187h1/)\n\n**核心思路**：對每個節點，計算「經過該節點的最長路徑」= 最長子鏈 + 次長子鏈，取全域最大值即為直徑。DFS 回傳值是「以該節點為端點的最長鏈長度」。\n\n**C++ 模板（二叉樹直徑）**：\n\n```cpp\n// 樹的直徑（二叉樹版本）：DFS 回傳深度，更新最長路徑\nint ans = 0;\n\nint dfs(TreeNode* node) {\n    if (node == nullptr) {\n        return -1; // 下方沒有節點，邊數為 -1\n    }\n    int l_len = dfs(node->left) + 1;  // 左鏈長度\n    int r_len = dfs(node->right) + 1; // 右鏈長度\n    ans = max(ans, l_len + r_len);    // 更新直徑\n    return max(l_len, r_len);         // 回傳較長的鏈\n}\n```\n\n**C++ 模板（一般樹直徑）**：\n\n```cpp\n// 樹的直徑（一般樹版本）：鄰接表 + DFS\nint ans = 0;\nvector<vector<int>> adj(n);\n\nfunction<int(int, int)> dfs = [&](int u, int fa) -> int {\n    int max_len = 0; // 以 u 為端點的最長鏈\n    for (int v : adj[u]) {\n        if (v == fa) {\n            continue;\n        }\n        int sub = dfs(v, u) + 1;\n        ans = max(ans, max_len + sub); // 最長 + 次長\n        max_len = max(max_len, sub);\n    }\n    return max_len;\n};\ndfs(0, -1);\n```",
+          "children": []
+        },
+        {
+          "id": 67,
+          "title": "12.2 樹上最大獨立集",
+          "summary": "講解：[樹形 DP：打家劫舍 III【基礎演算法精講 24】](https://www.bilibili.com/video/BV1vu4y1f7dn/)\n\n**核心思路**：對每個節點維護兩個狀態：「選」與「不選」。若選當前節點，則子節點都不選；若不選當前節點，則子節點可選可不選（取較大值）。\n\n**C++ 模板（二叉樹最大獨立集）**：\n\n```cpp\n// 回傳 {不選 u 的最大值, 選 u 的最大值}\npair<int, int> dfs(TreeNode* u) {\n    if (u == nullptr) {\n        return {0, 0};\n    }\n    auto [l_no, l_yes] = dfs(u->left);\n    auto [r_no, r_yes] = dfs(u->right);\n    int not_pick = max(l_no, l_yes) + max(r_no, r_yes); // 不選 u\n    int pick = l_no + r_no + u->val;                    // 選 u\n    return {not_pick, pick};\n}\n```\n\n**C++ 模板（一般樹最大獨立集）**：\n\n```cpp\n// 樹上最大獨立集（一般樹版本）：鄰接表 + DFS\nvector<vector<int>> adj(n);\nvector<int> val(n);\nvector<array<long long, 2>> dp(n); // dp[u][0]=不選, dp[u][1]=選\n\nfunction<void(int, int)> dfs = [&](int u, int fa) {\n    dp[u][1] = val[u]; // 選 u，初始值為 u 的權值\n    for (int v : adj[u]) {\n        if (v == fa) {\n            continue;\n        }\n        dfs(v, u);\n        dp[u][0] += max(dp[v][0], dp[v][1]); // 不選 u，子節點自由選\n        dp[u][1] += dp[v][0];                // 選 u，子節點不能選\n    }\n};\ndfs(0, -1);\nlong long ans = max(dp[0][0], dp[0][1]);\n```",
+          "children": []
+        },
+        {
+          "id": 68,
+          "title": "12.3 樹上最小支配集",
+          "summary": "講解：[樹形 DP：監控二叉樹【基礎演算法精講 25】](https://www.bilibili.com/video/BV1oF411U7qL/)，包含 968 的變形題。\n\n**核心思路**：每個節點有三種狀態：\n- 狀態 0：被子節點的攝像頭覆蓋（不需要自己放）\n- 狀態 1：自己放攝像頭\n- 狀態 2：未被覆蓋（需要父節點處理）\n\n**C++ 模板（監控二叉樹 / 最小支配集）**：\n\n```cpp\n// 樹上最小支配集：貪心選擇葉節點的父節點\nint ans = 0;\n\n// 回傳值：0=被子節點覆蓋, 1=自己放攝像頭, 2=未被覆蓋\nint dfs(TreeNode* u) {\n    if (u == nullptr) {\n        return 0; // 空節點視為已被覆蓋\n    }\n    int left = dfs(u->left);\n    int right = dfs(u->right);\n    if (left == 2 || right == 2) {\n        ans++; // 子節點未被覆蓋，必須在這裡放攝像頭\n        return 1;\n    }\n    if (left == 1 || right == 1) {\n        return 0; // 子節點放了攝像頭，自己被覆蓋\n    }\n    return 2; // 子節點都已被覆蓋但沒攝像頭，自己未被覆蓋\n}\n\n// 呼叫方式\nif (dfs(root) == 2) {\n    ans++; // 根節點未被覆蓋\n}\n```",
+          "children": []
+        },
+        {
+          "id": 69,
+          "title": "12.4 換根 DP",
+          "summary": "也叫二次掃描法。\n\n[【圖解】一張圖秒懂換根 DP！](https://leetcode.cn/problems/sum-of-distances-in-tree/solution/tu-jie-yi-zhang-tu-miao-dong-huan-gen-dp-6bgb/)\n\n**換根 DP 核心思想**：\n1. 第一次 DFS：計算以 0 為根時的所有子樹貢獻。\n2. 第二次 DFS：根據父節點推匯出子節點作為根時的答案（通常是 `ans[v] = ans[u] - v_contribution + u_other_contribution`）。\n\n**C++ 模板（樹中距離之和）**：\n\n```cpp\n// 換根 DP：兩次 DFS，第一次求子樹資訊，第二次換根轉移\nvector<vector<int>> adj(n);\nvector<int> sz(n, 1);    // 子樹大小\nvector<long long> dp(n); // dp[u] = 以 u 為根時所有節點到 u 的距離和\n\n// 第一次 DFS：以 0 為根，計運算元樹大小和 dp[0]\nfunction<void(int, int)> dfs1 = [&](int u, int fa) {\n    for (int v : adj[u]) {\n        if (v == fa) {\n            continue;\n        }\n        dfs1(v, u);\n        sz[u] += sz[v];\n        dp[u] += dp[v] + sz[v]; // 子樹距離 + 子樹中每個點多走一步\n    }\n};\n\n// 第二次 DFS：換根轉移\nfunction<void(int, int)> dfs2 = [&](int u, int fa) {\n    for (int v : adj[u]) {\n        if (v == fa) {\n            continue;\n        }\n        // v 的子樹中 sz[v] 個點各少走一步，其餘 n-sz[v] 個點各多走一步\n        dp[v] = dp[u] - sz[v] + (n - sz[v]);\n        dfs2(v, u);\n    }\n};\n\ndfs1(0, -1);\ndfs2(0, -1);\n// dp[i] 即為以 i 為根時的距離之和\n```",
+          "children": []
+        },
+        {
+          "id": 70,
+          "title": "12.5 其他樹形 DP",
+          "summary": "**其他樹形 DP**：本節收錄不屬於直徑、獨立集、支配集、換根的樹形 DP 題目，常見模式包括：\n\n- **子樹選擇型**：對每個子樹做「選或不選」的決策，合併子節點的 DP 值\n- **帶狀態轉移型**：`dp[u][j]` 表示以 u 為根的子樹中，某引數為 j 時的最優值\n- **貢獻合併型**：用類似背包的方式合併各子樹的貢獻\n\n**C++ 模板（子樹選擇型）**：\n\n```cpp\n// 一般樹形 DP：在鄰接表上做 DFS\nvector<vector<int>> adj(n);\nvector<int> val(n);\nvector<long long> dp(n);\n\nfunction<void(int, int)> dfs = [&](int u, int fa) {\n    dp[u] = val[u]; // 初始化為自身貢獻\n    for (int v : adj[u]) {\n        if (v == fa) {\n            continue;\n        }\n        dfs(v, u);\n        // 只在子樹貢獻為正時才選取\n        if (dp[v] > 0) {\n            dp[u] += dp[v];\n        }\n    }\n};\ndfs(0, -1);\nlong long ans = *max_element(dp.begin(), dp.end());\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "title": "13. 圖 DP",
+      "children": []
+    },
+    {
+      "id": 72,
+      "title": "14. 博弈 DP",
+      "children": []
+    },
+    {
+      "id": 73,
+      "title": "15. 機率/期望 DP",
+      "children": []
+    },
+    {
+      "id": 74,
+      "title": "16. 專題：輸出具體方案（列印方案）",
+      "summary": "注意這些題目和回溯的區別，某些回溯題目要求輸出**所有**方案，這裡只要求輸出**一個**。\n\n[講解](https://leetcode.cn/problems/shortest-common-supersequence/solution/cong-di-gui-dao-di-tui-jiao-ni-yi-bu-bu-auy8z/)",
+      "children": []
+    },
+    {
+      "id": 75,
+      "title": "17. 專題：前字尾分解",
+      "summary": "部分題目也可以用狀態機 DP 解決。\n\n如果涉及到的只是若干元素，而不是字首/字尾這樣的一段元素，也可以用「列舉右，維護左」思考，詳見資料結構題單。\n- [724\\. 尋找陣列的中心下標](https://leetcode.cn/problems/find-pivot-index/) 做到 $O(n)$\n- [1991\\. 找到陣列的中間位置](https://leetcode.cn/problems/find-the-middle-index-in-array/) 同 724 題\n- [3707\\. 相等子字串分數](https://leetcode.cn/problems/equal-score-substrings/) 1262\n- [2270\\. 分割陣列的方案數](https://leetcode.cn/problems/number-of-ways-to-split-array/) 1334\n- [2256\\. 最小平均差](https://leetcode.cn/problems/minimum-average-difference/) 1395\n- [1422\\. 分割字串的最大得分](https://leetcode.cn/problems/maximum-score-after-splitting-a-string/) 做到 $O(n)$\n- [238\\. 除自身以外陣列的乘積](https://leetcode.cn/problems/product-of-array-except-self/) \n- [1493\\. 刪掉一個元素以後全為 1 的最長子陣列](https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/) 1423\n- [845\\. 陣列中的最長山脈](https://leetcode.cn/problems/longest-mountain-in-array/) 1437 也可以分組迴圈\n- [2012\\. 陣列美麗值求和](https://leetcode.cn/problems/sum-of-beauty-in-the-array/) 1468\n- [2909\\. 元素和最小的山形三元組 II](https://leetcode.cn/problems/minimum-sum-of-mountain-triplets-ii/) 1479\n- [2483\\. 商店的最少代價](https://leetcode.cn/problems/minimum-penalty-for-a-shop/) 1495：前後綴統計 `answer[i]` / `prices[i]` 這類量時很常見\n- [1525\\. 字串的好分割數目](https://leetcode.cn/problems/number-of-good-ways-to-split-a-string/) 1500\n- [3583\\. 統計特殊三元組](https://leetcode.cn/problems/count-special-triplets/) 1510\n- [3354\\. 使陣列元素等於零](https://leetcode.cn/problems/make-array-elements-equal-to-zero/) 做到 $O(n)$\n- [1930\\. 長度為 3 的不同迴文子序列](https://leetcode.cn/problems/unique-length-3-palindromic-subsequences/) 1533\n- [2874\\. 有序三元組中的最大值 II](https://leetcode.cn/problems/maximum-value-of-an-ordered-triplet-ii/) 1583\n- [1664\\. 生成平衡陣列的方案數](https://leetcode.cn/problems/ways-to-make-a-fair-array/) 1590\n- [123\\. 買賣股票的最佳時機 III](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/) 拆分成兩個 121 題\n- [3698\\. 分割陣列得到最小絕對差](https://leetcode.cn/problems/split-array-with-minimum-difference/) 1649\n- [3598\\. 相鄰字串之間的最長公共字首](https://leetcode.cn/problems/longest-common-prefix-between-adjacent-strings-after-removals/) 1655\n- [2222\\. 選擇建築的方案數](https://leetcode.cn/problems/number-of-ways-to-select-buildings/) 1657\n- [1031\\. 兩個無重疊子陣列的最大和](https://leetcode.cn/problems/maximum-sum-of-two-non-overlapping-subarrays/) 1680\n- [689\\. 三個無重疊子陣列的最大和](https://leetcode.cn/problems/maximum-sum-of-3-non-overlapping-subarrays/) \n- [2420\\. 找到所有好下標](https://leetcode.cn/problems/find-all-good-indices/) 1695\n- [2100\\. 適合野炊的日子](https://leetcode.cn/problems/find-good-days-to-rob-the-bank/) 1702\n- [926\\. 將字串翻轉到單調遞增](https://leetcode.cn/problems/flip-string-to-monotone-increasing/) \n- [334\\. 遞增的三元子序列](https://leetcode.cn/problems/increasing-triplet-subsequence/) \n- [1653\\. 使字串平衡的最少刪除次數](https://leetcode.cn/problems/minimum-deletions-to-make-string-balanced/) 1794\n- [1186\\. 刪除一次得到子陣列最大和](https://leetcode.cn/problems/maximum-subarray-sum-with-one-deletion/) 1799\n- [3738\\. 替換至多一個元素後最長非遞減子陣列](https://leetcode.cn/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element/) 1811\n- [42\\. 接雨水](https://leetcode.cn/problems/trapping-rain-water/)（[講解](https://www.bilibili.com/video/BV1Qg411q7ia/?t=3m05s)）\n- [2711\\. 對角線上不同值的數量差](https://leetcode.cn/problems/difference-of-number-of-distinct-values-on-diagonals/) 做到 $O(mn)$\n- [1477\\. 找兩個和為目標值且不重疊的子陣列](https://leetcode.cn/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/) 1851\n- [2680\\. 最大或值](https://leetcode.cn/problems/maximum-or/) 1912\n- [1671\\. 得到山形陣列的最少刪除次數](https://leetcode.cn/problems/minimum-number-of-removals-to-make-mountain-array/) 1913\n- [2906\\. 構造乘積矩陣](https://leetcode.cn/problems/construct-product-matrix/) 2075\n- [3334\\. 陣列的最大因子得分](https://leetcode.cn/problems/find-the-maximum-factor-score-of-array/) 非暴力做法\n- [2167\\. 移除所有載有違禁貨物車廂所需的最少時間](https://leetcode.cn/problems/minimum-time-to-remove-all-cars-containing-illegal-goods/) 2219\n- [2484\\. 統計迴文子序列數目](https://leetcode.cn/problems/count-palindromic-subsequences/) 2223\n- [2163\\. 刪除元素後和的最小差值](https://leetcode.cn/problems/minimum-difference-in-sums-after-removal-of-elements/) 2225\n- [2565\\. 最少得分子序列](https://leetcode.cn/problems/subsequence-with-the-minimum-score/) 2432\n- [1995\\. 統計特殊四元組](https://leetcode.cn/problems/count-special-quadruplets/) 四個數\n- [2552\\. 統計上升四元組](https://leetcode.cn/problems/count-increasing-quadruplets/) 2433 四個數\n- [3302\\. 字典序最小的合法序列](https://leetcode.cn/problems/find-the-lexicographically-smallest-valid-sequence/) 2474 第 2565 題的進階版本\n- [3404\\. 統計特殊子序列的數目](https://leetcode.cn/problems/count-special-subsequences/) 2445 四個數\n- [3303\\. 第一個幾乎相等子字串的下標](https://leetcode.cn/problems/find-the-occurrence-of-first-almost-equal-substring/) 2509\n- [3287\\. 求出陣列中最大序列值](https://leetcode.cn/problems/find-the-maximum-sequence-value-of-array/) 2545\n- [3257\\. 放三個車的價值之和最大 II](https://leetcode.cn/problems/maximum-value-sum-by-placing-three-rooks-ii/) 2553\n- [3410\\. 刪除所有值為某個元素後的最大子陣列和](https://leetcode.cn/problems/maximize-subarray-sum-after-removing-all-occurrences-of-one-element/) 2844\n- [3003\\. 執行操作後的最大分割數量](https://leetcode.cn/problems/maximize-the-number-of-partitions-after-operations/) 3039\n- [487\\. 最大連續 1 的個數 II](https://leetcode.cn/problems/max-consecutive-ones-ii/)（會員題）\n- [1746\\. 經過一次操作後的最大子陣列和](https://leetcode.cn/problems/maximum-subarray-sum-after-one-operation/)（會員題）\n\n補充題目：\n- 輸入一個長為 n 的 prices 陣列，你需要返回一個長為 n 的 answer 陣列，其中 answer[i] 表示刪除 prices[i]，也就是禁止在第 i 天買賣股票，在此約束下 [121\\. 買賣股票的最佳時機](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/) 的答案。",
+      "children": []
+    },
+    {
+      "id": 76,
+      "title": "18. 專題：把 X 變成 Y",
+      "summary": "部分題目也可以用 BFS 解決。",
+      "children": []
+    },
+    {
+      "id": 77,
+      "title": "19. 專題：跳躍遊戲",
+      "children": []
+    },
+    {
+      "id": 78,
+      "title": "20. 其他",
+      "children": [
+        {
+          "id": 79,
+          "title": "20.1 雜項",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "summary": "掌握動態規劃（DP）是沒有捷徑的，咱們唯一能做的，就是投入時間猛猛刷題。好比學數學，只看書看影片而不做習題，是不能說學會的。\n\n**本題單涵蓋**：\n- 入門\n- 背包\n- 劃分\n- 狀態機\n- 區間\n- 狀壓\n- 數位\n- 樹形\n- 優化\n\n我能做的，是幫你節省找題的時間，並把這些題分類整理好。有著相同套路的題，一起做效率會更高，也更能領悟到 DP 的精髓。每個小節的題目已按照難度分排序（右側數字為難度分）。\n\n![動態規劃演算法題 DP題單 動態規劃題單 入門動態規劃題目 動態規劃新手教程 力扣DP 力扣動態規劃 leetcode動態規劃 leetcode dp 靈茶山艾府 靈神 靈神題單](https://pic.leetcode.cn/1710769845-JRnIfA-dp-2.jpg)\n\n**記憶化搜尋**是新手村神器（甚至可以用到遊戲後期），推薦先看 [動態規劃入門：從記憶化搜尋到遞推](https://www.bilibili.com/video/BV1Xj411K7oF/)。\n\n但記憶化搜尋並不是萬能的，某些題目只有寫成遞推，才能結合資料結構等來優化時間複雜度，多數題目還可以優化空間複雜度。所以儘量在寫完記憶化搜尋後，把遞推的程式碼也寫一下。熟練之後直接寫遞推也可以。\n\n**C++ 0-1 背包模板**：\n\n```cpp\n// 背包 DP 入門：選或不選，取價值最大\nint knapsack(int capacity, vector<int>& weights, vector<int>& values) {\n    vector<int> dp(capacity + 1, 0);\n    for (int i = 0; i < weights.size(); ++i) {\n        for (int cap = capacity; cap >= weights[i]; --cap) { // 倒序確保每件只選一次 {\n            dp[cap] = max(dp[cap], dp[cap - weights[i]] + values[i]); // 不選 or 選\n        }\n        }\n    }\n    return dp[capacity];\n}\n```"
+}

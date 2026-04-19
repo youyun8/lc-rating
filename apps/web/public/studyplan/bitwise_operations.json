@@ -1,13 +1,13 @@
 {
+  "id": 1,
   "title": "位元運算（基礎/性質/拆位/試填/恆等式/思維）",
   "src": "https://leetcode.cn/circle/discuss/dHn9Vk/",
   "last_update": "2026-02-24T14:03:25.797514+00:00",
-  "summary": "![位運算題單](https://pic.leetcode.cn/1720229787-pgKZVb-and-005.png)\n\n推薦先閱讀：[從集合論到位運算，常見位運算技巧分類總結！](https://leetcode.cn/circle/discuss/CaOJ45/)\n\n**本題單涵蓋**：\n- 基礎位運算操作與性質\n- 異或(XOR)、與或(AND/OR)運算應用\n- 拆位/貢獻法、試填法、恆等式\n- 線性基與思維題型\n\n**常用位元運算技巧**：\n- `n & (n - 1)`: 移除最後一個 1\n- `n & -n`: 獲取最後一個 1 (lowbit)\n- `1 << i`: 第 i 位為 1\n- `n >> i & 1`: 獲取第 i 位的值\n\n```cpp\n// 常用位運算操作\n// 判斷奇偶：n & 1\n// 取第 i 位：(n >> i) & 1\n// 設第 i 位為 1：n | (1 << i)\n// 清除第 i 位：n & ~(1 << i)\n// 翻轉第 i 位：n ^ (1 << i)\n// 取最低位的 1：n & (-n)（lowbit）\n// 清除最低位的 1：n & (n - 1)\n// 列舉子集：for (int s = m; s > 0; s = (s - 1) & m)\n```",
   "children": [
     {
+      "id": 2,
       "title": "1. 基礎題",
-      "src": null,
-      "summary": "![位運算題單 位運算題目 位運算基礎 靈茶山艾府](https://pic.leetcode.cn/1720229787-pgKZVb-and-005.png)\n\n推薦先閱讀：[從集合論到位運算，常見位運算技巧分類總結！](https://leetcode.cn/circle/discuss/CaOJ45/)\n\n---\n\n基礎位運算操作與性質\n\n**常用操作**：\n- 判斷奇偶：`n & 1`\n- 取第 i 位：`(n >> i) & 1`\n- 設第 i 位為 1：`n | (1 << i)`\n- 設第 i 位為 0：`n & ~(1 << i)`\n\n```cpp\n// 位運算基礎模板\n// 計算二進位中 1 的個數\nint popcount(int n) {\n    int cnt = 0;\n    while (n) {\n        n &= n - 1; // 清除最低位的 1\n        cnt++;\n    }\n    return cnt;\n}\n// 也可使用 __builtin_popcount(n)\n```",
+      "isLeaf": false,
       "problems": [
         {
           "id": "191",
@@ -201,8 +201,9 @@
       ],
       "children": [
         {
+          "id": 3,
           "title": "1.1 用位運算代替陣列操作",
-          "src": null,
+          "isLeaf": true,
           "problems": [
             {
               "id": "3690",
@@ -214,12 +215,12 @@
               "isPremium": false
             }
           ],
-          "children": [],
-          "isLeaf": true
+          "children": []
         },
         {
+          "id": 4,
           "title": "1.2 反轉二進位制數",
-          "src": null,
+          "isLeaf": true,
           "problems": [
             {
               "id": "190",
@@ -249,17 +250,14 @@
               "isPremium": false
             }
           ],
-          "children": [],
-          "isLeaf": true,
-          "summary": "\n\n**反轉二進位制數**：\n- 將整數的二進位製表示逐位反轉\n- 常見技巧：逐位取出最低位，放到結果的對應高位\n\n```cpp\n// 逐位反轉 32 位無號整數\nuint32_t reverseBits(uint32_t n) {\n    uint32_t res = 0;\n    for (int i = 0; i < 32; ++i) {\n        res = (res << 1) | (n & 1); // 取最低位放入結果\n        n >>= 1;                    // 右移處理下一位\n    }\n    return res;\n}\n```"
+          "children": []
         }
-      ],
-      "isLeaf": false
+      ]
     },
     {
+      "id": 5,
       "title": "2. 異或（XOR）的性質",
-      "src": null,
-      "summary": "本質是模 2 剩餘系的加法。\n\n另見 [資料結構題單](https://leetcode.cn/circle/discuss/mOr1u6/) 中的「6.4 0-1 字典樹（異或字典樹）」。\n\n**XOR 性質核心**：\n- `a ^ a = 0`, `a ^ 0 = a`\n- 滿足交換律與結合律\n- 常用技巧：字首異或和 `P[i] = a[0] ^ ... ^ a[i]`，區間異或 `a[l..r] = P[r] ^ P[l - 1]`",
+      "isLeaf": true,
       "problems": [
         {
           "id": "1310",
@@ -424,12 +422,12 @@
           "isPremium": false
         }
       ],
-      "children": [],
-      "isLeaf": true
+      "children": []
     },
     {
+      "id": 6,
       "title": "3. 與或（AND/OR）的性質",
-      "src": null,
+      "isLeaf": false,
       "problems": [
         {
           "id": "1318",
@@ -524,8 +522,9 @@
       ],
       "children": [
         {
+          "id": 7,
           "title": "3.1 AND/OR LogTrick",
-          "src": null,
+          "isLeaf": true,
           "problems": [
             {
               "id": "898",
@@ -582,13 +581,12 @@
               "isPremium": false
             }
           ],
-          "children": [],
-          "isLeaf": true,
-          "summary": "\n\n**LogTrick (AND/OR) 核心思想**：\n- 任意陣列的字首 AND/OR 結果最多隻有 $O(\\log U)$ 個不同值（U 為數值範圍）\n- 原因：AND 操作只會讓 1 變 0，OR 操作只會讓 0 變 1，每次變化至少減少/增加一個 1\n- 常用於：在 $O(n \\log U)$ 內找到所有子陣列的 AND/OR 結果\n\n**C++ 模板（子陣列 OR 統計）**：\n\n```cpp\n// OR LogTrick：維護所有以 i 結尾的子陣列 OR 值\nvector<pair<int, int>> ors; // {OR 值, 最左下標}\nfor (int i = 0; i < n; ++i) {\n    ors.push_back({nums[i], i});\n    int k = 0;\n    for (auto& p : ors) {\n        p.first |= nums[i]; // AND 則改用 &=\n        if (ors[k].first == p.first) {\n            ors[k].second = p.second; // 合併相同值，保留最左下標\n        } else {\n            ors[++k] = p; // 不同值，新增一項\n        }\n    }\n    ors.resize(k + 1); // 刪除多餘元素\n    // 此時 ors 儲存了所有以 i 結尾的子陣列的不同 OR 值及其最左下標\n    // ors 大小為 O(log U)，遍歷 ors 即可統計所有以 i 結尾的子陣列資訊\n}\n```\n\n**變形應用**：\n- 求滿足條件的最短/最長子陣列長度\n- 統計滿足條件的子陣列數目\n- 結合二分查詢或雙指標優化"
+          "children": []
         },
         {
+          "id": 8,
           "title": "3.2 GCD LogTrick",
-          "src": null,
+          "isLeaf": true,
           "problems": [
             {
               "id": "2447",
@@ -636,17 +634,14 @@
               "isPremium": false
             }
           ],
-          "children": [],
-          "isLeaf": true,
-          "summary": "\n\n**LogTrick (GCD) 核心思想**：\n- 任意陣列的字首 GCD 結果最多隻有 $O(\\log(\\max(\\text{nums})))$ 個不同值\n- 原因：GCD 具有單調不增性質，且若 gcd(a, b) < b，則 gcd(a, b) <= b / 2（至少減半）\n- 因此從任意位置開始往左延伸，GCD 的不同值最多隻有 $O(\\log U)$ 個\n\n**C++ 模板（子陣列 GCD 統計）**：\n\n```cpp\n// GCD LogTrick：維護所有以 i 結尾的子陣列 GCD 值\nvector<pair<int, int>> gcds; // {GCD 值, 最左下標}\nfor (int i = 0; i < n; ++i) {\n    gcds.push_back({nums[i], i});\n    int k = 0;\n    for (auto& p : gcds) {\n        p.first = std::gcd(p.first, nums[i]);\n        if (gcds[k].first == p.first) {\n            gcds[k].second = p.second; // 合併相同值，保留最左下標\n        } else {\n            gcds[++k] = p; // 不同值，新增一項\n        }\n    }\n    gcds.resize(k + 1); // 刪除多餘元素\n    // 此時 gcds 儲存了所有以 i 結尾的子陣列的不同 GCD 值及其最左下標\n    // 遍歷 gcds 即可統計所有以 i 結尾的子陣列資訊\n}\n```\n\n**常見題型**：\n- 統計 GCD 等於 K 的子陣列數目\n- 求使所有元素變為 1 的最少操作次數\n- 最大子陣列 GCD 相關問題\n\n**與 AND 的類比**：\n- GCD 和 AND 都具有「越多數參與，結果不增」的性質\n- 兩者的 LogTrick 模板幾乎完全相同，只是合併操作不同"
+          "children": []
         }
-      ],
-      "isLeaf": false,
-      "summary": "AND 的數越多，結果越小。\n\nOR 的數越多，結果越大。\n\n**AND/OR 單調性**：\n- `a & b <= a`, `a | b >= a`\n- 持續 AND 操作只會讓結果變小且 1 的個數減少\n- 持續 OR 操作只會讓結果變大且 1 的個數增加\n\n**常用技巧**：\n- 判斷子陣列 AND/OR 相關問題時，可利用單調性進行雙指標或列舉\n- 對於區間 AND/OR 查詢，可利用 ST 表（稀疏表）預處理，因為這兩種運算滿足結合律和單調性\n\n**性質詳解**：\n- AND：某位為 0 則永遠為 0，只有全部為 1 才為 1\n- OR：某位為 1 則永遠為 1，只有全部為 0 才為 0\n- 利用這些性質可以設計貪心策略或進行位分析\n\n```cpp\n// AND/OR 性質應用模板\n// AND 的數越多，結果越小；OR 的數越多，結果越大\n// 利用單調性，常與雙指標/滑動視窗結合\nint and_all = nums[0];\nfor (int i = 1; i < n; i++) {\n    and_all &= nums[i]; // 持續 AND 只會讓位元從 1 變 0\n}\n// 列舉子陣列的 AND/OR 值：利用「最多 O(log U) 個不同值」的性質\n```"
+      ]
     },
     {
+      "id": 9,
       "title": "4. 拆位 / 貢獻法",
-      "src": null,
+      "isLeaf": false,
       "problems": [
         {
           "id": "477",
@@ -714,8 +709,9 @@
       ],
       "children": [
         {
+          "id": 10,
           "title": "4.1 進位制拆位",
-          "src": null,
+          "isLeaf": true,
           "problems": [
             {
               "id": "3153",
@@ -727,16 +723,14 @@
               "isPremium": false
             }
           ],
-          "children": [],
-          "isLeaf": true
+          "children": []
         }
-      ],
-      "isLeaf": false,
-      "summary": "\n\n**位元拆分 (Bit-by-bit)**：\n- 將每個數拆成 30 或 62 個位元，獨立計算每一位的貢獻\n- 常用於解決 XOR/AND/OR 相關的加總問題\n\n**C++ 模板**：\n\n```cpp\n// 逐位計算每個 bit 的貢獻\nfor (int i = 0; i < 30; ++i) {\n    int count1 = 0;\n    for (int x : nums) {\n        if ((x >> i) & 1) {\n            count1++;\n        }\n    }\n    // 根據 count1 (1的個數) 和 n - count1 (0的個數) 計算貢獻\n    long long combinations = (long long)count1 * (n - count1);\n    ans += combinations * (1LL << i);\n}\n```"
+      ]
     },
     {
+      "id": 11,
       "title": "5. 試填法",
-      "src": null,
+      "isLeaf": true,
       "problems": [
         {
           "id": "421",
@@ -811,13 +805,12 @@
           "isPremium": false
         }
       ],
-      "children": [],
-      "isLeaf": true,
-      "summary": "\n\n**試填法 (Trial Filling)**：\n- 從最高位到最低位，逐位確定結果是否可以為 1\n- 常用於求最大異或和、結合 0-1 Trie 或檢查可行性\n\n**C++ 模板 (求最大異或和)**：\n\n```cpp\n// 從高位到低位貪心試填\nint ans = 0, mask = 0;\nfor (int i = 30; i >= 0; --i) {\n    mask |= (1 << i); // 逐步擴展考慮的位元範圍\n    unordered_set<int> seen;\n    int target = ans | (1 << i); // 嘗試第 i 位設為 1\n    for (int x : nums) {\n        if (seen.count((x & mask) ^ target)) { // 存在配對使 XOR 達到 target\n            ans = target;\n            break;\n        }\n\n        seen.insert(x & mask);\n    }\n}\n```"
+      "children": []
     },
     {
+      "id": 12,
       "title": "6. 恆等式",
-      "src": null,
+      "isLeaf": true,
       "problems": [
         {
           "id": "1835",
@@ -838,13 +831,12 @@
           "isPremium": false
         }
       ],
-      "children": [],
-      "isLeaf": true
+      "children": []
     },
     {
+      "id": 13,
       "title": "7. 線性基",
-      "src": null,
-      "summary": "**線性基 (Linear Basis) 模板**：\n用於解決異或相關的子集問題，如子集最大異或和。\n\n```cpp\n// 線性基：維護一組線性無關的位元向量，用於異或運算\n// 性質：線性基可以表示原集合所有子集異或的結果\nstruct LinearBasis {\n    long long d[64];  // d[i] 表示最高位為第 i 位的基向量\n    \n    // 初始化：所有基向量為 0\n    LinearBasis() {\n        memset(d, 0, sizeof(d));\n    }\n\n    // 插入一個數到線性基中\n    void insert(long long x) {\n        for (int i = 62; i >= 0; i--) {\n            if (!(x >> i)) {\n                continue;  // x 的第 i 位為 0，跳過\n            }\n            // x 的第 i 位為 1\n            if (!d[i]) {\n                d[i] = x;  // 第 i 位尚未有基底，直接設置\n                return;\n            }\n            x ^= d[i];  // 消去 x 的第 i 位，繼續嘗試更低位\n        }\n        // 若循環結束 x 變為 0，說明 x 可由現有基底線性表示\n    }\n\n    // 查詢最大異或和\n    long long queryMax() {\n        long long res = 0;\n        for (int i = 62; i >= 0; i--) {\n            // 貪心策略：若異或後結果更大則異或\n            res = max(res, res ^ d[i]);\n        }\n        return res;\n    }\n};\n```",
+      "isLeaf": true,
       "problems": [
         {
           "id": "3630",
@@ -865,12 +857,12 @@
           "isPremium": false
         }
       ],
-      "children": [],
-      "isLeaf": true
+      "children": []
     },
     {
+      "id": 14,
       "title": "8. 思維題",
-      "src": null,
+      "isLeaf": true,
       "problems": [
         {
           "id": "810",
@@ -999,13 +991,12 @@
           "isPremium": false
         }
       ],
-      "children": [],
-      "isLeaf": true,
-      "summary": "貪心、腦筋急轉彎等。"
+      "children": []
     },
     {
+      "id": 15,
       "title": "9. 其他",
-      "src": null,
+      "isLeaf": true,
       "problems": [
         {
           "id": "LCP 81",
@@ -1215,10 +1206,7 @@
           "isPremium": false
         }
       ],
-      "children": [],
-      "isLeaf": true,
-      "summary": "\n\n**位運算的其他應用**：\n- **只出現一次的數字**：利用 XOR 的性質 `a ^ a = 0`\n- **找缺失/重複**：利用 XOR 或位元計數\n- `x & (-x)` 取最低位的 1（lowbit）\n\n```cpp\n// 找出只出現一次的數字（其他出現兩次）\nint singleNumber(vector<int>& nums) {\n    int res = 0;\n    for (int x : nums) {\n        res ^= x;\n    }\n    return res;\n}\n```"
+      "children": []
     }
-  ],
-  "isLeaf": false
+  ]
 }

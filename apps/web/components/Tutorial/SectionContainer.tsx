@@ -5,50 +5,47 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { StudyPlanData, TutorialData } from "@/types";
+import { TutorialData } from "@/types";
 import React, { useMemo } from "react";
-import { StudyPlanMarkdownContent } from "./MarkdownContent";
-import { ProblemList } from "./ProblemList";
-import { extractImageUrls, stripDuplicateImages } from "./dedupe";
+import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
+import {
+  extractImageUrls,
+  stripDuplicateImages,
+} from "@/components/StudyPlan/dedupe";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 
-function countProblems(section: StudyPlanData.Section): number {
-  let count = section.problems?.length ?? 0;
+function countSections(section: TutorialData.Section): number {
+  let count = 1;
   if (section.children) {
     count += section.children.reduce(
-      (acc, child) => acc + countProblems(child),
+      (acc, child) => acc + countSections(child),
       0,
     );
   }
   return count;
 }
 
-interface SectionContainerProps {
-  section: StudyPlanData.Section;
-  /** Lookup of tutorial node by shared numeric id, for summary rendering. */
-  tutorialById?: Map<number, TutorialData.Section>;
+interface TutorialSectionContainerProps {
+  section: TutorialData.Section;
   level?: number;
   parentImageUrls?: Set<string>;
 }
 
-const SectionContainer = React.memo(
+const TutorialSectionContainer = React.memo(
   ({
     section,
-    tutorialById,
     level = 0,
     parentImageUrls = new Set(),
-  }: SectionContainerProps) => {
-    const totalProblems = countProblems(section);
+  }: TutorialSectionContainerProps) => {
     const childCount = section.children?.length ?? 0;
+    const totalSections = countSections(section);
 
-    const tutorial = tutorialById?.get(section.id);
-    const rawSummary = tutorial?.summary ?? "";
+    const rawSummary = section.summary ?? "";
     const dedupedSummary = useMemo(
       () => stripDuplicateImages(rawSummary, parentImageUrls),
       [rawSummary, parentImageUrls],
     );
 
-    // Merge parent + current section images so children won't repeat them either
     const mergedImageUrls = useMemo(() => {
       const own = extractImageUrls(rawSummary);
       if (own.size === 0) return parentImageUrls;
@@ -73,12 +70,14 @@ const SectionContainer = React.memo(
             <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 font-medium">
               {level === 0 ? "主章節" : level === 1 ? "子章節" : "細分章節"}
             </span>
-            <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
-              {totalProblems} 題
-            </span>
             {childCount > 0 && (
               <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
                 {childCount} 個子章節
+              </span>
+            )}
+            {totalSections > 1 && (
+              <span className="rounded-full border border-border/60 bg-muted/30 px-2.5 py-1">
+                共 {totalSections} 個章節
               </span>
             )}
           </div>
@@ -108,33 +107,25 @@ const SectionContainer = React.memo(
             </div>
           ) : null}
         </CardHeader>
-        <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
-          <div className="flex flex-col gap-4">
-            {section.problems && section.problems.length ? (
-              <div className="w-full">
-                <ProblemList problems={section.problems} />
-              </div>
-            ) : null}
-            {section.children && section.children.length > 0 && (
-              <div className="flex w-full flex-col gap-4 border-t border-border/50 pt-1">
-                {section.children.map((child) => (
-                  <SectionContainer
-                    key={child.id}
-                    section={child}
-                    tutorialById={tutorialById}
-                    level={level + 1}
-                    parentImageUrls={mergedImageUrls}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </CardContent>
+        {section.children && section.children.length > 0 ? (
+          <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
+            <div className="flex w-full flex-col gap-4 border-t border-border/50 pt-1">
+              {section.children.map((child) => (
+                <TutorialSectionContainer
+                  key={child.id}
+                  section={child}
+                  level={level + 1}
+                  parentImageUrls={mergedImageUrls}
+                />
+              ))}
+            </div>
+          </CardContent>
+        ) : null}
       </Card>
     );
   },
 );
 
-SectionContainer.displayName = "SectionContainer";
+TutorialSectionContainer.displayName = "TutorialSectionContainer";
 
-export { SectionContainer };
+export { TutorialSectionContainer };

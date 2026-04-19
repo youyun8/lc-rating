@@ -1,0 +1,156 @@
+{
+  "id": 1,
+  "title": "滑動視窗與雙指標（定長/不定長/單序列/雙序列/三指標/分組迴圈）",
+  "src": "https://leetcode.cn/circle/discuss/0viNMK/",
+  "last_update": "2026-02-24T14:26:31.192675+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 基礎",
+      "summary": "如果你剛開始刷題，還不熟悉基本編程語法和常用庫函數，推薦先刷力扣官方的【入門題單】：[「新」動計劃 · 編程入門](https://leetcode.cn/studyplan/primers-list/)。有了一定基礎後，可開始本題單。題目已按難度分組，右側數字為難度分。若遇難題，建議收藏後過段時間再做。\n\n---\n\n\n\n**定長滑動視窗**：\n- 視窗大小固定為 k\n- 先初始化第一個視窗\n- 後續移動時：加一個新元素，減一個舊元素\n\n```cpp\n// 定長滑動視窗：維護大小為 k 的視窗\nfor (int i = 0; i < n; ++i) {\n    // 1. 入：nums[i]\n    // ...\n    if (i < k - 1) {\n        continue;\n    }\n    // 2. 更新答案\n    // ...\n    // 3. 出：nums[i - k + 1]\n    // ...\n}\n```",
+      "children": []
+    },
+    {
+      "id": 3,
+      "title": "2. 進階（選做）",
+      "children": []
+    },
+    {
+      "id": 4,
+      "title": "3. 其他（選做）",
+      "children": []
+    },
+    {
+      "id": 5,
+      "title": "4. 越短越合法/求最長/最大 > 基礎",
+      "summary": "不定長滑動窗口主要分為三類：求最長子陣列，求最短子陣列，求子陣列個數。滑動窗口相當於在維護一個佇列。右指標的移動可以視作入隊，左指標的移動可以視作出隊。\n\n---\n\n\n\n**不定長滑動視窗（求最長/最大）基礎**：\n- 越短越合法 → 找最長的合法視窗\n- 右端點向右擴展，左端點在不合法時向右收縮\n- 視窗始終保持合法狀態\n\n```cpp\n// 不定長滑動視窗：求滿足條件的最長子陣列\nint left = 0, ans = 0;\nfor (int right = 0; right < n; ++right) {\n    // 加入 nums[right]\n    while (/* 視窗不合法 */) {\n        // 移除 nums[left]\n        left++;\n    }\n    ans = max(ans, right - left + 1);\n}\n```",
+      "children": []
+    },
+    {
+      "id": 6,
+      "title": "5. 越短越合法/求最長/最大 > 進階（選做）",
+      "children": []
+    },
+    {
+      "id": 7,
+      "title": "6. 越長越合法/求最短/最小",
+      "summary": "\n\n**不定長滑動視窗（求最短/最小）**：\n- 越長越合法 → 找最短的合法視窗\n- 右端點向右擴展，視窗合法時嘗試收縮左端點\n\n```cpp\n// 不定長滑動視窗：求滿足條件的最短子陣列\nint left = 0, ans = INT_MAX;\nfor (int right = 0; right < n; ++right) {\n    // 加入 nums[right]\n    while (/* 視窗合法 */) {\n        ans = min(ans, right - left + 1);\n        // 移除 nums[left]\n        left++;\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 8,
+      "title": "7. 求子陣列個數 > 越短越合法",
+      "summary": "\n\n**滑動視窗求子陣列個數（越短越合法）**：\n- 對每個右端點，合法的左端點是一個區間 [left, right]\n- 子陣列個數 += (right - left + 1)\n\n```cpp\n// 滑動視窗計數：每次右移，新增 right - left + 1 個合法子陣列\nint left = 0;\nlong long count = 0;\nfor (int right = 0; right < n; ++right) {\n    // 加入 nums[right]\n    while (/* 視窗不合法 */) {\n        // 移除 nums[left]\n        left++;\n    }\n    count += right - left + 1;\n}\n```",
+      "children": [
+        {
+          "id": 9,
+          "title": "7.1 求子陣列個數 > 越短越合法 > 思維擴展（選做）",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "8. 求子陣列個數 > 越長越合法",
+      "children": []
+    },
+    {
+      "id": 11,
+      "title": "9. 求子陣列個數 > 恰好型滑動視窗",
+      "summary": "\n\n**恰好型滑動視窗**：\n- 「恰好 k 個」= 「至多 k 個」-「至多 k-1 個」\n- 將恰好型問題轉換為兩次「至多型」滑動視窗\n- 這是處理恰好型問題的標準技巧\n\n```cpp\n// 恰好 k 個 = atMost(k) - atMost(k - 1)\nlong long atMost(vector<int>& nums, int k) {\n    int left = 0;\n    long long count = 0;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n        // 加入 nums[right]，更新狀態\n        while (/* 超過 k 個 */) {\n            // 移除 nums[left]\n            left++;\n        }\n        count += right - left + 1;\n    }\n    return count;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 12,
+      "title": "10. 其他（選做）",
+      "children": []
+    },
+    {
+      "id": 13,
+      "title": "11. 反轉字串",
+      "children": []
+    },
+    {
+      "id": 14,
+      "title": "12. 相向雙指標",
+      "summary": "兩個指標 `left = 0`、`right = n - 1`，從陣列的兩端開始，向中間移動，這叫相向雙指標。上面的滑動窗口相當於同向雙指標。\n\n---\n\n雙指標分為相向、同向、背向三種。滑動窗口是同向雙指標，相向雙指標常用於字串翻轉、迴文判斷、兩數之和等。\n\n---\n\n\n\n**相向雙指標**：\n- 兩個指標從兩端向中間移動\n- 適用於迴文判定、兩數之和（有序陣列）\n- 根據比較結果決定移動哪個指標\n\n```cpp\n// 相向雙指標：左右往中間靠攏\nint left = 0, right = n - 1;\nwhile (left < right) {\n    int sum = nums[left] + nums[right];\n    if (sum == target) {\n        // 找到目標\n        break;\n    } else if (sum < target) {\n        left++; // 和太小，左指標右移\n    } else {\n        right--; // 和太大，右指標左移\n    }\n}\n```",
+      "children": [
+        {
+          "id": 15,
+          "title": "12.1 相向雙指標 > 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "13. 同向雙指標",
+      "summary": "兩個指標的移動方向相同（都向右，或者都向左）。",
+      "children": []
+    },
+    {
+      "id": 17,
+      "title": "14. 同向雙指標 > 相似題目",
+      "children": []
+    },
+    {
+      "id": 18,
+      "title": "15. 背向雙指標",
+      "summary": "兩個指標從陣列中的同一個位置出發，一個向左，另一個向右，背向移動。",
+      "children": []
+    },
+    {
+      "id": 19,
+      "title": "16. 原地修改",
+      "summary": "雙指標常用於原地修改陣列，如移除元素、去重、排序等。\n\n---\n\n\n\n**原地修改（雙指標）**：\n- 用慢指標記錄寫入位置，快指標掃描\n- 適用於移除元素、去重等問題\n- 空間 $O(1)$\n\n```cpp\n// 快慢指標原地去重\nint removeDuplicates(vector<int>& nums) {\n    int slow = 0;\n    for (int fast = 0; fast < (int)nums.size(); ++fast) {\n        if (fast == 0 || nums[fast] != nums[fast - 1]) { // 與前一個不同才保留\n            nums[slow++] = nums[fast]; // 放到 slow 位置\n        }\n    }\n    return slow;\n}\n```",
+      "children": [
+        {
+          "id": 20,
+          "title": "16.1 原地修改 > 思維擴展（選做）",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "17. 矩陣上的雙指標",
+      "children": []
+    },
+    {
+      "id": 22,
+      "title": "18. 雙指標",
+      "summary": "雙序列雙指標常用於合併、判斷子序列、字串匹配等。\n\n---\n\n\n\n**雙序列雙指標**：\n- 同時在兩個序列上移動指標\n- 適用於合併操作、求公共元素等\n\n```cpp\n// 雙序列雙指標：同時遍歷兩個有序序列\nint i = 0, j = 0;\nwhile (i < m && j < n) {\n    if (nums1[i] < nums2[j]) {\n        i++; // nums1 較小，前進\n    } else if (nums1[i] > nums2[j]) {\n        j++; // nums2 較小，前進\n    } else {\n        // 找到公共元素\n        i++;\n        j++;\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 23,
+      "title": "19. 判斷子序列",
+      "summary": "**核心思路：** 使用雙指標判斷字串 `s` 是否為字串 `t` 的子序列。指標 `i` 遍歷 `s`，指標 `j` 遍歷 `t`，若字元匹配則 `i` 前進，最終檢查 `i` 是否走完 `s`。\n\n---\n\n**適用場景**：\n- 判斷一個序列能否透過刪除元素從另一個序列中得到\n- 尋找滿足子序列條件的最長/最短匹配\n- 計算使某字串成為子序列所需的最少操作\n\n```cpp\n// 判斷 s 是否為 t 的子序列\nbool isSubsequence(const string& s, const string& t) {\n    int i = 0, j = 0;\n    while (i < s.size() && j < t.size()) {\n        if (s[i] == t[j]) {\n            i++;\n        }\n        j++;\n    }\n    return i == s.size();\n}\n\n// 變體：回傳 s 中已匹配的長度（適用於 2486、2825 等題）\nint matchedLength(const string& s, const string& t) {\n    int i = 0;\n    for (int j = 0; i < s.size() && j < t.size(); j++) {\n        if (s[i] == t[j]) {\n            i++;\n        }\n    }\n    return i; // 已匹配字元數，s.size() - i 即為還需補的字元數\n}\n```",
+      "children": []
+    },
+    {
+      "id": 24,
+      "title": "20. 判斷子序列 > 進階",
+      "children": []
+    },
+    {
+      "id": 25,
+      "title": "21. 三指標",
+      "summary": "三指標常用於處理「恰好 k 個」問題，通過維護兩個左指標，實現「恰好」的滑動窗口。",
+      "children": [
+        {
+          "id": 26,
+          "title": "21.1 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "22. 分組迴圈",
+      "summary": "適用場景：按照題目要求，陣列會被分割成若干組，每一組的判斷/處理邏輯是相同的。核心思想：外層迴圈負責遍歷組之前的準備工作（記錄開始位置），和遍歷組之後的統計工作（更新答案最大值）。內層迴圈負責遍歷組，找出這一組最遠在哪結束。這個寫法的好處是，各個邏輯塊分工明確，也不需要特判最後一組（易錯點）。以我的經驗，這個寫法是所有寫法中最不容易出 bug 的，推薦大家記住。\n\n**分組迴圈模板**：\n適用於處理陣列中連續滿足某種條件的子段。\n\n```cpp\n// 外層迴圈：遍歷每一組\nfor (int i = 0; i < n;) {\n    int start = i; // 記錄分組起始位置\n    // 內層迴圈：找到當前分組的結束位置\n    // 修改 while 條件以適應不同題目\n    while (i < n && nums[i] == nums[start]) {\n        i++;\n    }\n    // 此時 [start, i-1] 是一個分組，長度為 i - start\n    // 在此處處理該分組的邏輯，例如：\n    ans = max(ans, i - start);\n}\n```\n\n**常見變形**：\n\n```cpp\n// 變形一：按值分組（相鄰相等）\nfor (int i = 0; i < n;) {\n    int start = i;\n    int val = nums[i];\n    while (i < n && nums[i] == val) {\n        i++;\n    }\n    // [start, i-1] 都是 val\n}\n\n// 變形二：按遞增/遞減分組\nfor (int i = 0; i < n;) {\n    int start = i;\n    i++;\n    while (i < n && nums[i] >= nums[i - 1]) {\n        i++;\n    }\n    // [start, i-1] 是一個非遞減子段\n}\n```",
+      "children": []
+    }
+  ],
+  "summary": "**本題單涵蓋**：\n- 定長滑動視窗：固定視窗大小問題\n- 不定長滑動視窗：求最長/最短子陣列\n- 單序列雙指標：同向/相向雙指標\n- 雙序列雙指標：歸併、匹配\n- 三指標：三數之和等\n- 分組迴圈：按條件分組遍歷\n\n題目按難度排序，附精選題解\n\n**C++ 模板 (不定長滑動視窗)**：\n\n```cpp\n// 不定長滑動視窗模板\nvoid slidingWindow(vector<int>& nums) {\n    int n = nums.size();\n    int left = 0;\n    for (int right = 0; right < n; ++right) {\n        // 1. 進窗：更新視窗內資料\n        // ...\n\n        // 2. 出窗：當不滿足條件時，縮小左邊界\n        while (/* 滿足出窗條件 */) {\n            // 更新視窗內資料\n            left++;\n        }\n\n        // 3. 更新答案\n        // ...\n    }\n}\n```"
+}

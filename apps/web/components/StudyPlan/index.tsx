@@ -1,6 +1,7 @@
 "use client";
 
 import { useStudyPlan } from "@/hooks/useStudyPlan";
+import { useTutorial } from "@/hooks/useTutorial";
 import { useProgressStore } from "@/hooks/useProgress";
 import { STUDYPLANS } from "@/config/constants";
 import {
@@ -9,7 +10,7 @@ import {
   defaultTheme,
 } from "@/config/studyPlanThemes";
 import { SectionContainer } from "./SectionContainer";
-import { StudyPlanData } from "@/types";
+import { StudyPlanData, TutorialData } from "@/types";
 import {
   BookOpen,
   CheckCircle2,
@@ -25,6 +26,7 @@ import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { extractImageUrls } from "./dedupe";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
+import { sectionAnchor } from "@/utils/sectionAnchor";
 
 function collectProblemIds(sections: StudyPlanData.Section[]): string[] {
   const ids: string[] = [];
@@ -100,6 +102,7 @@ function StudyPlanSidebarButtons() {
 
 function StudyPlan({ plan }: StudyPlanProps) {
   const { studyPlan } = useStudyPlan(plan);
+  const { tutorial } = useTutorial(plan);
   const progress = useProgressStore((state) => state.progress);
 
   const planTitle =
@@ -107,12 +110,21 @@ function StudyPlan({ plan }: StudyPlanProps) {
   const Icon = studyPlanIcons[plan] ?? BookOpen;
   const theme = studyPlanThemes[plan] ?? defaultTheme;
 
+  const tutorialById = useMemo(() => {
+    const map = new Map<number, TutorialData.Section>();
+    if (!tutorial) return map;
+    const walk = (node: TutorialData.Section) => {
+      map.set(node.id, node);
+      node.children?.forEach(walk);
+    };
+    tutorial.children?.forEach(walk);
+    return map;
+  }, [tutorial]);
+
   const topLevelImageUrls = useMemo(
     () =>
-      studyPlan?.summary
-        ? extractImageUrls(studyPlan.summary)
-        : new Set<string>(),
-    [studyPlan?.summary],
+      tutorial?.summary ? extractImageUrls(tutorial.summary) : new Set<string>(),
+    [tutorial?.summary],
   );
 
   const stats = useMemo(() => {
@@ -192,11 +204,17 @@ function StudyPlan({ plan }: StudyPlanProps) {
                             <span className="hidden sm:inline">·</span>
                           </>
                         )}
-                        <span>
-                          更新於{" "}
-                          {new Date(studyPlan.last_update).toLocaleDateString()}
-                        </span>
-                        <span className="hidden sm:inline">·</span>
+                        {studyPlan.last_update && (
+                          <>
+                            <span>
+                              更新於{" "}
+                              {new Date(
+                                studyPlan.last_update,
+                              ).toLocaleDateString()}
+                            </span>
+                            <span className="hidden sm:inline">·</span>
+                          </>
+                        )}
                         <span>{stats.rootSections} 個主章節</span>
                       </div>
                     </div>
@@ -287,7 +305,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
       <div className="mx-auto w-full max-w-7xl px-3 py-5 pb-24 sm:px-4 sm:py-6 md:px-6 md:py-8 md:pb-20 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
         <div className="flex flex-col gap-8">
-          {studyPlan?.summary && (
+          {tutorial?.summary && (
             <section className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm">
               <div className="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-5">
                 <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -306,7 +324,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
               </div>
               <div className="p-4 sm:p-5 md:p-6">
                 <StudyPlanMarkdownContent
-                  content={studyPlan.summary}
+                  content={tutorial.summary}
                   variant="plan"
                 />
               </div>
@@ -360,8 +378,8 @@ function StudyPlan({ plan }: StudyPlanProps) {
                 <div className="flex flex-wrap gap-2">
                   {studyPlan.children.map((section) => (
                     <a
-                      key={section.title}
-                      href={`#${section.title}`}
+                      key={section.id}
+                      href={`#${sectionAnchor(section.title)}`}
                       className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                     >
                       {section.title}
@@ -374,8 +392,9 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
           {studyPlan?.children.map((section) => (
             <SectionContainer
-              key={section.title}
+              key={section.id}
               section={section}
+              tutorialById={tutorialById}
               parentImageUrls={topLevelImageUrls}
             />
           ))}

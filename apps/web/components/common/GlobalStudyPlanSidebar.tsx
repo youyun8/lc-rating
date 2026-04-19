@@ -49,7 +49,7 @@ function SubTopicItem({ section }: SubTopicItemProps) {
         </SidebarMenuSubItem>
         <SidebarMenuSub>
           {section.children!.map((child) => (
-            <SubTopicItem key={child.title} section={child} />
+            <SubTopicItem key={child.id} section={child} />
           ))}
         </SidebarMenuSub>
       </>
@@ -137,7 +137,7 @@ export function GlobalStudyPlanSidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 {studyPlan.children.map((section) => (
-                  <SidebarMenuItem key={section.title}>
+                  <SidebarMenuItem key={section.id}>
                     {section.children && section.children.length > 0 ? (
                       <>
                         <SidebarMenuButton asChild>
@@ -147,7 +147,7 @@ export function GlobalStudyPlanSidebar() {
                         </SidebarMenuButton>
                         <SidebarMenuSub>
                           {section.children.map((child) => (
-                            <SubTopicItem key={child.title} section={child} />
+                            <SubTopicItem key={child.id} section={child} />
                           ))}
                         </SidebarMenuSub>
                       </>

@@ -1,0 +1,38 @@
+{
+  "id": 1,
+  "title": "網格圖（DFS/BFS/綜合應用）",
+  "src": "https://leetcode.cn/circle/discuss/YiXPXW/",
+  "last_update": "2026-04-18T11:53:23.324686+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 網格圖 DFS",
+      "summary": "適用於需要計算連通塊個數、大小的題目。<br>部分題目做法不止一種，也可以用 BFS 或並查集解決。<br><br>二叉樹 DFS 與網格圖 DFS 的區別：<br><table><thead><tr><th></th><th><strong>二叉樹</strong></th><th><strong>網格圖</strong></th></tr></thead><tbody><tr><td><strong>遞迴入口</strong></td><td>根節點</td><td>網格圖的某個格子</td></tr><tr><td><strong>遞迴方向</strong></td><td>左兒子和右兒子</td><td>一般為左右上下的相鄰格子</td></tr><tr><td><strong>遞迴邊界</strong></td><td>空節點（或者葉節點）</td><td>出界、遇到障礙或者已訪問</td></tr></tbody></table>\n\n---\n\n<img src=\"https://pic.leetcode.cn/1724834645-OYGBxU-grid004.png\" alt=\"網格圖題單 DFS BFS 網格圖題目 圖論 靈茶山艾府\" style=\"width: 100%;\"><br>> 小小貪喫蛇，移動花樣多。<br>> 平移加旋轉，為把迷宮破。<br>> 代碼復代碼，bug 何其多。<br>> 六步化一步，AC 定我奪。<br>> —— [1210. 穿過迷宮的最少移動次數](https://leetcode.cn/problems/minimum-moves-to-reach-target-with-rotations/)<br>\n\n---\n\n**適用場景**：計算連通塊個數、大小等\n\n**二叉樹 DFS vs 網格圖 DFS**：\n\n| 要素 | 二叉樹 | 網格圖 |\n|------|--------|--------|\n| 遞迴入口 | 根節點 | 某個格子 |\n| 遞迴方向 | 左右子節點 | 上下左右相鄰格子 |\n| 遞迴邊界 | 空節點/葉節點 | 出界/障礙/已訪問 |\n\n**注意**：部分題目可用 BFS 或並查集解決\n\n**C++ 網格圖 DFS 模板**：\n\n```cpp\n// 方向陣列：上、下、左、右\nconst int kDirs[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n// 或使用 vector: vector<pair<int, int>> kDirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n\n// 網格圖 DFS：四方向遞迴搜尋\nvoid dfs(int r, int c) {\n    vis[r][c] = true;\n    for (auto [dr, dc] : kDirs) {\n        int nr = r + dr, nc = c + dc;\n        if (nr >= 0 && nr < m && nc >= 0 && nc < n && !vis[nr][nc]) {\n            dfs(nr, nc);\n        }\n    }\n}\n```",
+      "children": [
+        {
+          "id": 3,
+          "title": "1.1 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "2. 網格圖 BFS",
+      "summary": "適用於需要計算最短距離（最短路）的題目。<br>DFS 是不撞南牆不回頭；BFS 是先訪問近的，再訪問遠的。\n\n---\n\n**適用場景**：計算最短距離、最短路徑\n\n**DFS vs BFS**：\n- DFS：不撞南牆不回頭，深度優先\n- BFS：先訪問近的、再訪問遠的，層序遍歷\n\n**C++ 網格圖 BFS 模板**：\n\n```cpp\n// 方向陣列：上、下、左、右\nconst int kDirs[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n\n// 網格圖 BFS：從起點開始逐層擴展\nqueue<pair<int, int>> q;\nq.push({start_r, start_c});\nvis[start_r][start_c] = true;\nwhile (!q.empty()) {\n    auto [r, c] = q.front();\n    q.pop();\n    for (auto [dr, dc] : kDirs) {\n        int nr = r + dr, nc = c + dc;\n        if (nr >= 0 && nr < m && nc >= 0 && nc < n && !vis[nr][nc]) {\n            vis[nr][nc] = true;\n            q.push({nr, nc});\n        }\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 5,
+      "title": "3. 0-1 BFS",
+      "summary": "邊權只有 0 和 1（或可建成「兩種固定代價」）的題目，求最短路時可用雙端佇列 (deque) 做多層 BFS：權為 0 的邊對應狀態從隊首擴展，權為 1 的從隊尾擴展；也可用 Dijkstra，但 0-1 BFS 在邊權只有兩檔時是線性時間。\n\n---\n\n**常見題型**\n\n- **網格／迷宮最短路**：相鄰格子之間，部分移動代價為 0、其餘為 1（例如沿既定方向免費、轉向／破障／多走一步代價 1）。<br>**留意**：先固定「什麼算一步／一次代價」再對應到 0 或 1；若可走法依「進入方向、箭頭、時間奇偶」而變，常要把這些一併編進狀態，否則會漏邊或重複算。\n- **「免費轉移」與「付費轉移」**：同一狀態有多種走法時，不增加計數的轉移視為 0 邊，每多一次「計數」的轉移視為 1 邊。<br>**留意**：題目求最小化的量（步數、修改次數、側跳次數等）必須與邊權定義一致；若一種操作會使多個計數同時 +1，通常無法硬拆成 0/1，需重新建模或換演算法。\n- **傳送門、跳躍、切換車道**：瞬移或換軌若不增加題目所求的量可建模為 0 邊，一般一格移動或側跳為 1 邊。<br>**留意**：確認傳送是否雙向、目標格是否合法、會不會與障礙重疊；0 邊很多時仍要維護「第一次以最小代價到達」的 dist／vis，避免在 deque 裡無效反覆鬆弛。\n- **顯式或隱式建圖**：不限於網格；只要鄰接邊權僅 0 與 1（或可壓成兩檔）即可套用。<br>**留意**：先估 V、E 是否可接受；隱式建圖時鄰居要在程式裡列舉完整，並檢查是否每條邊權真的只有兩種——若出現權重 2、3 或與已走長度有關的權重，應改用 Dijkstra 或其它模型。\n- **狀態圖 BFS**：頂點帶額外維度（方向、時間模數等），若每次轉移對「距離」的增量仍是 0 或 1，可把完整狀態當節點做 0-1 BFS。<br>**留意**：visited／dist 的維度要涵蓋完整狀態鍵；狀態數一爆就要想壓縮、剪枝或換思路；只要存在某次轉移使代價增量 ≥2，就不能再當純 0-1 BFS。\n\n**注意**：若邊權出現 2 以上且無法歸成兩檔代價，應改用 Dijkstra 等一般最短路做法。",
+      "children": []
+    },
+    {
+      "id": 6,
+      "title": "4. 綜合應用",
+      "children": []
+    }
+  ],
+  "summary": "**網格圖題目核心技巧**：\n- 方向陣列：`int dirs[4][2] = {{0,1}, {0,-1}, {1,0}, {-1,0}};`\n- 邊界檢查：`x >= 0 && x < m && y >= 0 && y < n`\n- 訪問陣列：`vector<vector<bool>> visited(m, vector<bool>(n, false));`\n\n**本題單涵蓋**：\n- DFS\n- BFS\n- 綜合應用\n\n```cpp\n// 網格圖 DFS/BFS 模板\nint dirs[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};\n\n// DFS 遍歷連通塊\nvoid dfs(vector<vector<int>>& grid, int x, int y) {\n    int m = grid.size(), n = grid[0].size();\n    grid[x][y] = 0; // 標記已訪問\n    for (auto& d : dirs) {\n        int nx = x + d[0], ny = y + d[1];\n        if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny]) {\n            dfs(grid, nx, ny);\n        }\n    }\n}\n\n// BFS 求最短路\nint bfs(vector<vector<int>>& grid, int sx, int sy, int tx, int ty) {\n    int m = grid.size(), n = grid[0].size();\n    queue<pair<int, int>> q;\n    q.push({sx, sy});\n    grid[sx][sy] = 0;\n    int step = 0;\n    while (!q.empty()) {\n        int sz = q.size();\n        while (sz--) {\n            auto [x, y] = q.front();\n            q.pop();\n            if (x == tx && y == ty) {\n                return step;\n            }\n            for (auto& d : dirs) {\n                int nx = x + d[0], ny = y + d[1];\n                if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny]) {\n                    grid[nx][ny] = 0;\n                    q.push({nx, ny});\n                }\n            }\n        }\n        step++;\n    }\n    return -1;\n}\n```"
+}

@@ -1,0 +1,241 @@
+{
+  "id": 1,
+  "title": "貪心（基本貪心策略/反悔/區間/字典序/數學/思維/構造）",
+  "src": "https://leetcode.cn/circle/discuss/g6KTKL/",
+  "last_update": "2026-02-24T14:55:40.937799+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 從最小/最大開始貪心",
+      "summary": "有兩種**基本貪心策略**：\n\n1.  從**最小/最大**開始貪心，優先考慮最小/最大的數，從小到大/從大到小貪心。在此基礎上，衍生出了**反悔貪心**。\n2.  從**最左/最右**開始貪心，思考第一個數/最後一個數的貪心策略，把 n 個數的原問題轉換成 n−1 個數（或更少）的子問題。\n\n---\n\n為方便大家練習，我把比較套路的貪心題目放在前面，更靈活的思維題和構造題放在後面。每個小節的題目均按照從易到難的順序排列。\n\n**如果做題時沒有思路，推薦看看本文第五章的「思考清單」。**\n\n---\n\n**核心思路**：\n- 優先考慮最小/最大的數\n- 從小到大/從大到小貪心\n\n**常用技巧**：答案與順序無關時，通常需要排序\n\n```cpp\n// 從最小/最大開始貪心模板\nsort(nums.begin(), nums.end()); // 排序後從最小開始處理\nint res = 0;\nfor (int i = 0; i < n; i++) {\n    // 依題意從最小（或最大）的元素開始做出貪心選擇\n    res += process(nums[i]);\n}\n```",
+      "children": [
+        {
+          "id": 3,
+          "title": "1.1 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "2. 單序列配對",
+      "summary": "同上，從最小/最大的元素開始貪心。",
+      "children": []
+    },
+    {
+      "id": 5,
+      "title": "3. 雙序列配對",
+      "summary": "同上，從最小/最大的元素開始貪心。",
+      "children": []
+    },
+    {
+      "id": 6,
+      "title": "4. 從最左/最右開始貪心",
+      "summary": "對於無法排序的題目，嘗試從左到右/從右到左貪心。思考第一個數/最後一個數的貪心策略，把 n 個數的原問題轉換成 n−1 個數（或更少）的子問題。\n\n讀者可以對比下面的題目和 [動態規劃題單](https://leetcode.cn/circle/discuss/tXLS3i/) 中的線性 DP、狀態機 DP 的區別，思考什麼情況下只能 DP 不能貪心，從而加深對「區域性最優」和「全域性最優」的理解。",
+      "children": []
+    },
+    {
+      "id": 7,
+      "title": "5. 劃分型貪心",
+      "summary": "把陣列/字串劃分成滿足要求的若干段，最小化/最大化劃分的段數。\n\n思考方法同上，嘗試從左到右/從右到左貪心。\n\n讀者可以對比下面的題目和 [動態規劃題單](https://leetcode.cn/circle/discuss/tXLS3i/) 中的劃分型 DP 的區別，思考什麼情況下只能 DP 不能貪心，從而加深對「區域性最優」和「全域性最優」的理解。",
+      "children": []
+    },
+    {
+      "id": 8,
+      "title": "6. 先列舉，再貪心",
+      "summary": "列舉題目的其中一個變數，將其視作已知條件，然後在此基礎上貪心。\n\n也可以列舉答案，檢查是否可以滿足要求。（類似二分答案）",
+      "children": []
+    },
+    {
+      "id": 9,
+      "title": "7. 交換論證法",
+      "summary": "交換論證法（exchange argument）用於證明一類貪心演算法的正確性，也可以用來啟發思考。做法如下：\n1. 對於題目，猜想按照「某種順序」處理資料，可以得到最優解。\n2. 交換順序中的兩個元素 $a_i$ 和 $a_j$，計算交換後的答案。\n3. 對比交換前後的答案。如果交換後，答案沒有變得更優，則說明猜想成立。\n\n也可以不用猜想，而是計算「先 $a_i$ 後 $a_j$」和「先 $a_j$ 後 $a_i$」對應的答案，透過比較兩個答案誰更優，來確定按照何種順序處理資料。\n\n[講解（以 2895 題為例）](https://leetcode.cn/problems/minimum-processing-time/solution/tan-xin-pythonjavacgo-by-endlesscheng-8fzf/)\n\n```cpp\n// 交換論證法：自定義排序規則\n// 假設相鄰兩元素 a, b，比較 a 在前 vs b 在前的結果\nsort(items.begin(), items.end(), [](auto& a, auto& b) {\n    // 根據題意推導排序不等式\n    return a.cost * b.weight < b.cost * a.weight;\n});\n```",
+      "children": [
+        {
+          "id": 10,
+          "title": "7.1 思維擴展",
+          "children": []
+        },
+        {
+          "id": 11,
+          "title": "7.2 相似題目",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "8. 相鄰不同",
+      "summary": "以下問題，設 n 是陣列 a 的長度，m 是出現次數最多的元素的出現次數。\n\n**問題一**：給定陣列 a，能否重新排列其中的元素，使得所有相鄰元素均不同？如果能，輸出重排後的陣列。\n\n**答**：如果 $m \\leq n - m + 1$，則可以做到，否則無法做到。\n\n**問題二**：給定陣列 a，每次操作，刪除 a 中的兩個不同元素。最多能操作多少次？\n\n**答**：最多操作 $\\min(\\lfloor n / 2 \\rfloor, n - m)$ 次。\n\n**問題三**：給定陣列 a，每次操作，刪除 a 中的**至多**兩個不同元素。最少要操作多少次？\n\n**答**：最少操作 $\\max(\\lceil n / 2 \\rceil, m)$ 次。\n\n[證明+具體操作方案](/link/?target=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F1945782212176909162)\n\n```cpp\n// 相鄰不同：使用最大堆貪心\npriority_queue<pair<int, char>> pq;\nfor (auto& [ch, cnt] : freq)\n    pq.push({cnt, ch});\nstring res;\nwhile (!pq.empty()) {\n    auto [count_1, char_1] = pq.top();\n    pq.pop();\n    res += char_1;\n    if (!pq.empty()) {\n        auto [count_2, char_2] = pq.top();\n        pq.pop();\n        res += char_2;\n        if (count_2 > 1) {\n            pq.push({count_2 - 1, char_2});\n        }\n    }\n    if (count_1 > 1) {\n        pq.push({count_1 - 1, char_1});\n    }\n}\n```",
+      "children": [
+        {
+          "id": 13,
+          "title": "8.1 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "9. 反悔貪心",
+      "summary": "一般要用到**堆**。\n\n[講解](https://leetcode.cn/problems/p0NxJO/solution/fan-hui-tan-xin-fu-ti-dan-pythonjavacgoj-hxup/)\n\n**反悔貪心核心思路**：\n- 先做當前最優選擇\n- 如果後面發現有更好的選擇，則「反悔」之前的決定\n- 通常使用優先佇列 (heap) 來記錄之前的選擇，便於取出最差的決定進行替換。",
+      "children": []
+    },
+    {
+      "id": 15,
+      "title": "10. 不相交區間",
+      "children": []
+    },
+    {
+      "id": 16,
+      "title": "11. 區間分組",
+      "summary": "\n\n**區間分組核心思路**：\n- 按照左端點從小到大排序\n- 使用小根堆維護目前所有分組的右端點最大值\n- 如果當前區間左端點 > 堆頂，則可以放入該組，更新堆頂\n- 否則，需要開一個新組，將當前右端點入堆\n\n**C++ 模板**：\n\n```cpp\n// 區間分組：貪心分配到右端點最小的組\nsort(intervals.begin(), intervals.end());\npriority_queue<int, vector<int>, greater<>> pq; // 儲存每組的右端點\nfor (auto& it : intervals) {\n    if (pq.empty() || it[0] <= pq.top()) { // 與最早結束的組有重疊\n        pq.push(it[1]); // 需要開新組\n    } else {\n        pq.pop();\n        pq.push(it[1]); // 放入現有組並更新右端點\n    }\n}\n\nint groups = pq.size();\n```",
+      "children": []
+    },
+    {
+      "id": 17,
+      "title": "12. 區間選點",
+      "summary": "本質上和不相交區間是一樣的。",
+      "children": []
+    },
+    {
+      "id": 18,
+      "title": "13. 區間覆蓋",
+      "summary": "[圖解](https://leetcode.cn/problems/jump-game-ii/solutions/2926993/tu-jie-yi-zhang-tu-miao-dong-tiao-yue-yo-h2d4/)\n\n**區間覆蓋核心思路**：\n- 按照左端點從小到大排序\n- 在所有能覆蓋當前起點的區間中，選擇右端點最大的那個\n- 更新起點為該最大右端點，重置迴圈\n\n**C++ 模板**：\n\n```cpp\n// 區間覆蓋：每次選能覆蓋最遠的區間\nsort(intervals.begin(), intervals.end());\nint ans = 0, cur_right = 0;\nfor (int i = 0; i < n;) {\n    int next_right = -1;\n    while (i < n && intervals[i][0] <= cur_right) {\n        next_right = max(next_right, intervals[i][1]); // 選能覆蓋最遠的\n        i++;\n    }\n\n    if (next_right <= cur_right) {\n        break; // 無法繼續覆蓋\n    }\n    ans++;\n    cur_right = next_right;\n    if (cur_right >= target) {\n        break;\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 19,
+      "title": "14. 合併區間",
+      "summary": "> 可能算不上貪心，但為了題單的完整性，也放到這個分類中。",
+      "children": []
+    },
+    {
+      "id": 20,
+      "title": "15. 其他區間貪心",
+      "children": []
+    },
+    {
+      "id": 21,
+      "title": "16. 字典序最小/最大",
+      "summary": "**字典序**的定義如下：\n- 對於兩個字串 `a` 和 `b`，從左到右依次比較字元 `a[i]` 和 `b[i]` 的 `ASCII` 值大小。\n- 當 `a[i] != b[i]` 時，如果 `a[i] < b[i]`，那麼 `a` 的字典序更小，否則 `b` 的字典序更小。\n- 如果沒有出現 `a[i] != b[i]`，則較短的字串字典序更小。\n- 如果兩個字串的長度和內容均相同，那麼兩個字串的字典序一樣。\n\n字典序的定義也可以推廣到陣列上，按照上述方法比較兩個陣列的字典序。\n\n```cpp\n// 字典序最小：單調堆疊貪心\n// Monotonic Stack Greedy for Lexicographically Smallest Subsequence\n//\n// 問題：從字串 s 中選 k 個字元（保持相對順序），使結果字典序最小\n//\n// 核心思路：\n//   遍歷字串，維護一個「單調遞增」的結果。\n//   遇到更小的字元時，把前面較大的字元彈出（如果還有刪除額度），\n//   這樣能讓結果盡可能以較小的字元開頭，達到字典序最小。\n\nstring res;                     // 用作單調堆疊，存放目前的結果\nint remain = s.size() - k;      // 還可以刪除的字元數量（= 總長 - 需要保留的數量）\n\nfor (char c : s) {\n    // 貪心策略：如果堆疊頂端的字元比當前字元大，\n    // 且我們還有刪除額度（remain > 0），就彈出頂端\n    // → 用更小的字元取代，使字典序更小\n    while (!res.empty() && res.back() > c && remain > 0) {\n        res.pop_back();         // 彈出較大的字元\n        remain--;               // 消耗一次刪除額度\n    }\n    res += c;                   // 將當前字元加入結果\n}\n\n// 如果刪除額度沒用完，結果可能超過 k 個字元，截斷到 k\nres.resize(k);\n```",
+      "children": [
+        {
+          "id": 22,
+          "title": "16.1 倒序貪心",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "17. 迴文串貪心",
+      "children": []
+    },
+    {
+      "id": 24,
+      "title": "18. 基礎",
+      "children": []
+    },
+    {
+      "id": 25,
+      "title": "19. 乘積貪心",
+      "children": []
+    },
+    {
+      "id": 26,
+      "title": "20. 排序不等式",
+      "summary": "給定兩個長度均為 n 的陣列 a 和 b，可以交換同一陣列內的元素，最小化/最大化\n\n$a_0 \\cdot b_0 + a_1 \\cdot b_1 + \\cdots + a_{n-1} \\cdot b_{n-1}$\n\n把 a 和 b 都從小到大排序，可以最大化上式。\n\n把 a 從小到大排序，b 從大到小排序，可以最小化上式。\n\n```cpp\n// 排序不等式：正序乘正序之和最大，正序乘逆序之和最小\nsort(a.begin(), a.end());\nsort(b.begin(), b.end());\nlong long min_sum = 0, max_sum = 0;\nfor (int i = 0; i < n; i++) {\n    max_sum += (long long)a[i] * b[i];         // 同序和最大\n    min_sum += (long long)a[i] * b[n - 1 - i]; // 反序和最小\n}\n```",
+      "children": [
+        {
+          "id": 27,
+          "title": "20.1 思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "21. 均值不等式",
+      "summary": "**柵欄問題**：長為 n 米的籬笆柵欄，圍成一個矩形，矩形面積最大是多少？\n\n**變形**：長為 n 米的柵欄分成 k 份，每份圍成一個正方形，面積之和最小是多少？",
+      "children": []
+    },
+    {
+      "id": 29,
+      "title": "22. 中位數貪心",
+      "summary": "中位數貪心利用中位數的最優性質來解決最小化距離和、最小化移動成本等問題。\n\n**中位數的核心性質**：\n\n對於一組數 $a_1, a_2, \\ldots, a_n$，選擇中位數 $m$ 作為目標點時，所有數到 $m$ 的距離和 $\\sum |a_i - m|$ 最小。\n\n**為什麼是中位數？**\n\n直觀理解：\n- 如果目標點 x 在中位數左側，那麼將 x 向右移動，左側的點距離增加，但右側更多的點距離減少，總和減小\n- 如果目標點 x 在中位數右側，那麼將 x 向左移動，右側的點距離增加，但左側更多的點距離減少，總和減小\n- 因此，中位數是使距離和最小的最優位置\n\n**數學證明**：\n\n設陣列已排序：$a_1 \\leq a_2 \\leq \\cdots \\leq a_n$\n\n對於任意點 $x$，距離和為：\n$$f(x) = \\sum_{i=1}^{n} |a_i - x|$$\n\n當 $x$ 在 $[a_k, a_{k+1}]$ 區間時：\n$$f(x) = \\sum_{i=1}^{k} (x - a_i) + \\sum_{i=k+1}^{n} (a_i - x)$$\n\n求導：\n$$f'(x) = k - (n - k) = 2k - n$$\n\n- 當 $k < n/2$ 時，$f'(x) < 0$，$f(x)$ 遞減\n- 當 $k > n/2$ 時，$f'(x) > 0$，$f(x)$ 遞增\n- 當 $k = n/2$ 時，$f'(x) = 0$，$f(x)$ 達到最小值\n\n因此，中位數（第 $\\lceil n/2 \\rceil$ 個元素）是最優解。\n\n**奇數和偶數個元素的情況**：\n\n- **奇數個元素**：中位數唯一，為第 $\\frac{n+1}{2}$ 個元素\n- **偶數個元素**：任何在第 $\\frac{n}{2}$ 和第 $\\frac{n}{2}+1$ 個元素之間的點都是最優的，通常選擇其中一個\n\n**常見應用場景**：\n\n1. **最小化總移動距離**：將所有點移動到某個位置，使得總距離最小\n2. **最小化成本**：每個元素移動的成本與距離成正比\n3. **二維問題**：對 x 和 y 坐標分別求中位數\n4. **帶權中位數**：每個點有不同的權重，需要找到加權中位數\n\n**C++ 實現**：\n\n```cpp\n// 方法 1：排序後找中位數\nint findMedian(vector<int>& nums) {\n    int n = nums.size();\n    sort(nums.begin(), nums.end());\n    return nums[n / 2];  // 對於奇數或偶數都適用\n}\n\n// 方法 2：使用 nth_element（更高效，O(n) 平均時間）\nint findMedianOptimized(vector<int>& nums) {\n    int n = nums.size();\n    int mid = n / 2;\n    nth_element(nums.begin(), nums.begin() + mid, nums.end());\n    return nums[mid];\n}\n\n// 計算到中位數的總距離\nlong long calculateDistance(vector<int>& nums, int median) {\n    long long dist = 0;\n    for (int num : nums) {\n        dist += abs(num - median);\n    }\n    return dist;\n}\n\n// 二維中位數貪心：分別對 x 和 y 求中位數\npair<int, int> findMedian2D(vector<pair<int, int>>& points) {\n    int n = points.size();\n    vector<int> xs, ys;\n    \n    for (auto [x, y] : points) {\n        xs.push_back(x);\n        ys.push_back(y);\n    }\n    \n    nth_element(xs.begin(), xs.begin() + n / 2, xs.end());\n    nth_element(ys.begin(), ys.begin() + n / 2, ys.end());\n    \n    return {xs[n / 2], ys[n / 2]};\n}\n```\n\n**經典例題**：\n\n- **最小移動次數**：將陣列所有元素變為相同值的最小移動次數\n- **最優會議點**：在數軸或二維平面上選擇一個點，使得所有人到達的距離和最小\n- **貨倉選址**：在數軸上選擇倉庫位置，使得到所有客戶的距離和最小\n\n**時間複雜度**：\n- 排序法：$O(n \\log n)$\n- nth_element：$O(n)$ 平均，$O(n^2)$ 最壞（但實際表現很好）",
+      "children": []
+    },
+    {
+      "id": 30,
+      "title": "23. 歸納法",
+      "children": []
+    },
+    {
+      "id": 31,
+      "title": "24. 其他數學貪心",
+      "children": []
+    },
+    {
+      "id": 32,
+      "title": "25. 從特殊到一般",
+      "children": []
+    },
+    {
+      "id": 33,
+      "title": "26. 腦筋急轉彎",
+      "summary": "從一般到特殊。",
+      "children": []
+    },
+    {
+      "id": 34,
+      "title": "27. 等價轉換",
+      "children": []
+    },
+    {
+      "id": 35,
+      "title": "28. 逆向思維",
+      "children": [
+        {
+          "id": 36,
+          "title": "28.1 時光倒流",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "title": "29. 貢獻法",
+      "summary": "**貢獻法（Contribution Method）**\n\n貢獻法是一種計數技巧，通過計算每個元素對答案的貢獻，從而得到最終答案。核心思想是**改變枚舉順序**，從「枚舉所有情況」轉換為「枚舉每個元素的貢獻」。\n\n**核心思路**：\n\n與其枚舉所有可能的子陣列/子序列，不如：\n1. 枚舉每個元素\n2. 計算該元素在多少個子陣列/子序列中出現\n3. 將該元素的值乘以出現次數，得到其貢獻\n4. 累加所有元素的貢獻\n\n**數學表示**：\n\n$$\\text{總和} = \\sum_{i=1}^{n} a_i \\cdot \\text{count}(i)$$\n\n其中 $\\text{count}(i)$ 表示元素 $a_i$ 在多少個子陣列/子序列中出現。\n\n**為什麼使用貢獻法？**\n\n**暴力枚舉的問題**：\n- 枚舉所有子陣列：$O(n^2)$ 或 $O(n^3)$\n- 枚舉所有子序列：$O(2^n)$\n- 當 n 較大時，時間複雜度無法接受\n\n**貢獻法的優勢**：\n- 只需枚舉每個元素：$O(n)$\n- 計算每個元素的貢獻次數：通常是 $O(1)$ 或 $O(\\log n)$\n- 總時間複雜度：$O(n)$ 或 $O(n \\log n)$\n\n**常見應用場景**：\n\n**1. 子陣列元素和**\n\n計算所有子陣列的元素和之和。\n\n元素 $a_i$ 作為子陣列元素出現的次數：\n- 左端點可以在 [0, i] 中選擇：i+1 種選擇\n- 右端點可以在 [i, n-1] 中選擇：n-i 種選擇\n- 貢獻次數：$(i+1) \\cdot (n-i)$\n\n```cpp\n// 計算所有子陣列的元素和之和\nlong long sumOfAllSubarrays(vector<int>& arr) {\n    int n = arr.size();\n    long long total = 0;\n    \n    for (int i = 0; i < n; i++) {\n        // arr[i] 在多少個子陣列中出現\n        long long count = (long long)(i + 1) * (n - i);\n        total += arr[i] * count;\n    }\n    \n    return total;\n}\n```\n\n**2. 子陣列最小值/最大值之和**\n\n計算所有子陣列的最小值（或最大值）之和。\n\n對於元素 $a_i$ 作為最小值的貢獻：\n- 找到左側第一個小於 $a_i$ 的位置 $L$\n- 找到右側第一個小於 $a_i$ 的位置 $R$\n- $a_i$ 作為 $[L+1, R-1]$ 區間內所有子陣列的最小值\n- 貢獻次數：$(i - L) \\cdot (R - i)$\n\n```cpp\n// 計算所有子陣列的最小值之和（使用單調堆疊）\nlong long sumOfSubarrayMins(vector<int>& arr) {\n    int n = arr.size();\n    const int kMod = 1e9 + 7;\n    \n    // left[i]: 左側第一個小於 arr[i] 的位置\n    // right[i]: 右側第一個小於 arr[i] 的位置\n    vector<int> left(n), right(n);\n    stack<int> st;\n    \n    // 計算 left 陣列\n    for (int i = 0; i < n; i++) {\n        while (!st.empty() && arr[st.top()] >= arr[i]) {\n            st.pop();\n        }\n        left[i] = st.empty() ? -1 : st.top();\n        st.push(i);\n    }\n    \n    // 清空堆疊，計算 right 陣列\n    while (!st.empty()) st.pop();\n    for (int i = n - 1; i >= 0; i--) {\n        while (!st.empty() && arr[st.top()] > arr[i]) {\n            st.pop();\n        }\n        right[i] = st.empty() ? n : st.top();\n        st.push(i);\n    }\n    \n    // 計算貢獻\n    long long result = 0;\n    for (int i = 0; i < n; i++) {\n        long long count = (long long)(i - left[i]) * (right[i] - i);\n        result = (result + arr[i] * count % kMod) % kMod;\n    }\n    \n    return result;\n}\n```\n\n**3. 子序列貢獻**\n\n計算每個元素在多少個子序列中出現。\n\n對於長度為 $n$ 的陣列，每個元素 $a_i$：\n- 可以選擇包含或不包含 $a_i$ 之前的元素：$2^i$ 種\n- 可以選擇包含或不包含 $a_i$ 之後的元素：$2^{n-i-1}$ 種\n- 包含 $a_i$ 的子序列數：$2^i \\cdot 2^{n-i-1} = 2^{n-1}$\n\n```cpp\n// 計算所有子序列的元素和（每個元素貢獻相同）\nlong long sumOfAllSubsequences(vector<int>& arr) {\n    int n = arr.size();\n    const int kMod = 1e9 + 7;\n    \n    long long total = 0;\n    long long power = 1; // 2^(n-1)\n    for (int i = 0; i < n - 1; i++) {\n        power = power * 2 % kMod;\n    }\n    \n    for (int num : arr) {\n        total = (total + num * power % kMod) % kMod;\n    }\n    \n    return total;\n}\n```\n\n**4. 區間乘積貢獻**\n\n計算包含某個元素的所有子陣列的貢獻。\n\n**策略**：\n- 對每個位置 i，計算以 i 為中心的貢獻\n- $\\text{左側貢獻} \\cdot \\text{右側貢獻}$\n\n**5. 組合計數貢獻**\n\n計算特定位置在組閤中的貢獻次數。\n\n**貢獻法的變形**：\n\n**1. 逆向貢獻法**\n\n不計算「有」的貢獻，而是計算「沒有」的貢獻。\n\n例子：計算沒有某個元素的子陣列個數\n$$\\text{答案} = \\text{所有子陣列} - \\text{包含該元素的子陣列}$$\n\n**2. 分類貢獻法**\n\n將元素分成不同類別，分別計算貢獻。\n\n例子：正數貢獻和負數貢獻分開計算\n\n**3. 雙端貢獻法**\n\n同時考慮元素作為最小值和最大值的貢獻。\n\n**解題步驟**：\n\n1. **識別問題**：是否可以將答案分解為每個元素的貢獻之和\n2. **計算貢獻次數**：\n   - 子陣列：通常與左右邊界有關\n   - 子序列：通常是組合數\n   - 特殊條件：使用單調堆疊或雙指標\n3. **累加貢獻**：將每個元素的值乘以其貢獻次數\n4. **注意取模**：涉及大數時需要取模\n\n**常見貢獻次數公式**：\n\n| 場景 | 貢獻次數 |\n|------|----------|\n| 子陣列中任意元素 | $(i+1) \\cdot (n-i)$ |\n| 子陣列中作為最小值/最大值 | $(i-L) \\cdot (R-i)$ |\n| 子序列中任意元素 | $2^{n-1}$ |\n| 子序列中固定位置 | $\\binom{n-1}{k-1}$ |\n| 不相鄰子序列 | 斐波那契數列相關 |\n\n**時間複雜度分析**：\n\n- **基礎貢獻法**：$O(n)$\n- **使用單調堆疊**：$O(n)$（找邊界）\n- **使用排序**：$O(n \\log n)$\n- **組合計數**：$O(n)$（預處理階乘）\n\n**經典例題**：\n\n- **907. 子陣列的最小值之和**：單調堆疊 + 貢獻法\n- **828. 統計子串中的唯一字符**：計算每個字符的貢獻範圍\n- **1856. 子陣列最小乘積的最大值**：前綴和 + 單調堆疊 + 貢獻法\n- **2104. 子陣列範圍和**：最大值貢獻 - 最小值貢獻\n\n**技巧總結**：\n\n1. **轉換思路**：從「枚舉情況」到「枚舉元素」\n2. **單調堆疊輔助**：快速找到左右邊界\n3. **前綴和優化**：計算區間和時使用\n4. **組合數學**：子序列問題常用\n5. **去重處理**：相同元素時需要特別處理邊界條件（使用 $\\geq$ 和 $>$ 的組合）\n\n**調試技巧**：\n\n- 先用小數據手動驗證貢獻次數公式\n- 檢查邊界條件（第一個和最後一個元素）\n- 檢查重複計數問題\n- 注意溢出和取模問題\n\n貢獻法是一種強大的計數技巧，掌握它能將許多看似複雜的問題轉化為簡單的線性時間解法！",
+      "children": []
+    },
+    {
+      "id": 38,
+      "title": "30. 兩次掃描",
+      "summary": "\n\n**兩次掃描核心思路**：\n- 適用於：當前位置的狀態取決於左側和右側的雙重約束\n- 做法：先從左向右掃描一遍滿足左側約束，再從右向左掃描一遍滿足右側約束 (如 135. 分發糖果)\n\n**C++ 模板 (如 135. 分發糖果)**：\n\n```cpp\n// 兩次掃描：分別從左往右、從右往左計算\nvector<int> left(n, 1), right(n, 1);\nfor (int i = 1; i < n; ++i) {\n    if (a[i] > a[i - 1]) {\n        left[i] = left[i - 1] + 1; // 遞增則延伸\n    }\n}\nfor (int i = n - 2; i >= 0; --i) {\n    if (a[i] > a[i + 1]) {\n        right[i] = right[i + 1] + 1; // 遞增則延伸\n    }\n}\nfor (int i = 0; i < n; ++i) {\n    ans += max(left[i], right[i]);\n}\n```",
+      "children": []
+    },
+    {
+      "id": 39,
+      "title": "31. 分類討論",
+      "children": []
+    },
+    {
+      "id": 40,
+      "title": "32. 構造題",
+      "summary": "構造題要求根據給定的條件或限制，構造出滿足要求的具體方案。這類題目考察創造性思維、邏輯推理能力和對問題本質的理解。\n\n**什麼是構造題？**\n\n構造題不同於常規的計算或搜索問題，它要求：\n1. **主動構造**：不是找出答案，而是創造一個滿足條件的方案\n2. **證明可行性**：構造的方案必須能證明滿足所有給定條件\n3. **多解性**：往往存在多個合法方案，找到一個即可\n\n**構造題的特點**：\n\n- **無固定模板**：每道題的構造方法可能完全不同\n- **需要洞察力**：要能發現問題的規律或特殊性質\n- **貪心思維**：很多構造題採用貪心策略逐步構造\n- **反向思考**：有時需要從結果倒推構造過程\n\n**常見的構造策略**：\n\n1. **貪心構造**\n   - 每一步都做出局部最優選擇\n   - 按照某種順序（升序、降序、交替等）填充\n   - 優先處理限制最嚴格的元素\n\n2. **對稱構造**\n   - 利用對稱性簡化問題\n   - 鏡像、旋轉、翻轉等對稱操作\n   - 中心對稱或軸對稱構造\n\n3. **分治構造**\n   - 將問題分解為更小的子問題\n   - 分別構造子問題的解\n   - 合併子問題的解得到完整方案\n\n4. **遞推構造**\n   - 從 n=1 或 n=2 的簡單情況開始\n   - 找到從 n 構造到 n+1 的方法\n   - 遞推得到任意 n 的構造方案\n\n5. **週期構造**\n   - 發現構造的週期性規律\n   - 利用重複的模式進行構造\n   - 處理餘數部分\n\n6. **逆向構造**\n   - 從期望的結果倒推\n   - 逆向執行操作找到初始狀態\n   - 檢驗構造的合法性\n\n**解題思路**：\n\n1. **理解條件**：明確所有限制和要求\n2. **尋找規律**：觀察小規模案例，發現模式\n3. **證明可行性**：思考為什麼這樣構造是對的\n4. **特殊情況**：考慮邊界條件和特殊情況\n5. **優化方案**：有時需要滿足額外的最優性要求\n\n**常見題型**：\n\n**1. 構造陣列/序列**\n- 構造滿足特定和或差的陣列\n- 構造滿足大小關係的排列\n- 構造滿足特定性質的子序列\n\n**2. 構造字串**\n- 構造字典序最小/最大的字串\n- 構造滿足條件的括號序列\n- 構造滿足模式匹配的字串\n\n**3. 構造矩陣**\n- 構造對稱矩陣\n- 構造滿足行列和的矩陣\n- 構造特殊結構的二維陣列\n\n**4. 構造圖**\n- 構造具有特定度數的圖\n- 構造滿足連通性的圖\n- 構造二分圖或特殊結構的圖\n\n**5. 構造操作序列**\n- 構造達到目標狀態的最少操作\n- 構造滿足限制的操作順序\n- 構造字典序最小的操作序列\n\n**經典例題模式**：\n\n```cpp\n// 模式 1：貪心填充（構造滿足條件的陣列）\nvector<int> constructArray(int n, int k) {\n    vector<int> res;\n    int left = 1, right = n;\n    \n    // 貪心策略：交替選擇最小和最大值\n    for (int i = 0; i < k; i++) {\n        if (i % 2 == 0) {\n            res.push_back(left++);\n        } else {\n            res.push_back(right--);\n        }\n    }\n    \n    // 填充剩餘部分\n    for (int i = left; i <= right; i++) {\n        res.push_back(i);\n    }\n    \n    return res;\n}\n\n// 模式 2：逆向構造（從目標倒推）\nvector<int> constructFromTarget(vector<int>& target) {\n    vector<int> res(target.size(), 1);\n    priority_queue<int> pq;\n    \n    long long sum = 0;\n    for (int x : target) {\n        sum += x;\n        pq.push(x);\n    }\n    \n    // 逆向操作\n    while (pq.top() != 1) {\n        int cur = pq.top();\n        pq.pop();\n        long long rest = sum - cur;\n        \n        if (rest == 0 || cur <= rest) {\n            return {};  // 無法構造\n        }\n        \n        int prev = cur % rest;\n        if (prev == 0) {\n            prev = rest;\n        }\n        \n        pq.push(prev);\n        sum = sum - cur + prev;\n    }\n    \n    return res;\n}\n\n// 模式 3：週期性構造（利用重複模式）\nstring constructString(int n, char start) {\n    string res;\n    string pattern = \"abc\";  // 基礎模式\n    \n    for (int i = 0; i < n; i++) {\n        res += pattern[i % pattern.size()];\n    }\n    \n    return res;\n}\n```\n\n**解題技巧**：\n\n1. **從簡單情況開始**：先解決 $n=1, 2, 3$ 的情況，尋找規律\n2. **畫圖輔助**：視覺化問題有助於發現構造方法\n3. **檢驗充要條件**：確保構造滿足所有必要和充分條件\n4. **考慮反例**：思考什麼情況下無解\n5. **優先考慮貪心**：很多構造題可以用貪心策略解決\n\n**注意事項**：\n\n- 構造題往往有多個正確答案，不要糾結於唯一解\n- 證明構造的正確性與構造本身同樣重要\n- 特殊情況（無解、唯一解）需要特別處理\n- 有時需要先判斷是否有解，再進行構造\n\n**心態建議**：\n\n構造題需要創造性思維，沒有固定套路。遇到困難時：\n- 不要急於尋找完美方案，先嘗試任何可行的構造\n- 從特殊情況入手，逐步推廣到一般情況\n- 多做題積累經驗，培養構造的直覺\n- 參考題解學習不同的構造思路",
+      "children": []
+    },
+    {
+      "id": 41,
+      "title": "33. 互動題",
+      "children": []
+    },
+    {
+      "id": 42,
+      "title": "34. 其他",
+      "children": []
+    }
+  ],
+  "summary": "**本題單結構**：\n- 前面：套路性貪心題（基本策略）\n- 後面：靈活思維題、構造題\n- 題目按難度排序\n\n**做題建議**：沒思路時參考第五章「思考清單」\n\n**本題單涵蓋**：\n- 基本貪心策略：從最小/最大、從最左/最右\n- 反悔貪心：反悔堆\n- 區間貪心：區間排序、區間合併\n- 字典序貪心：最小/最大字典序\n- 數學貪心：不等式、排序不等式\n- 思維與構造：腦筋急轉彎、構造答案\n\n**貪心演算法核心**：\n- 優先處理當前最優選擇\n- 通常需要排序或使用優先佇列 (heap)\n- 關鍵在於證明貪心策略的正確性\n\n```cpp\n// 區間排程貪心（最大不相交區間數）\n// 按右端點排序，依次選擇不衝突的區間\nsort(intervals.begin(), intervals.end(), [](auto& a, auto& b) { return a[1] < b[1]; });\nint cnt = 0, last = INT_MIN;\nfor (auto& it : intervals) {\n    if (it[0] >= last) {\n        cnt++;\n        last = it[1];\n    }\n}\n```"
+}

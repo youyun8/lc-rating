@@ -42,6 +42,11 @@ const navLinks = [
     label: ROUTERS.studyPlans.title,
     match: "/studyplan",
   },
+  {
+    href: ROUTERS.tutorials.href,
+    label: ROUTERS.tutorials.title,
+    match: "/tutorial",
+  },
 ];
 
 const Navigator = React.memo(() => {

@@ -16,19 +16,19 @@ import stringData from "@/public/studyplan/string.json";
 import treesData from "@/public/studyplan/trees.json";
 
 export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
-  rating_2400: rating2400Data,
-  binary_search: binarySearchData,
-  bitwise_operations: bitwiseOpsData,
-  data_structure: dataStructureData,
-  dynamic_programming: dpData,
-  graph: graphData,
-  greedy: greedyData,
-  grid: gridData,
-  math: mathData,
-  monotonic_stack: monotonicStackData,
-  sliding_window: slidingWindowData,
-  string: stringData,
-  trees: treesData,
+  rating_2400: rating2400Data as StudyPlanData.Root,
+  binary_search: binarySearchData as StudyPlanData.Root,
+  bitwise_operations: bitwiseOpsData as StudyPlanData.Root,
+  data_structure: dataStructureData as StudyPlanData.Root,
+  dynamic_programming: dpData as StudyPlanData.Root,
+  graph: graphData as StudyPlanData.Root,
+  greedy: greedyData as StudyPlanData.Root,
+  grid: gridData as StudyPlanData.Root,
+  math: mathData as StudyPlanData.Root,
+  monotonic_stack: monotonicStackData as StudyPlanData.Root,
+  sliding_window: slidingWindowData as StudyPlanData.Root,
+  string: stringData as StudyPlanData.Root,
+  trees: treesData as StudyPlanData.Root,
 };
 
 export interface StudyPlanProblemPlan {

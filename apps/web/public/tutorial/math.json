@@ -1,0 +1,198 @@
+{
+  "id": 1,
+  "title": "數學（數論/組合/機率期望/博弈/計算幾何/隨機演算法）",
+  "src": "https://leetcode.cn/circle/discuss/IYT3ss/",
+  "last_update": "2026-02-24T14:34:02.963631+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 判斷質數",
+      "summary": "本文全面整理了力扣上的數學相關題目，其中數論和組合數學的題目比較多。\n\n部分題目（尤其是組合數學）會涉及到取模，我寫了一篇詳細的取模教程，請看 [模運算的世界：當加減乘除遇上取模](https://leetcode.cn/circle/discuss/mDfnkW/)。\n\n---\n\n\n\n**試除法 (Trial Division)**：\n檢查 $2$ 到 $\\sqrt{n}$ 是否能整除 $n$。\n\n```cpp\n// 試除法判斷質數 O(sqrt(n))\nbool isPrime(int n) {\n    if (n < 2) {\n        return false;\n    }\n    for (int i = 2; i * i <= n; ++i) {\n        if (n % i == 0) {\n            return false;\n        }\n    }\n    return true;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 3,
+      "title": "2. 預處理質數（篩質數）",
+      "summary": "\n\n**埃氏篩 (Sieve of Eratosthenes) 模板**：\n\n```cpp\n// 線性篩（尤拉篩）：每個合數只被最小質因子篩掉\nvector<int> primes;\nbool is_prime[kMaxN];\nvoid getPrimes(int n) {\n    fill(is_prime, is_prime + n + 1, true);\n    is_prime[0] = is_prime[1] = false; // 0 和 1 不是質數\n    for (int i = 2; i <= n; i++) {\n        if (is_prime[i]) {\n            primes.push_back(i);\n            for (long long j = (long long)i * i; j <= n; j += i) {\n                is_prime[j] = false;\n            }\n        }\n    }\n}\n```",
+      "children": []
+    },
+    {
+      "id": 4,
+      "title": "3. 質因數分解",
+      "summary": "\n\n**質因數分解模板**：\n\n```cpp\n// 試除法質因數分解 O(sqrt(n))\nunordered_map<int, int> factorize(int n) {\n    unordered_map<int, int> res;\n    for (int i = 2; i * i <= n; ++i) {\n        while (n % i == 0) { // 除盡 i\n            res[i]++;\n            n /= i;\n        }\n    }\n\n    if (n > 1) {\n        res[n]++;\n    }\n    return res;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 5,
+      "title": "4. 階乘分解",
+      "children": []
+    },
+    {
+      "id": 6,
+      "title": "5. 因子",
+      "summary": "模板（預處理每個數的因子）：\n\n```py\n# 預處理每個數的因子\nMX = 1_000_001  # **根據題目調整**\ndivisors = [[] for _ in range(MX)]\nfor i in range(1, MX):\n    for j in range(i, MX, i):  # 列舉 i 的倍數 j\n        divisors[j].append(i)  # i 是 j 的因子\n```",
+      "children": []
+    },
+    {
+      "id": 7,
+      "title": "6. 最大公約數（GCD）",
+      "summary": "\n\n**最大公約數（GCD）**：\n- 歐幾裡得演算法：`gcd(a, b) = gcd(b, a % b)`\n- 最小公倍數：`lcm(a, b) = a / gcd(a, b) * b`\n- C++ 可用 `__gcd(a, b)` 或 C++17 的 `gcd(a, b)`\n\n```cpp\n// 輾轉相除法求 GCD\nint gcd(int a, int b) {\n    while (b) {\n        a %= b;\n        swap(a, b);\n    }\n    return a;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 8,
+      "title": "7. 最大公約數（GCD）擴展",
+      "children": []
+    },
+    {
+      "id": 9,
+      "title": "8. 最小公倍數（LCM）",
+      "summary": "\n\n**LCM 核心公式**：\n`lcm(a, b) = (a * b) / gcd(a, b)`\n\n```cpp\n// LCM = a / gcd(a, b) * b，先除避免溢位\nlong long lcm(long long a, long long b) {\n    if (a == 0 || b == 0) {\n        return 0;\n    }\n    return (a / gcd(a, b)) * b; // 先除後乘防止溢位\n}\n```",
+      "children": []
+    },
+    {
+      "id": 10,
+      "title": "9. 互質",
+      "summary": "**互質（Coprime）**：兩個整數 $a, b$ 互質，當且僅當 $\\gcd(a, b) = 1$。\n\n**核心概念**：\n- **尤拉函式 $\\varphi(n)$**：$1$ 到 $n$ 中與 $n$ 互質的正整數個數\n- 若 $n = p_1^{a_1} p_2^{a_2} \\cdots p_k^{a_k}$，則 $\\varphi(n) = n \\left(1 - \\frac{1}{p_1}\\right) \\left(1 - \\frac{1}{p_2}\\right) \\cdots \\left(1 - \\frac{1}{p_k}\\right)$\n- **性質**：$\\varphi(1) = 1$；若 $p$ 為質數，$\\varphi(p) = p - 1$；若 $\\gcd(a, b) = 1$，則 $\\varphi(ab) = \\varphi(a) \\varphi(b)$\n\n**常見應用**：\n- 最簡分數判定：$a / b$ 為最簡分數 $\\iff \\gcd(a, b) = 1$\n- 尤拉定理：若 $\\gcd(a, n) = 1$，則 $a^{\\varphi(n)} \\equiv 1 \\pmod{n}$\n- 費馬小定理（$n$ 為質數時的特例）：$a^{p-1} \\equiv 1 \\pmod{p}$\n\n**C++ 模板（尤拉函式）**：\n\n```cpp\n// 單點求尤拉函式 O(sqrt(n))\nint eulerPhi(int n) {\n    int result = n;\n    for (int p = 2; p * p <= n; ++p) {\n        if (n % p == 0) {\n            while (n % p == 0) {\n                n /= p;\n            }\n            result -= result / p; // 等價於 result *= (1 - 1/p)\n        }\n    }\n    if (n > 1) {\n        result -= result / n;\n    }\n    return result;\n}\n```\n\n**C++ 模板（尤拉篩求 1~n 的尤拉函式）**：\n\n```cpp\n// 尤拉篩：同時求質數與尤拉函式\nvector<int> eulerSieve(int n) {\n    vector<int> phi(n + 1), primes;\n    vector<bool> is_composite(n + 1, false);\n    phi[1] = 1;\n    for (int i = 2; i <= n; ++i) {\n        if (!is_composite[i]) {\n            primes.push_back(i);\n            phi[i] = i - 1; // 質數的尤拉函式\n        }\n        for (int p : primes) {\n            if (i * p > n) {\n                break;\n            }\n            is_composite[i * p] = true;\n            if (i % p == 0) {\n                phi[i * p] = phi[i] * p; // p | i 時\n                break;\n            }\n            phi[i * p] = phi[i] * (p - 1); // gcd(i, p) = 1 時\n        }\n    }\n    return phi;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 11,
+      "title": "10. 同餘",
+      "summary": "\n\n**快速冪模板 (a^b % MOD)**：\n\n```cpp\n// 快速冪：a^b % kMod，O(log b)\nlong long fastPow(long long a, long long b, long long k_mod) {\n    long long res = 1;\n    a %= k_mod;\n    while (b > 0) {\n        if (b & 1) { // b 的最低位為 1，乘入結果\n            res = (res * a) % kMod;\n        }\n        a = (a * a) % kMod; // 底數平方\n        b >>= 1;           // 指數右移\n    }\n    return res;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 12,
+      "title": "11. 數論分塊",
+      "summary": "\n\n**數論分塊模板**：\n用於求 $\\sum \\lfloor n / i \\rfloor$ 等和式，時間複雜度 $O(\\sqrt{n})$。\n\n```cpp\n// 數論分塊：利用 floor(n/i) 的值分段求和\nfor (long long l = 1, r; l <= n; l = r + 1) {\n    r = n / (n / l);\n    // 區間 [l, r] 內的 n/i 值均為 n/l\n    ans += (r - l + 1) * (n / l);\n}\n```",
+      "children": []
+    },
+    {
+      "id": 13,
+      "title": "12. 其他",
+      "children": []
+    },
+    {
+      "id": 14,
+      "title": "13. 乘法原理",
+      "summary": "快速冪、組合數的預處理**模板**見 [模運算的世界：當加減乘除遇上取模](https://leetcode.cn/circle/discuss/mDfnkW/)\n\n---\n\n\n\n**乘法原理**：\n- 若任務分若干步，每步有若干選擇，方案數為各步選擇數之積\n- 結合分類討論使用\n- 注意取模避免溢位",
+      "children": []
+    },
+    {
+      "id": 15,
+      "title": "14. 組合計數",
+      "summary": "\n\n**組合數預處理模板**：\n\n```cpp\n// 快速冪：計算 a^b % kMod，時間複雜度 O(log b)\nlong long fastPow(long long a, long long b, long long k_mod = 1e9 + 7) {\n    long long res = 1;\n    a %= k_mod;\n    while (b > 0) {\n        if (b & 1) {\n            res = res * a % kMod;\n        }\n        a = a * a % kMod;\n        b >>= 1;\n    }\n    return res;\n}\n\n// 預處理階乘與逆元，O(1) 求組合數 C(n, k)\nconst int kMaxN = 1e5 + 5;\nconst long long kMod = 1e9 + 7;\nlong long fac[kMaxN], inv[kMaxN];\n\nvoid precompute(int n) {\n    fac[0] = 1;\n    for (int i = 1; i <= n; i++) {\n        fac[i] = fac[i - 1] * i % kMod;\n    }\n    // 費馬小定理：a^(p-1) ≡ 1 (mod p)，所以 a^(-1) ≡ a^(p-2) (mod p)\n    inv[n] = fastPow(fac[n], kMod - 2, kMod);\n    for (int i = n - 1; i >= 0; i--) {\n        inv[i] = inv[i + 1] * (i + 1) % kMod; // 遞推逆元\n    }\n}\n\n// 計算組合數 C(n, k) = n! / (k! * (n-k)!)\nlong long comb(int n, int k) {\n    if (k < 0 || k > n) {\n        return 0;\n    }\n    return fac[n] * inv[k] % kMod * inv[n - k] % kMod;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 16,
+      "title": "15. 放球問題",
+      "children": [
+        {
+          "id": 17,
+          "title": "15.1 放球問題思維擴展",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "16. 容斥原理",
+      "summary": "部分題目有其他解法，難度分僅供參考。",
+      "children": []
+    },
+    {
+      "id": 19,
+      "title": "17. 生成函式（母函式）",
+      "children": []
+    },
+    {
+      "id": 20,
+      "title": "18. 機率期望",
+      "children": []
+    },
+    {
+      "id": 21,
+      "title": "19. 機率期望隨機資料下顯著更快的演算法",
+      "children": []
+    },
+    {
+      "id": 22,
+      "title": "20. 博弈論",
+      "summary": "**博弈論（Game Theory）**\n\n研究兩個玩家交替操作的組合遊戲，假設雙方都採取最優策略，判斷先手是否必勝。\n\n---\n\n**基本概念**：\n\n- **必敗態（P-position, Previous）**：先手在此狀態下必敗。所有可到達的後繼狀態都是必勝態。\n- **必勝態（N-position, Next）**：先手在此狀態下必勝。至少存在一個後繼狀態是必敗態。\n- **終局狀態**：無法操作的玩家判負（Normal Play Convention），此狀態為 P-position。\n\n---\n\n**經典博弈模型**：\n\n| 模型 | 規則 | 結論 |\n|------|------|------|\n| Bash 博弈 | 一堆 $n$ 個石子，每次取 $1$~$m$ 個 | $n \\bmod (m+1) \\neq 0$ 時先手必勝 |\n| Nim 博弈 | $k$ 堆石子，每次從一堆中取任意個 | 所有堆的 XOR 值 $\\neq 0$ 時先手必勝 |\n| 威佐夫博弈 | 兩堆石子，每次取一堆任意個或兩堆相同個 | 與黃金比例 $\\varphi = (1+\\sqrt{5})/2$ 有關 |\n| 階梯博弈 | 奇數位上的 Nim 遊戲 | 奇數位的 XOR 值 $\\neq 0$ 時先手必勝 |\n\n---\n\n**Sprague-Grundy 定理**：\n\n任何公平組合遊戲都等價於一個 Nim 遊戲。每個遊戲狀態都有一個 **SG 值（Grundy number）**：\n- $\\mathrm{SG}(\\text{終局}) = 0$\n- $\\mathrm{SG}(x) = \\operatorname{mex}(\\{\\mathrm{SG}(y) \\mid y \\text{ 是 } x \\text{ 的後繼狀態}\\})$，其中 $\\operatorname{mex}$ 是「最小排除值」（最小的非負整數且不在集合中）\n- 多個獨立子遊戲的 SG 值 = 各子遊戲 SG 值的 XOR\n- $\\mathrm{SG} = 0 \\iff \\text{必敗態}$\n\n**C++ 模板（SG 函式 + 記憶化）**：\n\n```cpp\n// moves: 每次可移動的步數集合\n// 求 SG(x) 的值\nvector<int> moves; // 例如 {1, 3, 4}\nvector<int> sg;\n\nint getSg(int x) {\n    if (sg[x] != -1) {\n        return sg[x];\n    }\n    unordered_set<int> reachable;\n    for (int m : moves) {\n        if (x >= m) {\n            reachable.insert(getSg(x - m));\n        }\n    }\n    // 求 mex：最小排除值\n    for (int i = 0;; ++i) {\n        if (!reachable.count(i)) {\n            return sg[x] = i;\n        }\n    }\n}\n\n// 使用方式：\n// sg.assign(kMaxN + 1, -1); sg[0] = 0;\n// 多堆遊戲：XOR 各堆的 SG 值，非零先手必勝\n```\n\n**C++ 模板（MinMax 博弈 / 區間 DP）**：\n\n```cpp\n// 雙人零和博弈，先手最大化得分差，後手最小化\n// 適用於石子游戲等區間選取問題\nvector<vector<int>> memo;\n\nint minmax(vector<int>& psum, int l, int r, bool is_first) {\n    if (l > r) {\n        return 0;\n    }\n    if (memo[l][r] != INT_MIN) {\n        return memo[l][r];\n    }\n    int pick_l = psum[r + 1] - psum[l + 1] - minmax(psum, l + 1, r, !is_first);\n    int pick_r = psum[r] - psum[l] - minmax(psum, l, r - 1, !is_first);\n    return memo[l][r] = max(pick_l, pick_r);\n}\n```\n\n---\n\n**解題思路**：\n1. **找規律**：打表小情況，觀察 P/N-position 的規律\n2. **SG 函式**：遊戲可拆分為獨立子遊戲時，用 SG 定理\n3. **MinMax + DP**：無法套用經典模型時，用記憶化搜尋暴力求解",
+      "children": []
+    },
+    {
+      "id": 23,
+      "title": "21. 點、線",
+      "children": []
+    },
+    {
+      "id": 24,
+      "title": "22. 圓",
+      "children": []
+    },
+    {
+      "id": 25,
+      "title": "23. 矩形、多邊形",
+      "children": []
+    },
+    {
+      "id": 26,
+      "title": "24. 凸包",
+      "summary": "\n\n**Andrew 演算法**：\n- 按照 x 座標排序，若 x 相同則按 y 座標排序\n- 分別求出下凸殼和上凸殼\n- 使用單調堆疊維護凸殼上的點\n\n**凸包 (Andrew 演算法) 模板**：\n\n```cpp\n// Andrew 演算法求凸包\nstruct Point {\n    double x, y;\n};\nvector<Point> getConvexHull(vector<Point>& p) {\n    int n = p.size(), k = 0;\n    if (n <= 2) {\n        return p;\n    }\n    sort(p.begin(), p.end(),\n         [](Point a, Point b) { return a.x < b.x || (a.x == b.x && a.y < b.y); });\n    vector<Point> h(2 * n);\n    for (int i = 0; i < n; h[k++] = p[i++]) {\n        while (k >= 2 && crossProduct(h[k - 2], h[k - 1], p[i]) <= 0) { // 非左轉則彈出\n            k--;\n        }\n    }\n    for (int i = n - 2, t = k + 1; i >= 0; h[k++] = p[i--]) {\n        while (k >= t && crossProduct(h[k - 2], h[k - 1], p[i]) <= 0) {\n            k--;\n        }\n    }\n    h.resize(k - 1);\n    return h;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 27,
+      "title": "25. 隨機數",
+      "summary": "\n\n**C++ 現代隨機數生成**：\n\n```cpp\n// 梅森旋轉隨機數產生器\nmt19937 rng(chrono::steady_clock::now().time_since_epoch().count());\nint randint(int l, int r) {\n    return uniform_int_distribution<int>(l, r)(rng);\n}\n```",
+      "children": []
+    },
+    {
+      "id": 28,
+      "title": "26. 隨機化技巧",
+      "children": []
+    },
+    {
+      "id": 29,
+      "title": "27. 迴文數",
+      "summary": "\n\n**迴文數**：\n- 判定迴文數：反轉一半數字比較\n- 生成指定長度的迴文數\n- 注意：負數和末尾為零的情況\n\n```cpp\n// 判斷一個整數是否為迴文數\nbool isPalindrome(int x) {\n    if (x < 0 || (x % 10 == 0 && x != 0)) {\n        return false;\n    }\n    int rev = 0;\n    while (x > rev) {\n        rev = rev * 10 + x % 10;\n        x /= 10; // 去掉最低位\n    }\n    return x == rev || x == rev / 10;\n}\n```",
+      "children": []
+    },
+    {
+      "id": 30,
+      "title": "28. 整數拆分",
+      "children": []
+    },
+    {
+      "id": 31,
+      "title": "29. 曼哈頓距離與切比雪夫距離",
+      "summary": "曼哈頓距離與切比雪夫距離是兩種常用的距離度量方式，在演算法題中經常出現。兩者可以透過座標變換相互轉換。\n\n**定義**：\n\n對於平面上兩點 $(x_1, y_1)$ 和 $(x_2, y_2)$：\n\n**曼哈頓距離（Manhattan Distance）**：\n\n$$d_M = |x_1 - x_2| + |y_1 - y_2|$$\n\n表示在網格上只能水平或垂直移動時的最短路徑長度。\n\n**切比雪夫距離（Chebyshev Distance）**：\n\n$$d_C = \\max(|x_1 - x_2|, |y_1 - y_2|)$$\n\n表示在網格上可以斜向移動（8個方向）時的最短步數。\n\n**座標變換**：\n\n曼哈頓距離和切比雪夫距離可以透過座標旋轉 45° 相互轉換：\n\n- 原座標 $(x, y)$ 轉換為 $(x + y, x - y)$ 後，曼哈頓距離變為切比雪夫距離\n- 原座標 $(x, y)$ 轉換為 $(\\frac{x+y}{2}, \\frac{x-y}{2})$ 後，切比雪夫距離變為曼哈頓距離\n\n**應用場景**：\n\n- 曼哈頓距離：網格路徑、最小移動步數、租車問題\n- 切比雪夫距離：國王在棋盤上的移動、最小步數（可斜向移動）\n- 座標轉換：將曼哈頓距離問題轉為切比雪夫距離問題（或反之），簡化計算\n\n**C++ 實現**：\n\n```cpp\n// 曼哈頓距離\nint manhattanDistance(int x_1, int y_1, int x_2, int y_2) {\n    return abs(x_1 - x_2) + abs(y_1 - y_2);\n}\n\n// 切比雪夫距離\nint chebyshevDistance(int x_1, int y_1, int x_2, int y_2) {\n    return max(abs(x_1 - x_2), abs(y_1 - y_2));\n}\n\n// 座標轉換：將曼哈頓距離轉為切比雪夫距離\n// 轉換後的座標 (u, v) = (x + y, x - y)\n// 則原曼哈頓距離 = 轉換後的切比雪夫距離\npair<int, int> toChebychev(int x, int y) {\n    return {x + y, x - y};\n}\n\n// 座標轉換：將切比雪夫距離轉為曼哈頓距離\n// 轉換後的座標 (u, v) = ((x + y) / 2, (x - y) / 2)\n// 則原切比雪夫距離 = 轉換後的曼哈頓距離\npair<int, int> toManhattan(int x, int y) {\n    return {(x + y) / 2, (x - y) / 2};\n}\n```",
+      "children": []
+    },
+    {
+      "id": 32,
+      "title": "30. 多項式",
+      "children": []
+    },
+    {
+      "id": 33,
+      "title": "31. 快速沃爾什變換（FWT）",
+      "children": []
+    },
+    {
+      "id": 34,
+      "title": "32. 摩爾投票法",
+      "summary": "\n\n**摩爾投票法**：\n- 找出出現次數超過 n/2 的多數元素\n- 維護候選人和計數：相同 +1，不同 -1，歸零換人\n- 空間 $O(1)$，時間 $O(n)$\n\n```cpp\n// Boyer-Moore 投票法：找出出現超過 n/2 次的元素\nint majorityElement(vector<int>& nums) {\n    int candidate = 0, count = 0;\n    for (int x : nums) {\n        if (count == 0) { // 候選人被完全抵消，換人\n            candidate = x;\n        }\n        count += (x == candidate) ? 1 : -1;\n    }\n    return candidate;\n}\n```\n\n**一般化：找出出現次數超過 n/k 的元素**\n\n摩爾投票法可以推廣到找出所有出現次數超過 $\\lfloor n/k \\rfloor$ 的元素。最多有 $k-1$ 個這樣的元素，因此維護 $k-1$ 個候選人。\n\n**核心思想**：\n- 維護至多 k-1 個候選人及其計數\n- 遇到已有候選人時，計數 +1\n- 遇到新候選人時，如果候選人未滿 k-1 個，加入新候選人\n- 否則所有候選人計數 -1，計數為 0 的候選人移除\n- 最後需要二次遍歷驗證候選人是否真的超過 $\\lfloor n/k \\rfloor$\n\n```cpp\n// Boyer-Moore 一般化：找出所有出現超過 n/k 次的元素\nvector<int> majorityElement(vector<int>& nums, int k) {\n    int n = nums.size();\n    unordered_map<int, int> candidates;  // 候選人及其計數\n    \n    // 第一階段：找出候選人\n    for (int x : nums) {\n        if (candidates.count(x)) {\n            // 已是候選人，計數 +1\n            candidates[x]++;\n        } else if (candidates.size() < k - 1) {\n            // 候選人未滿 k-1 個，加入新候選人\n            candidates[x] = 1;\n        } else {\n            // 所有候選人計數 -1\n            for (auto it = candidates.begin(); it != candidates.end(); ) {\n                it->second--;\n                if (it->second == 0) {\n                    it = candidates.erase(it);\n                } else {\n                    ++it;\n                }\n            }\n        }\n    }\n    \n    // 第二階段：驗證候選人是否真的出現超過 n/k 次\n    for (auto& [num, cnt] : candidates) {\n        cnt = 0;  // 重置計數\n    }\n    for (int x : nums) {\n        if (candidates.count(x)) {\n            candidates[x]++;\n        }\n    }\n    \n    vector<int> res;\n    for (auto& [num, cnt] : candidates) {\n        if (cnt > n / k) {\n            res.push_back(num);\n        }\n    }\n    \n    return res;\n}\n```\n\n**應用範例**：\n- k=2：找出現超過 n/2 次的元素（LeetCode 169）\n- k=3：找出現超過 n/3 次的元素（LeetCode 229）\n- k=4：找出現超過 n/4 次的元素\n\n**時間複雜度**：$O(n × k)$  \n**空間複雜度**：$O(k)$",
+      "children": []
+    },
+    {
+      "id": 35,
+      "title": "33. 其他",
+      "children": []
+    }
+  ],
+  "summary": "**本題單涵蓋**：\n- 數論：質數、GCD/LCM、質因數分解、尤拉函式\n- 組合數學：排列組合、容斥原理、卡特蘭數\n- 機率期望：期望計算、機率 DP\n- 博弈論：Nim 遊戲、SG 函式\n- 計算幾何：點線面、凸包\n- 隨機演算法：蒙特卡羅、拒絕抽樣\n\n**取模相關**：部分題目涉及取模運算，詳見 [模運算教程](https://leetcode.cn/circle/discuss/mDfnkW/)\n\n**C++ 質數篩模板**：\n\n```cpp\n// 埃氏篩：篩出 [2, n] 的所有質數\nvector<int> sieve(int n) {\n    vector<int> primes;\n    vector<bool> is_prime(n + 1, true);\n    is_prime[0] = is_prime[1] = false;\n    for (int p = 2; p <= n; ++p) {\n        if (is_prime[p]) {\n            primes.push_back(p);\n            for (long long i = (long long)p * p; i <= n; i += p) { // 從 p² 開始篩 {\n                is_prime[i] = false;\n            }\n            }\n        }\n    }\n    return primes;\n}\n```"
+}

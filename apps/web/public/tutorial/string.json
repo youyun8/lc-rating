@@ -1,0 +1,126 @@
+{
+  "id": 1,
+  "title": "字串（KMP/Z函式/Manacher/字串雜湊/AC自動機/後綴陣列/子序列自動機）",
+  "src": "https://leetcode.cn/circle/discuss/SJFwQI/",
+  "last_update": "2025-11-07T23:47:26.098808+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 介紹",
+      "children": [
+        {
+          "id": 3,
+          "title": "1.1 KMP（字首的字尾）",
+          "summary": "KMP 演算法透過預處理模式串的 π 陣列（最長 border 長度），實現文字串中模式串的線性時間匹配。適用於子串匹配、旋轉字串、重複子串等場景。模板題為 28. 找出字串中第一個匹配項的下標。\n\n**C++ 模板**：\n\n```cpp\n// 建立 KMP 前綴陣列（pi 陣列）\nvector<int> kmpBuild(const string& pattern) {\n    int n = pattern.size();\n    vector<int> pi(n);\n    for (int i = 1; i < n; i++) {\n        int j = pi[i - 1];\n        while (j > 0 && pattern[i] != pattern[j]) {\n            j = pi[j - 1];\n        }\n        if (pattern[i] == pattern[j]) {\n            j++;\n        }\n        pi[i] = j;\n    }\n    return pi;\n}\n\n// KMP 匹配：在 text 中找 pattern 的所有出現位置\nvector<int> kmpSearch(const string& text, const string& pattern) {\n    vector<int> pi = kmpBuild(pattern);\n    vector<int> res;\n    int j = 0;\n    for (int i = 0; i < (int)text.size(); i++) {\n        while (j > 0 && text[i] != pattern[j]) {\n            j = pi[j - 1];\n        }\n        if (text[i] == pattern[j]) {\n            j++;\n        }\n        if (j == (int)pattern.size()) {\n            res.push_back(i - j + 1);\n            j = pi[j - 1];\n        }\n    }\n    return res;\n}\n```",
+          "children": [
+            {
+              "id": 4,
+              "title": "1.1.1 基礎"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "1.2 Z 函式（字尾的字首）",
+          "summary": "Z 函式計算字尾與原串的最長公共字首（LCP），可用於子串匹配。構造 `pattern + s`，若 $z[m+i] \\geq m$，則匹配成功。可替代 KMP，適用於 28、2223 等題。\n\n**C++ 模板**：\n\n```cpp\n// Z 函式：z[i] = s[i..] 與 s 的最長公共字首長度\nvector<int> zFunction(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    int l = 0, r = 0;\n    for (int i = 1; i < n; i++) {\n        if (i < r) {\n            z[i] = min(r - i, z[i - l]);\n        }\n        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {\n            z[i]++;\n        }\n        if (i + z[i] > r) {\n            l = i;\n            r = i + z[i];\n        }\n    }\n    return z;\n}\n```",
+          "children": [
+            {
+              "id": 6,
+              "title": "1.2.1 基礎"
+            },
+            {
+              "id": 7,
+              "title": "1.2.2 LCP 陣列"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "1.3 Manacher 演算法（迴文串）",
+          "summary": "Manacher 演算法線上性時間內求出所有迴文中心的最長迴文串。可用於判斷子串是否為迴文、求最長迴文子串、最短迴文串構造等。模板題為 5. 最長迴文子串。\n\n**C++ 模板**：\n\n```cpp\n// Manacher：求每個中心的最長迴文半徑\nvector<int> manacher(const string& s) {\n    string t = \"#\";\n    for (char c : s) {\n        t += c;\n        t += '#';\n    }\n    int n = t.size();\n    vector<int> p(n, 0);\n    int c = 0, r = 0;\n    for (int i = 0; i < n; i++) {\n        // 如果 i 在當前回文右邊界內，利用對稱性初始化 p[i]\n        if (i < r) {\n            p[i] = min(r - i, p[2 * c - i]);\n        }\n        // 中心擴展：嘗試擴展以 i 為中心的迴文半徑\n        while (i - p[i] - 1 >= 0 && i + p[i] + 1 < n && t[i - p[i] - 1] == t[i + p[i] + 1]) {\n            p[i]++;\n        }\n        // 更新迴文右邊界 r 和對應的中心 c\n        if (i + p[i] > r) {\n            c = i;\n            r = i + p[i];\n        }\n    }\n    return p;\n}\n```",
+          "children": [
+            {
+              "id": 9,
+              "title": "1.3.1 基礎"
+            },
+            {
+              "id": 10,
+              "title": "1.3.2 中心擴展法"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "title": "1.4 字串雜湊",
+          "summary": "使用多項式雜湊（單模/雙模）快速比較子串。適用於子串匹配、重複子串、最長公共子串等。推薦先做 2156. 查詢給定雜湊值的子串。可二分比較字典序。\n\n**C++ 模板**：\n\n```cpp\n// 字串雜湊（多項式雜湊）\nstruct StringHash {\n    static const long long kMod = 1e9 + 7, kBase = 131;\n    vector<long long> h, pw;\n    StringHash(const string& s) {\n        int n = s.size();\n        h.resize(n + 1);\n        pw.resize(n + 1);\n        h[0] = 0;\n        pw[0] = 1;\n        for (int i = 0; i < n; i++) {\n            h[i + 1] = (h[i] * kBase + s[i]) % kMod;\n            pw[i + 1] = pw[i] * kBase % kMod;\n        }\n    }\n    long long get(int l, int r) {\n        return (h[r + 1] - h[l] * pw[r - l + 1] % kMod + kMod * 2) % kMod;\n    }\n};\n```",
+          "children": [
+            {
+              "id": 12,
+              "title": "1.4.1 基礎"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "title": "1.5 最小表示法",
+          "summary": "求字串迴圈同構串中字典序最小者。透過雙指標維護候選起點，每次排除 k+1 個位置，總複雜度 $O(n)$。模板題為 899. 有序佇列（k=1）。\n\n**C++ 模板**：\n\n```cpp\n// 最小表示法：找到字串旋轉中字典序最小的起始位置\nint minRepresentation(const string& s) {\n    int n = s.size(), i = 0, j = 1, k = 0;\n    while (i < n && j < n && k < n) {\n        int diff = s[(i + k) % n] - s[(j + k) % n];\n        // 字元相同，繼續比較下一個位置\n        if (diff == 0) {\n            k++;\n        }\n        // i 位置的字元較大，移動 i 指標跳過這段\n        else if (diff > 0) {\n            i += k + 1;\n            k = 0;\n        }\n        // j 位置的字元較大，移動 j 指標跳過這段\n        else {\n            j += k + 1;\n            k = 0;\n        }\n        // 避免 i 和 j 指向同一位置\n        if (i == j) {\n            j++;\n        }\n    }\n    return min(i, j);\n}\n```",
+          "children": [
+            {
+              "id": 14,
+              "title": "1.5.1 基礎"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "title": "1.6 字典樹"
+        },
+        {
+          "id": 16,
+          "title": "1.7 AC 自動機",
+          "summary": "AC 自動機 = 字典樹 + KMP。用於多模式串匹配。可替代字串雜湊，適用於 1032、1408 等題。\n\n**C++ 模板**：\n\n```cpp\n// AC 自動機 = 字典樹 + KMP fail 指標\nstruct AhoCorasick {\n    vector<array<int, 26>> ch;   // 字典樹的邊\n    vector<int> fail;             // fail 指標（類似 KMP 的 next 陣列）\n    vector<int> cnt;              // 每個節點結尾的模式串數量\n    \n    // 建立新節點\n    int newNode() {\n        ch.push_back({});\n        fail.push_back(0);\n        cnt.push_back(0);\n        ch.back().fill(0);\n        return ch.size() - 1;\n    }\n    \n    // 建構子：初始化根節點\n    AhoCorasick() {\n        newNode();\n    }\n    \n    // 插入模式串到字典樹\n    void insert(const string& s) {\n        int cur = 0;\n        for (char c : s) {\n            int u = c - 'a';\n            // 如果該邊不存在，建立新節點\n            if (!ch[cur][u]) {\n                ch[cur][u] = newNode();\n            }\n            cur = ch[cur][u];\n        }\n        cnt[cur]++;  // 標記模式串結尾\n    }\n    \n    // 建立 fail 指標（類似 KMP 的預處理）\n    void build() {\n        queue<int> q;\n        // 第一層節點的 fail 指標都指向根節點\n        for (int i = 0; i < 26; i++) {\n            if (ch[0][i]) {\n                q.push(ch[0][i]);\n            }\n        }\n        // BFS 建立 fail 指標\n        while (!q.empty()) {\n            int u = q.front();\n            q.pop();\n            for (int i = 0; i < 26; i++) {\n                if (ch[u][i]) {\n                    // 節點存在：設定 fail 指標並加入佇列\n                    fail[ch[u][i]] = ch[fail[u]][i];\n                    q.push(ch[u][i]);\n                } else {\n                    // 節點不存在：直接指向 fail 位置的對應邊（路徑壓縮）\n                    ch[u][i] = ch[fail[u]][i];\n                }\n            }\n        }\n    }\n};\n```",
+          "children": [
+            {
+              "id": 17,
+              "title": "1.7.1 基礎"
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "title": "1.8 後綴陣列 & 後綴自動機",
+          "summary": "後綴陣列可求字典序最大/最小子串、最長公共子串等。後綴自動機支援子串計數、本質不同子串數等。適用於 1163、1754、1044 等題。\n\n**C++ 模板**：\n\n```cpp\n// 後綴陣列（倍增法 O(n log n)）\nvector<int> buildSa(const string& s) {\n    int n = s.size();\n    vector<int> sa(n), rank(n), tmp(n);\n    iota(sa.begin(), sa.end(), 0);  // 初始化 sa 為 [0, 1, 2, ..., n-1]\n    \n    // 初始化 rank 為字元的 ASCII 值\n    for (int i = 0; i < n; i++) {\n        rank[i] = s[i];\n    }\n    \n    // 倍增排序：每次比較長度為 k 的子串\n    for (int k = 1; k < n; k <<= 1) {\n        // 比較函數：先比較前 k 個字元，再比較後 k 個字元\n        auto cmp = [&](int a, int b) {\n            if (rank[a] != rank[b]) {\n                return rank[a] < rank[b];\n            }\n            int ra = a + k < n ? rank[a + k] : -1;\n            int rb = b + k < n ? rank[b + k] : -1;\n            return ra < rb;\n        };\n        \n        // 根據比較函數排序後綴陣列\n        sort(sa.begin(), sa.end(), cmp);\n        \n        // 更新 rank：相同的後綴給相同的 rank\n        tmp[sa[0]] = 0;\n        for (int i = 1; i < n; i++) {\n            tmp[sa[i]] = tmp[sa[i - 1]] + (cmp(sa[i - 1], sa[i]) ? 1 : 0);\n        }\n        rank = tmp;\n        \n        // 如果所有後綴都已區分，提前退出\n        if (rank[sa[n - 1]] == n - 1) {\n            break;\n        }\n    }\n    return sa;\n}\n```",
+          "children": [
+            {
+              "id": 19,
+              "title": "1.8.1 基礎"
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "title": "1.9 子序列自動機",
+          "summary": "預處理每個位置後最近的字元下標，用於快速判斷子序列匹配。適用於 792、514、2014 等題。\n\n**C++ 模板**：\n\n```cpp\n// 子序列自動機：nxt[i][c] = 位置 i 之後最近的字元 c 的位置\nvector<array<int, 26>> buildSubseqAutomaton(const string& s) {\n    int n = s.size();\n    vector<array<int, 26>> nxt(n + 1);\n    nxt[n].fill(n);\n    for (int i = n - 1; i >= 0; i--) {\n        nxt[i] = nxt[i + 1];\n        nxt[i][s[i] - 'a'] = i;\n    }\n    return nxt;\n}\n```",
+          "children": [
+            {
+              "id": 21,
+              "title": "1.9.1 基礎"
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "title": "1.10 其他",
+          "summary": "包含 LCP 性質、重複計數、字首處理等進階題。",
+          "children": [
+            {
+              "id": 23,
+              "title": "1.10.1 進階"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": "本題單系統梳理字串演算法核心內容，涵蓋 KMP、Z 函式、Manacher、字串雜湊、最小表示法、字典樹、AC 自動機、後綴陣列/自動機、子序列自動機等十大模組。\n\n**本題單涵蓋**：\n- KMP\n- Z函式\n- Manacher\n- 字串雜湊\n- AC自動機\n- 後綴陣列\n- 子序列自動機\n\n**C++ 模板（KMP）**：\n\n```cpp\n// KMP：計算 π 陣列（最長 border / 字首函式）\nvector<int> kmpBuild(const string& s) {\n    int n = s.size();\n    vector<int> pi(n, 0);\n    for (int i = 1; i < n; i++) {\n        int j = pi[i - 1];\n        while (j > 0 && s[i] != s[j]) {\n            j = pi[j - 1];\n        }\n        if (s[i] == s[j]) {\n            j++;\n        }\n        pi[i] = j;\n    }\n    return pi;\n}\n```"
+}

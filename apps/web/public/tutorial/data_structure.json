@@ -1,0 +1,474 @@
+{
+  "id": 1,
+  "title": "資料結構（字首和/堆疊/佇列/堆/字典樹/並查集/樹狀陣列/線段樹）",
+  "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+  "last_update": "2026-02-24T15:43:15.314902+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 常用列舉技巧",
+      "summary": "本節介紹三種核心列舉策略：列舉右維護左、列舉中間、遍歷對角線，適用於雙變數、三/四變數及矩陣類問題。",
+      "children": [
+        {
+          "id": 3,
+          "title": "1.1 列舉右，維護左",
+          "summary": "![數據結構題單 數據結構入門 數據結構新手教程 數據結構題目 力扣數據結構 leetcode數據結構 靈茶山艾府 靈神](https://pic.leetcode.cn/1713836847-cDYwhf-Programming.jfif)\n\n---\n\n**核心思想**：\n- 雙變數問題 → 單變數問題\n- 列舉右邊的 $a_j$，在左邊查詢 $a_i = t - a_j$\n- 使用雜湊表維護已遍歷的元素\n\n**影片講解**：[兩數之和動畫講解](https://leetcode.cn/problems/two-sum/solution/dong-hua-cong-liang-shu-zhi-he-zhong-wo-0yvmj/)\n\n**要求**：儘量使用一次遍歷實現",
+          "children": [
+            {
+              "id": 4,
+              "title": "1.1.1 列舉右，維護左 > 思維擴展",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "1.2 進階",
+          "summary": "思維擴充套件：\n\n*   [454\\. 四數相加 II](https://leetcode.cn/problems/4sum-ii/)\n*   [3027\\. 人員站位的方案數 II](https://leetcode.cn/problems/find-the-number-of-ways-to-place-people-ii/) 2020\n*   [3548\\. 等和矩陣分割 II](https://leetcode.cn/problems/equal-sum-grid-partition-ii/) 2245 程式碼複用\n*   [3713\\. 最長的平衡子串 I](https://leetcode.cn/problems/longest-balanced-substring-i/) 非暴力寫法",
+          "children": []
+        },
+        {
+          "id": 6,
+          "title": "1.3 列舉中間",
+          "summary": "對於有三個或者四個變數的問題，列舉中間的變數往往更好算。\n\n為什麼？比如問題有三個下標，需要滿足 0≤i<j<k<n，對比一下：\n\n*   列舉 i，後續計算中還需保證 j<k。\n*   列舉 j，那麼 i 和 k 自動被 j 隔開，互相獨立，後續計算中無需關心 i 和 k 的位置關係。\n\n所以列舉中間的變數更簡單。",
+          "children": []
+        },
+        {
+          "id": 7,
+          "title": "1.4 遍歷對角線",
+          "summary": "注：有關**前字尾分解**的內容，見 [動態規劃題單](https://leetcode.cn/circle/discuss/tXLS3i/) 的「專題：前字尾分解」。",
+          "children": []
+        },
+        {
+          "id": 8,
+          "title": "1.5 列舉右，維護左 > 基礎",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "2. 字首和",
+      "summary": "**左閉右開公式**：子陣列 `[left, right)` 的元素和為 `sum[right] - sum[left]`。把下標區間定義成左閉右開，就不需要加一減一了。",
+      "children": [
+        {
+          "id": 10,
+          "title": "2.1 基礎",
+          "summary": "[講解](https://leetcode.cn/problems/range-sum-query-immutable/solution/qian-zhui-he-ji-qi-kuo-zhan-fu-ti-dan-py-vaar/)\n\n---\n\n思維擴展：\n- [1523\\. 在區間範圍內統計奇數數目](https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range/) 1209",
+          "children": [
+            {
+              "id": 11,
+              "title": "2.1.1 基礎 > 思維擴展",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "title": "2.2 字首和與雜湊表",
+          "summary": "通常要用到「列舉右，維護左」的技巧（見本題單 1.1 節）。\n\n[講解](https://leetcode.cn/problems/subarray-sum-equals-k/solution/qian-zhui-he-ha-xi-biao-cong-liang-ci-bi-4mwr/)",
+          "children": [
+            {
+              "id": 13,
+              "title": "2.2.1 字首和與雜湊表 > 思維擴展",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "title": "2.3 距離和",
+          "summary": "[圖解](https://leetcode.cn/problems/minimum-operations-to-make-all-array-elements-equal/solution/yi-tu-miao-dong-pai-xu-qian-zhui-he-er-f-nf55/)",
+          "children": []
+        },
+        {
+          "id": 15,
+          "title": "2.4 狀態壓縮字首和",
+          "summary": "推薦先閱讀：[從集合論到位運算，常見位運算技巧分類總結！](https://leetcode.cn/circle/discuss/CaOJ45/)",
+          "children": []
+        },
+        {
+          "id": 16,
+          "title": "2.5 進階",
+          "summary": "思維擴充套件：\n\n*   [2300\\. 咒語和藥水的成功對數](https://leetcode.cn/problems/successful-pairs-of-spells-and-potions/)\n*   [1534\\. 統計好三元組](https://leetcode.cn/problems/count-good-triplets/)",
+          "children": [
+            {
+              "id": 17,
+              "title": "2.5.1 進階 > 思維擴展",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "title": "2.6 二維字首和",
+          "summary": "[【圖解】一張圖秒懂二維字首和！](https://leetcode.cn/problems/range-sum-query-2d-immutable/solution/tu-jie-yi-zhang-tu-miao-dong-er-wei-qian-84qp/)",
+          "children": []
+        },
+        {
+          "id": 19,
+          "title": "2.7 字首和與雜湊表 > 字首和與有序集合",
+          "children": []
+        },
+        {
+          "id": 20,
+          "title": "2.8 二維字首和 > 二維字首最小值",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "3. 差分",
+      "summary": "差分與字首和的關係，類似**導數**與**積分**的關係。\n\n陣列 a 的差分的字首和就是陣列 a（不變）。\n\n[原理講解](https://leetcode.cn/problems/car-pooling/solution/suan-fa-xiao-ke-tang-chai-fen-shu-zu-fu-9d4ra/)",
+      "children": [
+        {
+          "id": 22,
+          "title": "3.1 一維差分",
+          "summary": "思維擴充套件：\n\n*   [56\\. 合併區間](https://leetcode.cn/problems/merge-intervals/) 做法見 [我的評論](https://leetcode.cn/problems/merge-intervals/solutions/2798138/jian-dan-zuo-fa-yi-ji-wei-shi-yao-yao-zh-f2b3/comments/2323402/?parent=2316868)\n*   [57\\. 插入區間](https://leetcode.cn/problems/insert-interval/)\n*   [732\\. 我的日程安排表 III](https://leetcode.cn/problems/my-calendar-iii/)\n*   [2406\\. 將區間分為最少組數](https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups/) 1713\n*   [253\\. 會議室 II](https://leetcode.cn/problems/meeting-rooms-ii/)（會員題）\n*   [759\\. 員工空閒時間](https://leetcode.cn/problems/employee-free-time/)（會員題）",
+          "children": [
+            {
+              "id": 23,
+              "title": "3.1.1 基礎",
+              "summary": "思維擴展：\n\n*   [56\\. 合併區間](https://leetcode.cn/problems/merge-intervals/) 做法見 [我的評論](https://leetcode.cn/problems/merge-intervals/solutions/2798138/jian-dan-zuo-fa-yi-ji-wei-shi-yao-yao-zh-f2b3/comments/2323402/?parent=2316868)\n*   [57\\. 插入區間](https://leetcode.cn/problems/insert-interval/)\n*   [732\\. 我的日程安排表 III](https://leetcode.cn/problems/my-calendar-iii/)\n*   [2406\\. 將區間分為最少組數](https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups/) 1713\n*   [253\\. 會議室 II](https://leetcode.cn/problems/meeting-rooms-ii/)（會員題）\n*   [759\\. 員工空閒時間](https://leetcode.cn/problems/employee-free-time/)（會員題）\n\n---\n\n**差分與前綴和的關係**：\n\n差分與前綴和的關係，類似**導數**與**積分**的關係：\n- **差分**：相鄰元素之差，類似導數（變化率）\n- **前綴和**：累積求和，類似積分（累積量）\n\n**核心性質**：\n1. 對陣列 a 求差分得到 d，再對 d 求前綴和，得到原陣列 a（不變）\n2. 對陣列 a 求前綴和得到 s，再對 s 求差分，得到原陣列 a（不變）\n\n**數學表達**：\n- 差分：`d[i] = a[i] - a[i - 1]`\n- 前綴和：`s[i] = s[i - 1] + d[i]`\n- 因此：`s[i] = a[i]`（恢復原陣列）\n\n**C++ 示例**：\n\n```cpp\n// 演示差分與前綴和的互逆關係\nvoid demonstrateDifferenceAndPrefixSum() {\n    vector<int> a = {3, 5, 2, 8, 4}; // 原陣列\n    int n = a.size();\n    \n    // 步驟 1：計算差分陣列 d\n    vector<int> d(n);\n    d[0] = a[0];\n    for (int i = 1; i < n; i++) {\n        d[i] = a[i] - a[i - 1]; // 差分\n    }\n    // d = [3, 2, -3, 6, -4]\n    \n    // 步驟 2：對差分陣列求前綴和，恢復原陣列\n    vector<int> restored(n);\n    restored[0] = d[0];\n    for (int i = 1; i < n; i++) {\n        restored[i] = restored[i - 1] + d[i]; // 前綴和\n    }\n    // restored = [3, 5, 2, 8, 4] = a（完全相同！）\n    \n    // 驗證\n    assert(restored == a); // 通過！\n    \n    // 這就是為什麼差分可以用來高效處理區間修改：\n    // 1. 區間 [l, r] 加 val：只需修改 d[l] += val, d[r+1] -= val\n    // 2. 最後對 d 求前綴和，得到所有修改後的結果\n}\n\n// 差分陣列模板（區間修改）\nvector<int> applyRangeUpdates(int n, vector<array<int, 3>>& updates) {\n    vector<int> d(n + 1, 0); // 差分陣列（多一位防止越界）\n    \n    // 對每個區間修改，只修改差分陣列的兩個端點\n    for (auto& update : updates) {\n        int l = update[0], r = update[1], val = update[2];\n        d[l] += val;      // 區間起點\n        d[r + 1] -= val;  // 區間終點的下一位\n    }\n    \n    // 對差分陣列求前綴和，得到最終結果\n    vector<int> result(n);\n    result[0] = d[0];\n    for (int i = 1; i < n; i++) {\n        result[i] = result[i - 1] + d[i];\n    }\n    \n    return result;\n}\n```\n\n**應用示例**：\n\n假設初始陣列全為 0，執行以下區間修改：\n- 區間 [1, 3] 加 5\n- 區間 [2, 4] 加 3\n- 區間 [0, 2] 加 2\n\n```cpp\nint n = 5;\nvector<array<int, 3>> updates = {\n    {1, 3, 5},  // [l, r, val]\n    {2, 4, 3},\n    {0, 2, 2}\n};\n\nvector<int> result = applyRangeUpdates(n, updates);\n// result = [2, 7, 10, 8, 3]\n//          ↑  ↑  ↑   ↑  ↑\n//          0  1  2   3  4 (索引)\n// 解釋：\n// [0]: 2 (來自第三次修改)\n// [1]: 2+5 = 7 (來自第一和第三次修改)\n// [2]: 2+5+3 = 10 (來自所有三次修改)\n// [3]: 5+3 = 8 (來自第一和第二次修改)\n// [4]: 3 (來自第二次修改)\n```\n\n[原理講解](https://leetcode.cn/problems/car-pooling/solution/suan-fa-xiao-ke-tang-chai-fen-shu-zu-fu-9d4ra/)\n\n---\n\n一維差分基礎應用題。",
+              "children": []
+            },
+            {
+              "id": 24,
+              "title": "3.1.2 進階",
+              "children": [
+                {
+                  "id": 25,
+                  "title": "3.1.2.1 一維差分 > 進階 > 思維擴展",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "title": "3.2 二維差分",
+          "summary": "[【圖解】從一維差分到二維差分](https://leetcode.cn/problems/stamping-the-grid/solution/wu-nao-zuo-fa-er-wei-qian-zhui-he-er-wei-zwiu/)",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "4. 堆疊",
+      "summary": "堆疊常用在 DFS 中，但無需我們手動維護。",
+      "children": [
+        {
+          "id": 28,
+          "title": "4.1 基礎",
+          "summary": "**基礎堆疊操作**\n\n堆疊（Stack）是一種後進先出（LIFO, Last In First Out）的資料結構，只允許在一端進行插入和刪除操作。\n\n**基本操作**：\n- `push(x)`：將元素 x 壓入堆疊頂，時間複雜度 $O(1)$\n- `pop()`：移除並返回堆疊頂元素，時間複雜度 $O(1)$\n- `top()`/`peek()`：返回堆疊頂元素但不移除，時間複雜度 $O(1)$\n- `empty()`：判斷堆疊是否為空，時間複雜度 $O(1)$\n\n**常見應用**：\n- 括號匹配\n- 表達式求值\n- 函數調用堆疊\n- DFS 遍歷\n- 回溯算法\n\n```cpp\n// 基礎堆疊操作模板\nstack<int> st;\n\n// 壓入元素\nst.push(1);\nst.push(2);\nst.push(3);\n\n// 訪問堆疊頂元素\nif (!st.empty()) {\n    int top = st.top(); // 3\n}\n\n// 彈出元素\nwhile (!st.empty()) {\n    int val = st.top();\n    st.pop();\n    // 處理 val\n}\n```",
+          "children": []
+        },
+        {
+          "id": 29,
+          "title": "4.2 進階",
+          "summary": "**進階堆疊應用**\n\n利用堆疊的特性解決更複雜的問題，通常涉及維護額外信息或結合其他數據結構。\n\n**常見技巧**：\n- **維護最小值/最大值**：使用輔助堆疊同步記錄當前最小/最大值\n- **堆疊排序**：使用額外堆疊進行排序操作\n- **雙堆疊模擬佇列**：兩個堆疊實現 FIFO 佇列\n- **堆疊中堆疊**：嵌套數據結構處理\n\n```cpp\n// 最小堆疊模板（同時維護最小值）\nclass MinStack {\n    stack<int> st;\n    stack<int> min_st; // 輔助堆疊記錄最小值\npublic:\n    void push(int x) {\n        st.push(x);\n        if (min_st.empty() || x <= min_st.top()) {\n            min_st.push(x);\n        }\n    }\n    \n    void pop() {\n        if (st.top() == min_st.top()) {\n            min_st.pop();\n        }\n        st.pop();\n    }\n    \n    int top() {\n        return st.top();\n    }\n    \n    int getMin() {\n        return min_st.top();\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 30,
+          "title": "4.3 鄰項消除",
+          "summary": "**鄰項消除**\n\n利用堆疊處理相鄰元素消除問題，當新元素與堆疊頂元素滿足某種關係時進行消除操作。\n\n**核心思路**：\n- 遍歷序列，將元素壓入堆疊\n- 若當前元素與堆疊頂元素滿足消除條件（如相同、相反、互補等），則彈出堆疊頂\n- 否則將當前元素壓入堆疊\n- 最終堆疊中剩餘的元素即為結果\n\n**典型應用**：\n- 刪除相鄰重複字符\n- 消除配對元素（如括號、標籤）\n- 處理運算符優先級\n\n**時間複雜度**：$O(n)$，每個元素最多進堆疊出堆疊一次\n\n```cpp\n// 鄰項消除模板\nstring removeDuplicates(string s) {\n    stack<char> st;\n    for (char c : s) {\n        // 若堆疊非空且堆疊頂與當前字符相同，則消除\n        if (!st.empty() && st.top() == c) {\n            st.pop();\n        } else {\n            st.push(c);\n        }\n    }\n    \n    // 構造結果（堆疊底到堆疊頂）\n    string res;\n    while (!st.empty()) {\n        res += st.top();\n        st.pop();\n    }\n    reverse(res.begin(), res.end());\n    return res;\n}\n```",
+          "children": []
+        },
+        {
+          "id": 31,
+          "title": "4.4 合法括號字串（RBS）",
+          "summary": "**合法括號字串（Valid Parentheses / RBS）**\n\n使用堆疊判斷括號序列是否合法，或處理括號相關的匹配問題。\n\n**核心思路**：\n- 遇到左括號 `(`, `[`, `{` 時壓入堆疊\n- 遇到右括號 `)`, `]`, `}` 時檢查堆疊頂是否為對應的左括號\n- 若匹配則彈出堆疊頂，否則不合法\n- 最終堆疊為空則合法\n\n**常見變形**：\n- 判斷括號序列是否合法\n- 找出最長合法括號子串\n- 計算需要添加/刪除多少括號使序列合法\n- 處理多種類型括號的嵌套\n\n**時間複雜度**：$O(n)$\n\n```cpp\n// 合法括號判定模板\nbool isValid(string s) {\n    stack<char> st;\n    unordered_map<char, char> pairs = {\n        {')', '('},\n        {']', '['},\n        {'}', '{'}\n    };\n    \n    for (char c : s) {\n        if (c == '(' || c == '[' || c == '{') {\n            st.push(c); // 左括號入堆疊\n        } else {\n            // 右括號：檢查是否匹配\n            if (st.empty() || st.top() != pairs[c]) {\n                return false;\n            }\n            st.pop();\n        }\n    }\n    \n    return st.empty(); // 堆疊空表示完全匹配\n}\n```",
+          "children": []
+        },
+        {
+          "id": 32,
+          "title": "4.5 表示式解析",
+          "summary": "**表達式解析**\n\n使用堆疊處理數學表達式的計算，包括中綴、後綴表達式求值和運算符優先級處理。\n\n**常見問題**：\n- **基本計算器**：處理 `+`, `-`, `*`, `/`, `()` 等運算符\n- **逆波蘭表示式（後綴表達式）**：無括號，易於堆疊計算\n- **中綴轉後綴**：使用運算符堆疊（調度場算法）\n\n**核心思路**：\n- **數字堆疊**：存儲操作數\n- **運算符堆疊**：根據優先級決定何時彈出並計算\n- 遇到數字：壓入數字堆疊\n- 遇到運算符：根據優先級彈出運算符堆疊並計算，再壓入新運算符\n- 遇到左括號：壓入運算符堆疊\n- 遇到右括號：彈出運算符直到遇到左括號\n\n**時間複雜度**：$O(n)$\n\n```cpp\n// 基本計算器模板（支持 +, -, *, /, ()）\nint calculate(string s) {\n    stack<int> nums;\n    stack<char> ops;\n    int num = 0;\n    bool has_num = false;\n    \n    auto calc = [&]() {\n        int b = nums.top(); nums.pop();\n        int a = nums.top(); nums.pop();\n        char op = ops.top(); ops.pop();\n        if (op == '+') nums.push(a + b);\n        else if (op == '-') nums.push(a - b);\n        else if (op == '*') nums.push(a * b);\n        else if (op == '/') nums.push(a / b);\n    };\n    \n    for (int i = 0; i < s.size(); ++i) {\n        char c = s[i];\n        if (isdigit(c)) {\n            num = num * 10 + (c - '0');\n            has_num = true;\n        } else if (c != ' ') {\n            if (has_num) {\n                nums.push(num);\n                num = 0;\n                has_num = false;\n            }\n            if (c == '(') {\n                ops.push(c);\n            } else if (c == ')') {\n                while (ops.top() != '(') {\n                    calc();\n                }\n                ops.pop(); // 彈出 '('\n            } else {\n                // 運算符：根據優先級計算\n                while (!ops.empty() && ops.top() != '(' && \n                       ((c == '+' || c == '-') || \n                        (ops.top() == '*' || ops.top() == '/'))) {\n                    calc();\n                }\n                ops.push(c);\n            }\n        }\n    }\n    if (has_num) nums.push(num);\n    while (!ops.empty()) calc();\n    return nums.top();\n}\n```",
+          "children": []
+        },
+        {
+          "id": 33,
+          "title": "4.6 對頂堆疊",
+          "summary": "**對頂堆疊（Two-Stack Technique）**\n\n使用兩個堆疊背對背維護數據，常用於處理中位數、動態數據流的統計問題。\n\n**核心思路**：\n- **左堆疊（遞減）**：維護較小的一半元素，堆疊頂為最大值\n- **右堆疊（遞增）**：維護較大的一半元素，堆疊頂為最小值\n- 保持兩個堆疊的大小平衡（差距不超過 1）\n- 中位數即為兩個堆疊頂元素\n\n**常見應用**：\n- 動態維護中位數\n- 滑動窗口中位數\n- 數據流的統計信息\n\n**時間複雜度**：\n- 插入/刪除：$O(\\log n)$（需要重新平衡）\n- 查詢中位數：$O(1)$\n\n```cpp\n// 對頂堆疊模板（維護中位數）\nclass MedianFinder {\n    multiset<int> left, right; // 使用 multiset 代替堆疊以支持刪除\npublic:\n    // 插入元素並保持平衡\n    void addNum(int num) {\n        if (left.empty() || num <= *left.rbegin()) {\n            left.insert(num);\n        } else {\n            right.insert(num);\n        }\n        \n        // 平衡兩個集合\n        if (left.size() > right.size() + 1) {\n            right.insert(*left.rbegin());\n            left.erase(left.find(*left.rbegin()));\n        } else if (right.size() > left.size()) {\n            left.insert(*right.begin());\n            right.erase(right.begin());\n        }\n    }\n    \n    // 獲取中位數\n    double findMedian() {\n        if (left.size() == right.size()) {\n            return (*left.rbegin() + *right.begin()) / 2.0;\n        }\n        return *left.rbegin();\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 34,
+          "title": "4.7 單調堆疊",
+          "summary": "見 [單調堆疊題單](https://leetcode.cn/circle/discuss/9oZFK9/)。",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "title": "5. 佇列",
+      "summary": "佇列常用在 BFS 中，見 [網格圖題單](https://leetcode.cn/circle/discuss/YiXPXW/) 和 [圖論題單](https://leetcode.cn/circle/discuss/01LUak/)。與此相比，堆疊常用在 DFS 中，但無需我們手動維護。",
+      "children": [
+        {
+          "id": 36,
+          "title": "5.1 基礎",
+          "summary": "佇列的基礎操作與應用題。",
+          "children": []
+        },
+        {
+          "id": 37,
+          "title": "5.2 設計",
+          "children": []
+        },
+        {
+          "id": 38,
+          "title": "5.3 雙端佇列",
+          "children": []
+        },
+        {
+          "id": 39,
+          "title": "5.4 單調佇列",
+          "summary": "個人覺得叫**單調雙端佇列**更準確。\n\n**單調佇列 = 滑動視窗 + 單調堆疊**。必須先掌握滑動視窗和單調堆疊這兩個知識點，再學單調佇列。\n\n**問**：入隊、出隊、更新答案，這三步的順序如何思考？\n\n**答**：有兩種情況。如果更新答案時，用到的資料包含當前元素，那麼就需要先入隊，再更新答案；如果用到的資料不包含當前元素，那麼就需要先更新答案，再入隊。至於出隊，一般寫在前面，每遍歷到一個新的元素，就看看隊首元素是否失效（不滿足要求），失效則彈出隊首。\n\n[原理講解](/link/?target=https%3A%2F%2Fwww.bilibili.com%2Fvideo%2FBV1bM411X72E%2F)\n\n模板：\n\n```cpp\n// 滑動視窗最大值（視窗大小 k）\nvector<int> maxSlidingWindow(vector<int>& nums, int k) {\n    vector<int> res;\n    deque<int> dq; // 存索引，維護單調遞減\n    for (int i = 0; i < (int)nums.size(); ++i) {\n        // 1. 出：移除過期元素\n        if (!dq.empty() && dq.front() <= i - k) {\n            dq.pop_front();\n        }\n        // 2. 入：維護單調性\n        while (!dq.empty() && nums[dq.back()] <= nums[i]) {\n            dq.pop_back();\n        }\n        dq.push_back(i);\n        // 3. 更新答案\n        if (i >= k - 1) {\n            res.push_back(nums[dq.front()]);\n        }\n    }\n    return res;\n}\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "title": "6. 堆（優先佇列）",
+      "summary": "[為什麼堆化的時間複雜度是 $O(n)$？](https://leetcode.cn/problems/take-gifts-from-the-richest-pile/solutions/2501655/yuan-di-dui-hua-o1-kong-jian-fu-ti-dan-p-fzdh/)",
+      "children": [
+        {
+          "id": 41,
+          "title": "6.1 基礎",
+          "summary": "**堆（優先佇列）基礎**：\n- 最大堆：堆頂為最大值；最小堆：堆頂為最小值\n- C++ 預設 `priority_queue` 為最大堆\n- 最小堆寫法：`priority_queue<int, vector<int>, greater<int>>`\n- 支援 $O(\\log n)$ 插入、$O(1)$ 查詢堆頂、$O(\\log n)$ 彈出堆頂\n\n```cpp\n// 最小堆\npriority_queue<int, vector<int>, greater<int>> min_heap;\nmin_heap.push(3);\nmin_heap.push(1);\nmin_heap.push(2);\nint top = min_heap.top(); // 1\nmin_heap.pop();\n\n// 最大堆\npriority_queue<int> max_heap;\nmax_heap.push(3);\nmax_heap.push(1);\nint top2 = max_heap.top(); // 3\n```",
+          "children": []
+        },
+        {
+          "id": 42,
+          "title": "6.2 進階",
+          "summary": "**堆進階**：\n- 合併多個有序序列：用最小堆維護每個序列的當前元素\n- 貪心 + 堆：每次取最優元素處理\n- 自定義比較函式處理複雜元素\n\n```cpp\n// 合併 K 個有序序列（自定義比較）\nauto cmp = [](pair<int, int>& a, pair<int, int>& b) {\n    return a.first > b.first; // 最小堆\n};\npriority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);\n```",
+          "children": []
+        },
+        {
+          "id": 43,
+          "title": "6.3 第 K 小/大",
+          "summary": "部分題目也可以用二分解決。\n\n**第 K 小/大**：\n- 用大小為 K 的堆維護前 K 小/大的元素\n- 第 K 小用**最大堆**（堆頂即為第 K 小）\n- 多路歸併：用最小堆合併多個有序源\n\n```cpp\n// 維護第 K 小（用最大堆，大小限制為 k）\npriority_queue<int> max_heap;\nfor (int x : nums) {\n    max_heap.push(x);\n    if ((int)max_heap.size() > k) { // 超過 k 個就彈出最大值\n        max_heap.pop();\n    }\n}\nint kth_smallest = max_heap.top();\n```",
+          "children": []
+        },
+        {
+          "id": 44,
+          "title": "6.4 重排元素",
+          "summary": "**重排元素**：\n- 用最大堆按頻率取出元素，交替放置\n- 確保相鄰元素不相同\n- 每次取頻率最高的元素放置\n\n```cpp\n// 重構字串：相鄰字元不同\npriority_queue<pair<int, char>> pq;\nfor (auto& [ch, cnt] : freq) {\n    pq.push({cnt, ch});\n}\nstring res;\nwhile (!pq.empty()) {\n    auto [cnt_1, ch_1] = pq.top();\n    pq.pop();\n    if (!res.empty() && res.back() == ch_1) {\n        // 取次大的\n        if (pq.empty()) {\n            return \"\"; // 無法重排\n        }\n        auto [cnt_2, ch_2] = pq.top();\n        pq.pop();\n        res += ch_2;\n        if (cnt_2 > 1) {\n            pq.push({cnt_2 - 1, ch_2});\n        }\n        pq.push({cnt_1, ch_1});\n    } else {\n        res += ch_1;\n        if (cnt_1 > 1) {\n            pq.push({cnt_1 - 1, ch_1});\n        }\n    }\n}\n```",
+          "children": []
+        },
+        {
+          "id": 45,
+          "title": "6.5 反悔堆",
+          "summary": "基於堆的反悔貪心。\n\n**反悔堆**：\n- 先做當前最優選擇，之後若發現更好的方案，則「反悔」\n- 將已做的選擇放入堆中，之後可以撤銷並替換\n- 適用於：最遠建築、課程表 III 等\n\n```cpp\n// 反悔貪心（課程表 III 模式）\n// 按截止時間排序，用最大堆維護已選課程的耗時\nsort(courses.begin(), courses.end(), [](auto& a, auto& b) { return a[1] < b[1]; });\npriority_queue<int> pq;\nint cur_time = 0;\nfor (auto& c : courses) {\n    int duration = c[0], deadline = c[1];\n    cur_time += duration;\n    pq.push(duration);\n    if (cur_time > deadline) {\n        // 反悔：移除耗時最長的課程\n        cur_time -= pq.top();\n        pq.pop();\n    }\n}\nint max_courses = pq.size();\n```",
+          "children": []
+        },
+        {
+          "id": 46,
+          "title": "6.6 懶刪除堆",
+          "summary": "支援刪除堆中任意元素。\n\n**懶刪除堆**：\n- 刪除時不立即從堆中移除，而是標記為已刪除\n- 取堆頂時，跳過已刪除的元素\n- 用雜湊表記錄每個值被刪除的次數\n\n```cpp\n// 懶刪除堆：標記刪除，取頂時才真正移除\nclass LazyHeap {\n    priority_queue<int> pq;          // 最大堆\n    unordered_map<int, int> delayed; // 延遲刪除計數\n\n    void prune() {\n        while (!pq.empty() && delayed[pq.top()] > 0) {\n            delayed[pq.top()]--;\n            pq.pop();\n        }\n    }\n\n  public:\n    void push(int val) {\n        pq.push(val);\n    }\n\n    void erase(int val) {\n        delayed[val]++;\n    }\n\n    int top() {\n        prune();\n        return pq.top();\n    }\n\n    void pop() {\n        prune();\n        pq.pop();\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 47,
+          "title": "6.7 對頂堆（滑動視窗第 K 小/大）",
+          "summary": "[講解](https://leetcode.cn/problems/find-median-from-data-stream/solutions/3015873/ru-he-zi-ran-yin-ru-da-xiao-dui-jian-ji-4v22k/)\n\n部分題目需要結合懶刪除堆。\n\n做法不止一種，部分題目也可以用有序集合/權值樹狀陣列等資料結構解決。\n\n**對頂堆**：\n- 用一個最大堆存較小的一半，一個最小堆存較大的一半\n- 維護兩個堆的大小平衡，即可 $O(1)$ 查詢中位數\n\n```cpp\n// 對頂堆求中位數\npriority_queue<int> lo;                            // 最大堆（較小的一半）\npriority_queue<int, vector<int>, greater<int>> hi; // 最小堆（較大的一半）\n\nvoid addNum(int num) {\n    if (lo.empty() || num <= lo.top()) {\n        lo.push(num);\n    } else {\n        hi.push(num);\n    }\n    // 平衡：lo 的大小 >= hi 且最多多 1 個\n    if (lo.size() > hi.size() + 1) {\n        hi.push(lo.top());\n        lo.pop();\n    } else if (hi.size() > lo.size()) {\n        lo.push(hi.top());\n        hi.pop();\n    }\n}\n\ndouble findMedian() {\n    if (lo.size() > hi.size()) {\n        return lo.top();\n    }\n    return (lo.top() + hi.top()) / 2.0;\n}\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "title": "7. 字典樹（trie）",
+      "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+      "summary": "[模板](https://leetcode.cn/problems/implement-trie-prefix-tree/solutions/2993894/cong-er-cha-shu-dao-er-shi-liu-cha-shu-p-xsj4/)\n\n**Trie 核心模板**：\n\n```cpp\n// 字典樹：逐字元插入與查詢字串\nstruct Trie {\n    Trie* children[26] = {}; // 26 個子節點（a-z）\n    bool is_end = false;     // 是否為某個字串的結尾\n    void insert(string word) {\n        Trie* node = this;\n        for (char c : word) {\n            if (!node->children[c - 'a']) {\n                node->children[c - 'a'] = new Trie();\n            }\n            node = node->children[c - 'a'];\n        }\n\n        node->is_end = true;\n    }\n};\n```",
+      "children": [
+        {
+          "id": 49,
+          "title": "7.1 基礎",
+          "summary": "字典樹的基礎操作與應用題。",
+          "children": []
+        },
+        {
+          "id": 50,
+          "title": "7.2 進階",
+          "children": []
+        },
+        {
+          "id": 51,
+          "title": "7.3 字典樹優化 DP",
+          "children": []
+        },
+        {
+          "id": 52,
+          "title": "7.4 0-1 字典樹（異或字典樹）",
+          "summary": "部分題目也可以用試填法解決。",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "title": "8. 並查集",
+      "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+      "summary": "模板：\n\n```cpp\n// 模板來源 https://leetcode.cn/circle/discuss/m_or1u6/\nstruct UnionFind {\n    vector<int> fa, sz;\n    int cc;\n    explicit UnionFind(int n) : fa(n), sz(n, 1), cc(n) {\n        iota(fa.begin(), fa.end(), 0);\n    }\n\n    int find(int x) {\n        if (fa[x] != x) {\n            fa[x] = find(fa[x]); // 路徑壓縮\n        }\n        return fa[x];\n    }\n\n    bool isSame(int x, int y) {\n        return find(x) == find(y);\n    }\n\n    bool merge(int x, int y) {\n        x = find(x);\n        y = find(y);\n        if (x == y) {\n            return false;\n        }\n        fa[x] = y; // 小的掛到大的下面（啟發式合併）\n        sz[y] += sz[x];\n        cc -= 1;\n        return true;\n    }\n\n    int getSize(int x) {\n        return sz[find(x)];\n    }\n};\n```",
+      "children": [
+        {
+          "id": 54,
+          "title": "8.1 基礎",
+          "children": []
+        },
+        {
+          "id": 55,
+          "title": "8.2 進階",
+          "children": []
+        },
+        {
+          "id": 56,
+          "title": "8.3 GCD 並查集",
+          "children": []
+        },
+        {
+          "id": 57,
+          "title": "8.4 陣列上的並查集",
+          "children": []
+        },
+        {
+          "id": 58,
+          "title": "8.5 區間並查集",
+          "children": []
+        },
+        {
+          "id": 59,
+          "title": "8.6 帶權並查集（邊權並查集）",
+          "summary": "模板：\n\n```cpp\n// 帶權並查集模板（維護相對距離）\nstruct WeightedUnionFind {\n    vector<int> fa, dis; // dis[x] 表示 x 到代表元的距離\n    explicit WeightedUnionFind(int n) : fa(n), dis(n, 0) {\n        iota(fa.begin(), fa.end(), 0);\n    }\n\n    int find(int x) {\n        if (fa[x] != x) {\n            int root = find(fa[x]);\n            dis[x] += dis[fa[x]]; // 遞迴更新 x 到其代表元的距離\n            fa[x] = root;\n        }\n        return fa[x];\n    }\n\n    bool same(int x, int y) {\n        return find(x) == find(y);\n    }\n\n    int getRelativeDistance(int from, int to) {\n        find(from);\n        find(to);\n        // to-from = (x-from) - (x-to) = dis[from] - dis[to]\n        return dis[from] - dis[to];\n    }\n\n    // 合併 from 和 to，新增資訊 to - from = value；如果矛盾返回 false\n    bool merge(int from, int to, int value) {\n        int x = find(from), y = find(to);\n        if (x == y) {\n            return dis[from] - dis[to] == value;\n        }\n        // y-x = (to-from) + (y-to) - (x-from)\n        dis[x] = value + dis[to] - dis[from]; // 計算 x 到其代表元 y 的距離\n        fa[x] = y;\n        return true;\n    }\n};\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "title": "9. 樹狀陣列和線段樹",
+      "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+      "summary": "能用樹狀陣列解決的題目，也能用線段樹解決（反過來不一定）。但樹狀陣列實現簡單，程式碼短。\n\n為方便大家練習，我把適合用樹狀陣列解決的題目分到樹狀陣列中，其餘分到線段樹中。",
+      "children": [
+        {
+          "id": 61,
+          "title": "9.1 樹狀陣列",
+          "summary": "講解：[帶你發明樹狀陣列！附數學證明](https://leetcode.cn/problems/range-sum-query-mutable/solution/dai-ni-fa-ming-shu-zhuang-shu-zu-fu-shu-lyfll/)\n\n模板：\n\n**C++ 樹狀陣列 (Fenwick Tree) 模板**：\n\n```cpp\n// 樹狀陣列：支援單點修改與字首查詢，O(log n)\nstruct Fenwick {\n    int n;\n    vector<long long> tree;\n\n    Fenwick(int n) : n(n), tree(n + 1, 0) {\n    }\n\n    int lowbit(int x) {\n        return x & -x; // 取最低位的 1\n    }\n\n    // 單點修改：將 a[i] 增加 delta\n    void update(int i, long long delta) {\n        for (; i <= n; i += lowbit(i)) {\n            tree[i] += delta; // 向上更新祖先節點\n        }\n    }\n\n    // 字首查詢：返回 a[1..i] 的和\n    long long query(int i) {\n        long long sum = 0;\n        for (; i > 0; i -= lowbit(i)) {\n            sum += tree[i]; // 向下累加字首\n        }\n        return sum;\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 62,
+          "title": "9.2 逆序對",
+          "summary": "除了可以用樹狀陣列解決，部分題目也可以在**歸併排序**的同時計算。\n\n**C++ 逆序對 (Inversions using Fenwick) 模板**：\n\n```cpp\n// 利用樹狀陣列統計逆序對數量\nlong long countInversions(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> sorted = nums;\n    sort(sorted.begin(), sorted.end());\n    sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end()); // 離散化\n\n    Fenwick fenwick(sorted.size());\n    long long inversions = 0;\n\n    for (int i = n - 1; i >= 0; --i) {\n        int rank = lower_bound(sorted.begin(), sorted.end(), nums[i]) - sorted.begin() + 1;\n        inversions += fenwick.query(rank - 1);\n        fenwick.update(rank, 1);\n    }\n\n    return inversions;\n}\n```",
+          "children": []
+        },
+        {
+          "id": 63,
+          "title": "9.3 線段樹（無區間更新）",
+          "summary": "線段樹本質是二叉樹，在學習之前，建議先做做 [104\\. 二叉樹的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) 和 [111\\. 二叉樹的最小深度](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)（自底向上寫法），當作熱身。\n\n[線段樹：為什麼要這樣設計？](/link/?target=https%3A%2F%2Fwww.bilibili.com%2Fvideo%2FBV15gRaYZE5o%2F) 理解線段樹發明的動機。\n\n把任意區間用 $O(\\log n)$ 個區間表示，線段樹的每個節點記錄對應區間的資訊。\n- **詢問**：把詢問區間拆分成 $O(\\log n)$ 個區間，對應著線段樹的 $O(\\log n)$ 個節點，把這 $O(\\log n)$ 個節點的資訊合併，即為答案。\n- **單點更新**：有 $O(\\log n)$ 個區間包含被修改的位置，需要更新 $O(\\log n)$ 個節點的資訊。\n\n基礎模板程式碼如下。為方便入門理解，我沒有做複雜封裝。通用模板程式碼可以參考 AtCoder Library 的 [segtree.hpp](/link/?target=https%3A%2F%2Fgithub.com%2Fatcoder%2Fac-library%2Fblob%2Fmaster%2Fatcoder%2Fsegtree.hpp)。\n\n**C++ 線段樹 (Segment Tree - Point Update) 模板**：\n\n```cpp\n// 線段樹：支援單點修改與區間查詢\nstruct SegmentTree {\n    int n;\n    vector<int> tree;\n\n    SegmentTree(int n) : n(n), tree(4 * n, 0) {\n    }\n\n    void update(int node, int start, int end, int idx, int val) {\n        if (start == end) {\n            tree[node] = val;\n            return;\n        }\n        int mid = start + (end - start) / 2;\n        if (idx <= mid) {\n            update(2 * node, start, mid, idx, val);\n        } else {\n            update(2 * node + 1, mid + 1, end, idx, val);\n        }\n\n        tree[node] = max(tree[2 * node], tree[2 * node + 1]); // 向上合併子區間\n    }\n\n    int query(int node, int start, int end, int l, int r) {\n        if (r < start || end < l) {\n            return 0;\n        }\n        if (l <= start && end <= r) {\n            return tree[node];\n        }\n\n        int mid = start + (end - start) / 2;\n        int p1 = query(2 * node, start, mid, l, r);\n        int p2 = query(2 * node + 1, mid + 1, end, l, r);\n        return max(p1, p2);\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 64,
+          "title": "9.4 Lazy 線段樹（有區間更新）",
+          "summary": "把任意區間用 $O(\\log n)$ 個區間表示，線段樹的每個節點記錄對應區間的資訊。\n- **詢問**：把詢問區間拆分成 $O(\\log n)$ 個區間，對應著線段樹的 $O(\\log n)$ 個節點，把這 $O(\\log n)$ 個節點的資訊合併，即為答案。\n- **區間更新**：仍然是拆分成 $O(\\log n)$ 個區間，對應著線段樹的 $O(\\log n)$ 個節點。但對於其中的非葉節點，不把更新的內容往下傳遞給子節點，而是記錄「發生了更新，內容為 xxx」，把更新的內容記錄下來。直到後續的詢問或更新操作，需要訪問或修改更下面的子節點資訊時，才把更新的內容往下傳。\n\n基礎模板程式碼如下。為方便入門理解，我沒有做複雜封裝。通用模板程式碼可以參考 AtCoder Library 的 [lazysegtree.hpp](/link/?target=https%3A%2F%2Fgithub.com%2Fatcoder%2Fac-library%2Fblob%2Fmaster%2Fatcoder%2Flazysegtree.hpp)。\n\n**C++ Lazy 線段樹 (Segment Tree - Range Update) 模板**：\n\n```cpp\n// Lazy 線段樹：支援區間修改與區間查詢，O(log n)\n// 使用懶標記（Lazy Propagation）延遲更新，提高區間修改效率\nstruct LazySegmentTree {\n    int n;                      // n: 陣列大小\n    vector<long long> tree;     // tree[i]: 節點 i 表示的區間和\n    vector<long long> lazy;     // lazy[i]: 節點 i 的懶標記（待傳遞的增量）\n\n    // 初始化：建立大小為 4n 的線段樹（完全二叉樹需要 4n 空間）\n    LazySegmentTree(int n) : n(n), tree(4 * n, 0), lazy(4 * n, 0) {\n    }\n\n    // 下推懶標記：將節點 node 的懶標記應用到當前區間，並傳遞給子節點\n    // node: 當前節點編號，[start, end]: 當前節點表示的區間\n    void push(int node, int start, int end) {\n        if (lazy[node] != 0) {\n            // 將懶標記應用到當前區間：區間長度 × 增量\n            tree[node] += lazy[node] * (end - start + 1);\n            \n            if (start != end) {\n                // 非葉子節點：將懶標記傳遞給左右子節點\n                lazy[2 * node] += lazy[node];       // 左子節點\n                lazy[2 * node + 1] += lazy[node];   // 右子節點\n            }\n            lazy[node] = 0; // 清除當前節點的懶標記\n        }\n    }\n\n    // 區間更新：將區間 [l, r] 的所有元素增加 val\n    // node: 當前節點，[start, end]: 當前節點表示的區間，[l, r]: 要更新的目標區間\n    void updateRange(int node, int start, int end, int l, int r, long long val) {\n        push(node, start, end); // 先下推懶標記\n        \n        // 無交集：當前區間與目標區間無重疊\n        if (start > end || start > r || end < l) {\n            return;\n        }\n\n        // 完全包含：當前區間完全在目標區間內\n        if (start >= l && end <= r) {\n            lazy[node] += val;      // 添加懶標記\n            push(node, start, end); // 立即應用到當前節點\n            return;\n        }\n\n        // 部分重疊：遞迴處理左右子樹\n        int mid = start + (end - start) / 2;\n        updateRange(2 * node, start, mid, l, r, val);           // 更新左子樹\n        updateRange(2 * node + 1, mid + 1, end, l, r, val);     // 更新右子樹\n        tree[node] = tree[2 * node] + tree[2 * node + 1];       // 合併子節點結果\n    }\n\n    // 區間查詢：查詢區間 [l, r] 的和\n    // node: 當前節點，[start, end]: 當前節點表示的區間，[l, r]: 查詢的目標區間\n    long long queryRange(int node, int start, int end, int l, int r) {\n        // 無交集：當前區間與目標區間無重疊\n        if (start > end || start > r || end < l) {\n            return 0;\n        }\n        \n        push(node, start, end); // 先下推懶標記，確保資料最新\n\n        // 完全包含：當前區間完全在目標區間內\n        if (start >= l && end <= r) {\n            return tree[node];\n        }\n\n        // 部分重疊：遞迴查詢左右子樹並合併結果\n        int mid = start + (end - start) / 2;\n        long long p1 = queryRange(2 * node, start, mid, l, r);      // 左子樹結果\n        long long p2 = queryRange(2 * node + 1, mid + 1, end, l, r); // 右子樹結果\n        return p1 + p2;\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 65,
+          "title": "9.5 動態開點線段樹",
+          "summary": "部分題目也可以用**珂朵莉樹**解決。\n\n**C++ 動態開點線段樹 (Dynamic Segment Tree) 模板**：\n\n```cpp\n// 動態開點線段樹：按需建立節點，適用於值域大的場景\nstruct DynamicSegNode {\n    long long val, lazy;\n    DynamicSegNode *left, *right;\n    DynamicSegNode()\n        : val(0), lazy(0), left(nullptr), right(nullptr) { // 初始為空節點\n    }\n};\n\nstruct DynamicSegTree {\n    DynamicSegNode* root;\n    long long left_bound, right_bound;\n\n    DynamicSegTree(long long l, long long r)\n        : root(new DynamicSegNode()), left_bound(l), right_bound(r) {\n    }\n\n    void push(DynamicSegNode* node, long long start, long long end) {\n        if (!node->left) {\n            node->left = new DynamicSegNode();\n        }\n        if (!node->right) {\n            node->right = new DynamicSegNode();\n        }\n        if (node->lazy != 0) {\n            long long mid = start + (end - start) / 2;\n            node->left->val += node->lazy * (mid - start + 1);\n            node->left->lazy += node->lazy;\n            node->right->val += node->lazy * (end - mid);\n            node->right->lazy += node->lazy;\n            node->lazy = 0;\n        }\n    }\n\n    void update(DynamicSegNode* node, long long start, long long end, long long l, long long r,\n                long long val) {\n        if (l <= start && end <= r) {\n            node->val += val * (end - start + 1);\n            node->lazy += val;\n            return;\n        }\n        push(node, start, end);\n        long long mid = start + (end - start) / 2;\n        if (l <= mid) {\n            update(node->left, start, mid, l, r, val);\n        }\n        if (r > mid) {\n            update(node->right, mid + 1, end, l, r, val);\n        }\n        node->val = node->left->val + node->right->val;\n    }\n\n    long long query(DynamicSegNode* node, long long start, long long end, long long l,\n                    long long r) {\n        if (l <= start && end <= r) {\n            return node->val;\n        }\n        push(node, start, end);\n        long long mid = start + (end - start) / 2;\n        long long res = 0;\n        if (l <= mid) {\n            res += query(node->left, start, mid, l, r);\n        }\n        if (r > mid) {\n            res += query(node->right, mid + 1, end, l, r);\n        }\n        return res;\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 66,
+          "title": "9.6 可持久化線段樹",
+          "summary": "**C++ 可持久化線段樹 (Persistent Segment Tree / Chairman Tree) 模板**：\n\n```cpp\n// 可持久化線段樹（主席樹）：保留歷史版本，支援查詢區間第 k 小\n// 核心思想：每次修改只複製路徑上的節點，其他節點共享\nstruct PresidentNode {\n    int count;      // 當前區間內的元素個數\n    int left, right; // 左右子節點的索引\n};\n\nstruct PresidentTree {\n    vector<PresidentNode> tree; // 存儲所有節點（包括歷史版本）\n    vector<int> roots;          // 每個版本的根節點索引\n    int n;                      // 值域範圍 [1, n]\n\n    // 初始化：n 為值域大小，q 為操作次數\n    PresidentTree(int n, int q) : n(n) {\n        tree.push_back({0, 0, 0}); // 空節點作為哨兵（索引 0）\n        roots.reserve(q + 1);\n        roots.push_back(0);        // 版本 0 為空樹\n    }\n\n    // 複製節點：創建一個新節點作為舊節點的副本\n    int clone(int node) {\n        tree.push_back(tree[node]);\n        return tree.size() - 1;\n    }\n\n    // 單點更新：在 prev_node 基礎上插入值 val，返回新樹的根節點\n    // [start, end] 為當前節點表示的值域範圍\n    int update(int prev_node, int start, int end, int val) {\n        int curr_node = clone(prev_node); // 複製當前節點\n        tree[curr_node].count++;           // 增加計數\n\n        if (start == end) {\n            return curr_node; // 葉子節點，返回\n        }\n\n        int mid = start + (end - start) / 2;\n        if (val <= mid) {\n            // 值在左半區間，更新左子樹\n            tree[curr_node].left = update(tree[prev_node].left, start, mid, val);\n        } else {\n            // 值在右半區間，更新右子樹\n            tree[curr_node].right = update(tree[prev_node].right, mid + 1, end, val);\n        }\n        return curr_node;\n    }\n\n    // 插入值：創建新版本\n    void insert(int val) {\n        roots.push_back(update(roots.back(), 1, n, val));\n    }\n\n    // 查詢區間第 k 小：在版本 [left_root, right_root] 之間\n    // 返回第 k 小的值（1-indexed）\n    int queryKth(int left_root, int right_root, int start, int end, int k) {\n        if (start == end) {\n            return start; // 找到第 k 小的值\n        }\n        \n        // 計算左子樹在 [left_root, right_root] 區間內的元素個數\n        int count = tree[tree[right_root].left].count - tree[tree[left_root].left].count;\n        int mid = start + (end - start) / 2;\n        \n        if (count >= k) {\n            // 第 k 小在左子樹\n            return queryKth(tree[left_root].left, tree[right_root].left, start, mid, k);\n        }\n        // 第 k 小在右子樹\n        return queryKth(tree[left_root].right, tree[right_root].right, mid + 1, end, k - count);\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 67,
+          "title": "9.7 ST 表（Sparse Table）",
+          "summary": "[ST 表](/link/?target=https%3A%2F%2Foi-wiki.org%2Fds%2Fsparse-table%2F) 支援區間最值查詢（Range Minimum/Maximum Query，RMQ），但不支援修改。\n\n優點是程式碼短，且查詢的時間複雜度是 $O(1)$。所以作為補充內容，附在此處。\n\n**C++ ST 表 (Sparse Table for RMQ) 模板**：\n\n```cpp\n// ST 表：O(n log n) 預處理，O(1) 查詢區間最值\n// 適用於靜態區間最值查詢（不支援修改）\nstruct SparseTable {\n    vector<vector<int>> st;  // st[i][j] 表示從 i 開始，長度為 2^j 的區間的最小值\n    vector<int> log2;        // log2[i] = floor(log2(i))，預處理加速查詢\n\n    // 構造函數：預處理 ST 表\n    SparseTable(const vector<int>& arr) {\n        int n = arr.size();\n        int max_log = log2Floor(n) + 1; // 需要的最大 log 層數\n        st.assign(n, vector<int>(max_log));\n        log2.assign(n + 1, 0);\n\n        // 預處理 log2 值\n        for (int i = 2; i <= n; i++) {\n            log2[i] = log2[i / 2] + 1;\n        }\n\n        // 初始化：長度為 1 的區間（2^0 = 1）\n        for (int i = 0; i < n; i++) {\n            st[i][0] = arr[i];\n        }\n\n        // 動態規劃：從小區間合併到大區間\n        for (int j = 1; j < max_log; j++) {\n            for (int i = 0; i + (1 << j) <= n; i++) {\n                // st[i][j] = min(左半部分, 右半部分)\n                // 左半：st[i][j-1]，右半：st[i + 2^(j-1)][j-1]\n                st[i][j] = min(st[i][j - 1], st[i + (1 << (j - 1))][j - 1]);\n            }\n        }\n    }\n\n    // 計算 floor(log2(n))\n    int log2Floor(int n) {\n        return 31 - __builtin_clz(n); // 前導零個數\n    }\n\n    // 查詢區間 [left, right] 的最小值，O(1) 時間\n    int query(int left, int right) {\n        int j = log2[right - left + 1]; // 找到最大的 j 使得 2^j <= 區間長度\n        // 用兩個長度為 2^j 的區間覆蓋 [left, right]\n        // 左段：[left, left + 2^j - 1]\n        // 右段：[right - 2^j + 1, right]\n        // 兩段可能重疊，但 min 操作滿足可重複貢獻性質\n        return min(st[left][j], st[right - (1 << j) + 1][j]);\n    }\n};\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "title": "10. 伸展樹（Splay 樹）",
+      "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+      "children": [
+        {
+          "id": 69,
+          "title": "10.1 基礎",
+          "summary": "**C++ 伸展樹 (Splay Tree) 模板**：\n\n```cpp\n// Splay 樹：自調整二叉搜索樹\nstruct SplayNode {\n    int val, size, count;\n    SplayNode *p, *ch[2];\n    SplayNode(int v)\n        : val(v), size(1), count(1), p(nullptr) { // 單一節點\n        ch[0] = ch[1] = nullptr;\n    }\n};\n\nstruct SplayTree {\n    SplayNode* root;\n    SplayTree() : root(nullptr) {\n    }\n\n    void maintain(SplayNode* x) {\n        if (x) {\n            x->size = x->count;\n            if (x->ch[0]) {\n                x->size += x->ch[0]->size;\n            }\n            if (x->ch[1]) {\n                x->size += x->ch[1]->size;\n            }\n        }\n    }\n\n    void rotate(SplayNode* x) {\n        SplayNode* y = x->p;\n        SplayNode* z = y->p;\n        int k = (y->ch[1] == x);\n        y->ch[k] = x->ch[k ^ 1];\n        if (x->ch[k ^ 1]) {\n            x->ch[k ^ 1]->p = y;\n        }\n        x->ch[k ^ 1] = y;\n        y->p = x;\n        x->p = z;\n        if (z) {\n            z->ch[z->ch[1] == y] = x;\n        }\n        maintain(y);\n        maintain(x);\n    }\n\n    void splay(SplayNode* x) {\n        for (SplayNode* f = x->p; f = x->p, f; rotate(x)) {\n            if (f->p) {\n                rotate((x == f->ch[1]) == (f == f->p->ch[1]) ? f : x);\n            }\n        }\n        root = x;\n    }\n};\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "title": "11. 根號演算法",
+      "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+      "children": [
+        {
+          "id": 71,
+          "title": "11.1 根號分解（Sqrt Decomposition）",
+          "summary": "**根號分解核心思想**：\n- 將長度為 $n$ 的序列分成約 $\\sqrt{n}$ 個塊，每塊大小約為 $\\sqrt{n}$。\n- 對於區間查詢：中間的完整塊直接使用預處理資料，兩端的零散部分暴力掃描。\n- 單次查詢時間複雜度為 $O(\\sqrt{n})$。\n\n**C++ 根號分解 (Sqrt Decomposition / 分塊) 模板**：\n\n```cpp\n// 根號分解：將陣列分塊，支援 O(sqrt(n)) 的區間查詢與修改\n// 空間複雜度 O(n)，預處理 O(n)，單次操作 O(sqrt(n))\nstruct SqrtDecomposition {\n    int n, block_size;        // n: 陣列長度, block_size: 每塊大小 (sqrt(n))\n    vector<int> arr;          // 原始陣列\n    vector<int> block_sum;    // block_sum[i]: 第 i 塊的元素和\n\n    // 構造函數：初始化分塊結構\n    SqrtDecomposition(const vector<int>& a) {\n        arr = a;\n        n = arr.size();\n        block_size = max(1, (int)sqrt(n)); // 每塊大小 sqrt(n)\n        int blocks = (n + block_size - 1) / block_size; // 總塊數（向上取整）\n        block_sum.assign(blocks, 0);\n\n        // 預處理：計算每個塊的和\n        for (int i = 0; i < n; i++) {\n            block_sum[i / block_size] += arr[i];\n        }\n    }\n\n    // 單點修改：將 arr[idx] 更新為 val，O(1)\n    void update(int idx, int val) {\n        int b_idx = idx / block_size;       // idx 所在的塊編號\n        block_sum[b_idx] += val - arr[idx]; // 更新塊和（差值）\n        arr[idx] = val;                     // 更新元素值\n    }\n\n    // 區間查詢：查詢 [l, r] 的和，O(sqrt(n))\n    int query(int l, int r) {\n        int sum = 0;\n        int b_l = l / block_size;  // 左端點所在塊\n        int b_r = r / block_size;  // 右端點所在塊\n\n        if (b_l == b_r) {\n            // 區間在同一塊內：直接暴力累加\n            for (int i = l; i <= r; i++) {\n                sum += arr[i];\n            }\n        } else {\n            // 區間跨多個塊：分三部分處理\n            \n            // 1. 左端零散部分：從 l 到當前塊末尾\n            for (int i = l, end = (b_l + 1) * block_size - 1; i <= end; i++) {\n                sum += arr[i];\n            }\n            \n            // 2. 中間完整塊：直接使用預處理的塊和\n            for (int i = b_l + 1; i < b_r; i++) {\n                sum += block_sum[i];\n            }\n            \n            // 3. 右端零散部分：從最後一塊開頭到 r\n            for (int i = b_r * block_size; i <= r; i++) {\n                sum += arr[i];\n            }\n        }\n        return sum;\n    }\n};\n```",
+          "children": []
+        },
+        {
+          "id": 72,
+          "title": "11.2 莫隊演算法",
+          "summary": "屬於離線演算法的一種。\n\n**C++ 莫隊演算法 (Mo's Algorithm) 模板**：\n\n```cpp\n// 莫隊演算法：離線排序查詢，透過增刪端點維護答案\nstruct Query {\n    int l, r, id;\n};\n\nint n, block_size;\n\nbool compare(Query a, Query b) {\n    if (a.l / block_size != b.l / block_size) {\n        return a.l / block_size < b.l / block_size;\n    }\n    return ((a.l / block_size) & 1) ? (a.r < b.r) : (a.r > b.r);\n}\n\nvector<int> mosAlgorithm(vector<int>& arr, vector<Query>& queries) {\n    n = arr.size();\n    block_size = max(1, (int)sqrt(n));\n    sort(queries.begin(), queries.end(), compare);\n\n    vector<int> res(queries.size());\n    int curr_l = 0, curr_r = -1;\n    int curr_ans = 0; // State variable\n\n    auto add = [&](int idx) {\n        // Implement add logic modifying curr_ans\n    };\n\n    auto remove = [&](int idx) {\n        // Implement remove logic modifying curr_ans\n    };\n\n    for (Query q : queries) {\n        while (curr_l > q.l) {\n            curr_l--;\n            add(curr_l);\n        }\n        while (curr_r < q.r) {\n            curr_r++;\n            add(curr_r);\n        }\n        while (curr_l < q.l) {\n            remove(curr_l);\n            curr_l++;\n        }\n        while (curr_r > q.r) {\n            remove(curr_r);\n            curr_r--;\n        }\n        res[q.id] = curr_ans;\n    }\n    return res;\n}\n```",
+          "children": []
+        },
+        {
+          "id": 73,
+          "title": "11.3 其他",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 74,
+      "title": "12. 專題：離線演算法",
+      "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+      "summary": "透過改變回答詢問的順序，使問題更容易處理。\n\n> 相應的，**線上演算法**就是按照 queries 的順序一個一個處理。",
+      "children": [
+        {
+          "id": 75,
+          "title": "12.1 基礎",
+          "summary": "**C++ 離線演算法 (Offline Queries Basics) 模板**：\n\n```cpp\n// 離線查詢：將查詢排序後統一處理\nstruct Query {\n    int l, r, id;\n};\n\nvector<int> processOfflineQueries(vector<int>& arr, vector<Query>& queries) {\n    // 1. Sort queries based on right endpoint (or other logic depending on\n    // problem)\n    sort(queries.begin(), queries.end(), [](const Query& a, const Query& b) { return a.r < b.r; });\n\n    vector<int> ans(queries.size());\n    int rightmost_processed = 0;\n\n    // Need some data structure (e.g., Fenwick Tree) to maintain dynamic state\n    // here Fenwick fenwick(arr.size());\n\n    for (const Query& q : queries) {\n        // 2. Add elements to our data structure up to q.r\n        while (rightmost_processed <= q.r) {\n            // update data structure with arr[rightmost_processed]\n            rightmost_processed++;\n        }\n\n        // 3. Answer query using the data structure up to q.r\n        // ans[q.id] = fenwick.query(q.r) - fenwick.query(q.l - 1);\n    }\n\n    return ans;\n}\n```",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 76,
+      "title": "13. 專題：比較複雜的題目",
+      "src": "https://leetcode.cn/circle/discuss/mOr1u6/",
+      "summary": "部分題目是模擬題。",
+      "children": [
+        {
+          "id": 77,
+          "title": "13.1 Part A",
+          "children": []
+        },
+        {
+          "id": 78,
+          "title": "13.2 Part B",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "summary": "![資料結構題單](https://pic.leetcode.cn/1713836847-cDYwhf-Programming.jfif)\n\n**本題單涵蓋**：\n- 列舉技巧：列舉右維護左、列舉中間\n- 字首和/差分：一維/二維、區間操作\n- 堆疊與佇列：單調堆疊、單調佇列、優先佇列\n- 雜湊表：計數、去重、查詢\n- 字典樹：字首檢索、字串統計\n- 並查集：連通性、動態連通\n- 樹狀陣列：單點修改、區間查詢\n- 線段樹：區間修改、區間查詢"
+}

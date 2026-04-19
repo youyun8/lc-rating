@@ -78,4 +78,15 @@ export const ROUTERS = {
       []
     ),
   },
+  tutorials: {
+    title: "教學",
+    href: `/tutorial`,
+    children: Object.entries(STUDYPLANS).reduce(
+      (acc: { title: string; href: string }[], [key, title]) => [
+        ...acc,
+        { title, href: `/tutorial/${key}` },
+      ],
+      []
+    ),
+  },
 };
