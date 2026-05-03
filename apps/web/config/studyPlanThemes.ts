@@ -21,6 +21,7 @@ export interface StudyPlanTheme {
 }
 
 export const studyPlanIcons: Record<string, LucideIcon> = {
+  rating_2100: Trophy,
   rating_2400: Trophy,
   binary_search: Search,
   bitwise_operations: Cpu,
@@ -42,6 +43,7 @@ export const defaultTheme: StudyPlanTheme = {
 };
 
 export const studyPlanThemes: Record<string, StudyPlanTheme> = {
+  rating_2100:         { gradient: "linear-gradient(135deg, #0f766e 0%, #115e59 100%)", accent: "#0f766e" },
   rating_2400:         { gradient: "linear-gradient(135deg, #f59e0b 0%, #b45309 100%)", accent: "#f59e0b" },
   binary_search:       { gradient: "linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)", accent: "#3b82f6" },
   bitwise_operations:  { gradient: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)", accent: "#8b5cf6" },
