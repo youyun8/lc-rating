@@ -4,8 +4,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { StudyPlanData, TutorialData } from "@/types";
+import { ChevronDown } from "lucide-react";
 import React, { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { ProblemList } from "./ProblemList";
@@ -95,17 +101,27 @@ const SectionContainer = React.memo(
             {section.title}
           </CardTitle>
           {dedupedSummary ? (
-            <div className="mt-4 rounded-[1.5rem] border border-border/60 bg-muted/20 p-4 sm:p-5">
-              <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                <span className="rounded-full border border-border/60 bg-background px-2.5 py-1 font-medium">
-                  {level === 0 ? "章節摘要" : "重點整理"}
+            <Collapsible className="group/summary mt-4">
+              <CollapsibleTrigger className="flex w-full items-center justify-between gap-3 rounded-full border border-border/60 bg-muted/30 px-4 py-2 text-left text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground">
+                <span className="inline-flex items-center gap-2">
+                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-0.5">
+                    {level === 0 ? "章節摘要" : "重點整理"}
+                  </span>
+                  <span className="text-muted-foreground/80">
+                    展開觀念說明
+                  </span>
                 </span>
-              </div>
-              <StudyPlanMarkdownContent
-                content={dedupedSummary}
-                variant="section"
-              />
-            </div>
+                <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]/summary:rotate-180" />
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <div className="mt-3 rounded-[1.5rem] border border-border/60 bg-muted/20 p-4 sm:p-5">
+                  <StudyPlanMarkdownContent
+                    content={dedupedSummary}
+                    variant="section"
+                  />
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
           ) : null}
         </CardHeader>
         <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">

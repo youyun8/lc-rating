@@ -5,9 +5,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { TutorialData } from "@/types";
+import { StudyPlanData, TutorialData } from "@/types";
+import { Sparkles } from "lucide-react";
 import React, { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
+import { ProblemList } from "@/components/StudyPlan/ProblemList";
 import {
   extractImageUrls,
   stripDuplicateImages,
@@ -27,6 +29,8 @@ function countSections(section: TutorialData.Section): number {
 
 interface TutorialSectionContainerProps {
   section: TutorialData.Section;
+  /** Lookup of example problems by shared section id (sourced from the matching study plan). */
+  examplesBySectionId?: Map<number, StudyPlanData.Item[]>;
   level?: number;
   parentImageUrls?: Set<string>;
 }
@@ -34,9 +38,11 @@ interface TutorialSectionContainerProps {
 const TutorialSectionContainer = React.memo(
   ({
     section,
+    examplesBySectionId,
     level = 0,
     parentImageUrls = new Set(),
   }: TutorialSectionContainerProps) => {
+    const examples = examplesBySectionId?.get(section.id) ?? [];
     const childCount = section.children?.length ?? 0;
     const totalSections = countSections(section);
 
@@ -107,20 +113,40 @@ const TutorialSectionContainer = React.memo(
             </div>
           ) : null}
         </CardHeader>
-        {section.children && section.children.length > 0 ? (
+        {(examples.length > 0 ||
+          (section.children && section.children.length > 0)) && (
           <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
-            <div className="flex w-full flex-col gap-4 border-t border-border/50 pt-1">
-              {section.children.map((child) => (
-                <TutorialSectionContainer
-                  key={child.id}
-                  section={child}
-                  level={level + 1}
-                  parentImageUrls={mergedImageUrls}
-                />
-              ))}
+            <div className="flex w-full flex-col gap-4">
+              {examples.length > 0 && (
+                <div className="rounded-[1.5rem] border border-border/60 bg-background/80 p-4 sm:p-5">
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                      <Sparkles className="h-3.5 w-3.5" />
+                      例題
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      取自對應題單，前 {examples.length} 題
+                    </span>
+                  </div>
+                  <ProblemList problems={examples} />
+                </div>
+              )}
+              {section.children && section.children.length > 0 && (
+                <div className="flex w-full flex-col gap-4 border-t border-border/50 pt-1">
+                  {section.children.map((child) => (
+                    <TutorialSectionContainer
+                      key={child.id}
+                      section={child}
+                      examplesBySectionId={examplesBySectionId}
+                      level={level + 1}
+                      parentImageUrls={mergedImageUrls}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </CardContent>
-        ) : null}
+        )}
       </Card>
     );
   },

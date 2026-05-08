@@ -8,7 +8,7 @@ import {
   defaultTheme,
 } from "@/config/studyPlanThemes";
 import { TutorialSectionContainer } from "./SectionContainer";
-import { TutorialData } from "@/types";
+import { StudyPlanData, TutorialData } from "@/types";
 import {
   BookOpen,
   ChevronRight,
@@ -20,7 +20,10 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
 import { extractImageUrls } from "@/components/StudyPlan/dedupe";
+import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { sectionAnchor } from "@/utils/sectionAnchor";
+
+const EXAMPLES_PER_SECTION = 3;
 
 function countSections(section: TutorialData.Section): number {
   let count = 1;
@@ -55,6 +58,33 @@ function Tutorial({ plan }: TutorialProps) {
     STUDYPLANS[plan as keyof typeof STUDYPLANS] ?? tutorial?.title ?? plan;
   const Icon = studyPlanIcons[plan] ?? BookOpen;
   const theme = studyPlanThemes[plan] ?? defaultTheme;
+
+  const examplesBySectionId = useMemo(() => {
+    const map = new Map<number, StudyPlanData.Item[]>();
+    const studyPlan = studyPlanDataMap[plan];
+    if (!studyPlan) return map;
+
+    const collectProblems = (
+      section: StudyPlanData.Section,
+    ): StudyPlanData.Item[] => {
+      const own = section.problems ?? [];
+      if (own.length >= EXAMPLES_PER_SECTION) {
+        return own.slice(0, EXAMPLES_PER_SECTION);
+      }
+      const childProblems = (section.children ?? []).flatMap(collectProblems);
+      return [...own, ...childProblems].slice(0, EXAMPLES_PER_SECTION);
+    };
+
+    const walk = (section: StudyPlanData.Section) => {
+      const examples = collectProblems(section);
+      if (examples.length > 0) {
+        map.set(section.id, examples);
+      }
+      section.children?.forEach(walk);
+    };
+    studyPlan.children.forEach(walk);
+    return map;
+  }, [plan]);
 
   const topLevelImageUrls = useMemo(
     () =>
@@ -259,6 +289,7 @@ function Tutorial({ plan }: TutorialProps) {
             <TutorialSectionContainer
               key={section.id}
               section={section}
+              examplesBySectionId={examplesBySectionId}
               parentImageUrls={topLevelImageUrls}
             />
           ))}

@@ -17,12 +17,12 @@ import {
   ChevronRight,
   ExternalLink,
   FolderTree,
+  GraduationCap,
   Layers3,
   PanelLeftIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
-import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { extractImageUrls } from "./dedupe";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
@@ -305,30 +305,37 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
       <div className="mx-auto w-full max-w-7xl px-3 py-5 pb-24 sm:px-4 sm:py-6 md:px-6 md:py-8 md:pb-20 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
         <div className="flex flex-col gap-8">
-          {tutorial?.summary && (
-            <section className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm">
-              <div className="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-5">
-                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                  <div>
-                    <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                      學習摘要
+          {tutorial && (
+            <Link
+              href={`/tutorial/${plan}`}
+              className="group block overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+            >
+              <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-5">
+                <div className="flex items-start gap-3 sm:items-center">
+                  <div
+                    className="shrink-0 rounded-2xl p-3 ring-1 ring-border/60"
+                    style={{ background: theme.gradient }}
+                  >
+                    <GraduationCap className="h-5 w-5 text-white drop-shadow-sm" />
+                  </div>
+                  <div className="min-w-0">
+                    <h2 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
+                      想看觀念說明？前往對應教學
                     </h2>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      先掌握題單重點與刷題建議，再依章節順序往下練習。
+                      此頁專注題目練習；題型概念、模板與例題請至教學頁閱讀。
                     </p>
                   </div>
-                  <span className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-                    題單導讀
-                  </span>
                 </div>
+                <span
+                  className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-border/60 bg-background px-3 py-1.5 text-sm font-medium transition-colors group-hover:border-primary/40 sm:self-auto"
+                  style={{ color: theme.accent }}
+                >
+                  閱讀教學
+                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
               </div>
-              <div className="p-4 sm:p-5 md:p-6">
-                <StudyPlanMarkdownContent
-                  content={tutorial.summary}
-                  variant="plan"
-                />
-              </div>
-            </section>
+            </Link>
           )}
 
           {studyPlan && (
