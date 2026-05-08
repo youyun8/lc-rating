@@ -74,15 +74,29 @@ function Tutorial({ plan }: TutorialProps) {
 
     const pickExamples = (
       section: StudyPlanData.Section,
-    ): StudyPlanData.Item[] =>
-      flattenProblems(section)
-        .filter(
-          (problem) =>
-            typeof problem.score === "number" &&
-            problem.score >= EXAMPLE_MIN_RATING,
+    ): StudyPlanData.Item[] => {
+      const all = flattenProblems(section);
+      const isHigh = (problem: StudyPlanData.Item) =>
+        typeof problem.score === "number" &&
+        problem.score >= EXAMPLE_MIN_RATING;
+
+      const high = all
+        .filter(isHigh)
+        .sort((a, b) => (a.score ?? 0) - (b.score ?? 0));
+      if (high.length >= EXAMPLES_PER_SECTION) {
+        return high.slice(0, EXAMPLES_PER_SECTION);
+      }
+
+      const low = all
+        .filter((problem) => !isHigh(problem))
+        .sort(
+          (a, b) =>
+            (b.score ?? Number.NEGATIVE_INFINITY) -
+            (a.score ?? Number.NEGATIVE_INFINITY),
         )
-        .sort((a, b) => (a.score ?? 0) - (b.score ?? 0))
-        .slice(0, EXAMPLES_PER_SECTION);
+        .slice(0, EXAMPLES_PER_SECTION - high.length);
+      return [...high, ...low];
+    };
 
     const walk = (section: StudyPlanData.Section) => {
       const examples = pickExamples(section);
