@@ -125,7 +125,7 @@ const TutorialSectionContainer = React.memo(
                       例題
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      取自對應題單，前 {examples.length} 題
+                      取自對應題單，分數 ≥ 1700 的前 {examples.length} 題
                     </span>
                   </div>
                   <ProblemList problems={examples} />

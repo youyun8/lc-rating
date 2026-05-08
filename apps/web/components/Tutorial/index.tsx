@@ -23,7 +23,8 @@ import { extractImageUrls } from "@/components/StudyPlan/dedupe";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 
-const EXAMPLES_PER_SECTION = 3;
+const EXAMPLES_PER_SECTION = 5;
+const EXAMPLE_MIN_RATING = 1700;
 
 function countSections(section: TutorialData.Section): number {
   let count = 1;
@@ -64,19 +65,27 @@ function Tutorial({ plan }: TutorialProps) {
     const studyPlan = studyPlanDataMap[plan];
     if (!studyPlan) return map;
 
-    const collectProblems = (
+    const flattenProblems = (
       section: StudyPlanData.Section,
-    ): StudyPlanData.Item[] => {
-      const own = section.problems ?? [];
-      if (own.length >= EXAMPLES_PER_SECTION) {
-        return own.slice(0, EXAMPLES_PER_SECTION);
-      }
-      const childProblems = (section.children ?? []).flatMap(collectProblems);
-      return [...own, ...childProblems].slice(0, EXAMPLES_PER_SECTION);
-    };
+    ): StudyPlanData.Item[] => [
+      ...(section.problems ?? []),
+      ...(section.children ?? []).flatMap(flattenProblems),
+    ];
+
+    const pickExamples = (
+      section: StudyPlanData.Section,
+    ): StudyPlanData.Item[] =>
+      flattenProblems(section)
+        .filter(
+          (problem) =>
+            typeof problem.score === "number" &&
+            problem.score >= EXAMPLE_MIN_RATING,
+        )
+        .sort((a, b) => (a.score ?? 0) - (b.score ?? 0))
+        .slice(0, EXAMPLES_PER_SECTION);
 
     const walk = (section: StudyPlanData.Section) => {
-      const examples = collectProblems(section);
+      const examples = pickExamples(section);
       if (examples.length > 0) {
         map.set(section.id, examples);
       }
