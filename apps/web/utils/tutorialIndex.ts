@@ -1,7 +1,6 @@
 import type { TutorialData } from "@/types";
 
 import rating2100 from "@/public/tutorial/rating_2100.json";
-import rating2400 from "@/public/tutorial/rating_2400.json";
 import binarySearch from "@/public/tutorial/binary_search.json";
 import bitwiseOps from "@/public/tutorial/bitwise_operations.json";
 import dataStructure from "@/public/tutorial/data_structure.json";
@@ -17,7 +16,6 @@ import trees from "@/public/tutorial/trees.json";
 
 export const tutorialDataMap: Record<string, TutorialData.Root> = {
   rating_2100: rating2100 as TutorialData.Root,
-  rating_2400: rating2400 as TutorialData.Root,
   binary_search: binarySearch as TutorialData.Root,
   bitwise_operations: bitwiseOps as TutorialData.Root,
   data_structure: dataStructure as TutorialData.Root,

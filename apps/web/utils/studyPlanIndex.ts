@@ -2,7 +2,6 @@ import { STUDYPLANS } from "@/config/constants";
 import type { StudyPlanData } from "@/types";
 
 import rating2100Data from "@/public/studyplan/rating_2100.json";
-import rating2400Data from "@/public/studyplan/rating_2400.json";
 import binarySearchData from "@/public/studyplan/binary_search.json";
 import bitwiseOpsData from "@/public/studyplan/bitwise_operations.json";
 import dataStructureData from "@/public/studyplan/data_structure.json";
@@ -18,7 +17,6 @@ import treesData from "@/public/studyplan/trees.json";
 
 export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
   rating_2100: rating2100Data as StudyPlanData.Root,
-  rating_2400: rating2400Data as StudyPlanData.Root,
   binary_search: binarySearchData as StudyPlanData.Root,
   bitwise_operations: bitwiseOpsData as StudyPlanData.Root,
   data_structure: dataStructureData as StudyPlanData.Root,
