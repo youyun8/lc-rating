@@ -15,6 +15,7 @@ import {
   ExternalLink,
   FolderTree,
   Layers3,
+  PanelLeftIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
@@ -22,6 +23,8 @@ import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent
 import { extractImageUrls } from "@/components/StudyPlan/dedupe";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { sectionAnchor } from "@/utils/sectionAnchor";
+import { Button } from "@/components/ui/button";
+import { useSidebar } from "@/components/ui/sidebar";
 
 const EXAMPLES_PER_SECTION = 5;
 const EXAMPLE_MIN_RATING = 1700;
@@ -50,6 +53,46 @@ function countSectionsWithSummary(section: TutorialData.Section): number {
 
 interface TutorialProps {
   plan: string;
+}
+
+function TutorialSidebarButtons() {
+  const { isMobile, open, openMobile, setOpen, setOpenMobile } = useSidebar();
+  const isSidebarVisible = isMobile ? openMobile : open;
+
+  return (
+    <>
+      {!isSidebarVisible && (
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="border border-border/60 bg-transparent text-muted-foreground hover:bg-accent/70 hover:text-foreground"
+          onClick={() => {
+            if (isMobile) {
+              setOpenMobile(true);
+              return;
+            }
+            setOpen(true);
+          }}
+        >
+          <PanelLeftIcon className="h-4 w-4" />
+          顯示側欄
+        </Button>
+      )}
+      {isSidebarVisible && !isMobile && (
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="border border-border/60 bg-transparent text-muted-foreground hover:bg-accent/70 hover:text-foreground"
+          onClick={() => setOpen(false)}
+        >
+          <PanelLeftIcon className="h-4 w-4" />
+          隱藏側欄
+        </Button>
+      )}
+    </>
+  );
 }
 
 function Tutorial({ plan }: TutorialProps) {
@@ -294,16 +337,59 @@ function Tutorial({ plan }: TutorialProps) {
 
           {tutorial && (
             <section className="rounded-2xl border border-border/60 bg-muted/20 p-4 shadow-sm sm:p-5">
-              <div className="flex flex-wrap gap-2">
-                {tutorial.children.map((section) => (
-                  <a
-                    key={section.id}
-                    href={`#${sectionAnchor(section.title)}`}
-                    className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                  >
-                    {section.title}
-                  </a>
-                ))}
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h2 className="text-base font-semibold tracking-tight text-foreground">
+                    章節導覽
+                  </h2>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    依照章節順序閱讀；也可用側欄導覽快速跳轉到指定章節。
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                  <TutorialSidebarButtons />
+                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+                    {stats.rootSections} 個主章節
+                  </span>
+                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+                    {stats.sections} 個總章節
+                  </span>
+                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
+                    {stats.documented} 個有筆記
+                  </span>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {tutorial && (
+            <section className="rounded-2xl border border-border/60 bg-background/90 p-4 shadow-sm xl:hidden sm:p-5">
+              <div className="flex flex-col gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="rounded-xl border border-border/60 bg-muted/30 p-2 text-muted-foreground">
+                    <PanelLeftIcon className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h2 className="text-base font-semibold tracking-tight text-foreground">
+                      快速章節提醒
+                    </h2>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      可先打開側欄查看完整章節樹，或直接用下方章節捷徑快速跳轉。
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {tutorial.children.map((section) => (
+                    <a
+                      key={section.id}
+                      href={`#${sectionAnchor(section.title)}`}
+                      className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    >
+                      {section.title}
+                    </a>
+                  ))}
+                </div>
               </div>
             </section>
           )}

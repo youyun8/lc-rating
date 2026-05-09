@@ -20,18 +20,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { STUDYPLANS } from "@/config/constants";
 import { studyPlanIcons } from "@/config/studyPlanThemes";
-import {
-  BookOpen,
-  ChevronRight,
-} from "lucide-react";
+import { BookOpen, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useStudyPlan } from "@/hooks/useStudyPlan";
-import { StudyPlanData } from "@/types";
+import { StudyPlanData, TutorialData } from "@/types";
 import { sectionAnchor } from "@/utils/sectionAnchor";
+import { studyPlanDataMap } from "@/utils/studyPlanIndex";
+import { tutorialDataMap } from "@/utils/tutorialIndex";
 
 interface SubTopicItemProps {
-  section: StudyPlanData.Section;
+  section: StudyPlanData.Section | TutorialData.Section;
 }
 
 function SubTopicItem({ section }: SubTopicItemProps) {
@@ -67,23 +65,35 @@ function SubTopicItem({ section }: SubTopicItemProps) {
   );
 }
 
-/** Only renders a sidebar on study-plan detail pages (`/studyplan/[category]`). */
+/** Renders a chapter sidebar on study-plan and tutorial detail pages. */
 export function GlobalStudyPlanSidebar() {
   const rawPathname = usePathname();
   const pathname = rawPathname ?? "";
   const { isMobile, open, openMobile, setOpen, setOpenMobile } = useSidebar();
 
-  const planSegment = pathname.startsWith("/studyplan/")
-    ? (pathname.replace("/studyplan/", "").split("/")[0] ?? "")
+  const pageType = pathname.startsWith("/tutorial/")
+    ? "tutorial"
+    : pathname.startsWith("/studyplan/")
+      ? "studyplan"
+      : null;
+  const planSegment = pageType
+    ? (pathname.replace(`/${pageType}/`, "").split("/")[0] ?? "")
     : "";
   const isDetailPage = planSegment.length > 0;
   const currentPlanKey = isDetailPage ? planSegment : null;
 
-  const { studyPlan } = useStudyPlan(currentPlanKey || "");
+  const data =
+    currentPlanKey && pageType === "tutorial"
+      ? tutorialDataMap[currentPlanKey]
+      : currentPlanKey
+        ? studyPlanDataMap[currentPlanKey]
+        : null;
 
   const currentPlanTitle = currentPlanKey
     ? STUDYPLANS[currentPlanKey as keyof typeof STUDYPLANS] || currentPlanKey
     : null;
+  const backHref = pageType === "tutorial" ? "/tutorial" : "/studyplan";
+  const backLabel = pageType === "tutorial" ? "返回教學列表" : "返回題單列表";
 
   // No sidebar on overview, contest, problemset, etc.
   if (!isDetailPage) return null;
@@ -95,11 +105,11 @@ export function GlobalStudyPlanSidebar() {
           <div className="flex items-start justify-between gap-2">
             <SidebarMenuButton asChild className="w-fit -ml-2">
               <Link
-                href="/studyplan"
+                href={backHref}
                 className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
               >
                 <ChevronRight className="h-4 w-4 rotate-180" />
-                <span className="text-xs">返回題單列表</span>
+                <span className="text-xs">{backLabel}</span>
               </Link>
             </SidebarMenuButton>
             {(isMobile ? openMobile : open) && (
@@ -131,17 +141,20 @@ export function GlobalStudyPlanSidebar() {
       </SidebarHeader>
       <SidebarSeparator />
       <SidebarContent>
-        {studyPlan && (
+        {data && (
           <SidebarGroup>
             <SidebarGroupLabel>章節導覽</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {studyPlan.children.map((section) => (
+                {data.children.map((section) => (
                   <SidebarMenuItem key={section.id}>
                     {section.children && section.children.length > 0 ? (
                       <>
                         <SidebarMenuButton asChild>
-                          <a href={`#${sectionAnchor(section.title)}`} className="font-medium">
+                          <a
+                            href={`#${sectionAnchor(section.title)}`}
+                            className="font-medium"
+                          >
                             {section.title}
                           </a>
                         </SidebarMenuButton>
@@ -153,7 +166,10 @@ export function GlobalStudyPlanSidebar() {
                       </>
                     ) : (
                       <SidebarMenuButton asChild>
-                        <a href={`#${sectionAnchor(section.title)}`} className="font-medium">
+                        <a
+                          href={`#${sectionAnchor(section.title)}`}
+                          className="font-medium"
+                        >
                           {section.title}
                         </a>
                       </SidebarMenuButton>

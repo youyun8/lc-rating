@@ -9,13 +9,15 @@ import { GithubBadge } from "./GithubBadge";
 import SettingsPanel from "./SettingsPanel";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 
-/** Only shows the sidebar toggle on study-plan detail pages. */
-function StudyPlanSidebarTrigger() {
+/** Only shows the sidebar toggle on study-plan and tutorial detail pages. */
+function PlanSidebarTrigger() {
   const pathname = usePathname() ?? "";
   const { isMobile, open } = useSidebar();
   const isDetailPage =
-    pathname.startsWith("/studyplan/") &&
-    (pathname.replace("/studyplan/", "").split("/")[0] ?? "").length > 0;
+    (pathname.startsWith("/studyplan/") &&
+      (pathname.replace("/studyplan/", "").split("/")[0] ?? "").length > 0) ||
+    (pathname.startsWith("/tutorial/") &&
+      (pathname.replace("/tutorial/", "").split("/")[0] ?? "").length > 0);
 
   if (!isDetailPage) return null;
 
@@ -63,7 +65,7 @@ const Navigator = React.memo(() => {
       <div className="flex h-[var(--navbar-height)] items-center justify-between gap-3 px-3 sm:px-4">
         {/* Left section */}
         <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
-          <StudyPlanSidebarTrigger />
+          <PlanSidebarTrigger />
 
           {/* Mobile hamburger */}
           <button
