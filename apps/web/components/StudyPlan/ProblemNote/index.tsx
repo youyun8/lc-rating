@@ -30,7 +30,7 @@ Key observation:
 
 Complexity:
 
-Mistake / lesson:
+Lesson learned:
 `;
 }
 
