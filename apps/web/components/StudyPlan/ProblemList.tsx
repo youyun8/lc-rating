@@ -9,6 +9,7 @@ import type { ProblemMap } from "@/types";
 import { StudyPlanData } from "@/types";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import React, { useMemo } from "react";
+import { ProblemNote } from "./ProblemNote";
 
 interface ProblemListProps {
   problems: StudyPlanData.Item[];
@@ -247,10 +248,13 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
                 )}
               </div>
               {problemId ? (
-                <ProgressSelector
-                  problemId={problemId}
-                  triggerClassName="min-w-[7.5rem] sm:min-w-[8rem] max-w-[12rem]"
-                />
+                <>
+                  <ProblemNote problemId={problemId} title={problem.title} />
+                  <ProgressSelector
+                    problemId={problemId}
+                    triggerClassName="min-w-[7.5rem] sm:min-w-[8rem] max-w-[12rem]"
+                  />
+                </>
               ) : null}
             </div>
           </div>

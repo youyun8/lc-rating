@@ -126,6 +126,20 @@ export function normalizeCloudSiteStorage(input: unknown): SiteStoragePatch {
     }
   }
 
+  if (hasOwn(payload, "problemNotes")) {
+    const problemNotes = toStringRecord(payload.problemNotes);
+    if (problemNotes !== undefined) {
+      normalized.problemNotes = problemNotes;
+    }
+  }
+
+  if (hasOwn(payload, "problemNotesUpdatedAt")) {
+    const problemNotesUpdatedAt = toNumberRecord(payload.problemNotesUpdatedAt);
+    if (problemNotesUpdatedAt !== undefined) {
+      normalized.problemNotesUpdatedAt = problemNotesUpdatedAt;
+    }
+  }
+
   return normalized;
 }
 

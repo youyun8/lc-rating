@@ -11,6 +11,8 @@ export interface SiteStorageData {
   options: Options;
   progress: Record<string, string>;
   progressUpdatedAt: Record<string, number>;
+  problemNotes: Record<string, string>;
+  problemNotesUpdatedAt: Record<string, number>;
 }
 
 export type SiteStoragePatch = Partial<SiteStorageData>;
