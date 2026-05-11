@@ -18,19 +18,23 @@ interface ProblemNoteProps {
   title: string;
 }
 
+const PROBLEM_NOTE_SECTIONS = [
+  "Initial thought",
+  "Pattern",
+  "Key observation",
+  "Complexity",
+  "Lesson learned",
+];
+
 function createProblemNoteTemplate(problemId: string, title: string) {
+  const sections = PROBLEM_NOTE_SECTIONS.map((section) => `${section}:`).join(
+    "\n\n",
+  );
+
   return `Problem:
 LC ${problemId} - ${title}
 
-Initial thought:
-
-Pattern:
-
-Key observation:
-
-Complexity:
-
-Lesson learned:
+${sections}
 `;
 }
 

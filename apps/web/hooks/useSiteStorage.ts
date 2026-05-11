@@ -10,94 +10,71 @@ import {
   SiteStoragePatch,
 } from "@/types/siteStorage";
 
-/**
- * Per-item merge: for each problem ID keep the entry with the newer timestamp.
- * Items only on one side are always kept.
- */
+function mergeTimestampedRecords(
+  localValues: Record<string, string>,
+  cloudValues: Record<string, string>,
+  localTimestamps: Record<string, number>,
+  cloudTimestamps: Record<string, number>,
+) {
+  const values: Record<string, string> = {};
+  const timestamps: Record<string, number> = {};
+  const allIds = new Set([
+    ...Object.keys(localValues),
+    ...Object.keys(cloudValues),
+  ]);
+
+  for (const id of allIds) {
+    const localValue = localValues[id];
+    const cloudValue = cloudValues[id];
+    const localTime = localTimestamps[id] ?? 0;
+    const cloudTime = cloudTimestamps[id] ?? 0;
+
+    if (localValue !== undefined && cloudValue !== undefined) {
+      if (localTime >= cloudTime) {
+        values[id] = localValue;
+        timestamps[id] = localTime || cloudTime;
+      } else {
+        values[id] = cloudValue;
+        timestamps[id] = cloudTime;
+      }
+    } else if (localValue !== undefined) {
+      values[id] = localValue;
+      if (localTime) timestamps[id] = localTime;
+    } else if (cloudValue !== undefined) {
+      values[id] = cloudValue;
+      if (cloudTime) timestamps[id] = cloudTime;
+    }
+  }
+
+  return { values, timestamps };
+}
+
 export function mergeProgress(
   local: SiteStoragePatch,
   cloud: SiteStoragePatch,
 ): Pick<SiteStoragePatch, "progress" | "progressUpdatedAt"> {
-  const localProgress = local.progress ?? {};
-  const cloudProgress = cloud.progress ?? {};
-  const localTs = local.progressUpdatedAt ?? {};
-  const cloudTs = cloud.progressUpdatedAt ?? {};
+  const { values, timestamps } = mergeTimestampedRecords(
+    local.progress ?? {},
+    cloud.progress ?? {},
+    local.progressUpdatedAt ?? {},
+    cloud.progressUpdatedAt ?? {},
+  );
 
-  const progress: Record<string, string> = {};
-  const progressUpdatedAt: Record<string, number> = {};
-
-  const allIds = new Set([
-    ...Object.keys(localProgress),
-    ...Object.keys(cloudProgress),
-  ]);
-
-  for (const id of allIds) {
-    const lVal = localProgress[id];
-    const cVal = cloudProgress[id];
-    const lTime = localTs[id] ?? 0;
-    const cTime = cloudTs[id] ?? 0;
-
-    if (lVal !== undefined && cVal !== undefined) {
-      if (lTime >= cTime) {
-        progress[id] = lVal;
-        progressUpdatedAt[id] = lTime || cTime;
-      } else {
-        progress[id] = cVal;
-        progressUpdatedAt[id] = cTime;
-      }
-    } else if (lVal !== undefined) {
-      progress[id] = lVal;
-      if (lTime) progressUpdatedAt[id] = lTime;
-    } else if (cVal !== undefined) {
-      progress[id] = cVal;
-      if (cTime) progressUpdatedAt[id] = cTime;
-    }
-  }
-
-  return { progress, progressUpdatedAt };
+  return { progress: values, progressUpdatedAt: timestamps };
 }
 
 export function mergeProblemNotes(
   local: SiteStoragePatch,
   cloud: SiteStoragePatch,
 ): Pick<SiteStoragePatch, "problemNotes" | "problemNotesUpdatedAt"> {
-  const localNotes = local.problemNotes ?? {};
-  const cloudNotes = cloud.problemNotes ?? {};
-  const localTs = local.problemNotesUpdatedAt ?? {};
-  const cloudTs = cloud.problemNotesUpdatedAt ?? {};
+  const { values, timestamps } = mergeTimestampedRecords(
+    local.problemNotes ?? {},
+    cloud.problemNotes ?? {},
+    local.problemNotesUpdatedAt ?? {},
+    cloud.problemNotesUpdatedAt ?? {},
+  );
 
-  const problemNotes: Record<string, string> = {};
-  const problemNotesUpdatedAt: Record<string, number> = {};
-
-  const allIds = new Set([
-    ...Object.keys(localNotes),
-    ...Object.keys(cloudNotes),
-  ]);
-
-  for (const id of allIds) {
-    const lVal = localNotes[id];
-    const cVal = cloudNotes[id];
-    const lTime = localTs[id] ?? 0;
-    const cTime = cloudTs[id] ?? 0;
-
-    if (lVal !== undefined && cVal !== undefined) {
-      if (lTime >= cTime) {
-        problemNotes[id] = lVal;
-        problemNotesUpdatedAt[id] = lTime || cTime;
-      } else {
-        problemNotes[id] = cVal;
-        problemNotesUpdatedAt[id] = cTime;
-      }
-    } else if (lVal !== undefined) {
-      problemNotes[id] = lVal;
-      if (lTime) problemNotesUpdatedAt[id] = lTime;
-    } else if (cVal !== undefined) {
-      problemNotes[id] = cVal;
-      if (cTime) problemNotesUpdatedAt[id] = cTime;
-    }
-  }
-
-  return { problemNotes, problemNotesUpdatedAt };
+  return { problemNotes: values, problemNotesUpdatedAt: timestamps };
 }
 
 export function useSiteStorage() {
