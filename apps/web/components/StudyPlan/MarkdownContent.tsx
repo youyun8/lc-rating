@@ -32,9 +32,27 @@ function normalizeInlineMath(md: string) {
       }
 
       // Some study plan content wraps KaTeX inline math in backticks by mistake.
-      return segment.replace(/`(\${1,2}[^`\n]+?\${1,2})`/g, "$1");
+      return segment
+        .replace(/`(\${1,2}[^`\n]+?\${1,2})`/g, "$1")
+        .replace(/(^|[^$])\$([^$\n]+)\$(?!\$)/g, (match, prefix, math) => {
+          if (shouldRenderAsPlainText(math)) {
+            return `${prefix}${math}`;
+          }
+
+          return match;
+        });
     })
     .join("");
+}
+
+function shouldRenderAsPlainText(math: string) {
+  const normalized = math.trim();
+
+  if (/[\u3400-\u9fff]/.test(normalized)) {
+    return true;
+  }
+
+  return /^\([A-Za-z_][\w\s,]*\)$/.test(normalized);
 }
 
 function createMarkup(md: string) {

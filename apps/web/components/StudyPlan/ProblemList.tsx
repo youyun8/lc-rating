@@ -20,10 +20,15 @@ function getSortableProblemIndex(problem: StudyPlanData.Item) {
 }
 
 function getSortableProblemScore(problem: StudyPlanData.Item) {
-  return typeof problem.score === "number" ? problem.score : Number.NEGATIVE_INFINITY;
+  return typeof problem.score === "number"
+    ? problem.score
+    : Number.NEGATIVE_INFINITY;
 }
 
-function compareStudyPlanProblems(a: StudyPlanData.Item, b: StudyPlanData.Item) {
+function compareStudyPlanProblems(
+  a: StudyPlanData.Item,
+  b: StudyPlanData.Item,
+) {
   const scoreDiff = getSortableProblemScore(a) - getSortableProblemScore(b);
 
   if (scoreDiff !== 0) {
@@ -77,7 +82,8 @@ function dedupeStudyPlanProblems(problems: StudyPlanData.Item[]) {
     const existing = byKey.get(key);
     if (
       !existing ||
-      studyPlanProblemCanonicalScore(problem) > studyPlanProblemCanonicalScore(existing)
+      studyPlanProblemCanonicalScore(problem) >
+        studyPlanProblemCanonicalScore(existing)
     ) {
       byKey.set(key, problem);
     }
@@ -87,6 +93,15 @@ function dedupeStudyPlanProblems(problems: StudyPlanData.Item[]) {
 
 function normalizedStudyPlanSlug(slug: string) {
   return slug.replace(/^\/+|\/+$/g, "").toLowerCase();
+}
+
+function getProblemLabels(problem: StudyPlanData.Item) {
+  return (
+    problem.subsection
+      ?.split(" / ")
+      .map((label) => label.trim())
+      .filter(Boolean) ?? []
+  );
 }
 
 /** Same numeric/LC id listed twice with different slugs (data typo or alternate URLs). */
@@ -190,16 +205,20 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
       {enrichedProblems.map((problem, idx) => {
         const problemId = problem.id?.toString();
         const info = ratingInfo(problem.score || 0);
+        const labels = getProblemLabels(problem);
         const statusKey = problemId ? progress[problemId] : undefined;
         const statusOption = getOption(statusKey);
         const hasStarted =
-          typeof statusKey !== "undefined" && statusOption.key !== pendingOption.key;
+          typeof statusKey !== "undefined" &&
+          statusOption.key !== pendingOption.key;
 
         return (
           <div
             key={`${problem.slug}-${problemId}`}
             className={`flex flex-col gap-2 px-4 py-3 transition-colors hover:bg-muted/20 sm:flex-row sm:items-center sm:justify-between${
-              idx < enrichedProblems.length - 1 ? " border-b border-border/60" : ""
+              idx < enrichedProblems.length - 1
+                ? " border-b border-border/60"
+                : ""
             }`}
             style={
               hasStarted
@@ -221,11 +240,16 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
                   ? problem.title
                   : `${problem.id}. ${problem.title}`}
               </a>
-              {problem.subsection && (
-                <div className="mt-1.5">
-                  <span className="inline-flex max-w-[32ch] items-center truncate rounded-md border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[11px] leading-tight text-muted-foreground">
-                    {problem.subsection}
-                  </span>
+              {labels.length > 0 && (
+                <div className="mt-1.5 flex flex-wrap gap-1">
+                  {labels.map((label) => (
+                    <span
+                      key={label}
+                      className="inline-flex max-w-[24ch] items-center truncate rounded-md border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[11px] leading-tight text-muted-foreground"
+                    >
+                      {label}
+                    </span>
+                  ))}
                 </div>
               )}
             </div>

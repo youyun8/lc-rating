@@ -12,10 +12,11 @@ export function useStudyPlan(plan: string) {
     queryFn: () =>
       fetchApi(
         `/studyplan/${plan}.json?t=${(new Date().getTime() / 100000).toFixed(
-          0
-        )}`
+          0,
+        )}`,
+        { cache: "no-store" },
       ).then((res) => res.json()),
-    staleTime: 3600 * 1000, // 1 hour
+    staleTime: 0,
   });
 
   return { studyPlan, isPending, error };
