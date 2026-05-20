@@ -1,6 +1,7 @@
 import { STUDYPLANS } from "@/config/constants";
 import type { StudyPlanData } from "@/types";
 
+import googleInterviewData from "@/public/studyplan/google_interview.json";
 import rating2100Data from "@/public/studyplan/rating_2100.json";
 import binarySearchData from "@/public/studyplan/binary_search.json";
 import bitwiseOpsData from "@/public/studyplan/bitwise_operations.json";
@@ -16,6 +17,7 @@ import stringData from "@/public/studyplan/string.json";
 import treesData from "@/public/studyplan/trees.json";
 
 export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
+  google_interview: googleInterviewData as StudyPlanData.Root,
   rating_2100: rating2100Data as StudyPlanData.Root,
   binary_search: binarySearchData as StudyPlanData.Root,
   bitwise_operations: bitwiseOpsData as StudyPlanData.Root,
@@ -47,7 +49,7 @@ function buildStudyPlanProblemIndex() {
   const addProblem = (
     problem: StudyPlanData.Item,
     planKey: string,
-    planTitle: string
+    planTitle: string,
   ) => {
     const problemId = problem.id?.toString();
     if (!problemId) return;
@@ -65,16 +67,16 @@ function buildStudyPlanProblemIndex() {
   const walkSection = (
     section: StudyPlanData.Section,
     planKey: string,
-    planTitle: string
+    planTitle: string,
   ) => {
     if (section.problems) {
       section.problems.forEach((problem) =>
-        addProblem(problem, planKey, planTitle)
+        addProblem(problem, planKey, planTitle),
       );
     }
     if (section.children) {
       section.children.forEach((child) =>
-        walkSection(child, planKey, planTitle)
+        walkSection(child, planKey, planTitle),
       );
     }
   };
@@ -83,7 +85,7 @@ function buildStudyPlanProblemIndex() {
     const planTitle =
       STUDYPLANS[planKey as keyof typeof STUDYPLANS] ?? plan.title ?? planKey;
     plan.children?.forEach((section) =>
-      walkSection(section, planKey, planTitle)
+      walkSection(section, planKey, planTitle),
     );
   });
 

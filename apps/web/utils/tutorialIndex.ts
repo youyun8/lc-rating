@@ -1,5 +1,6 @@
 import type { TutorialData } from "@/types";
 
+import googleInterview from "@/public/tutorial/google_interview.json";
 import rating2100 from "@/public/tutorial/rating_2100.json";
 import binarySearch from "@/public/tutorial/binary_search.json";
 import bitwiseOps from "@/public/tutorial/bitwise_operations.json";
@@ -15,6 +16,7 @@ import stringPlan from "@/public/tutorial/string.json";
 import trees from "@/public/tutorial/trees.json";
 
 export const tutorialDataMap: Record<string, TutorialData.Root> = {
+  google_interview: googleInterview as TutorialData.Root,
   rating_2100: rating2100 as TutorialData.Root,
   binary_search: binarySearch as TutorialData.Root,
   bitwise_operations: bitwiseOps as TutorialData.Root,
