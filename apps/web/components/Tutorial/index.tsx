@@ -19,12 +19,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
-import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
 import { extractImageUrls } from "@/components/StudyPlan/dedupe";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
+import { getStudyPlanCourseMaterial } from "@/data/studyPlanCourseMaterials";
+import { TutorialMarkdownPanel } from "./MarkdownPanel";
 
 const EXAMPLES_PER_SECTION = 5;
 const EXAMPLE_MIN_RATING = 1700;
@@ -102,6 +103,7 @@ function Tutorial({ plan }: TutorialProps) {
     STUDYPLANS[plan as keyof typeof STUDYPLANS] ?? tutorial?.title ?? plan;
   const Icon = studyPlanIcons[plan] ?? BookOpen;
   const theme = studyPlanThemes[plan] ?? defaultTheme;
+  const courseMaterial = getStudyPlanCourseMaterial(plan);
 
   const examplesBySectionId = useMemo(() => {
     const map = new Map<number, StudyPlanData.Item[]>();
@@ -310,29 +312,21 @@ function Tutorial({ plan }: TutorialProps) {
       <div className="mx-auto w-full max-w-7xl px-3 py-5 pb-24 sm:px-4 sm:py-6 md:px-6 md:py-8 md:pb-20 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
         <div className="flex flex-col gap-8">
           {tutorial?.summary && (
-            <section className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm">
-              <div className="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-5">
-                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                  <div>
-                    <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                      教學總覽
-                    </h2>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      先通讀本頁概要，再深入各章節複習重點與模板。
-                    </p>
-                  </div>
-                  <span className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-                    章節導讀
-                  </span>
-                </div>
-              </div>
-              <div className="p-4 sm:p-5 md:p-6">
-                <StudyPlanMarkdownContent
-                  content={tutorial.summary}
-                  variant="plan"
-                />
-              </div>
-            </section>
+            <TutorialMarkdownPanel
+              title="教學總覽"
+              description="先通讀本頁概要，再深入各章節複習重點與模板。"
+              badge="章節導讀"
+              content={tutorial.summary}
+            />
+          )}
+
+          {courseMaterial && (
+            <TutorialMarkdownPanel
+              title="競程課程講義"
+              description="按常見演算法 pattern 整理，包含適用訊號、模板與 C++ 範例。"
+              badge="Pattern notes"
+              content={courseMaterial}
+            />
           )}
 
           {tutorial && (
