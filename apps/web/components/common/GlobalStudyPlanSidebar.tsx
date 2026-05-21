@@ -27,6 +27,7 @@ import { StudyPlanData, TutorialData } from "@/types";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
+import { googleInterviewSectionTutorials } from "@/data/googleInterviewSectionTutorials";
 
 interface SubTopicItemProps {
   section: StudyPlanData.Section | TutorialData.Section;
@@ -94,6 +95,14 @@ export function GlobalStudyPlanSidebar() {
     : null;
   const backHref = pageType === "tutorial" ? "/tutorial" : "/studyplan";
   const backLabel = pageType === "tutorial" ? "返回教學列表" : "返回題單列表";
+  const googleTutorialHrefById = new Map(
+    googleInterviewSectionTutorials.map((section) => [
+      section.id,
+      `/tutorial/google_interview/${section.slug}`,
+    ]),
+  );
+  const useGoogleTutorialPages =
+    pageType === "tutorial" && currentPlanKey === "google_interview";
 
   // No sidebar on overview, contest, problemset, etc.
   if (!isDetailPage) return null;
@@ -166,12 +175,24 @@ export function GlobalStudyPlanSidebar() {
                       </>
                     ) : (
                       <SidebarMenuButton asChild>
-                        <a
-                          href={`#${sectionAnchor(section.title)}`}
-                          className="font-medium"
-                        >
-                          {section.title}
-                        </a>
+                        {useGoogleTutorialPages ? (
+                          <Link
+                            href={
+                              googleTutorialHrefById.get(section.id) ??
+                              `/tutorial/google_interview/${sectionAnchor(section.title)}`
+                            }
+                            className="font-medium"
+                          >
+                            {section.title}
+                          </Link>
+                        ) : (
+                          <a
+                            href={`#${sectionAnchor(section.title)}`}
+                            className="font-medium"
+                          >
+                            {section.title}
+                          </a>
+                        )}
                       </SidebarMenuButton>
                     )}
                   </SidebarMenuItem>

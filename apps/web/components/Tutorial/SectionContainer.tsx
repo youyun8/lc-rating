@@ -1,12 +1,8 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { StudyPlanData, TutorialData } from "@/types";
-import { Sparkles } from "lucide-react";
+import { BookOpen, Sparkles } from "lucide-react";
+import Link from "next/link";
 import React, { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
 import { ProblemList } from "@/components/StudyPlan/ProblemList";
@@ -31,6 +27,7 @@ interface TutorialSectionContainerProps {
   section: TutorialData.Section;
   /** Lookup of example problems by shared section id (sourced from the matching study plan). */
   examplesBySectionId?: Map<number, StudyPlanData.Item[]>;
+  detailHref?: string;
   level?: number;
   parentImageUrls?: Set<string>;
 }
@@ -39,6 +36,7 @@ const TutorialSectionContainer = React.memo(
   ({
     section,
     examplesBySectionId,
+    detailHref,
     level = 0,
     parentImageUrls = new Set(),
   }: TutorialSectionContainerProps) => {
@@ -99,6 +97,15 @@ const TutorialSectionContainer = React.memo(
           >
             {section.title}
           </CardTitle>
+          {detailHref && level === 0 && (
+            <Link
+              href={detailHref}
+              className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              <BookOpen className="h-3.5 w-3.5" />
+              閱讀完整教學
+            </Link>
+          )}
           {dedupedSummary ? (
             <div className="mt-4 rounded-[1.5rem] border border-border/60 bg-muted/20 p-4 sm:p-5">
               <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
@@ -125,7 +132,8 @@ const TutorialSectionContainer = React.memo(
                       例題
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      取自對應題單，分數 ≥ 1700 優先；不足時由最接近 1700 的題目補滿 5 題
+                      取自對應題單，分數 ≥ 1700 優先；不足時由最接近 1700
+                      的題目補滿 5 題
                     </span>
                   </div>
                   <ProblemList problems={examples} />
@@ -138,6 +146,7 @@ const TutorialSectionContainer = React.memo(
                       key={child.id}
                       section={child}
                       examplesBySectionId={examplesBySectionId}
+                      detailHref={detailHref}
                       level={level + 1}
                       parentImageUrls={mergedImageUrls}
                     />

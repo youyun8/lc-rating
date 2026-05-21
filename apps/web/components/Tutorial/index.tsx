@@ -399,6 +399,11 @@ function Tutorial({ plan }: TutorialProps) {
               key={section.id}
               section={section}
               examplesBySectionId={examplesBySectionId}
+              detailHref={
+                plan === "google_interview"
+                  ? `/tutorial/google_interview/${sectionAnchor(section.title)}`
+                  : undefined
+              }
               parentImageUrls={topLevelImageUrls}
             />
           ))}
