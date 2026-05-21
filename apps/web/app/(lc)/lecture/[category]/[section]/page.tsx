@@ -1,15 +1,12 @@
-import { GoogleSectionPage } from "@/components/Tutorial/GoogleSectionPage";
+import { LectureSectionPage } from "@/components/Tutorial/LectureSectionPage";
 import {
-  getGoogleInterviewSectionTutorial,
-  googleInterviewSectionTutorials,
-} from "@/data/googleInterviewSectionTutorials";
+  getLectureSectionStaticParams,
+  getLectureSectionTutorial,
+} from "@/data/lectureSectionTutorials";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  return googleInterviewSectionTutorials.map((section) => ({
-    category: "google_interview",
-    section: section.slug,
-  }));
+  return getLectureSectionStaticParams();
 }
 
 interface PageProps {
@@ -18,13 +15,11 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { category, section } = await params;
+  const lectureSection = getLectureSectionTutorial(category, section);
 
-  if (
-    category !== "google_interview" ||
-    !getGoogleInterviewSectionTutorial(section)
-  ) {
+  if (!lectureSection) {
     notFound();
   }
 
-  return <GoogleSectionPage sectionSlug={section} />;
+  return <LectureSectionPage section={lectureSection} />;
 }

@@ -27,28 +27,61 @@ import { StudyPlanData, TutorialData } from "@/types";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
-import { googleInterviewSectionTutorials } from "@/data/googleInterviewSectionTutorials";
+
+type PageType = "lecture" | "studyplan";
+
+function getSectionHref(
+  section: StudyPlanData.Section | TutorialData.Section,
+  pageType: PageType,
+  currentPlanKey: string | null,
+) {
+  if (pageType === "lecture" && currentPlanKey) {
+    return `/lecture/${currentPlanKey}/${sectionAnchor(section.title)}`;
+  }
+
+  return `#${sectionAnchor(section.title)}`;
+}
 
 interface SubTopicItemProps {
   section: StudyPlanData.Section | TutorialData.Section;
+  pageType: PageType;
+  currentPlanKey: string | null;
 }
 
-function SubTopicItem({ section }: SubTopicItemProps) {
-  const hasChildren = section.children && section.children.length > 0;
+function SubTopicItem({
+  section,
+  pageType,
+  currentPlanKey,
+}: SubTopicItemProps) {
+  const children = section.children ?? [];
+  const hasChildren = children.length > 0;
+  const href = getSectionHref(section, pageType, currentPlanKey);
+  const isLectureLink = pageType === "lecture" && Boolean(currentPlanKey);
 
   if (hasChildren) {
     return (
       <>
         <SidebarMenuSubItem>
           <SidebarMenuSubButton asChild>
-            <a href={`#${sectionAnchor(section.title)}`} className="truncate">
-              {section.title}
-            </a>
+            {isLectureLink ? (
+              <Link href={href} className="truncate">
+                {section.title}
+              </Link>
+            ) : (
+              <a href={href} className="truncate">
+                {section.title}
+              </a>
+            )}
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
         <SidebarMenuSub>
-          {section.children!.map((child) => (
-            <SubTopicItem key={child.id} section={child} />
+          {children.map((child) => (
+            <SubTopicItem
+              key={child.id}
+              section={child}
+              pageType={pageType}
+              currentPlanKey={currentPlanKey}
+            />
           ))}
         </SidebarMenuSub>
       </>
@@ -58,9 +91,15 @@ function SubTopicItem({ section }: SubTopicItemProps) {
   return (
     <SidebarMenuSubItem>
       <SidebarMenuSubButton asChild>
-        <a href={`#${sectionAnchor(section.title)}`} className="truncate">
-          {section.title}
-        </a>
+        {isLectureLink ? (
+          <Link href={href} className="truncate">
+            {section.title}
+          </Link>
+        ) : (
+          <a href={href} className="truncate">
+            {section.title}
+          </a>
+        )}
       </SidebarMenuSubButton>
     </SidebarMenuSubItem>
   );
@@ -83,29 +122,18 @@ export function GlobalStudyPlanSidebar() {
   const isDetailPage = planSegment.length > 0;
   const currentPlanKey = isDetailPage ? planSegment : null;
 
-  const data =
-    currentPlanKey && pageType === "lecture"
-      ? tutorialDataMap[currentPlanKey]
-      : currentPlanKey
-        ? studyPlanDataMap[currentPlanKey]
-        : null;
+  // No sidebar on overview, contest, problemset, etc.
+  if (!isDetailPage || !pageType || !currentPlanKey) return null;
 
-  const currentPlanTitle = currentPlanKey
-    ? STUDYPLANS[currentPlanKey as keyof typeof STUDYPLANS] || currentPlanKey
-    : null;
+  const data =
+    pageType === "lecture"
+      ? tutorialDataMap[currentPlanKey]
+      : studyPlanDataMap[currentPlanKey];
+
+  const currentPlanTitle =
+    STUDYPLANS[currentPlanKey as keyof typeof STUDYPLANS] || currentPlanKey;
   const backHref = pageType === "lecture" ? "/lecture" : "/studyplan";
   const backLabel = pageType === "lecture" ? "返回講義列表" : "返回題單列表";
-  const googleTutorialHrefById = new Map(
-    googleInterviewSectionTutorials.map((section) => [
-      section.id,
-      `/lecture/google_interview/${section.slug}`,
-    ]),
-  );
-  const useGoogleTutorialPages =
-    pageType === "lecture" && currentPlanKey === "google_interview";
-
-  // No sidebar on overview, contest, problemset, etc.
-  if (!isDetailPage) return null;
 
   return (
     <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r">
@@ -160,34 +188,61 @@ export function GlobalStudyPlanSidebar() {
                     {section.children && section.children.length > 0 ? (
                       <>
                         <SidebarMenuButton asChild>
-                          <a
-                            href={`#${sectionAnchor(section.title)}`}
-                            className="font-medium"
-                          >
-                            {section.title}
-                          </a>
+                          {pageType === "lecture" && currentPlanKey ? (
+                            <Link
+                              href={getSectionHref(
+                                section,
+                                pageType,
+                                currentPlanKey,
+                              )}
+                              className="font-medium"
+                            >
+                              {section.title}
+                            </Link>
+                          ) : (
+                            <a
+                              href={getSectionHref(
+                                section,
+                                pageType,
+                                currentPlanKey,
+                              )}
+                              className="font-medium"
+                            >
+                              {section.title}
+                            </a>
+                          )}
                         </SidebarMenuButton>
                         <SidebarMenuSub>
                           {section.children.map((child) => (
-                            <SubTopicItem key={child.id} section={child} />
+                            <SubTopicItem
+                              key={child.id}
+                              section={child}
+                              pageType={pageType}
+                              currentPlanKey={currentPlanKey}
+                            />
                           ))}
                         </SidebarMenuSub>
                       </>
                     ) : (
                       <SidebarMenuButton asChild>
-                        {useGoogleTutorialPages ? (
+                        {pageType === "lecture" && currentPlanKey ? (
                           <Link
-                            href={
-                              googleTutorialHrefById.get(section.id) ??
-                              `/lecture/google_interview/${sectionAnchor(section.title)}`
-                            }
+                            href={getSectionHref(
+                              section,
+                              pageType,
+                              currentPlanKey,
+                            )}
                             className="font-medium"
                           >
                             {section.title}
                           </Link>
                         ) : (
                           <a
-                            href={`#${sectionAnchor(section.title)}`}
+                            href={getSectionHref(
+                              section,
+                              pageType,
+                              currentPlanKey,
+                            )}
                             className="font-medium"
                           >
                             {section.title}

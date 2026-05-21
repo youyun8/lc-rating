@@ -27,7 +27,7 @@ interface TutorialSectionContainerProps {
   section: TutorialData.Section;
   /** Lookup of example problems by shared section id (sourced from the matching study plan). */
   examplesBySectionId?: Map<number, StudyPlanData.Item[]>;
-  detailHref?: string;
+  planKey?: string;
   level?: number;
   parentImageUrls?: Set<string>;
 }
@@ -36,13 +36,16 @@ const TutorialSectionContainer = React.memo(
   ({
     section,
     examplesBySectionId,
-    detailHref,
+    planKey,
     level = 0,
     parentImageUrls = new Set(),
   }: TutorialSectionContainerProps) => {
     const examples = examplesBySectionId?.get(section.id) ?? [];
     const childCount = section.children?.length ?? 0;
     const totalSections = countSections(section);
+    const detailHref = planKey
+      ? `/lecture/${planKey}/${sectionAnchor(section.title)}`
+      : undefined;
 
     const rawSummary = section.summary ?? "";
     const dedupedSummary = useMemo(
@@ -97,7 +100,7 @@ const TutorialSectionContainer = React.memo(
           >
             {section.title}
           </CardTitle>
-          {detailHref && level === 0 && (
+          {detailHref && (
             <Link
               href={detailHref}
               className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
@@ -146,7 +149,7 @@ const TutorialSectionContainer = React.memo(
                       key={child.id}
                       section={child}
                       examplesBySectionId={examplesBySectionId}
-                      detailHref={detailHref}
+                      planKey={planKey}
                       level={level + 1}
                       parentImageUrls={mergedImageUrls}
                     />
