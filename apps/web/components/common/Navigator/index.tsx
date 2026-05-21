@@ -9,15 +9,15 @@ import { GithubBadge } from "./GithubBadge";
 import SettingsPanel from "./SettingsPanel";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 
-/** Only shows the sidebar toggle on study-plan and tutorial detail pages. */
+/** Only shows the sidebar toggle on study-plan and lecture detail pages. */
 function PlanSidebarTrigger() {
   const pathname = usePathname() ?? "";
   const { isMobile, open } = useSidebar();
   const isDetailPage =
     (pathname.startsWith("/studyplan/") &&
       (pathname.replace("/studyplan/", "").split("/")[0] ?? "").length > 0) ||
-    (pathname.startsWith("/tutorial/") &&
-      (pathname.replace("/tutorial/", "").split("/")[0] ?? "").length > 0);
+    (pathname.startsWith("/lecture/") &&
+      (pathname.replace("/lecture/", "").split("/")[0] ?? "").length > 0);
 
   if (!isDetailPage) return null;
 
@@ -47,7 +47,7 @@ const navLinks = [
   {
     href: ROUTERS.tutorials.href,
     label: ROUTERS.tutorials.title,
-    match: "/tutorial",
+    match: "/lecture",
   },
 ];
 

@@ -66,14 +66,14 @@ function SubTopicItem({ section }: SubTopicItemProps) {
   );
 }
 
-/** Renders a chapter sidebar on study-plan and tutorial detail pages. */
+/** Renders a chapter sidebar on study-plan and lecture detail pages. */
 export function GlobalStudyPlanSidebar() {
   const rawPathname = usePathname();
   const pathname = rawPathname ?? "";
   const { isMobile, open, openMobile, setOpen, setOpenMobile } = useSidebar();
 
-  const pageType = pathname.startsWith("/tutorial/")
-    ? "tutorial"
+  const pageType = pathname.startsWith("/lecture/")
+    ? "lecture"
     : pathname.startsWith("/studyplan/")
       ? "studyplan"
       : null;
@@ -84,7 +84,7 @@ export function GlobalStudyPlanSidebar() {
   const currentPlanKey = isDetailPage ? planSegment : null;
 
   const data =
-    currentPlanKey && pageType === "tutorial"
+    currentPlanKey && pageType === "lecture"
       ? tutorialDataMap[currentPlanKey]
       : currentPlanKey
         ? studyPlanDataMap[currentPlanKey]
@@ -93,16 +93,16 @@ export function GlobalStudyPlanSidebar() {
   const currentPlanTitle = currentPlanKey
     ? STUDYPLANS[currentPlanKey as keyof typeof STUDYPLANS] || currentPlanKey
     : null;
-  const backHref = pageType === "tutorial" ? "/tutorial" : "/studyplan";
-  const backLabel = pageType === "tutorial" ? "返回教學列表" : "返回題單列表";
+  const backHref = pageType === "lecture" ? "/lecture" : "/studyplan";
+  const backLabel = pageType === "lecture" ? "返回講義列表" : "返回題單列表";
   const googleTutorialHrefById = new Map(
     googleInterviewSectionTutorials.map((section) => [
       section.id,
-      `/tutorial/google_interview/${section.slug}`,
+      `/lecture/google_interview/${section.slug}`,
     ]),
   );
   const useGoogleTutorialPages =
-    pageType === "tutorial" && currentPlanKey === "google_interview";
+    pageType === "lecture" && currentPlanKey === "google_interview";
 
   // No sidebar on overview, contest, problemset, etc.
   if (!isDetailPage) return null;
@@ -179,7 +179,7 @@ export function GlobalStudyPlanSidebar() {
                           <Link
                             href={
                               googleTutorialHrefById.get(section.id) ??
-                              `/tutorial/google_interview/${sectionAnchor(section.title)}`
+                              `/lecture/google_interview/${sectionAnchor(section.title)}`
                             }
                             className="font-medium"
                           >

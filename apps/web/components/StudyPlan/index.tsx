@@ -123,7 +123,9 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
   const topLevelImageUrls = useMemo(
     () =>
-      tutorial?.summary ? extractImageUrls(tutorial.summary) : new Set<string>(),
+      tutorial?.summary
+        ? extractImageUrls(tutorial.summary)
+        : new Set<string>(),
     [tutorial?.summary],
   );
 
@@ -307,7 +309,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
         <div className="flex flex-col gap-8">
           {tutorial && (
             <Link
-              href={`/tutorial/${plan}`}
+              href={`/lecture/${plan}`}
               className="group block overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
             >
               <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-5">
@@ -320,10 +322,10 @@ function StudyPlan({ plan }: StudyPlanProps) {
                   </div>
                   <div className="min-w-0">
                     <h2 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
-                      想看觀念說明？前往對應教學
+                      想看觀念說明？前往對應講義
                     </h2>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      此頁專注題目練習；題型概念、模板與例題請至教學頁閱讀。
+                      此頁專注題目練習；題型概念、模板與例題請至講義頁閱讀。
                     </p>
                   </div>
                 </div>
@@ -331,7 +333,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
                   className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-border/60 bg-background px-3 py-1.5 text-sm font-medium transition-colors group-hover:border-primary/40 sm:self-auto"
                   style={{ color: theme.accent }}
                 >
-                  閱讀教學
+                  閱讀講義
                   <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
               </div>

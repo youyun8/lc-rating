@@ -103,7 +103,7 @@ const TutorialSectionContainer = React.memo(
               className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             >
               <BookOpen className="h-3.5 w-3.5" />
-              閱讀完整教學
+              閱讀完整講義
             </Link>
           )}
           {dedupedSummary ? (

@@ -10,7 +10,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const BASE_PATH = "/lc-rating";
-const KNOWN_ROUTES = ["/contest", "/problemset", "/search", "/studyplan"];
+const KNOWN_ROUTES = [
+  "/contest",
+  "/problemset",
+  "/search",
+  "/studyplan",
+  "/lecture",
+];
 
 const redirectScript = `
 <script>

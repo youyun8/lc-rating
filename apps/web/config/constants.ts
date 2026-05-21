@@ -81,12 +81,12 @@ export const ROUTERS = {
     ),
   },
   tutorials: {
-    title: "教學",
-    href: `/tutorial`,
+    title: "講義",
+    href: `/lecture`,
     children: Object.entries(STUDYPLANS).reduce(
       (acc: { title: string; href: string }[], [key, title]) => [
         ...acc,
-        { title, href: `/tutorial/${key}` },
+        { title, href: `/lecture/${key}` },
       ],
       [],
     ),

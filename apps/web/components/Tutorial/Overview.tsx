@@ -115,7 +115,7 @@ function getTutorialMatches(
   };
 
   if (normalizedTitle.toLowerCase().includes(normalizedQuery)) {
-    addMatch({ kind: "plan", label: "教學", text: normalizedTitle });
+    addMatch({ kind: "plan", label: "講義", text: normalizedTitle });
   }
 
   const visitSection = (
@@ -168,14 +168,14 @@ function TutorialCard({
   if (!data) return null;
 
   const getMatchHref = (match: TutorialSearchMatch): string => {
-    const base = `/tutorial/${planKey}`;
+    const base = `/lecture/${planKey}`;
     if (match.kind === "plan") return base;
     if (match.kind === "section") return `${base}#${sectionAnchor(match.text)}`;
     return base;
   };
 
   return (
-    <Link href={`/tutorial/${planKey}`} className="block h-full">
+    <Link href={`/lecture/${planKey}`} className="block h-full">
       <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         <div
           className="relative h-28 overflow-hidden sm:h-32"
@@ -271,7 +271,7 @@ function TutorialCard({
             className="mt-auto inline-flex items-center pt-4 text-sm font-medium transition-colors"
             style={{ color: theme.accent }}
           >
-            閱讀教學
+            閱讀講義
             <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </div>
         </div>
@@ -326,7 +326,7 @@ function TutorialOverview() {
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl space-y-2">
                 <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  教學
+                  講義
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                   依主題整理的演算法筆記與模板，專注於學習與複習；題目練習請至對應題單。
@@ -344,7 +344,7 @@ function TutorialOverview() {
               <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   <LayoutGrid className="h-4 w-4" />
-                  教學主題
+                  講義主題
                 </div>
                 <p className="mt-2 text-2xl font-semibold text-foreground">
                   {totalPlans}
@@ -391,7 +391,7 @@ function TutorialOverview() {
                   搜尋
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  以教學主題或章節名稱搜尋
+                  以講義主題或章節名稱搜尋
                 </p>
               </div>
               <div className="w-full lg:max-w-sm xl:max-w-md">
@@ -399,7 +399,7 @@ function TutorialOverview() {
                   <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     type="search"
-                    placeholder="搜尋教學主題或章節..."
+                    placeholder="搜尋講義主題或章節..."
                     className="h-11 rounded-xl border-border/60 bg-background pl-9 pr-4 text-sm shadow-none transition-colors hover:border-primary/30 focus-visible:ring-2"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -415,7 +415,7 @@ function TutorialOverview() {
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-foreground">
-              教學列表
+              講義列表
             </h2>
             <p className="text-sm text-muted-foreground">
               挑選一個主題閱讀筆記，並點擊章節跳轉至詳細內容。
@@ -426,7 +426,7 @@ function TutorialOverview() {
           <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border/70 bg-muted/20 px-6 py-16 text-center text-muted-foreground">
             <Search className="mb-4 h-12 w-12 opacity-30" />
             <p className="text-lg font-medium text-foreground">
-              沒有找到匹配的教學
+              沒有找到匹配的講義
             </p>
             <p className="mt-1 text-sm">試試其他搜尋關鍵字。</p>
           </div>

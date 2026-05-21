@@ -5,7 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { BASE_PATH } from "@/config/constants";
 
 // List of known routes that should have trailing slashes
-const KNOWN_ROUTES = ["/contest", "/problemset", "/search", "/studyplan"];
+const KNOWN_ROUTES = [
+  "/contest",
+  "/problemset",
+  "/search",
+  "/studyplan",
+  "/lecture",
+];
 
 export default function NotFound() {
   const router = useRouter();

@@ -3,7 +3,6 @@ const studyPlanCourseMaterials: Record<string, string> = {
     "**競程課程講義：Google 面試題的競程化整理**",
     "這份題單橫跨圖、DP、字串、資料結構、系統 API 與資源限制。練習時建議把每題先歸類成一個已知 pattern，再補上面試需要的溝通：狀態定義、正確性、不變式、複雜度與邊界條件。",
     "**常見 Pattern**：BFS / Dijkstra、拓撲排序、樹形 DP、KMP / Trie / hash、heap / set / Fenwick、二分答案、滑動視窗、bitmask BFS、換根 DP。",
-    "```cpp\n// Interview checklist for algorithmic problems.\nstruct Checklist {\n    string state;        // what information determines the future?\n    string transition;   // how do we move to the next state?\n    string invariant;    // what is always true after each step?\n    string complexity;   // can it pass the input limits?\n};\n```",
   ].join("\n\n"),
 
   rating_2100: [
@@ -20,7 +19,7 @@ const studyPlanCourseMaterials: Record<string, string> = {
     "**Pattern 1：lower_bound / upper_bound**\n\n訊號：排序陣列中找第一個 `>= x`、第一個 `> x`、最後一個 `< x`。不變式是答案始終在 `[lo, hi)`。",
     "```cpp\nint firstGreaterEqual(vector<int>& a, int x) {\n    int lo = 0, hi = a.size();\n    while (lo < hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (a[mid] >= x) hi = mid;\n        else lo = mid + 1;\n    }\n    return lo;\n}\n```",
     "**Pattern 2：二分答案**\n\n訊號：問「最小可行值」或「最大可行值」。必須先定義單調 predicate。例題：最小速度、最小最大分段和、最大最小距離。",
-    "```cpp\nlong long minimizeLargestSum(vector<int>& nums, int k) {\n    auto ok = [&](long long limit) {\n        int groups = 1;\n        long long sum = 0;\n        for (int x : nums) {\n            if (x > limit) return false;\n            if (sum + x > limit) groups++, sum = 0;\n            sum += x;\n        }\n        return groups <= k;\n    };\n    long long lo = 0, hi = accumulate(nums.begin(), nums.end(), 0LL);\n    while (lo < hi) {\n        long long mid = lo + (hi - lo) / 2;\n        if (ok(mid)) hi = mid;\n        else lo = mid + 1;\n    }\n    return lo;\n}\n```",
+    "```cpp\nlong long minimizeLargestSum(vector<int>& nums, int k) {\n    auto canSplit = [&nums, k](long long limit) {\n        int groups = 1;\n        long long current_sum = 0;\n        for (int x : nums) {\n            if (x > limit) return false;\n            if (current_sum + x > limit) {\n                groups++;\n                current_sum = 0;\n            }\n            current_sum += x;\n        }\n        return groups <= k;\n    };\n    long long left = 0, right = accumulate(nums.begin(), nums.end(), 0LL);\n    while (left < right) {\n        long long mid = left + (right - left) / 2;\n        if (canSplit(mid)) right = mid;\n        else left = mid + 1;\n    }\n    return left;\n}\n```",
     "**Pattern 3：實數二分**\n\n訊號：答案是浮點數或幾何長度。固定迭代 60 到 100 次，比用 epsilon 當 while 條件更穩。",
   ].join("\n\n"),
 
@@ -39,16 +38,16 @@ const studyPlanCourseMaterials: Record<string, string> = {
     "**Pattern 1：Stack / monotonic stack**\n\n訊號：找左/右第一個更大、更小，或用每個元素當最小值/最大值算貢獻。",
     "**Pattern 2：Heap**\n\n訊號：動態取最大/最小、Top-K、合併 k 個有序序列。若元素會失效，用 lazy deletion。",
     "**Pattern 3：Trie**\n\n訊號：字串前綴、多字典匹配、最大 XOR。二進位 Trie 可逐 bit 決策。",
-    "```cpp\nstruct BinaryTrie {\n    vector<array<int, 2>> child{{{-1, -1}}};\n    void insert(int x) {\n        int u = 0;\n        for (int b = 30; b >= 0; --b) {\n            int c = (x >> b) & 1;\n            if (child[u][c] == -1) child[u][c] = child.size(), child.push_back({-1, -1});\n            u = child[u][c];\n        }\n    }\n};\n```",
+    "```cpp\nstruct BinaryTrie {\n    vector<array<int, 2>> children{{{-1, -1}}};\n\n    void insert(int x) {\n        int node = 0;\n        for (int bit = 30; bit >= 0; --bit) {\n            int direction = (x >> bit) & 1;\n            if (children[node][direction] == -1) {\n                children[node][direction] = children.size();\n                children.push_back({-1, -1});\n            }\n            node = children[node][direction];\n        }\n    }\n};\n```",
     "**Pattern 4：Fenwick / Segment Tree**\n\nFenwick 適合單點加、前綴和；Segment tree 適合區間 query、區間 update、維護 max/min/gcd 等可合併資訊。",
-    "```cpp\nclass Fenwick {\n    vector<long long> bit;\npublic:\n    Fenwick(int n) : bit(n + 1) {}\n    void add(int i, long long v) { for (++i; i < (int)bit.size(); i += i & -i) bit[i] += v; }\n    long long sum(int i) { long long s = 0; for (++i; i > 0; i -= i & -i) s += bit[i]; return s; }\n};\n```",
+    "```cpp\nclass Fenwick {\n    vector<long long> bit_;\n\npublic:\n    Fenwick(int n) : bit_(n + 1) {}\n\n    void add(int index, long long delta) {\n        for (++index; index < (int)bit_.size(); index += index & -index) {\n            bit_[index] += delta;\n        }\n    }\n\n    long long prefixSum(int index) {\n        long long sum = 0;\n        for (++index; index > 0; index -= index & -index) {\n            sum += bit_[index];\n        }\n        return sum;\n    }\n};\n```",
   ].join("\n\n"),
 
   dynamic_programming: [
     "**競程課程講義：動態規劃 Pattern**",
     "**Pattern 1：線性 DP**\n\n狀態按位置推進，轉移只依賴前面。先定義 `dp[i]` 的語意，再寫 take/skip 或 split。",
     "**Pattern 2：背包 DP**\n\n0/1 背包倒序枚舉容量，完全背包正序枚舉容量。",
-    "```cpp\nint zeroOneKnapsack(vector<int>& w, vector<int>& val, int cap) {\n    vector<int> dp(cap + 1);\n    for (int i = 0; i < (int)w.size(); ++i) {\n        for (int c = cap; c >= w[i]; --c) {\n            dp[c] = max(dp[c], dp[c - w[i]] + val[i]);\n        }\n    }\n    return dp[cap];\n}\n```",
+    "```cpp\nint zeroOneKnapsack(vector<int>& weights, vector<int>& values, int capacity) {\n    vector<int> dp(capacity + 1);\n    for (int i = 0; i < (int)weights.size(); ++i) {\n        for (int cap = capacity; cap >= weights[i]; --cap) {\n            dp[cap] = max(dp[cap], dp[cap - weights[i]] + values[i]);\n        }\n    }\n    return dp[capacity];\n}\n```",
     "**Pattern 3：區間 DP**\n\n訊號：合併區間、刪除區間、括號/回文。枚舉長度，再枚舉左端點和切分點。",
     "```cpp\nfor (int len = 2; len <= n; ++len) {\n    for (int l = 0; l + len <= n; ++l) {\n        int r = l + len - 1;\n        for (int k = l; k < r; ++k) {\n            dp[l][r] = min(dp[l][r], dp[l][k] + dp[k + 1][r] + cost(l, r));\n        }\n    }\n}\n```",
     "**Pattern 4：狀壓 DP**\n\n訊號：集合大小小。典型狀態 `dp[mask][last]` 表示已選集合 mask 且最後在 last。",
@@ -90,8 +89,8 @@ const studyPlanCourseMaterials: Record<string, string> = {
   math: [
     "**競程課程講義：數學題 Pattern**",
     "**Pattern 1：GCD / LCM / Euclid**\n\n整除、週期、最大公因數。注意 `lcm(a,b)=a/gcd(a,b)*b` 避免溢位。",
-    "```cpp\nlong long gcdll(long long a, long long b) {\n    while (b) tie(a, b) = pair(b, a % b);\n    return a;\n}\n```",
-    "**Pattern 2：快速冪與模逆元**\n\n訊號：大指數、組合數取模。若 MOD 是質數，`inv(x)=x^(MOD-2)`。",
+    "```cpp\nlong long gcdLl(long long a, long long b) {\n    while (b) tie(a, b) = pair(b, a % b);\n    return a;\n}\n```",
+    "**Pattern 2：快速冪與模逆元**\n\n訊號：大指數、組合數取模。若 mod 是質數，`inv(x)=x^(mod-2)`。",
     "```cpp\nlong long modPow(long long a, long long e, long long mod) {\n    long long r = 1;\n    while (e) {\n        if (e & 1) r = r * a % mod;\n        a = a * a % mod;\n        e >>= 1;\n    }\n    return r;\n}\n```",
     "**Pattern 3：篩法**\n\n求質數、最小質因數、分解多個數。多次 factor query 時先預處理 SPF。",
     "**Pattern 4：組合計數**\n\n先判斷是排列、組合、隔板法、容斥還是 DP 計數。取模時預處理 factorial 和 inverse factorial。",
@@ -111,10 +110,10 @@ const studyPlanCourseMaterials: Record<string, string> = {
   sliding_window: [
     "**競程課程講義：滑動視窗與雙指標**",
     "**Pattern 1：定長視窗**\n\n窗口大小固定 k，每次右進一個、左出一個，更新 sum/count/max。",
-    "```cpp\nint maxSumFixedK(vector<int>& nums, int k) {\n    int sum = 0, ans = INT_MIN;\n    for (int i = 0; i < (int)nums.size(); ++i) {\n        sum += nums[i];\n        if (i >= k) sum -= nums[i - k];\n        if (i >= k - 1) ans = max(ans, sum);\n    }\n    return ans;\n}\n```",
+    "```cpp\nint maxSumFixedK(vector<int>& nums, int k) {\n    int window_sum = 0, answer = INT_MIN;\n    for (int i = 0; i < (int)nums.size(); ++i) {\n        window_sum += nums[i];\n        if (i >= k) window_sum -= nums[i - k];\n        if (i >= k - 1) answer = max(answer, window_sum);\n    }\n    return answer;\n}\n```",
     "**Pattern 2：不定長視窗**\n\n右端擴張直到不合法，左端收縮恢復合法。適用於條件能局部維護的連續子陣列/子字串。",
     "**Pattern 3：恰好 K 轉成 atMost(K) - atMost(K-1)**\n\n計數型問題常用。例題：恰好 K 個不同整數的子陣列。",
-    "```cpp\nlong long atMostKDistinct(vector<int>& nums, int k) {\n    unordered_map<int, int> cnt;\n    long long ans = 0;\n    int left = 0;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n        if (cnt[nums[right]]++ == 0) k--;\n        while (k < 0) if (--cnt[nums[left++]] == 0) k++;\n        ans += right - left + 1;\n    }\n    return ans;\n}\n```",
+    "```cpp\nlong long atMostKDistinct(vector<int>& nums, int k) {\n    unordered_map<int, int> count;\n    long long answer = 0;\n    int left = 0;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n        if (count[nums[right]]++ == 0) k--;\n        while (k < 0) {\n            if (--count[nums[left++]] == 0) k++;\n        }\n        answer += right - left + 1;\n    }\n    return answer;\n}\n```",
     "**Pattern 4：雙序列雙指標**\n\n兩個排序序列合併、求交集、最小差值。指標移動依當前較小元素決定。",
   ].join("\n\n"),
 
@@ -143,10 +142,9 @@ const studyPlanCourseMaterials: Record<string, string> = {
 };
 
 const beginnerLecturePreface = [
-  "**如何像競程課學生一樣讀這份講義**",
-  "每個 pattern 都請照同一個順序理解：先看題目訊號，再定義狀態或資料結構，接著寫出維護的不變式，最後才背 C++ 模板。初學者最常犯的錯是先套模板，但不知道模板保證了什麼；面試和競賽真正要練的是「看到限制後能選對模型」。",
+  "**講義閱讀方式**",
+  "每個 pattern 都照同一個順序理解：先看題目訊號，再定義狀態或資料結構，接著寫出維護的不變式，最後再整理 C++ 模板。練習重點是理解模板保證了什麼，並且能根據限制選擇合適模型。",
   "**課堂解題流程**：\n1. 讀限制：`n`、值域、邊數、是否多次查詢。\n2. 找訊號：連續區間、排序、集合狀態、圖可達、最小最大、歷史版本。\n3. 選 pattern：把題目映射到已知模型。\n4. 寫不變式：例如 BFS 第一次出隊最短、單調棧內元素保持遞增、Fenwick 維護前綴和。\n5. 驗證複雜度：先算狀態數，再算每個狀態的轉移成本。",
-  "```cpp\n// A compact checklist to write before coding.\nstruct PatternChecklist {\n    string signal;      // What words or constraints suggest this pattern?\n    string state;       // What must be stored to make future decisions?\n    string invariant;   // What remains true after each operation?\n    string transition;  // How does one step update the state?\n    string complexity;  // Why does it fit the constraints?\n};\n```",
 ].join("\n\n");
 
 const beginnerPracticeGuide = [

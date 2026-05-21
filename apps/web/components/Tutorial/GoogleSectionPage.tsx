@@ -40,14 +40,14 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-6 sm:px-6 md:py-8 xl:px-8">
           <nav className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
             <Link
-              href="/tutorial"
+              href="/lecture"
               className="transition-colors hover:text-foreground"
             >
-              教學
+              講義
             </Link>
             <ChevronRight className="h-3.5 w-3.5" />
             <Link
-              href="/tutorial/google_interview"
+              href="/lecture/google_interview"
               className="transition-colors hover:text-foreground"
             >
               Google 面試準備
@@ -60,7 +60,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
             <div className="max-w-3xl">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
                 <BookOpen className="h-3.5 w-3.5" />
-                Google 面試章節教學
+                Google 面試章節講義
               </div>
               <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
                 {section.title}
@@ -71,7 +71,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
             </div>
 
             <Button asChild variant="outline" className="w-fit">
-              <Link href="/tutorial/google_interview">
+              <Link href="/lecture/google_interview">
                 <ArrowLeft className="h-4 w-4" />
                 返回章節列表
               </Link>
@@ -84,7 +84,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
         <article className="min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
           <div className="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-6">
             <h2 className="text-lg font-semibold tracking-tight text-foreground">
-              完整教學
+              完整講義
             </h2>
           </div>
           <div className="px-4 py-5 sm:px-6 md:py-7">
@@ -103,7 +103,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
             {googleInterviewSectionTutorials.map((item) => (
               <Link
                 key={item.id}
-                href={`/tutorial/google_interview/${item.slug}`}
+                href={`/lecture/google_interview/${item.slug}`}
                 className={cn(
                   "rounded-xl px-3 py-2 text-sm transition-colors",
                   item.id === section.id
@@ -120,7 +120,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
         <nav className="flex flex-col gap-3 md:col-span-2 sm:flex-row sm:items-center sm:justify-between">
           {previous ? (
             <Button asChild variant="outline" className="justify-start">
-              <Link href={`/tutorial/google_interview/${previous.slug}`}>
+              <Link href={`/lecture/google_interview/${previous.slug}`}>
                 <ArrowLeft className="h-4 w-4" />
                 {previous.title}
               </Link>
@@ -134,7 +134,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
               variant="outline"
               className="justify-start sm:justify-end"
             >
-              <Link href={`/tutorial/google_interview/${next.slug}`}>
+              <Link href={`/lecture/google_interview/${next.slug}`}>
                 {next.title}
                 <ArrowRight className="h-4 w-4" />
               </Link>

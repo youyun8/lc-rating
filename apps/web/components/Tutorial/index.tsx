@@ -195,10 +195,10 @@ function Tutorial({ plan }: TutorialProps) {
             <div className="relative p-4 sm:p-6 md:p-8 xl:p-10">
               <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-sm text-white/70">
                 <Link
-                  href="/tutorial"
+                  href="/lecture"
                   className="transition-colors hover:text-white"
                 >
-                  教學
+                  講義
                 </Link>
                 <ChevronRight className="h-3.5 w-3.5" />
                 <span className="font-medium text-white">{planTitle}</span>
@@ -278,10 +278,10 @@ function Tutorial({ plan }: TutorialProps) {
 
                 <div className="flex flex-wrap gap-2 text-xs text-white/75">
                   <Link
-                    href="/tutorial"
+                    href="/lecture"
                     className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
                   >
-                    返回教學列表
+                    返回講義列表
                   </Link>
                   <Link
                     href={`/studyplan/${plan}`}
@@ -312,7 +312,7 @@ function Tutorial({ plan }: TutorialProps) {
         <div className="flex flex-col gap-8">
           {tutorial?.summary && (
             <TutorialMarkdownPanel
-              title="教學總覽"
+              title="講義總覽"
               description="先通讀本頁概要，再深入各章節複習重點與模板。"
               badge="章節導讀"
               content={tutorial.summary}
@@ -387,7 +387,7 @@ function Tutorial({ plan }: TutorialProps) {
               examplesBySectionId={examplesBySectionId}
               detailHref={
                 plan === "google_interview"
-                  ? `/tutorial/google_interview/${sectionAnchor(section.title)}`
+                  ? `/lecture/google_interview/${sectionAnchor(section.title)}`
                   : undefined
               }
               parentImageUrls={topLevelImageUrls}
