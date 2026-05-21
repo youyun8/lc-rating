@@ -24,8 +24,8 @@ import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
-import { getStudyPlanCourseMaterial } from "@/data/studyPlanCourseMaterials";
 import { TutorialMarkdownPanel } from "./MarkdownPanel";
+import { CourseMaterials } from "./CourseMaterials";
 
 const EXAMPLES_PER_SECTION = 5;
 const EXAMPLE_MIN_RATING = 1700;
@@ -103,7 +103,6 @@ function Tutorial({ plan }: TutorialProps) {
     STUDYPLANS[plan as keyof typeof STUDYPLANS] ?? tutorial?.title ?? plan;
   const Icon = studyPlanIcons[plan] ?? BookOpen;
   const theme = studyPlanThemes[plan] ?? defaultTheme;
-  const courseMaterial = getStudyPlanCourseMaterial(plan);
 
   const examplesBySectionId = useMemo(() => {
     const map = new Map<number, StudyPlanData.Item[]>();
@@ -320,14 +319,7 @@ function Tutorial({ plan }: TutorialProps) {
             />
           )}
 
-          {courseMaterial && (
-            <TutorialMarkdownPanel
-              title="競程課程講義"
-              description="按常見演算法 pattern 整理，包含適用訊號、模板與 C++ 範例。"
-              badge="Pattern notes"
-              content={courseMaterial}
-            />
-          )}
+          <CourseMaterials plan={plan} />
 
           {tutorial && (
             <section className="rounded-2xl border border-border/60 bg-muted/20 p-4 shadow-sm sm:p-5">

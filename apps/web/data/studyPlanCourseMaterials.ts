@@ -142,6 +142,26 @@ const studyPlanCourseMaterials: Record<string, string> = {
   ].join("\n\n"),
 };
 
+const beginnerLecturePreface = [
+  "**如何像競程課學生一樣讀這份講義**",
+  "每個 pattern 都請照同一個順序理解：先看題目訊號，再定義狀態或資料結構，接著寫出維護的不變式，最後才背 C++ 模板。初學者最常犯的錯是先套模板，但不知道模板保證了什麼；面試和競賽真正要練的是「看到限制後能選對模型」。",
+  "**課堂解題流程**：\n1. 讀限制：`n`、值域、邊數、是否多次查詢。\n2. 找訊號：連續區間、排序、集合狀態、圖可達、最小最大、歷史版本。\n3. 選 pattern：把題目映射到已知模型。\n4. 寫不變式：例如 BFS 第一次出隊最短、單調棧內元素保持遞增、Fenwick 維護前綴和。\n5. 驗證複雜度：先算狀態數，再算每個狀態的轉移成本。",
+  "```cpp\n// A compact checklist to write before coding.\nstruct PatternChecklist {\n    string signal;      // What words or constraints suggest this pattern?\n    string state;       // What must be stored to make future decisions?\n    string invariant;   // What remains true after each operation?\n    string transition;  // How does one step update the state?\n    string complexity;  // Why does it fit the constraints?\n};\n```",
+].join("\n\n");
+
+const beginnerPracticeGuide = [
+  "**課後練習方式**",
+  "同一個 pattern 至少連續練三題：第一題照模板寫，第二題自己重寫並解釋不變式，第三題改變一個條件，例如把等權邊改成 0/1 權、把一次查詢改成多次查詢、把靜態資料改成動態更新。能處理這些變形，才代表你真正掌握 pattern。",
+  "**複盤問題**：\n- 我為什麼選這個 pattern，而不是相近的另一個？\n- 我的狀態是否包含所有會影響未來的資訊？\n- 哪一行程式維護了核心不變式？\n- 若輸入限制放大 10 倍，瓶頸在哪裡？",
+].join("\n\n");
+
 export function getStudyPlanCourseMaterial(plan: string) {
-  return studyPlanCourseMaterials[plan];
+  const material = studyPlanCourseMaterials[plan];
+  if (!material) {
+    return undefined;
+  }
+
+  return [beginnerLecturePreface, material, beginnerPracticeGuide].join(
+    "\n\n---\n\n",
+  );
 }
