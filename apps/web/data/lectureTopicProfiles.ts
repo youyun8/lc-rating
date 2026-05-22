@@ -42,10 +42,29 @@ function stripNumericPrefix(title: string) {
   return title.replace(/^\d+(?:\.\d+)*\.?\s*/, "").trim();
 }
 
+function getRating2100ProfileKey(titleHaystack: string) {
+  if (titleHaystack.includes("二分")) return "binary-answer";
+  if (titleHaystack.includes("位元")) return "bitwise-contribution";
+  if (titleHaystack.includes("資料結構")) {
+    return "rating-2100-data-structure";
+  }
+  if (titleHaystack.includes("動態規劃")) return "rating-2100-dp";
+  if (titleHaystack.includes("網格")) return "grid-state-bfs";
+  if (titleHaystack.includes("圖論")) return "graph-bfs-dfs";
+  if (titleHaystack.includes("貪心")) return "greedy-general";
+  if (titleHaystack.includes("數學")) return "math-number-theory";
+  if (titleHaystack.includes("單調")) return "monotonic-stack";
+  if (titleHaystack.includes("滑動")) return "sliding-window";
+  if (titleHaystack.includes("字串")) return "string-tools";
+  if (titleHaystack.includes("樹")) return "tree-linked-binary";
+  return undefined;
+}
+
 function scoreProfile(
   profile: LectureTopicProfile,
   planKey: string,
   haystack: string,
+  titleHaystack: string,
 ) {
   if (profile.planKeys && !profile.planKeys.includes(planKey)) {
     return -1;
@@ -54,10 +73,13 @@ function scoreProfile(
   return profile.keywords.reduce(
     (score, keyword) => {
       const normalized_keyword = normalize(keyword);
+      const title_score = titleHaystack.includes(normalized_keyword)
+        ? Math.max(4, normalized_keyword.length * 2)
+        : 0;
       if (haystack.includes(normalized_keyword)) {
-        return score + Math.max(2, normalized_keyword.length);
+        return score + title_score + Math.max(2, normalized_keyword.length);
       }
-      return score;
+      return score + title_score;
     },
     profile.planKeys?.includes(planKey) ? 2 : 0,
   );
@@ -86,11 +108,29 @@ export function findLectureTopicProfile({
       example?.slug ?? "",
     ].join(" "),
   );
+  const titleHaystack = normalize(
+    [section.title, studySection?.title ?? "", pathTitles.at(-1) ?? ""].join(
+      " ",
+    ),
+  );
+
+  const rating_2100_profile_key =
+    planKey === "rating_2100"
+      ? getRating2100ProfileKey(titleHaystack)
+      : undefined;
+  const rating_2100_profile = rating_2100_profile_key
+    ? lectureTopicProfiles.find(
+        (profile) => profile.key === rating_2100_profile_key,
+      )
+    : undefined;
+  if (rating_2100_profile) {
+    return rating_2100_profile;
+  }
 
   let best_profile = lectureTopicProfiles[0]!;
   let best_score = -1;
   for (const profile of lectureTopicProfiles) {
-    const score = scoreProfile(profile, planKey, haystack);
+    const score = scoreProfile(profile, planKey, haystack, titleHaystack);
     if (score > best_score) {
       best_score = score;
       best_profile = profile;
@@ -313,6 +353,118 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity: "通常把 `O(n^2)` 降成 `O(n)` 或 `O(n log n)`。",
     code: "```cpp\nclass Solution {\npublic:\n    long long maxPairScore(vector<int>& nums) {\n        long long best_left = LLONG_MIN;\n        long long answer = LLONG_MIN;\n        for (int right = 0; right < (int)nums.size(); ++right) {\n            if (best_left != LLONG_MIN) {\n                answer = max(answer, best_left + nums[right] - right);\n            }\n            best_left = max(best_left, 1LL * nums[right] + right);\n        }\n        return answer;\n    }\n};\n```",
+  },
+  {
+    key: "rating-2100-data-structure",
+    planKeys: ["rating_2100"],
+    keywords: ["資料結構", "離線", "查詢", "排名", "前綴計數"],
+    modelProblem:
+      "給定一批查詢或一串掃描事件，請選擇能維護候選集合、前綴計數、區間資訊或動態排名的資料結構，讓每次更新與查詢都不必線性重掃。",
+    signals: [
+      "每個位置要查歷史資料中有多少候選符合門檻",
+      "查詢可以按門檻排序後離線處理",
+      "需要動態取最大/最小、前驅/後繼或前綴排名",
+    ],
+    invariants: [
+      "資料結構中只保存目前掃描順序下已經合法的候選。",
+      "查詢答案只由資料結構的當前內容推出，不回頭重算已處理資料。",
+      "若使用離散化，原始大小關係必須在壓縮後保持不變。",
+    ],
+    derivation: [
+      "先把查詢條件整理成一個門檻或一個可排序事件。",
+      "決定掃描順序，讓候選只會被加入一次或刪除一次。",
+      "依查詢需求選 Fenwick、heap、set、segment tree 或 DSU。",
+      "每次回答查詢前，確認資料結構內的候選剛好是合法範圍。",
+    ],
+    patterns: [
+      "離線排序 + Fenwick",
+      "掃描線 + heap/set",
+      "門檻查詢 + DSU",
+      "有序集合維護前驅後繼",
+    ],
+    pitfalls: [
+      "資料結構保存的是輔助索引，不是題目原始資料本身。",
+      "離散化要包含所有更新值與查詢門檻。",
+      "heap 有過期元素時要做 lazy deletion。",
+    ],
+    complexity: "常見目標是 `O((n + q) log n)`，空間 `O(n + q)`。",
+    code: "```cpp\nclass Fenwick {\n    vector<int> tree_;\n\npublic:\n    explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n    void add(int index, int delta) {\n        for (++index; index < (int)tree_.size(); index += index & -index) {\n            tree_[index] += delta;\n        }\n    }\n\n    int prefixSum(int index) const {\n        int sum = 0;\n        for (++index; index > 0; index -= index & -index) {\n            sum += tree_[index];\n        }\n        return sum;\n    }\n};\n```",
+  },
+  {
+    key: "rating-2100-dp",
+    planKeys: ["rating_2100"],
+    keywords: ["動態規劃", "DP", "狀態", "轉移", "優化"],
+    modelProblem:
+      "給定一個序列、集合或圖狀態，請先寫出暴力搜尋中的重複局面，再把局面壓成 DP 狀態，必要時用排序、前綴最佳值、單調資料結構或二分把轉移降到可接受複雜度。",
+    signals: [
+      "同一個局面會由多條路徑重複到達",
+      "每一步有選或不選、接在前一段後面、或切分位置等決策",
+      "樸素轉移正確但枚舉太慢，需要再優化一層",
+    ],
+    invariants: [
+      "`dp` 的語意固定後，每次轉移只能從已處理、已定義的狀態來。",
+      "若做空間壓縮，更新順序必須保證不重複使用同一輪資料。",
+      "優化只改變查找最佳前驅的方式，不改變原始轉移語意。",
+    ],
+    derivation: [
+      "先用最後一步決策寫出遞迴或樸素 DP。",
+      "估算狀態數與每個狀態的轉移成本。",
+      "若轉移過慢，觀察最佳前驅是否可由排序、前綴最佳、二分或 deque 維護。",
+      "補上初始值與不可達狀態，最後確認答案取自哪個狀態。",
+    ],
+    patterns: [
+      "線性 DP + 狀態機",
+      "LIS/LCS 與序列接續",
+      "狀壓 DP",
+      "排序後 DP + 二分前驅",
+      "單調隊列或前綴最佳值優化",
+    ],
+    pitfalls: [
+      "`dp[i]` 不能只寫成目前答案，必須說清楚包含範圍與結尾條件。",
+      "最大化與最小化的不可達初始值不同。",
+      "先證明樸素轉移，再套優化，否則容易優化錯問題。",
+    ],
+    complexity:
+      "依狀態而定；Rating 2100 常見目標是 `O(n log n)`、`O(nk)` 或 `O(n 2^m)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int lengthOfLis(vector<int>& nums) {\n        vector<int> tails;\n        for (int x : nums) {\n            auto it = lower_bound(tails.begin(), tails.end(), x);\n            if (it == tails.end()) {\n                tails.push_back(x);\n            } else {\n                *it = x;\n            }\n        }\n        return tails.size();\n    }\n};\n```",
+  },
+  {
+    key: "grid-state-bfs",
+    planKeys: ["rating_2100", "grid"],
+    keywords: ["網格", "障礙", "鑰匙", "狀態 BFS", "最短路徑"],
+    modelProblem:
+      "給定網格、起點、終點與額外限制，例如可消除障礙次數、鑰匙集合或時間狀態，請把每個完整狀態視為圖上的節點，使用 BFS、0-1 BFS 或 Dijkstra 求最短代價。",
+    signals: [
+      "同一格在不同資源或 mask 下可走的後續不同",
+      "每一步移動成本相同或只有 0/1 成本",
+      "不能只用 `(row, col)` 去重",
+    ],
+    invariants: [
+      "visited 或 dist 的維度必須等於完整狀態維度。",
+      "等權 BFS 中，第一次到達某完整狀態時步數最短。",
+      "若同一格可用更好的剩餘資源抵達，較差狀態可以剪掉。",
+    ],
+    derivation: [
+      "定義狀態，例如 `(row, col, remaining)` 或 `(row, col, key_mask)`。",
+      "從初始狀態入隊，距離設為 0。",
+      "枚舉四方向或八方向轉移，更新額外狀態。",
+      "只在新狀態未見過或比舊狀態更好時入隊。",
+      "第一次取出終點完整狀態時回傳距離。",
+    ],
+    patterns: [
+      "網格 BFS",
+      "資源維度剪枝",
+      "key mask BFS",
+      "0-1 BFS",
+      "網格 Dijkstra",
+    ],
+    pitfalls: [
+      "只用座標去重會錯過剩餘資源不同的可行路徑。",
+      "若移動成本不是等權，不應使用普通 BFS。",
+      "狀態數上界要先估算，避免 mask 維度過大。",
+    ],
+    complexity: "狀態數通常為 `O(rows * cols * extra_states)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int shortestPath(vector<vector<int>>& grid, int k) {\n        int rows = grid.size();\n        int cols = grid[0].size();\n        const int kDirs[5] = {1, 0, -1, 0, 1};\n        vector<vector<int>> best(rows, vector<int>(cols, -1));\n        queue<array<int, 4>> q;\n\n        best[0][0] = k;\n        q.push({0, 0, k, 0});\n        while (!q.empty()) {\n            auto [row, col, remaining, dist] = q.front();\n            q.pop();\n            if (row == rows - 1 && col == cols - 1) return dist;\n            for (int dir = 0; dir < 4; ++dir) {\n                int next_row = row + kDirs[dir];\n                int next_col = col + kDirs[dir + 1];\n                if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) continue;\n                int next_remaining = remaining - grid[next_row][next_col];\n                if (next_remaining < 0 || next_remaining <= best[next_row][next_col]) continue;\n                best[next_row][next_col] = next_remaining;\n                q.push({next_row, next_col, next_remaining, dist + 1});\n            }\n        }\n        return -1;\n    }\n};\n```",
   },
   {
     key: "difference-array",
@@ -837,17 +989,7 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
   {
     key: "bitwise-contribution",
     planKeys: ["bitwise_operations"],
-    keywords: [
-      "基礎",
-      "位",
-      "XOR",
-      "異或",
-      "AND",
-      "OR",
-      "拆位",
-      "貢獻",
-      "試填",
-    ],
+    keywords: ["位元", "XOR", "異或", "AND", "OR", "拆位", "貢獻", "試填"],
     modelProblem:
       "給定一組整數，請利用每個 bit 的獨立性計算 XOR/OR/AND 的總貢獻，或從高位到低位構造最大可行答案。",
     signals: [
@@ -1113,6 +1255,33 @@ const defaultLectureExamples: Record<string, StudyPlanData.Item> = {
     src: "https://leetcode.cn/problems/sum-of-total-strength-of-wizards/",
     solution: null,
     score: 2621,
+    isPremium: false,
+  },
+  "rating-2100-data-structure": {
+    id: "2426",
+    title: "滿足不等式的數對數目",
+    slug: "number-of-pairs-satisfying-inequality",
+    src: "https://leetcode.cn/problems/number-of-pairs-satisfying-inequality/",
+    solution: null,
+    score: 2030,
+    isPremium: false,
+  },
+  "rating-2100-dp": {
+    id: "1671",
+    title: "得到山形陣列的最少刪除次數",
+    slug: "minimum-number-of-removals-to-make-mountain-array",
+    src: "https://leetcode.cn/problems/minimum-number-of-removals-to-make-mountain-array/",
+    solution: null,
+    score: 1913,
+    isPremium: false,
+  },
+  "grid-state-bfs": {
+    id: "1293",
+    title: "網格中的最短路徑",
+    slug: "shortest-path-in-a-grid-with-obstacles-elimination",
+    src: "https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination/",
+    solution: null,
+    score: 1967,
     isPremium: false,
   },
   "difference-array": {
@@ -1448,6 +1617,36 @@ const exampleLectureOverrides: NonNullable<LectureTopicProfile["examples"]> = {
     ],
     complexity: "離散化 `O(n log n)`，每次查詢與更新 `O(log n)`。",
     code: "```cpp\nclass Fenwick {\n    vector<int> tree_;\n\npublic:\n    explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n    void add(int index, int delta) {\n        for (++index; index < (int)tree_.size(); index += index & -index) tree_[index] += delta;\n    }\n\n    int prefixSum(int index) const {\n        int sum = 0;\n        for (++index; index > 0; index -= index & -index) sum += tree_[index];\n        return sum;\n    }\n};\n\nclass Solution {\npublic:\n    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {\n        vector<int> values;\n        vector<int> arr(nums1.size());\n        for (int i = 0; i < (int)nums1.size(); ++i) {\n            arr[i] = nums1[i] - nums2[i];\n            values.push_back(arr[i]);\n            values.push_back(arr[i] + diff);\n        }\n        sort(values.begin(), values.end());\n        values.erase(unique(values.begin(), values.end()), values.end());\n\n        Fenwick fenwick(values.size());\n        long long answer = 0;\n        for (int x : arr) {\n            int limit_index = upper_bound(values.begin(), values.end(), x + diff) - values.begin() - 1;\n            answer += fenwick.prefixSum(limit_index);\n            int index = lower_bound(values.begin(), values.end(), x) - values.begin();\n            fenwick.add(index, 1);\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "shortest-path-in-a-grid-with-obstacles-elimination": {
+    modelProblem:
+      "LeetCode 1293 給定一個 `rows x cols` 的 0/1 網格。你從 `(0,0)` 出發，每步可往上下左右移動，走到障礙格 `1` 時可以消耗一次消除機會，最多消除 `k` 個障礙。請回傳到 `(rows-1, cols-1)` 的最少步數，無法到達則回傳 `-1`。",
+    signals: [
+      "網格最短路",
+      "同一格剩餘消除次數不同時，後續可走路徑不同",
+      "每步成本相同，因此完整狀態圖上可用 BFS",
+    ],
+    invariants: [
+      "BFS 狀態是 `(row, col, remaining)`，不是只有座標。",
+      "`best[row][col]` 保存到達該格時看過的最大剩餘消除次數。",
+      "若新狀態的剩餘次數不大於 best，未來不會比舊狀態更好，可以剪掉。",
+    ],
+    derivation: [
+      "初始狀態為 `(0, 0, k, 0)`。",
+      "每次出隊後枚舉四個方向。",
+      "若下一格是障礙，`remaining` 減一；若變成負數則不可走。",
+      "只有當 `next_remaining > best[next_row][next_col]` 時才入隊。",
+      "第一次出隊到終點時，距離就是最少步數。",
+    ],
+    patterns: ["網格 BFS", "資源維度", "dominance pruning", "最短路狀態壓縮"],
+    pitfalls: [
+      "不能用二維 visited，否則會把剩餘資源不同的狀態混在一起。",
+      "若起點或終點是障礙，要依題意確認是否需要消耗 k。",
+      "狀態數上界是 `rows * cols * (k + 1)`，k 太大時可先做簡單捷徑剪枝。",
+    ],
+    complexity:
+      "最壞時間 `O(rows * cols * k)`，使用 best 剪枝後空間 `O(rows * cols)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int shortestPath(vector<vector<int>>& grid, int k) {\n        int rows = grid.size();\n        int cols = grid[0].size();\n        const int kDirs[5] = {1, 0, -1, 0, 1};\n        vector<vector<int>> best(rows, vector<int>(cols, -1));\n        queue<array<int, 4>> q;\n\n        best[0][0] = k;\n        q.push({0, 0, k, 0});\n        while (!q.empty()) {\n            auto [row, col, remaining, dist] = q.front();\n            q.pop();\n            if (row == rows - 1 && col == cols - 1) return dist;\n            for (int dir = 0; dir < 4; ++dir) {\n                int next_row = row + kDirs[dir];\n                int next_col = col + kDirs[dir + 1];\n                if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) continue;\n                int next_remaining = remaining - grid[next_row][next_col];\n                if (next_remaining < 0 || next_remaining <= best[next_row][next_col]) continue;\n                best[next_row][next_col] = next_remaining;\n                q.push({next_row, next_col, next_remaining, dist + 1});\n            }\n        }\n        return -1;\n    }\n};\n```",
   },
   "checking-existence-of-edge-length-limited-paths": {
     modelProblem:
