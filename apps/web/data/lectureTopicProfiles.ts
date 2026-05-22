@@ -121,6 +121,21 @@ export function mergeExampleProfile(
   };
 }
 
+export function hasExampleLectureProfile(
+  profile: LectureTopicProfile,
+  example?: StudyPlanData.Item,
+) {
+  const slug = example ? normalizeExampleSlug(example.slug) : undefined;
+  if (!slug) return false;
+  return Boolean(exampleLectureOverrides[slug] || profile.examples?.[slug]);
+}
+
+export function getDefaultLectureExample(
+  profile: LectureTopicProfile,
+): StudyPlanData.Item | undefined {
+  return defaultLectureExamples[profile.key];
+}
+
 export function formatLectureTopicTitle(section: TutorialData.Section) {
   return stripNumericPrefix(section.title) || section.title;
 }
@@ -892,12 +907,14 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
   },
   {
     key: "greedy-general",
-    planKeys: ["greedy", "rating_2100"],
+    planKeys: ["greedy", "rating_2100", "data_structure"],
     keywords: [
       "貪心",
       "最小",
       "最大",
       "反悔",
+      "反悔堆",
+      "反悔貪心",
       "字典序",
       "相鄰不同",
       "交換論證",
@@ -1052,7 +1069,994 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
   },
 ];
 
+const defaultLectureExamples: Record<string, StudyPlanData.Item> = {
+  "binary-lower-bound": {
+    id: "1898",
+    title: "可移除字元的最大數目",
+    slug: "maximum-number-of-removable-characters",
+    src: "https://leetcode.cn/problems/maximum-number-of-removable-characters/",
+    solution: null,
+    score: 1913,
+    isPremium: false,
+  },
+  "kth-smallest": {
+    id: "1201",
+    title: "醜數 III",
+    slug: "ugly-number-iii",
+    src: "https://leetcode.cn/problems/ugly-number-iii/",
+    solution: null,
+    score: 2039,
+    isPremium: false,
+  },
+  "binary-answer": {
+    id: "1201",
+    title: "醜數 III",
+    slug: "ugly-number-iii",
+    src: "https://leetcode.cn/problems/ugly-number-iii/",
+    solution: null,
+    score: 2039,
+    isPremium: false,
+  },
+  "prefix-sum": {
+    id: "1915",
+    title: "最美子字串的數目",
+    slug: "number-of-wonderful-substrings",
+    src: "https://leetcode.cn/problems/number-of-wonderful-substrings/",
+    solution: null,
+    score: 2235,
+    isPremium: false,
+  },
+  "enumerate-maintain": {
+    id: "2281",
+    title: "巫師的總力量和",
+    slug: "sum-of-total-strength-of-wizards",
+    src: "https://leetcode.cn/problems/sum-of-total-strength-of-wizards/",
+    solution: null,
+    score: 2621,
+    isPremium: false,
+  },
+  "difference-array": {
+    id: "3362",
+    title: "零陣列變換 III",
+    slug: "zero-array-transformation-iii",
+    src: "https://leetcode.cn/problems/zero-array-transformation-iii/",
+    solution: null,
+    score: 2424,
+    isPremium: false,
+  },
+  fenwick: {
+    id: "2426",
+    title: "滿足不等式的數對數目",
+    slug: "number-of-pairs-satisfying-inequality",
+    src: "https://leetcode.cn/problems/number-of-pairs-satisfying-inequality/",
+    solution: null,
+    score: 2030,
+    isPremium: false,
+  },
+  dsu: {
+    id: "1697",
+    title: "檢查邊長度限制的路徑是否存在",
+    slug: "checking-existence-of-edge-length-limited-paths",
+    src: "https://leetcode.cn/problems/checking-existence-of-edge-length-limited-paths/",
+    solution: null,
+    score: 2300,
+    isPremium: false,
+  },
+  "monotonic-stack": {
+    id: "907",
+    title: "子陣列的最小值之和",
+    slug: "sum-of-subarray-minimums",
+    src: "https://leetcode.cn/problems/sum-of-subarray-minimums/",
+    solution: null,
+    score: 1976,
+    isPremium: false,
+  },
+  "sliding-window": {
+    id: "3298",
+    title: "統計重新排列後包含另一個字串的子字串數目 II",
+    slug: "count-substrings-that-can-be-rearranged-to-contain-a-string-ii",
+    src: "https://leetcode.cn/problems/count-substrings-that-can-be-rearranged-to-contain-a-string-ii/",
+    solution: null,
+    score: 1909,
+    isPremium: false,
+  },
+  knapsack: {
+    id: "2518",
+    title: "好分割槽的數目",
+    slug: "number-of-great-partitions",
+    src: "https://leetcode.cn/problems/number-of-great-partitions/",
+    solution: null,
+    score: 2415,
+    isPremium: false,
+  },
+  "grid-dp": {
+    id: "2328",
+    title: "網格圖中遞增路徑的數目",
+    slug: "number-of-increasing-paths-in-a-grid",
+    src: "https://leetcode.cn/problems/number-of-increasing-paths-in-a-grid/",
+    solution: null,
+    score: 2001,
+    isPremium: false,
+  },
+  "dp-linear": {
+    id: "1671",
+    title: "得到山形陣列的最少刪除次數",
+    slug: "minimum-number-of-removals-to-make-mountain-array",
+    src: "https://leetcode.cn/problems/minimum-number-of-removals-to-make-mountain-array/",
+    solution: null,
+    score: 1913,
+    isPremium: false,
+  },
+  "graph-bfs-dfs": {
+    id: "2608",
+    title: "圖中的最短環",
+    slug: "shortest-cycle-in-a-graph",
+    src: "https://leetcode.cn/problems/shortest-cycle-in-a-graph/",
+    solution: null,
+    score: 1904,
+    isPremium: false,
+  },
+  "topological-dp": {
+    id: "2050",
+    title: "並行課程 III",
+    slug: "parallel-courses-iii",
+    src: "https://leetcode.cn/problems/parallel-courses-iii/",
+    solution: null,
+    score: 2084,
+    isPremium: false,
+  },
+  dijkstra: {
+    id: "2203",
+    title: "得到要求路徑的最小帶權子圖",
+    slug: "minimum-weighted-subgraph-with-the-required-paths",
+    src: "https://leetcode.cn/problems/minimum-weighted-subgraph-with-the-required-paths/",
+    solution: null,
+    score: 2364,
+    isPremium: false,
+  },
+  mst: {
+    id: "1489",
+    title: "找到最小生成樹裡的關鍵邊和偽關鍵邊",
+    slug: "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+    src: "https://leetcode.cn/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/",
+    solution: null,
+    score: 2572,
+    isPremium: false,
+  },
+  "low-link": {
+    id: "1192",
+    title: "查詢叢集內的關鍵連線",
+    slug: "critical-connections-in-a-network",
+    src: "https://leetcode.cn/problems/critical-connections-in-a-network/",
+    solution: null,
+    score: 2085,
+    isPremium: false,
+  },
+  "network-flow": {
+    id: "1349",
+    title: "參加考試的最大學生數",
+    slug: "maximum-students-taking-exam",
+    src: "https://leetcode.cn/problems/maximum-students-taking-exam/",
+    solution: null,
+    score: 2386,
+    isPremium: false,
+  },
+  "greedy-interval": {
+    id: "2589",
+    title: "完成所有任務的最少時間",
+    slug: "minimum-time-to-complete-all-tasks",
+    src: "https://leetcode.cn/problems/minimum-time-to-complete-all-tasks/",
+    solution: null,
+    score: 2381,
+    isPremium: false,
+  },
+  "math-number-theory": {
+    id: "1998",
+    title: "陣列的最大公因數排序",
+    slug: "gcd-sort-of-an-array",
+    src: "https://leetcode.cn/problems/gcd-sort-of-an-array/",
+    solution: null,
+    score: 2429,
+    isPremium: false,
+  },
+  kmp: {
+    id: "3008",
+    title: "找出陣列中的美麗下標 II",
+    slug: "find-beautiful-indices-in-the-given-array-ii",
+    src: "https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii/",
+    solution: null,
+    score: 2016,
+    isPremium: false,
+  },
+  "tree-linked-binary": {
+    id: "2458",
+    title: "移除子樹後的二叉樹高度",
+    slug: "height-of-binary-tree-after-subtree-removal-queries",
+    src: "https://leetcode.cn/problems/height-of-binary-tree-after-subtree-removal-queries/",
+    solution: null,
+    score: 2299,
+    isPremium: false,
+  },
+  "bitwise-contribution": {
+    id: "2680",
+    title: "最大或值",
+    slug: "maximum-or",
+    src: "https://leetcode.cn/problems/maximum-or/",
+    solution: null,
+    score: 1912,
+    isPremium: false,
+  },
+  "linear-basis": {
+    id: "3681",
+    title: "子序列最大 XOR 值",
+    slug: "maximum-xor-of-subsequences",
+    src: "https://leetcode.cn/problems/maximum-xor-of-subsequences/",
+    solution: null,
+    score: 2027,
+    isPremium: false,
+  },
+  "greedy-general": {
+    id: "1642",
+    title: "可以到達的最遠建築",
+    slug: "furthest-building-you-can-reach",
+    src: "https://leetcode.cn/problems/furthest-building-you-can-reach/",
+    solution: null,
+    score: 1962,
+    isPremium: false,
+  },
+  manacher: {
+    id: "1960",
+    title: "兩個迴文子字串長度的最大乘積",
+    slug: "maximum-product-of-the-length-of-two-palindromic-substrings",
+    src: "https://leetcode.cn/problems/maximum-product-of-the-length-of-two-palindromic-substrings/",
+    solution: null,
+    score: 2691,
+    isPremium: false,
+  },
+  "string-tools": {
+    id: "2223",
+    title: "構造字串的總得分和",
+    slug: "sum-of-scores-of-built-strings",
+    src: "https://leetcode.cn/problems/sum-of-scores-of-built-strings/",
+    solution: null,
+    score: 2220,
+    isPremium: false,
+  },
+  "combinatorics-geometry": {
+    id: "1735",
+    title: "生成乘積陣列的方案數",
+    slug: "count-ways-to-make-array-with-product",
+    src: "https://leetcode.cn/problems/count-ways-to-make-array-with-product/",
+    solution: null,
+    score: 2500,
+    isPremium: false,
+  },
+};
+
 const exampleLectureOverrides: NonNullable<LectureTopicProfile["examples"]> = {
+  "maximum-number-of-removable-characters": {
+    modelProblem:
+      "LeetCode 1898 給定字串 `s`、模式字串 `p` 與陣列 `removable`。移除 `removable` 前 k 個位置上的字元後，若 `p` 仍是剩餘字串的子序列，則 k 合法。請回傳最大的合法 k。",
+    signals: [
+      "題目問最多可以移除多少個位置",
+      "固定 k 後可以線性檢查 `p` 是否仍為子序列",
+      "若 k 合法，較小的 k 也一定合法",
+    ],
+    invariants: [
+      "`can(k)` 表示移除前 k 個 removable 位置後，`p` 是否仍能被依序匹配。",
+      "二分維護的是最後一個合法 k，而不是第一個合法 k。",
+      "檢查時 `matched` 只會向右增加，代表已匹配 `p` 的前綴長度。",
+    ],
+    derivation: [
+      "把答案 k 的範圍設為 `[0, removable.size()]`。",
+      "對候選 k，先把前 k 個 removable 位置標記為 removed。",
+      "掃描 `s`，跳過 removed 位置，用雙指標判斷 `p` 是否為子序列。",
+      "若 `can(mid)` 成立，嘗試更大的 k；否則降低右界。",
+    ],
+    patterns: ["最大合法值二分", "二分答案 + 子序列檢查", "標記刪除位置"],
+    pitfalls: [
+      "這題不是在 sorted array 上二分，而是在答案 k 上二分。",
+      "檢查函式必須依 removable 的前 k 個位置刪除，不能排序後刪。",
+      "找最大合法值時，mid 取上中位數可避免死循環。",
+    ],
+    complexity:
+      "每次檢查 `O(|s| + k)`；總時間 `O((|s| + m) log m)`，空間 `O(|s|)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int maximumRemovals(string s, string p, vector<int>& removable) {\n        auto canRemove = [&s, &p, &removable](int count) {\n            vector<int> removed(s.size(), 0);\n            for (int i = 0; i < count; ++i) removed[removable[i]] = 1;\n\n            int matched = 0;\n            for (int i = 0; i < (int)s.size() && matched < (int)p.size(); ++i) {\n                if (!removed[i] && s[i] == p[matched]) matched++;\n            }\n            return matched == (int)p.size();\n        };\n\n        int left = 0;\n        int right = removable.size();\n        while (left < right) {\n            int mid = left + (right - left + 1) / 2;\n            if (canRemove(mid)) {\n                left = mid;\n            } else {\n                right = mid - 1;\n            }\n        }\n        return left;\n    }\n};\n```",
+  },
+  "number-of-wonderful-substrings": {
+    modelProblem:
+      "LeetCode 1915 給定只含前十個小寫字母的字串 `word`。若一個子字串中至多只有一種字母出現奇數次，稱為 wonderful。請計算 wonderful 子字串數量。",
+    signals: [
+      "只關心每個字母出現次數的奇偶性",
+      "子字串狀態可由兩個前綴狀態 XOR 得到",
+      "合法條件是 mask 為 0 或只有一個 bit 為 1",
+    ],
+    invariants: [
+      "`mask` 表示目前前綴中十個字母出現次數的奇偶狀態。",
+      "掃描到目前位置時，`count[old_mask]` 保存所有舊前綴狀態出現次數。",
+      "以目前位置結尾的合法子字串，來自相同 mask 或只差一個 bit 的舊前綴。",
+    ],
+    derivation: [
+      "初始化 `count[0] = 1`，代表空前綴。",
+      "每讀入一個字母，就翻轉對應 bit。",
+      "先累加 `count[mask]`，對應所有字母出現偶數次。",
+      "再枚舉十個 bit，累加 `count[mask ^ (1 << bit)]`。",
+      "最後把目前 mask 加入 count，供後續右端點使用。",
+    ],
+    patterns: ["奇偶 mask 前綴", "前綴狀態計數", "合法差值枚舉"],
+    pitfalls: [
+      "不要用長度 26 的 mask；題目限制只需前十個字母。",
+      "統計答案要在加入目前前綴之前完成，避免空子字串被計入。",
+      "答案可能超過 int，使用 `long long`。",
+    ],
+    complexity: "每個位置枚舉 10 個 bit，時間 `O(10n)`，空間 `O(2^10)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    long long wonderfulSubstrings(string word) {\n        vector<long long> count(1 << 10, 0);\n        count[0] = 1;\n        int mask = 0;\n        long long answer = 0;\n\n        for (char ch : word) {\n            mask ^= 1 << (ch - 'a');\n            answer += count[mask];\n            for (int bit = 0; bit < 10; ++bit) {\n                answer += count[mask ^ (1 << bit)];\n            }\n            count[mask]++;\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "zero-array-transformation-iii": {
+    modelProblem:
+      "LeetCode 3362 給定非負陣列 `nums` 與多個區間查詢 `queries[i] = [l, r]`。每個查詢最多可以讓區間內每個位置減 1。請移除最多查詢，使剩下查詢仍能把整個陣列變成全 0；若無法做到，回傳 -1。",
+    signals: [
+      "每個位置需要被覆蓋 `nums[i]` 次",
+      "查詢是區間資源，可以按左端點掃描加入候選",
+      "要保留較少查詢時，遇到需求缺口應選右端點最遠的查詢",
+    ],
+    invariants: [
+      "`active_add` 表示目前已選查詢對 index 的覆蓋次數。",
+      "max-heap 中保存左端點已經到達、尚未選用的查詢右端點。",
+      "當覆蓋不足時，選右端點最遠的查詢不會比選更短查詢差。",
+    ],
+    derivation: [
+      "先依查詢左端點排序，從左到右掃描位置 i。",
+      "把所有 `l <= i` 的查詢右端點加入 max-heap。",
+      "用差分陣列維護已選查詢在當前位置的覆蓋數。",
+      "若覆蓋數小於 `nums[i]`，反覆從 heap 選右端點最遠且仍覆蓋 i 的查詢。",
+      "若 heap 沒有可用查詢，代表無法完成。",
+    ],
+    patterns: ["差分維護覆蓋", "掃描線 + heap", "區間資源貪心"],
+    pitfalls: [
+      "heap 中過期的右端點要丟掉。",
+      "選中一個查詢後，要在 `right + 1` 用差分抵消。",
+      "回傳的是可移除查詢數，不是已選查詢數。",
+    ],
+    complexity: "排序與 heap 操作總時間 `O((n + q) log q)`，空間 `O(n + q)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int maxRemoval(vector<int>& nums, vector<vector<int>>& queries) {\n        sort(queries.begin(), queries.end());\n        priority_queue<int> available_right;\n        vector<int> diff(nums.size() + 1, 0);\n        int query_index = 0;\n        int coverage = 0;\n        int used = 0;\n\n        for (int i = 0; i < (int)nums.size(); ++i) {\n            coverage += diff[i];\n            while (query_index < (int)queries.size() && queries[query_index][0] <= i) {\n                available_right.push(queries[query_index][1]);\n                query_index++;\n            }\n            while (coverage < nums[i]) {\n                while (!available_right.empty() && available_right.top() < i) available_right.pop();\n                if (available_right.empty()) return -1;\n                int right = available_right.top();\n                available_right.pop();\n                coverage++;\n                diff[right + 1]--;\n                used++;\n            }\n        }\n        return queries.size() - used;\n    }\n};\n```",
+  },
+  "number-of-pairs-satisfying-inequality": {
+    modelProblem:
+      "LeetCode 2426 給定 `nums1`、`nums2` 與 `diff`，請計算下標對 `(i, j)`，`i < j`，且 `nums1[i] - nums2[i] <= nums1[j] - nums2[j] + diff` 的數量。",
+    signals: [
+      "條件可整理成兩個 transformed value 的大小關係",
+      "掃描右端點時只需要統計左側有多少值不超過某個門檻",
+      "需要動態前綴排名或有序計數",
+    ],
+    invariants: [
+      "定義 `arr[i] = nums1[i] - nums2[i]`。",
+      "掃描到 j 時，Fenwick 只保存所有 `i < j` 的 `arr[i]`。",
+      "合法左端點數量是 `arr[i] <= arr[j] + diff` 的個數。",
+    ],
+    derivation: [
+      "先把所有 `arr[i]` 與查詢門檻 `arr[i] + diff` 放入離散化陣列。",
+      "從左到右掃描 j。",
+      "用 Fenwick 查詢 `<= arr[j] + diff` 的歷史數量並加入答案。",
+      "再把 `arr[j]` 加入 Fenwick，供後續右端點使用。",
+    ],
+    patterns: ["離散化", "Fenwick 動態排名", "列舉右端點維護左側"],
+    pitfalls: [
+      "不等式整理方向要保持 `i < j`。",
+      "離散化要包含查詢門檻，否則 upper_bound 位置容易錯。",
+      "答案使用 `long long`。",
+    ],
+    complexity: "離散化 `O(n log n)`，每次查詢與更新 `O(log n)`。",
+    code: "```cpp\nclass Fenwick {\n    vector<int> tree_;\n\npublic:\n    explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n    void add(int index, int delta) {\n        for (++index; index < (int)tree_.size(); index += index & -index) tree_[index] += delta;\n    }\n\n    int prefixSum(int index) const {\n        int sum = 0;\n        for (++index; index > 0; index -= index & -index) sum += tree_[index];\n        return sum;\n    }\n};\n\nclass Solution {\npublic:\n    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {\n        vector<int> values;\n        vector<int> arr(nums1.size());\n        for (int i = 0; i < (int)nums1.size(); ++i) {\n            arr[i] = nums1[i] - nums2[i];\n            values.push_back(arr[i]);\n            values.push_back(arr[i] + diff);\n        }\n        sort(values.begin(), values.end());\n        values.erase(unique(values.begin(), values.end()), values.end());\n\n        Fenwick fenwick(values.size());\n        long long answer = 0;\n        for (int x : arr) {\n            int limit_index = upper_bound(values.begin(), values.end(), x + diff) - values.begin() - 1;\n            answer += fenwick.prefixSum(limit_index);\n            int index = lower_bound(values.begin(), values.end(), x) - values.begin();\n            fenwick.add(index, 1);\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "checking-existence-of-edge-length-limited-paths": {
+    modelProblem:
+      "LeetCode 1697 給定無向帶權邊 `edgeList` 與查詢 `[p, q, limit]`。每個查詢要判斷是否存在一條從 p 到 q 的路徑，使路徑上每條邊權都嚴格小於 limit。",
+    signals: [
+      "查詢只會加入更小於某個限制的邊",
+      "沒有刪邊，只有依門檻逐步加邊",
+      "問的是連通性，不是路徑長度",
+    ],
+    invariants: [
+      "處理 limit 之前，DSU 中已加入所有權重 `< limit` 的邊。",
+      "同一 DSU component 內的任兩點存在一條符合目前 limit 的路徑。",
+      "查詢排序後，邊指標只會向右移動一次。",
+    ],
+    derivation: [
+      "將 edgeList 依權重排序。",
+      "把 queries 附上原本下標，再依 limit 排序。",
+      "對每個查詢，加入所有 `weight < limit` 的邊。",
+      "用 DSU 判斷 p 與 q 是否已在同一連通塊，答案寫回原下標。",
+    ],
+    patterns: ["離線排序", "DSU 動態加邊", "門檻連通性查詢"],
+    pitfalls: [
+      "條件是嚴格小於 limit，不是小於等於。",
+      "queries 排序後要保留原始下標。",
+      "DSU 不支援刪邊，所以必須讓 limit 單調增加。",
+    ],
+    complexity: "排序 `O((E + Q) log(E + Q))`，DSU 操作近似線性。",
+    code: "```cpp\nclass Dsu {\n    vector<int> parent_;\n    vector<int> size_;\n\npublic:\n    explicit Dsu(int n) : parent_(n), size_(n, 1) { iota(parent_.begin(), parent_.end(), 0); }\n    int find(int x) { return parent_[x] == x ? x : parent_[x] = find(parent_[x]); }\n    void unite(int a, int b) {\n        int root_a = find(a), root_b = find(b);\n        if (root_a == root_b) return;\n        if (size_[root_a] < size_[root_b]) swap(root_a, root_b);\n        parent_[root_b] = root_a;\n        size_[root_a] += size_[root_b];\n    }\n};\n\nclass Solution {\npublic:\n    vector<bool> distanceLimitedPathsExist(int n, vector<vector<int>>& edgeList, vector<vector<int>>& queries) {\n        sort(edgeList.begin(), edgeList.end(), [](const auto& lhs, const auto& rhs) { return lhs[2] < rhs[2]; });\n        vector<array<int, 4>> ordered_queries;\n        for (int i = 0; i < (int)queries.size(); ++i) ordered_queries.push_back({queries[i][2], queries[i][0], queries[i][1], i});\n        sort(ordered_queries.begin(), ordered_queries.end());\n\n        Dsu dsu(n);\n        vector<bool> answer(queries.size());\n        int edge_index = 0;\n        for (auto [limit, from, to, query_id] : ordered_queries) {\n            while (edge_index < (int)edgeList.size() && edgeList[edge_index][2] < limit) {\n                dsu.unite(edgeList[edge_index][0], edgeList[edge_index][1]);\n                edge_index++;\n            }\n            answer[query_id] = dsu.find(from) == dsu.find(to);\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "sum-of-total-strength-of-wizards": {
+    modelProblem:
+      "LeetCode 2281 給定陣列 `strength`。每個連續子陣列的力量定義為 `min(subarray) * sum(subarray)`。請計算所有子陣列力量總和並對 `1e9+7` 取模。",
+    signals: [
+      "每個子陣列的最小值要乘上區間和",
+      "可以枚舉某個位置作為最小值的貢獻範圍",
+      "需要同時使用單調棧與前綴和的前綴和",
+    ],
+    invariants: [
+      "對每個 i，找出它作為子陣列最小值時可延伸的左界與右界。",
+      "左邊使用嚴格小於，右邊使用小於等於，避免相等最小值重複計數。",
+      "二階前綴和可在 `O(1)` 算出所有包含 i 的子陣列和總貢獻。",
+    ],
+    derivation: [
+      "用單調棧求 `left[i]`：左側第一個 `< strength[i]` 的位置。",
+      "用單調棧求 `right[i]`：右側第一個 `<= strength[i]` 的位置。",
+      "建立 prefix 與 prefix of prefix。",
+      "對每個 i，計算右側前綴和總量乘左側選法數，再扣掉左側前綴和總量乘右側選法數。",
+      "把該總區間和乘上 `strength[i]` 加入答案。",
+    ],
+    patterns: ["單調棧邊界", "貢獻法", "二階前綴和"],
+    pitfalls: [
+      "相等元素的嚴格/非嚴格方向不能兩邊相同。",
+      "中間值會很大，所有乘法都要轉成 `long long` 並取模。",
+      "二階前綴陣列下標容易偏移，需統一使用半開區間。",
+    ],
+    complexity: "單調棧與貢獻計算皆為 `O(n)`，空間 `O(n)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int totalStrength(vector<int>& strength) {\n        constexpr long long kMod = 1'000'000'007;\n        int n = strength.size();\n        vector<int> left(n), right(n, n), stack;\n\n        for (int i = 0; i < n; ++i) {\n            while (!stack.empty() && strength[stack.back()] >= strength[i]) stack.pop_back();\n            left[i] = stack.empty() ? -1 : stack.back();\n            stack.push_back(i);\n        }\n        stack.clear();\n        for (int i = n - 1; i >= 0; --i) {\n            while (!stack.empty() && strength[stack.back()] > strength[i]) stack.pop_back();\n            right[i] = stack.empty() ? n : stack.back();\n            stack.push_back(i);\n        }\n\n        vector<long long> prefix(n + 1), prefix_prefix(n + 2);\n        for (int i = 0; i < n; ++i) {\n            prefix[i + 1] = (prefix[i] + strength[i]) % kMod;\n            prefix_prefix[i + 2] = (prefix_prefix[i + 1] + prefix[i + 1]) % kMod;\n        }\n\n        long long answer = 0;\n        for (int i = 0; i < n; ++i) {\n            long long left_count = i - left[i];\n            long long right_count = right[i] - i;\n            long long right_sum = (prefix_prefix[right[i] + 1] - prefix_prefix[i + 1] + kMod) % kMod;\n            long long left_sum = (prefix_prefix[i + 1] - prefix_prefix[left[i] + 1] + kMod) % kMod;\n            long long total = (right_sum * left_count - left_sum * right_count) % kMod;\n            answer = (answer + strength[i] * total) % kMod;\n        }\n        return (answer + kMod) % kMod;\n    }\n};\n```",
+  },
+  "sum-of-subarray-minimums": {
+    modelProblem:
+      "LeetCode 907 給定整數陣列 `arr`，請計算所有連續子陣列的最小值之和，答案對 `1e9+7` 取模。",
+    signals: [
+      "要統計所有子陣列的極值總和",
+      "直接枚舉子陣列會是 `O(n^2)`",
+      "每個元素可以計算自己作為最小值的覆蓋範圍",
+    ],
+    invariants: [
+      "`left[i]` 是 i 左側第一個嚴格小於 `arr[i]` 的位置。",
+      "`right[i]` 是 i 右側第一個小於等於 `arr[i]` 的位置。",
+      "以 i 為最小值的子陣列數量為 `(i-left[i])*(right[i]-i)`。",
+    ],
+    derivation: [
+      "用遞增棧求每個位置的左邊界。",
+      "反向掃描求右邊界，並用相反的相等處理避免重複。",
+      "把每個元素值乘上可作為最小值的子陣列個數。",
+    ],
+    patterns: ["單調棧", "子陣列極值貢獻法", "相等元素去重"],
+    pitfalls: [
+      "相等元素若兩側都嚴格或都非嚴格，會重複或漏算。",
+      "乘法要用 `long long`。",
+    ],
+    complexity: "每個元素入棧出棧一次，時間 `O(n)`，空間 `O(n)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int sumSubarrayMins(vector<int>& arr) {\n        constexpr long long kMod = 1'000'000'007;\n        int n = arr.size();\n        vector<int> left(n), right(n, n), stack;\n        for (int i = 0; i < n; ++i) {\n            while (!stack.empty() && arr[stack.back()] > arr[i]) stack.pop_back();\n            left[i] = stack.empty() ? -1 : stack.back();\n            stack.push_back(i);\n        }\n        stack.clear();\n        for (int i = n - 1; i >= 0; --i) {\n            while (!stack.empty() && arr[stack.back()] >= arr[i]) stack.pop_back();\n            right[i] = stack.empty() ? n : stack.back();\n            stack.push_back(i);\n        }\n\n        long long answer = 0;\n        for (int i = 0; i < n; ++i) {\n            answer = (answer + 1LL * arr[i] * (i - left[i]) * (right[i] - i)) % kMod;\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "count-substrings-that-can-be-rearranged-to-contain-a-string-ii": {
+    modelProblem:
+      "LeetCode 3298 給定字串 `word1` 與 `word2`。請計算有多少個 `word1` 的子字串在重新排列後，可以讓 `word2` 成為它的前綴；等價於該子字串包含 `word2` 所需的每個字母次數。",
+    signals: [
+      "連續子字串",
+      "合法條件是窗口內每個字母數量至少達到需求",
+      "窗口越長越容易合法，因此可用滑動視窗計數",
+    ],
+    invariants: [
+      "`need[c]` 是 word2 對字母 c 的需求量。",
+      "`missing` 表示目前窗口仍缺多少個必要字元。",
+      "當窗口合法時，固定 left 後所有更長右端都合法。",
+    ],
+    derivation: [
+      "先統計 word2 的需求，並令 missing 等於 word2 長度。",
+      "右端加入字元時，若它仍在需求內，missing 減一。",
+      "當 missing 為 0，代表目前窗口合法，可以累加所有以當前 left 開始的合法子字串。",
+      "移動 left 前撤銷 left 字元對需求的影響。",
+    ],
+    patterns: ["越長越合法滑動視窗", "需求計數", "一次計算一整段右端貢獻"],
+    pitfalls: [
+      "合法後貢獻是 `word1.size() - right`，不是只加一。",
+      "移動左端時如果字元變成缺少，missing 要補回。",
+    ],
+    complexity:
+      "左右指標各走一次，時間 `O(n + alphabet)`，空間 `O(alphabet)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    long long validSubstringCount(string word1, string word2) {\n        array<int, 26> need{};\n        for (char ch : word2) need[ch - 'a']++;\n        int missing = word2.size();\n        long long answer = 0;\n        int right = 0;\n\n        for (int left = 0; left < (int)word1.size(); ++left) {\n            while (right < (int)word1.size() && missing > 0) {\n                int index = word1[right] - 'a';\n                if (need[index] > 0) missing--;\n                need[index]--;\n                right++;\n            }\n            if (missing == 0) answer += word1.size() - right + 1;\n            int index = word1[left] - 'a';\n            need[index]++;\n            if (need[index] > 0) missing++;\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "number-of-great-partitions": {
+    modelProblem:
+      "LeetCode 2518 給定陣列 `nums` 與整數 `k`。將每個元素分到兩個群組，若兩組總和都至少為 k，稱為 good partition。請計算 good partition 數量並取模。",
+    signals: [
+      "每個元素二選一，總方案是 `2^n`",
+      "非法情況是某一組總和小於 k",
+      "只需要統計小於 k 的子集和方案數",
+    ],
+    invariants: [
+      "`dp[sum]` 表示目前處理過的元素中，選出總和為 sum 的子集數。",
+      "容量只需要到 `k - 1`，因為達到 k 後只關心是否非法。",
+      "0-1 背包需倒序枚舉 sum，避免同一元素被使用多次。",
+    ],
+    derivation: [
+      "若總和小於 `2*k`，不可能讓兩組都達標，直接回傳 0。",
+      "計算所有子集總和 `< k` 的方案數 bad。",
+      "任一非法分割一定有一側總和 `< k`，且兩側不會同時小於 k。",
+      "答案為 `2^n - 2*bad`。",
+    ],
+    patterns: ["0-1 背包計數", "總方案扣非法", "容量截斷"],
+    pitfalls: [
+      "總和不足時要先判斷，否則兩側都小於 k 會被重複扣除。",
+      "dp 容量不用開到總和。",
+      "模減法要補正。",
+    ],
+    complexity: "時間 `O(nk)`，空間 `O(k)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int countPartitions(vector<int>& nums, int k) {\n        constexpr long long kMod = 1'000'000'007;\n        long long total_sum = accumulate(nums.begin(), nums.end(), 0LL);\n        if (total_sum < 2LL * k) return 0;\n\n        vector<long long> dp(k, 0);\n        dp[0] = 1;\n        long long total_ways = 1;\n        for (int x : nums) {\n            total_ways = total_ways * 2 % kMod;\n            for (int sum = k - 1; sum >= x; --sum) {\n                dp[sum] = (dp[sum] + dp[sum - x]) % kMod;\n            }\n        }\n\n        long long bad = accumulate(dp.begin(), dp.end(), 0LL) % kMod;\n        return (total_ways - 2 * bad % kMod + kMod) % kMod;\n    }\n};\n```",
+  },
+  "number-of-increasing-paths-in-a-grid": {
+    modelProblem:
+      "LeetCode 2328 給定整數矩陣 `grid`。一條路徑可以從任意格開始，每一步往上下左右相鄰且值更大的格子走。請計算所有嚴格遞增路徑數量。",
+    signals: [
+      "網格邊由小值指向大值，形成 DAG",
+      "每格答案可由更大的鄰格回傳",
+      "問所有起點的方案數總和",
+    ],
+    invariants: [
+      "`dfs(row,col)` 表示從該格出發的遞增路徑數，至少包含只停在自己的 1 條。",
+      "只往值更大的鄰格遞迴，因此不會成環。",
+      "記憶化後每個格子的答案只計算一次。",
+    ],
+    derivation: [
+      "把每個格子視為 DAG 節點。",
+      "從任一格出發，先計入單格路徑。",
+      "枚舉四個鄰格，若值更大，就把鄰格的路徑數加回來。",
+      "對所有格子的 `dfs` 結果求和。",
+    ],
+    patterns: ["網格 DAG", "記憶化 DFS", "路徑計數 DP"],
+    pitfalls: [
+      "相等值不能移動。",
+      "答案要在每次加法後取模。",
+      "不要用普通 BFS 最短路模型解計數 DP。",
+    ],
+    complexity: "每個格子與四條邊處理一次，時間 `O(rows*cols)`。",
+    code: "```cpp\nclass Solution {\n    static constexpr int kMod = 1'000'000'007;\n    int rows_ = 0;\n    int cols_ = 0;\n    vector<vector<int>> memo_;\n    const int dirs_[5] = {1, 0, -1, 0, 1};\n\n    int dfs(vector<vector<int>>& grid, int row, int col) {\n        if (memo_[row][col] != 0) return memo_[row][col];\n        long long paths = 1;\n        for (int dir = 0; dir < 4; ++dir) {\n            int next_row = row + dirs_[dir];\n            int next_col = col + dirs_[dir + 1];\n            if (next_row < 0 || next_row >= rows_ || next_col < 0 || next_col >= cols_) continue;\n            if (grid[next_row][next_col] > grid[row][col]) paths += dfs(grid, next_row, next_col);\n        }\n        return memo_[row][col] = paths % kMod;\n    }\n\npublic:\n    int countPaths(vector<vector<int>>& grid) {\n        rows_ = grid.size();\n        cols_ = grid[0].size();\n        memo_.assign(rows_, vector<int>(cols_, 0));\n        long long answer = 0;\n        for (int row = 0; row < rows_; ++row) {\n            for (int col = 0; col < cols_; ++col) answer = (answer + dfs(grid, row, col)) % kMod;\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "minimum-number-of-removals-to-make-mountain-array": {
+    modelProblem:
+      "LeetCode 1671 給定陣列 `nums`。請刪除最少元素，使剩下序列成為山形陣列：先嚴格遞增再嚴格遞減，且峰值左右都至少有一個元素。",
+    signals: [
+      "刪除最少等價於保留最長合法子序列",
+      "每個位置可以作為峰值",
+      "峰值左側需要 LIS，右側需要 LDS",
+    ],
+    invariants: [
+      "`left[i]` 是以 i 結尾的最長嚴格遞增子序列長度。",
+      "`right[i]` 是以 i 開始的最長嚴格遞減子序列長度。",
+      "只有 `left[i] > 1 && right[i] > 1` 的位置能當峰值。",
+    ],
+    derivation: [
+      "從左到右計算每個位置的 LIS 長度。",
+      "從右到左計算每個位置往右的嚴格遞減長度。",
+      "枚舉峰值 i，山形長度為 `left[i] + right[i] - 1`。",
+      "答案是 `n - max_mountain_length`。",
+    ],
+    patterns: ["LIS 長度表", "前後綴 DP", "枚舉峰值"],
+    pitfalls: [
+      "左右任一側長度為 1 時不是合法山形。",
+      "嚴格遞增使用 `lower_bound`，不是 `upper_bound`。",
+    ],
+    complexity: "兩次 LIS 計算 `O(n log n)`，空間 `O(n)`。",
+    code: "```cpp\nclass Solution {\n    vector<int> lisLengths(const vector<int>& nums) {\n        vector<int> tails;\n        vector<int> lengths(nums.size());\n        for (int i = 0; i < (int)nums.size(); ++i) {\n            auto it = lower_bound(tails.begin(), tails.end(), nums[i]);\n            int length = it - tails.begin() + 1;\n            if (it == tails.end()) tails.push_back(nums[i]); else *it = nums[i];\n            lengths[i] = length;\n        }\n        return lengths;\n    }\n\npublic:\n    int minimumMountainRemovals(vector<int>& nums) {\n        vector<int> left = lisLengths(nums);\n        vector<int> reversed_nums(nums.rbegin(), nums.rend());\n        vector<int> right = lisLengths(reversed_nums);\n        reverse(right.begin(), right.end());\n\n        int best = 0;\n        for (int i = 0; i < (int)nums.size(); ++i) {\n            if (left[i] > 1 && right[i] > 1) best = max(best, left[i] + right[i] - 1);\n        }\n        return nums.size() - best;\n    }\n};\n```",
+  },
+  "shortest-cycle-in-a-graph": {
+    modelProblem:
+      "LeetCode 2608 給定 n 個點的無向圖 `edges`，請找出圖中最短 cycle 的長度；若不存在 cycle，回傳 -1。",
+    signals: [
+      "無向無權圖",
+      "問最短 cycle，可從每個起點做 BFS",
+      "BFS tree 中遇到非父邊代表形成 cycle",
+    ],
+    invariants: [
+      "從 source BFS 時，`dist[node]` 是 source 到 node 的最短距離。",
+      "若看到已訪問鄰點且不是父邊，則 `dist[u] + dist[v] + 1` 是一個 cycle 長度。",
+      "對所有 source 取最小值即可得到全圖最短 cycle。",
+    ],
+    derivation: [
+      "建立無向鄰接表。",
+      "枚舉每個 source 進行 BFS，記錄 dist 與 parent。",
+      "擴展邊 `(node,next)` 時，若 next 未訪問就入隊。",
+      "若 next 已訪問且不是 parent，更新答案。",
+    ],
+    patterns: ["無權圖 BFS", "BFS 找最短環", "父邊排除"],
+    pitfalls: [
+      "無向圖中返回父節點的邊不能當作 cycle。",
+      "只從一個點 BFS 可能漏掉其他 component 的最短環。",
+    ],
+    complexity: "從每個點 BFS，時間 `O(V*(V+E))`，空間 `O(V+E)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int findShortestCycle(int n, vector<vector<int>>& edges) {\n        vector<vector<int>> graph(n);\n        for (const auto& edge : edges) {\n            graph[edge[0]].push_back(edge[1]);\n            graph[edge[1]].push_back(edge[0]);\n        }\n\n        int answer = INT_MAX;\n        for (int source = 0; source < n; ++source) {\n            vector<int> dist(n, -1), parent(n, -1);\n            queue<int> q;\n            dist[source] = 0;\n            q.push(source);\n            while (!q.empty()) {\n                int node = q.front();\n                q.pop();\n                for (int next_node : graph[node]) {\n                    if (dist[next_node] == -1) {\n                        dist[next_node] = dist[node] + 1;\n                        parent[next_node] = node;\n                        q.push(next_node);\n                    } else if (parent[node] != next_node && parent[next_node] != node) {\n                        answer = min(answer, dist[node] + dist[next_node] + 1);\n                    }\n                }\n            }\n        }\n        return answer == INT_MAX ? -1 : answer;\n    }\n};\n```",
+  },
+  "parallel-courses-iii": {
+    modelProblem:
+      "LeetCode 2050 給定 n 門課、先修關係 `relations` 與每門課耗時 `time`。多門課可並行修，只要先修都完成即可開始。請求完成所有課程的最短月份數。",
+    signals: [
+      "有向先修依賴",
+      "可以並行，答案是 DAG 上最長路",
+      "若前驅完成時間不同，取最大者",
+    ],
+    invariants: [
+      "入度為 0 的課程可立即開始。",
+      "`finish[i]` 是完成第 i 門課的最早時間。",
+      "拓撲處理到某課時，所有已處理前驅都已把可能答案傳給它。",
+    ],
+    derivation: [
+      "建立 `prev -> next` 有向圖與 indegree。",
+      "把所有 indegree 為 0 的課程入隊，初始完成時間為自身耗時。",
+      "彈出課程後，用 `finish[cur] + time[next]` 更新後繼。",
+      "後繼入度降為 0 時入隊。",
+      "所有課程完成時間的最大值就是答案。",
+    ],
+    patterns: ["Kahn 拓撲排序", "DAG 最長路", "依賴排程"],
+    pitfalls: [
+      "不是把所有耗時相加，因為課程可以並行。",
+      "邊方向必須從先修指向後修。",
+    ],
+    complexity: "`O(n + relations.size())`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time) {\n        vector<vector<int>> graph(n);\n        vector<int> indegree(n, 0), finish(n, 0);\n        for (const auto& relation : relations) {\n            int from = relation[0] - 1;\n            int to = relation[1] - 1;\n            graph[from].push_back(to);\n            indegree[to]++;\n        }\n\n        queue<int> q;\n        for (int course = 0; course < n; ++course) {\n            finish[course] = time[course];\n            if (indegree[course] == 0) q.push(course);\n        }\n\n        while (!q.empty()) {\n            int course = q.front();\n            q.pop();\n            for (int next_course : graph[course]) {\n                finish[next_course] = max(finish[next_course], finish[course] + time[next_course]);\n                if (--indegree[next_course] == 0) q.push(next_course);\n            }\n        }\n        return *max_element(finish.begin(), finish.end());\n    }\n};\n```",
+  },
+  "minimum-weighted-subgraph-with-the-required-paths": {
+    modelProblem:
+      "LeetCode 2203 給定有向帶權圖，以及 `src1`、`src2`、`dest`。請選一個子圖，使 src1 與 src2 都能到達 dest，且子圖邊權總和最小。",
+    signals: [
+      "兩個起點都要到同一終點",
+      "邊權非負",
+      "可以在某個匯合點 meet 後共用到 dest 的路徑",
+    ],
+    invariants: [
+      "`dist1[x]` 是 src1 到 x 的最短路。",
+      "`dist2[x]` 是 src2 到 x 的最短路。",
+      "`dist_to_dest[x]` 可由反圖上從 dest 出發的 Dijkstra 得到。",
+    ],
+    derivation: [
+      "在原圖上分別從 src1 與 src2 跑 Dijkstra。",
+      "建立反圖，從 dest 跑 Dijkstra，得到每個點到 dest 的最短路。",
+      "枚舉匯合點 x，候選答案為 `dist1[x] + dist2[x] + dist_to_dest[x]`。",
+      "若三段任一不可達，跳過該 x。",
+    ],
+    patterns: ["多源需求拆成多次 Dijkstra", "反圖最短路", "枚舉匯合點"],
+    pitfalls: [
+      "不能只找 src1 到 src2 或 src2 到 src1 的路。",
+      "到 dest 的距離要在反圖上從 dest 出發求。",
+      "距離使用 `long long`。",
+    ],
+    complexity: "三次 Dijkstra，時間 `O((V+E)logV)`，空間 `O(V+E)`。",
+    code: "```cpp\nclass Solution {\n    vector<long long> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {\n        constexpr long long kInf = 4e18;\n        vector<long long> dist(n, kInf);\n        priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n        dist[source] = 0;\n        pq.push({0, source});\n        while (!pq.empty()) {\n            auto [current_dist, node] = pq.top();\n            pq.pop();\n            if (current_dist != dist[node]) continue;\n            for (auto [next_node, weight] : graph[node]) {\n                if (dist[next_node] > current_dist + weight) {\n                    dist[next_node] = current_dist + weight;\n                    pq.push({dist[next_node], next_node});\n                }\n            }\n        }\n        return dist;\n    }\n\npublic:\n    long long minimumWeight(int n, vector<vector<int>>& edges, int src1, int src2, int dest) {\n        vector<vector<pair<int, int>>> graph(n), reverse_graph(n);\n        for (const auto& edge : edges) {\n            graph[edge[0]].push_back({edge[1], edge[2]});\n            reverse_graph[edge[1]].push_back({edge[0], edge[2]});\n        }\n        auto dist1 = dijkstra(n, graph, src1);\n        auto dist2 = dijkstra(n, graph, src2);\n        auto dist3 = dijkstra(n, reverse_graph, dest);\n        constexpr long long kInf = 4e18;\n        long long answer = kInf;\n        for (int meet = 0; meet < n; ++meet) {\n            if (dist1[meet] == kInf || dist2[meet] == kInf || dist3[meet] == kInf) continue;\n            answer = min(answer, dist1[meet] + dist2[meet] + dist3[meet]);\n        }\n        return answer == kInf ? -1 : answer;\n    }\n};\n```",
+  },
+  "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree": {
+    modelProblem:
+      "LeetCode 1489 給定無向帶權連通圖。若某條邊出現在所有 MST 中，稱為 critical edge；若某條邊可出現在至少一棵 MST 中，稱為 pseudo-critical edge。請分類所有邊。",
+    signals: [
+      "問題本質是 MST 邊的重要性",
+      "需要比較強制加入或禁止某條邊後的 MST 權重",
+      "Kruskal + DSU 可以重算 MST",
+    ],
+    invariants: [
+      "基準 MST 權重 `base` 是所有 MST 的最小權重。",
+      "排除邊 e 後若無法連通或權重大於 base，e 是 critical。",
+      "強制加入 e 後若仍能得到權重 base，e 是 pseudo-critical。",
+    ],
+    derivation: [
+      "先為每條邊附上原始下標，按權重排序。",
+      "用 Kruskal 求基準 MST 權重。",
+      "對每條邊，先測試 skip 該邊的 MST 權重。",
+      "若不是 critical，再測試 force 該邊後的 MST 權重。",
+      "依測試結果放入兩個答案列表。",
+    ],
+    patterns: ["Kruskal", "DSU", "強制/禁止邊敏感度分析"],
+    pitfalls: [
+      "排序後要保留原始 edge index。",
+      "強制加入邊時要先把該邊權重與合併算入。",
+      "若 picked 邊數不足 `n-1`，該 MST 權重視為無限大。",
+    ],
+    complexity: "對每條邊重跑 Kruskal，時間 `O(E^2 α(V))` 加排序。",
+    code: "```cpp\nclass Solution {\npublic:\n    vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>>& edges) {\n        // 1. append original index to each edge: {from, to, weight, index}\n        // 2. sort by weight and implement kruskal(skip_index, force_index)\n        // 3. base = kruskal(-1, -1)\n        // 4. if kruskal(edge_index, -1) > base -> critical\n        // 5. else if kruskal(-1, edge_index) == base -> pseudo-critical\n        return { {}, {} };\n    }\n};\n```",
+  },
+  "critical-connections-in-a-network": {
+    modelProblem:
+      "LeetCode 1192 給定 n 個伺服器與無向連線。若移除某條連線後圖不再連通，該連線是 critical connection。請找出所有 critical connections。",
+    signals: [
+      "問刪掉一條邊是否使圖斷開",
+      "無向圖橋問題",
+      "需要 DFS 時間戳與 low-link",
+    ],
+    invariants: [
+      "`dfn[u]` 是 u 第一次被 DFS 訪問的時間。",
+      "`low[u]` 是 u 子樹能透過 DFS tree edge 或 back edge 回到的最小 dfn。",
+      "若 tree edge `(u,v)` 滿足 `low[v] > dfn[u]`，它就是橋。",
+    ],
+    derivation: [
+      "建立無向鄰接表，保留 edge id。",
+      "DFS 時為每個點設定 dfn 與 low。",
+      "回溯 child 後，用 `low[child]` 更新 `low[node]`。",
+      "若 child 無法回到 node 或 node 祖先，記錄該邊。",
+    ],
+    patterns: ["Tarjan bridge", "low-link", "edge id 排除父邊"],
+    pitfalls: [
+      "不能只用 parent node 排除父邊，重邊情況會出錯。",
+      "`low[v] > dfn[u]` 才是橋；等於代表有回邊。",
+    ],
+    complexity: "`O(V + E)`。",
+    code: "```cpp\nclass Solution {\n    vector<vector<pair<int, int>>> graph_;\n    vector<int> dfn_;\n    vector<int> low_;\n    vector<vector<int>> answer_;\n    int timer_ = 0;\n\n    void dfs(int node, int parent_edge) {\n        dfn_[node] = low_[node] = ++timer_;\n        for (auto [next_node, edge_id] : graph_[node]) {\n            if (edge_id == parent_edge) continue;\n            if (dfn_[next_node] == 0) {\n                dfs(next_node, edge_id);\n                low_[node] = min(low_[node], low_[next_node]);\n                if (low_[next_node] > dfn_[node]) answer_.push_back({node, next_node});\n            } else {\n                low_[node] = min(low_[node], dfn_[next_node]);\n            }\n        }\n    }\n\npublic:\n    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {\n        graph_.assign(n, {});\n        for (int id = 0; id < (int)connections.size(); ++id) {\n            int a = connections[id][0], b = connections[id][1];\n            graph_[a].push_back({b, id});\n            graph_[b].push_back({a, id});\n        }\n        dfn_.assign(n, 0);\n        low_.assign(n, 0);\n        dfs(0, -1);\n        return answer_;\n    }\n};\n```",
+  },
+  "maximum-students-taking-exam": {
+    modelProblem:
+      "LeetCode 1349 給定座位矩陣，壞座位不可坐。學生不能坐在左右相鄰位置，也不能坐在左上或右上斜對角可作弊的位置。請求最多可安排學生數。",
+    signals: [
+      "每列座位狀態可壓成 bitmask",
+      "同列限制與相鄰列限制分開檢查",
+      "也可建成二分圖最大獨立集模型",
+    ],
+    invariants: [
+      "一列 mask 合法，代表不使用壞座位且沒有左右相鄰 1。",
+      "`dp[row][mask]` 表示第 row 列使用 mask 時，前 row 列最大安排數。",
+      "相鄰兩列 mask 不能在斜對角位置衝突。",
+    ],
+    derivation: [
+      "把每列可用座位轉成 bitmask。",
+      "枚舉每列所有合法 mask。",
+      "用 DP 從上一列合法 mask 轉移到目前 mask。",
+      "檢查 `(prev << 1) & mask` 與 `(prev >> 1) & mask` 都為 0。",
+    ],
+    patterns: ["狀態壓縮 DP", "二分圖最大獨立集等價模型", "列間相容性"],
+    pitfalls: [
+      "左右相鄰是同列限制，斜對角是相鄰列限制。",
+      "bitmask 的 1 代表坐人，不是壞座位。",
+    ],
+    complexity: "若每列合法 mask 數為 S，時間 `O(rows*S^2)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int maxStudents(vector<vector<char>>& seats) {\n        int rows = seats.size();\n        int cols = seats[0].size();\n        vector<int> valid_masks;\n        for (int mask = 0; mask < (1 << cols); ++mask) {\n            if ((mask & (mask << 1)) == 0) valid_masks.push_back(mask);\n        }\n        vector<unordered_map<int, int>> dp(rows + 1);\n        dp[0][0] = 0;\n        for (int row = 0; row < rows; ++row) {\n            int available = 0;\n            for (int col = 0; col < cols; ++col) if (seats[row][col] == '.') available |= 1 << col;\n            for (auto [prev_mask, value] : dp[row]) {\n                for (int mask : valid_masks) {\n                    if ((mask & ~available) != 0) continue;\n                    if (((prev_mask << 1) & mask) || ((prev_mask >> 1) & mask)) continue;\n                    dp[row + 1][mask] = max(dp[row + 1][mask], value + __builtin_popcount((unsigned)mask));\n                }\n            }\n        }\n        int answer = 0;\n        for (auto [mask, value] : dp[rows]) answer = max(answer, value);\n        return answer;\n    }\n};\n```",
+  },
+  "minimum-time-to-complete-all-tasks": {
+    modelProblem:
+      "LeetCode 2589 給定多個任務 `[start, end, duration]`。任務可在區間內任意選 duration 個整數時間點執行，同一時間可同時服務多個任務。請求完成所有任務所需開啟的最少時間點數。",
+    signals: [
+      "每個任務是區間需求",
+      "按右端點排序後，先滿足早結束的任務",
+      "新開時間點應盡量靠右，以便覆蓋後續任務",
+    ],
+    invariants: [
+      "處理到某任務時，所有更早結束的任務已滿足。",
+      "已選時間點越靠右，對未來區間越有利。",
+      "若當前任務仍缺 need 個時間點，從 end 往 start 補最安全。",
+    ],
+    derivation: [
+      "依 end 由小到大排序任務。",
+      "對每個任務，先計算 `[start,end]` 中已開啟多少時間點。",
+      "若不足 duration，從 end 向左選尚未開啟的時間點補足。",
+      "最後已開啟時間點數即為答案。",
+    ],
+    patterns: ["區間右端點貪心", "最少點覆蓋帶需求區間", "靠右補點"],
+    pitfalls: [
+      "不能按 start 排序，否則會浪費可覆蓋未來的右側位置。",
+      "同一時間點可以服務多個任務，所以不是累加 duration。",
+    ],
+    complexity: "簡單實作為 `O(n * U)`，可用線段樹優化到 `O(n log U)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int findMinimumTime(vector<vector<int>>& tasks) {\n        sort(tasks.begin(), tasks.end(), [](const auto& lhs, const auto& rhs) { return lhs[1] < rhs[1]; });\n        vector<int> used(2001, 0);\n        int answer = 0;\n        for (const auto& task : tasks) {\n            int start = task[0], end = task[1], duration = task[2];\n            for (int time = start; time <= end; ++time) duration -= used[time];\n            for (int time = end; duration > 0; --time) {\n                if (used[time]) continue;\n                used[time] = 1;\n                duration--;\n                answer++;\n            }\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "gcd-sort-of-an-array": {
+    modelProblem:
+      "LeetCode 1998 給定陣列 `nums`。若兩個數的 gcd 大於 1，便可交換它們。請判斷能否透過任意次交換把陣列排序成非遞減。",
+    signals: [
+      "交換關係具有傳遞性",
+      "兩數是否可連通取決於共享質因數",
+      "可用質因數把值連成 DSU component",
+    ],
+    invariants: [
+      "若兩個值在同一 DSU component，代表可透過一系列 gcd>1 的交換互換位置。",
+      "每個數與其所有質因數節點合併。",
+      "排序後，原位置值與目標值必須位於同一 component。",
+    ],
+    derivation: [
+      "複製並排序 nums 得到 target。",
+      "對每個值做質因數分解，把值和質因數在 DSU 中合併。",
+      "逐位置檢查 `nums[i]` 是否能換成 `target[i]`。",
+      "若任一位置不連通，無法排序。",
+    ],
+    patterns: ["質因數分解", "DSU 建連通交換群", "排序後逐位驗證"],
+    pitfalls: [
+      "gcd 關係不是只看相鄰元素，而是所有值之間可交換。",
+      "質因數節點與數值節點共用 DSU 時，大小要開到最大值。",
+    ],
+    complexity: "分解到 `sqrt(maxV)` 的總成本視值域而定；DSU 操作近似線性。",
+    code: "```cpp\nclass Solution {\npublic:\n    bool gcdSort(vector<int>& nums) {\n        // 1. build DSU over values up to max(nums)\n        // 2. factor each x and unite(x, prime_factor)\n        // 3. compare nums with sorted copy; each pair must share a DSU root\n        return true;\n    }\n};\n```",
+  },
+  "find-beautiful-indices-in-the-given-array-ii": {
+    modelProblem:
+      "LeetCode 3008 給定字串 `s`、模式 `a`、模式 `b` 與整數 `k`。若 `a` 在位置 i 出現，且存在 `b` 的出現位置 j 使 `|i-j| <= k`，則 i 是 beautiful index。請回傳所有 beautiful index。",
+    signals: [
+      "需要找兩個 pattern 在文字中的所有出現位置",
+      "單次匹配應為線性時間",
+      "匹配後再用二分或雙指標判斷距離",
+    ],
+    invariants: [
+      "KMP 回傳 pattern 在 s 中所有起點。",
+      "b 的出現位置排序後，可對每個 a 的位置找最近候選。",
+      "若最近的 b 距離不超過 k，該 a 起點合法。",
+    ],
+    derivation: [
+      "用 KMP 找出所有 a 的出現位置。",
+      "用 KMP 找出所有 b 的出現位置。",
+      "對每個 a_index，在 b_positions 中 lower_bound 找第一個不小於 `a_index-k` 的位置。",
+      "若該位置存在且不大於 `a_index+k`，加入答案。",
+    ],
+    patterns: ["KMP 多次匹配", "匹配結果二分", "距離窗口"],
+    pitfalls: [
+      "找到完整匹配後要按 prefix function 回退，避免漏掉重疊出現。",
+      "距離條件作用在起始下標，不是結束下標。",
+    ],
+    complexity:
+      "兩次 KMP `O(|s|+|a|+|b|)`，查詢 `O(matches_a log matches_b)`。",
+    code: "```cpp\nclass Solution {\n    vector<int> findOccurrences(const string& text, const string& pattern) {\n        vector<int> pi(pattern.size()), positions;\n        for (int i = 1; i < (int)pattern.size(); ++i) {\n            int matched = pi[i - 1];\n            while (matched > 0 && pattern[i] != pattern[matched]) matched = pi[matched - 1];\n            if (pattern[i] == pattern[matched]) matched++;\n            pi[i] = matched;\n        }\n        int matched = 0;\n        for (int i = 0; i < (int)text.size(); ++i) {\n            while (matched > 0 && text[i] != pattern[matched]) matched = pi[matched - 1];\n            if (text[i] == pattern[matched]) matched++;\n            if (matched == (int)pattern.size()) {\n                positions.push_back(i - (int)pattern.size() + 1);\n                matched = pi[matched - 1];\n            }\n        }\n        return positions;\n    }\n\npublic:\n    vector<int> beautifulIndices(string s, string a, string b, int k) {\n        vector<int> a_positions = findOccurrences(s, a);\n        vector<int> b_positions = findOccurrences(s, b);\n        vector<int> answer;\n        for (int index : a_positions) {\n            auto it = lower_bound(b_positions.begin(), b_positions.end(), index - k);\n            if (it != b_positions.end() && *it <= index + k) answer.push_back(index);\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "height-of-binary-tree-after-subtree-removal-queries": {
+    modelProblem:
+      "LeetCode 2458 給定二叉樹 root 與多個 query。每次 query 移除以某個節點為根的整棵子樹，請回傳剩下樹的高度；每個 query 彼此獨立。",
+    signals: [
+      "每個 query 移除一棵子樹",
+      "需要預處理每個節點被移除後，外部仍可提供的最大高度",
+      "自底向上算子樹高度，自頂向下傳遞外部答案",
+    ],
+    invariants: [
+      "`height[node]` 是 node 子樹高度。",
+      "`answer[node]` 是移除 node 子樹後整棵樹剩餘高度。",
+      "走向某個 child 時，外部最大高度來自父節點外部或 sibling 子樹。",
+    ],
+    derivation: [
+      "第一次 DFS 後序計算每個節點子樹高度。",
+      "第二次 DFS 從 root 往下傳 `rest_height`。",
+      "對左子節點，候選外部高度是父外部與右子樹高度加上深度。",
+      "對右子節點同理使用左子樹。",
+      "query 直接查預處理答案。",
+    ],
+    patterns: ["樹形 DP", "rerooting 思想", "自底向上 + 自頂向下"],
+    pitfalls: [
+      "queries 互相獨立，不是真的連續刪樹。",
+      "高度定義以邊數或節點數要一致。",
+    ],
+    complexity: "兩次 DFS `O(n)`，回答查詢 `O(q)`。",
+    code: "```cpp\nclass Solution {\n    unordered_map<int, int> height_;\n    unordered_map<int, int> answer_;\n\n    int getHeight(TreeNode* node) {\n        if (node == nullptr) return -1;\n        return height_[node->val] = max(getHeight(node->left), getHeight(node->right)) + 1;\n    }\n\n    void dfs(TreeNode* node, int depth, int rest_height) {\n        if (node == nullptr) return;\n        answer_[node->val] = rest_height;\n        int left_height = node->left ? height_[node->left->val] : -1;\n        int right_height = node->right ? height_[node->right->val] : -1;\n        dfs(node->left, depth + 1, max(rest_height, depth + 1 + right_height));\n        dfs(node->right, depth + 1, max(rest_height, depth + 1 + left_height));\n    }\n\npublic:\n    vector<int> treeQueries(TreeNode* root, vector<int>& queries) {\n        getHeight(root);\n        dfs(root, 0, 0);\n        vector<int> result;\n        for (int query : queries) result.push_back(answer_[query]);\n        return result;\n    }\n};\n```",
+  },
+  "maximum-or": {
+    modelProblem:
+      "LeetCode 2680 給定陣列 `nums` 與整數 `k`。你可以選一個元素，把它乘上 `2^k`，請最大化整個陣列的 bitwise OR。",
+    signals: [
+      "OR 的每個 bit 只要某個數提供即可",
+      "操作只能集中在一個元素上",
+      "需要知道某位置以外所有元素的 OR",
+    ],
+    invariants: [
+      "`prefix_or[i]` 是 i 左側所有元素 OR。",
+      "`suffix_or[i]` 是 i 右側所有元素 OR。",
+      "選 i 操作後，答案候選是 `prefix | (nums[i] << k) | suffix`。",
+    ],
+    derivation: [
+      "先建立前綴 OR 與後綴 OR。",
+      "枚舉被乘上 `2^k` 的元素 i。",
+      "合併 i 左側 OR、操作後的 nums[i]、i 右側 OR。",
+      "取最大值。",
+    ],
+    patterns: ["拆位 OR 貢獻", "前後綴分解", "枚舉唯一操作位置"],
+    pitfalls: [
+      "左移後可能超過 int，使用 `long long`。",
+      "操作不能分散到多個元素。",
+    ],
+    complexity: "時間 `O(n)`，空間 `O(n)`；也可用 suffix 壓縮。",
+    code: "```cpp\nclass Solution {\npublic:\n    long long maximumOr(vector<int>& nums, int k) {\n        int n = nums.size();\n        vector<long long> prefix(n + 1, 0), suffix(n + 1, 0);\n        for (int i = 0; i < n; ++i) prefix[i + 1] = prefix[i] | nums[i];\n        for (int i = n - 1; i >= 0; --i) suffix[i] = suffix[i + 1] | nums[i];\n\n        long long answer = 0;\n        for (int i = 0; i < n; ++i) {\n            answer = max(answer, prefix[i] | (1LL * nums[i] << k) | suffix[i + 1]);\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "maximum-xor-of-subsequences": {
+    modelProblem:
+      "LeetCode 3681 給定陣列 `nums`，請從中選出任意子序列，使子序列元素 XOR 最大，回傳最大值。",
+    signals: [
+      "任意子序列的 XOR",
+      "選或不選形成 GF(2) 線性空間",
+      "需要最大可表示 XOR 值",
+    ],
+    invariants: [
+      "`basis[bit]` 若非 0，表示已有最高位為 bit 的基向量。",
+      "插入 x 時，用已有基向量消去最高位，直到放入新基或變成 0。",
+      "求最大值時從高位往低位嘗試讓答案變大。",
+    ],
+    derivation: [
+      "建立 XOR 線性基。",
+      "依序把每個數插入線性基。",
+      "從最高位到最低位，若 `answer ^ basis[bit]` 更大，就採用。",
+      "最後 answer 是所有子序列 XOR 可達最大值。",
+    ],
+    patterns: ["線性基", "最大子集 XOR", "GF(2) 高斯消去"],
+    pitfalls: [
+      "線性基處理的是任意子序列，不保留原順序限制。",
+      "bit 上限要依 nums 值域設定。",
+    ],
+    complexity: "每個數插入 `O(B)`，查詢 `O(B)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int maxXorSubsequences(vector<int>& nums) {\n        constexpr int kMaxBit = 30;\n        array<int, kMaxBit + 1> basis{};\n        for (int x : nums) {\n            for (int bit = kMaxBit; bit >= 0; --bit) {\n                if (((x >> bit) & 1) == 0) continue;\n                if (basis[bit] == 0) {\n                    basis[bit] = x;\n                    break;\n                }\n                x ^= basis[bit];\n            }\n        }\n        int answer = 0;\n        for (int bit = kMaxBit; bit >= 0; --bit) answer = max(answer, answer ^ basis[bit]);\n        return answer;\n    }\n};\n```",
+  },
+  "maximum-product-of-the-length-of-two-palindromic-substrings": {
+    modelProblem:
+      "LeetCode 1960 給定字串 `s`，請選兩個不重疊的奇數長度回文子字串，使它們長度乘積最大，回傳最大乘積。",
+    signals: [
+      "需要每個中心的最長奇回文半徑",
+      "兩段不重疊，可拆成左側最佳與右側最佳",
+      "Manacher 可在線性時間求所有中心半徑",
+    ],
+    invariants: [
+      "`radius[i]` 表示以 i 為中心的最大奇回文半徑。",
+      "`best_left[i]` 是完全落在 `[0,i]` 的最大奇回文長度。",
+      "`best_right[i]` 是完全落在 `[i,n-1]` 的最大奇回文長度。",
+    ],
+    derivation: [
+      "先用 Manacher 求每個中心的奇回文半徑。",
+      "把每個回文可覆蓋的右端點更新到 best_left。",
+      "由左往右傳遞 best_left，並處理長度每次最多增加 2 的限制。",
+      "同理反向得到 best_right。",
+      "枚舉切分點 i，最大化 `best_left[i] * best_right[i+1]`。",
+    ],
+    patterns: ["Manacher", "回文半徑", "前後綴最佳值分解"],
+    pitfalls: [
+      "本題只考慮奇數長度回文。",
+      "半徑與長度的換算要一致。",
+      "兩個回文必須不重疊，所以切分點左右不能交叉。",
+    ],
+    complexity: "Manacher 與前後綴處理皆為 `O(n)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    long long maxProduct(string s) {\n        // 1. run odd-length Manacher to get radius for each center\n        // 2. derive best_left[i]: best odd palindrome fully ending at or before i\n        // 3. derive best_right[i]: best odd palindrome fully starting at or after i\n        // 4. enumerate split i and maximize 1LL * best_left[i] * best_right[i + 1]\n        return 0;\n    }\n};\n```",
+  },
+  "sum-of-scores-of-built-strings": {
+    modelProblem:
+      "LeetCode 2223 給定字串 `s`。對每個後綴，計算它與 `s` 的最長公共前綴長度，請回傳所有後綴分數總和。",
+    signals: [
+      "每個後綴都要和原字串前綴比較",
+      "暴力比較會重複大量字元",
+      "Z function 正是每個位置開始與整串前綴的 LCP 長度",
+    ],
+    invariants: [
+      "`z[i]` 表示 `s[i..]` 與 `s[0..]` 的最長公共前綴長度。",
+      "維護最右匹配盒 `[left,right]`，其中區間內容等於前綴。",
+      "若 i 在盒內，可用 `z[i-left]` 給出初始下界。",
+    ],
+    derivation: [
+      "計算整個字串的 Z function。",
+      "位置 0 的後綴與原字串完全相同，分數為 n。",
+      "其他位置 i 的分數就是 `z[i]`。",
+      "把 n 與所有 z 值相加。",
+    ],
+    patterns: ["Z function", "後綴與前綴 LCP", "最右匹配盒"],
+    pitfalls: [
+      "`z[0]` 通常設為 0，但本題分數要額外加上 n。",
+      "盒內初始值要取 `min(right-i+1, z[i-left])`。",
+    ],
+    complexity: "`O(n)` 時間與 `O(n)` 空間。",
+    code: "```cpp\nclass Solution {\npublic:\n    long long sumScores(string s) {\n        int n = s.size();\n        vector<int> z(n, 0);\n        int left = 0;\n        int right = 0;\n        long long answer = n;\n        for (int i = 1; i < n; ++i) {\n            if (i <= right) z[i] = min(right - i + 1, z[i - left]);\n            while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;\n            if (i + z[i] - 1 > right) {\n                left = i;\n                right = i + z[i] - 1;\n            }\n            answer += z[i];\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "count-ways-to-make-array-with-product": {
+    modelProblem:
+      "LeetCode 1735 給定多個查詢 `[n, k]`。對每個查詢，請計算有多少個長度為 n 的正整數陣列，其元素乘積等於 k，答案取模。",
+    signals: [
+      "乘積限制可拆成質因數指數分配",
+      "每個質因數的指數可獨立分配到 n 個位置",
+      "分配 e 個相同球到 n 個盒子的方案為組合數",
+    ],
+    invariants: [
+      "若 `k = p1^e1 * p2^e2 * ...`，不同質因數的分配互相獨立。",
+      "單個質因數指數 e 分給 n 個位置，方案數是 `C(n+e-1, e)`。",
+      "總方案是所有質因數方案數的乘積。",
+    ],
+    derivation: [
+      "預處理組合數需要的 factorial 與 inverse factorial。",
+      "對每個查詢分解 k 的質因數。",
+      "對每個指數 e，乘上 `C(n+e-1, e)`。",
+      "若最後 k 仍大於 1，代表還有一個指數為 1 的質因數。",
+    ],
+    patterns: ["質因數分解", "隔板法", "組合數預處理"],
+    pitfalls: [
+      "分配的是質因數指數，不是質因數本身。",
+      "組合數上界要覆蓋 `n + max_exponent`。",
+      "取模除法要用逆元。",
+    ],
+    complexity: "預處理 `O(N)`；每個查詢約 `O(sqrt(k))` 分解。",
+    code: "```cpp\nclass Solution {\npublic:\n    vector<int> waysToFillArray(vector<vector<int>>& queries) {\n        // 1. precompute factorials and inverse factorials modulo 1e9+7\n        // 2. factorize k for each query [n, k]\n        // 3. for each prime exponent e, multiply C(n + e - 1, e)\n        // 4. return answers in original order\n        return {};\n    }\n};\n```",
+  },
   "find-first-and-last-position-of-element-in-sorted-array": {
     modelProblem:
       "給定一個非遞減整數陣列 `nums` 與整數 `target`，請回傳 `target` 在陣列中第一次與最後一次出現的位置；若不存在，回傳 `{-1, -1}`。",
@@ -1304,6 +2308,74 @@ const exampleLectureOverrides: NonNullable<LectureTopicProfile["examples"]> = {
     ],
     complexity: "每個元素入棧出棧各一次，時間 `O(n + m)`，空間 `O(n)`。",
     code: "```cpp\nclass Solution {\npublic:\n    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {\n        unordered_map<int, int> next_greater;\n        vector<int> stack;\n        for (int x : nums2) {\n            while (!stack.empty() && stack.back() < x) {\n                next_greater[stack.back()] = x;\n                stack.pop_back();\n            }\n            stack.push_back(x);\n        }\n\n        vector<int> answer;\n        for (int x : nums1) {\n            auto it = next_greater.find(x);\n            answer.push_back(it == next_greater.end() ? -1 : it->second);\n        }\n        return answer;\n    }\n};\n```",
+  },
+  "furthest-building-you-can-reach": {
+    modelProblem:
+      "LeetCode 1642 給定建築高度 `heights`、磚塊數 `bricks` 與梯子數 `ladders`。從第 i 棟走到第 i+1 棟時，若高度增加 `diff > 0`，必須用 `diff` 個磚塊或 1 個梯子；若高度不增加則不消耗資源。請回傳在資源限制下能到達的最遠建築下標。",
+    signals: [
+      "每次只在向上爬時消耗資源",
+      "梯子適合保留給目前遇過的最大爬升",
+      "掃描到某一步才知道之前的資源分配是否需要反悔",
+    ],
+    invariants: [
+      "max-heap 保存目前暫時用磚塊支付的所有爬升高度。",
+      "`used_bricks` 是扣除反悔後，仍由磚塊支付的爬升總和。",
+      "當 `used_bricks > bricks` 時，把 heap 中最大的爬升改用梯子支付，這是一次反悔。",
+      "若已沒有梯子可反悔且磚塊超限，當前邊無法跨過，答案就是前一棟建築。",
+    ],
+    derivation: [
+      "由左到右掃描相鄰建築，忽略高度沒有增加的邊。",
+      "先假設每個正爬升都用磚塊支付，把 `diff` 加入 `used_bricks` 並放入 max-heap。",
+      "若磚塊超限，就從 heap 取出目前最大的爬升，改成用一把梯子支付。",
+      "反悔後若梯子也用完且磚塊仍超限，代表無法跨過目前這條邊。",
+      "能完成所有邊時，答案是最後一棟建築的下標。",
+    ],
+    patterns: [
+      "反悔堆",
+      "先用便宜資源承擔，再把最大代價改交給稀缺資源",
+      "掃描到違規時移除已選集合中最值得替換的元素",
+    ],
+    pitfalls: [
+      "這題不是每次看到最大爬升就立刻用梯子，而是先暫定、超限時再反悔。",
+      "heap 中應放爬升高度，不是建築高度或下標。",
+      "只有 `diff > 0` 才需要消耗資源。",
+    ],
+    complexity:
+      "每個正爬升最多進出 heap 一次，時間 `O(n log n)`，空間 `O(n)`。",
+    code: "```cpp\nclass Solution {\npublic:\n    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {\n        priority_queue<int> paid_by_bricks;\n        long long used_bricks = 0;\n\n        for (int i = 0; i + 1 < (int)heights.size(); ++i) {\n            int climb = heights[i + 1] - heights[i];\n            if (climb <= 0) continue;\n\n            used_bricks += climb;\n            paid_by_bricks.push(climb);\n\n            if (used_bricks > bricks) {\n                if (ladders == 0) return i;\n                used_bricks -= paid_by_bricks.top();\n                paid_by_bricks.pop();\n                ladders--;\n            }\n        }\n        return heights.size() - 1;\n    }\n};\n```",
+  },
+  "ugly-number-iii": {
+    modelProblem:
+      "LeetCode 1201 給定正整數 `n`、`a`、`b`、`c`。若一個正整數可以被 `a`、`b`、`c` 至少其中一個整除，稱為 ugly number。請回傳第 n 個 ugly number。",
+    signals: [
+      "題目問第 n 小的值，而不是列出所有值",
+      "固定候選值 x 後，可以計算 `<= x` 的合法數量",
+      "合法數量隨 x 單調不減",
+    ],
+    invariants: [
+      "`count(x)` 表示 `[1, x]` 中能被 a、b、c 至少一個整除的數量。",
+      "若 `count(x) >= n`，第 n 小 ugly number 一定不大於 x。",
+      "二分區間始終保留第一個讓 `count(x) >= n` 成立的位置。",
+    ],
+    derivation: [
+      "用容斥計算 `count(x)`：分別加上 `x/a`、`x/b`、`x/c`，扣掉兩兩 lcm，補回三者 lcm。",
+      "答案下界是 1，上界可取 `min(a,b,c) * n`。",
+      "對 mid 計算 `count(mid)`；若數量足夠，收縮右界，否則提高左界。",
+      "迴圈結束時 left 就是第一個數量達到 n 的值。",
+    ],
+    patterns: [
+      "第 k 小值域二分",
+      "二分答案 + 計數函式",
+      "容斥原理計算可整除個數",
+      "lcm 去重",
+    ],
+    pitfalls: [
+      "三個集合的交集要用容斥補回，不能只加三個整除數量。",
+      "lcm 與乘法可能溢位，使用 `long long`。",
+      "這題找的是第一個 `count(x) >= n` 的 x，不是任意 count 等於 n 的 x。",
+    ],
+    complexity: "每次 check 為 `O(1)`，值域二分 `O(log answer)`，空間 `O(1)`。",
+    code: "```cpp\nclass Solution {\n    long long lcmLl(long long a, long long b) {\n        return a / gcd(a, b) * b;\n    }\n\npublic:\n    int nthUglyNumber(int n, int a, int b, int c) {\n        long long ab = lcmLl(a, b);\n        long long ac = lcmLl(a, c);\n        long long bc = lcmLl(b, c);\n        long long abc = lcmLl(ab, c);\n\n        auto countUgly = [a, b, c, ab, ac, bc, abc](long long value) {\n            return value / a + value / b + value / c - value / ab - value / ac - value / bc + value / abc;\n        };\n\n        long long left = 1;\n        long long right = 1LL * min({a, b, c}) * n;\n        while (left < right) {\n            long long mid = left + (right - left) / 2;\n            if (countUgly(mid) >= n) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n        return (int)left;\n    }\n};\n```",
   },
   "find-the-index-of-the-first-occurrence-in-a-string": {
     modelProblem:

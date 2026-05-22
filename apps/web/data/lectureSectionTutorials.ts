@@ -3,14 +3,21 @@ import { getGoogleInterviewSectionTutorial } from "@/data/googleInterviewSection
 import {
   findLectureTopicProfile,
   formatLectureTopicTitle,
+  getDefaultLectureExample,
+  hasExampleLectureProfile,
   mergeExampleProfile,
 } from "@/data/lectureTopicProfiles";
-import type { StudyPlanData, TutorialData } from "@/types";
+import problemMapJson from "@/public/problemset/problems.json";
+import type { ProblemMap, StudyPlanData, TutorialData } from "@/types";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
 
-const EXAMPLE_MIN_RATING = 1700;
+const EXAMPLE_MIN_RATING = 1900;
+const problemMap = problemMapJson as ProblemMap;
+const problemBySlug = new Map(
+  Object.values(problemMap).map((problem) => [problem.titleSlug, problem]),
+);
 
 export interface LectureSectionNavItem {
   id: number;
@@ -88,6 +95,27 @@ function flattenProblems(
   ];
 }
 
+function getProblemRating(problem: StudyPlanData.Item | undefined) {
+  if (!problem) return undefined;
+  if (typeof problem.score === "number") return problem.score;
+
+  const problem_id = problem.id?.toString();
+  const indexed_by_id = problem_id ? problemMap[problem_id] : undefined;
+  return indexed_by_id?.rating ?? problemBySlug.get(problem.slug)?.rating;
+}
+
+function getProblemDisplayId(problem: StudyPlanData.Item | undefined) {
+  if (!problem) return undefined;
+  return problem.id?.toString();
+}
+
+function getProblemDisplayTitle(problem: StudyPlanData.Item) {
+  const problem_id = getProblemDisplayId(problem);
+  if (!problem_id) return problem.title;
+  const escaped_id = problem_id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return problem.title.replace(new RegExp(`^${escaped_id}\\.?\\s*`), "");
+}
+
 function pickExampleProblem(
   section: StudyPlanData.Section | undefined,
 ): StudyPlanData.Item | undefined {
@@ -95,20 +123,16 @@ function pickExampleProblem(
   if (problems.length === 0) return undefined;
 
   const high = problems
-    .filter(
-      (problem) =>
-        typeof problem.score === "number" &&
-        problem.score >= EXAMPLE_MIN_RATING,
-    )
-    .sort((a, b) => (a.score ?? 0) - (b.score ?? 0));
+    .filter((problem) => (getProblemRating(problem) ?? 0) >= EXAMPLE_MIN_RATING)
+    .sort((a, b) => (getProblemRating(a) ?? 0) - (getProblemRating(b) ?? 0));
   if (high.length > 0) return high[0];
 
   return problems
     .slice()
     .sort(
       (a, b) =>
-        (b.score ?? Number.NEGATIVE_INFINITY) -
-        (a.score ?? Number.NEGATIVE_INFINITY),
+        (getProblemRating(b) ?? Number.NEGATIVE_INFINITY) -
+        (getProblemRating(a) ?? Number.NEGATIVE_INFINITY),
     )[0];
 }
 
@@ -120,13 +144,30 @@ function formatSteps(items: string[]) {
   return items.map((item, index) => `${index + 1}. ${item}`).join("\n");
 }
 
-function formatProblemReference(example: StudyPlanData.Item | undefined) {
+function formatProblemReference(
+  example: StudyPlanData.Item | undefined,
+  isFromStudyPlan: boolean,
+) {
   if (!example) return "本節使用本章標準模型題作為講解主線。";
-  return `本節以題單中的「${example.title}」作為主例題${
-    typeof example.score === "number"
-      ? `（rating ${Math.round(example.score)}）`
-      : ""
+  const problem_id = getProblemDisplayId(example);
+  const rating = getProblemRating(example);
+  const problem_label = problem_id
+    ? `LeetCode ${problem_id}「${getProblemDisplayTitle(example)}」`
+    : `「${getProblemDisplayTitle(example)}」`;
+  const source = isFromStudyPlan ? "題單中的 " : "";
+  return `本節以${source}${problem_label} 作為主例題${
+    typeof rating === "number" ? `（rating ${Math.round(rating)}）` : ""
   }，並把同一套不變式延伸到本節其他題目。`;
+}
+
+function formatProblemHeading(
+  example: StudyPlanData.Item | undefined,
+  fallbackTitle: string,
+) {
+  if (!example) return fallbackTitle;
+  const problem_id = getProblemDisplayId(example);
+  const prefix = problem_id ? `LeetCode ${problem_id} ` : "";
+  return `${prefix}${getProblemDisplayTitle(example)}`;
 }
 
 function buildRelatedProblems(studySection: StudyPlanData.Section | undefined) {
@@ -138,10 +179,12 @@ function buildRelatedProblems(studySection: StudyPlanData.Section | undefined) {
     formatList(
       problems.map((problem) => {
         const rating =
-          typeof problem.score === "number"
-            ? `，rating ${Math.round(problem.score)}`
+          typeof getProblemRating(problem) === "number"
+            ? `，rating ${Math.round(getProblemRating(problem)!)}`
             : "";
-        return `${problem.title}${rating}`;
+        const problem_id = getProblemDisplayId(problem);
+        const prefix = problem_id ? `LeetCode ${problem_id} ` : "";
+        return `${prefix}${getProblemDisplayTitle(problem)}${rating}`;
       }),
     ),
   ].join("\n\n");
@@ -157,14 +200,20 @@ function buildGenericSectionContent(
   studySection: StudyPlanData.Section | undefined,
 ) {
   const { section } = indexed;
-  const example = pickExampleProblem(studySection);
+  const picked_example = pickExampleProblem(studySection);
   const baseProfile = findLectureTopicProfile({
     planKey,
     section,
     studySection,
     pathTitles: indexed.pathTitles,
-    example,
+    example: picked_example,
   });
+  const has_picked_specific_profile =
+    picked_example && hasExampleLectureProfile(baseProfile, picked_example);
+  const example = has_picked_specific_profile
+    ? picked_example
+    : getDefaultLectureExample(baseProfile);
+  const isFromStudyPlan = Boolean(has_picked_specific_profile);
   const profile = mergeExampleProfile(baseProfile, example);
   const topic = formatLectureTopicTitle(section);
   const summary = [
@@ -180,9 +229,9 @@ function buildGenericSectionContent(
   return [
     summary,
     [
-      `**例題解析：${example?.title ?? topic}**`,
+      `**例題解析：${formatProblemHeading(example, topic)}**`,
       `**完整問題**：${profile.modelProblem}`,
-      formatProblemReference(example),
+      formatProblemReference(example, isFromStudyPlan),
       "**題目訊號**",
       formatList(profile.signals),
       "**狀態、不變式與答案更新**",
