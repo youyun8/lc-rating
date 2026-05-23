@@ -23,6 +23,105 @@ const marked = new Marked(
   }),
 );
 
+function normalizeCppCodeBlocks(md: string) {
+  return md.replace(
+    /```(cpp|c\+\+|cc|cxx)\n([\s\S]*?)```/g,
+    (_, lang: string, code: string) =>
+      `\`\`\`${lang}\n${expandCppSingleLineControlBodies(code)}\`\`\``,
+  );
+}
+
+function expandCppSingleLineControlBodies(code: string) {
+  let result = code;
+
+  for (let pass = 0; pass < 4; pass++) {
+    const next = result
+      .split("\n")
+      .map(expandCppSingleLineControlBody)
+      .join("\n");
+
+    if (next === result) {
+      return result;
+    }
+    result = next;
+  }
+
+  return result;
+}
+
+function expandCppSingleLineControlBody(line: string) {
+  const parsed = parseCppSingleLineControlBody(line);
+
+  if (!parsed) {
+    return line;
+  }
+
+  const { indent, head, body } = parsed;
+  return `${indent}${head} {\n${indent}    ${body}\n${indent}}`;
+}
+
+function parseCppSingleLineControlBody(line: string) {
+  const indent = line.match(/^\s*/)?.[0] ?? "";
+  const rest = line.slice(indent.length);
+
+  if (rest.startsWith("}")) {
+    return null;
+  }
+
+  const elseMatch = rest.match(/^else\s+(.+)$/);
+  if (elseMatch && !rest.startsWith("else if")) {
+    return parseCppSingleLineBody(indent, "else", elseMatch[1] ?? "");
+  }
+
+  const keywordMatch = rest.match(/^(else\s+if|if|for|while)\s*\(/);
+  if (!keywordMatch) {
+    return null;
+  }
+
+  const keyword = keywordMatch[1]!;
+  const openParenIndex = rest.indexOf("(", keyword.length);
+  const closeParenIndex = findMatchingParen(rest, openParenIndex);
+
+  if (closeParenIndex === -1) {
+    return null;
+  }
+
+  const head = rest.slice(0, closeParenIndex + 1);
+  const body = rest.slice(closeParenIndex + 1).trim();
+  return parseCppSingleLineBody(indent, head, body);
+}
+
+function parseCppSingleLineBody(indent: string, head: string, body: string) {
+  const bodyWithoutComment = body.replace(/\s*\/\/.*$/, "");
+
+  if (
+    !bodyWithoutComment.endsWith(";") ||
+    bodyWithoutComment.slice(0, -1).includes(";") ||
+    /[{}]/.test(bodyWithoutComment)
+  ) {
+    return null;
+  }
+
+  return { indent, head, body };
+}
+
+function findMatchingParen(text: string, openParenIndex: number) {
+  let depth = 0;
+
+  for (let i = openParenIndex; i < text.length; i++) {
+    if (text[i] === "(") {
+      depth++;
+    } else if (text[i] === ")") {
+      depth--;
+      if (depth === 0) {
+        return i;
+      }
+    }
+  }
+
+  return -1;
+}
+
 function normalizeInlineMath(md: string) {
   return md
     .split(/(```[\s\S]*?```)/g)
@@ -56,7 +155,8 @@ function shouldRenderAsPlainText(math: string) {
 }
 
 function createMarkup(md: string) {
-  const parsed = marked.parse(normalizeInlineMath(md));
+  const normalizedMarkdown = normalizeInlineMath(normalizeCppCodeBlocks(md));
+  const parsed = marked.parse(normalizedMarkdown);
   if (typeof parsed === "string") {
     return { __html: parsed };
   }
@@ -103,9 +203,7 @@ export function StudyPlanMarkdownContent({
 
     // Wrap each <pre> code block in a collapsible toggle container
     innerHtml.current.querySelectorAll("pre").forEach((pre) => {
-      if (
-        pre.parentElement?.getAttribute("data-code-toggle") === "true"
-      )
+      if (pre.parentElement?.getAttribute("data-code-toggle") === "true")
         return;
 
       // Extract label from the first comment line
@@ -160,7 +258,7 @@ export function StudyPlanMarkdownContent({
     <div
       ref={innerHtml}
       className={cn(
-        "prose max-w-none text-foreground dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-headings:mb-3 prose-headings:mt-6 prose-p:leading-7 prose-li:leading-7 prose-strong:text-foreground prose-a:no-underline prose-blockquote:text-foreground/80 prose-pre:my-4 prose-pre:overflow-x-auto prose-code:text-[0.95em]",
+        "prose max-w-none text-foreground dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-headings:mb-3 prose-headings:mt-6 prose-p:leading-7 prose-li:leading-7 prose-strong:text-foreground prose-a:no-underline prose-blockquote:text-foreground/80 prose-pre:my-4 prose-pre:overflow-x-hidden prose-pre:whitespace-pre-wrap prose-pre:break-words prose-code:text-[0.95em]",
         variant === "plan"
           ? "prose-sm sm:prose-base lg:prose-lg"
           : "prose-sm sm:prose-base",
