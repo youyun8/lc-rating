@@ -1,6 +1,6 @@
 "use client";
 
-import { BILIBILI_0X3F_SPACE, ROUTERS } from "@/config/constants";
+import { BILIBILI_0X3F_SPACE, ROUTERS, STUDYPLANS } from "@/config/constants";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,11 +13,13 @@ import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 function PlanSidebarTrigger() {
   const pathname = usePathname() ?? "";
   const { isMobile, open } = useSidebar();
+  const studyPlanSegment = pathname.replace("/studyplan/", "").split("/")[0];
+  const lectureSegment = pathname.replace("/lecture/", "").split("/")[0];
   const isDetailPage =
     (pathname.startsWith("/studyplan/") &&
-      (pathname.replace("/studyplan/", "").split("/")[0] ?? "").length > 0) ||
+      Boolean(STUDYPLANS[studyPlanSegment as keyof typeof STUDYPLANS])) ||
     (pathname.startsWith("/lecture/") &&
-      (pathname.replace("/lecture/", "").split("/")[0] ?? "").length > 0);
+      Boolean(STUDYPLANS[lectureSegment as keyof typeof STUDYPLANS]));
 
   if (!isDetailPage) return null;
 

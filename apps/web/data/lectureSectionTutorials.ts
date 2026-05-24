@@ -27,15 +27,24 @@ export interface LectureSectionNavItem {
   depth: number;
 }
 
+export interface LectureSectionChildItem extends LectureSectionNavItem {
+  summary?: string;
+  childCount: number;
+  totalSections: number;
+  practiceProblemCount: number;
+}
+
 export interface LectureSectionTutorial {
   id: number;
   title: string;
   slug: string;
   planKey: string;
   planTitle: string;
+  pathTitles: string[];
   content: string;
   practiceProblems: StudyPlanData.Item[];
   navItems: LectureSectionNavItem[];
+  children: LectureSectionChildItem[];
   previous?: LectureSectionNavItem;
   next?: LectureSectionNavItem;
 }
@@ -70,6 +79,16 @@ function flattenTutorialSections(
       ),
     ];
   });
+}
+
+function countTutorialSections(section: TutorialData.Section): number {
+  return (
+    1 +
+    (section.children ?? []).reduce(
+      (sum, child) => sum + countTutorialSections(child),
+      0,
+    )
+  );
 }
 
 function findStudyPlanSectionById(
@@ -584,6 +603,7 @@ export function getLectureSectionTutorial(
     slug: indexed.slug,
     planKey,
     planTitle: getPlanTitle(planKey),
+    pathTitles: indexed.pathTitles,
     content,
     practiceProblems: flattenProblems(studySection),
     navItems: sections.map(({ id, title, slug, depth }) => ({
@@ -592,6 +612,24 @@ export function getLectureSectionTutorial(
       slug,
       depth,
     })),
+    children: (indexed.section.children ?? []).map((child) => {
+      const childSlug = sectionAnchor(child.title);
+      const childStudySection = findStudyPlanSectionById(
+        studyPlanDataMap[planKey]?.children,
+        child.id,
+      );
+
+      return {
+        id: child.id,
+        title: child.title,
+        slug: childSlug,
+        depth: indexed.depth + 1,
+        summary: child.summary,
+        childCount: child.children?.length ?? 0,
+        totalSections: countTutorialSections(child),
+        practiceProblemCount: flattenProblems(childStudySection).length,
+      };
+    }),
     previous:
       index > 0
         ? {

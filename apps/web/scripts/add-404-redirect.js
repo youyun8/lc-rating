@@ -16,6 +16,7 @@ const KNOWN_ROUTES = [
   "/search",
   "/studyplan",
   "/lecture",
+  "/lecture/full",
 ];
 
 const redirectScript = `

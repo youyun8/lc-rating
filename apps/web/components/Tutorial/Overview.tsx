@@ -23,6 +23,9 @@ import { tutorialDataMap } from "@/utils/tutorialIndex";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { getTutorialStats } from "@/features/learning/utils/sectionTree";
+import { getTutorialSectionLinkGroups } from "@/utils/tutorialSectionLinks";
+
+const fullLectureGroups = getTutorialSectionLinkGroups();
 
 function getTutorialSummary(data: TutorialData.Root | undefined) {
   const stats = getTutorialStats(data);
@@ -276,6 +279,30 @@ function TutorialOverview() {
     });
   }, [trimmedQuery, planSearchMatches]);
 
+  const filteredLectureGroups = useMemo(() => {
+    return fullLectureGroups
+      .map((group) => ({
+        ...group,
+        links: group.links.filter((link) => {
+          if (!trimmedQuery) return true;
+
+          const normalizedQuery =
+            normalizeDisplayText(trimmedQuery).toLowerCase();
+          const target = normalizeDisplayText(
+            [
+              link.planTitle,
+              link.title,
+              link.pathTitles.join(" "),
+              link.slug,
+            ].join(" "),
+          ).toLowerCase();
+
+          return target.includes(normalizedQuery);
+        }),
+      }))
+      .filter((group) => group.links.length > 0);
+  }, [trimmedQuery]);
+
   const overviewStats = useMemo(() => {
     return Object.keys(STUDYPLANS).reduce(
       (acc, key) => {
@@ -304,11 +331,20 @@ function TutorialOverview() {
                   依主題整理的演算法筆記與模板，專注於學習與複習；題目練習請至對應題單。
                 </p>
               </div>
-              <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
-                <span className="shrink-0">資料來源</span>
-                <span className="font-medium text-foreground">
-                  靈茶山艾府（0x3F）題單整理
-                </span>
+              <div className="flex flex-wrap items-center gap-2 self-start">
+                <Link
+                  href="/lecture/full"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                >
+                  <BookOpen className="h-3.5 w-3.5" />
+                  完整講義索引
+                </Link>
+                <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
+                  <span className="shrink-0">資料來源</span>
+                  <span className="font-medium text-foreground">
+                    靈茶山艾府（0x3F）題單整理
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -387,10 +423,10 @@ function TutorialOverview() {
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-foreground">
-              講義列表
+              講義主題
             </h2>
             <p className="text-sm text-muted-foreground">
-              挑選一個主題閱讀筆記，並點擊章節跳轉至詳細內容。
+              先依主題查看摘要，再進入章節完整講義。
             </p>
           </div>
         </div>
@@ -415,6 +451,105 @@ function TutorialOverview() {
             ))}
           </div>
         )}
+
+        <section className="mt-8">
+          <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold tracking-tight text-foreground">
+                完整講義
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                所有章節詳解集中在此，可直接跳到完整閱讀頁。
+              </p>
+            </div>
+            <Link
+              href="/lecture/full"
+              className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              開啟索引頁
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          {filteredLectureGroups.length === 0 ? (
+            <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border/70 bg-muted/20 px-6 py-12 text-center text-muted-foreground">
+              <Search className="mb-4 h-10 w-10 opacity-30" />
+              <p className="text-base font-medium text-foreground">
+                沒有找到匹配的完整講義
+              </p>
+              <p className="mt-1 text-sm">試試其他搜尋關鍵字。</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+              {filteredLectureGroups.map((group) => {
+                const Icon = studyPlanIcons[group.planKey] ?? BookOpen;
+                const theme = studyPlanThemes[group.planKey] ?? defaultTheme;
+
+                return (
+                  <div
+                    key={group.planKey}
+                    className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm"
+                  >
+                    <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-muted/20 p-4">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <div
+                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white"
+                          style={{ background: theme.gradient }}
+                        >
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="truncate text-sm font-semibold text-foreground">
+                            {group.planTitle}
+                          </h3>
+                          <p className="text-xs text-muted-foreground">
+                            {group.links.length} 篇完整講義
+                          </p>
+                        </div>
+                      </div>
+                      <Link
+                        href={`/lecture/${group.planKey}`}
+                        className="shrink-0 rounded-full border border-border/60 bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                      >
+                        主題頁
+                      </Link>
+                    </div>
+
+                    <div className="divide-y divide-border/60">
+                      {group.links.map((link) => (
+                        <Link
+                          key={`${link.planKey}-${link.id}`}
+                          href={link.href}
+                          className="group flex items-center justify-between gap-3 px-4 py-3 transition-colors hover:bg-muted/35"
+                        >
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="shrink-0 rounded-full border border-border/60 bg-muted/25 px-2 py-0.5 text-[11px] text-muted-foreground">
+                                {link.depth === 0
+                                  ? "主章節"
+                                  : link.depth === 1
+                                    ? "子章節"
+                                    : "細分章節"}
+                              </span>
+                              <p className="truncate text-sm font-medium text-foreground group-hover:text-primary">
+                                {link.title}
+                              </p>
+                            </div>
+                            <p className="mt-1 truncate text-xs text-muted-foreground">
+                              {link.pathTitles.slice(0, -1).join(" / ") ||
+                                link.planTitle}
+                            </p>
+                          </div>
+                          <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
       </div>
     </div>
   );

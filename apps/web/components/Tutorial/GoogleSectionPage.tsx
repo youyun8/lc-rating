@@ -37,7 +37,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background font-song">
       <div className="border-b border-border/60 bg-muted/20">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-6 sm:px-6 md:py-8 xl:px-8">
+        <div className="mx-auto flex w-full max-w-[96rem] flex-col gap-5 px-4 py-6 sm:px-6 md:py-8 xl:px-8">
           <nav className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
             <Link
               href="/lecture"
@@ -80,8 +80,8 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
         </div>
       </div>
 
-      <main className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-6 pb-24 sm:px-6 md:grid-cols-[minmax(0,1fr)_18rem] md:py-8 xl:px-8">
-        <article className="min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
+      <main className="mx-auto grid w-full max-w-[96rem] gap-6 px-4 py-6 pb-24 sm:px-6 md:py-8 lg:grid-cols-[minmax(0,1fr)_18rem] xl:px-8">
+        <article className="min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm lg:w-full lg:max-w-[var(--lecture-reading-width)] lg:justify-self-center">
           <div className="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-6">
             <h2 className="text-lg font-semibold tracking-tight text-foreground">
               完整講義
@@ -90,12 +90,12 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
           <div className="px-4 py-5 sm:px-6 md:py-7">
             <StudyPlanMarkdownContent
               content={section.content}
-              variant="plan"
+              variant="lecture"
             />
           </div>
         </article>
 
-        <aside className="h-fit rounded-2xl border border-border/60 bg-card p-4 shadow-sm md:sticky md:top-24">
+        <aside className="h-fit rounded-2xl border border-border/60 bg-card p-4 shadow-sm lg:sticky lg:top-24">
           <h2 className="text-sm font-semibold tracking-tight text-foreground">
             Google 章節
           </h2>
@@ -117,7 +117,7 @@ export function GoogleSectionPage({ sectionSlug }: GoogleSectionPageProps) {
           </div>
         </aside>
 
-        <nav className="flex flex-col gap-3 md:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+        <nav className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:col-span-2">
           {previous ? (
             <Button asChild variant="outline" className="justify-start">
               <Link href={`/lecture/google_interview/${previous.slug}`}>

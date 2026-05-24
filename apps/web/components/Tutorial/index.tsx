@@ -7,7 +7,6 @@ import {
   studyPlanThemes,
   defaultTheme,
 } from "@/config/studyPlanThemes";
-import { TutorialSectionContainer } from "./SectionContainer";
 import {
   BookOpen,
   ChevronRight,
@@ -17,17 +16,18 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
-import { extractImageUrls } from "@/components/StudyPlan/dedupe";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { TutorialMarkdownPanel } from "./MarkdownPanel";
 import { CourseMaterials } from "./CourseMaterials";
 import type { StudyPlanData } from "@/types";
-import { SectionQuickLinks } from "@/features/learning/components/SectionQuickLinks";
-import { SidebarVisibilityButtons } from "@/features/learning/components/SidebarVisibilityButtons";
 import {
   flattenStudyPlanProblems,
   getTutorialStats,
 } from "@/features/learning/utils/sectionTree";
+import {
+  LectureSectionCards,
+  makeLectureSectionCardItem,
+} from "@/components/Tutorial/LectureSectionCards";
 
 interface TutorialProps {
   plan: string;
@@ -57,15 +57,19 @@ function Tutorial({ plan }: TutorialProps) {
     return map;
   }, [plan]);
 
-  const topLevelImageUrls = useMemo(
-    () =>
-      tutorial?.summary
-        ? extractImageUrls(tutorial.summary)
-        : new Set<string>(),
-    [tutorial?.summary],
-  );
-
   const stats = useMemo(() => getTutorialStats(tutorial), [tutorial]);
+  const sectionCardItems = useMemo(
+    () =>
+      tutorial?.children.map((section) =>
+        makeLectureSectionCardItem(
+          section,
+          plan,
+          0,
+          practiceBySectionId.get(section.id)?.length ?? 0,
+        ),
+      ) ?? [],
+    [plan, practiceBySectionId, tutorial?.children],
+  );
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background font-song">
@@ -209,48 +213,12 @@ function Tutorial({ plan }: TutorialProps) {
           <CourseMaterials plan={plan} />
 
           {tutorial && (
-            <section className="rounded-2xl border border-border/60 bg-muted/20 p-4 shadow-sm sm:p-5">
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                <div>
-                  <h2 className="text-base font-semibold tracking-tight text-foreground">
-                    章節導覽
-                  </h2>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    依照章節順序閱讀；也可用側欄導覽快速跳轉到指定章節。
-                  </p>
-                </div>
-                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                  <SidebarVisibilityButtons />
-                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-                    {stats.rootSections} 個主章節
-                  </span>
-                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-                    {stats.sections} 個總章節
-                  </span>
-                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-                    {stats.documented} 個有筆記
-                  </span>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {tutorial && (
-            <SectionQuickLinks
-              sections={tutorial.children}
-              description="可先打開側欄查看完整章節樹，或直接用下方章節捷徑快速跳轉。"
+            <LectureSectionCards
+              title="單元導覽"
+              description="先選擇要學的單元；若單元底下還有子單元，下一頁會繼續以小圖卡呈現。"
+              items={sectionCardItems}
             />
           )}
-
-          {tutorial?.children.map((section) => (
-            <TutorialSectionContainer
-              key={section.id}
-              section={section}
-              practiceBySectionId={practiceBySectionId}
-              planKey={plan}
-              parentImageUrls={topLevelImageUrls}
-            />
-          ))}
         </div>
       </div>
     </div>

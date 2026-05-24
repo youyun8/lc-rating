@@ -119,7 +119,9 @@ export function GlobalStudyPlanSidebar() {
   const planSegment = pageType
     ? (pathname.replace(`/${pageType}/`, "").split("/")[0] ?? "")
     : "";
-  const isDetailPage = planSegment.length > 0;
+  const isDetailPage = Boolean(
+    STUDYPLANS[planSegment as keyof typeof STUDYPLANS],
+  );
   const currentPlanKey = isDetailPage ? planSegment : null;
 
   // No sidebar on overview, contest, problemset, etc.

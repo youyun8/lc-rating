@@ -166,7 +166,7 @@ function createMarkup(md: string) {
 
 interface StudyPlanMarkdownContentProps {
   content: string;
-  variant?: "plan" | "section";
+  variant?: "plan" | "section" | "lecture";
   className?: string;
 }
 
@@ -183,7 +183,7 @@ export function StudyPlanMarkdownContent({
     if (!innerHtml.current) return;
 
     const imageClassName =
-      variant === "plan"
+      variant === "plan" || variant === "lecture"
         ? "mx-auto my-5 w-full max-w-4xl rounded-[1.5rem] border border-border/60 bg-background/80 shadow-sm"
         : "my-4 w-full rounded-2xl border border-border/60 bg-background/80 shadow-sm sm:w-2/3 md:w-1/2";
 
@@ -287,9 +287,11 @@ export function StudyPlanMarkdownContent({
       ref={innerHtml}
       className={cn(
         "prose max-w-none text-foreground dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-headings:mb-3 prose-headings:mt-6 prose-p:leading-7 prose-li:leading-7 prose-strong:text-foreground prose-a:no-underline prose-blockquote:text-foreground/80 prose-pre:my-4 prose-pre:overflow-x-hidden prose-pre:whitespace-pre-wrap prose-pre:break-words prose-code:text-[0.95em]",
-        variant === "plan"
-          ? "prose-sm sm:prose-base lg:prose-lg"
-          : "prose-sm sm:prose-base",
+        variant === "lecture"
+          ? "prose-base lg:prose-lg prose-p:leading-8 prose-li:leading-8"
+          : variant === "plan"
+            ? "prose-sm sm:prose-base lg:prose-lg"
+            : "prose-sm sm:prose-base",
         className,
       )}
       dangerouslySetInnerHTML={createMarkup(content)}
