@@ -45,8 +45,8 @@ export const useGlobalSettingsStore = create<GlobalSettingsStore>()(
         togglePremium: () => set({ premium: !get().premium }),
         setPremium: (premium: boolean) => set({ premium }),
       }),
-      persistOption
+      persistOption,
     ),
-    sharedOption
-  )
+    sharedOption,
+  ),
 );

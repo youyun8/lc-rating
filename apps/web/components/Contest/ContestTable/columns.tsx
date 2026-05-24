@@ -26,7 +26,7 @@ const isRatingFilter = (value: unknown): value is RatingFilter => {
 };
 
 const generate = (
-  key: "Q1" | "Q2" | "Q3" | "Q4"
+  key: "Q1" | "Q2" | "Q3" | "Q4",
 ): IdentifiedColumnDef<TableCol, Q> => {
   return {
     header: ({ column }) => {
@@ -54,7 +54,7 @@ const generate = (
               onChange={(e) => {
                 const value = e.target.value;
                 const min = value ? Number(value) : -Infinity;
-               column.setFilterValue((prev: RatingFilter | undefined) => ({
+                column.setFilterValue((prev: RatingFilter | undefined) => ({
                   min,
                   max: prev?.max ?? Infinity,
                 }));
@@ -132,7 +132,7 @@ const generate = (
     filterFn: (
       row,
       columnId,
-      filterValue: { min: number | undefined; max: number | undefined }
+      filterValue: { min: number | undefined; max: number | undefined },
     ) => {
       const q = row.getValue<TableCol[typeof key]>(columnId);
       const rating = q.problem.rating;

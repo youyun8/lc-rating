@@ -3,7 +3,7 @@ import { BASE_PATH } from "@/config/constants";
 function createFetchWithPrefix(basePath: string) {
   return async function fetchWithPrefix(
     input: RequestInfo,
-    init?: RequestInit
+    init?: RequestInit,
   ): Promise<Response> {
     const getFullUrl = (url: string) => `${basePath}${url}`;
 

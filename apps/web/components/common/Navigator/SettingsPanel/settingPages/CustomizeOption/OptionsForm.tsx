@@ -25,7 +25,7 @@ const OptionsForm = React.memo(({ form, onSubmit }: OptionsFormProps) => {
 
   const handleAdd = useCallback(
     () => fieldArray.append({ key: "", label: "", color: "#000000" }),
-    [fieldArray]
+    [fieldArray],
   );
 
   return (
@@ -45,7 +45,7 @@ const OptionsForm = React.memo(({ form, onSubmit }: OptionsFormProps) => {
                           return "Key 不能為空";
                         }
                         const isDuplicate = options.some(
-                          (opt, i) => i !== index && opt.key === value
+                          (opt, i) => i !== index && opt.key === value,
                         );
                         if (isDuplicate) {
                           return "Key 已存在";

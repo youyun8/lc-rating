@@ -7,12 +7,7 @@ import { useTags } from "@/hooks/useTags";
 import { Problem, Solution } from "@/types";
 import { Quodra } from "@/types/common";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
-import {
-  FileText,
-  Gauge,
-  Sparkles,
-  Swords,
-} from "lucide-react";
+import { FileText, Gauge, Sparkles, Swords } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { ProblemsTable } from "./ContestTable";
 import { TableCol } from "./ContestTable/types";
@@ -132,9 +127,16 @@ function ContestPage() {
 
   const contestCount = Object.keys(contestMap).length;
   const overviewStats = useMemo(() => {
-    const questions = tableData.flatMap((row) => [row.Q1, row.Q2, row.Q3, row.Q4]);
+    const questions = tableData.flatMap((row) => [
+      row.Q1,
+      row.Q2,
+      row.Q3,
+      row.Q4,
+    ]);
     const totalProblems = questions.length;
-    const solutionCount = questions.filter((item) => Boolean(item.solution)).length;
+    const solutionCount = questions.filter((item) =>
+      Boolean(item.solution),
+    ).length;
     const ratedProblems = questions.filter((item) => item.problem.rating > 0);
     const averageRating =
       ratedProblems.length > 0
@@ -231,7 +233,8 @@ function ContestPage() {
                 {isPending ? "--" : overviewStats.averageRating}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                平均 rating；最高約 {isPending ? "--" : overviewStats.hardestRating}
+                平均 rating；最高約{" "}
+                {isPending ? "--" : overviewStats.hardestRating}
               </p>
             </div>
           </div>
@@ -244,9 +247,7 @@ function ContestPage() {
             <h2 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
               比賽列表
             </h2>
-            <p className="text-sm text-muted-foreground">
-              依預設由新到舊排序
-            </p>
+            <p className="text-sm text-muted-foreground">依預設由新到舊排序</p>
           </div>
         </div>
 

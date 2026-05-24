@@ -14,7 +14,7 @@ interface ProgressStoreActions {
   delProgress: (id: string) => void;
   setAllProgress: (
     progress: Record<string, OptionKey>,
-    progressUpdatedAt?: ProgressUpdatedAt
+    progressUpdatedAt?: ProgressUpdatedAt,
   ) => void;
   clearAllProgress: () => void;
 }

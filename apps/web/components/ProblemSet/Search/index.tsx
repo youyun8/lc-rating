@@ -13,10 +13,7 @@ import { WordFilter } from "./WordFilter";
 
 interface SearchProps {
   data: TableCol[];
-  onSearch: (
-    similarities: number[],
-    options?: { scroll?: boolean },
-  ) => void;
+  onSearch: (similarities: number[], options?: { scroll?: boolean }) => void;
   totalCount: number;
   resultCount: number;
 }

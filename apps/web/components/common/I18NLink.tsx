@@ -29,7 +29,7 @@ const I18NLink = React.memo(
         {normalizeDisplayText(title)}
       </a>
     );
-  }
+  },
 );
 
 I18NLink.displayName = "I18NLink";

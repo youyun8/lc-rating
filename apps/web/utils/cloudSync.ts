@@ -212,7 +212,9 @@ export async function checkBackendHealth(): Promise<{
     const data = await response.json();
     return {
       ok: data?.success === true,
-      message: data?.success ? "後端正常運作" : `後端回應異常: ${response.status}`,
+      message: data?.success
+        ? "後端正常運作"
+        : `後端回應異常: ${response.status}`,
     };
   } catch {
     return { ok: false, message: "無法連線至後端" };

@@ -101,10 +101,10 @@ const useOptionsStore = create<OptionsStore>()(
           set({ options: { ...defaultOptions, ...Object.fromEntries(map) } });
         },
       }),
-      persistOption
+      persistOption,
     ),
-    sharedOption
-  )
+    sharedOption,
+  ),
 );
 
 export const useOptions = () => {
@@ -112,7 +112,7 @@ export const useOptions = () => {
 
   const optionKeys = useMemo(
     () => Object.keys({ ...defaultOptions, ...options }) as OptionKey[],
-    [options]
+    [options],
   );
 
   return {

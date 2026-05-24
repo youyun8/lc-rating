@@ -295,10 +295,7 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
       "最大化最小距離",
       "二分答案 + greedy check",
     ],
-    pitfalls: [
-      "缺乏單調性時不可二分答案。",
-      "check 函式的貪心策略亦需證明。",
-    ],
+    pitfalls: ["缺乏單調性時不可二分答案。", "check 函式的貪心策略亦需證明。"],
     complexity: "`O(log V * check_cost)`。",
     code: "```cpp\nclass Solution {\npublic:\n    int shipWithinDays(vector<int>& weights, int days) {\n        int left = *max_element(weights.begin(), weights.end());\n        int right = accumulate(weights.begin(), weights.end(), 0);\n\n        auto canShip = [&weights, days](int capacity) {\n            int used_days = 1;\n            int current = 0;\n            for (int weight : weights) {\n                if (current + weight > capacity) {\n                    used_days++;\n                    current = 0;\n                }\n                current += weight;\n            }\n            return used_days <= days;\n        };\n\n        while (left < right) {\n            int mid = left + (right - left) / 2;\n            if (canShip(mid)) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n        return left;\n    }\n};\n```",
   },
@@ -308,7 +305,12 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     keywords: ["字首和", "前綴和", "同餘", "距離和", "狀態壓縮字首和"],
     modelProblem:
       "給定陣列 `nums` 與目標 `k`，計算有多少個連續子陣列滿足區間和條件。區間 `(l, r]` 的和等於 `prefix[r] - prefix[l]`。",
-    signals: ["連續子陣列。", "區間和。", "可被 k 整除。", "同一前綴狀態重複出現。"],
+    signals: [
+      "連續子陣列。",
+      "區間和。",
+      "可被 k 整除。",
+      "同一前綴狀態重複出現。",
+    ],
     invariants: [
       "掃描到 right 時，雜湊表保存所有 left 前綴狀態。",
       "每次僅統計以當前 right 結尾的子陣列。",
@@ -517,7 +519,13 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     keywords: ["並查集", "DSU", "Union Find", "最小生成樹", "Kruskal"],
     modelProblem:
       "給定 n 個點與一批逐步加入的無向邊，維護連通分量、判斷兩點是否連通，或判定加入一條邊是否形成 cycle。",
-    signals: ["逐步加邊。", "合併集合。", "連通性。", "判斷成環。", "Kruskal。"],
+    signals: [
+      "逐步加邊。",
+      "合併集合。",
+      "連通性。",
+      "判斷成環。",
+      "Kruskal。",
+    ],
     invariants: [
       "每個集合僅有一個代表元。",
       "同一集合內任兩點已由先前加入的邊連通。",
@@ -528,7 +536,10 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
       "若代表元相同，此邊將形成 cycle；否則合併兩個集合。",
     ],
     patterns: ["動態加邊連通性", "Kruskal MST", "冗餘邊", "帶權並查集"],
-    pitfalls: ["普通 DSU 不支援刪邊。", "若題目詢問最短路或路徑內容，DSU 不足以勝任。"],
+    pitfalls: [
+      "普通 DSU 不支援刪邊。",
+      "若題目詢問最短路或路徑內容，DSU 不足以勝任。",
+    ],
     complexity: "每次 `find/unite` 均攤近似 `O(1)`。",
     code: "```cpp\nclass Dsu {\n    vector<int> parent_;\n    vector<int> size_;\n\npublic:\n    explicit Dsu(int n) : parent_(n), size_(n, 1) {\n        iota(parent_.begin(), parent_.end(), 0);\n    }\n\n    int find(int x) {\n        if (parent_[x] == x) return x;\n        return parent_[x] = find(parent_[x]);\n    }\n\n    bool unite(int a, int b) {\n        int root_a = find(a);\n        int root_b = find(b);\n        if (root_a == root_b) return false;\n        if (size_[root_a] < size_[root_b]) swap(root_a, root_b);\n        parent_[root_b] = root_a;\n        size_[root_a] += size_[root_b];\n        return true;\n    }\n};\n```",
   },
@@ -622,7 +633,12 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     keywords: ["背包", "0-1", "完全背包", "多重背包", "分組背包"],
     modelProblem:
       "給定物品重量、價值與容量限制，在不同選取規則下最大化價值、判斷可行或計算方案數。",
-    signals: ["容量限制。", "每個物品至多一次或可重複選。", "方案數。", "分組選擇。"],
+    signals: [
+      "容量限制。",
+      "每個物品至多一次或可重複選。",
+      "方案數。",
+      "分組選擇。",
+    ],
     invariants: [
       "`dp[cap]` 表示目前處理過的物品在容量 cap 下的最佳值。",
       "0-1 背包倒序枚舉容量，藉以避免同一物品重複使用。",
@@ -646,7 +662,11 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     keywords: ["網格圖 DP", "網格 DP", "矩陣", "路徑數", "最小路徑"],
     modelProblem:
       "給定二維網格，移動方向通常受限於向右、向下或固定鄰格，計算到達每格的方案數、最小代價或最大收益。",
-    signals: ["二維矩陣。", "每格答案由上方或左方轉移。", "路徑僅能依固定方向前進。"],
+    signals: [
+      "二維矩陣。",
+      "每格答案由上方或左方轉移。",
+      "路徑僅能依固定方向前進。",
+    ],
     invariants: [
       "`dp[row][col]` 表示到達或處理該格時的最佳答案。",
       "填表順序必須確保轉移來源已計算完成。",
@@ -817,7 +837,12 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     modelProblem:
       "給定圖，找出有向圖中的強連通分量，或找出無向圖中移除後會使連通塊增加的橋。",
-    signals: ["互相可達。", "critical connections。", "刪邊是否斷開。", "low-link。"],
+    signals: [
+      "互相可達。",
+      "critical connections。",
+      "刪邊是否斷開。",
+      "low-link。",
+    ],
     invariants: [
       "`dfn[u]` 為首次訪問時間。",
       "`low[u]` 為 u 子樹能回到的最早 dfn。",
@@ -852,7 +877,10 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
       "DFS 於分層圖上送流，直至 sink 不可達。",
     ],
     patterns: ["Dinic 最大流", "二分圖匹配", "最小割建模", "費用流"],
-    pitfalls: ["容量方向錯誤會改變問題。", "反向邊缺失會導致無法撤銷錯誤增廣。"],
+    pitfalls: [
+      "容量方向錯誤會改變問題。",
+      "反向邊缺失會導致無法撤銷錯誤增廣。",
+    ],
     complexity: "Dinic 複雜度視圖性質而定，二分圖匹配場合通常表現穩定。",
     code: "```cpp\nstruct Edge {\n    int to;\n    int rev;\n    long long cap;\n};\n\nclass Dinic {\n    vector<vector<Edge>> graph_;\n    vector<int> level_;\n    vector<int> iter_;\n\npublic:\n    explicit Dinic(int n) : graph_(n), level_(n), iter_(n) {}\n\n    void addEdge(int from, int to, long long cap) {\n        Edge forward{to, (int)graph_[to].size(), cap};\n        Edge backward{from, (int)graph_[from].size(), 0};\n        graph_[from].push_back(forward);\n        graph_[to].push_back(backward);\n    }\n};\n```",
   },
@@ -1022,7 +1050,13 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     keywords: ["線性基", "基向量", "子集異或", "最大異或"],
     modelProblem:
       "給定一組整數，維護其在 XOR 意義下生成的線性空間，用以求任意子集 XOR 的最大值、判斷某值是否可表示，或計算線性獨立的秩。",
-    signals: ["子集 XOR。", "最大異或值。", "線性獨立。", "可表示性。", "基向量。"],
+    signals: [
+      "子集 XOR。",
+      "最大異或值。",
+      "線性獨立。",
+      "可表示性。",
+      "基向量。",
+    ],
     invariants: [
       "`basis[bit]` 若非 0，表示目前已有最高位為 bit 的基向量。",
       "插入新數時持續以已有最高位基向量消去最高位。",
@@ -1187,7 +1221,15 @@ const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     modelProblem:
       "給定計數或幾何限制，將題目拆解為可相乘的選擇、需容斥的重疊條件，或以向量運算判斷幾何關係。",
-    signals: ["方案數。", "至少/至多。", "期望。", "座標。", "共線。", "面積。", "凸包。"],
+    signals: [
+      "方案數。",
+      "至少/至多。",
+      "期望。",
+      "座標。",
+      "共線。",
+      "面積。",
+      "凸包。",
+    ],
     invariants: [
       "組合計數中，每個物件須被計數一次且僅一次。",
       "容斥中，交集大小依違反條件數量的奇偶加減。",
@@ -2465,7 +2507,11 @@ const exampleLectureOverrides: NonNullable<LectureTopicProfile["examples"]> = {
   "split-linked-list-in-parts": {
     modelProblem:
       "給定鏈結串列 `head` 與整數 `k`，將鏈表按原順序切為 k 段，使每段長度盡量相等且前面段的長度可比後面段多 1，回傳每段的頭節點。",
-    signals: ["head 會被切斷。", "須保留原順序。", "每段長度由總長度除以 k 決定。"],
+    signals: [
+      "head 會被切斷。",
+      "須保留原順序。",
+      "每段長度由總長度除以 k 決定。",
+    ],
     invariants: [
       "`base = length / k` 為每段至少分得的節點數。",
       "前 `extra = length % k` 段各多一個節點。",

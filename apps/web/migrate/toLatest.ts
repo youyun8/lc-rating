@@ -13,14 +13,14 @@ const PROGRESS_KEY_MIGRATION: Record<string, string> = {
 export const optionToLTS = (
   persistedState: unknown,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _version: number
+  _version: number,
 ): OptionsStoreState => {
   return persistedState as OptionsStoreState;
 };
 
 export const progressToLTS = (
   persistedState: unknown,
-  version: number
+  version: number,
 ): ProgressStoreState => {
   const state = persistedState as ProgressStoreState;
   if (version < 1 && state?.progress) {
@@ -36,7 +36,7 @@ export const progressToLTS = (
 export const globalSettingToLTS = (
   persistedState: unknown,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _version: number
+  _version: number,
 ): GlobalSettingsStoreState => {
   return persistedState as GlobalSettingsStoreState;
 };

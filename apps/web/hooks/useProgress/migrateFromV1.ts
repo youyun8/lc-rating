@@ -10,7 +10,7 @@ export const migrateFromLocalStorage = (): ProgressStoreState => {
 
   try {
     const keys = Object.keys(localStorage).filter((key) =>
-      key.startsWith(LC_RATING_PROGRESS_KEY_PREFIX)
+      key.startsWith(LC_RATING_PROGRESS_KEY_PREFIX),
     );
 
     const progress: Progress = {};

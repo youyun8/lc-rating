@@ -34,11 +34,13 @@ npx tsx lc-parser/extract_html2md.ts
 ## 主要依賴
 
 ### Python 版本
+
 - `beautifulsoup4` - HTML 解析
 - `markdownify` - HTML 轉 Markdown
 - `requests` - HTTP 請求
 
 ### TypeScript 版本
+
 - `cheerio` - HTML 解析（類似 BeautifulSoup）
 - `turndown` - HTML 轉 Markdown（類似 markdownify）
 - `axios` - HTTP 請求（類似 requests）

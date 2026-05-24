@@ -31,7 +31,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 function Button({
@@ -51,7 +51,7 @@ function Button({
       data-slot="button"
       className={cn(
         "cursor-pointer select-none",
-        buttonVariants({ variant, size, className })
+        buttonVariants({ variant, size, className }),
       )}
       {...props}
     />

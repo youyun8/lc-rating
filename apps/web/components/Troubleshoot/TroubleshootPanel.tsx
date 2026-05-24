@@ -111,10 +111,7 @@ export default function TroubleshootPanel() {
     if (!decodedToken) return false;
     return decodedToken.exp < Date.now();
   }, [decodedToken]);
-  const validPayload = useMemo(
-    () => decodeAuthToken(authToken),
-    [authToken],
-  );
+  const validPayload = useMemo(() => decodeAuthToken(authToken), [authToken]);
 
   const [lastSyncAt, setLastSyncAt] = useState<number | null>(null);
 
@@ -289,7 +286,6 @@ export default function TroubleshootPanel() {
             上次同步：{formatTime(lastSyncAt)}
           </p>
         </div>
-
       </section>
 
       {/* Run diagnostics */}

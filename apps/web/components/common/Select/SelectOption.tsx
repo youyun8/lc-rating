@@ -24,7 +24,7 @@ const SelectOption = React.memo(
           {
             "": selectedValue === value,
           },
-          className
+          className,
         )}
         style={style}
         onClick={() => {
@@ -35,11 +35,11 @@ const SelectOption = React.memo(
         {children}
       </div>
     );
-  }
+  },
 );
 
 export const isOption = (
-  child: React.ReactNode
+  child: React.ReactNode,
 ): child is React.ReactElement<SelectOptionProps> => {
   return isValidElement(child) && child.type === SelectOption;
 };

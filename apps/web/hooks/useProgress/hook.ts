@@ -50,7 +50,7 @@ export const useProgressStore = create<ProgressStore>()(
 
         setAllProgress: (
           progress: Record<string, OptionKey>,
-          progressUpdatedAt: Record<string, number> = {}
+          progressUpdatedAt: Record<string, number> = {},
         ) => {
           set((state) => {
             return {
@@ -74,10 +74,10 @@ export const useProgressStore = create<ProgressStore>()(
             progressUpdatedAt: {},
           })),
       }),
-      persistOption
+      persistOption,
     ),
-    sharedOption
-  )
+    sharedOption,
+  ),
 );
 
 export const useProgress = () => {

@@ -12,7 +12,7 @@ export function useContests() {
     queryFn: () =>
       fetchApi(
         "/problemset/contests.json?t=" +
-          (new Date().getTime() / 100000).toFixed(0)
+          (new Date().getTime() / 100000).toFixed(0),
       ).then((res) => res.json()),
     staleTime: 3600 * 1000, // 1 hour
   });

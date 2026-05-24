@@ -51,7 +51,7 @@ const RatingCircle = React.memo(
             "top-0 -translate-y-full",
             "opacity-0 group-hover:opacity-100",
             "transition-all duration-500 ease-in-out",
-            "text-base font-bold pointer-events-none z-50 bg-background/80 px-1 rounded"
+            "text-base font-bold pointer-events-none z-50 bg-background/80 px-1 rounded",
           )}
           style={{
             color: color,
@@ -61,7 +61,7 @@ const RatingCircle = React.memo(
         </span>
       </div>
     );
-  }
+  },
 );
 
 RatingCircle.displayName = "RatingCircle";

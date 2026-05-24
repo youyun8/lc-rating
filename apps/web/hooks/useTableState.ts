@@ -14,7 +14,7 @@ type CreatePersistedStoreOptions<S extends Partial<TableState>> = {
 };
 
 export function createTableStore<S extends Partial<TableState>>(
-  options: CreatePersistedStoreOptions<S>
+  options: CreatePersistedStoreOptions<S>,
 ): TableStateHook<S> {
   const store = create<S>()(
     persist(
@@ -26,11 +26,11 @@ export function createTableStore<S extends Partial<TableState>>(
         version: STORAGE_VERSION,
         partialize: (state) => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { pagination, ...rest } = state;
+          const { pagination, ...rest } = state;
           return rest;
         },
-      }
-    )
+      },
+    ),
   );
 
   return {

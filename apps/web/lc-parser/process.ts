@@ -1,17 +1,21 @@
 // import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
-import { streamText } from 'ai';
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { streamText } from "ai";
 import "dotenv/config";
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from "fs";
 import { globSync } from "glob";
-import { ProxyAgent, type RequestInit as UndiciRequestInit, fetch as undiciFetch } from 'undici';
+import {
+  ProxyAgent,
+  type RequestInit as UndiciRequestInit,
+  fetch as undiciFetch,
+} from "undici";
 
 // eslint-disable-next-line turbo/no-undeclared-env-vars
 const HTTP_PROXY = process.env.HTTP_PROXY!; // eg. http://localhost:8080/
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function _proxyFetch(input: RequestInfo | URL, init?: RequestInit) {
-  console.log('使用代理進行請求:', HTTP_PROXY);
+  console.log("使用代理進行請求:", HTTP_PROXY);
   const dispatcher = new ProxyAgent({
     uri: HTTP_PROXY,
     requestTls: {
@@ -23,7 +27,7 @@ function _proxyFetch(input: RequestInfo | URL, init?: RequestInit) {
   });
 
   let url: string | URL;
-  if (typeof input === 'string') {
+  if (typeof input === "string") {
     url = input;
   } else if (input instanceof URL) {
     url = input;
@@ -48,7 +52,7 @@ const openai = createOpenAICompatible({
   baseURL: process.env.BASE_URL!,
   // eslint-disable-next-line turbo/no-undeclared-env-vars
   apiKey: process.env.MY_API_KEY!,
-  name: 'qwen'
+  name: "qwen",
 });
 
 // const google = createGoogleGenerativeAI({
@@ -58,12 +62,12 @@ const openai = createOpenAICompatible({
 
 // const model_id='qwen-plus-latest';
 // eslint-disable-next-line turbo/no-undeclared-env-vars
-const model_id=process.env.MODEL_ID!;
+const model_id = process.env.MODEL_ID!;
 
 // eslint-disable-next-line turbo/no-undeclared-env-vars
-console.log('🤖 使用的模型介面位址:', process.env.BASE_URL);
+console.log("🤖 使用的模型介面位址:", process.env.BASE_URL);
 // eslint-disable-next-line turbo/no-undeclared-env-vars
-console.log('🤖 使用的模型 API Key:', process.env.MY_API_KEY);
+console.log("🤖 使用的模型 API Key:", process.env.MY_API_KEY);
 
 const systemPrompt = `你是一個專業的技術文件整理助手。處理使用者輸入 Markdown 文件，嚴格按照指定的 JSON 格式輸出，輸出內容不要包含程式碼標籤。
 
@@ -126,7 +130,7 @@ function isJsonComplete(text: string): boolean {
 function isLikelyTruncated(text: string): boolean {
   const trimmed = text.trim();
   // 檢查是否以完整的 JSON 結尾
-  if (!trimmed.endsWith('}') && !trimmed.endsWith(']')) {
+  if (!trimmed.endsWith("}") && !trimmed.endsWith("]")) {
     return true;
   }
   // 檢查括號是否匹配
@@ -134,18 +138,18 @@ function isLikelyTruncated(text: string): boolean {
   const closeBraces = (trimmed.match(/\}/g) || []).length;
   const openBrackets = (trimmed.match(/\[/g) || []).length;
   const closeBrackets = (trimmed.match(/\]/g) || []).length;
-  
+
   return openBraces !== closeBraces || openBrackets !== closeBrackets;
 }
 
 const runProcess = async (input_file: string) => {
-  const fullText = readFileSync(input_file, 'utf-8');
+  const fullText = readFileSync(input_file, "utf-8");
   let shouldContinue = true;
   let consecutiveStops = 0; // ✅ 新增：連續 stop 計數
-  let fullResponse = '';
+  let fullResponse = "";
   let iterationCount = 0;
   const maxIterations = 10;
-  
+
   // 計算輸入文字的大致 token 數（中文約 1 字元 = 1.5-2 tokens）
   const estimatedInputTokens = fullText.length * 1.5;
   console.log(`📄 檔案大小: ${(fullText.length / 1024).toFixed(2)} KB`);
@@ -157,34 +161,40 @@ const runProcess = async (input_file: string) => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let messages: any[] = [];
-    
+
     if (iterationCount === 1) {
       // ✅ 第一輪：完整輸入
       messages = [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: fullText }
+        { role: "system", content: systemPrompt },
+        { role: "user", content: fullText },
       ];
     } else {
       // ✅ 續寫策略：滑動窗口 + 原文摘要
       const CONTEXT_WINDOW = 3000; // 保留最近 3000 字符
-      const recentOutput = fullResponse.length > CONTEXT_WINDOW ? fullResponse.slice(-CONTEXT_WINDOW) : fullResponse;
-      const omittedChars = fullResponse.length > CONTEXT_WINDOW ? fullResponse.length - CONTEXT_WINDOW : 0;
+      const recentOutput =
+        fullResponse.length > CONTEXT_WINDOW
+          ? fullResponse.slice(-CONTEXT_WINDOW)
+          : fullResponse;
+      const omittedChars =
+        fullResponse.length > CONTEXT_WINDOW
+          ? fullResponse.length - CONTEXT_WINDOW
+          : 0;
       // 提取最後幾個字符作為續寫錨點
-      const lastChars = fullResponse.slice(-100); // 最後100個字符      
+      const lastChars = fullResponse.slice(-100); // 最後100個字符
       // 構建上下文提示
-      let contextHint = '';
+      let contextHint = "";
       if (omittedChars > 0) {
         contextHint = `[已省略前面 ${omittedChars} 字符的輸出]\n...\n`;
       }
       contextHint += recentOutput;
-      
+
       messages = [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: fullText }, // ✅ 保留原文
-        { role: 'assistant', content: contextHint },
-        { 
-              role: 'user', 
-              content: `你的上一輪輸出在這裡停止：
+        { role: "system", content: systemPrompt },
+        { role: "user", content: fullText }, // ✅ 保留原文
+        { role: "assistant", content: contextHint },
+        {
+          role: "user",
+          content: `你的上一輪輸出在這裡停止：
 """
 ${lastChars}
 """
@@ -197,7 +207,8 @@ ${lastChars}
 5. **不要**重新開始
 6. 直接繼續寫，就像接著上面的內容繼續打字一樣
 
-繼續：` }
+繼續：`,
+        },
       ];
     }
 
@@ -210,138 +221,143 @@ ${lastChars}
         maxOutputTokens: 32768, // 或更大, 視模型支持而定
         temperature: 0.1, // 降低隨機性，提高一致性
       });
-      
-      let chunk = '';
+
+      let chunk = "";
       for await (const delta of result.textStream) {
         chunk += delta;
         process.stdout.write(delta);
       }
-      
+
       fullResponse += chunk;
-      
+
       const reason = await result.finishReason;
       console.log(`\n--- 完成原因: ${reason} ---`);
       console.log(`--- 本輪輸出: ${chunk.length} 字元 ---`);
       console.log(`--- 累計輸出: ${fullResponse.length} 字元 ---`);
-      
+
       // ✅ 改進的判斷邏輯
-      if (reason === 'length') {
+      if (reason === "length") {
         // 因長度限制被截斷，需要繼續
         shouldContinue = true;
         consecutiveStops = 0; // 重置計數
-        console.log('⚠️  輸出因長度限制被截斷，將繼續...');
-      } else if (reason === 'stop') {
-          
+        console.log("⚠️  輸出因長度限制被截斷，將繼續...");
+      } else if (reason === "stop") {
         // 儲存結果
-        const outputPath = input_file.replace(/\.md$/, `_iter${iterationCount}.json`);
-        writeFileSync(outputPath, fullResponse, 'utf-8');
+        const outputPath = input_file.replace(
+          /\.md$/,
+          `_iter${iterationCount}.json`,
+        );
+        writeFileSync(outputPath, fullResponse, "utf-8");
 
         consecutiveStops++; // 累加 stop 次數
-        
+
         const jsonComplete = isJsonComplete(fullResponse);
         const likelyTruncated = isLikelyTruncated(fullResponse);
-        
-        console.log(`JSON 完整性: ${jsonComplete ? '✅' : '❌'}`);
-        console.log(`截斷檢測: ${likelyTruncated ? '⚠️  可能截斷' : '✅ 看起來完整'}`);
+
+        console.log(`JSON 完整性: ${jsonComplete ? "✅" : "❌"}`);
+        console.log(
+          `截斷檢測: ${likelyTruncated ? "⚠️  可能截斷" : "✅ 看起來完整"}`,
+        );
         console.log(`連續 stop 次數: ${consecutiveStops}`);
-        
+
         if (jsonComplete) {
           // JSON 完整，立即停止
           shouldContinue = false;
-          console.log('✅ JSON 格式完整且可解析，處理完成');
+          console.log("✅ JSON 格式完整且可解析，處理完成");
         } else if (likelyTruncated) {
           // 明顯截斷，繼續
           shouldContinue = true;
           consecutiveStops = 0; // 重置（因為確實需要繼續）
-          console.log('⚠️  JSON 不完整，將繼續...');
+          console.log("⚠️  JSON 不完整，將繼續...");
         } else if (consecutiveStops >= 2) {
           // ✅ 連續 2 次 stop 且 JSON 看起來完整（雖然解析失敗）
           // 可能是格式問題，不是截斷問題，應該停止
           shouldContinue = false;
-          console.log('⚠️  連續 2 次正常停止，但 JSON 格式有誤，強制結束');
+          console.log("⚠️  連續 2 次正常停止，但 JSON 格式有誤，強制結束");
         } else if (chunk.length < 50) {
           // ✅ 輸出很少且非截斷，可能已完成
           shouldContinue = false;
-          console.log('⚠️  輸出極少，判斷為已完成');
+          console.log("⚠️  輸出極少，判斷為已完成");
         } else {
           // 不確定，再試一輪
           shouldContinue = true;
-          console.log('⚠️  狀態不明確，嘗試繼續...');
+          console.log("⚠️  狀態不明確，嘗試繼續...");
         }
       } else {
         // 其他原因（error 等），停止
         shouldContinue = false;
         console.log(`❌ 異常停止: ${reason}`);
       }
-      
     } catch (error) {
       console.error(`\n❌ 第 ${iterationCount} 輪處理出錯:`, error);
       shouldContinue = false;
     }
-    
+
     // ✅ 添加輪次間延遲，避免限流
     if (shouldContinue) {
-      console.log('\n⏳ 等待 1 秒後繼續...');
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log("\n⏳ 等待 1 秒後繼續...");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }
 
   if (iterationCount >= maxIterations) {
     console.log(`\n⚠️  達到最大迭代次數 (${maxIterations})，強制停止`);
   }
-  
+
   // 儲存結果
-  const outputPath = input_file.replace(/\.md$/, '.json');
-  writeFileSync(outputPath, fullResponse, 'utf-8');
+  const outputPath = input_file.replace(/\.md$/, ".json");
+  writeFileSync(outputPath, fullResponse, "utf-8");
 
   console.log(`\n✅ 生成完成，已儲存到: ${outputPath}`);
   console.log(`📊 最終輸出: ${fullResponse.length} 字元`);
   console.log(`📊 總輪次: ${iterationCount}`);
-  
+
   // ✅ 驗證最終 JSON
   if (isJsonComplete(fullResponse)) {
-    console.log('✅ 最終 JSON 驗證通過');
+    console.log("✅ 最終 JSON 驗證通過");
   } else {
-    console.warn('⚠️  警告：最終 JSON 可能不完整');
+    console.warn("⚠️  警告：最終 JSON 可能不完整");
   }
 };
 
 // 主函式：順序處理所有 md 文件
 async function main() {
-  const files = globSync('dist/graph.md');
+  const files = globSync("dist/graph.md");
   console.log(`\n📚 找到 ${files.length} 個檔案待處理\n`);
-  const skipFiles = ['string.md', 'trees.md', 'sliding_window.md', 'monotonic_stack.md', 'grid.md'];
+  const skipFiles = [
+    "string.md",
+    "trees.md",
+    "sliding_window.md",
+    "monotonic_stack.md",
+    "grid.md",
+  ];
   for (let i = 0; i < files.length; i++) {
     const file = files[i]!;
-    if (skipFiles.some(skip => file.endsWith(skip))) {
+    if (skipFiles.some((skip) => file.endsWith(skip))) {
       console.log(`跳過示例檔案: ${file}`);
       continue;
     }
-    console.log(`\n${'='.repeat(60)}`);
+    console.log(`\n${"=".repeat(60)}`);
     console.log(`🚀 [${i + 1}/${files.length}] 處理檔案: ${file}`);
-    console.log(`${'='.repeat(60)}\n`);
-    
+    console.log(`${"=".repeat(60)}\n`);
+
     try {
       await runProcess(file);
     } catch (error) {
       console.error(`\n❌ 處理檔案失敗: ${file}`, error);
     }
-    
+
     // 添加延遲避免 API 限流
     if (i < files.length - 1) {
-      console.log('\n⏳ 等待 2 秒後處理下一個檔案...\n');
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log("\n⏳ 等待 2 秒後處理下一個檔案...\n");
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
-  
-  console.log(`\n${'='.repeat(60)}`);
+
+  console.log(`\n${"=".repeat(60)}`);
   console.log(`🎉 所有檔案處理完成！`);
-  console.log(`${'='.repeat(60)}\n`);
+  console.log(`${"=".repeat(60)}\n`);
 }
 
 // 執行主函數
 main().catch(console.error);
-
-
-
-

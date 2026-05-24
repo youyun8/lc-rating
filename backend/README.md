@@ -76,13 +76,13 @@ Update the `API_BASE` in `apps/web/config/constants.ts` with your worker URL.
 
 ## API Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/login/github` | GET | Redirect to GitHub OAuth |
-| `/api/callback` | GET | OAuth callback handler |
-| `/api/uploadprogress` | POST | Upload user progress |
-| `/api/getprogress` | GET | Retrieve user progress |
-| `/api/health` | GET | Health check |
+| Endpoint              | Method | Description              |
+| --------------------- | ------ | ------------------------ |
+| `/api/login/github`   | GET    | Redirect to GitHub OAuth |
+| `/api/callback`       | GET    | OAuth callback handler   |
+| `/api/uploadprogress` | POST   | Upload user progress     |
+| `/api/getprogress`    | GET    | Retrieve user progress   |
+| `/api/health`         | GET    | Health check             |
 
 ## Development
 

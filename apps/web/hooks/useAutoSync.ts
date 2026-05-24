@@ -6,10 +6,7 @@ import {
   LC_RATING_LAST_SYNC_AT_KEY,
 } from "@/config/constants";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
-import {
-  pullCloudSiteStorage,
-  pushCloudSiteStorage,
-} from "@/utils/cloudSync";
+import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
 import { AuthExpiredError, isTokenValid } from "@/utils/auth";
 import { useEffect, useRef } from "react";
 

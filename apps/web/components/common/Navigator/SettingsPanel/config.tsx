@@ -5,9 +5,7 @@ import ProgressOverview from "./settingPages/ProgressOverview";
 import SyncStorage from "./settingPages/SyncStorage";
 import { lazy } from "react";
 
-const Troubleshooting = lazy(
-  () => import("./settingPages/Troubleshooting"),
-);
+const Troubleshooting = lazy(() => import("./settingPages/Troubleshooting"));
 
 export type SettingTabType = {
   key: string;

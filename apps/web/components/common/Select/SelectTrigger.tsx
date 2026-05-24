@@ -39,12 +39,14 @@ const SelectTrigger = React.memo((props: TriggerProps) => {
         setIsOpen(!isOpen);
       }
     },
-    [isOpen, setIsOpen, props.asChild, props.children]
+    [isOpen, setIsOpen, props.asChild, props.children],
   );
 
   if (props.asChild) {
     if (!isValidElement(props.children)) {
-      throw new Error("Trigger 的 asChild 為 true 時，必須傳遞一個有效的 React 元素");
+      throw new Error(
+        "Trigger 的 asChild 為 true 時，必須傳遞一個有效的 React 元素",
+      );
     }
 
     return cloneElement(props.children, {
@@ -60,7 +62,7 @@ const SelectTrigger = React.memo((props: TriggerProps) => {
           "border px-2 py-1 rounded-sm",
           "w-fit min-w-18 min-h-8",
           "text-sm",
-          props.className
+          props.className,
         )}
         style={props.style}
         onClick={() => setIsOpen(!isOpen)}
@@ -72,7 +74,7 @@ const SelectTrigger = React.memo((props: TriggerProps) => {
 });
 
 export const isTrigger = (
-  child: React.ReactNode
+  child: React.ReactNode,
 ): child is React.ReactElement<TriggerProps> => {
   return isValidElement(child) && child.type === SelectTrigger;
 };

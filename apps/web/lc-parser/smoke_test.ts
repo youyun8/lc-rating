@@ -1,6 +1,6 @@
-import { strict as assert } from 'node:assert';
+import { strict as assert } from "node:assert";
 
-import { convertHtmlToMarkdown } from './extract_html2md';
+import { convertHtmlToMarkdown } from "./extract_html2md";
 
 const sampleHtml = `
   <html>
@@ -20,10 +20,10 @@ const sampleHtml = `
 
 const markdown = convertHtmlToMarkdown(sampleHtml);
 
-assert.ok(markdown.startsWith('# Binary Search Notes\n\n'));
-assert.ok(markdown.includes('## Overview'));
-assert.ok(markdown.includes('Use binary search on monotonic answers.'));
+assert.ok(markdown.startsWith("# Binary Search Notes\n\n"));
+assert.ok(markdown.includes("## Overview"));
+assert.ok(markdown.includes("Use binary search on monotonic answers."));
 assert.match(markdown, /[-*]\s+First bad version/);
 assert.match(markdown, /[-*]\s+Search insert position/);
 
-console.log('lc-parser smoke test passed');
+console.log("lc-parser smoke test passed");

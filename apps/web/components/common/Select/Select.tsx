@@ -56,13 +56,13 @@ const Select = ({
         label: child.props.children ?? "",
         element: child,
       })),
-    [optionsChildren]
+    [optionsChildren],
   );
 
   const displayLabel = useMemo(
     () =>
       options.find((opt) => opt.value === actualValue)?.label ?? placeholder,
-    [actualValue, options, placeholder]
+    [actualValue, options, placeholder],
   );
 
   const handleSelect = useCallback(
@@ -70,7 +70,7 @@ const Select = ({
       onChange?.(value);
       setInternalValue(value);
     },
-    [onChange]
+    [onChange],
   );
 
   const contextValue = useMemo(
@@ -81,7 +81,7 @@ const Select = ({
       setIsOpen,
       displayLabel,
     }),
-    [actualValue, handleSelect, isOpen, displayLabel]
+    [actualValue, handleSelect, isOpen, displayLabel],
   );
 
   useEffect(() => {
@@ -115,13 +115,13 @@ const Select = ({
             {
               "transition-all duration-200 ease-in-out": true,
               "-translate-y-1/2 scale-y-0 opacity-0": !isOpen,
-            }
+            },
           )}
         >
           {optionsChildren.map((child) =>
             cloneElement(child, {
               key: child.props.value,
-            })
+            }),
           )}
         </div>
       </div>

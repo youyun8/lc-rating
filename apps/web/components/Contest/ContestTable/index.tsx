@@ -10,11 +10,7 @@ interface ProblemsTableProps {
 export function ProblemsTable({ tableData, isPending }: ProblemsTableProps) {
   return (
     <div className="rounded-xl border border-border bg-card overflow-hidden">
-      {isPending ? (
-        <TableSkeleton />
-      ) : (
-        <DataTable data={tableData} />
-      )}
+      {isPending ? <TableSkeleton /> : <DataTable data={tableData} />}
     </div>
   );
 }

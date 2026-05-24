@@ -104,35 +104,35 @@ export function BaseDataTable<TData>({
                   )
                 : 0;
               return (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className={headerBorderClassName}
-                    style={
-                      applySizeStyles
-                        ? {
-                            width: `${(header.column.getSize() / totalSize) * 100}%`,
-                          }
-                        : undefined
-                    }
-                  >
-                    <div
-                      className={cn(headerClassName, {
-                        "cursor-pointer": header.column.getCanSort(),
-                      })}
-                      onClick={header.column.getToggleSortingHandler()}
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead
+                      key={header.id}
+                      className={headerBorderClassName}
+                      style={
+                        applySizeStyles
+                          ? {
+                              width: `${(header.column.getSize() / totalSize) * 100}%`,
+                            }
+                          : undefined
+                      }
                     >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </div>
-                  </TableHead>
-                ))}
-              </TableRow>
+                      <div
+                        className={cn(headerClassName, {
+                          "cursor-pointer": header.column.getCanSort(),
+                        })}
+                        onClick={header.column.getToggleSortingHandler()}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </div>
+                    </TableHead>
+                  ))}
+                </TableRow>
               );
             })}
           </TableHeader>
