@@ -42,8 +42,7 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
                 {section.title}
               </h1>
               <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-                先列出完整問題，再依序拆解觀念、模式判斷、例題推導與 C++
-                實作骨架。
+                依序展開觀念、模式、例題推導與 C++ 實作骨架。
               </p>
             </div>
 

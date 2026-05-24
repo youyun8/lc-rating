@@ -9,8 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono:
-    var(--font-ubuntu-sans-mono, "Ubuntu Sans Mono"), Consolas, ui-monospace,
-    monospace;
+    var(--font-ubuntu-mono, "Ubuntu Mono"), Consolas, ui-monospace, monospace;
   --font-song:
     "Noto Serif TC", "宋體", "Songti SC", "Microsoft YaHei", "Helvetica Neue",
     sans-serif;
