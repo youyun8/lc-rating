@@ -8,92 +8,29 @@ import {
   defaultTheme,
 } from "@/config/studyPlanThemes";
 import { TutorialSectionContainer } from "./SectionContainer";
-import { StudyPlanData, TutorialData } from "@/types";
 import {
   BookOpen,
   ChevronRight,
   ExternalLink,
   FolderTree,
   Layers3,
-  PanelLeftIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
 import { extractImageUrls } from "@/components/StudyPlan/dedupe";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
-import { sectionAnchor } from "@/utils/sectionAnchor";
-import { Button } from "@/components/ui/button";
-import { useSidebar } from "@/components/ui/sidebar";
 import { TutorialMarkdownPanel } from "./MarkdownPanel";
 import { CourseMaterials } from "./CourseMaterials";
-
-const EXAMPLES_PER_SECTION = 5;
-const EXAMPLE_MIN_RATING = 1700;
-
-function countSections(section: TutorialData.Section): number {
-  let count = 1;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countSections(child),
-      0,
-    );
-  }
-  return count;
-}
-
-function countSectionsWithSummary(section: TutorialData.Section): number {
-  let count = section.summary ? 1 : 0;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countSectionsWithSummary(child),
-      0,
-    );
-  }
-  return count;
-}
+import type { StudyPlanData } from "@/types";
+import { SectionQuickLinks } from "@/features/learning/components/SectionQuickLinks";
+import { SidebarVisibilityButtons } from "@/features/learning/components/SidebarVisibilityButtons";
+import {
+  flattenStudyPlanProblems,
+  getTutorialStats,
+} from "@/features/learning/utils/sectionTree";
 
 interface TutorialProps {
   plan: string;
-}
-
-function TutorialSidebarButtons() {
-  const { isMobile, open, openMobile, setOpen, setOpenMobile } = useSidebar();
-  const isSidebarVisible = isMobile ? openMobile : open;
-
-  return (
-    <>
-      {!isSidebarVisible && (
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="border border-border/60 bg-transparent text-muted-foreground hover:bg-accent/70 hover:text-foreground"
-          onClick={() => {
-            if (isMobile) {
-              setOpenMobile(true);
-              return;
-            }
-            setOpen(true);
-          }}
-        >
-          <PanelLeftIcon className="h-4 w-4" />
-          顯示側欄
-        </Button>
-      )}
-      {isSidebarVisible && !isMobile && (
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="border border-border/60 bg-transparent text-muted-foreground hover:bg-accent/70 hover:text-foreground"
-          onClick={() => setOpen(false)}
-        >
-          <PanelLeftIcon className="h-4 w-4" />
-          隱藏側欄
-        </Button>
-      )}
-    </>
-  );
 }
 
 function Tutorial({ plan }: TutorialProps) {
@@ -104,48 +41,15 @@ function Tutorial({ plan }: TutorialProps) {
   const Icon = studyPlanIcons[plan] ?? BookOpen;
   const theme = studyPlanThemes[plan] ?? defaultTheme;
 
-  const examplesBySectionId = useMemo(() => {
+  const practiceBySectionId = useMemo(() => {
     const map = new Map<number, StudyPlanData.Item[]>();
     const studyPlan = studyPlanDataMap[plan];
     if (!studyPlan) return map;
 
-    const flattenProblems = (
-      section: StudyPlanData.Section,
-    ): StudyPlanData.Item[] => [
-      ...(section.problems ?? []),
-      ...(section.children ?? []).flatMap(flattenProblems),
-    ];
-
-    const pickExamples = (
-      section: StudyPlanData.Section,
-    ): StudyPlanData.Item[] => {
-      const all = flattenProblems(section);
-      const isHigh = (problem: StudyPlanData.Item) =>
-        typeof problem.score === "number" &&
-        problem.score >= EXAMPLE_MIN_RATING;
-
-      const high = all
-        .filter(isHigh)
-        .sort((a, b) => (a.score ?? 0) - (b.score ?? 0));
-      if (high.length >= EXAMPLES_PER_SECTION) {
-        return high.slice(0, EXAMPLES_PER_SECTION);
-      }
-
-      const low = all
-        .filter((problem) => !isHigh(problem))
-        .sort(
-          (a, b) =>
-            (b.score ?? Number.NEGATIVE_INFINITY) -
-            (a.score ?? Number.NEGATIVE_INFINITY),
-        )
-        .slice(0, EXAMPLES_PER_SECTION - high.length);
-      return [...high, ...low];
-    };
-
     const walk = (section: StudyPlanData.Section) => {
-      const examples = pickExamples(section);
-      if (examples.length > 0) {
-        map.set(section.id, examples);
+      const problems = flattenStudyPlanProblems(section);
+      if (problems.length > 0) {
+        map.set(section.id, problems);
       }
       section.children?.forEach(walk);
     };
@@ -161,24 +65,7 @@ function Tutorial({ plan }: TutorialProps) {
     [tutorial?.summary],
   );
 
-  const stats = useMemo(() => {
-    if (!tutorial) {
-      return { sections: 0, rootSections: 0, documented: 0 };
-    }
-    const sections = tutorial.children.reduce(
-      (acc, child) => acc + countSections(child),
-      0,
-    );
-    const documented = tutorial.children.reduce(
-      (acc, child) => acc + countSectionsWithSummary(child),
-      0,
-    );
-    return {
-      sections,
-      rootSections: tutorial.children.length,
-      documented,
-    };
-  }, [tutorial]);
+  const stats = useMemo(() => getTutorialStats(tutorial), [tutorial]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background font-song">
@@ -333,7 +220,7 @@ function Tutorial({ plan }: TutorialProps) {
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                  <TutorialSidebarButtons />
+                  <SidebarVisibilityButtons />
                   <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
                     {stats.rootSections} 個主章節
                   </span>
@@ -349,42 +236,17 @@ function Tutorial({ plan }: TutorialProps) {
           )}
 
           {tutorial && (
-            <section className="rounded-2xl border border-border/60 bg-background/90 p-4 shadow-sm xl:hidden sm:p-5">
-              <div className="flex flex-col gap-4">
-                <div className="flex items-start gap-3">
-                  <div className="rounded-xl border border-border/60 bg-muted/30 p-2 text-muted-foreground">
-                    <PanelLeftIcon className="h-4 w-4" />
-                  </div>
-                  <div>
-                    <h2 className="text-base font-semibold tracking-tight text-foreground">
-                      快速章節提醒
-                    </h2>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      可先打開側欄查看完整章節樹，或直接用下方章節捷徑快速跳轉。
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {tutorial.children.map((section) => (
-                    <a
-                      key={section.id}
-                      href={`#${sectionAnchor(section.title)}`}
-                      className="inline-flex items-center rounded-full border border-border/60 bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                    >
-                      {section.title}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </section>
+            <SectionQuickLinks
+              sections={tutorial.children}
+              description="可先打開側欄查看完整章節樹，或直接用下方章節捷徑快速跳轉。"
+            />
           )}
 
           {tutorial?.children.map((section) => (
             <TutorialSectionContainer
               key={section.id}
               section={section}
-              examplesBySectionId={examplesBySectionId}
+              practiceBySectionId={practiceBySectionId}
               planKey={plan}
               parentImageUrls={topLevelImageUrls}
             />

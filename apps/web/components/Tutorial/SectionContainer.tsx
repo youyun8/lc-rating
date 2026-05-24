@@ -1,32 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { StudyPlanData, TutorialData } from "@/types";
-import { BookOpen, Sparkles } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import React, { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
-import { ProblemList } from "@/components/StudyPlan/ProblemList";
 import {
   extractImageUrls,
   stripDuplicateImages,
 } from "@/components/StudyPlan/dedupe";
 import { sectionAnchor } from "@/utils/sectionAnchor";
-
-function countSections(section: TutorialData.Section): number {
-  let count = 1;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countSections(child),
-      0,
-    );
-  }
-  return count;
-}
+import { SectionPracticePanel } from "@/features/learning/components/SectionPracticePanel";
+import { countTutorialSections } from "@/features/learning/utils/sectionTree";
 
 interface TutorialSectionContainerProps {
   section: TutorialData.Section;
-  /** Lookup of example problems by shared section id (sourced from the matching study plan). */
-  examplesBySectionId?: Map<number, StudyPlanData.Item[]>;
+  /** Lookup of practice problems by shared section id (sourced from the matching study plan). */
+  practiceBySectionId?: Map<number, StudyPlanData.Item[]>;
   planKey?: string;
   level?: number;
   parentImageUrls?: Set<string>;
@@ -35,14 +25,14 @@ interface TutorialSectionContainerProps {
 const TutorialSectionContainer = React.memo(
   ({
     section,
-    examplesBySectionId,
+    practiceBySectionId,
     planKey,
     level = 0,
     parentImageUrls = new Set(),
   }: TutorialSectionContainerProps) => {
-    const examples = examplesBySectionId?.get(section.id) ?? [];
+    const practiceProblems = practiceBySectionId?.get(section.id) ?? [];
     const childCount = section.children?.length ?? 0;
-    const totalSections = countSections(section);
+    const totalSections = countTutorialSections(section);
     const detailHref = planKey
       ? `/lecture/${planKey}/${sectionAnchor(section.title)}`
       : undefined;
@@ -123,32 +113,18 @@ const TutorialSectionContainer = React.memo(
             </div>
           ) : null}
         </CardHeader>
-        {(examples.length > 0 ||
+        {(practiceProblems.length > 0 ||
           (section.children && section.children.length > 0)) && (
           <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
             <div className="flex w-full flex-col gap-4">
-              {examples.length > 0 && (
-                <div className="rounded-[1.5rem] border border-border/60 bg-background/80 p-4 sm:p-5">
-                  <div className="mb-3 flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 text-xs font-medium text-muted-foreground">
-                      <Sparkles className="h-3.5 w-3.5" />
-                      例題
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      取自對應題單，分數 ≥ 1700 優先；不足時由最接近 1700
-                      的題目補滿 5 題
-                    </span>
-                  </div>
-                  <ProblemList problems={examples} />
-                </div>
-              )}
+              <SectionPracticePanel problems={practiceProblems} />
               {section.children && section.children.length > 0 && (
                 <div className="flex w-full flex-col gap-4 border-t border-border/50 pt-1">
                   {section.children.map((child) => (
                     <TutorialSectionContainer
                       key={child.id}
                       section={child}
-                      examplesBySectionId={examplesBySectionId}
+                      practiceBySectionId={practiceBySectionId}
                       planKey={planKey}
                       level={level + 1}
                       parentImageUrls={mergedImageUrls}

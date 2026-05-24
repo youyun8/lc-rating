@@ -219,10 +219,14 @@ export function StudyPlanMarkdownContent({
       wrapper.className =
         "not-prose my-4 overflow-hidden rounded-xl border border-border/60";
 
+      const header = document.createElement("div");
+      header.className =
+        "flex w-full items-center gap-2 bg-muted/25 px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted/40";
+
       const toggle = document.createElement("button");
       toggle.type = "button";
       toggle.className =
-        "flex w-full items-center gap-2 bg-muted/25 px-4 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-muted/40 cursor-pointer select-none";
+        "flex min-w-0 flex-1 cursor-pointer select-none items-center gap-2 text-left";
 
       const chevron = document.createElement("span");
       chevron.className =
@@ -230,11 +234,35 @@ export function StudyPlanMarkdownContent({
       chevron.innerHTML = CHEVRON_SVG;
 
       const labelEl = document.createElement("span");
-      labelEl.className = "font-medium truncate";
+      labelEl.className = "min-w-0 flex-1 truncate font-medium";
       labelEl.textContent = label;
+
+      const copyButton = document.createElement("button");
+      copyButton.type = "button";
+      copyButton.className =
+        "ml-auto shrink-0 rounded-md border border-border/60 bg-background px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground";
+      copyButton.textContent = "複製";
+      copyButton.addEventListener("click", async (event) => {
+        event.stopPropagation();
+
+        try {
+          await navigator.clipboard.writeText(codeText.trimEnd());
+          copyButton.textContent = "已複製";
+          window.setTimeout(() => {
+            copyButton.textContent = "複製";
+          }, 1200);
+        } catch {
+          copyButton.textContent = "複製失敗";
+          window.setTimeout(() => {
+            copyButton.textContent = "複製";
+          }, 1200);
+        }
+      });
 
       toggle.appendChild(chevron);
       toggle.appendChild(labelEl);
+      header.appendChild(toggle);
+      header.appendChild(copyButton);
 
       // Start collapsed
       pre.style.display = "none";
@@ -249,7 +277,7 @@ export function StudyPlanMarkdownContent({
       });
 
       pre.parentNode?.insertBefore(wrapper, pre);
-      wrapper.appendChild(toggle);
+      wrapper.appendChild(header);
       wrapper.appendChild(pre);
     });
   }, [content, variant]);

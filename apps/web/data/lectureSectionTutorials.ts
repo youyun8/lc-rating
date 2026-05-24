@@ -34,6 +34,7 @@ export interface LectureSectionTutorial {
   planKey: string;
   planTitle: string;
   content: string;
+  practiceProblems: StudyPlanData.Item[];
   navItems: LectureSectionNavItem[];
   previous?: LectureSectionNavItem;
   next?: LectureSectionNavItem;
@@ -584,6 +585,7 @@ export function getLectureSectionTutorial(
     planKey,
     planTitle: getPlanTitle(planKey),
     content,
+    practiceProblems: flattenProblems(studySection),
     navItems: sections.map(({ id, title, slug, depth }) => ({
       id,
       title,

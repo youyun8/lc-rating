@@ -24,79 +24,21 @@ import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { useProgressStore } from "@/hooks/useProgress";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import { sectionAnchor } from "@/utils/sectionAnchor";
-
-function countProblems(section: StudyPlanData.Section): number {
-  let count = section.problems?.length || 0;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countProblems(child),
-      0,
-    );
-  }
-  return count;
-}
-
-function countSections(section: StudyPlanData.Section): number {
-  let count = 1;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countSections(child),
-      0,
-    );
-  }
-  return count;
-}
-
-function collectProblemIds(sections: StudyPlanData.Section[]): string[] {
-  const ids: string[] = [];
-  function walk(section: StudyPlanData.Section) {
-    if (section.problems) {
-      for (const p of section.problems) {
-        const id = p.id?.toString();
-        if (id) ids.push(id);
-      }
-    }
-    if (section.children) {
-      for (const child of section.children) walk(child);
-    }
-  }
-  for (const s of sections) walk(s);
-  return ids;
-}
+import { getStudyPlanPracticeStats } from "@/features/learning/utils/sectionTree";
 
 type ProgressMap = Record<string, string | undefined>;
 
-function getPlanSummary(data: StudyPlanData.Root | undefined, progress: ProgressMap) {
-  if (!data) {
-    return {
-      totalProblems: 0,
-      totalSections: 0,
-      completedProblems: 0,
-      pct: 0,
-    };
-  }
-
-  const ids = collectProblemIds(data.children);
-  const totalProblems =
-    ids.length ||
-    data.children.reduce(
-      (acc: number, child: StudyPlanData.Section) => acc + countProblems(child),
-      0,
-    );
-  const totalSections = data.children.reduce(
-    (acc: number, child: StudyPlanData.Section) => acc + countSections(child),
-    0,
-  );
-  const completedProblems = ids.filter((id) => progress[id] === "SOLVED").length;
+function getPlanSummary(
+  data: StudyPlanData.Root | undefined,
+  progress: ProgressMap,
+) {
+  const stats = getStudyPlanPracticeStats(data, progress);
 
   return {
-    totalProblems,
-    totalSections,
-    completedProblems,
-    pct:
-      totalProblems > 0
-        ? Math.round((completedProblems / totalProblems) * 100)
-        : 0,
+    totalProblems: stats.total,
+    totalSections: stats.sections,
+    completedProblems: stats.completed,
+    pct: stats.pct,
   };
 }
 
@@ -345,7 +287,9 @@ function StudyPlanCard({
             {totalProblems > 0 && (
               <div className="rounded-2xl border border-border/60 bg-muted/20 p-3.5">
                 <div className="mb-2 flex items-center justify-between gap-2">
-                  <p className="text-sm font-medium text-foreground">完成進度</p>
+                  <p className="text-sm font-medium text-foreground">
+                    完成進度
+                  </p>
                   <span
                     className="text-sm font-semibold"
                     style={{ color: theme.accent }}
@@ -482,7 +426,9 @@ function StudyPlanOverview() {
               </div>
               <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
                 <span className="shrink-0">資料來源</span>
-                <span className="font-medium text-foreground">靈茶山艾府（0x3F）題單</span>
+                <span className="font-medium text-foreground">
+                  靈茶山艾府（0x3F）題單
+                </span>
               </div>
             </div>
 
@@ -624,7 +570,9 @@ function StudyPlanOverview() {
         {filteredPlans.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border/70 bg-muted/20 px-6 py-16 text-center text-muted-foreground">
             <Search className="mb-4 h-12 w-12 opacity-30" />
-            <p className="text-lg font-medium text-foreground">沒有找到匹配的題單</p>
+            <p className="text-lg font-medium text-foreground">
+              沒有找到匹配的題單
+            </p>
             <p className="mt-1 text-sm">
               試試其他搜尋關鍵字，或切換回不同的進度篩選條件。
             </p>

@@ -22,42 +22,14 @@ import { TutorialData } from "@/types";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import { sectionAnchor } from "@/utils/sectionAnchor";
-
-function countSections(section: TutorialData.Section): number {
-  let count = 1;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countSections(child),
-      0,
-    );
-  }
-  return count;
-}
-
-function countSectionsWithSummary(section: TutorialData.Section): number {
-  let count = section.summary ? 1 : 0;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countSectionsWithSummary(child),
-      0,
-    );
-  }
-  return count;
-}
+import { getTutorialStats } from "@/features/learning/utils/sectionTree";
 
 function getTutorialSummary(data: TutorialData.Root | undefined) {
-  if (!data) return { totalSections: 0, documentedSections: 0 };
-  const totalSections = data.children.reduce(
-    (acc, child) => acc + countSections(child),
-    0,
-  );
-  const documentedSections =
-    (data.summary ? 1 : 0) +
-    data.children.reduce(
-      (acc, child) => acc + countSectionsWithSummary(child),
-      0,
-    );
-  return { totalSections, documentedSections };
+  const stats = getTutorialStats(data);
+  return {
+    totalSections: stats.sections,
+    documentedSections: stats.documented + (data?.summary ? 1 : 0),
+  };
 }
 
 type TutorialSearchMatch = {

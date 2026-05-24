@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
@@ -17,17 +12,7 @@ import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { ProblemList } from "./ProblemList";
 import { extractImageUrls, stripDuplicateImages } from "./dedupe";
 import { sectionAnchor } from "@/utils/sectionAnchor";
-
-function countProblems(section: StudyPlanData.Section): number {
-  let count = section.problems?.length ?? 0;
-  if (section.children) {
-    count += section.children.reduce(
-      (acc, child) => acc + countProblems(child),
-      0,
-    );
-  }
-  return count;
-}
+import { countStudyPlanProblems } from "@/features/learning/utils/sectionTree";
 
 interface SectionContainerProps {
   section: StudyPlanData.Section;
@@ -44,7 +29,7 @@ const SectionContainer = React.memo(
     level = 0,
     parentImageUrls = new Set(),
   }: SectionContainerProps) => {
-    const totalProblems = countProblems(section);
+    const totalProblems = countStudyPlanProblems(section);
     const childCount = section.children?.length ?? 0;
 
     const tutorial = tutorialById?.get(section.id);
@@ -107,9 +92,7 @@ const SectionContainer = React.memo(
                   <span className="rounded-full border border-border/60 bg-background px-2.5 py-0.5">
                     {level === 0 ? "章節摘要" : "重點整理"}
                   </span>
-                  <span className="text-muted-foreground/80">
-                    展開觀念說明
-                  </span>
+                  <span className="text-muted-foreground/80">展開觀念說明</span>
                 </span>
                 <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]/summary:rotate-180" />
               </CollapsibleTrigger>
