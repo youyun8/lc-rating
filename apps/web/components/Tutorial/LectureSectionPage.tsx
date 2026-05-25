@@ -28,6 +28,7 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
     childCount: child.childCount,
     totalSections: child.totalSections,
     problemCount: child.practiceProblemCount,
+    problemIds: child.practiceProblemIds,
     depth: child.depth,
   }));
 

@@ -32,6 +32,7 @@ export interface LectureSectionChildItem extends LectureSectionNavItem {
   childCount: number;
   totalSections: number;
   practiceProblemCount: number;
+  practiceProblemIds: string[];
 }
 
 export interface LectureSectionTutorial {
@@ -114,6 +115,16 @@ function flattenProblems(
     ...(section.problems ?? []),
     ...(section.children ?? []).flatMap(flattenProblems),
   ];
+}
+
+function getProblemIds(problems: StudyPlanData.Item[]) {
+  return Array.from(
+    new Set(
+      problems
+        .map((problem) => problem.id?.toString())
+        .filter((id): id is string => Boolean(id)),
+    ),
+  );
 }
 
 function getProblemRating(problem: StudyPlanData.Item | undefined) {
@@ -618,6 +629,7 @@ export function getLectureSectionTutorial(
         studyPlanDataMap[planKey]?.children,
         child.id,
       );
+      const childProblems = flattenProblems(childStudySection);
 
       return {
         id: child.id,
@@ -627,7 +639,8 @@ export function getLectureSectionTutorial(
         summary: child.summary,
         childCount: child.children?.length ?? 0,
         totalSections: countTutorialSections(child),
-        practiceProblemCount: flattenProblems(childStudySection).length,
+        practiceProblemCount: childProblems.length,
+        practiceProblemIds: getProblemIds(childProblems),
       };
     }),
     previous:

@@ -65,7 +65,7 @@ function Tutorial({ plan }: TutorialProps) {
           section,
           plan,
           0,
-          practiceBySectionId.get(section.id)?.length ?? 0,
+          practiceBySectionId.get(section.id) ?? [],
         ),
       ) ?? [],
     [plan, practiceBySectionId, tutorial?.children],

@@ -1,10 +1,23 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useOptions } from "@/hooks/useOptions";
+import { useProgressStore } from "@/hooks/useProgress";
 import { cn } from "@/lib/utils";
-import type { TutorialData } from "@/types";
+import type { StudyPlanData, TutorialData } from "@/types";
 import { sectionAnchor } from "@/utils/sectionAnchor";
-import { ArrowRight, BookOpen, FolderTree, ListChecks } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  CircleDashed,
+  FolderTree,
+  ListChecks,
+  PlayCircle,
+} from "lucide-react";
 import Link from "next/link";
+import { type CSSProperties, useMemo } from "react";
 
 export interface LectureSectionCardItem {
   id: number;
@@ -15,6 +28,7 @@ export interface LectureSectionCardItem {
   childCount: number;
   totalSections: number;
   problemCount: number;
+  problemIds: string[];
   depth: number;
 }
 
@@ -44,13 +58,24 @@ function getLevelLabel(depth: number) {
   return "細分單元";
 }
 
+function getProblemIds(problems: StudyPlanData.Item[]) {
+  return Array.from(
+    new Set(
+      problems
+        .map((problem) => problem.id?.toString())
+        .filter((id): id is string => Boolean(id)),
+    ),
+  );
+}
+
 export function makeLectureSectionCardItem(
   section: TutorialData.Section,
   planKey: string,
   depth = 0,
-  problemCount = 0,
+  problems: StudyPlanData.Item[] = [],
 ): LectureSectionCardItem {
   const slug = sectionAnchor(section.title);
+  const problemIds = getProblemIds(problems);
   const totalSections =
     1 +
     (section.children ?? []).reduce(
@@ -66,7 +91,8 @@ export function makeLectureSectionCardItem(
     summary: section.summary,
     childCount: section.children?.length ?? 0,
     totalSections,
-    problemCount,
+    problemCount: problemIds.length,
+    problemIds,
     depth,
   };
 }
@@ -81,12 +107,68 @@ function countTutorialDescendants(section: TutorialData.Section): number {
   );
 }
 
+function getCardProgressState(
+  problemIds: string[],
+  progress: Record<string, string | undefined>,
+  pendingKey: string,
+) {
+  const total = problemIds.length;
+  const solved = problemIds.filter((id) => progress[id] === "SOLVED").length;
+  const started = problemIds.filter((id) => {
+    const status = progress[id];
+    return Boolean(status && status !== pendingKey);
+  }).length;
+
+  if (total > 0 && solved === total) {
+    return {
+      key: "completed" as const,
+      label: "已完成",
+      helper: `${solved}/${total} 題`,
+      color: "#28a745",
+      Icon: CheckCircle2,
+    };
+  }
+
+  if (started > 0 || solved > 0) {
+    return {
+      key: "working" as const,
+      label: "進行中",
+      helper: `${solved}/${total} 題完成`,
+      color: "#1E90FF",
+      Icon: PlayCircle,
+    };
+  }
+
+  return {
+    key: "pending" as const,
+    label: total > 0 ? "未開始" : "未配置題目",
+    helper: total > 0 ? `0/${total} 題` : "暫無題目",
+    color: "#64748b",
+    Icon: CircleDashed,
+  };
+}
+
 export function LectureSectionCards({
   title,
   description,
   items,
   emptyText = "此層目前沒有可顯示的單元。",
 }: LectureSectionCardsProps) {
+  const progress = useProgressStore((state) => state.progress);
+  const { getOption } = useOptions();
+  const pendingKey = getOption().key;
+
+  const progressByItemId = useMemo(
+    () =>
+      new Map(
+        items.map((item) => [
+          item.id,
+          getCardProgressState(item.problemIds, progress, pendingKey),
+        ]),
+      ),
+    [items, pendingKey, progress],
+  );
+
   return (
     <section className="rounded-3xl border border-border/60 bg-card p-4 shadow-sm sm:p-5 xl:p-6">
       <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -109,12 +191,28 @@ export function LectureSectionCards({
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => {
             const isLeaf = item.childCount === 0;
+            const progressState = progressByItemId.get(item.id)!;
+            const ProgressIcon = progressState.Icon;
+            const isActive = progressState.key !== "pending";
 
             return (
               <Link
                 key={item.id}
                 href={item.href}
-                className="group flex min-h-64 flex-col overflow-hidden rounded-2xl border border-border/60 bg-background shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
+                className={cn(
+                  "group flex min-h-64 flex-col overflow-hidden rounded-2xl border bg-background shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md",
+                  isActive
+                    ? "border-[color:var(--section-progress-color)]"
+                    : "border-border/60 hover:border-primary/30",
+                )}
+                style={
+                  {
+                    "--section-progress-color": progressState.color,
+                    background: isActive
+                      ? `linear-gradient(135deg, color-mix(in srgb, ${progressState.color} 13%, transparent), transparent 46%), var(--card)`
+                      : undefined,
+                  } as CSSProperties
+                }
               >
                 <div className="flex flex-1 flex-col p-4 sm:p-5">
                   <div className="mb-4 flex items-start justify-between gap-3">
@@ -132,12 +230,25 @@ export function LectureSectionCards({
                         <FolderTree className="h-5 w-5" />
                       )}
                     </div>
-                    <Badge
-                      variant={isLeaf ? "default" : "outline"}
-                      className="rounded-full text-[11px]"
-                    >
-                      {isLeaf ? "完整講義" : getLevelLabel(item.depth)}
-                    </Badge>
+                    <div className="flex flex-col items-end gap-1.5">
+                      <Badge
+                        variant={isLeaf ? "default" : "outline"}
+                        className="rounded-full text-[11px]"
+                      >
+                        {isLeaf ? "完整講義" : getLevelLabel(item.depth)}
+                      </Badge>
+                      <span
+                        className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-medium"
+                        style={{
+                          borderColor: `color-mix(in srgb, ${progressState.color} 35%, transparent)`,
+                          backgroundColor: `color-mix(in srgb, ${progressState.color} 12%, transparent)`,
+                          color: progressState.color,
+                        }}
+                      >
+                        <ProgressIcon className="h-3 w-3" />
+                        {progressState.label}
+                      </span>
+                    </div>
                   </div>
 
                   <h3 className="break-words text-base font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-lg">
@@ -162,7 +273,7 @@ export function LectureSectionCards({
                     {item.problemCount > 0 && (
                       <span className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-muted/20 px-2.5 py-1">
                         <ListChecks className="h-3.5 w-3.5" />
-                        {item.problemCount} 題
+                        {progressState.helper}
                       </span>
                     )}
                   </div>
