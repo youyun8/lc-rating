@@ -63,7 +63,7 @@ const Navigator = React.memo(() => {
   }, [pathname]);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-20 border-b border-border/60 bg-background/80 backdrop-blur-md">
+    <nav className="fixed inset-x-0 top-0 z-20 border-b border-border/60 bg-background/80 backdrop-blur-md after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-gradient-to-r after:from-transparent after:via-primary/40 after:to-transparent after:animate-hairline-drift">
       <div className="flex h-[var(--navbar-height)] items-center justify-between gap-3 px-3 sm:px-4">
         {/* Left section */}
         <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
@@ -87,10 +87,13 @@ const Navigator = React.memo(() => {
           {/* Logo */}
           <Link
             href="/"
-            className="min-w-0 whitespace-nowrap text-sm font-bold transition-colors hover:text-primary sm:text-base"
+            className="group flex min-w-0 items-center gap-2 whitespace-nowrap text-sm font-bold tracking-tight sm:text-base"
           >
-            <span className="sm:hidden">LeetCode Rating</span>
-            <span className="hidden sm:inline">LeetCode Rating</span>
+            <span
+              aria-hidden
+              className="brand-gradient h-6 w-6 rounded-lg shadow-[0_4px_14px_-4px_rgba(168,83,186,0.55)] transition-transform group-hover:scale-105"
+            />
+            <span className="brand-text-gradient">LeetCode Rating</span>
           </Link>
 
           {/* Desktop nav links */}
@@ -109,7 +112,7 @@ const Navigator = React.memo(() => {
                 >
                   {label}
                   {isActive && (
-                    <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-primary rounded-full" />
+                    <span className="brand-gradient absolute -bottom-1.5 left-1/2 h-1 w-4/5 -translate-x-1/2 rounded-full" />
                   )}
                 </Link>
               );

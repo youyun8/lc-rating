@@ -56,19 +56,22 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.53 0.22 280);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.96 0.04 290);
+  --accent-foreground: oklch(0.32 0.18 285);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: oklch(0.62 0.2 280);
+  --brand-start: #2a8af6;
+  --brand-mid: #a853ba;
+  --brand-end: #e92a67;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -77,12 +80,12 @@
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary: oklch(0.53 0.22 280);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-accent: oklch(0.96 0.04 290);
+  --sidebar-accent-foreground: oklch(0.32 0.18 285);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-ring: oklch(0.62 0.2 280);
   --navbar-height: 64px;
   --lecture-reading-width: 100%;
   /* 導航欄高度 */
@@ -109,36 +112,36 @@
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
+  --card: oklch(0.18 0.01 285);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
+  --popover: oklch(0.18 0.01 285);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.72 0.2 290);
+  --primary-foreground: oklch(0.16 0.02 285);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
+  --muted: oklch(0.25 0.01 285);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: oklch(0.3 0.08 290);
+  --accent-foreground: oklch(0.95 0.02 290);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --border: oklch(0.28 0.01 285);
+  --input: oklch(0.28 0.01 285);
+  --ring: oklch(0.62 0.2 290);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
+  --sidebar: oklch(0.2 0.01 285);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar-primary: oklch(0.72 0.2 290);
+  --sidebar-primary-foreground: oklch(0.16 0.02 285);
+  --sidebar-accent: oklch(0.3 0.08 290);
+  --sidebar-accent-foreground: oklch(0.95 0.02 290);
+  --sidebar-border: oklch(0.28 0.01 285);
+  --sidebar-ring: oklch(0.62 0.2 290);
 }
 
 @layer base {
@@ -148,6 +151,138 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .brand-gradient {
+    background-image: linear-gradient(
+      120deg,
+      var(--brand-start, #2a8af6) 0%,
+      var(--brand-mid, #a853ba) 50%,
+      var(--brand-end, #e92a67) 100%
+    );
+  }
+
+  .brand-text-gradient {
+    background-image: linear-gradient(
+      120deg,
+      var(--brand-start, #2a8af6) 0%,
+      var(--brand-mid, #a853ba) 50%,
+      var(--brand-end, #e92a67) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .brand-glow::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+        70% 90% at 0% 0%,
+        color-mix(in oklab, var(--brand-start) 28%, transparent),
+        transparent 60%
+      ),
+      radial-gradient(
+        70% 90% at 100% 100%,
+        color-mix(in oklab, var(--brand-end) 24%, transparent),
+        transparent 60%
+      ),
+      radial-gradient(
+        90% 60% at 60% 0%,
+        color-mix(in oklab, var(--brand-mid) 18%, transparent),
+        transparent 65%
+      );
+  }
+
+  .brand-glow > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-card {
+    @apply relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-primary/[0.06] via-card/80 to-card/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md;
+  }
+
+  .stat-card::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 2px;
+    background-image: linear-gradient(
+      90deg,
+      var(--brand-start, #2a8af6),
+      var(--brand-mid, #a853ba),
+      var(--brand-end, #e92a67)
+    );
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+
+  .stat-card:hover::after {
+    opacity: 1;
+  }
+
+  .stat-card-icon {
+    @apply text-primary;
+  }
+
+  .stat-card svg {
+    @apply text-primary/80;
+  }
+
+  @keyframes motion-rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .motion-rise {
+    animation: motion-rise 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-rise {
+      animation: none;
+    }
+  }
+
+  .empty-state {
+    @apply flex flex-col items-center justify-center rounded-3xl border border-dashed border-primary/30 bg-gradient-to-br from-primary/[0.04] via-card/40 to-card/60 px-6 py-16 text-center text-muted-foreground;
+  }
+
+  .empty-state-icon {
+    @apply brand-gradient mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-[0_10px_30px_-12px_rgba(168,83,186,0.6)];
+  }
+
+  @keyframes hairline-drift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+
+  .animate-hairline-drift {
+    background-size: 200% 100%;
+    animation: hairline-drift 10s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-hairline-drift {
+      animation: none;
+    }
   }
 }
 

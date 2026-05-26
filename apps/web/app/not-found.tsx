@@ -34,11 +34,18 @@ export default function NotFound() {
   }, [pathname, router]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] p-8">
-      <h1 className="text-4xl font-bold mb-4">404</h1>
-      <p className="text-lg text-muted-foreground">
-        Page not found. Redirecting...
-      </p>
+    <div className="flex min-h-[70vh] items-center justify-center p-6 sm:p-10">
+      <section className="brand-glow motion-rise relative w-full max-w-xl overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-8 text-center shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)] sm:p-12">
+        <p className="brand-text-gradient text-7xl font-extrabold tracking-tight sm:text-8xl">
+          404
+        </p>
+        <h1 className="mt-3 text-xl font-semibold text-foreground sm:text-2xl">
+          頁面不存在
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+          Page not found. Redirecting...
+        </p>
+      </section>
     </div>
   );
 }

@@ -138,7 +138,7 @@ const FloatingSyncButton = () => {
             </p>
           ) : (
             <Button
-              variant="outline"
+              variant="brand"
               className="w-full justify-center"
               onClick={handleLogin}
               type="button"

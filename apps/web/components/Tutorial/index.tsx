@@ -76,7 +76,7 @@ function Tutorial({ plan }: TutorialProps) {
       {tutorial && (
         <div className="mx-auto w-full max-w-7xl px-3 pt-4 sm:px-4 sm:pt-6 md:px-6 md:pt-8 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
           <div
-            className="relative overflow-hidden rounded-[1.75rem] sm:rounded-[2rem]"
+            className="motion-rise relative overflow-hidden rounded-[1.75rem] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] sm:rounded-[2rem]"
             style={{ background: theme.gradient }}
           >
             <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-white/10" />

@@ -138,7 +138,7 @@ export function GlobalStudyPlanSidebar() {
   const backLabel = pageType === "lecture" ? "返回講義列表" : "返回題單列表";
 
   return (
-    <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r">
+    <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r before:absolute before:inset-x-0 before:top-0 before:h-px before:brand-gradient before:opacity-70 before:animate-hairline-drift">
       <SidebarHeader className="p-4">
         <div className="flex flex-col gap-2">
           <div className="flex items-start justify-between gap-2">
@@ -169,12 +169,18 @@ export function GlobalStudyPlanSidebar() {
               </Button>
             )}
           </div>
-          <div className="flex items-center gap-2 px-2 text-lg font-bold">
+          <div className="flex items-center gap-2.5 px-2 text-lg font-bold">
             {(() => {
               const Icon = studyPlanIcons[currentPlanKey as string] || BookOpen;
-              return <Icon className="h-6 w-6 text-primary" />;
+              return (
+                <span className="brand-gradient inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white shadow-[0_6px_18px_-8px_rgba(168,83,186,0.6)]">
+                  <Icon className="h-4 w-4" />
+                </span>
+              );
             })()}
-            <span className="truncate">{currentPlanTitle}</span>
+            <span className="brand-text-gradient truncate">
+              {currentPlanTitle}
+            </span>
           </div>
         </div>
       </SidebarHeader>

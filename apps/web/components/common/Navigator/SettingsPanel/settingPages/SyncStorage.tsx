@@ -315,7 +315,7 @@ export default function SyncStorage() {
             </Button>
           ) : (
             <Button
-              variant="outline"
+              variant="brand"
               size="sm"
               onClick={handleLogin}
               type="button"

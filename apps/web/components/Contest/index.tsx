@@ -160,11 +160,11 @@ function ContestPage() {
 
   return (
     <div className="flex flex-col gap-5 px-4 py-6 md:px-8">
-      <section className="overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-muted/40 via-background to-background">
+      <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)]">
         <div className="flex flex-col gap-6 p-5 sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl space-y-2">
-              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
                 比賽題目
               </h1>
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -185,7 +185,7 @@ function ContestPage() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+            <div className="stat-card">
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 <Swords className="h-4 w-4" />
                 比賽總數
@@ -198,7 +198,7 @@ function ContestPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+            <div className="stat-card">
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 <FileText className="h-4 w-4" />
                 題目總數
@@ -211,7 +211,7 @@ function ContestPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+            <div className="stat-card">
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 <Sparkles className="h-4 w-4" />
                 題解覆蓋
@@ -224,7 +224,7 @@ function ContestPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+            <div className="stat-card">
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 <Gauge className="h-4 w-4" />
                 難度概況

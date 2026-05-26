@@ -293,11 +293,11 @@ function TutorialOverview() {
   return (
     <div className="min-h-screen bg-background font-song">
       <div className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 md:px-6 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
-        <section className="overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-muted/40 via-background to-background">
+        <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)]">
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl space-y-2">
-                <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
                   講義
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -322,7 +322,7 @@ function TutorialOverview() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3 2xl:gap-4">
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="stat-card">
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   <LayoutGrid className="h-4 w-4" />
                   講義主題
@@ -335,7 +335,7 @@ function TutorialOverview() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="stat-card">
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   <FolderTree className="h-4 w-4" />
                   章節總數
@@ -348,7 +348,7 @@ function TutorialOverview() {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm">
+              <div className="stat-card">
                 <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   <BookOpen className="h-4 w-4" />
                   筆記總數
@@ -404,8 +404,10 @@ function TutorialOverview() {
           </div>
         </div>
         {filteredPlans.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-border/70 bg-muted/20 px-6 py-16 text-center text-muted-foreground">
-            <Search className="mb-4 h-12 w-12 opacity-30" />
+          <div className="empty-state">
+            <span className="empty-state-icon">
+              <Search className="h-6 w-6" />
+            </span>
             <p className="text-lg font-medium text-foreground">
               沒有找到匹配的講義
             </p>

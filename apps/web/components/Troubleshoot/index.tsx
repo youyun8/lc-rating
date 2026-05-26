@@ -10,18 +10,26 @@ export default function Troubleshoot() {
   if (!mounted) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-8">
-        <h1 className="mb-2 text-2xl font-bold">故障排除</h1>
-        <p className="mb-6 text-sm text-muted-foreground">載入中…</p>
+        <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)]">
+          <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
+            故障排除
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">載入中…</p>
+        </section>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="mb-2 text-2xl font-bold">故障排除</h1>
-      <p className="mb-6 text-sm text-muted-foreground">
-        檢查並修復雲端同步相關問題
-      </p>
+    <div className="mx-auto flex max-w-2xl flex-col gap-5 px-4 py-8">
+      <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)]">
+        <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
+          故障排除
+        </h1>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          檢查並修復雲端同步相關問題
+        </p>
+      </section>
       <TroubleshootPanel />
     </div>
   );
