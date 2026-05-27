@@ -162,7 +162,7 @@ export function BaseDataTable<TData>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-32 bg-gradient-to-b from-primary/[0.03] to-transparent text-center text-sm text-muted-foreground"
+                  className="h-32 text-center text-sm text-muted-foreground"
                 >
                   暫無資料
                 </TableCell>

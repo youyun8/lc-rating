@@ -185,7 +185,7 @@
   }
 
   .stat-card {
-    @apply relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-primary/[0.06] via-card/80 to-card/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md;
+    @apply relative overflow-hidden rounded-2xl border border-border/60 bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md;
   }
 
   .stat-card::after {
@@ -233,32 +233,13 @@
   }
 
   .empty-state {
-    @apply flex flex-col items-center justify-center rounded-3xl border border-dashed border-primary/30 bg-gradient-to-br from-primary/[0.04] via-card/40 to-card/60 px-6 py-16 text-center text-muted-foreground;
+    @apply flex flex-col items-center justify-center rounded-3xl border border-dashed border-primary/30 bg-card/60 px-6 py-16 text-center text-muted-foreground;
   }
 
   .empty-state-icon {
     @apply brand-gradient mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-sm;
   }
 
-  @keyframes hairline-drift {
-    0% {
-      background-position: 0% 50%;
-    }
-    100% {
-      background-position: 200% 50%;
-    }
-  }
-
-  .animate-hairline-drift {
-    background-size: 200% 100%;
-    animation: hairline-drift 10s linear infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-hairline-drift {
-      animation: none;
-    }
-  }
 }
 
 /* Markdown 內容樣式 */

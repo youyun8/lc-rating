@@ -164,7 +164,7 @@ export function GlobalStudyPlanSidebar() {
   const isLectureLink = pageType === "lecture" && Boolean(currentPlanKey);
 
   return (
-    <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r before:absolute before:inset-x-0 before:top-0 before:h-px before:brand-gradient before:opacity-70 before:animate-hairline-drift">
+    <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-primary/30">
       <SidebarHeader className="gap-3 p-4">
         <div className="flex items-start justify-between gap-2">
           <SidebarMenuButton asChild className="w-fit -ml-2">
@@ -194,11 +194,7 @@ export function GlobalStudyPlanSidebar() {
             </Button>
           )}
         </div>
-        <div className="relative overflow-hidden rounded-2xl border border-sidebar-border/60 bg-gradient-to-br from-sidebar-accent/30 via-sidebar/60 to-sidebar p-3">
-          <span
-            aria-hidden
-            className="brand-gradient absolute inset-x-0 top-0 h-px opacity-70"
-          />
+        <div className="relative overflow-hidden rounded-2xl border border-sidebar-border/60 bg-sidebar-accent/15 p-3">
           <div className="flex items-center gap-2.5">
             {(() => {
               const Icon = studyPlanIcons[currentPlanKey as string] || BookOpen;

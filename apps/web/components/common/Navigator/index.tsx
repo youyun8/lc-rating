@@ -63,7 +63,7 @@ const Navigator = React.memo(() => {
   }, [pathname]);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-20 border-b border-border/60 bg-background/80 backdrop-blur-md after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-gradient-to-r after:from-transparent after:via-primary/40 after:to-transparent after:animate-hairline-drift">
+    <nav className="fixed inset-x-0 top-0 z-20 border-b border-border/60 bg-background/80 backdrop-blur-md after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-primary/30">
       <div className="flex h-[var(--navbar-height)] items-center justify-between gap-3 px-3 sm:px-4">
         {/* Left section */}
         <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
