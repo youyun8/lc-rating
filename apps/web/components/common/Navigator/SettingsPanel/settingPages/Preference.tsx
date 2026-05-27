@@ -55,7 +55,7 @@ const Preference = () => {
           id="airplane-mode"
           checked={linkLanguage !== "zh"}
           onCheckedChange={toggleLinkLanguage}
-          className="data-[state=unchecked]:bg-red-400 data-[state=checked]:bg-blue-400"
+          className="data-[state=unchecked]:bg-red-400 data-[state=checked]:bg-lime-500"
         />
         <Label htmlFor="airplane-mode">英文</Label>
       </div>
@@ -66,7 +66,7 @@ const Preference = () => {
           id="airplane-mode"
           checked={tagLanguage !== "zh"}
           onCheckedChange={toggleTagLanguage}
-          className="data-[state=unchecked]:bg-red-400 data-[state=checked]:bg-blue-400"
+          className="data-[state=unchecked]:bg-red-400 data-[state=checked]:bg-lime-500"
         />
         <Label htmlFor="airplane-mode">英文</Label>
       </div>
