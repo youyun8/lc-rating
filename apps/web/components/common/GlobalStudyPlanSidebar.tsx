@@ -8,6 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarResizeHandle,
   SidebarSeparator,
   SidebarGroup,
   SidebarGroupLabel,
@@ -290,6 +291,7 @@ export function GlobalStudyPlanSidebar() {
         )}
       </SidebarContent>
       <SidebarRail />
+      <SidebarResizeHandle />
     </Sidebar>
   );
 }
