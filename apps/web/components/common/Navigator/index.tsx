@@ -1,7 +1,7 @@
 "use client";
 
 import { BILIBILI_0X3F_SPACE, ROUTERS, STUDYPLANS } from "@/config/constants";
-import { Menu, X } from "lucide-react";
+import { Code2, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -91,8 +91,10 @@ const Navigator = React.memo(() => {
           >
             <span
               aria-hidden
-              className="brand-gradient h-6 w-6 rounded-lg shadow-[0_4px_14px_-4px_rgba(168,83,186,0.55)] transition-transform group-hover:scale-105"
-            />
+              className="brand-gradient inline-flex h-6 w-6 items-center justify-center rounded-lg text-white shadow-[0_4px_14px_-4px_rgba(6,182,212,0.55)] transition-transform group-hover:scale-105"
+            >
+              <Code2 className="h-4 w-4" strokeWidth={2.5} />
+            </span>
             <span className="brand-text-gradient">LeetCode Rating</span>
           </Link>
 

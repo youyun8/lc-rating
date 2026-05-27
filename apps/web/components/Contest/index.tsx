@@ -160,7 +160,7 @@ function ContestPage() {
 
   return (
     <div className="flex flex-col gap-5 px-4 py-6 md:px-8">
-      <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)]">
+      <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-[0_30px_80px_-50px_rgba(6,182,212,0.55)]">
         <div className="flex flex-col gap-6 p-5 sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl space-y-2">

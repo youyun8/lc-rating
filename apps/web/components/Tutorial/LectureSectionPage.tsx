@@ -2,7 +2,6 @@ import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent
 import { Button } from "@/components/ui/button";
 import type { LectureSectionTutorial } from "@/data/lectureSectionTutorials";
 import { SectionPracticePanel } from "@/features/learning/components/SectionPracticePanel";
-import { cn } from "@/lib/utils";
 import {
   ArrowLeft,
   ArrowRight,
@@ -93,8 +92,8 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
           />
         </main>
       ) : (
-        <main className="mx-auto grid w-full max-w-[96rem] gap-6 px-4 py-6 pb-24 sm:px-6 md:py-8 lg:grid-cols-[minmax(0,1fr)_18rem] xl:px-8">
-          <article className="min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm lg:w-full lg:max-w-[var(--lecture-reading-width)] lg:justify-self-center">
+        <main className="mx-auto flex w-full max-w-[96rem] flex-col gap-6 px-4 py-6 pb-24 sm:px-6 md:py-8 xl:px-8">
+          <article className="mx-auto w-full min-w-0 overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm lg:max-w-[var(--lecture-reading-width)]">
             <div className="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-6">
               <h2 className="text-lg font-semibold tracking-tight text-foreground">
                 完整講義
@@ -108,41 +107,14 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
             </div>
           </article>
 
-          <aside className="flex h-fit flex-col gap-4 lg:sticky lg:top-24">
-            <div className="rounded-2xl border border-border/60 bg-card p-4 shadow-sm">
-              <h2 className="text-sm font-semibold tracking-tight text-foreground">
-                {section.planTitle} 章節
-              </h2>
-              <div className="mt-3 flex flex-col gap-1.5">
-                {section.navItems.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={`/lecture/${section.planKey}/${item.slug}`}
-                    className={cn(
-                      "rounded-xl px-3 py-2 text-sm transition-colors",
-                      item.depth > 0 && "ml-3 text-xs",
-                      item.id === section.id
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-muted/60 hover:text-foreground",
-                    )}
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </aside>
-
           {section.practiceProblems.length > 0 && (
-            <section className="lg:col-span-2">
-              <SectionPracticePanel
-                problems={section.practiceProblems}
-                title="搭配練習"
-              />
-            </section>
+            <SectionPracticePanel
+              problems={section.practiceProblems}
+              title="搭配練習"
+            />
           )}
 
-          <nav className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between lg:col-span-2">
+          <nav className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             {section.previous ? (
               <Button asChild variant="outline" className="justify-start">
                 <Link

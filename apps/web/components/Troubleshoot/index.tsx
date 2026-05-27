@@ -10,7 +10,7 @@ export default function Troubleshoot() {
   if (!mounted) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-8">
-        <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)]">
+        <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-[0_30px_80px_-50px_rgba(6,182,212,0.55)]">
           <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
             故障排除
           </h1>
@@ -22,7 +22,7 @@ export default function Troubleshoot() {
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-5 px-4 py-8">
-      <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-[0_30px_80px_-50px_rgba(168,83,186,0.55)]">
+      <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-[0_30px_80px_-50px_rgba(6,182,212,0.55)]">
         <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
           故障排除
         </h1>
