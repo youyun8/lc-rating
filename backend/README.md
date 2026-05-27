@@ -22,7 +22,7 @@ Cloudflare Worker backend for lc-rating cloud sync feature.
 1. Go to GitHub → Settings → Developer settings → OAuth Apps → New OAuth App
 2. Fill in:
    - **Application name**: LC-Rating Sync (or any name)
-   - **Homepage URL**: `https://asyncchang.github.io/lc-rating`
+   - **Homepage URL**: `https://youyun8.github.io/lc-rating`
    - **Authorization callback URL**: `https://lc-rating-backend.your-subdomain.workers.dev/api/callback`
 3. Save the **Client ID** and generate a **Client Secret**
 
@@ -59,7 +59,7 @@ npx wrangler secret put JWT_SECRET
 
 # Allowed origins (your frontend URLs)
 npx wrangler secret put ALLOWED_ORIGINS
-# Enter: https://asyncchang.github.io,http://localhost:3001
+# Enter: https://youyun8.github.io,http://localhost:3001
 ```
 
 ### 4. Deploy

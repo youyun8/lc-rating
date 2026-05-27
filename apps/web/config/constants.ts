@@ -24,7 +24,7 @@ export const STORAGE_VERSION = 1;
 //
 // Until then, the cloud sync buttons will show a "not configured" message.
 
-const YOUR_BACKEND_URL = "https://lc-rating-backend.asyncchang.workers.dev"; // <-- UPDATE THIS AFTER DEPLOYING BACKEND
+const YOUR_BACKEND_URL = "https://lc-rating-backend.youyun8.workers.dev"; // <-- UPDATE THIS AFTER DEPLOYING BACKEND
 
 // Auto-detect backend based on deployment domain
 const getApiBase = () => {

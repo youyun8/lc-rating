@@ -26,7 +26,7 @@ importers:
       '@ai-sdk/openai-compatible':
         specifier: ^1.0.28
         version: 1.0.28(zod@3.25.76)
-      '@asyncchang/ui':
+      '@youyun8/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@hookform/resolvers':
@@ -156,13 +156,13 @@ importers:
       '@ai-sdk/provider-utils':
         specifier: ^3.0.18
         version: 3.0.18(zod@3.25.76)
-      '@asyncchang/eslint-config':
+      '@youyun8/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@asyncchang/tailwind-config':
+      '@youyun8/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
-      '@asyncchang/typescript-config':
+      '@youyun8/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@joplin/turndown-plugin-gfm':
@@ -285,13 +285,13 @@ importers:
         specifier: ^19
         version: 19.2.0
     devDependencies:
-      '@asyncchang/eslint-config':
+      '@youyun8/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@asyncchang/tailwind-config':
+      '@youyun8/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
-      '@asyncchang/typescript-config':
+      '@youyun8/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@tailwindcss/cli':

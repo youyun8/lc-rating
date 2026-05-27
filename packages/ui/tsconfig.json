@@ -1,5 +1,5 @@
 {
-  "extends": "@asyncchang/typescript-config/react-library.json",
+  "extends": "@youyun8/typescript-config/react-library.json",
   "compilerOptions": {
     "outDir": "dist"
   },
