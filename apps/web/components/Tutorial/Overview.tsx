@@ -148,7 +148,10 @@ function TutorialCard({
 
   return (
     <Link href={`/lecture/${planKey}`} className="block h-full">
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <div
+        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+        style={{ "--card-accent-dark": theme.accentDark } as React.CSSProperties}
+      >
         <div
           className="relative h-28 overflow-hidden sm:h-32"
           style={{ background: theme.gradient }}
@@ -169,7 +172,7 @@ function TutorialCard({
         </div>
 
         <div className="flex flex-1 flex-col p-4 sm:p-5">
-          <h3 className="text-base font-bold tracking-tight transition-colors group-hover:text-primary sm:text-lg">
+          <h3 className="text-base font-bold tracking-tight transition-colors group-hover:text-[var(--card-accent-dark)] sm:text-lg">
             {title}
           </h3>
           <div className="mt-3 flex flex-wrap gap-2">

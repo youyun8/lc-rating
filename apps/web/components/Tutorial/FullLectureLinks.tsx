@@ -64,7 +64,7 @@ function FullLectureLinks() {
 
   return (
     <div className="min-h-screen bg-background font-song">
-      <div className="mx-auto w-full max-w-7xl px-3 py-4 sm:px-4 sm:py-6 md:px-6 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
+      <div className="mx-auto w-full px-3 py-4 sm:px-4 sm:py-6 md:px-6 xl:px-8 2xl:px-12">
         <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-sm">
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:p-8">
             <nav className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
@@ -170,7 +170,7 @@ function FullLectureLinks() {
         </section>
       </div>
 
-      <div className="mx-auto w-full max-w-7xl px-3 pb-8 sm:px-4 md:px-6 md:pb-10 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
+      <div className="mx-auto w-full px-3 pb-8 sm:px-4 md:px-6 md:pb-10 xl:px-8 2xl:px-12">
         {filteredGroups.length === 0 ? (
           <div className="empty-state">
             <span className="empty-state-icon">
@@ -191,6 +191,11 @@ function FullLectureLinks() {
                 <section
                   key={group.planKey}
                   className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm"
+                  style={
+                    {
+                      "--card-accent-dark": theme.accentDark,
+                    } as React.CSSProperties
+                  }
                 >
                   <div className="flex flex-col gap-3 border-b border-border/60 bg-muted/20 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
                     <div className="flex min-w-0 items-center gap-3">
@@ -218,12 +223,12 @@ function FullLectureLinks() {
                     </Link>
                   </div>
 
-                  <div className="grid gap-0 sm:grid-cols-2 xl:grid-cols-3">
+                  <div className="grid gap-0 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     {group.links.map((link) => (
                       <Link
                         key={`${link.planKey}-${link.id}`}
                         href={link.href}
-                        className="group flex min-h-24 flex-col justify-between gap-3 border-b border-border/60 p-4 transition-colors hover:bg-muted/35 sm:border-r sm:p-5 xl:[&:nth-child(3n)]:border-r-0"
+                        className="group flex min-h-24 flex-col justify-between gap-3 border-b border-border/60 p-4 transition-colors hover:bg-muted/35 sm:border-r sm:p-5 sm:[&:nth-child(2n)]:border-r-0 xl:[&:nth-child(2n)]:border-r xl:[&:nth-child(3n)]:border-r-0 2xl:[&:nth-child(3n)]:border-r 2xl:[&:nth-child(4n)]:border-r-0"
                       >
                         <div className="min-w-0 space-y-2">
                           <div className="flex flex-wrap items-center gap-2">
@@ -243,7 +248,7 @@ function FullLectureLinks() {
                               </span>
                             )}
                           </div>
-                          <h3 className="break-words text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-primary sm:text-base">
+                          <h3 className="break-words text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-[var(--card-accent-dark)] sm:text-base">
                             {link.title}
                           </h3>
                         </div>
@@ -252,7 +257,7 @@ function FullLectureLinks() {
                             {link.pathTitles.slice(0, -1).join(" / ") ||
                               link.planTitle}
                           </p>
-                          <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                          <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-[var(--card-accent-dark)]" />
                         </div>
                       </Link>
                     ))}
