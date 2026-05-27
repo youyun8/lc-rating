@@ -51,7 +51,7 @@ export const BILIBILI_0X3F_SPACE = {
 
 export const STUDYPLANS = {
   google_interview: "Google 面試準備",
-  rating_2100: "Rating 2100 攻略計畫",
+  rating_2100: "Rating 2100",
   binary_search: "二分搜尋",
   bitwise_operations: "位元運算",
   data_structure: "資料結構",
