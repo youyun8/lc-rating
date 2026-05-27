@@ -93,19 +93,19 @@
 
 @media (min-width: 768px) {
   :root {
-    --lecture-reading-width: min(100%, clamp(48rem, 72vw, 58rem));
+    --lecture-reading-width: min(100%, clamp(48rem, 88vw, 72rem));
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --lecture-reading-width: min(100%, clamp(52rem, 68vw, 64rem));
+    --lecture-reading-width: min(100%, clamp(60rem, 86vw, 88rem));
   }
 }
 
 @media (min-width: 1536px) {
   :root {
-    --lecture-reading-width: min(100%, 68rem);
+    --lecture-reading-width: min(100%, 96rem);
   }
 }
 

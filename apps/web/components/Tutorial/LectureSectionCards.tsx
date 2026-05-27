@@ -125,6 +125,7 @@ function getCardProgressState(
       label: "已完成",
       helper: `${solved}/${total} 題`,
       color: "#28a745",
+      darkColor: "#15803d",
       Icon: CheckCircle2,
     };
   }
@@ -135,6 +136,7 @@ function getCardProgressState(
       label: "進行中",
       helper: `${solved}/${total} 題完成`,
       color: "#1E90FF",
+      darkColor: "#1d4ed8",
       Icon: PlayCircle,
     };
   }
@@ -144,6 +146,7 @@ function getCardProgressState(
     label: total > 0 ? "未開始" : "未配置題目",
     helper: total > 0 ? `0/${total} 題` : "暫無題目",
     color: "#64748b",
+    darkColor: "#334155",
     Icon: CircleDashed,
   };
 }
@@ -208,6 +211,7 @@ export function LectureSectionCards({
                 style={
                   {
                     "--section-progress-color": progressState.color,
+                    "--section-progress-color-dark": progressState.darkColor,
                     background: isActive
                       ? `linear-gradient(135deg, color-mix(in srgb, ${progressState.color} 13%, transparent), transparent 46%), var(--card)`
                       : undefined,
@@ -251,7 +255,7 @@ export function LectureSectionCards({
                     </div>
                   </div>
 
-                  <h3 className="break-words text-base font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-lg">
+                  <h3 className="break-words text-base font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-[var(--section-progress-color-dark)] sm:text-lg">
                     {item.title}
                   </h3>
                   <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">
@@ -282,7 +286,7 @@ export function LectureSectionCards({
                 <div className="border-t border-border/60 bg-muted/20 px-4 py-3 sm:px-5">
                   <Button
                     variant="ghost"
-                    className="h-auto w-full justify-between px-0 py-0 text-sm font-medium text-muted-foreground hover:bg-transparent hover:text-primary"
+                    className="h-auto w-full justify-between px-0 py-0 text-sm font-medium text-muted-foreground hover:bg-transparent group-hover:text-[var(--section-progress-color-dark)]"
                     asChild
                   >
                     <span>
