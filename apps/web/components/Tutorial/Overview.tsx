@@ -297,7 +297,7 @@ function TutorialOverview() {
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl space-y-2">
-                <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   講義
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">

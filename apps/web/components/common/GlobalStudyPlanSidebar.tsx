@@ -212,7 +212,7 @@ export function GlobalStudyPlanSidebar() {
               <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
                 {pageType === "lecture" ? "講義" : "題單"}
               </p>
-              <p className="brand-text-gradient truncate text-base font-bold leading-tight">
+              <p className="truncate text-base font-bold leading-tight text-foreground">
                 {currentPlanTitle}
               </p>
             </div>

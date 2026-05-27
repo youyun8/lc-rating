@@ -84,7 +84,7 @@ function FullLectureLinks() {
                   <BookOpen className="h-3.5 w-3.5" />
                   完整講義
                 </div>
-                <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   完整講義索引
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">

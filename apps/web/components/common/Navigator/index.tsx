@@ -91,11 +91,11 @@ const Navigator = React.memo(() => {
           >
             <span
               aria-hidden
-              className="brand-gradient inline-flex h-6 w-6 items-center justify-center rounded-lg text-white shadow-sm transition-transform group-hover:scale-105"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-lime-500 text-white shadow-sm transition-transform group-hover:scale-105"
             >
               <Code2 className="h-4 w-4" strokeWidth={2.5} />
             </span>
-            <span className="brand-text-gradient">LeetCode Rating</span>
+            <span className="text-foreground">LeetCode Rating</span>
           </Link>
 
           {/* Desktop nav links */}

@@ -11,7 +11,7 @@ export default function Troubleshoot() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-8">
         <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-sm">
-          <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             故障排除
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">載入中…</p>
@@ -23,7 +23,7 @@ export default function Troubleshoot() {
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-5 px-4 py-8">
       <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 p-6 shadow-sm">
-        <h1 className="brand-text-gradient text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           故障排除
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
