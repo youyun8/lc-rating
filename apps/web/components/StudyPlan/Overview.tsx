@@ -413,7 +413,7 @@ function StudyPlanOverview() {
   return (
     <div className="min-h-screen bg-background font-song">
       <div className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 md:px-6 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
-        <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-[0_30px_80px_-50px_rgba(6,182,212,0.55)]">
+        <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-sm">
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl space-y-2">

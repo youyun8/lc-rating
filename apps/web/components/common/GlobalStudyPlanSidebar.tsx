@@ -203,7 +203,7 @@ export function GlobalStudyPlanSidebar() {
             {(() => {
               const Icon = studyPlanIcons[currentPlanKey as string] || BookOpen;
               return (
-                <span className="brand-gradient inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white shadow-[0_6px_18px_-8px_rgba(6,182,212,0.6)]">
+                <span className="brand-gradient inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white shadow-sm">
                   <Icon className="h-4 w-4" />
                 </span>
               );
