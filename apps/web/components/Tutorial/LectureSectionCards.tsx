@@ -223,10 +223,20 @@ export function LectureSectionCards({
                     <div
                       className={cn(
                         "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border",
-                        isLeaf
-                          ? "border-primary/20 bg-primary/10 text-primary"
-                          : "border-border/60 bg-muted/35 text-muted-foreground",
+                        !isLeaf && !isActive &&
+                          "border-border/60 bg-muted/35 text-muted-foreground",
+                        isLeaf && !isActive &&
+                          "border-primary/20 bg-primary/10 text-primary",
                       )}
+                      style={
+                        isActive
+                          ? {
+                              borderColor: `color-mix(in srgb, ${progressState.color} 35%, transparent)`,
+                              backgroundColor: `color-mix(in srgb, ${progressState.color} 12%, transparent)`,
+                              color: progressState.color,
+                            }
+                          : undefined
+                      }
                     >
                       {isLeaf ? (
                         <BookOpen className="h-5 w-5" />
