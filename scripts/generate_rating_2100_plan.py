@@ -89,6 +89,17 @@ TOPIC_SUMMARIES = {
     "樹和二元樹": "掌握後序彙總、前序下傳、換根 DP、LCA 與路徑貢獻；無根樹先固定根並定義父子方向。",
 }
 
+SPECIAL_TOPICS = [
+    {
+        "title": "小專題：固定一個維度",
+        "summary": (
+            "這個難度最需要練的是「固定一個維度」。固定右端點後，左側能不能用 "
+            "hash、Fenwick 或 set 維護？固定答案後，能不能用貪心 check？固定一個"
+            "節點後，其他距離能不能由預處理表查到？題目的突破口通常來自這種改寫。"
+        ),
+    },
+]
+
 
 def load_problems_db():
     with open(PROBLEMS_JSON, "r", encoding="utf-8") as f:
@@ -255,6 +266,16 @@ def main():
                 "title": f"{phase_idx + 1}. {phase['title']}",
                 "summary": phase["summary"],
                 "children": topic_sections,
+            }
+        )
+
+    for topic_idx, topic in enumerate(SPECIAL_TOPICS, len(PHASES) + 1):
+        children.append(
+            {
+                "title": f"{topic_idx}. {topic['title']}",
+                "summary": topic["summary"],
+                "problems": [],
+                "children": [],
             }
         )
 

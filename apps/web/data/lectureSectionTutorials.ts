@@ -402,6 +402,54 @@ const rating2100PhaseGuides: Record<
   },
 };
 
+function buildRating2100SpecialTopicContent(indexed: IndexedTutorialSection) {
+  if (!indexed.title.includes("固定一個維度")) return undefined;
+
+  return [
+    [
+      "**觀念起點**",
+      "這個難度最需要練的是「固定一個維度」。固定右端點後，左側能不能用 hash、Fenwick 或 set 維護？固定答案後，能不能用貪心 check？固定一個節點後，其他距離能不能由預處理表查到？題目的突破口通常來自這種改寫。",
+      "固定一維不是少想一維，而是先把題目的自由度壓成一條掃描線、一個候選答案或一個中心點。剩下的資訊若能變成查詢、判定或預處理表，原本看似要雙重枚舉的題目就會降到 `O(n log n)` 或接近線性。",
+    ].join("\n\n"),
+    [
+      "**三種常見固定方式**",
+      formatList([
+        "固定右端點：從左到右掃描，把所有可能左端點放進 hash、Fenwick、set、heap 或單調結構，只查目前 right 需要的歷史摘要。",
+        "固定答案：把最小化最大值、最大化最小值或可達門檻改成 `can(answer)`，再用貪心、BFS/DFS 或資料結構檢查單調 predicate。",
+        "固定節點或中心：在樹、圖或字串中枚舉一個匯合點、根、中心、分界點，其他距離、祖先、LCP 或前後綴資訊由預處理表回答。",
+      ]),
+    ].join("\n\n"),
+    [
+      "**解題流程**",
+      formatSteps([
+        "先由限制估目標複雜度。`n <= 2e5` 時，雙重枚舉通常需要被改寫成掃描加查詢。",
+        "選一個維度固定：右端點、左端點、排序後的位置、答案值、圖上匯合點或樹根。",
+        "寫出固定後的查詢：需要歷史中有多少個、最大/最小是哪個、是否存在、距離是多少，或可行性是否成立。",
+        "選維護工具：hash 處理等值與餘數，Fenwick/segment tree 處理排名與前綴，set 處理前驅後繼，預處理表處理多次距離或區間查詢。",
+        "用不變式檢查更新順序：答案查詢必須只使用已合法的候選，更新時不能把當前元素提前放進左側集合。",
+      ]),
+    ].join("\n\n"),
+    [
+      "**例題模型：固定右端點 + Fenwick**",
+      "**完整問題**：給定整數陣列 `nums` 與整數 `k`，計算有多少個非空連續子陣列的和至少為 `k`。陣列可能包含負數，因此不能直接用滑動視窗。",
+      "令 `prefix[i]` 是前 i 個數的總和。固定右端點 `right` 後，需要計算有多少個左端點 `left < right` 滿足 `prefix[right] - prefix[left] >= k`，也就是 `prefix[left] <= prefix[right] - k`。掃描 right 時，左側 prefix 都已經出現過，用 Fenwick 維護壓縮後的 prefix 排名數量即可。",
+    ].join("\n\n"),
+    [
+      "**C++：固定右端點後查左側數量**",
+      "```cpp\nclass Fenwick {\n    vector<int> bit_;\n\npublic:\n    Fenwick(int n) : bit_(n + 1) {}\n\n    void add(int index, int delta) {\n        for (++index; index < (int)bit_.size(); index += index & -index) {\n            bit_[index] += delta;\n        }\n    }\n\n    int prefixSum(int index) const {\n        int sum = 0;\n        for (++index; index > 0; index -= index & -index) {\n            sum += bit_[index];\n        }\n        return sum;\n    }\n};\n\nlong long countSubarraysAtLeastK(vector<int>& nums, long long k) {\n    int n = nums.size();\n    vector<long long> prefix(n + 1);\n    for (int i = 0; i < n; ++i) prefix[i + 1] = prefix[i] + nums[i];\n\n    vector<long long> values = prefix;\n    sort(values.begin(), values.end());\n    values.erase(unique(values.begin(), values.end()), values.end());\n\n    Fenwick bit(values.size());\n    long long answer = 0;\n    for (long long current : prefix) {\n        long long need = current - k;\n        int last = upper_bound(values.begin(), values.end(), need) - values.begin() - 1;\n        if (last >= 0) answer += bit.prefixSum(last);\n\n        int rank = lower_bound(values.begin(), values.end(), current) - values.begin();\n        bit.add(rank, 1);\n    }\n    return answer;\n}\n```",
+    ].join("\n\n"),
+    [
+      "**複盤問題**",
+      formatList([
+        "如果固定右端點，左側集合何時加入、何時刪除？相等元素要算幾次？",
+        "如果固定答案，`can(x)` 是否真的單調？貪心 check 的局部選擇有沒有證明？",
+        "如果固定節點，哪些資訊能先預處理：距離、祖先、子樹大小、前後綴最佳值或 LCP？",
+        "目前做法的瓶頸是哪一層枚舉？被固定後是否已經變成一次查詢或一次合併？",
+      ]),
+    ].join("\n\n"),
+  ].join("\n\n---\n\n");
+}
+
 function buildRating2100PhaseContent(
   indexed: IndexedTutorialSection,
   studySection: StudyPlanData.Section | undefined,
@@ -506,6 +554,14 @@ function buildGenericSectionContent(
   indexed: IndexedTutorialSection,
   studySection: StudyPlanData.Section | undefined,
 ) {
+  const rating_2100_special_content =
+    planKey === "rating_2100"
+      ? buildRating2100SpecialTopicContent(indexed)
+      : undefined;
+  if (rating_2100_special_content) {
+    return rating_2100_special_content;
+  }
+
   const rating_2100_phase_content =
     planKey === "rating_2100"
       ? buildRating2100PhaseContent(indexed, studySection)
