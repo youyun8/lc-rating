@@ -97,6 +97,20 @@ SPECIAL_TOPICS = [
             "hash、Fenwick 或 set 維護？固定答案後，能不能用貪心 check？固定一個"
             "節點後，其他距離能不能由預處理表查到？題目的突破口通常來自這種改寫。"
         ),
+        "problems": [
+            ("1014", "固定右端點：維護左側最佳值"),
+            ("1814", "固定右端點：hash 維護等價類"),
+            ("2426", "固定右端點：Fenwick 查左側排名"),
+            ("2444", "固定右端點：維護最近邊界"),
+            ("975", "固定下標：ordered set 查下一跳"),
+            ("1011", "固定答案：greedy check 最小容量"),
+            ("875", "固定答案：greedy check 最小速度"),
+            ("3281", "固定答案：greedy check 最大化最小值"),
+            ("2359", "固定節點：兩次距離預處理"),
+            ("2385", "固定起點：樹上距離展開"),
+            ("2477", "固定根節點：子樹資訊彙總"),
+            ("2106", "固定方向/端點：壓縮路徑枚舉"),
+        ],
     },
 ]
 
@@ -150,6 +164,19 @@ def get_problem_rating(problem, rating_map):
 
     slug = problem.get("slug", "").strip("/")
     return rating_map.get(f"slug:{slug}")
+
+
+def make_problem_item(problem, subsection, rating):
+    return {
+        "id": problem.get("id"),
+        "title": problem.get("title", ""),
+        "slug": problem.get("slug", ""),
+        "src": problem.get("src", ""),
+        "solution": problem.get("solution"),
+        "score": problem.get("score") or rating,
+        "subsection": subsection,
+        "isPremium": problem.get("isPremium", False),
+    }
 
 
 def assign_ids(root):
@@ -239,18 +266,7 @@ def main():
             )
             problem_list = []
             for problem, section_title, rating in problems_with_rating:
-                problem_list.append(
-                    {
-                        "id": problem.get("id"),
-                        "title": problem.get("title", ""),
-                        "slug": problem.get("slug", ""),
-                        "src": problem.get("src", ""),
-                        "solution": problem.get("solution"),
-                        "score": problem.get("score") or rating,
-                        "subsection": section_title,
-                        "isPremium": problem.get("isPremium", False),
-                    }
-                )
+                problem_list.append(make_problem_item(problem, section_title, rating))
 
             topic_sections.append(
                 {
@@ -270,11 +286,19 @@ def main():
         )
 
     for topic_idx, topic in enumerate(SPECIAL_TOPICS, len(PHASES) + 1):
+        problem_list = []
+        for problem_id, subsection in topic.get("problems", []):
+            item = seen.get(problem_id)
+            if item is None:
+                raise ValueError(f"Special topic problem {problem_id} was not found")
+            problem, _topic_name, _section_title, rating = item
+            problem_list.append(make_problem_item(problem, subsection, rating))
+
         children.append(
             {
                 "title": f"{topic_idx}. {topic['title']}",
                 "summary": topic["summary"],
-                "problems": [],
+                "problems": problem_list,
                 "children": [],
             }
         )
