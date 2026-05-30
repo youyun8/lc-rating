@@ -1,9 +1,14 @@
 export interface ProblemSolution {
+  /** Stable id, unique within a problem's solution list. */
+  id: string;
+  /** Optional label, e.g. the technique used ("雙指針", "DP"...). */
+  title: string;
   code: string;
   language: string;
 }
 
-export type ProblemSolutions = Record<string, ProblemSolution>;
+/** A problem can have multiple solutions (different techniques). */
+export type ProblemSolutions = Record<string, ProblemSolution[]>;
 export type ProblemSolutionsUpdatedAt = Record<string, number>;
 
 export interface ProblemSolutionsStoreState {
@@ -12,9 +17,9 @@ export interface ProblemSolutionsStoreState {
 }
 
 interface ProblemSolutionsStoreActions {
-  getProblemSolution: (id: string) => ProblemSolution | undefined;
-  setProblemSolution: (id: string, value: ProblemSolution) => void;
-  delProblemSolution: (id: string) => void;
+  getProblemSolutions: (id: string) => ProblemSolution[] | undefined;
+  setProblemSolutions: (id: string, value: ProblemSolution[]) => void;
+  delProblemSolutions: (id: string) => void;
   setAllProblemSolutions: (
     problemSolutions: ProblemSolutions,
     problemSolutionsUpdatedAt?: ProblemSolutionsUpdatedAt,

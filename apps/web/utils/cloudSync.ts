@@ -63,12 +63,30 @@ function toProblemSolutions(value: unknown): ProblemSolutions | undefined {
   }
 
   return Object.entries(value).reduce<ProblemSolutions>((acc, [key, item]) => {
-    if (
-      isRecord(item) &&
-      typeof item.code === "string" &&
-      typeof item.language === "string"
-    ) {
-      acc[key] = { code: item.code, language: item.language };
+    if (!Array.isArray(item)) {
+      return acc;
+    }
+
+    const solutions = item.flatMap((entry, index) => {
+      if (
+        isRecord(entry) &&
+        typeof entry.code === "string" &&
+        typeof entry.language === "string"
+      ) {
+        return [
+          {
+            id: typeof entry.id === "string" ? entry.id : `${key}-${index}`,
+            title: typeof entry.title === "string" ? entry.title : "",
+            code: entry.code,
+            language: entry.language,
+          },
+        ];
+      }
+      return [];
+    });
+
+    if (solutions.length > 0) {
+      acc[key] = solutions;
     }
     return acc;
   }, {});

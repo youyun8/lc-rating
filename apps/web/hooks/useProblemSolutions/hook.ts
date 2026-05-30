@@ -6,6 +6,7 @@ import { shared } from "use-broadcast-ts";
 import { create } from "zustand";
 import { persist, PersistOptions } from "zustand/middleware";
 import {
+  ProblemSolution,
   ProblemSolutionsStore,
   ProblemSolutionsStoreState,
 } from "./types_v2";
@@ -22,6 +23,18 @@ const sharedOption = {
   name: LC_RATING_PROBLEM_SOLUTIONS_KEY,
 };
 
+/** Drop solutions without any code so empty entries never get persisted. */
+function sanitizeSolutions(value: ProblemSolution[]): ProblemSolution[] {
+  return value
+    .filter((solution) => solution.code.trim().length > 0)
+    .map((solution) => ({
+      id: solution.id,
+      title: solution.title,
+      code: solution.code,
+      language: solution.language,
+    }));
+}
+
 export const useProblemSolutionsStore = create<ProblemSolutionsStore>()(
   shared(
     persist(
@@ -29,31 +42,28 @@ export const useProblemSolutionsStore = create<ProblemSolutionsStore>()(
         problemSolutions: {},
         problemSolutionsUpdatedAt: {},
 
-        getProblemSolution: (id) => get().problemSolutions[id],
+        getProblemSolutions: (id) => get().problemSolutions[id],
 
-        setProblemSolution: (id, value) =>
+        setProblemSolutions: (id, value) =>
           set((state) => {
-            const code = value.code.trim();
+            const sanitized = sanitizeSolutions(value);
             const problemSolutions = { ...state.problemSolutions };
             const problemSolutionsUpdatedAt = {
               ...state.problemSolutionsUpdatedAt,
             };
 
-            if (code.length === 0) {
+            if (sanitized.length === 0) {
               delete problemSolutions[id];
               delete problemSolutionsUpdatedAt[id];
             } else {
-              problemSolutions[id] = {
-                code: value.code,
-                language: value.language,
-              };
+              problemSolutions[id] = sanitized;
               problemSolutionsUpdatedAt[id] = Date.now();
             }
 
             return { problemSolutions, problemSolutionsUpdatedAt };
           }),
 
-        delProblemSolution: (id) =>
+        delProblemSolutions: (id) =>
           set((state) => {
             const problemSolutions = { ...state.problemSolutions };
             delete problemSolutions[id];
@@ -99,16 +109,16 @@ export const useProblemSolutions = () => {
   const problemSolutions = useProblemSolutionsStore(
     (state) => state.problemSolutions,
   );
-  const setProblemSolution = useProblemSolutionsStore(
-    (state) => state.setProblemSolution,
+  const setProblemSolutions = useProblemSolutionsStore(
+    (state) => state.setProblemSolutions,
   );
-  const delProblemSolution = useProblemSolutionsStore(
-    (state) => state.delProblemSolution,
+  const delProblemSolutions = useProblemSolutionsStore(
+    (state) => state.delProblemSolutions,
   );
 
   return {
     problemSolutions,
-    setProblemSolution,
-    delProblemSolution,
+    setProblemSolutions,
+    delProblemSolutions,
   };
 };
