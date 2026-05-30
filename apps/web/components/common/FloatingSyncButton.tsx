@@ -24,6 +24,17 @@ function formatTimestamp(timestamp: number | null) {
   }).format(new Date(timestamp));
 }
 
+function countProblemSolutions(
+  problemSolutions: Record<string, unknown> | undefined,
+) {
+  if (!problemSolutions) return 0;
+  return Object.values(problemSolutions).reduce<number>(
+    (count, solutions) =>
+      count + (Array.isArray(solutions) ? solutions.length : 0),
+    0,
+  );
+}
+
 const FloatingSyncButton = () => {
   const { siteStorage } = useSiteStorage();
   const [authToken, setAuthToken] = useState<string | null>(() => {
@@ -125,6 +136,9 @@ const FloatingSyncButton = () => {
             <p>上次同步：{formatTimestamp(lastSyncAt)}</p>
             <p className="mt-1">
               本機進度：{Object.keys(siteStorage.progress ?? {}).length} 筆
+            </p>
+            <p className="mt-1">
+              本機題解：{countProblemSolutions(siteStorage.problemSolutions)} 份
             </p>
           </div>
 

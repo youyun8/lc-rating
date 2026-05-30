@@ -253,6 +253,8 @@ export async function pushCloudSiteStorage(
 export async function checkBackendHealth(): Promise<{
   ok: boolean;
   message: string;
+  capabilities?: string[];
+  storageSchemaVersion?: number;
 }> {
   if (!API_BASE) {
     return { ok: false, message: "未設定後端 (API_BASE)" };
@@ -262,11 +264,20 @@ export async function checkBackendHealth(): Promise<{
       signal: AbortSignal.timeout(5000),
     });
     const data = await response.json();
+    const capabilities = Array.isArray(data?.capabilities)
+      ? data.capabilities.filter((item: unknown) => typeof item === "string")
+      : undefined;
+    const storageSchemaVersion =
+      typeof data?.storageSchemaVersion === "number"
+        ? data.storageSchemaVersion
+        : undefined;
     return {
       ok: data?.success === true,
       message: data?.success
         ? "後端正常運作"
         : `後端回應異常: ${response.status}`,
+      capabilities,
+      storageSchemaVersion,
     };
   } catch {
     return { ok: false, message: "無法連線至後端" };

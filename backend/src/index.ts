@@ -494,7 +494,12 @@ app.get("/api/getprogress", async (c) => {
 
 // Health check
 app.get("/api/health", (c) => {
-  return c.json({ success: true, message: "OK" });
+  return c.json({
+    success: true,
+    message: "OK",
+    storageSchemaVersion: 2,
+    capabilities: ["progress", "problemNotes", "problemSolutions"],
+  });
 });
 
 // JWT utilities

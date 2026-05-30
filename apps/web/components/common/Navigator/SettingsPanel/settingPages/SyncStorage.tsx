@@ -2,9 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { API_BASE, LC_RATING_AUTH_TOKEN_KEY } from "@/config/constants";
+import {
+  API_BASE,
+  LC_RATING_AUTH_TOKEN_KEY,
+  LC_RATING_LAST_SYNC_AT_KEY,
+} from "@/config/constants";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
 import { decodeAuthToken, getErrorMessage } from "@/utils/auth";
+import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
 import {
   Copy,
   Download,
@@ -22,6 +27,17 @@ import { toast } from "sonner";
 
 const BACKEND_SETUP_HINT = "雲端同步尚未設定，請參考 BACKEND_SETUP.md 進行設定";
 
+function countProblemSolutions(
+  problemSolutions: Record<string, unknown> | undefined,
+) {
+  if (!problemSolutions) return 0;
+  return Object.values(problemSolutions).reduce<number>(
+    (count, solutions) =>
+      count + (Array.isArray(solutions) ? solutions.length : 0),
+    0,
+  );
+}
+
 function formatTimestamp(timestamp: number | null) {
   if (!timestamp) return "尚無紀錄";
 
@@ -32,13 +48,14 @@ function formatTimestamp(timestamp: number | null) {
 }
 
 export default function SyncStorage() {
-  const { siteStorage, setSiteStorage } = useSiteStorage();
+  const { siteStorage, setSiteStorage, mergeSiteStorage } = useSiteStorage();
   const clearAllProgress = () =>
     setSiteStorage({ progress: {}, progressUpdatedAt: {} });
   const progressStr = JSON.stringify(siteStorage, null, 2);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isCloudSyncing, setIsCloudSyncing] = useState(false);
 
   /** Import JSON in either full site-data format or progress-only format. */
   const importData = (parsedData: Record<string, unknown>) => {
@@ -195,6 +212,103 @@ export default function SyncStorage() {
     });
   };
 
+  const setLastSyncAt = (timestamp: number) => {
+    localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(timestamp));
+    window.dispatchEvent(
+      new StorageEvent("storage", {
+        key: LC_RATING_LAST_SYNC_AT_KEY,
+        newValue: String(timestamp),
+      }),
+    );
+  };
+
+  const handlePushCloud = async () => {
+    if (!API_BASE) {
+      toast(<span className="text-amber-500">{BACKEND_SETUP_HINT}</span>, {
+        icon: <HeartCrack className="text-amber-500 size-full" />,
+      });
+      return;
+    }
+
+    if (!authToken) {
+      toast(<span className="text-amber-500">請先登入 GitHub</span>, {
+        icon: <HeartCrack className="text-amber-500 size-full" />,
+      });
+      return;
+    }
+
+    setIsCloudSyncing(true);
+    try {
+      await pushCloudSiteStorage(authToken, siteStorage);
+      const cloudStorage = await pullCloudSiteStorage(authToken);
+      mergeSiteStorage(cloudStorage);
+      setLastSyncAt(Date.now());
+
+      const localSolutionCount = countProblemSolutions(
+        siteStorage.problemSolutions,
+      );
+      const cloudSolutionCount = countProblemSolutions(
+        cloudStorage.problemSolutions,
+      );
+
+      if (localSolutionCount > 0 && cloudSolutionCount === 0) {
+        toast(
+          <span className="text-amber-500">
+            已上傳，但雲端未回傳題解；請確認 Worker 已部署最新版本
+          </span>,
+          { icon: <HeartCrack className="text-amber-500 size-full" /> },
+        );
+        return;
+      }
+
+      toast(<span className="text-green-500">已上傳完整站點資料</span>, {
+        icon: <ThumbsUp className="text-green-500 size-full" />,
+      });
+    } catch (error) {
+      const msg = getErrorMessage(error);
+      setErrorMessage(`雲端上傳失敗: ${msg}`);
+      toast(<span className="text-red-500">雲端上傳失敗: {msg}</span>, {
+        icon: <HeartCrack className="text-red-500 size-full" />,
+      });
+    } finally {
+      setIsCloudSyncing(false);
+    }
+  };
+
+  const handlePullCloud = async () => {
+    if (!API_BASE) {
+      toast(<span className="text-amber-500">{BACKEND_SETUP_HINT}</span>, {
+        icon: <HeartCrack className="text-amber-500 size-full" />,
+      });
+      return;
+    }
+
+    if (!authToken) {
+      toast(<span className="text-amber-500">請先登入 GitHub</span>, {
+        icon: <HeartCrack className="text-amber-500 size-full" />,
+      });
+      return;
+    }
+
+    setIsCloudSyncing(true);
+    try {
+      const cloudStorage = await pullCloudSiteStorage(authToken);
+      mergeSiteStorage(cloudStorage);
+      setLastSyncAt(Date.now());
+      toast(<span className="text-green-500">已從雲端拉取並合併</span>, {
+        icon: <ThumbsUp className="text-green-500 size-full" />,
+      });
+    } catch (error) {
+      const msg = getErrorMessage(error);
+      setErrorMessage(`雲端拉取失敗: ${msg}`);
+      toast(<span className="text-red-500">雲端拉取失敗: {msg}</span>, {
+        icon: <HeartCrack className="text-red-500 size-full" />,
+      });
+    } finally {
+      setIsCloudSyncing(false);
+    }
+  };
+
   const handleClearProgress = () => {
     const count = Object.keys(siteStorage.progress ?? {}).length;
     if (count === 0) {
@@ -237,13 +351,20 @@ export default function SyncStorage() {
 
   const isLoggedIn = Boolean(authToken);
   const progressCount = Object.keys(siteStorage.progress ?? {}).length;
+  const solutionCount = countProblemSolutions(siteStorage.problemSolutions);
+  const solutionProblemCount = Object.keys(
+    siteStorage.problemSolutions ?? {},
+  ).length;
   const timestampCount = Object.keys(
     siteStorage.progressUpdatedAt ?? {},
   ).length;
   const latestLocalUpdate = useMemo(() => {
-    const timestamps = Object.values(siteStorage.progressUpdatedAt ?? {});
+    const timestamps = [
+      ...Object.values(siteStorage.progressUpdatedAt ?? {}),
+      ...Object.values(siteStorage.problemSolutionsUpdatedAt ?? {}),
+    ];
     return timestamps.length ? Math.max(...timestamps) : null;
-  }, [siteStorage.progressUpdatedAt]);
+  }, [siteStorage.progressUpdatedAt, siteStorage.problemSolutionsUpdatedAt]);
 
   return (
     <div className="space-y-4">
@@ -270,7 +391,7 @@ export default function SyncStorage() {
         </div>
       )}
 
-      <section className="grid gap-3 sm:grid-cols-3">
+      <section className="grid gap-3 sm:grid-cols-4">
         <div className="rounded-lg border bg-card p-3">
           <p className="text-xs text-muted-foreground">雲端狀態</p>
           <Badge variant="outline" className={`mt-2 ${cloudStatus.className}`}>
@@ -290,12 +411,20 @@ export default function SyncStorage() {
         </div>
 
         <div className="rounded-lg border bg-card p-3">
+          <p className="text-xs text-muted-foreground">題解資料</p>
+          <p className="mt-2 text-xl font-semibold">{solutionCount}</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            來自 {solutionProblemCount} 題
+          </p>
+        </div>
+
+        <div className="rounded-lg border bg-card p-3">
           <p className="text-xs text-muted-foreground">最後本機更新</p>
           <p className="mt-2 text-sm font-medium">
             {formatTimestamp(latestLocalUpdate)}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            根據 progressUpdatedAt 計算
+            根據本機時間戳記計算
           </p>
         </div>
       </section>
@@ -327,8 +456,30 @@ export default function SyncStorage() {
         </div>
 
         <p className="text-xs text-muted-foreground">
-          登入後，資料變更時會自動同步至雲端，頁面載入時也會自動拉取最新資料。
+          登入後，進度、偏好設定與題解都會以完整站點資料同步。
         </p>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={handlePushCloud}
+            disabled={!isLoggedIn || isCloudSyncing}
+            type="button"
+          >
+            <Upload className="h-4 w-4" />
+            上傳到雲端
+          </Button>
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={handlePullCloud}
+            disabled={!isLoggedIn || isCloudSyncing}
+            type="button"
+          >
+            <Download className="h-4 w-4" />
+            從雲端拉取
+          </Button>
+        </div>
       </section>
 
       <section className="space-y-3 rounded-lg border bg-card p-4">

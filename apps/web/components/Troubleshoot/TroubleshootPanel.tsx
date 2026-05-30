@@ -6,6 +6,7 @@ import {
   API_BASE,
   LC_RATING_AUTH_TOKEN_KEY,
   LC_RATING_LAST_SYNC_AT_KEY,
+  LC_RATING_PROBLEM_SOLUTIONS_KEY,
   LC_RATING_PROGRESS_KEY,
 } from "@/config/constants";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
@@ -121,6 +122,9 @@ export default function TroubleshootPanel() {
   }, []);
 
   const progressCount = Object.keys(siteStorage.progress ?? {}).length;
+  const solutionCount = Object.values(
+    siteStorage.problemSolutions ?? {},
+  ).reduce((count, solutions) => count + solutions.length, 0);
 
   const tokenStatus: DiagnosticCheck = useMemo(() => {
     if (!authToken) {
@@ -158,10 +162,16 @@ export default function TroubleshootPanel() {
     // Backend reachability
     try {
       const health = await checkBackendHealth();
+      const supportsSolutions =
+        health.capabilities?.includes("problemSolutions") === true;
       results.push({
         name: "後端連線",
-        status: health.ok ? "pass" : "fail",
-        detail: health.message,
+        status: health.ok && supportsSolutions ? "pass" : "fail",
+        detail: health.ok
+          ? supportsSolutions
+            ? `${health.message}，支援題解同步`
+            : `${health.message}，但目前部署版本尚未宣告支援題解同步`
+          : health.message,
       });
     } catch (error) {
       results.push({
@@ -212,6 +222,38 @@ export default function TroubleshootPanel() {
         name: "進度資料",
         status: "fail",
         detail: "進度資料格式異常",
+      });
+    }
+
+    // Solution data
+    try {
+      const raw = localStorage.getItem(LC_RATING_PROBLEM_SOLUTIONS_KEY);
+      if (!raw) {
+        results.push({
+          name: "題解資料",
+          status: "warning",
+          detail: "尚無本機題解資料",
+        });
+      } else {
+        const parsed = JSON.parse(raw);
+        const count = Object.values(
+          parsed?.state?.problemSolutions ?? {},
+        ).reduce(
+          (sum: number, solutions) =>
+            sum + (Array.isArray(solutions) ? solutions.length : 0),
+          0,
+        );
+        results.push({
+          name: "題解資料",
+          status: "pass",
+          detail: `${count} 份題解，資料大小 ${(raw.length / 1024).toFixed(1)} KB`,
+        });
+      }
+    } catch {
+      results.push({
+        name: "題解資料",
+        status: "fail",
+        detail: "題解資料格式異常",
       });
     }
 
@@ -284,6 +326,9 @@ export default function TroubleshootPanel() {
           <p className="mt-2 text-xl font-semibold">{progressCount}</p>
           <p className="mt-1 text-xs text-muted-foreground">
             上次同步：{formatTime(lastSyncAt)}
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            本機題解：{solutionCount} 份
           </p>
         </div>
       </section>
