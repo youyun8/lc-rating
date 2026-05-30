@@ -327,9 +327,9 @@ export function ProblemSolution({ problemId, title }: ProblemSolutionProps) {
       <DialogTrigger asChild>
         <Button
           type="button"
-          variant="outline"
+          variant="success"
           size="sm"
-          className="h-9 min-w-9 gap-1.5 border-emerald-200 bg-emerald-50 px-2.5 font-medium text-emerald-700 shadow-sm transition-colors hover:border-emerald-300 hover:bg-emerald-100 hover:text-emerald-800 dark:border-emerald-800/60 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-900/50 dark:hover:text-emerald-200"
+          className="h-9 min-w-9 gap-1.5 px-2.5 font-medium"
           title={savedCount > 0 ? `我的題解（${savedCount}）` : "新增我的題解"}
           aria-label={savedCount > 0 ? "編輯我的題解" : "新增我的題解"}
         >
@@ -378,8 +378,8 @@ export function ProblemSolution({ problemId, title }: ProblemSolutionProps) {
               ))}
               <Button
                 type="button"
-                variant="outline"
-                className="w-full border-dashed border-emerald-300 text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 dark:border-emerald-800/60 dark:text-emerald-300 dark:hover:bg-emerald-950/40"
+                variant="success"
+                className="w-full"
                 onClick={addDraft}
               >
                 <Plus className="h-4 w-4" />
