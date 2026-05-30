@@ -8,8 +8,18 @@ import {
   LC_RATING_LAST_SYNC_AT_KEY,
 } from "@/config/constants";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
-import { decodeAuthToken } from "@/utils/auth";
-import { Cloud, LogIn, X } from "lucide-react";
+import { decodeAuthToken, getErrorMessage } from "@/utils/auth";
+import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
+import {
+  Cloud,
+  Download,
+  HeartCrack,
+  Loader2,
+  LogIn,
+  ThumbsUp,
+  Upload,
+  X,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -36,7 +46,7 @@ function countProblemSolutions(
 }
 
 const FloatingSyncButton = () => {
-  const { siteStorage } = useSiteStorage();
+  const { siteStorage, mergeSiteStorage } = useSiteStorage();
   const [authToken, setAuthToken] = useState<string | null>(() => {
     if (typeof window === "undefined") {
       return null;
@@ -44,6 +54,7 @@ const FloatingSyncButton = () => {
     return localStorage.getItem(LC_RATING_AUTH_TOKEN_KEY);
   });
   const [open, setOpen] = useState(false);
+  const [isCloudSyncing, setIsCloudSyncing] = useState(false);
   const authPayload = useMemo(() => decodeAuthToken(authToken), [authToken]);
   const [lastSyncAt, setLastSyncAt] = useState<number | null>(() => {
     if (typeof window === "undefined") {
@@ -87,6 +98,60 @@ const FloatingSyncButton = () => {
       return;
     }
     window.location.href = `${API_BASE}/api/login/github`;
+  };
+
+  const markSynced = () => {
+    const timestamp = Date.now();
+    localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(timestamp));
+    window.dispatchEvent(
+      new StorageEvent("storage", {
+        key: LC_RATING_LAST_SYNC_AT_KEY,
+        newValue: String(timestamp),
+      }),
+    );
+  };
+
+  const handlePush = async () => {
+    if (!authToken || isCloudSyncing) return;
+
+    setIsCloudSyncing(true);
+    try {
+      await pushCloudSiteStorage(authToken, siteStorage);
+      const cloudStorage = await pullCloudSiteStorage(authToken);
+      mergeSiteStorage(cloudStorage);
+      markSynced();
+      toast(<span className="text-green-500">已上傳至雲端</span>, {
+        icon: <ThumbsUp className="text-green-500 size-full" />,
+      });
+    } catch (error) {
+      const msg = getErrorMessage(error);
+      toast(<span className="text-red-500">雲端上傳失敗: {msg}</span>, {
+        icon: <HeartCrack className="text-red-500 size-full" />,
+      });
+    } finally {
+      setIsCloudSyncing(false);
+    }
+  };
+
+  const handlePull = async () => {
+    if (!authToken || isCloudSyncing) return;
+
+    setIsCloudSyncing(true);
+    try {
+      const cloudStorage = await pullCloudSiteStorage(authToken);
+      mergeSiteStorage(cloudStorage);
+      markSynced();
+      toast(<span className="text-green-500">已從雲端拉取並合併</span>, {
+        icon: <ThumbsUp className="text-green-500 size-full" />,
+      });
+    } catch (error) {
+      const msg = getErrorMessage(error);
+      toast(<span className="text-red-500">雲端拉取失敗: {msg}</span>, {
+        icon: <HeartCrack className="text-red-500 size-full" />,
+      });
+    } finally {
+      setIsCloudSyncing(false);
+    }
   };
 
   const cloudState = useMemo(() => {
@@ -147,9 +212,43 @@ const FloatingSyncButton = () => {
               {BACKEND_SETUP_HINT}
             </p>
           ) : isLoggedIn ? (
-            <p className="text-xs text-muted-foreground">
-              資料變更時會自動同步至雲端。
-            </p>
+            <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  variant="success"
+                  size="sm"
+                  className="w-full justify-center"
+                  onClick={handlePush}
+                  disabled={isCloudSyncing}
+                  type="button"
+                >
+                  {isCloudSyncing ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Upload className="h-4 w-4" />
+                  )}
+                  上傳
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full justify-center"
+                  onClick={handlePull}
+                  disabled={isCloudSyncing}
+                  type="button"
+                >
+                  {isCloudSyncing ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Download className="h-4 w-4" />
+                  )}
+                  拉取
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                資料變更時會自動同步，也可手動上傳或拉取。
+              </p>
+            </div>
           ) : (
             <Button
               variant="brand"
