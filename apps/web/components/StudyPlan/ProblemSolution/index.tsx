@@ -344,10 +344,10 @@ export function ProblemSolution({ problemId, title }: ProblemSolutionProps) {
           <DialogTitle className="pr-7 text-base leading-snug">
             {problemId}. {title}
           </DialogTitle>
-          <DialogDescription>
-            {mode === "view"
-              ? `已儲存 ${savedCount} 份題解`
-              : "撰寫你的解法，編輯時即時語法高亮。"}
+          <DialogDescription
+            className={mode === "view" ? undefined : "sr-only"}
+          >
+            {mode === "view" ? `已儲存 ${savedCount} 份題解` : "編輯題解"}
           </DialogDescription>
         </DialogHeader>
 
