@@ -20,6 +20,15 @@ interface SiteOption {
   color: string;
 }
 
+interface ProblemSolution {
+  id: string;
+  title: string;
+  code: string;
+  language: string;
+}
+
+type ProblemSolutions = Record<string, ProblemSolution[]>;
+
 interface UserSiteSettings {
   theme?: ThemePreference;
   tagLanguage?: Language;
@@ -28,6 +37,10 @@ interface UserSiteSettings {
   options?: Record<string, SiteOption>;
   progress?: Record<string, string>;
   progressUpdatedAt?: Record<string, number>;
+  problemNotes?: Record<string, string>;
+  problemNotesUpdatedAt?: Record<string, number>;
+  problemSolutions?: ProblemSolutions;
+  problemSolutionsUpdatedAt?: Record<string, number>;
   updatedAt: string;
 }
 
@@ -105,6 +118,41 @@ function toOptions(value: unknown) {
   );
 }
 
+function toProblemSolutions(value: unknown): ProblemSolutions | undefined {
+  if (!isRecord(value)) {
+    return undefined;
+  }
+
+  return Object.entries(value).reduce<ProblemSolutions>((acc, [key, item]) => {
+    if (!Array.isArray(item)) {
+      return acc;
+    }
+
+    const solutions = item.flatMap((entry, index) => {
+      if (
+        isRecord(entry) &&
+        typeof entry.code === "string" &&
+        typeof entry.language === "string"
+      ) {
+        return [
+          {
+            id: typeof entry.id === "string" ? entry.id : `${key}-${index}`,
+            title: typeof entry.title === "string" ? entry.title : "",
+            code: entry.code,
+            language: entry.language,
+          },
+        ];
+      }
+      return [];
+    });
+
+    if (solutions.length > 0) {
+      acc[key] = solutions;
+    }
+    return acc;
+  }, {});
+}
+
 function normalizeSiteSettings(
   value: unknown,
 ): Omit<UserSiteSettings, "updatedAt"> {
@@ -151,6 +199,36 @@ function normalizeSiteSettings(
     }
   }
 
+  if (hasOwn(value, "problemNotes")) {
+    const problemNotes = toStringRecord(value.problemNotes);
+    if (problemNotes !== undefined) {
+      normalized.problemNotes = problemNotes;
+    }
+  }
+
+  if (hasOwn(value, "problemNotesUpdatedAt")) {
+    const problemNotesUpdatedAt = toNumberRecord(value.problemNotesUpdatedAt);
+    if (problemNotesUpdatedAt !== undefined) {
+      normalized.problemNotesUpdatedAt = problemNotesUpdatedAt;
+    }
+  }
+
+  if (hasOwn(value, "problemSolutions")) {
+    const problemSolutions = toProblemSolutions(value.problemSolutions);
+    if (problemSolutions !== undefined) {
+      normalized.problemSolutions = problemSolutions;
+    }
+  }
+
+  if (hasOwn(value, "problemSolutionsUpdatedAt")) {
+    const problemSolutionsUpdatedAt = toNumberRecord(
+      value.problemSolutionsUpdatedAt,
+    );
+    if (problemSolutionsUpdatedAt !== undefined) {
+      normalized.problemSolutionsUpdatedAt = problemSolutionsUpdatedAt;
+    }
+  }
+
   return normalized;
 }
 
@@ -158,48 +236,48 @@ function normalizeSiteSettings(
  * Per-item merge: for each problem ID, keep the entry with the newer timestamp.
  * Falls back to incoming when timestamps are missing.
  */
-function mergeProgressByTimestamp(
-  existingProgress: Record<string, string> | undefined,
+function mergeRecordsByTimestamp<T>(
+  existingValues: Record<string, T> | undefined,
   existingTimestamps: Record<string, number> | undefined,
-  incomingProgress: Record<string, string> | undefined,
+  incomingValues: Record<string, T> | undefined,
   incomingTimestamps: Record<string, number> | undefined,
 ): {
-  progress: Record<string, string>;
-  progressUpdatedAt: Record<string, number>;
+  values: Record<string, T>;
+  timestamps: Record<string, number>;
 } {
-  const progress: Record<string, string> = {};
-  const progressUpdatedAt: Record<string, number> = {};
+  const values: Record<string, T> = {};
+  const timestamps: Record<string, number> = {};
 
   const allIds = new Set([
-    ...Object.keys(existingProgress ?? {}),
-    ...Object.keys(incomingProgress ?? {}),
+    ...Object.keys(existingValues ?? {}),
+    ...Object.keys(incomingValues ?? {}),
   ]);
 
   for (const id of allIds) {
-    const existingVal = existingProgress?.[id];
-    const incomingVal = incomingProgress?.[id];
+    const existingVal = existingValues?.[id];
+    const incomingVal = incomingValues?.[id];
     const existingTs = existingTimestamps?.[id] ?? 0;
     const incomingTs = incomingTimestamps?.[id] ?? 0;
 
     if (existingVal !== undefined && incomingVal !== undefined) {
       // Both have the item — keep the newer one
       if (incomingTs >= existingTs) {
-        progress[id] = incomingVal;
-        progressUpdatedAt[id] = incomingTs || existingTs;
+        values[id] = incomingVal;
+        timestamps[id] = incomingTs || existingTs;
       } else {
-        progress[id] = existingVal;
-        progressUpdatedAt[id] = existingTs;
+        values[id] = existingVal;
+        timestamps[id] = existingTs;
       }
     } else if (incomingVal !== undefined) {
-      progress[id] = incomingVal;
-      if (incomingTs) progressUpdatedAt[id] = incomingTs;
+      values[id] = incomingVal;
+      if (incomingTs) timestamps[id] = incomingTs;
     } else if (existingVal !== undefined) {
-      progress[id] = existingVal;
-      if (existingTs) progressUpdatedAt[id] = existingTs;
+      values[id] = existingVal;
+      if (existingTs) timestamps[id] = existingTs;
     }
   }
 
-  return { progress, progressUpdatedAt };
+  return { values, timestamps };
 }
 
 // CORS middleware
@@ -331,19 +409,35 @@ app.post("/api/uploadprogress", async (c) => {
       : {};
     const incomingSettings = normalizeSiteSettings(body);
 
-    // Per-item merge for progress using timestamps
-    const mergedProgress = mergeProgressByTimestamp(
+    // Per-item merge for user data using timestamps.
+    const mergedProgress = mergeRecordsByTimestamp(
       existingSettings.progress,
       existingSettings.progressUpdatedAt,
       incomingSettings.progress,
       incomingSettings.progressUpdatedAt,
     );
+    const mergedProblemNotes = mergeRecordsByTimestamp(
+      existingSettings.problemNotes,
+      existingSettings.problemNotesUpdatedAt,
+      incomingSettings.problemNotes,
+      incomingSettings.problemNotesUpdatedAt,
+    );
+    const mergedProblemSolutions = mergeRecordsByTimestamp(
+      existingSettings.problemSolutions,
+      existingSettings.problemSolutionsUpdatedAt,
+      incomingSettings.problemSolutions,
+      incomingSettings.problemSolutionsUpdatedAt,
+    );
 
     const userSiteSettings: UserSiteSettings = {
       ...existingSettings,
       ...incomingSettings,
-      progress: mergedProgress.progress,
-      progressUpdatedAt: mergedProgress.progressUpdatedAt,
+      progress: mergedProgress.values,
+      progressUpdatedAt: mergedProgress.timestamps,
+      problemNotes: mergedProblemNotes.values,
+      problemNotesUpdatedAt: mergedProblemNotes.timestamps,
+      problemSolutions: mergedProblemSolutions.values,
+      problemSolutionsUpdatedAt: mergedProblemSolutions.timestamps,
       updatedAt: new Date().toISOString(),
     };
 

@@ -5,7 +5,7 @@ Cloudflare Worker backend for lc-rating cloud sync feature.
 ## Features
 
 - GitHub OAuth authentication
-- Store/retrieve user progress data using Cloudflare KV
+- Store/retrieve user site data using Cloudflare KV
 - JWT-based session management
 - CORS support for multiple origins
 
@@ -80,8 +80,8 @@ Update the `API_BASE` in `apps/web/config/constants.ts` with your worker URL.
 | --------------------- | ------ | ------------------------ |
 | `/api/login/github`   | GET    | Redirect to GitHub OAuth |
 | `/api/callback`       | GET    | OAuth callback handler   |
-| `/api/uploadprogress` | POST   | Upload user progress     |
-| `/api/getprogress`    | GET    | Retrieve user progress   |
+| `/api/uploadprogress` | POST   | Upload user site data    |
+| `/api/getprogress`    | GET    | Retrieve user site data  |
 | `/api/health`         | GET    | Health check             |
 
 ## Development
@@ -95,10 +95,14 @@ npm run dev
 
 ## Data Structure
 
-User progress is stored in KV with key format: `user:{github_id}`
+User site data is stored in KV with key format: `user:{github_id}`
 
 ```json
 {
+  "theme": "system",
+  "tagLanguage": "zh",
+  "linkLanguage": "zh",
+  "premium": false,
   "progress": {
     "1": "solved",
     "2": "attempted"
@@ -106,6 +110,25 @@ User progress is stored in KV with key format: `user:{github_id}`
   "progressUpdatedAt": {
     "1": 1704067200000,
     "2": 1704153600000
+  },
+  "problemNotes": {
+    "1": "Review the two-pointer invariant."
+  },
+  "problemNotesUpdatedAt": {
+    "1": 1704067200000
+  },
+  "problemSolutions": {
+    "1": [
+      {
+        "id": "sol-1",
+        "title": "Hash map",
+        "code": "function twoSum(nums, target) {\\n  return [];\\n}",
+        "language": "javascript"
+      }
+    ]
+  },
+  "problemSolutionsUpdatedAt": {
+    "1": 1704067200000
   },
   "updatedAt": "2024-01-01T00:00:00.000Z"
 }

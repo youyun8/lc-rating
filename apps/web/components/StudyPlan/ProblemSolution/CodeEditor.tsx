@@ -6,6 +6,7 @@ import { useMemo, type CSSProperties, type KeyboardEvent } from "react";
 
 /** Padding applied identically to the textarea and the highlight layer (px). */
 const PADDING = 16;
+const GUTTER_WIDTH = 48;
 
 /**
  * Critical metrics that must match exactly between the editable textarea and
@@ -18,9 +19,7 @@ const SHARED_TEXT_STYLE: CSSProperties = {
   lineHeight: 1.6,
   tabSize: 2,
   fontVariantLigatures: "none",
-  whiteSpace: "pre-wrap",
-  overflowWrap: "break-word",
-  wordBreak: "normal",
+  whiteSpace: "pre",
   padding: PADDING,
   margin: 0,
 };
@@ -58,6 +57,7 @@ export function CodeEditor({
   minHeight = 240,
   maxHeight = 440,
 }: CodeEditorProps) {
+  const lineCount = Math.max(1, value.split("\n").length);
   const html = useMemo(() => {
     const highlighted = highlightCode(value, language);
     // The browser collapses a single trailing newline in <pre>, which would
@@ -88,11 +88,33 @@ export function CodeEditor({
       )}
       style={{ maxHeight }}
     >
-      <div className="relative" style={{ minHeight }}>
+      <div
+        className="relative"
+        style={{ minHeight, minWidth: "100%", width: "max-content" }}
+      >
+        <div
+          aria-hidden
+          className="absolute left-0 top-0 flex h-full select-none flex-col border-r border-border/60 bg-muted/30 pr-2 text-right text-muted-foreground/70"
+          style={{
+            ...SHARED_TEXT_STYLE,
+            width: GUTTER_WIDTH,
+            paddingLeft: 0,
+            paddingRight: 8,
+          }}
+        >
+          {Array.from({ length: lineCount }, (_, index) => (
+            <span key={index}>{index + 1}</span>
+          ))}
+        </div>
         <pre
           aria-hidden
           className="pointer-events-none select-none text-foreground"
-          style={{ ...SHARED_TEXT_STYLE, background: "transparent" }}
+          style={{
+            ...SHARED_TEXT_STYLE,
+            minWidth: "max-content",
+            paddingLeft: GUTTER_WIDTH + PADDING,
+            background: "transparent",
+          }}
         >
           <code
             className={`language-${language}`}
@@ -103,7 +125,10 @@ export function CodeEditor({
           <div
             aria-hidden
             className="pointer-events-none absolute left-0 top-0 text-muted-foreground/70"
-            style={SHARED_TEXT_STYLE}
+            style={{
+              ...SHARED_TEXT_STYLE,
+              paddingLeft: GUTTER_WIDTH + PADDING,
+            }}
           >
             {placeholder}
           </div>
@@ -119,7 +144,9 @@ export function CodeEditor({
           className="absolute inset-0 h-full w-full resize-none border-0 bg-transparent text-transparent outline-none"
           style={{
             ...SHARED_TEXT_STYLE,
+            minWidth: "max-content",
             overflow: "hidden",
+            paddingLeft: GUTTER_WIDTH + PADDING,
             caretColor: "var(--color-foreground)",
           }}
         />
