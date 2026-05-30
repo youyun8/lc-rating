@@ -165,10 +165,10 @@ function ContestPage() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl space-y-2">
               <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                比賽題目
+                競賽
               </h1>
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                按場次查看每場比賽的四題難度分布
+                歷屆週賽與雙週賽題目，依場次顯示每題的難度分級。
               </p>
             </div>
             <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
@@ -194,7 +194,7 @@ function ContestPage() {
                 {isPending ? "--" : contestCount}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                收錄每場競賽的四題資料
+                收錄每場競賽的四道題目
               </p>
             </div>
 
@@ -207,7 +207,7 @@ function ContestPage() {
                 {isPending ? "--" : overviewStats.totalProblems}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                方便整批練習同場比賽的四題
+                各場比賽合計的題目數
               </p>
             </div>
 
@@ -220,7 +220,7 @@ function ContestPage() {
                 {isPending ? "--" : overviewStats.solutionCount}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                可直接跳轉查看的對應題解數
+                可跳轉的 0x3F 對應題解數
               </p>
             </div>
 

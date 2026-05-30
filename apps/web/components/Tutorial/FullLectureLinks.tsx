@@ -88,7 +88,7 @@ function FullLectureLinks() {
                   完整講義索引
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  集中所有章節的完整講義連結，可依主題或章節名稱快速搜尋。
+                  彙整所有章節的完整講義連結，可依主題或章節名稱搜尋。
                 </p>
               </div>
 

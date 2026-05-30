@@ -27,7 +27,7 @@ export default function Troubleshoot() {
           故障排除
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          檢查並修復雲端同步相關問題
+          檢查並修復雲端同步的常見問題，例如登入狀態與資料同步。
         </p>
       </section>
       <TroubleshootPanel />

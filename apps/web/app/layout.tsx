@@ -18,7 +18,12 @@ const ubuntuMono = Ubuntu_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LeetCode Rating",
+  title: {
+    default: "LeetCode Rating｜演算法刷題與競賽分級助手",
+    template: "%s｜LeetCode Rating",
+  },
+  description:
+    "LeetCode 刷題輔助工具，提供競賽分級、主題題單、講義筆記與做題進度追蹤。",
   icons: `${BASE_PATH}/favico.svg`,
 };
 

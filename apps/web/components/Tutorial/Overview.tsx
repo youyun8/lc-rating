@@ -150,7 +150,9 @@ function TutorialCard({
     <Link href={`/lecture/${planKey}`} className="block h-full">
       <div
         className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-        style={{ "--card-accent-dark": theme.accentDark } as React.CSSProperties}
+        style={
+          { "--card-accent-dark": theme.accentDark } as React.CSSProperties
+        }
       >
         <div
           className="relative h-28 overflow-hidden sm:h-32"
@@ -304,7 +306,7 @@ function TutorialOverview() {
                   講義
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  依主題整理的演算法筆記與模板，專注於學習與複習；題目練習請至對應題單。
+                  依主題整理的演算法筆記與模板，適合學習與複習；題目練習請至對應題單。
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2 self-start">

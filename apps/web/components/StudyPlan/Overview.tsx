@@ -188,7 +188,9 @@ function StudyPlanCard({
     <Link href={`/studyplan/${planKey}`} className="block h-full">
       <div
         className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-        style={{ "--card-accent-dark": theme.accentDark } as React.CSSProperties}
+        style={
+          { "--card-accent-dark": theme.accentDark } as React.CSSProperties
+        }
       >
         {/* Gradient Banner */}
         <div
@@ -424,7 +426,7 @@ function StudyPlanOverview() {
                   題單
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  由靈茶山艾府（0x3F）整理的演算法題單，按主題分層規劃。
+                  由靈茶山艾府（0x3F）整理的演算法主題題單，按知識點分層規劃。
                 </p>
               </div>
               <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
@@ -484,7 +486,7 @@ function StudyPlanOverview() {
                   {overviewStats.completedProblems}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  依你的進度同步顯示已標記為 AC 的題目
+                  已標記為 AC 的題目數
                 </p>
               </div>
             </div>
