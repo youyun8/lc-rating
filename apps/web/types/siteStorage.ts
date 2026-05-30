@@ -1,4 +1,5 @@
 import type { Options } from "@/hooks/useOptions";
+import type { ProblemSolutions } from "@/hooks/useProblemSolutions";
 
 export type Language = "zh" | "en";
 export type ThemePreference = "system" | "light" | "dark";
@@ -13,6 +14,8 @@ export interface SiteStorageData {
   progressUpdatedAt: Record<string, number>;
   problemNotes: Record<string, string>;
   problemNotesUpdatedAt: Record<string, number>;
+  problemSolutions: ProblemSolutions;
+  problemSolutionsUpdatedAt: Record<string, number>;
 }
 
 export type SiteStoragePatch = Partial<SiteStorageData>;

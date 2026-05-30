@@ -1,5 +1,6 @@
 import { API_BASE } from "@/config/constants";
 import type { Options } from "@/hooks/useOptions";
+import type { ProblemSolutions } from "@/hooks/useProblemSolutions";
 import type {
   Language,
   SiteStorageData,
@@ -54,6 +55,23 @@ function toNumberRecord(value: unknown): Record<string, number> | undefined {
     },
     {},
   );
+}
+
+function toProblemSolutions(value: unknown): ProblemSolutions | undefined {
+  if (!isRecord(value)) {
+    return undefined;
+  }
+
+  return Object.entries(value).reduce<ProblemSolutions>((acc, [key, item]) => {
+    if (
+      isRecord(item) &&
+      typeof item.code === "string" &&
+      typeof item.language === "string"
+    ) {
+      acc[key] = { code: item.code, language: item.language };
+    }
+    return acc;
+  }, {});
 }
 
 function toOptions(value: unknown): Options | undefined {
@@ -137,6 +155,22 @@ export function normalizeCloudSiteStorage(input: unknown): SiteStoragePatch {
     const problemNotesUpdatedAt = toNumberRecord(payload.problemNotesUpdatedAt);
     if (problemNotesUpdatedAt !== undefined) {
       normalized.problemNotesUpdatedAt = problemNotesUpdatedAt;
+    }
+  }
+
+  if (hasOwn(payload, "problemSolutions")) {
+    const problemSolutions = toProblemSolutions(payload.problemSolutions);
+    if (problemSolutions !== undefined) {
+      normalized.problemSolutions = problemSolutions;
+    }
+  }
+
+  if (hasOwn(payload, "problemSolutionsUpdatedAt")) {
+    const problemSolutionsUpdatedAt = toNumberRecord(
+      payload.problemSolutionsUpdatedAt,
+    );
+    if (problemSolutionsUpdatedAt !== undefined) {
+      normalized.problemSolutionsUpdatedAt = problemSolutionsUpdatedAt;
     }
   }
 

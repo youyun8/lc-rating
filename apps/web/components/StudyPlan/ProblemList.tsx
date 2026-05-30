@@ -10,6 +10,7 @@ import { StudyPlanData } from "@/types";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import React, { useMemo } from "react";
 import { ProblemNote } from "./ProblemNote";
+import { ProblemSolution } from "./ProblemSolution";
 
 interface ProblemListProps {
   problems: StudyPlanData.Item[];
@@ -273,6 +274,10 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
               </div>
               {problemId ? (
                 <>
+                  <ProblemSolution
+                    problemId={problemId}
+                    title={problem.title}
+                  />
                   <ProblemNote problemId={problemId} title={problem.title} />
                   <ProgressSelector
                     problemId={problemId}

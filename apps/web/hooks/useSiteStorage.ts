@@ -3,6 +3,7 @@ import { useGlobalSettingsStore } from "./useGlobalSettings";
 import { useOptions } from "./useOptions";
 import { useProgressStore } from "./useProgress";
 import { useProblemNotesStore } from "./useProblemNotes";
+import { useProblemSolutionsStore } from "./useProblemSolutions";
 import { useTheme } from "next-themes";
 import {
   isThemePreference,
@@ -10,13 +11,13 @@ import {
   SiteStoragePatch,
 } from "@/types/siteStorage";
 
-function mergeTimestampedRecords(
-  localValues: Record<string, string>,
-  cloudValues: Record<string, string>,
+function mergeTimestampedRecords<T>(
+  localValues: Record<string, T>,
+  cloudValues: Record<string, T>,
   localTimestamps: Record<string, number>,
   cloudTimestamps: Record<string, number>,
 ) {
-  const values: Record<string, string> = {};
+  const values: Record<string, T> = {};
   const timestamps: Record<string, number> = {};
   const allIds = new Set([
     ...Object.keys(localValues),
@@ -77,6 +78,20 @@ export function mergeProblemNotes(
   return { problemNotes: values, problemNotesUpdatedAt: timestamps };
 }
 
+export function mergeProblemSolutions(
+  local: SiteStoragePatch,
+  cloud: SiteStoragePatch,
+): Pick<SiteStoragePatch, "problemSolutions" | "problemSolutionsUpdatedAt"> {
+  const { values, timestamps } = mergeTimestampedRecords(
+    local.problemSolutions ?? {},
+    cloud.problemSolutions ?? {},
+    local.problemSolutionsUpdatedAt ?? {},
+    cloud.problemSolutionsUpdatedAt ?? {},
+  );
+
+  return { problemSolutions: values, problemSolutionsUpdatedAt: timestamps };
+}
+
 export function useSiteStorage() {
   const {
     tagLanguage,
@@ -96,6 +111,12 @@ export function useSiteStorage() {
     setAllProblemNotes,
     clearAllProblemNotes,
   } = useProblemNotesStore();
+  const {
+    problemSolutions,
+    problemSolutionsUpdatedAt,
+    setAllProblemSolutions,
+    clearAllProblemSolutions,
+  } = useProblemSolutionsStore();
   const rawTheme = theme ?? "system";
   const siteTheme: SiteStorageData["theme"] = isThemePreference(rawTheme)
     ? rawTheme
@@ -112,6 +133,8 @@ export function useSiteStorage() {
       progressUpdatedAt,
       problemNotes,
       problemNotesUpdatedAt,
+      problemSolutions,
+      problemSolutionsUpdatedAt,
     }),
     [
       siteTheme,
@@ -123,6 +146,8 @@ export function useSiteStorage() {
       progressUpdatedAt,
       problemNotes,
       problemNotesUpdatedAt,
+      problemSolutions,
+      problemSolutionsUpdatedAt,
     ],
   );
 
@@ -147,12 +172,24 @@ export function useSiteStorage() {
           data.problemNotesUpdatedAt ?? {},
         );
       }
+      if (
+        data.problemSolutions !== undefined ||
+        data.problemSolutionsUpdatedAt !== undefined
+      ) {
+        clearAllProblemSolutions();
+        setAllProblemSolutions(
+          data.problemSolutions ?? {},
+          data.problemSolutionsUpdatedAt ?? {},
+        );
+      }
     },
     [
       clearAllProgress,
       clearAllProblemNotes,
+      clearAllProblemSolutions,
       setAllProgress,
       setAllProblemNotes,
+      setAllProblemSolutions,
       setLinkLanguage,
       setOptions,
       setPremium,
@@ -172,6 +209,10 @@ export function useSiteStorage() {
         { problemNotes, problemNotesUpdatedAt },
         cloud,
       );
+      const mergedSolutions = mergeProblemSolutions(
+        { problemSolutions, problemSolutionsUpdatedAt },
+        cloud,
+      );
 
       // Apply non-progress cloud settings
       if (cloud.theme !== undefined) setTheme(cloud.theme);
@@ -187,16 +228,25 @@ export function useSiteStorage() {
         mergedNotes.problemNotes ?? {},
         mergedNotes.problemNotesUpdatedAt ?? {},
       );
+      clearAllProblemSolutions();
+      setAllProblemSolutions(
+        mergedSolutions.problemSolutions ?? {},
+        mergedSolutions.problemSolutionsUpdatedAt ?? {},
+      );
     },
     [
       progress,
       progressUpdatedAt,
       problemNotes,
       problemNotesUpdatedAt,
+      problemSolutions,
+      problemSolutionsUpdatedAt,
       clearAllProgress,
       clearAllProblemNotes,
+      clearAllProblemSolutions,
       setAllProgress,
       setAllProblemNotes,
+      setAllProblemSolutions,
       setLinkLanguage,
       setOptions,
       setPremium,
