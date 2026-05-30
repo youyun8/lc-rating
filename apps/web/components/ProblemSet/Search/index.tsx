@@ -186,7 +186,7 @@ const Search = React.memo(
               onClick={() => handleConfirm({ scroll: true })}
               variant="default"
               size="sm"
-              className="w-full cursor-pointer px-6 sm:w-auto"
+              className="w-full px-6 sm:w-auto"
             >
               確認
             </Button>
@@ -194,7 +194,7 @@ const Search = React.memo(
               onClick={handleReset}
               variant="outline"
               size="sm"
-              className="w-full cursor-pointer px-6 sm:w-auto"
+              className="w-full px-6 sm:w-auto"
             >
               重置
             </Button>

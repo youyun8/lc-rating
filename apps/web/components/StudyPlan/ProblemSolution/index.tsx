@@ -110,10 +110,12 @@ interface CopyButtonProps {
 function CopyButton({ code }: CopyButtonProps) {
   const { copied, copy } = useCopy();
   return (
-    <button
+    <Button
       type="button"
+      variant="outline"
+      size="sm"
       onClick={() => copy(code)}
-      className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-background px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+      className="h-7 gap-1 border-border/60 px-2 text-xs text-muted-foreground hover:text-foreground"
     >
       {copied ? (
         <Check className="h-3.5 w-3.5" />
@@ -121,7 +123,7 @@ function CopyButton({ code }: CopyButtonProps) {
         <Copy className="h-3.5 w-3.5" />
       )}
       {copied ? "已複製" : "複製"}
-    </button>
+    </Button>
   );
 }
 

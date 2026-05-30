@@ -167,10 +167,8 @@ const FloatingSyncButton = () => {
       <div className="relative">
         <Button
           size="icon"
-          variant={isLoggedIn ? "default" : "outline"}
-          className={`h-11 w-11 rounded-full shadow-lg sm:h-12 sm:w-12 ${
-            isLoggedIn ? "bg-emerald-500 text-white hover:bg-emerald-600" : ""
-          }`}
+          variant={isLoggedIn ? "success" : "outline"}
+          className="h-11 w-11 rounded-full shadow-lg sm:h-12 sm:w-12"
           onClick={() => setOpen((prev) => !prev)}
           aria-label="雲端同步"
           aria-expanded={open}
