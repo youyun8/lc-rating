@@ -30,6 +30,25 @@ export interface ProgressStats {
   byStatus: ProgressStatusBreakdown[];
 }
 
+export interface RecentProgressItem {
+  /** Problem id (matches the key used in the library). */
+  id: string;
+  /** Display title, falling back to the id when the library is missing it. */
+  title: string;
+  /** LeetCode slug, used to build a direct problem link. */
+  titleSlug?: string;
+  /** Problem rating, when known. */
+  rating?: number;
+  /** Raw status/option key. */
+  status: string;
+  /** Human-readable status label. */
+  statusLabel: string;
+  /** Status colour used for the badge dot. */
+  statusColor: string;
+  /** Epoch millis of the last status change (0 when unknown). */
+  updatedAt: number;
+}
+
 /** Aggregated, user-facing progress statistics (no timestamps or raw keys). */
 export function useProgressStats(): ProgressStats {
   const { getOption } = useOptions();
@@ -72,6 +91,41 @@ export function useProgressStats(): ProgressStats {
       byStatus,
     };
   }, [getOption, problemMap, progress]);
+}
+
+/**
+ * The user's most recently updated problems, newest first. Combines progress
+ * timestamps with library metadata so the UI can render a ready-to-show list.
+ * Pass a positive `limit` to cap the list (defaults to 20); `0` returns all.
+ */
+export function useRecentProgress(limit = 20): RecentProgressItem[] {
+  const { getOption } = useOptions();
+  const { problemMap } = useProblems();
+  const progress = useProgressStore((state) => state.progress);
+  const progressUpdatedAt = useProgressStore(
+    (state) => state.progressUpdatedAt,
+  );
+
+  return useMemo(() => {
+    const items = Object.entries(progress).map(([id, status]) => {
+      const option = getOption(status);
+      const problem = problemMap?.[id];
+      return {
+        id,
+        title: problem?.title ?? id,
+        titleSlug: problem?.titleSlug,
+        rating: problem?.rating,
+        status,
+        statusLabel: option.label || option.key,
+        statusColor: option.color,
+        updatedAt: progressUpdatedAt?.[id] ?? 0,
+      } satisfies RecentProgressItem;
+    });
+
+    items.sort((a, b) => b.updatedAt - a.updatedAt);
+
+    return limit > 0 ? items.slice(0, limit) : items;
+  }, [getOption, problemMap, progress, progressUpdatedAt, limit]);
 }
 
 /**

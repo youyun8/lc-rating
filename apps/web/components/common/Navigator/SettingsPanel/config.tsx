@@ -1,7 +1,15 @@
-import { BarChart3, List, RefreshCw, Settings, Wrench } from "lucide-react";
+import {
+  BarChart3,
+  History,
+  List,
+  RefreshCw,
+  Settings,
+  Wrench,
+} from "lucide-react";
 import CustomizeOptions from "./settingPages/CustomizeOption";
 import { Preference } from "./settingPages/Preference";
 import ProgressOverview from "./settingPages/ProgressOverview";
+import RecentSubmissions from "./settingPages/RecentSubmissions";
 import SyncStorage from "./settingPages/SyncStorage";
 import { lazy } from "react";
 
@@ -38,6 +46,12 @@ export const settingTabs: SettingTabType[] = [
     title: "進度總覽",
     icon: <BarChart3 />,
     component: <ProgressOverview />,
+  },
+  {
+    key: "RecentSubmissions",
+    title: "最近紀錄",
+    icon: <History />,
+    component: <RecentSubmissions />,
   },
   {
     key: "Troubleshooting",

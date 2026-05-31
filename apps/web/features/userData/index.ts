@@ -15,12 +15,14 @@ export {
 
 export {
   useProgressStats,
+  useRecentProgress,
   useProgressMap,
   useProblemProgress,
   useTrackedCount,
   useClearProgress,
   type ProgressStats,
   type ProgressStatusBreakdown,
+  type RecentProgressItem,
 } from "./progress";
 
 export { useProblemSolutions, type ProblemSolution } from "./solutions";
