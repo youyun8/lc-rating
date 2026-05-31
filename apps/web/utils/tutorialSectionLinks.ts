@@ -50,12 +50,6 @@ function flattenTutorialSectionLinks(
   });
 }
 
-export function getTutorialSectionLinks(): TutorialSectionLink[] {
-  return Object.keys(STUDYPLANS).flatMap((planKey) =>
-    flattenTutorialSectionLinks(planKey, tutorialDataMap[planKey]?.children),
-  );
-}
-
 export function getTutorialSectionLinkGroups() {
   return Object.keys(STUDYPLANS)
     .map((planKey) => ({

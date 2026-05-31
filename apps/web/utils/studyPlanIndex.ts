@@ -1,4 +1,3 @@
-import { STUDYPLANS } from "@/config/constants";
 import type { StudyPlanData } from "@/types";
 
 import googleInterviewData from "@/public/studyplan/google_interview.json";
@@ -32,68 +31,3 @@ export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
   string: stringData as StudyPlanData.Root,
   trees: treesData as StudyPlanData.Root,
 };
-
-export interface StudyPlanProblemPlan {
-  planKey: string;
-  planTitle: string;
-}
-
-export interface StudyPlanProblemInfo {
-  title?: string;
-  plans: StudyPlanProblemPlan[];
-}
-
-function buildStudyPlanProblemIndex() {
-  const index: Record<string, StudyPlanProblemInfo> = {};
-
-  const addProblem = (
-    problem: StudyPlanData.Item,
-    planKey: string,
-    planTitle: string,
-  ) => {
-    const problemId = problem.id?.toString();
-    if (!problemId) return;
-    const existing = index[problemId];
-    const plans = existing?.plans ?? [];
-    if (!plans.some((plan) => plan.planKey === planKey)) {
-      plans.push({ planKey, planTitle });
-    }
-    index[problemId] = {
-      title: existing?.title ?? problem.title,
-      plans,
-    };
-  };
-
-  const walkSection = (
-    section: StudyPlanData.Section,
-    planKey: string,
-    planTitle: string,
-  ) => {
-    if (section.problems) {
-      section.problems.forEach((problem) =>
-        addProblem(problem, planKey, planTitle),
-      );
-    }
-    if (section.children) {
-      section.children.forEach((child) =>
-        walkSection(child, planKey, planTitle),
-      );
-    }
-  };
-
-  Object.entries(studyPlanDataMap).forEach(([planKey, plan]) => {
-    const planTitle =
-      STUDYPLANS[planKey as keyof typeof STUDYPLANS] ?? plan.title ?? planKey;
-    plan.children?.forEach((section) =>
-      walkSection(section, planKey, planTitle),
-    );
-  });
-
-  return index;
-}
-
-const studyPlanProblemIndex = buildStudyPlanProblemIndex();
-
-export function getStudyPlanProblemInfo(problemId: string) {
-  return studyPlanProblemIndex[problemId];
-}

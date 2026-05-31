@@ -1,6 +1,6 @@
 import { CheckCircle2, FileText, Tags } from "lucide-react";
 
-export interface ProblemSetStats {
+interface ProblemSetStats {
   total: number;
   solved: number;
   withSolutions: number;

@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import hljs from "highlight.js";
 import { useMemo, type CSSProperties, type KeyboardEvent } from "react";
+import { highlightCode } from "./solutionUtils";
 
 /** Padding applied identically to the textarea and the highlight layer (px). */
 const PADDING = 16;
@@ -22,15 +22,6 @@ const SHARED_TEXT_STYLE: CSSProperties = {
   padding: PADDING,
   margin: 0,
 };
-
-function highlightCode(code: string, language: string) {
-  const lang = hljs.getLanguage(language) ? language : "plaintext";
-  try {
-    return hljs.highlight(code, { language: lang }).value;
-  } catch {
-    return hljs.highlight(code, { language: "plaintext" }).value;
-  }
-}
 
 interface CodeEditorProps {
   value: string;

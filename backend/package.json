@@ -4,15 +4,18 @@
   "description": "Cloudflare Worker backend for lc-rating cloud sync",
   "main": "src/index.ts",
   "scripts": {
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "check-types": "tsc --noEmit",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "setup": "wrangler kv:namespace create LC_RATING_DATA"
+    "setup": "wrangler kv:namespace create LC_RATING_DATA",
+    "typegen": "wrangler types src/env.d.ts --include-runtime false"
   },
   "dependencies": {
     "hono": "^3.12.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20231218.0",
+    "@cloudflare/workers-types": "^4.20260530.1",
     "typescript": "^5.3.3",
     "wrangler": "^4.70.0"
   }

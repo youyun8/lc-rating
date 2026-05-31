@@ -50,7 +50,7 @@ function mergeTimestampedRecords<T>(
   return { values, timestamps };
 }
 
-export function mergeProgress(
+function mergeProgress(
   local: SiteStoragePatch,
   cloud: SiteStoragePatch,
 ): Pick<SiteStoragePatch, "progress" | "progressUpdatedAt"> {
@@ -64,7 +64,7 @@ export function mergeProgress(
   return { progress: values, progressUpdatedAt: timestamps };
 }
 
-export function mergeProblemNotes(
+function mergeProblemNotes(
   local: SiteStoragePatch,
   cloud: SiteStoragePatch,
 ): Pick<SiteStoragePatch, "problemNotes" | "problemNotesUpdatedAt"> {
@@ -78,7 +78,7 @@ export function mergeProblemNotes(
   return { problemNotes: values, problemNotesUpdatedAt: timestamps };
 }
 
-export function mergeProblemSolutions(
+function mergeProblemSolutions(
   local: SiteStoragePatch,
   cloud: SiteStoragePatch,
 ): Pick<SiteStoragePatch, "problemSolutions" | "problemSolutionsUpdatedAt"> {

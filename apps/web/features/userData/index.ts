@@ -3,15 +3,7 @@
 // the underlying zustand stores, localStorage keys, auth tokens and cloud
 // transport so the UI can speak purely in user terms.
 
-export {
-  useSyncState,
-  useCloudSync,
-  signIn,
-  signOut,
-  type SyncState,
-  type SyncStatus,
-  type CloudSyncActions,
-} from "./sync";
+export { useSyncState, useCloudSync, signIn, signOut } from "./sync";
 
 export {
   useProgressStats,
@@ -20,11 +12,8 @@ export {
   useProblemProgress,
   useTrackedCount,
   useClearProgress,
-  type ProgressStats,
-  type ProgressStatusBreakdown,
-  type RecentProgressItem,
 } from "./progress";
 
 export { useProblemSolutions, type ProblemSolution } from "./solutions";
 
-export { useDataBackup, type DataBackupActions } from "./backup";
+export { useDataBackup } from "./backup";

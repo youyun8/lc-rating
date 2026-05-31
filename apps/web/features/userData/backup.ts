@@ -30,7 +30,7 @@ function backupFileName() {
   return `lc-rating-backup-${stamp}.json`;
 }
 
-export interface DataBackupActions {
+interface DataBackupActions {
   /** Whether a file import is currently being processed. */
   isBusy: boolean;
   /** Save all of this device's data to a JSON file the user can keep. */

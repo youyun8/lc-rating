@@ -24,7 +24,7 @@ export function countStudyPlanProblems(section: StudyPlanData.Section): number {
   );
 }
 
-export function countStudyPlanSections(section: StudyPlanData.Section): number {
+function countStudyPlanSections(section: StudyPlanData.Section): number {
   return (
     1 +
     (section.children ?? []).reduce(
@@ -34,7 +34,7 @@ export function countStudyPlanSections(section: StudyPlanData.Section): number {
   );
 }
 
-export function countTutorialSections(section: TutorialData.Section): number {
+function countTutorialSections(section: TutorialData.Section): number {
   return (
     1 +
     (section.children ?? []).reduce(
@@ -44,7 +44,7 @@ export function countTutorialSections(section: TutorialData.Section): number {
   );
 }
 
-export function countDocumentedTutorialSections(
+function countDocumentedTutorialSections(
   section: TutorialData.Section,
 ): number {
   return (
@@ -56,7 +56,7 @@ export function countDocumentedTutorialSections(
   );
 }
 
-export function collectStudyPlanProblemIds(
+function collectStudyPlanProblemIds(
   sections: StudyPlanData.Section[],
 ): string[] {
   const ids: string[] = [];

@@ -1,6 +1,10 @@
 name = "lc-rating-backend"
 main = "src/index.ts"
-compatibility_date = "2024-01-01"
+compatibility_date = "2026-05-31"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
 
 # KV Namespace for storing user progress data
 [[kv_namespaces]]
@@ -13,7 +17,6 @@ id = "376e14658e2a4687891ca743c1dd3394"
 # Use: wrangler secret put GITHUB_CLIENT_ID
 # Use: wrangler secret put GITHUB_CLIENT_SECRET
 # Use: wrangler secret put JWT_SECRET
-# Use: wrangler secret put ALLOWED_ORIGINS
 
 # CORS settings
 ALLOWED_ORIGINS = "https://youyun8.github.io,http://localhost:3001"

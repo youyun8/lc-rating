@@ -12,14 +12,14 @@ import { isTruthy } from "@/types/common";
 import type { Tag } from "@/types";
 import { useMemo } from "react";
 
-export interface ProgressStatusBreakdown {
+interface ProgressStatusBreakdown {
   key: string;
   label: string;
   color: string;
   count: number;
 }
 
-export interface ProgressStats {
+interface ProgressStats {
   /** Number of problems the user has given any status. */
   tracked: number;
   /** Number of problems marked solved (AC). */
@@ -33,7 +33,7 @@ export interface ProgressStats {
   byStatus: ProgressStatusBreakdown[];
 }
 
-export interface RecentProgressItem {
+interface RecentProgressItem {
   /** Problem id (matches the key used in the library). */
   id: string;
   /** Display title, falling back to the id when the library is missing it. */

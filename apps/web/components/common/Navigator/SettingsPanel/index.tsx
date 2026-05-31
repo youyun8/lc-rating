@@ -16,7 +16,7 @@ interface SettingsPanelProps {
   onOpenChange: (show: boolean) => void;
 }
 
-export function SettingsPanel({ show, onOpenChange }: SettingsPanelProps) {
+function SettingsPanel({ show, onOpenChange }: SettingsPanelProps) {
   const [activeTab = "", setActiveTab] = useState(settingTabs[0]?.key);
 
   const ActiveComponent = settingTabs.find(

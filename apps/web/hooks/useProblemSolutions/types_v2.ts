@@ -9,7 +9,7 @@ export interface ProblemSolution {
 
 /** A problem can have multiple solutions (different techniques). */
 export type ProblemSolutions = Record<string, ProblemSolution[]>;
-export type ProblemSolutionsUpdatedAt = Record<string, number>;
+type ProblemSolutionsUpdatedAt = Record<string, number>;
 
 export interface ProblemSolutionsStoreState {
   problemSolutions: ProblemSolutions;

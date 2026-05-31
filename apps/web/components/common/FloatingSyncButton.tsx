@@ -14,7 +14,7 @@ import {
   Upload,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const wrapperClass =
@@ -32,6 +32,26 @@ const FloatingSyncButton = () => {
   const { status, account, lastSyncedAt } = useSyncState();
   const { push, pull, isSyncing } = useCloudSync();
   const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+
+      if (!(target instanceof Node)) return;
+      if (containerRef.current?.contains(target)) return;
+
+      setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [open]);
 
   // Cloud sync isn't available here; there's nothing to surface.
   if (status === "offline") {
@@ -73,7 +93,7 @@ const FloatingSyncButton = () => {
   };
 
   return (
-    <div className={wrapperClass} data-floating-sync>
+    <div ref={containerRef} className={wrapperClass}>
       {open ? (
         <div className="w-[min(calc(100vw-2rem),320px)] space-y-3 rounded-2xl border bg-background/95 p-3.5 shadow-xl backdrop-blur supports-[backdrop-filter]:bg-background/85">
           <div className="flex items-start justify-between gap-2">
@@ -150,25 +170,23 @@ const FloatingSyncButton = () => {
         </div>
       ) : null}
 
-      <div className="relative">
-        <Button
-          size="icon"
-          variant={isLoggedIn ? "success" : "outline"}
-          className="h-11 w-11 rounded-full shadow-lg sm:h-12 sm:w-12"
-          onClick={() => setOpen((prev) => !prev)}
-          aria-label="雲端同步"
-          aria-expanded={open}
-          type="button"
-        >
-          {open ? (
-            <X className="h-5 w-5" />
-          ) : isLoggedIn ? (
-            <Cloud className="h-5 w-5" />
-          ) : (
-            <LogIn className="h-5 w-5" />
-          )}
-        </Button>
-      </div>
+      <Button
+        size="icon"
+        variant={isLoggedIn ? "success" : "outline"}
+        className="h-11 w-11 rounded-full shadow-lg sm:h-12 sm:w-12"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label="雲端同步"
+        aria-expanded={open}
+        type="button"
+      >
+        {open ? (
+          <X className="h-5 w-5" />
+        ) : isLoggedIn ? (
+          <Cloud className="h-5 w-5" />
+        ) : (
+          <LogIn className="h-5 w-5" />
+        )}
+      </Button>
     </div>
   );
 };

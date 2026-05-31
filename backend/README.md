@@ -29,16 +29,14 @@ Cloudflare Worker backend for lc-rating cloud sync feature.
 ### 2. Deploy the Worker
 
 ```bash
-cd backend
-
 # Install dependencies
-npm install
+pnpm install
 
 # Login to Cloudflare
-npx wrangler login
+pnpm --filter lc-rating-backend exec wrangler login
 
 # Create KV namespace
-npx wrangler kv:namespace create "LC_RATING_DATA"
+pnpm --filter lc-rating-backend setup
 
 # Update wrangler.toml with the KV namespace ID you got from the previous command
 ```
@@ -47,25 +45,24 @@ npx wrangler kv:namespace create "LC_RATING_DATA"
 
 ```bash
 # GitHub OAuth credentials
-npx wrangler secret put GITHUB_CLIENT_ID
+pnpm --filter lc-rating-backend exec wrangler secret put GITHUB_CLIENT_ID
 # Enter your GitHub OAuth App Client ID
 
-npx wrangler secret put GITHUB_CLIENT_SECRET
+pnpm --filter lc-rating-backend exec wrangler secret put GITHUB_CLIENT_SECRET
 # Enter your GitHub OAuth App Client Secret
 
 # JWT secret (generate a random string)
-npx wrangler secret put JWT_SECRET
+pnpm --filter lc-rating-backend exec wrangler secret put JWT_SECRET
 # Enter a random secret key for JWT signing
-
-# Allowed origins (your frontend URLs)
-npx wrangler secret put ALLOWED_ORIGINS
-# Enter: https://youyun8.github.io,http://localhost:3001
 ```
+
+Allowed frontend origins are configured in `wrangler.toml` as
+`ALLOWED_ORIGINS`.
 
 ### 4. Deploy
 
 ```bash
-npx wrangler deploy
+pnpm --filter lc-rating-backend deploy
 ```
 
 The worker will be deployed to `https://lc-rating-backend.your-subdomain.workers.dev`
@@ -88,9 +85,17 @@ Update the `API_BASE` in `apps/web/config/constants.ts` with your worker URL.
 
 ```bash
 # Run locally
-npm run dev
+pnpm --filter lc-rating-backend dev
 
 # The worker will be available at http://localhost:8787
+```
+
+## Validation
+
+```bash
+pnpm --filter lc-rating-backend typegen
+pnpm --filter lc-rating-backend check-types
+pnpm --filter lc-rating-backend build
 ```
 
 ## Data Structure

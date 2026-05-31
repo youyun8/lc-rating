@@ -1,6 +1,6 @@
 import { Quodra } from "./common";
 
-export interface Contest {
+interface Contest {
   id: string;
   title: string;
   titleSlug: string;

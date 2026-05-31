@@ -10,9 +10,9 @@ import { clearAuthToken, decodeAuthToken, isTokenValid } from "@/utils/auth";
 import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
 import { useCallback, useEffect, useState } from "react";
 
-export type SyncStatus = "offline" | "signed-out" | "synced";
+type SyncStatus = "offline" | "signed-out" | "synced";
 
-export interface SyncState {
+interface SyncState {
   /** Whether cloud sync is available at all (backend configured). */
   isConfigured: boolean;
   status: SyncStatus;
@@ -102,7 +102,7 @@ export function signOut() {
   clearAuthToken();
 }
 
-export interface CloudSyncActions {
+interface CloudSyncActions {
   /** Upload this device's data to the cloud, replacing the stored copy. */
   push: () => Promise<void>;
   /** Download the cloud copy and merge it into this device. */

@@ -1,7 +1,7 @@
 import { OptionKey } from "@/hooks/useOptions";
 
 export type Progress = Record<string, OptionKey>;
-export type ProgressUpdatedAt = Record<string, number>;
+type ProgressUpdatedAt = Record<string, number>;
 
 export interface ProgressStoreState {
   progress: Progress;

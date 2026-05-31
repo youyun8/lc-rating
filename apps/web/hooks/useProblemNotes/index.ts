@@ -1,5 +1,3 @@
-import { useProblemNotes, useProblemNotesStore } from "./hook";
-import type { ProblemNotesStore, ProblemNotesStoreState } from "./types_v2";
+import { useProblemNotesStore } from "./hook";
 
-export { useProblemNotes, useProblemNotesStore };
-export type { ProblemNotesStore, ProblemNotesStoreState };
+export { useProblemNotesStore };

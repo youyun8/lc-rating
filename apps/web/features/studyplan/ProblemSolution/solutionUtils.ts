@@ -27,7 +27,7 @@ export const LANGUAGE_OPTIONS: LanguageOption[] = [
   { value: "plaintext", label: "純文字" },
 ];
 
-export const DEFAULT_LANGUAGE = "cpp";
+const DEFAULT_LANGUAGE = "cpp";
 
 export type DialogMode = "view" | "edit";
 

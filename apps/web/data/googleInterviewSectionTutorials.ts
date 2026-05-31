@@ -1,6 +1,6 @@
 import { sectionAnchor } from "@/utils/sectionAnchor";
 
-export interface GoogleInterviewSectionTutorial {
+interface GoogleInterviewSectionTutorial {
   id: number;
   title: string;
   slug: string;
@@ -322,7 +322,7 @@ const competitiveProgrammingCourseMaterials: Record<number, string> = {
   ].join("\n\n"),
 };
 
-export const googleInterviewSectionTutorials: GoogleInterviewSectionTutorial[] =
+const googleInterviewSectionTutorials: GoogleInterviewSectionTutorial[] =
   sectionTutorials.map((section) => ({
     id: section.id,
     title: section.title,

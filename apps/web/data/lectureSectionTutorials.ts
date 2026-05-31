@@ -20,14 +20,14 @@ const problemBySlug = new Map(
   Object.values(problemMap).map((problem) => [problem.titleSlug, problem]),
 );
 
-export interface LectureSectionNavItem {
+interface LectureSectionNavItem {
   id: number;
   title: string;
   slug: string;
   depth: number;
 }
 
-export interface LectureSectionChildItem extends LectureSectionNavItem {
+interface LectureSectionChildItem extends LectureSectionNavItem {
   summary?: string;
   childCount: number;
   totalSections: number;

@@ -79,15 +79,3 @@ export const useProblemNotesStore = create<ProblemNotesStore>()(
     sharedOption,
   ),
 );
-
-export const useProblemNotes = () => {
-  const problemNotes = useProblemNotesStore((state) => state.problemNotes);
-  const setProblemNote = useProblemNotesStore((state) => state.setProblemNote);
-  const delProblemNote = useProblemNotesStore((state) => state.delProblemNote);
-
-  return {
-    problemNotes,
-    setProblemNote,
-    delProblemNote,
-  };
-};

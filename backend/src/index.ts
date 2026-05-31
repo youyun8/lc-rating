@@ -1,16 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 
-// Types
-interface Bindings {
-  [key: string]: unknown;
-  LC_RATING_DATA: KVNamespace;
-  GITHUB_CLIENT_ID: string;
-  GITHUB_CLIENT_SECRET: string;
-  JWT_SECRET: string;
-  ALLOWED_ORIGINS: string;
-}
-
 type Language = "zh" | "en";
 type ThemePreference = "system" | "light" | "dark";
 
@@ -28,6 +18,7 @@ interface ProblemSolution {
 }
 
 type ProblemSolutions = Record<string, ProblemSolution[]>;
+type Bindings = Env & Record<string, unknown>;
 
 interface UserSiteSettings {
   theme?: ThemePreference;
@@ -60,6 +51,12 @@ function isLanguage(value: unknown): value is Language {
 
 function isThemePreference(value: unknown): value is ThemePreference {
   return value === "system" || value === "light" || value === "dark";
+}
+
+function getAllowedOrigins(env: Env) {
+  return env.ALLOWED_ORIGINS.split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 }
 
 function toStringRecord(value: unknown) {
@@ -282,10 +279,8 @@ function mergeRecordsByTimestamp<T>(
 
 // CORS middleware
 app.use("*", async (c, next) => {
-  const env = c.env as Bindings;
-  const allowedOrigins = env.ALLOWED_ORIGINS?.split(",") || ["*"];
   const corsMiddleware = cors({
-    origin: allowedOrigins,
+    origin: getAllowedOrigins(c.env),
     allowMethods: ["GET", "POST", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -295,17 +290,14 @@ app.use("*", async (c, next) => {
 
 // GitHub OAuth login endpoint
 app.get("/api/login/github", async (c) => {
-  const env = c.env as Bindings;
-  const clientId = env.GITHUB_CLIENT_ID;
   const redirectUri = `${new URL(c.req.url).origin}/api/callback`;
 
   const githubAuthUrl =
     `https://github.com/login/oauth/authorize?` +
     new URLSearchParams({
-      client_id: clientId,
+      client_id: c.env.GITHUB_CLIENT_ID,
       redirect_uri: redirectUri,
       scope: "read:user",
-      prompt: "consent",
     });
 
   return c.redirect(githubAuthUrl);
@@ -313,7 +305,6 @@ app.get("/api/login/github", async (c) => {
 
 // GitHub OAuth callback endpoint
 app.get("/api/callback", async (c) => {
-  const env = c.env as Bindings;
   const code = c.req.query("code");
   if (!code) {
     return c.json({ success: false, message: "No code provided" }, 400);
@@ -330,8 +321,8 @@ app.get("/api/callback", async (c) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          client_id: env.GITHUB_CLIENT_ID,
-          client_secret: env.GITHUB_CLIENT_SECRET,
+          client_id: c.env.GITHUB_CLIENT_ID,
+          client_secret: c.env.GITHUB_CLIENT_SECRET,
           code,
         }),
       },
@@ -369,14 +360,12 @@ app.get("/api/callback", async (c) => {
         userId: userData.id.toString(),
         username: userData.login,
       },
-      env.JWT_SECRET,
+      c.env.JWT_SECRET,
     );
 
     // Redirect back to frontend with token
-    const allowedOrigins = env.ALLOWED_ORIGINS?.split(",") || [
-      "http://localhost:3001",
-    ];
-    const redirectOrigin = allowedOrigins[0].trim();
+    const redirectOrigin =
+      getAllowedOrigins(c.env)[0] ?? "http://localhost:3001";
     const redirectUrl = `${redirectOrigin}/lc-rating?token=${encodeURIComponent(jwtToken)}`;
 
     return c.redirect(redirectUrl);
@@ -388,7 +377,6 @@ app.get("/api/callback", async (c) => {
 
 // Upload site data endpoint
 app.post("/api/uploadprogress", async (c) => {
-  const env = c.env as Bindings;
   const authHeader = c.req.header("Authorization");
   if (!authHeader?.startsWith("Bearer ")) {
     return c.json({ success: false, message: "Unauthorized" }, 401);
@@ -397,13 +385,15 @@ app.post("/api/uploadprogress", async (c) => {
   const token = authHeader.slice(7);
 
   try {
-    const payload = await verifyJWT(token, env.JWT_SECRET);
+    const payload = await verifyJWT(token, c.env.JWT_SECRET);
     if (!payload) {
       return c.json({ success: false, message: "Invalid token" }, 401);
     }
 
     const body = await c.req.json();
-    const existingData = await env.LC_RATING_DATA.get(`user:${payload.userId}`);
+    const existingData = await c.env.LC_RATING_DATA.get(
+      `user:${payload.userId}`,
+    );
     const existingSettings = existingData
       ? normalizeSiteSettings(JSON.parse(existingData))
       : {};
@@ -442,7 +432,7 @@ app.post("/api/uploadprogress", async (c) => {
     };
 
     // Store in KV
-    await env.LC_RATING_DATA.put(
+    await c.env.LC_RATING_DATA.put(
       `user:${payload.userId}`,
       JSON.stringify(userSiteSettings),
     );
@@ -456,7 +446,6 @@ app.post("/api/uploadprogress", async (c) => {
 
 // Get site data endpoint
 app.get("/api/getprogress", async (c) => {
-  const env = c.env as Bindings;
   const authHeader = c.req.header("Authorization");
   if (!authHeader?.startsWith("Bearer ")) {
     return c.json({ success: false, message: "Unauthorized" }, 401);
@@ -465,13 +454,13 @@ app.get("/api/getprogress", async (c) => {
   const token = authHeader.slice(7);
 
   try {
-    const payload = await verifyJWT(token, env.JWT_SECRET);
+    const payload = await verifyJWT(token, c.env.JWT_SECRET);
     if (!payload) {
       return c.json({ success: false, message: "Invalid token" }, 401);
     }
 
     // Get from KV
-    const data = await env.LC_RATING_DATA.get(`user:${payload.userId}`);
+    const data = await c.env.LC_RATING_DATA.get(`user:${payload.userId}`);
 
     if (!data) {
       return c.json({

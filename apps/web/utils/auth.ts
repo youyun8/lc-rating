@@ -65,13 +65,6 @@ export function clearAuthToken() {
   window.dispatchEvent(new Event("lc-rating-auth-update"));
 }
 
-/** Read the stored auth token and decode it. */
-export function getStoredAuthPayload(): JWTPayload | null {
-  if (typeof window === "undefined") return null;
-  const token = localStorage.getItem(LC_RATING_AUTH_TOKEN_KEY);
-  return decodeAuthToken(token);
-}
-
 /** Extract a human-readable error message from an unknown caught value. */
 export function getErrorMessage(error: unknown): string {
   if (error instanceof Error) return error.message;

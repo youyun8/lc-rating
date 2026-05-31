@@ -1,5 +1,5 @@
-export type ProblemNotes = Record<string, string>;
-export type ProblemNotesUpdatedAt = Record<string, number>;
+type ProblemNotes = Record<string, string>;
+type ProblemNotesUpdatedAt = Record<string, number>;
 
 export interface ProblemNotesStoreState {
   problemNotes: ProblemNotes;

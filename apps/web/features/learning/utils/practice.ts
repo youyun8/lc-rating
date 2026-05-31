@@ -1,6 +1,6 @@
 import type { StudyPlanData } from "@/types";
 
-export const RECOMMENDED_PRACTICE_COUNT = 5;
+const RECOMMENDED_PRACTICE_COUNT = 5;
 export const RECOMMENDED_MIN_RATING = 1700;
 
 function getProblemScore(problem: StudyPlanData.Item) {

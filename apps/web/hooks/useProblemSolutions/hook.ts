@@ -104,21 +104,3 @@ export const useProblemSolutionsStore = create<ProblemSolutionsStore>()(
     sharedOption,
   ),
 );
-
-export const useProblemSolutions = () => {
-  const problemSolutions = useProblemSolutionsStore(
-    (state) => state.problemSolutions,
-  );
-  const setProblemSolutions = useProblemSolutionsStore(
-    (state) => state.setProblemSolutions,
-  );
-  const delProblemSolutions = useProblemSolutionsStore(
-    (state) => state.delProblemSolutions,
-  );
-
-  return {
-    problemSolutions,
-    setProblemSolutions,
-    delProblemSolutions,
-  };
-};
