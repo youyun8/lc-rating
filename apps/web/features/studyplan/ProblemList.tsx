@@ -1,9 +1,9 @@
 import { ProgressSelector } from "@/components/common/ProgressSelector";
 import { ratingInfo } from "@/components/common/RatingCircle";
 import { LC_HOST_EN, LC_HOST_ZH } from "@/config/constants";
+import { useProgressMap } from "@/features/userData";
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { useOptions } from "@/hooks/useOptions";
-import { useProgressStore } from "@/hooks/useProgress";
 import { useProblems } from "@/hooks/useProblems";
 import type { ProblemMap } from "@/types";
 import { StudyPlanData } from "@/types";
@@ -161,7 +161,7 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
   const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
   const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
   const { problemMap } = useProblems();
-  const progress = useProgressStore((state) => state.progress);
+  const progress = useProgressMap();
   const { getOption } = useOptions();
   const pendingOption = getOption();
 

@@ -6,7 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OptionKey, useOptions } from "@/hooks/useOptions";
-import { useProgress } from "@/hooks/useProgress";
+import { useProblemProgress } from "@/features/userData";
 import { cn } from "@/lib/utils";
 import React, { useCallback, useMemo } from "react";
 
@@ -18,19 +18,19 @@ interface ProgressSelectorProps {
 const ProgressSelector = React.memo(
   ({ problemId, triggerClassName }: ProgressSelectorProps) => {
     const { optionKeys, getOption } = useOptions();
-    const { progress, setProgress, delProgress } = useProgress();
+    const { progress, setStatus, clearStatus } = useProblemProgress();
     const todoOption = getOption();
     const optValue = getOption(progress[problemId]);
 
     const handleSelect = useCallback(
       (key: OptionKey) => {
         if (key === todoOption.key) {
-          delProgress(problemId);
+          clearStatus(problemId);
         } else {
-          setProgress(problemId, key);
+          setStatus(problemId, key);
         }
       },
-      [problemId, todoOption, delProgress, setProgress],
+      [problemId, todoOption, clearStatus, setStatus],
     );
 
     const isOptionKey = useCallback(

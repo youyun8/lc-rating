@@ -2,7 +2,7 @@
 
 import { useStudyPlan } from "@/hooks/useStudyPlan";
 import { useTutorial } from "@/hooks/useTutorial";
-import { useProgressStore } from "@/hooks/useProgress";
+import { useProgressMap } from "@/features/userData";
 import { STUDYPLANS } from "@/config/constants";
 import {
   studyPlanIcons,
@@ -36,7 +36,7 @@ interface StudyPlanProps {
 function StudyPlan({ plan }: StudyPlanProps) {
   const { studyPlan } = useStudyPlan(plan);
   const { tutorial } = useTutorial(plan);
-  const progress = useProgressStore((state) => state.progress);
+  const progress = useProgressMap();
 
   const planTitle =
     STUDYPLANS[plan as keyof typeof STUDYPLANS] ?? studyPlan?.title ?? plan;

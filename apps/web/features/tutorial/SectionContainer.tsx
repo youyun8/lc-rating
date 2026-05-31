@@ -4,11 +4,11 @@ import { StudyPlanData, TutorialData } from "@/types";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import React, { useMemo } from "react";
-import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
+import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
 import {
   extractImageUrls,
   stripDuplicateImages,
-} from "@/components/StudyPlan/dedupe";
+} from "@/features/studyplan/dedupe";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { SectionPracticePanel } from "@/features/learning/components/SectionPracticePanel";
 import { countTutorialSections } from "@/features/learning/utils/sectionTree";

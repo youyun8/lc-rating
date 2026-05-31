@@ -17,7 +17,7 @@ export type SettingTabType = {
 export const settingTabs: SettingTabType[] = [
   {
     key: "SyncProgress",
-    title: "同步站點資料",
+    title: "帳號與同步",
     icon: <RefreshCw />,
     component: <SyncStorage />,
   },

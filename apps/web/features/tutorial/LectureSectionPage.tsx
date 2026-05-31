@@ -1,4 +1,4 @@
-import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
+import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
 import { Button } from "@/components/ui/button";
 import type { LectureSectionTutorial } from "@/data/lectureSectionTutorials";
 import { SectionPracticePanel } from "@/features/learning/components/SectionPracticePanel";
@@ -10,7 +10,7 @@ import {
   FolderTree,
 } from "lucide-react";
 import Link from "next/link";
-import { LectureSectionCards } from "@/components/Tutorial/LectureSectionCards";
+import { LectureSectionCards } from "@/features/tutorial/LectureSectionCards";
 
 interface LectureSectionPageProps {
   section: LectureSectionTutorial;

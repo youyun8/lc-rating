@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "LeetCode 題庫檢索，可依題號、難度評分、演算法標籤與做題進度篩選。",
 };
 
-const ProblemSet = lazy(() => import("@/components/ProblemSet"));
+const ProblemSet = lazy(() => import("@/features/problemset"));
 
 export default function Page() {
   return <ProblemSet />;

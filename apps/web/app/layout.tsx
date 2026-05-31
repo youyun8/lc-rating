@@ -1,7 +1,6 @@
 import { Navigator } from "@/components/common/Navigator";
 import { Provider } from "@/components/common/Provider";
 import { AuthTokenHandler } from "@/components/common/AuthTokenHandler";
-import { AutoSync } from "@/components/common/AutoSync";
 import { FloatingSyncButton } from "@/components/common/FloatingSyncButton";
 import { BASE_PATH } from "@/config/constants";
 import type { Metadata, Viewport } from "next";
@@ -47,7 +46,6 @@ export default function RootLayout({
       >
         <Provider>
           <AuthTokenHandler />
-          <AutoSync />
           <SidebarProvider defaultOpen={false}>
             <Navigator />
             <GlobalStudyPlanSidebar />

@@ -1,4 +1,4 @@
-import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
+import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
 import React from "react";
 
 interface TutorialMarkdownPanelProps {

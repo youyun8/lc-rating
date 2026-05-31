@@ -2,7 +2,7 @@ import { STUDYPLANS } from "@/config/constants";
 import type { Metadata } from "next";
 import { lazy } from "react";
 
-const StudyPlan = lazy(() => import("@/components/StudyPlan"));
+const StudyPlan = lazy(() => import("@/features/studyplan"));
 
 export async function generateStaticParams() {
   const categories = Object.keys(STUDYPLANS);

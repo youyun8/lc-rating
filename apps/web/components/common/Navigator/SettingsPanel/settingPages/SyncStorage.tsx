@@ -1,46 +1,35 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
 import {
-  API_BASE,
-  LC_RATING_AUTH_TOKEN_KEY,
-  LC_RATING_LAST_SYNC_AT_KEY,
-} from "@/config/constants";
-import { useSiteStorage } from "@/hooks/useSiteStorage";
-import { decodeAuthToken, getErrorMessage } from "@/utils/auth";
-import { pullCloudSiteStorage, pushCloudSiteStorage } from "@/utils/cloudSync";
+  signIn,
+  signOut,
+  useClearProgress,
+  useCloudSync,
+  useDataBackup,
+  useSyncState,
+  useTrackedCount,
+} from "@/features/userData";
+import { getErrorMessage } from "@/utils/auth";
 import {
-  Copy,
+  CheckCircle2,
+  CloudOff,
+  DatabaseBackup,
   Download,
-  HeartCrack,
+  HardDriveDownload,
+  HardDriveUpload,
+  Loader2,
   LogIn,
   LogOut,
-  ThumbsUp,
+  RefreshCw,
   Trash2,
   Upload,
-  X,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useRef, type ChangeEvent } from "react";
 import { toast } from "sonner";
 
-const BACKEND_SETUP_HINT = "雲端同步尚未設定，請參考 BACKEND_SETUP.md 進行設定";
-
-function countProblemSolutions(
-  problemSolutions: Record<string, unknown> | undefined,
-) {
-  if (!problemSolutions) return 0;
-  return Object.values(problemSolutions).reduce<number>(
-    (count, solutions) =>
-      count + (Array.isArray(solutions) ? solutions.length : 0),
-    0,
-  );
-}
-
-function formatTimestamp(timestamp: number | null) {
-  if (!timestamp) return "尚無紀錄";
-
+function formatLastSynced(timestamp: number | null) {
+  if (!timestamp) return "尚未同步";
   return new Intl.DateTimeFormat("zh-TW", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -48,515 +37,165 @@ function formatTimestamp(timestamp: number | null) {
 }
 
 export default function SyncStorage() {
-  const { siteStorage, setSiteStorage, mergeSiteStorage } = useSiteStorage();
-  const clearAllProgress = () =>
-    setSiteStorage({ progress: {}, progressUpdatedAt: {} });
-  const progressStr = JSON.stringify(siteStorage, null, 2);
+  const { status, account, lastSyncedAt } = useSyncState();
+  const { push, pull, isSyncing } = useCloudSync();
+  const { isBusy, downloadToDevice, uploadFromDevice } = useDataBackup();
+  const trackedCount = useTrackedCount();
+  const clearProgress = useClearProgress();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [authToken, setAuthToken] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isCloudSyncing, setIsCloudSyncing] = useState(false);
 
-  /** Import JSON in either full site-data format or progress-only format. */
-  const importData = (parsedData: Record<string, unknown>) => {
-    if (parsedData.progress && typeof parsedData.progress === "object") {
-      setSiteStorage(parsedData as Parameters<typeof setSiteStorage>[0]);
-    } else {
-      throw new Error("無法辨識的 JSON 格式，需包含 progress 欄位");
-    }
-  };
-
-  useEffect(() => {
-    setAuthToken(localStorage.getItem(LC_RATING_AUTH_TOKEN_KEY));
-
-    const handleStorage = (event: StorageEvent) => {
-      if (event.key === LC_RATING_AUTH_TOKEN_KEY) {
-        setAuthToken(event.newValue);
-      }
-    };
-
-    const handleAuthUpdate = () => {
-      setAuthToken(localStorage.getItem(LC_RATING_AUTH_TOKEN_KEY));
-    };
-
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener("lc-rating-auth-update", handleAuthUpdate);
-    return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener("lc-rating-auth-update", handleAuthUpdate);
-    };
-  }, []);
-
-  const form = useForm({
-    defaultValues: {
-      progressData: "",
-    },
-  });
-
-  const authPayload = useMemo(() => decodeAuthToken(authToken), [authToken]);
-
-  const cloudStatus = useMemo(() => {
-    if (!API_BASE) {
-      return {
-        label: "未設定後端",
-        description: BACKEND_SETUP_HINT,
-        className:
-          "border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-300",
-      };
-    }
-
-    if (authPayload?.username) {
-      return {
-        label: "已登入",
-        description: `目前帳號：${authPayload.username}`,
-        className:
-          "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-300",
-      };
-    }
-
-    if (authToken) {
-      return {
-        label: "已登入",
-        description: "驗證通過，可以進行雲端同步",
-        className:
-          "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-300",
-      };
-    }
-
-    return {
-      label: "未登入",
-      description: "登入 GitHub 後即可自動同步資料",
-      className:
-        "border-muted-foreground/20 bg-muted/60 text-muted-foreground dark:border-muted-foreground/40",
-    };
-  }, [authToken, authPayload]);
-
-  const handleCopy = async () => {
+  const handlePush = async () => {
     try {
-      await navigator.clipboard.writeText(progressStr);
-      toast(<span className="text-green-500">複製成功</span>, {
-        icon: <ThumbsUp className="text-green-500 size-full" />,
-      });
+      await push();
+      toast("已將本機資料上傳至雲端");
     } catch (error) {
-      const msg = getErrorMessage(error);
-      setErrorMessage(`複製失敗: ${msg}`);
-      toast(<span className="text-red-500">複製失敗: {msg}</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
+      toast(`上傳失敗：${getErrorMessage(error)}`);
     }
   };
 
-  const handleDownload = () => {
-    const blob = new Blob([progressStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `site-data-${new Date().toISOString().split("T")[0]}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    toast(<span className="text-green-500">下載成功</span>, {
-      icon: <ThumbsUp className="text-green-500 size-full" />,
-    });
+  const handlePull = async () => {
+    try {
+      await pull();
+      toast("已從雲端下載並合併資料");
+    } catch (error) {
+      toast(`下載失敗：${getErrorMessage(error)}`);
+    }
   };
 
-  const handleUpload = () => {
-    fileInputRef.current?.click();
+  const handleDownloadToDevice = () => {
+    downloadToDevice();
+    toast("已下載備份檔到這台裝置");
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelected = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    event.target.value = "";
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const content = e.target?.result as string;
-        const parsedData = JSON.parse(content);
-        importData(parsedData);
-        setErrorMessage(null);
-        toast(<span className="text-green-500">匯入成功</span>, {
-          icon: <ThumbsUp className="text-green-500 size-full" />,
-        });
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
-      } catch (error) {
-        console.error("Error parsing file:", error);
-        const msg = getErrorMessage(error);
-        setErrorMessage(`檔案格式錯誤: ${msg}`);
-        toast(<span className="text-red-500">檔案格式錯誤: {msg}</span>, {
-          icon: <HeartCrack className="text-red-500 size-full" />,
-        });
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const handleLogin = () => {
-    if (!API_BASE) {
-      toast(<span className="text-amber-500">{BACKEND_SETUP_HINT}</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
-      return;
-    }
-    window.location.href = `${API_BASE}/api/login/github`;
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem(LC_RATING_AUTH_TOKEN_KEY);
-    setAuthToken(null);
-    toast(<span className="text-green-500">已登出</span>, {
-      icon: <ThumbsUp className="text-green-500 size-full" />,
-    });
-  };
-
-  const setLastSyncAt = (timestamp: number) => {
-    localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(timestamp));
-    window.dispatchEvent(
-      new StorageEvent("storage", {
-        key: LC_RATING_LAST_SYNC_AT_KEY,
-        newValue: String(timestamp),
-      }),
-    );
-  };
-
-  const handlePushCloud = async () => {
-    if (!API_BASE) {
-      toast(<span className="text-amber-500">{BACKEND_SETUP_HINT}</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
-      return;
-    }
-
-    if (!authToken) {
-      toast(<span className="text-amber-500">請先登入 GitHub</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
-      return;
-    }
-
-    setIsCloudSyncing(true);
     try {
-      await pushCloudSiteStorage(authToken, siteStorage);
-      const cloudStorage = await pullCloudSiteStorage(authToken);
-      mergeSiteStorage(cloudStorage);
-      setLastSyncAt(Date.now());
-
-      const localSolutionCount = countProblemSolutions(
-        siteStorage.problemSolutions,
+      await uploadFromDevice(file);
+      toast(
+        status === "synced"
+          ? "已從檔案匯入並上傳到雲端"
+          : "已從檔案匯入到這台裝置",
       );
-      const cloudSolutionCount = countProblemSolutions(
-        cloudStorage.problemSolutions,
-      );
-
-      if (localSolutionCount > 0 && cloudSolutionCount === 0) {
-        toast(
-          <span className="text-amber-500">
-            已上傳，但雲端未回傳題解；請確認 Worker 已部署最新版本
-          </span>,
-          { icon: <HeartCrack className="text-amber-500 size-full" /> },
-        );
-        return;
-      }
-
-      toast(<span className="text-green-500">已上傳完整站點資料</span>, {
-        icon: <ThumbsUp className="text-green-500 size-full" />,
-      });
     } catch (error) {
-      const msg = getErrorMessage(error);
-      setErrorMessage(`雲端上傳失敗: ${msg}`);
-      toast(<span className="text-red-500">雲端上傳失敗: {msg}</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
-    } finally {
-      setIsCloudSyncing(false);
-    }
-  };
-
-  const handlePullCloud = async () => {
-    if (!API_BASE) {
-      toast(<span className="text-amber-500">{BACKEND_SETUP_HINT}</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
-      return;
-    }
-
-    if (!authToken) {
-      toast(<span className="text-amber-500">請先登入 GitHub</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
-      return;
-    }
-
-    setIsCloudSyncing(true);
-    try {
-      const cloudStorage = await pullCloudSiteStorage(authToken);
-      mergeSiteStorage(cloudStorage);
-      setLastSyncAt(Date.now());
-      toast(<span className="text-green-500">已從雲端拉取並合併</span>, {
-        icon: <ThumbsUp className="text-green-500 size-full" />,
-      });
-    } catch (error) {
-      const msg = getErrorMessage(error);
-      setErrorMessage(`雲端拉取失敗: ${msg}`);
-      toast(<span className="text-red-500">雲端拉取失敗: {msg}</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
-    } finally {
-      setIsCloudSyncing(false);
+      toast(`匯入失敗：${getErrorMessage(error)}`);
     }
   };
 
   const handleClearProgress = () => {
-    const count = Object.keys(siteStorage.progress ?? {}).length;
-    if (count === 0) {
-      toast(<span className="text-amber-500">目前沒有進度資料</span>, {
-        icon: <HeartCrack className="text-amber-500 size-full" />,
-      });
+    if (trackedCount === 0) {
+      toast("目前沒有任何進度可以清除");
       return;
     }
     if (
       !window.confirm(
-        `確定要清除所有進度嗎？共 ${count} 筆資料將被刪除，此操作無法復原。`,
+        `確定要清除所有進度嗎？共 ${trackedCount} 題的紀錄將被刪除，且無法復原。`,
       )
     ) {
       return;
     }
-    clearAllProgress();
-    toast(<span className="text-green-500">已清除所有進度</span>, {
-      icon: <ThumbsUp className="text-green-500 size-full" />,
-    });
+    clearProgress();
+    toast("已清除所有進度");
   };
-
-  const onSubmit = (data: { progressData: string }) => {
-    try {
-      const parsedData = JSON.parse(data.progressData);
-      importData(parsedData);
-      setErrorMessage(null);
-      form.reset({ progressData: "" });
-      toast(<span className="text-green-500">匯入成功</span>, {
-        icon: <ThumbsUp className="text-green-500 size-full" />,
-      });
-    } catch (error) {
-      console.error("Error setting progress:", error);
-      const msg = getErrorMessage(error);
-      setErrorMessage(`匯入失敗: ${msg}`);
-      toast(<span className="text-red-500">匯入失敗: {msg}</span>, {
-        icon: <HeartCrack className="text-red-500 size-full" />,
-      });
-    }
-  };
-
-  const isLoggedIn = Boolean(authToken);
-  const progressCount = Object.keys(siteStorage.progress ?? {}).length;
-  const solutionCount = countProblemSolutions(siteStorage.problemSolutions);
-  const solutionProblemCount = Object.keys(
-    siteStorage.problemSolutions ?? {},
-  ).length;
-  const timestampCount = Object.keys(
-    siteStorage.progressUpdatedAt ?? {},
-  ).length;
-  const latestLocalUpdate = useMemo(() => {
-    const timestamps = [
-      ...Object.values(siteStorage.progressUpdatedAt ?? {}),
-      ...Object.values(siteStorage.problemSolutionsUpdatedAt ?? {}),
-    ];
-    return timestamps.length ? Math.max(...timestamps) : null;
-  }, [siteStorage.progressUpdatedAt, siteStorage.problemSolutionsUpdatedAt]);
 
   return (
     <div className="space-y-4">
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".json"
-        onChange={handleFileChange}
-        className="hidden"
-      />
-
-      {errorMessage && (
-        <div className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-300">
-          <HeartCrack className="mt-0.5 h-4 w-4 shrink-0" />
-          <span className="flex-1 break-all">{errorMessage}</span>
-          <button
-            onClick={() => setErrorMessage(null)}
-            className="shrink-0 rounded p-0.5 hover:bg-red-100 dark:hover:bg-red-900"
-            type="button"
-            aria-label="關閉錯誤訊息"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-      )}
-
-      <section className="grid gap-3 sm:grid-cols-4">
-        <div className="rounded-lg border bg-card p-3">
-          <p className="text-xs text-muted-foreground">雲端狀態</p>
-          <Badge variant="outline" className={`mt-2 ${cloudStatus.className}`}>
-            {cloudStatus.label}
-          </Badge>
-          <p className="mt-2 text-xs text-muted-foreground">
-            {cloudStatus.description}
-          </p>
-        </div>
-
-        <div className="rounded-lg border bg-card p-3">
-          <p className="text-xs text-muted-foreground">進度資料</p>
-          <p className="mt-2 text-xl font-semibold">{progressCount}</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            含 {timestampCount} 筆時間戳記
-          </p>
-        </div>
-
-        <div className="rounded-lg border bg-card p-3">
-          <p className="text-xs text-muted-foreground">題解資料</p>
-          <p className="mt-2 text-xl font-semibold">{solutionCount}</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            來自 {solutionProblemCount} 題
-          </p>
-        </div>
-
-        <div className="rounded-lg border bg-card p-3">
-          <p className="text-xs text-muted-foreground">最後本機更新</p>
-          <p className="mt-2 text-sm font-medium">
-            {formatTimestamp(latestLocalUpdate)}
-          </p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            根據本機時間戳記計算
-          </p>
-        </div>
-      </section>
+      <p className="text-sm text-muted-foreground">
+        登入後，你可以手動將刷題進度、筆記與題解上傳到雲端，或從雲端下載到目前的裝置。
+      </p>
 
       <section className="space-y-3 rounded-lg border bg-card p-4">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="text-sm font-semibold">雲端同步</h3>
-          {isLoggedIn ? (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleLogout}
-              type="button"
-            >
-              <LogOut className="h-3.5 w-3.5" />
-              登出
-            </Button>
-          ) : (
-            <Button
-              variant="brand"
-              size="sm"
-              onClick={handleLogin}
-              type="button"
-            >
+        {status === "synced" ? (
+          <>
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
+                  <h3 className="text-sm font-semibold">已登入</h3>
+                </div>
+                {account && (
+                  <p className="mt-1 truncate text-sm text-muted-foreground">
+                    {account}
+                  </p>
+                )}
+              </div>
+              <Button variant="ghost" size="sm" onClick={signOut} type="button">
+                <LogOut className="h-3.5 w-3.5" />
+                登出
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              上次同步：{formatLastSynced(lastSyncedAt)}
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                variant="success"
+                size="sm"
+                className="w-full justify-center"
+                onClick={handlePush}
+                disabled={isSyncing}
+                type="button"
+              >
+                {isSyncing ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Upload className="h-4 w-4" />
+                )}
+                上傳到雲端
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full justify-center"
+                onClick={handlePull}
+                disabled={isSyncing}
+                type="button"
+              >
+                {isSyncing ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="h-4 w-4" />
+                )}
+                從雲端下載
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              上傳會以本機資料覆蓋雲端，下載會將雲端資料合併回本機。
+            </p>
+          </>
+        ) : status === "signed-out" ? (
+          <>
+            <div className="flex items-center gap-2">
+              <RefreshCw className="h-4 w-4 shrink-0 text-muted-foreground" />
+              <h3 className="text-sm font-semibold">尚未登入</h3>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              登入 GitHub 後即可在不同裝置間自動同步進度。
+            </p>
+            <Button variant="brand" size="sm" onClick={signIn} type="button">
               <LogIn className="h-3.5 w-3.5" />
-              GitHub 登入
+              使用 GitHub 登入
             </Button>
-          )}
-        </div>
-
-        <p className="text-xs text-muted-foreground">
-          登入後，進度、偏好設定與題解都會以完整站點資料同步。
-        </p>
-        <div className="grid gap-2 sm:grid-cols-2">
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={handlePushCloud}
-            disabled={!isLoggedIn || isCloudSyncing}
-            type="button"
-          >
-            <Upload className="h-4 w-4" />
-            上傳到雲端
-          </Button>
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={handlePullCloud}
-            disabled={!isLoggedIn || isCloudSyncing}
-            type="button"
-          >
-            <Download className="h-4 w-4" />
-            從雲端拉取
-          </Button>
-        </div>
+          </>
+        ) : (
+          <div className="flex items-start gap-2">
+            <CloudOff className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
+            <div>
+              <h3 className="text-sm font-semibold">雲端同步未啟用</h3>
+              <p className="mt-1 text-xs text-muted-foreground">
+                目前無法使用雲端同步，你的進度仍會安全地保存在這台裝置上。
+              </p>
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="space-y-3 rounded-lg border bg-card p-4">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="text-sm font-semibold">本機 JSON 資料</h3>
-          <Button variant="ghost" size="sm" onClick={handleCopy} type="button">
-            <Copy className="h-3.5 w-3.5" />
-            複製
-          </Button>
-        </div>
-
-        <Textarea
-          readOnly
-          rows={7}
-          value={progressStr}
-          className="resize-none field-sizing-fixed bg-muted/40 font-mono text-[11px] leading-relaxed"
-        />
-
-        <div className="grid gap-2 sm:grid-cols-2">
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={handleDownload}
-            type="button"
-          >
-            <Download className="h-4 w-4" />
-            匯出 JSON
-          </Button>
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={handleUpload}
-            type="button"
-          >
-            <Upload className="h-4 w-4" />
-            匯入 JSON 檔案
-          </Button>
-        </div>
-      </section>
-
-      <section className="space-y-3 rounded-lg border bg-card p-4">
-        <h3 className="text-sm font-semibold">貼上 JSON 匯入</h3>
+        <h3 className="text-sm font-semibold">我的進度</h3>
         <p className="text-xs text-muted-foreground">
-          支援完整站點資料（含 progress）或同步匯出的 JSON。
-        </p>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            <FormField
-              control={form.control}
-              name="progressData"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      rows={5}
-                      placeholder='{"progress": {...}, "progressUpdatedAt": {...}}'
-                      className="resize-none field-sizing-fixed font-mono text-xs"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full" size="sm">
-              <Upload className="h-4 w-4" />
-              匯入貼上內容
-            </Button>
-          </form>
-        </Form>
-      </section>
-
-      <section className="space-y-3 rounded-lg border border-red-200 bg-red-50/60 p-4 dark:border-red-900 dark:bg-red-950/20">
-        <h3 className="text-sm font-semibold text-red-600 dark:text-red-400">
-          危險操作
-        </h3>
-        <p className="text-xs text-red-600/80 dark:text-red-300/80">
-          清除後無法復原，建議先匯出 JSON 進行備份。
+          目前已記錄 {trackedCount} 題的刷題進度。
         </p>
         <Button
           variant="outline"
@@ -566,8 +205,51 @@ export default function SyncStorage() {
           type="button"
         >
           <Trash2 className="h-4 w-4" />
-          清除所有進度 ({progressCount})
+          清除所有進度
         </Button>
+      </section>
+
+      <section className="space-y-3 rounded-lg border border-dashed bg-muted/10 p-4">
+        <div className="flex items-center gap-2">
+          <DatabaseBackup className="h-4 w-4 shrink-0 text-muted-foreground" />
+          <h3 className="text-sm font-semibold">進階：本機備份</h3>
+        </div>
+        <p className="text-xs text-muted-foreground">
+          將完整資料下載成檔案保存到這台裝置，或從備份檔還原。還原時若已登入，會一併上傳到雲端。
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleDownloadToDevice}
+            disabled={isBusy}
+            type="button"
+          >
+            <HardDriveDownload className="h-4 w-4" />
+            下載到本機
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isBusy}
+            type="button"
+          >
+            {isBusy ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <HardDriveUpload className="h-4 w-4" />
+            )}
+            從檔案還原
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={handleFileSelected}
+          />
+        </div>
       </section>
     </div>
   );

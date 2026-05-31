@@ -27,7 +27,7 @@ import {
 import {
   LectureSectionCards,
   makeLectureSectionCardItem,
-} from "@/components/Tutorial/LectureSectionCards";
+} from "@/features/tutorial/LectureSectionCards";
 
 interface TutorialProps {
   plan: string;

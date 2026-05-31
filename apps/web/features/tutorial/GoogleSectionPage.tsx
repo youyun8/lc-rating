@@ -1,6 +1,6 @@
 "use client";
 
-import { StudyPlanMarkdownContent } from "@/components/StudyPlan/MarkdownContent";
+import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
 import { Button } from "@/components/ui/button";
 import {
   getGoogleInterviewSectionTutorial,

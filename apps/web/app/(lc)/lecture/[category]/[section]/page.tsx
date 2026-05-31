@@ -1,4 +1,4 @@
-import { LectureSectionPage } from "@/components/Tutorial/LectureSectionPage";
+import { LectureSectionPage } from "@/features/tutorial/LectureSectionPage";
 import {
   getLectureSectionStaticParams,
   getLectureSectionTutorial,

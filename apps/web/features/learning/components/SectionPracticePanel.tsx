@@ -3,9 +3,9 @@
 import { useMemo, useState } from "react";
 import { CheckCircle2, ListChecks, Sparkles } from "lucide-react";
 
-import { ProblemList } from "@/components/StudyPlan/ProblemList";
+import { ProblemList } from "@/features/studyplan/ProblemList";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useProgressStore } from "@/hooks/useProgress";
+import { useProgressMap } from "@/features/userData";
 import { cn } from "@/lib/utils";
 import type { StudyPlanData } from "@/types";
 import {
@@ -68,7 +68,7 @@ export function SectionPracticePanel({
 }: SectionPracticePanelProps) {
   const [tab, setTab] = useState<PracticeTab>("recommended");
   const [difficulty, setDifficulty] = useState<DifficultyFilter>("all");
-  const progress = useProgressStore((state) => state.progress);
+  const progress = useProgressMap();
 
   const allProblems = useMemo(() => uniqueProblems(problems), [problems]);
   const recommended = useMemo(

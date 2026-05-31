@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "歷屆 LeetCode 週賽與雙週賽題目，依 Q1–Q4 顯示每場四題的難度分級。",
 };
 
-const Contest = lazy(() => import("@/components/Contest"));
+const Contest = lazy(() => import("@/features/contest"));
 
 export default function Page() {
   return <Contest />;

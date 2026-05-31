@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const FullLectureLinks = lazy(
-  () => import("@/components/Tutorial/FullLectureLinks"),
+  () => import("@/features/tutorial/FullLectureLinks"),
 );
 
 export default function Page() {

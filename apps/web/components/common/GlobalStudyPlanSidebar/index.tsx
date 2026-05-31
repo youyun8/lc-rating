@@ -14,8 +14,6 @@ import {
   SidebarGroupLabel,
   SidebarGroupContent,
   SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -25,104 +23,10 @@ import { cn } from "@/lib/utils";
 import { BookOpen, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
-import { StudyPlanData, TutorialData } from "@/types";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
-
-type PageType = "lecture" | "studyplan";
-type AnySection = StudyPlanData.Section | TutorialData.Section;
-
-function getSectionHref(
-  section: AnySection,
-  pageType: PageType,
-  currentPlanKey: string | null,
-) {
-  if (pageType === "lecture" && currentPlanKey) {
-    return `/lecture/${currentPlanKey}/${sectionAnchor(section.title)}`;
-  }
-
-  return `#${sectionAnchor(section.title)}`;
-}
-
-interface ChapterLinkProps {
-  href: string;
-  isLectureLink: boolean;
-  className?: string;
-  children: ReactNode;
-}
-
-/** Lecture pages cross route boundaries (Next Link); studyplan uses in-page anchors. */
-function ChapterLink({
-  href,
-  isLectureLink,
-  className,
-  children,
-}: ChapterLinkProps) {
-  if (isLectureLink) {
-    return (
-      <Link href={href} className={className}>
-        {children}
-      </Link>
-    );
-  }
-  return (
-    <a href={href} className={className}>
-      {children}
-    </a>
-  );
-}
-
-interface SubTopicItemProps {
-  section: AnySection;
-  pageType: PageType;
-  currentPlanKey: string | null;
-  currentSlug: string | null;
-}
-
-function SubTopicItem({
-  section,
-  pageType,
-  currentPlanKey,
-  currentSlug,
-}: SubTopicItemProps) {
-  const children = section.children ?? [];
-  const hasChildren = children.length > 0;
-  const href = getSectionHref(section, pageType, currentPlanKey);
-  const isLectureLink = pageType === "lecture" && Boolean(currentPlanKey);
-  const isActive =
-    isLectureLink && currentSlug === sectionAnchor(section.title);
-
-  return (
-    <>
-      <SidebarMenuSubItem>
-        <SidebarMenuSubButton asChild isActive={isActive}>
-          <ChapterLink
-            href={href}
-            isLectureLink={isLectureLink}
-            className={cn("truncate", isActive && "font-semibold")}
-          >
-            {section.title}
-          </ChapterLink>
-        </SidebarMenuSubButton>
-      </SidebarMenuSubItem>
-      {hasChildren && (
-        <SidebarMenuSub>
-          {children.map((child) => (
-            <SubTopicItem
-              key={child.id}
-              section={child}
-              pageType={pageType}
-              currentPlanKey={currentPlanKey}
-              currentSlug={currentSlug}
-            />
-          ))}
-        </SidebarMenuSub>
-      )}
-    </>
-  );
-}
+import { ChapterLink, getSectionHref, SubTopicItem } from "./sidebarNav";
 
 /** Renders a chapter sidebar on study-plan and lecture detail pages. */
 export function GlobalStudyPlanSidebar() {
@@ -158,8 +62,8 @@ export function GlobalStudyPlanSidebar() {
 
   const currentSlug =
     pageType === "lecture"
-      ? (pathname.replace(`/lecture/${currentPlanKey}`, "").replace(/^\//, "") ||
-        null)
+      ? pathname.replace(`/lecture/${currentPlanKey}`, "").replace(/^\//, "") ||
+        null
       : null;
 
   const isLectureLink = pageType === "lecture" && Boolean(currentPlanKey);
