@@ -1,1 +1,773 @@
-{"id":1,"title":"網格圖（DFS/BFS/綜合應用）","src":"https://leetcode.cn/circle/discuss/YiXPXW/","last_update":"2026-04-18T11:53:23.324686+00:00","children":[{"id":2,"title":"1. 網格圖 DFS","isLeaf":false,"problems":[{"id":"LCS 03","title":"LCS 03. 主題空間","slug":"YesdPw","src":"https://leetcode.cn/problems/YesdPw/","solution":null,"score":null,"isPremium":false},{"id":"LCP 63","title":"LCP 63. 彈珠遊戲","slug":"EXvqDp","src":"https://leetcode.cn/problems/EXvqDp/","solution":null,"score":null,"isPremium":false},{"id":"130","title":"被圍繞的區域","slug":"surrounded-regions","src":"https://leetcode.cn/problems/surrounded-regions/","solution":null,"score":null,"isPremium":false},{"id":"200","title":"島嶼數量","slug":"number-of-islands","src":"https://leetcode.cn/problems/number-of-islands/","solution":null,"score":null,"isPremium":false},{"id":"305","title":"島嶼數量 II","slug":"number-of-islands-ii","src":"https://leetcode.cn/problems/number-of-islands-ii/","solution":null,"score":null,"isPremium":true},{"id":"417","title":"太平洋大西洋水流問題","slug":"pacific-atlantic-water-flow","src":"https://leetcode.cn/problems/pacific-atlantic-water-flow/","solution":null,"score":null,"isPremium":false},{"id":"463","title":"島嶼的周長","slug":"island-perimeter","src":"https://leetcode.cn/problems/island-perimeter/","solution":null,"score":null,"isPremium":false},{"id":"489","title":"掃地機器人","slug":"robot-room-cleaner","src":"https://leetcode.cn/problems/robot-room-cleaner/","solution":null,"score":null,"isPremium":true},{"id":"529","title":"掃雷遊戲","slug":"minesweeper","src":"https://leetcode.cn/problems/minesweeper/","solution":null,"score":null,"isPremium":false},{"id":"695","title":"島嶼的最大面積","slug":"max-area-of-island","src":"https://leetcode.cn/problems/max-area-of-island/","solution":null,"score":null,"isPremium":false},{"id":"733","title":"影象渲染","slug":"flood-fill","src":"https://leetcode.cn/problems/flood-fill/","solution":null,"score":null,"isPremium":false},{"id":"827","title":"最大人工島","slug":"making-a-large-island","src":"https://leetcode.cn/problems/making-a-large-island/","solution":null,"score":null,"isPremium":false},{"id":"892","title":"三維形體的表面積","slug":"surface-area-of-3d-shapes","src":"https://leetcode.cn/problems/surface-area-of-3d-shapes/","solution":null,"score":null,"isPremium":false},{"id":"1020","title":"飛地的數量","slug":"number-of-enclaves","src":"https://leetcode.cn/problems/number-of-enclaves/","solution":null,"score":null,"isPremium":false},{"id":"1034","title":"邊界著色","slug":"coloring-a-border","src":"https://leetcode.cn/problems/coloring-a-border/","solution":null,"score":null,"isPremium":false},{"id":"1254","title":"統計封閉島嶼的數目","slug":"number-of-closed-islands","src":"https://leetcode.cn/problems/number-of-closed-islands/","solution":null,"score":null,"isPremium":false},{"id":"1391","title":"檢查網格中是否存在有效路徑","slug":"check-if-there-is-a-valid-path-in-a-grid","src":"https://leetcode.cn/problems/check-if-there-is-a-valid-path-in-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"1559","title":"二維網格圖中探測環","slug":"detect-cycles-in-2d-grid","src":"https://leetcode.cn/problems/detect-cycles-in-2d-grid/","solution":null,"score":null,"isPremium":false},{"id":"面試題 16.19","title":"面試題 16.19. 水域大小","slug":"pond-sizes-lcci","src":"https://leetcode.cn/problems/pond-sizes-lcci/","solution":null,"score":null,"isPremium":false},{"id":"1905","title":"統計子島嶼","slug":"count-sub-islands","src":"https://leetcode.cn/problems/count-sub-islands/","solution":null,"score":null,"isPremium":false},{"id":"2061","title":"掃地機器人清掃過的空間個數","slug":"number-of-spaces-cleaning-robot-cleaned","src":"https://leetcode.cn/problems/number-of-spaces-cleaning-robot-cleaned/","solution":null,"score":null,"isPremium":true},{"id":"2658","title":"網格圖中魚的最大數目","slug":"maximum-number-of-fish-in-a-grid","src":"https://leetcode.cn/problems/maximum-number-of-fish-in-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"2684","title":"矩陣中移動的最大次數","slug":"maximum-number-of-moves-in-a-grid","src":"https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"2852","title":"所有單元格的遠離程度之和","slug":"sum-of-remoteness-of-all-cells","src":"https://leetcode.cn/problems/sum-of-remoteness-of-all-cells/","solution":null,"score":null,"isPremium":true},{"id":"3619","title":"總價值可以被 K 整除的島嶼數目","slug":"count-islands-with-total-value-divisible-by-k","src":"https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k/","solution":null,"score":null,"isPremium":false},{"id":10141,"title":"LCS 03. 主題空間","slug":"/YesdPw/","src":"https://leetcode.cn/problems/YesdPw/","solution":null,"score":null,"isPremium":false},{"id":10153,"title":"LCP 63. 彈珠遊戲","slug":"/EXvqDp/","src":"https://leetcode.cn/problems/EXvqDp/","solution":null,"score":null,"isPremium":false},{"id":10275,"title":"面試題 16.19. 水域大小","slug":"/pond-sizes-lcci/","src":"https://leetcode.cn/problems/pond-sizes-lcci/","solution":null,"score":null,"isPremium":false}],"children":[{"id":3,"title":"1.1 思維擴展","isLeaf":true,"problems":[{"id":"1970","title":"你能穿過矩陣的最後一天","slug":"last-day-where-you-can-still-cross","src":"https://leetcode.cn/problems/last-day-where-you-can-still-cross/","solution":null,"score":null,"isPremium":false}],"children":[]}],"summary":"適用於需要計算連通塊個數、大小的題目。<br>部分題目做法不止一種，也可以用 BFS 或並查集解決。<br><br>二叉樹 DFS 與網格圖 DFS 的區別：<br><table><thead><tr><th></th><th><strong>二叉樹</strong></th><th><strong>網格圖</strong></th></tr></thead><tbody><tr><td><strong>遞迴入口</strong></td><td>根節點</td><td>網格圖的某個格子</td></tr><tr><td><strong>遞迴方向</strong></td><td>左兒子和右兒子</td><td>一般為左右上下的相鄰格子</td></tr><tr><td><strong>遞迴邊界</strong></td><td>空節點（或者葉節點）</td><td>出界、遇到障礙或者已訪問</td></tr></tbody></table>"},{"id":4,"title":"2. 網格圖 BFS","isLeaf":true,"problems":[{"id":"286","title":"牆與門","slug":"walls-and-gates","src":"https://leetcode.cn/problems/walls-and-gates/","solution":null,"score":null,"isPremium":true},{"id":"317","title":"離建築物最近的距離","slug":"shortest-distance-from-all-buildings","src":"https://leetcode.cn/problems/shortest-distance-from-all-buildings/","solution":null,"score":null,"isPremium":true},{"id":"490","title":"迷宮","slug":"the-maze","src":"https://leetcode.cn/problems/the-maze/","solution":null,"score":null,"isPremium":true},{"id":"499","title":"迷宮 III","slug":"the-maze-iii","src":"https://leetcode.cn/problems/the-maze-iii/","solution":null,"score":null,"isPremium":true},{"id":"505","title":"迷宮 II","slug":"the-maze-ii","src":"https://leetcode.cn/problems/the-maze-ii/","solution":null,"score":null,"isPremium":true},{"id":"542","title":"01 矩陣","slug":"01-matrix","src":"https://leetcode.cn/problems/01-matrix/","solution":null,"score":null,"isPremium":false},{"id":"675","title":"為高爾夫比賽砍樹","slug":"cut-off-trees-for-golf-event","src":"https://leetcode.cn/problems/cut-off-trees-for-golf-event/","solution":null,"score":null,"isPremium":false},{"id":"749","title":"隔離病毒","slug":"contain-virus","src":"https://leetcode.cn/problems/contain-virus/","solution":null,"score":null,"isPremium":false},{"id":"909","title":"蛇梯棋","slug":"snakes-and-ladders","src":"https://leetcode.cn/problems/snakes-and-ladders/","solution":null,"score":null,"isPremium":false},{"id":"934","title":"最短的橋","slug":"shortest-bridge","src":"https://leetcode.cn/problems/shortest-bridge/","solution":null,"score":null,"isPremium":false},{"id":"994","title":"腐爛的橘子","slug":"rotting-oranges","src":"https://leetcode.cn/problems/rotting-oranges/","solution":null,"score":null,"isPremium":false},{"id":"1091","title":"二進位制矩陣中的最短路徑","slug":"shortest-path-in-binary-matrix","src":"https://leetcode.cn/problems/shortest-path-in-binary-matrix/","solution":null,"score":null,"isPremium":false},{"id":"1162","title":"地圖分析","slug":"as-far-from-land-as-possible","src":"https://leetcode.cn/problems/as-far-from-land-as-possible/","solution":null,"score":null,"isPremium":false},{"id":"1210","title":"穿過迷宮的最少移動次數","slug":"minimum-moves-to-reach-target-with-rotations","src":"https://leetcode.cn/problems/minimum-moves-to-reach-target-with-rotations/","solution":null,"score":null,"isPremium":false},{"id":"1293","title":"網格中的最短路徑","slug":"shortest-path-in-a-grid-with-obstacles-elimination","src":"https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination/","solution":null,"score":null,"isPremium":false},{"id":"1730","title":"獲取食物的最短路徑","slug":"shortest-path-to-get-food","src":"https://leetcode.cn/problems/shortest-path-to-get-food/","solution":null,"score":null,"isPremium":true},{"id":"1765","title":"地圖中的最高點","slug":"map-of-highest-peak","src":"https://leetcode.cn/problems/map-of-highest-peak/","solution":null,"score":null,"isPremium":false},{"id":"1926","title":"迷宮中離入口最近的出口","slug":"nearest-exit-from-entrance-in-maze","src":"https://leetcode.cn/problems/nearest-exit-from-entrance-in-maze/","solution":null,"score":null,"isPremium":false},{"id":"2146","title":"價格範圍內最高排名的 K 樣物品","slug":"k-highest-ranked-items-within-a-price-range","src":"https://leetcode.cn/problems/k-highest-ranked-items-within-a-price-range/","solution":null,"score":null,"isPremium":false},{"id":"2812","title":"找出最安全路徑","slug":"find-the-safest-path-in-a-grid","src":"https://leetcode.cn/problems/find-the-safest-path-in-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"2814","title":"避免淹死併到達目的地的最短時間","slug":"minimum-time-takes-to-reach-destination-without-drowning","src":"https://leetcode.cn/problems/minimum-time-takes-to-reach-destination-without-drowning/","solution":null,"score":null,"isPremium":true}],"children":[],"summary":"適用於需要計算最短距離（最短路）的題目。<br>DFS 是不撞南牆不回頭；BFS 是先訪問近的，再訪問遠的。"},{"id":5,"title":"3. 0-1 BFS","isLeaf":true,"problems":[{"id":56,"title":"LCP 56. 信物傳送","slug":"/6UEx57/","src":"https://leetcode.cn/problems/6UEx57/","solution":null,"score":null,"isPremium":false},{"id":"LCP 56","title":"LCP 56. 信物傳送","slug":"6UEx57","src":"https://leetcode.cn/problems/6UEx57/","solution":null,"score":null,"isPremium":false},{"id":"1368","title":"使網格圖至少有一條有效路徑的最小代價","slug":"minimum-cost-to-make-at-least-one-valid-path-in-a-grid","src":"https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"1824","title":"最少側跳次數","slug":"minimum-sideway-jumps","src":"https://leetcode.cn/problems/minimum-sideway-jumps/","solution":null,"score":null,"isPremium":false},{"id":"2290","title":"到達角落需要移除障礙物的最小數目","slug":"minimum-obstacle-removal-to-reach-corner","src":"https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner/","solution":null,"score":null,"isPremium":false},{"id":"3286","title":"穿越網格圖的安全路徑","slug":"find-a-safe-walk-through-a-grid","src":"https://leetcode.cn/problems/find-a-safe-walk-through-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"3552","title":"網格傳送門旅遊","slug":"grid-teleportation-traversal","src":"https://leetcode.cn/problems/grid-teleportation-traversal/","solution":null,"score":null,"isPremium":false}],"children":[],"summary":"邊權只有 0 和 1 的題目，也可以用 BFS 做。"},{"id":6,"title":"4. 綜合應用","isLeaf":true,"problems":[{"id":13,"title":"LCP 13. 尋寶","slug":"/xun-bao/","src":"https://leetcode.cn/problems/xun-bao/","solution":null,"score":null,"isPremium":false},{"id":"LCP 13","title":"LCP 13. 尋寶","slug":"xun-bao","src":"https://leetcode.cn/problems/xun-bao/","solution":null,"score":null,"isPremium":false},{"id":31,"title":"LCP 31. 變換的迷宮","slug":"/Db3wC1/","src":"https://leetcode.cn/problems/Db3wC1/","solution":null,"score":null,"isPremium":false},{"id":"LCP 31","title":"LCP 31. 變換的迷宮","slug":"Db3wC1","src":"https://leetcode.cn/problems/Db3wC1/","solution":null,"score":null,"isPremium":false},{"id":45,"title":"LCP 45. 腳踏車炫技賽場","slug":"/kplEvH/","src":"https://leetcode.cn/problems/kplEvH/","solution":null,"score":null,"isPremium":false},{"id":"LCP 45","title":"LCP 45. 腳踏車炫技賽場","slug":"kplEvH","src":"https://leetcode.cn/problems/kplEvH/","solution":null,"score":null,"isPremium":false},{"id":75,"title":"LCP 75. 傳送卷軸","slug":"/rdmXM7/","src":"https://leetcode.cn/problems/rdmXM7/","solution":null,"score":null,"isPremium":false},{"id":"LCP 75","title":"LCP 75. 傳送卷軸","slug":"rdmXM7","src":"https://leetcode.cn/problems/rdmXM7/","solution":null,"score":null,"isPremium":false},{"id":"329","title":"矩陣中的最長遞增路徑","slug":"longest-increasing-path-in-a-matrix","src":"https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/","solution":null,"score":null,"isPremium":false},{"id":"694","title":"不同島嶼的數量","slug":"number-of-distinct-islands","src":"https://leetcode.cn/problems/number-of-distinct-islands/","solution":null,"score":null,"isPremium":true},{"id":"711","title":"不同島嶼的數量 II","slug":"number-of-distinct-islands-ii","src":"https://leetcode.cn/problems/number-of-distinct-islands-ii/","solution":null,"score":null,"isPremium":true},{"id":"778","title":"水位上升的泳池中游泳","slug":"swim-in-rising-water","src":"https://leetcode.cn/problems/swim-in-rising-water/","solution":null,"score":null,"isPremium":false},{"id":"864","title":"獲取所有鑰匙的最短路徑","slug":"shortest-path-to-get-all-keys","src":"https://leetcode.cn/problems/shortest-path-to-get-all-keys/","solution":null,"score":null,"isPremium":false},{"id":"1036","title":"逃離大迷宮","slug":"escape-a-large-maze","src":"https://leetcode.cn/problems/escape-a-large-maze/","solution":null,"score":null,"isPremium":false},{"id":"1102","title":"得分最高的路徑","slug":"path-with-maximum-minimum-value","src":"https://leetcode.cn/problems/path-with-maximum-minimum-value/","solution":null,"score":null,"isPremium":true},{"id":"1263","title":"推箱子","slug":"minimum-moves-to-move-a-box-to-their-target-location","src":"https://leetcode.cn/problems/minimum-moves-to-move-a-box-to-their-target-location/","solution":null,"score":null,"isPremium":false},{"id":"1631","title":"最小體力消耗路徑","slug":"path-with-minimum-effort","src":"https://leetcode.cn/problems/path-with-minimum-effort/","solution":null,"score":null,"isPremium":false},{"id":"1778","title":"未知網格中的最短路徑","slug":"shortest-path-in-a-hidden-grid","src":"https://leetcode.cn/problems/shortest-path-in-a-hidden-grid/","solution":null,"score":null,"isPremium":true},{"id":"2258","title":"逃離火災","slug":"escape-the-spreading-fire","src":"https://leetcode.cn/problems/escape-the-spreading-fire/","solution":null,"score":null,"isPremium":false},{"id":"2556","title":"二進位制矩陣中翻轉最多一次使路徑不連通","slug":"disconnect-path-in-a-binary-matrix-by-at-most-one-flip","src":"https://leetcode.cn/problems/disconnect-path-in-a-binary-matrix-by-at-most-one-flip/","solution":null,"score":null,"isPremium":false},{"id":"2577","title":"在網格圖中訪問一個格子的最少時間","slug":"minimum-time-to-visit-a-cell-in-a-grid","src":"https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"2617","title":"網格圖中最少訪問的格子數","slug":"minimum-number-of-visited-cells-in-a-grid","src":"https://leetcode.cn/problems/minimum-number-of-visited-cells-in-a-grid/","solution":null,"score":null,"isPremium":false},{"id":"3568","title":"清理教室的最少移動","slug":"minimum-moves-to-clean-the-classroom","src":"https://leetcode.cn/problems/minimum-moves-to-clean-the-classroom/","solution":null,"score":null,"isPremium":false}],"children":[]}],"summary":"<img src=\"https://pic.leetcode.cn/1724834645-OYGBxU-grid004.png\" alt=\"網格圖題單 DFS BFS 網格圖題目 圖論 靈茶山艾府\" style=\"width: 100%;\"><br>> 小小貪吃蛇，移動花樣多。<br>> 平移加旋轉，為把迷宮破。<br>> 程式碼復程式碼，bug 何其多。<br>> 六步化一步，AC 定我奪。<br>> —— [1210. 穿過迷宮的最少移動次數](https://leetcode.cn/problems/minimum-moves-to-reach-target-with-rotations/)<br>"}
+{
+  "id": 1,
+  "title": "網格圖（DFS/BFS/綜合應用）",
+  "src": "https://leetcode.cn/circle/discuss/YiXPXW/",
+  "last_update": "2026-04-18T11:53:23.324686+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 網格圖 DFS",
+      "isLeaf": false,
+      "problems": [
+        {
+          "id": "LCS 03",
+          "title": "LCS 03. 主題空間",
+          "slug": "YesdPw",
+          "src": "https://leetcode.cn/problems/YesdPw/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "LCP 63",
+          "title": "LCP 63. 彈珠遊戲",
+          "slug": "EXvqDp",
+          "src": "https://leetcode.cn/problems/EXvqDp/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "130",
+          "title": "被圍繞的區域",
+          "slug": "surrounded-regions",
+          "src": "https://leetcode.cn/problems/surrounded-regions/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "200",
+          "title": "島嶼數量",
+          "slug": "number-of-islands",
+          "src": "https://leetcode.cn/problems/number-of-islands/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "305",
+          "title": "島嶼數量 II",
+          "slug": "number-of-islands-ii",
+          "src": "https://leetcode.cn/problems/number-of-islands-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "417",
+          "title": "太平洋大西洋水流問題",
+          "slug": "pacific-atlantic-water-flow",
+          "src": "https://leetcode.cn/problems/pacific-atlantic-water-flow/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "463",
+          "title": "島嶼的周長",
+          "slug": "island-perimeter",
+          "src": "https://leetcode.cn/problems/island-perimeter/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "489",
+          "title": "掃地機器人",
+          "slug": "robot-room-cleaner",
+          "src": "https://leetcode.cn/problems/robot-room-cleaner/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "529",
+          "title": "掃雷遊戲",
+          "slug": "minesweeper",
+          "src": "https://leetcode.cn/problems/minesweeper/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "695",
+          "title": "島嶼的最大面積",
+          "slug": "max-area-of-island",
+          "src": "https://leetcode.cn/problems/max-area-of-island/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "733",
+          "title": "影象渲染",
+          "slug": "flood-fill",
+          "src": "https://leetcode.cn/problems/flood-fill/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "827",
+          "title": "最大人工島",
+          "slug": "making-a-large-island",
+          "src": "https://leetcode.cn/problems/making-a-large-island/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "892",
+          "title": "三維形體的表面積",
+          "slug": "surface-area-of-3d-shapes",
+          "src": "https://leetcode.cn/problems/surface-area-of-3d-shapes/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1020",
+          "title": "飛地的數量",
+          "slug": "number-of-enclaves",
+          "src": "https://leetcode.cn/problems/number-of-enclaves/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1034",
+          "title": "邊界著色",
+          "slug": "coloring-a-border",
+          "src": "https://leetcode.cn/problems/coloring-a-border/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1254",
+          "title": "統計封閉島嶼的數目",
+          "slug": "number-of-closed-islands",
+          "src": "https://leetcode.cn/problems/number-of-closed-islands/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1391",
+          "title": "檢查網格中是否存在有效路徑",
+          "slug": "check-if-there-is-a-valid-path-in-a-grid",
+          "src": "https://leetcode.cn/problems/check-if-there-is-a-valid-path-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1559",
+          "title": "二維網格圖中探測環",
+          "slug": "detect-cycles-in-2d-grid",
+          "src": "https://leetcode.cn/problems/detect-cycles-in-2d-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "面試題 16.19",
+          "title": "面試題 16.19. 水域大小",
+          "slug": "pond-sizes-lcci",
+          "src": "https://leetcode.cn/problems/pond-sizes-lcci/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1905",
+          "title": "統計子島嶼",
+          "slug": "count-sub-islands",
+          "src": "https://leetcode.cn/problems/count-sub-islands/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2061",
+          "title": "掃地機器人清掃過的空間個數",
+          "slug": "number-of-spaces-cleaning-robot-cleaned",
+          "src": "https://leetcode.cn/problems/number-of-spaces-cleaning-robot-cleaned/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "2658",
+          "title": "網格圖中魚的最大數目",
+          "slug": "maximum-number-of-fish-in-a-grid",
+          "src": "https://leetcode.cn/problems/maximum-number-of-fish-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2684",
+          "title": "矩陣中移動的最大次數",
+          "slug": "maximum-number-of-moves-in-a-grid",
+          "src": "https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2852",
+          "title": "所有單元格的遠離程度之和",
+          "slug": "sum-of-remoteness-of-all-cells",
+          "src": "https://leetcode.cn/problems/sum-of-remoteness-of-all-cells/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "3619",
+          "title": "總價值可以被 K 整除的島嶼數目",
+          "slug": "count-islands-with-total-value-divisible-by-k",
+          "src": "https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": 10141,
+          "title": "LCS 03. 主題空間",
+          "slug": "/YesdPw/",
+          "src": "https://leetcode.cn/problems/YesdPw/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": 10153,
+          "title": "LCP 63. 彈珠遊戲",
+          "slug": "/EXvqDp/",
+          "src": "https://leetcode.cn/problems/EXvqDp/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": 10275,
+          "title": "面試題 16.19. 水域大小",
+          "slug": "/pond-sizes-lcci/",
+          "src": "https://leetcode.cn/problems/pond-sizes-lcci/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        }
+      ],
+      "children": [
+        {
+          "id": 3,
+          "title": "1.1 思維擴展",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "1970",
+              "title": "你能穿過矩陣的最後一天",
+              "slug": "last-day-where-you-can-still-cross",
+              "src": "https://leetcode.cn/problems/last-day-where-you-can-still-cross/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        }
+      ],
+      "summary": "適用於需要計算連通塊個數、大小的題目。<br>部分題目做法不止一種，也可以用 BFS 或並查集解決。<br><br>二叉樹 DFS 與網格圖 DFS 的區別：<br><table><thead><tr><th></th><th><strong>二叉樹</strong></th><th><strong>網格圖</strong></th></tr></thead><tbody><tr><td><strong>遞迴入口</strong></td><td>根節點</td><td>網格圖的某個格子</td></tr><tr><td><strong>遞迴方向</strong></td><td>左兒子和右兒子</td><td>一般為左右上下的相鄰格子</td></tr><tr><td><strong>遞迴邊界</strong></td><td>空節點（或者葉節點）</td><td>出界、遇到障礙或者已訪問</td></tr></tbody></table>"
+    },
+    {
+      "id": 4,
+      "title": "2. 網格圖 BFS",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "286",
+          "title": "牆與門",
+          "slug": "walls-and-gates",
+          "src": "https://leetcode.cn/problems/walls-and-gates/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "317",
+          "title": "離建築物最近的距離",
+          "slug": "shortest-distance-from-all-buildings",
+          "src": "https://leetcode.cn/problems/shortest-distance-from-all-buildings/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "490",
+          "title": "迷宮",
+          "slug": "the-maze",
+          "src": "https://leetcode.cn/problems/the-maze/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "499",
+          "title": "迷宮 III",
+          "slug": "the-maze-iii",
+          "src": "https://leetcode.cn/problems/the-maze-iii/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "505",
+          "title": "迷宮 II",
+          "slug": "the-maze-ii",
+          "src": "https://leetcode.cn/problems/the-maze-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "542",
+          "title": "01 矩陣",
+          "slug": "01-matrix",
+          "src": "https://leetcode.cn/problems/01-matrix/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "675",
+          "title": "為高爾夫比賽砍樹",
+          "slug": "cut-off-trees-for-golf-event",
+          "src": "https://leetcode.cn/problems/cut-off-trees-for-golf-event/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "749",
+          "title": "隔離病毒",
+          "slug": "contain-virus",
+          "src": "https://leetcode.cn/problems/contain-virus/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "909",
+          "title": "蛇梯棋",
+          "slug": "snakes-and-ladders",
+          "src": "https://leetcode.cn/problems/snakes-and-ladders/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "934",
+          "title": "最短的橋",
+          "slug": "shortest-bridge",
+          "src": "https://leetcode.cn/problems/shortest-bridge/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "994",
+          "title": "腐爛的橘子",
+          "slug": "rotting-oranges",
+          "src": "https://leetcode.cn/problems/rotting-oranges/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1091",
+          "title": "二進位制矩陣中的最短路徑",
+          "slug": "shortest-path-in-binary-matrix",
+          "src": "https://leetcode.cn/problems/shortest-path-in-binary-matrix/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1162",
+          "title": "地圖分析",
+          "slug": "as-far-from-land-as-possible",
+          "src": "https://leetcode.cn/problems/as-far-from-land-as-possible/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1210",
+          "title": "穿過迷宮的最少移動次數",
+          "slug": "minimum-moves-to-reach-target-with-rotations",
+          "src": "https://leetcode.cn/problems/minimum-moves-to-reach-target-with-rotations/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1293",
+          "title": "網格中的最短路徑",
+          "slug": "shortest-path-in-a-grid-with-obstacles-elimination",
+          "src": "https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1730",
+          "title": "獲取食物的最短路徑",
+          "slug": "shortest-path-to-get-food",
+          "src": "https://leetcode.cn/problems/shortest-path-to-get-food/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "1765",
+          "title": "地圖中的最高點",
+          "slug": "map-of-highest-peak",
+          "src": "https://leetcode.cn/problems/map-of-highest-peak/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1926",
+          "title": "迷宮中離入口最近的出口",
+          "slug": "nearest-exit-from-entrance-in-maze",
+          "src": "https://leetcode.cn/problems/nearest-exit-from-entrance-in-maze/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2146",
+          "title": "價格範圍內最高排名的 K 樣物品",
+          "slug": "k-highest-ranked-items-within-a-price-range",
+          "src": "https://leetcode.cn/problems/k-highest-ranked-items-within-a-price-range/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2812",
+          "title": "找出最安全路徑",
+          "slug": "find-the-safest-path-in-a-grid",
+          "src": "https://leetcode.cn/problems/find-the-safest-path-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2814",
+          "title": "避免淹死併到達目的地的最短時間",
+          "slug": "minimum-time-takes-to-reach-destination-without-drowning",
+          "src": "https://leetcode.cn/problems/minimum-time-takes-to-reach-destination-without-drowning/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        }
+      ],
+      "children": [],
+      "summary": "適用於需要計算最短距離（最短路）的題目。<br>DFS 是不撞南牆不回頭；BFS 是先訪問近的，再訪問遠的。"
+    },
+    {
+      "id": 5,
+      "title": "3. 0-1 BFS",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": 56,
+          "title": "LCP 56. 信物傳送",
+          "slug": "/6UEx57/",
+          "src": "https://leetcode.cn/problems/6UEx57/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "LCP 56",
+          "title": "LCP 56. 信物傳送",
+          "slug": "6UEx57",
+          "src": "https://leetcode.cn/problems/6UEx57/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1368",
+          "title": "使網格圖至少有一條有效路徑的最小代價",
+          "slug": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+          "src": "https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1824",
+          "title": "最少側跳次數",
+          "slug": "minimum-sideway-jumps",
+          "src": "https://leetcode.cn/problems/minimum-sideway-jumps/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2290",
+          "title": "到達角落需要移除障礙物的最小數目",
+          "slug": "minimum-obstacle-removal-to-reach-corner",
+          "src": "https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3286",
+          "title": "穿越網格圖的安全路徑",
+          "slug": "find-a-safe-walk-through-a-grid",
+          "src": "https://leetcode.cn/problems/find-a-safe-walk-through-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3552",
+          "title": "網格傳送門旅遊",
+          "slug": "grid-teleportation-traversal",
+          "src": "https://leetcode.cn/problems/grid-teleportation-traversal/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        }
+      ],
+      "children": [],
+      "summary": "邊權只有 0 和 1 的題目，也可以用 BFS 做。"
+    },
+    {
+      "id": 6,
+      "title": "4. 綜合應用",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": 13,
+          "title": "LCP 13. 尋寶",
+          "slug": "/xun-bao/",
+          "src": "https://leetcode.cn/problems/xun-bao/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "LCP 13",
+          "title": "LCP 13. 尋寶",
+          "slug": "xun-bao",
+          "src": "https://leetcode.cn/problems/xun-bao/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": 31,
+          "title": "LCP 31. 變換的迷宮",
+          "slug": "/Db3wC1/",
+          "src": "https://leetcode.cn/problems/Db3wC1/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "LCP 31",
+          "title": "LCP 31. 變換的迷宮",
+          "slug": "Db3wC1",
+          "src": "https://leetcode.cn/problems/Db3wC1/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": 45,
+          "title": "LCP 45. 腳踏車炫技賽場",
+          "slug": "/kplEvH/",
+          "src": "https://leetcode.cn/problems/kplEvH/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "LCP 45",
+          "title": "LCP 45. 腳踏車炫技賽場",
+          "slug": "kplEvH",
+          "src": "https://leetcode.cn/problems/kplEvH/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": 75,
+          "title": "LCP 75. 傳送卷軸",
+          "slug": "/rdmXM7/",
+          "src": "https://leetcode.cn/problems/rdmXM7/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "LCP 75",
+          "title": "LCP 75. 傳送卷軸",
+          "slug": "rdmXM7",
+          "src": "https://leetcode.cn/problems/rdmXM7/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "329",
+          "title": "矩陣中的最長遞增路徑",
+          "slug": "longest-increasing-path-in-a-matrix",
+          "src": "https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "694",
+          "title": "不同島嶼的數量",
+          "slug": "number-of-distinct-islands",
+          "src": "https://leetcode.cn/problems/number-of-distinct-islands/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "711",
+          "title": "不同島嶼的數量 II",
+          "slug": "number-of-distinct-islands-ii",
+          "src": "https://leetcode.cn/problems/number-of-distinct-islands-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "778",
+          "title": "水位上升的泳池中游泳",
+          "slug": "swim-in-rising-water",
+          "src": "https://leetcode.cn/problems/swim-in-rising-water/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "864",
+          "title": "獲取所有鑰匙的最短路徑",
+          "slug": "shortest-path-to-get-all-keys",
+          "src": "https://leetcode.cn/problems/shortest-path-to-get-all-keys/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1036",
+          "title": "逃離大迷宮",
+          "slug": "escape-a-large-maze",
+          "src": "https://leetcode.cn/problems/escape-a-large-maze/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1102",
+          "title": "得分最高的路徑",
+          "slug": "path-with-maximum-minimum-value",
+          "src": "https://leetcode.cn/problems/path-with-maximum-minimum-value/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "1263",
+          "title": "推箱子",
+          "slug": "minimum-moves-to-move-a-box-to-their-target-location",
+          "src": "https://leetcode.cn/problems/minimum-moves-to-move-a-box-to-their-target-location/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1631",
+          "title": "最小體力消耗路徑",
+          "slug": "path-with-minimum-effort",
+          "src": "https://leetcode.cn/problems/path-with-minimum-effort/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1778",
+          "title": "未知網格中的最短路徑",
+          "slug": "shortest-path-in-a-hidden-grid",
+          "src": "https://leetcode.cn/problems/shortest-path-in-a-hidden-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "2258",
+          "title": "逃離火災",
+          "slug": "escape-the-spreading-fire",
+          "src": "https://leetcode.cn/problems/escape-the-spreading-fire/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2556",
+          "title": "二進位制矩陣中翻轉最多一次使路徑不連通",
+          "slug": "disconnect-path-in-a-binary-matrix-by-at-most-one-flip",
+          "src": "https://leetcode.cn/problems/disconnect-path-in-a-binary-matrix-by-at-most-one-flip/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2577",
+          "title": "在網格圖中訪問一個格子的最少時間",
+          "slug": "minimum-time-to-visit-a-cell-in-a-grid",
+          "src": "https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2617",
+          "title": "網格圖中最少訪問的格子數",
+          "slug": "minimum-number-of-visited-cells-in-a-grid",
+          "src": "https://leetcode.cn/problems/minimum-number-of-visited-cells-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3568",
+          "title": "清理教室的最少移動",
+          "slug": "minimum-moves-to-clean-the-classroom",
+          "src": "https://leetcode.cn/problems/minimum-moves-to-clean-the-classroom/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        }
+      ],
+      "children": []
+    }
+  ],
+  "summary": "<img src=\"https://pic.leetcode.cn/1724834645-OYGBxU-grid004.png\" alt=\"網格圖題單 DFS BFS 網格圖題目 圖論 靈茶山艾府\" style=\"width: 100%;\"><br>> 小小貪吃蛇，移動花樣多。<br>> 平移加旋轉，為把迷宮破。<br>> 程式碼復程式碼，bug 何其多。<br>> 六步化一步，AC 定我奪。<br>> —— [1210. 穿過迷宮的最少移動次數](https://leetcode.cn/problems/minimum-moves-to-reach-target-with-rotations/)<br>"
+}
