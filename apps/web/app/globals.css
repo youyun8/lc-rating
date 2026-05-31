@@ -151,6 +151,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Use the generic monospace keyword so code honors the browser's
+     configured fixed-width font, overriding Tailwind preflight's concrete
+     mono stack (which resolves to an installed font first). */
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: monospace;
+  }
 }
 
 @utility brand-gradient {
