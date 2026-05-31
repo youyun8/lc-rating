@@ -88,6 +88,7 @@ export function CodeEditor({
       style={{ maxHeight }}
     >
       <div
+        lang="en"
         className="relative"
         style={{ minHeight, minWidth: "100%", width: "max-content" }}
       >

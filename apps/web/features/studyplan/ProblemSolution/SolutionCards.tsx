@@ -69,6 +69,7 @@ function HighlightedCode({ code, language, className }: HighlightedCodeProps) {
   );
   return (
     <pre
+      lang="en"
       className={cn(
         "max-h-[26rem] overflow-auto font-mono text-sm leading-6 [font-variant-ligatures:none]",
         className,

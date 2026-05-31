@@ -182,6 +182,14 @@ export function StudyPlanMarkdownContent({
       '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
     if (!innerHtml.current) return;
 
+    // Chrome resolves the generic `monospace` via a per-script font preference.
+    // The document is lang="zh", so code would otherwise fall back to the
+    // Chinese fixed-width font (e.g. NSimSun). Tagging code as English makes
+    // Chrome use the Latin fixed-width font configured in the browser.
+    innerHtml.current.querySelectorAll("pre, code").forEach((el) => {
+      el.setAttribute("lang", "en");
+    });
+
     const imageClassName =
       variant === "plan" || variant === "lecture"
         ? "mx-auto my-5 w-full max-w-4xl rounded-[1.5rem] border border-border/60 bg-background/80 shadow-sm"
