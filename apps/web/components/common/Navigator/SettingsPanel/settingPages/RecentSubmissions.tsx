@@ -1,9 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { LC_HOST_ZH } from "@/config/constants";
 import { useRecentProgress } from "@/features/userData";
+import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { ExternalLink } from "lucide-react";
 
-const RECENT_LIMIT = 30;
+const RECENT_LIMIT = 10;
 
 const relativeTimeFormatter = new Intl.RelativeTimeFormat("zh-TW", {
   numeric: "auto",
@@ -44,6 +45,8 @@ function formatUpdatedAt(timestamp: number) {
 
 export default function RecentSubmissions() {
   const recent = useRecentProgress(RECENT_LIMIT);
+  const tagLanguage = useGlobalSettingsStore((state) => state.tagLanguage);
+  const isZh = tagLanguage === "zh";
 
   return (
     <div className="space-y-4">
@@ -65,11 +68,11 @@ export default function RecentSubmissions() {
             return (
               <li
                 key={item.id}
-                className="flex items-center justify-between gap-3 rounded-lg border bg-card px-3 py-2"
+                className="flex items-start justify-between gap-3 rounded-lg border bg-card px-3 py-2"
               >
-                <div className="flex min-w-0 items-center gap-2">
+                <div className="flex min-w-0 items-start gap-2">
                   <span
-                    className="h-2.5 w-2.5 shrink-0 rounded-full"
+                    className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"
                     style={{ backgroundColor: item.statusColor }}
                   />
                   <div className="min-w-0">
@@ -88,7 +91,20 @@ export default function RecentSubmissions() {
                         {item.title}
                       </span>
                     )}
-                    <p className="text-xs text-muted-foreground">
+                    {item.tags.length > 0 && (
+                      <div className="mt-1 flex flex-wrap gap-1">
+                        {item.tags.map((tag) => (
+                          <Badge
+                            key={tag.id}
+                            variant="outline"
+                            className="px-1.5 py-0 text-[11px] font-normal text-muted-foreground"
+                          >
+                            {isZh ? tag.zh : tag.en}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                    <p className="mt-1 text-xs text-muted-foreground">
                       {formatUpdatedAt(item.updatedAt)}
                     </p>
                   </div>

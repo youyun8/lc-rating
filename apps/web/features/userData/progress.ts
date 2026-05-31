@@ -7,6 +7,9 @@ import {
   useProgressStore,
   type Progress,
 } from "@/hooks/useProgress";
+import { useTags } from "@/hooks/useTags";
+import { isTruthy } from "@/types/common";
+import type { Tag } from "@/types";
 import { useMemo } from "react";
 
 export interface ProgressStatusBreakdown {
@@ -45,6 +48,8 @@ export interface RecentProgressItem {
   statusLabel: string;
   /** Status colour used for the badge dot. */
   statusColor: string;
+  /** Resolved topic tags (e.g. DFS, Binary Search), when known. */
+  tags: Tag[];
   /** Epoch millis of the last status change (0 when unknown). */
   updatedAt: number;
 }
@@ -101,6 +106,7 @@ export function useProgressStats(): ProgressStats {
 export function useRecentProgress(limit = 20): RecentProgressItem[] {
   const { getOption } = useOptions();
   const { problemMap } = useProblems();
+  const { tagMap } = useTags();
   const progress = useProgressStore((state) => state.progress);
   const progressUpdatedAt = useProgressStore(
     (state) => state.progressUpdatedAt,
@@ -110,6 +116,10 @@ export function useRecentProgress(limit = 20): RecentProgressItem[] {
     const items = Object.entries(progress).map(([id, status]) => {
       const option = getOption(status);
       const problem = problemMap?.[id];
+      const tags =
+        problem && tagMap
+          ? problem.tagIds.map((tagId) => tagMap[tagId]).filter(isTruthy)
+          : [];
       return {
         id,
         title: problem?.title ?? id,
@@ -118,6 +128,7 @@ export function useRecentProgress(limit = 20): RecentProgressItem[] {
         status,
         statusLabel: option.label || option.key,
         statusColor: option.color,
+        tags,
         updatedAt: progressUpdatedAt?.[id] ?? 0,
       } satisfies RecentProgressItem;
     });
@@ -125,7 +136,7 @@ export function useRecentProgress(limit = 20): RecentProgressItem[] {
     items.sort((a, b) => b.updatedAt - a.updatedAt);
 
     return limit > 0 ? items.slice(0, limit) : items;
-  }, [getOption, problemMap, progress, progressUpdatedAt, limit]);
+  }, [getOption, problemMap, tagMap, progress, progressUpdatedAt, limit]);
 }
 
 /**
