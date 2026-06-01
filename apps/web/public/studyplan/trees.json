@@ -373,6 +373,15 @@
               "isPremium": false
             },
             {
+              "id": 287,
+              "title": "尋找重複數",
+              "slug": "/find-the-duplicate-number/",
+              "src": "https://leetcode.cn/problems/find-the-duplicate-number/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 457,
               "title": "457. 環形陣列是否存在迴圈",
               "slug": "/circular-array-loop/",
@@ -382,19 +391,19 @@
               "isPremium": false
             },
             {
+              "id": 2674,
+              "title": "2674. 拆分迴圈連結串列",
+              "slug": "/split-a-circular-linked-list/",
+              "src": "https://leetcode.cn/problems/split-a-circular-linked-list/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
               "id": 876,
               "title": "876. 連結串列的中間結點",
               "slug": "/middle-of-the-linked-list/",
               "src": "https://leetcode.cn/problems/middle-of-the-linked-list/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2095,
-              "title": "2095. 刪除連結串列的中間節點",
-              "slug": "/delete-the-middle-node-of-a-linked-list/",
-              "src": "https://leetcode.cn/problems/delete-the-middle-node-of-a-linked-list/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -409,13 +418,31 @@
               "isPremium": false
             },
             {
-              "id": 2674,
-              "title": "2674. 拆分迴圈連結串列",
-              "slug": "/split-a-circular-linked-list/",
-              "src": "https://leetcode.cn/problems/split-a-circular-linked-list/",
+              "id": 2095,
+              "title": "2095. 刪除連結串列的中間節點",
+              "slug": "/delete-the-middle-node-of-a-linked-list/",
+              "src": "https://leetcode.cn/problems/delete-the-middle-node-of-a-linked-list/",
               "solution": null,
               "score": null,
-              "isPremium": true
+              "isPremium": false
+            },
+            {
+              "id": 3790,
+              "title": "最小全 1 倍數",
+              "slug": "/smallest-all-ones-multiple/",
+              "src": "https://leetcode.cn/problems/smallest-all-ones-multiple/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1015,
+              "title": "可被 K 整除的最小整數",
+              "slug": "/smallest-integer-divisible-by-k/",
+              "src": "https://leetcode.cn/problems/smallest-integer-divisible-by-k/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
             }
           ],
           "children": [],
@@ -2016,10 +2043,118 @@
               "isPremium": true
             },
             {
+              "id": 1602,
+              "title": "1602. 找到二叉樹中最近的右側節點",
+              "slug": "/find-nearest-right-node-in-binary-tree/",
+              "src": "https://leetcode.cn/problems/find-nearest-right-node-in-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": 1660,
+              "title": "1660. 糾正二叉樹",
+              "slug": "/correct-a-binary-tree/",
+              "src": "https://leetcode.cn/problems/correct-a-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": 3157,
+              "title": "3157. 找到具有最小和的樹的層數",
+              "slug": "/find-the-level-of-tree-with-minimum-sum/",
+              "src": "https://leetcode.cn/problems/find-the-level-of-tree-with-minimum-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": 3831,
+              "title": "二叉搜尋樹某一層的中位數",
+              "slug": "/median-of-a-binary-search-tree-level/",
+              "src": "https://leetcode.cn/problems/median-of-a-binary-search-tree-level/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": 1161,
+              "title": "1161. 最大層內元素和",
+              "slug": "/maximum-level-sum-of-a-binary-tree/",
+              "src": "https://leetcode.cn/problems/maximum-level-sum-of-a-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 993,
+              "title": "993. 二叉樹的堂兄弟節點",
+              "slug": "/cousins-in-binary-tree/",
+              "src": "https://leetcode.cn/problems/cousins-in-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2583,
+              "title": "2583. 二叉樹中的第 K 大層和",
+              "slug": "/kth-largest-sum-in-a-binary-tree/",
+              "src": "https://leetcode.cn/problems/kth-largest-sum-in-a-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1302,
+              "title": "1302. 層數最深葉子節點的和",
+              "slug": "/deepest-leaves-sum/",
+              "src": "https://leetcode.cn/problems/deepest-leaves-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2415,
+              "title": "2415. 反轉二叉樹的奇數層",
+              "slug": "/reverse-odd-levels-of-binary-tree/",
+              "src": "https://leetcode.cn/problems/reverse-odd-levels-of-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1609,
+              "title": "1609. 奇偶樹",
+              "slug": "/even-odd-tree/",
+              "src": "https://leetcode.cn/problems/even-odd-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2471,
+              "title": "2471. 逐層排序二叉樹所需的最少運算元目",
+              "slug": "/minimum-number-of-operations-to-sort-a-binary-tree-by-level/",
+              "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 863,
               "title": "863. 二叉樹中所有距離為 K 的結點",
               "slug": "/all-nodes-distance-k-in-binary-tree/",
               "src": "https://leetcode.cn/problems/all-nodes-distance-k-in-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2641,
+              "title": "2641. 二叉樹的堂兄弟節點 II",
+              "slug": "/cousins-in-binary-tree-ii/",
+              "src": "https://leetcode.cn/problems/cousins-in-binary-tree-ii/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2041,105 +2176,6 @@
               "solution": null,
               "score": null,
               "isPremium": false
-            },
-            {
-              "id": 993,
-              "title": "993. 二叉樹的堂兄弟節點",
-              "slug": "/cousins-in-binary-tree/",
-              "src": "https://leetcode.cn/problems/cousins-in-binary-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1161,
-              "title": "1161. 最大層內元素和",
-              "slug": "/maximum-level-sum-of-a-binary-tree/",
-              "src": "https://leetcode.cn/problems/maximum-level-sum-of-a-binary-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1302,
-              "title": "1302. 層數最深葉子節點的和",
-              "slug": "/deepest-leaves-sum/",
-              "src": "https://leetcode.cn/problems/deepest-leaves-sum/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1602,
-              "title": "1602. 找到二叉樹中最近的右側節點",
-              "slug": "/find-nearest-right-node-in-binary-tree/",
-              "src": "https://leetcode.cn/problems/find-nearest-right-node-in-binary-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": 1609,
-              "title": "1609. 奇偶樹",
-              "slug": "/even-odd-tree/",
-              "src": "https://leetcode.cn/problems/even-odd-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1660,
-              "title": "1660. 糾正二叉樹",
-              "slug": "/correct-a-binary-tree/",
-              "src": "https://leetcode.cn/problems/correct-a-binary-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": 2415,
-              "title": "2415. 反轉二叉樹的奇數層",
-              "slug": "/reverse-odd-levels-of-binary-tree/",
-              "src": "https://leetcode.cn/problems/reverse-odd-levels-of-binary-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2471,
-              "title": "2471. 逐層排序二叉樹所需的最少運算元目",
-              "slug": "/minimum-number-of-operations-to-sort-a-binary-tree-by-level/",
-              "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2583,
-              "title": "2583. 二叉樹中的第 K 大層和",
-              "slug": "/kth-largest-sum-in-a-binary-tree/",
-              "src": "https://leetcode.cn/problems/kth-largest-sum-in-a-binary-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2641,
-              "title": "2641. 二叉樹的堂兄弟節點 II",
-              "slug": "/cousins-in-binary-tree-ii/",
-              "src": "https://leetcode.cn/problems/cousins-in-binary-tree-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 3157,
-              "title": "3157. 找到具有最小和的樹的層數",
-              "slug": "/find-the-level-of-tree-with-minimum-sum/",
-              "src": "https://leetcode.cn/problems/find-the-level-of-tree-with-minimum-sum/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
             }
           ],
           "children": [],
@@ -2596,6 +2632,15 @@
           "isLeaf": false,
           "problems": [
             {
+              "id": 3535,
+              "title": "3535. 單位轉換 II",
+              "slug": "/unit-conversion-ii/",
+              "src": "https://leetcode.cn/problems/unit-conversion-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
               "id": 1376,
               "title": "1376. 通知所有員工所需的時間",
               "slug": "/time-needed-to-inform-all-employees/",
@@ -2605,10 +2650,10 @@
               "isPremium": false
             },
             {
-              "id": 1377,
-              "title": "1377. T 秒後青蛙的位置",
-              "slug": "/frog-position-after-t-seconds/",
-              "src": "https://leetcode.cn/problems/frog-position-after-t-seconds/",
+              "id": 3528,
+              "title": "3528. 單位轉換 I",
+              "slug": "/unit-conversion-i/",
+              "src": "https://leetcode.cn/problems/unit-conversion-i/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2623,28 +2668,19 @@
               "isPremium": false
             },
             {
-              "id": 1766,
-              "title": "1766. 互質樹",
-              "slug": "/tree-of-coprimes/",
-              "src": "https://leetcode.cn/problems/tree-of-coprimes/",
+              "id": 3820,
+              "title": "樹上的勾股距離節點",
+              "slug": "/pythagorean-distance-nodes-in-a-tree/",
+              "src": "https://leetcode.cn/problems/pythagorean-distance-nodes-in-a-tree/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": 2467,
-              "title": "2467. 樹上最大得分和路徑",
-              "slug": "/most-profitable-path-in-a-tree/",
-              "src": "https://leetcode.cn/problems/most-profitable-path-in-a-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2791,
-              "title": "2791. 樹中可以形成迴文的路徑數",
-              "slug": "/count-paths-that-can-form-a-palindrome-in-a-tree/",
-              "src": "https://leetcode.cn/problems/count-paths-that-can-form-a-palindrome-in-a-tree/",
+              "id": 1377,
+              "title": "1377. T 秒後青蛙的位置",
+              "slug": "/frog-position-after-t-seconds/",
+              "src": "https://leetcode.cn/problems/frog-position-after-t-seconds/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2668,6 +2704,15 @@
               "isPremium": false
             },
             {
+              "id": 2467,
+              "title": "2467. 樹上最大得分和路徑",
+              "slug": "/most-profitable-path-in-a-tree/",
+              "src": "https://leetcode.cn/problems/most-profitable-path-in-a-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 3373,
               "title": "3373. 連線兩棵樹後最大目標節點數目 II",
               "slug": "/maximize-the-number-of-target-nodes-after-connecting-trees-ii/",
@@ -2677,22 +2722,22 @@
               "isPremium": false
             },
             {
-              "id": 3528,
-              "title": "3528. 單位轉換 I",
-              "slug": "/unit-conversion-i/",
-              "src": "https://leetcode.cn/problems/unit-conversion-i/",
+              "id": 1766,
+              "title": "1766. 互質樹",
+              "slug": "/tree-of-coprimes/",
+              "src": "https://leetcode.cn/problems/tree-of-coprimes/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": 3535,
-              "title": "3535. 單位轉換 II",
-              "slug": "/unit-conversion-ii/",
-              "src": "https://leetcode.cn/problems/unit-conversion-ii/",
+              "id": 2791,
+              "title": "2791. 樹中可以形成迴文的路徑數",
+              "slug": "/count-paths-that-can-form-a-palindrome-in-a-tree/",
+              "src": "https://leetcode.cn/problems/count-paths-that-can-form-a-palindrome-in-a-tree/",
               "solution": null,
               "score": null,
-              "isPremium": true
+              "isPremium": false
             }
           ],
           "children": []
@@ -2707,60 +2752,6 @@
               "title": "690. 員工的重要性",
               "slug": "/employee-importance/",
               "src": "https://leetcode.cn/problems/employee-importance/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1273,
-              "title": "1273. 刪除樹節點",
-              "slug": "/delete-tree-nodes/",
-              "src": "https://leetcode.cn/problems/delete-tree-nodes/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": 1519,
-              "title": "1519. 子樹中標籤相同的節點數",
-              "slug": "/number-of-nodes-in-the-sub-tree-with-the-same-label/",
-              "src": "https://leetcode.cn/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2440,
-              "title": "2440. 建立價值相同的連通塊",
-              "slug": "/create-components-with-same-value/",
-              "src": "https://leetcode.cn/problems/create-components-with-same-value/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2477,
-              "title": "2477. 到達首都的最少油耗",
-              "slug": "/minimum-fuel-cost-to-report-to-the-capital/",
-              "src": "https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2872,
-              "title": "2872. 可以被 K 整除連通塊的最大數目",
-              "slug": "/maximum-number-of-k-divisible-components/",
-              "src": "https://leetcode.cn/problems/maximum-number-of-k-divisible-components/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2973,
-              "title": "2973. 樹中每個節點放置的金幣數目",
-              "slug": "/find-number-of-coins-to-place-in-tree-nodes/",
-              "src": "https://leetcode.cn/problems/find-number-of-coins-to-place-in-tree-nodes/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2784,6 +2775,24 @@
               "isPremium": false
             },
             {
+              "id": 1273,
+              "title": "1273. 刪除樹節點",
+              "slug": "/delete-tree-nodes/",
+              "src": "https://leetcode.cn/problems/delete-tree-nodes/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": 1519,
+              "title": "1519. 子樹中標籤相同的節點數",
+              "slug": "/number-of-nodes-in-the-sub-tree-with-the-same-label/",
+              "src": "https://leetcode.cn/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 3558,
               "title": "3558. 給邊賦權值的方案數 I",
               "slug": "/number-of-ways-to-assign-edge-weights-i/",
@@ -2797,6 +2806,51 @@
               "title": "3593. 使葉子路徑成本相等的最小增量",
               "slug": "/minimum-increments-to-equalize-leaf-paths/",
               "src": "https://leetcode.cn/problems/minimum-increments-to-equalize-leaf-paths/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2872,
+              "title": "2872. 可以被 K 整除連通塊的最大數目",
+              "slug": "/maximum-number-of-k-divisible-components/",
+              "src": "https://leetcode.cn/problems/maximum-number-of-k-divisible-components/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2477,
+              "title": "2477. 到達首都的最少油耗",
+              "slug": "/minimum-fuel-cost-to-report-to-the-capital/",
+              "src": "https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3812,
+              "title": "翻轉樹上最少邊",
+              "slug": "/minimum-edge-toggles-on-a-tree/",
+              "src": "https://leetcode.cn/problems/minimum-edge-toggles-on-a-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2973,
+              "title": "2973. 樹中每個節點放置的金幣數目",
+              "slug": "/find-number-of-coins-to-place-in-tree-nodes/",
+              "src": "https://leetcode.cn/problems/find-number-of-coins-to-place-in-tree-nodes/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2440,
+              "title": "2440. 建立價值相同的連通塊",
+              "slug": "/create-components-with-same-value/",
+              "src": "https://leetcode.cn/problems/create-components-with-same-value/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2836,6 +2890,24 @@
           "isLeaf": false,
           "problems": [
             {
+              "id": 3313,
+              "title": "3313. 查詢樹中最後標記的節點",
+              "slug": "/find-the-last-marked-nodes-in-tree/",
+              "src": "https://leetcode.cn/problems/find-the-last-marked-nodes-in-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": 3787,
+              "title": "查詢樹的直徑端點",
+              "slug": "/find-diameter-endpoints-of-a-tree/",
+              "src": "https://leetcode.cn/problems/find-diameter-endpoints-of-a-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
               "id": 1245,
               "title": "1245. 樹的直徑",
               "slug": "/tree-diameter/",
@@ -2845,28 +2917,10 @@
               "isPremium": true
             },
             {
-              "id": 1617,
-              "title": "1617. 統計子樹中城市之間最大距離",
-              "slug": "/count-subtrees-with-max-distance-between-cities/",
-              "src": "https://leetcode.cn/problems/count-subtrees-with-max-distance-between-cities/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": 2246,
               "title": "2246. 相鄰字元不同的最長路徑",
               "slug": "/longest-path-with-different-adjacent-characters/",
               "src": "https://leetcode.cn/problems/longest-path-with-different-adjacent-characters/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2538,
-              "title": "2538. 最大價值和與最小价值和的差值",
-              "slug": "/difference-between-maximum-and-minimum-price-sum/",
-              "src": "https://leetcode.cn/problems/difference-between-maximum-and-minimum-price-sum/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2881,13 +2935,22 @@
               "isPremium": false
             },
             {
-              "id": 3313,
-              "title": "3313. 查詢樹中最後標記的節點",
-              "slug": "/find-the-last-marked-nodes-in-tree/",
-              "src": "https://leetcode.cn/problems/find-the-last-marked-nodes-in-tree/",
+              "id": 1617,
+              "title": "1617. 統計子樹中城市之間最大距離",
+              "slug": "/count-subtrees-with-max-distance-between-cities/",
+              "src": "https://leetcode.cn/problems/count-subtrees-with-max-distance-between-cities/",
               "solution": null,
               "score": null,
-              "isPremium": true
+              "isPremium": false
+            },
+            {
+              "id": 2538,
+              "title": "2538. 最大價值和與最小价值和的差值",
+              "slug": "/difference-between-maximum-and-minimum-price-sum/",
+              "src": "https://leetcode.cn/problems/difference-between-maximum-and-minimum-price-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
             }
           ],
           "children": [],
@@ -2903,6 +2966,15 @@
               "title": "310. 最小高度樹",
               "slug": "/minimum-height-trees/",
               "src": "https://leetcode.cn/problems/minimum-height-trees/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3812,
+              "title": "翻轉樹上最少邊",
+              "slug": "/minimum-edge-toggles-on-a-tree/",
+              "src": "https://leetcode.cn/problems/minimum-edge-toggles-on-a-tree/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2979,15 +3051,6 @@
           "isLeaf": false,
           "problems": [
             {
-              "id": 1483,
-              "title": "1483. 樹節點的第 K 個祖先",
-              "slug": "/kth-ancestor-of-a-tree-node/",
-              "src": "https://leetcode.cn/problems/kth-ancestor-of-a-tree-node/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": 2277,
               "title": "2277. 樹中最接近路徑的節點",
               "slug": "/closest-node-to-path-in-tree/",
@@ -2997,28 +3060,10 @@
               "isPremium": true
             },
             {
-              "id": 2646,
-              "title": "2646. 最小化旅行的價格總和",
-              "slug": "/minimize-the-total-price-of-the-trips/",
-              "src": "https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2846,
-              "title": "2846. 邊權重均等查詢",
-              "slug": "/minimum-edge-weight-equilibrium-queries-in-a-tree/",
-              "src": "https://leetcode.cn/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 3553,
-              "title": "3553. 包含給定路徑的最小帶權子樹 II",
-              "slug": "/minimum-weighted-subgraph-with-the-required-paths-ii/",
-              "src": "https://leetcode.cn/problems/minimum-weighted-subgraph-with-the-required-paths-ii/",
+              "id": 1483,
+              "title": "1483. 樹節點的第 K 個祖先",
+              "slug": "/kth-ancestor-of-a-tree-node/",
+              "src": "https://leetcode.cn/problems/kth-ancestor-of-a-tree-node/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3033,10 +3078,64 @@
               "isPremium": false
             },
             {
+              "id": 2646,
+              "title": "2646. 最小化旅行的價格總和",
+              "slug": "/minimize-the-total-price-of-the-trips/",
+              "src": "https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3553,
+              "title": "3553. 包含給定路徑的最小帶權子樹 II",
+              "slug": "/minimum-weighted-subgraph-with-the-required-paths-ii/",
+              "src": "https://leetcode.cn/problems/minimum-weighted-subgraph-with-the-required-paths-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 3585,
               "title": "3585. 樹中找到帶權中位節點",
               "slug": "/find-weighted-median-node-in-tree/",
               "src": "https://leetcode.cn/problems/find-weighted-median-node-in-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3534,
+              "title": "針對圖的路徑存在性查詢 II",
+              "slug": "/path-existence-queries-in-a-graph-ii/",
+              "src": "https://leetcode.cn/problems/path-existence-queries-in-a-graph-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2846,
+              "title": "2846. 邊權重均等查詢",
+              "slug": "/minimum-edge-weight-equilibrium-queries-in-a-tree/",
+              "src": "https://leetcode.cn/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2836,
+              "title": "在傳球遊戲中最大化函式值",
+              "slug": "/maximize-value-of-function-in-a-ball-passing-game/",
+              "src": "https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3464,
+              "title": "正方形上的點之間的最大距離",
+              "slug": "/maximize-the-distance-between-points-on-a-square/",
+              "src": "https://leetcode.cn/problems/maximize-the-distance-between-points-on-a-square/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3046,8 +3145,25 @@
           "summary": "講解"
         },
         {
+          "id": 55,
+          "title": "3.9 虛樹",
+          "isLeaf": false,
+          "problems": [
+            {
+              "id": 3786,
+              "title": "樹組的互動代價總和",
+              "slug": "/total-sum-of-interaction-cost-in-tree-groups/",
+              "src": "https://leetcode.cn/problems/total-sum-of-interaction-cost-in-tree-groups/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        },
+        {
           "id": 40,
-          "title": "3.9 樹上滑動視窗",
+          "title": "3.10 樹上滑動視窗",
           "isLeaf": false,
           "problems": [
             {
@@ -3073,7 +3189,7 @@
         },
         {
           "id": 41,
-          "title": "3.10 樹上啟發式合併",
+          "title": "3.11 樹上啟發式合併",
           "isLeaf": false,
           "problems": [
             {
@@ -3108,7 +3224,7 @@
         },
         {
           "id": 42,
-          "title": "3.11 點分治",
+          "title": "3.12 點分治",
           "isLeaf": false,
           "problems": [
             {
@@ -3125,27 +3241,9 @@
         },
         {
           "id": 43,
-          "title": "3.12 其他",
+          "title": "3.13 其他",
           "isLeaf": false,
           "problems": [
-            {
-              "id": 1719,
-              "title": "1719. 重構一棵樹的方案數",
-              "slug": "/number-of-ways-to-reconstruct-a-tree/",
-              "src": "https://leetcode.cn/problems/number-of-ways-to-reconstruct-a-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2421,
-              "title": "2421. 好路徑的數目",
-              "slug": "/number-of-good-paths/",
-              "src": "https://leetcode.cn/problems/number-of-good-paths/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
             {
               "id": 2479,
               "title": "2479. 兩個不重疊子樹的最大異或值",
@@ -3160,6 +3258,24 @@
               "title": "2867. 統計樹中的合法路徑數目",
               "slug": "/count-valid-paths-in-a-tree/",
               "src": "https://leetcode.cn/problems/count-valid-paths-in-a-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2421,
+              "title": "2421. 好路徑的數目",
+              "slug": "/number-of-good-paths/",
+              "src": "https://leetcode.cn/problems/number-of-good-paths/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1719,
+              "title": "1719. 重構一棵樹的方案數",
+              "slug": "/number-of-ways-to-reconstruct-a-tree/",
+              "src": "https://leetcode.cn/problems/number-of-ways-to-reconstruct-a-tree/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3198,6 +3314,15 @@
           "title": "4.2 子集型回溯",
           "isLeaf": false,
           "problems": [
+            {
+              "id": 39,
+              "title": "組合總和",
+              "slug": "/combination-sum/",
+              "src": "https://leetcode.cn/problems/combination-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
             {
               "id": 51,
               "title": "LCP 51. 烹飪料理",
@@ -3244,46 +3369,28 @@
               "isPremium": false
             },
             {
-              "id": 1239,
-              "title": "1239. 串聯字串的最大長度",
-              "slug": "/maximum-length-of-a-concatenated-string-with-unique-characters/",
-              "src": "https://leetcode.cn/problems/maximum-length-of-a-concatenated-string-with-unique-characters/",
+              "id": 2174,
+              "title": "2174. 透過翻轉行或列來去除所有的 1 II",
+              "slug": "/remove-all-ones-with-row-and-column-flips-ii/",
+              "src": "https://leetcode.cn/problems/remove-all-ones-with-row-and-column-flips-ii/",
               "solution": null,
               "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1255,
-              "title": "1255. 得分最高的單詞集合",
-              "slug": "/maximum-score-words-formed-by-letters/",
-              "src": "https://leetcode.cn/problems/maximum-score-words-formed-by-letters/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1601,
-              "title": "1601. 最多可達成的換樓請求數目",
-              "slug": "/maximum-number-of-achievable-transfer-requests/",
-              "src": "https://leetcode.cn/problems/maximum-number-of-achievable-transfer-requests/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1617,
-              "title": "1617. 統計子樹中城市之間最大距離",
-              "slug": "/count-subtrees-with-max-distance-between-cities/",
-              "src": "https://leetcode.cn/problems/count-subtrees-with-max-distance-between-cities/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
+              "isPremium": true
             },
             {
               "id": 1863,
               "title": "1863. 找出所有子集的異或總和再求和",
               "slug": "/sum-of-all-subset-xor-totals/",
               "src": "https://leetcode.cn/problems/sum-of-all-subset-xor-totals/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3566,
+              "title": "3566. 等積子集的劃分方案",
+              "slug": "/partition-array-into-two-equal-product-subsets/",
+              "src": "https://leetcode.cn/problems/partition-array-into-two-equal-product-subsets/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3298,22 +3405,22 @@
               "isPremium": false
             },
             {
-              "id": 2151,
-              "title": "2151. 基於陳述統計最多好人數",
-              "slug": "/maximum-good-people-based-on-statements/",
-              "src": "https://leetcode.cn/problems/maximum-good-people-based-on-statements/",
+              "id": 2397,
+              "title": "2397. 被列覆蓋的最多行數",
+              "slug": "/maximum-rows-covered-by-columns/",
+              "src": "https://leetcode.cn/problems/maximum-rows-covered-by-columns/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": 2174,
-              "title": "2174. 透過翻轉行或列來去除所有的 1 II",
-              "slug": "/remove-all-ones-with-row-and-column-flips-ii/",
-              "src": "https://leetcode.cn/problems/remove-all-ones-with-row-and-column-flips-ii/",
+              "id": 1239,
+              "title": "1239. 串聯字串的最大長度",
+              "slug": "/maximum-length-of-a-concatenated-string-with-unique-characters/",
+              "src": "https://leetcode.cn/problems/maximum-length-of-a-concatenated-string-with-unique-characters/",
               "solution": null,
               "score": null,
-              "isPremium": true
+              "isPremium": false
             },
             {
               "id": 2212,
@@ -3325,10 +3432,19 @@
               "isPremium": false
             },
             {
-              "id": 2397,
-              "title": "2397. 被列覆蓋的最多行數",
-              "slug": "/maximum-rows-covered-by-columns/",
-              "src": "https://leetcode.cn/problems/maximum-rows-covered-by-columns/",
+              "id": 1255,
+              "title": "1255. 得分最高的單詞集合",
+              "slug": "/maximum-score-words-formed-by-letters/",
+              "src": "https://leetcode.cn/problems/maximum-score-words-formed-by-letters/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2151,
+              "title": "2151. 基於陳述統計最多好人數",
+              "slug": "/maximum-good-people-based-on-statements/",
+              "src": "https://leetcode.cn/problems/maximum-good-people-based-on-statements/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3352,10 +3468,19 @@
               "isPremium": false
             },
             {
-              "id": 3566,
-              "title": "3566. 等積子集的劃分方案",
-              "slug": "/partition-array-into-two-equal-product-subsets/",
-              "src": "https://leetcode.cn/problems/partition-array-into-two-equal-product-subsets/",
+              "id": 1601,
+              "title": "1601. 最多可達成的換樓請求數目",
+              "slug": "/maximum-number-of-achievable-transfer-requests/",
+              "src": "https://leetcode.cn/problems/maximum-number-of-achievable-transfer-requests/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1617,
+              "title": "1617. 統計子樹中城市之間最大距離",
+              "slug": "/count-subtrees-with-max-distance-between-cities/",
+              "src": "https://leetcode.cn/problems/count-subtrees-with-max-distance-between-cities/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3541,28 +3666,19 @@
               "isPremium": true
             },
             {
-              "id": 1307,
-              "title": "1307. 口算難題",
-              "slug": "/verbal-arithmetic-puzzle/",
-              "src": "https://leetcode.cn/problems/verbal-arithmetic-puzzle/",
+              "id": 3437,
+              "title": "3437. 全排列 III",
+              "slug": "/permutations-iii/",
+              "src": "https://leetcode.cn/problems/permutations-iii/",
               "solution": null,
               "score": null,
-              "isPremium": false
+              "isPremium": true
             },
             {
-              "id": 1718,
-              "title": "1718. 構建字典序最大的可行序列",
-              "slug": "/construct-the-lexicographically-largest-valid-sequence/",
-              "src": "https://leetcode.cn/problems/construct-the-lexicographically-largest-valid-sequence/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2850,
-              "title": "2850. 將石頭分散到網格圖的最少移動次數",
-              "slug": "/minimum-moves-to-spread-stones-over-grid/",
-              "src": "https://leetcode.cn/problems/minimum-moves-to-spread-stones-over-grid/",
+              "id": 3799,
+              "title": "單詞方塊 II",
+              "slug": "/word-squares-ii/",
+              "src": "https://leetcode.cn/problems/word-squares-ii/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3577,13 +3693,31 @@
               "isPremium": false
             },
             {
-              "id": 3437,
-              "title": "3437. 全排列 III",
-              "slug": "/permutations-iii/",
-              "src": "https://leetcode.cn/problems/permutations-iii/",
+              "id": 2850,
+              "title": "2850. 將石頭分散到網格圖的最少移動次數",
+              "slug": "/minimum-moves-to-spread-stones-over-grid/",
+              "src": "https://leetcode.cn/problems/minimum-moves-to-spread-stones-over-grid/",
               "solution": null,
               "score": null,
-              "isPremium": true
+              "isPremium": false
+            },
+            {
+              "id": 1718,
+              "title": "1718. 構建字典序最大的可行序列",
+              "slug": "/construct-the-lexicographically-largest-valid-sequence/",
+              "src": "https://leetcode.cn/problems/construct-the-lexicographically-largest-valid-sequence/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1307,
+              "title": "1307. 口算難題",
+              "slug": "/verbal-arithmetic-puzzle/",
+              "src": "https://leetcode.cn/problems/verbal-arithmetic-puzzle/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
             }
           ],
           "children": [],
@@ -3720,6 +3854,15 @@
               "isPremium": true
             },
             {
+              "id": 282,
+              "title": "給表示式新增運算子",
+              "slug": "/expression-add-operators/",
+              "src": "https://leetcode.cn/problems/expression-add-operators/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 411,
               "title": "411. 最短獨佔單詞縮寫",
               "slug": "/minimum-unique-word-abbreviation/",
@@ -3756,6 +3899,15 @@
               "isPremium": false
             },
             {
+              "id": 679,
+              "title": "24 點遊戲",
+              "slug": "/24-game/",
+              "src": "https://leetcode.cn/problems/24-game/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 691,
               "title": "691. 貼紙拼詞",
               "slug": "/stickers-to-spell-word/",
@@ -3765,100 +3917,10 @@
               "isPremium": false
             },
             {
-              "id": 967,
-              "title": "967. 連續差相同的數字",
-              "slug": "/numbers-with-same-consecutive-differences/",
-              "src": "https://leetcode.cn/problems/numbers-with-same-consecutive-differences/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 980,
-              "title": "980. 不同路徑 III",
-              "slug": "/unique-paths-iii/",
-              "src": "https://leetcode.cn/problems/unique-paths-iii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1088,
-              "title": "1088. 易混淆數 II",
-              "slug": "/confusing-number-ii/",
-              "src": "https://leetcode.cn/problems/confusing-number-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": 1219,
-              "title": "1219. 黃金礦工",
-              "slug": "/path-with-maximum-gold/",
-              "src": "https://leetcode.cn/problems/path-with-maximum-gold/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1255,
-              "title": "1255. 得分最高的單詞集合",
-              "slug": "/maximum-score-words-formed-by-letters/",
-              "src": "https://leetcode.cn/problems/maximum-score-words-formed-by-letters/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1415,
-              "title": "1415. 長度為 n 的開心字串中字典序第 k 小的字串",
-              "slug": "/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/",
-              "src": "https://leetcode.cn/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 1725,
-              "title": "面試題 17.25. 單詞矩陣",
-              "slug": "/word-rectangle-lcci/",
-              "src": "https://leetcode.cn/problems/word-rectangle-lcci/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2002,
-              "title": "2002. 兩個迴文子序列長度的最大乘積",
-              "slug": "/maximum-product-of-the-length-of-two-palindromic-subsequences/",
-              "src": "https://leetcode.cn/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2056,
-              "title": "2056. 棋盤上有效移動組合的數目",
-              "slug": "/number-of-valid-move-combinations-on-chessboard/",
-              "src": "https://leetcode.cn/problems/number-of-valid-move-combinations-on-chessboard/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2094,
-              "title": "2094. 找出 3 位偶數",
-              "slug": "/finding-3-digit-even-numbers/",
-              "src": "https://leetcode.cn/problems/finding-3-digit-even-numbers/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 2386,
-              "title": "2386. 找出陣列的第 K 大和",
-              "slug": "/find-the-k-sum-of-an-array/",
-              "src": "https://leetcode.cn/problems/find-the-k-sum-of-an-array/",
+              "id": 756,
+              "title": "金字塔轉換矩陣",
+              "slug": "/pyramid-transition-matrix/",
+              "src": "https://leetcode.cn/problems/pyramid-transition-matrix/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3873,24 +3935,6 @@
               "isPremium": true
             },
             {
-              "id": 3211,
-              "title": "3211. 生成不含相鄰零的二進位制字串",
-              "slug": "/generate-binary-strings-without-adjacent-zeros/",
-              "src": "https://leetcode.cn/problems/generate-binary-strings-without-adjacent-zeros/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 3509,
-              "title": "3509. 最大化交錯和為 K 的子序列乘積",
-              "slug": "/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/",
-              "src": "https://leetcode.cn/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": 3565,
               "title": "3565. 順序網格路徑覆蓋",
               "slug": "/sequential-grid-path-cover/",
@@ -3900,10 +3944,136 @@
               "isPremium": true
             },
             {
+              "id": 1725,
+              "title": "面試題 17.25. 單詞矩陣",
+              "slug": "/word-rectangle-lcci/",
+              "src": "https://leetcode.cn/problems/word-rectangle-lcci/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3211,
+              "title": "3211. 生成不含相鄰零的二進位制字串",
+              "slug": "/generate-binary-strings-without-adjacent-zeros/",
+              "src": "https://leetcode.cn/problems/generate-binary-strings-without-adjacent-zeros/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 967,
+              "title": "967. 連續差相同的數字",
+              "slug": "/numbers-with-same-consecutive-differences/",
+              "src": "https://leetcode.cn/problems/numbers-with-same-consecutive-differences/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2094,
+              "title": "2094. 找出 3 位偶數",
+              "slug": "/finding-3-digit-even-numbers/",
+              "src": "https://leetcode.cn/problems/finding-3-digit-even-numbers/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1415,
+              "title": "1415. 長度為 n 的開心字串中字典序第 k 小的字串",
+              "slug": "/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/",
+              "src": "https://leetcode.cn/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1219,
+              "title": "1219. 黃金礦工",
+              "slug": "/path-with-maximum-gold/",
+              "src": "https://leetcode.cn/problems/path-with-maximum-gold/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 980,
+              "title": "980. 不同路徑 III",
+              "slug": "/unique-paths-iii/",
+              "src": "https://leetcode.cn/problems/unique-paths-iii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2002,
+              "title": "2002. 兩個迴文子序列長度的最大乘積",
+              "slug": "/maximum-product-of-the-length-of-two-palindromic-subsequences/",
+              "src": "https://leetcode.cn/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1255,
+              "title": "1255. 得分最高的單詞集合",
+              "slug": "/maximum-score-words-formed-by-letters/",
+              "src": "https://leetcode.cn/problems/maximum-score-words-formed-by-letters/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 3669,
               "title": "3669. K 因數分解",
               "slug": "/balanced-k-factor-decomposition/",
               "src": "https://leetcode.cn/problems/balanced-k-factor-decomposition/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 1088,
+              "title": "1088. 易混淆數 II",
+              "slug": "/confusing-number-ii/",
+              "src": "https://leetcode.cn/problems/confusing-number-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": 1240,
+              "title": "鋪瓷磚",
+              "slug": "/tiling-a-rectangle-with-the-fewest-squares/",
+              "src": "https://leetcode.cn/problems/tiling-a-rectangle-with-the-fewest-squares/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2056,
+              "title": "2056. 棋盤上有效移動組合的數目",
+              "slug": "/number-of-valid-move-combinations-on-chessboard/",
+              "src": "https://leetcode.cn/problems/number-of-valid-move-combinations-on-chessboard/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 2386,
+              "title": "2386. 找出陣列的第 K 大和",
+              "slug": "/find-the-k-sum-of-an-array/",
+              "src": "https://leetcode.cn/problems/find-the-k-sum-of-an-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3509,
+              "title": "3509. 最大化交錯和為 K 的子序列乘積",
+              "slug": "/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/",
+              "src": "https://leetcode.cn/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3944,10 +4114,10 @@
               "isPremium": false
             },
             {
-              "id": 956,
-              "title": "956. 最高的廣告牌",
-              "slug": "/tallest-billboard/",
-              "src": "https://leetcode.cn/problems/tallest-billboard/",
+              "id": 3566,
+              "title": "3566. 等積子集的劃分方案",
+              "slug": "/partition-array-into-two-equal-product-subsets/",
+              "src": "https://leetcode.cn/problems/partition-array-into-two-equal-product-subsets/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3957,6 +4127,24 @@
               "title": "1755. 最接近目標值的子序列和",
               "slug": "/closest-subsequence-sum/",
               "src": "https://leetcode.cn/problems/closest-subsequence-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 956,
+              "title": "956. 最高的廣告牌",
+              "slug": "/tallest-billboard/",
+              "src": "https://leetcode.cn/problems/tallest-billboard/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3801,
+              "title": "合併有序列表的最小成本",
+              "slug": "/minimum-cost-to-merge-sorted-lists/",
+              "src": "https://leetcode.cn/problems/minimum-cost-to-merge-sorted-lists/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3975,15 +4163,6 @@
               "title": "3267. 統計近似相等數對 II",
               "slug": "/count-almost-equal-pairs-ii/",
               "src": "https://leetcode.cn/problems/count-almost-equal-pairs-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 3566,
-              "title": "3566. 等積子集的劃分方案",
-              "slug": "/partition-array-into-two-equal-product-subsets/",
-              "src": "https://leetcode.cn/problems/partition-array-into-two-equal-product-subsets/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -4006,10 +4185,10 @@
           "isLeaf": false,
           "problems": [
             {
-              "id": 880,
-              "title": "880. 索引處的解碼字串",
-              "slug": "/decoded-string-at-index/",
-              "src": "https://leetcode.cn/problems/decoded-string-at-index/",
+              "id": 215,
+              "title": "陣列中的第K個最大元素",
+              "slug": "/kth-largest-element-in-an-array/",
+              "src": "https://leetcode.cn/problems/kth-largest-element-in-an-array/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -4024,28 +4203,10 @@
               "isPremium": false
             },
             {
-              "id": 932,
-              "title": "932. 漂亮陣列",
-              "slug": "/beautiful-array/",
-              "src": "https://leetcode.cn/problems/beautiful-array/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": 1545,
               "title": "1545. 找出第 N 個二進位制字串中的第 K 位",
               "slug": "/find-kth-bit-in-nth-binary-string/",
               "src": "https://leetcode.cn/problems/find-kth-bit-in-nth-binary-string/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": 3307,
-              "title": "3307. 找出第 K 個字元 II",
-              "slug": "/find-the-k-th-character-in-string-game-ii/",
-              "src": "https://leetcode.cn/problems/find-the-k-th-character-in-string-game-ii/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -4060,10 +4221,37 @@
               "isPremium": false
             },
             {
+              "id": 880,
+              "title": "880. 索引處的解碼字串",
+              "slug": "/decoded-string-at-index/",
+              "src": "https://leetcode.cn/problems/decoded-string-at-index/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": 3614,
               "title": "3614. 用特殊操作處理字串 II",
               "slug": "/process-string-with-special-operations-ii/",
               "src": "https://leetcode.cn/problems/process-string-with-special-operations-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 3307,
+              "title": "3307. 找出第 K 個字元 II",
+              "slug": "/find-the-k-th-character-in-string-game-ii/",
+              "src": "https://leetcode.cn/problems/find-the-k-th-character-in-string-game-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": 932,
+              "title": "932. 漂亮陣列",
+              "slug": "/beautiful-array/",
+              "src": "https://leetcode.cn/problems/beautiful-array/",
               "solution": null,
               "score": null,
               "isPremium": false

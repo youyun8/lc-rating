@@ -1,12 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import {
-  ArrowRight,
-  BookOpen,
-  FolderTree,
-  ListChecks,
-} from "lucide-react";
+import { ArrowRight, BookOpen, FolderTree, ListChecks } from "lucide-react";
 import Link from "next/link";
 import { type CSSProperties } from "react";
 import {

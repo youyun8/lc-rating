@@ -12,7 +12,7 @@
         {
           "id": 3,
           "title": "1.1 列舉右，維護左",
-          "summary": "![數據結構題單 數據結構入門 數據結構新手教程 數據結構題目 力扣數據結構 leetcode數據結構 靈茶山艾府 靈神](https://pic.leetcode.cn/1713836847-cDYwhf-Programming.jfif)\n\n---\n\n**核心思想**：\n- 雙變數問題 → 單變數問題\n- 列舉右邊的 $a_j$，在左邊查詢 $a_i = t - a_j$\n- 使用雜湊表維護已遍歷的元素\n\n**影片講解**：[兩數之和動畫講解](https://leetcode.cn/problems/two-sum/solution/dong-hua-cong-liang-shu-zhi-he-zhong-wo-0yvmj/)\n\n**要求**：儘量使用一次遍歷實現\n\n本節為「1.1 列舉右，維護左」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：把題意轉成「決策序列／區間／圖」其中一類，再對照主節模板逐項檢查。",
+          "summary": "![數據結構題單 數據結構入門 數據結構新手教程 數據結構題目 力扣數據結構 leetcode數據結構 靈茶山艾府 靈神](https://pic.leetcode.cn/1713836847-cDYwhf-Programming.jfif)\n\n---\n\n**核心思想**：\n- 雙變數問題 → 單變數問題\n- 列舉右邊的 $a_j$，在左邊查詢 $a_i = t - a_j$\n- 使用雜湊表維護已遍歷的元素\n\n**影片講解**：[兩數之和動畫講解](https://leetcode.cn/problems/two-sum/solution/dong-hua-cong-liang-shu-zhi-he-zhong-wo-0yvmj/)\n\n**要求**：儘量使用一次遍歷實現\n\n本節為「1.1 列舉右，維護左」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：把題意轉成「決策序列／區間／圖」其中一類，再對照主節模板逐項檢查。\n\n「1. 常用列舉技巧」的入門與模板題：熟悉定義、實作細節與常見邊界（空輸入、長度 1、全相同字元等）。\n\n**目標**：能在壓力下快速寫對核心流程，並說清時間與空間複雜度。",
           "children": []
         },
         {
@@ -32,12 +32,6 @@
           "title": "1.4 遍歷對角線",
           "summary": "注：有關**前字尾分解**的內容，見 [動態規劃題單](https://leetcode.cn/circle/discuss/tXLS3i/) 的「專題：前字尾分解」。",
           "children": []
-        },
-        {
-          "id": 8,
-          "title": "1.5 列舉右，維護左 > 基礎",
-          "children": [],
-          "summary": "「1. 常用列舉技巧」的入門與模板題：熟悉定義、實作細節與常見邊界（空輸入、長度 1、全相同字元等）。\n\n**目標**：能在壓力下快速寫對核心流程，並說清時間與空間複雜度。"
         }
       ]
     },
@@ -222,7 +216,7 @@
         {
           "id": 42,
           "title": "6.2 進階",
-          "summary": "**堆進階**：\n- 合併多個有序序列：用最小堆維護每個序列的當前元素\n- 貪心 + 堆：每次取最優元素處理\n- 自定義比較函式處理複雜元素\n\n```cpp\n// 合併 K 個有序序列（自定義比較）\nauto cmp = [](pair<int, int>& a, pair<int, int>& b) {\n    return a.first > b.first; // 最小堆\n};\npriority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);\n```",
+          "summary": "**堆進階**：\n- 合併多個有序序列：用最小堆維護每個序列的當前元素\n- 貪心 + 堆：每次取最優元素處理\n- 自定義比較函式處理複雜元素\n\n```cpp\n// 合併 K 個有序序列（自定義比較）\nauto cmp = [](pair<int, int>& a, pair<int, int>& b) {\n    return a.first > b.first; // 最小堆\n};\npriority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);\n```\n\n**代表例題**：2542. 最大子序列的分數（rating 2056）——按乘數降序排序後枚舉，用大小為 k 的最小堆維護另一維的前 k 大之和，邊掃邊更新答案。",
           "children": []
         },
         {

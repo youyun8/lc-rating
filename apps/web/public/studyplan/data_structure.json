@@ -116,8 +116,8 @@
             {
               "id": "1128",
               "title": "等價多米諾骨牌對的數量",
-              "slug": "number-of-equivalent-domino-pairs-description",
-              "src": "https://leetcode.cn/problems/number-of-equivalent-domino-pairs/description/",
+              "slug": "number-of-equivalent-domino-pairs",
+              "src": "https://leetcode.cn/problems/number-of-equivalent-domino-pairs",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -177,6 +177,15 @@
               "isPremium": false
             },
             {
+              "id": "3805",
+              "title": "統計凱撒加密對數目",
+              "slug": "count-caesar-cipher-pairs",
+              "src": "https://leetcode.cn/problems/count-caesar-cipher-pairs",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": "3371",
               "title": "識別陣列中的最大異常值",
               "slug": "identify-the-largest-outlier-in-an-array",
@@ -226,6 +235,15 @@
               "title": "找出滿足差值條件的下標 II",
               "slug": "find-indices-with-index-and-value-difference-ii",
               "src": "https://leetcode.cn/problems/find-indices-with-index-and-value-difference-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3027",
+              "title": "人員站位的方案數 II",
+              "slug": "/find-the-number-of-ways-to-place-people-ii/",
+              "src": "https://leetcode.cn/problems/find-the-number-of-ways-to-place-people-ii/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -584,32 +602,6 @@
           ],
           "children": [],
           "summary": "注：有關**前字尾分解**的內容，見 [動態規劃題單](https://leetcode.cn/circle/discuss/tXLS3i/) 的「專題：前字尾分解」。"
-        },
-        {
-          "id": 8,
-          "title": "1.5 列舉右，維護左 > 基礎",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "1128",
-              "title": "等價多米諾骨牌對的數量",
-              "slug": "number-of-equivalent-domino-pairs",
-              "src": "https://leetcode.cn/problems/number-of-equivalent-domino-pairs",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3805",
-              "title": "統計凱撒加密對數目",
-              "slug": "count-caesar-cipher-pairs",
-              "src": "https://leetcode.cn/problems/count-caesar-cipher-pairs",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
         }
       ],
       "summary": "本節介紹三種核心列舉策略：列舉右維護左、列舉中間、遍歷對角線，適用於雙變數、三/四變數及矩陣類問題。"
@@ -2998,15 +2990,6 @@
               "isPremium": false
             },
             {
-              "id": "LCP 33",
-              "title": "蓄水",
-              "slug": "o8SXZn",
-              "src": "https://leetcode.cn/problems/o8SXZn/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "355",
               "title": "設計推特",
               "slug": "design-twitter",
@@ -3052,60 +3035,6 @@
               "isPremium": false
             },
             {
-              "id": "857",
-              "title": "僱傭 K 名工人的最低成本",
-              "slug": "minimum-cost-to-hire-k-workers",
-              "src": "https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1199",
-              "title": "建造街區的最短時間",
-              "slug": "minimum-time-to-build-blocks",
-              "src": "https://leetcode.cn/problems/minimum-time-to-build-blocks/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "1235",
-              "title": "規劃兼職工作",
-              "slug": "maximum-profit-in-job-scheduling",
-              "src": "https://leetcode.cn/problems/maximum-profit-in-job-scheduling/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1353",
-              "title": "最多可以參加的會議數目",
-              "slug": "maximum-number-of-events-that-can-be-attended",
-              "src": "https://leetcode.cn/problems/maximum-number-of-events-that-can-be-attended/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1354",
-              "title": "多次求和構造目標陣列",
-              "slug": "construct-target-array-with-multiple-sums",
-              "src": "https://leetcode.cn/problems/construct-target-array-with-multiple-sums/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1383",
-              "title": "最大的團隊表現值",
-              "slug": "maximum-performance-of-a-team",
-              "src": "https://leetcode.cn/problems/maximum-performance-of-a-team/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "1500",
               "title": "設計檔案分享系統",
               "slug": "design-a-file-sharing-system",
@@ -3115,28 +3044,37 @@
               "isPremium": true
             },
             {
-              "id": "1606",
-              "title": "找到處理最多請求的伺服器",
-              "slug": "find-servers-that-handled-most-number-of-requests",
-              "src": "https://leetcode.cn/problems/find-servers-that-handled-most-number-of-requests/",
+              "id": "3506",
+              "title": "查詢消除細菌菌株所需時間",
+              "slug": "find-time-required-to-eliminate-bacterial-strains",
+              "src": "https://leetcode.cn/problems/find-time-required-to-eliminate-bacterial-strains/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "LCP 33",
+              "title": "蓄水",
+              "slug": "o8SXZn",
+              "src": "https://leetcode.cn/problems/o8SXZn/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "1631",
-              "title": "最小體力消耗路徑",
-              "slug": "path-with-minimum-effort",
-              "src": "https://leetcode.cn/problems/path-with-minimum-effort/",
+              "id": "2931",
+              "title": "購買物品的最大開銷",
+              "slug": "maximum-spending-after-buying-items",
+              "src": "https://leetcode.cn/problems/maximum-spending-after-buying-items/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "1675",
-              "title": "陣列的最小偏移量",
-              "slug": "minimize-deviation-in-array",
-              "src": "https://leetcode.cn/problems/minimize-deviation-in-array/",
+              "id": "3781",
+              "title": "二進位制交換後的最大分數",
+              "slug": "maximum-score-after-binary-swaps",
+              "src": "https://leetcode.cn/problems/maximum-score-after-binary-swaps",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3151,10 +3089,10 @@
               "isPremium": false
             },
             {
-              "id": "1851",
-              "title": "包含每個查詢的最小區間",
-              "slug": "minimum-interval-to-include-each-query",
-              "src": "https://leetcode.cn/problems/minimum-interval-to-include-each-query/",
+              "id": "1631",
+              "title": "最小體力消耗路徑",
+              "slug": "path-with-minimum-effort",
+              "src": "https://leetcode.cn/problems/path-with-minimum-effort/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3169,10 +3107,46 @@
               "isPremium": false
             },
             {
-              "id": "2163",
-              "title": "刪除元素後和的最小差值",
-              "slug": "minimum-difference-in-sums-after-removal-of-elements",
-              "src": "https://leetcode.cn/problems/minimum-difference-in-sums-after-removal-of-elements/",
+              "id": "1354",
+              "title": "多次求和構造目標陣列",
+              "slug": "construct-target-array-with-multiple-sums",
+              "src": "https://leetcode.cn/problems/construct-target-array-with-multiple-sums/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1353",
+              "title": "最多可以參加的會議數目",
+              "slug": "maximum-number-of-events-that-can-be-attended",
+              "src": "https://leetcode.cn/problems/maximum-number-of-events-that-can-be-attended/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1235",
+              "title": "規劃兼職工作",
+              "slug": "maximum-profit-in-job-scheduling",
+              "src": "https://leetcode.cn/problems/maximum-profit-in-job-scheduling/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2542",
+              "title": "最大子序列的分數",
+              "slug": "maximum-subsequence-score",
+              "src": "https://leetcode.cn/problems/maximum-subsequence-score/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1383",
+              "title": "最大的團隊表現值",
+              "slug": "maximum-performance-of-a-team",
+              "src": "https://leetcode.cn/problems/maximum-performance-of-a-team/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3196,46 +3170,46 @@
               "isPremium": false
             },
             {
-              "id": "2532",
-              "title": "過橋的時間",
-              "slug": "time-to-cross-a-bridge",
-              "src": "https://leetcode.cn/problems/time-to-cross-a-bridge/",
+              "id": "2163",
+              "title": "刪除元素後和的最小差值",
+              "slug": "minimum-difference-in-sums-after-removal-of-elements",
+              "src": "https://leetcode.cn/problems/minimum-difference-in-sums-after-removal-of-elements/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2542",
-              "title": "最大子序列的分數",
-              "slug": "maximum-subsequence-score",
-              "src": "https://leetcode.cn/problems/maximum-subsequence-score/",
+              "id": "1199",
+              "title": "建造街區的最短時間",
+              "slug": "minimum-time-to-build-blocks",
+              "src": "https://leetcode.cn/problems/minimum-time-to-build-blocks/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "857",
+              "title": "僱傭 K 名工人的最低成本",
+              "slug": "minimum-cost-to-hire-k-workers",
+              "src": "https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2589",
-              "title": "完成所有任務的最少時間",
-              "slug": "minimum-time-to-complete-all-tasks",
-              "src": "https://leetcode.cn/problems/minimum-time-to-complete-all-tasks/",
+              "id": "1606",
+              "title": "找到處理最多請求的伺服器",
+              "slug": "find-servers-that-handled-most-number-of-requests",
+              "src": "https://leetcode.cn/problems/find-servers-that-handled-most-number-of-requests/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2617",
-              "title": "網格圖中最少訪問的格子數",
-              "slug": "minimum-number-of-visited-cells-in-a-grid",
-              "src": "https://leetcode.cn/problems/minimum-number-of-visited-cells-in-a-grid/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2931",
-              "title": "購買物品的最大開銷",
-              "slug": "maximum-spending-after-buying-items",
-              "src": "https://leetcode.cn/problems/maximum-spending-after-buying-items/",
+              "id": "1851",
+              "title": "包含每個查詢的最小區間",
+              "slug": "minimum-interval-to-include-each-query",
+              "src": "https://leetcode.cn/problems/minimum-interval-to-include-each-query/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3250,15 +3224,6 @@
               "isPremium": false
             },
             {
-              "id": "3266",
-              "title": "K 次乘運算後的最終陣列 II",
-              "slug": "final-array-state-after-k-multiplication-operations-ii",
-              "src": "https://leetcode.cn/problems/final-array-state-after-k-multiplication-operations-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "3399",
               "title": "字元相同的最短子字串 II",
               "slug": "smallest-substring-with-identical-characters-ii",
@@ -3268,19 +3233,46 @@
               "isPremium": false
             },
             {
-              "id": "3506",
-              "title": "查詢消除細菌菌株所需時間",
-              "slug": "find-time-required-to-eliminate-bacterial-strains",
-              "src": "https://leetcode.cn/problems/find-time-required-to-eliminate-bacterial-strains/",
+              "id": "2589",
+              "title": "完成所有任務的最少時間",
+              "slug": "minimum-time-to-complete-all-tasks",
+              "src": "https://leetcode.cn/problems/minimum-time-to-complete-all-tasks/",
               "solution": null,
               "score": null,
-              "isPremium": true
+              "isPremium": false
             },
             {
-              "id": "3781",
-              "title": "二進位制交換後的最大分數",
-              "slug": "maximum-score-after-binary-swaps",
-              "src": "https://leetcode.cn/problems/maximum-score-after-binary-swaps",
+              "id": "3266",
+              "title": "K 次乘運算後的最終陣列 II",
+              "slug": "final-array-state-after-k-multiplication-operations-ii",
+              "src": "https://leetcode.cn/problems/final-array-state-after-k-multiplication-operations-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1675",
+              "title": "陣列的最小偏移量",
+              "slug": "minimize-deviation-in-array",
+              "src": "https://leetcode.cn/problems/minimize-deviation-in-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2617",
+              "title": "網格圖中最少訪問的格子數",
+              "slug": "minimum-number-of-visited-cells-in-a-grid",
+              "src": "https://leetcode.cn/problems/minimum-number-of-visited-cells-in-a-grid/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2532",
+              "title": "過橋的時間",
+              "slug": "time-to-cross-a-bridge",
+              "src": "https://leetcode.cn/problems/time-to-cross-a-bridge/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -4761,15 +4753,6 @@
           "isLeaf": true,
           "problems": [
             {
-              "id": "LCP 05",
-              "title": "發 LeetCoin",
-              "slug": "coin-bonus",
-              "src": "https://leetcode.cn/problems/coin-bonus/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
               "id": "60",
               "title": "排列序列",
               "slug": "permutation-sequence",
@@ -4797,51 +4780,6 @@
               "isPremium": true
             },
             {
-              "id": "1395",
-              "title": "統計作戰單位數",
-              "slug": "count-number-of-teams",
-              "src": "https://leetcode.cn/problems/count-number-of-teams/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1409",
-              "title": "查詢帶鍵的排列",
-              "slug": "queries-on-a-permutation-with-key",
-              "src": "https://leetcode.cn/problems/queries-on-a-permutation-with-key/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1505",
-              "title": "最多 K 次交換相鄰數位後得到的最小整數",
-              "slug": "minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits",
-              "src": "https://leetcode.cn/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1626",
-              "title": "無矛盾的最佳球隊",
-              "slug": "best-team-with-no-conflicts",
-              "src": "https://leetcode.cn/problems/best-team-with-no-conflicts/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1649",
-              "title": "透過指令建立有序陣列",
-              "slug": "create-sorted-array-through-instructions",
-              "src": "https://leetcode.cn/problems/create-sorted-array-through-instructions/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "1756",
               "title": "設計最近使用（MRU）佇列",
               "slug": "design-most-recently-used-queue",
@@ -4849,24 +4787,6 @@
               "solution": null,
               "score": null,
               "isPremium": true
-            },
-            {
-              "id": "2179",
-              "title": "統計陣列中好三元組數目",
-              "slug": "count-good-triplets-in-an-array",
-              "src": "https://leetcode.cn/problems/count-good-triplets-in-an-array/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2250",
-              "title": "統計包含每個點的矩形數目",
-              "slug": "count-number-of-rectangles-containing-each-point",
-              "src": "https://leetcode.cn/problems/count-number-of-rectangles-containing-each-point/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
             },
             {
               "id": "2519",
@@ -4887,33 +4807,6 @@
               "isPremium": true
             },
             {
-              "id": "2653",
-              "title": "滑動子陣列的美麗值",
-              "slug": "sliding-subarray-beauty",
-              "src": "https://leetcode.cn/problems/sliding-subarray-beauty/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2659",
-              "title": "將陣列清空",
-              "slug": "make-array-empty",
-              "src": "https://leetcode.cn/problems/make-array-empty/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2736",
-              "title": "最大和查詢",
-              "slug": "maximum-sum-queries",
-              "src": "https://leetcode.cn/problems/maximum-sum-queries/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "2921",
               "title": "價格遞增的最大利潤三元組 II",
               "slug": "maximum-profitable-triplets-with-increasing-prices-ii",
@@ -4923,10 +4816,55 @@
               "isPremium": true
             },
             {
-              "id": "2926",
-              "title": "平衡子序列的最大和",
-              "slug": "maximum-balanced-subsequence-sum",
-              "src": "https://leetcode.cn/problems/maximum-balanced-subsequence-sum/",
+              "id": "3109",
+              "title": "查詢排列的下標",
+              "slug": "find-the-index-of-permutation",
+              "src": "https://leetcode.cn/problems/find-the-index-of-permutation/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "LCP 05",
+              "title": "發 LeetCoin",
+              "slug": "coin-bonus",
+              "src": "https://leetcode.cn/problems/coin-bonus/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "1409",
+              "title": "查詢帶鍵的排列",
+              "slug": "queries-on-a-permutation-with-key",
+              "src": "https://leetcode.cn/problems/queries-on-a-permutation-with-key/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1395",
+              "title": "統計作戰單位數",
+              "slug": "count-number-of-teams",
+              "src": "https://leetcode.cn/problems/count-number-of-teams/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2653",
+              "title": "滑動子陣列的美麗值",
+              "slug": "sliding-subarray-beauty",
+              "src": "https://leetcode.cn/problems/sliding-subarray-beauty/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2250",
+              "title": "統計包含每個點的矩形數目",
+              "slug": "count-number-of-rectangles-containing-each-point",
+              "src": "https://leetcode.cn/problems/count-number-of-rectangles-containing-each-point/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -4941,64 +4879,19 @@
               "isPremium": false
             },
             {
+              "id": "1626",
+              "title": "無矛盾的最佳球隊",
+              "slug": "best-team-with-no-conflicts",
+              "src": "https://leetcode.cn/problems/best-team-with-no-conflicts/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": "3072",
               "title": "將元素分配到兩個陣列中 II",
               "slug": "distribute-elements-into-two-arrays-ii",
               "src": "https://leetcode.cn/problems/distribute-elements-into-two-arrays-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3109",
-              "title": "查詢排列的下標",
-              "slug": "find-the-index-of-permutation",
-              "src": "https://leetcode.cn/problems/find-the-index-of-permutation/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "3187",
-              "title": "陣列中的峰值",
-              "slug": "peaks-in-array",
-              "src": "https://leetcode.cn/problems/peaks-in-array/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3245",
-              "title": "交替組 III",
-              "slug": "alternating-groups-iii",
-              "src": "https://leetcode.cn/problems/alternating-groups-iii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3382",
-              "title": "用點構造面積最大的矩形 II",
-              "slug": "maximum-area-rectangle-with-point-constraints-ii",
-              "src": "https://leetcode.cn/problems/maximum-area-rectangle-with-point-constraints-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3515",
-              "title": "帶權樹中的最短路徑",
-              "slug": "shortest-path-in-a-weighted-tree",
-              "src": "https://leetcode.cn/problems/shortest-path-in-a-weighted-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3590",
-              "title": "第 K 小的路徑異或和",
-              "slug": "kth-smallest-path-xor-sum",
-              "src": "https://leetcode.cn/problems/kth-smallest-path-xor-sum/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -5013,10 +4906,10 @@
               "isPremium": false
             },
             {
-              "id": "3671",
-              "title": "子序列美麗值求和",
-              "slug": "sum-of-beautiful-subsequences",
-              "src": "https://leetcode.cn/problems/sum-of-beautiful-subsequences/",
+              "id": "3187",
+              "title": "陣列中的峰值",
+              "slug": "peaks-in-array",
+              "src": "https://leetcode.cn/problems/peaks-in-array/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -5026,6 +4919,105 @@
               "title": "使子字串變交替的最少刪除次數",
               "slug": "minimum-deletions-to-make-alternating-substring",
               "src": "https://leetcode.cn/problems/minimum-deletions-to-make-alternating-substring",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1649",
+              "title": "透過指令建立有序陣列",
+              "slug": "create-sorted-array-through-instructions",
+              "src": "https://leetcode.cn/problems/create-sorted-array-through-instructions/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2179",
+              "title": "統計陣列中好三元組數目",
+              "slug": "count-good-triplets-in-an-array",
+              "src": "https://leetcode.cn/problems/count-good-triplets-in-an-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2659",
+              "title": "將陣列清空",
+              "slug": "make-array-empty",
+              "src": "https://leetcode.cn/problems/make-array-empty/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3515",
+              "title": "帶權樹中的最短路徑",
+              "slug": "shortest-path-in-a-weighted-tree",
+              "src": "https://leetcode.cn/problems/shortest-path-in-a-weighted-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1505",
+              "title": "最多 K 次交換相鄰數位後得到的最小整數",
+              "slug": "minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits",
+              "src": "https://leetcode.cn/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2926",
+              "title": "平衡子序列的最大和",
+              "slug": "maximum-balanced-subsequence-sum",
+              "src": "https://leetcode.cn/problems/maximum-balanced-subsequence-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2736",
+              "title": "最大和查詢",
+              "slug": "maximum-sum-queries",
+              "src": "https://leetcode.cn/problems/maximum-sum-queries/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3590",
+              "title": "第 K 小的路徑異或和",
+              "slug": "kth-smallest-path-xor-sum",
+              "src": "https://leetcode.cn/problems/kth-smallest-path-xor-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3671",
+              "title": "子序列美麗值求和",
+              "slug": "sum-of-beautiful-subsequences",
+              "src": "https://leetcode.cn/problems/sum-of-beautiful-subsequences/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3382",
+              "title": "用點構造面積最大的矩形 II",
+              "slug": "maximum-area-rectangle-with-point-constraints-ii",
+              "src": "https://leetcode.cn/problems/maximum-area-rectangle-with-point-constraints-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3245",
+              "title": "交替組 III",
+              "slug": "alternating-groups-iii",
+              "src": "https://leetcode.cn/problems/alternating-groups-iii/",
               "solution": null,
               "score": null,
               "isPremium": false
