@@ -1,80 +1,48 @@
-# HTML to Markdown Converter
+# lc-parser
 
-這個工具用於將 LeetCode 討論頁面的 HTML 轉換為 Markdown 格式。
+將 LeetCode 題單／討論頁面的 HTML 轉換為 Markdown，並整理為講義所需的結構化資料。實作為 TypeScript。
 
 ## 檔案說明
 
-- `extract_html2md.py` - Python 版本（使用 markdownify）
-- `extract_html2md.ts` - TypeScript 版本（使用 turndown）
+- `extract_html2md.ts`：下載 HTML 並以 turndown 轉為 Markdown（解析使用 cheerio，下載使用 axios）。匯出 `convertHtmlToMarkdown`，輸出寫入 `dist/`。
+- `process.ts`：透過 OpenAI 相容的 LLM（`ai` SDK）將擷取內容整理為結構化 JSON（章節 `title`／`src`／`summary`／`children`／題目清單）。支援 `HTTP_PROXY` 與 `.env`。
+- `smoke_test.ts`：對 `convertHtmlToMarkdown` 的煙霧測試，對應 `pnpm --filter web test`。
+- `turndown-plugin-gfm.d.ts`：GFM 外掛的型別宣告。
 
-## TypeScript 版本使用方法
-
-### 安裝依賴
+## 安裝依賴
 
 ```bash
 cd apps/web
 pnpm install
 ```
 
-如果要驗證 `apps/web/lc-maker/` 的 Python 更新腳本，建議使用虛擬環境，避免系統 Python 的套件管理限制：
+## 使用方法
 
 ```bash
-cd apps/web/lc-maker
-python -m venv .venv
-. .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
-### 運行腳本
-
-```bash
+# 擷取並轉換 HTML 為 Markdown
 npx tsx lc-parser/extract_html2md.ts
+
+# 整理為結構化講義資料（需設定 LLM 相關環境變數於 .env）
+npx tsx lc-parser/process.ts
 ```
+
+可用的 package.json 指令：
+
+- `pnpm --filter web parser:extract`：執行 `extract_html2md.ts`。
+- `pnpm --filter web parser:process`：執行 `process.ts`。
+- `pnpm --filter web test`：執行 `smoke_test.ts`。
 
 ## 主要依賴
 
-### Python 版本
+- `cheerio`：HTML 解析。
+- `turndown` 與 `@joplin/turndown-plugin-gfm`：HTML 轉 Markdown（含 GFM 表格等）。
+- `axios`：HTTP 下載。
+- `ai` 與 `@ai-sdk/openai-compatible`：`process.ts` 的 LLM 呼叫。
+- `undici`：`process.ts` 的代理請求。
 
-- `beautifulsoup4` - HTML 解析
-- `markdownify` - HTML 轉 Markdown
-- `requests` - HTTP 請求
+## 功能流程
 
-### TypeScript 版本
-
-- `cheerio` - HTML 解析（類似 BeautifulSoup）
-- `turndown` - HTML 轉 Markdown（類似 markdownify）
-- `axios` - HTTP 請求（類似 requests）
-
-## 測試
-
-可以執行以下指令做 parser smoke test：
-
-```bash
-pnpm --filter web test
-```
-
-## 功能對比
-
-兩個版本實現了完全相同的功能：
-
-1. 從指定 URL 下載 HTML 檔案
-2. 解析 HTML 並提取標題和內容
-3. 將 HTML 轉換為 Markdown 格式
-4. 儲存為 `.md` 檔案
-
-## 配置
-
-腳本會處理以下 LeetCode 演算法題單：
-
-- 滑動窗口與雙指標
-- 二分演算法
-- 單調堆疊
-- 網格圖
-- 位元運算
-- 圖論演算法
-- 動態規劃
-- 常用資料結構
-- 數學演算法
-- 貪心演算法
-- 鏈結串列、二元樹與回溯
-- 字串
+1. 從指定 URL 下載 HTML。
+2. 解析 HTML 並提取標題與內容。
+3. 將內容轉換為 Markdown。
+4. 由 `process.ts` 整理為結構化 JSON，供題單與講義使用。

@@ -2,10 +2,12 @@
 
 ## Project Structure & Module Organization
 
-- `apps/web/` is the main Next.js 16 app (App Router) with UI in `components/`, shared hooks in `hooks/`, and utilities in `utils/`.
-- `apps/web/public/` contains static data used at runtime (for example `problemset/` and `studyplan/`).
+- `apps/web/` is the main Next.js 16 app (App Router). UI lives in `components/`, feature modules in `features/`, shared hooks in `hooks/`, derived data in `data/`, and utilities in `utils/`/`lib/`.
+- `apps/web/public/` contains static data used at runtime (for example `problemset/`, `studyplan/`, and `tutorial/`).
+- `apps/web/lc-parser/` holds the TypeScript HTML→Markdown parser; `apps/web/lc-maker/` holds Python sync/translation scripts.
+- `backend/` is the optional Cloudflare Worker for cloud sync (see `backend/README.md`).
+- `scripts/` holds Python study-plan generation/update scripts.
 - `packages/` holds shared configs and UI primitives (`eslint-config/`, `tailwind-config/`, `typescript-config/`, `ui/`).
-- `apps/v0/` is a legacy app; avoid editing unless a change is explicitly scoped to it.
 
 ## Build, Test, and Development Commands
 
@@ -23,7 +25,7 @@ Run from repo root unless noted.
 - Use TypeScript, React, and Tailwind CSS conventions already in the codebase.
 - Indentation and formatting are handled by Prettier (run `pnpm format`).
 - Components use PascalCase (for example `ContestTable.tsx`); hooks use `useX` naming (for example `useProgress`).
-- Keep files colocated by feature under `apps/web/components/` or `apps/web/hooks/`.
+- Keep files colocated by feature under `apps/web/features/`, with shared UI in `apps/web/components/` and shared hooks in `apps/web/hooks/`.
 
 ## Testing Guidelines
 
