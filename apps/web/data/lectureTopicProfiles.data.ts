@@ -996,7 +996,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     patterns: ["Euclid", "質數篩", "SPF 分解", "模運算", "容斥前的數論化簡"],
     pitfalls: [
-      "`lcm(a,b)` 須先除以 gcd 再乘以避免溢位。",
+      "`lcm(a, b)` 須先除以 gcd 再乘以避免溢位。",
       "模除法要求除數可逆。",
     ],
     complexity: "Euclid `O(log V)`；篩法 `O(n log log n)`。",
@@ -1769,7 +1769,7 @@ export const exampleLectureOverrides: NonNullable<
   },
   "shortest-path-in-a-grid-with-obstacles-elimination": {
     modelProblem:
-      "LeetCode 1293 給定 `rows x cols` 的 0/1 網格。自 `(0,0)` 出發，每步可往上下左右移動；踏入障礙格 `1` 時可消耗一次消除機會，至多消除 `k` 個障礙。回傳到 `(rows-1, cols-1)` 的最少步數；無法到達則回傳 `-1`。",
+      "LeetCode 1293 給定 `rows x cols` 的 0/1 網格。自 `(0, 0)` 出發，每步可往上下左右移動；踏入障礙格 `1` 時可消耗一次消除機會，至多消除 `k` 個障礙。回傳到 `(rows-1, cols-1)` 的最少步數；無法到達則回傳 `-1`。",
     signals: [
       "網格最短路。",
       "同一格在不同剩餘消除次數下後續可走路徑不同。",
@@ -1945,7 +1945,7 @@ export const exampleLectureOverrides: NonNullable<
       "詢問所有起點的方案數總和。",
     ],
     invariants: [
-      "`dfs(row,col)` 表示自該格出發的遞增路徑數，至少包含僅停在自己的 1 條。",
+      "`dfs(row, col)` 表示自該格出發的遞增路徑數，至少包含僅停在自己的 1 條。",
       "僅往值更大的鄰格遞迴，故不會成環。",
       "記憶化後每個格子的答案僅計算一次。",
     ],
@@ -2007,7 +2007,7 @@ export const exampleLectureOverrides: NonNullable<
     derivation: [
       "建立無向鄰接表。",
       "枚舉每個 source 進行 BFS，記錄 dist 與 parent。",
-      "擴展邊 `(node,next)` 時，若 next 未訪問則入隊。",
+      "擴展邊 `(node, next)` 時，若 next 未訪問則入隊。",
       "若 next 已訪問且非 parent，更新答案。",
     ],
     patterns: ["無權圖 BFS", "BFS 找最短環", "父邊排除"],
@@ -2114,7 +2114,7 @@ export const exampleLectureOverrides: NonNullable<
     invariants: [
       "`dfn[u]` 為 u 首次被 DFS 訪問的時間。",
       "`low[u]` 為 u 子樹透過 DFS tree edge 或 back edge 可回到的最小 dfn。",
-      "若 tree edge `(u,v)` 滿足 `low[v] > dfn[u]`，即為橋。",
+      "若 tree edge `(u, v)` 滿足 `low[v] > dfn[u]`，即為橋。",
     ],
     derivation: [
       "建立無向鄰接表並保留 edge id。",
@@ -2172,7 +2172,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     derivation: [
       "依 end 由小至大排序任務。",
-      "對每個任務先計算 `[start,end]` 中已開啟多少時間點。",
+      "對每個任務先計算 `[start, end]` 中已開啟多少時間點。",
       "若不足 duration，自 end 向左選尚未開啟的時間點補足。",
       "最終已開啟時間點數即為答案。",
     ],
@@ -2331,8 +2331,8 @@ export const exampleLectureOverrides: NonNullable<
     ],
     invariants: [
       "`radius[i]` 表示以 i 為中心的最大奇回文半徑。",
-      "`best_left[i]` 為完全落於 `[0,i]` 的最大奇回文長度。",
-      "`best_right[i]` 為完全落於 `[i,n-1]` 的最大奇回文長度。",
+      "`best_left[i]` 為完全落於 `[0, i]` 的最大奇回文長度。",
+      "`best_right[i]` 為完全落於 `[i, n-1]` 的最大奇回文長度。",
     ],
     derivation: [
       "先以 Manacher 求每個中心的奇回文半徑。",
@@ -2360,7 +2360,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     invariants: [
       "`z[i]` 表示 `s[i..]` 與 `s[0..]` 的最長公共前綴長度。",
-      "維護最右匹配盒 `[left,right]`，盒內區間內容等於前綴。",
+      "維護最右匹配盒 `[left, right]`，盒內區間內容等於前綴。",
       "若 i 在盒內，可由 `z[i-left]` 給出初始下界。",
     ],
     derivation: [
@@ -2711,7 +2711,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     derivation: [
       "以容斥計算 `count(x)`：分別加 `x/a`、`x/b`、`x/c`，扣除兩兩 lcm，補回三者 lcm。",
-      "答案下界為 1，上界可取 `min(a,b,c) * n`。",
+      "答案下界為 1，上界可取 `min(a, b, c) * n`。",
       "對 mid 計算 `count(mid)`；若數量足夠則收縮右界，否則提高左界。",
       "迴圈結束時 left 即為第一個數量達到 n 的值。",
     ],

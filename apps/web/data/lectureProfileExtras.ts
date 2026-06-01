@@ -21,34 +21,34 @@ const LONG_LONG =
 export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   "binary-lower-bound": {
     walkthrough:
-      "以 `nums = [5,7,7,8,8,10]`、`target = 8` 求左端點：left = 0、right = 6；mid = 3（值 8）滿足 `>= 8` → right = 3；mid = 1（值 7）不滿足 → left = 2；mid = 2（值 7）不滿足 → left = 3；此時 left == right == 3，即第一個 8 的位置。對 `target + 1 = 9` 再做一次得 5，故 8 的範圍是 [3, 4]。",
+      "以 `nums = [5, 7, 7, 8, 8, 10]`、`target = 8` 求左端點：left = 0、right = 6；mid = 3（值 8）滿足 `>= 8` → right = 3；mid = 1（值 7）不滿足 → left = 2；mid = 2（值 7）不滿足 → left = 3；此時 left == right == 3，即第一個 8 的位置。對 `target + 1 = 9` 再做一次得 5，故 8 的範圍是 [3, 4]。",
     templateNote:
       "延伸題多半只改 predicate：找「最後一個 <=target」用 `upperBound-1`；旋轉排序陣列找最小值，把 predicate 換成「mid 元素 <= 最右元素」。",
     extraPitfalls: [MID_OVERFLOW],
   },
   "kth-smallest": {
     walkthrough:
-      "以 `nums1 = [1,7]`、`nums2 = [2,4]`、k = 2：先把每列首個 pair 入堆 →{(3,i = 0,j = 0),(9,i = 1,j = 0)}。彈出最小 (3) → 記錄 (1,2)，並推入同列下一個 (1 + 4 = 5)。再彈出 (5) → 記錄 (1,4)。得前 2 小的 pair。",
+      "以 `nums1 = [1, 7]`、`nums2 = [2, 4]`、k = 2：先把每列首個 pair 入堆 →{(3, i = 0, j = 0),(9, i = 1, j = 0)}。彈出最小 (3) → 記錄 (1,2)，並推入同列下一個 (1 + 4 = 5)。再彈出 (5) → 記錄 (1,4)。得前 2 小的 pair。",
     templateNote:
       "若只要第 k 小的「數值」（如有序矩陣），改用「二分答案 + 計算 <=x 的個數」；要列出前 k 個「組合」才用 heap 多路歸併。",
   },
   "binary-answer": {
     walkthrough:
-      "以 `weights = [1,2,3,4,5]`、days = 3：答案值域為 [5（最大件）, 15（總和）]。`canShip(mid)` 貪心裝箱、超過就換天。mid = 6 可在 3 天內運完（[1,2,3]/[4]/[5]）；mid = 5 需 4 天不可行。二分收斂到最小可行容量 6。",
+      "以 `weights = [1, 2, 3, 4, 5]`、days = 3：答案值域為 [5（最大件）, 15（總和）]。`canShip(mid)` 貪心裝箱、超過就換天。mid = 6 可在 3 天內運完（[1,2,3]/[4]/[5]）；mid = 5 需 4 天不可行。二分收斂到最小可行容量 6。",
     templateNote:
       "換題時只需重寫 `can(x)` 與值域：最小速度吃香蕉把 `can` 換成總時數 <=h；最大化最小距離則把單調方向反過來（值越大越難）。",
     extraPitfalls: [MID_OVERFLOW],
   },
   "prefix-sum": {
     walkthrough:
-      "以 `nums = [1,-1,1]`、k = 1 求和為 1 的子陣列數：count = {0:1}，prefix 依序 1、0、1。prefix = 1 時查 count[0] = 1（答案 +1），記 count[1] = 1；prefix = 0 時查 count[-1] = 0，記 count[0] = 2；prefix = 1 時查 count[0] = 2（答案 +2）。共 3 個。",
+      "以 `nums = [1, -1, 1]`、k = 1 求和為 1 的子陣列數：count = {0:1}，prefix 依序 1、0、1。prefix = 1 時查 count[0] = 1（答案 +1），記 count[1] = 1；prefix = 0 時查 count[-1] = 0，記 count[0] = 2；prefix = 1 時查 count[0] = 2（答案 +2）。共 3 個。",
     templateNote:
       "把「和等於 k」換成「和為 k 的倍數」時，改存 `prefix % k` 的出現次數；二維子矩陣和則改用二維前綴和容斥。",
     extraPitfalls: [LONG_LONG],
   },
   "enumerate-maintain": {
     walkthrough:
-      "以 `nums = [3,1,4]` 求 `max(best_left + nums[right] - right)`：right = 0 時左側為空，僅更新 best_left = 3；right = 1：答案 = 3 + 1 - 1 = 3，更新 best_left = max(3,1 + 1) = 3；right = 2：答案 = max(3,3 + 4 - 2) = 5。掃一遍得 5。",
+      "以 `nums = [3, 1, 4]` 求 `max(best_left + nums[right] - right)`：right = 0 時左側為空，僅更新 best_left = 3；right = 1：答案 = 3 + 1 - 1 = 3，更新 best_left = max(3,1 + 1) = 3；right = 2：答案 = max(3,3 + 4 - 2) = 5。掃一遍得 5。",
     templateNote:
       "把「維護左側最大值」換成計數表、雜湊或有序集合，即可處理「左側有多少符合條件」「左側前驅後繼」等變體。",
   },
@@ -78,7 +78,7 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   fenwick: {
     walkthrough:
-      "以 `add(2,5)` 為例（內部 1-indexed，index = 3）：更新 index 3 → 4 → 8…沿 `index += lowbit(index)` 把途經的桶加 5。`prefixSum(4)`（index = 5）則沿 `index -= lowbit(index)`：5 → 4 → 0，累加途經桶得前綴和。",
+      "以 `add(2, 5)` 為例（內部 1-indexed，index = 3）：更新 index 3 → 4 → 8…沿 `index += lowbit(index)` 把途經的桶加 5。`prefixSum(4)`（index = 5）則沿 `index -= lowbit(index)`：5 → 4 → 0，累加途經桶得前綴和。",
     templateNote:
       "求逆序對：離散化後由右往左，先查「比它小的已出現個數」再 add；需要區間更新區間查詢時改用兩個 BIT。",
     extraPitfalls: [LONG_LONG],
@@ -86,7 +86,7 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   "segment-tree": {
     walkthrough:
-      "以 `[1,2,3,4]`、先「區間 [1,2] 加 5」再「查 [0,2] 的和」為例：更新時被完整覆蓋的節點打 lazy 並更新和；查詢 [0,2] 進入子節點前先 push down，合併得 1 + (2 + 5) + (3 + 5) = 16。",
+      "以 `[1, 2, 3, 4]`、先「區間 [1,2] 加 5」再「查 [0,2] 的和」為例：更新時被完整覆蓋的節點打 lazy 並更新和；查詢 [0,2] 進入子節點前先 push down，合併得 1 + (2 + 5) + (3 + 5) = 16。",
     templateNote:
       "把聚合從「和」換成「最大值」「最小值」「計數」時，pushUp 與 lazy 套用方式要一致；區間賦值用覆蓋型 lazy，區間加用累加型 lazy。",
   },
@@ -100,14 +100,14 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   "monotonic-stack": {
     walkthrough:
-      "以 `nums = [2,1,3]` 求每個元素的下一個更大值：i = 0 推入棧 [0]；i = 1（值 1 < 2）直接推入 [0,1]；i = 2（值 3）彈出 1（答案 = idx2）、再彈出 0（答案 = idx2），推入 [2]。得 [3,3,-1]（值）。",
+      "以 `nums = [2, 1, 3]` 求每個元素的下一個更大值：i = 0 推入棧 [0]；i = 1（值 1 < 2）直接推入 [0,1]；i = 2（值 3）彈出 1（答案 = idx2）、再彈出 0（答案 = idx2），推入 [2]。得 [3,3,-1]（值）。",
     templateNote:
       "求「前一個更小」改成從左掃並維持遞增，或反向掃描；子陣列最小值之和則用貢獻法（左右第一個更小的距離相乘）。",
     complexityNote: "每個元素至多入棧、出棧各一次，總時間均攤 `O(n)`。",
   },
   "two-pointers": {
     walkthrough:
-      "以排序後 `nums = [-1,0,1,2]` 求三數之和為 0：固定 -1，left 指向 0、right 指向 2，和 -1 + 0 + 2 = 1 > 0 → right 左移到值 1，和 -1 + 0 + 1 = 0 命中 [-1,0,1]。",
+      "以排序後 `nums = [-1, 0, 1, 2]` 求三數之和為 0：固定 -1，left 指向 0、right 指向 2，和 -1 + 0 + 2 = 1 > 0 → right 左移到值 1，和 -1 + 0 + 1 = 0 命中 [-1,0,1]。",
     templateNote:
       "目標從 0 換成任意 target 只改判斷；盛最多水改成「移動較矮的一側」，接雨水則維護左右兩側最高。",
     extraPitfalls: [COMPARATOR_STRICT],
@@ -116,7 +116,7 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   "sliding-window": {
     walkthrough:
-      "以「最多 1 個 0 的最長子陣列」、`nums = [1,0,1,1]`：right 擴張並累計 0 的個數，當 0 的個數 > 1 時 left 右移並還原。整段 [0..3] 僅含一個 0，合法且長度 4，即答案。",
+      "以「最多 1 個 0 的最長子陣列」、`nums = [1, 0, 1, 1]`：right 擴張並累計 0 的個數，當 0 的個數 > 1 時 left 右移並還原。整段 [0..3] 僅含一個 0，合法且長度 4，即答案。",
     templateNote:
       "「恰好 K」=「至多 K」-「至多 K-1」；條件為「至少」時改用「總子陣列數 - 不合法數」反算。",
     complexityNote: "left 與 right 各只前進 `O(n)` 步，總時間 `O(n)`。",
@@ -162,7 +162,7 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   "dp-linear": {
     walkthrough:
-      "以打家劫舍 `nums = [2,7,9]`：x = 2 → take = 2、skip = 0；x = 7 → take = skip + 7 = 7、skip = max(0,2) = 2；x = 9 → take = 2 + 9 = 11、skip = max(2,7) = 7 → 取 max = 11。",
+      "以打家劫舍 `nums = [2, 7, 9]`：x = 2 → take = 2、skip = 0；x = 7 → take = skip + 7 = 7、skip = max(0,2) = 2；x = 9 → take = 2 + 9 = 11、skip = max(2,7) = 7 → 取 max = 11。",
     templateNote:
       "LIS 改用「二分維護最小結尾」達 `O(n log n)`；含狀態（持有/未持有）時擴成狀態機 DP。",
     complexityNote: "一次掃描 `O(n)`，滾動變數空間 `O(1)`。",
@@ -221,7 +221,7 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   "math-number-theory": {
     walkthrough:
-      "以 `gcd(12,18)`：18 % 12 = 6，12 % 6 = 0 → gcd = 6；`lcm = 12 / 6 * 18 = 36`（先除再乘避免溢位）。快速冪 `pow(2,10)` 則把指數拆成二進位，逐步平方累乘。",
+      "以 `gcd(12, 18)`：18 % 12 = 6，12 % 6 = 0 → gcd = 6；`lcm = 12 / 6 * 18 = 36`（先除再乘避免溢位）。快速冪 `pow(2, 10)` 則把指數拆成二進位，逐步平方累乘。",
     templateNote:
       "模意義下的除法改乘逆元（質數模用費馬小定理 `a^(p-2)`）；大組合數取模用預處理階乘 + 逆元，模為大質數時用 Lucas。",
     extraPitfalls: [LONG_LONG],
@@ -245,21 +245,21 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   backtracking: {
     walkthrough:
-      "以 `nums = [1,2]` 求所有子集：path = [] 記錄 []；選 1 記錄 [1]；再選 2 記錄 [1,2]；回溯去掉 2、再回溯去掉 1；選 2 記錄 [2]。得 []、[1]、[1,2]、[2]。",
+      "以 `nums = [1, 2]` 求所有子集：path = [] 記錄 []；選 1 記錄 [1]；再選 2 記錄 [1,2]；回溯去掉 2、再回溯去掉 1；選 2 記錄 [2]。得 []、[1]、[1,2]、[2]。",
     templateNote:
       "排列型改用 used 標記而非起始下標；含重複元素先排序，同層跳過 `nums[i]==nums[i-1]` 去重。",
     extraPitfalls: [DFS_STACK],
   },
   "bitwise-contribution": {
     walkthrough:
-      "以 `nums = [1,2]` 求所有 pair 的 XOR 和：第 0 位上 1 有、2 無 → ones = 1,zeros = 1，貢獻 1 * 1 * 1 = 1；第 1 位上 2 有、1 無 → 1 * 1 * 2 = 2。總和 3（即 1^2）。",
+      "以 `nums = [1, 2]` 求所有 pair 的 XOR 和：第 0 位上 1 有、2 無 → ones = 1, zeros = 1，貢獻 1 * 1 * 1 = 1；第 1 位上 2 有、1 無 → 1 * 1 * 2 = 2。總和 3（即 1^2）。",
     templateNote:
       "把每位的 0/1 計數套到 OR/AND 要換公式（OR：至少一個有；AND：全部都有）；求最大 XOR 用高位試填或線性基。",
     complexityNote: "逐位掃描，時間 `O(n * B)`（B 為位數）、空間 `O(1)`。",
   },
   "linear-basis": {
     walkthrough:
-      "以 `[3,5]` 建線性基（3 = 011、5 = 101）：插入 3，最高位 1 → basis[1] = 3；插入 5，最高位 2 無基 → basis[2] = 5。求最大 XOR：ans = 0，試 basis[2] → 5，再試 basis[1] → 5^3 = 6 > 5 採用，得 6。",
+      "以 `[3, 5]` 建線性基（3 = 011、5 = 101）：插入 3，最高位 1 → basis[1] = 3；插入 5，最高位 2 無基 → basis[2] = 5。求最大 XOR：ans = 0，試 basis[2] → 5，再試 basis[1] → 5^3 = 6 > 5 採用，得 6。",
     templateNote:
       "判某值能否表示：用基逐位消去後若歸 0 即可表示；求第 k 小 XOR 需先把基化簡為各位獨立。",
     complexityNote: "每個數插入 `O(B)`，共 `O(n * B)`、空間 `O(B)`。",
@@ -281,7 +281,7 @@ export const lectureProfileExtras: Record<string, LectureProfileExtra> = {
   },
   "string-tools": {
     walkthrough:
-      '以雜湊比較 "abcabc" 的 [0,3) 與 [3,6)：預處理前綴雜湊與冪次後，`hash(0,3)` 與 `hash(3,6)` 各 O(1) 取得；相等代表兩段可能相同，再比對原字串確認。',
+      '以雜湊比較 "abcabc" 的 [0,3) 與 [3,6)：預處理前綴雜湊與冪次後，`hash(0, 3)` 與 `hash(3, 6)` 各 O(1) 取得；相等代表兩段可能相同，再比對原字串確認。',
     templateNote:
       "固定 pattern 找位置用 KMP/Z；任意子串相等比較用雜湊；大量字典詞共用前綴用 Trie——依「昂貴比較的種類」選工具。",
     complexityNote:

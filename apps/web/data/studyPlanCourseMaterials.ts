@@ -62,7 +62,7 @@ const studyPlanCourseMaterials: Record<string, string> = {
     "```cpp\nvector<int> topoSort(int n, vector<vector<int>>& g) {\n    vector<int> indeg(n), order;\n    for (int u = 0; u < n; ++u) for (int v : g[u]) indeg[v]++;\n    queue<int> q;\n    for (int i = 0; i < n; ++i) if (!indeg[i]) q.push(i);\n    while (!q.empty()) {\n        int u = q.front(); q.pop(); order.push_back(u);\n        for (int v : g[u]) if (--indeg[v] == 0) q.push(v);\n    }\n    return order;\n}\n```",
     "**Pattern 3：最短路**\n\n等權 BFS、0-1 BFS、非負權 Dijkstra、有負權 Bellman-Ford / SPFA 判負環。競程中先看邊權範圍再選。",
     "**Pattern 4：最小生成樹**\n\n無向連通圖選 n-1 條邊讓總權最小。Kruskal = sort edges + DSU。",
-    "```cpp\nlong long kruskal(int n, vector<array<int,3>>& edges) {\n    sort(edges.begin(), edges.end());\n    DSU dsu(n);\n    long long total = 0;\n    for (auto [w, u, v] : edges) if (dsu.unite(u, v)) total += w;\n    return total;\n}\n```",
+    "```cpp\nlong long kruskal(int n, vector<array<int, 3>>& edges) {\n    sort(edges.begin(), edges.end());\n    DSU dsu(n);\n    long long total = 0;\n    for (auto [w, u, v] : edges) if (dsu.unite(u, v)) total += w;\n    return total;\n}\n```",
     "**Pattern 5：SCC / bridge / articulation**\n\nSCC 用在有向互相可達，bridge/articulation 用在無向關鍵邊/點。",
     "**Pattern 6：Network flow**\n\n訊號：二分圖匹配、最大流、最小割、帶容量分配。熟悉 Dinic 的 BFS 分層 + DFS 增廣即可處理多數題。",
   ].join("\n\n"),
@@ -79,7 +79,7 @@ const studyPlanCourseMaterials: Record<string, string> = {
 
   grid: [
     "**競程課程講義：網格圖**",
-    "**Pattern 1：Flood fill**\n\n訊號：島嶼數量、連通區域大小、包圍區域。把 `(r,c)` 當節點，四方向或八方向當邊。",
+    "**Pattern 1：Flood fill**\n\n訊號：島嶼數量、連通區域大小、包圍區域。把 `(r, c)` 當節點，四方向或八方向當邊。",
     "```cpp\nint dirs[5] = {1, 0, -1, 0, 1};\nvoid dfs(int r, int c, vector<vector<int>>& grid) {\n    int m = grid.size(), n = grid[0].size();\n    if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] == 0) return;\n    grid[r][c] = 0;\n    for (int d = 0; d < 4; ++d) dfs(r + dirs[d], c + dirs[d + 1], grid);\n}\n```",
     "**Pattern 2：多源 BFS**\n\n訊號：每個格子到最近 source 的距離，例如最近 0、腐爛橘子、邊界逃離。把所有 source 同時入隊。",
     "**Pattern 3：狀態 BFS**\n\n若同一格的未來取決於鑰匙、剩餘消除次數、方向或時間，visited 必須包含額外維度。",
@@ -88,7 +88,7 @@ const studyPlanCourseMaterials: Record<string, string> = {
 
   math: [
     "**競程課程講義：數學題 Pattern**",
-    "**Pattern 1：GCD / LCM / Euclid**\n\n整除、週期、最大公因數。注意 `lcm(a,b)=a/gcd(a,b)*b` 避免溢位。",
+    "**Pattern 1：GCD / LCM / Euclid**\n\n整除、週期、最大公因數。注意 `lcm(a, b)=a/gcd(a, b)*b` 避免溢位。",
     "```cpp\nlong long gcdLl(long long a, long long b) {\n    while (b) tie(a, b) = pair(b, a % b);\n    return a;\n}\n```",
     "**Pattern 2：快速冪與模逆元**\n\n訊號：大指數、組合數取模。若 mod 是質數，`inv(x)=x^(mod-2)`。",
     "```cpp\nlong long modPow(long long a, long long e, long long mod) {\n    long long r = 1;\n    while (e) {\n        if (e & 1) r = r * a % mod;\n        a = a * a % mod;\n        e >>= 1;\n    }\n    return r;\n}\n```",
