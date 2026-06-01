@@ -122,6 +122,24 @@ function findMatchingParen(text: string, openParenIndex: number) {
   return -1;
 }
 
+// Convert backtick-wrapped complexity expressions (e.g. `O(n log n)`,
+// `O(2^{n/2})`) into KaTeX inline math so superscripts render properly. Only
+// touches spans that look like a complexity expression and contain LaTeX-safe
+// characters; spans with CJK or other content (e.g. `O(不同前綴狀態數)`) are
+// left as inline code.
+function complexityToKatex(text: string) {
+  return text.replace(/`([^`\n]+)`/g, (match, inner: string) => {
+    const expr = inner.trim();
+    if (!/^[OΘΩ]\(.+\)$/.test(expr)) return match;
+    if (!/^[A-Za-z0-9\s^_{}/+\-*().,!]+$/.test(expr)) return match;
+    const latex = expr
+      .replace(/\bsqrt\s*\(\s*([^()]*?)\s*\)/g, "\\sqrt{$1}")
+      .replace(/\blog\b/g, "\\log")
+      .replace(/ \* /g, " \\cdot ");
+    return `$${latex}$`;
+  });
+}
+
 function normalizeInlineMath(md: string) {
   return md
     .split(/(```[\s\S]*?```)/g)
@@ -131,7 +149,7 @@ function normalizeInlineMath(md: string) {
       }
 
       // Some study plan content wraps KaTeX inline math in backticks by mistake.
-      return segment
+      return complexityToKatex(segment)
         .replace(/`(\${1,2}[^`\n]+?\${1,2})`/g, "$1")
         .replace(/(^|[^$])\$([^$\n]+)\$(?!\$)/g, (match, prefix, math) => {
           if (shouldRenderAsPlainText(math)) {

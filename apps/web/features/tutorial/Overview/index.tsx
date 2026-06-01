@@ -6,6 +6,10 @@ import { BookOpen, FolderTree, LayoutGrid, Search } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
+import { lectureLearningPath } from "@/data/lectureLearningPath";
+import { lectureMetaSummary } from "@/data/lectureMetaSummary";
+import { lectureDebuggingGuide } from "@/data/lectureDebuggingGuide";
+import { TutorialMarkdownPanel } from "@/features/tutorial/MarkdownPanel";
 
 import { getTutorialSummary } from "./stats";
 import { getTutorialMatches, type TutorialSearchMatch } from "./search";
@@ -50,7 +54,7 @@ function TutorialOverview() {
   const totalPlans = Object.keys(STUDYPLANS).length;
 
   return (
-    <div className="min-h-screen bg-background font-song">
+    <div className="min-h-screen bg-background font-han">
       <div className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 md:px-6 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
         <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-sm">
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
@@ -183,6 +187,29 @@ function TutorialOverview() {
                 searchMatches={planSearchMatches[key] ?? []}
               />
             ))}
+          </div>
+        )}
+
+        {!trimmedQuery && (
+          <div className="mt-6 flex flex-col gap-4">
+            <TutorialMarkdownPanel
+              title="學習順序與前置依賴"
+              description="由易到難的建議路線，箭頭代表前置依賴。"
+              badge="學習路線"
+              content={lectureLearningPath}
+            />
+            <TutorialMarkdownPanel
+              title="通用解題心法"
+              description="貫穿各章節的共通判斷準則，適合讀完各主題後回頭對照。"
+              badge="跨章節整理"
+              content={lectureMetaSummary}
+            />
+            <TutorialMarkdownPanel
+              title="測試與除錯"
+              description="LeetCode 常見的 WA / TLE / RE 自我檢查清單與手動模擬建議。"
+              badge="方法論"
+              content={lectureDebuggingGuide}
+            />
           </div>
         )}
       </div>

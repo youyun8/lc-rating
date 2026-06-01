@@ -338,6 +338,53 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     code: "```cpp\nclass Fenwick {\n    vector<long long> tree_;\n\npublic:\n    explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n    void add(int index, long long delta) {\n        for (++index; index < (int)tree_.size(); index += index & -index) {\n            tree_[index] += delta;\n        }\n    }\n\n    long long prefixSum(int index) const {\n        long long sum = 0;\n        for (++index; index > 0; index -= index & -index) {\n            sum += tree_[index];\n        }\n        return sum;\n    }\n\n    long long rangeSum(int left, int right) const {\n        return prefixSum(right) - (left == 0 ? 0 : prefixSum(left - 1));\n    }\n};\n```",
   },
   {
+    key: "segment-tree",
+    planKeys: ["data_structure"],
+    keywords: [
+      "線段樹",
+      "Lazy",
+      "lazy",
+      "區間更新",
+      "區間查詢",
+      "動態開點",
+      "可持久化",
+      "ST 表",
+      "稀疏表",
+    ],
+    modelProblem:
+      "給定陣列與兩種操作：將區間 `[l, r]` 同加一個值，以及查詢區間 `[l, r]` 的和（或最大值）。線段樹把區間遞迴二分，每個節點維護一段區間的聚合值，並以 lazy 標記支援區間更新。",
+    signals: [
+      "同時要求區間更新與區間查詢。",
+      "查詢的是區間和、區間最大/最小或區間計數。",
+      "操作次數多，無法每次線性掃描。",
+    ],
+    invariants: [
+      "每個節點儲存其負責區間的正確聚合值（lazy 下推前需先套用標記）。",
+      "lazy 標記表示尚未下推給子節點的待處理更新。",
+      "查詢與更新各只走 `O(log n)` 個節點。",
+    ],
+    derivation: [
+      "把陣列區間遞迴二分，葉節點對應單一元素，內部節點維護左右子區間的合併值。",
+      "區間更新時，若當前節點區間被完全包含，直接更新聚合值並打 lazy 標記後返回。",
+      "遞迴進入子節點前先 push down，把父節點的 lazy 下推給左右子。",
+      "查詢時只遞迴與目標區間相交的節點，回傳合併結果。",
+    ],
+    patterns: [
+      "區間加 + 區間和",
+      "區間賦值 + 區間最大",
+      "權值線段樹（值域計數、求第 k 小）",
+      "動態開點（值域大、免離散化）",
+    ],
+    pitfalls: [
+      "忘記 push down 會讓子節點讀到過期值。",
+      "lazy 標記的合併方式需與聚合運算一致：加法可累加，賦值需覆蓋。",
+      "區間加對和的影響是 `delta * 區間長度`，長度需正確參與更新。",
+    ],
+    complexity:
+      "單次更新與查詢皆 `O(log n)`，空間 `O(n)`；動態開點為 `O(操作數 * log 值域)`。",
+    code: "```cpp\n// 區間加、區間求和的 lazy 線段樹\nclass SegmentTree {\n    int n_;\n    vector<long long> sum_, lazy_;\n\n    void pushUp(int node) {\n        sum_[node] = sum_[node * 2] + sum_[node * 2 + 1];\n    }\n\n    void applyAdd(int node, int len, long long delta) {\n        sum_[node] += delta * len;\n        lazy_[node] += delta;\n    }\n\n    void pushDown(int node, int leftLen, int rightLen) {\n        if (lazy_[node] == 0) return;\n        applyAdd(node * 2, leftLen, lazy_[node]);\n        applyAdd(node * 2 + 1, rightLen, lazy_[node]);\n        lazy_[node] = 0;\n    }\n\n    void build(const vector<long long>& a, int node, int l, int r) {\n        if (l == r) {\n            sum_[node] = a[l];\n            return;\n        }\n        int mid = (l + r) / 2;\n        build(a, node * 2, l, mid);\n        build(a, node * 2 + 1, mid + 1, r);\n        pushUp(node);\n    }\n\n    void update(int node, int l, int r, int ql, int qr, long long delta) {\n        if (ql <= l && r <= qr) {\n            applyAdd(node, r - l + 1, delta);\n            return;\n        }\n        int mid = (l + r) / 2;\n        pushDown(node, mid - l + 1, r - mid);\n        if (ql <= mid) update(node * 2, l, mid, ql, qr, delta);\n        if (qr > mid) update(node * 2 + 1, mid + 1, r, ql, qr, delta);\n        pushUp(node);\n    }\n\n    long long query(int node, int l, int r, int ql, int qr) {\n        if (ql <= l && r <= qr) return sum_[node];\n        int mid = (l + r) / 2;\n        pushDown(node, mid - l + 1, r - mid);\n        long long res = 0;\n        if (ql <= mid) res += query(node * 2, l, mid, ql, qr);\n        if (qr > mid) res += query(node * 2 + 1, mid + 1, r, ql, qr);\n        return res;\n    }\n\npublic:\n    explicit SegmentTree(const vector<long long>& a)\n        : n_(a.size()), sum_(a.size() * 4, 0), lazy_(a.size() * 4, 0) {\n        if (n_ > 0) build(a, 1, 0, n_ - 1);\n    }\n\n    void update(int l, int r, long long delta) {\n        update(1, 0, n_ - 1, l, r, delta);\n    }\n\n    long long query(int l, int r) {\n        return query(1, 0, n_ - 1, l, r);\n    }\n};\n```",
+  },
+  {
     key: "dsu",
     planKeys: ["data_structure", "graph"],
     keywords: ["並查集", "DSU", "Union Find", "最小生成樹", "Kruskal"],
@@ -411,6 +458,53 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     code: "```cpp\nclass Solution {\npublic:\n    vector<int> nextGreaterElement(vector<int>& nums) {\n        int n = nums.size();\n        vector<int> answer(n, -1);\n        vector<int> stack;\n\n        for (int i = 0; i < n; ++i) {\n            while (!stack.empty() && nums[stack.back()] < nums[i]) {\n                answer[stack.back()] = i;\n                stack.pop_back();\n            }\n            stack.push_back(i);\n        }\n        return answer;\n    }\n};\n```",
   },
   {
+    key: "two-pointers",
+    planKeys: ["sliding_window"],
+    keywords: [
+      "相向雙指標",
+      "相向",
+      "背向雙指標",
+      "背向",
+      "對撞指標",
+      "三數之和",
+      "四數之和",
+      "兩數之和",
+      "接雨水",
+      "盛最多水",
+    ],
+    modelProblem:
+      "給定已排序（或可排序）的陣列，左右兩指標從兩端向中間移動：依當前兩端的組合與目標的大小關係決定移動哪一端，在線性時間內找出滿足條件的配對或極值。",
+    signals: [
+      "陣列已排序，或排序後不影響答案。",
+      "要找和為定值的配對、三元組，或最大容積、最大面積。",
+      "暴力枚舉所有 pair 為 `O(n^2)` 過慢。",
+    ],
+    invariants: [
+      "左指標左側與右指標右側的元素都已被排除，不會再成為更好的答案。",
+      "每一步至少有一個指標向內移動，總移動次數為 `O(n)`。",
+    ],
+    derivation: [
+      "排序後置左指標於開頭、右指標於結尾。",
+      "計算當前兩端的組合值並與目標比較。",
+      "和過小時左指標右移以增大，和過大時右指標左移以減小；相等則記錄答案並同時收縮。",
+      "三數之和則固定一個數，對其餘部分做相向雙指標，並跳過重複值去重。",
+    ],
+    patterns: [
+      "排序後相向找配對",
+      "三數之和 / 四數之和",
+      "盛最多水的容器",
+      "接雨水（左右指標 + 兩側最高）",
+    ],
+    pitfalls: [
+      "未跳過重複元素會產生重複答案。",
+      "相向雙指標要求排序或單調性，無序且不可排序時不適用。",
+      "邊界 `left < right` 與相等時的收縮方向要明確。",
+    ],
+    complexity:
+      "排序 `O(n log n)`，雙指標掃描 `O(n)`；若輸入已排序則整體 `O(n)`。",
+    code: "```cpp\n// 三數之和：排序 + 固定一個數 + 相向雙指標\nclass Solution {\npublic:\n    vector<vector<int>> threeSum(vector<int>& nums) {\n        sort(nums.begin(), nums.end());\n        int n = nums.size();\n        vector<vector<int>> ans;\n        for (int i = 0; i + 2 < n; ++i) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            if (nums[i] > 0) break;\n            int left = i + 1, right = n - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum < 0) {\n                    left++;\n                } else if (sum > 0) {\n                    right--;\n                } else {\n                    ans.push_back({nums[i], nums[left], nums[right]});\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++;\n                    right--;\n                }\n            }\n        }\n        return ans;\n    }\n};\n```",
+  },
+  {
     key: "sliding-window",
     planKeys: ["sliding_window"],
     keywords: [
@@ -450,6 +544,148 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity: "左右指標各掃過一次，時間 `O(n)`。",
     code: "```cpp\nclass Solution {\npublic:\n    long long atMostKDistinct(vector<int>& nums, int k) {\n        unordered_map<int, int> count;\n        long long answer = 0;\n        int left = 0;\n\n        for (int right = 0; right < (int)nums.size(); ++right) {\n            if (count[nums[right]]++ == 0) k--;\n            while (k < 0) {\n                if (--count[nums[left]] == 0) k++;\n                left++;\n            }\n            answer += right - left + 1;\n        }\n        return answer;\n    }\n};\n```",
+  },
+  {
+    key: "interval-dp",
+    planKeys: ["dynamic_programming"],
+    keywords: ["區間 DP", "區間", "回文", "石子合併", "戳氣球", "合併石子"],
+    modelProblem:
+      "答案由「先解決較小的子區間、再合併成大區間」構成。狀態 `dp[i][j]` 表示處理區間 `[i, j]` 的最佳值，轉移時枚舉區間內的分割點或最後操作的位置。",
+    signals: [
+      "答案與一段連續區間有關，且大區間由小區間合併。",
+      "存在「最後合併的位置」或「最後戳破的元素」這類決策。",
+      "回文、括號、合併石子、戳氣球等題型。",
+    ],
+    invariants: [
+      "`dp[i][j]` 只依賴長度更短的子區間。",
+      "列舉順序需保證較短區間先算好（按區間長度由小到大）。",
+    ],
+    derivation: [
+      "定義 `dp[i][j]` 為區間 `[i, j]` 的答案。",
+      "枚舉分割點 k 或最後操作的元素 k，把區間拆成兩段子問題。",
+      "轉移如 `dp[i][j] = best(dp[i][k] + 合併代價 + dp[k+1][j])`，戳氣球類為 `dp[i][k-1] + 戳破k + dp[k+1][j]`。",
+      "按區間長度遞增填表，邊界為長度 1 或空區間。",
+    ],
+    patterns: [
+      "最長回文子序列",
+      "戳氣球",
+      "合併石子",
+      "括號匹配 / 多邊形三角剖分",
+    ],
+    pitfalls: [
+      "列舉順序錯（未按長度遞增）會讀到未算好的子區間。",
+      "邊界（單一元素、空區間）初始化要正確。",
+      "戳氣球類需在兩端補虛擬元素。",
+    ],
+    complexity: "狀態 `O(n^2)`，每個狀態枚舉分割點 `O(n)`，整體 `O(n^3)`。",
+    code: "```cpp\n// 最長回文子序列：區間 DP\nclass Solution {\npublic:\n    int longestPalindromeSubseq(string s) {\n        int n = s.size();\n        vector<vector<int>> dp(n, vector<int>(n, 0));\n        for (int i = n - 1; i >= 0; --i) {\n            dp[i][i] = 1;\n            for (int j = i + 1; j < n; ++j) {\n                if (s[i] == s[j]) {\n                    dp[i][j] = dp[i + 1][j - 1] + 2;\n                } else {\n                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);\n                }\n            }\n        }\n        return dp[0][n - 1];\n    }\n};\n```",
+  },
+  {
+    key: "tree-dp",
+    planKeys: ["dynamic_programming"],
+    keywords: ["樹形 DP", "樹型 DP", "樹形", "換根", "樹的直徑", "樹上"],
+    modelProblem:
+      "在一棵樹上，每個節點的答案由其子樹資訊合併而來。以一次後序 DFS 計算每個節點的狀態（例如選或不選該節點），父節點再彙整孩子的結果。",
+    signals: [
+      "輸入是一棵樹或無環連通圖。",
+      "答案可由子樹結果合併（選/不選、路徑、直徑、覆蓋）。",
+      "需要對每個節點求一個值，或對整棵樹求全域最優。",
+    ],
+    invariants: [
+      "後序 DFS 中，處理父節點前其所有孩子的狀態皆已算好。",
+      "節點狀態只描述其子樹內的資訊；換根題需第二次 DFS 下推父側資訊。",
+    ],
+    derivation: [
+      "以任一節點為根，DFS 時避開 parent。",
+      "為每個節點定義狀態，例如 `dp[u][0/1]` 表示不選/選 u 時子樹的最優值。",
+      "合併孩子：`dp[u][1] += dp[v][0]`、`dp[u][0] += max(dp[v][0], dp[v][1])`。",
+      "全域答案在根或回溯過程更新（如直徑為每點左右最長鏈之和）。",
+    ],
+    patterns: [
+      "打家劫舍 III（選/不選）",
+      "樹的直徑",
+      "樹形背包",
+      "換根 DP（第二次 DFS 下推父側資訊）",
+    ],
+    pitfalls: [
+      "遞迴未避開 parent 會無限遞迴。",
+      "節點數大時遞迴過深可能爆 stack，必要時改顯式堆疊。",
+      "換根題的父側資訊需另一次 DFS，不能只靠子樹狀態。",
+    ],
+    complexity: "每個節點與邊各處理常數次，整體 `O(n)`。",
+    code: "```cpp\n// 打家劫舍 III：樹形 DP（選/不選）\nclass Solution {\n    pair<int, int> dfs(TreeNode* node) {\n        if (!node) return {0, 0}; // {不選此節點, 選此節點}\n        auto [leftSkip, leftTake] = dfs(node->left);\n        auto [rightSkip, rightTake] = dfs(node->right);\n        int take = node->val + leftSkip + rightSkip;\n        int skip = max(leftSkip, leftTake) + max(rightSkip, rightTake);\n        return {skip, take};\n    }\n\npublic:\n    int rob(TreeNode* root) {\n        auto [skip, take] = dfs(root);\n        return max(skip, take);\n    }\n};\n```",
+  },
+  {
+    key: "digit-dp",
+    planKeys: ["dynamic_programming"],
+    keywords: ["數位 DP", "數位", "數字統計", "數位和"],
+    modelProblem:
+      "統計 `[0, n]`（或 `[lo, hi]`）範圍內滿足某種數位性質的整數個數，例如不含某數字、相鄰數位差受限、數位和符合條件。逐位從高到低填，沿途記錄是否仍貼著上界與必要狀態。",
+    signals: [
+      "答案是「某範圍內滿足數位條件的數的個數」。",
+      "範圍上界很大（可達 `1e9` 以上），無法逐一枚舉。",
+      "條件只與各數位及其相鄰關係有關。",
+    ],
+    invariants: [
+      "`tight` 表示目前前綴是否仍等於上界前綴；為真時當前位的上限受 n 限制。",
+      "`tight` 為假時的子問題與具體上界無關，可記憶化重用。",
+    ],
+    derivation: [
+      "把 n 拆成數位陣列，從最高位開始逐位選擇。",
+      "維護 `tight`（是否貼上界）與題目所需狀態（前一位、是否已開始、數位和等）。",
+      "當前位的可選範圍是 `0..(tight ? digit[pos] : 9)`。",
+      "`tight` 為假的狀態以記憶化快取，遞迴到末位時回傳是否合法。",
+    ],
+    patterns: [
+      "統計不含 / 含特定數字的數",
+      "相鄰數位差限制",
+      "數位和 / 整除性質計數",
+      "區間答案 = f(hi) - f(lo - 1)",
+    ],
+    pitfalls: [
+      "前導零需用 `started` 旗標處理，否則會誤判數位性質。",
+      "記憶化只能快取 `tight` 為假的狀態。",
+      "區間查詢用前綴相減時注意 `lo - 1` 的邊界。",
+    ],
+    complexity:
+      "狀態為 `位數 * 狀態維度`，每位枚舉約 10 個數字，整體約 `O(位數 * 狀態數 * 10)`。",
+    code: "```cpp\n// 統計 [0, n] 中不含數字 4 的整數個數（數位 DP 範本）\nclass Solution {\n    string digits_;\n    vector<int> memo_; // 只快取 tight=false 且 started=true 的結果\n\n    int dfs(int pos, bool tight, bool started) {\n        if (pos == (int)digits_.size()) return 1;\n        if (!tight && started && memo_[pos] != -1) return memo_[pos];\n        int hi = tight ? digits_[pos] - '0' : 9;\n        int res = 0;\n        for (int d = 0; d <= hi; ++d) {\n            if (d == 4) continue;\n            res += dfs(pos + 1, tight && d == hi, started || d > 0);\n        }\n        if (!tight && started) memo_[pos] = res;\n        return res;\n    }\n\npublic:\n    int countNoFour(int n) {\n        digits_ = to_string(n);\n        memo_.assign(digits_.size(), -1);\n        return dfs(0, true, false);\n    }\n};\n```",
+  },
+  {
+    key: "state-compression-dp",
+    planKeys: ["dynamic_programming"],
+    keywords: ["狀態壓縮", "狀壓", "bitmask", "旅行商", "TSP", "子集"],
+    modelProblem:
+      "當「已選集合」是狀態的一部分且元素數很小（約 `n <= 20`）時，用一個整數的二進位位元表示集合，`dp[mask]` 表示集合 mask 已完成時的最優值。",
+    signals: [
+      "需要記錄「哪些元素已使用 / 已訪問」且 `n` 很小（多為 `<= 20`）。",
+      "旅行商、任務指派、棋盤鋪放、集合覆蓋等。",
+      "暴力枚舉所有排列 `O(n!)` 過大。",
+    ],
+    invariants: [
+      "mask 的第 i 位為 1 表示元素 i 已包含在當前狀態。",
+      "轉移只在合法的位元變化間進行（加入一個尚未選的元素）。",
+    ],
+    derivation: [
+      "以整數 mask 表示已選集合，狀態維度可再加「目前所在位置」等。",
+      "列舉 mask 由小到大，或對每個 mask 枚舉下一個加入的元素。",
+      "轉移如 `dp[mask | (1<<j)][j] = min(dp[mask][i] + cost[i][j])`。",
+      "答案在 `mask == (1<<n) - 1`（全選）時取得。",
+    ],
+    patterns: [
+      "旅行商最短路徑（TSP）",
+      "任務指派最小成本",
+      "子集狀壓 / SOS DP",
+      "棋盤逐行狀壓",
+    ],
+    pitfalls: [
+      "`n` 超過約 22 時 `2^n` 狀態爆量，狀壓不再適用。",
+      "位元運算優先序低，`mask | 1 << j` 需括號寫成 `mask | (1 << j)`。",
+      "枚舉子集要用 `for (int s = mask; s; s = (s - 1) & mask)`。",
+    ],
+    complexity:
+      "TSP 為 `O(n^2 * 2^n)`；一般狀壓約 `O(2^n * n)` 至 `O(3^n)`（含子集枚舉）。",
+    code: "```cpp\n// 旅行商最短哈密頓迴路：bitmask DP\nclass Solution {\npublic:\n    int shortestTour(vector<vector<int>>& dist) {\n        int n = dist.size();\n        int full = (1 << n) - 1;\n        const int kInf = 1e9;\n        vector<vector<int>> dp(1 << n, vector<int>(n, kInf));\n        dp[1][0] = 0; // 從 0 出發，已訪問 {0}\n        for (int mask = 1; mask <= full; ++mask) {\n            if (!(mask & 1)) continue;\n            for (int i = 0; i < n; ++i) {\n                if (dp[mask][i] == kInf || !(mask & (1 << i))) continue;\n                for (int j = 0; j < n; ++j) {\n                    if (mask & (1 << j)) continue;\n                    int next = mask | (1 << j);\n                    dp[next][j] = min(dp[next][j], dp[mask][i] + dist[i][j]);\n                }\n            }\n        }\n        int ans = kInf;\n        for (int i = 0; i < n; ++i) ans = min(ans, dp[full][i] + dist[i][0]);\n        return ans;\n    }\n};\n```",
   },
   {
     key: "knapsack",
@@ -802,7 +1038,6 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "直徑",
       "最近公共祖先",
       "二叉搜索樹",
-      "回溯",
     ],
     modelProblem:
       "給定鏈結串列或二元樹，藉由指標操作、前序傳遞狀態與後序合併子樹資訊，完成反轉、刪除、路徑或子樹問題。",
@@ -837,6 +1072,52 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity: "通常 `O(n)` 時間；鏈表額外空間 `O(1)`，樹遞迴棧 `O(height)`。",
     code: "```cpp\nstruct TreeNode {\n    int val;\n    TreeNode* left;\n    TreeNode* right;\n};\n\nclass Solution {\n    int answer_ = 0;\n\n    int depth(TreeNode* node) {\n        if (node == nullptr) return 0;\n        int left_depth = depth(node->left);\n        int right_depth = depth(node->right);\n        answer_ = max(answer_, left_depth + right_depth);\n        return max(left_depth, right_depth) + 1;\n    }\n\npublic:\n    int diameterOfBinaryTree(TreeNode* root) {\n        depth(root);\n        return answer_;\n    }\n};\n```",
+  },
+  {
+    key: "backtracking",
+    planKeys: ["trees"],
+    keywords: [
+      "回溯",
+      "子集",
+      "排列",
+      "組合",
+      "分割",
+      "全排列",
+      "N 皇后",
+      "括號生成",
+      "電話號碼",
+    ],
+    modelProblem:
+      "枚舉所有可行的子集、排列、組合或分割方案。以 DFS 在決策樹上「選擇 → 遞迴 → 撤銷選擇」，必要時加入剪枝避免無效分支。",
+    signals: [
+      "要求列出所有方案，而非只求一個最優值或計數。",
+      "答案是子集、排列、組合、分割或棋盤放置。",
+      "資料規模小，方案數本身可接受。",
+    ],
+    invariants: [
+      "遞迴每層代表一個決策位置；進入下一層前已做出選擇，回到本層前已撤銷。",
+      "用起始下標或 used 標記避免重複選取同一元素。",
+    ],
+    derivation: [
+      "設計遞迴狀態：目前處理到的位置與已選的路徑 path。",
+      "在每層枚舉所有可選分支，選擇後遞迴、回來後撤銷（回溯）。",
+      "到達終止條件（path 長度達標或位置走完）時記錄一份答案的副本。",
+      "去重：先排序，同層相同元素只選一次（跳過 `nums[i] == nums[i-1]`）。",
+    ],
+    patterns: [
+      "子集型（每個元素選或不選）",
+      "組合型（固定長度，用起始下標避免重複）",
+      "排列型（used 標記）",
+      "分割型 / N 皇后 / 括號生成",
+    ],
+    pitfalls: [
+      "忘記撤銷選擇會污染其他分支。",
+      "含重複元素時未排序去重會產生重複方案。",
+      "記錄答案時需存路徑的副本，且終止條件與時機要正確。",
+    ],
+    complexity:
+      "與方案數同階：子集 `O(2^n * n)`、排列 `O(n! * n)`、組合視題而定。",
+    code: "```cpp\n// 子集型與排列型回溯範本\nclass Solution {\npublic:\n    // 子集：每個元素選或不選\n    vector<vector<int>> subsets(vector<int>& nums) {\n        vector<vector<int>> ans;\n        vector<int> path;\n        function<void(int)> dfs = [&](int start) {\n            ans.push_back(path);\n            for (int i = start; i < (int)nums.size(); ++i) {\n                path.push_back(nums[i]);\n                dfs(i + 1);\n                path.pop_back(); // 撤銷選擇\n            }\n        };\n        dfs(0);\n        return ans;\n    }\n\n    // 排列：用 used 標記避免重複使用同一元素\n    vector<vector<int>> permute(vector<int>& nums) {\n        vector<vector<int>> ans;\n        vector<int> path;\n        vector<char> used(nums.size(), false);\n        function<void()> dfs = [&]() {\n            if (path.size() == nums.size()) {\n                ans.push_back(path);\n                return;\n            }\n            for (int i = 0; i < (int)nums.size(); ++i) {\n                if (used[i]) continue;\n                used[i] = true;\n                path.push_back(nums[i]);\n                dfs();\n                path.pop_back();\n                used[i] = false;\n            }\n        };\n        dfs();\n        return ans;\n    }\n};\n```",
   },
   {
     key: "bitwise-contribution",
