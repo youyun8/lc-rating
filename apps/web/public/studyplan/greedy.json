@@ -10,163 +10,10 @@
       "isLeaf": false,
       "problems": [
         {
-          "id": "LCP 40",
-          "title": "心算挑戰",
-          "slug": "uOAnQW",
-          "src": "https://leetcode.cn/problems/uOAnQW/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "945",
-          "title": "使陣列唯一的最小增量",
-          "slug": "minimum-increment-to-make-array-unique",
-          "src": "https://leetcode.cn/problems/minimum-increment-to-make-array-unique/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "948",
-          "title": "令牌放置",
-          "slug": "bag-of-tokens",
-          "src": "https://leetcode.cn/problems/bag-of-tokens/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "976",
-          "title": "三角形的最大周長",
-          "slug": "largest-perimeter-triangle",
-          "src": "https://leetcode.cn/problems/largest-perimeter-triangle/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1005",
-          "title": "K 次取反後最大化的陣列和",
-          "slug": "maximize-sum-of-array-after-k-negations",
-          "src": "https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1196",
-          "title": "最多可以買到的蘋果數量",
-          "slug": "how-many-apples-can-you-put-into-the-basket",
-          "src": "https://leetcode.cn/problems/how-many-apples-can-you-put-into-the-basket/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "1262",
-          "title": "可被三整除的最大和",
-          "slug": "greatest-sum-divisible-by-three",
-          "src": "https://leetcode.cn/problems/greatest-sum-divisible-by-three/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1338",
-          "title": "陣列大小減半",
-          "slug": "reduce-array-size-to-the-half",
-          "src": "https://leetcode.cn/problems/reduce-array-size-to-the-half/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1403",
-          "title": "非遞增順序的最小子序列",
-          "slug": "minimum-subsequence-in-non-increasing-order",
-          "src": "https://leetcode.cn/problems/minimum-subsequence-in-non-increasing-order/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1481",
-          "title": "不同整數的最少數目",
-          "slug": "least-number-of-unique-integers-after-k-removals",
-          "src": "https://leetcode.cn/problems/least-number-of-unique-integers-after-k-removals/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1509",
-          "title": "三次操作後最大值與最小值的最小差",
-          "slug": "minimum-difference-between-largest-and-smallest-value-in-three-moves",
-          "src": "https://leetcode.cn/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1561",
-          "title": "你可以獲得的最大硬幣數目",
-          "slug": "maximum-number-of-coins-you-can-get",
-          "src": "https://leetcode.cn/problems/maximum-number-of-coins-you-can-get/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1578",
-          "title": "使繩子變成彩色的最短時間",
-          "slug": "minimum-time-to-make-rope-colorful",
-          "src": "https://leetcode.cn/problems/minimum-time-to-make-rope-colorful/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1647",
-          "title": "字元頻次唯一的最小刪除次數",
-          "slug": "minimum-deletions-to-make-character-frequencies-unique",
-          "src": "https://leetcode.cn/problems/minimum-deletions-to-make-character-frequencies-unique/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1710",
-          "title": "卡車上的最大單元數",
-          "slug": "maximum-units-on-a-truck",
-          "src": "https://leetcode.cn/problems/maximum-units-on-a-truck/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1775",
-          "title": "透過最少操作次數使陣列的和相等",
-          "slug": "equal-sum-arrays-with-minimum-number-of-operations",
-          "src": "https://leetcode.cn/problems/equal-sum-arrays-with-minimum-number-of-operations/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1833",
-          "title": "雪糕的最大數量",
-          "slug": "maximum-ice-cream-bars",
-          "src": "https://leetcode.cn/problems/maximum-ice-cream-bars/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1846",
-          "title": "減小和重新排列陣列後的最大元素",
-          "slug": "maximum-element-after-decreasing-and-rearranging",
-          "src": "https://leetcode.cn/problems/maximum-element-after-decreasing-and-rearranging/",
+          "id": "624",
+          "title": "陣列列表中的最大距離",
+          "slug": "maximum-distance-in-arrays",
+          "src": "https://leetcode.cn/problems/maximum-distance-in-arrays/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -181,42 +28,6 @@
           "isPremium": true
         },
         {
-          "id": "2099",
-          "title": "找到和最大的長度為 K 的子序列",
-          "slug": "find-subsequence-of-length-k-with-the-largest-sum",
-          "src": "https://leetcode.cn/problems/find-subsequence-of-length-k-with-the-largest-sum/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2126",
-          "title": "摧毀小行星",
-          "slug": "destroying-asteroids",
-          "src": "https://leetcode.cn/problems/destroying-asteroids/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2141",
-          "title": "同時執行 N 臺電腦的最長時間",
-          "slug": "maximum-running-time-of-n-computers",
-          "src": "https://leetcode.cn/problems/maximum-running-time-of-n-computers/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2178",
-          "title": "拆分成最多數目的正偶數之和",
-          "slug": "maximum-split-of-positive-even-integers",
-          "src": "https://leetcode.cn/problems/maximum-split-of-positive-even-integers/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2214",
           "title": "通關遊戲所需的最低生命值",
           "slug": "minimum-health-to-beat-game",
@@ -224,24 +35,6 @@
           "solution": null,
           "score": null,
           "isPremium": true
-        },
-        {
-          "id": "2279",
-          "title": "裝滿石頭的背包的最大數量",
-          "slug": "maximum-bags-with-full-capacity-of-rocks",
-          "src": "https://leetcode.cn/problems/maximum-bags-with-full-capacity-of-rocks/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2333",
-          "title": "最小差值平方和",
-          "slug": "minimum-sum-of-squared-difference",
-          "src": "https://leetcode.cn/problems/minimum-sum-of-squared-difference/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
         },
         {
           "id": "2548",
@@ -253,15 +46,6 @@
           "isPremium": true
         },
         {
-          "id": "2554",
-          "title": "從一個範圍內選擇最多整數 I",
-          "slug": "maximum-number-of-integers-to-choose-from-a-range-i",
-          "src": "https://leetcode.cn/problems/maximum-number-of-integers-to-choose-from-a-range-i/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2557",
           "title": "從一個範圍內選擇最多整數 II",
           "slug": "maximum-number-of-integers-to-choose-from-a-range-ii",
@@ -271,46 +55,55 @@
           "isPremium": true
         },
         {
-          "id": "2567",
-          "title": "修改兩個元素的最小分數",
-          "slug": "minimum-score-by-changing-two-elements",
-          "src": "https://leetcode.cn/problems/minimum-score-by-changing-two-elements/",
+          "id": "3119",
+          "title": "最大數量的可修復坑窪",
+          "slug": "maximum-number-of-potholes-that-can-be-fixed",
+          "src": "https://leetcode.cn/problems/maximum-number-of-potholes-that-can-be-fixed/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "3476",
+          "title": "最大化任務分配的利潤",
+          "slug": "maximize-profit-from-task-assignment",
+          "src": "https://leetcode.cn/problems/maximize-profit-from-task-assignment/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "3730",
+          "title": "跳躍燃燒的最大卡路里",
+          "slug": "maximum-calories-burnt-from-jumps",
+          "src": "https://leetcode.cn/problems/maximum-calories-burnt-from-jumps/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "3763",
+          "title": "帶閾值約束的最大總和",
+          "slug": "maximum-total-sum-with-threshold-constraints",
+          "src": "https://leetcode.cn/problems/maximum-total-sum-with-threshold-constraints/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "LCP 40",
+          "title": "心算挑戰",
+          "slug": "uOAnQW",
+          "src": "https://leetcode.cn/problems/uOAnQW/",
           "solution": null,
           "score": null,
           "isPremium": false
         },
         {
-          "id": "2587",
-          "title": "重排陣列以得到最大字首分數",
-          "slug": "rearrange-array-to-maximize-prefix-score",
-          "src": "https://leetcode.cn/problems/rearrange-array-to-maximize-prefix-score/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2611",
-          "title": "老鼠和乳酪",
-          "slug": "mice-and-cheese",
-          "src": "https://leetcode.cn/problems/mice-and-cheese/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2971",
-          "title": "找到最大周長的多邊形",
-          "slug": "find-polygon-with-the-largest-perimeter",
-          "src": "https://leetcode.cn/problems/find-polygon-with-the-largest-perimeter/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3010",
-          "title": "將陣列分成最小總代價的子陣列 I",
-          "slug": "divide-an-array-into-subarrays-with-minimum-cost-i",
-          "src": "https://leetcode.cn/problems/divide-an-array-into-subarrays-with-minimum-cost-i/",
+          "id": "LCS 02",
+          "title": "完成一半題目",
+          "slug": "WqXACV",
+          "src": "https://leetcode.cn/problems/WqXACV/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -325,73 +118,46 @@
           "isPremium": false
         },
         {
-          "id": "3075",
-          "title": "幸福值最大化的選擇方案",
-          "slug": "maximize-happiness-of-selected-children",
-          "src": "https://leetcode.cn/problems/maximize-happiness-of-selected-children/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3119",
-          "title": "最大數量的可修復坑窪",
-          "slug": "maximum-number-of-potholes-that-can-be-fixed",
-          "src": "https://leetcode.cn/problems/maximum-number-of-potholes-that-can-be-fixed/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3301",
-          "title": "高度互不相同的最大塔高和",
-          "slug": "maximize-the-total-height-of-unique-towers",
-          "src": "https://leetcode.cn/problems/maximize-the-total-height-of-unique-towers/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3397",
-          "title": "執行操作後不同元素的最大數量",
-          "slug": "maximum-number-of-distinct-elements-after-operations",
-          "src": "https://leetcode.cn/problems/maximum-number-of-distinct-elements-after-operations/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3457",
-          "title": "喫披薩",
-          "slug": "eat-pizzas",
-          "src": "https://leetcode.cn/problems/eat-pizzas/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3462",
-          "title": "提取至多 K 個元素的最大總和",
-          "slug": "maximum-sum-with-at-most-k-elements",
-          "src": "https://leetcode.cn/problems/maximum-sum-with-at-most-k-elements/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3476",
-          "title": "最大化任務分配的利潤",
-          "slug": "maximize-profit-from-task-assignment",
-          "src": "https://leetcode.cn/problems/maximize-profit-from-task-assignment/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
           "id": "3545",
           "title": "不同字元數量最多為 K 時的最少刪除數",
           "slug": "minimum-deletions-for-at-most-k-distinct-characters",
           "src": "https://leetcode.cn/problems/minimum-deletions-for-at-most-k-distinct-characters/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3745",
+          "title": "三元素表示式的最大值",
+          "slug": "maximize-expression-of-three-elements",
+          "src": "https://leetcode.cn/problems/maximize-expression-of-three-elements/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1196",
+          "title": "最多可以買到的蘋果數量",
+          "slug": "how-many-apples-can-you-put-into-the-basket",
+          "src": "https://leetcode.cn/problems/how-many-apples-can-you-put-into-the-basket/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "2279",
+          "title": "裝滿石頭的背包的最大數量",
+          "slug": "maximum-bags-with-full-capacity-of-rocks",
+          "src": "https://leetcode.cn/problems/maximum-bags-with-full-capacity-of-rocks/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1833",
+          "title": "雪糕的最大數量",
+          "slug": "maximum-ice-cream-bars",
+          "src": "https://leetcode.cn/problems/maximum-ice-cream-bars/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -406,10 +172,163 @@
           "isPremium": false
         },
         {
-          "id": "3645",
-          "title": "最優啟用順序得到的最大總和",
-          "slug": "maximum-total-from-optimal-activation-order",
-          "src": "https://leetcode.cn/problems/maximum-total-from-optimal-activation-order/",
+          "id": "1005",
+          "title": "K 次取反後最大化的陣列和",
+          "slug": "maximize-sum-of-array-after-k-negations",
+          "src": "https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1481",
+          "title": "不同整數的最少數目",
+          "slug": "least-number-of-unique-integers-after-k-removals",
+          "src": "https://leetcode.cn/problems/least-number-of-unique-integers-after-k-removals/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1403",
+          "title": "非遞增順序的最小子序列",
+          "slug": "minimum-subsequence-in-non-increasing-order",
+          "src": "https://leetcode.cn/problems/minimum-subsequence-in-non-increasing-order/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3010",
+          "title": "將陣列分成最小總代價的子陣列 I",
+          "slug": "divide-an-array-into-subarrays-with-minimum-cost-i",
+          "src": "https://leetcode.cn/problems/divide-an-array-into-subarrays-with-minimum-cost-i/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1338",
+          "title": "陣列大小減半",
+          "slug": "reduce-array-size-to-the-half",
+          "src": "https://leetcode.cn/problems/reduce-array-size-to-the-half/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1984",
+          "title": "學生分數的最小差值",
+          "slug": "minimum-difference-between-highest-and-lowest-of-k-scores",
+          "src": "https://leetcode.cn/problems/minimum-difference-between-highest-and-lowest-of-k-scores/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1710",
+          "title": "卡車上的最大單元數",
+          "slug": "maximum-units-on-a-truck",
+          "src": "https://leetcode.cn/problems/maximum-units-on-a-truck/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3075",
+          "title": "幸福值最大化的選擇方案",
+          "slug": "maximize-happiness-of-selected-children",
+          "src": "https://leetcode.cn/problems/maximize-happiness-of-selected-children/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2554",
+          "title": "從一個範圍內選擇最多整數 I",
+          "slug": "maximum-number-of-integers-to-choose-from-a-range-i",
+          "src": "https://leetcode.cn/problems/maximum-number-of-integers-to-choose-from-a-range-i/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2126",
+          "title": "摧毀小行星",
+          "slug": "destroying-asteroids",
+          "src": "https://leetcode.cn/problems/destroying-asteroids/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2587",
+          "title": "重排陣列以得到最大字首分數",
+          "slug": "rearrange-array-to-maximize-prefix-score",
+          "src": "https://leetcode.cn/problems/rearrange-array-to-maximize-prefix-score/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "976",
+          "title": "三角形的最大周長",
+          "slug": "largest-perimeter-triangle",
+          "src": "https://leetcode.cn/problems/largest-perimeter-triangle/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1561",
+          "title": "你可以獲得的最大硬幣數目",
+          "slug": "maximum-number-of-coins-you-can-get",
+          "src": "https://leetcode.cn/problems/maximum-number-of-coins-you-can-get/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3462",
+          "title": "提取至多 K 個元素的最大總和",
+          "slug": "maximum-sum-with-at-most-k-elements",
+          "src": "https://leetcode.cn/problems/maximum-sum-with-at-most-k-elements/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2099",
+          "title": "找到和最大的長度為 K 的子序列",
+          "slug": "find-subsequence-of-length-k-with-the-largest-sum",
+          "src": "https://leetcode.cn/problems/find-subsequence-of-length-k-with-the-largest-sum/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "945",
+          "title": "使陣列唯一的最小增量",
+          "slug": "minimum-increment-to-make-array-unique",
+          "src": "https://leetcode.cn/problems/minimum-increment-to-make-array-unique/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3301",
+          "title": "高度互不相同的最大塔高和",
+          "slug": "maximize-the-total-height-of-unique-towers",
+          "src": "https://leetcode.cn/problems/maximize-the-total-height-of-unique-towers/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1846",
+          "title": "減小和重新排列陣列後的最大元素",
+          "slug": "maximum-element-after-decreasing-and-rearranging",
+          "src": "https://leetcode.cn/problems/maximum-element-after-decreasing-and-rearranging/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -424,31 +343,76 @@
           "isPremium": false
         },
         {
-          "id": "3730",
-          "title": "跳躍燃燒的最大卡路里",
-          "slug": "maximum-calories-burnt-from-jumps",
-          "src": "https://leetcode.cn/problems/maximum-calories-burnt-from-jumps/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3745",
-          "title": "三元素表示式的最大值",
-          "slug": "maximize-expression-of-three-elements",
-          "src": "https://leetcode.cn/problems/maximize-expression-of-three-elements/",
+          "id": "1647",
+          "title": "字元頻次唯一的最小刪除次數",
+          "slug": "minimum-deletions-to-make-character-frequencies-unique",
+          "src": "https://leetcode.cn/problems/minimum-deletions-to-make-character-frequencies-unique/",
           "solution": null,
           "score": null,
           "isPremium": false
         },
         {
-          "id": "3763",
-          "title": "帶閾值約束的最大總和",
-          "slug": "maximum-total-sum-with-threshold-constraints",
-          "src": "https://leetcode.cn/problems/maximum-total-sum-with-threshold-constraints/",
+          "id": "2971",
+          "title": "找到最大周長的多邊形",
+          "slug": "find-polygon-with-the-largest-perimeter",
+          "src": "https://leetcode.cn/problems/find-polygon-with-the-largest-perimeter/",
           "solution": null,
           "score": null,
-          "isPremium": true
+          "isPremium": false
+        },
+        {
+          "id": "2178",
+          "title": "拆分成最多數目的正偶數之和",
+          "slug": "maximum-split-of-positive-even-integers",
+          "src": "https://leetcode.cn/problems/maximum-split-of-positive-even-integers/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1578",
+          "title": "使繩子變成彩色的最短時間",
+          "slug": "minimum-time-to-make-rope-colorful",
+          "src": "https://leetcode.cn/problems/minimum-time-to-make-rope-colorful/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2567",
+          "title": "修改兩個元素的最小分數",
+          "slug": "minimum-score-by-changing-two-elements",
+          "src": "https://leetcode.cn/problems/minimum-score-by-changing-two-elements/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1509",
+          "title": "三次操作後最大值與最小值的最小差",
+          "slug": "minimum-difference-between-largest-and-smallest-value-in-three-moves",
+          "src": "https://leetcode.cn/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2611",
+          "title": "老鼠和乳酪",
+          "slug": "mice-and-cheese",
+          "src": "https://leetcode.cn/problems/mice-and-cheese/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3397",
+          "title": "執行操作後不同元素的最大數量",
+          "slug": "maximum-number-of-distinct-elements-after-operations",
+          "src": "https://leetcode.cn/problems/maximum-number-of-distinct-elements-after-operations/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         },
         {
           "id": "3767",
@@ -458,72 +422,99 @@
           "solution": null,
           "score": null,
           "isPremium": false
+        },
+        {
+          "id": "3457",
+          "title": "喫披薩",
+          "slug": "eat-pizzas",
+          "src": "https://leetcode.cn/problems/eat-pizzas/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1262",
+          "title": "可被三整除的最大和",
+          "slug": "greatest-sum-divisible-by-three",
+          "src": "https://leetcode.cn/problems/greatest-sum-divisible-by-three/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "948",
+          "title": "令牌放置",
+          "slug": "bag-of-tokens",
+          "src": "https://leetcode.cn/problems/bag-of-tokens/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1775",
+          "title": "透過最少操作次數使陣列的和相等",
+          "slug": "equal-sum-arrays-with-minimum-number-of-operations",
+          "src": "https://leetcode.cn/problems/equal-sum-arrays-with-minimum-number-of-operations/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2333",
+          "title": "最小差值平方和",
+          "slug": "minimum-sum-of-squared-difference",
+          "src": "https://leetcode.cn/problems/minimum-sum-of-squared-difference/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3645",
+          "title": "最優啟用順序得到的最大總和",
+          "slug": "maximum-total-from-optimal-activation-order",
+          "src": "https://leetcode.cn/problems/maximum-total-from-optimal-activation-order/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3366",
+          "title": "最小陣列和",
+          "slug": "minimum-array-sum",
+          "src": "https://leetcode.cn/problems/minimum-array-sum/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "910",
+          "title": "最小差值 II",
+          "slug": "smallest-range-ii",
+          "src": "https://leetcode.cn/problems/smallest-range-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2835",
+          "title": "使子序列的和等於目標的最少操作次數",
+          "slug": "minimum-operations-to-form-subsequence-with-target-sum",
+          "src": "https://leetcode.cn/problems/minimum-operations-to-form-subsequence-with-target-sum/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2141",
+          "title": "同時執行 N 臺電腦的最長時間",
+          "slug": "maximum-running-time-of-n-computers",
+          "src": "https://leetcode.cn/problems/maximum-running-time-of-n-computers/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         }
       ],
-      "children": [
-        {
-          "id": 3,
-          "title": "1.1 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "LCS 02",
-              "title": "完成一半題目",
-              "slug": "WqXACV",
-              "src": "https://leetcode.cn/problems/WqXACV/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "624",
-              "title": "陣列列表中的最大距離",
-              "slug": "maximum-distance-in-arrays",
-              "src": "https://leetcode.cn/problems/maximum-distance-in-arrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "910",
-              "title": "最小差值 II",
-              "slug": "smallest-range-ii",
-              "src": "https://leetcode.cn/problems/smallest-range-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1984",
-              "title": "學生分數的最小差值",
-              "slug": "minimum-difference-between-highest-and-lowest-of-k-scores",
-              "src": "https://leetcode.cn/problems/minimum-difference-between-highest-and-lowest-of-k-scores/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2835",
-              "title": "使子序列的和等於目標的最少操作次數",
-              "slug": "minimum-operations-to-form-subsequence-with-target-sum",
-              "src": "https://leetcode.cn/problems/minimum-operations-to-form-subsequence-with-target-sum/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3366",
-              "title": "最小陣列和",
-              "slug": "minimum-array-sum",
-              "src": "https://leetcode.cn/problems/minimum-array-sum/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
       "id": 4,
@@ -1098,10 +1089,10 @@
       "isLeaf": false,
       "problems": [
         {
-          "id": "1665",
-          "title": "完成所有任務的最少初始能量",
-          "slug": "minimum-initial-energy-to-finish-tasks",
-          "src": "https://leetcode.cn/problems/minimum-initial-energy-to-finish-tasks/",
+          "id": "179",
+          "title": "最大數",
+          "slug": "largest-number",
+          "src": "https://leetcode.cn/problems/largest-number/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -1111,6 +1102,51 @@
           "title": "陣列中最大數對和的最小值",
           "slug": "minimize-maximum-pair-sum-in-array",
           "src": "https://leetcode.cn/problems/minimize-maximum-pair-sum-in-array/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2895",
+          "title": "最小處理時間",
+          "slug": "minimum-processing-time",
+          "src": "https://leetcode.cn/problems/minimum-processing-time/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3309",
+          "title": "連線二進位製表示可形成的最大數值",
+          "slug": "maximum-possible-number-by-binary-concatenation",
+          "src": "https://leetcode.cn/problems/maximum-possible-number-by-binary-concatenation/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3457",
+          "title": "喫披薩",
+          "slug": "eat-pizzas",
+          "src": "https://leetcode.cn/problems/eat-pizzas/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1665",
+          "title": "完成所有任務的最少初始能量",
+          "slug": "minimum-initial-energy-to-finish-tasks",
+          "src": "https://leetcode.cn/problems/minimum-initial-energy-to-finish-tasks/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3273",
+          "title": "對 Bob 造成的最少傷害",
+          "slug": "minimum-amount-of-damage-dealt-to-bob",
+          "src": "https://leetcode.cn/problems/minimum-amount-of-damage-dealt-to-bob/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -1132,62 +1168,9 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        },
-        {
-          "id": "2895",
-          "title": "最小處理時間",
-          "slug": "minimum-processing-time",
-          "src": "https://leetcode.cn/problems/minimum-processing-time/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3273",
-          "title": "對 Bob 造成的最少傷害",
-          "slug": "minimum-amount-of-damage-dealt-to-bob",
-          "src": "https://leetcode.cn/problems/minimum-amount-of-damage-dealt-to-bob/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3457",
-          "title": "喫披薩",
-          "slug": "eat-pizzas",
-          "src": "https://leetcode.cn/problems/eat-pizzas/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
         }
       ],
       "children": [
-        {
-          "id": 10,
-          "title": "7.1 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "179",
-              "title": "最大數",
-              "slug": "largest-number",
-              "src": "https://leetcode.cn/problems/largest-number/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3309",
-              "title": "連線二進位製表示可形成的最大數值",
-              "slug": "maximum-possible-number-by-binary-concatenation",
-              "src": "https://leetcode.cn/problems/maximum-possible-number-by-binary-concatenation/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        },
         {
           "id": 11,
           "title": "7.2 相似題目",
@@ -1241,64 +1224,10 @@
           "isPremium": false
         },
         {
-          "id": "1054",
-          "title": "距離相等的條形碼",
-          "slug": "distant-barcodes",
-          "src": "https://leetcode.cn/problems/distant-barcodes/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1753",
-          "title": "移除石子的最大得分",
-          "slug": "maximum-score-from-removing-stones",
-          "src": "https://leetcode.cn/problems/maximum-score-from-removing-stones/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1953",
-          "title": "你可以工作的最大週數",
-          "slug": "maximum-number-of-weeks-for-which-you-can-work",
-          "src": "https://leetcode.cn/problems/maximum-number-of-weeks-for-which-you-can-work/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2335",
           "title": "裝滿杯子需要的最短總時長",
           "slug": "minimum-amount-of-time-to-fill-cups",
           "src": "https://leetcode.cn/problems/minimum-amount-of-time-to-fill-cups/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2856",
-          "title": "刪除數對後的最小陣列長度",
-          "slug": "minimum-array-length-after-pair-removals",
-          "src": "https://leetcode.cn/problems/minimum-array-length-after-pair-removals/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3139",
-          "title": "使陣列中所有元素相等的最小開銷",
-          "slug": "minimum-cost-to-equalize-array",
-          "src": "https://leetcode.cn/problems/minimum-cost-to-equalize-array/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3495",
-          "title": "使陣列元素都變為零的最少操作次數",
-          "slug": "minimum-operations-to-make-array-elements-zero",
-          "src": "https://leetcode.cn/problems/minimum-operations-to-make-array-elements-zero/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -1313,10 +1242,55 @@
           "isPremium": false
         },
         {
-          "id": "3664",
-          "title": "兩個字母卡牌遊戲",
-          "slug": "two-letter-card-game",
-          "src": "https://leetcode.cn/problems/two-letter-card-game/",
+          "id": "984",
+          "title": "不含 AAA 或 BBB 的字串",
+          "slug": "string-without-aaa-or-bbb",
+          "src": "https://leetcode.cn/problems/string-without-aaa-or-bbb/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1753",
+          "title": "移除石子的最大得分",
+          "slug": "maximum-score-from-removing-stones",
+          "src": "https://leetcode.cn/problems/maximum-score-from-removing-stones/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1054",
+          "title": "距離相等的條形碼",
+          "slug": "distant-barcodes",
+          "src": "https://leetcode.cn/problems/distant-barcodes/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2856",
+          "title": "刪除數對後的最小陣列長度",
+          "slug": "minimum-array-length-after-pair-removals",
+          "src": "https://leetcode.cn/problems/minimum-array-length-after-pair-removals/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1953",
+          "title": "你可以工作的最大週數",
+          "slug": "maximum-number-of-weeks-for-which-you-can-work",
+          "src": "https://leetcode.cn/problems/maximum-number-of-weeks-for-which-you-can-work/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1405",
+          "title": "最長快樂字串",
+          "slug": "longest-happy-string",
+          "src": "https://leetcode.cn/problems/longest-happy-string/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -1329,36 +1303,36 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        }
-      ],
-      "children": [
+        },
         {
-          "id": 13,
-          "title": "8.1 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "984",
-              "title": "不含 AAA 或 BBB 的字串",
-              "slug": "string-without-aaa-or-bbb",
-              "src": "https://leetcode.cn/problems/string-without-aaa-or-bbb/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1405",
-              "title": "最長快樂字串",
-              "slug": "longest-happy-string",
-              "src": "https://leetcode.cn/problems/longest-happy-string/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
+          "id": "3664",
+          "title": "兩個字母卡牌遊戲",
+          "slug": "two-letter-card-game",
+          "src": "https://leetcode.cn/problems/two-letter-card-game/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3495",
+          "title": "使陣列元素都變為零的最少操作次數",
+          "slug": "minimum-operations-to-make-array-elements-zero",
+          "src": "https://leetcode.cn/problems/minimum-operations-to-make-array-elements-zero/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3139",
+          "title": "使陣列中所有元素相等的最小開銷",
+          "slug": "minimum-cost-to-equalize-array",
+          "src": "https://leetcode.cn/problems/minimum-cost-to-equalize-array/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         }
       ],
+      "children": [],
       "summary": "以下問題，設 n 是陣列 a 的長度，m 是出現次數最多的元素的出現次數。\n\n**問題一**：給定陣列 a，能否重新排列其中的元素，使得所有相鄰元素均不同？如果能，輸出重排後的陣列。\n\n**答**：如果 m≤n−m+1，則可以做到，否則無法做到。\n\n**問題二**：給定陣列 a，每次操作，刪除 a 中的兩個不同元素。最多能操作多少次？\n\n**答**：最多操作 min(⌊2n​⌋,n−m) 次。\n\n**問題三**：給定陣列 a，每次操作，刪除 a 中的**至多**兩個不同元素。最少要操作多少次？\n\n**答**：最少操作 max(⌈2n​⌉,m) 次。\n\n[證明+具體操作方案](/link/?target=https%3A%2F%2Fzhuanlan.zhihu.com%2Fp%2F1945782212176909162)"
     },
     {
@@ -2441,24 +2415,6 @@
       "isLeaf": false,
       "problems": [
         {
-          "id": "1402",
-          "title": "做菜順序",
-          "slug": "reducing-dishes",
-          "src": "https://leetcode.cn/problems/reducing-dishes/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1589",
-          "title": "所有排列中的最大和",
-          "slug": "maximum-sum-obtained-of-any-permutation",
-          "src": "https://leetcode.cn/problems/maximum-sum-obtained-of-any-permutation/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "1874",
           "title": "兩個陣列的最小乘積和",
           "slug": "minimize-product-sum-of-two-arrays",
@@ -2486,6 +2442,24 @@
           "isPremium": false
         },
         {
+          "id": "3016",
+          "title": "輸入單詞需要的最少按鍵次數 II",
+          "slug": "minimum-number-of-pushes-to-type-word-ii",
+          "src": "https://leetcode.cn/problems/minimum-number-of-pushes-to-type-word-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1402",
+          "title": "做菜順序",
+          "slug": "reducing-dishes",
+          "src": "https://leetcode.cn/problems/reducing-dishes/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
           "id": "2931",
           "title": "購買物品的最大開銷",
           "slug": "maximum-spending-after-buying-items",
@@ -2495,43 +2469,34 @@
           "isPremium": false
         },
         {
-          "id": "3016",
-          "title": "輸入單詞需要的最少按鍵次數 II",
-          "slug": "minimum-number-of-pushes-to-type-word-ii",
-          "src": "https://leetcode.cn/problems/minimum-number-of-pushes-to-type-word-ii/",
+          "id": "1589",
+          "title": "所有排列中的最大和",
+          "slug": "maximum-sum-obtained-of-any-permutation",
+          "src": "https://leetcode.cn/problems/maximum-sum-obtained-of-any-permutation/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2561",
+          "title": "重排水果",
+          "slug": "rearranging-fruits",
+          "src": "https://leetcode.cn/problems/rearranging-fruits/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3547",
+          "title": "圖中邊值的最大和",
+          "slug": "maximum-sum-of-edge-values-in-a-graph",
+          "src": "https://leetcode.cn/problems/maximum-sum-of-edge-values-in-a-graph/",
           "solution": null,
           "score": null,
           "isPremium": false
         }
       ],
-      "children": [
-        {
-          "id": 27,
-          "title": "20.1 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "2561",
-              "title": "重排水果",
-              "slug": "rearranging-fruits",
-              "src": "https://leetcode.cn/problems/rearranging-fruits/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3547",
-              "title": "圖中邊值的最大和",
-              "slug": "maximum-sum-of-edge-values-in-a-graph",
-              "src": "https://leetcode.cn/problems/maximum-sum-of-edge-values-in-a-graph/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        }
-      ],
+      "children": [],
       "summary": "給定兩個長度均為 n 的陣列 a 和 b，可以交換同一陣列內的元素，最小化/最大化\n\na\\[0\\]⋅b\\[0\\]+a\\[1\\]⋅b\\[1\\]+⋯+a\\[n−1\\]⋅b\\[n−1\\]\n\n把 a 和 b 都從小到大排序，可以最大化上式。\n\n把 a 從小到大排序，b 從大到小排序，可以最小化上式。"
     },
     {

@@ -1440,19 +1440,28 @@
       "isLeaf": true,
       "problems": [
         {
-          "id": "1621",
-          "title": "大小為 K 的不重疊線段的數目",
-          "slug": "number-of-sets-of-k-non-overlapping-line-segments",
-          "src": "https://leetcode.cn/problems/number-of-sets-of-k-non-overlapping-line-segments/",
+          "id": "1641",
+          "title": "統計字典序母音字串的數目",
+          "slug": "count-sorted-vowel-strings",
+          "src": "https://leetcode.cn/problems/count-sorted-vowel-strings/",
           "solution": null,
           "score": null,
           "isPremium": false
         },
         {
-          "id": "1641",
-          "title": "統計字典序母音字串的數目",
-          "slug": "count-sorted-vowel-strings",
-          "src": "https://leetcode.cn/problems/count-sorted-vowel-strings/",
+          "id": "3669",
+          "title": "K 因數分解",
+          "slug": "balanced-k-factor-decomposition",
+          "src": "https://leetcode.cn/problems/balanced-k-factor-decomposition/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1621",
+          "title": "大小為 K 的不重疊線段的數目",
+          "slug": "number-of-sets-of-k-non-overlapping-line-segments",
+          "src": "https://leetcode.cn/problems/number-of-sets-of-k-non-overlapping-line-segments/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -1476,25 +1485,7 @@
           "isPremium": false
         }
       ],
-      "children": [
-        {
-          "id": 17,
-          "title": "15.1 放球問題思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "3669",
-              "title": "K 因數分解",
-              "slug": "balanced-k-factor-decomposition",
-              "src": "https://leetcode.cn/problems/balanced-k-factor-decomposition/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
       "id": 18,

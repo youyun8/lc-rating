@@ -13,28 +13,14 @@
     {
       "id": 3,
       "title": "2. 進階",
-      "summary": "\n\n**進階二分查詢技巧**：\n- 利用二分查詢解決「查詢滿足條件的最近元素」問題\n- 結合排序與雙指標，處理區間距離、頻次統計等\n- 適用於有序序列中的比較與計數操作\n\n```cpp\n// 查詢第一個 >= target 的位置（lowerBound）\nint lowerBound(vector<int>& nums, int target) {\n    int lo = 0, hi = nums.size(); // 左閉右開 [lo, hi)\n    while (lo < hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (nums[mid] < target) {\n            lo = mid + 1;\n        } else {\n            hi = mid;\n        }\n    }\n    return lo;\n}\n```",
-      "children": [
-        {
-          "id": 4,
-          "title": "2.1 進階 > 思維擴展",
-          "children": [],
-          "summary": "本節為「2. 進階」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：把題意轉成「決策序列／區間／圖」其中一類，再對照主節模板逐項檢查。"
-        }
-      ]
+      "summary": "\n\n**進階二分查詢技巧**：\n- 利用二分查詢解決「查詢滿足條件的最近元素」問題\n- 結合排序與雙指標，處理區間距離、頻次統計等\n- 適用於有序序列中的比較與計數操作\n\n```cpp\n// 查詢第一個 >= target 的位置（lowerBound）\nint lowerBound(vector<int>& nums, int target) {\n    int lo = 0, hi = nums.size(); // 左閉右開 [lo, hi)\n    while (lo < hi) {\n        int mid = lo + (hi - lo) / 2;\n        if (nums[mid] < target) {\n            lo = mid + 1;\n        } else {\n            hi = mid;\n        }\n    }\n    return lo;\n}\n```\n\n本節為「2. 進階」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：把題意轉成「決策序列／區間／圖」其中一類，再對照主節模板逐項檢查。",
+      "children": []
     },
     {
       "id": 5,
       "title": "3. 求最小",
-      "summary": "> “花費一個 log 的時間，增加了一個條件。” —— 二分答案\n\n---\n\n\n\n**核心思路**：\n- 尋找滿足條件的第一個位置\n- 當 `check(mid)` 為真時，答案在左側或當前位置，`high = mid - 1`, `ans = mid`\n\n```cpp\n// 二分答案求最小值：check(mid) 為 true 時收縮右邊界\nwhile (low <= high) {\n    int mid = low + (high - low) / 2;\n    if (check(mid)) { // 滿足條件，嘗試更小的答案\n        ans = mid;\n        high = mid - 1;\n    } else {\n        low = mid + 1;\n    }\n}\n```",
-      "children": [
-        {
-          "id": 6,
-          "title": "3.1 求最小 > 思維擴展",
-          "children": [],
-          "summary": "本節為「3. 求最小」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：旋轉陣列、浮點二分精度、`check` 內部是否需離散化或排序；證明單調時先畫「可行／不可行」示意。"
-        }
-      ]
+      "summary": "> “花費一個 log 的時間，增加了一個條件。” —— 二分答案\n\n---\n\n\n\n**核心思路**：\n- 尋找滿足條件的第一個位置\n- 當 `check(mid)` 為真時，答案在左側或當前位置，`high = mid - 1`, `ans = mid`\n\n```cpp\n// 二分答案求最小值：check(mid) 為 true 時收縮右邊界\nwhile (low <= high) {\n    int mid = low + (high - low) / 2;\n    if (check(mid)) { // 滿足條件，嘗試更小的答案\n        ans = mid;\n        high = mid - 1;\n    } else {\n        low = mid + 1;\n    }\n}\n```\n\n本節為「3. 求最小」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：旋轉陣列、浮點二分精度、`check` 內部是否需離散化或排序；證明單調時先畫「可行／不可行」示意。",
+      "children": []
     },
     {
       "id": 7,

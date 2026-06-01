@@ -63,127 +63,10 @@
       "isLeaf": true,
       "problems": [
         {
-          "id": "LCP 08",
-          "title": "劇情觸發時間",
-          "slug": "ju-qing-hong-fa-shi-jian",
-          "src": "https://leetcode.cn/problems/ju-qing-hong-fa-shi-jian/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "658",
           "title": "找到 K 個最接近的元素",
           "slug": "find-k-closest-elements",
           "src": "https://leetcode.cn/problems/find-k-closest-elements/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "911",
-          "title": "線上選舉",
-          "slug": "online-election",
-          "src": "https://leetcode.cn/problems/online-election/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "981",
-          "title": "基於時間的鍵值儲存",
-          "slug": "time-based-key-value-store",
-          "src": "https://leetcode.cn/problems/time-based-key-value-store/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1146",
-          "title": "快照陣列",
-          "slug": "snapshot-array",
-          "src": "https://leetcode.cn/problems/snapshot-array/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1170",
-          "title": "比較字串最小字母出現頻次",
-          "slug": "compare-strings-by-frequency-of-the-smallest-character",
-          "src": "https://leetcode.cn/problems/compare-strings-by-frequency-of-the-smallest-character/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1182",
-          "title": "與目標顏色間的最短距離",
-          "slug": "shortest-distance-to-target-color",
-          "src": "https://leetcode.cn/problems/shortest-distance-to-target-color/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "1385",
-          "title": "兩個陣列間的距離值",
-          "slug": "find-the-distance-value-between-two-arrays",
-          "src": "https://leetcode.cn/problems/find-the-distance-value-between-two-arrays/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1818",
-          "title": "絕對差值和",
-          "slug": "minimum-absolute-sum-difference",
-          "src": "https://leetcode.cn/problems/minimum-absolute-sum-difference/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2070",
-          "title": "每一個查詢的最大美麗值",
-          "slug": "most-beautiful-item-for-each-query",
-          "src": "https://leetcode.cn/problems/most-beautiful-item-for-each-query/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2080",
-          "title": "區間內查詢數字的頻率",
-          "slug": "range-frequency-queries",
-          "src": "https://leetcode.cn/problems/range-frequency-queries/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2300",
-          "title": "咒語和藥水的成功對數",
-          "slug": "successful-pairs-of-spells-and-potions",
-          "src": "https://leetcode.cn/problems/successful-pairs-of-spells-and-potions/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2389",
-          "title": "和有限的最長子序列",
-          "slug": "longest-subsequence-with-limited-sum",
-          "src": "https://leetcode.cn/problems/longest-subsequence-with-limited-sum/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2563",
-          "title": "統計公平數對的數目",
-          "slug": "count-the-number-of-fair-pairs",
-          "src": "https://leetcode.cn/problems/count-the-number-of-fair-pairs/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -198,10 +81,136 @@
           "isPremium": true
         },
         {
+          "id": "LCP 08",
+          "title": "劇情觸發時間",
+          "slug": "ju-qing-hong-fa-shi-jian",
+          "src": "https://leetcode.cn/problems/ju-qing-hong-fa-shi-jian/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1287",
+          "title": "有序陣列中出現次數超過 25% 的元素",
+          "slug": "element-appearing-more-than-25-in-sorted-array",
+          "src": "https://leetcode.cn/problems/element-appearing-more-than-25-in-sorted-array/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1385",
+          "title": "兩個陣列間的距離值",
+          "slug": "find-the-distance-value-between-two-arrays",
+          "src": "https://leetcode.cn/problems/find-the-distance-value-between-two-arrays/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1150",
+          "title": "檢查一個數是否在陣列中佔絕大多數",
+          "slug": "check-if-a-number-is-majority-element-in-a-sorted-array",
+          "src": "https://leetcode.cn/problems/check-if-a-number-is-majority-element-in-a-sorted-array/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "2389",
+          "title": "和有限的最長子序列",
+          "slug": "longest-subsequence-with-limited-sum",
+          "src": "https://leetcode.cn/problems/longest-subsequence-with-limited-sum/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1170",
+          "title": "比較字串最小字母出現頻次",
+          "slug": "compare-strings-by-frequency-of-the-smallest-character",
+          "src": "https://leetcode.cn/problems/compare-strings-by-frequency-of-the-smallest-character/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2300",
+          "title": "咒語和藥水的成功對數",
+          "slug": "successful-pairs-of-spells-and-potions",
+          "src": "https://leetcode.cn/problems/successful-pairs-of-spells-and-potions/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "981",
+          "title": "基於時間的鍵值儲存",
+          "slug": "time-based-key-value-store",
+          "src": "https://leetcode.cn/problems/time-based-key-value-store/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2476",
+          "title": "二叉搜索樹最近節點查詢",
+          "slug": "closest-nodes-queries-in-a-binary-search-tree",
+          "src": "https://leetcode.cn/problems/closest-nodes-queries-in-a-binary-search-tree/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1182",
+          "title": "與目標顏色間的最短距離",
+          "slug": "shortest-distance-to-target-color",
+          "src": "https://leetcode.cn/problems/shortest-distance-to-target-color/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
           "id": "3488",
           "title": "距離最小相等元素查詢",
           "slug": "closest-equal-element-queries",
           "src": "https://leetcode.cn/problems/closest-equal-element-queries/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2080",
+          "title": "區間內查詢數字的頻率",
+          "slug": "range-frequency-queries",
+          "src": "https://leetcode.cn/problems/range-frequency-queries/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2563",
+          "title": "統計公平數對的數目",
+          "slug": "count-the-number-of-fair-pairs",
+          "src": "https://leetcode.cn/problems/count-the-number-of-fair-pairs/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2070",
+          "title": "每一個查詢的最大美麗值",
+          "slug": "most-beautiful-item-for-each-query",
+          "src": "https://leetcode.cn/problems/most-beautiful-item-for-each-query/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1146",
+          "title": "快照陣列",
+          "slug": "snapshot-array",
+          "src": "https://leetcode.cn/problems/snapshot-array/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -214,45 +223,27 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        }
-      ],
-      "children": [
+        },
         {
-          "id": 4,
-          "title": "2.1 進階 > 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "1150",
-              "title": "檢查一個數是否在陣列中佔絕大多數",
-              "slug": "check-if-a-number-is-majority-element-in-a-sorted-array",
-              "src": "https://leetcode.cn/problems/check-if-a-number-is-majority-element-in-a-sorted-array/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "1287",
-              "title": "有序陣列中出現次數超過 25% 的元素",
-              "slug": "element-appearing-more-than-25-in-sorted-array",
-              "src": "https://leetcode.cn/problems/element-appearing-more-than-25-in-sorted-array/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2476",
-              "title": "二叉搜索樹最近節點查詢",
-              "slug": "closest-nodes-queries-in-a-binary-search-tree",
-              "src": "https://leetcode.cn/problems/closest-nodes-queries-in-a-binary-search-tree/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
+          "id": "1818",
+          "title": "絕對差值和",
+          "slug": "minimum-absolute-sum-difference",
+          "src": "https://leetcode.cn/problems/minimum-absolute-sum-difference/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "911",
+          "title": "線上選舉",
+          "slug": "online-election",
+          "src": "https://leetcode.cn/problems/online-election/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         }
       ],
+      "children": [],
       "summary": "部分題目需要先排序，然後在有序陣列上二分查詢。"
     },
     {
@@ -265,60 +256,6 @@
           "title": "供暖器",
           "slug": "heaters",
           "src": "https://leetcode.cn/problems/heaters/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "875",
-          "title": "愛喫香蕉的珂珂",
-          "slug": "koko-eating-bananas",
-          "src": "https://leetcode.cn/problems/koko-eating-bananas/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1011",
-          "title": "在 D 天內送達包裹的能力",
-          "slug": "capacity-to-ship-packages-within-d-days",
-          "src": "https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1283",
-          "title": "使結果不超過閾值的最小除數",
-          "slug": "find-the-smallest-divisor-given-a-threshold",
-          "src": "https://leetcode.cn/problems/find-the-smallest-divisor-given-a-threshold/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1482",
-          "title": "製作 m 束花所需的最少天數",
-          "slug": "minimum-number-of-days-to-make-m-bouquets",
-          "src": "https://leetcode.cn/problems/minimum-number-of-days-to-make-m-bouquets/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2187",
-          "title": "完成旅途的最少時間",
-          "slug": "minimum-time-to-complete-trips",
-          "src": "https://leetcode.cn/problems/minimum-time-to-complete-trips/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2594",
-          "title": "修車的最少時間",
-          "slug": "minimum-time-to-repair-cars",
-          "src": "https://leetcode.cn/problems/minimum-time-to-repair-cars/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -342,33 +279,6 @@
           "isPremium": true
         },
         {
-          "id": "3048",
-          "title": "標記所有下標的最早秒數 I",
-          "slug": "earliest-second-to-mark-indices-i",
-          "src": "https://leetcode.cn/problems/earliest-second-to-mark-indices-i/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3296",
-          "title": "移山所需的最少秒數",
-          "slug": "minimum-number-of-seconds-to-make-mountain-height-zero",
-          "src": "https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3639",
-          "title": "變為活躍狀態的最小時間",
-          "slug": "minimum-time-to-activate-string",
-          "src": "https://leetcode.cn/problems/minimum-time-to-activate-string/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "3807",
           "title": "修復邊以遍歷圖的最小成本",
           "slug": "minimum-cost-to-repair-edges-to-traverse-a-graph",
@@ -385,36 +295,108 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        }
-      ],
-      "children": [
+        },
         {
-          "id": 6,
-          "title": "3.1 求最小 > 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "1870",
-              "title": "準時到達的列車最小時速",
-              "slug": "minimum-speed-to-arrive-on-time",
-              "src": "https://leetcode.cn/problems/minimum-speed-to-arrive-on-time/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3453",
-              "title": "分割正方形 I",
-              "slug": "separate-squares-i",
-              "src": "https://leetcode.cn/problems/separate-squares-i/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
+          "id": "1283",
+          "title": "使結果不超過閾值的最小除數",
+          "slug": "find-the-smallest-divisor-given-a-threshold",
+          "src": "https://leetcode.cn/problems/find-the-smallest-divisor-given-a-threshold/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2187",
+          "title": "完成旅途的最少時間",
+          "slug": "minimum-time-to-complete-trips",
+          "src": "https://leetcode.cn/problems/minimum-time-to-complete-trips/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1870",
+          "title": "準時到達的列車最小時速",
+          "slug": "minimum-speed-to-arrive-on-time",
+          "src": "https://leetcode.cn/problems/minimum-speed-to-arrive-on-time/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3296",
+          "title": "移山所需的最少秒數",
+          "slug": "minimum-number-of-seconds-to-make-mountain-height-zero",
+          "src": "https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1011",
+          "title": "在 D 天內送達包裹的能力",
+          "slug": "capacity-to-ship-packages-within-d-days",
+          "src": "https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3453",
+          "title": "分割正方形 I",
+          "slug": "separate-squares-i",
+          "src": "https://leetcode.cn/problems/separate-squares-i/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "875",
+          "title": "愛喫香蕉的珂珂",
+          "slug": "koko-eating-bananas",
+          "src": "https://leetcode.cn/problems/koko-eating-bananas/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3639",
+          "title": "變為活躍狀態的最小時間",
+          "slug": "minimum-time-to-activate-string",
+          "src": "https://leetcode.cn/problems/minimum-time-to-activate-string/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2594",
+          "title": "修車的最少時間",
+          "slug": "minimum-time-to-repair-cars",
+          "src": "https://leetcode.cn/problems/minimum-time-to-repair-cars/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1482",
+          "title": "製作 m 束花所需的最少天數",
+          "slug": "minimum-number-of-days-to-make-m-bouquets",
+          "src": "https://leetcode.cn/problems/minimum-number-of-days-to-make-m-bouquets/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3048",
+          "title": "標記所有下標的最早秒數 I",
+          "slug": "earliest-second-to-mark-indices-i",
+          "src": "https://leetcode.cn/problems/earliest-second-to-mark-indices-i/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         }
       ],
+      "children": [],
       "summary": "題目求什麼，就二分什麼。\n\n#### 答疑\n\n**問**：如何把二分答案與陣列上的二分查詢聯絡起來？\n\n**答**：假設答案在區間 [2,5] 中，我們相當於在一個**虛擬陣列** [check(2),check(3),check(4),check(5)] 中二分找第一個（或者最後一個）值為 true 的 check(x)。這同樣可以用紅藍染色法思考。\n\n**問**：有些題目，明明 m 可以是答案，但卻不在初始二分割槽間中。比如閉區間二分初始化 right=m−1（或者開區間 right=m），這不會算錯嗎？\n\n**答**：不會算錯。注意「答案所在區間」和「二分割槽間」是兩個概念。想一想，如果二分的 while 迴圈每次更新的都是 left，那麼最終答案是什麼？正好就是 m。一般地，如果一開始就能確定 m 一定可以滿足題目要求，那麼 m 是不需要在二分割槽間中的。換句話說，二分割槽間是「尚未確定是否滿足題目要求」的數的範圍。那些在區間外面的數，都是已確定的滿足（不滿足）題目要求的數。\n\n**問**：什麼是迴圈不變數？\n\n**答**：想一想，對於求最小的題目，**開區間二分**的寫法，為什麼最終返回的是 right，而不是別的數？在初始化（迴圈之前）、迴圈中、迴圈結束後，都時時刻刻保證 `check(right) == true` 和 `check(left) == false`，這就叫**迴圈不變數**。根據迴圈不變數，迴圈結束時 left+1=right，那麼 right 就是最小的滿足要求的數（因為再 −1 就不滿足要求了），所以答案是 right。\n\n**注**：部分題目可以最佳化二分邊界，減少二分次數，從而減少程式碼執行時間。對於初次接觸二分答案的同學，無需強求自己寫出最優的程式碼，設定一個比較大的二分上界也是可以的。\n\n開區間二分模板（求最小）："
     },
     {

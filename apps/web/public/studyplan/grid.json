@@ -10,24 +10,6 @@
       "isLeaf": false,
       "problems": [
         {
-          "id": "LCS 03",
-          "title": "LCS 03. 主題空間",
-          "slug": "YesdPw",
-          "src": "https://leetcode.cn/problems/YesdPw/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "LCP 63",
-          "title": "LCP 63. 彈珠遊戲",
-          "slug": "EXvqDp",
-          "src": "https://leetcode.cn/problems/EXvqDp/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "130",
           "title": "被圍繞的區域",
           "slug": "surrounded-regions",
@@ -118,19 +100,73 @@
           "isPremium": false
         },
         {
-          "id": "892",
-          "title": "三維形體的表面積",
-          "slug": "surface-area-of-3d-shapes",
-          "src": "https://leetcode.cn/problems/surface-area-of-3d-shapes/",
+          "id": "2061",
+          "title": "掃地機器人清掃過的空間個數",
+          "slug": "number-of-spaces-cleaning-robot-cleaned",
+          "src": "https://leetcode.cn/problems/number-of-spaces-cleaning-robot-cleaned/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "2852",
+          "title": "所有單元格的遠離程度之和",
+          "slug": "sum-of-remoteness-of-all-cells",
+          "src": "https://leetcode.cn/problems/sum-of-remoteness-of-all-cells/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "LCP 63",
+          "title": "LCP 63. 彈珠遊戲",
+          "slug": "EXvqDp",
+          "src": "https://leetcode.cn/problems/EXvqDp/",
           "solution": null,
           "score": null,
           "isPremium": false
         },
         {
-          "id": "1020",
-          "title": "飛地的數量",
-          "slug": "number-of-enclaves",
-          "src": "https://leetcode.cn/problems/number-of-enclaves/",
+          "id": "LCS 03",
+          "title": "LCS 03. 主題空間",
+          "slug": "YesdPw",
+          "src": "https://leetcode.cn/problems/YesdPw/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "面試題 16.19",
+          "title": "面試題 16.19. 水域大小",
+          "slug": "pond-sizes-lcci",
+          "src": "https://leetcode.cn/problems/pond-sizes-lcci/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3619",
+          "title": "總價值可以被 K 整除的島嶼數目",
+          "slug": "count-islands-with-total-value-divisible-by-k",
+          "src": "https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2658",
+          "title": "網格圖中魚的最大數目",
+          "slug": "maximum-number-of-fish-in-a-grid",
+          "src": "https://leetcode.cn/problems/maximum-number-of-fish-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "892",
+          "title": "三維形體的表面積",
+          "slug": "surface-area-of-3d-shapes",
+          "src": "https://leetcode.cn/problems/surface-area-of-3d-shapes/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -145,10 +181,37 @@
           "isPremium": false
         },
         {
+          "id": "1020",
+          "title": "飛地的數量",
+          "slug": "number-of-enclaves",
+          "src": "https://leetcode.cn/problems/number-of-enclaves/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2684",
+          "title": "矩陣中移動的最大次數",
+          "slug": "maximum-number-of-moves-in-a-grid",
+          "src": "https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
           "id": "1254",
           "title": "統計封閉島嶼的數目",
           "slug": "number-of-closed-islands",
           "src": "https://leetcode.cn/problems/number-of-closed-islands/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1905",
+          "title": "統計子島嶼",
+          "slug": "count-sub-islands",
+          "src": "https://leetcode.cn/problems/count-sub-islands/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -172,115 +235,16 @@
           "isPremium": false
         },
         {
-          "id": "面試題 16.19",
-          "title": "面試題 16.19. 水域大小",
-          "slug": "pond-sizes-lcci",
-          "src": "https://leetcode.cn/problems/pond-sizes-lcci/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1905",
-          "title": "統計子島嶼",
-          "slug": "count-sub-islands",
-          "src": "https://leetcode.cn/problems/count-sub-islands/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2061",
-          "title": "掃地機器人清掃過的空間個數",
-          "slug": "number-of-spaces-cleaning-robot-cleaned",
-          "src": "https://leetcode.cn/problems/number-of-spaces-cleaning-robot-cleaned/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "2658",
-          "title": "網格圖中魚的最大數目",
-          "slug": "maximum-number-of-fish-in-a-grid",
-          "src": "https://leetcode.cn/problems/maximum-number-of-fish-in-a-grid/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2684",
-          "title": "矩陣中移動的最大次數",
-          "slug": "maximum-number-of-moves-in-a-grid",
-          "src": "https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2852",
-          "title": "所有單元格的遠離程度之和",
-          "slug": "sum-of-remoteness-of-all-cells",
-          "src": "https://leetcode.cn/problems/sum-of-remoteness-of-all-cells/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3619",
-          "title": "總價值可以被 K 整除的島嶼數目",
-          "slug": "count-islands-with-total-value-divisible-by-k",
-          "src": "https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": 10141,
-          "title": "LCS 03. 主題空間",
-          "slug": "/YesdPw/",
-          "src": "https://leetcode.cn/problems/YesdPw/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": 10153,
-          "title": "LCP 63. 彈珠遊戲",
-          "slug": "/EXvqDp/",
-          "src": "https://leetcode.cn/problems/EXvqDp/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": 10275,
-          "title": "面試題 16.19. 水域大小",
-          "slug": "/pond-sizes-lcci/",
-          "src": "https://leetcode.cn/problems/pond-sizes-lcci/",
+          "id": "1970",
+          "title": "你能穿過矩陣的最後一天",
+          "slug": "last-day-where-you-can-still-cross",
+          "src": "https://leetcode.cn/problems/last-day-where-you-can-still-cross/",
           "solution": null,
           "score": null,
           "isPremium": false
         }
       ],
-      "children": [
-        {
-          "id": 3,
-          "title": "1.1 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "1970",
-              "title": "你能穿過矩陣的最後一天",
-              "slug": "last-day-where-you-can-still-cross",
-              "src": "https://leetcode.cn/problems/last-day-where-you-can-still-cross/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        }
-      ],
+      "children": [],
       "summary": "適用於需要計算連通塊個數、大小的題目。<br>部分題目做法不止一種，也可以用 BFS 或並查集解決。<br><br>二叉樹 DFS 與網格圖 DFS 的區別：<br><table><thead><tr><th></th><th><strong>二叉樹</strong></th><th><strong>網格圖</strong></th></tr></thead><tbody><tr><td><strong>遞迴入口</strong></td><td>根節點</td><td>網格圖的某個格子</td></tr><tr><td><strong>遞迴方向</strong></td><td>左兒子和右兒子</td><td>一般為左右上下的相鄰格子</td></tr><tr><td><strong>遞迴邊界</strong></td><td>空節點（或者葉節點）</td><td>出界、遇到障礙或者已訪問</td></tr></tbody></table>"
     },
     {

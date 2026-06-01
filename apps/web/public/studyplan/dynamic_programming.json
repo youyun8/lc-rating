@@ -896,7 +896,17 @@
       "id": 15,
       "title": "4. 經典線性 DP",
       "isLeaf": false,
-      "problems": [],
+      "problems": [
+        {
+          "id": "3825",
+          "title": "按位與結果非零的最長上升子序列",
+          "slug": "longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
+          "src": "https://leetcode.cn/problems/longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        }
+      ],
       "children": [
         {
           "id": 16,
@@ -1243,23 +1253,6 @@
             }
           ],
           "summary": "講解：[最長遞增子序列【基礎演算法精講 20】](https://www.bilibili.com/video/BV1ub411Q7sB/)\n\n做法有很多：\n\n1.  列舉選哪個。（見講解）\n2.  二分。（見講解）\n3.  計算 a 和把 a 排序後的陣列 sortedA 的最長公共子序列。（用 LCS 求 LIS）\n4.  資料結構最佳化。（見 [2407 題](https://leetcode.cn/problems/longest-increasing-subsequence-ii/)）"
-        },
-        {
-          "id": 22,
-          "title": "4.3 最長遞增子序列（LIS） > 進階",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "3825",
-              "title": "按位與結果非零的最長上升子序列",
-              "slug": "longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
-              "src": "https://leetcode.cn/problems/longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
         }
       ],
       "summary": "講解：[最長公共子序列 編輯距離【基礎演算法精講 19】](https://www.bilibili.com/video/BV1TM4y1o7ug/)\n\n一般定義 f[i][j] 表示對 (s[:i],t[:j]) 的求解結果。"
@@ -2643,51 +2636,6 @@
           "isLeaf": true,
           "problems": [
             {
-              "id": "LCP 36",
-              "title": "最多牌組數",
-              "slug": "Up5XYM",
-              "src": "https://leetcode.cn/problems/Up5XYM/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "LCP 38",
-              "title": "守衛城堡",
-              "slug": "7rLGCR",
-              "src": "https://leetcode.cn/problems/7rLGCR/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "LCP 43",
-              "title": "十字路口的交通",
-              "slug": "Y1VbOX",
-              "src": "https://leetcode.cn/problems/Y1VbOX/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "LCP 57",
-              "title": "打地鼠",
-              "slug": "ZbAuEH",
-              "src": "https://leetcode.cn/problems/ZbAuEH/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "LCP 65",
-              "title": "舒適的溼度",
-              "slug": "3aqs1c",
-              "src": "https://leetcode.cn/problems/3aqs1c/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "256",
               "title": "粉刷房子",
               "slug": "paint-house",
@@ -2742,127 +2690,10 @@
               "isPremium": false
             },
             {
-              "id": "887",
-              "title": "雞蛋掉落",
-              "slug": "super-egg-drop",
-              "src": "https://leetcode.cn/problems/super-egg-drop/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "903",
-              "title": "DI 序列的有效排列",
-              "slug": "valid-permutations-for-di-sequence",
-              "src": "https://leetcode.cn/problems/valid-permutations-for-di-sequence/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "920",
-              "title": "播放列表的數量",
-              "slug": "number-of-music-playlists",
-              "src": "https://leetcode.cn/problems/number-of-music-playlists/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "964",
-              "title": "表示數字的最少運算子",
-              "slug": "least-operators-to-express-number",
-              "src": "https://leetcode.cn/problems/least-operators-to-express-number/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1079",
-              "title": "活字印刷",
-              "slug": "letter-tile-possibilities",
-              "src": "https://leetcode.cn/problems/letter-tile-possibilities/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1223",
-              "title": "擲骰子模擬",
-              "slug": "dice-roll-simulation",
-              "src": "https://leetcode.cn/problems/dice-roll-simulation/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1262",
-              "title": "可被三整除的最大和",
-              "slug": "greatest-sum-divisible-by-three",
-              "src": "https://leetcode.cn/problems/greatest-sum-divisible-by-three/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1269",
-              "title": "停在原地的方案數",
-              "slug": "number-of-ways-to-stay-in-the-same-place-after-some-steps",
-              "src": "https://leetcode.cn/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1320",
-              "title": "二指輸入的的最小距離",
-              "slug": "minimum-distance-to-type-a-word-using-two-fingers",
-              "src": "https://leetcode.cn/problems/minimum-distance-to-type-a-word-using-two-fingers/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1388",
-              "title": "3n 塊披薩",
-              "slug": "pizza-with-3n-slices",
-              "src": "https://leetcode.cn/problems/pizza-with-3n-slices/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1420",
-              "title": "生成陣列",
-              "slug": "build-array-where-you-can-find-the-maximum-exactly-k-comparisons",
-              "src": "https://leetcode.cn/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1444",
-              "title": "切披薩的方案數",
-              "slug": "number-of-ways-of-cutting-a-pizza",
-              "src": "https://leetcode.cn/problems/number-of-ways-of-cutting-a-pizza/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1531",
-              "title": "壓縮字串 II",
-              "slug": "string-compression-ii",
-              "src": "https://leetcode.cn/problems/string-compression-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1575",
-              "title": "統計所有可行路徑",
-              "slug": "count-all-possible-routes",
-              "src": "https://leetcode.cn/problems/count-all-possible-routes/",
+              "id": "638",
+              "title": "大禮包",
+              "slug": "shopping-offers",
+              "src": "https://leetcode.cn/problems/shopping-offers/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2877,55 +2708,10 @@
               "isPremium": true
             },
             {
-              "id": "1787",
-              "title": "使所有區間的異或結果為零",
-              "slug": "make-the-xor-of-all-segments-equal-to-zero",
-              "src": "https://leetcode.cn/problems/make-the-xor-of-all-segments-equal-to-zero/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1866",
-              "title": "恰有 K 根木棍可以看到的排列數目",
-              "slug": "number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
-              "src": "https://leetcode.cn/problems/number-of-ways-to-rearrange-sticks-with-k-sticks-visible/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1883",
-              "title": "準時抵達會議現場的最小跳過休息次數",
-              "slug": "minimum-skips-to-arrive-at-meeting-on-time",
-              "src": "https://leetcode.cn/problems/minimum-skips-to-arrive-at-meeting-on-time/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "1884",
               "title": "雞蛋掉落-兩枚雞蛋",
               "slug": "egg-drop-with-2-eggs-and-n-floors",
               "src": "https://leetcode.cn/problems/egg-drop-with-2-eggs-and-n-floors/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1900",
-              "title": "最佳運動員的比拼回合",
-              "slug": "the-earliest-and-latest-rounds-where-players-compete",
-              "src": "https://leetcode.cn/problems/the-earliest-and-latest-rounds-where-players-compete/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2060",
-              "title": "同源字串檢測",
-              "slug": "check-if-an-original-string-exists-given-two-encoded-strings",
-              "src": "https://leetcode.cn/problems/check-if-an-original-string-exists-given-two-encoded-strings/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -2940,127 +2726,73 @@
               "isPremium": true
             },
             {
-              "id": "2222",
-              "title": "選擇建築的方案數",
-              "slug": "number-of-ways-to-select-buildings",
-              "src": "https://leetcode.cn/problems/number-of-ways-to-select-buildings/",
+              "id": "3269",
+              "title": "構建兩個遞增陣列",
+              "slug": "constructing-two-increasing-arrays",
+              "src": "https://leetcode.cn/problems/constructing-two-increasing-arrays/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "3339",
+              "title": "查詢 K 偶數陣列的數量",
+              "slug": "find-the-number-of-k-even-arrays",
+              "src": "https://leetcode.cn/problems/find-the-number-of-k-even-arrays/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "LCP 36",
+              "title": "最多牌組數",
+              "slug": "Up5XYM",
+              "src": "https://leetcode.cn/problems/Up5XYM/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2312",
-              "title": "賣木頭塊",
-              "slug": "selling-pieces-of-wood",
-              "src": "https://leetcode.cn/problems/selling-pieces-of-wood/",
+              "id": "LCP 38",
+              "title": "守衛城堡",
+              "slug": "7rLGCR",
+              "src": "https://leetcode.cn/problems/7rLGCR/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2318",
-              "title": "不同骰子序列的數目",
-              "slug": "number-of-distinct-roll-sequences",
-              "src": "https://leetcode.cn/problems/number-of-distinct-roll-sequences/",
+              "id": "LCP 43",
+              "title": "十字路口的交通",
+              "slug": "Y1VbOX",
+              "src": "https://leetcode.cn/problems/Y1VbOX/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2400",
-              "title": "恰好移動 k 步到達某一位置的方法數目",
-              "slug": "number-of-ways-to-reach-a-position-after-exactly-k-steps",
-              "src": "https://leetcode.cn/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/",
+              "id": "LCP 57",
+              "title": "打地鼠",
+              "slug": "ZbAuEH",
+              "src": "https://leetcode.cn/problems/ZbAuEH/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2746",
-              "title": "字串連線刪減字母",
-              "slug": "decremental-string-concatenation",
-              "src": "https://leetcode.cn/problems/decremental-string-concatenation/",
+              "id": "LCP 65",
+              "title": "舒適的溼度",
+              "slug": "3aqs1c",
+              "src": "https://leetcode.cn/problems/3aqs1c/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2809",
-              "title": "使陣列和小於等於 x 的最少時間",
-              "slug": "minimum-time-to-make-array-sum-at-most-x",
-              "src": "https://leetcode.cn/problems/minimum-time-to-make-array-sum-at-most-x/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2826",
-              "title": "將三個組排序",
-              "slug": "sorting-three-groups",
-              "src": "https://leetcode.cn/problems/sorting-three-groups/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2896",
-              "title": "執行操作使兩個字串相等",
-              "slug": "apply-operations-to-make-two-strings-equal",
-              "src": "https://leetcode.cn/problems/apply-operations-to-make-two-strings-equal/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3003",
-              "title": "執行操作後的最大分割數量",
-              "slug": "maximize-the-number-of-partitions-after-operations",
-              "src": "https://leetcode.cn/problems/maximize-the-number-of-partitions-after-operations/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3122",
-              "title": "使矩陣滿足條件的最少操作次數",
-              "slug": "minimum-number-of-operations-to-satisfy-conditions",
-              "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-satisfy-conditions/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3154",
-              "title": "到達第 K 級臺階的方案數",
-              "slug": "find-number-of-ways-to-reach-the-k-th-stair",
-              "src": "https://leetcode.cn/problems/find-number-of-ways-to-reach-the-k-th-stair/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3176",
-              "title": "求出最長好子序列 I",
-              "slug": "find-the-maximum-length-of-a-good-subsequence-i",
-              "src": "https://leetcode.cn/problems/find-the-maximum-length-of-a-good-subsequence-i/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3177",
-              "title": "求出最長好子序列 II",
-              "slug": "find-the-maximum-length-of-a-good-subsequence-ii",
-              "src": "https://leetcode.cn/problems/find-the-maximum-length-of-a-good-subsequence-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3193",
-              "title": "統計逆序對的數目",
-              "slug": "count-the-number-of-inversions",
-              "src": "https://leetcode.cn/problems/count-the-number-of-inversions/",
+              "id": "3780",
+              "title": "能被 3 整除的三元組最大和",
+              "slug": "maximum-sum-of-three-numbers-divisible-by-three",
+              "src": "https://leetcode.cn/problems/maximum-sum-of-three-numbers-divisible-by-three",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3075,37 +2807,46 @@
               "isPremium": false
             },
             {
-              "id": "3225",
-              "title": "網格圖操作後的最大分數",
-              "slug": "maximum-score-from-grid-operations",
-              "src": "https://leetcode.cn/problems/maximum-score-from-grid-operations/",
+              "id": "2222",
+              "title": "選擇建築的方案數",
+              "slug": "number-of-ways-to-select-buildings",
+              "src": "https://leetcode.cn/problems/number-of-ways-to-select-buildings/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3250",
-              "title": "單調陣列對的數目 I",
-              "slug": "find-the-count-of-monotonic-pairs-i",
-              "src": "https://leetcode.cn/problems/find-the-count-of-monotonic-pairs-i/",
+              "id": "2826",
+              "title": "將三個組排序",
+              "slug": "sorting-three-groups",
+              "src": "https://leetcode.cn/problems/sorting-three-groups/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3269",
-              "title": "構建兩個遞增陣列",
-              "slug": "constructing-two-increasing-arrays",
-              "src": "https://leetcode.cn/problems/constructing-two-increasing-arrays/",
+              "id": "1079",
+              "title": "活字印刷",
+              "slug": "letter-tile-possibilities",
+              "src": "https://leetcode.cn/problems/letter-tile-possibilities/",
               "solution": null,
               "score": null,
-              "isPremium": true
+              "isPremium": false
             },
             {
-              "id": "3320",
-              "title": "統計能獲勝的出招序列數",
-              "slug": "count-the-number-of-winning-sequences",
-              "src": "https://leetcode.cn/problems/count-the-number-of-winning-sequences/",
+              "id": "2400",
+              "title": "恰好移動 k 步到達某一位置的方法數目",
+              "slug": "number-of-ways-to-reach-a-position-after-exactly-k-steps",
+              "src": "https://leetcode.cn/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1262",
+              "title": "可被三整除的最大和",
+              "slug": "greatest-sum-divisible-by-three",
+              "src": "https://leetcode.cn/problems/greatest-sum-divisible-by-three/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3120,82 +2861,37 @@
               "isPremium": false
             },
             {
-              "id": "3336",
-              "title": "最大公約數相等的子序列數量",
-              "slug": "find-the-number-of-subsequences-with-equal-gcd",
-              "src": "https://leetcode.cn/problems/find-the-number-of-subsequences-with-equal-gcd/",
+              "id": "3176",
+              "title": "求出最長好子序列 I",
+              "slug": "find-the-maximum-length-of-a-good-subsequence-i",
+              "src": "https://leetcode.cn/problems/find-the-maximum-length-of-a-good-subsequence-i/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3339",
-              "title": "查詢 K 偶數陣列的數量",
-              "slug": "find-the-number-of-k-even-arrays",
-              "src": "https://leetcode.cn/problems/find-the-number-of-k-even-arrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "3343",
-              "title": "統計平衡排列的數目",
-              "slug": "count-number-of-balanced-permutations",
-              "src": "https://leetcode.cn/problems/count-number-of-balanced-permutations/",
+              "id": "1269",
+              "title": "停在原地的方案數",
+              "slug": "number-of-ways-to-stay-in-the-same-place-after-some-steps",
+              "src": "https://leetcode.cn/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3366",
-              "title": "最小陣列和",
-              "slug": "minimum-array-sum",
-              "src": "https://leetcode.cn/problems/minimum-array-sum/",
+              "id": "3250",
+              "title": "單調陣列對的數目 I",
+              "slug": "find-the-count-of-monotonic-pairs-i",
+              "src": "https://leetcode.cn/problems/find-the-count-of-monotonic-pairs-i/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3429",
-              "title": "粉刷房子 IV",
-              "slug": "paint-house-iv",
-              "src": "https://leetcode.cn/problems/paint-house-iv/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3441",
-              "title": "變成好標題的最少代價",
-              "slug": "minimum-cost-good-caption",
-              "src": "https://leetcode.cn/problems/minimum-cost-good-caption/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3469",
-              "title": "移除所有陣列元素的最小代價",
-              "slug": "find-minimum-cost-to-remove-array-elements",
-              "src": "https://leetcode.cn/problems/find-minimum-cost-to-remove-array-elements/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3509",
-              "title": "最大化交錯和為 K 的子序列乘積",
-              "slug": "maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k",
-              "src": "https://leetcode.cn/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3539",
-              "title": "魔法序列的陣列乘積之和",
-              "slug": "find-sum-of-array-product-of-magical-sequences",
-              "src": "https://leetcode.cn/problems/find-sum-of-array-product-of-magical-sequences/",
+              "id": "3122",
+              "title": "使矩陣滿足條件的最少操作次數",
+              "slug": "minimum-number-of-operations-to-satisfy-conditions",
+              "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-satisfy-conditions/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -3210,34 +2906,322 @@
               "isPremium": false
             },
             {
-              "id": "3780",
-              "title": "能被 3 整除的三元組最大和",
-              "slug": "maximum-sum-of-three-numbers-divisible-by-three",
-              "src": "https://leetcode.cn/problems/maximum-sum-of-three-numbers-divisible-by-three",
+              "id": "1223",
+              "title": "擲骰子模擬",
+              "slug": "dice-roll-simulation",
+              "src": "https://leetcode.cn/problems/dice-roll-simulation/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1320",
+              "title": "二指輸入的的最小距離",
+              "slug": "minimum-distance-to-type-a-word-using-two-fingers",
+              "src": "https://leetcode.cn/problems/minimum-distance-to-type-a-word-using-two-fingers/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3366",
+              "title": "最小陣列和",
+              "slug": "minimum-array-sum",
+              "src": "https://leetcode.cn/problems/minimum-array-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1575",
+              "title": "統計所有可行路徑",
+              "slug": "count-all-possible-routes",
+              "src": "https://leetcode.cn/problems/count-all-possible-routes/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3154",
+              "title": "到達第 K 級臺階的方案數",
+              "slug": "find-number-of-ways-to-reach-the-k-th-stair",
+              "src": "https://leetcode.cn/problems/find-number-of-ways-to-reach-the-k-th-stair/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2318",
+              "title": "不同骰子序列的數目",
+              "slug": "number-of-distinct-roll-sequences",
+              "src": "https://leetcode.cn/problems/number-of-distinct-roll-sequences/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3469",
+              "title": "移除所有陣列元素的最小代價",
+              "slug": "find-minimum-cost-to-remove-array-elements",
+              "src": "https://leetcode.cn/problems/find-minimum-cost-to-remove-array-elements/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2746",
+              "title": "字串連線刪減字母",
+              "slug": "decremental-string-concatenation",
+              "src": "https://leetcode.cn/problems/decremental-string-concatenation/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1444",
+              "title": "切披薩的方案數",
+              "slug": "number-of-ways-of-cutting-a-pizza",
+              "src": "https://leetcode.cn/problems/number-of-ways-of-cutting-a-pizza/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3320",
+              "title": "統計能獲勝的出招序列數",
+              "slug": "count-the-number-of-winning-sequences",
+              "src": "https://leetcode.cn/problems/count-the-number-of-winning-sequences/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3429",
+              "title": "粉刷房子 IV",
+              "slug": "paint-house-iv",
+              "src": "https://leetcode.cn/problems/paint-house-iv/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2896",
+              "title": "執行操作使兩個字串相等",
+              "slug": "apply-operations-to-make-two-strings-equal",
+              "src": "https://leetcode.cn/problems/apply-operations-to-make-two-strings-equal/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1420",
+              "title": "生成陣列",
+              "slug": "build-array-where-you-can-find-the-maximum-exactly-k-comparisons",
+              "src": "https://leetcode.cn/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3193",
+              "title": "統計逆序對的數目",
+              "slug": "count-the-number-of-inversions",
+              "src": "https://leetcode.cn/problems/count-the-number-of-inversions/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1866",
+              "title": "恰有 K 根木棍可以看到的排列數目",
+              "slug": "number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
+              "src": "https://leetcode.cn/problems/number-of-ways-to-rearrange-sticks-with-k-sticks-visible/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2312",
+              "title": "賣木頭塊",
+              "slug": "selling-pieces-of-wood",
+              "src": "https://leetcode.cn/problems/selling-pieces-of-wood/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3177",
+              "title": "求出最長好子序列 II",
+              "slug": "find-the-maximum-length-of-a-good-subsequence-ii",
+              "src": "https://leetcode.cn/problems/find-the-maximum-length-of-a-good-subsequence-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "887",
+              "title": "雞蛋掉落",
+              "slug": "super-egg-drop",
+              "src": "https://leetcode.cn/problems/super-egg-drop/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "920",
+              "title": "播放列表的數量",
+              "slug": "number-of-music-playlists",
+              "src": "https://leetcode.cn/problems/number-of-music-playlists/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3336",
+              "title": "最大公約數相等的子序列數量",
+              "slug": "find-the-number-of-subsequences-with-equal-gcd",
+              "src": "https://leetcode.cn/problems/find-the-number-of-subsequences-with-equal-gcd/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1388",
+              "title": "3n 塊披薩",
+              "slug": "pizza-with-3n-slices",
+              "src": "https://leetcode.cn/problems/pizza-with-3n-slices/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "903",
+              "title": "DI 序列的有效排列",
+              "slug": "valid-permutations-for-di-sequence",
+              "src": "https://leetcode.cn/problems/valid-permutations-for-di-sequence/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1900",
+              "title": "最佳運動員的比拼回合",
+              "slug": "the-earliest-and-latest-rounds-where-players-compete",
+              "src": "https://leetcode.cn/problems/the-earliest-and-latest-rounds-where-players-compete/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1531",
+              "title": "壓縮字串 II",
+              "slug": "string-compression-ii",
+              "src": "https://leetcode.cn/problems/string-compression-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1883",
+              "title": "準時抵達會議現場的最小跳過休息次數",
+              "slug": "minimum-skips-to-arrive-at-meeting-on-time",
+              "src": "https://leetcode.cn/problems/minimum-skips-to-arrive-at-meeting-on-time/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "964",
+              "title": "表示數字的最少運算子",
+              "slug": "least-operators-to-express-number",
+              "src": "https://leetcode.cn/problems/least-operators-to-express-number/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3343",
+              "title": "統計平衡排列的數目",
+              "slug": "count-number-of-balanced-permutations",
+              "src": "https://leetcode.cn/problems/count-number-of-balanced-permutations/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1787",
+              "title": "使所有區間的異或結果為零",
+              "slug": "make-the-xor-of-all-segments-equal-to-zero",
+              "src": "https://leetcode.cn/problems/make-the-xor-of-all-segments-equal-to-zero/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3539",
+              "title": "魔法序列的陣列乘積之和",
+              "slug": "find-sum-of-array-product-of-magical-sequences",
+              "src": "https://leetcode.cn/problems/find-sum-of-array-product-of-magical-sequences/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3509",
+              "title": "最大化交錯和為 K 的子序列乘積",
+              "slug": "maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k",
+              "src": "https://leetcode.cn/problems/maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3441",
+              "title": "變成好標題的最少代價",
+              "slug": "minimum-cost-good-caption",
+              "src": "https://leetcode.cn/problems/minimum-cost-good-caption/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2060",
+              "title": "同源字串檢測",
+              "slug": "check-if-an-original-string-exists-given-two-encoded-strings",
+              "src": "https://leetcode.cn/problems/check-if-an-original-string-exists-given-two-encoded-strings/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2809",
+              "title": "使陣列和小於等於 x 的最少時間",
+              "slug": "minimum-time-to-make-array-sum-at-most-x",
+              "src": "https://leetcode.cn/problems/minimum-time-to-make-array-sum-at-most-x/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3225",
+              "title": "網格圖操作後的最大分數",
+              "slug": "maximum-score-from-grid-operations",
+              "src": "https://leetcode.cn/problems/maximum-score-from-grid-operations/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3003",
+              "title": "執行操作後的最大分割數量",
+              "slug": "maximize-the-number-of-partitions-after-operations",
+              "src": "https://leetcode.cn/problems/maximize-the-number-of-partitions-after-operations/",
               "solution": null,
               "score": null,
               "isPremium": false
             }
           ],
-          "children": [
-            {
-              "id": 38,
-              "title": "7.6.1 多維 DP 思維擴展",
-              "isLeaf": true,
-              "problems": [
-                {
-                  "id": "638",
-                  "title": "大禮包",
-                  "slug": "shopping-offers",
-                  "src": "https://leetcode.cn/problems/shopping-offers/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                }
-              ],
-              "children": []
-            }
-          ]
+          "children": []
         },
         {
           "id": 39,

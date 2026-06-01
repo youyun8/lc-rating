@@ -7,15 +7,8 @@
     {
       "id": 2,
       "title": "1. 網格圖 DFS",
-      "summary": "適用於需要計算連通塊個數、大小的題目。<br>部分題目做法不止一種，也可以用 BFS 或並查集解決。<br><br>二叉樹 DFS 與網格圖 DFS 的區別：<br><table><thead><tr><th></th><th><strong>二叉樹</strong></th><th><strong>網格圖</strong></th></tr></thead><tbody><tr><td><strong>遞迴入口</strong></td><td>根節點</td><td>網格圖的某個格子</td></tr><tr><td><strong>遞迴方向</strong></td><td>左兒子和右兒子</td><td>一般為左右上下的相鄰格子</td></tr><tr><td><strong>遞迴邊界</strong></td><td>空節點（或者葉節點）</td><td>出界、遇到障礙或者已訪問</td></tr></tbody></table>\n\n---\n\n<img src=\"https://pic.leetcode.cn/1724834645-OYGBxU-grid004.png\" alt=\"網格圖題單 DFS BFS 網格圖題目 圖論 靈茶山艾府\" style=\"width: 100%;\"><br>> 小小貪喫蛇，移動花樣多。<br>> 平移加旋轉，為把迷宮破。<br>> 代碼復代碼，bug 何其多。<br>> 六步化一步，AC 定我奪。<br>> —— [1210. 穿過迷宮的最少移動次數](https://leetcode.cn/problems/minimum-moves-to-reach-target-with-rotations/)<br>\n\n---\n\n**適用場景**：計算連通塊個數、大小等\n\n**二叉樹 DFS vs 網格圖 DFS**：\n\n| 要素 | 二叉樹 | 網格圖 |\n|------|--------|--------|\n| 遞迴入口 | 根節點 | 某個格子 |\n| 遞迴方向 | 左右子節點 | 上下左右相鄰格子 |\n| 遞迴邊界 | 空節點/葉節點 | 出界/障礙/已訪問 |\n\n**注意**：部分題目可用 BFS 或並查集解決\n\n**C++ 網格圖 DFS 模板**：\n\n```cpp\n// 方向陣列：上、下、左、右\nconst int kDirs[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n// 或使用 vector: vector<pair<int, int>> kDirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n\n// 網格圖 DFS：四方向遞迴搜尋\nvoid dfs(int r, int c) {\n    vis[r][c] = true;\n    for (auto [dr, dc] : kDirs) {\n        int nr = r + dr, nc = c + dc;\n        if (nr >= 0 && nr < m && nc >= 0 && nc < n && !vis[nr][nc]) {\n            dfs(nr, nc);\n        }\n    }\n}\n```",
-      "children": [
-        {
-          "id": 3,
-          "title": "1.1 思維擴展",
-          "children": [],
-          "summary": "本節為「1. 網格圖 DFS」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：回溯去重、分層圖狀態設計、最短路邊權是否允許負權或 0-1。"
-        }
-      ]
+      "summary": "適用於需要計算連通塊個數、大小的題目。<br>部分題目做法不止一種，也可以用 BFS 或並查集解決。<br><br>二叉樹 DFS 與網格圖 DFS 的區別：<br><table><thead><tr><th></th><th><strong>二叉樹</strong></th><th><strong>網格圖</strong></th></tr></thead><tbody><tr><td><strong>遞迴入口</strong></td><td>根節點</td><td>網格圖的某個格子</td></tr><tr><td><strong>遞迴方向</strong></td><td>左兒子和右兒子</td><td>一般為左右上下的相鄰格子</td></tr><tr><td><strong>遞迴邊界</strong></td><td>空節點（或者葉節點）</td><td>出界、遇到障礙或者已訪問</td></tr></tbody></table>\n\n---\n\n<img src=\"https://pic.leetcode.cn/1724834645-OYGBxU-grid004.png\" alt=\"網格圖題單 DFS BFS 網格圖題目 圖論 靈茶山艾府\" style=\"width: 100%;\"><br>> 小小貪喫蛇，移動花樣多。<br>> 平移加旋轉，為把迷宮破。<br>> 代碼復代碼，bug 何其多。<br>> 六步化一步，AC 定我奪。<br>> —— [1210. 穿過迷宮的最少移動次數](https://leetcode.cn/problems/minimum-moves-to-reach-target-with-rotations/)<br>\n\n---\n\n**適用場景**：計算連通塊個數、大小等\n\n**二叉樹 DFS vs 網格圖 DFS**：\n\n| 要素 | 二叉樹 | 網格圖 |\n|------|--------|--------|\n| 遞迴入口 | 根節點 | 某個格子 |\n| 遞迴方向 | 左右子節點 | 上下左右相鄰格子 |\n| 遞迴邊界 | 空節點/葉節點 | 出界/障礙/已訪問 |\n\n**注意**：部分題目可用 BFS 或並查集解決\n\n**C++ 網格圖 DFS 模板**：\n\n```cpp\n// 方向陣列：上、下、左、右\nconst int kDirs[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n// 或使用 vector: vector<pair<int, int>> kDirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n\n// 網格圖 DFS：四方向遞迴搜尋\nvoid dfs(int r, int c) {\n    vis[r][c] = true;\n    for (auto [dr, dc] : kDirs) {\n        int nr = r + dr, nc = c + dc;\n        if (nr >= 0 && nr < m && nc >= 0 && nc < n && !vis[nr][nc]) {\n            dfs(nr, nc);\n        }\n    }\n}\n```\n\n本節為「1. 網格圖 DFS」的延伸與變形：題幹包裝更活，常混雜次要條件或需多步轉化。\n\n**練習流程**：\n1. 默寫上級節核心不變式與結束條件\n2. 列出與主模板不同的約束，逐條對應修改點\n3. 用小測資手跑，特別是空、單元素、全相等、極值\n\n**本主線加強**：回溯去重、分層圖狀態設計、最短路邊權是否允許負權或 0-1。",
+      "children": []
     },
     {
       "id": 4,

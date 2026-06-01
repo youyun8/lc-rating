@@ -100,24 +100,6 @@
           "isPremium": false
         },
         {
-          "id": "975",
-          "title": "奇偶跳",
-          "slug": "odd-even-jump",
-          "src": "https://leetcode.cn/problems/odd-even-jump/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1019",
-          "title": "連結串列中的下一個更大節點",
-          "slug": "next-greater-node-in-linked-list",
-          "src": "https://leetcode.cn/problems/next-greater-node-in-linked-list/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "1063",
           "title": "有效子陣列的數目",
           "slug": "number-of-valid-subarrays",
@@ -125,33 +107,6 @@
           "solution": null,
           "score": null,
           "isPremium": true
-        },
-        {
-          "id": "1130",
-          "title": "葉值的最小代價生成樹",
-          "slug": "minimum-cost-tree-from-leaf-values",
-          "src": "https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1776",
-          "title": "車隊 II",
-          "slug": "car-fleet-ii",
-          "src": "https://leetcode.cn/problems/car-fleet-ii/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1944",
-          "title": "佇列中可以看到的人數",
-          "slug": "number-of-visible-people-in-a-queue",
-          "src": "https://leetcode.cn/problems/number-of-visible-people-in-a-queue/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
         },
         {
           "id": "1950",
@@ -172,15 +127,6 @@
           "isPremium": true
         },
         {
-          "id": "2054",
-          "title": "兩個最好的不重疊活動",
-          "slug": "two-best-non-overlapping-events",
-          "src": "https://leetcode.cn/problems/two-best-non-overlapping-events/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2282",
           "title": "在一個網格中可以看到的人數",
           "slug": "number-of-people-that-can-be-seen-in-a-grid",
@@ -188,15 +134,6 @@
           "solution": null,
           "score": null,
           "isPremium": true
-        },
-        {
-          "id": "2289",
-          "title": "使陣列按非遞減順序排列",
-          "slug": "steps-to-make-array-non-decreasing",
-          "src": "https://leetcode.cn/problems/steps-to-make-array-non-decreasing/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
         },
         {
           "id": "2355",
@@ -208,24 +145,6 @@
           "isPremium": true
         },
         {
-          "id": "2454",
-          "title": "下一個更大元素 IV",
-          "slug": "next-greater-element-iv",
-          "src": "https://leetcode.cn/problems/next-greater-element-iv/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2736",
-          "title": "最大和查詢",
-          "slug": "maximum-sum-queries",
-          "src": "https://leetcode.cn/problems/maximum-sum-queries/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2832",
           "title": "每個元素為最大值的最大範圍",
           "slug": "maximal-range-that-each-element-is-maximum-in-it",
@@ -235,10 +154,100 @@
           "isPremium": true
         },
         {
-          "id": "2866",
-          "title": "美麗塔 II",
-          "slug": "beautiful-towers-ii",
-          "src": "https://leetcode.cn/problems/beautiful-towers-ii/",
+          "id": "2863",
+          "title": "最長半遞減子陣列的長度",
+          "slug": "maximum-length-of-semi-decreasing-subarrays",
+          "src": "https://leetcode.cn/problems/maximum-length-of-semi-decreasing-subarrays/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "3221",
+          "title": "最大陣列跳躍得分 II",
+          "slug": "maximum-array-hopping-score-ii",
+          "src": "https://leetcode.cn/problems/maximum-array-hopping-score-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "3555",
+          "title": "排序每個滑動視窗中最小的子陣列",
+          "slug": "smallest-subarray-to-sort-in-every-sliding-window",
+          "src": "https://leetcode.cn/problems/smallest-subarray-to-sort-in-every-sliding-window/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "1019",
+          "title": "連結串列中的下一個更大節點",
+          "slug": "next-greater-node-in-linked-list",
+          "src": "https://leetcode.cn/problems/next-greater-node-in-linked-list/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "962",
+          "title": "最大寬度坡",
+          "slug": "maximum-width-ramp",
+          "src": "https://leetcode.cn/problems/maximum-width-ramp/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3814",
+          "title": "預算下的最大總容量",
+          "slug": "maximum-capacity-within-budget",
+          "src": "https://leetcode.cn/problems/maximum-capacity-within-budget/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3676",
+          "title": "碗子陣列的數目",
+          "slug": "count-bowl-subarrays",
+          "src": "https://leetcode.cn/problems/count-bowl-subarrays/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2054",
+          "title": "兩個最好的不重疊活動",
+          "slug": "two-best-non-overlapping-events",
+          "src": "https://leetcode.cn/problems/two-best-non-overlapping-events/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3542",
+          "title": "將所有元素變為 0 的最少操作次數",
+          "slug": "minimum-operations-to-convert-all-elements-to-zero",
+          "src": "https://leetcode.cn/problems/minimum-operations-to-convert-all-elements-to-zero/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1124",
+          "title": "表現良好的最長時間段",
+          "slug": "longest-well-performing-interval",
+          "src": "https://leetcode.cn/problems/longest-well-performing-interval/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1130",
+          "title": "葉值的最小代價生成樹",
+          "slug": "minimum-cost-tree-from-leaf-values",
+          "src": "https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -253,13 +262,67 @@
           "isPremium": false
         },
         {
-          "id": "3221",
-          "title": "最大陣列跳躍得分 II",
-          "slug": "maximum-array-hopping-score-ii",
-          "src": "https://leetcode.cn/problems/maximum-array-hopping-score-ii/",
+          "id": "2866",
+          "title": "美麗塔 II",
+          "slug": "beautiful-towers-ii",
+          "src": "https://leetcode.cn/problems/beautiful-towers-ii/",
           "solution": null,
           "score": null,
-          "isPremium": true
+          "isPremium": false
+        },
+        {
+          "id": "975",
+          "title": "奇偶跳",
+          "slug": "odd-even-jump",
+          "src": "https://leetcode.cn/problems/odd-even-jump/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1944",
+          "title": "佇列中可以看到的人數",
+          "slug": "number-of-visible-people-in-a-queue",
+          "src": "https://leetcode.cn/problems/number-of-visible-people-in-a-queue/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2454",
+          "title": "下一個更大元素 IV",
+          "slug": "next-greater-element-iv",
+          "src": "https://leetcode.cn/problems/next-greater-element-iv/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2289",
+          "title": "使陣列按非遞減順序排列",
+          "slug": "steps-to-make-array-non-decreasing",
+          "src": "https://leetcode.cn/problems/steps-to-make-array-non-decreasing/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1776",
+          "title": "車隊 II",
+          "slug": "car-fleet-ii",
+          "src": "https://leetcode.cn/problems/car-fleet-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2736",
+          "title": "最大和查詢",
+          "slug": "maximum-sum-queries",
+          "src": "https://leetcode.cn/problems/maximum-sum-queries/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         },
         {
           "id": "3420",
@@ -269,81 +332,9 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        },
-        {
-          "id": "3555",
-          "title": "排序每個滑動視窗中最小的子陣列",
-          "slug": "smallest-subarray-to-sort-in-every-sliding-window",
-          "src": "https://leetcode.cn/problems/smallest-subarray-to-sort-in-every-sliding-window/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3676",
-          "title": "碗子陣列的數目",
-          "slug": "count-bowl-subarrays",
-          "src": "https://leetcode.cn/problems/count-bowl-subarrays/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3814",
-          "title": "預算下的最大總容量",
-          "slug": "maximum-capacity-within-budget",
-          "src": "https://leetcode.cn/problems/maximum-capacity-within-budget/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
         }
       ],
-      "children": [
-        {
-          "id": 4,
-          "title": "2.1 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "962",
-              "title": "最大寬度坡",
-              "slug": "maximum-width-ramp",
-              "src": "https://leetcode.cn/problems/maximum-width-ramp/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1124",
-              "title": "表現良好的最長時間段",
-              "slug": "longest-well-performing-interval",
-              "src": "https://leetcode.cn/problems/longest-well-performing-interval/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2863",
-              "title": "最長半遞減子陣列的長度",
-              "slug": "maximum-length-of-semi-decreasing-subarrays",
-              "src": "https://leetcode.cn/problems/maximum-length-of-semi-decreasing-subarrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "3542",
-              "title": "將所有元素變為 0 的最少操作次數",
-              "slug": "minimum-operations-to-convert-all-elements-to-zero",
-              "src": "https://leetcode.cn/problems/minimum-operations-to-convert-all-elements-to-zero/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        }
-      ],
+      "children": [],
       "summary": "<strong>思維擴充套件</strong>：<ul><li><a href=\"https://leetcode.cn/problems/maximum-width-ramp/\">962. 最大寬度坡</a> 1608</li><li><a href=\"https://leetcode.cn/problems/minimum-operations-to-convert-all-elements-to-zero/\">3542. 將所有元素變為 0 的最少操作次數</a> 1890</li><li><a href=\"https://leetcode.cn/problems/longest-well-performing-interval/\">1124. 表現良好的最長時間段</a> 1908</li></ul>"
     },
     {
@@ -432,6 +423,33 @@
       "isLeaf": false,
       "problems": [
         {
+          "id": "3359",
+          "title": "查詢最大元素不超過 K 的有序子矩陣",
+          "slug": "find-sorted-submatrices-with-maximum-element-at-most-k",
+          "src": "https://leetcode.cn/problems/find-sorted-submatrices-with-maximum-element-at-most-k/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "2104",
+          "title": "子陣列範圍和（最大值-最小值）",
+          "slug": "sum-of-subarray-ranges",
+          "src": "https://leetcode.cn/problems/sum-of-subarray-ranges/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2962",
+          "title": "統計最大元素出現至少 K 次的子陣列",
+          "slug": "count-subarrays-where-max-element-appears-at-least-k-times",
+          "src": "https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
           "id": "907",
           "title": "子陣列的最小值之和",
           "slug": "sum-of-subarray-minimums",
@@ -450,19 +468,10 @@
           "isPremium": false
         },
         {
-          "id": "2104",
-          "title": "子陣列範圍和（最大值-最小值）",
-          "slug": "sum-of-subarray-ranges",
-          "src": "https://leetcode.cn/problems/sum-of-subarray-ranges/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2281",
-          "title": "巫師的總力量和（最小值×和）",
-          "slug": "sum-of-total-strength-of-wizards",
-          "src": "https://leetcode.cn/problems/sum-of-total-strength-of-wizards/",
+          "id": "2334",
+          "title": "元素值大於變化閾值的子陣列",
+          "slug": "subarray-with-elements-greater-than-varying-threshold",
+          "src": "https://leetcode.cn/problems/subarray-with-elements-greater-than-varying-threshold/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -477,13 +486,13 @@
           "isPremium": false
         },
         {
-          "id": "3359",
-          "title": "查詢最大元素不超過 K 的有序子矩陣",
-          "slug": "find-sorted-submatrices-with-maximum-element-at-most-k",
-          "src": "https://leetcode.cn/problems/find-sorted-submatrices-with-maximum-element-at-most-k/",
+          "id": "2281",
+          "title": "巫師的總力量和（最小值×和）",
+          "slug": "sum-of-total-strength-of-wizards",
+          "src": "https://leetcode.cn/problems/sum-of-total-strength-of-wizards/",
           "solution": null,
           "score": null,
-          "isPremium": true
+          "isPremium": false
         },
         {
           "id": "3430",
@@ -495,34 +504,7 @@
           "isPremium": false
         }
       ],
-      "children": [
-        {
-          "id": 7,
-          "title": "4.1 思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "2334",
-              "title": "元素值大於變化閾值的子陣列",
-              "slug": "subarray-with-elements-greater-than-varying-threshold",
-              "src": "https://leetcode.cn/problems/subarray-with-elements-greater-than-varying-threshold/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2962",
-              "title": "統計最大元素出現至少 K 次的子陣列",
-              "slug": "count-subarrays-where-max-element-appears-at-least-k-times",
-              "src": "https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        }
-      ],
+      "children": [],
       "summary": "<strong>思維擴充套件</strong>：<ul><li><a href=\"https://leetcode.cn/problems/subarray-with-elements-greater-than-varying-threshold/\">2334. 元素值大於變化閾值的子陣列</a> 2381</li><li><a href=\"https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times/solutions/2560940/hua-dong-chuang-kou-fu-ti-dan-pythonjava-xvwg/\">2962. 統計最大元素出現至少 K 次的子陣列·我的題解</a> 中的思考題（解答見評論）</li></ul>"
     },
     {

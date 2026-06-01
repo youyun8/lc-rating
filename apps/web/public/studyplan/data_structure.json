@@ -42,37 +42,19 @@
               "isPremium": false
             },
             {
+              "id": "454",
+              "title": "四數相加 II",
+              "slug": "4sum-ii",
+              "src": "https://leetcode.cn/problems/4sum-ii",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": "624",
               "title": "陣列列表中的最大距離",
               "slug": "maximum-distance-in-arrays",
               "src": "https://leetcode.cn/problems/maximum-distance-in-arrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1014",
-              "title": "最佳觀光組合",
-              "slug": "best-sightseeing-pair",
-              "src": "https://leetcode.cn/problems/best-sightseeing-pair/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1128",
-              "title": "等價多米諾骨牌對的數量",
-              "slug": "number-of-equivalent-domino-pairs-description",
-              "src": "https://leetcode.cn/problems/number-of-equivalent-domino-pairs/description/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1512",
-              "title": "好數對的數目",
-              "slug": "number-of-good-pairs",
-              "src": "https://leetcode.cn/problems/number-of-good-pairs/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -87,64 +69,10 @@
               "isPremium": true
             },
             {
-              "id": "1679",
-              "title": "K 和數對的最大數目",
-              "slug": "max-number-of-k-sum-pairs",
-              "src": "https://leetcode.cn/problems/max-number-of-k-sum-pairs/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1814",
-              "title": "統計一個陣列中好對子的數目",
-              "slug": "count-nice-pairs-in-an-array",
-              "src": "https://leetcode.cn/problems/count-nice-pairs-in-an-array/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2001",
-              "title": "可互換矩形的組數",
-              "slug": "number-of-pairs-of-interchangeable-rectangles",
-              "src": "https://leetcode.cn/problems/number-of-pairs-of-interchangeable-rectangles/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2016",
-              "title": "增量元素之間的最大差值",
-              "slug": "maximum-difference-between-increasing-elements",
-              "src": "https://leetcode.cn/problems/maximum-difference-between-increasing-elements/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2260",
-              "title": "必須拿起的最小連續卡牌數",
-              "slug": "minimum-consecutive-cards-to-pick-up",
-              "src": "https://leetcode.cn/problems/minimum-consecutive-cards-to-pick-up/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2342",
-              "title": "數位和相等數對的最大和",
-              "slug": "max-sum-of-a-pair-with-equal-sum-of-digits",
-              "src": "https://leetcode.cn/problems/max-sum-of-a-pair-with-equal-sum-of-digits/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2364",
-              "title": "統計壞數對的數目",
-              "slug": "count-number-of-bad-pairs",
-              "src": "https://leetcode.cn/problems/count-number-of-bad-pairs/",
+              "id": "1512",
+              "title": "好數對的數目",
+              "slug": "number-of-good-pairs",
+              "src": "https://leetcode.cn/problems/number-of-good-pairs/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -159,6 +87,15 @@
               "isPremium": false
             },
             {
+              "id": "2016",
+              "title": "增量元素之間的最大差值",
+              "slug": "maximum-difference-between-increasing-elements",
+              "src": "https://leetcode.cn/problems/maximum-difference-between-increasing-elements/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": "2815",
               "title": "陣列中的最大數對和",
               "slug": "max-pair-sum-in-an-array",
@@ -168,28 +105,55 @@
               "isPremium": false
             },
             {
-              "id": "2905",
-              "title": "找出滿足差值條件的下標 II",
-              "slug": "find-indices-with-index-and-value-difference-ii",
-              "src": "https://leetcode.cn/problems/find-indices-with-index-and-value-difference-ii/",
+              "id": "2342",
+              "title": "數位和相等數對的最大和",
+              "slug": "max-sum-of-a-pair-with-equal-sum-of-digits",
+              "src": "https://leetcode.cn/problems/max-sum-of-a-pair-with-equal-sum-of-digits/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3371",
-              "title": "識別陣列中的最大異常值",
-              "slug": "identify-the-largest-outlier-in-an-array",
-              "src": "https://leetcode.cn/problems/identify-the-largest-outlier-in-an-array/",
+              "id": "1128",
+              "title": "等價多米諾骨牌對的數量",
+              "slug": "number-of-equivalent-domino-pairs-description",
+              "src": "https://leetcode.cn/problems/number-of-equivalent-domino-pairs/description/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3584",
-              "title": "子序列首尾元素的最大乘積",
-              "slug": "maximum-product-of-first-and-last-elements-of-a-subsequence",
-              "src": "https://leetcode.cn/problems/maximum-product-of-first-and-last-elements-of-a-subsequence/",
+              "id": "1679",
+              "title": "K 和數對的最大數目",
+              "slug": "max-number-of-k-sum-pairs",
+              "src": "https://leetcode.cn/problems/max-number-of-k-sum-pairs/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2260",
+              "title": "必須拿起的最小連續卡牌數",
+              "slug": "minimum-consecutive-cards-to-pick-up",
+              "src": "https://leetcode.cn/problems/minimum-consecutive-cards-to-pick-up/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2001",
+              "title": "可互換矩形的組數",
+              "slug": "number-of-pairs-of-interchangeable-rectangles",
+              "src": "https://leetcode.cn/problems/number-of-pairs-of-interchangeable-rectangles/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3713",
+              "title": "最長的平衡子串 I",
+              "slug": "longest-balanced-substring-i",
+              "src": "https://leetcode.cn/problems/longest-balanced-substring-i",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -204,6 +168,24 @@
               "isPremium": false
             },
             {
+              "id": "2364",
+              "title": "統計壞數對的數目",
+              "slug": "count-number-of-bad-pairs",
+              "src": "https://leetcode.cn/problems/count-number-of-bad-pairs/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3371",
+              "title": "識別陣列中的最大異常值",
+              "slug": "identify-the-largest-outlier-in-an-array",
+              "src": "https://leetcode.cn/problems/identify-the-largest-outlier-in-an-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": "3761",
               "title": "映象對之間最小絕對距離",
               "slug": "minimum-absolute-distance-between-mirror-pairs",
@@ -211,45 +193,54 @@
               "solution": null,
               "score": null,
               "isPremium": false
-            }
-          ],
-          "children": [
+            },
             {
-              "id": 4,
-              "title": "1.1.1 列舉右，維護左 > 思維擴展",
-              "isLeaf": true,
-              "problems": [
-                {
-                  "id": "454",
-                  "title": "四數相加 II",
-                  "slug": "4sum-ii",
-                  "src": "https://leetcode.cn/problems/4sum-ii",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "3548",
-                  "title": "等和矩陣分割 II",
-                  "slug": "equal-sum-grid-partition-ii",
-                  "src": "https://leetcode.cn/problems/equal-sum-grid-partition-ii",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "3713",
-                  "title": "最長的平衡子串 I",
-                  "slug": "longest-balanced-substring-i",
-                  "src": "https://leetcode.cn/problems/longest-balanced-substring-i",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                }
-              ],
-              "children": []
+              "id": "1014",
+              "title": "最佳觀光組合",
+              "slug": "best-sightseeing-pair",
+              "src": "https://leetcode.cn/problems/best-sightseeing-pair/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1814",
+              "title": "統計一個陣列中好對子的數目",
+              "slug": "count-nice-pairs-in-an-array",
+              "src": "https://leetcode.cn/problems/count-nice-pairs-in-an-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3584",
+              "title": "子序列首尾元素的最大乘積",
+              "slug": "maximum-product-of-first-and-last-elements-of-a-subsequence",
+              "src": "https://leetcode.cn/problems/maximum-product-of-first-and-last-elements-of-a-subsequence/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2905",
+              "title": "找出滿足差值條件的下標 II",
+              "slug": "find-indices-with-index-and-value-difference-ii",
+              "src": "https://leetcode.cn/problems/find-indices-with-index-and-value-difference-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3548",
+              "title": "等和矩陣分割 II",
+              "slug": "equal-sum-grid-partition-ii",
+              "src": "https://leetcode.cn/problems/equal-sum-grid-partition-ii",
+              "solution": null,
+              "score": null,
+              "isPremium": false
             }
           ],
+          "children": [],
           "summary": "對於 **雙變數問題**，例如兩數之和 ai​+aj​=t，可以列舉右邊的 aj​，轉換成 **單變數問題**，也就是在 aj​ 左邊查詢是否有 ai​=t−aj​，這可以用雜湊表維護。\n\n我把這個技巧叫做 **列舉右，維護左**。\n\n[講解](https://leetcode.cn/problems/two-sum/solution/dong-hua-cong-liang-shu-zhi-he-zhong-wo-0yvmj/)\n\n下面這些題目，如果可以，請用**一次遍歷**實現。"
         },
         {
@@ -652,60 +643,6 @@
               "isPremium": false
             },
             {
-              "id": "1310",
-              "title": "子陣列異或查詢",
-              "slug": "xor-queries-of-a-subarray",
-              "src": "https://leetcode.cn/problems/xor-queries-of-a-subarray/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1749",
-              "title": "任意子陣列和的絕對值的最大值",
-              "slug": "maximum-absolute-sum-of-any-subarray",
-              "src": "https://leetcode.cn/problems/maximum-absolute-sum-of-any-subarray/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2559",
-              "title": "統計範圍內的母音字串數",
-              "slug": "count-vowel-strings-in-ranges",
-              "src": "https://leetcode.cn/problems/count-vowel-strings-in-ranges/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3152",
-              "title": "特殊陣列 II",
-              "slug": "special-array-ii",
-              "src": "https://leetcode.cn/problems/special-array-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3361",
-              "title": "兩個字串的切換距離",
-              "slug": "shift-distance-between-two-strings",
-              "src": "https://leetcode.cn/problems/shift-distance-between-two-strings/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3427",
-              "title": "變長子陣列求和",
-              "slug": "sum-of-variable-length-subarrays",
-              "src": "https://leetcode.cn/problems/sum-of-variable-length-subarrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "3511",
               "title": "構造正陣列",
               "slug": "make-a-positive-array",
@@ -724,6 +661,78 @@
               "isPremium": true
             },
             {
+              "id": "1523",
+              "title": "在區間範圍內統計奇數數目",
+              "slug": "count-odd-numbers-in-an-interval-range",
+              "src": "https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3427",
+              "title": "變長子陣列求和",
+              "slug": "sum-of-variable-length-subarrays",
+              "src": "https://leetcode.cn/problems/sum-of-variable-length-subarrays/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "848",
+              "title": "字母移位",
+              "slug": "shifting-letters",
+              "src": "https://leetcode.cn/problems/shifting-letters",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2559",
+              "title": "統計範圍內的母音字串數",
+              "slug": "count-vowel-strings-in-ranges",
+              "src": "https://leetcode.cn/problems/count-vowel-strings-in-ranges/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1310",
+              "title": "子陣列異或查詢",
+              "slug": "xor-queries-of-a-subarray",
+              "src": "https://leetcode.cn/problems/xor-queries-of-a-subarray/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3152",
+              "title": "特殊陣列 II",
+              "slug": "special-array-ii",
+              "src": "https://leetcode.cn/problems/special-array-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1749",
+              "title": "任意子陣列和的絕對值的最大值",
+              "slug": "maximum-absolute-sum-of-any-subarray",
+              "src": "https://leetcode.cn/problems/maximum-absolute-sum-of-any-subarray/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3361",
+              "title": "兩個字串的切換距離",
+              "slug": "shift-distance-between-two-strings",
+              "src": "https://leetcode.cn/problems/shift-distance-between-two-strings/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": "3652",
               "title": "按策略買賣股票的最佳時機",
               "slug": "best-time-to-buy-and-sell-stock-using-strategy",
@@ -733,34 +742,7 @@
               "isPremium": false
             }
           ],
-          "children": [
-            {
-              "id": 11,
-              "title": "2.1.1 基礎 > 思維擴展",
-              "isLeaf": true,
-              "problems": [
-                {
-                  "id": "848",
-                  "title": "字母移位",
-                  "slug": "shifting-letters",
-                  "src": "https://leetcode.cn/problems/shifting-letters",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "1523",
-                  "title": "在區間範圍內統計奇數數目",
-                  "slug": "count-odd-numbers-in-an-interval-range",
-                  "src": "https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                }
-              ],
-              "children": []
-            }
-          ],
+          "children": [],
           "summary": "思維擴充套件：\n\n*   [1523\\. 在區間範圍內統計奇數數目](https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range/) 1209"
         },
         {
@@ -776,6 +758,15 @@
               "solution": null,
               "score": null,
               "isPremium": true
+            },
+            {
+              "id": "437",
+              "title": "路徑總和 III",
+              "slug": "path-sum-iii",
+              "src": "https://leetcode.cn/problems/path-sum-iii",
+              "solution": null,
+              "score": null,
+              "isPremium": false
             },
             {
               "id": "523",
@@ -814,40 +805,49 @@
               "isPremium": false
             },
             {
-              "id": "930",
-              "title": "和相同的二元子陣列",
-              "slug": "binary-subarrays-with-sum",
-              "src": "https://leetcode.cn/problems/binary-subarrays-with-sum/",
+              "id": "1983",
+              "title": "範圍和相等的最寬索引對",
+              "slug": "widest-pair-of-indices-with-equal-range-sum",
+              "src": "https://leetcode.cn/problems/widest-pair-of-indices-with-equal-range-sum/",
               "solution": null,
               "score": null,
-              "isPremium": false
+              "isPremium": true
             },
             {
-              "id": "974",
-              "title": "和可被 K 整除的子陣列",
-              "slug": "subarray-sums-divisible-by-k",
-              "src": "https://leetcode.cn/problems/subarray-sums-divisible-by-k/",
+              "id": "2031",
+              "title": "1 比 0 多的子陣列個數",
+              "slug": "count-subarrays-with-more-ones-than-zeros",
+              "src": "https://leetcode.cn/problems/count-subarrays-with-more-ones-than-zeros/",
               "solution": null,
               "score": null,
-              "isPremium": false
+              "isPremium": true
             },
             {
-              "id": "1074",
-              "title": "元素和為目標值的子矩陣數量",
-              "slug": "number-of-submatrices-that-sum-to-target",
-              "src": "https://leetcode.cn/problems/number-of-submatrices-that-sum-to-target/",
+              "id": "2489",
+              "title": "固定比率的子字串數",
+              "slug": "number-of-substrings-with-fixed-ratio",
+              "src": "https://leetcode.cn/problems/number-of-substrings-with-fixed-ratio/",
               "solution": null,
               "score": null,
-              "isPremium": false
+              "isPremium": true
             },
             {
-              "id": "1124",
-              "title": "表現良好的最長時間段",
-              "slug": "longest-well-performing-interval",
-              "src": "https://leetcode.cn/problems/longest-well-performing-interval/",
+              "id": "2950",
+              "title": "可整除子串的數量",
+              "slug": "number-of-divisible-substrings",
+              "src": "https://leetcode.cn/problems/number-of-divisible-substrings/",
               "solution": null,
               "score": null,
-              "isPremium": false
+              "isPremium": true
+            },
+            {
+              "id": "面試題 17.05",
+              "title": "字母與數字",
+              "slug": "find-longest-subarray-lcci",
+              "src": "https://leetcode.cn/problems/find-longest-subarray-lcci/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
             },
             {
               "id": "1442",
@@ -859,10 +859,10 @@
               "isPremium": false
             },
             {
-              "id": "1477",
-              "title": "找兩個和為目標值且不重疊的子陣列",
-              "slug": "find-two-non-overlapping-sub-arrays-each-with-target-sum",
-              "src": "https://leetcode.cn/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/",
+              "id": "930",
+              "title": "和相同的二元子陣列",
+              "slug": "binary-subarrays-with-sum",
+              "src": "https://leetcode.cn/problems/binary-subarrays-with-sum/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -877,76 +877,22 @@
               "isPremium": false
             },
             {
-              "id": "1546",
-              "title": "和為目標值且不重疊的非空子陣列的最大數目",
-              "slug": "maximum-number-of-non-overlapping-subarrays-with-sum-equals-target",
-              "src": "https://leetcode.cn/problems/maximum-number-of-non-overlapping-subarrays-with-sum-equals-target/",
+              "id": "3755",
+              "title": "最大平衡異或子陣列的長度",
+              "slug": "find-maximum-balanced-xor-subarray-length",
+              "src": "https://leetcode.cn/problems/find-maximum-balanced-xor-subarray-length/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "1590",
-              "title": "使陣列和能被 P 整除",
-              "slug": "make-sum-divisible-by-p",
-              "src": "https://leetcode.cn/problems/make-sum-divisible-by-p/",
+              "id": "974",
+              "title": "和可被 K 整除的子陣列",
+              "slug": "subarray-sums-divisible-by-k",
+              "src": "https://leetcode.cn/problems/subarray-sums-divisible-by-k/",
               "solution": null,
               "score": null,
               "isPremium": false
-            },
-            {
-              "id": "面試題 17.05",
-              "title": "字母與數字",
-              "slug": "find-longest-subarray-lcci",
-              "src": "https://leetcode.cn/problems/find-longest-subarray-lcci/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "1983",
-              "title": "範圍和相等的最寬索引對",
-              "slug": "widest-pair-of-indices-with-equal-range-sum",
-              "src": "https://leetcode.cn/problems/widest-pair-of-indices-with-equal-range-sum/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "2025",
-              "title": "分割陣列的最多方案數",
-              "slug": "maximum-number-of-ways-to-partition-an-array",
-              "src": "https://leetcode.cn/problems/maximum-number-of-ways-to-partition-an-array/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2031",
-              "title": "1 比 0 多的子陣列個數",
-              "slug": "count-subarrays-with-more-ones-than-zeros",
-              "src": "https://leetcode.cn/problems/count-subarrays-with-more-ones-than-zeros/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "2488",
-              "title": "統計中位數為 K 的子陣列",
-              "slug": "count-subarrays-with-median-k",
-              "src": "https://leetcode.cn/problems/count-subarrays-with-median-k/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2489",
-              "title": "固定比率的子字串數",
-              "slug": "number-of-substrings-with-fixed-ratio",
-              "src": "https://leetcode.cn/problems/number-of-substrings-with-fixed-ratio/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
             },
             {
               "id": "2588",
@@ -958,33 +904,6 @@
               "isPremium": false
             },
             {
-              "id": "2845",
-              "title": "統計趣味子陣列的數目",
-              "slug": "count-of-interesting-subarrays",
-              "src": "https://leetcode.cn/problems/count-of-interesting-subarrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2949",
-              "title": "統計美麗子字串 II",
-              "slug": "count-beautiful-substrings-ii",
-              "src": "https://leetcode.cn/problems/count-beautiful-substrings-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2950",
-              "title": "可整除子串的數量",
-              "slug": "number-of-divisible-substrings",
-              "src": "https://leetcode.cn/problems/number-of-divisible-substrings/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
               "id": "3026",
               "title": "最大好子陣列和",
               "slug": "maximum-good-subarray-sum",
@@ -994,19 +913,28 @@
               "isPremium": false
             },
             {
-              "id": "3381",
-              "title": "長度可被 K 整除的子陣列的最大元素和",
-              "slug": "maximum-subarray-sum-with-length-divisible-by-k",
-              "src": "https://leetcode.cn/problems/maximum-subarray-sum-with-length-divisible-by-k/",
+              "id": "1477",
+              "title": "找兩個和為目標值且不重疊的子陣列",
+              "slug": "find-two-non-overlapping-sub-arrays-each-with-target-sum",
+              "src": "https://leetcode.cn/problems/find-two-non-overlapping-sub-arrays-each-with-target-sum/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "3714",
-              "title": "最長的平衡子串 II",
-              "slug": "longest-balanced-substring-ii",
-              "src": "https://leetcode.cn/problems/longest-balanced-substring-ii/",
+              "id": "1546",
+              "title": "和為目標值且不重疊的非空子陣列的最大數目",
+              "slug": "maximum-number-of-non-overlapping-subarrays-with-sum-equals-target",
+              "src": "https://leetcode.cn/problems/maximum-number-of-non-overlapping-subarrays-with-sum-equals-target/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1124",
+              "title": "表現良好的最長時間段",
+              "slug": "longest-well-performing-interval",
+              "src": "https://leetcode.cn/problems/longest-well-performing-interval/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -1021,10 +949,37 @@
               "isPremium": false
             },
             {
-              "id": "3729",
-              "title": "統計有序陣列中可被 K 整除的子陣列數量",
-              "slug": "count-distinct-subarrays-divisible-by-k-in-sorted-array",
-              "src": "https://leetcode.cn/problems/count-distinct-subarrays-divisible-by-k-in-sorted-array/",
+              "id": "3381",
+              "title": "長度可被 K 整除的子陣列的最大元素和",
+              "slug": "maximum-subarray-sum-with-length-divisible-by-k",
+              "src": "https://leetcode.cn/problems/maximum-subarray-sum-with-length-divisible-by-k/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2488",
+              "title": "統計中位數為 K 的子陣列",
+              "slug": "count-subarrays-with-median-k",
+              "src": "https://leetcode.cn/problems/count-subarrays-with-median-k/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1590",
+              "title": "使陣列和能被 P 整除",
+              "slug": "make-sum-divisible-by-p",
+              "src": "https://leetcode.cn/problems/make-sum-divisible-by-p/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2845",
+              "title": "統計趣味子陣列的數目",
+              "slug": "count-of-interesting-subarrays",
+              "src": "https://leetcode.cn/problems/count-of-interesting-subarrays/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -1039,34 +994,52 @@
               "isPremium": false
             },
             {
-              "id": "3755",
-              "title": "最大平衡異或子陣列的長度",
-              "slug": "find-maximum-balanced-xor-subarray-length",
-              "src": "https://leetcode.cn/problems/find-maximum-balanced-xor-subarray-length/",
+              "id": "1074",
+              "title": "元素和為目標值的子矩陣數量",
+              "slug": "number-of-submatrices-that-sum-to-target",
+              "src": "https://leetcode.cn/problems/number-of-submatrices-that-sum-to-target/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3714",
+              "title": "最長的平衡子串 II",
+              "slug": "longest-balanced-substring-ii",
+              "src": "https://leetcode.cn/problems/longest-balanced-substring-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2025",
+              "title": "分割陣列的最多方案數",
+              "slug": "maximum-number-of-ways-to-partition-an-array",
+              "src": "https://leetcode.cn/problems/maximum-number-of-ways-to-partition-an-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3729",
+              "title": "統計有序陣列中可被 K 整除的子陣列數量",
+              "slug": "count-distinct-subarrays-divisible-by-k-in-sorted-array",
+              "src": "https://leetcode.cn/problems/count-distinct-subarrays-divisible-by-k-in-sorted-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2949",
+              "title": "統計美麗子字串 II",
+              "slug": "count-beautiful-substrings-ii",
+              "src": "https://leetcode.cn/problems/count-beautiful-substrings-ii/",
               "solution": null,
               "score": null,
               "isPremium": false
             }
           ],
-          "children": [
-            {
-              "id": 13,
-              "title": "2.2.1 字首和與雜湊表 > 思維擴展",
-              "isLeaf": true,
-              "problems": [
-                {
-                  "id": "437",
-                  "title": "路徑總和 III",
-                  "slug": "path-sum-iii",
-                  "src": "https://leetcode.cn/problems/path-sum-iii",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                }
-              ],
-              "children": []
-            }
-          ],
+          "children": [],
           "summary": "通常要用到「列舉右，維護左」的技巧（見本題單 §0.1 節）。\n\n[講解](https://leetcode.cn/problems/subarray-sum-equals-k/solution/qian-zhui-he-ha-xi-biao-cong-liang-ci-bi-4mwr/)"
         },
         {
@@ -1201,33 +1174,6 @@
           "isLeaf": true,
           "problems": [
             {
-              "id": "1031",
-              "title": "兩個無重疊子陣列的最大和",
-              "slug": "maximum-sum-of-two-non-overlapping-subarrays",
-              "src": "https://leetcode.cn/problems/maximum-sum-of-two-non-overlapping-subarrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1712",
-              "title": "將陣列分成三個子陣列的方案數",
-              "slug": "ways-to-split-array-into-three-subarrays",
-              "src": "https://leetcode.cn/problems/ways-to-split-array-into-three-subarrays/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1744",
-              "title": "你能在你最喜歡的那天喫到你最喜歡的糖果嗎？",
-              "slug": "can-you-eat-your-favorite-candy-on-your-favorite-day",
-              "src": "https://leetcode.cn/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
               "id": "1788",
               "title": "最大化花園的美觀度",
               "slug": "maximize-the-beauty-of-the-garden",
@@ -1237,19 +1183,55 @@
               "isPremium": true
             },
             {
-              "id": "1862",
-              "title": "向下取整數對和",
-              "slug": "sum-of-floored-pairs",
-              "src": "https://leetcode.cn/problems/sum-of-floored-pairs/",
+              "id": "2819",
+              "title": "購買巧克力後的最小相對損失",
+              "slug": "minimum-relative-loss-after-buying-chocolates",
+              "src": "https://leetcode.cn/problems/minimum-relative-loss-after-buying-chocolates/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "2955",
+              "title": "同端子串的數量",
+              "slug": "number-of-same-end-substrings",
+              "src": "https://leetcode.cn/problems/number-of-same-end-substrings/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "2389",
+              "title": "和有限的最長子序列",
+              "slug": "longest-subsequence-with-limited-sum",
+              "src": "https://leetcode.cn/problems/longest-subsequence-with-limited-sum/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "1878",
-              "title": "矩陣中最大的三個菱形和",
-              "slug": "get-biggest-three-rhombus-sums-in-a-grid",
-              "src": "https://leetcode.cn/problems/get-biggest-three-rhombus-sums-in-a-grid/",
+              "id": "2300",
+              "title": "咒語和藥水的成功對數",
+              "slug": "successful-pairs-of-spells-and-potions",
+              "src": "https://leetcode.cn/problems/successful-pairs-of-spells-and-potions",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3709",
+              "title": "設計考試分數記錄器",
+              "slug": "design-exam-scores-tracker",
+              "src": "https://leetcode.cn/problems/design-exam-scores-tracker/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1031",
+              "title": "兩個無重疊子陣列的最大和",
+              "slug": "maximum-sum-of-two-non-overlapping-subarrays",
+              "src": "https://leetcode.cn/problems/maximum-sum-of-two-non-overlapping-subarrays/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -1273,6 +1255,33 @@
               "isPremium": false
             },
             {
+              "id": "1744",
+              "title": "你能在你最喜歡的那天喫到你最喜歡的糖果嗎？",
+              "slug": "can-you-eat-your-favorite-candy-on-your-favorite-day",
+              "src": "https://leetcode.cn/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1878",
+              "title": "矩陣中最大的三個菱形和",
+              "slug": "get-biggest-three-rhombus-sums-in-a-grid",
+              "src": "https://leetcode.cn/problems/get-biggest-three-rhombus-sums-in-a-grid/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3756",
+              "title": "連線非零數字並乘以其數字和 II",
+              "slug": "concatenate-non-zero-digits-and-multiply-by-sum-ii",
+              "src": "https://leetcode.cn/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
               "id": "2245",
               "title": "轉角路徑的乘積中最多能有幾個尾隨零",
               "slug": "maximum-trailing-zeros-in-a-cornered-path",
@@ -1282,64 +1291,19 @@
               "isPremium": false
             },
             {
-              "id": "2281",
-              "title": "巫師的總力量和",
-              "slug": "sum-of-total-strength-of-wizards",
-              "src": "https://leetcode.cn/problems/sum-of-total-strength-of-wizards/",
+              "id": "1712",
+              "title": "將陣列分成三個子陣列的方案數",
+              "slug": "ways-to-split-array-into-three-subarrays",
+              "src": "https://leetcode.cn/problems/ways-to-split-array-into-three-subarrays/",
               "solution": null,
               "score": null,
               "isPremium": false
             },
             {
-              "id": "2389",
-              "title": "和有限的最長子序列",
-              "slug": "longest-subsequence-with-limited-sum",
-              "src": "https://leetcode.cn/problems/longest-subsequence-with-limited-sum/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "2819",
-              "title": "購買巧克力後的最小相對損失",
-              "slug": "minimum-relative-loss-after-buying-chocolates",
-              "src": "https://leetcode.cn/problems/minimum-relative-loss-after-buying-chocolates/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "2955",
-              "title": "同端子串的數量",
-              "slug": "number-of-same-end-substrings",
-              "src": "https://leetcode.cn/problems/number-of-same-end-substrings/",
-              "solution": null,
-              "score": null,
-              "isPremium": true
-            },
-            {
-              "id": "2983",
-              "title": "迴文串重新排列查詢",
-              "slug": "palindrome-rearrangement-queries",
-              "src": "https://leetcode.cn/problems/palindrome-rearrangement-queries/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3445",
-              "title": "奇偶頻次間的最大差值 II",
-              "slug": "maximum-difference-between-even-and-odd-frequency-ii",
-              "src": "https://leetcode.cn/problems/maximum-difference-between-even-and-odd-frequency-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "3709",
-              "title": "設計考試分數記錄器",
-              "slug": "design-exam-scores-tracker",
-              "src": "https://leetcode.cn/problems/design-exam-scores-tracker/",
+              "id": "1862",
+              "title": "向下取整數對和",
+              "slug": "sum-of-floored-pairs",
+              "src": "https://leetcode.cn/problems/sum-of-floored-pairs/",
               "solution": null,
               "score": null,
               "isPremium": false
@@ -1354,34 +1318,34 @@
               "isPremium": false
             },
             {
-              "id": "3756",
-              "title": "連線非零數字並乘以其數字和 II",
-              "slug": "concatenate-non-zero-digits-and-multiply-by-sum-ii",
-              "src": "https://leetcode.cn/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii/",
+              "id": "2281",
+              "title": "巫師的總力量和",
+              "slug": "sum-of-total-strength-of-wizards",
+              "src": "https://leetcode.cn/problems/sum-of-total-strength-of-wizards/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3445",
+              "title": "奇偶頻次間的最大差值 II",
+              "slug": "maximum-difference-between-even-and-odd-frequency-ii",
+              "src": "https://leetcode.cn/problems/maximum-difference-between-even-and-odd-frequency-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2983",
+              "title": "迴文串重新排列查詢",
+              "slug": "palindrome-rearrangement-queries",
+              "src": "https://leetcode.cn/problems/palindrome-rearrangement-queries/",
               "solution": null,
               "score": null,
               "isPremium": false
             }
           ],
-          "children": [
-            {
-              "id": 17,
-              "title": "2.5.1 進階 > 思維擴展",
-              "isLeaf": true,
-              "problems": [
-                {
-                  "id": "2300",
-                  "title": "咒語和藥水的成功對數",
-                  "slug": "successful-pairs-of-spells-and-potions",
-                  "src": "https://leetcode.cn/problems/successful-pairs-of-spells-and-potions",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                }
-              ],
-              "children": []
-            }
-          ],
+          "children": [],
           "summary": "思維擴充套件：\n\n*   [2300\\. 咒語和藥水的成功對數](https://leetcode.cn/problems/successful-pairs-of-spells-and-potions/)\n*   [1534\\. 統計好三元組](https://leetcode.cn/problems/count-good-triplets/)"
         },
         {
@@ -1598,55 +1562,37 @@
               "isLeaf": true,
               "problems": [
                 {
+                  "id": "56",
+                  "title": "合併區間",
+                  "slug": "merge-intervals",
+                  "src": "https://leetcode.cn/problems/merge-intervals",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "57",
+                  "title": "插入區間",
+                  "slug": "insert-interval",
+                  "src": "https://leetcode.cn/problems/insert-interval",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "759",
+                  "title": "員工空閒時間",
+                  "slug": "employee-free-time",
+                  "src": "https://leetcode.cn/problems/employee-free-time",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": true
+                },
+                {
                   "id": "798",
                   "title": "得分最高的最小輪調",
                   "slug": "smallest-rotation-with-highest-score",
                   "src": "https://leetcode.cn/problems/smallest-rotation-with-highest-score/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "995",
-                  "title": "K 連續位的最小翻轉次數",
-                  "slug": "minimum-number-of-k-consecutive-bit-flips",
-                  "src": "https://leetcode.cn/problems/minimum-number-of-k-consecutive-bit-flips/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "1526",
-                  "title": "形成目標陣列的子陣列最少增加次數",
-                  "slug": "minimum-number-of-increments-on-subarrays-to-form-a-target-array",
-                  "src": "https://leetcode.cn/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "1589",
-                  "title": "所有排列中的最大和",
-                  "slug": "maximum-sum-obtained-of-any-permutation",
-                  "src": "https://leetcode.cn/problems/maximum-sum-obtained-of-any-permutation/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "1674",
-                  "title": "使陣列互補的最少操作次數",
-                  "slug": "minimum-moves-to-make-array-complementary",
-                  "src": "https://leetcode.cn/problems/minimum-moves-to-make-array-complementary/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "1943",
-                  "title": "描述繪畫結果",
-                  "slug": "describe-the-painting",
-                  "src": "https://leetcode.cn/problems/describe-the-painting/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
@@ -1679,19 +1625,28 @@
                   "isPremium": true
                 },
                 {
-                  "id": "2251",
-                  "title": "花期內花的數目",
-                  "slug": "number-of-flowers-in-full-bloom",
-                  "src": "https://leetcode.cn/problems/number-of-flowers-in-full-bloom/",
+                  "id": "3009",
+                  "title": "折線圖上的最大交點數量",
+                  "slug": "maximum-number-of-intersections-on-the-chart",
+                  "src": "https://leetcode.cn/problems/maximum-number-of-intersections-on-the-chart/",
                   "solution": null,
                   "score": null,
-                  "isPremium": false
+                  "isPremium": true
                 },
                 {
-                  "id": "2327",
-                  "title": "知道祕密的人數",
-                  "slug": "number-of-people-aware-of-a-secret",
-                  "src": "https://leetcode.cn/problems/number-of-people-aware-of-a-secret/",
+                  "id": "3279",
+                  "title": "活塞佔據的最大總面積",
+                  "slug": "maximum-total-area-occupied-by-pistons",
+                  "src": "https://leetcode.cn/problems/maximum-total-area-occupied-by-pistons/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": true
+                },
+                {
+                  "id": "3453",
+                  "title": "分割正方形 I",
+                  "slug": "separate-squares-i",
+                  "src": "https://leetcode.cn/problems/separate-squares-i/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
@@ -1706,73 +1661,37 @@
                   "isPremium": false
                 },
                 {
-                  "id": "2528",
-                  "title": "最大化城市的最小電量",
-                  "slug": "maximize-the-minimum-powered-city",
-                  "src": "https://leetcode.cn/problems/maximize-the-minimum-powered-city/",
+                  "id": "995",
+                  "title": "K 連續位的最小翻轉次數",
+                  "slug": "minimum-number-of-k-consecutive-bit-flips",
+                  "src": "https://leetcode.cn/problems/minimum-number-of-k-consecutive-bit-flips/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
                 },
                 {
-                  "id": "2772",
-                  "title": "使陣列中的所有元素都等於零",
-                  "slug": "apply-operations-to-make-all-array-elements-equal-to-zero",
-                  "src": "https://leetcode.cn/problems/apply-operations-to-make-all-array-elements-equal-to-zero/",
+                  "id": "1589",
+                  "title": "所有排列中的最大和",
+                  "slug": "maximum-sum-obtained-of-any-permutation",
+                  "src": "https://leetcode.cn/problems/maximum-sum-obtained-of-any-permutation/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
                 },
                 {
-                  "id": "3009",
-                  "title": "折線圖上的最大交點數量",
-                  "slug": "maximum-number-of-intersections-on-the-chart",
-                  "src": "https://leetcode.cn/problems/maximum-number-of-intersections-on-the-chart/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": true
-                },
-                {
-                  "id": "3017",
-                  "title": "按距離統計房屋對數目 II",
-                  "slug": "count-the-number-of-houses-at-a-certain-distance-ii",
-                  "src": "https://leetcode.cn/problems/count-the-number-of-houses-at-a-certain-distance-ii/",
+                  "id": "1526",
+                  "title": "形成目標陣列的子陣列最少增加次數",
+                  "slug": "minimum-number-of-increments-on-subarrays-to-form-a-target-array",
+                  "src": "https://leetcode.cn/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
                 },
                 {
-                  "id": "3224",
-                  "title": "使差值相等的最少陣列改動次數",
-                  "slug": "minimum-array-changes-to-make-differences-equal",
-                  "src": "https://leetcode.cn/problems/minimum-array-changes-to-make-differences-equal/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "3229",
-                  "title": "使陣列等於目標陣列所需的最少操作次數",
-                  "slug": "minimum-operations-to-make-array-equal-to-target",
-                  "src": "https://leetcode.cn/problems/minimum-operations-to-make-array-equal-to-target/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": false
-                },
-                {
-                  "id": "3279",
-                  "title": "活塞佔據的最大總面積",
-                  "slug": "maximum-total-area-occupied-by-pistons",
-                  "src": "https://leetcode.cn/problems/maximum-total-area-occupied-by-pistons/",
-                  "solution": null,
-                  "score": null,
-                  "isPremium": true
-                },
-                {
-                  "id": "3347",
-                  "title": "執行操作後元素的最高頻率 II",
-                  "slug": "maximum-frequency-of-an-element-after-performing-operations-ii",
-                  "src": "https://leetcode.cn/problems/maximum-frequency-of-an-element-after-performing-operations-ii/",
+                  "id": "2327",
+                  "title": "知道祕密的人數",
+                  "slug": "number-of-people-aware-of-a-secret",
+                  "src": "https://leetcode.cn/problems/number-of-people-aware-of-a-secret/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
@@ -1787,19 +1706,46 @@
                   "isPremium": false
                 },
                 {
-                  "id": "3362",
-                  "title": "零陣列變換 III",
-                  "slug": "zero-array-transformation-iii",
-                  "src": "https://leetcode.cn/problems/zero-array-transformation-iii/",
+                  "id": "1943",
+                  "title": "描述繪畫結果",
+                  "slug": "describe-the-painting",
+                  "src": "https://leetcode.cn/problems/describe-the-painting/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
                 },
                 {
-                  "id": "3453",
-                  "title": "分割正方形 I",
-                  "slug": "separate-squares-i",
-                  "src": "https://leetcode.cn/problems/separate-squares-i/",
+                  "id": "3224",
+                  "title": "使差值相等的最少陣列改動次數",
+                  "slug": "minimum-array-changes-to-make-differences-equal",
+                  "src": "https://leetcode.cn/problems/minimum-array-changes-to-make-differences-equal/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "2251",
+                  "title": "花期內花的數目",
+                  "slug": "number-of-flowers-in-full-bloom",
+                  "src": "https://leetcode.cn/problems/number-of-flowers-in-full-bloom/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "2772",
+                  "title": "使陣列中的所有元素都等於零",
+                  "slug": "apply-operations-to-make-all-array-elements-equal-to-zero",
+                  "src": "https://leetcode.cn/problems/apply-operations-to-make-all-array-elements-equal-to-zero/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "3229",
+                  "title": "使陣列等於目標陣列所需的最少操作次數",
+                  "slug": "minimum-operations-to-make-array-equal-to-target",
+                  "src": "https://leetcode.cn/problems/minimum-operations-to-make-array-equal-to-target/",
                   "solution": null,
                   "score": null,
                   "isPremium": false
@@ -1814,6 +1760,42 @@
                   "isPremium": false
                 },
                 {
+                  "id": "3347",
+                  "title": "執行操作後元素的最高頻率 II",
+                  "slug": "maximum-frequency-of-an-element-after-performing-operations-ii",
+                  "src": "https://leetcode.cn/problems/maximum-frequency-of-an-element-after-performing-operations-ii/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "2528",
+                  "title": "最大化城市的最小電量",
+                  "slug": "maximize-the-minimum-powered-city",
+                  "src": "https://leetcode.cn/problems/maximize-the-minimum-powered-city/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "1674",
+                  "title": "使陣列互補的最少操作次數",
+                  "slug": "minimum-moves-to-make-array-complementary",
+                  "src": "https://leetcode.cn/problems/minimum-moves-to-make-array-complementary/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "3362",
+                  "title": "零陣列變換 III",
+                  "slug": "zero-array-transformation-iii",
+                  "src": "https://leetcode.cn/problems/zero-array-transformation-iii/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
                   "id": "3655",
                   "title": "區間乘法查詢後的異或 II",
                   "slug": "xor-after-range-multiplication-queries-ii",
@@ -1821,45 +1803,18 @@
                   "solution": null,
                   "score": null,
                   "isPremium": false
+                },
+                {
+                  "id": "3017",
+                  "title": "按距離統計房屋對數目 II",
+                  "slug": "count-the-number-of-houses-at-a-certain-distance-ii",
+                  "src": "https://leetcode.cn/problems/count-the-number-of-houses-at-a-certain-distance-ii/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
                 }
               ],
-              "children": [
-                {
-                  "id": 25,
-                  "title": "3.1.2.1 一維差分 > 進階 > 思維擴展",
-                  "isLeaf": true,
-                  "problems": [
-                    {
-                      "id": "56",
-                      "title": "合併區間",
-                      "slug": "merge-intervals",
-                      "src": "https://leetcode.cn/problems/merge-intervals",
-                      "solution": null,
-                      "score": null,
-                      "isPremium": false
-                    },
-                    {
-                      "id": "57",
-                      "title": "插入區間",
-                      "slug": "insert-interval",
-                      "src": "https://leetcode.cn/problems/insert-interval",
-                      "solution": null,
-                      "score": null,
-                      "isPremium": false
-                    },
-                    {
-                      "id": "759",
-                      "title": "員工空閒時間",
-                      "slug": "employee-free-time",
-                      "src": "https://leetcode.cn/problems/employee-free-time",
-                      "solution": null,
-                      "score": null,
-                      "isPremium": true
-                    }
-                  ],
-                  "children": []
-                }
-              ]
+              "children": []
             }
           ],
           "summary": "思維擴充套件：\n\n*   [56\\. 合併區間](https://leetcode.cn/problems/merge-intervals/) 做法見 [我的評論](https://leetcode.cn/problems/merge-intervals/solutions/2798138/jian-dan-zuo-fa-yi-ji-wei-shi-yao-yao-zh-f2b3/comments/2323402/?parent=2316868)\n*   [57\\. 插入區間](https://leetcode.cn/problems/insert-interval/)\n*   [732\\. 我的日程安排表 III](https://leetcode.cn/problems/my-calendar-iii/)\n*   [2406\\. 將區間分為最少組數](https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups/) 1713\n*   [253\\. 會議室 II](https://leetcode.cn/problems/meeting-rooms-ii/)（會員題）\n*   [759\\. 員工空閒時間](https://leetcode.cn/problems/employee-free-time/)（會員題）"
@@ -2542,7 +2497,12 @@
           ],
           "children": []
         },
-        { "id": 34, "title": "4.7 單調堆疊", "isLeaf": true, "children": [] }
+        {
+          "id": 34,
+          "title": "4.7 單調堆疊",
+          "isLeaf": true,
+          "children": []
+        }
       ],
       "summary": "堆疊常用在 DFS 中，但無需我們手動維護。"
     },

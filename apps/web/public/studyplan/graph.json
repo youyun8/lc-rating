@@ -10,15 +10,6 @@
       "isLeaf": true,
       "problems": [
         {
-          "id": "LCP 07",
-          "title": "傳遞資訊",
-          "slug": "chuan-di-xin-xi",
-          "src": "https://leetcode.cn/problems/chuan-di-xin-xi/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "207",
           "title": "課程表",
           "slug": "course-schedule",
@@ -82,28 +73,19 @@
           "isPremium": false
         },
         {
-          "id": "841",
-          "title": "鑰匙和房間",
-          "slug": "keys-and-rooms",
-          "src": "https://leetcode.cn/problems/keys-and-rooms/",
+          "id": "1971",
+          "title": "尋找圖中是否存在路徑",
+          "slug": "find-if-path-exists-in-graph",
+          "src": "https://leetcode.cn/problems/find-if-path-exists-in-graph/",
           "solution": null,
           "score": null,
           "isPremium": false
         },
         {
-          "id": "924",
-          "title": "儘量減少惡意軟體的傳播",
-          "slug": "minimize-malware-spread",
-          "src": "https://leetcode.cn/problems/minimize-malware-spread/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "928",
-          "title": "儘量減少惡意軟體的傳播 II",
-          "slug": "minimize-malware-spread-ii",
-          "src": "https://leetcode.cn/problems/minimize-malware-spread-ii/",
+          "id": "LCP 07",
+          "title": "傳遞資訊",
+          "slug": "chuan-di-xin-xi",
+          "src": "https://leetcode.cn/problems/chuan-di-xin-xi/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -118,46 +100,10 @@
           "isPremium": false
         },
         {
-          "id": "1319",
-          "title": "連通網路的操作次數",
-          "slug": "number-of-operations-to-make-network-connected",
-          "src": "https://leetcode.cn/problems/number-of-operations-to-make-network-connected/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1971",
-          "title": "尋找圖中是否存在路徑",
-          "slug": "find-if-path-exists-in-graph",
-          "src": "https://leetcode.cn/problems/find-if-path-exists-in-graph/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2092",
-          "title": "找出知曉祕密的所有專家",
-          "slug": "find-all-people-with-secret",
-          "src": "https://leetcode.cn/problems/find-all-people-with-secret/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2101",
-          "title": "引爆最多的炸彈",
-          "slug": "detonate-the-maximum-bombs",
-          "src": "https://leetcode.cn/problems/detonate-the-maximum-bombs/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2192",
-          "title": "有向無環圖中一個節點的所有祖先",
-          "slug": "all-ancestors-of-a-node-in-a-directed-acyclic-graph",
-          "src": "https://leetcode.cn/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/",
+          "id": "841",
+          "title": "鑰匙和房間",
+          "slug": "keys-and-rooms",
+          "src": "https://leetcode.cn/problems/keys-and-rooms/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -172,28 +118,19 @@
           "isPremium": false
         },
         {
+          "id": "1319",
+          "title": "連通網路的操作次數",
+          "slug": "number-of-operations-to-make-network-connected",
+          "src": "https://leetcode.cn/problems/number-of-operations-to-make-network-connected/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
           "id": "2492",
           "title": "兩個城市間路徑的最小分數",
           "slug": "minimum-score-of-a-path-between-two-cities",
           "src": "https://leetcode.cn/problems/minimum-score-of-a-path-between-two-cities/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2685",
-          "title": "統計完全連通分量的數量",
-          "slug": "count-the-number-of-complete-components",
-          "src": "https://leetcode.cn/problems/count-the-number-of-complete-components/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3108",
-          "title": "帶權圖裡旅途的最小代價",
-          "slug": "minimum-cost-walk-in-weighted-graph",
-          "src": "https://leetcode.cn/problems/minimum-cost-walk-in-weighted-graph/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -208,10 +145,55 @@
           "isPremium": false
         },
         {
+          "id": "2685",
+          "title": "統計完全連通分量的數量",
+          "slug": "count-the-number-of-complete-components",
+          "src": "https://leetcode.cn/problems/count-the-number-of-complete-components/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
           "id": "3387",
           "title": "兩天自由外匯交易後的最大貨幣數",
           "slug": "maximize-amount-after-two-days-of-conversions",
           "src": "https://leetcode.cn/problems/maximize-amount-after-two-days-of-conversions/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2192",
+          "title": "有向無環圖中一個節點的所有祖先",
+          "slug": "all-ancestors-of-a-node-in-a-directed-acyclic-graph",
+          "src": "https://leetcode.cn/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1298",
+          "title": "你能從盒子裡獲得的最大糖果數",
+          "slug": "maximum-candies-you-can-get-from-boxes",
+          "src": "https://leetcode.cn/problems/maximum-candies-you-can-get-from-boxes/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "924",
+          "title": "儘量減少惡意軟體的傳播",
+          "slug": "minimize-malware-spread",
+          "src": "https://leetcode.cn/problems/minimize-malware-spread/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2101",
+          "title": "引爆最多的炸彈",
+          "slug": "detonate-the-maximum-bombs",
+          "src": "https://leetcode.cn/problems/detonate-the-maximum-bombs/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -224,27 +206,36 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        }
-      ],
-      "children": [
+        },
         {
-          "id": 3,
-          "title": "1.1 深度優先搜尋（DFS）思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "1298",
-              "title": "你能從盒子裡獲得的最大糖果數",
-              "slug": "maximum-candies-you-can-get-from-boxes",
-              "src": "https://leetcode.cn/problems/maximum-candies-you-can-get-from-boxes/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
+          "id": "928",
+          "title": "儘量減少惡意軟體的傳播 II",
+          "slug": "minimize-malware-spread-ii",
+          "src": "https://leetcode.cn/problems/minimize-malware-spread-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2092",
+          "title": "找出知曉祕密的所有專家",
+          "slug": "find-all-people-with-secret",
+          "src": "https://leetcode.cn/problems/find-all-people-with-secret/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3108",
+          "title": "帶權圖裡旅途的最小代價",
+          "slug": "minimum-cost-walk-in-weighted-graph",
+          "src": "https://leetcode.cn/problems/minimum-cost-walk-in-weighted-graph/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         }
       ],
+      "children": [],
       "summary": "找連通塊、判斷是否有環（如 207 題）等。部分題目做法不止一種。\n\n模板（計算每個連通塊的大小）：\n\n```py\ndef solve(n: int, edges: List[List[int]]) -> List[int]:\n    # 節點編號從 0 到 n-1\n    g = [[] for _ in range(n)]\n    for x, y in edges:\n        g[x].append(y)\n        g[y].append(x)  # 無向圖\n\n    vis = [False] * n\n\n    def dfs(x: int) -> int:\n        vis[x] = True  # 避免重複訪問節點\n        size = 1\n        for y in g[x]:\n            if not vis[y]:\n                size += dfs(y)\n        return size\n\n    # 計算每個連通塊的大小\n    ans = []\n    for i, b in enumerate(vis):\n        if not b:  # i 沒有訪問過\n            size = dfs(i)\n            ans.append(size)\n    return ans\n```"
     },
     {
@@ -522,15 +513,6 @@
       "isLeaf": true,
       "problems": [
         {
-          "id": "LCR 114",
-          "title": "火星詞典",
-          "slug": "Jf1JuT",
-          "src": "https://leetcode.cn/problems/Jf1JuT/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "210",
           "title": "課程表 II",
           "slug": "course-schedule-ii",
@@ -547,6 +529,15 @@
           "solution": null,
           "score": null,
           "isPremium": true
+        },
+        {
+          "id": "310",
+          "title": "最小高度樹",
+          "slug": "minimum-height-trees",
+          "src": "https://leetcode.cn/problems/minimum-height-trees/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         },
         {
           "id": "444",
@@ -567,10 +558,37 @@
           "isPremium": true
         },
         {
-          "id": "1203",
-          "title": "專案管理",
-          "slug": "sort-items-by-groups-respecting-dependencies",
-          "src": "https://leetcode.cn/problems/sort-items-by-groups-respecting-dependencies/",
+          "id": "2371",
+          "title": "最小化網格中的最大值",
+          "slug": "minimize-maximum-value-in-a-grid",
+          "src": "https://leetcode.cn/problems/minimize-maximum-value-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "3481",
+          "title": "應用替換",
+          "slug": "apply-substitutions",
+          "src": "https://leetcode.cn/problems/apply-substitutions/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
+          "id": "LCR 114",
+          "title": "火星詞典",
+          "slug": "Jf1JuT",
+          "src": "https://leetcode.cn/problems/Jf1JuT/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1361",
+          "title": "驗證二叉樹",
+          "slug": "validate-binary-tree-nodes",
+          "src": "https://leetcode.cn/problems/validate-binary-tree-nodes/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -585,10 +603,37 @@
           "isPremium": false
         },
         {
+          "id": "2115",
+          "title": "從給定原材料中找到所有可以做出的菜",
+          "slug": "find-all-possible-recipes-from-given-supplies",
+          "src": "https://leetcode.cn/problems/find-all-possible-recipes-from-given-supplies/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2392",
+          "title": "給定條件下構造矩陣",
+          "slug": "build-a-matrix-with-conditions",
+          "src": "https://leetcode.cn/problems/build-a-matrix-with-conditions/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
           "id": "1591",
           "title": "奇怪的印表機 II",
           "slug": "strange-printer-ii",
           "src": "https://leetcode.cn/problems/strange-printer-ii/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1203",
+          "title": "專案管理",
+          "slug": "sort-items-by-groups-respecting-dependencies",
+          "src": "https://leetcode.cn/problems/sort-items-by-groups-respecting-dependencies/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -603,33 +648,6 @@
           "isPremium": false
         },
         {
-          "id": "2115",
-          "title": "從給定原材料中找到所有可以做出的菜",
-          "slug": "find-all-possible-recipes-from-given-supplies",
-          "src": "https://leetcode.cn/problems/find-all-possible-recipes-from-given-supplies/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2371",
-          "title": "最小化網格中的最大值",
-          "slug": "minimize-maximum-value-in-a-grid",
-          "src": "https://leetcode.cn/problems/minimize-maximum-value-in-a-grid/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "2392",
-          "title": "給定條件下構造矩陣",
-          "slug": "build-a-matrix-with-conditions",
-          "src": "https://leetcode.cn/problems/build-a-matrix-with-conditions/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2603",
           "title": "收集樹中金幣",
           "slug": "collect-coins-in-a-tree",
@@ -637,45 +655,9 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        },
-        {
-          "id": "3481",
-          "title": "應用替換",
-          "slug": "apply-substitutions",
-          "src": "https://leetcode.cn/problems/apply-substitutions/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
         }
       ],
-      "children": [
-        {
-          "id": 8,
-          "title": "5.1 拓撲排序思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "310",
-              "title": "最小高度樹",
-              "slug": "minimum-height-trees",
-              "src": "https://leetcode.cn/problems/minimum-height-trees/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            },
-            {
-              "id": "1361",
-              "title": "驗證二叉樹",
-              "slug": "validate-binary-tree-nodes",
-              "src": "https://leetcode.cn/problems/validate-binary-tree-nodes/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
       "id": 9,
@@ -737,10 +719,10 @@
       "isLeaf": true,
       "problems": [
         {
-          "id": "LCP 21",
-          "title": "追逐遊戲",
-          "slug": "Za25hA",
-          "src": "https://leetcode.cn/problems/Za25hA/",
+          "id": "287",
+          "title": "尋找重複數",
+          "slug": "find-the-duplicate-number",
+          "src": "https://leetcode.cn/problems/find-the-duplicate-number/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -764,15 +746,6 @@
           "isPremium": false
         },
         {
-          "id": "2127",
-          "title": "參加會議的最多員工數",
-          "slug": "maximum-employees-to-be-invited-to-a-meeting",
-          "src": "https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2204",
           "title": "無向圖中到環的距離",
           "slug": "distance-to-a-cycle-in-undirected-graph",
@@ -780,6 +753,15 @@
           "solution": null,
           "score": null,
           "isPremium": true
+        },
+        {
+          "id": "LCP 21",
+          "title": "追逐遊戲",
+          "slug": "Za25hA",
+          "src": "https://leetcode.cn/problems/Za25hA/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         },
         {
           "id": "2359",
@@ -800,15 +782,6 @@
           "isPremium": false
         },
         {
-          "id": "2836",
-          "title": "在傳球遊戲中最大化函式值",
-          "slug": "maximize-value-of-function-in-a-ball-passing-game",
-          "src": "https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
           "id": "2876",
           "title": "有向圖訪問計數",
           "slug": "count-visited-nodes-in-a-directed-graph",
@@ -816,27 +789,27 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        }
-      ],
-      "children": [
+        },
         {
-          "id": 11,
-          "title": "7.1 基環樹思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "287",
-              "title": "尋找重複數",
-              "slug": "find-the-duplicate-number",
-              "src": "https://leetcode.cn/problems/find-the-duplicate-number/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
+          "id": "2127",
+          "title": "參加會議的最多員工數",
+          "slug": "maximum-employees-to-be-invited-to-a-meeting",
+          "src": "https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2836",
+          "title": "在傳球遊戲中最大化函式值",
+          "slug": "maximize-value-of-function-in-a-ball-passing-game",
+          "src": "https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         }
       ],
+      "children": [],
       "summary": "[基環樹介紹](https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting/solution/nei-xiang-ji-huan-shu-tuo-bu-pai-xu-fen-c1i1b/)"
     },
     {
@@ -1246,19 +1219,10 @@
           "isPremium": true
         },
         {
-          "id": "1168",
-          "title": "水資源分配優化",
-          "slug": "optimize-water-distribution-in-a-village",
-          "src": "https://leetcode.cn/problems/optimize-water-distribution-in-a-village/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "1489",
-          "title": "找到最小生成樹裡的關鍵邊和偽關鍵邊",
-          "slug": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
-          "src": "https://leetcode.cn/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/",
+          "id": "3219",
+          "title": "切蛋糕的最小總開銷 II",
+          "slug": "minimum-cost-for-cutting-cake-ii",
+          "src": "https://leetcode.cn/problems/minimum-cost-for-cutting-cake-ii/",
           "solution": null,
           "score": null,
           "isPremium": false
@@ -1273,6 +1237,15 @@
           "isPremium": false
         },
         {
+          "id": "1168",
+          "title": "水資源分配優化",
+          "slug": "optimize-water-distribution-in-a-village",
+          "src": "https://leetcode.cn/problems/optimize-water-distribution-in-a-village/",
+          "solution": null,
+          "score": null,
+          "isPremium": true
+        },
+        {
           "id": "3600",
           "title": "升級後最大生成樹穩定性",
           "slug": "maximize-spanning-tree-stability-with-upgrades",
@@ -1280,27 +1253,18 @@
           "solution": null,
           "score": null,
           "isPremium": false
-        }
-      ],
-      "children": [
+        },
         {
-          "id": 18,
-          "title": "13.1 最小生成樹思維擴展",
-          "isLeaf": true,
-          "problems": [
-            {
-              "id": "3219",
-              "title": "切蛋糕的最小總開銷 II",
-              "slug": "minimum-cost-for-cutting-cake-ii",
-              "src": "https://leetcode.cn/problems/minimum-cost-for-cutting-cake-ii/",
-              "solution": null,
-              "score": null,
-              "isPremium": false
-            }
-          ],
-          "children": []
+          "id": "1489",
+          "title": "找到最小生成樹裡的關鍵邊和偽關鍵邊",
+          "slug": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree",
+          "src": "https://leetcode.cn/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
         }
       ],
+      "children": [],
       "summary": "涉及到 Kruskal 演算法和 Prim 演算法。前者一般用於稀疏圖，後者一般用於稠密圖。\n\n> 注：如果要求最大生成樹，把邊權從大到小排序。\n\nKruskal 演算法模板（用到了並查集，完整模板見 [資料結構題單](https://leetcode.cn/circle/discuss/mOr1u6/)）：\n\n```py\nclass UnionFind:\n    def __init__(self, n: int):\n        # 一開始有 n 個集合 {0}, {1}, ..., {n-1}\n        # 集合 i 的代表元是自己\n        self._fa = list(range(n))  # 代表元\n        self.cc = n  # 連通塊個數\n\n    # 返回 x 所在集合的代表元\n    # 同時做路徑壓縮，也就是把 x 所在集合中的所有元素的 fa 都改成代表元\n    def find(self, x: int) -> int:\n        # 如果 fa[x] == x，則表示 x 是代表元\n        if self._fa[x] != x:\n            self._fa[x] = self.find(self._fa[x])  # fa 改成代表元\n        return self._fa[x]\n\n    # 把 from 所在集合合併到 to 所在集合中\n    # 返回是否合併成功\n    def merge(self, from_: int, to: int) -> bool:\n        x, y = self.find(from_), self.find(to)\n        if x == y:  # from 和 to 在同一個集合，不做合併\n            return False\n        self._fa[x] = y  # 合併集合。修改後就可以認為 from 和 to 在同一個集合了\n        self.cc -= 1  # 成功合併，連通塊個數減一\n        return True\n\n\n# 計算圖的最小生成樹的邊權之和\n# 如果圖不連通，返回 math.inf\n# 節點編號從 0 到 n-1\n# 時間複雜度 O(n + mlogm)，其中 m 是 edges 的長度\ndef mstKruskal(n: int, edges: List[List[int]]) -> int:\n    edges.sort(key=lambda e: e[2])\n\n    uf = UnionFind(n)\n    sum_wt = 0\n    for x, y, wt in edges:\n        if uf.merge(x, y):\n            sum_wt += wt\n\n    if uf.cc > 1:  # 圖不連通\n        return inf\n    return sum_wt\n```"
     },
     {
