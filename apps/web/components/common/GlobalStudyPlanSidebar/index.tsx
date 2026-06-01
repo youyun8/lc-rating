@@ -169,7 +169,7 @@ export function GlobalStudyPlanSidebar() {
                               isActive && "font-semibold text-sidebar-primary",
                             )}
                           >
-                            {section.title}
+                            {section.title.replace(/^\d+\.\s*/, "")}
                           </span>
                         </ChapterLink>
                       </SidebarMenuButton>
