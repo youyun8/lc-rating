@@ -9,9 +9,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: monospace;
-  --font-song:
-    "Noto Serif TC", "宋體", "Songti SC", "Microsoft YaHei", "Helvetica Neue",
-    sans-serif;
+  /* 思源黑體（Source Han Sans / Noto Sans CJK）優先的黑體堆疊，未安裝時依序退回其他黑體 */
+  --font-han:
+    "Noto Sans TC", "Source Han Sans TC", "思源黑體", "PingFang TC",
+    "Microsoft JhengHei", "Microsoft YaHei", system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

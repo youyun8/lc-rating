@@ -62,7 +62,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
   );
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-background font-song">
+    <div className="flex min-h-screen w-full flex-col bg-background font-han">
       {studyPlan && (
         <div className="mx-auto w-full max-w-7xl px-3 pt-4 sm:px-4 sm:pt-6 md:px-6 md:pt-8 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
           <div

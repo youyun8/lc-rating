@@ -32,7 +32,7 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
   }));
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-background font-song">
+    <div className="flex min-h-screen w-full flex-col bg-background font-han">
       <div className="border-b border-border/60 bg-muted/20">
         <div className="mx-auto flex w-full max-w-[96rem] flex-col gap-5 px-4 py-6 sm:px-6 md:py-8 xl:px-8">
           <nav className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">

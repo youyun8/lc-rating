@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="zh" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden font-song`}
+        className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden font-han`}
       >
         <Provider>
           <AuthTokenHandler />

@@ -96,7 +96,7 @@ function StudyPlanOverview() {
     filterTabs.find((tab) => tab.key === filter)?.label ?? "全部";
 
   return (
-    <div className="min-h-screen bg-background font-song">
+    <div className="min-h-screen bg-background font-han">
       <div className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6 md:px-6 xl:max-w-[88rem] xl:px-8 2xl:max-w-[96rem]">
         <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-sm">
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
