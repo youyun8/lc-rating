@@ -323,7 +323,9 @@
 [data-slot="card-description"] ol,
 .prose ul,
 .prose ol {
-  @apply mb-4 ml-6 list-outside;
+  @apply mb-4 list-outside;
+  margin-inline-start: 0;
+  padding-inline-start: 1.5rem;
 }
 
 [data-slot="card-description"] ul,
@@ -339,6 +341,12 @@
 [data-slot="card-description"] li,
 .prose li {
   @apply mb-1;
+  padding-inline-start: 0.25rem;
+}
+
+[data-slot="card-description"] li::marker,
+.prose li::marker {
+  color: var(--muted-foreground);
 }
 
 /* Search-result row highlight (plays once then stops) */

@@ -738,9 +738,16 @@ export function getLectureSectionTutorial(
     studyPlanDataMap[planKey]?.children,
     indexed.id,
   );
+  // The lecture body shows the leaf section's own authored content: each
+  // section's `summary` in tutorial/*.json is written specifically for that
+  // leaf. `buildGenericSectionContent` (profile-synthesised) is kept only as a
+  // fallback for sections that have no authored summary.
+  const authoredSummary = indexed.section.summary?.trim();
   const content = googleSection
     ? normalizeGoogleContent(googleSection.content)
-    : buildGenericSectionContent(planKey, indexed, studySection);
+    : authoredSummary
+      ? authoredSummary
+      : buildGenericSectionContent(planKey, indexed, studySection);
 
   return {
     id: indexed.id,
