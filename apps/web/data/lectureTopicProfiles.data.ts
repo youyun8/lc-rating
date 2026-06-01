@@ -1707,7 +1707,7 @@ export const exampleLectureOverrides: NonNullable<
       "統計答案須於加入當前前綴之前完成，避免空子字串被計入。",
       "答案可能超過 int，須使用 `long long`。",
     ],
-    complexity: "每個位置枚舉 10 個 bit，時間 `O(10n)`，空間 `O(2^10)`。",
+    complexity: "每個位置枚舉 10 個 bit，時間 `O(10n)`，空間 `O(2^{10})`。",
     code: "```cpp\nclass Solution {\npublic:\n    long long wonderfulSubstrings(string word) {\n        vector<long long> count(1 << 10, 0);\n        count[0] = 1;\n        int mask = 0;\n        long long answer = 0;\n\n        for (char ch : word) {\n            mask ^= 1 << (ch - 'a');\n            answer += count[mask];\n            for (int bit = 0; bit < 10; ++bit) {\n                answer += count[mask ^ (1 << bit)];\n            }\n            count[mask]++;\n        }\n        return answer;\n    }\n};\n```",
   },
   "zero-array-transformation-iii": {
@@ -2726,7 +2726,8 @@ export const exampleLectureOverrides: NonNullable<
       "lcm 與乘法可能溢位，須使用 `long long`。",
       "本題找的是第一個 `count(x) >= n` 的 x，並非任意 count 等於 n 的 x。",
     ],
-    complexity: "每次 check 為 `O(1)`，值域二分 `O(log answer)`，空間 `O(1)`。",
+    complexity:
+      "每次 check 為 `O(1)`，值域二分 `O(log(answer))`，空間 `O(1)`。",
     code: "```cpp\nclass Solution {\n    long long lcmLl(long long a, long long b) {\n        return a / gcd(a, b) * b;\n    }\n\npublic:\n    int nthUglyNumber(int n, int a, int b, int c) {\n        long long ab = lcmLl(a, b);\n        long long ac = lcmLl(a, c);\n        long long bc = lcmLl(b, c);\n        long long abc = lcmLl(ab, c);\n\n        auto countUgly = [a, b, c, ab, ac, bc, abc](long long value) {\n            return value / a + value / b + value / c - value / ab - value / ac - value / bc + value / abc;\n        };\n\n        long long left = 1;\n        long long right = 1LL * min({a, b, c}) * n;\n        while (left < right) {\n            long long mid = left + (right - left) / 2;\n            if (countUgly(mid) >= n) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n        return (int)left;\n    }\n};\n```",
   },
   "find-the-index-of-the-first-occurrence-in-a-string": {

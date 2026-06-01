@@ -662,29 +662,27 @@ function buildGenericSectionContent(
   const complexityText = extra?.complexityNote
     ? `${profile.complexity} ${extra.complexityNote}`
     : profile.complexity;
-  const summary = [
-    buildConceptPrimer(topic, profile),
-    "**本節核心模型**",
-    profile.modelProblem,
-    "**從零建模**",
-    formatSteps(profile.derivation),
-  ].join("\n\n");
+  const conceptPrimer = buildConceptPrimer(topic, profile);
   const relatedProblems = buildRelatedProblems(studySection);
   const templateNote = extra?.templateNote
     ? ["**同一模板的套用要點**", extra.templateNote].join("\n\n")
     : undefined;
 
+  // Each section is anchored on a single representative problem: the concept
+  // primer, then one problem statement followed by its signals, invariants,
+  // derivation, walkthrough, patterns, pitfalls and complexity. There is no
+  // separate abstract-model block, so nothing is restated twice.
   return [
-    summary,
+    conceptPrimer,
     [
-      `**例題解析：${formatProblemHeading(example, topic)}**`,
+      `**代表例題：${formatProblemHeading(example, topic)}**`,
       `**完整問題**：${profile.modelProblem}`,
       formatProblemReference(example, isFromStudyPlan),
       "**題目訊號**",
       formatList(profile.signals),
       "**狀態、不變式與答案更新**",
       formatList(profile.invariants),
-      "**操作流程**",
+      "**從零建模**",
       formatSteps(profile.derivation),
       ...(extra?.walkthrough ? ["**小範例手動模擬**", extra.walkthrough] : []),
       "**常見模式**",
