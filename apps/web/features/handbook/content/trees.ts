@@ -31,7 +31,14 @@ Related: [Data Structures](/handbook/data-structures), [Graph Algorithms](/handb
 
 \`\`\`cpp
 // Standard node used throughout
-struct TreeNode { int val; TreeNode *left, *right; TreeNode(int v): val(v), left(nullptr), right(nullptr) {} };
+struct TreeNode
+{
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int v) : val(v), left(nullptr), right(nullptr)
+    {
+    }
+};
 \`\`\``,
     },
     {
@@ -41,7 +48,8 @@ struct TreeNode { int val; TreeNode *left, *right; TreeNode(int v): val(v), left
 
 \`\`\`cpp
 // Recursive inorder (left, node, right) -> sorted for a BST
-void inorder(TreeNode* r, vector<int>& out) {
+void inorder(TreeNode* r, vector<int>& out)
+{
     if (!r)
         return;
     inorder(r->left, out);
@@ -54,16 +62,22 @@ Iterative inorder with an explicit stack (useful when recursion depth is a conce
 
 \`\`\`cpp
 // Iterative inorder traversal (LC 94)
-vector<int> inorderIter(TreeNode* root) {
-    vector<int> out; stack<TreeNode*> st; TreeNode* cur = root;
-    while (cur || !st.empty()) {
-        while (cur) {                                   // dive left
+vector<int> inorderIter(TreeNode* root)
+{
+    vector<int> out;
+    stack<TreeNode*> st;
+    TreeNode* cur = root;
+    while (cur || !st.empty())
+    {
+        while (cur)
+        { // dive left
             st.push(cur);
             cur = cur->left;
         }
-        cur = st.top(); st.pop();
+        cur = st.top();
+        st.pop();
         out.push_back(cur->val);
-        cur = cur->right;                              // then right
+        cur = cur->right; // then right
     }
     return out;
 }
@@ -76,16 +90,21 @@ vector<int> inorderIter(TreeNode* root) {
 
 \`\`\`cpp
 // Level-order traversal grouped by depth (LC 102)
-vector<vector<int>> levelOrder(TreeNode* root) {
+vector<vector<int>> levelOrder(TreeNode* root)
+{
     vector<vector<int>> res;
     if (!root)
         return res;
-    queue<TreeNode*> q; q.push(root);
-    while (!q.empty()) {
+    queue<TreeNode*> q;
+    q.push(root);
+    while (!q.empty())
+    {
         int sz = q.size();
         vector<int> level;
-        for (int i = 0; i < sz; i++) {
-            TreeNode* node = q.front(); q.pop();
+        for (int i = 0; i < sz; i++)
+        {
+            TreeNode* node = q.front();
+            q.pop();
             level.push_back(node->val);
             if (node->left)
                 q.push(node->left);
@@ -107,7 +126,8 @@ The same loop yields right-side view (last of each level, LC 199), zigzag order 
 
 \`\`\`cpp
 // Validate BST using min/max bounds (LC 98)
-bool valid(TreeNode* r, long lo, long hi) {
+bool valid(TreeNode* r, long lo, long hi)
+{
     if (!r)
         return true;
     if (r->val <= lo || r->val >= hi)
@@ -119,14 +139,19 @@ bool valid(TreeNode* r, long lo, long hi) {
 
 \`\`\`cpp
 // Kth smallest in a BST (LC 230) via inorder counting
-int kthSmallest(TreeNode* root, int k) {
-    stack<TreeNode*> st; TreeNode* cur = root;
-    while (cur || !st.empty()) {
-        while (cur) {
+int kthSmallest(TreeNode* root, int k)
+{
+    stack<TreeNode*> st;
+    TreeNode* cur = root;
+    while (cur || !st.empty())
+    {
+        while (cur)
+        {
             st.push(cur);
             cur = cur->left;
         }
-        cur = st.top(); st.pop();
+        cur = st.top();
+        st.pop();
         if (--k == 0)
             return cur->val;
         cur = cur->right;
@@ -143,19 +168,21 @@ int kthSmallest(TreeNode* root, int k) {
 \`\`\`cpp
 // Diameter (longest path in edges, LC 543): height returns depth, updates best
 int best = 0;
-int height(TreeNode* r) {
+int height(TreeNode* r)
+{
     if (!r)
         return 0;
     int L = height(r->left), R = height(r->right);
-    best = max(best, L + R);          // path through r uses both children
-    return 1 + max(L, R);             // height contributed upward
+    best = max(best, L + R); // path through r uses both children
+    return 1 + max(L, R);    // height contributed upward
 }
 \`\`\`
 
 \`\`\`cpp
 // Max path sum (LC 124): a node may "drop" a negative branch
 int maxSum = INT_MIN;
-int gain(TreeNode* r) {
+int gain(TreeNode* r)
+{
     if (!r)
         return 0;
     int L = max(0, gain(r->left)), R = max(0, gain(r->right)); // ignore negatives
@@ -173,14 +200,15 @@ House Robber III (LC 337) returns a pair {rob, skip} per node — the canonical 
 
 \`\`\`cpp
 // LCA in a binary tree (LC 236)
-TreeNode* lca(TreeNode* r, TreeNode* p, TreeNode* q) {
+TreeNode* lca(TreeNode* r, TreeNode* p, TreeNode* q)
+{
     if (!r || r == p || r == q)
         return r;
     TreeNode* L = lca(r->left, p, q);
     TreeNode* R = lca(r->right, p, q);
-    if (L && R)                       // p and q split here -> r is the LCA
+    if (L && R) // p and q split here -> r is the LCA
         return r;
-    return L ? L : R;                 // both on one side (or neither)
+    return L ? L : R; // both on one side (or neither)
 }
 \`\`\`
 
@@ -193,17 +221,18 @@ In a **BST** the LCA is simpler: walk down, going left/right until \`p\` and \`q
 
 \`\`\`cpp
 // Build tree from preorder + inorder (LC 105)
-TreeNode* build(vector<int>& pre, vector<int>& in) {
-    unordered_map<int,int> pos;        // value -> index in inorder
+TreeNode* build(vector<int>& pre, vector<int>& in)
+{
+    unordered_map<int, int> pos; // value -> index in inorder
     for (int i = 0; i < (int)in.size(); i++)
         pos[in[i]] = i;
     int idx = 0;
-    function<TreeNode*(int,int)> go = [&](int l, int r) -> TreeNode* {
+    function<TreeNode*(int, int)> go = [&](int l, int r) -> TreeNode* {
         if (l > r)
             return nullptr;
         int v = pre[idx++];
         TreeNode* node = new TreeNode(v);
-        node->left  = go(l, pos[v] - 1);
+        node->left = go(l, pos[v] - 1);
         node->right = go(pos[v] + 1, r);
         return node;
     };
@@ -220,17 +249,23 @@ Serialize/deserialize (LC 297) uses preorder with explicit null markers ("#") so
 
 \`\`\`cpp
 // LCA by binary lifting (LC 1483 Kth Ancestor uses the same up[][] table)
-struct LCA {
-    int LOG; vector<int> depth; vector<vector<int>> up;
-    LCA(int n, vector<vector<int>>& adj, int root = 0) {
+struct LCA
+{
+    int LOG;
+    vector<int> depth;
+    vector<vector<int>> up;
+    LCA(int n, vector<vector<int>>& adj, int root = 0)
+    {
         LOG = 1;
         while ((1 << LOG) < n)
             LOG++;
-        depth.assign(n, 0); up.assign(LOG, vector<int>(n, root));
-        function<void(int,int)> dfs = [&](int u, int p) {
+        depth.assign(n, 0);
+        up.assign(LOG, vector<int>(n, root));
+        function<void(int, int)> dfs = [&](int u, int p) {
             up[0][u] = p;
             for (int v : adj[u])
-                if (v != p) {
+                if (v != p)
+                {
                     depth[v] = depth[u] + 1;
                     dfs(v, u);
                 }
@@ -238,19 +273,21 @@ struct LCA {
         dfs(root, root);
         for (int k = 1; k < LOG; k++)
             for (int v = 0; v < n; v++)
-                up[k][v] = up[k-1][up[k-1][v]];
+                up[k][v] = up[k - 1][up[k - 1][v]];
     }
-    int lca(int a, int b) {
+    int lca(int a, int b)
+    {
         if (depth[a] < depth[b])
             swap(a, b);
         int d = depth[a] - depth[b];
-        for (int k = 0; k < LOG; k++)                                 // lift a up to b
+        for (int k = 0; k < LOG; k++) // lift a up to b
             if (d & (1 << k))
                 a = up[k][a];
         if (a == b)
             return a;
         for (int k = LOG - 1; k >= 0; k--)
-            if (up[k][a] != up[k][b]) {
+            if (up[k][a] != up[k][b])
+            {
                 a = up[k][a];
                 b = up[k][b];
             }
@@ -266,29 +303,34 @@ struct LCA {
 
 \`\`\`cpp
 // Sum of Distances in Tree (LC 834): two passes
-vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges) {
+vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges)
+{
     vector<vector<int>> g(n);
-    for (auto& e : edges) {
+    for (auto& e : edges)
+    {
         g[e[0]].push_back(e[1]);
         g[e[1]].push_back(e[0]);
     }
     vector<int> cnt(n, 1), ans(n, 0);
-    function<void(int,int)> post = [&](int u, int p) {
+    function<void(int, int)> post = [&](int u, int p) {
         for (int v : g[u])
-            if (v != p) {
+            if (v != p)
+            {
                 post(v, u);
                 cnt[u] += cnt[v];
                 ans[u] += ans[v] + cnt[v];
             }
     };
-    function<void(int,int)> reroot = [&](int u, int p) {
+    function<void(int, int)> reroot = [&](int u, int p) {
         for (int v : g[u])
-            if (v != p) {
+            if (v != p)
+            {
                 ans[v] = ans[u] - cnt[v] + (n - cnt[v]);
                 reroot(v, u);
             }
     };
-    post(0, -1); reroot(0, -1);
+    post(0, -1);
+    reroot(0, -1);
     return ans;
 }
 \`\`\`
@@ -297,22 +339,29 @@ vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges) {
 
 \`\`\`cpp
 // Morris inorder traversal: O(1) space
-vector<int> morrisInorder(TreeNode* root) {
-    vector<int> out; TreeNode* cur = root;
-    while (cur) {
-        if (!cur->left) {
+vector<int> morrisInorder(TreeNode* root)
+{
+    vector<int> out;
+    TreeNode* cur = root;
+    while (cur)
+    {
+        if (!cur->left)
+        {
             out.push_back(cur->val);
             cur = cur->right;
         }
-        else {
+        else
+        {
             TreeNode* pre = cur->left;
             while (pre->right && pre->right != cur)
                 pre = pre->right;
-            if (!pre->right) {                                        // create thread
+            if (!pre->right)
+            { // create thread
                 pre->right = cur;
                 cur = cur->left;
             }
-            else {                                                    // remove
+            else
+            { // remove
                 pre->right = nullptr;
                 out.push_back(cur->val);
                 cur = cur->right;

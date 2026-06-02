@@ -34,9 +34,10 @@ Related: [Grid / Matrix](/handbook/grid) (implicit graphs), [Trees & Binary Tree
 
 \`\`\`cpp
 // Adjacency list (most common representation)
-int n;                                       // number of nodes
-vector<vector<int>> g(n);                     // g[u] = neighbours of u
-for (auto& e : edges) { // undirected
+int n;                    // number of nodes
+vector<vector<int>> g(n); // g[u] = neighbours of u
+for (auto& e : edges)
+{ // undirected
     g[e[0]].push_back(e[1]);
     g[e[1]].push_back(e[0]);
 }
@@ -50,7 +51,8 @@ for (auto& e : edges) { // undirected
 \`\`\`cpp
 // DFS to count connected components / mark visited
 vector<int> vis;
-void dfs(int u, vector<vector<int>>& g) {
+void dfs(int u, vector<vector<int>>& g)
+{
     vis[u] = 1;
     for (int v : g[u])
         if (!vis[v])
@@ -60,13 +62,19 @@ void dfs(int u, vector<vector<int>>& g) {
 
 \`\`\`cpp
 // BFS shortest distance (in edges) from src in an unweighted graph
-vector<int> bfs(int src, vector<vector<int>>& g) {
+vector<int> bfs(int src, vector<vector<int>>& g)
+{
     vector<int> dist(g.size(), -1);
-    queue<int> q; q.push(src); dist[src] = 0;
-    while (!q.empty()) {
-        int u = q.front(); q.pop();
+    queue<int> q;
+    q.push(src);
+    dist[src] = 0;
+    while (!q.empty())
+    {
+        int u = q.front();
+        q.pop();
         for (int v : g[u])
-            if (dist[v] == -1) {
+            if (dist[v] == -1)
+            {
                 dist[v] = dist[u] + 1;
                 q.push(v);
             }
@@ -84,7 +92,8 @@ Word Ladder (LC 127) and Open the Lock (LC 752) are BFS over implicit graphs of 
 
 \`\`\`cpp
 // Kahn's algorithm: topological order, or empty if there is a cycle (LC 207/210)
-vector<int> topoSort(int n, vector<vector<int>>& g) {
+vector<int> topoSort(int n, vector<vector<int>>& g)
+{
     vector<int> indeg(n, 0), order;
     for (int u = 0; u < n; u++)
         for (int v : g[u])
@@ -93,8 +102,11 @@ vector<int> topoSort(int n, vector<vector<int>>& g) {
     for (int u = 0; u < n; u++)
         if (indeg[u] == 0)
             q.push(u);
-    while (!q.empty()) {
-        int u = q.front(); q.pop(); order.push_back(u);
+    while (!q.empty())
+    {
+        int u = q.front();
+        q.pop();
+        order.push_back(u);
         for (int v : g[u])
             if (--indeg[v] == 0)
                 q.push(v);
@@ -112,17 +124,23 @@ Used for Course Schedule (LC 207/210), Alien Dictionary (LC 269), and Parallel C
 
 \`\`\`cpp
 // Dijkstra from src; g[u] = list of {v, weight}
-vector<long long> dijkstra(int src, vector<vector<pair<int,int>>>& g) {
+vector<long long> dijkstra(int src, vector<vector<pair<int, int>>>& g)
+{
     const long long INF = LLONG_MAX;
     vector<long long> dist(g.size(), INF);
-    priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<>> pq;
-    dist[src] = 0; pq.push({0, src});
-    while (!pq.empty()) {
-        auto [d, u] = pq.top(); pq.pop();
+    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;
+    dist[src] = 0;
+    pq.push({0, src});
+    while (!pq.empty())
+    {
+        auto [d, u] = pq.top();
+        pq.pop();
         if (d > dist[u])
-            continue;            // stale entry
-        for (auto [v, w] : g[u]) {
-            if (dist[u] + w < dist[v]) {
+            continue; // stale entry
+        for (auto [v, w] : g[u])
+        {
+            if (dist[u] + w < dist[v])
+            {
                 dist[v] = dist[u] + w;
                 pq.push({dist[v], v});
             }
@@ -141,14 +159,16 @@ Network Delay Time (LC 743), Cheapest Flights (LC 787, with a hop limit → pref
 
 \`\`\`cpp
 // Bellman-Ford: shortest paths with possible negative edges
-vector<long long> bellman(int n, int src, vector<array<int,3>>& edges) {
+vector<long long> bellman(int n, int src, vector<array<int, 3>>& edges)
+{
     const long long INF = LLONG_MAX;
-    vector<long long> dist(n, INF); dist[src] = 0;
+    vector<long long> dist(n, INF);
+    dist[src] = 0;
     for (int i = 0; i < n - 1; i++)
         for (auto& [u, v, w] : edges)
             if (dist[u] != INF && dist[u] + w < dist[v])
                 dist[v] = dist[u] + w;
-    return dist;                       // run once more to detect a negative cycle
+    return dist; // run once more to detect a negative cycle
 }
 \`\`\`
 
@@ -172,12 +192,16 @@ for (int k = 0; k < n; k++)
 
 \`\`\`cpp
 // Kruskal's MST using DSU (see Data Structures for DSU); returns total weight
-long long kruskal(int n, vector<array<int,3>>& edges /*{w,u,v}*/) {
+long long kruskal(int n, vector<array<int, 3>>& edges /*{w,u,v}*/)
+{
     sort(edges.begin(), edges.end());
     DSU dsu(n);
-    long long total = 0; int used = 0;
-    for (auto& [w, u, v] : edges) {
-        if (dsu.unite(u, v)) {
+    long long total = 0;
+    int used = 0;
+    for (auto& [w, u, v] : edges)
+    {
+        if (dsu.unite(u, v))
+        {
             total += w;
             if (++used == n - 1)
                 break;
@@ -196,15 +220,24 @@ Min Cost to Connect All Points (LC 1584) is a complete graph MST: build edges fr
 
 \`\`\`cpp
 // Bipartite check via BFS 2-coloring (LC 785)
-bool isBipartite(vector<vector<int>>& g) {
-    int n = g.size(); vector<int> color(n, -1);
+bool isBipartite(vector<vector<int>>& g)
+{
+    int n = g.size();
+    vector<int> color(n, -1);
     for (int s = 0; s < n; s++)
-        if (color[s] == -1) {
-            queue<int> q; q.push(s); color[s] = 0;
-            while (!q.empty()) {
-                int u = q.front(); q.pop();
-                for (int v : g[u]) {
-                    if (color[v] == -1) {
+        if (color[s] == -1)
+        {
+            queue<int> q;
+            q.push(s);
+            color[s] = 0;
+            while (!q.empty())
+            {
+                int u = q.front();
+                q.pop();
+                for (int v : g[u])
+                {
+                    if (color[v] == -1)
+                    {
                         color[v] = color[u] ^ 1;
                         q.push(v);
                     }
@@ -226,25 +259,31 @@ For strongly connected components on directed graphs, learn Tarjan's or Kosaraju
 
 \`\`\`cpp
 // Critical Connections / bridges (LC 1192) via Tarjan low-link
-vector<vector<int>> criticalConnections(int n, vector<vector<int>>& conns) {
+vector<vector<int>> criticalConnections(int n, vector<vector<int>>& conns)
+{
     vector<vector<int>> g(n), bridges;
-    for (auto& e : conns) {
+    for (auto& e : conns)
+    {
         g[e[0]].push_back(e[1]);
         g[e[1]].push_back(e[0]);
     }
-    vector<int> disc(n, -1), low(n); int timer = 0;
-    function<void(int,int)> dfs = [&](int u, int parent) {
+    vector<int> disc(n, -1), low(n);
+    int timer = 0;
+    function<void(int, int)> dfs = [&](int u, int parent) {
         disc[u] = low[u] = timer++;
-        for (int v : g[u]) {
+        for (int v : g[u])
+        {
             if (v == parent)
                 continue;
-            if (disc[v] == -1) {
+            if (disc[v] == -1)
+            {
                 dfs(v, u);
                 low[u] = min(low[u], low[v]);
                 if (low[v] > disc[u])
                     bridges.push_back({u, v}); // bridge found
-            } else
-                low[u] = min(low[u], disc[v]);               // back edge
+            }
+            else
+                low[u] = min(low[u], disc[v]); // back edge
         }
     };
     for (int i = 0; i < n; i++)
@@ -263,18 +302,24 @@ vector<vector<int>> criticalConnections(int n, vector<vector<int>>& conns) {
 
 \`\`\`cpp
 // Reconstruct Itinerary (LC 332): Hierholzer Eulerian path
-vector<string> findItinerary(vector<vector<string>>& tickets) {
+vector<string> findItinerary(vector<vector<string>>& tickets)
+{
     unordered_map<string, multiset<string>> g;
     for (auto& t : tickets)
         g[t[0]].insert(t[1]);
-    vector<string> route; stack<string> st; st.push("JFK");
-    while (!st.empty()) {
+    vector<string> route;
+    stack<string> st;
+    st.push("JFK");
+    while (!st.empty())
+    {
         string u = st.top();
-        if (g[u].empty()) {
+        if (g[u].empty())
+        {
             route.push_back(u);
             st.pop();
         }
-        else {
+        else
+        {
             auto it = g[u].begin();
             string v = *it;
             g[u].erase(it);

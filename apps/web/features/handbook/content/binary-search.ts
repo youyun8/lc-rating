@@ -53,16 +53,18 @@ Always compute the midpoint as \`mid = l + (r - l) / 2\` to avoid \`int\` overfl
 
 \`\`\`cpp
 // Find first index in [0, n] where check(i) is true (half-open, the workhorse)
-int lower_bound_pred(int n, auto&& check) {
-    int l = 0, r = n;                 // search the boundary in [l, r]
-    while (l < r) {
+int lower_bound_pred(int n, auto&& check)
+{
+    int l = 0, r = n; // search the boundary in [l, r]
+    while (l < r)
+    {
         int mid = l + (r - l) / 2;
-        if (check(mid))               // mid works -> answer is mid or to the left
+        if (check(mid)) // mid works -> answer is mid or to the left
             r = mid;
-        else                          // mid fails -> answer is strictly right
+        else // mid fails -> answer is strictly right
             l = mid + 1;
     }
-    return l;                         // l == r == first true (or n if none)
+    return l; // l == r == first true (or n if none)
 }
 \`\`\`
 
@@ -70,9 +72,11 @@ Classic value search and the STL-equivalent bounds:
 
 \`\`\`cpp
 // Plain binary search: index of target in sorted a, else -1
-int binary_search_value(const vector<int>& a, int target) {
+int binary_search_value(const vector<int>& a, int target)
+{
     int l = 0, r = (int)a.size() - 1; // closed interval [l, r]
-    while (l <= r) {
+    while (l <= r)
+    {
         int mid = l + (r - l) / 2;
         if (a[mid] == target)
             return mid;
@@ -87,27 +91,31 @@ int binary_search_value(const vector<int>& a, int target) {
 
 \`\`\`cpp
 // Hand-rolled lower_bound / upper_bound (first >= / first > target)
-int lower_bound_idx(const vector<int>& a, int target) {
+int lower_bound_idx(const vector<int>& a, int target)
+{
     int l = 0, r = (int)a.size();
-    while (l < r) {
+    while (l < r)
+    {
         int mid = l + (r - l) / 2;
         if (a[mid] >= target)
             r = mid;
         else
             l = mid + 1;
     }
-    return l;                         // count of elements < target
+    return l; // count of elements < target
 }
-int upper_bound_idx(const vector<int>& a, int target) {
+int upper_bound_idx(const vector<int>& a, int target)
+{
     int l = 0, r = (int)a.size();
-    while (l < r) {
+    while (l < r)
+    {
         int mid = l + (r - l) / 2;
         if (a[mid] > target)
             r = mid;
         else
             l = mid + 1;
     }
-    return l;                         // count of elements <= target
+    return l; // count of elements <= target
 }
 \`\`\`
 
@@ -117,8 +125,8 @@ Prefer the STL when you can — it is correct and concise:
 // STL bounds on a sorted vector
 auto lo = lower_bound(a.begin(), a.end(), x); // first element >= x
 auto hi = upper_bound(a.begin(), a.end(), x); // first element  > x
-int  count_equal = hi - lo;                   // occurrences of x
-int  idx_first_ge = lo - a.begin();
+int count_equal = hi - lo;                    // occurrences of x
+int idx_first_ge = lo - a.begin();
 \`\`\``,
     },
     {
@@ -130,12 +138,14 @@ int  idx_first_ge = lo - a.begin();
 
 \`\`\`cpp
 // Smallest feasible x in [lo, hi]; check is monotone false...false,true...true
-long long min_feasible(long long lo, long long hi, auto&& check) {
-    while (lo < hi) {
+long long min_feasible(long long lo, long long hi, auto&& check)
+{
+    while (lo < hi)
+    {
         long long mid = lo + (hi - lo) / 2;
-        if (check(mid))               // feasible -> try smaller
+        if (check(mid)) // feasible -> try smaller
             hi = mid;
-        else                          // infeasible -> need larger
+        else // infeasible -> need larger
             lo = mid + 1;
     }
     return lo;
@@ -146,12 +156,14 @@ long long min_feasible(long long lo, long long hi, auto&& check) {
 
 \`\`\`cpp
 // Largest feasible x in [lo, hi]; check is monotone true...true,false...false
-long long max_feasible(long long lo, long long hi, auto&& check) {
-    while (lo < hi) {
+long long max_feasible(long long lo, long long hi, auto&& check)
+{
+    while (lo < hi)
+    {
         long long mid = lo + (hi - lo + 1) / 2; // bias up to avoid infinite loop
-        if (check(mid))               // feasible -> try larger
+        if (check(mid))                         // feasible -> try larger
             lo = mid;
-        else                          // infeasible -> need smaller
+        else // infeasible -> need smaller
             hi = mid - 1;
     }
     return lo;
@@ -164,10 +176,12 @@ Example \`check\` for LeetCode 1011 (ship packages within D days at capacity \`c
 // Feasible if we can ship all weights within 'days' using capacity cap
 auto check = [&](int cap) {
     int days = 1, load = 0;
-    for (int w : weights) {
-        if (w > cap)                  // a single item exceeds capacity
+    for (int w : weights)
+    {
+        if (w > cap) // a single item exceeds capacity
             return false;
-        if (load + w > cap) {
+        if (load + w > cap)
+        {
             days++;
             load = 0;
         }
@@ -189,18 +203,23 @@ auto check = [&](int cap) {
 
 \`\`\`cpp
 // Search target in a rotated sorted array with distinct values (LC 33)
-int search(vector<int>& a, int target) {
+int search(vector<int>& a, int target)
+{
     int l = 0, r = (int)a.size() - 1;
-    while (l <= r) {
+    while (l <= r)
+    {
         int mid = l + (r - l) / 2;
         if (a[mid] == target)
             return mid;
-        if (a[l] <= a[mid]) {                     // left half sorted
+        if (a[l] <= a[mid])
+        { // left half sorted
             if (a[l] <= target && target < a[mid])
                 r = mid - 1;
             else
                 l = mid + 1;
-        } else {                                  // right half sorted
+        }
+        else
+        { // right half sorted
             if (a[mid] < target && target <= a[r])
                 l = mid + 1;
             else
@@ -217,13 +236,17 @@ int search(vector<int>& a, int target) {
 
 \`\`\`cpp
 // Count entries <= x in an n*n row/col-sorted matrix, staircase from bottom-left
-int countLE(const vector<vector<int>>& m, int x) {
+int countLE(const vector<vector<int>>& m, int x)
+{
     int n = m.size(), r = n - 1, c = 0, cnt = 0;
-    while (r >= 0 && c < n) {
-        if (m[r][c] <= x) {                       // whole column up to r qualifies
+    while (r >= 0 && c < n)
+    {
+        if (m[r][c] <= x)
+        { // whole column up to r qualifies
             cnt += r + 1;
             c++;
-        } else
+        }
+        else
             r--;
     }
     return cnt;
@@ -235,7 +258,8 @@ int countLE(const vector<vector<int>>& m, int x) {
 \`\`\`cpp
 // ~100 iterations halves the interval to < 2^-100 — plenty of precision
 double lo = 0, hi = 1e9;
-for (int it = 0; it < 100; it++) {
+for (int it = 0; it < 100; it++)
+{
     double mid = (lo + hi) / 2;
     if (check(mid))
         hi = mid;
@@ -254,20 +278,22 @@ for (int it = 0; it < 100; it++) {
 
 \`\`\`cpp
 // Median of two sorted arrays in O(log(min(m, n))) (LC 4)
-double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
+double findMedianSortedArrays(vector<int>& a, vector<int>& b)
+{
     if (a.size() > b.size())
         swap(a, b);
     int m = a.size(), n = b.size(), half = (m + n + 1) / 2;
     int lo = 0, hi = m;
-    while (lo <= hi) {
-        int i = (lo + hi) / 2, j = half - i;          // i from a, j from b
-        int aL = i ? a[i-1] : INT_MIN, aR = i < m ? a[i] : INT_MAX;
-        int bL = j ? b[j-1] : INT_MIN, bR = j < n ? b[j] : INT_MAX;
+    while (lo <= hi)
+    {
+        int i = (lo + hi) / 2, j = half - i; // i from a, j from b
+        int aL = i ? a[i - 1] : INT_MIN, aR = i < m ? a[i] : INT_MAX;
+        int bL = j ? b[j - 1] : INT_MIN, bR = j < n ? b[j] : INT_MAX;
         if (aL <= bR && bL <= aR)
             return ((m + n) & 1) ? max(aL, bL) : (max(aL, bL) + min(aR, bR)) / 2.0;
-        else if (aL > bR)                              // take less from a
+        else if (aL > bR) // take less from a
             hi = i - 1;
-        else                                           // take more from a
+        else // take more from a
             lo = i + 1;
     }
     return 0.0;
@@ -278,14 +304,17 @@ double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
 
 \`\`\`cpp
 // Maximum average subarray of length >= k (LC 644)
-double findMaxAverage(vector<int>& a, int k) {
+double findMaxAverage(vector<int>& a, int k)
+{
     double lo = *min_element(a.begin(), a.end()), hi = *max_element(a.begin(), a.end());
     auto feasible = [&](double x) {
         double sum = 0, prefix = 0, minPrefix = 0;
-        for (int i = 0; i < (int)a.size(); i++) {
+        for (int i = 0; i < (int)a.size(); i++)
+        {
             sum += a[i] - x;
-            if (i >= k) {
-                prefix += a[i-k] - x;
+            if (i >= k)
+            {
+                prefix += a[i - k] - x;
                 minPrefix = min(minPrefix, prefix);
             }
             if (i >= k - 1 && sum - minPrefix >= 0)
@@ -293,7 +322,8 @@ double findMaxAverage(vector<int>& a, int k) {
         }
         return false;
     };
-    while (hi - lo > 1e-5) {
+    while (hi - lo > 1e-5)
+    {
         double mid = (lo + hi) / 2;
         if (feasible(mid))
             lo = mid;
