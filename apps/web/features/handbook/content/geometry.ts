@@ -354,7 +354,7 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) 
 | 1828 | [Queries on Number of Points Inside a Circle](https://leetcode.cn/problems/queries-on-number-of-points-inside-a-circle) | squared-distance test |
 | 1515 | [Best Position for a Service Centre](https://leetcode.cn/problems/best-position-for-a-service-centre) | geometric median |
 
-**Recent problems (rating ≥ 1700)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

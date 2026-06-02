@@ -532,7 +532,7 @@ struct RollbackDSU {
 | 1947 | [Maximum Compatibility Score Sum](https://leetcode.cn/problems/maximum-compatibility-score-sum) | assignment matching |
 | 1879 | [Minimum XOR Sum of Two Arrays](https://leetcode.cn/problems/minimum-xor-sum-of-two-arrays) | assignment cost |
 
-**Recent problems (rating ≥ 1700)**
+**Recent medium problems**
 
 These recent contest problems exercise the connectivity, MST, and DAG-ordering building blocks behind SCC condensation and rollback DSU.
 

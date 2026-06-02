@@ -303,7 +303,7 @@ int dfs(int mask) {
 | 79 | [Word Search](https://leetcode.cn/problems/word-search) | grid DFS + undo |
 | 698 | [Partition to K Equal Sum Subsets](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets) | bucket assignment + pruning |
 
-**Recent problems (rating ≥ 1700)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

@@ -349,7 +349,7 @@ Recurring lesson: when plain BFS/DFS is too weak, *enrich the state* (keys, fuel
 | 2684 | [Maximum Number of Moves in a Grid](https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid) | DP / BFS |
 | 2812 | [Find the Safest Path in a Grid](https://leetcode.cn/problems/find-the-safest-path-in-a-grid) | multi-source BFS + binary search |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

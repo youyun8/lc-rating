@@ -14,6 +14,8 @@ import { ProblemSolution } from "./ProblemSolution";
 interface ProblemListProps {
   problems: StudyPlanData.Item[];
   title?: string;
+  /** UI language for the header/labels. Defaults to "zh" (studyplan/lectures). */
+  language?: "zh" | "en";
 }
 
 function getSortableProblemIndex(problem: StudyPlanData.Item) {
@@ -158,139 +160,147 @@ function mergeStudyPlanProblemsById(
   return fromSlug.filter((p) => !losers.has(p)).sort(compareStudyPlanProblems);
 }
 
-const ProblemList = React.memo(({ problems, title }: ProblemListProps) => {
-  const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
-  const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
-  const { problemMap } = useProblems();
-  const progress = useProgressMap();
-  const { getOption } = useOptions();
-  const pendingOption = getOption();
+const ProblemList = React.memo(
+  ({ problems, title, language = "zh" }: ProblemListProps) => {
+    const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
+    const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
+    const { problemMap } = useProblems();
+    const progress = useProgressMap();
+    const { getOption } = useOptions();
+    const pendingOption = getOption();
 
-  // Enrich problems with scores from problemMap
-  const enrichedProblems = useMemo(() => {
-    const mapped = problems.map((problem) => {
-      const problemId = problem.id?.toString();
-      const fallbackScore =
-        problemId && problemMap ? problemMap[problemId]?.rating : undefined;
+    // Enrich problems with scores from problemMap
+    const enrichedProblems = useMemo(() => {
+      const mapped = problems.map((problem) => {
+        const problemId = problem.id?.toString();
+        const fallbackScore =
+          problemId && problemMap ? problemMap[problemId]?.rating : undefined;
 
-      if (problem.score !== null && problem.score !== undefined) {
+        if (problem.score !== null && problem.score !== undefined) {
+          return {
+            ...problem,
+            title: normalizeDisplayText(problem.title),
+            score: problem.score,
+          };
+        }
+
         return {
           ...problem,
           title: normalizeDisplayText(problem.title),
-          score: problem.score,
+          score: fallbackScore ?? problem.score,
         };
-      }
+      });
+      return mergeStudyPlanProblemsById(mapped, problemMap);
+    }, [problems, problemMap]);
 
-      return {
-        ...problem,
-        title: normalizeDisplayText(problem.title),
-        score: fallbackScore ?? problem.score,
-      };
-    });
-    return mergeStudyPlanProblemsById(mapped, problemMap);
-  }, [problems, problemMap]);
+    const isEnglish = language === "en";
+    const count = enrichedProblems.length;
+    const resolvedTitle = title ?? (isEnglish ? "Problems" : "題目列表");
+    const countLabel = isEnglish
+      ? `${count} ${count === 1 ? "problem" : "problems"}`
+      : `${count} 題`;
+    const unratedLabel = isEnglish ? "Unrated" : "無評分";
 
-  return (
-    <div className="overflow-hidden rounded-2xl border border-border/60 bg-background/80">
-      <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-muted/25 px-4 py-3">
-        <div>
-          <p className="text-sm font-semibold tracking-tight text-foreground">
-            {title ?? "題目列表"}
+    return (
+      <div className="overflow-hidden rounded-2xl border border-border/60 bg-background/80">
+        <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-muted/25 px-4 py-3">
+          <p className="min-w-0 truncate text-sm font-semibold tracking-tight text-foreground">
+            {resolvedTitle}
           </p>
+          <span className="shrink-0 rounded-full border border-border/60 bg-background px-2.5 py-1 text-xs font-medium tabular-nums text-muted-foreground">
+            {countLabel}
+          </span>
         </div>
-        <span className="rounded-full border border-border/60 bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground">
-          {enrichedProblems.length} 題
-        </span>
-      </div>
 
-      {enrichedProblems.map((problem, idx) => {
-        const problemId = problem.id?.toString();
-        const info = ratingInfo(problem.score || 0);
-        const labels = getProblemLabels(problem);
-        const statusKey = problemId ? progress[problemId] : undefined;
-        const statusOption = getOption(statusKey);
-        const hasStarted =
-          typeof statusKey !== "undefined" &&
-          statusOption.key !== pendingOption.key;
+        {enrichedProblems.map((problem, idx) => {
+          const problemId = problem.id?.toString();
+          const info = ratingInfo(problem.score || 0);
+          const labels = getProblemLabels(problem);
+          const statusKey = problemId ? progress[problemId] : undefined;
+          const statusOption = getOption(statusKey);
+          const hasStarted =
+            typeof statusKey !== "undefined" &&
+            statusOption.key !== pendingOption.key;
 
-        return (
-          <div
-            key={`${problem.slug}-${problemId}`}
-            className={`flex flex-col gap-2 px-4 py-3 transition-colors hover:bg-muted/20 sm:flex-row sm:items-center sm:justify-between${
-              idx < enrichedProblems.length - 1
-                ? " border-b border-border/60"
-                : ""
-            }`}
-            style={
-              hasStarted
-                ? {
-                    backgroundColor: `color-mix(in srgb, ${statusOption.color} 10%, transparent)`,
-                  }
-                : undefined
-            }
-          >
-            <div className="min-w-0 flex-1">
-              <a
-                href={`${LC_HOST}/problems/${problem.slug}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-w-0 text-sm font-medium leading-snug text-foreground transition-colors hover:text-primary sm:text-[15px]"
-              >
-                {problem.id?.toString() === "1000000000" ||
-                problem.title.startsWith(`${problem.id}`)
-                  ? problem.title
-                  : `${problem.id}. ${problem.title}`}
-              </a>
-              {labels.length > 0 && (
-                <div className="mt-1.5 flex flex-wrap gap-1">
-                  {labels.map((label) => (
-                    <span
-                      key={label}
-                      className="inline-flex max-w-[24ch] items-center truncate rounded-md border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[11px] leading-tight text-muted-foreground"
-                    >
-                      {label}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
-              <div className="flex items-center gap-2">
-                {problem.score ? (
-                  <span
-                    className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums"
-                    style={{
-                      color: info.color,
-                      backgroundColor: `${info.color}1a`,
-                    }}
-                  >
-                    {problem.score.toFixed(0)}
-                  </span>
-                ) : (
-                  <span className="rounded-full border border-dashed border-border/60 px-2.5 py-0.5 text-xs text-muted-foreground">
-                    無評分
-                  </span>
+          return (
+            <div
+              key={`${problem.slug}-${problemId}`}
+              className={`flex flex-col gap-2 px-4 py-3 transition-colors hover:bg-muted/20 sm:flex-row sm:items-center sm:justify-between${
+                idx < enrichedProblems.length - 1
+                  ? " border-b border-border/60"
+                  : ""
+              }`}
+              style={
+                hasStarted
+                  ? {
+                      backgroundColor: `color-mix(in srgb, ${statusOption.color} 10%, transparent)`,
+                    }
+                  : undefined
+              }
+            >
+              <div className="min-w-0 flex-1">
+                <a
+                  href={`${LC_HOST}/problems/${problem.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-w-0 text-sm font-medium leading-snug text-foreground transition-colors hover:text-primary sm:text-[15px]"
+                >
+                  {problem.id?.toString() === "1000000000" ||
+                  problem.title.startsWith(`${problem.id}`)
+                    ? problem.title
+                    : `${problem.id}. ${problem.title}`}
+                </a>
+                {labels.length > 0 && (
+                  <div className="mt-1.5 flex flex-wrap gap-1">
+                    {labels.map((label) => (
+                      <span
+                        key={label}
+                        className="inline-flex max-w-[24ch] items-center truncate rounded-md border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[11px] leading-tight text-muted-foreground"
+                      >
+                        {label}
+                      </span>
+                    ))}
+                  </div>
                 )}
               </div>
-              {problemId ? (
-                <>
-                  <ProblemSolution
-                    problemId={problemId}
-                    title={problem.title}
-                  />
-                  <ProgressSelector
-                    problemId={problemId}
-                    triggerClassName="min-w-[7.5rem] sm:min-w-[8rem] max-w-[12rem]"
-                  />
-                </>
-              ) : null}
+              <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
+                <div className="flex items-center gap-2">
+                  {problem.score ? (
+                    <span
+                      className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums"
+                      style={{
+                        color: info.color,
+                        backgroundColor: `${info.color}1a`,
+                      }}
+                    >
+                      {problem.score.toFixed(0)}
+                    </span>
+                  ) : (
+                    <span className="rounded-full border border-dashed border-border/60 px-2.5 py-0.5 text-xs text-muted-foreground">
+                      {unratedLabel}
+                    </span>
+                  )}
+                </div>
+                {problemId ? (
+                  <>
+                    <ProblemSolution
+                      problemId={problemId}
+                      title={problem.title}
+                    />
+                    <ProgressSelector
+                      problemId={problemId}
+                      triggerClassName="min-w-[7.5rem] sm:min-w-[8rem] max-w-[12rem]"
+                    />
+                  </>
+                ) : null}
+              </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-});
+          );
+        })}
+      </div>
+    );
+  },
+);
 
 ProblemList.displayName = "ProblemList";
 

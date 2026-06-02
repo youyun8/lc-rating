@@ -485,7 +485,7 @@ struct MergeSortTree {
 | 715 | [Range Module](https://leetcode.cn/problems/range-module) | interval segment tree |
 | 699 | [Falling Squares](https://leetcode.cn/problems/falling-squares) | compression + segment tree |
 
-**Recent problems (rating ≥ 1700)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

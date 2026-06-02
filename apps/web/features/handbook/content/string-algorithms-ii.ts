@@ -431,7 +431,7 @@ string minRotation(string s) {
 | 1923 | [Longest Common Subpath](https://leetcode.cn/problems/longest-common-subpath) | suffix automaton or hashing |
 | 899 | [Orderly Queue](https://leetcode.cn/problems/orderly-queue) | minimum rotation |
 
-**Recent problems (rating ≥ 1700)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

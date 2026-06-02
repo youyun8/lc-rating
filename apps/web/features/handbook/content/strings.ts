@@ -386,7 +386,7 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
 | 3008 | [Find Beautiful Indices in the Given Array II](https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii) | KMP / Z-function |
 | 3031 | [Minimum Time to Revert Word to Initial State II](https://leetcode.cn/problems/minimum-time-to-revert-word-to-initial-state-ii) | Z-function |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

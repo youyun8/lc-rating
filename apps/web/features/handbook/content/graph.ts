@@ -383,7 +383,7 @@ These rarely appear on LeetCode but are decisive on the hardest contest problems
 | 2290 | [Minimum Obstacle Removal to Reach Corner](https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner) | 0-1 BFS |
 | 2421 | [Number of Good Paths](https://leetcode.cn/problems/number-of-good-paths) | DSU |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

@@ -472,7 +472,7 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
 | 2266 | [Count Number of Texts](https://leetcode.cn/problems/count-number-of-texts) | linear DP |
 | 2466 | [Count Ways To Build Good Strings](https://leetcode.cn/problems/count-ways-to-build-good-strings) | counting DP |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Pattern |
 | --- | --- | --- | --- |

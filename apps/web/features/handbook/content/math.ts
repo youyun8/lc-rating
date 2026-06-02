@@ -337,7 +337,7 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
 | 2761 | [Prime Pairs With Target Sum](https://leetcode.cn/problems/prime-pairs-with-target-sum) | sieve |
 | 2954 | [Count the Number of Infection Sequences](https://leetcode.cn/problems/count-the-number-of-infection-sequences) | combinatorics |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

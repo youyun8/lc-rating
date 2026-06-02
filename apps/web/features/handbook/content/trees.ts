@@ -416,7 +416,7 @@ vector<int> morrisInorder(TreeNode* root) {
 | 2458 | [Height of Binary Tree After Subtree Removal Queries](https://leetcode.cn/problems/height-of-binary-tree-after-subtree-removal-queries) | DFS in/out order |
 | 2467 | [Most Profitable Path in a Tree](https://leetcode.cn/problems/most-profitable-path-in-a-tree) | tree + BFS paths |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

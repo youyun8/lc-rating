@@ -451,7 +451,7 @@ class LRUCache {
 | 2286 | [Booking Concert Tickets in Groups](https://leetcode.cn/problems/booking-concert-tickets-in-groups) | segment tree |
 | 2736 | [Maximum Sum Queries](https://leetcode.cn/problems/maximum-sum-queries) | offline + monotonic stack / BIT |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Structure |
 | --- | --- | --- | --- |

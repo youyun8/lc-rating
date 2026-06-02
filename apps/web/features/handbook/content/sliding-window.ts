@@ -225,7 +225,7 @@ Every index enters and exits the window once — that is the source of the linea
 | 2799 | [Count Complete Subarrays in an Array](https://leetcode.cn/problems/count-complete-subarrays-in-an-array) | at-most-K window |
 | 2962 | [Count Subarrays Where Max Element Appears at Least K Times](https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times) | window |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

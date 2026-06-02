@@ -27,7 +27,11 @@ export function HandbookSectionBody({ body }: HandbookSectionBodyProps) {
       {segments.map((segment, idx) =>
         segment.kind === "problems" ? (
           <div key={idx} className="my-4">
-            <ProblemList problems={segment.problems} title={segment.title} />
+            <ProblemList
+              problems={segment.problems}
+              title={segment.title ?? "Core problems"}
+              language="en"
+            />
           </div>
         ) : (
           <StudyPlanMarkdownContent

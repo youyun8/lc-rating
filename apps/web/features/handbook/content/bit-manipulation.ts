@@ -228,7 +228,7 @@ while (sub < (1 << n)) {
 | 2588 | [Count the Number of Beautiful Subarrays](https://leetcode.cn/problems/count-the-number-of-beautiful-subarrays) | prefix XOR |
 | 2680 | [Maximum OR](https://leetcode.cn/problems/maximum-or) | prefix / suffix OR |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

@@ -366,7 +366,7 @@ The whole game is making \`check\` cheap and *provably monotone*.`,
 | 2861 | [Maximum Number of Alloys](https://leetcode.cn/problems/maximum-number-of-alloys) | BS on answer |
 | 3296 | [Minimum Number of Seconds to Make Mountain Height Zero](https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero) | BS on answer |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

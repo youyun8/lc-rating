@@ -242,7 +242,7 @@ The \`O(n)\` bound holds because each index is pushed once and popped once.`,
 | 2487 | [Remove Nodes From Linked List](https://leetcode.cn/problems/remove-nodes-from-linked-list) | monotonic stack |
 | 2818 | [Apply Operations to Maximize Score](https://leetcode.cn/problems/apply-operations-to-maximize-score) | monotonic stack + math |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |

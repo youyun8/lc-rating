@@ -244,7 +244,7 @@ The cost is almost always dominated by the initial sort or by heap operations.`,
 | 2410 | [Maximum Matching of Players With Trainers](https://leetcode.cn/problems/maximum-matching-of-players-with-trainers) | sort + two pointers |
 | 2790 | [Maximum Number of Groups With Increasing Length](https://leetcode.cn/problems/maximum-number-of-groups-with-increasing-length) | greedy |
 
-**Recent medium problems (rating ≥ 1800)**
+**Recent medium problems**
 
 | ID | Problem | Rating | Technique |
 | --- | --- | --- | --- |
