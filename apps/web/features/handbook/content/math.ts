@@ -263,7 +263,17 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
 | 2543 Check if Point Is Reachable | gcd |
 | 2400 Number of Ways to Reach a Position After Exactly k Steps | combinatorics (nCr) |
 | 2954 Count the Number of Infection Sequences | combinatorics |
-| 372 Super Pow | modular exponentiation |`,
+| 372 Super Pow | modular exponentiation |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 3524 Find X Value of Array I | 2008 | modular arithmetic |
+| 3756 Concatenate Non-Zero Digits and Multiply by Sum II | 1968 | digit math |
+| 3669 Balanced K-Factor Decomposition | 1917 | factorization + search |
+| 3747 Count Distinct Integers After Removing Zeros | 1848 | digit math |
+| 3558 Number of Ways to Assign Edge Weights I | 1845 | combinatorics |`,
     },
     {
       id: "pitfalls",

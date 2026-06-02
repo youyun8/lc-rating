@@ -284,7 +284,17 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
 | 1392 Longest Happy Prefix | prefix function |
 | 1316 Distinct Echo Substrings | rolling hash |
 | 5 Longest Palindromic Substring | Manacher |
-| 1032 Stream of Characters | Aho–Corasick |`,
+| 1032 Stream of Characters | Aho–Corasick |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 3614 Process String With Special Operations II | 2011 | simulation / indexing |
+| 3472 Longest Palindromic Subsequence After at Most K Operations | 1884 | interval DP |
+| 3781 Maximum Score After Binary Swaps | 1823 | greedy on string |
+| 3335 Total Characters in String After Transformations I | 1806 | counting recurrence |
+| 3703 Remove K Balanced Substrings | 1802 | stack |`,
     },
     {
       id: "pitfalls",

@@ -318,7 +318,17 @@ vector<int> morrisInorder(TreeNode* root) {
 | 1483 Kth Ancestor of a Tree Node | binary lifting |
 | 834 Sum of Distances in Tree | rerooting DP |
 | 968 Binary Tree Cameras | greedy tree DP |
-| 979 Distribute Coins in Binary Tree | flow-as-DP |`,
+| 979 Distribute Coins in Binary Tree | flow-as-DP |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 3331 Find Subtree Sizes After Changes | 2046 | DFS + relabel |
+| 2477 Minimum Fuel Cost to Report to the Capital | 2012 | tree DFS |
+| 3593 Minimum Increments to Equalize Leaf Paths | 1959 | tree DP (postorder) |
+| 3372 Maximize the Number of Target Nodes After Connecting Trees I | 1927 | tree BFS / DP |
+| 3067 Count Pairs of Connectable Servers in a Weighted Tree Network | 1909 | tree DFS |`,
     },
     {
       id: "pitfalls",

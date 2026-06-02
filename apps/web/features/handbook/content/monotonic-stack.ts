@@ -213,7 +213,17 @@ The \`O(n)\` bound holds because each index is pushed once and popped once.`,
 | 2487 Remove Nodes From Linked List | monotonic stack |
 | 2818 Apply Operations to Maximize Score | monotonic stack + math |
 | 1130 Minimum Cost Tree From Leaf Values | greedy monotonic stack |
-| 962 Maximum Width Ramp | stack + reverse scan |`,
+| 962 Maximum Width Ramp | stack + reverse scan |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 2866 Beautiful Towers II | 2072 | prefix/suffix monotonic stack |
+| 1856 Maximum Subarray Min Product | 2051 | min span + prefix sums |
+| 1996 The Number of Weak Characters in the Game | 1861 | sort + monotonic stack |
+| 3676 Count Bowl Subarrays | 1848 | monotonic stack |
+| 1504 Count Submatrices With All Ones | 1845 | per-row monotonic stack |`,
     },
     {
       id: "pitfalls",

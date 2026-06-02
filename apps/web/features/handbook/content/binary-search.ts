@@ -305,7 +305,17 @@ The whole game is making \`check\` cheap and *provably monotone*.`,
 | 2560 House Robber IV | BS on answer + greedy check |
 | 2616 Minimize the Maximum Difference of Pairs | BS on answer + greedy |
 | 2861 Maximum Number of Alloys | BS on answer |
-| 3296 Minimum Number of Seconds to Make Mountain Height Zero | BS on answer |`,
+| 3296 Minimum Number of Seconds to Make Mountain Height Zero | BS on answer |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 3771 Total Score of Dungeon Runs | 1981 | BS on the answer |
+| 3733 Minimum Time to Complete All Deliveries | 1973 | BS on the answer |
+| 3356 Zero Array Transformation II | 1913 | BS + difference array |
+| 3608 Minimum Time for K Connected Components | 1893 | BS + DSU |
+| 3639 Minimum Time to Activate String | 1853 | BS on the answer |`,
     },
     {
       id: "pitfalls",

@@ -198,7 +198,17 @@ Every index enters and exits the window once — that is the source of the linea
 | 2962 Count Subarrays Where Max Element Appears at Least K Times | window |
 | 2799 Count Complete Subarrays in an Array | at-most-K window |
 | 862 Shortest Subarray with Sum at Least K | prefix sums + deque |
-| 727 Minimum Window Subsequence | two-pointer / DP |`,
+| 727 Minimum Window Subsequence | two-pointer / DP |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 3578 Count Partitions With Max-Min Difference at Most K | 2033 | window + monotonic deque |
+| 2762 Continuous Subarrays | 1940 | window + two deques |
+| 2875 Minimum Size Subarray in Infinite Array | 1914 | window on doubled array |
+| 3097 Shortest Subarray With OR at Least K II | 1891 | bit-count window |
+| 3346 Maximum Frequency of an Element After Operations I | 1865 | sort + window |`,
     },
     {
       id: "pitfalls",

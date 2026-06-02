@@ -277,7 +277,17 @@ Recurring lesson: when plain BFS/DFS is too weak, *enrich the state* (keys, fuel
 | 2684 Maximum Number of Moves in a Grid | DP / BFS |
 | 778 Swim in Rising Water | min-max Dijkstra |
 | 864 Shortest Path to Get All Keys | BFS with bitmask state |
-| 407 Trapping Rain Water II | heap BFS |`,
+| 407 Trapping Rain Water II | heap BFS |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 3240 Minimum Number of Flips to Make Binary Grid Palindromic II | 2080 | grid + greedy/counting |
+| 3552 Grid Teleportation Traversal | 2036 | 0-1 BFS |
+| 3122 Minimum Number of Operations to Satisfy Conditions | 1905 | grid DP / counting |
+| 3665 Twisted Mirror Path Count | 1883 | grid DFS / DP |
+| 3742 Maximum Path Score in a Grid | 1804 | grid DP |`,
     },
     {
       id: "pitfalls",

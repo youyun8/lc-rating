@@ -392,7 +392,17 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
 | 1696 Jump Game VI | monotonic-queue DP |
 | 1235 Maximum Profit in Job Scheduling | DP + binary search |
 | 552 Student Attendance Record II | matrix exponentiation |
-| 877 Stone Game | minimax DP |`,
+| 877 Stone Game | minimax DP |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Pattern |
+| --- | --- | --- |
+| 3685 Subsequence Sum After Capping Elements | 2073 | knapsack DP |
+| 3654 Minimum Sum After Divisible Sum Deletions | 2039 | DP + prefix |
+| 3686 Number of Stable Subsequences | 1969 | counting DP |
+| 3599 Partition Array to Minimize XOR | 1955 | bitmask / interval DP |
+| 3738 Longest Non-Decreasing Subarray After One Replacement | 1811 | DP |`,
     },
     {
       id: "pitfalls",

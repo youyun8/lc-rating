@@ -209,7 +209,17 @@ The cost is almost always dominated by the initial sort or by heap operations.`,
 | 1921 Eliminate Maximum Number of Monsters | sort by arrival time |
 | 871 Minimum Number of Refueling Stops | regret heap |
 | 630 Course Schedule III | take-then-drop heap |
-| 135 Candy | two-pass greedy |`,
+| 135 Candy | two-pass greedy |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 3785 Minimum Swaps to Avoid Forbidden Values | 2052 | greedy |
+| 3720 Lexicographically Smallest Permutation Greater Than Target | 1958 | greedy construction |
+| 3635 Earliest Finish Time for Land and Water Rides II | 1870 | greedy + sort |
+| 3752 Lexicographically Smallest Negated Permutation That Sums to Target | 1827 | greedy construction |
+| 3588 Find Maximum Area of a Triangle | 1819 | greedy extremes |`,
     },
     {
       id: "pitfalls",

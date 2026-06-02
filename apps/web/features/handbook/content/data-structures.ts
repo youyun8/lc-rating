@@ -357,7 +357,17 @@ public:
 | 1157 Online Majority Element In Subarray | merge-sort tree |
 | 146 LRU Cache | hash map + linked list |
 | 715 Range Module | ordered interval map |
-| 218 The Skyline Problem | sweep line + heap |`,
+| 218 The Skyline Problem | sweep line + heap |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Structure |
+| --- | --- | --- |
+| 3739 Count Subarrays With Majority Element II | 2090 | Fenwick / segment tree |
+| 3624 Number of Integers With Popcount-Depth Equal to K II | 2086 | segment tree |
+| 3645 Maximum Total From Optimal Activation Order | 2019 | heap (priority queue) |
+| 3508 Implement Router | 1851 | design + ordered set |
+| 3408 Design Task Manager | 1807 | heap / ordered set |`,
     },
     {
       id: "pitfalls",

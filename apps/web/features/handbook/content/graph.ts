@@ -295,7 +295,17 @@ These rarely appear on LeetCode but are decisive on the hardest contest problems
 | 1976 Number of Ways to Arrive at Destination | Dijkstra + counting |
 | 1192 Critical Connections in a Network | Tarjan bridges |
 | 332 Reconstruct Itinerary | Eulerian path |
-| 329 Longest Increasing Path in a Matrix | DAG memo DP |`,
+| 329 Longest Increasing Path in a Matrix | DAG memo DP |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 2508 Add Edges to Make Degrees of All Nodes Even | 2060 | degree analysis |
+| 2948 Make Lexicographically Smallest Array by Swapping | 2047 | DSU components |
+| 3342 Find Minimum Time to Reach Last Room II | 1862 | Dijkstra |
+| 2976 Minimum Cost to Convert String I | 1882 | Floyd–Warshall |
+| 3604 Minimum Time to Reach Destination in Directed Graph | 1845 | time-aware Dijkstra |`,
     },
     {
       id: "pitfalls",

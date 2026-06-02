@@ -211,7 +211,17 @@ while (sub < (1 << n)) {
 | 2411 Smallest Subarrays With Maximum Bitwise OR | bit-position tracking |
 | 982 Triples with Bitwise AND Equal To Zero | SOS DP |
 | 1707 Maximum XOR With an Element From Array | bitwise Trie |
-| 1755 Closest Subsequence Sum | meet in the middle |`,
+| 1755 Closest Subsequence Sum | meet in the middle |
+
+**Newer medium problems (rating ≥ 1800)**
+
+| Problem | Rating | Technique |
+| --- | --- | --- |
+| 2857 Count Pairs of Points With Distance K | 2082 | XOR + hashing |
+| 2741 Special Permutations | 2021 | bitmask DP |
+| 2564 Substring XOR Queries | 1959 | prefix XOR / bits |
+| 3133 Minimum Array End | 1935 | bit construction |
+| 3514 Number of Unique XOR Triplets II | 1884 | XOR enumeration |`,
     },
     {
       id: "pitfalls",
