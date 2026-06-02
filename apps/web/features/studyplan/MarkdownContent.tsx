@@ -330,7 +330,12 @@ export function StudyPlanMarkdownContent({
     <div
       ref={innerHtml}
       className={cn(
-        "prose max-w-none text-foreground dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-headings:mb-3 prose-headings:mt-6 prose-p:leading-7 prose-li:leading-7 prose-strong:text-foreground prose-a:no-underline prose-blockquote:text-foreground/80 prose-pre:my-4 prose-pre:overflow-x-hidden prose-pre:whitespace-pre-wrap prose-pre:break-words prose-code:text-[0.95em]",
+        "prose max-w-none text-foreground dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-headings:mb-3 prose-headings:mt-6 prose-p:leading-7 prose-li:leading-7 prose-strong:text-foreground prose-a:no-underline prose-blockquote:text-foreground/80 prose-pre:my-4 prose-code:text-[0.95em]",
+        // Long code lines wrap on narrow screens (readable on phones); the
+        // handbook switches to one-line + horizontal scroll at lg and up.
+        enhanceLeetCode
+          ? "prose-pre:overflow-x-hidden prose-pre:whitespace-pre-wrap prose-pre:break-words lg:prose-pre:overflow-x-auto lg:prose-pre:whitespace-pre lg:prose-pre:break-normal"
+          : "prose-pre:overflow-x-hidden prose-pre:whitespace-pre-wrap prose-pre:break-words",
         variant === "lecture"
           ? "prose-base lg:prose-lg prose-p:leading-8 prose-li:leading-8"
           : variant === "plan"
