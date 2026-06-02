@@ -69,6 +69,19 @@ function parseProblemId(token: string): string | number | undefined {
   return /^\d+$/.test(trimmed) ? Number(trimmed) : trimmed;
 }
 
+/**
+ * Split a technique cell into individual labels. Both ` / ` and ` + ` act as
+ * separators (e.g. "BS on answer + greedy check" → "BS on answer", "greedy
+ * check"), then re-join with ` / ` so {@link ProblemList} renders one chip each.
+ */
+function techToSubsection(tech: string): string | undefined {
+  const labels = tech
+    .split(/\s+\+\s+|\s*\/\s*/)
+    .map((t) => t.trim())
+    .filter(Boolean);
+  return labels.length > 0 ? labels.join(" / ") : undefined;
+}
+
 /** Build study-plan items from one `| ID | Problem | … |` table. */
 function parseProblemRows(
   tableLines: string[],
@@ -101,7 +114,7 @@ function parseProblemRows(
         solution: null,
         score,
         isPremium: false,
-        subsection: tech || undefined,
+        subsection: techToSubsection(tech),
       });
       continue;
     }
@@ -116,7 +129,7 @@ function parseProblemRows(
         solution: null,
         score,
         isPremium: false,
-        subsection: tech || undefined,
+        subsection: techToSubsection(tech),
       });
     });
   }
