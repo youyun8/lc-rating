@@ -1,0 +1,82 @@
+import type { HandbookGroup, HandbookTopic, HandbookTopicRef } from "../model";
+import { binarySearch } from "./binary-search";
+import { slidingWindow } from "./sliding-window";
+import { monotonicStack } from "./monotonic-stack";
+import { greedy } from "./greedy";
+import { dataStructures } from "./data-structures";
+import { trees } from "./trees";
+import { graph } from "./graph";
+import { grid } from "./grid";
+import { dynamicProgramming } from "./dynamic-programming";
+import { strings } from "./strings";
+import { math } from "./math";
+import { bitManipulation } from "./bit-manipulation";
+
+/**
+ * Ordered list of every handbook topic. The order doubles as the learning
+ * path used for prev/next navigation on each topic page.
+ */
+export const HANDBOOK_TOPICS: HandbookTopic[] = [
+  binarySearch,
+  slidingWindow,
+  monotonicStack,
+  greedy,
+  dataStructures,
+  trees,
+  graph,
+  grid,
+  dynamicProgramming,
+  strings,
+  math,
+  bitManipulation,
+];
+
+/** Display order of the overview groups. */
+export const HANDBOOK_GROUP_ORDER: HandbookGroup[] = [
+  "Foundations",
+  "Data Structures",
+  "Graphs & Grids",
+  "Dynamic Programming",
+  "Strings & Math",
+];
+
+const TOPIC_BY_SLUG = new Map(HANDBOOK_TOPICS.map((t) => [t.slug, t]));
+
+export function getHandbookTopic(slug: string): HandbookTopic | undefined {
+  return TOPIC_BY_SLUG.get(slug);
+}
+
+export function getHandbookTopicSlugs(): string[] {
+  return HANDBOOK_TOPICS.map((t) => t.slug);
+}
+
+/** Previous/next topic refs for in-page footer navigation. */
+export function getAdjacentTopics(slug: string): {
+  prev?: HandbookTopicRef;
+  next?: HandbookTopicRef;
+} {
+  const idx = HANDBOOK_TOPICS.findIndex((t) => t.slug === slug);
+  if (idx === -1) return {};
+  const toRef = (t: HandbookTopic): HandbookTopicRef => ({
+    slug: t.slug,
+    title: t.title,
+  });
+  return {
+    prev: idx > 0 ? toRef(HANDBOOK_TOPICS[idx - 1]!) : undefined,
+    next:
+      idx < HANDBOOK_TOPICS.length - 1
+        ? toRef(HANDBOOK_TOPICS[idx + 1]!)
+        : undefined,
+  };
+}
+
+/** Topics grouped by their `group`, in `HANDBOOK_GROUP_ORDER`. */
+export function getHandbookTopicsByGroup(): {
+  group: HandbookGroup;
+  topics: HandbookTopic[];
+}[] {
+  return HANDBOOK_GROUP_ORDER.map((group) => ({
+    group,
+    topics: HANDBOOK_TOPICS.filter((t) => t.group === group),
+  })).filter((entry) => entry.topics.length > 0);
+}

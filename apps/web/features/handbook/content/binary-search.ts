@@ -1,0 +1,321 @@
+import type { HandbookTopic } from "../model";
+
+export const binarySearch: HandbookTopic = {
+  slug: "binary-search",
+  title: "Binary Search",
+  tagline:
+    "Halve the search space every step — on sorted arrays, on the answer, and on monotone predicates.",
+  icon: "Crosshair",
+  group: "Foundations",
+  sections: [
+    {
+      id: "overview",
+      title: "Overview & when to use it",
+      body: `Binary search turns an \`O(n)\` scan into an \`O(log n)\` probe by repeatedly discarding half of the remaining candidates. It applies whenever the search space is **monotone**: there is a point before which a predicate is false and after which it is true.
+
+Reach for binary search when you see any of these signals:
+
+- The array is **sorted** (or can be sorted) and you need a position or a value.
+- You must find the **first/last** index satisfying a condition.
+- The problem asks to **minimize a maximum** or **maximize a minimum** ("the smallest capacity such that…", "the largest \`k\` such that…").
+- The answer lies in a numeric range and you can **check feasibility** of a candidate answer in \`O(n)\` — this is *binary search on the answer*.
+- You need the **Kth smallest** value and counting "how many ≤ x" is cheap.
+
+The mental model: define a boolean \`check(x)\` that is **monotone** (false…false, true…true). Binary search finds the boundary between the two regions.`,
+    },
+    {
+      id: "prerequisites",
+      title: "Prerequisites",
+      body: `- Comfort with array indexing and half-open vs. closed intervals.
+- The idea of a **loop invariant**: a property that holds before and after every iteration.
+- Basic complexity: why halving gives \`O(log n)\`.
+
+Related handbook topics: [Sliding Window](/handbook/sliding-window) (the other "monotone shrink" pattern) and [Greedy](/handbook/greedy) (often supplies the \`check\` function for binary-search-on-answer).`,
+    },
+    {
+      id: "invariants",
+      title: "Core idea: the loop invariant",
+      body: `Every correct binary search maintains the invariant: *if the answer exists, it is still inside the current interval.* You only ever discard the half that provably cannot contain the answer, so the invariant survives each step and the interval strictly shrinks — guaranteeing termination.
+
+Two interval conventions; pick one and never mix them:
+
+| Convention | Init | Loop test | Move left | Move right |
+| --- | --- | --- | --- | --- |
+| Closed \`[l, r]\` | \`l=0, r=n-1\` | \`l <= r\` | \`r = mid - 1\` | \`l = mid + 1\` |
+| Half-open \`[l, r)\` | \`l=0, r=n\` | \`l < r\` | \`r = mid\` | \`l = mid + 1\` |
+
+Always compute the midpoint as \`mid = l + (r - l) / 2\` to avoid \`int\` overflow.`,
+    },
+    {
+      id: "templates",
+      title: "C++ templates",
+      body: `The single most useful template is **"find the first index where \`check\` is true"**. Almost every variant reduces to it.
+
+\`\`\`cpp
+// Find first index in [0, n] where check(i) is true (half-open, the workhorse)
+int lower_bound_pred(int n, auto&& check) {
+    int l = 0, r = n;                 // search the boundary in [l, r]
+    while (l < r) {
+        int mid = l + (r - l) / 2;
+        if (check(mid)) r = mid;      // mid works -> answer is mid or to the left
+        else l = mid + 1;             // mid fails -> answer is strictly right
+    }
+    return l;                         // l == r == first true (or n if none)
+}
+\`\`\`
+
+Classic value search and the STL-equivalent bounds:
+
+\`\`\`cpp
+// Plain binary search: index of target in sorted a, else -1
+int binary_search_value(const vector<int>& a, int target) {
+    int l = 0, r = (int)a.size() - 1; // closed interval [l, r]
+    while (l <= r) {
+        int mid = l + (r - l) / 2;
+        if (a[mid] == target) return mid;
+        else if (a[mid] < target) l = mid + 1;
+        else r = mid - 1;
+    }
+    return -1;
+}
+\`\`\`
+
+\`\`\`cpp
+// Hand-rolled lower_bound / upper_bound (first >= / first > target)
+int lower_bound_idx(const vector<int>& a, int target) {
+    int l = 0, r = (int)a.size();
+    while (l < r) {
+        int mid = l + (r - l) / 2;
+        if (a[mid] >= target) r = mid;
+        else l = mid + 1;
+    }
+    return l;                         // count of elements < target
+}
+int upper_bound_idx(const vector<int>& a, int target) {
+    int l = 0, r = (int)a.size();
+    while (l < r) {
+        int mid = l + (r - l) / 2;
+        if (a[mid] > target) r = mid;
+        else l = mid + 1;
+    }
+    return l;                         // count of elements <= target
+}
+\`\`\`
+
+Prefer the STL when you can — it is correct and concise:
+
+\`\`\`cpp
+// STL bounds on a sorted vector
+auto lo = lower_bound(a.begin(), a.end(), x); // first element >= x
+auto hi = upper_bound(a.begin(), a.end(), x); // first element  > x
+int  count_equal = hi - lo;                   // occurrences of x
+int  idx_first_ge = lo - a.begin();
+\`\`\``,
+    },
+    {
+      id: "answer",
+      title: "Technique: binary search on the answer",
+      body: `When the answer is a number in \`[lo, hi]\` and *feasibility is monotone*, search the answer directly. You only need a \`check(x)\` that returns whether \`x\` is achievable.
+
+**Minimize-the-maximum** ("smallest \`x\` that is feasible"):
+
+\`\`\`cpp
+// Smallest feasible x in [lo, hi]; check is monotone false...false,true...true
+long long min_feasible(long long lo, long long hi, auto&& check) {
+    while (lo < hi) {
+        long long mid = lo + (hi - lo) / 2;
+        if (check(mid)) hi = mid;     // feasible -> try smaller
+        else lo = mid + 1;            // infeasible -> need larger
+    }
+    return lo;
+}
+\`\`\`
+
+**Maximize-the-minimum** ("largest \`x\` that is feasible"):
+
+\`\`\`cpp
+// Largest feasible x in [lo, hi]; check is monotone true...true,false...false
+long long max_feasible(long long lo, long long hi, auto&& check) {
+    while (lo < hi) {
+        long long mid = lo + (hi - lo + 1) / 2; // bias up to avoid infinite loop
+        if (check(mid)) lo = mid;     // feasible -> try larger
+        else hi = mid - 1;            // infeasible -> need smaller
+    }
+    return lo;
+}
+\`\`\`
+
+Example \`check\` for LeetCode 1011 (ship packages within D days at capacity \`cap\`):
+
+\`\`\`cpp
+// Feasible if we can ship all weights within 'days' using capacity cap
+auto check = [&](int cap) {
+    int days = 1, load = 0;
+    for (int w : weights) {
+        if (w > cap) return false;    // a single item exceeds capacity
+        if (load + w > cap) { days++; load = 0; }
+        load += w;
+    }
+    return days <= D;
+};
+// lo = max(weights), hi = sum(weights); answer = min_feasible(lo, hi, check)
+\`\`\``,
+    },
+    {
+      id: "variants",
+      title: "Techniques & LeetCode variants",
+      body: `**1. First/last occurrence.** \`lower_bound\` gives the first \`>= x\`; \`upper_bound - 1\` gives the last \`== x\`. (LC 34 Find First and Last Position.)
+
+**2. Insertion point.** \`lower_bound\` index is where \`x\` would be inserted. (LC 35 Search Insert Position.)
+
+**3. Rotated sorted array.** One half is always sorted — decide which, then test whether the target lies in it.
+
+\`\`\`cpp
+// Search target in a rotated sorted array with distinct values (LC 33)
+int search(vector<int>& a, int target) {
+    int l = 0, r = (int)a.size() - 1;
+    while (l <= r) {
+        int mid = l + (r - l) / 2;
+        if (a[mid] == target) return mid;
+        if (a[l] <= a[mid]) {                     // left half sorted
+            if (a[l] <= target && target < a[mid]) r = mid - 1;
+            else l = mid + 1;
+        } else {                                  // right half sorted
+            if (a[mid] < target && target <= a[r]) l = mid + 1;
+            else r = mid - 1;
+        }
+    }
+    return -1;
+}
+\`\`\`
+
+**4. Find a peak / find the minimum of a rotated array.** Compare \`a[mid]\` to a neighbour or to \`a[r]\` to decide direction (LC 162, LC 153).
+
+**5. Kth-smallest via "count ≤ x".** If you can count how many elements are \`<= x\` in \`O(f(n))\`, binary search the value. Works for a sorted matrix (LC 378), the multiplication table (LC 668), and Kth-smallest distance pair (LC 719).
+
+\`\`\`cpp
+// Count entries <= x in an n*n row/col-sorted matrix, staircase from bottom-left
+int countLE(const vector<vector<int>>& m, int x) {
+    int n = m.size(), r = n - 1, c = 0, cnt = 0;
+    while (r >= 0 && c < n) {
+        if (m[r][c] <= x) { cnt += r + 1; c++; }  // whole column up to r qualifies
+        else r--;
+    }
+    return cnt;
+}
+\`\`\`
+
+**6. Real-valued (floating) binary search.** Iterate a fixed number of times instead of comparing floats:
+
+\`\`\`cpp
+// ~100 iterations halves the interval to < 2^-100 — plenty of precision
+double lo = 0, hi = 1e9;
+for (int it = 0; it < 100; it++) {
+    double mid = (lo + hi) / 2;
+    if (check(mid)) hi = mid; else lo = mid;
+}
+// answer ~ lo (or hi)
+\`\`\`
+
+**7. Binary search the index by predicate.** Split-array-largest-sum (LC 410), Koko eating bananas (LC 875), and minimum-time problems are all \`min_feasible\` with a greedy \`check\`.`,
+    },
+    {
+      id: "advanced",
+      title: "Advanced techniques (hard problems)",
+      body: `**Partition by binary search — median of two sorted arrays (LC 4).** Instead of merging, binary search the cut in the shorter array so the left halves of both arrays form the lower half of the merged array.
+
+\`\`\`cpp
+// Median of two sorted arrays in O(log(min(m, n))) (LC 4)
+double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
+    if (a.size() > b.size()) swap(a, b);
+    int m = a.size(), n = b.size(), half = (m + n + 1) / 2;
+    int lo = 0, hi = m;
+    while (lo <= hi) {
+        int i = (lo + hi) / 2, j = half - i;          // i from a, j from b
+        int aL = i ? a[i-1] : INT_MIN, aR = i < m ? a[i] : INT_MAX;
+        int bL = j ? b[j-1] : INT_MIN, bR = j < n ? b[j] : INT_MAX;
+        if (aL <= bR && bL <= aR)
+            return ((m + n) & 1) ? max(aL, bL) : (max(aL, bL) + min(aR, bR)) / 2.0;
+        else if (aL > bR) hi = i - 1;                  // take less from a
+        else lo = i + 1;                               // take more from a
+    }
+    return 0.0;
+}
+\`\`\`
+
+**Fractional / parametric binary search — maximize average (LC 644).** Binary search the answer value \`x\`; "average ≥ x" becomes "some window has sum of \`(a[i] - x) ≥ 0\`", checkable with a prefix-min sweep.
+
+\`\`\`cpp
+// Maximum average subarray of length >= k (LC 644)
+double findMaxAverage(vector<int>& a, int k) {
+    double lo = *min_element(a.begin(), a.end()), hi = *max_element(a.begin(), a.end());
+    auto feasible = [&](double x) {
+        double sum = 0, prefix = 0, minPrefix = 0;
+        for (int i = 0; i < (int)a.size(); i++) {
+            sum += a[i] - x;
+            if (i >= k) { prefix += a[i-k] - x; minPrefix = min(minPrefix, prefix); }
+            if (i >= k - 1 && sum - minPrefix >= 0) return true;
+        }
+        return false;
+    };
+    while (hi - lo > 1e-5) { double mid = (lo + hi) / 2; feasible(mid) ? lo = mid : hi = mid; }
+    return lo;
+}
+\`\`\`
+
+**Binary search the answer with a heavy check.** The \`check(x)\` can itself be a greedy or DP — the search just needs it to be monotone. This unlocks many hard problems: split-array / painter problems (LC 410, LC 1highest via DP check), bouquets (LC 1482), magnetic force between balls (LC 1552), maximum candies (LC 2226), and finding a target in a hidden mountain array (LC 1095).
+
+**Kth-smallest via a counting predicate** generalizes with number theory: count "how many values ≤ x" using inclusion–exclusion and \`gcd\`/\`lcm\` for the Nth magical number (LC 878) and ugly number III (LC 1201), or a div-count for the kth smallest in a multiplication table (LC 668).`,
+    },
+    {
+      id: "complexity",
+      title: "Complexity cheatsheet",
+      body: `| Operation | Time | Notes |
+| --- | --- | --- |
+| Value / bound search | \`O(log n)\` | comparisons only |
+| Binary search on answer | \`O(log(hi - lo) * C)\` | \`C\` = cost of one \`check\` |
+| Kth-smallest by counting | \`O(log(range) * count_cost)\` | counting often \`O(n)\` |
+| Floating search | \`O(iterations * C)\` | fixed ~60–100 iterations |
+
+The whole game is making \`check\` cheap and *provably monotone*.`,
+    },
+    {
+      id: "problems",
+      title: "Representative LeetCode problems",
+      body: `| Problem | Technique |
+| --- | --- |
+| 704 Binary Search | plain value search |
+| 34 First & Last Position | lower/upper bound |
+| 35 Search Insert Position | insertion point |
+| 33 / 81 Search in Rotated Array | rotated-array split |
+| 153 / 154 Find Minimum in Rotated Array | direction by \`a[r]\` |
+| 162 Find Peak Element | local monotonicity |
+| 875 Koko Eating Bananas | min-feasible on answer |
+| 1011 Capacity to Ship Packages | min-feasible on answer |
+| 410 Split Array Largest Sum | min-feasible + greedy check |
+| 378 Kth Smallest in Sorted Matrix | count ≤ x + value search |
+| 719 Kth Smallest Distance Pair | count ≤ x + two pointers |
+| 4 Median of Two Sorted Arrays | partition by binary search |
+
+**Harder & newer problems**
+
+| Problem | Technique |
+| --- | --- |
+| 2226 Maximum Candies Allocated to K Children | BS on the answer |
+| 2560 House Robber IV | BS on answer + greedy check |
+| 2616 Minimize the Maximum Difference of Pairs | BS on answer + greedy |
+| 2861 Maximum Number of Alloys | BS on answer |
+| 3296 Minimum Number of Seconds to Make Mountain Height Zero | BS on answer |`,
+    },
+    {
+      id: "pitfalls",
+      title: "Pitfalls & tips",
+      body: `- **Overflow**: always \`mid = l + (r - l) / 2\`, and use \`long long\` for \`hi\` when summing.
+- **Infinite loop in maximize**: use \`mid = l + (r - l + 1) / 2\` (round up) when \`l\` can equal \`mid\`.
+- **Off-by-one**: decide your interval convention up front; closed uses \`l <= r\` and \`mid ± 1\`, half-open uses \`l < r\` and \`r = mid\`.
+- **Non-monotone check**: binary search is only valid if \`check\` flips exactly once. If it doesn't, you need a different approach.
+- **Prefer STL** \`lower_bound\`/\`upper_bound\` for sorted containers to avoid hand-rolled bugs.
+- **Answer bounds**: set \`lo\`/\`hi\` to provably valid extremes (e.g. \`lo = max(weights)\`, \`hi = sum(weights)\`).`,
+    },
+  ],
+};

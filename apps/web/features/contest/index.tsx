@@ -11,6 +11,7 @@ import { FileText, Gauge, Sparkles, Swords } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { ProblemsTable } from "./ContestTable";
 import { TableCol } from "./ContestTable/types";
+import { HandbookEntryCard } from "@/features/handbook/HandbookEntryCard";
 
 function ContestPage() {
   const {
@@ -160,6 +161,7 @@ function ContestPage() {
 
   return (
     <div className="flex flex-col gap-5 px-4 py-6 md:px-8">
+      <HandbookEntryCard />
       <section className="brand-glow motion-rise relative overflow-hidden rounded-3xl border border-border/60 bg-background/80 shadow-sm">
         <div className="flex flex-col gap-6 p-5 sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
