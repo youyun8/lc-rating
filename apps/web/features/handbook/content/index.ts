@@ -1,15 +1,20 @@
 import type { HandbookGroup, HandbookTopic, HandbookTopicRef } from "../model";
+import { competitiveProgrammingEssentials } from "./competitive-programming-essentials";
 import { binarySearch } from "./binary-search";
 import { slidingWindow } from "./sliding-window";
 import { monotonicStack } from "./monotonic-stack";
 import { greedy } from "./greedy";
 import { dataStructures } from "./data-structures";
+import { rangeQueriesOffline } from "./range-queries-offline";
 import { trees } from "./trees";
 import { graph } from "./graph";
+import { advancedGraphTemplates } from "./advanced-graph-templates";
 import { grid } from "./grid";
 import { dynamicProgramming } from "./dynamic-programming";
 import { strings } from "./strings";
+import { stringAlgorithmsII } from "./string-algorithms-ii";
 import { math } from "./math";
+import { geometry } from "./geometry";
 import { bitManipulation } from "./bit-manipulation";
 
 /**
@@ -17,17 +22,22 @@ import { bitManipulation } from "./bit-manipulation";
  * path used for prev/next navigation on each topic page.
  */
 export const HANDBOOK_TOPICS: HandbookTopic[] = [
+  competitiveProgrammingEssentials,
   binarySearch,
   slidingWindow,
   monotonicStack,
   greedy,
   dataStructures,
+  rangeQueriesOffline,
   trees,
   graph,
+  advancedGraphTemplates,
   grid,
   dynamicProgramming,
   strings,
+  stringAlgorithmsII,
   math,
+  geometry,
   bitManipulation,
 ];
 

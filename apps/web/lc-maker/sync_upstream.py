@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
+import subprocess
 import sys
 import urllib.request
 from pathlib import Path
@@ -18,8 +20,10 @@ DEFAULT_UPSTREAM_BASE = (
     "/main/apps/web/public/problemset"
 )
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "public" / "problemset"
+REPO_ROOT = Path(__file__).resolve().parents[3]
 UPSTREAM_FILES = ("problems.json", "solutions.json", "contests.json", "tags.json")
 CONTEST_KEYWORDS = ("周赛", "双周赛", "週賽", "雙週賽")
+PRETTIER_VERSION = "3.6.2"
 REQUEST_HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; lc-rating-upstream-sync/1.0)",
 }
@@ -48,10 +52,64 @@ def filter_contests(contests: dict) -> tuple[dict, int]:
     return kept, removed
 
 
-def write_json(path: Path, data: dict | list) -> None:
-    """Write JSON using the repository's compact formatting style."""
+def write_json(path: Path, data: dict | list, *, compact: bool = False) -> None:
+    """Write JSON either for Prettier input or readable fallback output."""
     with path.open("w", encoding="utf-8") as handle:
-        json.dump(data, handle, ensure_ascii=False, separators=(",", ":"))
+        if compact:
+            json.dump(data, handle, ensure_ascii=False, separators=(",", ":"))
+        else:
+            json.dump(data, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+
+
+def prettier_commands(paths: list[Path]) -> list[list[str]]:
+    """Build candidate Prettier commands for local and CI environments."""
+    path_args = [str(path) for path in paths]
+    commands: list[list[str]] = []
+
+    local_prettier = REPO_ROOT / "node_modules" / ".bin" / "prettier"
+    if local_prettier.exists():
+        commands.append([str(local_prettier), "--write", *path_args])
+
+    pnpm = shutil.which("pnpm")
+    if pnpm is not None:
+        commands.append(
+            [pnpm, "dlx", f"prettier@{PRETTIER_VERSION}", "--write", *path_args]
+        )
+
+    npx = shutil.which("npx")
+    if npx is not None:
+        commands.append([npx, f"prettier@{PRETTIER_VERSION}", "--write", *path_args])
+
+    return commands
+
+
+def format_json_files(paths: list[Path]) -> bool:
+    """Format written JSON files the same way the web app's data files are kept."""
+    if not paths:
+        return True
+
+    sys.stdout.flush()
+    commands = prettier_commands(paths)
+    if not commands:
+        print(
+            "  warning: prettier is not available; left JSON in 2-space format",
+            file=sys.stderr,
+        )
+        return False
+
+    for command in commands:
+        try:
+            subprocess.run(command, cwd=REPO_ROOT, check=True)
+            return True
+        except (FileNotFoundError, subprocess.CalledProcessError):
+            continue
+
+    print(
+        "  warning: failed to run prettier; left JSON in 2-space format",
+        file=sys.stderr,
+    )
+    return False
 
 
 def summarize_changes(local_path: Path, upstream_data: dict | list) -> None:
@@ -98,6 +156,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Skip Simplified Chinese to Traditional Chinese translation.",
     )
+    parser.add_argument(
+        "--no-format",
+        action="store_true",
+        help="Skip Prettier formatting after writing JSON files.",
+    )
     return parser.parse_args()
 
 
@@ -139,9 +202,22 @@ def main() -> int:
             upstream_payloads[filename] = translate_dict(payload)
 
     print("Writing refreshed problemset files")
+    output_paths = [output_dir / filename for filename in upstream_payloads]
+    should_format = not args.no_format
+    formatter_available = should_format and bool(prettier_commands(output_paths))
+    written_paths: list[Path] = []
     for filename, payload in upstream_payloads.items():
-        write_json(output_dir / filename, payload)
-        print(f"  wrote {output_dir / filename}")
+        output_path = output_dir / filename
+        write_json(output_path, payload, compact=formatter_available)
+        written_paths.append(output_path)
+        print(f"  wrote {output_path}")
+
+    if should_format:
+        print("Formatting refreshed problemset files", flush=True)
+        if not format_json_files(written_paths) and formatter_available:
+            print("Rewriting refreshed problemset files with readable fallback JSON")
+            for filename, payload in upstream_payloads.items():
+                write_json(output_dir / filename, payload)
 
     print("Problemset sync complete")
     return 0

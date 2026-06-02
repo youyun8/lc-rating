@@ -11,6 +11,8 @@ from Simplified Chinese to Traditional Chinese.
     `huxulm/lc-rating`.
   - Filters contest data down to weekly and biweekly contests.
   - Translates fetched content to Traditional Chinese before writing.
+  - Formats written JSON with Prettier when `pnpm`/`npx` is available, matching
+    the current checked-in `public/**/*.json` style.
 - `merge_upstream_to_local.py`
   - Merges only newly added upstream study-plan problems into the local
     `apps/web/public/studyplan/*.json` files.
@@ -34,6 +36,12 @@ Dry-run the problemset sync against local files:
 ```bash
 LC_RATING_UPSTREAM_BASE="file:///absolute/path/to/apps/web/public/problemset" \
   python sync_upstream.py --dry-run
+```
+
+Skip formatting only when debugging formatter issues:
+
+```bash
+python sync_upstream.py --no-format
 ```
 
 Dry-run the study-plan merge against local files:

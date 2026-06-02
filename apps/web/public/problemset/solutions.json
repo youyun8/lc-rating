@@ -85,7 +85,7 @@
   },
   "1016789276": {
     "id": "1016789276",
-    "title": "O(n) 換座位，透過例子理解演算法思想（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "O(n) 換座位，通過例子理解演算法思想（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "huan-zuo-wei-tong-guo-li-zi-li-jie-suan-qa94e",
     "time": 1744979172323,
     "problemId": "41"
@@ -204,7 +204,7 @@
   },
   "1032257843": {
     "id": "1032257843",
-    "title": "恰好裝滿型 0-1 揹包：從記憶化搜尋到遞推（Python/Java/C++/Go）",
+    "title": "恰好裝滿型 0-1 背包：從記憶化搜尋到遞推（Python/Java/C++/Go）",
     "titleSlug": "mo-ban-qia-hao-zhuang-man-xing-0-1-bei-b-0nca",
     "time": 1698537659966,
     "problemId": "2915"
@@ -307,6 +307,13 @@
     "time": 1738994954574,
     "problemId": "1552"
   },
+  "1054865497": {
+    "id": "1054865497",
+    "title": "貪心+維護最小次小，O(nlogn) 時間（Python/Java/C++/Go）",
+    "titleSlug": "tan-xin-wei-hu-zui-xiao-ci-xiao-onlogn-s-u5us",
+    "time": 1779790331857,
+    "problemId": "3944"
+  },
   "1057920854": {
     "id": "1057920854",
     "title": "三種方法：列舉上下邊界 / 動態規劃 / 單調堆疊（Python/Java/C++/Go）",
@@ -330,7 +337,7 @@
   },
   "1059693173": {
     "id": "1059693173",
-    "title": "兩種方法：0-1 揹包 / 二分答案+多重揹包（Python/Java/C++/Go）",
+    "title": "兩種方法：0-1 背包 / 二分答案+多重背包（Python/Java/C++/Go）",
     "titleSlug": "0-1-bei-bao-pythonjavacgo-by-endlesschen-2y0l",
     "time": 1742098290614,
     "problemId": "3489"
@@ -722,7 +729,7 @@
   },
   "114887924": {
     "id": "114887924",
-    "title": "兩種方法：前字尾分解 / 相向雙指標（Python/Java/C++/Go）",
+    "title": "兩種方法：前後綴分解 / 相向雙指標（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-yizq",
     "time": 1772942612642,
     "problemId": "3862"
@@ -1023,7 +1030,7 @@
   },
   "1204660336": {
     "id": "1204660336",
-    "title": "兩種方法：列舉 / 倒序貪心 + 0-1 揹包（Python/Java/C++/Go）",
+    "title": "兩種方法：列舉 / 倒序貪心 + 0-1 背包（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-fang-fa-mei-ju-dao-xu-tan-xi-164n",
     "time": 1761273383041,
     "problemId": "2048"
@@ -1107,7 +1114,7 @@
   },
   "1226463396": {
     "id": "1226463396",
-    "title": "前字尾分解 + 子序列匹配 + 貪心（Python/Java/C++/Go）",
+    "title": "前後綴分解 + 子序列匹配 + 貪心（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-zi-xu-lie-pi-pei-t-le8d",
     "time": 1727571358485,
     "problemId": "3302"
@@ -1387,7 +1394,7 @@
   },
   "1299599676": {
     "id": "1299599676",
-    "title": "三種方法：前字尾分解 / 維護前三大 LCP / 維護前二大 LCP（Python/Java/C++/Go）",
+    "title": "三種方法：前後綴分解 / 維護前三大 LCP / 維護前二大 LCP（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-8sn2",
     "time": 1751170209125,
     "problemId": "3598"
@@ -1597,7 +1604,7 @@
   },
   "1343589514": {
     "id": "1343589514",
-    "title": "通用做法：二維 0-1 揹包（Python/Java/C++/Go）",
+    "title": "通用做法：二維 0-1 背包（Python/Java/C++/Go）",
     "titleSlug": "tong-yong-zuo-fa-er-wei-0-1-bei-bao-pyth-9gwu",
     "time": 1766277338576,
     "problemId": "3780"
@@ -1674,7 +1681,7 @@
   },
   "1374421496": {
     "id": "1374421496",
-    "title": "兩種方法：複用 115 題程式碼 / 狀態機 DP + 前字尾分解（Python/Java/C++/Go）",
+    "title": "兩種方法：複用 115 題程式碼 / 狀態機 DP + 前後綴分解（Python/Java/C++/Go）",
     "titleSlug": "fu-yong-115-ti-dai-ma-qian-hou-zhui-fen-gtkqz",
     "time": 1753589871862,
     "problemId": "3628"
@@ -1702,7 +1709,7 @@
   },
   "1377831845": {
     "id": "1377831845",
-    "title": "O(n) 前字尾分解，附題單（Python/Java/C++/Go/JS/Rust）",
+    "title": "O(n) 前後綴分解，附題單（Python/Java/C++/Go/JS/Rust）",
     "titleSlug": "on-zuo-fa-mei-ju-numsjqian-hou-zhui-fen-xweo4",
     "time": 1697961847243,
     "problemId": "2908"
@@ -1940,7 +1947,7 @@
   },
   "1446453156": {
     "id": "1446453156",
-    "title": "非暴力做法：前字尾分解（Python/Java/C++/Go）",
+    "title": "非暴力做法：前後綴分解（Python/Java/C++/Go）",
     "titleSlug": "fei-bao-li-zuo-fa-qian-hou-zhui-fen-jie-27f8y",
     "time": 1730004260731,
     "problemId": "3334"
@@ -2143,7 +2150,7 @@
   },
   "1490454383": {
     "id": "1490454383",
-    "title": "完全揹包 + 輸出具體方案（Python/Java/C++/Go）",
+    "title": "完全背包 + 輸出具體方案（Python/Java/C++/Go）",
     "titleSlug": "wan-quan-bei-bao-shu-chu-ju-ti-fang-an-p-i29o",
     "time": 1761279502911,
     "problemId": "1449"
@@ -2220,7 +2227,7 @@
   },
   "1507011086": {
     "id": "1507011086",
-    "title": "計算前字尾 + 簡潔寫法",
+    "title": "計算前後綴 + 簡潔寫法",
     "titleSlug": "ji-suan-qian-hou-zhui-jian-ji-xie-fa-by-b8els",
     "time": 1643517363923,
     "problemId": "2155"
@@ -2304,7 +2311,7 @@
   },
   "1519348229": {
     "id": "1519348229",
-    "title": "【影片】三種方法：前字尾分解/雙指標/單調堆疊（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "【影片】三種方法：前後綴分解/雙指標/單調堆疊（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "zuo-liao-nbian-huan-bu-hui-yi-ge-shi-pin-ukwm",
     "time": 1668591004634,
     "problemId": "42"
@@ -2612,7 +2619,7 @@
   },
   "1590273508": {
     "id": "1590273508",
-    "title": "【影片】完全揹包：從記憶化搜尋到遞推，附題單！（Python/Java/C++/Go）",
+    "title": "【影片】完全背包：從記憶化搜尋到遞推，附題單！（Python/Java/C++/Go）",
     "titleSlug": "shi-pin-wan-quan-bei-bao-cong-ji-yi-hua-o3ew0",
     "time": 1711324901654,
     "problemId": "518"
@@ -2997,7 +3004,7 @@
   },
   "1687003236": {
     "id": "1687003236",
-    "title": "DP 最佳化技巧：拆項+前字尾最大值",
+    "title": "DP 最佳化技巧：拆項+前後綴最大值",
     "titleSlug": "dp-you-hua-ji-qiao-chai-xiang-qian-hou-z-5vvc",
     "time": 1626581190733,
     "problemId": "1937"
@@ -3067,7 +3074,7 @@
   },
   "1697537146": {
     "id": "1697537146",
-    "title": "【模板】多重揹包求方案數（Python/Java/C++/Go）",
+    "title": "【模板】多重背包求方案數（Python/Java/C++/Go）",
     "titleSlug": "fen-zu-bei-bao-pythonjavacgo-by-endlessc-ludl",
     "time": 1677989213368,
     "problemId": "2585"
@@ -3907,7 +3914,7 @@
   },
   "1910869482": {
     "id": "1910869482",
-    "title": "兩種方法：0-1 揹包 / 折半列舉（Python/Java/C++/Go）",
+    "title": "兩種方法：0-1 背包 / 折半列舉（Python/Java/C++/Go）",
     "titleSlug": "jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-s1cx",
     "time": 1676723491065,
     "problemId": "494"
@@ -4166,14 +4173,14 @@
   },
   "1962061945": {
     "id": "1962061945",
-    "title": "兩種方法：前字尾分解 / O(1) 空間（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "兩種方法：前後綴分解 / O(1) 空間（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "tan-xin-qian-hou-zhui-fen-jie-pythonjava-wrv1",
     "time": 1683994355055,
     "problemId": "2680"
   },
   "1962595835": {
     "id": "1962595835",
-    "title": "從大到小排序貪心",
+    "title": "如何證明貪心是對的？（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "cong-da-dao-xiao-pai-xu-tan-xin-by-endle-smhf",
     "time": 1642868066898,
     "problemId": "2144"
@@ -4201,7 +4208,7 @@
   },
   "19753391": {
     "id": "19753391",
-    "title": "O(n) 前字尾分解+單調堆疊（Python/Java/C++/Go）",
+    "title": "O(n) 前後綴分解+單調堆疊（Python/Java/C++/Go）",
     "titleSlug": "on-qian-hou-zhui-fen-jie-dan-diao-zhan-p-w3g0",
     "time": 1695528846314,
     "problemId": "2865"
@@ -4369,7 +4376,7 @@
   },
   "2013773941": {
     "id": "2013773941",
-    "title": "【模板】恰好裝滿型 0-1 揹包（Python/Java/C++/Go）",
+    "title": "【模板】恰好裝滿型 0-1 背包（Python/Java/C++/Go）",
     "titleSlug": "mo-ban-qia-hao-zhuang-man-xing-0-1-bei-b-llbw",
     "time": 1774152867696,
     "problemId": "3877"
@@ -4500,6 +4507,13 @@
     "time": 1759672002189,
     "problemId": "面試題 03.02"
   },
+  "2045640391": {
+    "id": "2045640391",
+    "title": "0-1 背包 + 列舉最佳化（Python/Java/C++/Go）",
+    "titleSlug": "0-1-bei-bao-mei-ju-you-hua-pythonjavacgo-6km7",
+    "time": 1780200174794,
+    "problemId": "3946"
+  },
   "2048723677": {
     "id": "2048723677",
     "title": "教你一步步思考動態規劃！（Python/Java/C++/Go）",
@@ -4586,7 +4600,7 @@
   },
   "2064923425": {
     "id": "2064923425",
-    "title": "O(mn) 前字尾分解，附費用流寫法（Python/Java/C++/Go）",
+    "title": "O(mn) 前後綴分解，附費用流寫法（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-gc48",
     "time": 1723940496937,
     "problemId": "3257"
@@ -4670,7 +4684,7 @@
   },
   "2080936805": {
     "id": "2080936805",
-    "title": "三種方法：線段樹/前字尾分解/字首和一次遍歷（Python/Java/C++/Go）",
+    "title": "三種方法：線段樹/前後綴分解/字首和一次遍歷（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-fang-fa-xian-duan-shu-qian-h-961z",
     "time": 1736077864537,
     "problemId": "3410"
@@ -4969,6 +4983,13 @@
     "time": 1767492791450,
     "problemId": "3797"
   },
+  "2161204569": {
+    "id": "2161204569",
+    "title": "兩種方法：遞迴 / 找中點+反轉右半（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-fang-fa-di-gui-zhao-zhong-di-czvg",
+    "time": 1779844575965,
+    "problemId": "2130"
+  },
   "2162382478": {
     "id": "2162382478",
     "title": "拆位+線段樹",
@@ -5181,7 +5202,7 @@
   },
   "2208585097": {
     "id": "2208585097",
-    "title": "前字尾分解，附題單！（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "前後綴分解，附題單！（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "qian-hou-zhui-fen-jie-fu-ti-dan-pythonja-86r1",
     "time": 1716173043821,
     "problemId": "238"
@@ -5342,7 +5363,7 @@
   },
   "2249718139": {
     "id": "2249718139",
-    "title": "前字尾分解，一張圖秒懂！（附動態規劃）Python/Java/C++/Go",
+    "title": "前後綴分解，一張圖秒懂！（附動態規劃）Python/Java/C++/Go",
     "titleSlug": "qian-hou-zhui-fen-jie-yi-zhang-tu-miao-d-dor2",
     "time": 1678024936500,
     "problemId": "1653"
@@ -5356,7 +5377,7 @@
   },
   "2252317011": {
     "id": "2252317011",
-    "title": "兩次遍歷 + 前字尾分解",
+    "title": "兩次遍歷 + 前後綴分解",
     "titleSlug": "liang-ci-bian-li-qian-hou-zhui-by-endles-pq67",
     "time": 1639239150269,
     "problemId": "2100"
@@ -5440,7 +5461,7 @@
   },
   "2273737749": {
     "id": "2273737749",
-    "title": "bitset/bigint 最佳化 0-1 揹包 + 兩數之和最佳化（Python/Java/C++/Go）",
+    "title": "bitset/bigint 最佳化 0-1 背包 + 兩數之和最佳化（Python/Java/C++/Go）",
     "titleSlug": "bitset-you-hua-0-1-bei-bao-by-endlessche-m1xn",
     "time": 1717906211782,
     "problemId": "3181"
@@ -5545,7 +5566,7 @@
   },
   "2285940610": {
     "id": "2285940610",
-    "title": "三種方法：選或不選/列舉選哪個/完全揹包預處理+可行性剪枝（Python/Java/C++/Go）",
+    "title": "三種方法：選或不選/列舉選哪個/完全背包預處理+可行性剪枝（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-fang-fa-xuan-huo-bu-xuan-mei-mhf9",
     "time": 1713574024235,
     "problemId": "39"
@@ -5615,7 +5636,7 @@
   },
   "2305284156": {
     "id": "2305284156",
-    "title": "貢獻法+單調堆疊，兩種計運算元陣列的方法（Python/Java/C++/Go）",
+    "title": "貢獻法+單調堆疊，兩種計算子陣列的方法（Python/Java/C++/Go）",
     "titleSlug": "gong-xian-fa-dan-diao-zhan-pythonjavacgo-9gz3",
     "time": 1737260674345,
     "problemId": "3430"
@@ -5755,7 +5776,7 @@
   },
   "2335538835": {
     "id": "2335538835",
-    "title": "字首和最佳化 DP（Python/Java/C++/Go）",
+    "title": "三種方法：DP/差分陣列/同向雙指標（Python/Java/C++/Go）",
     "titleSlug": "qian-zhui-he-you-hua-dp-by-endlesscheng-k9d2",
     "time": 1621747033319,
     "problemId": "1871"
@@ -5790,7 +5811,7 @@
   },
   "2347161220": {
     "id": "2347161220",
-    "title": "樹上獨立集 + 樹上揹包（Python/Java/C++/Go）",
+    "title": "樹上獨立集 + 樹上背包（Python/Java/C++/Go）",
     "titleSlug": "shu-shang-du-li-ji-shu-shang-bei-bao-pyt-zyos",
     "time": 1779585029090,
     "problemId": "3939"
@@ -6574,7 +6595,7 @@
   },
   "2534323731": {
     "id": "2534323731",
-    "title": "轉換為 01 揹包方案數",
+    "title": "轉換為 01 背包方案數",
     "titleSlug": "zhuan-huan-wei-01-bei-bao-fang-an-shu-by-1dax",
     "time": 1632564990216,
     "problemId": "LCP 47"
@@ -6784,7 +6805,7 @@
   },
   "2582430711": {
     "id": "2582430711",
-    "title": "【圖解】循序漸進：從雙指標到二分（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "【圖解】循序漸進：從排序到雙指標到二分（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "tu-jie-xun-xu-jian-jin-cong-shuang-zhi-z-p2gd",
     "time": 1728911580943,
     "problemId": "4"
@@ -6826,10 +6847,17 @@
   },
   "2598780139": {
     "id": "2598780139",
-    "title": "前字尾分解 + DP（Python/Java/C++/Go）",
+    "title": "前後綴分解 + DP（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-dp-by-endlesscheng-6u1b",
     "time": 1644120382788,
     "problemId": "2167"
+  },
+  "2600903443": {
+    "id": "2600903443",
+    "title": "分組迴圈（Python/Java/C++/Go）",
+    "titleSlug": "fen-zu-xun-huan-pythonjavacgo-by-endless-x35d",
+    "time": 1780201239512,
+    "problemId": "3948"
   },
   "2601690955": {
     "id": "2601690955",
@@ -7232,7 +7260,7 @@
   },
   "2671757819": {
     "id": "2671757819",
-    "title": "0-1 揹包模板題（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "0-1 背包模板題（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "0-1-bei-bao-mo-ban-ti-by-endlesscheng-ap09",
     "time": 1690070993752,
     "problemId": "2787"
@@ -7257,6 +7285,13 @@
     "titleSlug": "mo-ni-wei-yun-suan-by-endlesscheng-7zfi",
     "time": 1645336377493,
     "problemId": "2180"
+  },
+  "2678582250": {
+    "id": "2678582250",
+    "title": "貪心（Python/Java/C++/Go）",
+    "titleSlug": "tan-xin-pythonjavacgo-by-endlesscheng-a2tp",
+    "time": 1780200249708,
+    "problemId": "3947"
   },
   "268097121": {
     "id": "268097121",
@@ -7323,7 +7358,7 @@
   },
   "2692580018": {
     "id": "2692580018",
-    "title": "前字尾分解+單調堆疊（附題單！）Python/Java/C++/Go",
+    "title": "前後綴分解+單調堆疊（附題單！）Python/Java/C++/Go",
     "titleSlug": "qian-hou-zhui-fen-jie-dan-diao-zhan-pyth-1exe",
     "time": 1695528801585,
     "problemId": "2866"
@@ -7484,7 +7519,7 @@
   },
   "2720318685": {
     "id": "2720318685",
-    "title": "多重揹包方案數：從樸素 DP 到最佳化（Python/Java/C++/Go）",
+    "title": "多重背包方案數：從樸素 DP 到最佳化（Python/Java/C++/Go）",
     "titleSlug": "duo-zhong-bei-bao-fang-an-shu-cong-po-su-f5ay",
     "time": 1697333864768,
     "problemId": "2902"
@@ -7965,6 +8000,13 @@
     "time": 1771917667888,
     "problemId": "1689"
   },
+  "2833016658": {
+    "id": "2833016658",
+    "title": "差分陣列（Python/Java/C++/C/Go/JS/Rust）",
+    "titleSlug": "chai-fen-shu-zu-pythonjavaccgojsrust-by-o0zvr",
+    "time": 1779502950178,
+    "problemId": "798"
+  },
   "2833491097": {
     "id": "2833491097",
     "title": "三種方法：多次遍歷/正序一次遍歷/倒序一次遍歷（Python/Java/C++/Go/JS/Rust）",
@@ -8002,7 +8044,7 @@
   },
   "28373825": {
     "id": "28373825",
-    "title": "轉化成分組揹包：記憶化搜尋 / 遞推 / 空間最佳化（Python/Java/C++/Go）",
+    "title": "轉化成分組背包：記憶化搜尋 / 遞推 / 空間最佳化（Python/Java/C++/Go）",
     "titleSlug": "zhuan-hua-cheng-fen-zu-bei-bao-pythongoc-3xnk",
     "time": 1648354058017,
     "problemId": "2218"
@@ -8240,7 +8282,7 @@
   },
   "290020167": {
     "id": "290020167",
-    "title": "前字尾分解 + Z 陣列（Python/Java/C++/Go）",
+    "title": "前後綴分解 + Z 陣列（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-z-shu-zu-pythonjav-0est",
     "time": 1727574831718,
     "problemId": "3303"
@@ -8478,7 +8520,7 @@
   },
   "2953959029": {
     "id": "2953959029",
-    "title": "小球打磚塊，O(n) 前字尾分解（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "小球打磚塊，O(n) 前後綴分解（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "on-qian-hou-zhui-fen-jie-jian-ji-xie-fa-an2kt",
     "time": 1731834381813,
     "problemId": "3354"
@@ -8562,7 +8604,7 @@
   },
   "2967621636": {
     "id": "2967621636",
-    "title": "前字尾分解 + 堆（Python/Java/C++/Go）",
+    "title": "前後綴分解 + 堆（Python/Java/C++/Go）",
     "titleSlug": "qian-zhui-zui-xiao-he-hou-zhui-zui-da-he-yz3d",
     "time": 1644077550306,
     "problemId": "2163"
@@ -8994,6 +9036,13 @@
     "time": 1665288447496,
     "problemId": "2434"
   },
+  "3068592210": {
+    "id": "3068592210",
+    "title": "數位和（Python/Java/C++/Go）",
+    "titleSlug": "shu-wei-he-pythonjavacgo-by-endlesscheng-1spd",
+    "time": 1780201447624,
+    "problemId": "3945"
+  },
   "3071090507": {
     "id": "3071090507",
     "title": "極致最佳化！程式碼擊敗接近 100%！（Python/Java/C++/C/Go/JS/Rust）",
@@ -9143,7 +9192,7 @@
   },
   "3104122930": {
     "id": "3104122930",
-    "title": "如何用 Python 的狀壓 DP 遞推寫法透過此題",
+    "title": "如何用 Python 的狀壓 DP 遞推寫法通過此題",
     "titleSlug": "by-endlesscheng-d2oa",
     "time": 1620091783563,
     "problemId": "1723"
@@ -9416,7 +9465,7 @@
   },
   "3171415635": {
     "id": "3171415635",
-    "title": "前字尾分解 + 二維 0-1 揹包 + 最佳化所選元素個數 + 試填法（Python/Java/C++/Go）",
+    "title": "前後綴分解 + 二維 0-1 背包 + 最佳化所選元素個數 + 試填法（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-er-wei-0-1-bei-bao-8icz",
     "time": 1726361122320,
     "problemId": "3287"
@@ -9430,7 +9479,7 @@
   },
   "3173954782": {
     "id": "3173954782",
-    "title": "bitset/bigint 最佳化 0-1 揹包（Python/Java/C++/Go）",
+    "title": "bitset/bigint 最佳化 0-1 背包（Python/Java/C++/Go）",
     "titleSlug": "0-1-bei-bao-by-endlesscheng-702p",
     "time": 1717906308525,
     "problemId": "3180"
@@ -9472,7 +9521,7 @@
   },
   "3181264345": {
     "id": "3181264345",
-    "title": "兩種方法：前字尾分解 / 列舉右維護左（Python/Java/C++/Go）",
+    "title": "兩種方法：前後綴分解 / 列舉右維護左（Python/Java/C++/Go）",
     "titleSlug": "shi-zi-bian-xing-qian-hou-zhui-fen-jie-p-ts6n",
     "time": 1735445030312,
     "problemId": "3404"
@@ -9829,7 +9878,7 @@
   },
   "3255865490": {
     "id": "3255865490",
-    "title": "O(mn) 前字尾分解（Python/Java/C++/Go）",
+    "title": "O(mn) 前後綴分解（Python/Java/C++/Go）",
     "titleSlug": "omn-qian-hou-zhui-fen-jie-pythonjavacgo-eq0uo",
     "time": 1723940592816,
     "problemId": "3256"
@@ -10564,7 +10613,7 @@
   },
   "343052836": {
     "id": "343052836",
-    "title": "列舉中間 + 前字尾分解（Python/Java/C++/Go/JS/Rust）",
+    "title": "列舉中間 + 前後綴分解（Python/Java/C++/Go/JS/Rust）",
     "titleSlug": "mei-ju-numsj-qian-hou-zhui-fen-jie-pytho-tskf",
     "time": 1697961789032,
     "problemId": "2909"
@@ -10774,7 +10823,7 @@
   },
   "3483377785": {
     "id": "3483377785",
-    "title": "兩種寫法：01揹包/子集狀壓DP（Python/Java/C++/Go）",
+    "title": "兩種寫法：01背包/子集狀壓DP（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-xie-fa-01bei-bao-zi-ji-zhuan-3ooi",
     "time": 1676800983475,
     "problemId": "2572"
@@ -10823,7 +10872,7 @@
   },
   "3491083207": {
     "id": "3491083207",
-    "title": "樹上揹包 + 狀態機 DP，兩種寫法（Python/Java/C++/Go）",
+    "title": "樹上背包 + 狀態機 DP，兩種寫法（Python/Java/C++/Go）",
     "titleSlug": "shu-shang-bei-bao-zhuang-tai-ji-dppython-2q7b",
     "time": 1748152490802,
     "problemId": "3562"
@@ -11082,7 +11131,7 @@
   },
   "3549549255": {
     "id": "3549549255",
-    "title": "前字尾分解，O(1) 空間最佳化（Python/Java/C++/Go）",
+    "title": "前後綴分解，O(1) 空間最佳化（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-o1-kong-jian-you-h-ytf3",
     "time": 1766894826824,
     "problemId": "3788"
@@ -11159,7 +11208,7 @@
   },
   "3563762803": {
     "id": "3563762803",
-    "title": "兩種方法：狀態最佳化 / 轉換成 0-1 揹包（Python/Java/C++/Go）",
+    "title": "兩種方法：狀態最佳化 / 轉換成 0-1 背包（Python/Java/C++/Go）",
     "titleSlug": "xuan-huo-bu-xuan-de-dian-xing-si-lu-by-e-ulcd",
     "time": 1687061457364,
     "problemId": "2742"
@@ -11460,7 +11509,7 @@
   },
   "3647529643": {
     "id": "3647529643",
-    "title": "斜向字首和（Python/Java/C++/Go）",
+    "title": "斜向前綴和（Python/Java/C++/Go）",
     "titleSlug": "go-qian-zhui-he-by-endlesscheng-30l0",
     "time": 1622364769067,
     "problemId": "1878"
@@ -11838,7 +11887,7 @@
   },
   "3739237036": {
     "id": "3739237036",
-    "title": "兩種方法：列舉全排列 / 倒序貪心 + 0-1 揹包（Python/Java/C++/Go）",
+    "title": "兩種方法：列舉全排列 / 倒序貪心 + 0-1 背包（Python/Java/C++/Go）",
     "titleSlug": "bao-li-mei-ju-he-fa-pai-lie-by-endlessch-b5gw",
     "time": 1754800084603,
     "problemId": "3646"
@@ -11922,7 +11971,7 @@
   },
   "3754993583": {
     "id": "3754993583",
-    "title": "三種方法：暴力 / 前字尾分解 / 位運算最佳化（Python/Java/C++/Go）",
+    "title": "三種方法：暴力 / 前後綴分解 / 位運算最佳化（Python/Java/C++/Go）",
     "titleSlug": "cong-o503-dao-o502-by-endlesscheng-5wp4",
     "time": 1685267821125,
     "problemId": "2711"
@@ -12020,7 +12069,7 @@
   },
   "3778856012": {
     "id": "3778856012",
-    "title": "列舉分割線，O(n) 前字尾分解 / 一次遍歷（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "列舉分割線，O(n) 前後綴分解 / 一次遍歷（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "mei-ju-fen-ge-xian-on-qian-hou-zhui-fen-a3pio",
     "time": 1733144850672,
     "problemId": "1422"
@@ -12104,7 +12153,7 @@
   },
   "3799538716": {
     "id": "3799538716",
-    "title": "三種方法：前字尾分解 / 分組迴圈 / 狀態機 DP（Python/Java/C++/Go）",
+    "title": "三種方法：前後綴分解 / 分組迴圈 / 狀態機 DP（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-fang-fa-qian-hou-zhui-fen-ji-on94",
     "time": 1762649724308,
     "problemId": "3738"
@@ -12615,7 +12664,7 @@
   },
   "3919648050": {
     "id": "3919648050",
-    "title": "前字尾分解（Python/Java/C++/Go）",
+    "title": "前後綴分解（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-by77",
     "time": 1776572607837,
     "problemId": "3904"
@@ -12643,14 +12692,14 @@
   },
   "3922635563": {
     "id": "3922635563",
-    "title": "每組恰好選一個的分組揹包 + 常數最佳化至 40ms",
+    "title": "每組恰好選一個的分組背包 + 常數最佳化至 40ms",
     "titleSlug": "fen-zu-bei-bao-by-endlesscheng-fret",
     "time": 1629605741679,
     "problemId": "1981"
   },
   "3924272496": {
     "id": "3924272496",
-    "title": "DFS 計運算元樹大小，附相似題目（Python/Java/C++/Go）",
+    "title": "DFS 計算子樹大小，附相似題目（Python/Java/C++/Go）",
     "titleSlug": "dfs-ji-suan-zi-shu-da-xiao-pythonjavacgo-9atl",
     "time": 1723349293526,
     "problemId": "3249"
@@ -12755,7 +12804,7 @@
   },
   "3950508185": {
     "id": "3950508185",
-    "title": "前字尾分解 / 分組迴圈 / 狀態機 DP（Python/Java/C++/Go）",
+    "title": "前後綴分解 / 分組迴圈 / 狀態機 DP（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-hys8",
     "time": 1773548884596,
     "problemId": "3872"
@@ -12958,7 +13007,7 @@
   },
   "3983231482": {
     "id": "3983231482",
-    "title": "0-1 揹包 + 雙指標，附 bitset 最佳化（Python/Java/C++/Go）",
+    "title": "0-1 背包 + 雙指標，附 bitset 最佳化（Python/Java/C++/Go）",
     "titleSlug": "0-1-bei-bao-shuang-zhi-zhen-pythonjavacg-j4ca",
     "time": 1757822570907,
     "problemId": "3685"
@@ -13378,7 +13427,7 @@
   },
   "4078406602": {
     "id": "4078406602",
-    "title": "三種方法：選或不選/列舉選哪個/完全揹包預處理+可行性剪枝（Python/Java/C++/Go）",
+    "title": "三種方法：選或不選/列舉選哪個/完全背包預處理+可行性剪枝（Python/Java/C++/Go）",
     "titleSlug": "san-chong-fang-fa-xuan-huo-bu-xuan-mei-j-ccwr",
     "time": 1720313712572,
     "problemId": "LCR 081"
@@ -13504,7 +13553,7 @@
   },
   "4108118731": {
     "id": "4108118731",
-    "title": "前字尾分解",
+    "title": "前後綴分解",
     "titleSlug": "qian-hou-zhui-fen-jie-by-endlesscheng-a47e",
     "time": 1651336981937,
     "problemId": "2256"
@@ -13693,7 +13742,7 @@
   },
   "4155170174": {
     "id": "4155170174",
-    "title": "三種方法：前字尾分解 / 分組迴圈 / 狀態機 DP（Python/Java/C++/Go）",
+    "title": "三種方法：前後綴分解 / 分組迴圈 / 狀態機 DP（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-ml47",
     "time": 1769919037540,
     "problemId": "3830"
@@ -14078,7 +14127,7 @@
   },
   "4247734526": {
     "id": "4247734526",
-    "title": "完全揹包：反向構造題（Python/Java/C++/Go）",
+    "title": "完全背包：反向構造題（Python/Java/C++/Go）",
     "titleSlug": "wan-quan-bei-bao-pythonjavacgo-by-endles-y6oq",
     "time": 1750565203062,
     "problemId": "3592"
@@ -14204,7 +14253,7 @@
   },
   "4290150798": {
     "id": "4290150798",
-    "title": "前字尾分解（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "前後綴分解（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "zhou-sai-chang-kao-qian-hou-zhui-fen-jie-21hr",
     "time": 1697343140467,
     "problemId": "2906"
@@ -14379,7 +14428,7 @@
   },
   "476179926": {
     "id": "476179926",
-    "title": "【影片】三種方法：前字尾分解/雙指標/單調堆疊（Python/Java/C++/Go/JS/Rust）",
+    "title": "【影片】三種方法：前後綴分解/雙指標/單調堆疊（Python/Java/C++/Go/JS/Rust）",
     "titleSlug": "shi-pin-san-chong-fang-fa-qian-hou-zhui-gzm54",
     "time": 1724663342455,
     "problemId": "面試題 17.21"
@@ -14393,7 +14442,7 @@
   },
   "480223586": {
     "id": "480223586",
-    "title": "前字尾分解，一次遍歷最佳化（Python/Java/C++/Go）",
+    "title": "前後綴分解，一次遍歷最佳化（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-o1-kong-jian-by-en-c2m5",
     "time": 1669510947258,
     "problemId": "2483"
@@ -14519,7 +14568,7 @@
   },
   "509699848": {
     "id": "509699848",
-    "title": "前字尾分解+最長遞增子序列，附題單（Python/Java/C++/Go/JS/Rust）",
+    "title": "前後綴分解+最長遞增子序列，附題單（Python/Java/C++/Go/JS/Rust）",
     "titleSlug": "qian-hou-zhui-fen-jie-zui-chang-di-zeng-9vowl",
     "time": 1703204792018,
     "problemId": "1671"
@@ -14708,7 +14757,7 @@
   },
   "537590451": {
     "id": "537590451",
-    "title": "狀壓 0-1 揹包，查表法 vs 刷表法（Python/Java/C++/Go）",
+    "title": "狀壓 0-1 背包，查表法 vs 刷表法（Python/Java/C++/Go）",
     "titleSlug": "zhuang-ya-0-1-bei-bao-cha-biao-fa-vs-shu-qode",
     "time": 1680882121642,
     "problemId": "1125"
@@ -15072,7 +15121,7 @@
   },
   "63406553": {
     "id": "63406553",
-    "title": "前字尾分解（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "前後綴分解（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-t3eu",
     "time": 1711842373865,
     "problemId": "3096"
@@ -15086,7 +15135,7 @@
   },
   "636790914": {
     "id": "636790914",
-    "title": "逆向思維 + 01 揹包方案數（Python/Java/C++/Go）",
+    "title": "逆向思維 + 01 背包方案數（Python/Java/C++/Go）",
     "titleSlug": "ni-xiang-si-wei-01-bei-bao-fang-an-shu-p-v47x",
     "time": 1671941522938,
     "problemId": "2518"
@@ -15163,7 +15212,7 @@
   },
   "656219423": {
     "id": "656219423",
-    "title": "前字尾分解（Python/Java/C++/Go）",
+    "title": "前後綴分解（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-pythonjavacgo-by-e-8tcq",
     "time": 1775362627750,
     "problemId": "3891"
@@ -15569,7 +15618,7 @@
   },
   "752241853": {
     "id": "752241853",
-    "title": "O(n) 前字尾分解（Python/Java/C++/Go）",
+    "title": "O(n) 前後綴分解（Python/Java/C++/Go）",
     "titleSlug": "on-qian-hou-zhui-fen-jie-pythonjavacgo-b-wssq",
     "time": 1683439307190,
     "problemId": "2670"
@@ -15618,7 +15667,7 @@
   },
   "761828406": {
     "id": "761828406",
-    "title": "字首和最佳化多重揹包（Python/Java/C++/Go）",
+    "title": "字首和最佳化多重背包（Python/Java/C++/Go）",
     "titleSlug": "zheng-nan-ze-fan-qian-zhui-he-you-hua-dp-5mi9",
     "time": 1729993738237,
     "problemId": "3333"
@@ -15702,7 +15751,7 @@
   },
   "782263815": {
     "id": "782263815",
-    "title": "前字尾分解+判斷子序列（Python/Java/C++/Go）",
+    "title": "前後綴分解+判斷子序列（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-san-zhi-zhen-pytho-6cmr",
     "time": 1676174811938,
     "problemId": "2565"
@@ -15926,7 +15975,7 @@
   },
   "834197249": {
     "id": "834197249",
-    "title": "兩種方法：記憶化搜尋 / O(n) 前字尾分解（Python/Java/C++/Go）",
+    "title": "兩種方法：記憶化搜尋 / O(n) 前後綴分解（Python/Java/C++/Go）",
     "titleSlug": "ji-yi-hua-sou-suo-jian-ji-xie-fa-pythonj-6g5z",
     "time": 1704629169815,
     "problemId": "3003"
@@ -16318,7 +16367,7 @@
   },
   "924129852": {
     "id": "924129852",
-    "title": "前字尾分解 + O(100) 常數空間（Python/Java/C++/Go）",
+    "title": "前後綴分解 + O(100) 常數空間（Python/Java/C++/Go）",
     "titleSlug": "qian-hou-zhui-fen-jie-o100-chang-shu-kon-51cv",
     "time": 1669513031560,
     "problemId": "2484"
@@ -16486,7 +16535,7 @@
   },
   "96141044": {
     "id": "96141044",
-    "title": "和字符集大小無關的線段樹做法（Python/Java/C++/Go）",
+    "title": "和字元集大小無關的線段樹做法（Python/Java/C++/Go）",
     "titleSlug": "by-endlesscheng-qpbw",
     "time": 1647749348471,
     "problemId": "2213"
