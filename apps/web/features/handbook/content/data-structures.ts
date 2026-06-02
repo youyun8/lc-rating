@@ -32,7 +32,7 @@ Quick selection guide:
       body: `- Arrays, pointers, and amortized analysis.
 - Recursion (for segment trees) and bit tricks (\`i & -i\` for Fenwick).
 
-Related: [Monotonic Stack](/handbook/monotonic-stack), [Trees & Binary Trees](/handbook/trees), [Strings](/handbook/strings) (Trie), [Graph Algorithms](/handbook/graph) (DSU drives Kruskal & connectivity).`,
+Related: [Monotonic Stack](/handbook/monotonic-stack), [Trees & Binary Trees](/handbook/trees), [Strings](/handbook/strings) (Trie), [Graph Algorithms](/handbook/graph) (DSU drives Kruskal & connectivity). Going further: [Range Queries & Offline Algorithms](/handbook/range-queries-offline) (coordinate compression, sweep line, Mo's algorithm, persistent structures).`,
     },
     {
       id: "prefix",

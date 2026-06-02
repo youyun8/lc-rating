@@ -25,7 +25,9 @@ Signals:
       title: "Prerequisites",
       body: `- ASCII/char arithmetic (\`c - 'a'\`), \`std::string\` operations.
 - [Sliding Window](/handbook/sliding-window) for substring constraints; [Data Structures](/handbook/data-structures) for hashing.
-- Modular arithmetic for rolling hashes (see [Math](/handbook/math)).`,
+- Modular arithmetic for rolling hashes (see [Math](/handbook/math)).
+
+Going further: [String Algorithms II](/handbook/string-algorithms-ii) (Manacher, Aho-Corasick, suffix arrays, suffix automata, palindromic trees).`,
     },
     {
       id: "twopointer",

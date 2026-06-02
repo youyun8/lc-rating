@@ -30,7 +30,7 @@ The decision tree:
       body: `- Queues, stacks, recursion, and priority queues.
 - Disjoint Set Union (see [Data Structures](/handbook/data-structures)) for Kruskal and connectivity.
 
-Related: [Grid / Matrix](/handbook/grid) (implicit graphs), [Trees & Binary Trees](/handbook/trees), [Greedy](/handbook/greedy).
+Related: [Grid / Matrix](/handbook/grid) (implicit graphs), [Trees & Binary Trees](/handbook/trees), [Greedy](/handbook/greedy). Going further: [Advanced Graph Templates](/handbook/advanced-graph-templates) (SCC condensation, 2-SAT, flow, matching, HLD).
 
 \`\`\`cpp
 // Adjacency list (most common representation)

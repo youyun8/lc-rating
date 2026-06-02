@@ -35,6 +35,15 @@ cout << likelyFits((long long)n * n) << "\\n";       // O(n^2)
 \`\`\``,
     },
     {
+      id: "prerequisites",
+      title: "Prerequisites",
+      body: `- Comfort with arrays, vectors, maps, sets, and heaps, plus big-O analysis.
+- One language you can type quickly and correctly under pressure (this handbook uses C++).
+- Willingness to test before submitting rather than guessing.
+
+This chapter is the entry point to the handbook. From here, branch into [Binary Search](/handbook/binary-search), [Greedy](/handbook/greedy), [Backtracking & Recursion](/handbook/backtracking), [Dynamic Programming](/handbook/dynamic-programming), and [Data Structures](/handbook/data-structures); the templates and proof patterns below apply to every later topic.`,
+    },
+    {
       id: "constraints",
       title: "Complexity from constraints",
       body: `Use the maximum input size to reject impossible approaches before coding.
@@ -348,6 +357,24 @@ struct CustomHash {
 
 unordered_map<long long, int, CustomHash> safeCount;
 \`\`\``,
+    },
+    {
+      id: "complexity",
+      title: "Complexity cheatsheet",
+      body: `Memorize these baseline costs so you can size an approach in seconds and pair them with the constraint table above.
+
+| Operation | Complexity |
+| --- | --- |
+| Sort \`n\` items | \`O(n log n)\` |
+| Heap push / pop | \`O(log n)\` |
+| Balanced BST / ordered-set op | \`O(log n)\` |
+| Hash map op (expected) | \`O(1)\` |
+| DSU find / union | \`O(α(n))\` |
+| Fenwick / segment-tree op | \`O(log n)\` |
+| BFS / DFS | \`O(V + E)\` |
+| Dijkstra (binary heap) | \`O((V + E) log V)\` |
+| Subset enumeration | \`O(2^n)\` |
+| Permutation enumeration | \`O(n!)\` |`,
     },
     {
       id: "pitfalls",

@@ -38,6 +38,15 @@ enum class GraphTool {
 \`\`\``,
     },
     {
+      id: "prerequisites",
+      title: "Prerequisites",
+      body: `- All of [Graph Algorithms](/handbook/graph): BFS/DFS, Dijkstra, topological sort, MST, and Tarjan low-link.
+- [Data Structures](/handbook/data-structures) for DSU, and [Trees & Binary Trees](/handbook/trees) for the Euler order behind heavy-light decomposition.
+- Practice turning a word problem into a reduction ("minimum cut", "assign at most one", "two-literal clause").
+
+Related: [Range Queries & Offline Algorithms](/handbook/range-queries-offline) (a segment tree over time powers the rollback-DSU technique).`,
+    },
+    {
       id: "scc",
       title: "Strongly connected components and condensation",
       body: `SCCs partition a directed graph into maximal groups where every node can reach every other node. Compressing each SCC gives a DAG.
@@ -495,6 +504,46 @@ struct RollbackDSU {
   }
 };
 \`\`\``,
+    },
+    {
+      id: "complexity",
+      title: "Complexity cheatsheet",
+      body: `| Algorithm | Complexity | Notes |
+| --- | --- | --- |
+| Tarjan SCC | \`O(V + E)\` | single DFS, linear |
+| 2-SAT | \`O(V + E)\` | SCC on the implication graph |
+| Kuhn matching | \`O(V * E)\` | small / medium bipartite graphs |
+| Hopcroft-Karp | \`O(E sqrt V)\` | large bipartite matching |
+| Dinic max flow | \`O(V^2 E)\` | \`O(E sqrt V)\` on unit capacities |
+| Min-cost max-flow | \`O(V E)\` per augment | use potentials + Dijkstra to speed up |
+| HLD + segment tree | \`O(log^2 n)\` per query | \`O(log n)\` chains times segment tree |`,
+    },
+    {
+      id: "problems",
+      title: "Representative LeetCode problems",
+      body: `Explicit max-flow, 2-SAT, and HLD tasks are rare on LeetCode; the closest exercises share the underlying reductions — Tarjan low-link, bipartite matching, and the assignment problem.
+
+| ID | Problem | Technique |
+| --- | --- | --- |
+| 1192 | [Critical Connections in a Network](https://leetcode.cn/problems/critical-connections-in-a-network) | Tarjan low-link |
+| 2360 | [Longest Cycle in a Graph](https://leetcode.cn/problems/longest-cycle-in-a-graph) | directed cycle detection |
+| 785 | [Is Graph Bipartite?](https://leetcode.cn/problems/is-graph-bipartite) | bipartite check |
+| 1349 | [Maximum Students Taking Exam](https://leetcode.cn/problems/maximum-students-taking-exam) | bipartite matching |
+| 1947 | [Maximum Compatibility Score Sum](https://leetcode.cn/problems/maximum-compatibility-score-sum) | assignment matching |
+| 1879 | [Minimum XOR Sum of Two Arrays](https://leetcode.cn/problems/minimum-xor-sum-of-two-arrays) | assignment cost |
+
+**Recent problems (rating ≥ 1700)**
+
+These recent contest problems exercise the connectivity, MST, and DAG-ordering building blocks behind SCC condensation and rollback DSU.
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | offline DSU |
+| 3600 | [Maximize Spanning Tree Stability with Upgrades](https://leetcode.cn/problems/maximize-spanning-tree-stability-with-upgrades) | 2301 | minimum spanning tree |
+| 3594 | [Minimum Time to Transport All Individuals](https://leetcode.cn/problems/minimum-time-to-transport-all-individuals) | 2604 | state-space BFS |
+| 3534 | [Path Existence Queries in a Graph II](https://leetcode.cn/problems/path-existence-queries-in-a-graph-ii) | 2507 | reachability + DSU |
+| 3530 | [Maximum Profit from Valid Topological Order in DAG](https://leetcode.cn/problems/maximum-profit-from-valid-topological-order-in-dag) | 2353 | topological order |
+| 3419 | [Minimize the Maximum Edge Weight of Graph](https://leetcode.cn/problems/minimize-the-maximum-edge-weight-of-graph) | 2243 | MST + binary search |`,
     },
     {
       id: "pitfalls",

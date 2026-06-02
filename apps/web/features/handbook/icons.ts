@@ -3,6 +3,7 @@ import {
   Boxes,
   Crosshair,
   Gauge,
+  GitBranch,
   Grid3x3,
   Layers,
   Network,
@@ -26,6 +27,7 @@ export const HANDBOOK_ICONS: Record<string, LucideIcon> = {
   Sigma,
   Type,
   Binary,
+  GitBranch,
 };
 
 export function resolveHandbookIcon(name: string): LucideIcon {

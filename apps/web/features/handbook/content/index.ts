@@ -4,6 +4,7 @@ import { binarySearch } from "./binary-search";
 import { slidingWindow } from "./sliding-window";
 import { monotonicStack } from "./monotonic-stack";
 import { greedy } from "./greedy";
+import { backtracking } from "./backtracking";
 import { dataStructures } from "./data-structures";
 import { rangeQueriesOffline } from "./range-queries-offline";
 import { trees } from "./trees";
@@ -27,6 +28,7 @@ export const HANDBOOK_TOPICS: HandbookTopic[] = [
   slidingWindow,
   monotonicStack,
   greedy,
+  backtracking,
   dataStructures,
   rangeQueriesOffline,
   trees,

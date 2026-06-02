@@ -39,6 +39,15 @@ vector<long long> answerQueries(vector<int>& a, vector<Query> queries) {
 \`\`\``,
     },
     {
+      id: "prerequisites",
+      title: "Prerequisites",
+      body: `- A solid grasp of [Data Structures](/handbook/data-structures): Fenwick trees, segment trees, heaps, and DSU.
+- [Binary Search](/handbook/binary-search) for kth-element descent on a Fenwick tree and for parametric search.
+- Sorting, and the idea of answering queries in an order you choose rather than the input order (offline).
+
+Related: [Sliding Window](/handbook/sliding-window) (the online cousin of many range queries) and [Greedy](/handbook/greedy) (event ordering for sweep line).`,
+    },
+    {
       id: "prefix-difference",
       title: "Prefix sums and difference arrays",
       body: `Use prefix sums for static range sums and difference arrays for many range additions followed by one materialization.
@@ -444,6 +453,48 @@ struct MergeSortTree {
   }
 };
 \`\`\``,
+    },
+    {
+      id: "complexity",
+      title: "Complexity cheatsheet",
+      body: `| Tool | Build | Query | Update |
+| --- | --- | --- | --- |
+| Prefix sum | \`O(n)\` | \`O(1)\` | rebuild |
+| Difference array | \`O(n)\` | \`O(1)\` after build | \`O(1)\` range add |
+| Sparse table | \`O(n log n)\` | \`O(1)\` | immutable |
+| Fenwick tree | \`O(n)\` | \`O(log n)\` | \`O(log n)\` |
+| Segment tree (lazy) | \`O(n)\` | \`O(log n)\` | \`O(log n)\` |
+| Merge-sort tree | \`O(n log n)\` | \`O(log^2 n)\` | immutable |
+| Mo's algorithm | — | \`O((n + q) sqrt n)\` total | offline only |`,
+    },
+    {
+      id: "problems",
+      title: "Representative LeetCode problems",
+      body: `| ID | Problem | Technique |
+| --- | --- | --- |
+| 303 | [Range Sum Query - Immutable](https://leetcode.cn/problems/range-sum-query-immutable) | prefix sums |
+| 304 | [Range Sum Query 2D - Immutable](https://leetcode.cn/problems/range-sum-query-2d-immutable) | 2D prefix sums |
+| 1109 | [Corporate Flight Bookings](https://leetcode.cn/problems/corporate-flight-bookings) | difference array |
+| 307 | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) | Fenwick or segment tree |
+| 315 | [Count of Smaller Numbers After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) | Fenwick + compression |
+| 327 | [Count of Range Sum](https://leetcode.cn/problems/count-of-range-sum) | prefix sums + Fenwick |
+| 493 | [Reverse Pairs](https://leetcode.cn/problems/reverse-pairs) | merge sort or Fenwick |
+| 218 | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) | sweep line |
+| 850 | [Rectangle Area II](https://leetcode.cn/problems/rectangle-area-ii) | sweep line + segment tree |
+| 2251 | [Number of Flowers in Full Bloom](https://leetcode.cn/problems/number-of-flowers-in-full-bloom) | offline events + sorting |
+| 715 | [Range Module](https://leetcode.cn/problems/range-module) | interval segment tree |
+| 699 | [Falling Squares](https://leetcode.cn/problems/falling-squares) | compression + segment tree |
+
+**Recent problems (rating ≥ 1700)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3777 | [Minimum Deletions to Make Alternating Substring](https://leetcode.cn/problems/minimum-deletions-to-make-alternating-substring) | 2202 | segment tree |
+| 3768 | [Minimum Inversion Count in Subarrays of Fixed Length](https://leetcode.cn/problems/minimum-inversion-count-in-subarrays-of-fixed-length) | 2158 | Fenwick + merge sort |
+| 3748 | [Count Stable Subarrays](https://leetcode.cn/problems/count-stable-subarrays) | 2209 | prefix sums |
+| 3739 | [Count Subarrays With Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | segment tree + merge sort |
+| 3691 | [Maximum Total Subarray Value II](https://leetcode.cn/problems/maximum-total-subarray-value-ii) | 2469 | segment tree |
+| 3636 | [Threshold Majority Queries](https://leetcode.cn/problems/threshold-majority-queries) | 2451 | offline queries |`,
     },
     {
       id: "pitfalls",

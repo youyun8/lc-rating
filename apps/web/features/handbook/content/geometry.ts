@@ -31,6 +31,13 @@ void chooseGeometryTool(bool integerCoords, bool needHull, bool needDistances) {
 \`\`\``,
     },
     {
+      id: "prerequisites",
+      title: "Prerequisites",
+      body: `- Vectors, dot and cross products, and basic trigonometry.
+- [Math](/handbook/math) for precision, gcd, and modular reasoning; [Binary Search](/handbook/binary-search) for parametric and ternary search on a geometric answer.
+- Sorting and [Range Queries & Offline Algorithms](/handbook/range-queries-offline) (sweep line) for plane-sweep problems.`,
+    },
+    {
       id: "point-vector",
       title: "Point and vector operations",
       body: `Represent a point as a pair of coordinates. Cross product gives orientation and area; dot product gives projection and angle information.
@@ -320,6 +327,43 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) 
   return 2;
 }
 \`\`\``,
+    },
+    {
+      id: "complexity",
+      title: "Complexity cheatsheet",
+      body: `| Routine | Complexity | Notes |
+| --- | --- | --- |
+| Orientation / cross product | \`O(1)\` | exact with integers |
+| Segment intersection | \`O(1)\` | orientation + bounding box |
+| Point in polygon | \`O(n)\` | ray casting |
+| Polygon area (shoelace) | \`O(n)\` | signed twice-area |
+| Convex hull (monotonic chain) | \`O(n log n)\` | sorting dominates |
+| Rotating calipers | \`O(n)\` | on the hull, after building it |
+| Closest pair of points | \`O(n log n)\` | divide and conquer or sweep |`,
+    },
+    {
+      id: "problems",
+      title: "Representative LeetCode problems",
+      body: `| ID | Problem | Technique |
+| --- | --- | --- |
+| 587 | [Erect the Fence](https://leetcode.cn/problems/erect-the-fence) | convex hull (monotonic chain) |
+| 149 | [Max Points on a Line](https://leetcode.cn/problems/max-points-on-a-line) | collinearity via cross product |
+| 1232 | [Check If It Is a Straight Line](https://leetcode.cn/problems/check-if-it-is-a-straight-line) | orientation test |
+| 812 | [Largest Triangle Area](https://leetcode.cn/problems/largest-triangle-area) | shoelace area |
+| 1453 | [Maximum Number of Darts Inside of a Circle](https://leetcode.cn/problems/maximum-number-of-darts-inside-of-a-circular-dartboard) | circle through two points |
+| 1828 | [Queries on Number of Points Inside a Circle](https://leetcode.cn/problems/queries-on-number-of-points-inside-a-circle) | squared-distance test |
+| 1515 | [Best Position for a Service Centre](https://leetcode.cn/problems/best-position-for-a-service-centre) | geometric median |
+
+**Recent problems (rating ≥ 1700)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3625 | [Count Number of Trapezoids II](https://leetcode.cn/problems/count-number-of-trapezoids-ii) | 2643 | slope grouping |
+| 3588 | [Find Maximum Area of a Triangle](https://leetcode.cn/problems/find-maximum-area-of-a-triangle) | 1819 | shoelace area |
+| 3382 | [Maximum Area Rectangle With Point Constraints II](https://leetcode.cn/problems/maximum-area-rectangle-with-point-constraints-ii) | 2723 | sweep + geometry |
+| 3235 | [Check if the Rectangle Corner Is Reachable](https://leetcode.cn/problems/check-if-the-rectangle-corner-is-reachable) | 3774 | circle-line geometry |
+| 3102 | [Minimize Manhattan Distances](https://leetcode.cn/problems/minimize-manhattan-distances) | 2216 | Manhattan to Chebyshev |
+| 3027 | [Find the Number of Ways to Place People II](https://leetcode.cn/problems/find-the-number-of-ways-to-place-people-ii) | 2020 | orientation + sorting |`,
     },
     {
       id: "pitfalls",

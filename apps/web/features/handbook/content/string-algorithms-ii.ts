@@ -38,6 +38,14 @@ void chooseStringTool(bool manyPatterns, bool palindromes, bool suffixOrder) {
 \`\`\``,
     },
     {
+      id: "prerequisites",
+      title: "Prerequisites",
+      body: `- Everything in [Strings](/handbook/strings): KMP, the Z-function, rolling hashes, and tries.
+- Automata thinking (states and transitions) and amortized analysis.
+
+Related: [Data Structures](/handbook/data-structures) (tries and suffix structures) and [Math](/handbook/math) (modular arithmetic for double hashing).`,
+    },
+    {
       id: "manacher",
       title: "Manacher for palindrome radii",
       body: `Manacher computes odd and even palindrome radii in linear time. It replaces \`O(n^2)\` center expansion when the input can be large.
@@ -397,6 +405,42 @@ string minRotation(string s) {
   return s.substr(idx) + s.substr(0, idx);
 }
 \`\`\``,
+    },
+    {
+      id: "complexity",
+      title: "Complexity cheatsheet",
+      body: `| Algorithm | Build | Query | Notes |
+| --- | --- | --- | --- |
+| Manacher | \`O(n)\` | \`O(1)\` per center | all palindrome radii |
+| Aho-Corasick | \`O(total pattern length)\` | \`O(text length + matches)\` | multi-pattern search |
+| Suffix array + LCP | \`O(n log n)\` | \`O(log n)\` per LCP | \`O(n)\` with SA-IS |
+| Suffix automaton | \`O(n)\` | \`O(query length)\` | distinct substrings, LCS |
+| Palindromic tree | \`O(n)\` | — | all distinct palindromes |
+| Booth's algorithm | \`O(n)\` | — | least rotation |`,
+    },
+    {
+      id: "problems",
+      title: "Representative LeetCode problems",
+      body: `| ID | Problem | Technique |
+| --- | --- | --- |
+| 5 | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) | Manacher |
+| 647 | [Palindromic Substrings](https://leetcode.cn/problems/palindromic-substrings) | Manacher radii |
+| 214 | [Shortest Palindrome](https://leetcode.cn/problems/shortest-palindrome) | prefix function or Manacher |
+| 1032 | [Stream of Characters](https://leetcode.cn/problems/stream-of-characters) | Aho-Corasick |
+| 718 | [Maximum Length of Repeated Subarray](https://leetcode.cn/problems/maximum-length-of-repeated-subarray) | longest common substring |
+| 1923 | [Longest Common Subpath](https://leetcode.cn/problems/longest-common-subpath) | suffix automaton or hashing |
+| 899 | [Orderly Queue](https://leetcode.cn/problems/orderly-queue) | minimum rotation |
+
+**Recent problems (rating ≥ 1700)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3474 | [Lexicographically Smallest Generated String](https://leetcode.cn/problems/lexicographically-smallest-generated-string) | 2605 | string matching + greedy |
+| 3455 | [Shortest Matching Substring](https://leetcode.cn/problems/shortest-matching-substring) | 2303 | KMP / Z-function |
+| 3303 | [Find the Occurrence of First Almost Equal Substring](https://leetcode.cn/problems/find-the-occurrence-of-first-almost-equal-substring) | 2509 | Z-function |
+| 3292 | [Minimum Number of Valid Strings to Form Target II](https://leetcode.cn/problems/minimum-number-of-valid-strings-to-form-target-ii) | 2662 | Aho-Corasick + DP |
+| 3213 | [Construct String with Minimum Cost](https://leetcode.cn/problems/construct-string-with-minimum-cost) | 2171 | Aho-Corasick |
+| 3045 | [Count Prefix and Suffix Pairs II](https://leetcode.cn/problems/count-prefix-and-suffix-pairs-ii) | 2328 | Z-function + Trie |`,
     },
     {
       id: "pitfalls",
