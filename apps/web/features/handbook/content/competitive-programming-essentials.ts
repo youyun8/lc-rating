@@ -50,12 +50,12 @@ This chapter is the entry point to the handbook. From here, branch into [Binary 
 
 | Constraint shape | Usually viable |
 | --- | --- |
-| n <= 20 | subsets, bitmask DP, meet in the middle |
-| n <= 400 | O(n^3) DP / Floyd-Warshall |
-| n <= 5000 | O(n^2) |
-| n <= 2e5 | O(n log n) or O(n) |
-| q <= 2e5 | preprocessing, Fenwick, segment tree, offline queries |
-| values up to 1e9 | coordinate compression, hashing, math |
+| $n \\le 20$ | subsets, bitmask DP, meet in the middle |
+| $n \\le 400$ | \`O(n^3)\` DP / Floyd-Warshall |
+| $n \\le 5000$ | \`O(n^2)\` |
+| $n \\le 2 \\times 10^5$ | \`O(n log n)\` or \`O(n)\` |
+| $q \\le 2 \\times 10^5$ | preprocessing, Fenwick, segment tree, offline queries |
+| values up to $10^9$ | coordinate compression, hashing, math |
 
 \`\`\`cpp
 // Pick a technique from constraints. This is a thinking checklist encoded as

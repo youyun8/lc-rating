@@ -122,19 +122,53 @@ function findMatchingParen(text: string, openParenIndex: number) {
   return -1;
 }
 
+// Greek letters used in asymptotic notation (e.g. `O(α(n))`, `Θ(n)`) mapped to
+// their LaTeX commands so KaTeX renders them as real symbols.
+const GREEK_TO_LATEX: Record<string, string> = {
+  α: "\\alpha",
+  β: "\\beta",
+  γ: "\\gamma",
+  δ: "\\delta",
+  ε: "\\epsilon",
+  ζ: "\\zeta",
+  η: "\\eta",
+  θ: "\\theta",
+  λ: "\\lambda",
+  μ: "\\mu",
+  π: "\\pi",
+  ρ: "\\rho",
+  σ: "\\sigma",
+  τ: "\\tau",
+  φ: "\\phi",
+  χ: "\\chi",
+  ψ: "\\psi",
+  ω: "\\omega",
+  Γ: "\\Gamma",
+  Δ: "\\Delta",
+  Θ: "\\Theta",
+  Λ: "\\Lambda",
+  Σ: "\\Sigma",
+  Φ: "\\Phi",
+  Ω: "\\Omega",
+};
+
 // Convert backtick-wrapped complexity expressions (e.g. `O(n log n)`,
-// `O(2^{n/2})`) into KaTeX inline math so superscripts render properly. Only
-// touches spans that look like a complexity expression and contain LaTeX-safe
-// characters; spans with CJK or other content (e.g. `O(不同前綴狀態數)`) are
-// left as inline code.
+// `O(2^{n/2})`, `O(α(n))`) into KaTeX inline math so symbols and superscripts
+// render properly. Gating is structural — the span must look like asymptotic
+// notation, e.g. O(...), Θ(...), Ω(...) — rather than relying on a character
+// allow-list (which silently dropped valid math such as Greek letters). Spans
+// describing things in CJK (e.g. `O(不同前綴狀態數)`) are intentionally left as
+// inline code, and any expression KaTeX cannot parse falls back gracefully
+// because the renderer is configured with `throwOnError: false`.
 function complexityToKatex(text: string) {
   return text.replace(/`([^`\n]+)`/g, (match, inner: string) => {
     const expr = inner.trim();
     if (!/^[OΘΩ]\(.+\)$/.test(expr)) return match;
-    if (!/^[A-Za-z0-9\s^_{}/+\-*().,!]+$/.test(expr)) return match;
+    if (/[\u3400-\u9fff\uf900-\ufaff]/.test(expr)) return match;
     const latex = expr
       .replace(/\bsqrt\s*\(\s*([^()]*?)\s*\)/g, "\\sqrt{$1}")
       .replace(/\blog\b/g, "\\log")
+      .replace(/[\u0370-\u03ff]/g, (g) => GREEK_TO_LATEX[g] ?? g)
       .replace(/ \* /g, " \\cdot ");
     return `$${latex}$`;
   });
