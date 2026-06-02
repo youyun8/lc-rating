@@ -40,14 +40,15 @@ The recipe never changes:
 
 \`\`\`cpp
 // Fibonacci-style memoized recursion (template for any top-down DP)
-vector<long long> memo; // sized n+1, init to -1
-long long f(int i)
-{
-    if (i <= 1)
-        return i; // base case
-    if (memo[i] != -1)
-        return memo[i];                   // cache hit
-    return memo[i] = f(i - 1) + f(i - 2); // transition + store
+vector<long long> memo;  // sized n+1, init to -1
+long long f(int i) {
+  if (i <= 1) {
+    return i;  // base case
+  }
+  if (memo[i] != -1) {
+    return memo[i];  // cache hit
+  }
+  return memo[i] = f(i - 1) + f(i - 2);  // transition + store
 }
 \`\`\`
 
@@ -55,16 +56,14 @@ long long f(int i)
 
 \`\`\`cpp
 // Same DP, tabulated, with O(1) rolling space
-long long fib(int n)
-{
-    long long a = 0, b = 1;
-    for (int i = 2; i <= n; i++)
-    {
-        long long c = a + b;
-        a = b;
-        b = c;
-    }
-    return n == 0 ? 0 : b;
+long long fib(int n) {
+  long long a = 0, b = 1;
+  for (int i = 2; i <= n; i++) {
+    long long c = a + b;
+    a = b;
+    b = c;
+  }
+  return n == 0 ? 0 : b;
 }
 \`\`\`
 
@@ -77,16 +76,14 @@ Derive top-down first; convert to bottom-up when you need speed or space.`,
 
 \`\`\`cpp
 // House Robber (LC 198): rob[i] = max(skip this, rob this + dp[i-2])
-int rob(vector<int>& a)
-{
-    int take = 0, skip = 0; // best ending with/without robbing prev
-    for (int x : a)
-    {
-        int newTake = skip + x;
-        skip = max(skip, take);
-        take = newTake;
-    }
-    return max(take, skip);
+int rob(vector<int>& a) {
+  int take = 0, skip = 0;  // best ending with/without robbing prev
+  for (int x : a) {
+    int newTake = skip + x;
+    skip = max(skip, take);
+    take = newTake;
+  }
+  return max(take, skip);
 }
 \`\`\`
 
@@ -99,13 +96,14 @@ Climbing Stairs (LC 70), Maximum Subarray / Kadane (LC 53), Decode Ways (LC 91),
 
 \`\`\`cpp
 // 0/1 knapsack: max value within capacity W
-int knapsack01(vector<int>& wt, vector<int>& val, int W)
-{
-    vector<int> dp(W + 1, 0);
-    for (int i = 0; i < (int)wt.size(); i++)
-        for (int c = W; c >= wt[i]; c--) // downward: each item once
-            dp[c] = max(dp[c], dp[c - wt[i]] + val[i]);
-    return dp[W];
+int knapsack01(vector<int>& wt, vector<int>& val, int W) {
+  vector<int> dp(W + 1, 0);
+  for (int i = 0; i < (int)wt.size(); i++) {
+    for (int c = W; c >= wt[i]; c--) {  // downward: each item once
+      dp[c] = max(dp[c], dp[c - wt[i]] + val[i]);
+    }
+  }
+  return dp[W];
 }
 \`\`\`
 
@@ -113,15 +111,16 @@ int knapsack01(vector<int>& wt, vector<int>& val, int W)
 
 \`\`\`cpp
 // Coin Change (LC 322): fewest coins to make 'amount'; upward = reuse allowed
-int coinChange(vector<int>& coins, int amount)
-{
-    const int INF = 1e9;
-    vector<int> dp(amount + 1, INF);
-    dp[0] = 0;
-    for (int c : coins)
-        for (int a = c; a <= amount; a++)
-            dp[a] = min(dp[a], dp[a - c] + 1);
-    return dp[amount] >= INF ? -1 : dp[amount];
+int coinChange(vector<int>& coins, int amount) {
+  const int INF = 1e9;
+  vector<int> dp(amount + 1, INF);
+  dp[0] = 0;
+  for (int c : coins) {
+    for (int a = c; a <= amount; a++) {
+      dp[a] = min(dp[a], dp[a - c] + 1);
+    }
+  }
+  return dp[amount] >= INF ? -1 : dp[amount];
 }
 \`\`\`
 
@@ -133,19 +132,19 @@ int coinChange(vector<int>& coins, int amount)
       body: `The \`O(n^2)\` DP is intuitive; the \`O(n log n)\` patience-sorting version is the one to memorize.
 
 \`\`\`cpp
-// LIS length in O(n log n) (LC 300): tails[k] = smallest tail of an LIS of length k+1
-int lengthOfLIS(vector<int>& a)
-{
-    vector<int> tails;
-    for (int x : a)
-    {
-        auto it = lower_bound(tails.begin(), tails.end(), x); // strictly increasing
-        if (it == tails.end())
-            tails.push_back(x);
-        else
-            *it = x; // replace to keep tails small
+// LIS length in O(n log n) (LC 300): tails[k] = smallest tail of an LIS of
+// length k+1
+int lengthOfLIS(vector<int>& a) {
+  vector<int> tails;
+  for (int x : a) {
+    auto it = lower_bound(tails.begin(), tails.end(), x);  // strictly increasing
+    if (it == tails.end()) {
+      tails.push_back(x);
+    } else {
+      *it = x;  // replace to keep tails small
     }
-    return tails.size();
+  }
+  return tails.size();
 }
 \`\`\`
 
@@ -158,32 +157,35 @@ For non-decreasing subsequences use \`upper_bound\`. Russian Doll Envelopes (LC 
 
 \`\`\`cpp
 // Longest Common Subsequence (LC 1143)
-int lcs(string a, string b)
-{
-    int m = a.size(), n = b.size();
-    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-    for (int i = 1; i <= m; i++)
-        for (int j = 1; j <= n; j++)
-            dp[i][j] = (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] + 1 : max(dp[i - 1][j], dp[i][j - 1]);
-    return dp[m][n];
+int lcs(string a, string b) {
+  int m = a.size(), n = b.size();
+  vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+  for (int i = 1; i <= m; i++) {
+    for (int j = 1; j <= n; j++) {
+      dp[i][j] = (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] + 1 : max(dp[i - 1][j], dp[i][j - 1]);
+    }
+  }
+  return dp[m][n];
 }
 \`\`\`
 
 \`\`\`cpp
 // Edit Distance (LC 72): insert/delete/replace
-int minDistance(string a, string b)
-{
-    int m = a.size(), n = b.size();
-    vector<vector<int>> dp(m + 1, vector<int>(n + 1));
-    for (int i = 0; i <= m; i++)
-        dp[i][0] = i;
-    for (int j = 0; j <= n; j++)
-        dp[0][j] = j;
-    for (int i = 1; i <= m; i++)
-        for (int j = 1; j <= n; j++)
-            dp[i][j] =
-                (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] : 1 + min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]});
-    return dp[m][n];
+int minDistance(string a, string b) {
+  int m = a.size(), n = b.size();
+  vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+  for (int i = 0; i <= m; i++) {
+    dp[i][0] = i;
+  }
+  for (int j = 0; j <= n; j++) {
+    dp[0][j] = j;
+  }
+  for (int i = 1; i <= m; i++) {
+    for (int j = 1; j <= n; j++) {
+      dp[i][j] = (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] : 1 + min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]});
+    }
+  }
+  return dp[m][n];
 }
 \`\`\``,
     },
@@ -194,21 +196,22 @@ int minDistance(string a, string b)
 
 \`\`\`cpp
 // Burst Balloons (LC 312): dp[l][r] = max coins bursting open interval (l, r)
-int maxCoins(vector<int> nums)
-{
-    int n = nums.size();
-    vector<int> a(n + 2, 1);
-    for (int i = 0; i < n; i++)
-        a[i + 1] = nums[i]; // padded with 1s
-    vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
-    for (int len = 1; len <= n; len++)
-        for (int l = 1; l + len - 1 <= n; l++)
-        {
-            int r = l + len - 1;
-            for (int k = l; k <= r; k++) // k is the last balloon burst
-                dp[l][r] = max(dp[l][r], dp[l][k - 1] + a[l - 1] * a[k] * a[r + 1] + dp[k + 1][r]);
-        }
-    return dp[1][n];
+int maxCoins(vector<int> nums) {
+  int n = nums.size();
+  vector<int> a(n + 2, 1);
+  for (int i = 0; i < n; i++) {
+    a[i + 1] = nums[i];  // padded with 1s
+  }
+  vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
+  for (int len = 1; len <= n; len++) {
+    for (int l = 1; l + len - 1 <= n; l++) {
+      int r = l + len - 1;
+      for (int k = l; k <= r; k++) {  // k is the last balloon burst
+        dp[l][r] = max(dp[l][r], dp[l][k - 1] + a[l - 1] * a[k] * a[r + 1] + dp[k + 1][r]);
+      }
+    }
+  }
+  return dp[1][n];
 }
 \`\`\`
 
@@ -221,17 +224,15 @@ Matrix Chain order, Minimum Cost to Cut a Stick (LC 1547), and Stone Game varian
 
 \`\`\`cpp
 // Best Time to Buy/Sell with cooldown (LC 309)
-int maxProfit(vector<int>& p)
-{
-    int hold = INT_MIN, sold = 0, rest = 0; // states after day i
-    for (int x : p)
-    {
-        int prevSold = sold;
-        sold = hold + x;            // sell today
-        hold = max(hold, rest - x); // keep holding or buy today
-        rest = max(rest, prevSold); // cooldown after selling
-    }
-    return max(sold, rest);
+int maxProfit(vector<int>& p) {
+  int hold = INT_MIN, sold = 0, rest = 0;  // states after day i
+  for (int x : p) {
+    int prevSold = sold;
+    sold = hold + x;             // sell today
+    hold = max(hold, rest - x);  // keep holding or buy today
+    rest = max(rest, prevSold);  // cooldown after selling
+  }
+  return max(sold, rest);
 }
 \`\`\`
 
@@ -244,19 +245,24 @@ With at most \`k\` transactions (LC 188), use \`dp[k][holding]\` arrays.`,
 
 \`\`\`cpp
 // Travelling salesman-style: shortest path visiting all nodes (LC 943-flavored)
-int tsp(vector<vector<int>>& dist)
-{
-    int n = dist.size(), FULL = (1 << n) - 1;
-    vector<vector<int>> dp(1 << n, vector<int>(n, 1e9));
-    for (int i = 0; i < n; i++)
-        dp[1 << i][i] = 0;
-    for (int mask = 1; mask <= FULL; mask++)
-        for (int u = 0; u < n; u++)
-            if (mask & (1 << u))
-                for (int v = 0; v < n; v++)
-                    if (!(mask & (1 << v)))
-                        dp[mask | (1 << v)][v] = min(dp[mask | (1 << v)][v], dp[mask][u] + dist[u][v]);
-    return *min_element(dp[FULL].begin(), dp[FULL].end());
+int tsp(vector<vector<int>>& dist) {
+  int n = dist.size(), FULL = (1 << n) - 1;
+  vector<vector<int>> dp(1 << n, vector<int>(n, 1e9));
+  for (int i = 0; i < n; i++) {
+    dp[1 << i][i] = 0;
+  }
+  for (int mask = 1; mask <= FULL; mask++) {
+    for (int u = 0; u < n; u++) {
+      if (mask & (1 << u)) {
+        for (int v = 0; v < n; v++) {
+          if (!(mask & (1 << v))) {
+            dp[mask | (1 << v)][v] = min(dp[mask | (1 << v)][v], dp[mask][u] + dist[u][v]);
+          }
+        }
+      }
+    }
+  }
+  return *min_element(dp[FULL].begin(), dp[FULL].end());
 }
 \`\`\`
 
@@ -270,23 +276,25 @@ Partition to K Equal Sum Subsets (LC 698) and Shortest Path Visiting All Nodes (
 \`\`\`cpp
 // Count integers in [0, N] with no two equal adjacent digits (template)
 string s;
-vector<vector<int>> memo; // memo[pos][prev], -1 init; size handles tight separately
-int dfs(int pos, int prev, bool tight, bool started)
-{
-    if (pos == (int)s.size())
-        return 1;
-    if (!tight && started && memo[pos][prev] != -1)
-        return memo[pos][prev];
-    int hi = tight ? s[pos] - '0' : 9, res = 0;
-    for (int d = 0; d <= hi; d++)
-    {
-        if (started && d == prev)
-            continue; // property check
-        res += dfs(pos + 1, d, tight && d == hi, started || d > 0);
+vector<vector<int>> memo;  // memo[pos][prev], -1 init; size handles tight separately
+int dfs(int pos, int prev, bool tight, bool started) {
+  if (pos == (int)s.size()) {
+    return 1;
+  }
+  if (!tight && started && memo[pos][prev] != -1) {
+    return memo[pos][prev];
+  }
+  int hi = tight ? s[pos] - '0' : 9, res = 0;
+  for (int d = 0; d <= hi; d++) {
+    if (started && d == prev) {
+      continue;  // property check
     }
-    if (!tight && started)
-        memo[pos][prev] = res;
-    return res;
+    res += dfs(pos + 1, d, tight && d == hi, started || d > 0);
+  }
+  if (!tight && started) {
+    memo[pos][prev] = res;
+  }
+  return res;
 }
 \`\`\`
 
@@ -301,23 +309,23 @@ Used for Numbers With Repeated Digits (LC 1012), Count Numbers with Unique Digit
 
 \`\`\`cpp
 // Jump Game VI (LC 1696): dp[i] = a[i] + max(dp[i-k..i-1])
-int maxResult(vector<int>& a, int k)
-{
-    int n = a.size();
-    vector<long long> dp(n);
-    deque<int> dq; // indices, dp[] decreasing
-    dp[0] = a[0];
-    dq.push_back(0);
-    for (int i = 1; i < n; i++)
-    {
-        while (!dq.empty() && dq.front() < i - k)
-            dq.pop_front(); // drop out-of-window
-        dp[i] = a[i] + dp[dq.front()];
-        while (!dq.empty() && dp[dq.back()] <= dp[i])
-            dq.pop_back();
-        dq.push_back(i);
+int maxResult(vector<int>& a, int k) {
+  int n = a.size();
+  vector<long long> dp(n);
+  deque<int> dq;  // indices, dp[] decreasing
+  dp[0] = a[0];
+  dq.push_back(0);
+  for (int i = 1; i < n; i++) {
+    while (!dq.empty() && dq.front() < i - k) {
+      dq.pop_front();  // drop out-of-window
     }
-    return dp[n - 1];
+    dp[i] = a[i] + dp[dq.front()];
+    while (!dq.empty() && dp[dq.back()] <= dp[i]) {
+      dq.pop_back();
+    }
+    dq.push_back(i);
+  }
+  return dp[n - 1];
 }
 \`\`\`
 
@@ -336,31 +344,34 @@ int maxResult(vector<int>& a, int k)
 // Matrix power for linear recurrences / counting length-k walks (mod 1e9+7)
 using Matrix = vector<vector<long long>>;
 const long long MOD = 1e9 + 7;
-Matrix mul(const Matrix& A, const Matrix& B)
-{
-    int n = A.size(), m = B[0].size(), p = B.size();
-    Matrix C(n, vector<long long>(m, 0));
-    for (int i = 0; i < n; i++)
-        for (int k = 0; k < p; k++)
-            if (A[i][k])
-                for (int j = 0; j < m; j++)
-                    C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
-    return C;
-}
-Matrix matpow(Matrix A, long long e)
-{
-    int n = A.size();
-    Matrix R(n, vector<long long>(n, 0));
-    for (int i = 0; i < n; i++)
-        R[i][i] = 1; // identity
-    while (e > 0)
-    {
-        if (e & 1)
-            R = mul(R, A);
-        A = mul(A, A);
-        e >>= 1;
+Matrix mul(const Matrix& A, const Matrix& B) {
+  int n = A.size(), m = B[0].size(), p = B.size();
+  Matrix C(n, vector<long long>(m, 0));
+  for (int i = 0; i < n; i++) {
+    for (int k = 0; k < p; k++) {
+      if (A[i][k]) {
+        for (int j = 0; j < m; j++) {
+          C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
+        }
+      }
     }
-    return R;
+  }
+  return C;
+}
+Matrix matpow(Matrix A, long long e) {
+  int n = A.size();
+  Matrix R(n, vector<long long>(n, 0));
+  for (int i = 0; i < n; i++) {
+    R[i][i] = 1;  // identity
+  }
+  while (e > 0) {
+    if (e & 1) {
+      R = mul(R, A);
+    }
+    A = mul(A, A);
+    e >>= 1;
+  }
+  return R;
 }
 \`\`\`
 
@@ -370,10 +381,13 @@ Use it for Student Attendance Record II (LC 552), Knight Dialer (LC 935), and Co
 
 \`\`\`cpp
 // SOS DP: f[mask] becomes the sum over all submasks of mask
-for (int b = 0; b < n; b++)
-    for (int mask = 0; mask < (1 << n); mask++)
-        if (mask & (1 << b))
-            f[mask] += f[mask ^ (1 << b)];
+for (int b = 0; b < n; b++) {
+  for (int mask = 0; mask < (1 << n); mask++) {
+    if (mask & (1 << b)) {
+      f[mask] += f[mask ^ (1 << b)];
+    }
+  }
+}
 \`\`\``,
     },
     {
@@ -383,19 +397,19 @@ for (int b = 0; b < n; b++)
 
 \`\`\`cpp
 // Predict the Winner (LC 486): dp[i][j] = best margin on a[i..j] for the mover
-bool predictTheWinner(vector<int>& a)
-{
-    int n = a.size();
-    vector<vector<int>> dp(n, vector<int>(n, 0));
-    for (int i = 0; i < n; i++)
-        dp[i][i] = a[i];
-    for (int len = 2; len <= n; len++)
-        for (int i = 0; i + len - 1 < n; i++)
-        {
-            int j = i + len - 1;
-            dp[i][j] = max(a[i] - dp[i + 1][j], a[j] - dp[i][j - 1]); // take left or right
-        }
-    return dp[0][n - 1] >= 0;
+bool predictTheWinner(vector<int>& a) {
+  int n = a.size();
+  vector<vector<int>> dp(n, vector<int>(n, 0));
+  for (int i = 0; i < n; i++) {
+    dp[i][i] = a[i];
+  }
+  for (int len = 2; len <= n; len++) {
+    for (int i = 0; i + len - 1 < n; i++) {
+      int j = i + len - 1;
+      dp[i][j] = max(a[i] - dp[i + 1][j], a[j] - dp[i][j - 1]);  // take left or right
+    }
+  }
+  return dp[0][n - 1] >= 0;
 }
 \`\`\`
 

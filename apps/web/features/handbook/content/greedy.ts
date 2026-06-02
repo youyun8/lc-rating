@@ -48,19 +48,16 @@ If you cannot construct such an argument, treat greedy as a *guess* and verify a
 
 \`\`\`cpp
 // Max number of non-overlapping intervals (LC 435 returns the count to remove)
-int maxNonOverlap(vector<vector<int>>& iv)
-{
-    sort(iv.begin(), iv.end(), [](auto& a, auto& b) { return a[1] < b[1]; });
-    int count = 0, end = INT_MIN;
-    for (auto& x : iv)
-    {
-        if (x[0] >= end)
-        { // take it; advance the frontier
-            count++;
-            end = x[1];
-        }
+int maxNonOverlap(vector<vector<int>>& iv) {
+  sort(iv.begin(), iv.end(), [](auto& a, auto& b) { return a[1] < b[1]; });
+  int count = 0, end = INT_MIN;
+  for (auto& x : iv) {
+    if (x[0] >= end) {  // take it; advance the frontier
+      count++;
+      end = x[1];
     }
-    return count; // erase = iv.size() - count
+  }
+  return count;  // erase = iv.size() - count
 }
 \`\`\`
 
@@ -75,20 +72,18 @@ int maxNonOverlap(vector<vector<int>>& iv)
 
 \`\`\`cpp
 // Minimum cost to connect ropes / merge stones-style (Huffman-like)
-long long connectSticks(vector<int>& sticks)
-{
-    priority_queue<long long, vector<long long>, greater<>> pq(sticks.begin(), sticks.end());
-    long long cost = 0;
-    while (pq.size() > 1)
-    {
-        long long a = pq.top();
-        pq.pop();
-        long long b = pq.top();
-        pq.pop();
-        cost += a + b;
-        pq.push(a + b); // always merge the two cheapest
-    }
-    return cost;
+long long connectSticks(vector<int>& sticks) {
+  priority_queue<long long, vector<long long>, greater<>> pq(sticks.begin(), sticks.end());
+  long long cost = 0;
+  while (pq.size() > 1) {
+    long long a = pq.top();
+    pq.pop();
+    long long b = pq.top();
+    pq.pop();
+    cost += a + b;
+    pq.push(a + b);  // always merge the two cheapest
+  }
+  return cost;
 }
 \`\`\`
 
@@ -101,19 +96,16 @@ Heap-greedy also solves Task Scheduler (LC 621), Reorganize String (LC 767), IPO
 
 \`\`\`cpp
 // Minimum jumps to reach the end (LC 45) — BFS-like level expansion
-int jump(vector<int>& a)
-{
-    int jumps = 0, curEnd = 0, farthest = 0;
-    for (int i = 0; i + 1 < (int)a.size(); i++)
-    {
-        farthest = max(farthest, i + a[i]);
-        if (i == curEnd)
-        { // finished a level
-            jumps++;
-            curEnd = farthest;
-        }
+int jump(vector<int>& a) {
+  int jumps = 0, curEnd = 0, farthest = 0;
+  for (int i = 0; i + 1 < (int)a.size(); i++) {
+    farthest = max(farthest, i + a[i]);
+    if (i == curEnd) {  // finished a level
+      jumps++;
+      curEnd = farthest;
     }
-    return jumps;
+  }
+  return jumps;
 }
 \`\`\`
 
@@ -126,18 +118,17 @@ Can-jump (LC 55) is the boolean version: keep the max reach and fail if \`i > re
 
 \`\`\`cpp
 // Assign cookies to greedy children (LC 455): smallest cookie that satisfies
-int findContentChildren(vector<int>& g, vector<int>& s)
-{
-    sort(g.begin(), g.end());
-    sort(s.begin(), s.end());
-    int i = 0, j = 0;
-    while (i < (int)g.size() && j < (int)s.size())
-    {
-        if (s[j] >= g[i])
-            i++; // this cookie satisfies child i
-        j++;
+int findContentChildren(vector<int>& g, vector<int>& s) {
+  sort(g.begin(), g.end());
+  sort(s.begin(), s.end());
+  int i = 0, j = 0;
+  while (i < (int)g.size() && j < (int)s.size()) {
+    if (s[j] >= g[i]) {
+      i++;  // this cookie satisfies child i
     }
-    return i;
+    j++;
+  }
+  return i;
 }
 \`\`\`
 
@@ -150,21 +141,21 @@ Other "sort by the right key" classics: Gas Station (LC 134), Queue Reconstructi
 
 \`\`\`cpp
 // Minimum Number of Refueling Stops (LC 871)
-int minRefuelStops(int target, int startFuel, vector<vector<int>>& st)
-{
-    priority_queue<int> pq; // fuel of passed-but-unused stations
-    int fuel = startFuel, i = 0, stops = 0, n = st.size();
-    while (fuel < target)
-    {
-        while (i < n && st[i][0] <= fuel)
-            pq.push(st[i++][1]); // everything reachable
-        if (pq.empty())
-            return -1; // truly stuck
-        fuel += pq.top();
-        pq.pop();
-        stops++; // claim the best deferred refuel
+int minRefuelStops(int target, int startFuel, vector<vector<int>>& st) {
+  priority_queue<int> pq;  // fuel of passed-but-unused stations
+  int fuel = startFuel, i = 0, stops = 0, n = st.size();
+  while (fuel < target) {
+    while (i < n && st[i][0] <= fuel) {
+      pq.push(st[i++][1]);  // everything reachable
     }
-    return stops;
+    if (pq.empty()) {
+      return -1;  // truly stuck
+    }
+    fuel += pq.top();
+    pq.pop();
+    stops++;  // claim the best deferred refuel
+  }
+  return stops;
 }
 \`\`\`
 
@@ -172,22 +163,19 @@ int minRefuelStops(int target, int startFuel, vector<vector<int>>& st)
 
 \`\`\`cpp
 // Course Schedule III (LC 630)
-int scheduleCourse(vector<vector<int>>& c)
-{
-    sort(c.begin(), c.end(), [](auto& a, auto& b) { return a[1] < b[1]; }); // by deadline
-    priority_queue<int> pq;
-    long long time = 0;
-    for (auto& x : c)
-    {
-        time += x[0];
-        pq.push(x[0]);
-        if (time > x[1])
-        { // shed the longest
-            time -= pq.top();
-            pq.pop();
-        }
+int scheduleCourse(vector<vector<int>>& c) {
+  sort(c.begin(), c.end(), [](auto& a, auto& b) { return a[1] < b[1]; });  // by deadline
+  priority_queue<int> pq;
+  long long time = 0;
+  for (auto& x : c) {
+    time += x[0];
+    pq.push(x[0]);
+    if (time > x[1]) {  // shed the longest
+      time -= pq.top();
+      pq.pop();
     }
-    return pq.size();
+  }
+  return pq.size();
 }
 \`\`\`
 
@@ -195,17 +183,20 @@ int scheduleCourse(vector<vector<int>>& c)
 
 \`\`\`cpp
 // Candy (LC 135): satisfy both neighbour constraints
-int candy(vector<int>& r)
-{
-    int n = r.size();
-    vector<int> c(n, 1);
-    for (int i = 1; i < n; i++)
-        if (r[i] > r[i - 1])
-            c[i] = c[i - 1] + 1;
-    for (int i = n - 2; i >= 0; i--)
-        if (r[i] > r[i + 1])
-            c[i] = max(c[i], c[i + 1] + 1);
-    return accumulate(c.begin(), c.end(), 0);
+int candy(vector<int>& r) {
+  int n = r.size();
+  vector<int> c(n, 1);
+  for (int i = 1; i < n; i++) {
+    if (r[i] > r[i - 1]) {
+      c[i] = c[i - 1] + 1;
+    }
+  }
+  for (int i = n - 2; i >= 0; i--) {
+    if (r[i] > r[i + 1]) {
+      c[i] = max(c[i], c[i + 1] + 1);
+    }
+  }
+  return accumulate(c.begin(), c.end(), 0);
 }
 \`\`\`
 

@@ -34,7 +34,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "找到任一 target 不等同於找到第一個 target。",
     ],
     complexity: "每次查詢 `O(log n)`，額外空間 `O(1)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int lowerBound(vector<int>& nums, int target) {\n        int left = 0;\n        int right = nums.size();\n        while (left < right) {\n            int mid = left + (right - left) / 2;\n            if (nums[mid] >= target) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n        return left;\n    }\n\n    vector<int> searchRange(vector<int>& nums, int target) {\n        int first = lowerBound(nums, target);\n        int after_last = lowerBound(nums, target + 1);\n        if (first == (int)nums.size() || nums[first] != target) {\n            return {-1, -1};\n        }\n        return {first, after_last - 1};\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int lowerBound(vector<int>& nums, int target) {\n    int left = 0;\n    int right = nums.size();\n    while (left < right) {\n      int mid = left + (right - left) / 2;\n      if (nums[mid] >= target) {\n        right = mid;\n      } else {\n        left = mid + 1;\n      }\n    }\n    return left;\n  }\n\n  vector<int> searchRange(vector<int>& nums, int target) {\n    int first = lowerBound(nums, target);\n    int after_last = lowerBound(nums, target + 1);\n    if (first == (int)nums.size() || nums[first] != target) {\n      return {-1, -1};\n    }\n    return {first, after_last - 1};\n  }\n};\n```",
   },
   {
     key: "kth-smallest",
@@ -71,7 +71,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity:
       "回傳前 k 個 pair 時，時間 `O(k log min(k, n))`，空間 `O(min(k, n))`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {\n        using State = tuple<int, int, int>; // sum, index in nums1, index in nums2\n        priority_queue<State, vector<State>, greater<State>> frontier;\n        vector<vector<int>> answer;\n\n        if (nums1.empty() || nums2.empty() || k == 0) return answer;\n        int initial_rows = min<int>(nums1.size(), k);\n        for (int i = 0; i < initial_rows; ++i) {\n            frontier.push({nums1[i] + nums2[0], i, 0});\n        }\n\n        while (!frontier.empty() && (int)answer.size() < k) {\n            auto [sum, i, j] = frontier.top();\n            frontier.pop();\n            answer.push_back({nums1[i], nums2[j]});\n            if (j + 1 < (int)nums2.size()) {\n                frontier.push({nums1[i] + nums2[j + 1], i, j + 1});\n            }\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {\n    using State = tuple<int, int, int>;  // sum, index in nums1, index in nums2\n    priority_queue<State, vector<State>, greater<State>> frontier;\n    vector<vector<int>> answer;\n\n    if (nums1.empty() || nums2.empty() || k == 0) {\n      return answer;\n    }\n    int initial_rows = min<int>(nums1.size(), k);\n    for (int i = 0; i < initial_rows; ++i) {\n      frontier.push({nums1[i] + nums2[0], i, 0});\n    }\n\n    while (!frontier.empty() && (int)answer.size() < k) {\n      auto [sum, i, j] = frontier.top();\n      frontier.pop();\n      answer.push_back({nums1[i], nums2[j]});\n      if (j + 1 < (int)nums2.size()) {\n        frontier.push({nums1[i] + nums2[j + 1], i, j + 1});\n      }\n    }\n    return answer;\n  }\n};\n```",
     examples: {
       "find-k-pairs-with-smallest-sums": {},
       "kth-smallest-element-in-a-sorted-matrix": {
@@ -89,7 +89,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
           "否則第 k 小大於 mid，提高左界。",
         ],
         complexity: "計數 `O(n)`，值域二分總時間 `O(n log V)`。",
-        code: "```cpp\nclass Solution {\npublic:\n    int kthSmallest(vector<vector<int>>& matrix, int k) {\n        int n = matrix.size();\n        int left = matrix[0][0];\n        int right = matrix[n - 1][n - 1];\n\n        auto countLessEqual = [&matrix, n](int value) {\n            int row = n - 1;\n            int col = 0;\n            int count = 0;\n            while (row >= 0 && col < n) {\n                if (matrix[row][col] <= value) {\n                    count += row + 1;\n                    col++;\n                } else {\n                    row--;\n                }\n            }\n            return count;\n        };\n\n        while (left < right) {\n            int mid = left + (right - left) / 2;\n            if (countLessEqual(mid) >= k) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n        return left;\n    }\n};\n```",
+        code: "```cpp\nclass Solution {\n public:\n  int kthSmallest(vector<vector<int>>& matrix, int k) {\n    int n = matrix.size();\n    int left = matrix[0][0];\n    int right = matrix[n - 1][n - 1];\n\n    auto countLessEqual = [&matrix, n](int value) {\n      int row = n - 1;\n      int col = 0;\n      int count = 0;\n      while (row >= 0 && col < n) {\n        if (matrix[row][col] <= value) {\n          count += row + 1;\n          col++;\n        } else {\n          row--;\n        }\n      }\n      return count;\n    };\n\n    while (left < right) {\n      int mid = left + (right - left) / 2;\n      if (countLessEqual(mid) >= k) {\n        right = mid;\n      } else {\n        left = mid + 1;\n      }\n    }\n    return left;\n  }\n};\n```",
       },
     },
   },
@@ -121,7 +121,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     pitfalls: ["缺乏單調性時不可二分答案。", "check 函式的貪心策略亦需證明。"],
     complexity: "`O(log V * check_cost)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int shipWithinDays(vector<int>& weights, int days) {\n        int left = *max_element(weights.begin(), weights.end());\n        int right = accumulate(weights.begin(), weights.end(), 0);\n\n        auto canShip = [&weights, days](int capacity) {\n            int used_days = 1;\n            int current = 0;\n            for (int weight : weights) {\n                if (current + weight > capacity) {\n                    used_days++;\n                    current = 0;\n                }\n                current += weight;\n            }\n            return used_days <= days;\n        };\n\n        while (left < right) {\n            int mid = left + (right - left) / 2;\n            if (canShip(mid)) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n        return left;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int shipWithinDays(vector<int>& weights, int days) {\n    int left = *max_element(weights.begin(), weights.end());\n    int right = accumulate(weights.begin(), weights.end(), 0);\n\n    auto canShip = [&weights, days](int capacity) {\n      int used_days = 1;\n      int current = 0;\n      for (int weight : weights) {\n        if (current + weight > capacity) {\n          used_days++;\n          current = 0;\n        }\n        current += weight;\n      }\n      return used_days <= days;\n    };\n\n    while (left < right) {\n      int mid = left + (right - left) / 2;\n      if (canShip(mid)) {\n        right = mid;\n      } else {\n        left = mid + 1;\n      }\n    }\n    return left;\n  }\n};\n```",
   },
   {
     key: "prefix-sum",
@@ -150,7 +150,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "`count[0] = 1` 代表自 index 0 開始的子陣列。",
     ],
     complexity: "一次掃描 `O(n)`，空間 `O(不同前綴狀態數)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int subarraySum(vector<int>& nums, int k) {\n        unordered_map<int, int> count;\n        count[0] = 1;\n        int prefix_sum = 0;\n        int answer = 0;\n\n        for (int x : nums) {\n            prefix_sum += x;\n            answer += count[prefix_sum - k];\n            count[prefix_sum]++;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int subarraySum(vector<int>& nums, int k) {\n    unordered_map<int, int> count;\n    count[0] = 1;\n    int prefix_sum = 0;\n    int answer = 0;\n\n    for (int x : nums) {\n      prefix_sum += x;\n      answer += count[prefix_sum - k];\n      count[prefix_sum]++;\n    }\n    return answer;\n  }\n};\n```",
   },
   {
     key: "enumerate-maintain",
@@ -178,7 +178,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "若維護值需刪除過期元素，普通變數不足，應改用 heap、deque 或 set。",
     ],
     complexity: "通常將 `O(n^2)` 降至 `O(n)` 或 `O(n log n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long maxPairScore(vector<int>& nums) {\n        long long best_left = LLONG_MIN;\n        long long answer = LLONG_MIN;\n        for (int right = 0; right < (int)nums.size(); ++right) {\n            if (best_left != LLONG_MIN) {\n                answer = max(answer, best_left + nums[right] - right);\n            }\n            best_left = max(best_left, 1LL * nums[right] + right);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long maxPairScore(vector<int>& nums) {\n    long long best_left = LLONG_MIN;\n    long long answer = LLONG_MIN;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n      if (best_left != LLONG_MIN) {\n        answer = max(answer, best_left + nums[right] - right);\n      }\n      best_left = max(best_left, 1LL * nums[right] + right);\n    }\n    return answer;\n  }\n};\n```",
   },
   {
     key: "rating-2100-data-structure",
@@ -214,7 +214,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "heap 含過期元素時須做 lazy deletion。",
     ],
     complexity: "常見目標為 `O((n + q) log n)`，空間 `O(n + q)`。",
-    code: "```cpp\nclass Fenwick {\n    vector<int> tree_;\n\npublic:\n    explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n    void add(int index, int delta) {\n        for (++index; index < (int)tree_.size(); index += index & -index) {\n            tree_[index] += delta;\n        }\n    }\n\n    int prefixSum(int index) const {\n        int sum = 0;\n        for (++index; index > 0; index -= index & -index) {\n            sum += tree_[index];\n        }\n        return sum;\n    }\n};\n```",
+    code: "```cpp\nclass Fenwick {\n  vector<int> tree_;\n\n public:\n  explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n  void add(int index, int delta) {\n    for (++index; index < (int)tree_.size(); index += index & -index) {\n      tree_[index] += delta;\n    }\n  }\n\n  int prefixSum(int index) const {\n    int sum = 0;\n    for (++index; index > 0; index -= index & -index) {\n      sum += tree_[index];\n    }\n    return sum;\n  }\n};\n```",
   },
   {
     key: "rating-2100-dp",
@@ -252,7 +252,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity:
       "依狀態而定；Rating 2100 常見目標為 `O(n log n)`、`O(nk)` 或 `O(n 2^m)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int lengthOfLis(vector<int>& nums) {\n        vector<int> tails;\n        for (int x : nums) {\n            auto it = lower_bound(tails.begin(), tails.end(), x);\n            if (it == tails.end()) {\n                tails.push_back(x);\n            } else {\n                *it = x;\n            }\n        }\n        return tails.size();\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int lengthOfLis(vector<int>& nums) {\n    vector<int> tails;\n    for (int x : nums) {\n      auto it = lower_bound(tails.begin(), tails.end(), x);\n      if (it == tails.end()) {\n        tails.push_back(x);\n      } else {\n        *it = x;\n      }\n    }\n    return tails.size();\n  }\n};\n```",
   },
   {
     key: "grid-state-bfs",
@@ -290,7 +290,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "狀態數上界須先估算，避免 mask 維度過大。",
     ],
     complexity: "狀態數通常為 `O(rows * cols * extra_states)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int shortestPath(vector<vector<int>>& grid, int k) {\n        int rows = grid.size();\n        int cols = grid[0].size();\n        const int kDirs[5] = {1, 0, -1, 0, 1};\n        vector<vector<int>> best(rows, vector<int>(cols, -1));\n        queue<array<int, 4>> q;\n\n        best[0][0] = k;\n        q.push({0, 0, k, 0});\n        while (!q.empty()) {\n            auto [row, col, remaining, dist] = q.front();\n            q.pop();\n            if (row == rows - 1 && col == cols - 1) return dist;\n            for (int dir = 0; dir < 4; ++dir) {\n                int next_row = row + kDirs[dir];\n                int next_col = col + kDirs[dir + 1];\n                if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) continue;\n                int next_remaining = remaining - grid[next_row][next_col];\n                if (next_remaining < 0 || next_remaining <= best[next_row][next_col]) continue;\n                best[next_row][next_col] = next_remaining;\n                q.push({next_row, next_col, next_remaining, dist + 1});\n            }\n        }\n        return -1;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int shortestPath(vector<vector<int>>& grid, int k) {\n    int rows = grid.size();\n    int cols = grid[0].size();\n    const int kDirs[5] = {1, 0, -1, 0, 1};\n    vector<vector<int>> best(rows, vector<int>(cols, -1));\n    queue<array<int, 4>> q;\n\n    best[0][0] = k;\n    q.push({0, 0, k, 0});\n    while (!q.empty()) {\n      auto [row, col, remaining, dist] = q.front();\n      q.pop();\n      if (row == rows - 1 && col == cols - 1) {\n        return dist;\n      }\n      for (int dir = 0; dir < 4; ++dir) {\n        int next_row = row + kDirs[dir];\n        int next_col = col + kDirs[dir + 1];\n        if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) {\n          continue;\n        }\n        int next_remaining = remaining - grid[next_row][next_col];\n        if (next_remaining < 0 || next_remaining <= best[next_row][next_col]) {\n          continue;\n        }\n        best[next_row][next_col] = next_remaining;\n        q.push({next_row, next_col, next_remaining, dist + 1});\n      }\n    }\n    return -1;\n  }\n};\n```",
   },
   {
     key: "difference-array",
@@ -314,7 +314,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "若操作與查詢交錯，應改用 Fenwick 或 segment tree。",
     ],
     complexity: "每次更新 `O(1)`，還原 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> applyUpdates(int n, vector<array<int, 3>>& updates) {\n        vector<int> diff(n + 1, 0);\n        for (auto [left, right, delta] : updates) {\n            diff[left] += delta;\n            diff[right + 1] -= delta;\n        }\n\n        vector<int> answer(n);\n        int running = 0;\n        for (int i = 0; i < n; ++i) {\n            running += diff[i];\n            answer[i] = running;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> applyUpdates(int n, vector<array<int, 3>>& updates) {\n    vector<int> diff(n + 1, 0);\n    for (auto [left, right, delta] : updates) {\n      diff[left] += delta;\n      diff[right + 1] -= delta;\n    }\n\n    vector<int> answer(n);\n    int running = 0;\n    for (int i = 0; i < n; ++i) {\n      running += diff[i];\n      answer[i] = running;\n    }\n    return answer;\n  }\n};\n```",
   },
   {
     key: "fenwick",
@@ -335,7 +335,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     patterns: ["單點加、區間和", "離散化 + 排名", "逆序對", "樹狀陣列二分"],
     pitfalls: ["0-index 直接套 lowbit 會陷入死循環。", "值域大時須先離散化。"],
     complexity: "更新與查詢皆為 `O(log n)`，空間 `O(n)`。",
-    code: "```cpp\nclass Fenwick {\n    vector<long long> tree_;\n\npublic:\n    explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n    void add(int index, long long delta) {\n        for (++index; index < (int)tree_.size(); index += index & -index) {\n            tree_[index] += delta;\n        }\n    }\n\n    long long prefixSum(int index) const {\n        long long sum = 0;\n        for (++index; index > 0; index -= index & -index) {\n            sum += tree_[index];\n        }\n        return sum;\n    }\n\n    long long rangeSum(int left, int right) const {\n        return prefixSum(right) - (left == 0 ? 0 : prefixSum(left - 1));\n    }\n};\n```",
+    code: "```cpp\nclass Fenwick {\n  vector<long long> tree_;\n\n public:\n  explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n  void add(int index, long long delta) {\n    for (++index; index < (int)tree_.size(); index += index & -index) {\n      tree_[index] += delta;\n    }\n  }\n\n  long long prefixSum(int index) const {\n    long long sum = 0;\n    for (++index; index > 0; index -= index & -index) {\n      sum += tree_[index];\n    }\n    return sum;\n  }\n\n  long long rangeSum(int left, int right) const { return prefixSum(right) - (left == 0 ? 0 : prefixSum(left - 1)); }\n};\n```",
   },
   {
     key: "segment-tree",
@@ -382,7 +382,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity:
       "單次更新與查詢皆 `O(log n)`，空間 `O(n)`；動態開點為 `O(操作數 * log 值域)`。",
-    code: "```cpp\n// 區間加、區間求和的 lazy 線段樹\nclass SegmentTree {\n    int n_;\n    vector<long long> sum_, lazy_;\n\n    void pushUp(int node) {\n        sum_[node] = sum_[node * 2] + sum_[node * 2 + 1];\n    }\n\n    void applyAdd(int node, int len, long long delta) {\n        sum_[node] += delta * len;\n        lazy_[node] += delta;\n    }\n\n    void pushDown(int node, int leftLen, int rightLen) {\n        if (lazy_[node] == 0) return;\n        applyAdd(node * 2, leftLen, lazy_[node]);\n        applyAdd(node * 2 + 1, rightLen, lazy_[node]);\n        lazy_[node] = 0;\n    }\n\n    void build(const vector<long long>& a, int node, int l, int r) {\n        if (l == r) {\n            sum_[node] = a[l];\n            return;\n        }\n        int mid = (l + r) / 2;\n        build(a, node * 2, l, mid);\n        build(a, node * 2 + 1, mid + 1, r);\n        pushUp(node);\n    }\n\n    void update(int node, int l, int r, int ql, int qr, long long delta) {\n        if (ql <= l && r <= qr) {\n            applyAdd(node, r - l + 1, delta);\n            return;\n        }\n        int mid = (l + r) / 2;\n        pushDown(node, mid - l + 1, r - mid);\n        if (ql <= mid) update(node * 2, l, mid, ql, qr, delta);\n        if (qr > mid) update(node * 2 + 1, mid + 1, r, ql, qr, delta);\n        pushUp(node);\n    }\n\n    long long query(int node, int l, int r, int ql, int qr) {\n        if (ql <= l && r <= qr) return sum_[node];\n        int mid = (l + r) / 2;\n        pushDown(node, mid - l + 1, r - mid);\n        long long res = 0;\n        if (ql <= mid) res += query(node * 2, l, mid, ql, qr);\n        if (qr > mid) res += query(node * 2 + 1, mid + 1, r, ql, qr);\n        return res;\n    }\n\npublic:\n    explicit SegmentTree(const vector<long long>& a)\n        : n_(a.size()), sum_(a.size() * 4, 0), lazy_(a.size() * 4, 0) {\n        if (n_ > 0) build(a, 1, 0, n_ - 1);\n    }\n\n    void update(int l, int r, long long delta) {\n        update(1, 0, n_ - 1, l, r, delta);\n    }\n\n    long long query(int l, int r) {\n        return query(1, 0, n_ - 1, l, r);\n    }\n};\n```",
+    code: "```cpp\n// 區間加、區間求和的 lazy 線段樹\nclass SegmentTree {\n  int n_;\n  vector<long long> sum_, lazy_;\n\n  void pushUp(int node) { sum_[node] = sum_[node * 2] + sum_[node * 2 + 1]; }\n\n  void applyAdd(int node, int len, long long delta) {\n    sum_[node] += delta * len;\n    lazy_[node] += delta;\n  }\n\n  void pushDown(int node, int leftLen, int rightLen) {\n    if (lazy_[node] == 0) {\n      return;\n    }\n    applyAdd(node * 2, leftLen, lazy_[node]);\n    applyAdd(node * 2 + 1, rightLen, lazy_[node]);\n    lazy_[node] = 0;\n  }\n\n  void build(const vector<long long>& a, int node, int l, int r) {\n    if (l == r) {\n      sum_[node] = a[l];\n      return;\n    }\n    int mid = (l + r) / 2;\n    build(a, node * 2, l, mid);\n    build(a, node * 2 + 1, mid + 1, r);\n    pushUp(node);\n  }\n\n  void update(int node, int l, int r, int ql, int qr, long long delta) {\n    if (ql <= l && r <= qr) {\n      applyAdd(node, r - l + 1, delta);\n      return;\n    }\n    int mid = (l + r) / 2;\n    pushDown(node, mid - l + 1, r - mid);\n    if (ql <= mid) {\n      update(node * 2, l, mid, ql, qr, delta);\n    }\n    if (qr > mid) {\n      update(node * 2 + 1, mid + 1, r, ql, qr, delta);\n    }\n    pushUp(node);\n  }\n\n  long long query(int node, int l, int r, int ql, int qr) {\n    if (ql <= l && r <= qr) {\n      return sum_[node];\n    }\n    int mid = (l + r) / 2;\n    pushDown(node, mid - l + 1, r - mid);\n    long long res = 0;\n    if (ql <= mid) {\n      res += query(node * 2, l, mid, ql, qr);\n    }\n    if (qr > mid) {\n      res += query(node * 2 + 1, mid + 1, r, ql, qr);\n    }\n    return res;\n  }\n\n public:\n  explicit SegmentTree(const vector<long long>& a) : n_(a.size()), sum_(a.size() * 4, 0), lazy_(a.size() * 4, 0) {\n    if (n_ > 0) {\n      build(a, 1, 0, n_ - 1);\n    }\n  }\n\n  void update(int l, int r, long long delta) { update(1, 0, n_ - 1, l, r, delta); }\n\n  long long query(int l, int r) { return query(1, 0, n_ - 1, l, r); }\n};\n```",
   },
   {
     key: "dsu",
@@ -412,7 +412,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "若題目詢問最短路或路徑內容，DSU 不足以勝任。",
     ],
     complexity: "每次 `find/unite` 均攤近似 `O(1)`。",
-    code: "```cpp\nclass Dsu {\n    vector<int> parent_;\n    vector<int> size_;\n\npublic:\n    explicit Dsu(int n) : parent_(n), size_(n, 1) {\n        iota(parent_.begin(), parent_.end(), 0);\n    }\n\n    int find(int x) {\n        if (parent_[x] == x) return x;\n        return parent_[x] = find(parent_[x]);\n    }\n\n    bool unite(int a, int b) {\n        int root_a = find(a);\n        int root_b = find(b);\n        if (root_a == root_b) return false;\n        if (size_[root_a] < size_[root_b]) swap(root_a, root_b);\n        parent_[root_b] = root_a;\n        size_[root_a] += size_[root_b];\n        return true;\n    }\n};\n```",
+    code: "```cpp\nclass Dsu {\n  vector<int> parent_;\n  vector<int> size_;\n\n public:\n  explicit Dsu(int n) : parent_(n), size_(n, 1) { iota(parent_.begin(), parent_.end(), 0); }\n\n  int find(int x) {\n    if (parent_[x] == x) {\n      return x;\n    }\n    return parent_[x] = find(parent_[x]);\n  }\n\n  bool unite(int a, int b) {\n    int root_a = find(a);\n    int root_b = find(b);\n    if (root_a == root_b) {\n      return false;\n    }\n    if (size_[root_a] < size_[root_b]) {\n      swap(root_a, root_b);\n    }\n    parent_[root_b] = root_a;\n    size_[root_a] += size_[root_b];\n    return true;\n  }\n};\n```",
   },
   {
     key: "monotonic-stack",
@@ -455,7 +455,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "需要距離時應存 index，不可僅存 value。",
     ],
     complexity: "每個元素至多入棧與出棧一次，總時間 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> nextGreaterElement(vector<int>& nums) {\n        int n = nums.size();\n        vector<int> answer(n, -1);\n        vector<int> stack;\n\n        for (int i = 0; i < n; ++i) {\n            while (!stack.empty() && nums[stack.back()] < nums[i]) {\n                answer[stack.back()] = i;\n                stack.pop_back();\n            }\n            stack.push_back(i);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> nextGreaterElement(vector<int>& nums) {\n    int n = nums.size();\n    vector<int> answer(n, -1);\n    vector<int> stack;\n\n    for (int i = 0; i < n; ++i) {\n      while (!stack.empty() && nums[stack.back()] < nums[i]) {\n        answer[stack.back()] = i;\n        stack.pop_back();\n      }\n      stack.push_back(i);\n    }\n    return answer;\n  }\n};\n```",
   },
   {
     key: "two-pointers",
@@ -502,7 +502,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity:
       "排序 `O(n log n)`，雙指標掃描 `O(n)`；若輸入已排序則整體 `O(n)`。",
-    code: "```cpp\n// 三數之和：排序 + 固定一個數 + 相向雙指標\nclass Solution {\npublic:\n    vector<vector<int>> threeSum(vector<int>& nums) {\n        sort(nums.begin(), nums.end());\n        int n = nums.size();\n        vector<vector<int>> ans;\n        for (int i = 0; i + 2 < n; ++i) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            if (nums[i] > 0) break;\n            int left = i + 1, right = n - 1;\n            while (left < right) {\n                int sum = nums[i] + nums[left] + nums[right];\n                if (sum < 0) {\n                    left++;\n                } else if (sum > 0) {\n                    right--;\n                } else {\n                    ans.push_back({nums[i], nums[left], nums[right]});\n                    while (left < right && nums[left] == nums[left + 1]) left++;\n                    while (left < right && nums[right] == nums[right - 1]) right--;\n                    left++;\n                    right--;\n                }\n            }\n        }\n        return ans;\n    }\n};\n```",
+    code: "```cpp\n// 三數之和：排序 + 固定一個數 + 相向雙指標\nclass Solution {\n public:\n  vector<vector<int>> threeSum(vector<int>& nums) {\n    sort(nums.begin(), nums.end());\n    int n = nums.size();\n    vector<vector<int>> ans;\n    for (int i = 0; i + 2 < n; ++i) {\n      if (i > 0 && nums[i] == nums[i - 1]) {\n        continue;\n      }\n      if (nums[i] > 0) {\n        break;\n      }\n      int left = i + 1, right = n - 1;\n      while (left < right) {\n        int sum = nums[i] + nums[left] + nums[right];\n        if (sum < 0) {\n          left++;\n        } else if (sum > 0) {\n          right--;\n        } else {\n          ans.push_back({nums[i], nums[left], nums[right]});\n          while (left < right && nums[left] == nums[left + 1]) {\n            left++;\n          }\n          while (left < right && nums[right] == nums[right - 1]) {\n            right--;\n          }\n          left++;\n          right--;\n        }\n      }\n    }\n    return ans;\n  }\n};\n```",
   },
   {
     key: "sliding-window",
@@ -543,7 +543,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "計數題須明確每個 right 貢獻多少個子陣列。",
     ],
     complexity: "左右指標各掃過一次，時間 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long atMostKDistinct(vector<int>& nums, int k) {\n        unordered_map<int, int> count;\n        long long answer = 0;\n        int left = 0;\n\n        for (int right = 0; right < (int)nums.size(); ++right) {\n            if (count[nums[right]]++ == 0) k--;\n            while (k < 0) {\n                if (--count[nums[left]] == 0) k++;\n                left++;\n            }\n            answer += right - left + 1;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long atMostKDistinct(vector<int>& nums, int k) {\n    unordered_map<int, int> count;\n    long long answer = 0;\n    int left = 0;\n\n    for (int right = 0; right < (int)nums.size(); ++right) {\n      if (count[nums[right]]++ == 0) {\n        k--;\n      }\n      while (k < 0) {\n        if (--count[nums[left]] == 0) {\n          k++;\n        }\n        left++;\n      }\n      answer += right - left + 1;\n    }\n    return answer;\n  }\n};\n```",
   },
   {
     key: "interval-dp",
@@ -578,7 +578,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "戳氣球類需在兩端補虛擬元素。",
     ],
     complexity: "狀態 `O(n^2)`，每個狀態枚舉分割點 `O(n)`，整體 `O(n^3)`。",
-    code: "```cpp\n// 最長回文子序列：區間 DP\nclass Solution {\npublic:\n    int longestPalindromeSubseq(string s) {\n        int n = s.size();\n        vector<vector<int>> dp(n, vector<int>(n, 0));\n        for (int i = n - 1; i >= 0; --i) {\n            dp[i][i] = 1;\n            for (int j = i + 1; j < n; ++j) {\n                if (s[i] == s[j]) {\n                    dp[i][j] = dp[i + 1][j - 1] + 2;\n                } else {\n                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);\n                }\n            }\n        }\n        return dp[0][n - 1];\n    }\n};\n```",
+    code: "```cpp\n// 最長回文子序列：區間 DP\nclass Solution {\n public:\n  int longestPalindromeSubseq(string s) {\n    int n = s.size();\n    vector<vector<int>> dp(n, vector<int>(n, 0));\n    for (int i = n - 1; i >= 0; --i) {\n      dp[i][i] = 1;\n      for (int j = i + 1; j < n; ++j) {\n        if (s[i] == s[j]) {\n          dp[i][j] = dp[i + 1][j - 1] + 2;\n        } else {\n          dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);\n        }\n      }\n    }\n    return dp[0][n - 1];\n  }\n};\n```",
   },
   {
     key: "tree-dp",
@@ -613,7 +613,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "換根題的父側資訊需另一次 DFS，不能只靠子樹狀態。",
     ],
     complexity: "每個節點與邊各處理常數次，整體 `O(n)`。",
-    code: "```cpp\n// 打家劫舍 III：樹形 DP（選/不選）\nclass Solution {\n    pair<int, int> dfs(TreeNode* node) {\n        if (!node) return {0, 0}; // {不選此節點, 選此節點}\n        auto [leftSkip, leftTake] = dfs(node->left);\n        auto [rightSkip, rightTake] = dfs(node->right);\n        int take = node->val + leftSkip + rightSkip;\n        int skip = max(leftSkip, leftTake) + max(rightSkip, rightTake);\n        return {skip, take};\n    }\n\npublic:\n    int rob(TreeNode* root) {\n        auto [skip, take] = dfs(root);\n        return max(skip, take);\n    }\n};\n```",
+    code: "```cpp\n// 打家劫舍 III：樹形 DP（選/不選）\nclass Solution {\n  pair<int, int> dfs(TreeNode* node) {\n    if (!node) {\n      return {0, 0};  // {不選此節點, 選此節點}\n    }\n    auto [leftSkip, leftTake] = dfs(node->left);\n    auto [rightSkip, rightTake] = dfs(node->right);\n    int take = node->val + leftSkip + rightSkip;\n    int skip = max(leftSkip, leftTake) + max(rightSkip, rightTake);\n    return {skip, take};\n  }\n\n public:\n  int rob(TreeNode* root) {\n    auto [skip, take] = dfs(root);\n    return max(skip, take);\n  }\n};\n```",
   },
   {
     key: "digit-dp",
@@ -649,7 +649,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity:
       "狀態為 `位數 * 狀態維度`，每位枚舉約 10 個數字，整體約 `O(位數 * 狀態數 * 10)`。",
-    code: "```cpp\n// 統計 [0, n] 中不含數字 4 的整數個數（數位 DP 範本）\nclass Solution {\n    string digits_;\n    vector<int> memo_; // 只快取 tight=false 且 started=true 的結果\n\n    int dfs(int pos, bool tight, bool started) {\n        if (pos == (int)digits_.size()) return 1;\n        if (!tight && started && memo_[pos] != -1) return memo_[pos];\n        int hi = tight ? digits_[pos] - '0' : 9;\n        int res = 0;\n        for (int d = 0; d <= hi; ++d) {\n            if (d == 4) continue;\n            res += dfs(pos + 1, tight && d == hi, started || d > 0);\n        }\n        if (!tight && started) memo_[pos] = res;\n        return res;\n    }\n\npublic:\n    int countNoFour(int n) {\n        digits_ = to_string(n);\n        memo_.assign(digits_.size(), -1);\n        return dfs(0, true, false);\n    }\n};\n```",
+    code: "```cpp\n// 統計 [0, n] 中不含數字 4 的整數個數（數位 DP 範本）\nclass Solution {\n  string digits_;\n  vector<int> memo_;  // 只快取 tight=false 且 started=true 的結果\n\n  int dfs(int pos, bool tight, bool started) {\n    if (pos == (int)digits_.size()) {\n      return 1;\n    }\n    if (!tight && started && memo_[pos] != -1) {\n      return memo_[pos];\n    }\n    int hi = tight ? digits_[pos] - '0' : 9;\n    int res = 0;\n    for (int d = 0; d <= hi; ++d) {\n      if (d == 4) {\n        continue;\n      }\n      res += dfs(pos + 1, tight && d == hi, started || d > 0);\n    }\n    if (!tight && started) {\n      memo_[pos] = res;\n    }\n    return res;\n  }\n\n public:\n  int countNoFour(int n) {\n    digits_ = to_string(n);\n    memo_.assign(digits_.size(), -1);\n    return dfs(0, true, false);\n  }\n};\n```",
   },
   {
     key: "state-compression-dp",
@@ -685,7 +685,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity:
       "TSP 為 `O(n^2 * 2^n)`；一般狀壓約 `O(2^n * n)` 至 `O(3^n)`（含子集枚舉）。",
-    code: "```cpp\n// 旅行商最短哈密頓迴路：bitmask DP\nclass Solution {\npublic:\n    int shortestTour(vector<vector<int>>& dist) {\n        int n = dist.size();\n        int full = (1 << n) - 1;\n        const int kInf = 1e9;\n        vector<vector<int>> dp(1 << n, vector<int>(n, kInf));\n        dp[1][0] = 0; // 從 0 出發，已訪問 {0}\n        for (int mask = 1; mask <= full; ++mask) {\n            if (!(mask & 1)) continue;\n            for (int i = 0; i < n; ++i) {\n                if (dp[mask][i] == kInf || !(mask & (1 << i))) continue;\n                for (int j = 0; j < n; ++j) {\n                    if (mask & (1 << j)) continue;\n                    int next = mask | (1 << j);\n                    dp[next][j] = min(dp[next][j], dp[mask][i] + dist[i][j]);\n                }\n            }\n        }\n        int ans = kInf;\n        for (int i = 0; i < n; ++i) ans = min(ans, dp[full][i] + dist[i][0]);\n        return ans;\n    }\n};\n```",
+    code: "```cpp\n// 旅行商最短哈密頓迴路：bitmask DP\nclass Solution {\n public:\n  int shortestTour(vector<vector<int>>& dist) {\n    int n = dist.size();\n    int full = (1 << n) - 1;\n    const int kInf = 1e9;\n    vector<vector<int>> dp(1 << n, vector<int>(n, kInf));\n    dp[1][0] = 0;  // 從 0 出發，已訪問 {0}\n    for (int mask = 1; mask <= full; ++mask) {\n      if (!(mask & 1)) {\n        continue;\n      }\n      for (int i = 0; i < n; ++i) {\n        if (dp[mask][i] == kInf || !(mask & (1 << i))) {\n          continue;\n        }\n        for (int j = 0; j < n; ++j) {\n          if (mask & (1 << j)) {\n            continue;\n          }\n          int next = mask | (1 << j);\n          dp[next][j] = min(dp[next][j], dp[mask][i] + dist[i][j]);\n        }\n      }\n    }\n    int ans = kInf;\n    for (int i = 0; i < n; ++i) {\n      ans = min(ans, dp[full][i] + dist[i][0]);\n    }\n    return ans;\n  }\n};\n```",
   },
   {
     key: "knapsack",
@@ -714,7 +714,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "方案數題通常初始化 `dp[0] = 1`。",
     ],
     complexity: "`O(n * capacity)` 時間，`O(capacity)` 空間。",
-    code: "```cpp\nclass Solution {\npublic:\n    int zeroOneKnapsack(vector<int>& weights, vector<int>& values, int capacity) {\n        vector<int> dp(capacity + 1, 0);\n        for (int i = 0; i < (int)weights.size(); ++i) {\n            for (int cap = capacity; cap >= weights[i]; --cap) {\n                dp[cap] = max(dp[cap], dp[cap - weights[i]] + values[i]);\n            }\n        }\n        return dp[capacity];\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int zeroOneKnapsack(vector<int>& weights, vector<int>& values, int capacity) {\n    vector<int> dp(capacity + 1, 0);\n    for (int i = 0; i < (int)weights.size(); ++i) {\n      for (int cap = capacity; cap >= weights[i]; --cap) {\n        dp[cap] = max(dp[cap], dp[cap - weights[i]] + values[i]);\n      }\n    }\n    return dp[capacity];\n  }\n};\n```",
   },
   {
     key: "grid-dp",
@@ -742,7 +742,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "可上下左右任意走的最短路並非普通網格 DP。",
     ],
     complexity: "`O(rows * cols)` 時間，空間可壓至 `O(cols)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int minPathSum(vector<vector<int>>& grid) {\n        int rows = grid.size();\n        int cols = grid[0].size();\n        vector<vector<int>> dp(rows, vector<int>(cols, INT_MAX / 2));\n        dp[0][0] = grid[0][0];\n\n        for (int row = 0; row < rows; ++row) {\n            for (int col = 0; col < cols; ++col) {\n                if (row > 0) dp[row][col] = min(dp[row][col], dp[row - 1][col] + grid[row][col]);\n                if (col > 0) dp[row][col] = min(dp[row][col], dp[row][col - 1] + grid[row][col]);\n            }\n        }\n        return dp[rows - 1][cols - 1];\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int minPathSum(vector<vector<int>>& grid) {\n    int rows = grid.size();\n    int cols = grid[0].size();\n    vector<vector<int>> dp(rows, vector<int>(cols, INT_MAX / 2));\n    dp[0][0] = grid[0][0];\n\n    for (int row = 0; row < rows; ++row) {\n      for (int col = 0; col < cols; ++col) {\n        if (row > 0) {\n          dp[row][col] = min(dp[row][col], dp[row - 1][col] + grid[row][col]);\n        }\n        if (col > 0) {\n          dp[row][col] = min(dp[row][col], dp[row][col - 1] + grid[row][col]);\n        }\n      }\n    }\n    return dp[rows - 1][cols - 1];\n  }\n};\n```",
   },
   {
     key: "dp-linear",
@@ -776,7 +776,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "子序列與子陣列的連續性不同。",
     ],
     complexity: "視轉移而定；常見線性 DP 為 `O(n)`，LIS 優化為 `O(n log n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int rob(vector<int>& nums) {\n        int skip = 0;\n        int take = 0;\n        for (int money : nums) {\n            int next_take = skip + money;\n            int next_skip = max(skip, take);\n            take = next_take;\n            skip = next_skip;\n        }\n        return max(skip, take);\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int rob(vector<int>& nums) {\n    int skip = 0;\n    int take = 0;\n    for (int money : nums) {\n      int next_take = skip + money;\n      int next_skip = max(skip, take);\n      take = next_take;\n      skip = next_skip;\n    }\n    return max(skip, take);\n  }\n};\n```",
   },
   {
     key: "graph-bfs-dfs",
@@ -809,7 +809,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "大圖遞迴 DFS 可能爆棧。",
     ],
     complexity: "顯式圖 `O(V + E)`；網格 `O(rows * cols * state_count)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {\n        int rows = mat.size();\n        int cols = mat[0].size();\n        const int kDirs[5] = {1, 0, -1, 0, 1};\n        vector<vector<int>> dist(rows, vector<int>(cols, -1));\n        queue<pair<int, int>> q;\n\n        for (int row = 0; row < rows; ++row) {\n            for (int col = 0; col < cols; ++col) {\n                if (mat[row][col] == 0) {\n                    dist[row][col] = 0;\n                    q.push({row, col});\n                }\n            }\n        }\n\n        while (!q.empty()) {\n            auto [row, col] = q.front();\n            q.pop();\n            for (int dir = 0; dir < 4; ++dir) {\n                int next_row = row + kDirs[dir];\n                int next_col = col + kDirs[dir + 1];\n                if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) continue;\n                if (dist[next_row][next_col] != -1) continue;\n                dist[next_row][next_col] = dist[row][col] + 1;\n                q.push({next_row, next_col});\n            }\n        }\n        return dist;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {\n    int rows = mat.size();\n    int cols = mat[0].size();\n    const int kDirs[5] = {1, 0, -1, 0, 1};\n    vector<vector<int>> dist(rows, vector<int>(cols, -1));\n    queue<pair<int, int>> q;\n\n    for (int row = 0; row < rows; ++row) {\n      for (int col = 0; col < cols; ++col) {\n        if (mat[row][col] == 0) {\n          dist[row][col] = 0;\n          q.push({row, col});\n        }\n      }\n    }\n\n    while (!q.empty()) {\n      auto [row, col] = q.front();\n      q.pop();\n      for (int dir = 0; dir < 4; ++dir) {\n        int next_row = row + kDirs[dir];\n        int next_col = col + kDirs[dir + 1];\n        if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) {\n          continue;\n        }\n        if (dist[next_row][next_col] != -1) {\n          continue;\n        }\n        dist[next_row][next_col] = dist[row][col] + 1;\n        q.push({next_row, next_col});\n      }\n    }\n    return dist;\n  }\n};\n```",
   },
   {
     key: "topological-dp",
@@ -834,7 +834,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "存在 cycle 時不可僅回傳最大 finish，必須標記無解。",
     ],
     complexity: "`O(V + E)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time) {\n        vector<vector<int>> graph(n);\n        vector<int> indegree(n, 0);\n        vector<int> finish(n, 0);\n        for (auto& edge : relations) {\n            int from = edge[0] - 1;\n            int to = edge[1] - 1;\n            graph[from].push_back(to);\n            indegree[to]++;\n        }\n\n        queue<int> q;\n        for (int node = 0; node < n; ++node) {\n            finish[node] = time[node];\n            if (indegree[node] == 0) q.push(node);\n        }\n\n        int seen = 0;\n        while (!q.empty()) {\n            int node = q.front();\n            q.pop();\n            seen++;\n            for (int next_node : graph[node]) {\n                finish[next_node] = max(finish[next_node], finish[node] + time[next_node]);\n                if (--indegree[next_node] == 0) q.push(next_node);\n            }\n        }\n        return seen == n ? *max_element(finish.begin(), finish.end()) : -1;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time) {\n    vector<vector<int>> graph(n);\n    vector<int> indegree(n, 0);\n    vector<int> finish(n, 0);\n    for (auto& edge : relations) {\n      int from = edge[0] - 1;\n      int to = edge[1] - 1;\n      graph[from].push_back(to);\n      indegree[to]++;\n    }\n\n    queue<int> q;\n    for (int node = 0; node < n; ++node) {\n      finish[node] = time[node];\n      if (indegree[node] == 0) {\n        q.push(node);\n      }\n    }\n\n    int seen = 0;\n    while (!q.empty()) {\n      int node = q.front();\n      q.pop();\n      seen++;\n      for (int next_node : graph[node]) {\n        finish[next_node] = max(finish[next_node], finish[node] + time[next_node]);\n        if (--indegree[next_node] == 0) {\n          q.push(next_node);\n        }\n      }\n    }\n    return seen == n ? *max_element(finish.begin(), finish.end()) : -1;\n  }\n};\n```",
   },
   {
     key: "dijkstra",
@@ -858,7 +858,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "額外資源會影響未來時，不可僅以 node 作為狀態。",
     ],
     complexity: "`O((V + E) log V)`；分層圖須乘上狀態層數。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<long long> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {\n        constexpr long long kInf = 4e18;\n        vector<long long> dist(n, kInf);\n        priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n        dist[source] = 0;\n        pq.push({0, source});\n\n        while (!pq.empty()) {\n            auto [current_dist, node] = pq.top();\n            pq.pop();\n            if (current_dist != dist[node]) continue;\n            for (auto [next_node, weight] : graph[node]) {\n                if (dist[next_node] > current_dist + weight) {\n                    dist[next_node] = current_dist + weight;\n                    pq.push({dist[next_node], next_node});\n                }\n            }\n        }\n        return dist;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<long long> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {\n    constexpr long long kInf = 4e18;\n    vector<long long> dist(n, kInf);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n    dist[source] = 0;\n    pq.push({0, source});\n\n    while (!pq.empty()) {\n      auto [current_dist, node] = pq.top();\n      pq.pop();\n      if (current_dist != dist[node]) {\n        continue;\n      }\n      for (auto [next_node, weight] : graph[node]) {\n        if (dist[next_node] > current_dist + weight) {\n          dist[next_node] = current_dist + weight;\n          pq.push({dist[next_node], next_node});\n        }\n      }\n    }\n    return dist;\n  }\n};\n```",
   },
   {
     key: "mst",
@@ -880,7 +880,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     patterns: ["Kruskal + DSU", "Prim + heap", "最大生成樹", "瓶頸生成樹"],
     pitfalls: ["有向圖不可直接套用 MST。", "邊權排序鍵寫錯會破壞貪心。"],
     complexity: "Kruskal 時間 `O(E log E)`，空間 `O(V + E)`。",
-    code: "```cpp\nclass Dsu {\n    vector<int> parent_;\n    vector<int> size_;\n\npublic:\n    explicit Dsu(int n) : parent_(n), size_(n, 1) {\n        iota(parent_.begin(), parent_.end(), 0);\n    }\n\n    int find(int x) {\n        if (parent_[x] == x) return x;\n        return parent_[x] = find(parent_[x]);\n    }\n\n    bool unite(int a, int b) {\n        int root_a = find(a);\n        int root_b = find(b);\n        if (root_a == root_b) return false;\n        if (size_[root_a] < size_[root_b]) swap(root_a, root_b);\n        parent_[root_b] = root_a;\n        size_[root_a] += size_[root_b];\n        return true;\n    }\n};\n\nclass Solution {\npublic:\n    long long minimumSpanningTree(int n, vector<array<int, 3>>& edges) {\n        sort(edges.begin(), edges.end()); // {weight, from, to}\n        Dsu dsu(n);\n        long long total = 0;\n        int picked = 0;\n        for (auto [weight, from, to] : edges) {\n            if (dsu.unite(from, to)) {\n                total += weight;\n                picked++;\n            }\n        }\n        return picked == n - 1 ? total : -1;\n    }\n};\n```",
+    code: "```cpp\nclass Dsu {\n  vector<int> parent_;\n  vector<int> size_;\n\n public:\n  explicit Dsu(int n) : parent_(n), size_(n, 1) { iota(parent_.begin(), parent_.end(), 0); }\n\n  int find(int x) {\n    if (parent_[x] == x) {\n      return x;\n    }\n    return parent_[x] = find(parent_[x]);\n  }\n\n  bool unite(int a, int b) {\n    int root_a = find(a);\n    int root_b = find(b);\n    if (root_a == root_b) {\n      return false;\n    }\n    if (size_[root_a] < size_[root_b]) {\n      swap(root_a, root_b);\n    }\n    parent_[root_b] = root_a;\n    size_[root_a] += size_[root_b];\n    return true;\n  }\n};\n\nclass Solution {\n public:\n  long long minimumSpanningTree(int n, vector<array<int, 3>>& edges) {\n    sort(edges.begin(), edges.end());  // {weight, from, to}\n    Dsu dsu(n);\n    long long total = 0;\n    int picked = 0;\n    for (auto [weight, from, to] : edges) {\n      if (dsu.unite(from, to)) {\n        total += weight;\n        picked++;\n      }\n    }\n    return picked == n - 1 ? total : -1;\n  }\n};\n```",
   },
   {
     key: "low-link",
@@ -918,7 +918,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "SCC 為有向圖概念，不等同無向連通塊。",
     ],
     complexity: "`O(V + E)`。",
-    code: "```cpp\nclass Solution {\n    vector<vector<pair<int, int>>> graph_;\n    vector<int> dfn_;\n    vector<int> low_;\n    vector<vector<int>> bridges_;\n    int timer_ = 0;\n\n    void dfs(int node, int parent_edge) {\n        dfn_[node] = low_[node] = ++timer_;\n        for (auto [next_node, edge_id] : graph_[node]) {\n            if (edge_id == parent_edge) continue;\n            if (dfn_[next_node] == 0) {\n                dfs(next_node, edge_id);\n                low_[node] = min(low_[node], low_[next_node]);\n                if (low_[next_node] > dfn_[node]) {\n                    bridges_.push_back({node, next_node});\n                }\n            } else {\n                low_[node] = min(low_[node], dfn_[next_node]);\n            }\n        }\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  vector<vector<pair<int, int>>> graph_;\n  vector<int> dfn_;\n  vector<int> low_;\n  vector<vector<int>> bridges_;\n  int timer_ = 0;\n\n  void dfs(int node, int parent_edge) {\n    dfn_[node] = low_[node] = ++timer_;\n    for (auto [next_node, edge_id] : graph_[node]) {\n      if (edge_id == parent_edge) {\n        continue;\n      }\n      if (dfn_[next_node] == 0) {\n        dfs(next_node, edge_id);\n        low_[node] = min(low_[node], low_[next_node]);\n        if (low_[next_node] > dfn_[node]) {\n          bridges_.push_back({node, next_node});\n        }\n      } else {\n        low_[node] = min(low_[node], dfn_[next_node]);\n      }\n    }\n  }\n};\n```",
   },
   {
     key: "network-flow",
@@ -942,7 +942,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "反向邊缺失會導致無法撤銷錯誤增廣。",
     ],
     complexity: "Dinic 複雜度視圖性質而定，二分圖匹配場合通常表現穩定。",
-    code: "```cpp\nstruct Edge {\n    int to;\n    int rev;\n    long long cap;\n};\n\nclass Dinic {\n    vector<vector<Edge>> graph_;\n    vector<int> level_;\n    vector<int> iter_;\n\npublic:\n    explicit Dinic(int n) : graph_(n), level_(n), iter_(n) {}\n\n    void addEdge(int from, int to, long long cap) {\n        Edge forward{to, (int)graph_[to].size(), cap};\n        Edge backward{from, (int)graph_[from].size(), 0};\n        graph_[from].push_back(forward);\n        graph_[to].push_back(backward);\n    }\n};\n```",
+    code: "```cpp\nstruct Edge {\n  int to;\n  int rev;\n  long long cap;\n};\n\nclass Dinic {\n  vector<vector<Edge>> graph_;\n  vector<int> level_;\n  vector<int> iter_;\n\n public:\n  explicit Dinic(int n) : graph_(n), level_(n), iter_(n) {}\n\n  void addEdge(int from, int to, long long cap) {\n    Edge forward{to, (int)graph_[to].size(), cap};\n    Edge backward{from, (int)graph_[from].size(), 0};\n    graph_[from].push_back(forward);\n    graph_[to].push_back(backward);\n  }\n};\n```",
   },
   {
     key: "greedy-interval",
@@ -966,7 +966,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "覆蓋問題未必可直接按右端點選取。",
     ],
     complexity: "排序 `O(n log n)`，掃描 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int eraseOverlapIntervals(vector<vector<int>>& intervals) {\n        sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) {\n            return lhs[1] < rhs[1];\n        });\n\n        int kept = 0;\n        int last_end = INT_MIN;\n        for (const auto& interval : intervals) {\n            if (interval[0] >= last_end) {\n                kept++;\n                last_end = interval[1];\n            }\n        }\n        return intervals.size() - kept;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int eraseOverlapIntervals(vector<vector<int>>& intervals) {\n    sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) { return lhs[1] < rhs[1]; });\n\n    int kept = 0;\n    int last_end = INT_MIN;\n    for (const auto& interval : intervals) {\n      if (interval[0] >= last_end) {\n        kept++;\n        last_end = interval[1];\n      }\n    }\n    return intervals.size() - kept;\n  }\n};\n```",
   },
   {
     key: "math-number-theory",
@@ -1000,7 +1000,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "模除法要求除數可逆。",
     ],
     complexity: "Euclid `O(log V)`；篩法 `O(n log log n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long gcdLl(long long a, long long b) {\n        while (b != 0) {\n            long long next_a = b;\n            long long next_b = a % b;\n            a = next_a;\n            b = next_b;\n        }\n        return a;\n    }\n\n    long long lcmLl(long long a, long long b) {\n        return a / gcdLl(a, b) * b;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long gcdLl(long long a, long long b) {\n    while (b != 0) {\n      long long next_a = b;\n      long long next_b = a % b;\n      a = next_a;\n      b = next_b;\n    }\n    return a;\n  }\n\n  long long lcmLl(long long a, long long b) { return a / gcdLl(a, b) * b; }\n};\n```",
   },
   {
     key: "kmp",
@@ -1024,7 +1024,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "pi 的語意不同於 Z function。",
     ],
     complexity: "`O(n + m)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> prefixFunction(const string& pattern) {\n        vector<int> pi(pattern.size());\n        for (int i = 1; i < (int)pattern.size(); ++i) {\n            int matched = pi[i - 1];\n            while (matched > 0 && pattern[i] != pattern[matched]) {\n                matched = pi[matched - 1];\n            }\n            if (pattern[i] == pattern[matched]) matched++;\n            pi[i] = matched;\n        }\n        return pi;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> prefixFunction(const string& pattern) {\n    vector<int> pi(pattern.size());\n    for (int i = 1; i < (int)pattern.size(); ++i) {\n      int matched = pi[i - 1];\n      while (matched > 0 && pattern[i] != pattern[matched]) {\n        matched = pi[matched - 1];\n      }\n      if (pattern[i] == pattern[matched]) {\n        matched++;\n      }\n      pi[i] = matched;\n    }\n    return pi;\n  }\n};\n```",
   },
   {
     key: "tree-linked-binary",
@@ -1071,7 +1071,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "路徑題須分清向下路徑與任意兩點路徑。",
     ],
     complexity: "通常 `O(n)` 時間；鏈表額外空間 `O(1)`，樹遞迴棧 `O(height)`。",
-    code: "```cpp\nstruct TreeNode {\n    int val;\n    TreeNode* left;\n    TreeNode* right;\n};\n\nclass Solution {\n    int answer_ = 0;\n\n    int depth(TreeNode* node) {\n        if (node == nullptr) return 0;\n        int left_depth = depth(node->left);\n        int right_depth = depth(node->right);\n        answer_ = max(answer_, left_depth + right_depth);\n        return max(left_depth, right_depth) + 1;\n    }\n\npublic:\n    int diameterOfBinaryTree(TreeNode* root) {\n        depth(root);\n        return answer_;\n    }\n};\n```",
+    code: "```cpp\nstruct TreeNode {\n  int val;\n  TreeNode* left;\n  TreeNode* right;\n};\n\nclass Solution {\n  int answer_ = 0;\n\n  int depth(TreeNode* node) {\n    if (node == nullptr) {\n      return 0;\n    }\n    int left_depth = depth(node->left);\n    int right_depth = depth(node->right);\n    answer_ = max(answer_, left_depth + right_depth);\n    return max(left_depth, right_depth) + 1;\n  }\n\n public:\n  int diameterOfBinaryTree(TreeNode* root) {\n    depth(root);\n    return answer_;\n  }\n};\n```",
   },
   {
     key: "backtracking",
@@ -1117,7 +1117,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     complexity:
       "與方案數同階：子集 `O(2^n * n)`、排列 `O(n! * n)`、組合視題而定。",
-    code: "```cpp\n// 子集型與排列型回溯範本\nclass Solution {\npublic:\n    // 子集：每個元素選或不選\n    vector<vector<int>> subsets(vector<int>& nums) {\n        vector<vector<int>> ans;\n        vector<int> path;\n        function<void(int)> dfs = [&](int start) {\n            ans.push_back(path);\n            for (int i = start; i < (int)nums.size(); ++i) {\n                path.push_back(nums[i]);\n                dfs(i + 1);\n                path.pop_back(); // 撤銷選擇\n            }\n        };\n        dfs(0);\n        return ans;\n    }\n\n    // 排列：用 used 標記避免重複使用同一元素\n    vector<vector<int>> permute(vector<int>& nums) {\n        vector<vector<int>> ans;\n        vector<int> path;\n        vector<char> used(nums.size(), false);\n        function<void()> dfs = [&]() {\n            if (path.size() == nums.size()) {\n                ans.push_back(path);\n                return;\n            }\n            for (int i = 0; i < (int)nums.size(); ++i) {\n                if (used[i]) continue;\n                used[i] = true;\n                path.push_back(nums[i]);\n                dfs();\n                path.pop_back();\n                used[i] = false;\n            }\n        };\n        dfs();\n        return ans;\n    }\n};\n```",
+    code: "```cpp\n// 子集型與排列型回溯範本\nclass Solution {\n public:\n  // 子集：每個元素選或不選\n  vector<vector<int>> subsets(vector<int>& nums) {\n    vector<vector<int>> ans;\n    vector<int> path;\n    function<void(int)> dfs = [&](int start) {\n      ans.push_back(path);\n      for (int i = start; i < (int)nums.size(); ++i) {\n        path.push_back(nums[i]);\n        dfs(i + 1);\n        path.pop_back();  // 撤銷選擇\n      }\n    };\n    dfs(0);\n    return ans;\n  }\n\n  // 排列：用 used 標記避免重複使用同一元素\n  vector<vector<int>> permute(vector<int>& nums) {\n    vector<vector<int>> ans;\n    vector<int> path;\n    vector<char> used(nums.size(), false);\n    function<void()> dfs = [&]() {\n      if (path.size() == nums.size()) {\n        ans.push_back(path);\n        return;\n      }\n      for (int i = 0; i < (int)nums.size(); ++i) {\n        if (used[i]) {\n          continue;\n        }\n        used[i] = true;\n        path.push_back(nums[i]);\n        dfs();\n        path.pop_back();\n        used[i] = false;\n      }\n    };\n    dfs();\n    return ans;\n  }\n};\n```",
   },
   {
     key: "bitwise-contribution",
@@ -1147,7 +1147,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "XOR 的計數公式不可直接套用於 OR/AND。",
     ],
     complexity: "常見為 `O(n * B)`，`B` 為 bit 數。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long pairXorSum(vector<int>& nums) {\n        long long answer = 0;\n        for (int bit = 0; bit < 31; ++bit) {\n            long long ones = 0;\n            for (int x : nums) {\n                ones += (x >> bit) & 1;\n            }\n            long long zeros = nums.size() - ones;\n            answer += ones * zeros * (1LL << bit);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long pairXorSum(vector<int>& nums) {\n    long long answer = 0;\n    for (int bit = 0; bit < 31; ++bit) {\n      long long ones = 0;\n      for (int x : nums) {\n        ones += (x >> bit) & 1;\n      }\n      long long zeros = nums.size() - ones;\n      answer += ones * zeros * (1LL << bit);\n    }\n    return answer;\n  }\n};\n```",
   },
   {
     key: "linear-basis",
@@ -1184,7 +1184,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "bit 上限須依值域決定，`long long` 通常取 60 至 62 位。",
     ],
     complexity: "每次插入或查詢 `O(B)`，`B` 為 bit 數。",
-    code: "```cpp\nclass XorBasis {\n    static constexpr int kMaxBit = 60;\n    array<long long, kMaxBit + 1> basis_{};\n\npublic:\n    void insert(long long x) {\n        for (int bit = kMaxBit; bit >= 0; --bit) {\n            if (((x >> bit) & 1LL) == 0) continue;\n            if (basis_[bit] == 0) {\n                basis_[bit] = x;\n                return;\n            }\n            x ^= basis_[bit];\n        }\n    }\n\n    long long maxXor() const {\n        long long answer = 0;\n        for (int bit = kMaxBit; bit >= 0; --bit) {\n            answer = max(answer, answer ^ basis_[bit]);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass XorBasis {\n  static constexpr int kMaxBit = 60;\n  array<long long, kMaxBit + 1> basis_{};\n\n public:\n  void insert(long long x) {\n    for (int bit = kMaxBit; bit >= 0; --bit) {\n      if (((x >> bit) & 1LL) == 0) {\n        continue;\n      }\n      if (basis_[bit] == 0) {\n        basis_[bit] = x;\n        return;\n      }\n      x ^= basis_[bit];\n    }\n  }\n\n  long long maxXor() const {\n    long long answer = 0;\n    for (int bit = kMaxBit; bit >= 0; --bit) {\n      answer = max(answer, answer ^ basis_[bit]);\n    }\n    return answer;\n  }\n};\n```",
   },
   {
     key: "greedy-general",
@@ -1226,7 +1226,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "反悔貪心必須說明被移除者永不比留下者更值得保留。",
     ],
     complexity: "通常排序 `O(n log n)`，每個候選進出 heap 一次。",
-    code: "```cpp\nclass Solution {\npublic:\n    int scheduleCourse(vector<vector<int>>& courses) {\n        sort(courses.begin(), courses.end(), [](const auto& lhs, const auto& rhs) {\n            return lhs[1] < rhs[1];\n        });\n\n        priority_queue<int> chosen_durations;\n        int used_time = 0;\n        for (const auto& course : courses) {\n            int duration = course[0];\n            int last_day = course[1];\n            used_time += duration;\n            chosen_durations.push(duration);\n            if (used_time > last_day) {\n                used_time -= chosen_durations.top();\n                chosen_durations.pop();\n            }\n        }\n        return chosen_durations.size();\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int scheduleCourse(vector<vector<int>>& courses) {\n    sort(courses.begin(), courses.end(), [](const auto& lhs, const auto& rhs) { return lhs[1] < rhs[1]; });\n\n    priority_queue<int> chosen_durations;\n    int used_time = 0;\n    for (const auto& course : courses) {\n      int duration = course[0];\n      int last_day = course[1];\n      used_time += duration;\n      chosen_durations.push(duration);\n      if (used_time > last_day) {\n        used_time -= chosen_durations.top();\n        chosen_durations.pop();\n      }\n    }\n    return chosen_durations.size();\n  }\n};\n```",
   },
   {
     key: "manacher",
@@ -1257,7 +1257,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "使用分隔符版本時，原字串 index 與處理後 index 須分清。",
     ],
     complexity: "`O(n)` 時間與 `O(n)` 空間。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> manacherOdd(const string& s) {\n        int n = s.size();\n        vector<int> radius(n);\n        int left = 0;\n        int right = -1;\n        for (int i = 0; i < n; ++i) {\n            int k = (i > right) ? 1 : min(radius[left + right - i], right - i + 1);\n            while (0 <= i - k && i + k < n && s[i - k] == s[i + k]) k++;\n            radius[i] = k--;\n            if (i + k > right) {\n                left = i - k;\n                right = i + k;\n            }\n        }\n        return radius;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> manacherOdd(const string& s) {\n    int n = s.size();\n    vector<int> radius(n);\n    int left = 0;\n    int right = -1;\n    for (int i = 0; i < n; ++i) {\n      int k = (i > right) ? 1 : min(radius[left + right - i], right - i + 1);\n      while (0 <= i - k && i + k < n && s[i - k] == s[i + k]) {\n        k++;\n      }\n      radius[i] = k--;\n      if (i + k > right) {\n        left = i - k;\n        right = i + k;\n      }\n    }\n    return radius;\n  }\n};\n```",
   },
   {
     key: "string-tools",
@@ -1305,7 +1305,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "Hash 有碰撞風險，嚴格場合須採雙 hash 或額外驗證。",
     ],
     complexity: "多數預處理為 `O(n)` 或 `O(總字元數)`，查詢視工具而定。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> zFunction(const string& s) {\n        int n = s.size();\n        vector<int> z(n, 0);\n        int left = 0;\n        int right = 0;\n        for (int i = 1; i < n; ++i) {\n            if (i <= right) {\n                z[i] = min(right - i + 1, z[i - left]);\n            }\n            while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;\n            if (i + z[i] - 1 > right) {\n                left = i;\n                right = i + z[i] - 1;\n            }\n        }\n        return z;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> zFunction(const string& s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    int left = 0;\n    int right = 0;\n    for (int i = 1; i < n; ++i) {\n      if (i <= right) {\n        z[i] = min(right - i + 1, z[i - left]);\n      }\n      while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {\n        z[i]++;\n      }\n      if (i + z[i] - 1 > right) {\n        left = i;\n        right = i + z[i] - 1;\n      }\n    }\n    return z;\n  }\n};\n```",
   },
   {
     key: "combinatorics-geometry",
@@ -1354,7 +1354,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
     ],
     pitfalls: ["排列與組合不可混用。", "幾何題須處理共線、重點與浮點誤差。"],
     complexity: "組合預處理常為 `O(n)`；凸包通常 `O(n log n)`。",
-    code: "```cpp\nstruct Point {\n    long long x;\n    long long y;\n};\n\nlong long cross(Point origin, Point a, Point b) {\n    long long ax = a.x - origin.x;\n    long long ay = a.y - origin.y;\n    long long bx = b.x - origin.x;\n    long long by = b.y - origin.y;\n    return ax * by - ay * bx;\n}\n```",
+    code: "```cpp\nstruct Point {\n  long long x;\n  long long y;\n};\n\nlong long cross(Point origin, Point a, Point b) {\n  long long ax = a.x - origin.x;\n  long long ay = a.y - origin.y;\n  long long bx = b.x - origin.x;\n  long long by = b.y - origin.y;\n  return ax * by - ay * bx;\n}\n```",
   },
 ];
 
@@ -1679,7 +1679,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "每次檢查 `O(|s| + k)`；總時間 `O((|s| + m) log m)`，空間 `O(|s|)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int maximumRemovals(string s, string p, vector<int>& removable) {\n        auto canRemove = [&s, &p, &removable](int count) {\n            vector<int> removed(s.size(), 0);\n            for (int i = 0; i < count; ++i) removed[removable[i]] = 1;\n\n            int matched = 0;\n            for (int i = 0; i < (int)s.size() && matched < (int)p.size(); ++i) {\n                if (!removed[i] && s[i] == p[matched]) matched++;\n            }\n            return matched == (int)p.size();\n        };\n\n        int left = 0;\n        int right = removable.size();\n        while (left < right) {\n            int mid = left + (right - left + 1) / 2;\n            if (canRemove(mid)) {\n                left = mid;\n            } else {\n                right = mid - 1;\n            }\n        }\n        return left;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int maximumRemovals(string s, string p, vector<int>& removable) {\n    auto canRemove = [&s, &p, &removable](int count) {\n      vector<int> removed(s.size(), 0);\n      for (int i = 0; i < count; ++i) {\n        removed[removable[i]] = 1;\n      }\n\n      int matched = 0;\n      for (int i = 0; i < (int)s.size() && matched < (int)p.size(); ++i) {\n        if (!removed[i] && s[i] == p[matched]) {\n          matched++;\n        }\n      }\n      return matched == (int)p.size();\n    };\n\n    int left = 0;\n    int right = removable.size();\n    while (left < right) {\n      int mid = left + (right - left + 1) / 2;\n      if (canRemove(mid)) {\n        left = mid;\n      } else {\n        right = mid - 1;\n      }\n    }\n    return left;\n  }\n};\n```",
   },
   "number-of-wonderful-substrings": {
     modelProblem:
@@ -1708,7 +1708,7 @@ export const exampleLectureOverrides: NonNullable<
       "答案可能超過 int，須使用 `long long`。",
     ],
     complexity: "每個位置枚舉 10 個 bit，時間 `O(10n)`，空間 `O(2^{10})`。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long wonderfulSubstrings(string word) {\n        vector<long long> count(1 << 10, 0);\n        count[0] = 1;\n        int mask = 0;\n        long long answer = 0;\n\n        for (char ch : word) {\n            mask ^= 1 << (ch - 'a');\n            answer += count[mask];\n            for (int bit = 0; bit < 10; ++bit) {\n                answer += count[mask ^ (1 << bit)];\n            }\n            count[mask]++;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long wonderfulSubstrings(string word) {\n    vector<long long> count(1 << 10, 0);\n    count[0] = 1;\n    int mask = 0;\n    long long answer = 0;\n\n    for (char ch : word) {\n      mask ^= 1 << (ch - 'a');\n      answer += count[mask];\n      for (int bit = 0; bit < 10; ++bit) {\n        answer += count[mask ^ (1 << bit)];\n      }\n      count[mask]++;\n    }\n    return answer;\n  }\n};\n```",
   },
   "zero-array-transformation-iii": {
     modelProblem:
@@ -1737,7 +1737,7 @@ export const exampleLectureOverrides: NonNullable<
       "回傳的是可移除查詢數，而非已選查詢數。",
     ],
     complexity: "排序與 heap 操作總時間 `O((n + q) log q)`，空間 `O(n + q)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int maxRemoval(vector<int>& nums, vector<vector<int>>& queries) {\n        sort(queries.begin(), queries.end());\n        priority_queue<int> available_right;\n        vector<int> diff(nums.size() + 1, 0);\n        int query_index = 0;\n        int coverage = 0;\n        int used = 0;\n\n        for (int i = 0; i < (int)nums.size(); ++i) {\n            coverage += diff[i];\n            while (query_index < (int)queries.size() && queries[query_index][0] <= i) {\n                available_right.push(queries[query_index][1]);\n                query_index++;\n            }\n            while (coverage < nums[i]) {\n                while (!available_right.empty() && available_right.top() < i) available_right.pop();\n                if (available_right.empty()) return -1;\n                int right = available_right.top();\n                available_right.pop();\n                coverage++;\n                diff[right + 1]--;\n                used++;\n            }\n        }\n        return queries.size() - used;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int maxRemoval(vector<int>& nums, vector<vector<int>>& queries) {\n    sort(queries.begin(), queries.end());\n    priority_queue<int> available_right;\n    vector<int> diff(nums.size() + 1, 0);\n    int query_index = 0;\n    int coverage = 0;\n    int used = 0;\n\n    for (int i = 0; i < (int)nums.size(); ++i) {\n      coverage += diff[i];\n      while (query_index < (int)queries.size() && queries[query_index][0] <= i) {\n        available_right.push(queries[query_index][1]);\n        query_index++;\n      }\n      while (coverage < nums[i]) {\n        while (!available_right.empty() && available_right.top() < i) {\n          available_right.pop();\n        }\n        if (available_right.empty()) {\n          return -1;\n        }\n        int right = available_right.top();\n        available_right.pop();\n        coverage++;\n        diff[right + 1]--;\n        used++;\n      }\n    }\n    return queries.size() - used;\n  }\n};\n```",
   },
   "number-of-pairs-satisfying-inequality": {
     modelProblem:
@@ -1765,7 +1765,7 @@ export const exampleLectureOverrides: NonNullable<
       "答案須使用 `long long`。",
     ],
     complexity: "離散化 `O(n log n)`，每次查詢與更新 `O(log n)`。",
-    code: "```cpp\nclass Fenwick {\n    vector<int> tree_;\n\npublic:\n    explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n    void add(int index, int delta) {\n        for (++index; index < (int)tree_.size(); index += index & -index) tree_[index] += delta;\n    }\n\n    int prefixSum(int index) const {\n        int sum = 0;\n        for (++index; index > 0; index -= index & -index) sum += tree_[index];\n        return sum;\n    }\n};\n\nclass Solution {\npublic:\n    long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {\n        vector<int> values;\n        vector<int> arr(nums1.size());\n        for (int i = 0; i < (int)nums1.size(); ++i) {\n            arr[i] = nums1[i] - nums2[i];\n            values.push_back(arr[i]);\n            values.push_back(arr[i] + diff);\n        }\n        sort(values.begin(), values.end());\n        values.erase(unique(values.begin(), values.end()), values.end());\n\n        Fenwick fenwick(values.size());\n        long long answer = 0;\n        for (int x : arr) {\n            int limit_index = upper_bound(values.begin(), values.end(), x + diff) - values.begin() - 1;\n            answer += fenwick.prefixSum(limit_index);\n            int index = lower_bound(values.begin(), values.end(), x) - values.begin();\n            fenwick.add(index, 1);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Fenwick {\n  vector<int> tree_;\n\n public:\n  explicit Fenwick(int n) : tree_(n + 1, 0) {}\n\n  void add(int index, int delta) {\n    for (++index; index < (int)tree_.size(); index += index & -index) {\n      tree_[index] += delta;\n    }\n  }\n\n  int prefixSum(int index) const {\n    int sum = 0;\n    for (++index; index > 0; index -= index & -index) {\n      sum += tree_[index];\n    }\n    return sum;\n  }\n};\n\nclass Solution {\n public:\n  long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {\n    vector<int> values;\n    vector<int> arr(nums1.size());\n    for (int i = 0; i < (int)nums1.size(); ++i) {\n      arr[i] = nums1[i] - nums2[i];\n      values.push_back(arr[i]);\n      values.push_back(arr[i] + diff);\n    }\n    sort(values.begin(), values.end());\n    values.erase(unique(values.begin(), values.end()), values.end());\n\n    Fenwick fenwick(values.size());\n    long long answer = 0;\n    for (int x : arr) {\n      int limit_index = upper_bound(values.begin(), values.end(), x + diff) - values.begin() - 1;\n      answer += fenwick.prefixSum(limit_index);\n      int index = lower_bound(values.begin(), values.end(), x) - values.begin();\n      fenwick.add(index, 1);\n    }\n    return answer;\n  }\n};\n```",
   },
   "shortest-path-in-a-grid-with-obstacles-elimination": {
     modelProblem:
@@ -1795,7 +1795,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "最壞時間 `O(rows * cols * k)`，採用 best 剪枝後空間 `O(rows * cols)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int shortestPath(vector<vector<int>>& grid, int k) {\n        int rows = grid.size();\n        int cols = grid[0].size();\n        const int kDirs[5] = {1, 0, -1, 0, 1};\n        vector<vector<int>> best(rows, vector<int>(cols, -1));\n        queue<array<int, 4>> q;\n\n        best[0][0] = k;\n        q.push({0, 0, k, 0});\n        while (!q.empty()) {\n            auto [row, col, remaining, dist] = q.front();\n            q.pop();\n            if (row == rows - 1 && col == cols - 1) return dist;\n            for (int dir = 0; dir < 4; ++dir) {\n                int next_row = row + kDirs[dir];\n                int next_col = col + kDirs[dir + 1];\n                if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) continue;\n                int next_remaining = remaining - grid[next_row][next_col];\n                if (next_remaining < 0 || next_remaining <= best[next_row][next_col]) continue;\n                best[next_row][next_col] = next_remaining;\n                q.push({next_row, next_col, next_remaining, dist + 1});\n            }\n        }\n        return -1;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int shortestPath(vector<vector<int>>& grid, int k) {\n    int rows = grid.size();\n    int cols = grid[0].size();\n    const int kDirs[5] = {1, 0, -1, 0, 1};\n    vector<vector<int>> best(rows, vector<int>(cols, -1));\n    queue<array<int, 4>> q;\n\n    best[0][0] = k;\n    q.push({0, 0, k, 0});\n    while (!q.empty()) {\n      auto [row, col, remaining, dist] = q.front();\n      q.pop();\n      if (row == rows - 1 && col == cols - 1) {\n        return dist;\n      }\n      for (int dir = 0; dir < 4; ++dir) {\n        int next_row = row + kDirs[dir];\n        int next_col = col + kDirs[dir + 1];\n        if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) {\n          continue;\n        }\n        int next_remaining = remaining - grid[next_row][next_col];\n        if (next_remaining < 0 || next_remaining <= best[next_row][next_col]) {\n          continue;\n        }\n        best[next_row][next_col] = next_remaining;\n        q.push({next_row, next_col, next_remaining, dist + 1});\n      }\n    }\n    return -1;\n  }\n};\n```",
   },
   "checking-existence-of-edge-length-limited-paths": {
     modelProblem:
@@ -1823,7 +1823,7 @@ export const exampleLectureOverrides: NonNullable<
       "DSU 不支援刪邊，故必須使 limit 單調遞增。",
     ],
     complexity: "排序 `O((E + Q) log(E + Q))`，DSU 操作近似線性。",
-    code: "```cpp\nclass Dsu {\n    vector<int> parent_;\n    vector<int> size_;\n\npublic:\n    explicit Dsu(int n) : parent_(n), size_(n, 1) { iota(parent_.begin(), parent_.end(), 0); }\n    int find(int x) { return parent_[x] == x ? x : parent_[x] = find(parent_[x]); }\n    void unite(int a, int b) {\n        int root_a = find(a), root_b = find(b);\n        if (root_a == root_b) return;\n        if (size_[root_a] < size_[root_b]) swap(root_a, root_b);\n        parent_[root_b] = root_a;\n        size_[root_a] += size_[root_b];\n    }\n};\n\nclass Solution {\npublic:\n    vector<bool> distanceLimitedPathsExist(int n, vector<vector<int>>& edgeList, vector<vector<int>>& queries) {\n        sort(edgeList.begin(), edgeList.end(), [](const auto& lhs, const auto& rhs) { return lhs[2] < rhs[2]; });\n        vector<array<int, 4>> ordered_queries;\n        for (int i = 0; i < (int)queries.size(); ++i) ordered_queries.push_back({queries[i][2], queries[i][0], queries[i][1], i});\n        sort(ordered_queries.begin(), ordered_queries.end());\n\n        Dsu dsu(n);\n        vector<bool> answer(queries.size());\n        int edge_index = 0;\n        for (auto [limit, from, to, query_id] : ordered_queries) {\n            while (edge_index < (int)edgeList.size() && edgeList[edge_index][2] < limit) {\n                dsu.unite(edgeList[edge_index][0], edgeList[edge_index][1]);\n                edge_index++;\n            }\n            answer[query_id] = dsu.find(from) == dsu.find(to);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Dsu {\n  vector<int> parent_;\n  vector<int> size_;\n\n public:\n  explicit Dsu(int n) : parent_(n), size_(n, 1) { iota(parent_.begin(), parent_.end(), 0); }\n  int find(int x) { return parent_[x] == x ? x : parent_[x] = find(parent_[x]); }\n  void unite(int a, int b) {\n    int root_a = find(a), root_b = find(b);\n    if (root_a == root_b) {\n      return;\n    }\n    if (size_[root_a] < size_[root_b]) {\n      swap(root_a, root_b);\n    }\n    parent_[root_b] = root_a;\n    size_[root_a] += size_[root_b];\n  }\n};\n\nclass Solution {\n public:\n  vector<bool> distanceLimitedPathsExist(int n, vector<vector<int>>& edgeList, vector<vector<int>>& queries) {\n    sort(edgeList.begin(), edgeList.end(), [](const auto& lhs, const auto& rhs) { return lhs[2] < rhs[2]; });\n    vector<array<int, 4>> ordered_queries;\n    for (int i = 0; i < (int)queries.size(); ++i) {\n      ordered_queries.push_back({queries[i][2], queries[i][0], queries[i][1], i});\n    }\n    sort(ordered_queries.begin(), ordered_queries.end());\n\n    Dsu dsu(n);\n    vector<bool> answer(queries.size());\n    int edge_index = 0;\n    for (auto [limit, from, to, query_id] : ordered_queries) {\n      while (edge_index < (int)edgeList.size() && edgeList[edge_index][2] < limit) {\n        dsu.unite(edgeList[edge_index][0], edgeList[edge_index][1]);\n        edge_index++;\n      }\n      answer[query_id] = dsu.find(from) == dsu.find(to);\n    }\n    return answer;\n  }\n};\n```",
   },
   "sum-of-total-strength-of-wizards": {
     modelProblem:
@@ -1852,7 +1852,7 @@ export const exampleLectureOverrides: NonNullable<
       "二階前綴陣列下標易偏移，須統一使用半開區間。",
     ],
     complexity: "單調棧與貢獻計算皆為 `O(n)`，空間 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int totalStrength(vector<int>& strength) {\n        constexpr long long kMod = 1'000'000'007;\n        int n = strength.size();\n        vector<int> left(n), right(n, n), stack;\n\n        for (int i = 0; i < n; ++i) {\n            while (!stack.empty() && strength[stack.back()] >= strength[i]) stack.pop_back();\n            left[i] = stack.empty() ? -1 : stack.back();\n            stack.push_back(i);\n        }\n        stack.clear();\n        for (int i = n - 1; i >= 0; --i) {\n            while (!stack.empty() && strength[stack.back()] > strength[i]) stack.pop_back();\n            right[i] = stack.empty() ? n : stack.back();\n            stack.push_back(i);\n        }\n\n        vector<long long> prefix(n + 1), prefix_prefix(n + 2);\n        for (int i = 0; i < n; ++i) {\n            prefix[i + 1] = (prefix[i] + strength[i]) % kMod;\n            prefix_prefix[i + 2] = (prefix_prefix[i + 1] + prefix[i + 1]) % kMod;\n        }\n\n        long long answer = 0;\n        for (int i = 0; i < n; ++i) {\n            long long left_count = i - left[i];\n            long long right_count = right[i] - i;\n            long long right_sum = (prefix_prefix[right[i] + 1] - prefix_prefix[i + 1] + kMod) % kMod;\n            long long left_sum = (prefix_prefix[i + 1] - prefix_prefix[left[i] + 1] + kMod) % kMod;\n            long long total = (right_sum * left_count - left_sum * right_count) % kMod;\n            answer = (answer + strength[i] * total) % kMod;\n        }\n        return (answer + kMod) % kMod;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int totalStrength(vector<int>& strength) {\n    constexpr long long kMod = 1'000'000'007;\n    int n = strength.size();\n    vector<int> left(n), right(n, n), stack;\n\n    for (int i = 0; i < n; ++i) {\n      while (!stack.empty() && strength[stack.back()] >= strength[i]) {\n        stack.pop_back();\n      }\n      left[i] = stack.empty() ? -1 : stack.back();\n      stack.push_back(i);\n    }\n    stack.clear();\n    for (int i = n - 1; i >= 0; --i) {\n      while (!stack.empty() && strength[stack.back()] > strength[i]) {\n        stack.pop_back();\n      }\n      right[i] = stack.empty() ? n : stack.back();\n      stack.push_back(i);\n    }\n\n    vector<long long> prefix(n + 1), prefix_prefix(n + 2);\n    for (int i = 0; i < n; ++i) {\n      prefix[i + 1] = (prefix[i] + strength[i]) % kMod;\n      prefix_prefix[i + 2] = (prefix_prefix[i + 1] + prefix[i + 1]) % kMod;\n    }\n\n    long long answer = 0;\n    for (int i = 0; i < n; ++i) {\n      long long left_count = i - left[i];\n      long long right_count = right[i] - i;\n      long long right_sum = (prefix_prefix[right[i] + 1] - prefix_prefix[i + 1] + kMod) % kMod;\n      long long left_sum = (prefix_prefix[i + 1] - prefix_prefix[left[i] + 1] + kMod) % kMod;\n      long long total = (right_sum * left_count - left_sum * right_count) % kMod;\n      answer = (answer + strength[i] * total) % kMod;\n    }\n    return (answer + kMod) % kMod;\n  }\n};\n```",
   },
   "sum-of-subarray-minimums": {
     modelProblem:
@@ -1878,7 +1878,7 @@ export const exampleLectureOverrides: NonNullable<
       "乘法須使用 `long long`。",
     ],
     complexity: "每個元素入棧出棧各一次，時間 `O(n)`，空間 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int sumSubarrayMins(vector<int>& arr) {\n        constexpr long long kMod = 1'000'000'007;\n        int n = arr.size();\n        vector<int> left(n), right(n, n), stack;\n        for (int i = 0; i < n; ++i) {\n            while (!stack.empty() && arr[stack.back()] > arr[i]) stack.pop_back();\n            left[i] = stack.empty() ? -1 : stack.back();\n            stack.push_back(i);\n        }\n        stack.clear();\n        for (int i = n - 1; i >= 0; --i) {\n            while (!stack.empty() && arr[stack.back()] >= arr[i]) stack.pop_back();\n            right[i] = stack.empty() ? n : stack.back();\n            stack.push_back(i);\n        }\n\n        long long answer = 0;\n        for (int i = 0; i < n; ++i) {\n            answer = (answer + 1LL * arr[i] * (i - left[i]) * (right[i] - i)) % kMod;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int sumSubarrayMins(vector<int>& arr) {\n    constexpr long long kMod = 1'000'000'007;\n    int n = arr.size();\n    vector<int> left(n), right(n, n), stack;\n    for (int i = 0; i < n; ++i) {\n      while (!stack.empty() && arr[stack.back()] > arr[i]) {\n        stack.pop_back();\n      }\n      left[i] = stack.empty() ? -1 : stack.back();\n      stack.push_back(i);\n    }\n    stack.clear();\n    for (int i = n - 1; i >= 0; --i) {\n      while (!stack.empty() && arr[stack.back()] >= arr[i]) {\n        stack.pop_back();\n      }\n      right[i] = stack.empty() ? n : stack.back();\n      stack.push_back(i);\n    }\n\n    long long answer = 0;\n    for (int i = 0; i < n; ++i) {\n      answer = (answer + 1LL * arr[i] * (i - left[i]) * (right[i] - i)) % kMod;\n    }\n    return answer;\n  }\n};\n```",
   },
   "count-substrings-that-can-be-rearranged-to-contain-a-string-ii": {
     modelProblem:
@@ -1906,7 +1906,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "左右指標各走一次，時間 `O(n + alphabet)`，空間 `O(alphabet)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long validSubstringCount(string word1, string word2) {\n        array<int, 26> need{};\n        for (char ch : word2) need[ch - 'a']++;\n        int missing = word2.size();\n        long long answer = 0;\n        int right = 0;\n\n        for (int left = 0; left < (int)word1.size(); ++left) {\n            while (right < (int)word1.size() && missing > 0) {\n                int index = word1[right] - 'a';\n                if (need[index] > 0) missing--;\n                need[index]--;\n                right++;\n            }\n            if (missing == 0) answer += word1.size() - right + 1;\n            int index = word1[left] - 'a';\n            need[index]++;\n            if (need[index] > 0) missing++;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long validSubstringCount(string word1, string word2) {\n    array<int, 26> need{};\n    for (char ch : word2) {\n      need[ch - 'a']++;\n    }\n    int missing = word2.size();\n    long long answer = 0;\n    int right = 0;\n\n    for (int left = 0; left < (int)word1.size(); ++left) {\n      while (right < (int)word1.size() && missing > 0) {\n        int index = word1[right] - 'a';\n        if (need[index] > 0) {\n          missing--;\n        }\n        need[index]--;\n        right++;\n      }\n      if (missing == 0) {\n        answer += word1.size() - right + 1;\n      }\n      int index = word1[left] - 'a';\n      need[index]++;\n      if (need[index] > 0) {\n        missing++;\n      }\n    }\n    return answer;\n  }\n};\n```",
   },
   "number-of-great-partitions": {
     modelProblem:
@@ -1934,7 +1934,7 @@ export const exampleLectureOverrides: NonNullable<
       "模減法須補正。",
     ],
     complexity: "時間 `O(nk)`，空間 `O(k)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int countPartitions(vector<int>& nums, int k) {\n        constexpr long long kMod = 1'000'000'007;\n        long long total_sum = accumulate(nums.begin(), nums.end(), 0LL);\n        if (total_sum < 2LL * k) return 0;\n\n        vector<long long> dp(k, 0);\n        dp[0] = 1;\n        long long total_ways = 1;\n        for (int x : nums) {\n            total_ways = total_ways * 2 % kMod;\n            for (int sum = k - 1; sum >= x; --sum) {\n                dp[sum] = (dp[sum] + dp[sum - x]) % kMod;\n            }\n        }\n\n        long long bad = accumulate(dp.begin(), dp.end(), 0LL) % kMod;\n        return (total_ways - 2 * bad % kMod + kMod) % kMod;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int countPartitions(vector<int>& nums, int k) {\n    constexpr long long kMod = 1'000'000'007;\n    long long total_sum = accumulate(nums.begin(), nums.end(), 0LL);\n    if (total_sum < 2LL * k) {\n      return 0;\n    }\n\n    vector<long long> dp(k, 0);\n    dp[0] = 1;\n    long long total_ways = 1;\n    for (int x : nums) {\n      total_ways = total_ways * 2 % kMod;\n      for (int sum = k - 1; sum >= x; --sum) {\n        dp[sum] = (dp[sum] + dp[sum - x]) % kMod;\n      }\n    }\n\n    long long bad = accumulate(dp.begin(), dp.end(), 0LL) % kMod;\n    return (total_ways - 2 * bad % kMod + kMod) % kMod;\n  }\n};\n```",
   },
   "number-of-increasing-paths-in-a-grid": {
     modelProblem:
@@ -1962,7 +1962,7 @@ export const exampleLectureOverrides: NonNullable<
       "勿以普通 BFS 最短路模型解計數 DP。",
     ],
     complexity: "每個格子與四條邊處理一次，時間 `O(rows*cols)`。",
-    code: "```cpp\nclass Solution {\n    static constexpr int kMod = 1'000'000'007;\n    int rows_ = 0;\n    int cols_ = 0;\n    vector<vector<int>> memo_;\n    const int dirs_[5] = {1, 0, -1, 0, 1};\n\n    int dfs(vector<vector<int>>& grid, int row, int col) {\n        if (memo_[row][col] != 0) return memo_[row][col];\n        long long paths = 1;\n        for (int dir = 0; dir < 4; ++dir) {\n            int next_row = row + dirs_[dir];\n            int next_col = col + dirs_[dir + 1];\n            if (next_row < 0 || next_row >= rows_ || next_col < 0 || next_col >= cols_) continue;\n            if (grid[next_row][next_col] > grid[row][col]) paths += dfs(grid, next_row, next_col);\n        }\n        return memo_[row][col] = paths % kMod;\n    }\n\npublic:\n    int countPaths(vector<vector<int>>& grid) {\n        rows_ = grid.size();\n        cols_ = grid[0].size();\n        memo_.assign(rows_, vector<int>(cols_, 0));\n        long long answer = 0;\n        for (int row = 0; row < rows_; ++row) {\n            for (int col = 0; col < cols_; ++col) answer = (answer + dfs(grid, row, col)) % kMod;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  static constexpr int kMod = 1'000'000'007;\n  int rows_ = 0;\n  int cols_ = 0;\n  vector<vector<int>> memo_;\n  const int dirs_[5] = {1, 0, -1, 0, 1};\n\n  int dfs(vector<vector<int>>& grid, int row, int col) {\n    if (memo_[row][col] != 0) {\n      return memo_[row][col];\n    }\n    long long paths = 1;\n    for (int dir = 0; dir < 4; ++dir) {\n      int next_row = row + dirs_[dir];\n      int next_col = col + dirs_[dir + 1];\n      if (next_row < 0 || next_row >= rows_ || next_col < 0 || next_col >= cols_) {\n        continue;\n      }\n      if (grid[next_row][next_col] > grid[row][col]) {\n        paths += dfs(grid, next_row, next_col);\n      }\n    }\n    return memo_[row][col] = paths % kMod;\n  }\n\n public:\n  int countPaths(vector<vector<int>>& grid) {\n    rows_ = grid.size();\n    cols_ = grid[0].size();\n    memo_.assign(rows_, vector<int>(cols_, 0));\n    long long answer = 0;\n    for (int row = 0; row < rows_; ++row) {\n      for (int col = 0; col < cols_; ++col) {\n        answer = (answer + dfs(grid, row, col)) % kMod;\n      }\n    }\n    return answer;\n  }\n};\n```",
   },
   "minimum-number-of-removals-to-make-mountain-array": {
     modelProblem:
@@ -1989,7 +1989,7 @@ export const exampleLectureOverrides: NonNullable<
       "嚴格遞增須使用 `lower_bound`，而非 `upper_bound`。",
     ],
     complexity: "兩次 LIS 計算 `O(n log n)`，空間 `O(n)`。",
-    code: "```cpp\nclass Solution {\n    vector<int> lisLengths(const vector<int>& nums) {\n        vector<int> tails;\n        vector<int> lengths(nums.size());\n        for (int i = 0; i < (int)nums.size(); ++i) {\n            auto it = lower_bound(tails.begin(), tails.end(), nums[i]);\n            int length = it - tails.begin() + 1;\n            if (it == tails.end()) tails.push_back(nums[i]); else *it = nums[i];\n            lengths[i] = length;\n        }\n        return lengths;\n    }\n\npublic:\n    int minimumMountainRemovals(vector<int>& nums) {\n        vector<int> left = lisLengths(nums);\n        vector<int> reversed_nums(nums.rbegin(), nums.rend());\n        vector<int> right = lisLengths(reversed_nums);\n        reverse(right.begin(), right.end());\n\n        int best = 0;\n        for (int i = 0; i < (int)nums.size(); ++i) {\n            if (left[i] > 1 && right[i] > 1) best = max(best, left[i] + right[i] - 1);\n        }\n        return nums.size() - best;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  vector<int> lisLengths(const vector<int>& nums) {\n    vector<int> tails;\n    vector<int> lengths(nums.size());\n    for (int i = 0; i < (int)nums.size(); ++i) {\n      auto it = lower_bound(tails.begin(), tails.end(), nums[i]);\n      int length = it - tails.begin() + 1;\n      if (it == tails.end()) {\n        tails.push_back(nums[i]);\n      } else {\n        *it = nums[i];\n      }\n      lengths[i] = length;\n    }\n    return lengths;\n  }\n\n public:\n  int minimumMountainRemovals(vector<int>& nums) {\n    vector<int> left = lisLengths(nums);\n    vector<int> reversed_nums(nums.rbegin(), nums.rend());\n    vector<int> right = lisLengths(reversed_nums);\n    reverse(right.begin(), right.end());\n\n    int best = 0;\n    for (int i = 0; i < (int)nums.size(); ++i) {\n      if (left[i] > 1 && right[i] > 1) {\n        best = max(best, left[i] + right[i] - 1);\n      }\n    }\n    return nums.size() - best;\n  }\n};\n```",
   },
   "shortest-cycle-in-a-graph": {
     modelProblem:
@@ -2016,7 +2016,7 @@ export const exampleLectureOverrides: NonNullable<
       "僅自單一點做 BFS 可能漏掉其他 component 的最短環。",
     ],
     complexity: "對每個點做 BFS，時間 `O(V*(V+E))`，空間 `O(V+E)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int findShortestCycle(int n, vector<vector<int>>& edges) {\n        vector<vector<int>> graph(n);\n        for (const auto& edge : edges) {\n            graph[edge[0]].push_back(edge[1]);\n            graph[edge[1]].push_back(edge[0]);\n        }\n\n        int answer = INT_MAX;\n        for (int source = 0; source < n; ++source) {\n            vector<int> dist(n, -1), parent(n, -1);\n            queue<int> q;\n            dist[source] = 0;\n            q.push(source);\n            while (!q.empty()) {\n                int node = q.front();\n                q.pop();\n                for (int next_node : graph[node]) {\n                    if (dist[next_node] == -1) {\n                        dist[next_node] = dist[node] + 1;\n                        parent[next_node] = node;\n                        q.push(next_node);\n                    } else if (parent[node] != next_node && parent[next_node] != node) {\n                        answer = min(answer, dist[node] + dist[next_node] + 1);\n                    }\n                }\n            }\n        }\n        return answer == INT_MAX ? -1 : answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int findShortestCycle(int n, vector<vector<int>>& edges) {\n    vector<vector<int>> graph(n);\n    for (const auto& edge : edges) {\n      graph[edge[0]].push_back(edge[1]);\n      graph[edge[1]].push_back(edge[0]);\n    }\n\n    int answer = INT_MAX;\n    for (int source = 0; source < n; ++source) {\n      vector<int> dist(n, -1), parent(n, -1);\n      queue<int> q;\n      dist[source] = 0;\n      q.push(source);\n      while (!q.empty()) {\n        int node = q.front();\n        q.pop();\n        for (int next_node : graph[node]) {\n          if (dist[next_node] == -1) {\n            dist[next_node] = dist[node] + 1;\n            parent[next_node] = node;\n            q.push(next_node);\n          } else if (parent[node] != next_node && parent[next_node] != node) {\n            answer = min(answer, dist[node] + dist[next_node] + 1);\n          }\n        }\n      }\n    }\n    return answer == INT_MAX ? -1 : answer;\n  }\n};\n```",
   },
   "parallel-courses-iii": {
     modelProblem:
@@ -2044,7 +2044,7 @@ export const exampleLectureOverrides: NonNullable<
       "邊方向必須由先修指向後修。",
     ],
     complexity: "`O(n + relations.size())`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time) {\n        vector<vector<int>> graph(n);\n        vector<int> indegree(n, 0), finish(n, 0);\n        for (const auto& relation : relations) {\n            int from = relation[0] - 1;\n            int to = relation[1] - 1;\n            graph[from].push_back(to);\n            indegree[to]++;\n        }\n\n        queue<int> q;\n        for (int course = 0; course < n; ++course) {\n            finish[course] = time[course];\n            if (indegree[course] == 0) q.push(course);\n        }\n\n        while (!q.empty()) {\n            int course = q.front();\n            q.pop();\n            for (int next_course : graph[course]) {\n                finish[next_course] = max(finish[next_course], finish[course] + time[next_course]);\n                if (--indegree[next_course] == 0) q.push(next_course);\n            }\n        }\n        return *max_element(finish.begin(), finish.end());\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time) {\n    vector<vector<int>> graph(n);\n    vector<int> indegree(n, 0), finish(n, 0);\n    for (const auto& relation : relations) {\n      int from = relation[0] - 1;\n      int to = relation[1] - 1;\n      graph[from].push_back(to);\n      indegree[to]++;\n    }\n\n    queue<int> q;\n    for (int course = 0; course < n; ++course) {\n      finish[course] = time[course];\n      if (indegree[course] == 0) {\n        q.push(course);\n      }\n    }\n\n    while (!q.empty()) {\n      int course = q.front();\n      q.pop();\n      for (int next_course : graph[course]) {\n        finish[next_course] = max(finish[next_course], finish[course] + time[next_course]);\n        if (--indegree[next_course] == 0) {\n          q.push(next_course);\n        }\n      }\n    }\n    return *max_element(finish.begin(), finish.end());\n  }\n};\n```",
   },
   "minimum-weighted-subgraph-with-the-required-paths": {
     modelProblem:
@@ -2072,7 +2072,7 @@ export const exampleLectureOverrides: NonNullable<
       "距離須使用 `long long`。",
     ],
     complexity: "三次 Dijkstra，時間 `O((V+E)logV)`，空間 `O(V+E)`。",
-    code: "```cpp\nclass Solution {\n    vector<long long> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {\n        constexpr long long kInf = 4e18;\n        vector<long long> dist(n, kInf);\n        priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n        dist[source] = 0;\n        pq.push({0, source});\n        while (!pq.empty()) {\n            auto [current_dist, node] = pq.top();\n            pq.pop();\n            if (current_dist != dist[node]) continue;\n            for (auto [next_node, weight] : graph[node]) {\n                if (dist[next_node] > current_dist + weight) {\n                    dist[next_node] = current_dist + weight;\n                    pq.push({dist[next_node], next_node});\n                }\n            }\n        }\n        return dist;\n    }\n\npublic:\n    long long minimumWeight(int n, vector<vector<int>>& edges, int src1, int src2, int dest) {\n        vector<vector<pair<int, int>>> graph(n), reverse_graph(n);\n        for (const auto& edge : edges) {\n            graph[edge[0]].push_back({edge[1], edge[2]});\n            reverse_graph[edge[1]].push_back({edge[0], edge[2]});\n        }\n        auto dist1 = dijkstra(n, graph, src1);\n        auto dist2 = dijkstra(n, graph, src2);\n        auto dist3 = dijkstra(n, reverse_graph, dest);\n        constexpr long long kInf = 4e18;\n        long long answer = kInf;\n        for (int meet = 0; meet < n; ++meet) {\n            if (dist1[meet] == kInf || dist2[meet] == kInf || dist3[meet] == kInf) continue;\n            answer = min(answer, dist1[meet] + dist2[meet] + dist3[meet]);\n        }\n        return answer == kInf ? -1 : answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  vector<long long> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {\n    constexpr long long kInf = 4e18;\n    vector<long long> dist(n, kInf);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;\n    dist[source] = 0;\n    pq.push({0, source});\n    while (!pq.empty()) {\n      auto [current_dist, node] = pq.top();\n      pq.pop();\n      if (current_dist != dist[node]) {\n        continue;\n      }\n      for (auto [next_node, weight] : graph[node]) {\n        if (dist[next_node] > current_dist + weight) {\n          dist[next_node] = current_dist + weight;\n          pq.push({dist[next_node], next_node});\n        }\n      }\n    }\n    return dist;\n  }\n\n public:\n  long long minimumWeight(int n, vector<vector<int>>& edges, int src1, int src2, int dest) {\n    vector<vector<pair<int, int>>> graph(n), reverse_graph(n);\n    for (const auto& edge : edges) {\n      graph[edge[0]].push_back({edge[1], edge[2]});\n      reverse_graph[edge[1]].push_back({edge[0], edge[2]});\n    }\n    auto dist1 = dijkstra(n, graph, src1);\n    auto dist2 = dijkstra(n, graph, src2);\n    auto dist3 = dijkstra(n, reverse_graph, dest);\n    constexpr long long kInf = 4e18;\n    long long answer = kInf;\n    for (int meet = 0; meet < n; ++meet) {\n      if (dist1[meet] == kInf || dist2[meet] == kInf || dist3[meet] == kInf) {\n        continue;\n      }\n      answer = min(answer, dist1[meet] + dist2[meet] + dist3[meet]);\n    }\n    return answer == kInf ? -1 : answer;\n  }\n};\n```",
   },
   "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree": {
     modelProblem:
@@ -2101,7 +2101,7 @@ export const exampleLectureOverrides: NonNullable<
       "若 picked 邊數不足 `n-1`，該 MST 權重視為無限大。",
     ],
     complexity: "對每條邊重跑 Kruskal，時間 `O(E^2 α(V))` 加排序。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>>& edges) {\n        // 1. append original index to each edge: {from, to, weight, index}\n        // 2. sort by weight and implement kruskal(skip_index, force_index)\n        // 3. base = kruskal(-1, -1)\n        // 4. if kruskal(edge_index, -1) > base -> critical\n        // 5. else if kruskal(-1, edge_index) == base -> pseudo-critical\n        return { {}, {} };\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<vector<int>> findCriticalAndPseudoCriticalEdges(int n, vector<vector<int>>& edges) {\n    // 1. append original index to each edge: {from, to, weight, index}\n    // 2. sort by weight and implement kruskal(skip_index, force_index)\n    // 3. base = kruskal(-1, -1)\n    // 4. if kruskal(edge_index, -1) > base -> critical\n    // 5. else if kruskal(-1, edge_index) == base -> pseudo-critical\n    return {{}, {}};\n  }\n};\n```",
   },
   "critical-connections-in-a-network": {
     modelProblem:
@@ -2128,7 +2128,7 @@ export const exampleLectureOverrides: NonNullable<
       "`low[v] > dfn[u]` 方為橋；等於則代表有回邊。",
     ],
     complexity: "`O(V + E)`。",
-    code: "```cpp\nclass Solution {\n    vector<vector<pair<int, int>>> graph_;\n    vector<int> dfn_;\n    vector<int> low_;\n    vector<vector<int>> answer_;\n    int timer_ = 0;\n\n    void dfs(int node, int parent_edge) {\n        dfn_[node] = low_[node] = ++timer_;\n        for (auto [next_node, edge_id] : graph_[node]) {\n            if (edge_id == parent_edge) continue;\n            if (dfn_[next_node] == 0) {\n                dfs(next_node, edge_id);\n                low_[node] = min(low_[node], low_[next_node]);\n                if (low_[next_node] > dfn_[node]) answer_.push_back({node, next_node});\n            } else {\n                low_[node] = min(low_[node], dfn_[next_node]);\n            }\n        }\n    }\n\npublic:\n    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {\n        graph_.assign(n, {});\n        for (int id = 0; id < (int)connections.size(); ++id) {\n            int a = connections[id][0], b = connections[id][1];\n            graph_[a].push_back({b, id});\n            graph_[b].push_back({a, id});\n        }\n        dfn_.assign(n, 0);\n        low_.assign(n, 0);\n        dfs(0, -1);\n        return answer_;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  vector<vector<pair<int, int>>> graph_;\n  vector<int> dfn_;\n  vector<int> low_;\n  vector<vector<int>> answer_;\n  int timer_ = 0;\n\n  void dfs(int node, int parent_edge) {\n    dfn_[node] = low_[node] = ++timer_;\n    for (auto [next_node, edge_id] : graph_[node]) {\n      if (edge_id == parent_edge) {\n        continue;\n      }\n      if (dfn_[next_node] == 0) {\n        dfs(next_node, edge_id);\n        low_[node] = min(low_[node], low_[next_node]);\n        if (low_[next_node] > dfn_[node]) {\n          answer_.push_back({node, next_node});\n        }\n      } else {\n        low_[node] = min(low_[node], dfn_[next_node]);\n      }\n    }\n  }\n\n public:\n  vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {\n    graph_.assign(n, {});\n    for (int id = 0; id < (int)connections.size(); ++id) {\n      int a = connections[id][0], b = connections[id][1];\n      graph_[a].push_back({b, id});\n      graph_[b].push_back({a, id});\n    }\n    dfn_.assign(n, 0);\n    low_.assign(n, 0);\n    dfs(0, -1);\n    return answer_;\n  }\n};\n```",
   },
   "maximum-students-taking-exam": {
     modelProblem:
@@ -2155,7 +2155,7 @@ export const exampleLectureOverrides: NonNullable<
       "bitmask 的 1 代表坐人，並非壞座位。",
     ],
     complexity: "若每列合法 mask 數為 S，時間 `O(rows*S^2)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int maxStudents(vector<vector<char>>& seats) {\n        int rows = seats.size();\n        int cols = seats[0].size();\n        vector<int> valid_masks;\n        for (int mask = 0; mask < (1 << cols); ++mask) {\n            if ((mask & (mask << 1)) == 0) valid_masks.push_back(mask);\n        }\n        vector<unordered_map<int, int>> dp(rows + 1);\n        dp[0][0] = 0;\n        for (int row = 0; row < rows; ++row) {\n            int available = 0;\n            for (int col = 0; col < cols; ++col) if (seats[row][col] == '.') available |= 1 << col;\n            for (auto [prev_mask, value] : dp[row]) {\n                for (int mask : valid_masks) {\n                    if ((mask & ~available) != 0) continue;\n                    if (((prev_mask << 1) & mask) || ((prev_mask >> 1) & mask)) continue;\n                    dp[row + 1][mask] = max(dp[row + 1][mask], value + __builtin_popcount((unsigned)mask));\n                }\n            }\n        }\n        int answer = 0;\n        for (auto [mask, value] : dp[rows]) answer = max(answer, value);\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int maxStudents(vector<vector<char>>& seats) {\n    int rows = seats.size();\n    int cols = seats[0].size();\n    vector<int> valid_masks;\n    for (int mask = 0; mask < (1 << cols); ++mask) {\n      if ((mask & (mask << 1)) == 0) {\n        valid_masks.push_back(mask);\n      }\n    }\n    vector<unordered_map<int, int>> dp(rows + 1);\n    dp[0][0] = 0;\n    for (int row = 0; row < rows; ++row) {\n      int available = 0;\n      for (int col = 0; col < cols; ++col) {\n        if (seats[row][col] == '.') {\n          available |= 1 << col;\n        }\n      }\n      for (auto [prev_mask, value] : dp[row]) {\n        for (int mask : valid_masks) {\n          if ((mask & ~available) != 0) {\n            continue;\n          }\n          if (((prev_mask << 1) & mask) || ((prev_mask >> 1) & mask)) {\n            continue;\n          }\n          dp[row + 1][mask] = max(dp[row + 1][mask], value + __builtin_popcount((unsigned)mask));\n        }\n      }\n    }\n    int answer = 0;\n    for (auto [mask, value] : dp[rows]) {\n      answer = max(answer, value);\n    }\n    return answer;\n  }\n};\n```",
   },
   "minimum-time-to-complete-all-tasks": {
     modelProblem:
@@ -2182,7 +2182,7 @@ export const exampleLectureOverrides: NonNullable<
       "同一時間點可服務多個任務，故並非累加 duration。",
     ],
     complexity: "簡單實作為 `O(n * U)`，可用線段樹優化至 `O(n log U)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int findMinimumTime(vector<vector<int>>& tasks) {\n        sort(tasks.begin(), tasks.end(), [](const auto& lhs, const auto& rhs) { return lhs[1] < rhs[1]; });\n        vector<int> used(2001, 0);\n        int answer = 0;\n        for (const auto& task : tasks) {\n            int start = task[0], end = task[1], duration = task[2];\n            for (int time = start; time <= end; ++time) duration -= used[time];\n            for (int time = end; duration > 0; --time) {\n                if (used[time]) continue;\n                used[time] = 1;\n                duration--;\n                answer++;\n            }\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int findMinimumTime(vector<vector<int>>& tasks) {\n    sort(tasks.begin(), tasks.end(), [](const auto& lhs, const auto& rhs) { return lhs[1] < rhs[1]; });\n    vector<int> used(2001, 0);\n    int answer = 0;\n    for (const auto& task : tasks) {\n      int start = task[0], end = task[1], duration = task[2];\n      for (int time = start; time <= end; ++time) {\n        duration -= used[time];\n      }\n      for (int time = end; duration > 0; --time) {\n        if (used[time]) {\n          continue;\n        }\n        used[time] = 1;\n        duration--;\n        answer++;\n      }\n    }\n    return answer;\n  }\n};\n```",
   },
   "gcd-sort-of-an-array": {
     modelProblem:
@@ -2209,7 +2209,7 @@ export const exampleLectureOverrides: NonNullable<
       "質因數節點與數值節點共用 DSU 時，大小須開至最大值。",
     ],
     complexity: "分解至 `sqrt(maxV)` 的總成本視值域而定；DSU 操作近似線性。",
-    code: "```cpp\nclass Solution {\npublic:\n    bool gcdSort(vector<int>& nums) {\n        // 1. build DSU over values up to max(nums)\n        // 2. factor each x and unite(x, prime_factor)\n        // 3. compare nums with sorted copy; each pair must share a DSU root\n        return true;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  bool gcdSort(vector<int>& nums) {\n    // 1. build DSU over values up to max(nums)\n    // 2. factor each x and unite(x, prime_factor)\n    // 3. compare nums with sorted copy; each pair must share a DSU root\n    return true;\n  }\n};\n```",
   },
   "find-beautiful-indices-in-the-given-array-ii": {
     modelProblem:
@@ -2237,7 +2237,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "兩次 KMP `O(|s|+|a|+|b|)`，查詢 `O(matches_a log matches_b)`。",
-    code: "```cpp\nclass Solution {\n    vector<int> findOccurrences(const string& text, const string& pattern) {\n        vector<int> pi(pattern.size()), positions;\n        for (int i = 1; i < (int)pattern.size(); ++i) {\n            int matched = pi[i - 1];\n            while (matched > 0 && pattern[i] != pattern[matched]) matched = pi[matched - 1];\n            if (pattern[i] == pattern[matched]) matched++;\n            pi[i] = matched;\n        }\n        int matched = 0;\n        for (int i = 0; i < (int)text.size(); ++i) {\n            while (matched > 0 && text[i] != pattern[matched]) matched = pi[matched - 1];\n            if (text[i] == pattern[matched]) matched++;\n            if (matched == (int)pattern.size()) {\n                positions.push_back(i - (int)pattern.size() + 1);\n                matched = pi[matched - 1];\n            }\n        }\n        return positions;\n    }\n\npublic:\n    vector<int> beautifulIndices(string s, string a, string b, int k) {\n        vector<int> a_positions = findOccurrences(s, a);\n        vector<int> b_positions = findOccurrences(s, b);\n        vector<int> answer;\n        for (int index : a_positions) {\n            auto it = lower_bound(b_positions.begin(), b_positions.end(), index - k);\n            if (it != b_positions.end() && *it <= index + k) answer.push_back(index);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  vector<int> findOccurrences(const string& text, const string& pattern) {\n    vector<int> pi(pattern.size()), positions;\n    for (int i = 1; i < (int)pattern.size(); ++i) {\n      int matched = pi[i - 1];\n      while (matched > 0 && pattern[i] != pattern[matched]) {\n        matched = pi[matched - 1];\n      }\n      if (pattern[i] == pattern[matched]) {\n        matched++;\n      }\n      pi[i] = matched;\n    }\n    int matched = 0;\n    for (int i = 0; i < (int)text.size(); ++i) {\n      while (matched > 0 && text[i] != pattern[matched]) {\n        matched = pi[matched - 1];\n      }\n      if (text[i] == pattern[matched]) {\n        matched++;\n      }\n      if (matched == (int)pattern.size()) {\n        positions.push_back(i - (int)pattern.size() + 1);\n        matched = pi[matched - 1];\n      }\n    }\n    return positions;\n  }\n\n public:\n  vector<int> beautifulIndices(string s, string a, string b, int k) {\n    vector<int> a_positions = findOccurrences(s, a);\n    vector<int> b_positions = findOccurrences(s, b);\n    vector<int> answer;\n    for (int index : a_positions) {\n      auto it = lower_bound(b_positions.begin(), b_positions.end(), index - k);\n      if (it != b_positions.end() && *it <= index + k) {\n        answer.push_back(index);\n      }\n    }\n    return answer;\n  }\n};\n```",
   },
   "height-of-binary-tree-after-subtree-removal-queries": {
     modelProblem:
@@ -2265,7 +2265,7 @@ export const exampleLectureOverrides: NonNullable<
       "高度定義以邊數或節點數須一致。",
     ],
     complexity: "兩次 DFS `O(n)`，回答查詢 `O(q)`。",
-    code: "```cpp\nclass Solution {\n    unordered_map<int, int> height_;\n    unordered_map<int, int> answer_;\n\n    int getHeight(TreeNode* node) {\n        if (node == nullptr) return -1;\n        return height_[node->val] = max(getHeight(node->left), getHeight(node->right)) + 1;\n    }\n\n    void dfs(TreeNode* node, int depth, int rest_height) {\n        if (node == nullptr) return;\n        answer_[node->val] = rest_height;\n        int left_height = node->left ? height_[node->left->val] : -1;\n        int right_height = node->right ? height_[node->right->val] : -1;\n        dfs(node->left, depth + 1, max(rest_height, depth + 1 + right_height));\n        dfs(node->right, depth + 1, max(rest_height, depth + 1 + left_height));\n    }\n\npublic:\n    vector<int> treeQueries(TreeNode* root, vector<int>& queries) {\n        getHeight(root);\n        dfs(root, 0, 0);\n        vector<int> result;\n        for (int query : queries) result.push_back(answer_[query]);\n        return result;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  unordered_map<int, int> height_;\n  unordered_map<int, int> answer_;\n\n  int getHeight(TreeNode* node) {\n    if (node == nullptr) {\n      return -1;\n    }\n    return height_[node->val] = max(getHeight(node->left), getHeight(node->right)) + 1;\n  }\n\n  void dfs(TreeNode* node, int depth, int rest_height) {\n    if (node == nullptr) {\n      return;\n    }\n    answer_[node->val] = rest_height;\n    int left_height = node->left ? height_[node->left->val] : -1;\n    int right_height = node->right ? height_[node->right->val] : -1;\n    dfs(node->left, depth + 1, max(rest_height, depth + 1 + right_height));\n    dfs(node->right, depth + 1, max(rest_height, depth + 1 + left_height));\n  }\n\n public:\n  vector<int> treeQueries(TreeNode* root, vector<int>& queries) {\n    getHeight(root);\n    dfs(root, 0, 0);\n    vector<int> result;\n    for (int query : queries) {\n      result.push_back(answer_[query]);\n    }\n    return result;\n  }\n};\n```",
   },
   "maximum-or": {
     modelProblem:
@@ -2292,7 +2292,7 @@ export const exampleLectureOverrides: NonNullable<
       "操作不可分散至多個元素。",
     ],
     complexity: "時間 `O(n)`，空間 `O(n)`；亦可採 suffix 壓縮。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long maximumOr(vector<int>& nums, int k) {\n        int n = nums.size();\n        vector<long long> prefix(n + 1, 0), suffix(n + 1, 0);\n        for (int i = 0; i < n; ++i) prefix[i + 1] = prefix[i] | nums[i];\n        for (int i = n - 1; i >= 0; --i) suffix[i] = suffix[i + 1] | nums[i];\n\n        long long answer = 0;\n        for (int i = 0; i < n; ++i) {\n            answer = max(answer, prefix[i] | (1LL * nums[i] << k) | suffix[i + 1]);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long maximumOr(vector<int>& nums, int k) {\n    int n = nums.size();\n    vector<long long> prefix(n + 1, 0), suffix(n + 1, 0);\n    for (int i = 0; i < n; ++i) {\n      prefix[i + 1] = prefix[i] | nums[i];\n    }\n    for (int i = n - 1; i >= 0; --i) {\n      suffix[i] = suffix[i + 1] | nums[i];\n    }\n\n    long long answer = 0;\n    for (int i = 0; i < n; ++i) {\n      answer = max(answer, prefix[i] | (1LL * nums[i] << k) | suffix[i + 1]);\n    }\n    return answer;\n  }\n};\n```",
   },
   "maximum-xor-of-subsequences": {
     modelProblem:
@@ -2319,7 +2319,7 @@ export const exampleLectureOverrides: NonNullable<
       "bit 上限須依 nums 值域設定。",
     ],
     complexity: "每個數插入 `O(B)`，查詢 `O(B)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int maxXorSubsequences(vector<int>& nums) {\n        constexpr int kMaxBit = 30;\n        array<int, kMaxBit + 1> basis{};\n        for (int x : nums) {\n            for (int bit = kMaxBit; bit >= 0; --bit) {\n                if (((x >> bit) & 1) == 0) continue;\n                if (basis[bit] == 0) {\n                    basis[bit] = x;\n                    break;\n                }\n                x ^= basis[bit];\n            }\n        }\n        int answer = 0;\n        for (int bit = kMaxBit; bit >= 0; --bit) answer = max(answer, answer ^ basis[bit]);\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int maxXorSubsequences(vector<int>& nums) {\n    constexpr int kMaxBit = 30;\n    array<int, kMaxBit + 1> basis{};\n    for (int x : nums) {\n      for (int bit = kMaxBit; bit >= 0; --bit) {\n        if (((x >> bit) & 1) == 0) {\n          continue;\n        }\n        if (basis[bit] == 0) {\n          basis[bit] = x;\n          break;\n        }\n        x ^= basis[bit];\n      }\n    }\n    int answer = 0;\n    for (int bit = kMaxBit; bit >= 0; --bit) {\n      answer = max(answer, answer ^ basis[bit]);\n    }\n    return answer;\n  }\n};\n```",
   },
   "maximum-product-of-the-length-of-two-palindromic-substrings": {
     modelProblem:
@@ -2348,7 +2348,7 @@ export const exampleLectureOverrides: NonNullable<
       "兩個回文必須不重疊，故切分點左右不能交叉。",
     ],
     complexity: "Manacher 與前後綴處理皆為 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long maxProduct(string s) {\n        // 1. run odd-length Manacher to get radius for each center\n        // 2. derive best_left[i]: best odd palindrome fully ending at or before i\n        // 3. derive best_right[i]: best odd palindrome fully starting at or after i\n        // 4. enumerate split i and maximize 1LL * best_left[i] * best_right[i + 1]\n        return 0;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long maxProduct(string s) {\n    // 1. run odd-length Manacher to get radius for each center\n    // 2. derive best_left[i]: best odd palindrome fully ending at or before i\n    // 3. derive best_right[i]: best odd palindrome fully starting at or after i\n    // 4. enumerate split i and maximize 1LL * best_left[i] * best_right[i + 1]\n    return 0;\n  }\n};\n```",
   },
   "sum-of-scores-of-built-strings": {
     modelProblem:
@@ -2375,7 +2375,7 @@ export const exampleLectureOverrides: NonNullable<
       "盒內初始值須取 `min(right-i+1, z[i-left])`。",
     ],
     complexity: "`O(n)` 時間與 `O(n)` 空間。",
-    code: "```cpp\nclass Solution {\npublic:\n    long long sumScores(string s) {\n        int n = s.size();\n        vector<int> z(n, 0);\n        int left = 0;\n        int right = 0;\n        long long answer = n;\n        for (int i = 1; i < n; ++i) {\n            if (i <= right) z[i] = min(right - i + 1, z[i - left]);\n            while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;\n            if (i + z[i] - 1 > right) {\n                left = i;\n                right = i + z[i] - 1;\n            }\n            answer += z[i];\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  long long sumScores(string s) {\n    int n = s.size();\n    vector<int> z(n, 0);\n    int left = 0;\n    int right = 0;\n    long long answer = n;\n    for (int i = 1; i < n; ++i) {\n      if (i <= right) {\n        z[i] = min(right - i + 1, z[i - left]);\n      }\n      while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {\n        z[i]++;\n      }\n      if (i + z[i] - 1 > right) {\n        left = i;\n        right = i + z[i] - 1;\n      }\n      answer += z[i];\n    }\n    return answer;\n  }\n};\n```",
   },
   "count-ways-to-make-array-with-product": {
     modelProblem:
@@ -2403,7 +2403,7 @@ export const exampleLectureOverrides: NonNullable<
       "取模除法須使用逆元。",
     ],
     complexity: "預處理 `O(N)`；每個查詢約 `O(sqrt(k))` 分解。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> waysToFillArray(vector<vector<int>>& queries) {\n        // 1. precompute factorials and inverse factorials modulo 1e9+7\n        // 2. factorize k for each query [n, k]\n        // 3. for each prime exponent e, multiply C(n + e - 1, e)\n        // 4. return answers in original order\n        return {};\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> waysToFillArray(vector<vector<int>>& queries) {\n    // 1. precompute factorials and inverse factorials modulo 1e9+7\n    // 2. factorize k for each query [n, k]\n    // 3. for each prime exponent e, multiply C(n + e - 1, e)\n    // 4. return answers in original order\n    return {};\n  }\n};\n```",
   },
   "find-first-and-last-position-of-element-in-sorted-array": {
     modelProblem:
@@ -2429,7 +2429,7 @@ export const exampleLectureOverrides: NonNullable<
       "`target + 1` 可能溢位時，應改寫為 upper_bound predicate。",
     ],
     complexity: "兩次二分，時間 `O(log n)`，額外空間 `O(1)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> searchRange(vector<int>& nums, int target) {\n        auto lowerBound = [&nums](int value) {\n            int left = 0;\n            int right = nums.size();\n            while (left < right) {\n                int mid = left + (right - left) / 2;\n                if (nums[mid] >= value) {\n                    right = mid;\n                } else {\n                    left = mid + 1;\n                }\n            }\n            return left;\n        };\n\n        int first = lowerBound(target);\n        int after_last = lowerBound(target + 1);\n        if (first == (int)nums.size() || nums[first] != target) return {-1, -1};\n        return {first, after_last - 1};\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> searchRange(vector<int>& nums, int target) {\n    auto lowerBound = [&nums](int value) {\n      int left = 0;\n      int right = nums.size();\n      while (left < right) {\n        int mid = left + (right - left) / 2;\n        if (nums[mid] >= value) {\n          right = mid;\n        } else {\n          left = mid + 1;\n        }\n      }\n      return left;\n    };\n\n    int first = lowerBound(target);\n    int after_last = lowerBound(target + 1);\n    if (first == (int)nums.size() || nums[first] != target) {\n      return {-1, -1};\n    }\n    return {first, after_last - 1};\n  }\n};\n```",
   },
   heaters: {
     modelProblem:
@@ -2456,7 +2456,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "排序 `O(m log m)`，每個房屋二分 `O(log m)`，總時間 `O((n + m) log m)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int findRadius(vector<int>& houses, vector<int>& heaters) {\n        sort(heaters.begin(), heaters.end());\n        int answer = 0;\n        for (int house : houses) {\n            auto right_it = lower_bound(heaters.begin(), heaters.end(), house);\n            int best = INT_MAX;\n            if (right_it != heaters.end()) best = min(best, abs(*right_it - house));\n            if (right_it != heaters.begin()) best = min(best, abs(*prev(right_it) - house));\n            answer = max(answer, best);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int findRadius(vector<int>& houses, vector<int>& heaters) {\n    sort(heaters.begin(), heaters.end());\n    int answer = 0;\n    for (int house : houses) {\n      auto right_it = lower_bound(heaters.begin(), heaters.end(), house);\n      int best = INT_MAX;\n      if (right_it != heaters.end()) {\n        best = min(best, abs(*right_it - house));\n      }\n      if (right_it != heaters.begin()) {\n        best = min(best, abs(*prev(right_it) - house));\n      }\n      answer = max(answer, best);\n    }\n    return answer;\n  }\n};\n```",
   },
   "climbing-stairs": {
     modelProblem:
@@ -2479,7 +2479,7 @@ export const exampleLectureOverrides: NonNullable<
       "若題目擴增可走步數集合，轉移須改為枚舉所有合法前驅。",
     ],
     complexity: "時間 `O(n)`；若僅保留前兩項，空間 `O(1)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int climbStairs(int n) {\n        int prev_two = 1;\n        int prev_one = 1;\n        for (int step = 2; step <= n; ++step) {\n            int current = prev_one + prev_two;\n            prev_two = prev_one;\n            prev_one = current;\n        }\n        return prev_one;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int climbStairs(int n) {\n    int prev_two = 1;\n    int prev_one = 1;\n    for (int step = 2; step <= n; ++step) {\n      int current = prev_one + prev_two;\n      prev_two = prev_one;\n      prev_one = current;\n    }\n    return prev_one;\n  }\n};\n```",
   },
   "maximum-average-subarray-i": {
     modelProblem:
@@ -2502,7 +2502,7 @@ export const exampleLectureOverrides: NonNullable<
       "答案可能為負數時，最大和初值不可設為 0。",
     ],
     complexity: "一次掃描 `O(n)`，額外空間 `O(1)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    double findMaxAverage(vector<int>& nums, int k) {\n        int window_sum = 0;\n        int best_sum = INT_MIN;\n        for (int right = 0; right < (int)nums.size(); ++right) {\n            window_sum += nums[right];\n            if (right >= k) window_sum -= nums[right - k];\n            if (right >= k - 1) best_sum = max(best_sum, window_sum);\n        }\n        return 1.0 * best_sum / k;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  double findMaxAverage(vector<int>& nums, int k) {\n    int window_sum = 0;\n    int best_sum = INT_MIN;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n      window_sum += nums[right];\n      if (right >= k) {\n        window_sum -= nums[right - k];\n      }\n      if (right >= k - 1) {\n        best_sum = max(best_sum, window_sum);\n      }\n    }\n    return 1.0 * best_sum / k;\n  }\n};\n```",
   },
   "two-sum": {
     modelProblem:
@@ -2529,7 +2529,7 @@ export const exampleLectureOverrides: NonNullable<
       "需回傳下標時，hash map 應存 index 而非僅存布林值。",
     ],
     complexity: "均攤時間 `O(n)`，空間 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        unordered_map<int, int> seen;\n        for (int right = 0; right < (int)nums.size(); ++right) {\n            int need = target - nums[right];\n            auto it = seen.find(need);\n            if (it != seen.end()) return {it->second, right};\n            seen[nums[right]] = right;\n        }\n        return {};\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> twoSum(vector<int>& nums, int target) {\n    unordered_map<int, int> seen;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n      int need = target - nums[right];\n      auto it = seen.find(need);\n      if (it != seen.end()) {\n        return {it->second, right};\n      }\n      seen[nums[right]] = right;\n    }\n    return {};\n  }\n};\n```",
   },
   "number-of-1-bits": {
     modelProblem:
@@ -2555,7 +2555,7 @@ export const exampleLectureOverrides: NonNullable<
       "`n & (n - 1)` 清的是最低位 1，而非最低位 bit。",
     ],
     complexity: "時間 `O(number_of_ones)`，空間 `O(1)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int hammingWeight(uint32_t n) {\n        int answer = 0;\n        while (n != 0) {\n            n &= n - 1;\n            answer++;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int hammingWeight(uint32_t n) {\n    int answer = 0;\n    while (n != 0) {\n      n &= n - 1;\n      answer++;\n    }\n    return answer;\n  }\n};\n```",
   },
   "prime-number-of-set-bits-in-binary-representation": {
     modelProblem:
@@ -2580,7 +2580,7 @@ export const exampleLectureOverrides: NonNullable<
       "1 與 0 皆非質數。",
     ],
     complexity: "枚舉區間，時間 `O(right - left + 1)`，空間 `O(1)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int countPrimeSetBits(int left, int right) {\n        const unordered_set<int> kPrimeCounts{2, 3, 5, 7, 11, 13, 17, 19};\n        int answer = 0;\n        for (int x = left; x <= right; ++x) {\n            int bit_count = __builtin_popcount((unsigned)x);\n            if (kPrimeCounts.find(bit_count) != kPrimeCounts.end()) answer++;\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int countPrimeSetBits(int left, int right) {\n    const unordered_set<int> kPrimeCounts{2, 3, 5, 7, 11, 13, 17, 19};\n    int answer = 0;\n    for (int x = left; x <= right; ++x) {\n      int bit_count = __builtin_popcount((unsigned)x);\n      if (kPrimeCounts.find(bit_count) != kPrimeCounts.end()) {\n        answer++;\n      }\n    }\n    return answer;\n  }\n};\n```",
   },
   "chuan-di-xin-xi": {
     modelProblem:
@@ -2609,7 +2609,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "若不加記憶化，時間與長度為 k 的可行路徑數相關；題目規模較大時可將 `(node, step)` 記憶化為 `O(k * (V + E))`。",
-    code: "```cpp\nclass Solution {\n    vector<vector<int>> graph_;\n    int target_ = 0;\n    int max_step_ = 0;\n    int answer_ = 0;\n\n    void dfs(int node, int step) {\n        if (step == max_step_) {\n            if (node == target_) answer_++;\n            return;\n        }\n        for (int next_node : graph_[node]) {\n            dfs(next_node, step + 1);\n        }\n    }\n\npublic:\n    int numWays(int n, vector<vector<int>>& relation, int k) {\n        graph_.assign(n, {});\n        for (const auto& edge : relation) {\n            graph_[edge[0]].push_back(edge[1]);\n        }\n        target_ = n - 1;\n        max_step_ = k;\n        dfs(0, 0);\n        return answer_;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  vector<vector<int>> graph_;\n  int target_ = 0;\n  int max_step_ = 0;\n  int answer_ = 0;\n\n  void dfs(int node, int step) {\n    if (step == max_step_) {\n      if (node == target_) {\n        answer_++;\n      }\n      return;\n    }\n    for (int next_node : graph_[node]) {\n      dfs(next_node, step + 1);\n    }\n  }\n\n public:\n  int numWays(int n, vector<vector<int>>& relation, int k) {\n    graph_.assign(n, {});\n    for (const auto& edge : relation) {\n      graph_[edge[0]].push_back(edge[1]);\n    }\n    target_ = n - 1;\n    max_step_ = k;\n    dfs(0, 0);\n    return answer_;\n  }\n};\n```",
   },
   "split-linked-list-in-parts": {
     modelProblem:
@@ -2636,7 +2636,7 @@ export const exampleLectureOverrides: NonNullable<
       "切斷 `next` 前未保存下一段頭將丟失後續節點。",
     ],
     complexity: "遍歷鏈表常數次，時間 `O(n + k)`，額外空間不含答案為 `O(1)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<ListNode*> splitListToParts(ListNode* head, int k) {\n        int length = 0;\n        for (ListNode* node = head; node != nullptr; node = node->next) length++;\n        int base = length / k;\n        int extra = length % k;\n\n        vector<ListNode*> answer(k, nullptr);\n        ListNode* current = head;\n        for (int part = 0; part < k; ++part) {\n            answer[part] = current;\n            int part_size = base + (part < extra ? 1 : 0);\n            for (int i = 1; i < part_size; ++i) current = current->next;\n            if (current != nullptr) {\n                ListNode* next_head = current->next;\n                current->next = nullptr;\n                current = next_head;\n            }\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<ListNode*> splitListToParts(ListNode* head, int k) {\n    int length = 0;\n    for (ListNode* node = head; node != nullptr; node = node->next) {\n      length++;\n    }\n    int base = length / k;\n    int extra = length % k;\n\n    vector<ListNode*> answer(k, nullptr);\n    ListNode* current = head;\n    for (int part = 0; part < k; ++part) {\n      answer[part] = current;\n      int part_size = base + (part < extra ? 1 : 0);\n      for (int i = 1; i < part_size; ++i) {\n        current = current->next;\n      }\n      if (current != nullptr) {\n        ListNode* next_head = current->next;\n        current->next = nullptr;\n        current = next_head;\n      }\n    }\n    return answer;\n  }\n};\n```",
   },
   "next-greater-element-i": {
     modelProblem:
@@ -2659,7 +2659,7 @@ export const exampleLectureOverrides: NonNullable<
       "若元素可重複，不可直接以 value 為 hash key，須改存 index。",
     ],
     complexity: "每個元素入棧出棧各一次，時間 `O(n + m)`，空間 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {\n        unordered_map<int, int> next_greater;\n        vector<int> stack;\n        for (int x : nums2) {\n            while (!stack.empty() && stack.back() < x) {\n                next_greater[stack.back()] = x;\n                stack.pop_back();\n            }\n            stack.push_back(x);\n        }\n\n        vector<int> answer;\n        for (int x : nums1) {\n            auto it = next_greater.find(x);\n            answer.push_back(it == next_greater.end() ? -1 : it->second);\n        }\n        return answer;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {\n    unordered_map<int, int> next_greater;\n    vector<int> stack;\n    for (int x : nums2) {\n      while (!stack.empty() && stack.back() < x) {\n        next_greater[stack.back()] = x;\n        stack.pop_back();\n      }\n      stack.push_back(x);\n    }\n\n    vector<int> answer;\n    for (int x : nums1) {\n      auto it = next_greater.find(x);\n      answer.push_back(it == next_greater.end() ? -1 : it->second);\n    }\n    return answer;\n  }\n};\n```",
   },
   "furthest-building-you-can-reach": {
     modelProblem:
@@ -2694,7 +2694,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "每個正爬升至多進出 heap 一次，時間 `O(n log n)`，空間 `O(n)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {\n        priority_queue<int> paid_by_bricks;\n        long long used_bricks = 0;\n\n        for (int i = 0; i + 1 < (int)heights.size(); ++i) {\n            int climb = heights[i + 1] - heights[i];\n            if (climb <= 0) continue;\n\n            used_bricks += climb;\n            paid_by_bricks.push(climb);\n\n            if (used_bricks > bricks) {\n                if (ladders == 0) return i;\n                used_bricks -= paid_by_bricks.top();\n                paid_by_bricks.pop();\n                ladders--;\n            }\n        }\n        return heights.size() - 1;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int furthestBuilding(vector<int>& heights, int bricks, int ladders) {\n    priority_queue<int> paid_by_bricks;\n    long long used_bricks = 0;\n\n    for (int i = 0; i + 1 < (int)heights.size(); ++i) {\n      int climb = heights[i + 1] - heights[i];\n      if (climb <= 0) {\n        continue;\n      }\n\n      used_bricks += climb;\n      paid_by_bricks.push(climb);\n\n      if (used_bricks > bricks) {\n        if (ladders == 0) {\n          return i;\n        }\n        used_bricks -= paid_by_bricks.top();\n        paid_by_bricks.pop();\n        ladders--;\n      }\n    }\n    return heights.size() - 1;\n  }\n};\n```",
   },
   "ugly-number-iii": {
     modelProblem:
@@ -2728,7 +2728,7 @@ export const exampleLectureOverrides: NonNullable<
     ],
     complexity:
       "每次 check 為 `O(1)`，值域二分 `O(log(answer))`，空間 `O(1)`。",
-    code: "```cpp\nclass Solution {\n    long long lcmLl(long long a, long long b) {\n        return a / gcd(a, b) * b;\n    }\n\npublic:\n    int nthUglyNumber(int n, int a, int b, int c) {\n        long long ab = lcmLl(a, b);\n        long long ac = lcmLl(a, c);\n        long long bc = lcmLl(b, c);\n        long long abc = lcmLl(ab, c);\n\n        auto countUgly = [a, b, c, ab, ac, bc, abc](long long value) {\n            return value / a + value / b + value / c - value / ab - value / ac - value / bc + value / abc;\n        };\n\n        long long left = 1;\n        long long right = 1LL * min({a, b, c}) * n;\n        while (left < right) {\n            long long mid = left + (right - left) / 2;\n            if (countUgly(mid) >= n) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n        return (int)left;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n  long long lcmLl(long long a, long long b) { return a / gcd(a, b) * b; }\n\n public:\n  int nthUglyNumber(int n, int a, int b, int c) {\n    long long ab = lcmLl(a, b);\n    long long ac = lcmLl(a, c);\n    long long bc = lcmLl(b, c);\n    long long abc = lcmLl(ab, c);\n\n    auto countUgly = [a, b, c, ab, ac, bc, abc](long long value) {\n      return value / a + value / b + value / c - value / ab - value / ac - value / bc + value / abc;\n    };\n\n    long long left = 1;\n    long long right = 1LL * min({a, b, c}) * n;\n    while (left < right) {\n      long long mid = left + (right - left) / 2;\n      if (countUgly(mid) >= n) {\n        right = mid;\n      } else {\n        left = mid + 1;\n      }\n    }\n    return (int)left;\n  }\n};\n```",
   },
   "find-the-index-of-the-first-occurrence-in-a-string": {
     modelProblem:
@@ -2759,6 +2759,6 @@ export const exampleLectureOverrides: NonNullable<
       "回退時應使用 `pi[matched - 1]`，而非將 matched 直接歸零。",
     ],
     complexity: "建立 pi 與掃描字串總時間 `O(n + m)`，空間 `O(m)`。",
-    code: "```cpp\nclass Solution {\npublic:\n    int strStr(string haystack, string needle) {\n        vector<int> pi(needle.size());\n        for (int i = 1; i < (int)needle.size(); ++i) {\n            int matched = pi[i - 1];\n            while (matched > 0 && needle[i] != needle[matched]) matched = pi[matched - 1];\n            if (needle[i] == needle[matched]) matched++;\n            pi[i] = matched;\n        }\n\n        int matched = 0;\n        for (int i = 0; i < (int)haystack.size(); ++i) {\n            while (matched > 0 && haystack[i] != needle[matched]) matched = pi[matched - 1];\n            if (haystack[i] == needle[matched]) matched++;\n            if (matched == (int)needle.size()) return i - (int)needle.size() + 1;\n        }\n        return -1;\n    }\n};\n```",
+    code: "```cpp\nclass Solution {\n public:\n  int strStr(string haystack, string needle) {\n    vector<int> pi(needle.size());\n    for (int i = 1; i < (int)needle.size(); ++i) {\n      int matched = pi[i - 1];\n      while (matched > 0 && needle[i] != needle[matched]) {\n        matched = pi[matched - 1];\n      }\n      if (needle[i] == needle[matched]) {\n        matched++;\n      }\n      pi[i] = matched;\n    }\n\n    int matched = 0;\n    for (int i = 0; i < (int)haystack.size(); ++i) {\n      while (matched > 0 && haystack[i] != needle[matched]) {\n        matched = pi[matched - 1];\n      }\n      if (haystack[i] == needle[matched]) {\n        matched++;\n      }\n      if (matched == (int)needle.size()) {\n        return i - (int)needle.size() + 1;\n      }\n    }\n    return -1;\n  }\n};\n```",
   },
 };

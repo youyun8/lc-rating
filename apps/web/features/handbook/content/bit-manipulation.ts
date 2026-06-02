@@ -41,10 +41,10 @@ Related: [Math](/handbook/math), [Dynamic Programming](/handbook/dynamic-program
 
 \`\`\`cpp
 // Test, set, clear, toggle the i-th bit of x
-bool bit = (x >> i) & 1; // read bit i
-x |= (1 << i);           // set bit i to 1
-x &= ~(1 << i);          // clear bit i to 0
-x ^= (1 << i);           // toggle bit i
+bool bit = (x >> i) & 1;  // read bit i
+x |= (1 << i);            // set bit i to 1
+x &= ~(1 << i);           // clear bit i to 0
+x ^= (1 << i);            // toggle bit i
 \`\`\`
 
 Use \`1u << i\` or \`1LL << i\` when \`i >= 31\` to avoid signed overflow / UB.`,
@@ -54,21 +54,21 @@ Use \`1u << i\` or \`1LL << i\` when \`i >= 31\` to avoid signed overflow / UB.`
       title: "Essential tricks",
       body: `\`\`\`cpp
 // Lowest set bit and clearing it
-int low = x & (-x); // isolates the lowest set bit (also Fenwick's i&-i)
-x &= (x - 1);       // clears the lowest set bit (Brian Kernighan)
+int low = x & (-x);  // isolates the lowest set bit (also Fenwick's i&-i)
+x &= (x - 1);        // clears the lowest set bit (Brian Kernighan)
 \`\`\`
 
 \`\`\`cpp
 // Power-of-two check and counting set bits
 bool isPow2 = x > 0 && (x & (x - 1)) == 0;
-int bits = __builtin_popcount(x); // popcountll for long long
+int bits = __builtin_popcount(x);  // popcountll for long long
 \`\`\`
 
 \`\`\`cpp
 // Other handy builtins (GCC/Clang)
-int leadingZeros = __builtin_clz(x);    // x != 0
-int trailingZeros = __builtin_ctz(x);   // x != 0; index of lowest set bit
-int highestBit = 31 - __builtin_clz(x); // floor(log2(x))
+int leadingZeros = __builtin_clz(x);     // x != 0
+int trailingZeros = __builtin_ctz(x);    // x != 0; index of lowest set bit
+int highestBit = 31 - __builtin_clz(x);  // floor(log2(x))
 \`\`\`
 
 Counting set bits for all numbers \`0..n\` in \`O(n)\` (LC 338): \`dp[i] = dp[i >> 1] + (i & 1)\`.`,
@@ -80,23 +80,23 @@ Counting set bits for all numbers \`0..n\` in \`O(n)\` (LC 338): \`dp[i] = dp[i 
 
 \`\`\`cpp
 // Single Number (LC 136): everything cancels except the unique element
-int singleNumber(vector<int>& a)
-{
-    int x = 0;
-    for (int v : a)
-        x ^= v;
-    return x;
+int singleNumber(vector<int>& a) {
+  int x = 0;
+  for (int v : a) {
+    x ^= v;
+  }
+  return x;
 }
 \`\`\`
 
 \`\`\`cpp
 // Missing Number (LC 268): XOR indices and values
-int missingNumber(vector<int>& a)
-{
-    int x = a.size();
-    for (int i = 0; i < (int)a.size(); i++)
-        x ^= i ^ a[i];
-    return x;
+int missingNumber(vector<int>& a) {
+  int x = a.size();
+  for (int i = 0; i < (int)a.size(); i++) {
+    x ^= i ^ a[i];
+  }
+  return x;
 }
 \`\`\`
 
@@ -109,19 +109,19 @@ Single Number II (LC 137, every element thrice but one) uses bit-count mod 3 per
 
 \`\`\`cpp
 // Enumerate all subsets of an n-element set (LC 78 Subsets)
-vector<vector<int>> subsets(vector<int>& a)
-{
-    int n = a.size();
-    vector<vector<int>> res;
-    for (int mask = 0; mask < (1 << n); mask++)
-    {
-        vector<int> cur;
-        for (int i = 0; i < n; i++)
-            if (mask & (1 << i))
-                cur.push_back(a[i]);
-        res.push_back(cur);
+vector<vector<int>> subsets(vector<int>& a) {
+  int n = a.size();
+  vector<vector<int>> res;
+  for (int mask = 0; mask < (1 << n); mask++) {
+    vector<int> cur;
+    for (int i = 0; i < n; i++) {
+      if (mask & (1 << i)) {
+        cur.push_back(a[i]);
+      }
     }
-    return res;
+    res.push_back(cur);
+  }
+  return res;
 }
 \`\`\`
 
@@ -129,9 +129,8 @@ To enumerate **submasks** of a mask (used in bitmask DP partition problems) in \
 
 \`\`\`cpp
 // Iterate every non-empty submask of 'mask'
-for (int sub = mask; sub > 0; sub = (sub - 1) & mask)
-{
-    // 'sub' ranges over all submasks of mask
+for (int sub = mask; sub > 0; sub = (sub - 1) & mask) {
+  // 'sub' ranges over all submasks of mask
 }
 \`\`\``,
     },
@@ -142,31 +141,28 @@ for (int sub = mask; sub > 0; sub = (sub - 1) & mask)
 
 \`\`\`cpp
 // XOR / linear basis: maximum-XOR subset and membership
-struct XorBasis
-{
-    static const int B = 60;
-    long long basis[B + 1] = {0};
-    void insert(long long x)
-    {
-        for (int b = B; b >= 0; b--)
-        {
-            if (!((x >> b) & 1))
-                continue;
-            if (!basis[b])
-            {
-                basis[b] = x;
-                return; // new independent vector
-            }
-            x ^= basis[b]; // reduce and continue
-        }
+struct XorBasis {
+  static const int B = 60;
+  long long basis[B + 1] = {0};
+  void insert(long long x) {
+    for (int b = B; b >= 0; b--) {
+      if (!((x >> b) & 1)) {
+        continue;
+      }
+      if (!basis[b]) {
+        basis[b] = x;
+        return;  // new independent vector
+      }
+      x ^= basis[b];  // reduce and continue
     }
-    long long maxXor()
-    {
-        long long res = 0;
-        for (int b = B; b >= 0; b--)
-            res = max(res, res ^ basis[b]);
-        return res;
+  }
+  long long maxXor() {
+    long long res = 0;
+    for (int b = B; b >= 0; b--) {
+      res = max(res, res ^ basis[b]);
     }
+    return res;
+  }
 };
 \`\`\`
 
@@ -180,11 +176,10 @@ This is the tool behind Maximum XOR With an Element From Array (LC 1707, also a 
 \`\`\`cpp
 // Iterate all k-subsets of an n-element set
 int sub = (1 << k) - 1;
-while (sub < (1 << n))
-{
-    // use 'sub' here (exactly k bits set)
-    int c = sub & -sub, r = sub + c;
-    sub = (((r ^ sub) >> 2) / c) | r;
+while (sub < (1 << n)) {
+  // use 'sub' here (exactly k bits set)
+  int c = sub & -sub, r = sub + c;
+  sub = (((r ^ sub) >> 2) / c) | r;
 }
 \`\`\`
 

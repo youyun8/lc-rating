@@ -34,39 +34,39 @@ Signals:
 
 \`\`\`cpp
 // Valid palindrome ignoring non-alphanumerics (LC 125)
-bool isPalindrome(string s)
-{
-    int i = 0, j = s.size() - 1;
-    while (i < j)
-    {
-        while (i < j && !isalnum(s[i]))
-            i++;
-        while (i < j && !isalnum(s[j]))
-            j--;
-        if (tolower(s[i]) != tolower(s[j]))
-            return false;
-        i++;
-        j--;
+bool isPalindrome(string s) {
+  int i = 0, j = s.size() - 1;
+  while (i < j) {
+    while (i < j && !isalnum(s[i])) {
+      i++;
     }
-    return true;
+    while (i < j && !isalnum(s[j])) {
+      j--;
+    }
+    if (tolower(s[i]) != tolower(s[j])) {
+      return false;
+    }
+    i++;
+    j--;
+  }
+  return true;
 }
 \`\`\`
 
 \`\`\`cpp
 // Group anagrams (LC 49): signature = sorted letters (or a 26-count key)
-vector<vector<string>> groupAnagrams(vector<string>& strs)
-{
-    unordered_map<string, vector<string>> m;
-    for (auto& s : strs)
-    {
-        string k = s;
-        sort(k.begin(), k.end());
-        m[k].push_back(s);
-    }
-    vector<vector<string>> res;
-    for (auto& [k, v] : m)
-        res.push_back(v);
-    return res;
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+  unordered_map<string, vector<string>> m;
+  for (auto& s : strs) {
+    string k = s;
+    sort(k.begin(), k.end());
+    m[k].push_back(s);
+  }
+  vector<vector<string>> res;
+  for (auto& [k, v] : m) {
+    res.push_back(v);
+  }
+  return res;
 }
 \`\`\``,
     },
@@ -77,27 +77,23 @@ vector<vector<string>> groupAnagrams(vector<string>& strs)
 
 \`\`\`cpp
 // Longest palindromic substring (LC 5) via center expansion
-string longestPalindrome(string s)
-{
-    int start = 0, len = 0;
-    auto expand = [&](int l, int r) {
-        while (l >= 0 && r < (int)s.size() && s[l] == s[r])
-        {
-            l--;
-            r++;
-        }
-        if (r - l - 1 > len)
-        {
-            len = r - l - 1;
-            start = l + 1;
-        }
-    };
-    for (int i = 0; i < (int)s.size(); i++)
-    {
-        expand(i, i);
-        expand(i, i + 1);
+string longestPalindrome(string s) {
+  int start = 0, len = 0;
+  auto expand = [&](int l, int r) {
+    while (l >= 0 && r < (int)s.size() && s[l] == s[r]) {
+      l--;
+      r++;
     }
-    return s.substr(start, len);
+    if (r - l - 1 > len) {
+      len = r - l - 1;
+      start = l + 1;
+    }
+  };
+  for (int i = 0; i < (int)s.size(); i++) {
+    expand(i, i);
+    expand(i, i + 1);
+  }
+  return s.substr(start, len);
 }
 \`\`\`
 
@@ -110,41 +106,43 @@ For \`O(n)\` longest palindrome use **Manacher's algorithm** (advanced). Palindr
 
 \`\`\`cpp
 // Prefix function (failure function) of a pattern
-vector<int> prefixFunc(const string& p)
-{
-    int m = p.size();
-    vector<int> pi(m, 0);
-    for (int i = 1; i < m; i++)
-    {
-        int j = pi[i - 1];
-        while (j > 0 && p[i] != p[j])
-            j = pi[j - 1];
-        if (p[i] == p[j])
-            j++;
-        pi[i] = j;
+vector<int> prefixFunc(const string& p) {
+  int m = p.size();
+  vector<int> pi(m, 0);
+  for (int i = 1; i < m; i++) {
+    int j = pi[i - 1];
+    while (j > 0 && p[i] != p[j]) {
+      j = pi[j - 1];
     }
-    return pi;
+    if (p[i] == p[j]) {
+      j++;
+    }
+    pi[i] = j;
+  }
+  return pi;
 }
 \`\`\`
 
 \`\`\`cpp
 // KMP search: return first index of pattern p in text t, else -1 (LC 28)
-int kmp(const string& t, const string& p)
-{
-    if (p.empty())
-        return 0;
-    vector<int> pi = prefixFunc(p);
-    int j = 0;
-    for (int i = 0; i < (int)t.size(); i++)
-    {
-        while (j > 0 && t[i] != p[j])
-            j = pi[j - 1];
-        if (t[i] == p[j])
-            j++;
-        if (j == (int)p.size())
-            return i - j + 1; // full match
+int kmp(const string& t, const string& p) {
+  if (p.empty()) {
+    return 0;
+  }
+  vector<int> pi = prefixFunc(p);
+  int j = 0;
+  for (int i = 0; i < (int)t.size(); i++) {
+    while (j > 0 && t[i] != p[j]) {
+      j = pi[j - 1];
     }
-    return -1;
+    if (t[i] == p[j]) {
+      j++;
+    }
+    if (j == (int)p.size()) {
+      return i - j + 1;  // full match
+    }
+  }
+  return -1;
 }
 \`\`\`
 
@@ -157,24 +155,23 @@ The prefix function alone solves Shortest Palindrome (LC 214) and Repeated Subst
 
 \`\`\`cpp
 // Z-function: z[i] = length of longest common prefix of s and s[i..]
-vector<int> zFunction(const string& s)
-{
-    int n = s.size();
-    vector<int> z(n, 0);
-    z[0] = n;
-    for (int i = 1, l = 0, r = 0; i < n; i++)
-    {
-        if (i < r)
-            z[i] = min(r - i, z[i - l]);
-        while (i + z[i] < n && s[z[i]] == s[i + z[i]])
-            z[i]++;
-        if (i + z[i] > r)
-        {
-            l = i;
-            r = i + z[i];
-        }
+vector<int> zFunction(const string& s) {
+  int n = s.size();
+  vector<int> z(n, 0);
+  z[0] = n;
+  for (int i = 1, l = 0, r = 0; i < n; i++) {
+    if (i < r) {
+      z[i] = min(r - i, z[i - l]);
     }
-    return z;
+    while (i + z[i] < n && s[z[i]] == s[i + z[i]]) {
+      z[i]++;
+    }
+    if (i + z[i] > r) {
+      l = i;
+      r = i + z[i];
+    }
+  }
+  return z;
 }
 \`\`\`
 
@@ -183,21 +180,18 @@ vector<int> zFunction(const string& s)
 \`\`\`cpp
 // Polynomial prefix hash with a single 64-bit modulus
 const unsigned long long B = 131;
-vector<unsigned long long> h, pw; // h[i] = hash of s[0..i-1]
-void buildHash(const string& s)
-{
-    int n = s.size();
-    h.assign(n + 1, 0);
-    pw.assign(n + 1, 1);
-    for (int i = 0; i < n; i++)
-    {
-        h[i + 1] = h[i] * B + s[i];
-        pw[i + 1] = pw[i] * B;
-    }
+vector<unsigned long long> h, pw;  // h[i] = hash of s[0..i-1]
+void buildHash(const string& s) {
+  int n = s.size();
+  h.assign(n + 1, 0);
+  pw.assign(n + 1, 1);
+  for (int i = 0; i < n; i++) {
+    h[i + 1] = h[i] * B + s[i];
+    pw[i + 1] = pw[i] * B;
+  }
 }
-unsigned long long sub(int l, int r)
-{ // hash of s[l..r]
-    return h[r + 1] - h[l] * pw[r - l + 1];
+unsigned long long sub(int l, int r) {  // hash of s[l..r]
+  return h[r + 1] - h[l] * pw[r - l + 1];
 }
 \`\`\``,
     },
@@ -208,47 +202,39 @@ unsigned long long sub(int l, int r)
 
 \`\`\`cpp
 // Trie supporting insert / search / startsWith (LC 208)
-struct Trie
-{
-    struct Node
-    {
-        Node* nxt[26] = {};
-        bool end = false;
-    };
-    Node* root = new Node();
-    void insert(const string& w)
-    {
-        Node* cur = root;
-        for (char c : w)
-        {
-            int k = c - 'a';
-            if (!cur->nxt[k])
-                cur->nxt[k] = new Node();
-            cur = cur->nxt[k];
-        }
-        cur->end = true;
+struct Trie {
+  struct Node {
+    Node* nxt[26] = {};
+    bool end = false;
+  };
+  Node* root = new Node();
+  void insert(const string& w) {
+    Node* cur = root;
+    for (char c : w) {
+      int k = c - 'a';
+      if (!cur->nxt[k]) {
+        cur->nxt[k] = new Node();
+      }
+      cur = cur->nxt[k];
     }
-    Node* walk(const string& w)
-    {
-        Node* cur = root;
-        for (char c : w)
-        {
-            int k = c - 'a';
-            if (!cur->nxt[k])
-                return nullptr;
-            cur = cur->nxt[k];
-        }
-        return cur;
+    cur->end = true;
+  }
+  Node* walk(const string& w) {
+    Node* cur = root;
+    for (char c : w) {
+      int k = c - 'a';
+      if (!cur->nxt[k]) {
+        return nullptr;
+      }
+      cur = cur->nxt[k];
     }
-    bool search(const string& w)
-    {
-        Node* n = walk(w);
-        return n && n->end;
-    }
-    bool startsWith(const string& p)
-    {
-        return walk(p) != nullptr;
-    }
+    return cur;
+  }
+  bool search(const string& w) {
+    Node* n = walk(w);
+    return n && n->end;
+  }
+  bool startsWith(const string& p) { return walk(p) != nullptr; }
 };
 \`\`\`
 
@@ -261,37 +247,35 @@ Add Word with wildcard '.' (LC 211) recurses across all children on a dot; Word 
 
 \`\`\`cpp
 // Manacher's algorithm: longest palindromic substring in O(n) (LC 5)
-string longestPalindromeManacher(const string& s)
-{
-    string t = "^";
-    for (char c : s)
-    {
-        t += '#';
-        t += c;
+string longestPalindromeManacher(const string& s) {
+  string t = "^";
+  for (char c : s) {
+    t += '#';
+    t += c;
+  }
+  t += "#$";  // sentinels remove bounds checks
+  int n = t.size(), center = 0, right = 0;
+  vector<int> p(n, 0);  // p[i] = palindrome radius at i
+  for (int i = 1; i < n - 1; i++) {
+    if (i < right) {
+      p[i] = min(right - i, p[2 * center - i]);  // mirror
     }
-    t += "#$"; // sentinels remove bounds checks
-    int n = t.size(), center = 0, right = 0;
-    vector<int> p(n, 0); // p[i] = palindrome radius at i
-    for (int i = 1; i < n - 1; i++)
-    {
-        if (i < right)
-            p[i] = min(right - i, p[2 * center - i]); // mirror
-        while (t[i + p[i] + 1] == t[i - p[i] - 1])
-            p[i]++; // expand
-        if (i + p[i] > right)
-        {
-            center = i;
-            right = i + p[i];
-        }
+    while (t[i + p[i] + 1] == t[i - p[i] - 1]) {
+      p[i]++;  // expand
     }
-    int len = 0, c = 0;
-    for (int i = 1; i < n - 1; i++)
-        if (p[i] > len)
-        {
-            len = p[i];
-            c = i;
-        }
-    return s.substr((c - len) / 2, len); // map back to the original string
+    if (i + p[i] > right) {
+      center = i;
+      right = i + p[i];
+    }
+  }
+  int len = 0, c = 0;
+  for (int i = 1; i < n - 1; i++) {
+    if (p[i] > len) {
+      len = p[i];
+      c = i;
+    }
+  }
+  return s.substr((c - len) / 2, len);  // map back to the original string
 }
 \`\`\`
 
@@ -303,62 +287,50 @@ The radius array also answers Palindromic Substrings (LC 647) counts and feeds p
       body: `To match **many** patterns against a text at once, build a trie of the patterns and add KMP-style *failure links* so a mismatch jumps to the longest proper suffix that is still a trie prefix. Total cost is \`O(sum of pattern lengths + text + matches)\`.
 
 \`\`\`cpp
-// Aho–Corasick automaton (lowercase). add() patterns, build(), then run over text.
-struct AhoCorasick
-{
-    struct Node
-    {
-        int nxt[26];
-        int fail = 0;
-        vector<int> out;
-        Node()
-        {
-            memset(nxt, 0, sizeof nxt);
-        }
-    };
-    vector<Node> t;
-    AhoCorasick()
-    {
+// Aho–Corasick automaton (lowercase). add() patterns, build(), then run over
+// text.
+struct AhoCorasick {
+  struct Node {
+    int nxt[26];
+    int fail = 0;
+    vector<int> out;
+    Node() { memset(nxt, 0, sizeof nxt); }
+  };
+  vector<Node> t;
+  AhoCorasick() { t.emplace_back(); }
+  void add(const string& s, int id) {
+    int u = 0;
+    for (char c : s) {
+      int k = c - 'a';
+      if (!t[u].nxt[k]) {
+        t[u].nxt[k] = t.size();
         t.emplace_back();
+      }
+      u = t[u].nxt[k];
     }
-    void add(const string& s, int id)
-    {
-        int u = 0;
-        for (char c : s)
-        {
-            int k = c - 'a';
-            if (!t[u].nxt[k])
-            {
-                t[u].nxt[k] = t.size();
-                t.emplace_back();
-            }
-            u = t[u].nxt[k];
+    t[u].out.push_back(id);
+  }
+  void build() {  // BFS to set fail links / goto automaton
+    queue<int> q;
+    for (int k = 0; k < 26; k++) {
+      if (t[0].nxt[k]) {
+        q.push(t[0].nxt[k]);
+      }
+    }
+    while (!q.empty()) {
+      int u = q.front();
+      q.pop();
+      for (int k = 0; k < 26; k++) {
+        int v = t[u].nxt[k];
+        if (!v) {
+          t[u].nxt[k] = t[t[u].fail].nxt[k];  // follow fail on miss
+        } else {
+          t[v].fail = t[t[u].fail].nxt[k];
+          q.push(v);
         }
-        t[u].out.push_back(id);
+      }
     }
-    void build()
-    { // BFS to set fail links / goto automaton
-        queue<int> q;
-        for (int k = 0; k < 26; k++)
-            if (t[0].nxt[k])
-                q.push(t[0].nxt[k]);
-        while (!q.empty())
-        {
-            int u = q.front();
-            q.pop();
-            for (int k = 0; k < 26; k++)
-            {
-                int v = t[u].nxt[k];
-                if (!v)
-                    t[u].nxt[k] = t[t[u].fail].nxt[k]; // follow fail on miss
-                else
-                {
-                    t[v].fail = t[t[u].fail].nxt[k];
-                    q.push(v);
-                }
-            }
-        }
-    }
+  }
 };
 \`\`\`
 

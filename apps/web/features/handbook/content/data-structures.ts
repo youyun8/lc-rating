@@ -42,8 +42,9 @@ Related: [Monotonic Stack](/handbook/monotonic-stack), [Trees & Binary Trees](/h
 \`\`\`cpp
 // 1D prefix sum: sum of a[l..r] inclusive
 vector<long long> pre(n + 1, 0);
-for (int i = 0; i < n; i++)
-    pre[i + 1] = pre[i] + a[i];
+for (int i = 0; i < n; i++) {
+  pre[i + 1] = pre[i] + a[i];
+}
 auto rangeSum = [&](int l, int r) { return pre[r + 1] - pre[l]; };
 \`\`\`
 
@@ -51,12 +52,13 @@ auto rangeSum = [&](int l, int r) { return pre[r + 1] - pre[l]; };
 // Difference array: add 'val' to every index in [l, r], O(1) per update
 vector<long long> diff(n + 1, 0);
 auto update = [&](int l, int r, long long val) {
-    diff[l] += val;
-    diff[r + 1] -= val;
+  diff[l] += val;
+  diff[r + 1] -= val;
 };
 // materialize
-for (int i = 1; i < n; i++)
-    diff[i] += diff[i - 1];
+for (int i = 1; i < n; i++) {
+  diff[i] += diff[i - 1];
+}
 \`\`\`
 
 2D prefix sums (LC 304) give submatrix sums in \`O(1)\`; the 2D difference array (LC 2536) batches rectangle updates. Prefix sums + a hash map of seen sums solve "subarray sum equals K" (LC 560).`,
@@ -68,18 +70,16 @@ for (int i = 1; i < n; i++)
 
 \`\`\`cpp
 // Subarray sum equals k (LC 560): count prefix sums seen so far
-int subarraySum(vector<int>& a, int k)
-{
-    unordered_map<long long, int> seen{{0, 1}};
-    long long sum = 0;
-    int res = 0;
-    for (int x : a)
-    {
-        sum += x;
-        res += seen.count(sum - k) ? seen[sum - k] : 0; // a prefix that makes k
-        seen[sum]++;
-    }
-    return res;
+int subarraySum(vector<int>& a, int k) {
+  unordered_map<long long, int> seen{{0, 1}};
+  long long sum = 0;
+  int res = 0;
+  for (int x : a) {
+    sum += x;
+    res += seen.count(sum - k) ? seen[sum - k] : 0;  // a prefix that makes k
+    seen[sum]++;
+  }
+  return res;
 }
 \`\`\`
 
@@ -92,41 +92,34 @@ Tips: reserve capacity (\`m.reserve(n)\`) to cut rehashing; for adversarial inpu
 
 \`\`\`cpp
 // Kth largest element (LC 215) with a size-k min-heap: O(n log k)
-int findKthLargest(vector<int>& a, int k)
-{
-    priority_queue<int, vector<int>, greater<>> pq;
-    for (int x : a)
-    {
-        pq.push(x);
-        if ((int)pq.size() > k)
-            pq.pop(); // keep only the k largest
+int findKthLargest(vector<int>& a, int k) {
+  priority_queue<int, vector<int>, greater<>> pq;
+  for (int x : a) {
+    pq.push(x);
+    if ((int)pq.size() > k) {
+      pq.pop();  // keep only the k largest
     }
-    return pq.top();
+  }
+  return pq.top();
 }
 \`\`\`
 
 \`\`\`cpp
 // Streaming median (LC 295): max-heap for low half, min-heap for high half
-class MedianFinder
-{
-    priority_queue<int> lo;                         // max-heap
-    priority_queue<int, vector<int>, greater<>> hi; // min-heap
-  public:
-    void addNum(int x)
-    {
-        lo.push(x);
-        hi.push(lo.top());
-        lo.pop(); // balance values
-        if (hi.size() > lo.size())
-        {
-            lo.push(hi.top());
-            hi.pop();
-        }
+class MedianFinder {
+  priority_queue<int> lo;                          // max-heap
+  priority_queue<int, vector<int>, greater<>> hi;  // min-heap
+ public:
+  void addNum(int x) {
+    lo.push(x);
+    hi.push(lo.top());
+    lo.pop();  // balance values
+    if (hi.size() > lo.size()) {
+      lo.push(hi.top());
+      hi.pop();
     }
-    double findMedian()
-    {
-        return lo.size() > hi.size() ? lo.top() : (lo.top() + hi.top()) / 2.0;
-    }
+  }
+  double findMedian() { return lo.size() > hi.size() ? lo.top() : (lo.top() + hi.top()) / 2.0; }
 };
 \`\`\``,
     },
@@ -137,29 +130,23 @@ class MedianFinder
 
 \`\`\`cpp
 // Disjoint Set Union with path compression + union by size
-struct DSU
-{
-    vector<int> p, sz;
-    DSU(int n) : p(n), sz(n, 1)
-    {
-        iota(p.begin(), p.end(), 0);
+struct DSU {
+  vector<int> p, sz;
+  DSU(int n) : p(n), sz(n, 1) { iota(p.begin(), p.end(), 0); }
+  int find(int x) { return p[x] == x ? x : p[x] = find(p[x]); }
+  bool unite(int a, int b) {
+    a = find(a);
+    b = find(b);
+    if (a == b) {
+      return false;  // already connected
     }
-    int find(int x)
-    {
-        return p[x] == x ? x : p[x] = find(p[x]);
+    if (sz[a] < sz[b]) {
+      swap(a, b);
     }
-    bool unite(int a, int b)
-    {
-        a = find(a);
-        b = find(b);
-        if (a == b)
-            return false; // already connected
-        if (sz[a] < sz[b])
-            swap(a, b);
-        p[b] = a;
-        sz[a] += sz[b];
-        return true;
-    }
+    p[b] = a;
+    sz[a] += sz[b];
+    return true;
+  }
 };
 \`\`\`
 
@@ -172,29 +159,23 @@ Uses: number of connected components / provinces (LC 547), redundant connection 
 
 \`\`\`cpp
 // Fenwick / BIT: 1-indexed, prefix sums with point updates
-struct Fenwick
-{
-    int n;
-    vector<long long> t;
-    Fenwick(int n) : n(n), t(n + 1, 0)
-    {
+struct Fenwick {
+  int n;
+  vector<long long> t;
+  Fenwick(int n) : n(n), t(n + 1, 0) {}
+  void add(int i, long long v) {
+    for (; i <= n; i += i & -i) {
+      t[i] += v;
     }
-    void add(int i, long long v)
-    {
-        for (; i <= n; i += i & -i)
-            t[i] += v;
+  }
+  long long sum(int i) {
+    long long s = 0;
+    for (; i > 0; i -= i & -i) {
+      s += t[i];
     }
-    long long sum(int i)
-    {
-        long long s = 0;
-        for (; i > 0; i -= i & -i)
-            s += t[i];
-        return s;
-    }
-    long long range(int l, int r)
-    {
-        return sum(r) - sum(l - 1);
-    } // 1-indexed [l, r]
+    return s;
+  }
+  long long range(int l, int r) { return sum(r) - sum(l - 1); }  // 1-indexed [l, r]
 };
 \`\`\`
 
@@ -207,50 +188,47 @@ Counting inversions (LC 315 Count of Smaller Numbers After Self) is the canonica
 
 \`\`\`cpp
 // Iterative-free recursive segment tree: range-sum with range-add (lazy)
-struct SegTree
-{
-    int n;
-    vector<long long> sum, lazy;
-    SegTree(int n) : n(n), sum(4 * n, 0), lazy(4 * n, 0)
-    {
+struct SegTree {
+  int n;
+  vector<long long> sum, lazy;
+  SegTree(int n) : n(n), sum(4 * n, 0), lazy(4 * n, 0) {}
+  void push(int node, int l, int r) {
+    if (!lazy[node]) {
+      return;
     }
-    void push(int node, int l, int r)
-    {
-        if (!lazy[node])
-            return;
-        int m = (l + r) / 2, L = 2 * node, R = 2 * node + 1;
-        sum[L] += lazy[node] * (m - l + 1);
-        lazy[L] += lazy[node];
-        sum[R] += lazy[node] * (r - m);
-        lazy[R] += lazy[node];
-        lazy[node] = 0;
+    int m = (l + r) / 2, L = 2 * node, R = 2 * node + 1;
+    sum[L] += lazy[node] * (m - l + 1);
+    lazy[L] += lazy[node];
+    sum[R] += lazy[node] * (r - m);
+    lazy[R] += lazy[node];
+    lazy[node] = 0;
+  }
+  void update(int node, int l, int r, int ql, int qr, long long v) {
+    if (qr < l || r < ql) {
+      return;
     }
-    void update(int node, int l, int r, int ql, int qr, long long v)
-    {
-        if (qr < l || r < ql)
-            return;
-        if (ql <= l && r <= qr)
-        {
-            sum[node] += v * (r - l + 1);
-            lazy[node] += v;
-            return;
-        }
-        push(node, l, r);
-        int m = (l + r) / 2;
-        update(2 * node, l, m, ql, qr, v);
-        update(2 * node + 1, m + 1, r, ql, qr, v);
-        sum[node] = sum[2 * node] + sum[2 * node + 1];
+    if (ql <= l && r <= qr) {
+      sum[node] += v * (r - l + 1);
+      lazy[node] += v;
+      return;
     }
-    long long query(int node, int l, int r, int ql, int qr)
-    {
-        if (qr < l || r < ql)
-            return 0;
-        if (ql <= l && r <= qr)
-            return sum[node];
-        push(node, l, r);
-        int m = (l + r) / 2;
-        return query(2 * node, l, m, ql, qr) + query(2 * node + 1, m + 1, r, ql, qr);
+    push(node, l, r);
+    int m = (l + r) / 2;
+    update(2 * node, l, m, ql, qr, v);
+    update(2 * node + 1, m + 1, r, ql, qr, v);
+    sum[node] = sum[2 * node] + sum[2 * node + 1];
+  }
+  long long query(int node, int l, int r, int ql, int qr) {
+    if (qr < l || r < ql) {
+      return 0;
     }
+    if (ql <= l && r <= qr) {
+      return sum[node];
+    }
+    push(node, l, r);
+    int m = (l + r) / 2;
+    return query(2 * node, l, m, ql, qr) + query(2 * node + 1, m + 1, r, ql, qr);
+  }
 };
 \`\`\`
 
@@ -263,30 +241,27 @@ If you only need point updates, prefer Fenwick — it is shorter and faster. Rea
 
 \`\`\`cpp
 // Reverse a singly linked list (LC 206)
-ListNode* reverse(ListNode* head)
-{
-    ListNode* prev = nullptr;
-    while (head)
-    {
-        ListNode* nxt = head->next;
-        head->next = prev;
-        prev = head;
-        head = nxt;
-    }
-    return prev;
+ListNode* reverse(ListNode* head) {
+  ListNode* prev = nullptr;
+  while (head) {
+    ListNode* nxt = head->next;
+    head->next = prev;
+    prev = head;
+    head = nxt;
+  }
+  return prev;
 }
 // Cycle detection (LC 141): slow/fast meet inside a cycle
-bool hasCycle(ListNode* head)
-{
-    ListNode *slow = head, *fast = head;
-    while (fast && fast->next)
-    {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast)
-            return true;
+bool hasCycle(ListNode* head) {
+  ListNode *slow = head, *fast = head;
+  while (fast && fast->next) {
+    slow = slow->next;
+    fast = fast->next->next;
+    if (slow == fast) {
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 \`\`\``,
     },
@@ -297,29 +272,31 @@ bool hasCycle(ListNode* head)
 
 \`\`\`cpp
 // Sparse table for range minimum: O(n log n) build, O(1) query on [l, r]
-struct SparseTable
-{
-    vector<vector<int>> st;
-    vector<int> lg;
-    SparseTable(const vector<int>& a)
-    {
-        int n = a.size(), K = 1;
-        while ((1 << K) <= n)
-            K++;
-        lg.assign(n + 1, 0);
-        for (int i = 2; i <= n; i++)
-            lg[i] = lg[i / 2] + 1;
-        st.assign(K, vector<int>(n));
-        st[0] = a;
-        for (int j = 1; j < K; j++)
-            for (int i = 0; i + (1 << j) <= n; i++)
-                st[j][i] = min(st[j - 1][i], st[j - 1][i + (1 << (j - 1))]);
+struct SparseTable {
+  vector<vector<int>> st;
+  vector<int> lg;
+  SparseTable(const vector<int>& a) {
+    int n = a.size(), K = 1;
+    while ((1 << K) <= n) {
+      K++;
     }
-    int query(int l, int r)
-    { // inclusive
-        int j = lg[r - l + 1];
-        return min(st[j][l], st[j][r - (1 << j) + 1]); // overlap is fine for min/max
+    lg.assign(n + 1, 0);
+    for (int i = 2; i <= n; i++) {
+      lg[i] = lg[i / 2] + 1;
     }
+    st.assign(K, vector<int>(n));
+    st[0] = a;
+    for (int j = 1; j < K; j++) {
+      for (int i = 0; i + (1 << j) <= n; i++) {
+        st[j][i] = min(st[j - 1][i], st[j - 1][i + (1 << (j - 1))]);
+      }
+    }
+  }
+  int query(int l, int r) {  // inclusive
+    int j = lg[r - l + 1];
+    return min(st[j][l],
+               st[j][r - (1 << j) + 1]);  // overlap is fine for min/max
+  }
 };
 \`\`\`
 
@@ -335,7 +312,8 @@ Combined with an Euler tour, a sparse table gives \`O(1)\` LCA. For sums (not id
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-template <class T> using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+template <class T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 // os.find_by_order(k) -> iterator to the kth smallest (0-indexed)
 // os.order_of_key(x)  -> count of elements strictly less than x
 \`\`\`
@@ -345,37 +323,40 @@ template <class T> using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, 
 **Mo's algorithm.** For *offline* range queries with cheap incremental add/remove, sort queries by \`sqrt(n)\` blocks and shuffle two pointers across them in \`O((n + q)·sqrt(n))\`.
 
 \`\`\`cpp
-// Mo's algorithm skeleton: fill add()/remove() with the query-specific aggregate
-struct Query
-{
-    int l, r, idx;
+// Mo's algorithm skeleton: fill add()/remove() with the query-specific
+// aggregate
+struct Query {
+  int l, r, idx;
 };
-vector<long long> mo(int n, vector<Query>& qs)
-{
-    int B = max(1, (int)sqrt((double)n));
-    sort(qs.begin(), qs.end(), [&](const Query& x, const Query& y) {
-        if (x.l / B != y.l / B)
-            return x.l / B < y.l / B;
-        return (x.l / B & 1) ? x.r > y.r : x.r < y.r; // snake order
-    });
-    vector<long long> ans(qs.size());
-    long long cur = 0;
-    int curL = 0, curR = -1;
-    auto add = [&](int i) { /* fold a[i] into cur */ };
-    auto remove = [&](int i) { /* remove a[i] from cur */ };
-    for (auto& q : qs)
-    {
-        while (curR < q.r)
-            add(++curR);
-        while (curL > q.l)
-            add(--curL);
-        while (curR > q.r)
-            remove(curR--);
-        while (curL < q.l)
-            remove(curL++);
-        ans[q.idx] = cur;
+vector<long long> mo(int n, vector<Query>& qs) {
+  int B = max(1, (int)sqrt((double)n));
+  sort(qs.begin(), qs.end(), [&](const Query& x, const Query& y) {
+    if (x.l / B != y.l / B) {
+      return x.l / B < y.l / B;
     }
-    return ans;
+    return (x.l / B & 1) ? x.r > y.r : x.r < y.r;  // snake order
+  });
+  vector<long long> ans(qs.size());
+  long long cur = 0;
+  int curL = 0, curR = -1;
+  auto add = [&](int i) { /* fold a[i] into cur */ };
+  auto remove = [&](int i) { /* remove a[i] from cur */ };
+  for (auto& q : qs) {
+    while (curR < q.r) {
+      add(++curR);
+    }
+    while (curL > q.l) {
+      add(--curL);
+    }
+    while (curR > q.r) {
+      remove(curR--);
+    }
+    while (curL < q.l) {
+      remove(curL++);
+    }
+    ans[q.idx] = cur;
+  }
+  return ans;
 }
 \`\`\``,
     },
@@ -386,41 +367,35 @@ vector<long long> mo(int n, vector<Query>& qs)
 
 \`\`\`cpp
 // LRU Cache (LC 146): list front = most-recently-used
-class LRUCache
-{
-    int cap;
-    list<pair<int, int>> dll;
-    unordered_map<int, list<pair<int, int>>::iterator> pos;
+class LRUCache {
+  int cap;
+  list<pair<int, int>> dll;
+  unordered_map<int, list<pair<int, int>>::iterator> pos;
 
-  public:
-    LRUCache(int capacity) : cap(capacity)
-    {
+ public:
+  LRUCache(int capacity) : cap(capacity) {}
+  int get(int key) {
+    auto it = pos.find(key);
+    if (it == pos.end()) {
+      return -1;
     }
-    int get(int key)
-    {
-        auto it = pos.find(key);
-        if (it == pos.end())
-            return -1;
-        dll.splice(dll.begin(), dll, it->second); // promote to front
-        return it->second->second;
+    dll.splice(dll.begin(), dll, it->second);  // promote to front
+    return it->second->second;
+  }
+  void put(int key, int value) {
+    auto it = pos.find(key);
+    if (it != pos.end()) {
+      it->second->second = value;
+      dll.splice(dll.begin(), dll, it->second);
+      return;
     }
-    void put(int key, int value)
-    {
-        auto it = pos.find(key);
-        if (it != pos.end())
-        {
-            it->second->second = value;
-            dll.splice(dll.begin(), dll, it->second);
-            return;
-        }
-        if ((int)dll.size() == cap)
-        {
-            pos.erase(dll.back().first);
-            dll.pop_back();
-        }
-        dll.push_front({key, value});
-        pos[key] = dll.begin();
+    if ((int)dll.size() == cap) {
+      pos.erase(dll.back().first);
+      dll.pop_back();
     }
+    dll.push_front({key, value});
+    pos[key] = dll.begin();
+  }
 };
 \`\`\`
 

@@ -38,19 +38,18 @@ Related: [Binary Search](/handbook/binary-search), [Monotonic Stack](/handbook/m
 
 \`\`\`cpp
 // Longest substring without repeating characters (LC 3)
-int lengthOfLongestSubstring(string s)
-{
-    vector<int> last(128, -1); // last index each char was seen
-    int left = 0, best = 0;
-    for (int right = 0; right < (int)s.size(); right++)
-    {
-        char c = s[right];
-        if (last[c] >= left)
-            left = last[c] + 1; // jump left past the duplicate
-        last[c] = right;
-        best = max(best, right - left + 1);
+int lengthOfLongestSubstring(string s) {
+  vector<int> last(128, -1);  // last index each char was seen
+  int left = 0, best = 0;
+  for (int right = 0; right < (int)s.size(); right++) {
+    char c = s[right];
+    if (last[c] >= left) {
+      left = last[c] + 1;  // jump left past the duplicate
     }
-    return best;
+    last[c] = right;
+    best = max(best, right - left + 1);
+  }
+  return best;
 }
 \`\`\`
 
@@ -59,15 +58,13 @@ The general "shrink while invalid" skeleton:
 \`\`\`cpp
 // Generic variable window: maximize length subject to an invariant
 int left = 0, best = 0;
-for (int right = 0; right < n; right++)
-{
-    add(a[right]); // include a[right]
-    while (!valid())
-    { // restore the invariant
-        remove(a[left]);
-        left++;
-    }
-    best = max(best, right - left + 1);
+for (int right = 0; right < n; right++) {
+  add(a[right]);      // include a[right]
+  while (!valid()) {  // restore the invariant
+    remove(a[left]);
+    left++;
+  }
+  best = max(best, right - left + 1);
 }
 \`\`\`
 
@@ -80,18 +77,17 @@ For *minimum-length* windows, shrink as far as possible *while still valid* and 
 
 \`\`\`cpp
 // Maximum average / sum of any length-k subarray
-double maxAverage(vector<int>& a, int k)
-{
-    long long sum = 0;
-    for (int i = 0; i < k; i++)
-        sum += a[i];
-    long long best = sum;
-    for (int i = k; i < (int)a.size(); i++)
-    {
-        sum += a[i] - a[i - k]; // slide: add new, drop old
-        best = max(best, sum);
-    }
-    return (double)best / k;
+double maxAverage(vector<int>& a, int k) {
+  long long sum = 0;
+  for (int i = 0; i < k; i++) {
+    sum += a[i];
+  }
+  long long best = sum;
+  for (int i = k; i < (int)a.size(); i++) {
+    sum += a[i] - a[i - k];  // slide: add new, drop old
+    best = max(best, sum);
+  }
+  return (double)best / k;
 }
 \`\`\`
 
@@ -106,23 +102,24 @@ For "permutation in string" / "find all anagrams" (LC 567, LC 438), keep a frequ
 
 \`\`\`cpp
 // Count subarrays with exactly K distinct integers (LC 992)
-int subarraysWithKDistinct(vector<int>& a, int k)
-{
-    auto atMost = [&](int k) {
-        unordered_map<int, int> cnt;
-        int left = 0, res = 0;
-        for (int right = 0; right < (int)a.size(); right++)
-        {
-            if (++cnt[a[right]] == 1)
-                k--; // new distinct value
-            while (k < 0)
-                if (--cnt[a[left++]] == 0)
-                    k++;
-            res += right - left + 1; // # valid windows ending at right
+int subarraysWithKDistinct(vector<int>& a, int k) {
+  auto atMost = [&](int k) {
+    unordered_map<int, int> cnt;
+    int left = 0, res = 0;
+    for (int right = 0; right < (int)a.size(); right++) {
+      if (++cnt[a[right]] == 1) {
+        k--;  // new distinct value
+      }
+      while (k < 0) {
+        if (--cnt[a[left++]] == 0) {
+          k++;
         }
-        return res;
-    };
-    return atMost(k) - atMost(k - 1);
+      }
+      res += right - left + 1;  // # valid windows ending at right
+    }
+    return res;
+  };
+  return atMost(k) - atMost(k - 1);
 }
 \`\`\`
 
@@ -135,21 +132,22 @@ The same trick counts subarrays with sum / product / odd-count constraints (LC 1
 
 \`\`\`cpp
 // Sliding window maximum (LC 239)
-vector<int> maxSlidingWindow(vector<int>& a, int k)
-{
-    deque<int> dq; // indices, values decreasing front->back
-    vector<int> res;
-    for (int i = 0; i < (int)a.size(); i++)
-    {
-        while (!dq.empty() && a[dq.back()] <= a[i])
-            dq.pop_back(); // pop smaller
-        dq.push_back(i);
-        if (dq.front() <= i - k)
-            dq.pop_front(); // drop out-of-window index
-        if (i >= k - 1)
-            res.push_back(a[dq.front()]);
+vector<int> maxSlidingWindow(vector<int>& a, int k) {
+  deque<int> dq;  // indices, values decreasing front->back
+  vector<int> res;
+  for (int i = 0; i < (int)a.size(); i++) {
+    while (!dq.empty() && a[dq.back()] <= a[i]) {
+      dq.pop_back();  // pop smaller
     }
-    return res;
+    dq.push_back(i);
+    if (dq.front() <= i - k) {
+      dq.pop_front();  // drop out-of-window index
+    }
+    if (i >= k - 1) {
+      res.push_back(a[dq.front()]);
+    }
+  }
+  return res;
 }
 \`\`\`
 
@@ -162,26 +160,25 @@ This deque idea generalizes to "longest subarray where max − min ≤ limit" (L
 
 \`\`\`cpp
 // Shortest subarray with sum >= k, values may be negative (LC 862)
-int shortestSubarray(vector<int>& a, long long k)
-{
-    int n = a.size();
-    vector<long long> pre(n + 1, 0);
-    for (int i = 0; i < n; i++)
-        pre[i + 1] = pre[i] + a[i];
-    deque<int> dq; // indices, pre[] increasing front->back
-    int best = INT_MAX;
-    for (int i = 0; i <= n; i++)
-    {
-        while (!dq.empty() && pre[i] - pre[dq.front()] >= k)
-        { // found a valid window
-            best = min(best, i - dq.front());
-            dq.pop_front();
-        }
-        while (!dq.empty() && pre[dq.back()] >= pre[i])
-            dq.pop_back(); // keep increasing
-        dq.push_back(i);
+int shortestSubarray(vector<int>& a, long long k) {
+  int n = a.size();
+  vector<long long> pre(n + 1, 0);
+  for (int i = 0; i < n; i++) {
+    pre[i + 1] = pre[i] + a[i];
+  }
+  deque<int> dq;  // indices, pre[] increasing front->back
+  int best = INT_MAX;
+  for (int i = 0; i <= n; i++) {
+    while (!dq.empty() && pre[i] - pre[dq.front()] >= k) {  // found a valid window
+      best = min(best, i - dq.front());
+      dq.pop_front();
     }
-    return best == INT_MAX ? -1 : best;
+    while (!dq.empty() && pre[dq.back()] >= pre[i]) {
+      dq.pop_back();  // keep increasing
+    }
+    dq.push_back(i);
+  }
+  return best == INT_MAX ? -1 : best;
 }
 \`\`\`
 

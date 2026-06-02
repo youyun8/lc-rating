@@ -44,26 +44,27 @@ auto inBounds = [&](int r, int c) { return r >= 0 && r < m && c >= 0 && c < n; }
 
 \`\`\`cpp
 // Number of Islands (LC 200): sink each island on first contact
-int numIslands(vector<vector<char>>& g)
-{
-    int m = g.size(), n = g[0].size(), count = 0;
-    function<void(int, int)> sink = [&](int r, int c) {
-        if (r < 0 || r >= m || c < 0 || c >= n || g[r][c] != '1')
-            return;
-        g[r][c] = '0'; // mark visited in place
-        sink(r - 1, c);
-        sink(r + 1, c);
-        sink(r, c - 1);
-        sink(r, c + 1);
-    };
-    for (int r = 0; r < m; r++)
-        for (int c = 0; c < n; c++)
-            if (g[r][c] == '1')
-            {
-                count++;
-                sink(r, c);
-            }
-    return count;
+int numIslands(vector<vector<char>>& g) {
+  int m = g.size(), n = g[0].size(), count = 0;
+  function<void(int, int)> sink = [&](int r, int c) {
+    if (r < 0 || r >= m || c < 0 || c >= n || g[r][c] != '1') {
+      return;
+    }
+    g[r][c] = '0';  // mark visited in place
+    sink(r - 1, c);
+    sink(r + 1, c);
+    sink(r, c - 1);
+    sink(r, c + 1);
+  };
+  for (int r = 0; r < m; r++) {
+    for (int c = 0; c < n; c++) {
+      if (g[r][c] == '1') {
+        count++;
+        sink(r, c);
+      }
+    }
+  }
+  return count;
 }
 \`\`\`
 
@@ -76,40 +77,36 @@ Variations: Max Area of Island (LC 695, return the size), Surrounded Regions (LC
 
 \`\`\`cpp
 // Rotting Oranges (LC 994): minutes until all fresh oranges rot
-int orangesRotting(vector<vector<int>>& g)
-{
-    int m = g.size(), n = g[0].size(), fresh = 0, minutes = 0;
-    queue<pair<int, int>> q;
-    for (int r = 0; r < m; r++)
-        for (int c = 0; c < n; c++)
-        {
-            if (g[r][c] == 2)
-                q.push({r, c}); // every rotten cell is a source
-            else if (g[r][c] == 1)
-                fresh++;
-        }
-    const int dx[4] = {-1, 1, 0, 0}, dy[4] = {0, 0, -1, 1};
-    while (!q.empty() && fresh)
-    {
-        int sz = q.size();
-        for (int i = 0; i < sz; i++)
-        {
-            auto [r, c] = q.front();
-            q.pop();
-            for (int d = 0; d < 4; d++)
-            {
-                int nr = r + dx[d], nc = c + dy[d];
-                if (nr >= 0 && nr < m && nc >= 0 && nc < n && g[nr][nc] == 1)
-                {
-                    g[nr][nc] = 2;
-                    fresh--;
-                    q.push({nr, nc});
-                }
-            }
-        }
-        minutes++;
+int orangesRotting(vector<vector<int>>& g) {
+  int m = g.size(), n = g[0].size(), fresh = 0, minutes = 0;
+  queue<pair<int, int>> q;
+  for (int r = 0; r < m; r++) {
+    for (int c = 0; c < n; c++) {
+      if (g[r][c] == 2) {
+        q.push({r, c});  // every rotten cell is a source
+      } else if (g[r][c] == 1) {
+        fresh++;
+      }
     }
-    return fresh ? -1 : minutes;
+  }
+  const int dx[4] = {-1, 1, 0, 0}, dy[4] = {0, 0, -1, 1};
+  while (!q.empty() && fresh) {
+    int sz = q.size();
+    for (int i = 0; i < sz; i++) {
+      auto [r, c] = q.front();
+      q.pop();
+      for (int d = 0; d < 4; d++) {
+        int nr = r + dx[d], nc = c + dy[d];
+        if (nr >= 0 && nr < m && nc >= 0 && nc < n && g[nr][nc] == 1) {
+          g[nr][nc] = 2;
+          fresh--;
+          q.push({nr, nc});
+        }
+      }
+    }
+    minutes++;
+  }
+  return fresh ? -1 : minutes;
 }
 \`\`\`
 
@@ -122,38 +119,36 @@ int orangesRotting(vector<vector<int>>& g)
 
 \`\`\`cpp
 // Shortest path in a binary matrix, 8-directional (LC 1091)
-int shortestPathBinaryMatrix(vector<vector<int>>& g)
-{
-    int n = g.size();
-    if (g[0][0] || g[n - 1][n - 1])
-        return -1;
-    queue<pair<int, int>> q;
-    q.push({0, 0});
-    g[0][0] = 1; // reuse grid as distance
-    int dist = 1;
-    while (!q.empty())
-    {
-        int sz = q.size();
-        for (int i = 0; i < sz; i++)
-        {
-            auto [r, c] = q.front();
-            q.pop();
-            if (r == n - 1 && c == n - 1)
-                return dist;
-            for (int dr = -1; dr <= 1; dr++)
-                for (int dc = -1; dc <= 1; dc++)
-                {
-                    int nr = r + dr, nc = c + dc;
-                    if (nr >= 0 && nr < n && nc >= 0 && nc < n && g[nr][nc] == 0)
-                    {
-                        g[nr][nc] = 1;
-                        q.push({nr, nc});
-                    }
-                }
-        }
-        dist++;
-    }
+int shortestPathBinaryMatrix(vector<vector<int>>& g) {
+  int n = g.size();
+  if (g[0][0] || g[n - 1][n - 1]) {
     return -1;
+  }
+  queue<pair<int, int>> q;
+  q.push({0, 0});
+  g[0][0] = 1;  // reuse grid as distance
+  int dist = 1;
+  while (!q.empty()) {
+    int sz = q.size();
+    for (int i = 0; i < sz; i++) {
+      auto [r, c] = q.front();
+      q.pop();
+      if (r == n - 1 && c == n - 1) {
+        return dist;
+      }
+      for (int dr = -1; dr <= 1; dr++) {
+        for (int dc = -1; dc <= 1; dc++) {
+          int nr = r + dr, nc = c + dc;
+          if (nr >= 0 && nr < n && nc >= 0 && nc < n && g[nr][nc] == 0) {
+            g[nr][nc] = 1;
+            q.push({nr, nc});
+          }
+        }
+      }
+    }
+    dist++;
+  }
+  return -1;
 }
 \`\`\`
 
@@ -166,25 +161,29 @@ When you must track extra state (keys collected, remaining obstacle removals), m
 
 \`\`\`cpp
 // Word Search (LC 79): DFS with backtracking
-bool exist(vector<vector<char>>& b, string word)
-{
-    int m = b.size(), n = b[0].size();
-    function<bool(int, int, int)> dfs = [&](int r, int c, int k) {
-        if (k == (int)word.size())
-            return true;
-        if (r < 0 || r >= m || c < 0 || c >= n || b[r][c] != word[k])
-            return false;
-        char tmp = b[r][c];
-        b[r][c] = '#'; // mark to avoid reuse
-        bool found = dfs(r + 1, c, k + 1) || dfs(r - 1, c, k + 1) || dfs(r, c + 1, k + 1) || dfs(r, c - 1, k + 1);
-        b[r][c] = tmp; // restore (backtrack)
-        return found;
-    };
-    for (int r = 0; r < m; r++)
-        for (int c = 0; c < n; c++)
-            if (dfs(r, c, 0))
-                return true;
-    return false;
+bool exist(vector<vector<char>>& b, string word) {
+  int m = b.size(), n = b[0].size();
+  function<bool(int, int, int)> dfs = [&](int r, int c, int k) {
+    if (k == (int)word.size()) {
+      return true;
+    }
+    if (r < 0 || r >= m || c < 0 || c >= n || b[r][c] != word[k]) {
+      return false;
+    }
+    char tmp = b[r][c];
+    b[r][c] = '#';  // mark to avoid reuse
+    bool found = dfs(r + 1, c, k + 1) || dfs(r - 1, c, k + 1) || dfs(r, c + 1, k + 1) || dfs(r, c - 1, k + 1);
+    b[r][c] = tmp;  // restore (backtrack)
+    return found;
+  };
+  for (int r = 0; r < m; r++) {
+    for (int c = 0; c < n; c++) {
+      if (dfs(r, c, 0)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 \`\`\``,
     },
@@ -194,15 +193,18 @@ bool exist(vector<vector<char>>& b, string word)
       body: `Layout problems are about index arithmetic, not algorithms.
 
 \`\`\`cpp
-// Rotate image 90 degrees clockwise in place (LC 48): transpose then reverse rows
-void rotate(vector<vector<int>>& a)
-{
-    int n = a.size();
-    for (int i = 0; i < n; i++)
-        for (int j = i + 1; j < n; j++)
-            swap(a[i][j], a[j][i]);
-    for (auto& row : a)
-        reverse(row.begin(), row.end());
+// Rotate image 90 degrees clockwise in place (LC 48): transpose then reverse
+// rows
+void rotate(vector<vector<int>>& a) {
+  int n = a.size();
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      swap(a[i][j], a[j][i]);
+    }
+  }
+  for (auto& row : a) {
+    reverse(row.begin(), row.end());
+  }
 }
 \`\`\`
 
@@ -215,31 +217,28 @@ Spiral Matrix (LC 54) walks four shrinking boundaries; Set Matrix Zeroes (LC 73)
 
 \`\`\`cpp
 // Swim in Rising Water (LC 778): minimize the largest elevation on a path
-int swimInWater(vector<vector<int>>& grid)
-{
-    int n = grid.size();
-    priority_queue<array<int, 3>, vector<array<int, 3>>, greater<>> pq; // {time, r, c}
-    vector<vector<int>> seen(n, vector<int>(n, 0));
-    pq.push({grid[0][0], 0, 0});
-    seen[0][0] = 1;
-    const int dx[4] = {-1, 1, 0, 0}, dy[4] = {0, 0, -1, 1};
-    while (!pq.empty())
-    {
-        auto [t, r, c] = pq.top();
-        pq.pop();
-        if (r == n - 1 && c == n - 1)
-            return t;
-        for (int d = 0; d < 4; d++)
-        {
-            int nr = r + dx[d], nc = c + dy[d];
-            if (nr >= 0 && nr < n && nc >= 0 && nc < n && !seen[nr][nc])
-            {
-                seen[nr][nc] = 1;
-                pq.push({max(t, grid[nr][nc]), nr, nc}); // path cost = max cell
-            }
-        }
+int swimInWater(vector<vector<int>>& grid) {
+  int n = grid.size();
+  priority_queue<array<int, 3>, vector<array<int, 3>>, greater<>> pq;  // {time, r, c}
+  vector<vector<int>> seen(n, vector<int>(n, 0));
+  pq.push({grid[0][0], 0, 0});
+  seen[0][0] = 1;
+  const int dx[4] = {-1, 1, 0, 0}, dy[4] = {0, 0, -1, 1};
+  while (!pq.empty()) {
+    auto [t, r, c] = pq.top();
+    pq.pop();
+    if (r == n - 1 && c == n - 1) {
+      return t;
     }
-    return -1;
+    for (int d = 0; d < 4; d++) {
+      int nr = r + dx[d], nc = c + dy[d];
+      if (nr >= 0 && nr < n && nc >= 0 && nc < n && !seen[nr][nc]) {
+        seen[nr][nc] = 1;
+        pq.push({max(t, grid[nr][nc]), nr, nc});  // path cost = max cell
+      }
+    }
+  }
+  return -1;
 }
 \`\`\`
 
@@ -251,36 +250,41 @@ Path With Minimum Effort (LC 1631) is the same template minimizing the maximum a
       body: `When grid dimensions are small in one direction (\`cols <= ~12\`), DP over **row bitmasks** — each mask encodes which cells in a row are chosen, with adjacency constraints between consecutive rows.
 
 \`\`\`cpp
-// Maximum Students Taking Exam (LC 1349): DP over valid seating bitmasks per row
-int maxStudents(vector<vector<char>>& seats)
-{
-    int m = seats.size(), n = seats[0].size();
-    vector<int> good(m, 0);
-    for (int i = 0; i < m; i++)
-        for (int j = 0; j < n; j++)
-            if (seats[i][j] == '.')
-                good[i] |= (1 << j);
-    auto ok = [&](int row, int mask) { return (mask & good[row]) == mask && !(mask & (mask << 1)); };
-    vector<vector<int>> dp(m + 1, vector<int>(1 << n, -1));
-    dp[0][0] = 0;
-    int best = 0;
-    for (int i = 0; i < m; i++)
-        for (int prev = 0; prev < (1 << n); prev++)
-        {
-            if (dp[i][prev] < 0)
-                continue;
-            for (int cur = 0; cur < (1 << n); cur++)
-            {
-                if (!ok(i, cur))
-                    continue;
-                if ((cur & (prev << 1)) || (cur & (prev >> 1)))
-                    continue; // diagonal clash
-                int val = dp[i][prev] + __builtin_popcount(cur);
-                dp[i + 1][cur] = max(dp[i + 1][cur], val);
-                best = max(best, val);
-            }
+// Maximum Students Taking Exam (LC 1349): DP over valid seating bitmasks per
+// row
+int maxStudents(vector<vector<char>>& seats) {
+  int m = seats.size(), n = seats[0].size();
+  vector<int> good(m, 0);
+  for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+      if (seats[i][j] == '.') {
+        good[i] |= (1 << j);
+      }
+    }
+  }
+  auto ok = [&](int row, int mask) { return (mask & good[row]) == mask && !(mask & (mask << 1)); };
+  vector<vector<int>> dp(m + 1, vector<int>(1 << n, -1));
+  dp[0][0] = 0;
+  int best = 0;
+  for (int i = 0; i < m; i++) {
+    for (int prev = 0; prev < (1 << n); prev++) {
+      if (dp[i][prev] < 0) {
+        continue;
+      }
+      for (int cur = 0; cur < (1 << n); cur++) {
+        if (!ok(i, cur)) {
+          continue;
         }
-    return best;
+        if ((cur & (prev << 1)) || (cur & (prev >> 1))) {
+          continue;  // diagonal clash
+        }
+        int val = dp[i][prev] + __builtin_popcount(cur);
+        dp[i + 1][cur] = max(dp[i + 1][cur], val);
+        best = max(best, val);
+      }
+    }
+  }
+  return best;
 }
 \`\`\`
 

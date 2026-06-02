@@ -38,21 +38,18 @@ Related: [Sliding Window](/handbook/sliding-window), [Dynamic Programming](/hand
 
 \`\`\`cpp
 // For each i, index of the next strictly greater element to the right, else -1
-vector<int> nextGreater(const vector<int>& a)
-{
-    int n = a.size();
-    vector<int> res(n, -1);
-    stack<int> st; // indices, values decreasing bottom->top
-    for (int i = 0; i < n; i++)
-    {
-        while (!st.empty() && a[st.top()] < a[i])
-        {
-            res[st.top()] = i; // a[i] is the next greater for st.top()
-            st.pop();
-        }
-        st.push(i);
+vector<int> nextGreater(const vector<int>& a) {
+  int n = a.size();
+  vector<int> res(n, -1);
+  stack<int> st;  // indices, values decreasing bottom->top
+  for (int i = 0; i < n; i++) {
+    while (!st.empty() && a[st.top()] < a[i]) {
+      res[st.top()] = i;  // a[i] is the next greater for st.top()
+      st.pop();
     }
-    return res;
+    st.push(i);
+  }
+  return res;
 }
 \`\`\`
 
@@ -70,23 +67,20 @@ Variations are just sign/direction flips:
 
 \`\`\`cpp
 // Largest rectangle in histogram (LC 84); sentinel 0 flushes the stack
-int largestRectangleArea(vector<int> h)
-{
-    h.push_back(0); // sentinel forces all bars to pop
-    stack<int> st;  // indices with increasing heights
-    int best = 0;
-    for (int i = 0; i < (int)h.size(); i++)
-    {
-        while (!st.empty() && h[st.top()] >= h[i])
-        {
-            int height = h[st.top()];
-            st.pop();
-            int left = st.empty() ? -1 : st.top();
-            best = max(best, height * (i - left - 1)); // width between boundaries
-        }
-        st.push(i);
+int largestRectangleArea(vector<int> h) {
+  h.push_back(0);  // sentinel forces all bars to pop
+  stack<int> st;   // indices with increasing heights
+  int best = 0;
+  for (int i = 0; i < (int)h.size(); i++) {
+    while (!st.empty() && h[st.top()] >= h[i]) {
+      int height = h[st.top()];
+      st.pop();
+      int left = st.empty() ? -1 : st.top();
+      best = max(best, height * (i - left - 1));  // width between boundaries
     }
-    return best;
+    st.push(i);
+  }
+  return best;
 }
 \`\`\`
 
@@ -99,38 +93,33 @@ int largestRectangleArea(vector<int> h)
 
 \`\`\`cpp
 // Sum of minimums of all subarrays (LC 907), mod 1e9+7
-int sumSubarrayMins(vector<int>& a)
-{
-    const long long MOD = 1e9 + 7;
-    int n = a.size();
-    vector<long long> left(n), right(n); // span where a[i] is the min
-    stack<int> st;
-    for (int i = 0; i < n; i++)
-    { // strictly-smaller to the left
-        while (!st.empty() && a[st.top()] >= a[i])
-        {
-            st.pop();
-        }
-        left[i] = st.empty() ? i + 1 : i - st.top();
-        st.push(i);
+int sumSubarrayMins(vector<int>& a) {
+  const long long MOD = 1e9 + 7;
+  int n = a.size();
+  vector<long long> left(n), right(n);  // span where a[i] is the min
+  stack<int> st;
+  for (int i = 0; i < n; i++) {  // strictly-smaller to the left
+    while (!st.empty() && a[st.top()] >= a[i]) {
+      st.pop();
     }
-    while (!st.empty())
-    {
-        st.pop();
+    left[i] = st.empty() ? i + 1 : i - st.top();
+    st.push(i);
+  }
+  while (!st.empty()) {
+    st.pop();
+  }
+  for (int i = n - 1; i >= 0; i--) {  // smaller-or-equal to the right
+    while (!st.empty() && a[st.top()] > a[i]) {
+      st.pop();
     }
-    for (int i = n - 1; i >= 0; i--)
-    { // smaller-or-equal to the right
-        while (!st.empty() && a[st.top()] > a[i])
-        {
-            st.pop();
-        }
-        right[i] = st.empty() ? n - i : st.top() - i;
-        st.push(i);
-    }
-    long long ans = 0;
-    for (int i = 0; i < n; i++)
-        ans = (ans + a[i] * left[i] % MOD * right[i]) % MOD;
-    return ans;
+    right[i] = st.empty() ? n - i : st.top() - i;
+    st.push(i);
+  }
+  long long ans = 0;
+  for (int i = 0; i < n; i++) {
+    ans = (ans + a[i] * left[i] % MOD * right[i]) % MOD;
+  }
+  return ans;
 }
 \`\`\`
 
@@ -143,24 +132,22 @@ The asymmetric strict/non-strict comparison (\`>=\` on one side, \`>\` on the ot
 
 \`\`\`cpp
 // Remove k digits to form the smallest number (LC 402)
-string removeKdigits(string num, int k)
-{
-    string st; // acts as a monotonic (non-decreasing) stack
-    for (char c : num)
-    {
-        while (k > 0 && !st.empty() && st.back() > c)
-        {
-            st.pop_back();
-            k--;
-        }
-        st.push_back(c);
+string removeKdigits(string num, int k) {
+  string st;  // acts as a monotonic (non-decreasing) stack
+  for (char c : num) {
+    while (k > 0 && !st.empty() && st.back() > c) {
+      st.pop_back();
+      k--;
     }
-    st.resize(st.size() - k); // still have deletions left -> drop from tail
-    int i = 0;
-    while (i < (int)st.size() - 1 && st[i] == '0') // strip leading 0s
-        i++;
-    string res = st.substr(i);
-    return res.empty() ? "0" : res;
+    st.push_back(c);
+  }
+  st.resize(st.size() - k);  // still have deletions left -> drop from tail
+  int i = 0;
+  while (i < (int)st.size() - 1 && st[i] == '0') {  // strip leading 0s
+    i++;
+  }
+  string res = st.substr(i);
+  return res.empty() ? "0" : res;
 }
 \`\`\`
 
@@ -173,23 +160,21 @@ The same idea powers "Remove Duplicate Letters" (LC 316) and "Create Maximum Num
 
 \`\`\`cpp
 // Minimum Cost Tree From Leaf Values (LC 1130)
-int mctFromLeafValues(vector<int>& a)
-{
-    int res = 0;
-    vector<int> st = {INT_MAX}; // sentinel
-    for (int x : a)
-    {
-        while (st.back() <= x)
-        { // x is a larger neighbour for st.back()
-            int mid = st.back();
-            st.pop_back();
-            res += mid * min(st.back(), x); // merge cost with the cheaper side
-        }
-        st.push_back(x);
+int mctFromLeafValues(vector<int>& a) {
+  int res = 0;
+  vector<int> st = {INT_MAX};  // sentinel
+  for (int x : a) {
+    while (st.back() <= x) {  // x is a larger neighbour for st.back()
+      int mid = st.back();
+      st.pop_back();
+      res += mid * min(st.back(), x);  // merge cost with the cheaper side
     }
-    for (int i = 2; i < (int)st.size(); i++)
-        res += st[i] * st[i - 1];
-    return res;
+    st.push_back(x);
+  }
+  for (int i = 2; i < (int)st.size(); i++) {
+    res += st[i] * st[i - 1];
+  }
+  return res;
 }
 \`\`\`
 
@@ -197,21 +182,22 @@ int mctFromLeafValues(vector<int>& a)
 
 \`\`\`cpp
 // Maximum Width Ramp (LC 962)
-int maxWidthRamp(vector<int>& a)
-{
-    int n = a.size();
-    stack<int> st;
-    for (int i = 0; i < n; i++)
-        if (st.empty() || a[st.top()] > a[i])
-            st.push(i);
-    int res = 0;
-    for (int j = n - 1; j >= 0; j--)
-        while (!st.empty() && a[st.top()] <= a[j])
-        {
-            res = max(res, j - st.top());
-            st.pop();
-        }
-    return res;
+int maxWidthRamp(vector<int>& a) {
+  int n = a.size();
+  stack<int> st;
+  for (int i = 0; i < n; i++) {
+    if (st.empty() || a[st.top()] > a[i]) {
+      st.push(i);
+    }
+  }
+  int res = 0;
+  for (int j = n - 1; j >= 0; j--) {
+    while (!st.empty() && a[st.top()] <= a[j]) {
+      res = max(res, j - st.top());
+      st.pop();
+    }
+  }
+  return res;
 }
 \`\`\`
 
