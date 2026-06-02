@@ -220,27 +220,27 @@ The \`O(n)\` bound holds because each index is pushed once and popped once.`,
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 496 / 503 | [Next Greater Element I/II](https://leetcode.cn/problems/next-greater-element-i) | next greater (circular) |
-| 739 | [Daily Temperatures](https://leetcode.cn/problems/daily-temperatures) | next greater (distance) |
+| 42 | [Trapping Rain Water](https://leetcode.cn/problems/trapping-rain-water) | decreasing stack (or two pointers) |
 | 84 | [Largest Rectangle in Histogram](https://leetcode.cn/problems/largest-rectangle-in-histogram) | histogram spans |
 | 85 | [Maximal Rectangle](https://leetcode.cn/problems/maximal-rectangle) | per-row histogram |
+| 316 | [Remove Duplicate Letters](https://leetcode.cn/problems/remove-duplicate-letters) | greedy + seen set |
+| 402 | [Remove K Digits](https://leetcode.cn/problems/remove-k-digits) | greedy monotonic removal |
+| 496 / 503 | [Next Greater Element I/II](https://leetcode.cn/problems/next-greater-element-i) | next greater (circular) |
+| 739 | [Daily Temperatures](https://leetcode.cn/problems/daily-temperatures) | next greater (distance) |
+| 901 | [Online Stock Span](https://leetcode.cn/problems/online-stock-span) | running span |
 | 907 | [Sum of Subarray Minimums](https://leetcode.cn/problems/sum-of-subarray-minimums) | contribution counting |
 | 2104 | [Sum of Subarray Ranges](https://leetcode.cn/problems/sum-of-subarray-ranges) | min + max contributions |
-| 402 | [Remove K Digits](https://leetcode.cn/problems/remove-k-digits) | greedy monotonic removal |
-| 316 | [Remove Duplicate Letters](https://leetcode.cn/problems/remove-duplicate-letters) | greedy + seen set |
-| 901 | [Online Stock Span](https://leetcode.cn/problems/online-stock-span) | running span |
-| 42 | [Trapping Rain Water](https://leetcode.cn/problems/trapping-rain-water) | decreasing stack (or two pointers) |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 2454 | [Next Greater Element IV](https://leetcode.cn/problems/next-greater-element-iv) | two monotonic stacks |
+| 962 | [Maximum Width Ramp](https://leetcode.cn/problems/maximum-width-ramp) | stack + reverse scan |
+| 1130 | [Minimum Cost Tree From Leaf Values](https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values) | greedy monotonic stack |
 | 2334 | [Subarray With Elements Greater Than Varying Threshold](https://leetcode.cn/problems/subarray-with-elements-greater-than-varying-threshold) | monotonic stack |
+| 2454 | [Next Greater Element IV](https://leetcode.cn/problems/next-greater-element-iv) | two monotonic stacks |
 | 2487 | [Remove Nodes From Linked List](https://leetcode.cn/problems/remove-nodes-from-linked-list) | monotonic stack |
 | 2818 | [Apply Operations to Maximize Score](https://leetcode.cn/problems/apply-operations-to-maximize-score) | monotonic stack + math |
-| 1130 | [Minimum Cost Tree From Leaf Values](https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values) | greedy monotonic stack |
-| 962 | [Maximum Width Ramp](https://leetcode.cn/problems/maximum-width-ramp) | stack + reverse scan |
 
 **Recent medium problems (rating ≥ 1800)**
 

@@ -204,7 +204,9 @@ vector<int> linearSieve(int n) {
 \`\`\`cpp
 // Deterministic Miller–Rabin (64-bit) and Pollard's rho
 using u128 = __uint128_t;
-long long mulmod(long long a, long long b, long long m) { return (u128)a * b % m; }
+long long mulmod(long long a, long long b, long long m) {
+  return (u128)a * b % m;
+}
 long long powmod(long long a, long long b, long long m) {
   long long r = 1 % m;
   a %= m;
@@ -313,27 +315,27 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 204 | [Count Primes](https://leetcode.cn/problems/count-primes) | sieve |
-| 50 | [Pow(x, n)](https://leetcode.cn/problems/powx-n) | binary exponentiation |
-| 372 | [Super Pow](https://leetcode.cn/problems/super-pow) | modular exponentiation |
-| 1735 | [Count Ways to Make Array Product](https://leetcode.cn/problems/count-ways-to-make-array-with-product) | factorization + combinatorics |
-| 62 | [Unique Paths](https://leetcode.cn/problems/unique-paths) | combinatorics (\`nCr\`) |
-| 365 | [Water and Jug Problem](https://leetcode.cn/problems/water-and-jug-problem) | GCD (Bézout) |
 | 7 | [Reverse Integer](https://leetcode.cn/problems/reverse-integer) | digit peeling + overflow |
 | 9 | [Palindrome Number](https://leetcode.cn/problems/palindrome-number) | digit math |
-| 535 | [Encode/Decode TinyURL](https://leetcode.cn/problems/encode-and-decode-tinyurl) | base conversion |
+| 50 | [Pow(x, n)](https://leetcode.cn/problems/powx-n) | binary exponentiation |
+| 62 | [Unique Paths](https://leetcode.cn/problems/unique-paths) | combinatorics (\`nCr\`) |
+| 204 | [Count Primes](https://leetcode.cn/problems/count-primes) | sieve |
 | 233 | [Number of Digit One](https://leetcode.cn/problems/number-of-digit-one) | digit counting |
+| 365 | [Water and Jug Problem](https://leetcode.cn/problems/water-and-jug-problem) | GCD (Bézout) |
+| 372 | [Super Pow](https://leetcode.cn/problems/super-pow) | modular exponentiation |
+| 535 | [Encode/Decode TinyURL](https://leetcode.cn/problems/encode-and-decode-tinyurl) | base conversion |
+| 1735 | [Count Ways to Make Array Product](https://leetcode.cn/problems/count-ways-to-make-array-with-product) | factorization + combinatorics |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 2521 | [Distinct Prime Factors of Product of Array](https://leetcode.cn/problems/distinct-prime-factors-of-product-of-array) | sieve / factorization |
-| 2761 | [Prime Pairs With Target Sum](https://leetcode.cn/problems/prime-pairs-with-target-sum) | sieve |
-| 2543 | [Check if Point Is Reachable](https://leetcode.cn/problems/check-if-point-is-reachable) | gcd |
-| 2400 | [Number of Ways to Reach a Position After Exactly k Steps](https://leetcode.cn/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps) | combinatorics (nCr) |
-| 2954 | [Count the Number of Infection Sequences](https://leetcode.cn/problems/count-the-number-of-infection-sequences) | combinatorics |
 | 372 | [Super Pow](https://leetcode.cn/problems/super-pow) | modular exponentiation |
+| 2400 | [Number of Ways to Reach a Position After Exactly k Steps](https://leetcode.cn/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps) | combinatorics (nCr) |
+| 2521 | [Distinct Prime Factors of Product of Array](https://leetcode.cn/problems/distinct-prime-factors-of-product-of-array) | sieve / factorization |
+| 2543 | [Check if Point Is Reachable](https://leetcode.cn/problems/check-if-point-is-reachable) | gcd |
+| 2761 | [Prime Pairs With Target Sum](https://leetcode.cn/problems/prime-pairs-with-target-sum) | sieve |
+| 2954 | [Count the Number of Infection Sequences](https://leetcode.cn/problems/count-the-number-of-infection-sequences) | combinatorics |
 
 **Recent medium problems (rating ≥ 1800)**
 

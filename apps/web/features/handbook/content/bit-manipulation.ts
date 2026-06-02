@@ -205,28 +205,28 @@ while (sub < (1 << n)) {
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 136 / 137 / 260 | [Single Number I/II/III](https://leetcode.cn/problems/single-number) | XOR / bit-count |
-| 268 | [Missing Number](https://leetcode.cn/problems/missing-number) | XOR |
-| 191 | [Number of 1 Bits](https://leetcode.cn/problems/number-of-1-bits) | popcount |
-| 338 | [Counting Bits](https://leetcode.cn/problems/counting-bits) | bit DP |
-| 231 | [Power of Two](https://leetcode.cn/problems/power-of-two) | \`x & (x-1)\` |
 | 78 | [Subsets](https://leetcode.cn/problems/subsets) | mask enumeration |
-| 1310 | [XOR Queries of a Subarray](https://leetcode.cn/problems/xor-queries-of-a-subarray) | prefix XOR |
-| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
-| 201 | [Bitwise AND of Range](https://leetcode.cn/problems/bitwise-and-of-numbers-range) | common prefix |
+| 136 / 137 / 260 | [Single Number I/II/III](https://leetcode.cn/problems/single-number) | XOR / bit-count |
 | 190 | [Reverse Bits](https://leetcode.cn/problems/reverse-bits) | bit-by-bit |
+| 191 | [Number of 1 Bits](https://leetcode.cn/problems/number-of-1-bits) | popcount |
+| 201 | [Bitwise AND of Range](https://leetcode.cn/problems/bitwise-and-of-numbers-range) | common prefix |
+| 231 | [Power of Two](https://leetcode.cn/problems/power-of-two) | \`x & (x-1)\` |
+| 268 | [Missing Number](https://leetcode.cn/problems/missing-number) | XOR |
+| 338 | [Counting Bits](https://leetcode.cn/problems/counting-bits) | bit DP |
+| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
+| 1310 | [XOR Queries of a Subarray](https://leetcode.cn/problems/xor-queries-of-a-subarray) | prefix XOR |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 2588 | [Count the Number of Beautiful Subarrays](https://leetcode.cn/problems/count-the-number-of-beautiful-subarrays) | prefix XOR |
-| 2429 | [Minimize XOR](https://leetcode.cn/problems/minimize-xor) | greedy bits |
-| 2680 | [Maximum OR](https://leetcode.cn/problems/maximum-or) | prefix / suffix OR |
-| 2411 | [Smallest Subarrays With Maximum Bitwise OR](https://leetcode.cn/problems/smallest-subarrays-with-maximum-bitwise-or) | bit-position tracking |
 | 982 | [Triples with Bitwise AND Equal To Zero](https://leetcode.cn/problems/triples-with-bitwise-and-equal-to-zero) | SOS DP |
 | 1707 | [Maximum XOR With an Element From Array](https://leetcode.cn/problems/maximum-xor-with-an-element-from-array) | bitwise Trie |
 | 1755 | [Closest Subsequence Sum](https://leetcode.cn/problems/closest-subsequence-sum) | meet in the middle |
+| 2411 | [Smallest Subarrays With Maximum Bitwise OR](https://leetcode.cn/problems/smallest-subarrays-with-maximum-bitwise-or) | bit-position tracking |
+| 2429 | [Minimize XOR](https://leetcode.cn/problems/minimize-xor) | greedy bits |
+| 2588 | [Count the Number of Beautiful Subarrays](https://leetcode.cn/problems/count-the-number-of-beautiful-subarrays) | prefix XOR |
+| 2680 | [Maximum OR](https://leetcode.cn/problems/maximum-or) | prefix / suffix OR |
 
 **Recent medium problems (rating ≥ 1800)**
 

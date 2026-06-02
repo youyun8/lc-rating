@@ -130,7 +130,8 @@ Used for Course Schedule (LC 207/210), Alien Dictionary (LC 269), and Parallel C
 vector<long long> dijkstra(int src, vector<vector<pair<int, int>>>& g) {
   const long long INF = LLONG_MAX;
   vector<long long> dist(g.size(), INF);
-  priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> pq;
+  priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>>
+      pq;
   dist[src] = 0;
   pq.push({0, src});
   while (!pq.empty()) {
@@ -358,29 +359,29 @@ These rarely appear on LeetCode but are decisive on the hardest contest problems
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
+| 127 | [Word Ladder](https://leetcode.cn/problems/word-ladder) | BFS over states |
 | 200 | [Number of Islands](https://leetcode.cn/problems/number-of-islands) | DFS/BFS components |
 | 207 / 210 | [Course Schedule I/II](https://leetcode.cn/problems/course-schedule) | topological sort |
-| 127 | [Word Ladder](https://leetcode.cn/problems/word-ladder) | BFS over states |
-| 743 | [Network Delay Time](https://leetcode.cn/problems/network-delay-time) | Dijkstra |
-| 787 | [Cheapest Flights K Stops](https://leetcode.cn/problems/cheapest-flights-within-k-stops) | Bellman-Ford |
-| 1631 | [Path With Minimum Effort](https://leetcode.cn/problems/path-with-minimum-effort) | Dijkstra variant |
-| 1584 | [Connect All Points](https://leetcode.cn/problems/min-cost-to-connect-all-points) | MST |
-| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | DSU cycle |
-| 785 | [Is Graph Bipartite](https://leetcode.cn/problems/is-graph-bipartite) | 2-coloring |
 | 269 | [Alien Dictionary](https://leetcode.cn/problems/alien-dictionary) | topo sort |
+| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | DSU cycle |
+| 743 | [Network Delay Time](https://leetcode.cn/problems/network-delay-time) | Dijkstra |
+| 785 | [Is Graph Bipartite](https://leetcode.cn/problems/is-graph-bipartite) | 2-coloring |
+| 787 | [Cheapest Flights K Stops](https://leetcode.cn/problems/cheapest-flights-within-k-stops) | Bellman-Ford |
 | 1368 | [Min Cost Valid Path](https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid) | 0-1 BFS |
+| 1584 | [Connect All Points](https://leetcode.cn/problems/min-cost-to-connect-all-points) | MST |
+| 1631 | [Path With Minimum Effort](https://leetcode.cn/problems/path-with-minimum-effort) | Dijkstra variant |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 2421 | [Number of Good Paths](https://leetcode.cn/problems/number-of-good-paths) | DSU |
+| 329 | [Longest Increasing Path in a Matrix](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix) | DAG memo DP |
+| 332 | [Reconstruct Itinerary](https://leetcode.cn/problems/reconstruct-itinerary) | Eulerian path |
+| 1192 | [Critical Connections in a Network](https://leetcode.cn/problems/critical-connections-in-a-network) | Tarjan bridges |
+| 1976 | [Number of Ways to Arrive at Destination](https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination) | Dijkstra + counting |
 | 2092 | [Find All People With Secret](https://leetcode.cn/problems/find-all-people-with-secret) | DSU by event time |
 | 2290 | [Minimum Obstacle Removal to Reach Corner](https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner) | 0-1 BFS |
-| 1976 | [Number of Ways to Arrive at Destination](https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination) | Dijkstra + counting |
-| 1192 | [Critical Connections in a Network](https://leetcode.cn/problems/critical-connections-in-a-network) | Tarjan bridges |
-| 332 | [Reconstruct Itinerary](https://leetcode.cn/problems/reconstruct-itinerary) | Eulerian path |
-| 329 | [Longest Increasing Path in a Matrix](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix) | DAG memo DP |
+| 2421 | [Number of Good Paths](https://leetcode.cn/problems/number-of-good-paths) | DSU |
 
 **Recent medium problems (rating ≥ 1800)**
 

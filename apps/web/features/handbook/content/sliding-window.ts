@@ -169,7 +169,8 @@ int shortestSubarray(vector<int>& a, long long k) {
   deque<int> dq;  // indices, pre[] increasing front->back
   int best = INT_MAX;
   for (int i = 0; i <= n; i++) {
-    while (!dq.empty() && pre[i] - pre[dq.front()] >= k) {  // found a valid window
+    // found a valid window
+    while (!dq.empty() && pre[i] - pre[dq.front()] >= k) {
       best = min(best, i - dq.front());
       dq.pop_front();
     }
@@ -203,26 +204,26 @@ Every index enters and exits the window once — that is the source of the linea
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 3 | [Longest Substring Without Repeating](https://leetcode.cn/problems/longest-substring-without-repeating-characters) | variable window |
-| 209 | [Minimum Size Subarray Sum](https://leetcode.cn/problems/minimum-size-subarray-sum) | shrinking min-window |
 | 76 | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) | min-window with counts |
-| 567 / 438 | [Permutation in String](https://leetcode.cn/problems/permutation-in-string) / [Find Anagrams](https://leetcode.cn/problems/find-all-anagrams-in-a-string) | fixed window + freq |
+| 209 | [Minimum Size Subarray Sum](https://leetcode.cn/problems/minimum-size-subarray-sum) | shrinking min-window |
+| 239 | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) | monotonic deque |
 | 424 | [Longest Repeating Char Replacement](https://leetcode.cn/problems/longest-repeating-character-replacement) | window with majority count |
+| 567 / 438 | [Permutation in String](https://leetcode.cn/problems/permutation-in-string) / [Find Anagrams](https://leetcode.cn/problems/find-all-anagrams-in-a-string) | fixed window + freq |
+| 713 | [Subarray Product Less Than K](https://leetcode.cn/problems/subarray-product-less-than-k) | product window |
 | 992 | [Subarrays with K Distinct](https://leetcode.cn/problems/subarrays-with-k-different-integers) | at-most-K trick |
 | 1248 | [Count Nice Subarrays](https://leetcode.cn/problems/count-number-of-nice-subarrays) | at-most-K trick |
-| 713 | [Subarray Product Less Than K](https://leetcode.cn/problems/subarray-product-less-than-k) | product window |
-| 239 | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) | monotonic deque |
 | 1438 | [Longest Subarray with Abs Diff ≤ Limit](https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit) | two deques |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 2444 | [Count Subarrays With Fixed Bounds](https://leetcode.cn/problems/count-subarrays-with-fixed-bounds) | two-pointer window |
-| 2398 | [Maximum Number of Robots Within Budget](https://leetcode.cn/problems/maximum-number-of-robots-within-budget) | window + monotonic deque |
-| 2962 | [Count Subarrays Where Max Element Appears at Least K Times](https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times) | window |
-| 2799 | [Count Complete Subarrays in an Array](https://leetcode.cn/problems/count-complete-subarrays-in-an-array) | at-most-K window |
-| 862 | [Shortest Subarray with Sum at Least K](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) | prefix sums + deque |
 | 727 | [Minimum Window Subsequence](https://leetcode.cn/problems/minimum-window-subsequence) | two-pointer / DP |
+| 862 | [Shortest Subarray with Sum at Least K](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) | prefix sums + deque |
+| 2398 | [Maximum Number of Robots Within Budget](https://leetcode.cn/problems/maximum-number-of-robots-within-budget) | window + monotonic deque |
+| 2444 | [Count Subarrays With Fixed Bounds](https://leetcode.cn/problems/count-subarrays-with-fixed-bounds) | two-pointer window |
+| 2799 | [Count Complete Subarrays in an Array](https://leetcode.cn/problems/count-complete-subarrays-in-an-array) | at-most-K window |
+| 2962 | [Count Subarrays Where Max Element Appears at Least K Times](https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times) | window |
 
 **Recent medium problems (rating ≥ 1800)**
 

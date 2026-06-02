@@ -178,7 +178,8 @@ int gain(TreeNode* r) {
   if (!r) {
     return 0;
   }
-  int L = max(0, gain(r->left)), R = max(0, gain(r->right));  // ignore negatives
+  // ignore negatives
+  int L = max(0, gain(r->left)), R = max(0, gain(r->right));
   maxSum = max(maxSum, r->val + L + R);
   return r->val + max(L, R);
 }
@@ -392,28 +393,28 @@ vector<int> morrisInorder(TreeNode* root) {
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 94 / 144 / 145 | [Traversals](https://leetcode.cn/problems/binary-tree-inorder-traversal) | recursion / stack |
-| 102 / 103 / 199 | [Level](https://leetcode.cn/problems/binary-tree-level-order-traversal) / [Zigzag](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal) / [Right View](https://leetcode.cn/problems/binary-tree-right-side-view) | BFS |
 | 98 | [Validate BST](https://leetcode.cn/problems/validate-binary-search-tree) | bounds recursion |
+| 102 / 103 / 199 | [Level](https://leetcode.cn/problems/binary-tree-level-order-traversal) / [Zigzag](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal) / [Right View](https://leetcode.cn/problems/binary-tree-right-side-view) | BFS |
+| 105 / 106 | [Construct from Traversals](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal) | divide & conquer |
+| 124 | [Max Path Sum](https://leetcode.cn/problems/binary-tree-maximum-path-sum) | tree DP with drop |
+| 226 | [Invert Binary Tree](https://leetcode.cn/problems/invert-binary-tree) | recursion |
 | 230 | [Kth Smallest in BST](https://leetcode.cn/problems/kth-smallest-element-in-a-bst) | inorder |
 | 235 / 236 | [LCA (BST / binary)](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree) | descent / postorder |
-| 543 | [Diameter](https://leetcode.cn/problems/diameter-of-binary-tree) | tree DP |
-| 124 | [Max Path Sum](https://leetcode.cn/problems/binary-tree-maximum-path-sum) | tree DP with drop |
-| 337 | [House Robber III](https://leetcode.cn/problems/house-robber-iii) | tree DP with state |
-| 105 / 106 | [Construct from Traversals](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal) | divide & conquer |
 | 297 | [Serialize and Deserialize](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree) | preorder + null markers |
-| 226 | [Invert Binary Tree](https://leetcode.cn/problems/invert-binary-tree) | recursion |
+| 337 | [House Robber III](https://leetcode.cn/problems/house-robber-iii) | tree DP with state |
+| 543 | [Diameter](https://leetcode.cn/problems/diameter-of-binary-tree) | tree DP |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 2458 | [Height of Binary Tree After Subtree Removal Queries](https://leetcode.cn/problems/height-of-binary-tree-after-subtree-removal-queries) | DFS in/out order |
-| 2467 | [Most Profitable Path in a Tree](https://leetcode.cn/problems/most-profitable-path-in-a-tree) | tree + BFS paths |
-| 2049 | [Count Nodes With the Highest Score](https://leetcode.cn/problems/count-nodes-with-the-highest-score) | tree DP |
-| 1483 | [Kth Ancestor of a Tree Node](https://leetcode.cn/problems/kth-ancestor-of-a-tree-node) | binary lifting |
 | 834 | [Sum of Distances in Tree](https://leetcode.cn/problems/sum-of-distances-in-tree) | rerooting DP |
 | 968 | [Binary Tree Cameras](https://leetcode.cn/problems/binary-tree-cameras) | greedy tree DP |
 | 979 | [Distribute Coins in Binary Tree](https://leetcode.cn/problems/distribute-coins-in-binary-tree) | flow-as-DP |
+| 1483 | [Kth Ancestor of a Tree Node](https://leetcode.cn/problems/kth-ancestor-of-a-tree-node) | binary lifting |
+| 2049 | [Count Nodes With the Highest Score](https://leetcode.cn/problems/count-nodes-with-the-highest-score) | tree DP |
+| 2458 | [Height of Binary Tree After Subtree Removal Queries](https://leetcode.cn/problems/height-of-binary-tree-after-subtree-removal-queries) | DFS in/out order |
+| 2467 | [Most Profitable Path in a Tree](https://leetcode.cn/problems/most-profitable-path-in-a-tree) | tree + BFS paths |
 
 **Recent medium problems (rating ≥ 1800)**
 

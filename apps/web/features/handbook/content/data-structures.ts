@@ -119,7 +119,9 @@ class MedianFinder {
       hi.pop();
     }
   }
-  double findMedian() { return lo.size() > hi.size() ? lo.top() : (lo.top() + hi.top()) / 2.0; }
+  double findMedian() {
+    return lo.size() > hi.size() ? lo.top() : (lo.top() + hi.top()) / 2.0;
+  }
 };
 \`\`\``,
     },
@@ -175,7 +177,8 @@ struct Fenwick {
     }
     return s;
   }
-  long long range(int l, int r) { return sum(r) - sum(l - 1); }  // 1-indexed [l, r]
+  // 1-indexed [l, r]
+  long long range(int l, int r) { return sum(r) - sum(l - 1); }
 };
 \`\`\`
 
@@ -227,7 +230,8 @@ struct SegTree {
     }
     push(node, l, r);
     int m = (l + r) / 2;
-    return query(2 * node, l, m, ql, qr) + query(2 * node + 1, m + 1, r, ql, qr);
+    return query(2 * node, l, m, ql, qr) +
+           query(2 * node + 1, m + 1, r, ql, qr);
   }
 };
 \`\`\`
@@ -313,7 +317,8 @@ Combined with an Euler tour, a sparse table gives \`O(1)\` LCA. For sums (not id
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 template <class T>
-using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+using ordered_set =
+    tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 // os.find_by_order(k) -> iterator to the kth smallest (0-indexed)
 // os.order_of_key(x)  -> count of elements strictly less than x
 \`\`\`
@@ -422,29 +427,29 @@ class LRUCache {
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Structure |
 | --- | --- | --- |
-| 560 | [Subarray Sum Equals K](https://leetcode.cn/problems/subarray-sum-equals-k) | prefix sum + hash |
-| 304 | [Range Sum Query 2D](https://leetcode.cn/problems/range-sum-query-2d-immutable) | 2D prefix sum |
 | 1 / 49 | [Two Sum](https://leetcode.cn/problems/two-sum) / [Group Anagrams](https://leetcode.cn/problems/group-anagrams) | hash map |
+| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | heap |
+| 206 / 141 | [Reverse List](https://leetcode.cn/problems/reverse-linked-list) / [Cycle](https://leetcode.cn/problems/linked-list-cycle) | linked-list pointers |
 | 215 | [Kth Largest](https://leetcode.cn/problems/kth-largest-element-in-an-array) | heap |
 | 295 | [Find Median from Data Stream](https://leetcode.cn/problems/find-median-from-data-stream) | two heaps |
-| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | heap |
-| 547 | [Number of Provinces](https://leetcode.cn/problems/number-of-provinces) | DSU |
-| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | DSU cycle detect |
-| 315 | [Count of Smaller After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) | Fenwick / merge sort |
+| 304 | [Range Sum Query 2D](https://leetcode.cn/problems/range-sum-query-2d-immutable) | 2D prefix sum |
 | 307 | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) | Fenwick / segment tree |
-| 206 / 141 | [Reverse List](https://leetcode.cn/problems/reverse-linked-list) / [Cycle](https://leetcode.cn/problems/linked-list-cycle) | linked-list pointers |
+| 315 | [Count of Smaller After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) | Fenwick / merge sort |
+| 547 | [Number of Provinces](https://leetcode.cn/problems/number-of-provinces) | DSU |
+| 560 | [Subarray Sum Equals K](https://leetcode.cn/problems/subarray-sum-equals-k) | prefix sum + hash |
+| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | DSU cycle detect |
 
 **Advanced practice problems**
 
 | ID | Problem | Structure |
 | --- | --- | --- |
-| 2286 | [Booking Concert Tickets in Groups](https://leetcode.cn/problems/booking-concert-tickets-in-groups) | segment tree |
-| 2080 | [Range Frequency Queries](https://leetcode.cn/problems/range-frequency-queries) | per-value binary search |
-| 2736 | [Maximum Sum Queries](https://leetcode.cn/problems/maximum-sum-queries) | offline + monotonic stack / BIT |
-| 1157 | [Online Majority Element In Subarray](https://leetcode.cn/problems/online-majority-element-in-subarray) | merge-sort tree |
 | 146 | [LRU Cache](https://leetcode.cn/problems/lru-cache) | hash map + linked list |
-| 715 | [Range Module](https://leetcode.cn/problems/range-module) | ordered interval map |
 | 218 | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) | sweep line + heap |
+| 715 | [Range Module](https://leetcode.cn/problems/range-module) | ordered interval map |
+| 1157 | [Online Majority Element In Subarray](https://leetcode.cn/problems/online-majority-element-in-subarray) | merge-sort tree |
+| 2080 | [Range Frequency Queries](https://leetcode.cn/problems/range-frequency-queries) | per-value binary search |
+| 2286 | [Booking Concert Tickets in Groups](https://leetcode.cn/problems/booking-concert-tickets-in-groups) | segment tree |
+| 2736 | [Maximum Sum Queries](https://leetcode.cn/problems/maximum-sum-queries) | offline + monotonic stack / BIT |
 
 **Recent medium problems (rating ≥ 1800)**
 

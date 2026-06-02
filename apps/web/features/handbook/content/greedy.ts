@@ -73,7 +73,8 @@ int maxNonOverlap(vector<vector<int>>& iv) {
 \`\`\`cpp
 // Minimum cost to connect ropes / merge stones-style (Huffman-like)
 long long connectSticks(vector<int>& sticks) {
-  priority_queue<long long, vector<long long>, greater<>> pq(sticks.begin(), sticks.end());
+  priority_queue<long long, vector<long long>, greater<>> pq(sticks.begin(),
+                                                            sticks.end());
   long long cost = 0;
   while (pq.size() > 1) {
     long long a = pq.top();
@@ -164,7 +165,8 @@ int minRefuelStops(int target, int startFuel, vector<vector<int>>& st) {
 \`\`\`cpp
 // Course Schedule III (LC 630)
 int scheduleCourse(vector<vector<int>>& c) {
-  sort(c.begin(), c.end(), [](auto& a, auto& b) { return a[1] < b[1]; });  // by deadline
+  // by deadline
+  sort(c.begin(), c.end(), [](auto& a, auto& b) { return a[1] < b[1]; });
   priority_queue<int> pq;
   long long time = 0;
   for (auto& x : c) {
@@ -218,29 +220,29 @@ The cost is almost always dominated by the initial sort or by heap operations.`,
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 455 | [Assign Cookies](https://leetcode.cn/problems/assign-cookies) | sorted two-pointer |
-| 435 | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) | sort by end |
+| 55 / 45 | [Jump Game I/II](https://leetcode.cn/problems/jump-game) | farthest reach |
 | 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | sort by start |
-| 452 | [Burst Balloons (arrows)](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons) | sort by end |
+| 134 | [Gas Station](https://leetcode.cn/problems/gas-station) | running deficit |
 | 253 | [Meeting Rooms II](https://leetcode.cn/problems/meeting-rooms-ii) | sweep / min-heap |
+| 406 | [Queue Reconstruction by Height](https://leetcode.cn/problems/queue-reconstruction-by-height) | sort + insert |
+| 435 | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) | sort by end |
+| 452 | [Burst Balloons (arrows)](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons) | sort by end |
+| 455 | [Assign Cookies](https://leetcode.cn/problems/assign-cookies) | sorted two-pointer |
 | 621 | [Task Scheduler](https://leetcode.cn/problems/task-scheduler) | heap / math |
 | 767 | [Reorganize String](https://leetcode.cn/problems/reorganize-string) | max-heap |
-| 55 / 45 | [Jump Game I/II](https://leetcode.cn/problems/jump-game) | farthest reach |
-| 134 | [Gas Station](https://leetcode.cn/problems/gas-station) | running deficit |
-| 406 | [Queue Reconstruction by Height](https://leetcode.cn/problems/queue-reconstruction-by-height) | sort + insert |
 | 881 | [Boats to Save People](https://leetcode.cn/problems/boats-to-save-people) | two pointers |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
+| 135 | [Candy](https://leetcode.cn/problems/candy) | two-pass greedy |
+| 630 | [Course Schedule III](https://leetcode.cn/problems/course-schedule-iii) | take-then-drop heap |
+| 871 | [Minimum Number of Refueling Stops](https://leetcode.cn/problems/minimum-number-of-refueling-stops) | regret heap |
+| 1921 | [Eliminate Maximum Number of Monsters](https://leetcode.cn/problems/eliminate-maximum-number-of-monsters) | sort by arrival time |
+| 2171 | [Removing Minimum Number of Magic Beans](https://leetcode.cn/problems/removing-minimum-number-of-magic-beans) | sort + prefix greedy |
 | 2410 | [Maximum Matching of Players With Trainers](https://leetcode.cn/problems/maximum-matching-of-players-with-trainers) | sort + two pointers |
 | 2790 | [Maximum Number of Groups With Increasing Length](https://leetcode.cn/problems/maximum-number-of-groups-with-increasing-length) | greedy |
-| 2171 | [Removing Minimum Number of Magic Beans](https://leetcode.cn/problems/removing-minimum-number-of-magic-beans) | sort + prefix greedy |
-| 1921 | [Eliminate Maximum Number of Monsters](https://leetcode.cn/problems/eliminate-maximum-number-of-monsters) | sort by arrival time |
-| 871 | [Minimum Number of Refueling Stops](https://leetcode.cn/problems/minimum-number-of-refueling-stops) | regret heap |
-| 630 | [Course Schedule III](https://leetcode.cn/problems/course-schedule-iii) | take-then-drop heap |
-| 135 | [Candy](https://leetcode.cn/problems/candy) | two-pass greedy |
 
 **Recent medium problems (rating ≥ 1800)**
 

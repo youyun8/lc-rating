@@ -294,7 +294,8 @@ double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
 \`\`\`cpp
 // Maximum average subarray of length >= k (LC 644)
 double findMaxAverage(vector<int>& a, int k) {
-  double lo = *min_element(a.begin(), a.end()), hi = *max_element(a.begin(), a.end());
+  double lo = *min_element(a.begin(), a.end()),
+         hi = *max_element(a.begin(), a.end());
   auto feasible = [&](double x) {
     double sum = 0, prefix = 0, minPrefix = 0;
     for (int i = 0; i < (int)a.size(); i++) {
@@ -342,18 +343,18 @@ The whole game is making \`check\` cheap and *provably monotone*.`,
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 704 | [Binary Search](https://leetcode.cn/problems/binary-search) | plain value search |
+| 4 | [Median of Two Sorted Arrays](https://leetcode.cn/problems/median-of-two-sorted-arrays) | partition by binary search |
+| 33 / 81 | [Search in Rotated Array](https://leetcode.cn/problems/search-in-rotated-sorted-array) | rotated-array split |
 | 34 | [First & Last Position](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array) | lower/upper bound |
 | 35 | [Search Insert Position](https://leetcode.cn/problems/search-insert-position) | insertion point |
-| 33 / 81 | [Search in Rotated Array](https://leetcode.cn/problems/search-in-rotated-sorted-array) | rotated-array split |
 | 153 / 154 | [Find Minimum in Rotated Array](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array) | direction by \`a[r]\` |
 | 162 | [Find Peak Element](https://leetcode.cn/problems/find-peak-element) | local monotonicity |
+| 378 | [Kth Smallest in Sorted Matrix](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix) | count ≤ x + value search |
+| 410 | [Split Array Largest Sum](https://leetcode.cn/problems/split-array-largest-sum) | min-feasible + greedy check |
+| 704 | [Binary Search](https://leetcode.cn/problems/binary-search) | plain value search |
+| 719 | [Kth Smallest Distance Pair](https://leetcode.cn/problems/find-k-th-smallest-pair-distance) | count ≤ x + two pointers |
 | 875 | [Koko Eating Bananas](https://leetcode.cn/problems/koko-eating-bananas) | min-feasible on answer |
 | 1011 | [Capacity to Ship Packages](https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days) | min-feasible on answer |
-| 410 | [Split Array Largest Sum](https://leetcode.cn/problems/split-array-largest-sum) | min-feasible + greedy check |
-| 378 | [Kth Smallest in Sorted Matrix](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix) | count ≤ x + value search |
-| 719 | [Kth Smallest Distance Pair](https://leetcode.cn/problems/find-k-th-smallest-pair-distance) | count ≤ x + two pointers |
-| 4 | [Median of Two Sorted Arrays](https://leetcode.cn/problems/median-of-two-sorted-arrays) | partition by binary search |
 
 **Advanced practice problems**
 

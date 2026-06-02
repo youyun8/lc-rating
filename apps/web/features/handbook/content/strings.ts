@@ -362,27 +362,27 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 125 / 5 / 647 | [Palindrome family](https://leetcode.cn/problems/valid-palindrome) | two pointers / expand |
-| 49 / 242 | [Anagrams](https://leetcode.cn/problems/group-anagrams) | frequency counting |
 | 28 | [Find the Index (strStr)](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string) | KMP |
-| 459 | [Repeated Substring Pattern](https://leetcode.cn/problems/repeated-substring-pattern) | prefix function |
-| 214 | [Shortest Palindrome](https://leetcode.cn/problems/shortest-palindrome) | KMP / hash |
-| 1044 | [Longest Duplicate Substring](https://leetcode.cn/problems/longest-duplicate-substring) | rolling hash + binary search |
-| 208 / 211 / 212 | [Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) / [Add&Search](https://leetcode.cn/problems/design-add-and-search-words-data-structure) / [Word Search II](https://leetcode.cn/problems/word-search-ii) | Trie |
-| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
+| 49 / 242 | [Anagrams](https://leetcode.cn/problems/group-anagrams) | frequency counting |
 | 76 | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) | sliding window |
+| 125 / 5 / 647 | [Palindrome family](https://leetcode.cn/problems/valid-palindrome) | two pointers / expand |
 | 131 / 132 | [Palindrome Partitioning](https://leetcode.cn/problems/palindrome-partitioning) | DP |
+| 208 / 211 / 212 | [Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) / [Add&Search](https://leetcode.cn/problems/design-add-and-search-words-data-structure) / [Word Search II](https://leetcode.cn/problems/word-search-ii) | Trie |
+| 214 | [Shortest Palindrome](https://leetcode.cn/problems/shortest-palindrome) | KMP / hash |
+| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
+| 459 | [Repeated Substring Pattern](https://leetcode.cn/problems/repeated-substring-pattern) | prefix function |
+| 1044 | [Longest Duplicate Substring](https://leetcode.cn/problems/longest-duplicate-substring) | rolling hash + binary search |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 3008 | [Find Beautiful Indices in the Given Array II](https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii) | KMP / Z-function |
-| 3031 | [Minimum Time to Revert Word to Initial State II](https://leetcode.cn/problems/minimum-time-to-revert-word-to-initial-state-ii) | Z-function |
-| 1392 | [Longest Happy Prefix](https://leetcode.cn/problems/longest-happy-prefix) | prefix function |
-| 1316 | [Distinct Echo Substrings](https://leetcode.cn/problems/distinct-echo-substrings) | rolling hash |
 | 5 | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) | Manacher |
 | 1032 | [Stream of Characters](https://leetcode.cn/problems/stream-of-characters) | Aho–Corasick |
+| 1316 | [Distinct Echo Substrings](https://leetcode.cn/problems/distinct-echo-substrings) | rolling hash |
+| 1392 | [Longest Happy Prefix](https://leetcode.cn/problems/longest-happy-prefix) | prefix function |
+| 3008 | [Find Beautiful Indices in the Given Array II](https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii) | KMP / Z-function |
+| 3031 | [Minimum Time to Revert Word to Initial State II](https://leetcode.cn/problems/minimum-time-to-revert-word-to-initial-state-ii) | Z-function |
 
 **Recent medium problems (rating ≥ 1800)**
 

@@ -34,7 +34,9 @@ The directions array is the single most reused idiom:
 // 4-directional neighbours (use the 8-dir version for diagonal moves)
 const int dx[4] = {-1, 1, 0, 0};
 const int dy[4] = {0, 0, -1, 1};
-auto inBounds = [&](int r, int c) { return r >= 0 && r < m && c >= 0 && c < n; };
+auto inBounds = [&](int r, int c) {
+  return r >= 0 && r < m && c >= 0 && c < n;
+};
 \`\`\``,
     },
     {
@@ -172,7 +174,8 @@ bool exist(vector<vector<char>>& b, string word) {
     }
     char tmp = b[r][c];
     b[r][c] = '#';  // mark to avoid reuse
-    bool found = dfs(r + 1, c, k + 1) || dfs(r - 1, c, k + 1) || dfs(r, c + 1, k + 1) || dfs(r, c - 1, k + 1);
+    bool found = dfs(r + 1, c, k + 1) || dfs(r - 1, c, k + 1) ||
+                 dfs(r, c + 1, k + 1) || dfs(r, c - 1, k + 1);
     b[r][c] = tmp;  // restore (backtrack)
     return found;
   };
@@ -219,7 +222,8 @@ Spiral Matrix (LC 54) walks four shrinking boundaries; Set Matrix Zeroes (LC 73)
 // Swim in Rising Water (LC 778): minimize the largest elevation on a path
 int swimInWater(vector<vector<int>>& grid) {
   int n = grid.size();
-  priority_queue<array<int, 3>, vector<array<int, 3>>, greater<>> pq;  // {time, r, c}
+  // {time, r, c}
+  priority_queue<array<int, 3>, vector<array<int, 3>>, greater<>> pq;
   vector<vector<int>> seen(n, vector<int>(n, 0));
   pq.push({grid[0][0], 0, 0});
   seen[0][0] = 1;
@@ -262,7 +266,9 @@ int maxStudents(vector<vector<char>>& seats) {
       }
     }
   }
-  auto ok = [&](int row, int mask) { return (mask & good[row]) == mask && !(mask & (mask << 1)); };
+  auto ok = [&](int row, int mask) {
+    return (mask & good[row]) == mask && !(mask & (mask << 1));
+  };
   vector<vector<int>> dp(m + 1, vector<int>(1 << n, -1));
   dp[0][0] = 0;
   int best = 0;
@@ -319,29 +325,29 @@ Recurring lesson: when plain BFS/DFS is too weak, *enrich the state* (keys, fuel
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 200 | [Number of Islands](https://leetcode.cn/problems/number-of-islands) | flood fill |
-| 695 | [Max Area of Island](https://leetcode.cn/problems/max-area-of-island) | flood fill + size |
-| 130 | [Surrounded Regions](https://leetcode.cn/problems/surrounded-regions) | border flood |
-| 417 | [Pacific Atlantic Water Flow](https://leetcode.cn/problems/pacific-atlantic-water-flow) | reverse multi-flood |
-| 994 | [Rotting Oranges](https://leetcode.cn/problems/rotting-oranges) | multi-source BFS |
-| 542 | [01 Matrix](https://leetcode.cn/problems/01-matrix) | multi-source BFS |
-| 1091 | [Shortest Path in Binary Matrix](https://leetcode.cn/problems/shortest-path-in-binary-matrix) | BFS (8-dir) |
-| 1293 | [Shortest Path with Obstacles](https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination) | BFS with state |
-| 79 | [Word Search](https://leetcode.cn/problems/word-search) | backtracking |
 | 48 / 54 / 73 | [Rotate Image](https://leetcode.cn/problems/rotate-image) / [Spiral](https://leetcode.cn/problems/spiral-matrix) / [Set Zeroes](https://leetcode.cn/problems/set-matrix-zeroes) | in-place transforms |
 | 64 | [Minimum Path Sum](https://leetcode.cn/problems/minimum-path-sum) | grid DP |
+| 79 | [Word Search](https://leetcode.cn/problems/word-search) | backtracking |
+| 130 | [Surrounded Regions](https://leetcode.cn/problems/surrounded-regions) | border flood |
+| 200 | [Number of Islands](https://leetcode.cn/problems/number-of-islands) | flood fill |
+| 417 | [Pacific Atlantic Water Flow](https://leetcode.cn/problems/pacific-atlantic-water-flow) | reverse multi-flood |
+| 542 | [01 Matrix](https://leetcode.cn/problems/01-matrix) | multi-source BFS |
+| 695 | [Max Area of Island](https://leetcode.cn/problems/max-area-of-island) | flood fill + size |
+| 994 | [Rotting Oranges](https://leetcode.cn/problems/rotting-oranges) | multi-source BFS |
+| 1091 | [Shortest Path in Binary Matrix](https://leetcode.cn/problems/shortest-path-in-binary-matrix) | BFS (8-dir) |
+| 1293 | [Shortest Path with Obstacles](https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination) | BFS with state |
 
 **Advanced practice problems**
 
 | ID | Problem | Technique |
 | --- | --- | --- |
-| 2577 | [Minimum Time to Visit a Cell In a Grid](https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid) | Dijkstra |
-| 2812 | [Find the Safest Path in a Grid](https://leetcode.cn/problems/find-the-safest-path-in-a-grid) | multi-source BFS + binary search |
-| 2258 | [Escape the Spreading Fire](https://leetcode.cn/problems/escape-the-spreading-fire) | BFS + binary search |
-| 2684 | [Maximum Number of Moves in a Grid](https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid) | DP / BFS |
+| 407 | [Trapping Rain Water II](https://leetcode.cn/problems/trapping-rain-water-ii) | heap BFS |
 | 778 | [Swim in Rising Water](https://leetcode.cn/problems/swim-in-rising-water) | min-max Dijkstra |
 | 864 | [Shortest Path to Get All Keys](https://leetcode.cn/problems/shortest-path-to-get-all-keys) | BFS with bitmask state |
-| 407 | [Trapping Rain Water II](https://leetcode.cn/problems/trapping-rain-water-ii) | heap BFS |
+| 2258 | [Escape the Spreading Fire](https://leetcode.cn/problems/escape-the-spreading-fire) | BFS + binary search |
+| 2577 | [Minimum Time to Visit a Cell In a Grid](https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid) | Dijkstra |
+| 2684 | [Maximum Number of Moves in a Grid](https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid) | DP / BFS |
+| 2812 | [Find the Safest Path in a Grid](https://leetcode.cn/problems/find-the-safest-path-in-a-grid) | multi-source BFS + binary search |
 
 **Recent medium problems (rating ≥ 1800)**
 

@@ -137,7 +137,8 @@ int coinChange(vector<int>& coins, int amount) {
 int lengthOfLIS(vector<int>& a) {
   vector<int> tails;
   for (int x : a) {
-    auto it = lower_bound(tails.begin(), tails.end(), x);  // strictly increasing
+    // strictly increasing
+    auto it = lower_bound(tails.begin(), tails.end(), x);
     if (it == tails.end()) {
       tails.push_back(x);
     } else {
@@ -162,7 +163,8 @@ int lcs(string a, string b) {
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
   for (int i = 1; i <= m; i++) {
     for (int j = 1; j <= n; j++) {
-      dp[i][j] = (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] + 1 : max(dp[i - 1][j], dp[i][j - 1]);
+      dp[i][j] = (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] + 1
+                                        : max(dp[i - 1][j], dp[i][j - 1]);
     }
   }
   return dp[m][n];
@@ -182,7 +184,9 @@ int minDistance(string a, string b) {
   }
   for (int i = 1; i <= m; i++) {
     for (int j = 1; j <= n; j++) {
-      dp[i][j] = (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] : 1 + min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]});
+      dp[i][j] = (a[i - 1] == b[j - 1])
+                     ? dp[i - 1][j - 1]
+                     : 1 + min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]});
     }
   }
   return dp[m][n];
@@ -207,7 +211,8 @@ int maxCoins(vector<int> nums) {
     for (int l = 1; l + len - 1 <= n; l++) {
       int r = l + len - 1;
       for (int k = l; k <= r; k++) {  // k is the last balloon burst
-        dp[l][r] = max(dp[l][r], dp[l][k - 1] + a[l - 1] * a[k] * a[r + 1] + dp[k + 1][r]);
+        dp[l][r] = max(
+            dp[l][r], dp[l][k - 1] + a[l - 1] * a[k] * a[r + 1] + dp[k + 1][r]);
       }
     }
   }
@@ -256,7 +261,8 @@ int tsp(vector<vector<int>>& dist) {
       if (mask & (1 << u)) {
         for (int v = 0; v < n; v++) {
           if (!(mask & (1 << v))) {
-            dp[mask | (1 << v)][v] = min(dp[mask | (1 << v)][v], dp[mask][u] + dist[u][v]);
+            dp[mask | (1 << v)][v] =
+                min(dp[mask | (1 << v)][v], dp[mask][u] + dist[u][v]);
           }
         }
       }
@@ -276,7 +282,8 @@ Partition to K Equal Sum Subsets (LC 698) and Shortest Path Visiting All Nodes (
 \`\`\`cpp
 // Count integers in [0, N] with no two equal adjacent digits (template)
 string s;
-vector<vector<int>> memo;  // memo[pos][prev], -1 init; size handles tight separately
+// memo[pos][prev], -1 init; size handles tight separately
+vector<vector<int>> memo;
 int dfs(int pos, int prev, bool tight, bool started) {
   if (pos == (int)s.size()) {
     return 1;
@@ -406,7 +413,8 @@ bool predictTheWinner(vector<int>& a) {
   for (int len = 2; len <= n; len++) {
     for (int i = 0; i + len - 1 < n; i++) {
       int j = i + len - 1;
-      dp[i][j] = max(a[i] - dp[i + 1][j], a[j] - dp[i][j - 1]);  // take left or right
+      // take left or right
+      dp[i][j] = max(a[i] - dp[i + 1][j], a[j] - dp[i][j - 1]);
     }
   }
   return dp[0][n - 1] >= 0;
@@ -439,30 +447,30 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Pattern |
 | --- | --- | --- |
-| 70 / 198 / 53 | [Stairs](https://leetcode.cn/problems/climbing-stairs) / [Robber](https://leetcode.cn/problems/house-robber) / [Max Subarray](https://leetcode.cn/problems/maximum-subarray) | linear DP |
-| 322 / 518 | [Coin Change I/II](https://leetcode.cn/problems/coin-change) | unbounded knapsack |
-| 416 | [Partition Equal Subset Sum](https://leetcode.cn/problems/partition-equal-subset-sum) | 0/1 knapsack |
-| 300 / 354 / 673 | [LIS family](https://leetcode.cn/problems/longest-increasing-subsequence) | LIS |
-| 1143 / 72 | [LCS](https://leetcode.cn/problems/longest-common-subsequence) / [Edit Distance](https://leetcode.cn/problems/edit-distance) | two-sequence DP |
-| 312 | [Burst Balloons](https://leetcode.cn/problems/burst-balloons) | interval DP |
-| 1547 | [Min Cost to Cut a Stick](https://leetcode.cn/problems/minimum-cost-to-cut-a-stick) | interval DP |
-| 309 / 188 | [Stock with Cooldown](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown) / [k Transactions](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv) | state-machine DP |
-| 698 / 847 | [Partition K Subsets](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets) / [Visit All Nodes](https://leetcode.cn/problems/shortest-path-visiting-all-nodes) | bitmask DP |
 | 64 / 62 | [Min Path Sum](https://leetcode.cn/problems/minimum-path-sum) / [Unique Paths](https://leetcode.cn/problems/unique-paths) | grid DP |
+| 70 / 198 / 53 | [Stairs](https://leetcode.cn/problems/climbing-stairs) / [Robber](https://leetcode.cn/problems/house-robber) / [Max Subarray](https://leetcode.cn/problems/maximum-subarray) | linear DP |
+| 300 / 354 / 673 | [LIS family](https://leetcode.cn/problems/longest-increasing-subsequence) | LIS |
+| 309 / 188 | [Stock with Cooldown](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown) / [k Transactions](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv) | state-machine DP |
+| 312 | [Burst Balloons](https://leetcode.cn/problems/burst-balloons) | interval DP |
+| 322 / 518 | [Coin Change I/II](https://leetcode.cn/problems/coin-change) | unbounded knapsack |
 | 337 | [House Robber III](https://leetcode.cn/problems/house-robber-iii) | tree DP |
+| 416 | [Partition Equal Subset Sum](https://leetcode.cn/problems/partition-equal-subset-sum) | 0/1 knapsack |
+| 698 / 847 | [Partition K Subsets](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets) / [Visit All Nodes](https://leetcode.cn/problems/shortest-path-visiting-all-nodes) | bitmask DP |
+| 1143 / 72 | [LCS](https://leetcode.cn/problems/longest-common-subsequence) / [Edit Distance](https://leetcode.cn/problems/edit-distance) | two-sequence DP |
+| 1547 | [Min Cost to Cut a Stick](https://leetcode.cn/problems/minimum-cost-to-cut-a-stick) | interval DP |
 
 **Advanced practice problems**
 
 | ID | Problem | Pattern |
 | --- | --- | --- |
-| 2266 | [Count Number of Texts](https://leetcode.cn/problems/count-number-of-texts) | linear DP |
-| 2218 | [Maximum Value of K Coins From Piles](https://leetcode.cn/problems/maximum-value-of-k-coins-from-piles) | group knapsack |
-| 2466 | [Count Ways To Build Good Strings](https://leetcode.cn/problems/count-ways-to-build-good-strings) | counting DP |
-| 2008 | [Maximum Earnings From Taxi](https://leetcode.cn/problems/maximum-earnings-from-taxi) | DP + binary search |
-| 1696 | [Jump Game VI](https://leetcode.cn/problems/jump-game-vi) | monotonic-queue DP |
-| 1235 | [Maximum Profit in Job Scheduling](https://leetcode.cn/problems/maximum-profit-in-job-scheduling) | DP + binary search |
 | 552 | [Student Attendance Record II](https://leetcode.cn/problems/student-attendance-record-ii) | matrix exponentiation |
 | 877 | [Stone Game](https://leetcode.cn/problems/stone-game) | minimax DP |
+| 1235 | [Maximum Profit in Job Scheduling](https://leetcode.cn/problems/maximum-profit-in-job-scheduling) | DP + binary search |
+| 1696 | [Jump Game VI](https://leetcode.cn/problems/jump-game-vi) | monotonic-queue DP |
+| 2008 | [Maximum Earnings From Taxi](https://leetcode.cn/problems/maximum-earnings-from-taxi) | DP + binary search |
+| 2218 | [Maximum Value of K Coins From Piles](https://leetcode.cn/problems/maximum-value-of-k-coins-from-piles) | group knapsack |
+| 2266 | [Count Number of Texts](https://leetcode.cn/problems/count-number-of-texts) | linear DP |
+| 2466 | [Count Ways To Build Good Strings](https://leetcode.cn/problems/count-ways-to-build-good-strings) | counting DP |
 
 **Recent medium problems (rating ≥ 1800)**
 
