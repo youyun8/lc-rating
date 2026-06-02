@@ -445,7 +445,7 @@ string minRotation(string s) {
     {
       id: "pitfalls",
       title: "Pitfalls & tips",
-      body: `- Manacher's odd radius includes the center; even radius is centered between \`i-1\` and \`i\`.
+      body: `- Manacher's odd radius includes the center; even radius is centered between \`i - 1\` and \`i\`.
 - Aho-Corasick memory grows with total pattern length times alphabet size; use maps for large alphabets.
 - Suffix array code must handle \`n == 1\`.
 - Suffix automaton transitions can use \`array<int, 26>\` for lowercase only, or \`map\` for general characters.

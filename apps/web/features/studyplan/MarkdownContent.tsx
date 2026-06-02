@@ -166,10 +166,16 @@ function complexityToKatex(text: string) {
     if (!/^[OΘΩ]\(.+\)$/.test(expr)) return match;
     if (/[\u3400-\u9fff\uf900-\ufaff]/.test(expr)) return match;
     const latex = expr
+      // Accept every spelling of the radicand — `sqrt(n)`, `sqrt{n}`, and the
+      // bare `sqrt n` (the space-separated form used alongside `O(n log n)`).
+      // Without the bare case, KaTeX rendered the literal letters s·q·r·t·n,
+      // i.e. the "O(sqrtn)" glitch.
       .replace(/\bsqrt\s*\(\s*([^()]*?)\s*\)/g, "\\sqrt{$1}")
+      .replace(/\bsqrt\s*\{\s*([^{}]*?)\s*\}/g, "\\sqrt{$1}")
+      .replace(/\bsqrt\s+([A-Za-z0-9]+)/g, "\\sqrt{$1}")
       .replace(/\blog\b/g, "\\log")
       .replace(/[\u0370-\u03ff]/g, (g) => GREEK_TO_LATEX[g] ?? g)
-      .replace(/ \* /g, " \\cdot ");
+      .replace(/\s*\*\s*/g, " \\cdot ");
     return `$${latex}$`;
   });
 }

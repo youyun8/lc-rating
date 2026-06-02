@@ -156,7 +156,7 @@ Network Delay Time (LC 743), Cheapest Flights (LC 787, with a hop limit → pref
     {
       id: "other-paths",
       title: "Bellman-Ford, Floyd-Warshall & 0-1 BFS",
-      body: `**Bellman-Ford** relaxes all edges \`V-1\` times; handles negative edges and detects negative cycles (one more relaxation still improves something).
+      body: `**Bellman-Ford** relaxes all edges \`V - 1\` times; handles negative edges and detects negative cycles (one more relaxation still improves something).
 
 \`\`\`cpp
 // Bellman-Ford: shortest paths with possible negative edges
@@ -190,7 +190,7 @@ for (int k = 0; k < n; k++) {
 }
 \`\`\`
 
-**0-1 BFS**: when weights are only 0 or 1, a deque (push-front for 0, push-back for 1) gives shortest paths in \`O(V+E)\` (LC 1368 Minimum Cost to Make at Least One Valid Path).`,
+**0-1 BFS**: when weights are only 0 or 1, a deque (push-front for 0, push-back for 1) gives shortest paths in \`O(V + E)\` (LC 1368 Minimum Cost to Make at Least One Valid Path).`,
     },
     {
       id: "mst",

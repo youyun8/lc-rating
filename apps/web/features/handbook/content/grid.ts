@@ -301,7 +301,7 @@ The same idea (broken-profile DP) tiles boards with dominoes (LC 1659 Maximize G
       title: "Advanced traversal techniques (hard problems)",
       body: `- **BFS with a bitmask of collected items.** Shortest Path to Get All Keys (LC 864): the state is \`(r, c, keyMask)\`, and the goal is reaching \`keyMask == allKeys\`.
 - **A\\* search.** Sliding Puzzle (LC 773) and the 15-puzzle prune BFS with an admissible heuristic (sum of Manhattan distances) to reach the goal far faster than plain BFS.
-- **Bidirectional BFS.** Search from both source and target and meet in the middle — turns \`O(b^d)\` into roughly \`O(b^{d/2})\` for Word Ladder (LC 127) and Open the Lock (LC 752).
+- **Bidirectional BFS.** Search from both source and target and meet in the middle — turns \`O(b^d)\` into roughly \`O(b^{d / 2})\` for Word Ladder (LC 127) and Open the Lock (LC 752).
 - **Backtracking with pruning.** N-Queens (LC 51) places one queen per row using column/diagonal bitmasks to prune in \`O(1)\`.
 - **DSU on a grid.** Number of Islands II (LC 305) adds land incrementally and unions with neighbours to maintain the component count online.
 

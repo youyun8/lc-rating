@@ -11,7 +11,7 @@ export const math: HandbookTopic = {
     {
       id: "overview",
       title: "Overview & when to use it",
-      body: `Math problems reward recognizing a formula or a number-theoretic property instead of brute force. The recurring tools are: GCD/LCM, prime sieves and factorization, modular arithmetic (because answers are taken \`mod 1e9+7\`), fast exponentiation, and combinatorics (\`nCr\`).
+      body: `Math problems reward recognizing a formula or a number-theoretic property instead of brute force. The recurring tools are: GCD/LCM, prime sieves and factorization, modular arithmetic (because answers are taken \`mod 1e9 + 7\`), fast exponentiation, and combinatorics (\`nCr\`).
 
 Signals:
 
@@ -25,14 +25,14 @@ Signals:
       id: "prerequisites",
       title: "Prerequisites",
       body: `- Integer arithmetic, overflow awareness (use \`long long\`).
-- Modular arithmetic identities: \`(a+b) % m\`, \`(a*b) % m\`, and modular inverse via Fermat's little theorem.
+- Modular arithmetic identities: \`(a + b) % m\`, \`(a * b) % m\`, and modular inverse via Fermat's little theorem.
 
 Related: [Bit Manipulation](/handbook/bit-manipulation), [Dynamic Programming](/handbook/dynamic-programming) (counting DP often needs \`nCr\`).`,
     },
     {
       id: "gcd",
       title: "GCD, LCM & the Euclidean algorithm",
-      body: `\`gcd\` runs in \`O(log min(a,b))\`. \`lcm(a,b) = a / gcd(a,b) * b\` (divide first to avoid overflow).
+      body: `\`gcd\` runs in \`O(log min(a, b))\`. \`lcm(a, b) = a / gcd(a, b) * b\` (divide first to avoid overflow).
 
 \`\`\`cpp
 // GCD and LCM (C++17 has std::gcd / std::lcm in <numeric>)
@@ -40,7 +40,7 @@ long long gcd(long long a, long long b) { return b ? gcd(b, a % b) : a; }
 long long lcm(long long a, long long b) { return a / gcd(a, b) * b; }
 \`\`\`
 
-The **extended Euclidean algorithm** also finds \`x, y\` with \`ax + by = gcd(a,b)\` — the basis for modular inverses when the modulus isn't prime.
+The **extended Euclidean algorithm** also finds \`x, y\` with \`ax + by = gcd(a, b)\` — the basis for modular inverses when the modulus isn't prime.
 
 \`\`\`cpp
 // Extended GCD: returns g = gcd(a,b) and sets x,y so that a*x + b*y = g
@@ -124,7 +124,7 @@ long long power(long long a, long long b, long long m) {
 }
 \`\`\`
 
-When \`m\` is **prime**, the modular inverse of \`a\` is \`a^(m-2) mod m\` (Fermat's little theorem):
+When \`m\` is **prime**, the modular inverse of \`a\` is \`a^(m - 2) mod m\` (Fermat's little theorem):
 
 \`\`\`cpp
 // Modular inverse for prime modulus m
@@ -161,17 +161,17 @@ long long nCr(int n, int r) {
 }
 \`\`\`
 
-Used for Unique Paths (closed form \`C(m+n-2, m-1)\`), counting-DP answers, and "number of ways" problems with large \`n\`.`,
+Used for Unique Paths (closed form \`C(m + n - 2, m - 1)\`), counting-DP answers, and "number of ways" problems with large \`n\`.`,
     },
     {
       id: "misc",
       title: "Useful number-theory facts & tricks",
-      body: `- **Sum 1..n** = \`n(n+1)/2\`; sum of an arithmetic series = \`(first+last)*count/2\`.
+      body: `- **Sum 1..n** = \`n(n + 1) / 2\`; sum of an arithmetic series = \`(first + last) * count / 2\`.
 - **Count of multiples** of \`k\` in \`[1, n]\` = \`n / k\` (integer division).
 - **Digit sum / digit reverse**: peel digits with \`% 10\` and \`/ 10\`; watch for overflow on reverse (LC 7).
-- **Powers of two**: \`x\` is a power of two iff \`x > 0 && (x & (x-1)) == 0\` (see [Bit Manipulation](/handbook/bit-manipulation)).
+- **Powers of two**: \`x\` is a power of two iff \`x > 0 && (x & (x - 1)) == 0\` (see [Bit Manipulation](/handbook/bit-manipulation)).
 - **GCD over an array** is associative — fold it; the whole array's GCD is the gcd of all elements.
-- **Geometry basics**: orientation via cross product sign \`(\`(b-a)×(c-a)\`)\`; area of a polygon via the shoelace formula.
+- **Geometry basics**: orientation via cross product sign \`(b - a) × (c - a)\`; area of a polygon via the shoelace formula.
 - **Expected value / probability**: linearity of expectation often turns a hard count into a sum of simple terms.`,
     },
     {
@@ -291,7 +291,7 @@ long long crt(long long r1, long long m1, long long r2, long long m2) {
       id: "advanced-combinatorics",
       title: "Advanced combinatorics & transforms",
       body: `- **Lucas' theorem** computes \`C(n, r) mod p\` for huge \`n, r\` and small prime \`p\` by multiplying \`C\` of the base-\`p\` digits.
-- **Catalan numbers** \`C_n = C(2n, n)/(n+1)\` count balanced parentheses, BST shapes (LC 96 Unique Binary Search Trees), and triangulations.
+- **Catalan numbers** \`C_n = C(2n, n) / (n + 1)\` count balanced parentheses, BST shapes (LC 96 Unique Binary Search Trees), and triangulations.
 - **Inclusion–exclusion & Möbius** count "coprime to n", "divisible by some set", and surjections — the backbone of counting problems like LC 1until divisor sums.
 - **Matrix exponentiation** (see the DP chapter) solves linear-recurrence counting in \`O(d^3 log k)\`.
 - **FFT / NTT** multiply polynomials (and thus do fast convolution / subset-sum counting) in \`O(n log n)\` — rare on LeetCode but the tool for "count pairs with sum s" at scale.
@@ -304,7 +304,7 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
       title: "Complexity cheatsheet",
       body: `| Operation | Time |
 | --- | --- |
-| GCD / extended GCD | \`O(log min(a,b))\` |
+| GCD / extended GCD | \`O(log min(a, b))\` |
 | Sieve up to n | \`O(n log log n)\` |
 | Factorize one number | \`O(sqrt n)\` |
 | Fast power / modular inverse | \`O(log b)\` |
@@ -354,7 +354,7 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
 - **Modular inverse needs a prime modulus** for Fermat; otherwise use extended GCD.
 - **\`lcm\` overflow**: divide by \`gcd\` before multiplying.
 - **Negative mod**: in C++ \`-5 % 3 == -2\`; normalize with \`((x % m) + m) % m\`.
-- **Sieve bound**: use \`(long long)i*i <= n\` to avoid \`int\` overflow in the inner bound.
+- **Sieve bound**: use \`(long long)i * i <= n\` to avoid \`int\` overflow in the inner bound.
 - **Don't precompute more than you need**: factorial tables sized to the max \`n\` in the constraints.`,
     },
   ],

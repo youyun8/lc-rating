@@ -41,7 +41,7 @@ Two interval conventions; pick one and never mix them:
 
 | Convention | Init | Loop test | Move left | Move right |
 | --- | --- | --- | --- | --- |
-| Closed \`[l, r]\` | \`l=0, r=n-1\` | \`l <= r\` | \`r = mid - 1\` | \`l = mid + 1\` |
+| Closed \`[l, r]\` | \`l = 0, r = n - 1\` | \`l <= r\` | \`r = mid - 1\` | \`l = mid + 1\` |
 | Half-open \`[l, r)\` | \`l=0, r=n\` | \`l < r\` | \`r = mid\` | \`l = mid + 1\` |
 
 Always compute the midpoint as \`mid = l + (r - l) / 2\` to avoid \`int\` overflow.`,

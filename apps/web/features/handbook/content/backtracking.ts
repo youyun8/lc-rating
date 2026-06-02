@@ -266,7 +266,7 @@ int dfs(int mask) {
 
 **Iterative deepening (IDA*).** When the depth of the answer is small but the tree is huge, repeatedly DFS with an increasing depth limit; add an admissible heuristic to prune (classic for puzzle solvers).
 
-**Meet in the middle.** Split the choices in half, enumerate each half (\`2^{n/2}\`), and combine — turns \`2^{40}\` into a manageable \`2^{20}\` per side (see [Bit Manipulation](/handbook/bit-manipulation)).`,
+**Meet in the middle.** Split the choices in half, enumerate each half (\`2^{n / 2}\`), and combine — turns \`2^{40}\` into a manageable \`2^{20}\` per side (see [Bit Manipulation](/handbook/bit-manipulation)).`,
     },
     {
       id: "complexity",

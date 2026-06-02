@@ -341,7 +341,7 @@ Aho–Corasick powers Stream of Characters (LC 1032) and dictionary-replacement 
     {
       id: "suffix-structures",
       title: "Suffix arrays, automata & double hashing",
-      body: `- **Suffix array + LCP.** Sorting all suffixes (\`O(n log n)\` or \`O(n log^2 n)\`) plus Kasai's LCP array answers "longest repeated substring", "number of distinct substrings" (\`n(n+1)/2 − sum(LCP)\`), and cross-string longest common substring.
+      body: `- **Suffix array + LCP.** Sorting all suffixes (\`O(n log n)\` or \`O(n log^2 n)\`) plus Kasai's LCP array answers "longest repeated substring", "number of distinct substrings" (\`n(n + 1) / 2 − sum(LCP)\`), and cross-string longest common substring.
 - **Suffix automaton / suffix tree.** A linear-size DFA of all substrings; counts distinct substrings and finds occurrences in \`O(n)\` — the heavyweight tool for the hardest string problems.
 - **Palindromic tree (eertree).** Stores all distinct palindromic substrings in \`O(n)\`.
 - **Double hashing.** To make rolling-hash comparisons collision-safe under adversarial tests, compare two independent hashes (different bases/moduli), or use a single random 64-bit modulus. This is the pragmatic path for Longest Duplicate Substring (LC 1044) and Distinct Echo Substrings (LC 1316).
@@ -400,7 +400,7 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
       id: "pitfalls",
       title: "Pitfalls & tips",
       body: `- **Hash collisions**: a single modulus can be attacked; use a 64-bit unsigned mod or double hashing for safety.
-- **Off-by-one in KMP**: the prefix function is over the *pattern*; reset \`j\` via \`pi[j-1]\`, never by 1.
+- **Off-by-one in KMP**: the prefix function is over the *pattern*; reset \`j\` via \`pi[j - 1]\`, never by 1.
 - **Even/odd palindromes**: expand from both single and double centers.
 - **Trie memory**: 26-pointer nodes can be heavy; use a hash map per node for large alphabets.
 - **Char ranges**: confirm lowercase-only vs. full ASCII before sizing arrays.`,

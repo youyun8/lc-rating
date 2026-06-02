@@ -124,7 +124,7 @@ int coinChange(vector<int>& coins, int amount) {
 }
 \`\`\`
 
-**Subset-sum / partition** (LC 416) is a boolean 0/1 knapsack: can we hit \`sum/2\`? Coin Change II (LC 518) counts combinations (loop coins outer to avoid counting orderings).`,
+**Subset-sum / partition** (LC 416) is a boolean 0/1 knapsack: can we hit \`sum / 2\`? Coin Change II (LC 518) counts combinations (loop coins outer to avoid counting orderings).`,
     },
     {
       id: "lis",
@@ -154,7 +154,7 @@ For non-decreasing subsequences use \`upper_bound\`. Russian Doll Envelopes (LC 
     {
       id: "twoseq",
       title: "Two-sequence DP (LCS, edit distance)",
-      body: `State \`dp[i][j]\` over prefixes of two strings; the transition compares \`a[i-1]\` and \`b[j-1]\`.
+      body: `State \`dp[i][j]\` over prefixes of two strings; the transition compares \`a[i - 1]\` and \`b[j - 1]\`.
 
 \`\`\`cpp
 // Longest Common Subsequence (LC 1143)
@@ -312,7 +312,7 @@ Used for Numbers With Repeated Digits (LC 1012), Count Numbers with Unique Digit
       title: "Transition optimization (monotonic queue, CHT, D&C, Knuth)",
       body: `When a DP is correct but too slow, the *transition* — not the state — is usually the bottleneck. The four standard accelerators:
 
-**Monotonic-queue optimization.** When \`dp[i] = best(dp[i-k..i-1]) + c[i]\` (a sliding-window extreme), a monotonic deque turns the \`O(nk)\` scan into \`O(n)\`.
+**Monotonic-queue optimization.** When \`dp[i] = best(dp[i - k..i - 1]) + c[i]\` (a sliding-window extreme), a monotonic deque turns the \`O(nk)\` scan into \`O(n)\`.
 
 \`\`\`cpp
 // Jump Game VI (LC 1696): dp[i] = a[i] + max(dp[i-k..i-1])
@@ -340,7 +340,7 @@ int maxResult(vector<int>& a, int k) {
 
 **Divide & conquer DP.** When the optimal split point \`opt(i)\` is monotone in \`i\`, compute \`dp[k][·]\` by recursing on index ranges and split ranges together — \`O(kn log n)\` instead of \`O(kn^2)\` (e.g. allocate-mailboxes-style layered DP).
 
-**Knuth's optimization.** Interval DPs \`dp[i][j] = min_k(dp[i][k] + dp[k][j]) + w(i,j)\` whose cost obeys the quadrangle inequality have monotone optimal splits, collapsing \`O(n^3)\` to \`O(n^2)\`.`,
+**Knuth's optimization.** Interval DPs \`dp[i][j] = min_k(dp[i][k] + dp[k][j]) + w(i, j)\` whose cost obeys the quadrangle inequality have monotone optimal splits, collapsing \`O(n^3)\` to \`O(n^2)\`.`,
     },
     {
       id: "matrix-expo",
