@@ -41,7 +41,11 @@ function useActiveSection(ids: string[]): string {
   return active;
 }
 
-export function HandbookTopicPage({ topic, prev, next }: HandbookTopicPageProps) {
+export function HandbookTopicPage({
+  topic,
+  prev,
+  next,
+}: HandbookTopicPageProps) {
   const Icon = resolveHandbookIcon(topic.icon);
   const ids = topic.sections.map((s) => s.id);
   const active = useActiveSection(ids);
