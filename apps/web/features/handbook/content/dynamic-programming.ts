@@ -42,8 +42,10 @@ The recipe never changes:
 // Fibonacci-style memoized recursion (template for any top-down DP)
 vector<long long> memo;                 // sized n+1, init to -1
 long long f(int i) {
-    if (i <= 1) return i;               // base case
-    if (memo[i] != -1) return memo[i];  // cache hit
+    if (i <= 1)
+        return i;               // base case
+    if (memo[i] != -1)
+        return memo[i];  // cache hit
     return memo[i] = f(i-1) + f(i-2);   // transition + store
 }
 \`\`\`
@@ -54,7 +56,11 @@ long long f(int i) {
 // Same DP, tabulated, with O(1) rolling space
 long long fib(int n) {
     long long a = 0, b = 1;
-    for (int i = 2; i <= n; i++) { long long c = a + b; a = b; b = c; }
+    for (int i = 2; i <= n; i++) {
+        long long c = a + b;
+        a = b;
+        b = c;
+    }
     return n == 0 ? 0 : b;
 }
 \`\`\`
@@ -124,8 +130,10 @@ int lengthOfLIS(vector<int>& a) {
     vector<int> tails;
     for (int x : a) {
         auto it = lower_bound(tails.begin(), tails.end(), x); // strictly increasing
-        if (it == tails.end()) tails.push_back(x);
-        else *it = x;                                          // replace to keep tails small
+        if (it == tails.end())
+            tails.push_back(x);
+        else
+            *it = x;                                          // replace to keep tails small
     }
     return tails.size();
 }
@@ -156,8 +164,10 @@ int lcs(string a, string b) {
 int minDistance(string a, string b) {
     int m = a.size(), n = b.size();
     vector<vector<int>> dp(m+1, vector<int>(n+1));
-    for (int i = 0; i <= m; i++) dp[i][0] = i;
-    for (int j = 0; j <= n; j++) dp[0][j] = j;
+    for (int i = 0; i <= m; i++)
+        dp[i][0] = i;
+    for (int j = 0; j <= n; j++)
+        dp[0][j] = j;
     for (int i = 1; i <= m; i++)
         for (int j = 1; j <= n; j++)
             dp[i][j] = (a[i-1] == b[j-1]) ? dp[i-1][j-1]
@@ -176,7 +186,8 @@ int minDistance(string a, string b) {
 int maxCoins(vector<int> nums) {
     int n = nums.size();
     vector<int> a(n + 2, 1);
-    for (int i = 0; i < n; i++) a[i+1] = nums[i];          // padded with 1s
+    for (int i = 0; i < n; i++)
+        a[i+1] = nums[i];          // padded with 1s
     vector<vector<int>> dp(n+2, vector<int>(n+2, 0));
     for (int len = 1; len <= n; len++)
         for (int l = 1; l + len - 1 <= n; l++) {
@@ -221,11 +232,14 @@ With at most \`k\` transactions (LC 188), use \`dp[k][holding]\` arrays.`,
 int tsp(vector<vector<int>>& dist) {
     int n = dist.size(), FULL = (1 << n) - 1;
     vector<vector<int>> dp(1 << n, vector<int>(n, 1e9));
-    for (int i = 0; i < n; i++) dp[1 << i][i] = 0;
+    for (int i = 0; i < n; i++)
+        dp[1 << i][i] = 0;
     for (int mask = 1; mask <= FULL; mask++)
-        for (int u = 0; u < n; u++) if (mask & (1 << u))
-            for (int v = 0; v < n; v++) if (!(mask & (1 << v)))
-                dp[mask | (1 << v)][v] = min(dp[mask | (1 << v)][v], dp[mask][u] + dist[u][v]);
+        for (int u = 0; u < n; u++)
+            if (mask & (1 << u))
+                for (int v = 0; v < n; v++)
+                    if (!(mask & (1 << v)))
+                        dp[mask | (1 << v)][v] = min(dp[mask | (1 << v)][v], dp[mask][u] + dist[u][v]);
     return *min_element(dp[FULL].begin(), dp[FULL].end());
 }
 \`\`\`
@@ -241,14 +255,18 @@ Partition to K Equal Sum Subsets (LC 698) and Shortest Path Visiting All Nodes (
 // Count integers in [0, N] with no two equal adjacent digits (template)
 string s; vector<vector<int>> memo;     // memo[pos][prev], -1 init; size handles tight separately
 int dfs(int pos, int prev, bool tight, bool started) {
-    if (pos == (int)s.size()) return 1;
-    if (!tight && started && memo[pos][prev] != -1) return memo[pos][prev];
+    if (pos == (int)s.size())
+        return 1;
+    if (!tight && started && memo[pos][prev] != -1)
+        return memo[pos][prev];
     int hi = tight ? s[pos] - '0' : 9, res = 0;
     for (int d = 0; d <= hi; d++) {
-        if (started && d == prev) continue;             // property check
+        if (started && d == prev)
+            continue;             // property check
         res += dfs(pos + 1, d, tight && d == hi, started || d > 0);
     }
-    if (!tight && started) memo[pos][prev] = res;
+    if (!tight && started)
+        memo[pos][prev] = res;
     return res;
 }
 \`\`\`
@@ -270,9 +288,11 @@ int maxResult(vector<int>& a, int k) {
     deque<int> dq;                              // indices, dp[] decreasing
     dp[0] = a[0]; dq.push_back(0);
     for (int i = 1; i < n; i++) {
-        while (!dq.empty() && dq.front() < i - k) dq.pop_front();  // drop out-of-window
+        while (!dq.empty() && dq.front() < i - k)
+            dq.pop_front();  // drop out-of-window
         dp[i] = a[i] + dp[dq.front()];
-        while (!dq.empty() && dp[dq.back()] <= dp[i]) dq.pop_back();
+        while (!dq.empty() && dp[dq.back()] <= dp[i])
+            dq.pop_back();
         dq.push_back(i);
     }
     return dp[n - 1];
@@ -298,16 +318,23 @@ Matrix mul(const Matrix& A, const Matrix& B) {
     int n = A.size(), m = B[0].size(), p = B.size();
     Matrix C(n, vector<long long>(m, 0));
     for (int i = 0; i < n; i++)
-        for (int k = 0; k < p; k++) if (A[i][k])
-            for (int j = 0; j < m; j++)
-                C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
+        for (int k = 0; k < p; k++)
+            if (A[i][k])
+                for (int j = 0; j < m; j++)
+                    C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
     return C;
 }
 Matrix matpow(Matrix A, long long e) {
     int n = A.size();
     Matrix R(n, vector<long long>(n, 0));
-    for (int i = 0; i < n; i++) R[i][i] = 1;            // identity
-    while (e > 0) { if (e & 1) R = mul(R, A); A = mul(A, A); e >>= 1; }
+    for (int i = 0; i < n; i++)
+        R[i][i] = 1;            // identity
+    while (e > 0) {
+        if (e & 1)
+            R = mul(R, A);
+        A = mul(A, A);
+        e >>= 1;
+    }
     return R;
 }
 \`\`\`
@@ -320,7 +347,8 @@ Use it for Student Attendance Record II (LC 552), Knight Dialer (LC 935), and Co
 // SOS DP: f[mask] becomes the sum over all submasks of mask
 for (int b = 0; b < n; b++)
     for (int mask = 0; mask < (1 << n); mask++)
-        if (mask & (1 << b)) f[mask] += f[mask ^ (1 << b)];
+        if (mask & (1 << b))
+            f[mask] += f[mask ^ (1 << b)];
 \`\`\``,
     },
     {
@@ -333,7 +361,8 @@ for (int b = 0; b < n; b++)
 bool predictTheWinner(vector<int>& a) {
     int n = a.size();
     vector<vector<int>> dp(n, vector<int>(n, 0));
-    for (int i = 0; i < n; i++) dp[i][i] = a[i];
+    for (int i = 0; i < n; i++)
+        dp[i][i] = a[i];
     for (int len = 2; len <= n; len++)
         for (int i = 0; i + len - 1 < n; i++) {
             int j = i + len - 1;
@@ -367,42 +396,42 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Pattern |
-| --- | --- |
-| 70 / 198 / 53 Stairs / Robber / Max Subarray | linear DP |
-| 322 / 518 Coin Change I/II | unbounded knapsack |
-| 416 Partition Equal Subset Sum | 0/1 knapsack |
-| 300 / 354 / 673 LIS family | LIS |
-| 1143 / 72 LCS / Edit Distance | two-sequence DP |
-| 312 Burst Balloons | interval DP |
-| 1547 Min Cost to Cut a Stick | interval DP |
-| 309 / 188 Stock with Cooldown / k Transactions | state-machine DP |
-| 698 / 847 Partition K Subsets / Visit All Nodes | bitmask DP |
-| 64 / 62 Min Path Sum / Unique Paths | grid DP |
-| 337 House Robber III | tree DP |
-
-**Harder & newer problems**
-
-| Problem | Pattern |
-| --- | --- |
-| 2266 Count Number of Texts | linear DP |
-| 2218 Maximum Value of K Coins From Piles | group knapsack |
-| 2466 Count Ways To Build Good Strings | counting DP |
-| 2008 Maximum Earnings From Taxi | DP + binary search |
-| 1696 Jump Game VI | monotonic-queue DP |
-| 1235 Maximum Profit in Job Scheduling | DP + binary search |
-| 552 Student Attendance Record II | matrix exponentiation |
-| 877 Stone Game | minimax DP |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Pattern |
+      body: `| ID | Problem | Pattern |
 | --- | --- | --- |
-| 3685 Subsequence Sum After Capping Elements | 2073 | knapsack DP |
-| 3654 Minimum Sum After Divisible Sum Deletions | 2039 | DP + prefix |
-| 3686 Number of Stable Subsequences | 1969 | counting DP |
-| 3599 Partition Array to Minimize XOR | 1955 | bitmask / interval DP |
-| 3738 Longest Non-Decreasing Subarray After One Replacement | 1811 | DP |`,
+| 70 / 198 / 53 | [Stairs](https://leetcode.cn/problems/climbing-stairs) / [Robber](https://leetcode.cn/problems/house-robber) / [Max Subarray](https://leetcode.cn/problems/maximum-subarray) | linear DP |
+| 322 / 518 | [Coin Change I/II](https://leetcode.cn/problems/coin-change) | unbounded knapsack |
+| 416 | [Partition Equal Subset Sum](https://leetcode.cn/problems/partition-equal-subset-sum) | 0/1 knapsack |
+| 300 / 354 / 673 | [LIS family](https://leetcode.cn/problems/longest-increasing-subsequence) | LIS |
+| 1143 / 72 | [LCS](https://leetcode.cn/problems/longest-common-subsequence) / [Edit Distance](https://leetcode.cn/problems/edit-distance) | two-sequence DP |
+| 312 | [Burst Balloons](https://leetcode.cn/problems/burst-balloons) | interval DP |
+| 1547 | [Min Cost to Cut a Stick](https://leetcode.cn/problems/minimum-cost-to-cut-a-stick) | interval DP |
+| 309 / 188 | [Stock with Cooldown](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown) / [k Transactions](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv) | state-machine DP |
+| 698 / 847 | [Partition K Subsets](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets) / [Visit All Nodes](https://leetcode.cn/problems/shortest-path-visiting-all-nodes) | bitmask DP |
+| 64 / 62 | [Min Path Sum](https://leetcode.cn/problems/minimum-path-sum) / [Unique Paths](https://leetcode.cn/problems/unique-paths) | grid DP |
+| 337 | [House Robber III](https://leetcode.cn/problems/house-robber-iii) | tree DP |
+
+**Advanced practice problems**
+
+| ID | Problem | Pattern |
+| --- | --- | --- |
+| 2266 | [Count Number of Texts](https://leetcode.cn/problems/count-number-of-texts) | linear DP |
+| 2218 | [Maximum Value of K Coins From Piles](https://leetcode.cn/problems/maximum-value-of-k-coins-from-piles) | group knapsack |
+| 2466 | [Count Ways To Build Good Strings](https://leetcode.cn/problems/count-ways-to-build-good-strings) | counting DP |
+| 2008 | [Maximum Earnings From Taxi](https://leetcode.cn/problems/maximum-earnings-from-taxi) | DP + binary search |
+| 1696 | [Jump Game VI](https://leetcode.cn/problems/jump-game-vi) | monotonic-queue DP |
+| 1235 | [Maximum Profit in Job Scheduling](https://leetcode.cn/problems/maximum-profit-in-job-scheduling) | DP + binary search |
+| 552 | [Student Attendance Record II](https://leetcode.cn/problems/student-attendance-record-ii) | matrix exponentiation |
+| 877 | [Stone Game](https://leetcode.cn/problems/stone-game) | minimax DP |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Pattern |
+| --- | --- | --- | --- |
+| 3685 | [Subsequence Sum After Capping Elements](https://leetcode.cn/problems/subsequence-sum-after-capping-elements) | 2073 | knapsack DP |
+| 3654 | [Minimum Sum After Divisible Sum Deletions](https://leetcode.cn/problems/minimum-sum-after-divisible-sum-deletions) | 2039 | DP + prefix |
+| 3686 | [Number of Stable Subsequences](https://leetcode.cn/problems/number-of-stable-subsequences) | 1969 | counting DP |
+| 3599 | [Partition Array to Minimize XOR](https://leetcode.cn/problems/partition-array-to-minimize-xor) | 1955 | bitmask / interval DP |
+| 3738 | [Longest Non-Decreasing Subarray After One Replacement](https://leetcode.cn/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element) | 1811 | DP |`,
     },
     {
       id: "pitfalls",

@@ -98,18 +98,25 @@ int sumSubarrayMins(vector<int>& a) {
     vector<long long> left(n), right(n);   // span where a[i] is the min
     stack<int> st;
     for (int i = 0; i < n; i++) {          // strictly-smaller to the left
-        while (!st.empty() && a[st.top()] >= a[i]) st.pop();
+        while (!st.empty() && a[st.top()] >= a[i]) {
+            st.pop();
+        }
         left[i] = st.empty() ? i + 1 : i - st.top();
         st.push(i);
     }
-    while (!st.empty()) st.pop();
+    while (!st.empty()) {
+        st.pop();
+    }
     for (int i = n - 1; i >= 0; i--) {     // smaller-or-equal to the right
-        while (!st.empty() && a[st.top()] > a[i]) st.pop();
+        while (!st.empty() && a[st.top()] > a[i]) {
+            st.pop();
+        }
         right[i] = st.empty() ? n - i : st.top() - i;
         st.push(i);
     }
     long long ans = 0;
-    for (int i = 0; i < n; i++) ans = (ans + a[i] * left[i] % MOD * right[i]) % MOD;
+    for (int i = 0; i < n; i++)
+        ans = (ans + a[i] * left[i] % MOD * right[i]) % MOD;
     return ans;
 }
 \`\`\`
@@ -126,11 +133,16 @@ The asymmetric strict/non-strict comparison (\`>=\` on one side, \`>\` on the ot
 string removeKdigits(string num, int k) {
     string st;                        // acts as a monotonic (non-decreasing) stack
     for (char c : num) {
-        while (k > 0 && !st.empty() && st.back() > c) { st.pop_back(); k--; }
+        while (k > 0 && !st.empty() && st.back() > c) {
+            st.pop_back();
+            k--;
+        }
         st.push_back(c);
     }
     st.resize(st.size() - k);         // still have deletions left -> drop from tail
-    int i = 0; while (i < (int)st.size() - 1 && st[i] == '0') i++; // strip leading 0s
+    int i = 0;
+    while (i < (int)st.size() - 1 && st[i] == '0') // strip leading 0s
+        i++;
     string res = st.substr(i);
     return res.empty() ? "0" : res;
 }
@@ -155,7 +167,8 @@ int mctFromLeafValues(vector<int>& a) {
         }
         st.push_back(x);
     }
-    for (int i = 2; i < (int)st.size(); i++) res += st[i] * st[i - 1];
+    for (int i = 2; i < (int)st.size(); i++)
+        res += st[i] * st[i - 1];
     return res;
 }
 \`\`\`
@@ -166,10 +179,15 @@ int mctFromLeafValues(vector<int>& a) {
 // Maximum Width Ramp (LC 962)
 int maxWidthRamp(vector<int>& a) {
     int n = a.size(); stack<int> st;
-    for (int i = 0; i < n; i++) if (st.empty() || a[st.top()] > a[i]) st.push(i);
+    for (int i = 0; i < n; i++)
+        if (st.empty() || a[st.top()] > a[i])
+            st.push(i);
     int res = 0;
     for (int j = n - 1; j >= 0; j--)
-        while (!st.empty() && a[st.top()] <= a[j]) { res = max(res, j - st.top()); st.pop(); }
+        while (!st.empty() && a[st.top()] <= a[j]) {
+            res = max(res, j - st.top());
+            st.pop();
+        }
     return res;
 }
 \`\`\`
@@ -191,39 +209,39 @@ The \`O(n)\` bound holds because each index is pushed once and popped once.`,
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Technique |
-| --- | --- |
-| 496 / 503 Next Greater Element I/II | next greater (circular) |
-| 739 Daily Temperatures | next greater (distance) |
-| 84 Largest Rectangle in Histogram | histogram spans |
-| 85 Maximal Rectangle | per-row histogram |
-| 907 Sum of Subarray Minimums | contribution counting |
-| 2104 Sum of Subarray Ranges | min + max contributions |
-| 402 Remove K Digits | greedy monotonic removal |
-| 316 Remove Duplicate Letters | greedy + seen set |
-| 901 Online Stock Span | running span |
-| 42 Trapping Rain Water | decreasing stack (or two pointers) |
-
-**Harder & newer problems**
-
-| Problem | Technique |
-| --- | --- |
-| 2454 Next Greater Element IV | two monotonic stacks |
-| 2334 Subarray With Elements Greater Than Varying Threshold | monotonic stack |
-| 2487 Remove Nodes From Linked List | monotonic stack |
-| 2818 Apply Operations to Maximize Score | monotonic stack + math |
-| 1130 Minimum Cost Tree From Leaf Values | greedy monotonic stack |
-| 962 Maximum Width Ramp | stack + reverse scan |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Technique |
+      body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 2866 Beautiful Towers II | 2072 | prefix/suffix monotonic stack |
-| 1856 Maximum Subarray Min Product | 2051 | min span + prefix sums |
-| 1996 The Number of Weak Characters in the Game | 1861 | sort + monotonic stack |
-| 3676 Count Bowl Subarrays | 1848 | monotonic stack |
-| 1504 Count Submatrices With All Ones | 1845 | per-row monotonic stack |`,
+| 496 / 503 | [Next Greater Element I/II](https://leetcode.cn/problems/next-greater-element-i) | next greater (circular) |
+| 739 | [Daily Temperatures](https://leetcode.cn/problems/daily-temperatures) | next greater (distance) |
+| 84 | [Largest Rectangle in Histogram](https://leetcode.cn/problems/largest-rectangle-in-histogram) | histogram spans |
+| 85 | [Maximal Rectangle](https://leetcode.cn/problems/maximal-rectangle) | per-row histogram |
+| 907 | [Sum of Subarray Minimums](https://leetcode.cn/problems/sum-of-subarray-minimums) | contribution counting |
+| 2104 | [Sum of Subarray Ranges](https://leetcode.cn/problems/sum-of-subarray-ranges) | min + max contributions |
+| 402 | [Remove K Digits](https://leetcode.cn/problems/remove-k-digits) | greedy monotonic removal |
+| 316 | [Remove Duplicate Letters](https://leetcode.cn/problems/remove-duplicate-letters) | greedy + seen set |
+| 901 | [Online Stock Span](https://leetcode.cn/problems/online-stock-span) | running span |
+| 42 | [Trapping Rain Water](https://leetcode.cn/problems/trapping-rain-water) | decreasing stack (or two pointers) |
+
+**Advanced practice problems**
+
+| ID | Problem | Technique |
+| --- | --- | --- |
+| 2454 | [Next Greater Element IV](https://leetcode.cn/problems/next-greater-element-iv) | two monotonic stacks |
+| 2334 | [Subarray With Elements Greater Than Varying Threshold](https://leetcode.cn/problems/subarray-with-elements-greater-than-varying-threshold) | monotonic stack |
+| 2487 | [Remove Nodes From Linked List](https://leetcode.cn/problems/remove-nodes-from-linked-list) | monotonic stack |
+| 2818 | [Apply Operations to Maximize Score](https://leetcode.cn/problems/apply-operations-to-maximize-score) | monotonic stack + math |
+| 1130 | [Minimum Cost Tree From Leaf Values](https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values) | greedy monotonic stack |
+| 962 | [Maximum Width Ramp](https://leetcode.cn/problems/maximum-width-ramp) | stack + reverse scan |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 2866 | [Beautiful Towers II](https://leetcode.cn/problems/beautiful-towers-ii) | 2072 | prefix/suffix monotonic stack |
+| 1856 | [Maximum Subarray Min Product](https://leetcode.cn/problems/maximum-subarray-min-product) | 2051 | min span + prefix sums |
+| 1996 | [The Number of Weak Characters in the Game](https://leetcode.cn/problems/the-number-of-weak-characters-in-the-game) | 1861 | sort + monotonic stack |
+| 3676 | [Count Bowl Subarrays](https://leetcode.cn/problems/count-bowl-subarrays) | 1848 | monotonic stack |
+| 1504 | [Count Submatrices With All Ones](https://leetcode.cn/problems/count-submatrices-with-all-ones) | 1845 | per-row monotonic stack |`,
     },
     {
       id: "pitfalls",

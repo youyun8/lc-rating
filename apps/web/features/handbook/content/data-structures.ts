@@ -42,7 +42,8 @@ Related: [Monotonic Stack](/handbook/monotonic-stack), [Trees & Binary Trees](/h
 \`\`\`cpp
 // 1D prefix sum: sum of a[l..r] inclusive
 vector<long long> pre(n + 1, 0);
-for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + a[i];
+for (int i = 0; i < n; i++)
+    pre[i + 1] = pre[i] + a[i];
 auto rangeSum = [&](int l, int r){ return pre[r + 1] - pre[l]; };
 \`\`\`
 
@@ -51,7 +52,8 @@ auto rangeSum = [&](int l, int r){ return pre[r + 1] - pre[l]; };
 vector<long long> diff(n + 1, 0);
 auto update = [&](int l, int r, long long val){ diff[l] += val; diff[r + 1] -= val; };
 // materialize
-for (int i = 1; i < n; i++) diff[i] += diff[i - 1];
+for (int i = 1; i < n; i++)
+    diff[i] += diff[i - 1];
 \`\`\`
 
 2D prefix sums (LC 304) give submatrix sums in \`O(1)\`; the 2D difference array (LC 2536) batches rectangle updates. Prefix sums + a hash map of seen sums solve "subarray sum equals K" (LC 560).`,
@@ -88,7 +90,8 @@ int findKthLargest(vector<int>& a, int k) {
     priority_queue<int, vector<int>, greater<>> pq;
     for (int x : a) {
         pq.push(x);
-        if ((int)pq.size() > k) pq.pop(); // keep only the k largest
+        if ((int)pq.size() > k)
+            pq.pop(); // keep only the k largest
     }
     return pq.top();
 }
@@ -103,7 +106,10 @@ public:
     void addNum(int x) {
         lo.push(x);
         hi.push(lo.top()); lo.pop();            // balance values
-        if (hi.size() > lo.size()) { lo.push(hi.top()); hi.pop(); }
+        if (hi.size() > lo.size()) {
+            lo.push(hi.top());
+            hi.pop();
+        }
     }
     double findMedian() {
         return lo.size() > hi.size() ? lo.top() : (lo.top() + hi.top()) / 2.0;
@@ -124,8 +130,10 @@ struct DSU {
     int find(int x){ return p[x] == x ? x : p[x] = find(p[x]); }
     bool unite(int a, int b){
         a = find(a); b = find(b);
-        if (a == b) return false;             // already connected
-        if (sz[a] < sz[b]) swap(a, b);
+        if (a == b)
+            return false;             // already connected
+        if (sz[a] < sz[b])
+            swap(a, b);
         p[b] = a; sz[a] += sz[b];
         return true;
     }
@@ -144,8 +152,16 @@ Uses: number of connected components / provinces (LC 547), redundant connection 
 struct Fenwick {
     int n; vector<long long> t;
     Fenwick(int n): n(n), t(n + 1, 0) {}
-    void add(int i, long long v){ for (; i <= n; i += i & -i) t[i] += v; }
-    long long sum(int i){ long long s = 0; for (; i > 0; i -= i & -i) s += t[i]; return s; }
+    void add(int i, long long v){
+        for (; i <= n; i += i & -i)
+            t[i] += v;
+    }
+    long long sum(int i){
+        long long s = 0;
+        for (; i > 0; i -= i & -i)
+            s += t[i];
+        return s;
+    }
     long long range(int l, int r){ return sum(r) - sum(l - 1); } // 1-indexed [l, r]
 };
 \`\`\`
@@ -163,15 +179,21 @@ struct SegTree {
     int n; vector<long long> sum, lazy;
     SegTree(int n): n(n), sum(4*n, 0), lazy(4*n, 0) {}
     void push(int node, int l, int r){
-        if (!lazy[node]) return;
+        if (!lazy[node])
+            return;
         int m = (l + r) / 2, L = 2*node, R = 2*node+1;
         sum[L] += lazy[node] * (m - l + 1); lazy[L] += lazy[node];
         sum[R] += lazy[node] * (r - m);     lazy[R] += lazy[node];
         lazy[node] = 0;
     }
     void update(int node, int l, int r, int ql, int qr, long long v){
-        if (qr < l || r < ql) return;
-        if (ql <= l && r <= qr){ sum[node] += v * (r - l + 1); lazy[node] += v; return; }
+        if (qr < l || r < ql)
+            return;
+        if (ql <= l && r <= qr){
+            sum[node] += v * (r - l + 1);
+            lazy[node] += v;
+            return;
+        }
         push(node, l, r);
         int m = (l + r) / 2;
         update(2*node, l, m, ql, qr, v);
@@ -179,8 +201,10 @@ struct SegTree {
         sum[node] = sum[2*node] + sum[2*node+1];
     }
     long long query(int node, int l, int r, int ql, int qr){
-        if (qr < l || r < ql) return 0;
-        if (ql <= l && r <= qr) return sum[node];
+        if (qr < l || r < ql)
+            return 0;
+        if (ql <= l && r <= qr)
+            return sum[node];
         push(node, l, r);
         int m = (l + r) / 2;
         return query(2*node, l, m, ql, qr) + query(2*node+1, m+1, r, ql, qr);
@@ -199,7 +223,12 @@ If you only need point updates, prefer Fenwick — it is shorter and faster. Rea
 // Reverse a singly linked list (LC 206)
 ListNode* reverse(ListNode* head) {
     ListNode* prev = nullptr;
-    while (head) { ListNode* nxt = head->next; head->next = prev; prev = head; head = nxt; }
+    while (head) {
+        ListNode* nxt = head->next;
+        head->next = prev;
+        prev = head;
+        head = nxt;
+    }
     return prev;
 }
 // Cycle detection (LC 141): slow/fast meet inside a cycle
@@ -207,7 +236,8 @@ bool hasCycle(ListNode* head) {
     ListNode *slow = head, *fast = head;
     while (fast && fast->next) {
         slow = slow->next; fast = fast->next->next;
-        if (slow == fast) return true;
+        if (slow == fast)
+            return true;
     }
     return false;
 }
@@ -223,9 +253,12 @@ bool hasCycle(ListNode* head) {
 struct SparseTable {
     vector<vector<int>> st; vector<int> lg;
     SparseTable(const vector<int>& a) {
-        int n = a.size(), K = 1; while ((1 << K) <= n) K++;
+        int n = a.size(), K = 1;
+        while ((1 << K) <= n)
+            K++;
         lg.assign(n + 1, 0);
-        for (int i = 2; i <= n; i++) lg[i] = lg[i / 2] + 1;
+        for (int i = 2; i <= n; i++)
+            lg[i] = lg[i / 2] + 1;
         st.assign(K, vector<int>(n));
         st[0] = a;
         for (int j = 1; j < K; j++)
@@ -267,7 +300,8 @@ struct Query { int l, r, idx; };
 vector<long long> mo(int n, vector<Query>& qs) {
     int B = max(1, (int)sqrt((double)n));
     sort(qs.begin(), qs.end(), [&](const Query& x, const Query& y){
-        if (x.l / B != y.l / B) return x.l / B < y.l / B;
+        if (x.l / B != y.l / B)
+            return x.l / B < y.l / B;
         return (x.l / B & 1) ? x.r > y.r : x.r < y.r;       // snake order
     });
     vector<long long> ans(qs.size());
@@ -275,10 +309,14 @@ vector<long long> mo(int n, vector<Query>& qs) {
     auto add = [&](int i){ /* fold a[i] into cur */ };
     auto remove = [&](int i){ /* remove a[i] from cur */ };
     for (auto& q : qs) {
-        while (curR < q.r) add(++curR);
-        while (curL > q.l) add(--curL);
-        while (curR > q.r) remove(curR--);
-        while (curL < q.l) remove(curL++);
+        while (curR < q.r)
+            add(++curR);
+        while (curL > q.l)
+            add(--curL);
+        while (curR > q.r)
+            remove(curR--);
+        while (curL < q.l)
+            remove(curL++);
         ans[q.idx] = cur;
     }
     return ans;
@@ -299,14 +337,22 @@ public:
     LRUCache(int capacity): cap(capacity) {}
     int get(int key) {
         auto it = pos.find(key);
-        if (it == pos.end()) return -1;
+        if (it == pos.end())
+            return -1;
         dll.splice(dll.begin(), dll, it->second);   // promote to front
         return it->second->second;
     }
     void put(int key, int value) {
         auto it = pos.find(key);
-        if (it != pos.end()) { it->second->second = value; dll.splice(dll.begin(), dll, it->second); return; }
-        if ((int)dll.size() == cap) { pos.erase(dll.back().first); dll.pop_back(); }
+        if (it != pos.end()) {
+            it->second->second = value;
+            dll.splice(dll.begin(), dll, it->second);
+            return;
+        }
+        if ((int)dll.size() == cap) {
+            pos.erase(dll.back().first);
+            dll.pop_back();
+        }
         dll.push_front({key, value}); pos[key] = dll.begin();
     }
 };
@@ -333,41 +379,41 @@ public:
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Structure |
-| --- | --- |
-| 560 Subarray Sum Equals K | prefix sum + hash |
-| 304 Range Sum Query 2D | 2D prefix sum |
-| 1 Two Sum / 49 Group Anagrams | hash map |
-| 215 Kth Largest | heap |
-| 295 Find Median from Data Stream | two heaps |
-| 23 Merge k Sorted Lists | heap |
-| 547 Number of Provinces | DSU |
-| 684 Redundant Connection | DSU cycle detect |
-| 315 Count of Smaller After Self | Fenwick / merge sort |
-| 307 Range Sum Query - Mutable | Fenwick / segment tree |
-| 206 / 141 Reverse List / Cycle | linked-list pointers |
-
-**Harder & newer problems**
-
-| Problem | Structure |
-| --- | --- |
-| 2286 Booking Concert Tickets in Groups | segment tree |
-| 2080 Range Frequency Queries | per-value binary search |
-| 2736 Maximum Sum Queries | offline + monotonic stack / BIT |
-| 1157 Online Majority Element In Subarray | merge-sort tree |
-| 146 LRU Cache | hash map + linked list |
-| 715 Range Module | ordered interval map |
-| 218 The Skyline Problem | sweep line + heap |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Structure |
+      body: `| ID | Problem | Structure |
 | --- | --- | --- |
-| 3739 Count Subarrays With Majority Element II | 2090 | Fenwick / segment tree |
-| 3624 Number of Integers With Popcount-Depth Equal to K II | 2086 | segment tree |
-| 3645 Maximum Total From Optimal Activation Order | 2019 | heap (priority queue) |
-| 3508 Implement Router | 1851 | design + ordered set |
-| 3408 Design Task Manager | 1807 | heap / ordered set |`,
+| 560 | [Subarray Sum Equals K](https://leetcode.cn/problems/subarray-sum-equals-k) | prefix sum + hash |
+| 304 | [Range Sum Query 2D](https://leetcode.cn/problems/range-sum-query-2d-immutable) | 2D prefix sum |
+| 1 / 49 | [Two Sum](https://leetcode.cn/problems/two-sum) / [Group Anagrams](https://leetcode.cn/problems/group-anagrams) | hash map |
+| 215 | [Kth Largest](https://leetcode.cn/problems/kth-largest-element-in-an-array) | heap |
+| 295 | [Find Median from Data Stream](https://leetcode.cn/problems/find-median-from-data-stream) | two heaps |
+| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | heap |
+| 547 | [Number of Provinces](https://leetcode.cn/problems/number-of-provinces) | DSU |
+| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | DSU cycle detect |
+| 315 | [Count of Smaller After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) | Fenwick / merge sort |
+| 307 | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) | Fenwick / segment tree |
+| 206 / 141 | [Reverse List](https://leetcode.cn/problems/reverse-linked-list) / [Cycle](https://leetcode.cn/problems/linked-list-cycle) | linked-list pointers |
+
+**Advanced practice problems**
+
+| ID | Problem | Structure |
+| --- | --- | --- |
+| 2286 | [Booking Concert Tickets in Groups](https://leetcode.cn/problems/booking-concert-tickets-in-groups) | segment tree |
+| 2080 | [Range Frequency Queries](https://leetcode.cn/problems/range-frequency-queries) | per-value binary search |
+| 2736 | [Maximum Sum Queries](https://leetcode.cn/problems/maximum-sum-queries) | offline + monotonic stack / BIT |
+| 1157 | [Online Majority Element In Subarray](https://leetcode.cn/problems/online-majority-element-in-subarray) | merge-sort tree |
+| 146 | [LRU Cache](https://leetcode.cn/problems/lru-cache) | hash map + linked list |
+| 715 | [Range Module](https://leetcode.cn/problems/range-module) | ordered interval map |
+| 218 | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) | sweep line + heap |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Structure |
+| --- | --- | --- | --- |
+| 3739 | [Count Subarrays With Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | Fenwick / segment tree |
+| 3624 | [Number of Integers With Popcount-Depth Equal to K II](https://leetcode.cn/problems/number-of-integers-with-popcount-depth-equal-to-k-ii) | 2086 | segment tree |
+| 3645 | [Maximum Total From Optimal Activation Order](https://leetcode.cn/problems/maximum-total-from-optimal-activation-order) | 2019 | heap (priority queue) |
+| 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | design + ordered set |
+| 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | heap / ordered set |`,
     },
     {
       id: "pitfalls",

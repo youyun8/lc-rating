@@ -82,7 +82,8 @@ Counting set bits for all numbers \`0..n\` in \`O(n)\` (LC 338): \`dp[i] = dp[i 
 // Single Number (LC 136): everything cancels except the unique element
 int singleNumber(vector<int>& a) {
     int x = 0;
-    for (int v : a) x ^= v;
+    for (int v : a)
+        x ^= v;
     return x;
 }
 \`\`\`
@@ -91,7 +92,8 @@ int singleNumber(vector<int>& a) {
 // Missing Number (LC 268): XOR indices and values
 int missingNumber(vector<int>& a) {
     int x = a.size();
-    for (int i = 0; i < (int)a.size(); i++) x ^= i ^ a[i];
+    for (int i = 0; i < (int)a.size(); i++)
+        x ^= i ^ a[i];
     return x;
 }
 \`\`\`
@@ -110,7 +112,9 @@ vector<vector<int>> subsets(vector<int>& a) {
     vector<vector<int>> res;
     for (int mask = 0; mask < (1 << n); mask++) {
         vector<int> cur;
-        for (int i = 0; i < n; i++) if (mask & (1 << i)) cur.push_back(a[i]);
+        for (int i = 0; i < n; i++)
+            if (mask & (1 << i))
+                cur.push_back(a[i]);
         res.push_back(cur);
     }
     return res;
@@ -138,14 +142,19 @@ struct XorBasis {
     long long basis[B + 1] = {0};
     void insert(long long x) {
         for (int b = B; b >= 0; b--) {
-            if (!((x >> b) & 1)) continue;
-            if (!basis[b]) { basis[b] = x; return; }   // new independent vector
+            if (!((x >> b) & 1))
+                continue;
+            if (!basis[b]) {
+                basis[b] = x;
+                return;   // new independent vector
+            }
             x ^= basis[b];                              // reduce and continue
         }
     }
     long long maxXor() {
         long long res = 0;
-        for (int b = B; b >= 0; b--) res = max(res, res ^ basis[b]);
+        for (int b = B; b >= 0; b--)
+            res = max(res, res ^ basis[b]);
         return res;
     }
 };
@@ -188,40 +197,40 @@ while (sub < (1 << n)) {
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Technique |
-| --- | --- |
-| 136 / 137 / 260 Single Number I/II/III | XOR / bit-count |
-| 268 Missing Number | XOR |
-| 191 Number of 1 Bits | popcount |
-| 338 Counting Bits | bit DP |
-| 231 Power of Two | \`x & (x-1)\` |
-| 78 Subsets | mask enumeration |
-| 1310 XOR Queries of a Subarray | prefix XOR |
-| 421 Maximum XOR of Two Numbers | bitwise Trie |
-| 201 Bitwise AND of Range | common prefix |
-| 190 Reverse Bits | bit-by-bit |
-
-**Harder & newer problems**
-
-| Problem | Technique |
-| --- | --- |
-| 2588 Count the Number of Beautiful Subarrays | prefix XOR |
-| 2429 Minimize XOR | greedy bits |
-| 2680 Maximum OR | prefix / suffix OR |
-| 2411 Smallest Subarrays With Maximum Bitwise OR | bit-position tracking |
-| 982 Triples with Bitwise AND Equal To Zero | SOS DP |
-| 1707 Maximum XOR With an Element From Array | bitwise Trie |
-| 1755 Closest Subsequence Sum | meet in the middle |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Technique |
+      body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 2857 Count Pairs of Points With Distance K | 2082 | XOR + hashing |
-| 2741 Special Permutations | 2021 | bitmask DP |
-| 2564 Substring XOR Queries | 1959 | prefix XOR / bits |
-| 3133 Minimum Array End | 1935 | bit construction |
-| 3514 Number of Unique XOR Triplets II | 1884 | XOR enumeration |`,
+| 136 / 137 / 260 | [Single Number I/II/III](https://leetcode.cn/problems/single-number) | XOR / bit-count |
+| 268 | [Missing Number](https://leetcode.cn/problems/missing-number) | XOR |
+| 191 | [Number of 1 Bits](https://leetcode.cn/problems/number-of-1-bits) | popcount |
+| 338 | [Counting Bits](https://leetcode.cn/problems/counting-bits) | bit DP |
+| 231 | [Power of Two](https://leetcode.cn/problems/power-of-two) | \`x & (x-1)\` |
+| 78 | [Subsets](https://leetcode.cn/problems/subsets) | mask enumeration |
+| 1310 | [XOR Queries of a Subarray](https://leetcode.cn/problems/xor-queries-of-a-subarray) | prefix XOR |
+| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
+| 201 | [Bitwise AND of Range](https://leetcode.cn/problems/bitwise-and-of-numbers-range) | common prefix |
+| 190 | [Reverse Bits](https://leetcode.cn/problems/reverse-bits) | bit-by-bit |
+
+**Advanced practice problems**
+
+| ID | Problem | Technique |
+| --- | --- | --- |
+| 2588 | [Count the Number of Beautiful Subarrays](https://leetcode.cn/problems/count-the-number-of-beautiful-subarrays) | prefix XOR |
+| 2429 | [Minimize XOR](https://leetcode.cn/problems/minimize-xor) | greedy bits |
+| 2680 | [Maximum OR](https://leetcode.cn/problems/maximum-or) | prefix / suffix OR |
+| 2411 | [Smallest Subarrays With Maximum Bitwise OR](https://leetcode.cn/problems/smallest-subarrays-with-maximum-bitwise-or) | bit-position tracking |
+| 982 | [Triples with Bitwise AND Equal To Zero](https://leetcode.cn/problems/triples-with-bitwise-and-equal-to-zero) | SOS DP |
+| 1707 | [Maximum XOR With an Element From Array](https://leetcode.cn/problems/maximum-xor-with-an-element-from-array) | bitwise Trie |
+| 1755 | [Closest Subsequence Sum](https://leetcode.cn/problems/closest-subsequence-sum) | meet in the middle |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 2857 | [Count Pairs of Points With Distance K](https://leetcode.cn/problems/count-pairs-of-points-with-distance-k) | 2082 | XOR + hashing |
+| 2741 | [Special Permutations](https://leetcode.cn/problems/special-permutations) | 2021 | bitmask DP |
+| 2564 | [Substring XOR Queries](https://leetcode.cn/problems/substring-xor-queries) | 1959 | prefix XOR / bits |
+| 3133 | [Minimum Array End](https://leetcode.cn/problems/minimum-array-end) | 1935 | bit construction |
+| 3514 | [Number of Unique XOR Triplets II](https://leetcode.cn/problems/number-of-unique-xor-triplets-ii) | 1884 | XOR enumeration |`,
     },
     {
       id: "pitfalls",

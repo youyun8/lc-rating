@@ -57,8 +57,10 @@ int lower_bound_pred(int n, auto&& check) {
     int l = 0, r = n;                 // search the boundary in [l, r]
     while (l < r) {
         int mid = l + (r - l) / 2;
-        if (check(mid)) r = mid;      // mid works -> answer is mid or to the left
-        else l = mid + 1;             // mid fails -> answer is strictly right
+        if (check(mid))               // mid works -> answer is mid or to the left
+            r = mid;
+        else                          // mid fails -> answer is strictly right
+            l = mid + 1;
     }
     return l;                         // l == r == first true (or n if none)
 }
@@ -72,9 +74,12 @@ int binary_search_value(const vector<int>& a, int target) {
     int l = 0, r = (int)a.size() - 1; // closed interval [l, r]
     while (l <= r) {
         int mid = l + (r - l) / 2;
-        if (a[mid] == target) return mid;
-        else if (a[mid] < target) l = mid + 1;
-        else r = mid - 1;
+        if (a[mid] == target)
+            return mid;
+        else if (a[mid] < target)
+            l = mid + 1;
+        else
+            r = mid - 1;
     }
     return -1;
 }
@@ -86,8 +91,10 @@ int lower_bound_idx(const vector<int>& a, int target) {
     int l = 0, r = (int)a.size();
     while (l < r) {
         int mid = l + (r - l) / 2;
-        if (a[mid] >= target) r = mid;
-        else l = mid + 1;
+        if (a[mid] >= target)
+            r = mid;
+        else
+            l = mid + 1;
     }
     return l;                         // count of elements < target
 }
@@ -95,8 +102,10 @@ int upper_bound_idx(const vector<int>& a, int target) {
     int l = 0, r = (int)a.size();
     while (l < r) {
         int mid = l + (r - l) / 2;
-        if (a[mid] > target) r = mid;
-        else l = mid + 1;
+        if (a[mid] > target)
+            r = mid;
+        else
+            l = mid + 1;
     }
     return l;                         // count of elements <= target
 }
@@ -124,8 +133,10 @@ int  idx_first_ge = lo - a.begin();
 long long min_feasible(long long lo, long long hi, auto&& check) {
     while (lo < hi) {
         long long mid = lo + (hi - lo) / 2;
-        if (check(mid)) hi = mid;     // feasible -> try smaller
-        else lo = mid + 1;            // infeasible -> need larger
+        if (check(mid))               // feasible -> try smaller
+            hi = mid;
+        else                          // infeasible -> need larger
+            lo = mid + 1;
     }
     return lo;
 }
@@ -138,8 +149,10 @@ long long min_feasible(long long lo, long long hi, auto&& check) {
 long long max_feasible(long long lo, long long hi, auto&& check) {
     while (lo < hi) {
         long long mid = lo + (hi - lo + 1) / 2; // bias up to avoid infinite loop
-        if (check(mid)) lo = mid;     // feasible -> try larger
-        else hi = mid - 1;            // infeasible -> need smaller
+        if (check(mid))               // feasible -> try larger
+            lo = mid;
+        else                          // infeasible -> need smaller
+            hi = mid - 1;
     }
     return lo;
 }
@@ -152,8 +165,12 @@ Example \`check\` for LeetCode 1011 (ship packages within D days at capacity \`c
 auto check = [&](int cap) {
     int days = 1, load = 0;
     for (int w : weights) {
-        if (w > cap) return false;    // a single item exceeds capacity
-        if (load + w > cap) { days++; load = 0; }
+        if (w > cap)                  // a single item exceeds capacity
+            return false;
+        if (load + w > cap) {
+            days++;
+            load = 0;
+        }
         load += w;
     }
     return days <= D;
@@ -176,13 +193,18 @@ int search(vector<int>& a, int target) {
     int l = 0, r = (int)a.size() - 1;
     while (l <= r) {
         int mid = l + (r - l) / 2;
-        if (a[mid] == target) return mid;
+        if (a[mid] == target)
+            return mid;
         if (a[l] <= a[mid]) {                     // left half sorted
-            if (a[l] <= target && target < a[mid]) r = mid - 1;
-            else l = mid + 1;
+            if (a[l] <= target && target < a[mid])
+                r = mid - 1;
+            else
+                l = mid + 1;
         } else {                                  // right half sorted
-            if (a[mid] < target && target <= a[r]) l = mid + 1;
-            else r = mid - 1;
+            if (a[mid] < target && target <= a[r])
+                l = mid + 1;
+            else
+                r = mid - 1;
         }
     }
     return -1;
@@ -198,8 +220,11 @@ int search(vector<int>& a, int target) {
 int countLE(const vector<vector<int>>& m, int x) {
     int n = m.size(), r = n - 1, c = 0, cnt = 0;
     while (r >= 0 && c < n) {
-        if (m[r][c] <= x) { cnt += r + 1; c++; }  // whole column up to r qualifies
-        else r--;
+        if (m[r][c] <= x) {                       // whole column up to r qualifies
+            cnt += r + 1;
+            c++;
+        } else
+            r--;
     }
     return cnt;
 }
@@ -212,7 +237,10 @@ int countLE(const vector<vector<int>>& m, int x) {
 double lo = 0, hi = 1e9;
 for (int it = 0; it < 100; it++) {
     double mid = (lo + hi) / 2;
-    if (check(mid)) hi = mid; else lo = mid;
+    if (check(mid))
+        hi = mid;
+    else
+        lo = mid;
 }
 // answer ~ lo (or hi)
 \`\`\`
@@ -227,7 +255,8 @@ for (int it = 0; it < 100; it++) {
 \`\`\`cpp
 // Median of two sorted arrays in O(log(min(m, n))) (LC 4)
 double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
-    if (a.size() > b.size()) swap(a, b);
+    if (a.size() > b.size())
+        swap(a, b);
     int m = a.size(), n = b.size(), half = (m + n + 1) / 2;
     int lo = 0, hi = m;
     while (lo <= hi) {
@@ -236,8 +265,10 @@ double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
         int bL = j ? b[j-1] : INT_MIN, bR = j < n ? b[j] : INT_MAX;
         if (aL <= bR && bL <= aR)
             return ((m + n) & 1) ? max(aL, bL) : (max(aL, bL) + min(aR, bR)) / 2.0;
-        else if (aL > bR) hi = i - 1;                  // take less from a
-        else lo = i + 1;                               // take more from a
+        else if (aL > bR)                              // take less from a
+            hi = i - 1;
+        else                                           // take more from a
+            lo = i + 1;
     }
     return 0.0;
 }
@@ -253,12 +284,22 @@ double findMaxAverage(vector<int>& a, int k) {
         double sum = 0, prefix = 0, minPrefix = 0;
         for (int i = 0; i < (int)a.size(); i++) {
             sum += a[i] - x;
-            if (i >= k) { prefix += a[i-k] - x; minPrefix = min(minPrefix, prefix); }
-            if (i >= k - 1 && sum - minPrefix >= 0) return true;
+            if (i >= k) {
+                prefix += a[i-k] - x;
+                minPrefix = min(minPrefix, prefix);
+            }
+            if (i >= k - 1 && sum - minPrefix >= 0)
+                return true;
         }
         return false;
     };
-    while (hi - lo > 1e-5) { double mid = (lo + hi) / 2; feasible(mid) ? lo = mid : hi = mid; }
+    while (hi - lo > 1e-5) {
+        double mid = (lo + hi) / 2;
+        if (feasible(mid))
+            lo = mid;
+        else
+            hi = mid;
+    }
     return lo;
 }
 \`\`\`
@@ -282,40 +323,40 @@ The whole game is making \`check\` cheap and *provably monotone*.`,
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Technique |
-| --- | --- |
-| 704 Binary Search | plain value search |
-| 34 First & Last Position | lower/upper bound |
-| 35 Search Insert Position | insertion point |
-| 33 / 81 Search in Rotated Array | rotated-array split |
-| 153 / 154 Find Minimum in Rotated Array | direction by \`a[r]\` |
-| 162 Find Peak Element | local monotonicity |
-| 875 Koko Eating Bananas | min-feasible on answer |
-| 1011 Capacity to Ship Packages | min-feasible on answer |
-| 410 Split Array Largest Sum | min-feasible + greedy check |
-| 378 Kth Smallest in Sorted Matrix | count ≤ x + value search |
-| 719 Kth Smallest Distance Pair | count ≤ x + two pointers |
-| 4 Median of Two Sorted Arrays | partition by binary search |
-
-**Harder & newer problems**
-
-| Problem | Technique |
-| --- | --- |
-| 2226 Maximum Candies Allocated to K Children | BS on the answer |
-| 2560 House Robber IV | BS on answer + greedy check |
-| 2616 Minimize the Maximum Difference of Pairs | BS on answer + greedy |
-| 2861 Maximum Number of Alloys | BS on answer |
-| 3296 Minimum Number of Seconds to Make Mountain Height Zero | BS on answer |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Technique |
+      body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 3771 Total Score of Dungeon Runs | 1981 | BS on the answer |
-| 3733 Minimum Time to Complete All Deliveries | 1973 | BS on the answer |
-| 3356 Zero Array Transformation II | 1913 | BS + difference array |
-| 3608 Minimum Time for K Connected Components | 1893 | BS + DSU |
-| 3639 Minimum Time to Activate String | 1853 | BS on the answer |`,
+| 704 | [Binary Search](https://leetcode.cn/problems/binary-search) | plain value search |
+| 34 | [First & Last Position](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array) | lower/upper bound |
+| 35 | [Search Insert Position](https://leetcode.cn/problems/search-insert-position) | insertion point |
+| 33 / 81 | [Search in Rotated Array](https://leetcode.cn/problems/search-in-rotated-sorted-array) | rotated-array split |
+| 153 / 154 | [Find Minimum in Rotated Array](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array) | direction by \`a[r]\` |
+| 162 | [Find Peak Element](https://leetcode.cn/problems/find-peak-element) | local monotonicity |
+| 875 | [Koko Eating Bananas](https://leetcode.cn/problems/koko-eating-bananas) | min-feasible on answer |
+| 1011 | [Capacity to Ship Packages](https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days) | min-feasible on answer |
+| 410 | [Split Array Largest Sum](https://leetcode.cn/problems/split-array-largest-sum) | min-feasible + greedy check |
+| 378 | [Kth Smallest in Sorted Matrix](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix) | count ≤ x + value search |
+| 719 | [Kth Smallest Distance Pair](https://leetcode.cn/problems/find-k-th-smallest-pair-distance) | count ≤ x + two pointers |
+| 4 | [Median of Two Sorted Arrays](https://leetcode.cn/problems/median-of-two-sorted-arrays) | partition by binary search |
+
+**Advanced practice problems**
+
+| ID | Problem | Technique |
+| --- | --- | --- |
+| 2226 | [Maximum Candies Allocated to K Children](https://leetcode.cn/problems/maximum-candies-allocated-to-k-children) | BS on the answer |
+| 2560 | [House Robber IV](https://leetcode.cn/problems/house-robber-iv) | BS on answer + greedy check |
+| 2616 | [Minimize the Maximum Difference of Pairs](https://leetcode.cn/problems/minimize-the-maximum-difference-of-pairs) | BS on answer + greedy |
+| 2861 | [Maximum Number of Alloys](https://leetcode.cn/problems/maximum-number-of-alloys) | BS on answer |
+| 3296 | [Minimum Number of Seconds to Make Mountain Height Zero](https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero) | BS on answer |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3771 | [Total Score of Dungeon Runs](https://leetcode.cn/problems/total-score-of-dungeon-runs) | 1981 | BS on the answer |
+| 3733 | [Minimum Time to Complete All Deliveries](https://leetcode.cn/problems/minimum-time-to-complete-all-deliveries) | 1973 | BS on the answer |
+| 3356 | [Zero Array Transformation II](https://leetcode.cn/problems/zero-array-transformation-ii) | 1913 | BS + difference array |
+| 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | BS + DSU |
+| 3639 | [Minimum Time to Activate String](https://leetcode.cn/problems/minimum-time-to-activate-string) | 1853 | BS on the answer |`,
     },
     {
       id: "pitfalls",

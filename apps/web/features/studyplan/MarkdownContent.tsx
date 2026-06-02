@@ -172,6 +172,12 @@ function shouldRenderAsPlainText(math: string) {
   return /^\([A-Za-z_][\w\s,]*\)$/.test(normalized);
 }
 
+const LEETCODE_HOST_RE = /leetcode\.(cn|com)/i;
+
+function isLeetCodeLink(href: string | null) {
+  return !!href && LEETCODE_HOST_RE.test(href);
+}
+
 function createMarkup(md: string) {
   const normalizedMarkdown = normalizeInlineMath(normalizeCppCodeBlocks(md));
   const parsed = marked.parse(normalizedMarkdown);
@@ -194,12 +200,18 @@ interface StudyPlanMarkdownContentProps {
   content: string;
   variant?: "plan" | "section" | "lecture";
   className?: string;
+  /**
+   * Give LeetCode links a distinct color and render `ID | Problem | …` tables as
+   * 講義-style problem lists. Opt-in (used by the handbook).
+   */
+  enhanceLeetCode?: boolean;
 }
 
 export function StudyPlanMarkdownContent({
   content,
   variant = "section",
   className,
+  enhanceLeetCode = false,
 }: StudyPlanMarkdownContentProps) {
   const innerHtml = useRef<HTMLDivElement>(null);
 
@@ -217,7 +229,13 @@ export function StudyPlanMarkdownContent({
       link.removeAttribute("style");
       link.setAttribute("target", "_blank");
       link.setAttribute("rel", "noopener noreferrer");
-      link.className = "font-medium text-primary underline underline-offset-4";
+      if (enhanceLeetCode && isLeetCodeLink(link.getAttribute("href"))) {
+        link.className =
+          "font-medium text-orange-600 underline underline-offset-4 dark:text-orange-400";
+      } else {
+        link.className =
+          "font-medium text-primary underline underline-offset-4";
+      }
     });
 
     innerHtml.current.querySelectorAll("img").forEach((img) => {
@@ -306,7 +324,7 @@ export function StudyPlanMarkdownContent({
       wrapper.appendChild(header);
       wrapper.appendChild(pre);
     });
-  }, [content, variant]);
+  }, [content, variant, enhanceLeetCode]);
 
   return (
     <div

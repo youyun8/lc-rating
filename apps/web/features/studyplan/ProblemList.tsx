@@ -13,6 +13,7 @@ import { ProblemSolution } from "./ProblemSolution";
 
 interface ProblemListProps {
   problems: StudyPlanData.Item[];
+  title?: string;
 }
 
 function getSortableProblemIndex(problem: StudyPlanData.Item) {
@@ -157,7 +158,7 @@ function mergeStudyPlanProblemsById(
   return fromSlug.filter((p) => !losers.has(p)).sort(compareStudyPlanProblems);
 }
 
-const ProblemList = React.memo(({ problems }: ProblemListProps) => {
+const ProblemList = React.memo(({ problems, title }: ProblemListProps) => {
   const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
   const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
   const { problemMap } = useProblems();
@@ -194,7 +195,7 @@ const ProblemList = React.memo(({ problems }: ProblemListProps) => {
       <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-muted/25 px-4 py-3">
         <div>
           <p className="text-sm font-semibold tracking-tight text-foreground">
-            題目列表
+            {title ?? "題目列表"}
           </p>
         </div>
         <span className="rounded-full border border-border/60 bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground">

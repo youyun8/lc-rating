@@ -92,4 +92,5 @@ export const ROUTERS = {
       [],
     ),
   },
+  handbook: { title: "手冊", href: `/handbook` },
 };

@@ -37,9 +37,12 @@ Signals:
 bool isPalindrome(string s) {
     int i = 0, j = s.size() - 1;
     while (i < j) {
-        while (i < j && !isalnum(s[i])) i++;
-        while (i < j && !isalnum(s[j])) j--;
-        if (tolower(s[i]) != tolower(s[j])) return false;
+        while (i < j && !isalnum(s[i]))
+            i++;
+        while (i < j && !isalnum(s[j]))
+            j--;
+        if (tolower(s[i]) != tolower(s[j]))
+            return false;
         i++; j--;
     }
     return true;
@@ -50,9 +53,14 @@ bool isPalindrome(string s) {
 // Group anagrams (LC 49): signature = sorted letters (or a 26-count key)
 vector<vector<string>> groupAnagrams(vector<string>& strs) {
     unordered_map<string, vector<string>> m;
-    for (auto& s : strs) { string k = s; sort(k.begin(), k.end()); m[k].push_back(s); }
+    for (auto& s : strs) {
+        string k = s;
+        sort(k.begin(), k.end());
+        m[k].push_back(s);
+    }
     vector<vector<string>> res;
-    for (auto& [k, v] : m) res.push_back(v);
+    for (auto& [k, v] : m)
+        res.push_back(v);
     return res;
 }
 \`\`\``,
@@ -67,10 +75,19 @@ vector<vector<string>> groupAnagrams(vector<string>& strs) {
 string longestPalindrome(string s) {
     int start = 0, len = 0;
     auto expand = [&](int l, int r) {
-        while (l >= 0 && r < (int)s.size() && s[l] == s[r]) { l--; r++; }
-        if (r - l - 1 > len) { len = r - l - 1; start = l + 1; }
+        while (l >= 0 && r < (int)s.size() && s[l] == s[r]) {
+            l--;
+            r++;
+        }
+        if (r - l - 1 > len) {
+            len = r - l - 1;
+            start = l + 1;
+        }
     };
-    for (int i = 0; i < (int)s.size(); i++) { expand(i, i); expand(i, i + 1); }
+    for (int i = 0; i < (int)s.size(); i++) {
+        expand(i, i);
+        expand(i, i + 1);
+    }
     return s.substr(start, len);
 }
 \`\`\`
@@ -89,8 +106,10 @@ vector<int> prefixFunc(const string& p) {
     vector<int> pi(m, 0);
     for (int i = 1; i < m; i++) {
         int j = pi[i - 1];
-        while (j > 0 && p[i] != p[j]) j = pi[j - 1];
-        if (p[i] == p[j]) j++;
+        while (j > 0 && p[i] != p[j])
+            j = pi[j - 1];
+        if (p[i] == p[j])
+            j++;
         pi[i] = j;
     }
     return pi;
@@ -100,13 +119,17 @@ vector<int> prefixFunc(const string& p) {
 \`\`\`cpp
 // KMP search: return first index of pattern p in text t, else -1 (LC 28)
 int kmp(const string& t, const string& p) {
-    if (p.empty()) return 0;
+    if (p.empty())
+        return 0;
     vector<int> pi = prefixFunc(p);
     int j = 0;
     for (int i = 0; i < (int)t.size(); i++) {
-        while (j > 0 && t[i] != p[j]) j = pi[j - 1];
-        if (t[i] == p[j]) j++;
-        if (j == (int)p.size()) return i - j + 1;   // full match
+        while (j > 0 && t[i] != p[j])
+            j = pi[j - 1];
+        if (t[i] == p[j])
+            j++;
+        if (j == (int)p.size())
+            return i - j + 1;   // full match
     }
     return -1;
 }
@@ -125,9 +148,14 @@ vector<int> zFunction(const string& s) {
     int n = s.size();
     vector<int> z(n, 0); z[0] = n;
     for (int i = 1, l = 0, r = 0; i < n; i++) {
-        if (i < r) z[i] = min(r - i, z[i - l]);
-        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;
-        if (i + z[i] > r) { l = i; r = i + z[i]; }
+        if (i < r)
+            z[i] = min(r - i, z[i - l]);
+        while (i + z[i] < n && s[z[i]] == s[i + z[i]])
+            z[i]++;
+        if (i + z[i] > r) {
+            l = i;
+            r = i + z[i];
+        }
     }
     return z;
 }
@@ -141,7 +169,10 @@ const unsigned long long B = 131;
 vector<unsigned long long> h, pw;            // h[i] = hash of s[0..i-1]
 void buildHash(const string& s) {
     int n = s.size(); h.assign(n + 1, 0); pw.assign(n + 1, 1);
-    for (int i = 0; i < n; i++) { h[i+1] = h[i]*B + s[i]; pw[i+1] = pw[i]*B; }
+    for (int i = 0; i < n; i++) {
+        h[i+1] = h[i]*B + s[i];
+        pw[i+1] = pw[i]*B;
+    }
 }
 unsigned long long sub(int l, int r) {       // hash of s[l..r]
     return h[r+1] - h[l] * pw[r - l + 1];
@@ -160,12 +191,22 @@ struct Trie {
     Node* root = new Node();
     void insert(const string& w) {
         Node* cur = root;
-        for (char c : w) { int k = c - 'a'; if (!cur->nxt[k]) cur->nxt[k] = new Node(); cur = cur->nxt[k]; }
+        for (char c : w) {
+            int k = c - 'a';
+            if (!cur->nxt[k])
+                cur->nxt[k] = new Node();
+            cur = cur->nxt[k];
+        }
         cur->end = true;
     }
     Node* walk(const string& w) {
         Node* cur = root;
-        for (char c : w) { int k = c - 'a'; if (!cur->nxt[k]) return nullptr; cur = cur->nxt[k]; }
+        for (char c : w) {
+            int k = c - 'a';
+            if (!cur->nxt[k])
+                return nullptr;
+            cur = cur->nxt[k];
+        }
         return cur;
     }
     bool search(const string& w){ Node* n = walk(w); return n && n->end; }
@@ -184,17 +225,29 @@ Add Word with wildcard '.' (LC 211) recurses across all children on a dot; Word 
 // Manacher's algorithm: longest palindromic substring in O(n) (LC 5)
 string longestPalindromeManacher(const string& s) {
     string t = "^";
-    for (char c : s) { t += '#'; t += c; }
+    for (char c : s) {
+        t += '#';
+        t += c;
+    }
     t += "#$";                                  // sentinels remove bounds checks
     int n = t.size(), center = 0, right = 0;
     vector<int> p(n, 0);                         // p[i] = palindrome radius at i
     for (int i = 1; i < n - 1; i++) {
-        if (i < right) p[i] = min(right - i, p[2 * center - i]); // mirror
-        while (t[i + p[i] + 1] == t[i - p[i] - 1]) p[i]++;       // expand
-        if (i + p[i] > right) { center = i; right = i + p[i]; }
+        if (i < right)
+            p[i] = min(right - i, p[2 * center - i]); // mirror
+        while (t[i + p[i] + 1] == t[i - p[i] - 1])
+            p[i]++;       // expand
+        if (i + p[i] > right) {
+            center = i;
+            right = i + p[i];
+        }
     }
     int len = 0, c = 0;
-    for (int i = 1; i < n - 1; i++) if (p[i] > len) { len = p[i]; c = i; }
+    for (int i = 1; i < n - 1; i++)
+        if (p[i] > len) {
+            len = p[i];
+            c = i;
+        }
     return s.substr((c - len) / 2, len);        // map back to the original string
 }
 \`\`\`
@@ -216,20 +269,29 @@ struct AhoCorasick {
         int u = 0;
         for (char c : s) {
             int k = c - 'a';
-            if (!t[u].nxt[k]) { t[u].nxt[k] = t.size(); t.emplace_back(); }
+            if (!t[u].nxt[k]) {
+                t[u].nxt[k] = t.size();
+                t.emplace_back();
+            }
             u = t[u].nxt[k];
         }
         t[u].out.push_back(id);
     }
     void build() {                              // BFS to set fail links / goto automaton
         queue<int> q;
-        for (int k = 0; k < 26; k++) if (t[0].nxt[k]) q.push(t[0].nxt[k]);
+        for (int k = 0; k < 26; k++)
+            if (t[0].nxt[k])
+                q.push(t[0].nxt[k]);
         while (!q.empty()) {
             int u = q.front(); q.pop();
             for (int k = 0; k < 26; k++) {
                 int v = t[u].nxt[k];
-                if (!v) t[u].nxt[k] = t[t[u].fail].nxt[k];   // follow fail on miss
-                else { t[v].fail = t[t[u].fail].nxt[k]; q.push(v); }
+                if (!v)
+                    t[u].nxt[k] = t[t[u].fail].nxt[k];   // follow fail on miss
+                else {
+                    t[v].fail = t[t[u].fail].nxt[k];
+                    q.push(v);
+                }
             }
         }
     }
@@ -262,39 +324,39 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Technique |
-| --- | --- |
-| 125 / 5 / 647 Palindrome family | two pointers / expand |
-| 49 / 242 Anagrams | frequency counting |
-| 28 Find the Index (strStr) | KMP |
-| 459 Repeated Substring Pattern | prefix function |
-| 214 Shortest Palindrome | KMP / hash |
-| 1044 Longest Duplicate Substring | rolling hash + binary search |
-| 208 / 211 / 212 Trie / Add&Search / Word Search II | Trie |
-| 421 Maximum XOR of Two Numbers | bitwise Trie |
-| 76 Minimum Window Substring | sliding window |
-| 131 / 132 Palindrome Partitioning | DP |
-
-**Harder & newer problems**
-
-| Problem | Technique |
-| --- | --- |
-| 3008 Find Beautiful Indices in the Given Array II | KMP / Z-function |
-| 3031 Minimum Time to Revert Word to Initial State II | Z-function |
-| 1392 Longest Happy Prefix | prefix function |
-| 1316 Distinct Echo Substrings | rolling hash |
-| 5 Longest Palindromic Substring | Manacher |
-| 1032 Stream of Characters | Aho–Corasick |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Technique |
+      body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 3614 Process String With Special Operations II | 2011 | simulation / indexing |
-| 3472 Longest Palindromic Subsequence After at Most K Operations | 1884 | interval DP |
-| 3781 Maximum Score After Binary Swaps | 1823 | greedy on string |
-| 3335 Total Characters in String After Transformations I | 1806 | counting recurrence |
-| 3703 Remove K Balanced Substrings | 1802 | stack |`,
+| 125 / 5 / 647 | [Palindrome family](https://leetcode.cn/problems/valid-palindrome) | two pointers / expand |
+| 49 / 242 | [Anagrams](https://leetcode.cn/problems/group-anagrams) | frequency counting |
+| 28 | [Find the Index (strStr)](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string) | KMP |
+| 459 | [Repeated Substring Pattern](https://leetcode.cn/problems/repeated-substring-pattern) | prefix function |
+| 214 | [Shortest Palindrome](https://leetcode.cn/problems/shortest-palindrome) | KMP / hash |
+| 1044 | [Longest Duplicate Substring](https://leetcode.cn/problems/longest-duplicate-substring) | rolling hash + binary search |
+| 208 / 211 / 212 | [Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) / [Add&Search](https://leetcode.cn/problems/design-add-and-search-words-data-structure) / [Word Search II](https://leetcode.cn/problems/word-search-ii) | Trie |
+| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
+| 76 | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) | sliding window |
+| 131 / 132 | [Palindrome Partitioning](https://leetcode.cn/problems/palindrome-partitioning) | DP |
+
+**Advanced practice problems**
+
+| ID | Problem | Technique |
+| --- | --- | --- |
+| 3008 | [Find Beautiful Indices in the Given Array II](https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii) | KMP / Z-function |
+| 3031 | [Minimum Time to Revert Word to Initial State II](https://leetcode.cn/problems/minimum-time-to-revert-word-to-initial-state-ii) | Z-function |
+| 1392 | [Longest Happy Prefix](https://leetcode.cn/problems/longest-happy-prefix) | prefix function |
+| 1316 | [Distinct Echo Substrings](https://leetcode.cn/problems/distinct-echo-substrings) | rolling hash |
+| 5 | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) | Manacher |
+| 1032 | [Stream of Characters](https://leetcode.cn/problems/stream-of-characters) | Aho–Corasick |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3614 | [Process String With Special Operations II](https://leetcode.cn/problems/process-string-with-special-operations-ii) | 2011 | simulation / indexing |
+| 3472 | [Longest Palindromic Subsequence After at Most K Operations](https://leetcode.cn/problems/longest-palindromic-subsequence-after-at-most-k-operations) | 1884 | interval DP |
+| 3781 | [Maximum Score After Binary Swaps](https://leetcode.cn/problems/maximum-score-after-binary-swaps) | 1823 | greedy on string |
+| 3335 | [Total Characters in String After Transformations I](https://leetcode.cn/problems/total-characters-in-string-after-transformations-i) | 1806 | counting recurrence |
+| 3703 | [Remove K Balanced Substrings](https://leetcode.cn/problems/remove-k-balanced-substrings) | 1802 | stack |`,
     },
     {
       id: "pitfalls",

@@ -45,7 +45,11 @@ The **extended Euclidean algorithm** also finds \`x, y\` with \`ax + by = gcd(a,
 \`\`\`cpp
 // Extended GCD: returns g = gcd(a,b) and sets x,y so that a*x + b*y = g
 long long extgcd(long long a, long long b, long long& x, long long& y) {
-    if (!b) { x = 1; y = 0; return a; }
+    if (!b) {
+        x = 1;
+        y = 0;
+        return a;
+    }
     long long x1, y1, g = extgcd(b, a % b, x1, y1);
     x = y1; y = x1 - (a / b) * y1;
     return g;
@@ -64,7 +68,8 @@ vector<bool> sieve(int n) {
     isPrime[0] = isPrime[1] = false;
     for (int i = 2; (long long)i * i <= n; i++)
         if (isPrime[i])
-            for (int j = i * i; j <= n; j += i) isPrime[j] = false;
+            for (int j = i * i; j <= n; j += i)
+                isPrime[j] = false;
     return isPrime;
 }
 \`\`\`
@@ -76,8 +81,16 @@ Trial-division factorization up to \`sqrt(n)\` is enough for single numbers:
 vector<pair<long long,int>> factorize(long long n) {
     vector<pair<long long,int>> f;
     for (long long p = 2; p * p <= n; p++)
-        if (n % p == 0) { int e = 0; while (n % p == 0) { n /= p; e++; } f.push_back({p, e}); }
-    if (n > 1) f.push_back({n, 1});
+        if (n % p == 0) {
+            int e = 0;
+            while (n % p == 0) {
+                n /= p;
+                e++;
+            }
+            f.push_back({p, e});
+        }
+    if (n > 1)
+        f.push_back({n, 1});
     return f;
 }
 \`\`\`
@@ -94,7 +107,8 @@ The **smallest prime factor (SPF)** sieve factorizes many numbers in \`O(log n)\
 long long power(long long a, long long b, long long m) {
     long long res = 1 % m; a %= m;
     while (b > 0) {
-        if (b & 1) res = res * a % m;
+        if (b & 1)
+            res = res * a % m;
         a = a * a % m;
         b >>= 1;
     }
@@ -123,12 +137,15 @@ const int MX = 200000;
 long long fact[MX + 1], invfact[MX + 1];
 void initComb() {
     fact[0] = 1;
-    for (int i = 1; i <= MX; i++) fact[i] = fact[i-1] * i % MOD;
+    for (int i = 1; i <= MX; i++)
+        fact[i] = fact[i-1] * i % MOD;
     invfact[MX] = power(fact[MX], MOD - 2, MOD);          // see binary exponentiation
-    for (int i = MX; i > 0; i--) invfact[i-1] = invfact[i] * i % MOD;
+    for (int i = MX; i > 0; i--)
+        invfact[i-1] = invfact[i] * i % MOD;
 }
 long long nCr(int n, int r) {
-    if (r < 0 || r > n) return 0;
+    if (r < 0 || r > n)
+        return 0;
     return fact[n] * invfact[r] % MOD * invfact[n - r] % MOD;
 }
 \`\`\`
@@ -156,9 +173,13 @@ Used for Unique Paths (closed form \`C(m+n-2, m-1)\`), counting-DP answers, and 
 vector<int> linearSieve(int n) {
     vector<int> spf(n + 1, 0), primes;
     for (int i = 2; i <= n; i++) {
-        if (!spf[i]) { spf[i] = i; primes.push_back(i); }
+        if (!spf[i]) {
+            spf[i] = i;
+            primes.push_back(i);
+        }
         for (int p : primes) {
-            if (p > spf[i] || (long long)i * p > n) break;
+            if (p > spf[i] || (long long)i * p > n)
+                break;
             spf[i * p] = p;
         }
     }
@@ -174,30 +195,55 @@ using u128 = __uint128_t;
 long long mulmod(long long a, long long b, long long m){ return (u128)a * b % m; }
 long long powmod(long long a, long long b, long long m){
     long long r = 1 % m; a %= m;
-    while (b) { if (b & 1) r = mulmod(r, a, m); a = mulmod(a, a, m); b >>= 1; }
+    while (b) {
+        if (b & 1)
+            r = mulmod(r, a, m);
+        a = mulmod(a, a, m);
+        b >>= 1;
+    }
     return r;
 }
 bool isPrime(long long n) {
-    if (n < 2) return false;
-    for (long long p : {2,3,5,7,11,13,17,19,23,29,31,37}) if (n % p == 0) return n == p;
+    if (n < 2)
+        return false;
+    for (long long p : {2,3,5,7,11,13,17,19,23,29,31,37})
+        if (n % p == 0)
+            return n == p;
     long long d = n - 1; int s = 0;
-    while (!(d & 1)) { d >>= 1; s++; }
+    while (!(d & 1)) {
+        d >>= 1;
+        s++;
+    }
     for (long long a : {2,3,5,7,11,13,17,19,23,29,31,37}) {
         long long x = powmod(a, d, n);
-        if (x == 1 || x == n - 1) continue;
+        if (x == 1 || x == n - 1)
+            continue;
         bool composite = true;
-        for (int i = 0; i < s - 1; i++) { x = mulmod(x, x, n); if (x == n - 1) { composite = false; break; } }
-        if (composite) return false;
+        for (int i = 0; i < s - 1; i++) {
+            x = mulmod(x, x, n);
+            if (x == n - 1) {
+                composite = false;
+                break;
+            }
+        }
+        if (composite)
+            return false;
     }
     return true;
 }
 long long pollard(long long n) {
-    if (n % 2 == 0) return 2;
+    if (n % 2 == 0)
+        return 2;
     for (long long c = 1; ; c++) {
         long long x = 2, y = 2, d = 1;
         auto f = [&](long long v){ return (mulmod(v, v, n) + c) % n; };
-        while (d == 1) { x = f(x); y = f(f(y)); d = __gcd(x > y ? x - y : y - x, n); }
-        if (d != n) return d;
+        while (d == 1) {
+            x = f(x);
+            y = f(f(y));
+            d = __gcd(x > y ? x - y : y - x, n);
+        }
+        if (d != n)
+            return d;
     }
 }
 \`\`\`
@@ -208,7 +254,8 @@ long long pollard(long long n) {
 // CRT for two moduli (uses extended GCD from the GCD section)
 long long crt(long long r1, long long m1, long long r2, long long m2) {
     long long p, q, g = extgcd(m1, m2, p, q);     // m1*p + m2*q = g
-    if ((r2 - r1) % g != 0) return -1;            // no solution
+    if ((r2 - r1) % g != 0)
+        return -1;            // no solution
     long long lcm = m1 / g * m2, diff = (r2 - r1) / g;
     long long x = (r1 + (__int128)m1 * ((diff * p) % (m2 / g))) % lcm;
     return (x % lcm + lcm) % lcm;
@@ -241,39 +288,39 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Technique |
-| --- | --- |
-| 204 Count Primes | sieve |
-| 50 Pow(x, n) | binary exponentiation |
-| 372 Super Pow | modular exponentiation |
-| 1735 Count Ways to Make Array Product | factorization + combinatorics |
-| 62 Unique Paths | combinatorics (\`nCr\`) |
-| 365 Water and Jug Problem | GCD (Bézout) |
-| 7 Reverse Integer | digit peeling + overflow |
-| 9 Palindrome Number | digit math |
-| 535 Encode/Decode TinyURL | base conversion |
-| 233 Number of Digit One | digit counting |
-
-**Harder & newer problems**
-
-| Problem | Technique |
-| --- | --- |
-| 2521 Distinct Prime Factors of Product of Array | sieve / factorization |
-| 2761 Prime Pairs With Target Sum | sieve |
-| 2543 Check if Point Is Reachable | gcd |
-| 2400 Number of Ways to Reach a Position After Exactly k Steps | combinatorics (nCr) |
-| 2954 Count the Number of Infection Sequences | combinatorics |
-| 372 Super Pow | modular exponentiation |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Technique |
+      body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 3524 Find X Value of Array I | 2008 | modular arithmetic |
-| 3756 Concatenate Non-Zero Digits and Multiply by Sum II | 1968 | digit math |
-| 3669 Balanced K-Factor Decomposition | 1917 | factorization + search |
-| 3747 Count Distinct Integers After Removing Zeros | 1848 | digit math |
-| 3558 Number of Ways to Assign Edge Weights I | 1845 | combinatorics |`,
+| 204 | [Count Primes](https://leetcode.cn/problems/count-primes) | sieve |
+| 50 | [Pow(x, n)](https://leetcode.cn/problems/powx-n) | binary exponentiation |
+| 372 | [Super Pow](https://leetcode.cn/problems/super-pow) | modular exponentiation |
+| 1735 | [Count Ways to Make Array Product](https://leetcode.cn/problems/count-ways-to-make-array-with-product) | factorization + combinatorics |
+| 62 | [Unique Paths](https://leetcode.cn/problems/unique-paths) | combinatorics (\`nCr\`) |
+| 365 | [Water and Jug Problem](https://leetcode.cn/problems/water-and-jug-problem) | GCD (Bézout) |
+| 7 | [Reverse Integer](https://leetcode.cn/problems/reverse-integer) | digit peeling + overflow |
+| 9 | [Palindrome Number](https://leetcode.cn/problems/palindrome-number) | digit math |
+| 535 | [Encode/Decode TinyURL](https://leetcode.cn/problems/encode-and-decode-tinyurl) | base conversion |
+| 233 | [Number of Digit One](https://leetcode.cn/problems/number-of-digit-one) | digit counting |
+
+**Advanced practice problems**
+
+| ID | Problem | Technique |
+| --- | --- | --- |
+| 2521 | [Distinct Prime Factors of Product of Array](https://leetcode.cn/problems/distinct-prime-factors-of-product-of-array) | sieve / factorization |
+| 2761 | [Prime Pairs With Target Sum](https://leetcode.cn/problems/prime-pairs-with-target-sum) | sieve |
+| 2543 | [Check if Point Is Reachable](https://leetcode.cn/problems/check-if-point-is-reachable) | gcd |
+| 2400 | [Number of Ways to Reach a Position After Exactly k Steps](https://leetcode.cn/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps) | combinatorics (nCr) |
+| 2954 | [Count the Number of Infection Sequences](https://leetcode.cn/problems/count-the-number-of-infection-sequences) | combinatorics |
+| 372 | [Super Pow](https://leetcode.cn/problems/super-pow) | modular exponentiation |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3524 | [Find X Value of Array I](https://leetcode.cn/problems/find-x-value-of-array-i) | 2008 | modular arithmetic |
+| 3756 | [Concatenate Non-Zero Digits and Multiply by Sum II](https://leetcode.cn/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii) | 1968 | digit math |
+| 3669 | [Balanced K-Factor Decomposition](https://leetcode.cn/problems/balanced-k-factor-decomposition) | 1917 | factorization + search |
+| 3747 | [Count Distinct Integers After Removing Zeros](https://leetcode.cn/problems/count-distinct-integers-after-removing-zeros) | 1848 | digit math |
+| 3558 | [Number of Ways to Assign Edge Weights I](https://leetcode.cn/problems/number-of-ways-to-assign-edge-weights-i) | 1845 | combinatorics |`,
     },
     {
       id: "pitfalls",

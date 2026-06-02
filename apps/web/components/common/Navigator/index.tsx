@@ -2,6 +2,7 @@
 
 import { BILIBILI_0X3F_SPACE, ROUTERS, STUDYPLANS } from "@/config/constants";
 import { Code2, Menu, X } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -30,7 +31,12 @@ function PlanSidebarTrigger() {
   return <SidebarTrigger />;
 }
 
-const navLinks = [
+const navLinks: {
+  href: string;
+  label: string;
+  match: string;
+  icon?: LucideIcon;
+}[] = [
   {
     href: ROUTERS.contest.href,
     label: ROUTERS.contest.title,
@@ -50,6 +56,11 @@ const navLinks = [
     href: ROUTERS.tutorials.href,
     label: ROUTERS.tutorials.title,
     match: "/lecture",
+  },
+  {
+    href: ROUTERS.handbook.href,
+    label: ROUTERS.handbook.title,
+    match: "/handbook",
   },
 ];
 
@@ -100,18 +111,19 @@ const Navigator = React.memo(() => {
 
           {/* Desktop nav links */}
           <div className="ml-6 hidden h-full items-center gap-1 md:flex">
-            {navLinks.map(({ href, label, match }) => {
+            {navLinks.map(({ href, label, match, icon: Icon }) => {
               const isActive = pathname.startsWith(match);
               return (
                 <Link
                   key={href}
                   href={href}
-                  className={`relative flex items-center h-full px-3 text-base font-semibold transition-colors ${
+                  className={`relative flex items-center gap-1.5 h-full px-3 text-base font-semibold transition-colors ${
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
+                  {Icon && <Icon className="h-4 w-4" />}
                   {label}
                   {isActive && (
                     <span className="absolute -bottom-1.5 left-1/2 h-1 w-4/5 -translate-x-1/2 rounded-full bg-lime-500" />
@@ -143,19 +155,20 @@ const Navigator = React.memo(() => {
           <div className="absolute inset-x-0 top-full border-b border-border/60 bg-background/95 shadow-xl backdrop-blur-md md:hidden">
             <div className="flex flex-col gap-4 px-4 py-4">
               <div className="rounded-2xl border border-border/60 bg-muted/30 p-1.5">
-                {navLinks.map(({ href, label, match }) => {
+                {navLinks.map(({ href, label, match, icon: Icon }) => {
                   const isActive = pathname.startsWith(match);
                   return (
                     <Link
                       key={href}
                       href={href}
-                      className={`flex items-center rounded-xl px-3 py-3 text-sm font-medium transition-colors ${
+                      className={`flex items-center gap-1.5 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${
                         isActive
                           ? "bg-background text-foreground shadow-sm"
                           : "text-muted-foreground hover:bg-background/80 hover:text-foreground"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
+                      {Icon && <Icon className="h-4 w-4" />}
                       {label}
                     </Link>
                   );

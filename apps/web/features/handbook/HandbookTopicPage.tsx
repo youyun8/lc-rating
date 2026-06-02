@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronRight, List } from "lucide-react";
-import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
+import { HandbookSectionBody } from "./HandbookSectionBody";
 import { cn } from "@/lib/utils";
 import { resolveHandbookIcon } from "./icons";
 import type { HandbookTopic, HandbookTopicRef } from "./model";
@@ -118,7 +118,7 @@ export function HandbookTopicPage({
                 <h2 className="mb-3 border-b border-border/60 pb-2 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
                   {s.title}
                 </h2>
-                <StudyPlanMarkdownContent content={s.body} variant="lecture" />
+                <HandbookSectionBody body={s.body} />
               </section>
             ))}
 

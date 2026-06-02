@@ -52,7 +52,10 @@ int maxNonOverlap(vector<vector<int>>& iv) {
     sort(iv.begin(), iv.end(), [](auto& a, auto& b){ return a[1] < b[1]; });
     int count = 0, end = INT_MIN;
     for (auto& x : iv) {
-        if (x[0] >= end) { count++; end = x[1]; } // take it; advance the frontier
+        if (x[0] >= end) { // take it; advance the frontier
+            count++;
+            end = x[1];
+        }
     }
     return count;                     // erase = iv.size() - count
 }
@@ -95,7 +98,10 @@ int jump(vector<int>& a) {
     int jumps = 0, curEnd = 0, farthest = 0;
     for (int i = 0; i + 1 < (int)a.size(); i++) {
         farthest = max(farthest, i + a[i]);
-        if (i == curEnd) { jumps++; curEnd = farthest; } // finished a level
+        if (i == curEnd) { // finished a level
+            jumps++;
+            curEnd = farthest;
+        }
     }
     return jumps;
 }
@@ -114,7 +120,8 @@ int findContentChildren(vector<int>& g, vector<int>& s) {
     sort(g.begin(), g.end()); sort(s.begin(), s.end());
     int i = 0, j = 0;
     while (i < (int)g.size() && j < (int)s.size()) {
-        if (s[j] >= g[i]) i++;        // this cookie satisfies child i
+        if (s[j] >= g[i])
+            i++;        // this cookie satisfies child i
         j++;
     }
     return i;
@@ -134,8 +141,10 @@ int minRefuelStops(int target, int startFuel, vector<vector<int>>& st) {
     priority_queue<int> pq;                      // fuel of passed-but-unused stations
     int fuel = startFuel, i = 0, stops = 0, n = st.size();
     while (fuel < target) {
-        while (i < n && st[i][0] <= fuel) pq.push(st[i++][1]); // everything reachable
-        if (pq.empty()) return -1;               // truly stuck
+        while (i < n && st[i][0] <= fuel)
+            pq.push(st[i++][1]); // everything reachable
+        if (pq.empty())
+            return -1;               // truly stuck
         fuel += pq.top(); pq.pop(); stops++;     // claim the best deferred refuel
     }
     return stops;
@@ -151,7 +160,10 @@ int scheduleCourse(vector<vector<int>>& c) {
     priority_queue<int> pq; long long time = 0;
     for (auto& x : c) {
         time += x[0]; pq.push(x[0]);
-        if (time > x[1]) { time -= pq.top(); pq.pop(); } // shed the longest
+        if (time > x[1]) { // shed the longest
+            time -= pq.top();
+            pq.pop();
+        }
     }
     return pq.size();
 }
@@ -163,8 +175,12 @@ int scheduleCourse(vector<vector<int>>& c) {
 // Candy (LC 135): satisfy both neighbour constraints
 int candy(vector<int>& r) {
     int n = r.size(); vector<int> c(n, 1);
-    for (int i = 1; i < n; i++) if (r[i] > r[i-1]) c[i] = c[i-1] + 1;
-    for (int i = n - 2; i >= 0; i--) if (r[i] > r[i+1]) c[i] = max(c[i], c[i+1] + 1);
+    for (int i = 1; i < n; i++)
+        if (r[i] > r[i-1])
+            c[i] = c[i-1] + 1;
+    for (int i = n - 2; i >= 0; i--)
+        if (r[i] > r[i+1])
+            c[i] = max(c[i], c[i+1] + 1);
     return accumulate(c.begin(), c.end(), 0);
 }
 \`\`\`
@@ -185,41 +201,41 @@ The cost is almost always dominated by the initial sort or by heap operations.`,
     {
       id: "problems",
       title: "Representative LeetCode problems",
-      body: `| Problem | Technique |
-| --- | --- |
-| 455 Assign Cookies | sorted two-pointer |
-| 435 Non-overlapping Intervals | sort by end |
-| 56 Merge Intervals | sort by start |
-| 452 Burst Balloons (arrows) | sort by end |
-| 253 Meeting Rooms II | sweep / min-heap |
-| 621 Task Scheduler | heap / math |
-| 767 Reorganize String | max-heap |
-| 55 / 45 Jump Game I/II | farthest reach |
-| 134 Gas Station | running deficit |
-| 406 Queue Reconstruction by Height | sort + insert |
-| 881 Boats to Save People | two pointers |
-
-**Harder & newer problems**
-
-| Problem | Technique |
-| --- | --- |
-| 2410 Maximum Matching of Players With Trainers | sort + two pointers |
-| 2790 Maximum Number of Groups With Increasing Length | greedy |
-| 2171 Removing Minimum Number of Magic Beans | sort + prefix greedy |
-| 1921 Eliminate Maximum Number of Monsters | sort by arrival time |
-| 871 Minimum Number of Refueling Stops | regret heap |
-| 630 Course Schedule III | take-then-drop heap |
-| 135 Candy | two-pass greedy |
-
-**Newer medium problems (rating ≥ 1800)**
-
-| Problem | Rating | Technique |
+      body: `| ID | Problem | Technique |
 | --- | --- | --- |
-| 3785 Minimum Swaps to Avoid Forbidden Values | 2052 | greedy |
-| 3720 Lexicographically Smallest Permutation Greater Than Target | 1958 | greedy construction |
-| 3635 Earliest Finish Time for Land and Water Rides II | 1870 | greedy + sort |
-| 3752 Lexicographically Smallest Negated Permutation That Sums to Target | 1827 | greedy construction |
-| 3588 Find Maximum Area of a Triangle | 1819 | greedy extremes |`,
+| 455 | [Assign Cookies](https://leetcode.cn/problems/assign-cookies) | sorted two-pointer |
+| 435 | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) | sort by end |
+| 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | sort by start |
+| 452 | [Burst Balloons (arrows)](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons) | sort by end |
+| 253 | [Meeting Rooms II](https://leetcode.cn/problems/meeting-rooms-ii) | sweep / min-heap |
+| 621 | [Task Scheduler](https://leetcode.cn/problems/task-scheduler) | heap / math |
+| 767 | [Reorganize String](https://leetcode.cn/problems/reorganize-string) | max-heap |
+| 55 / 45 | [Jump Game I/II](https://leetcode.cn/problems/jump-game) | farthest reach |
+| 134 | [Gas Station](https://leetcode.cn/problems/gas-station) | running deficit |
+| 406 | [Queue Reconstruction by Height](https://leetcode.cn/problems/queue-reconstruction-by-height) | sort + insert |
+| 881 | [Boats to Save People](https://leetcode.cn/problems/boats-to-save-people) | two pointers |
+
+**Advanced practice problems**
+
+| ID | Problem | Technique |
+| --- | --- | --- |
+| 2410 | [Maximum Matching of Players With Trainers](https://leetcode.cn/problems/maximum-matching-of-players-with-trainers) | sort + two pointers |
+| 2790 | [Maximum Number of Groups With Increasing Length](https://leetcode.cn/problems/maximum-number-of-groups-with-increasing-length) | greedy |
+| 2171 | [Removing Minimum Number of Magic Beans](https://leetcode.cn/problems/removing-minimum-number-of-magic-beans) | sort + prefix greedy |
+| 1921 | [Eliminate Maximum Number of Monsters](https://leetcode.cn/problems/eliminate-maximum-number-of-monsters) | sort by arrival time |
+| 871 | [Minimum Number of Refueling Stops](https://leetcode.cn/problems/minimum-number-of-refueling-stops) | regret heap |
+| 630 | [Course Schedule III](https://leetcode.cn/problems/course-schedule-iii) | take-then-drop heap |
+| 135 | [Candy](https://leetcode.cn/problems/candy) | two-pass greedy |
+
+**Recent medium problems (rating ≥ 1800)**
+
+| ID | Problem | Rating | Technique |
+| --- | --- | --- | --- |
+| 3785 | [Minimum Swaps to Avoid Forbidden Values](https://leetcode.cn/problems/minimum-swaps-to-avoid-forbidden-values) | 2052 | greedy |
+| 3720 | [Lexicographically Smallest Permutation Greater Than Target](https://leetcode.cn/problems/lexicographically-smallest-permutation-greater-than-target) | 1958 | greedy construction |
+| 3635 | [Earliest Finish Time for Land and Water Rides II](https://leetcode.cn/problems/earliest-finish-time-for-land-and-water-rides-ii) | 1870 | greedy + sort |
+| 3752 | [Lexicographically Smallest Negated Permutation That Sums to Target](https://leetcode.cn/problems/lexicographically-smallest-negated-permutation-that-sums-to-target) | 1827 | greedy construction |
+| 3588 | [Find Maximum Area of a Triangle](https://leetcode.cn/problems/find-maximum-area-of-a-triangle) | 1819 | greedy extremes |`,
     },
     {
       id: "pitfalls",
