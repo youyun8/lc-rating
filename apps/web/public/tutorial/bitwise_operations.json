@@ -7,7 +7,6 @@
     {
       "id": 2,
       "title": "1. 基礎題",
-      "summary": "![位運算題單 位運算題目 位運算基礎 靈茶山艾府](https://pic.leetcode.cn/1720229787-pgKZVb-and-005.png)\n\n推薦先閱讀：[從集合論到位運算，常見位運算技巧分類總結！](https://leetcode.cn/circle/discuss/CaOJ45/)\n\n---\n\n基礎位運算操作與性質\n\n**常用操作**：\n- 判斷奇偶：`n & 1`\n- 取第 i 位：`(n >> i) & 1`\n- 設第 i 位為 1：`n | (1 << i)`\n- 設第 i 位為 0：`n & ~(1 << i)`\n\n```cpp\n// 位運算基礎模板\n// 計算二進位中 1 的個數\nint popcount(int n) {\n  int cnt = 0;\n  while (n) {\n    n &= n - 1;  // 清除最低位的 1\n    cnt++;\n  }\n  return cnt;\n}\n// 也可使用 __builtin_popcount(n)\n```",
       "children": [
         {
           "id": 16,
@@ -38,7 +37,6 @@
     {
       "id": 6,
       "title": "3. 與或（AND/OR）的性質",
-      "summary": "AND 的數越多，結果越小。\n\nOR 的數越多，結果越大。\n\n**AND/OR 單調性**：\n- `a & b <= a`, `a | b >= a`\n- 持續 AND 操作只會讓結果變小且 1 的個數減少\n- 持續 OR 操作只會讓結果變大且 1 的個數增加\n\n**常用技巧**：\n- 判斷子陣列 AND/OR 相關問題時，可利用單調性進行雙指標或列舉\n- 對於區間 AND/OR 查詢，可利用 ST 表（稀疏表）預處理，因為這兩種運算滿足結合律和單調性\n\n**性質詳解**：\n- AND：某位為 0 則永遠為 0，只有全部為 1 才為 1\n- OR：某位為 1 則永遠為 1，只有全部為 0 才為 0\n- 利用這些性質可以設計貪心策略或進行位分析\n\n```cpp\n// AND/OR 性質應用模板\n// AND 的數越多，結果越小；OR 的數越多，結果越大\n// 利用單調性，常與雙指標/滑動視窗結合\nint and_all = nums[0];\nfor (int i = 1; i < n; i++) {\n  and_all &= nums[i];  // 持續 AND 只會讓位元從 1 變 0\n}\n// 列舉子陣列的 AND/OR 值：利用「最多 O(log U) 個不同值」的性質\n```",
       "children": [
         {
           "id": 17,
@@ -63,7 +61,6 @@
     {
       "id": 9,
       "title": "4. 拆位 / 貢獻法",
-      "summary": "\n\n**位元拆分 (Bit-by-bit)**：\n- 將每個數拆成 30 或 62 個位元，獨立計算每一位的貢獻\n- 常用於解決 XOR/AND/OR 相關的加總問題\n\n**C++ 模板**：\n\n```cpp\n// 逐位計算每個 bit 的貢獻\nfor (int i = 0; i < 30; ++i) {\n  int count1 = 0;\n  for (int x : nums) {\n    if ((x >> i) & 1) {\n      count1++;\n    }\n  }\n  // 根據 count1 (1的個數) 和 n - count1 (0的個數) 計算貢獻\n  long long combinations = (long long)count1 * (n - count1);\n  ans += combinations * (1LL << i);\n}\n```",
       "children": [
         {
           "id": 18,
