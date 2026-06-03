@@ -179,6 +179,18 @@ function complexityToKatex(text: string) {
       // glitch class as the `sqrt`/`log` cases above).
       .replace(/\bmin\b/g, "\\min")
       .replace(/\bmax\b/g, "\\max")
+      // Brace multi-letter snake_case runs so authors don't have to. Without
+      // this, `count_cost` renders as `count` with a stray single-char
+      // subscript (count_c \u00b7 ost); a bare `number_of_ones` would even trip
+      // KaTeX's "double subscript" error. We turn the first underscore into a
+      // real subscript covering the whole trailing run and escape any further
+      // underscores inside it. Single-letter subscripts (`a_i`, `n_2`) already
+      // render correctly and are intentionally left alone.
+      .replace(
+        /([A-Za-z][A-Za-z0-9]*)_([A-Za-z0-9]{2,}(?:_[A-Za-z0-9]+)*)/g,
+        (_m, base: string, run: string) =>
+          `${base}_{${run.replace(/_/g, "\\_")}}`,
+      )
       .replace(/[\u0370-\u03ff]/g, (g) => GREEK_TO_LATEX[g] ?? g)
       .replace(/\s*\*\s*/g, " \\cdot ");
     return `$${latex}$`;
