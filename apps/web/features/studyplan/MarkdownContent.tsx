@@ -174,6 +174,11 @@ function complexityToKatex(text: string) {
       .replace(/\bsqrt\s*\{\s*([^{}]*?)\s*\}/g, "\\sqrt{$1}")
       .replace(/\bsqrt\s+([A-Za-z0-9]+)/g, "\\sqrt{$1}")
       .replace(/\blog\b/g, "\\log")
+      // Map bare min/max operators to their LaTeX commands so KaTeX renders
+      // them upright instead of as the italic letters m\u00b7i\u00b7n / m\u00b7a\u00b7x (the same
+      // glitch class as the `sqrt`/`log` cases above).
+      .replace(/\bmin\b/g, "\\min")
+      .replace(/\bmax\b/g, "\\max")
       .replace(/[\u0370-\u03ff]/g, (g) => GREEK_TO_LATEX[g] ?? g)
       .replace(/\s*\*\s*/g, " \\cdot ");
     return `$${latex}$`;
