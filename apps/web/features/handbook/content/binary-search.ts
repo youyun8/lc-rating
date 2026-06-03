@@ -333,7 +333,7 @@ double findMaxAverage(vector<int>& a, int k) {
 | --- | --- | --- |
 | Value / bound search | \`O(log n)\` | comparisons only |
 | Binary search on answer | \`O(log(hi - lo) * C)\` | \`C\` = cost of one \`check\` |
-| Kth-smallest by counting | \`O(log(range) * count_cost)\` | counting often \`O(n)\` |
+| Kth-smallest by counting | \`O(log(range) * C)\` | \`C\` = cost to count \`<= x\`, often \`O(n)\` |
 | Floating search | \`O(iterations * C)\` | fixed ~60–100 iterations |
 
 The whole game is making \`check\` cheap and *provably monotone*.`,

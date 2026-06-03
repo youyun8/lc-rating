@@ -120,7 +120,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "二分答案 + greedy check",
     ],
     pitfalls: ["缺乏單調性時不可二分答案。", "check 函式的貪心策略亦需證明。"],
-    complexity: "`O(log V * check_cost)`。",
+    complexity: "`O(log V * checkCost)`。",
     code: "```cpp\nclass Solution {\n public:\n  int shipWithinDays(vector<int>& weights, int days) {\n    int left = *max_element(weights.begin(), weights.end());\n    int right = accumulate(weights.begin(), weights.end(), 0);\n\n    auto canShip = [&weights, days](int capacity) {\n      int used_days = 1;\n      int current = 0;\n      for (int weight : weights) {\n        if (current + weight > capacity) {\n          used_days++;\n          current = 0;\n        }\n        current += weight;\n      }\n      return used_days <= days;\n    };\n\n    while (left < right) {\n      int mid = left + (right - left) / 2;\n      if (canShip(mid)) {\n        right = mid;\n      } else {\n        left = mid + 1;\n      }\n    }\n    return left;\n  }\n};\n```",
   },
   {
@@ -289,7 +289,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "移動成本非等權時不應使用普通 BFS。",
       "狀態數上界須先估算，避免 mask 維度過大。",
     ],
-    complexity: "狀態數通常為 `O(rows * cols * extra_states)`。",
+    complexity: "狀態數通常為 `O(rows * cols * extraStates)`。",
     code: "```cpp\nclass Solution {\n public:\n  int shortestPath(vector<vector<int>>& grid, int k) {\n    int rows = grid.size();\n    int cols = grid[0].size();\n    const int kDirs[5] = {1, 0, -1, 0, 1};\n    vector<vector<int>> best(rows, vector<int>(cols, -1));\n    queue<array<int, 4>> q;\n\n    best[0][0] = k;\n    q.push({0, 0, k, 0});\n    while (!q.empty()) {\n      auto [row, col, remaining, dist] = q.front();\n      q.pop();\n      if (row == rows - 1 && col == cols - 1) {\n        return dist;\n      }\n      for (int dir = 0; dir < 4; ++dir) {\n        int next_row = row + kDirs[dir];\n        int next_col = col + kDirs[dir + 1];\n        if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) {\n          continue;\n        }\n        int next_remaining = remaining - grid[next_row][next_col];\n        if (next_remaining < 0 || next_remaining <= best[next_row][next_col]) {\n          continue;\n        }\n        best[next_row][next_col] = next_remaining;\n        q.push({next_row, next_col, next_remaining, dist + 1});\n      }\n    }\n    return -1;\n  }\n};\n```",
   },
   {
@@ -808,7 +808,7 @@ export const lectureTopicProfiles: LectureTopicProfile[] = [
       "狀態含鑰匙、剩餘資源或時間時，visited 亦須涵蓋這些維度。",
       "大圖遞迴 DFS 可能爆棧。",
     ],
-    complexity: "顯式圖 `O(V + E)`；網格 `O(rows * cols * state_count)`。",
+    complexity: "顯式圖 `O(V + E)`；網格 `O(rows * cols * stateCount)`。",
     code: "```cpp\nclass Solution {\n public:\n  vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {\n    int rows = mat.size();\n    int cols = mat[0].size();\n    const int kDirs[5] = {1, 0, -1, 0, 1};\n    vector<vector<int>> dist(rows, vector<int>(cols, -1));\n    queue<pair<int, int>> q;\n\n    for (int row = 0; row < rows; ++row) {\n      for (int col = 0; col < cols; ++col) {\n        if (mat[row][col] == 0) {\n          dist[row][col] = 0;\n          q.push({row, col});\n        }\n      }\n    }\n\n    while (!q.empty()) {\n      auto [row, col] = q.front();\n      q.pop();\n      for (int dir = 0; dir < 4; ++dir) {\n        int next_row = row + kDirs[dir];\n        int next_col = col + kDirs[dir + 1];\n        if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) {\n          continue;\n        }\n        if (dist[next_row][next_col] != -1) {\n          continue;\n        }\n        dist[next_row][next_col] = dist[row][col] + 1;\n        q.push({next_row, next_col});\n      }\n    }\n    return dist;\n  }\n};\n```",
   },
   {
@@ -2554,7 +2554,7 @@ export const exampleLectureOverrides: NonNullable<
       "若使用有號整數右移，須特別留意負數情況；本題以無號整數較清楚。",
       "`n & (n - 1)` 清的是最低位 1，而非最低位 bit。",
     ],
-    complexity: "時間 `O(number_of_ones)`，空間 `O(1)`。",
+    complexity: "時間 `O(numberOfOnes)`，空間 `O(1)`。",
     code: "```cpp\nclass Solution {\n public:\n  int hammingWeight(uint32_t n) {\n    int answer = 0;\n    while (n != 0) {\n      n &= n - 1;\n      answer++;\n    }\n    return answer;\n  }\n};\n```",
   },
   "prime-number-of-set-bits-in-binary-representation": {
