@@ -1087,90 +1087,97 @@
       "id": 9,
       "title": "7. 交換論證法",
       "isLeaf": false,
-      "problems": [
-        {
-          "id": "179",
-          "title": "最大數",
-          "slug": "largest-number",
-          "src": "https://leetcode.cn/problems/largest-number/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1877",
-          "title": "陣列中最大數對和的最小值",
-          "slug": "minimize-maximum-pair-sum-in-array",
-          "src": "https://leetcode.cn/problems/minimize-maximum-pair-sum-in-array/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2895",
-          "title": "最小處理時間",
-          "slug": "minimum-processing-time",
-          "src": "https://leetcode.cn/problems/minimum-processing-time/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3309",
-          "title": "連線二進位製表示可形成的最大數值",
-          "slug": "maximum-possible-number-by-binary-concatenation",
-          "src": "https://leetcode.cn/problems/maximum-possible-number-by-binary-concatenation/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3457",
-          "title": "喫披薩",
-          "slug": "eat-pizzas",
-          "src": "https://leetcode.cn/problems/eat-pizzas/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1665",
-          "title": "完成所有任務的最少初始能量",
-          "slug": "minimum-initial-energy-to-finish-tasks",
-          "src": "https://leetcode.cn/problems/minimum-initial-energy-to-finish-tasks/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3273",
-          "title": "對 Bob 造成的最少傷害",
-          "slug": "minimum-amount-of-damage-dealt-to-bob",
-          "src": "https://leetcode.cn/problems/minimum-amount-of-damage-dealt-to-bob/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2136",
-          "title": "全部開花的最早一天",
-          "slug": "earliest-possible-day-of-full-bloom",
-          "src": "https://leetcode.cn/problems/earliest-possible-day-of-full-bloom/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2561",
-          "title": "重排水果",
-          "slug": "rearranging-fruits",
-          "src": "https://leetcode.cn/problems/rearranging-fruits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        }
-      ],
+      "problems": [],
       "children": [
+        {
+          "id": 43,
+          "title": "7.1 交換論證法",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "179",
+              "title": "最大數",
+              "slug": "largest-number",
+              "src": "https://leetcode.cn/problems/largest-number/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1877",
+              "title": "陣列中最大數對和的最小值",
+              "slug": "minimize-maximum-pair-sum-in-array",
+              "src": "https://leetcode.cn/problems/minimize-maximum-pair-sum-in-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2895",
+              "title": "最小處理時間",
+              "slug": "minimum-processing-time",
+              "src": "https://leetcode.cn/problems/minimum-processing-time/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3309",
+              "title": "連線二進位製表示可形成的最大數值",
+              "slug": "maximum-possible-number-by-binary-concatenation",
+              "src": "https://leetcode.cn/problems/maximum-possible-number-by-binary-concatenation/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3457",
+              "title": "喫披薩",
+              "slug": "eat-pizzas",
+              "src": "https://leetcode.cn/problems/eat-pizzas/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1665",
+              "title": "完成所有任務的最少初始能量",
+              "slug": "minimum-initial-energy-to-finish-tasks",
+              "src": "https://leetcode.cn/problems/minimum-initial-energy-to-finish-tasks/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3273",
+              "title": "對 Bob 造成的最少傷害",
+              "slug": "minimum-amount-of-damage-dealt-to-bob",
+              "src": "https://leetcode.cn/problems/minimum-amount-of-damage-dealt-to-bob/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2136",
+              "title": "全部開花的最早一天",
+              "slug": "earliest-possible-day-of-full-bloom",
+              "src": "https://leetcode.cn/problems/earliest-possible-day-of-full-bloom/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2561",
+              "title": "重排水果",
+              "slug": "rearranging-fruits",
+              "src": "https://leetcode.cn/problems/rearranging-fruits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        },
         {
           "id": 11,
           "title": "7.2 相似題目",
@@ -1768,300 +1775,307 @@
       "id": 21,
       "title": "16. 字典序最小/最大",
       "isLeaf": false,
-      "problems": [
-        {
-          "id": "555",
-          "title": "分割連線字串",
-          "slug": "split-concatenated-strings",
-          "src": "https://leetcode.cn/problems/split-concatenated-strings/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "564",
-          "title": "尋找最近的迴文數",
-          "slug": "find-the-closest-palindrome",
-          "src": "https://leetcode.cn/problems/find-the-closest-palindrome/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "670",
-          "title": "最大交換",
-          "slug": "maximum-swap",
-          "src": "https://leetcode.cn/problems/maximum-swap/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "738",
-          "title": "單調遞增的數字",
-          "slug": "monotone-increasing-digits",
-          "src": "https://leetcode.cn/problems/monotone-increasing-digits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1053",
-          "title": "交換一次的先前排列",
-          "slug": "previous-permutation-with-one-swap",
-          "src": "https://leetcode.cn/problems/previous-permutation-with-one-swap/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1202",
-          "title": "交換字串中的元素",
-          "slug": "smallest-string-with-swaps",
-          "src": "https://leetcode.cn/problems/smallest-string-with-swaps/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1323",
-          "title": "6 和 9 組成的最大數字",
-          "slug": "maximum-69-number",
-          "src": "https://leetcode.cn/problems/maximum-69-number/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1328",
-          "title": "破壞迴文串",
-          "slug": "break-a-palindrome",
-          "src": "https://leetcode.cn/problems/break-a-palindrome/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1363",
-          "title": "形成三的最大倍數",
-          "slug": "largest-multiple-of-three",
-          "src": "https://leetcode.cn/problems/largest-multiple-of-three/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1432",
-          "title": "改變一個整數能得到的最大差值",
-          "slug": "max-difference-you-can-get-from-changing-an-integer",
-          "src": "https://leetcode.cn/problems/max-difference-you-can-get-from-changing-an-integer/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1505",
-          "title": "最多 K 次交換相鄰數位後得到的最小整數",
-          "slug": "minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits",
-          "src": "https://leetcode.cn/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1663",
-          "title": "具有給定數值的最小字串",
-          "slug": "smallest-string-with-a-given-numeric-value",
-          "src": "https://leetcode.cn/problems/smallest-string-with-a-given-numeric-value/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1754",
-          "title": "構造字典序最大的合併字串",
-          "slug": "largest-merge-of-two-strings",
-          "src": "https://leetcode.cn/problems/largest-merge-of-two-strings/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1881",
-          "title": "插入後的最大值",
-          "slug": "maximum-value-after-insertion",
-          "src": "https://leetcode.cn/problems/maximum-value-after-insertion/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1946",
-          "title": "子字串突變後可能得到的最大整數",
-          "slug": "largest-number-after-mutating-substring",
-          "src": "https://leetcode.cn/problems/largest-number-after-mutating-substring/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2182",
-          "title": "構造限制重複的字串",
-          "slug": "construct-string-with-repeat-limit",
-          "src": "https://leetcode.cn/problems/construct-string-with-repeat-limit/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2259",
-          "title": "移除指定數字得到的最大結果",
-          "slug": "remove-digit-from-number-to-maximize-result",
-          "src": "https://leetcode.cn/problems/remove-digit-from-number-to-maximize-result/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2375",
-          "title": "根據模式串構造最小數字",
-          "slug": "construct-smallest-number-from-di-string",
-          "src": "https://leetcode.cn/problems/construct-smallest-number-from-di-string/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2434",
-          "title": "使用機器人列印字典序最小的字串",
-          "slug": "using-a-robot-to-print-the-lexicographically-smallest-string",
-          "src": "https://leetcode.cn/problems/using-a-robot-to-print-the-lexicographically-smallest-string/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2566",
-          "title": "替換一個數字後的最大差值",
-          "slug": "maximum-difference-by-remapping-a-digit",
-          "src": "https://leetcode.cn/problems/maximum-difference-by-remapping-a-digit/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2697",
-          "title": "字典序最小回文串",
-          "slug": "lexicographically-smallest-palindrome",
-          "src": "https://leetcode.cn/problems/lexicographically-smallest-palindrome/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2734",
-          "title": "執行子串操作後的字典序最小字串",
-          "slug": "lexicographically-smallest-string-after-substring-operation",
-          "src": "https://leetcode.cn/problems/lexicographically-smallest-string-after-substring-operation/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2948",
-          "title": "交換得到字典序最小的陣列",
-          "slug": "make-lexicographically-smallest-array-by-swapping-elements",
-          "src": "https://leetcode.cn/problems/make-lexicographically-smallest-array-by-swapping-elements/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3088",
-          "title": "使字串反迴文",
-          "slug": "make-string-anti-palindrome",
-          "src": "https://leetcode.cn/problems/make-string-anti-palindrome/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3106",
-          "title": "滿足距離約束且字典序最小的字串",
-          "slug": "lexicographically-smallest-string-after-operations-with-constraint",
-          "src": "https://leetcode.cn/problems/lexicographically-smallest-string-after-operations-with-constraint/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3170",
-          "title": "刪除星號以後字典序最小的字串",
-          "slug": "lexicographically-minimum-string-after-removing-stars",
-          "src": "https://leetcode.cn/problems/lexicographically-minimum-string-after-removing-stars/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3216",
-          "title": "交換後字典序最小的字串",
-          "slug": "lexicographically-smallest-string-after-a-swap",
-          "src": "https://leetcode.cn/problems/lexicographically-smallest-string-after-a-swap/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3403",
-          "title": "從盒子中找出字典序最大的字串 I",
-          "slug": "find-the-lexicographically-largest-string-from-the-box-i",
-          "src": "https://leetcode.cn/problems/find-the-lexicographically-largest-string-from-the-box-i/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3474",
-          "title": "字典序最小的生成字串",
-          "slug": "lexicographically-smallest-generated-string",
-          "src": "https://leetcode.cn/problems/lexicographically-smallest-generated-string/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3517",
-          "title": "最小回文排列 I",
-          "slug": "smallest-palindromic-rearrangement-i",
-          "src": "https://leetcode.cn/problems/smallest-palindromic-rearrangement-i/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3723",
-          "title": "數位平方和的最大值",
-          "slug": "maximize-sum-of-squares-of-digits",
-          "src": "https://leetcode.cn/problems/maximize-sum-of-squares-of-digits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3752",
-          "title": "字典序最小和為目標值且絕對值是排列的陣列",
-          "slug": "lexicographically-smallest-negated-permutation-that-sums-to-target",
-          "src": "https://leetcode.cn/problems/lexicographically-smallest-negated-permutation-that-sums-to-target/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        }
-      ],
+      "problems": [],
       "children": [
         {
+          "id": 44,
+          "title": "16.1 字典序最小/最大",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "555",
+              "title": "分割連線字串",
+              "slug": "split-concatenated-strings",
+              "src": "https://leetcode.cn/problems/split-concatenated-strings/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "564",
+              "title": "尋找最近的迴文數",
+              "slug": "find-the-closest-palindrome",
+              "src": "https://leetcode.cn/problems/find-the-closest-palindrome/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "670",
+              "title": "最大交換",
+              "slug": "maximum-swap",
+              "src": "https://leetcode.cn/problems/maximum-swap/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "738",
+              "title": "單調遞增的數字",
+              "slug": "monotone-increasing-digits",
+              "src": "https://leetcode.cn/problems/monotone-increasing-digits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1053",
+              "title": "交換一次的先前排列",
+              "slug": "previous-permutation-with-one-swap",
+              "src": "https://leetcode.cn/problems/previous-permutation-with-one-swap/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1202",
+              "title": "交換字串中的元素",
+              "slug": "smallest-string-with-swaps",
+              "src": "https://leetcode.cn/problems/smallest-string-with-swaps/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1323",
+              "title": "6 和 9 組成的最大數字",
+              "slug": "maximum-69-number",
+              "src": "https://leetcode.cn/problems/maximum-69-number/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1328",
+              "title": "破壞迴文串",
+              "slug": "break-a-palindrome",
+              "src": "https://leetcode.cn/problems/break-a-palindrome/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1363",
+              "title": "形成三的最大倍數",
+              "slug": "largest-multiple-of-three",
+              "src": "https://leetcode.cn/problems/largest-multiple-of-three/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1432",
+              "title": "改變一個整數能得到的最大差值",
+              "slug": "max-difference-you-can-get-from-changing-an-integer",
+              "src": "https://leetcode.cn/problems/max-difference-you-can-get-from-changing-an-integer/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1505",
+              "title": "最多 K 次交換相鄰數位後得到的最小整數",
+              "slug": "minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits",
+              "src": "https://leetcode.cn/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1663",
+              "title": "具有給定數值的最小字串",
+              "slug": "smallest-string-with-a-given-numeric-value",
+              "src": "https://leetcode.cn/problems/smallest-string-with-a-given-numeric-value/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1754",
+              "title": "構造字典序最大的合併字串",
+              "slug": "largest-merge-of-two-strings",
+              "src": "https://leetcode.cn/problems/largest-merge-of-two-strings/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1881",
+              "title": "插入後的最大值",
+              "slug": "maximum-value-after-insertion",
+              "src": "https://leetcode.cn/problems/maximum-value-after-insertion/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1946",
+              "title": "子字串突變後可能得到的最大整數",
+              "slug": "largest-number-after-mutating-substring",
+              "src": "https://leetcode.cn/problems/largest-number-after-mutating-substring/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2182",
+              "title": "構造限制重複的字串",
+              "slug": "construct-string-with-repeat-limit",
+              "src": "https://leetcode.cn/problems/construct-string-with-repeat-limit/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2259",
+              "title": "移除指定數字得到的最大結果",
+              "slug": "remove-digit-from-number-to-maximize-result",
+              "src": "https://leetcode.cn/problems/remove-digit-from-number-to-maximize-result/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2375",
+              "title": "根據模式串構造最小數字",
+              "slug": "construct-smallest-number-from-di-string",
+              "src": "https://leetcode.cn/problems/construct-smallest-number-from-di-string/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2434",
+              "title": "使用機器人列印字典序最小的字串",
+              "slug": "using-a-robot-to-print-the-lexicographically-smallest-string",
+              "src": "https://leetcode.cn/problems/using-a-robot-to-print-the-lexicographically-smallest-string/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2566",
+              "title": "替換一個數字後的最大差值",
+              "slug": "maximum-difference-by-remapping-a-digit",
+              "src": "https://leetcode.cn/problems/maximum-difference-by-remapping-a-digit/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2697",
+              "title": "字典序最小回文串",
+              "slug": "lexicographically-smallest-palindrome",
+              "src": "https://leetcode.cn/problems/lexicographically-smallest-palindrome/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2734",
+              "title": "執行子串操作後的字典序最小字串",
+              "slug": "lexicographically-smallest-string-after-substring-operation",
+              "src": "https://leetcode.cn/problems/lexicographically-smallest-string-after-substring-operation/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2948",
+              "title": "交換得到字典序最小的陣列",
+              "slug": "make-lexicographically-smallest-array-by-swapping-elements",
+              "src": "https://leetcode.cn/problems/make-lexicographically-smallest-array-by-swapping-elements/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3088",
+              "title": "使字串反迴文",
+              "slug": "make-string-anti-palindrome",
+              "src": "https://leetcode.cn/problems/make-string-anti-palindrome/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "3106",
+              "title": "滿足距離約束且字典序最小的字串",
+              "slug": "lexicographically-smallest-string-after-operations-with-constraint",
+              "src": "https://leetcode.cn/problems/lexicographically-smallest-string-after-operations-with-constraint/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3170",
+              "title": "刪除星號以後字典序最小的字串",
+              "slug": "lexicographically-minimum-string-after-removing-stars",
+              "src": "https://leetcode.cn/problems/lexicographically-minimum-string-after-removing-stars/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3216",
+              "title": "交換後字典序最小的字串",
+              "slug": "lexicographically-smallest-string-after-a-swap",
+              "src": "https://leetcode.cn/problems/lexicographically-smallest-string-after-a-swap/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3403",
+              "title": "從盒子中找出字典序最大的字串 I",
+              "slug": "find-the-lexicographically-largest-string-from-the-box-i",
+              "src": "https://leetcode.cn/problems/find-the-lexicographically-largest-string-from-the-box-i/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3474",
+              "title": "字典序最小的生成字串",
+              "slug": "lexicographically-smallest-generated-string",
+              "src": "https://leetcode.cn/problems/lexicographically-smallest-generated-string/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3517",
+              "title": "最小回文排列 I",
+              "slug": "smallest-palindromic-rearrangement-i",
+              "src": "https://leetcode.cn/problems/smallest-palindromic-rearrangement-i/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3723",
+              "title": "數位平方和的最大值",
+              "slug": "maximize-sum-of-squares-of-digits",
+              "src": "https://leetcode.cn/problems/maximize-sum-of-squares-of-digits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3752",
+              "title": "字典序最小和為目標值且絕對值是排列的陣列",
+              "slug": "lexicographically-smallest-negated-permutation-that-sums-to-target",
+              "src": "https://leetcode.cn/problems/lexicographically-smallest-negated-permutation-that-sums-to-target/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        },
+        {
           "id": 22,
-          "title": "16.1 倒序貪心",
+          "title": "16.2 倒序貪心",
           "isLeaf": true,
           "problems": [
             {
@@ -3480,210 +3494,217 @@
       "id": 35,
       "title": "28. 逆向思維",
       "isLeaf": false,
-      "problems": [
-        {
-          "id": "417",
-          "title": "太平洋大西洋水流問題",
-          "slug": "pacific-atlantic-water-flow",
-          "src": "https://leetcode.cn/problems/pacific-atlantic-water-flow/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "554",
-          "title": "磚牆",
-          "slug": "brick-wall",
-          "src": "https://leetcode.cn/problems/brick-wall/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "683",
-          "title": "K 個關閉的燈泡",
-          "slug": "k-empty-slots",
-          "src": "https://leetcode.cn/problems/k-empty-slots/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "780",
-          "title": "到達終點",
-          "slug": "reaching-points",
-          "src": "https://leetcode.cn/problems/reaching-points/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "782",
-          "title": "變為棋盤",
-          "slug": "transform-to-chessboard",
-          "src": "https://leetcode.cn/problems/transform-to-chessboard/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "869",
-          "title": "重新排序得到 2 的冪",
-          "slug": "reordered-power-of-2",
-          "src": "https://leetcode.cn/problems/reordered-power-of-2/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "936",
-          "title": "戳印序列",
-          "slug": "stamping-the-sequence",
-          "src": "https://leetcode.cn/problems/stamping-the-sequence/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "991",
-          "title": "壞了的計算器",
-          "slug": "broken-calculator",
-          "src": "https://leetcode.cn/problems/broken-calculator/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1354",
-          "title": "多次求和構造目標陣列",
-          "slug": "construct-target-array-with-multiple-sums",
-          "src": "https://leetcode.cn/problems/construct-target-array-with-multiple-sums/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1558",
-          "title": "得到目標陣列的最少函式呼叫次數",
-          "slug": "minimum-numbers-of-function-calls-to-make-target-array",
-          "src": "https://leetcode.cn/problems/minimum-numbers-of-function-calls-to-make-target-array/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1611",
-          "title": "使整數變為 0 的最少操作次數",
-          "slug": "minimum-one-bit-operations-to-make-integers-zero",
-          "src": "https://leetcode.cn/problems/minimum-one-bit-operations-to-make-integers-zero/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2139",
-          "title": "得到目標值的最少行動次數",
-          "slug": "minimum-moves-to-reach-target-score",
-          "src": "https://leetcode.cn/problems/minimum-moves-to-reach-target-score/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2227",
-          "title": "加密解密字串",
-          "slug": "encrypt-and-decrypt-strings",
-          "src": "https://leetcode.cn/problems/encrypt-and-decrypt-strings/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2543",
-          "title": "判斷一個點是否可以到達",
-          "slug": "check-if-point-is-reachable",
-          "src": "https://leetcode.cn/problems/check-if-point-is-reachable/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3141",
-          "title": "最大漢明距離",
-          "slug": "maximum-hamming-distances",
-          "src": "https://leetcode.cn/problems/maximum-hamming-distances/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3147",
-          "title": "從魔法師身上吸取的最大能量",
-          "slug": "taking-maximum-energy-from-the-mystic-dungeon",
-          "src": "https://leetcode.cn/problems/taking-maximum-energy-from-the-mystic-dungeon/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3307",
-          "title": "找出第 K 個字元 II",
-          "slug": "find-the-k-th-character-in-string-game-ii",
-          "src": "https://leetcode.cn/problems/find-the-k-th-character-in-string-game-ii/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3396",
-          "title": "使陣列元素互不相同所需的最少操作次數",
-          "slug": "minimum-number-of-operations-to-make-elements-in-array-distinct",
-          "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-make-elements-in-array-distinct/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3419",
-          "title": "圖的最大邊權的最小值",
-          "slug": "minimize-the-maximum-edge-weight-of-graph",
-          "src": "https://leetcode.cn/problems/minimize-the-maximum-edge-weight-of-graph/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3609",
-          "title": "到達目標點的最小移動次數",
-          "slug": "minimum-moves-to-reach-target-in-grid",
-          "src": "https://leetcode.cn/problems/minimum-moves-to-reach-target-in-grid/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3614",
-          "title": "用特殊操作處理字串 II",
-          "slug": "process-string-with-special-operations-ii",
-          "src": "https://leetcode.cn/problems/process-string-with-special-operations-ii/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3779",
-          "title": "得到互不相同元素的最少操作次數",
-          "slug": "minimum-number-of-operations-to-have-distinct-elements",
-          "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-have-distinct-elements/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        }
-      ],
+      "problems": [],
       "children": [
         {
+          "id": 45,
+          "title": "28.1 逆向思維",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "417",
+              "title": "太平洋大西洋水流問題",
+              "slug": "pacific-atlantic-water-flow",
+              "src": "https://leetcode.cn/problems/pacific-atlantic-water-flow/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "554",
+              "title": "磚牆",
+              "slug": "brick-wall",
+              "src": "https://leetcode.cn/problems/brick-wall/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "683",
+              "title": "K 個關閉的燈泡",
+              "slug": "k-empty-slots",
+              "src": "https://leetcode.cn/problems/k-empty-slots/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "780",
+              "title": "到達終點",
+              "slug": "reaching-points",
+              "src": "https://leetcode.cn/problems/reaching-points/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "782",
+              "title": "變為棋盤",
+              "slug": "transform-to-chessboard",
+              "src": "https://leetcode.cn/problems/transform-to-chessboard/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "869",
+              "title": "重新排序得到 2 的冪",
+              "slug": "reordered-power-of-2",
+              "src": "https://leetcode.cn/problems/reordered-power-of-2/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "936",
+              "title": "戳印序列",
+              "slug": "stamping-the-sequence",
+              "src": "https://leetcode.cn/problems/stamping-the-sequence/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "991",
+              "title": "壞了的計算器",
+              "slug": "broken-calculator",
+              "src": "https://leetcode.cn/problems/broken-calculator/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1354",
+              "title": "多次求和構造目標陣列",
+              "slug": "construct-target-array-with-multiple-sums",
+              "src": "https://leetcode.cn/problems/construct-target-array-with-multiple-sums/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1558",
+              "title": "得到目標陣列的最少函式呼叫次數",
+              "slug": "minimum-numbers-of-function-calls-to-make-target-array",
+              "src": "https://leetcode.cn/problems/minimum-numbers-of-function-calls-to-make-target-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1611",
+              "title": "使整數變為 0 的最少操作次數",
+              "slug": "minimum-one-bit-operations-to-make-integers-zero",
+              "src": "https://leetcode.cn/problems/minimum-one-bit-operations-to-make-integers-zero/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2139",
+              "title": "得到目標值的最少行動次數",
+              "slug": "minimum-moves-to-reach-target-score",
+              "src": "https://leetcode.cn/problems/minimum-moves-to-reach-target-score/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2227",
+              "title": "加密解密字串",
+              "slug": "encrypt-and-decrypt-strings",
+              "src": "https://leetcode.cn/problems/encrypt-and-decrypt-strings/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2543",
+              "title": "判斷一個點是否可以到達",
+              "slug": "check-if-point-is-reachable",
+              "src": "https://leetcode.cn/problems/check-if-point-is-reachable/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3141",
+              "title": "最大漢明距離",
+              "slug": "maximum-hamming-distances",
+              "src": "https://leetcode.cn/problems/maximum-hamming-distances/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "3147",
+              "title": "從魔法師身上吸取的最大能量",
+              "slug": "taking-maximum-energy-from-the-mystic-dungeon",
+              "src": "https://leetcode.cn/problems/taking-maximum-energy-from-the-mystic-dungeon/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3307",
+              "title": "找出第 K 個字元 II",
+              "slug": "find-the-k-th-character-in-string-game-ii",
+              "src": "https://leetcode.cn/problems/find-the-k-th-character-in-string-game-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3396",
+              "title": "使陣列元素互不相同所需的最少操作次數",
+              "slug": "minimum-number-of-operations-to-make-elements-in-array-distinct",
+              "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-make-elements-in-array-distinct/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3419",
+              "title": "圖的最大邊權的最小值",
+              "slug": "minimize-the-maximum-edge-weight-of-graph",
+              "src": "https://leetcode.cn/problems/minimize-the-maximum-edge-weight-of-graph/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3609",
+              "title": "到達目標點的最小移動次數",
+              "slug": "minimum-moves-to-reach-target-in-grid",
+              "src": "https://leetcode.cn/problems/minimum-moves-to-reach-target-in-grid/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3614",
+              "title": "用特殊操作處理字串 II",
+              "slug": "process-string-with-special-operations-ii",
+              "src": "https://leetcode.cn/problems/process-string-with-special-operations-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3779",
+              "title": "得到互不相同元素的最少操作次數",
+              "slug": "minimum-number-of-operations-to-have-distinct-elements",
+              "src": "https://leetcode.cn/problems/minimum-number-of-operations-to-have-distinct-elements/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        },
+        {
           "id": 36,
-          "title": "28.1 時光倒流",
+          "title": "28.2 時光倒流",
           "isLeaf": true,
           "problems": [
             {

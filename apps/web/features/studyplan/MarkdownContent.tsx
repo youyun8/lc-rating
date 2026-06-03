@@ -381,6 +381,37 @@ export function StudyPlanMarkdownContent({
       wrapper.appendChild(header);
       wrapper.appendChild(pre);
     });
+
+    // Collapse any table column whose body cells are all identical into a
+    // single rowspanned cell. Generated "代表例題" tables often repeat the same
+    // 解法重點 text on every row; merging those cells removes that visual
+    // repetition while leaving the per-row columns (題號/題目/Rating) intact.
+    innerHtml.current.querySelectorAll("table").forEach((table) => {
+      const bodyRows = Array.from(
+        table.querySelectorAll<HTMLTableRowElement>("tbody > tr"),
+      );
+      if (bodyRows.length < 2) return;
+
+      const rowCells = bodyRows.map(
+        (row) => Array.from(row.children) as HTMLTableCellElement[],
+      );
+      const columnCount = rowCells[0]?.length ?? 0;
+
+      for (let col = 0; col < columnCount; col++) {
+        const cells = rowCells.map((cellsInRow) => cellsInRow[col]);
+        if (cells.some((cell) => !cell)) continue;
+
+        const key = cells[0]!.innerHTML.trim();
+        if (!key) continue;
+        if (!cells.every((cell) => cell!.innerHTML.trim() === key)) continue;
+
+        cells[0]!.setAttribute("rowspan", String(cells.length));
+        cells[0]!.style.verticalAlign = "middle";
+        for (let i = 1; i < cells.length; i++) {
+          cells[i]!.remove();
+        }
+      }
+    });
   }, [content, variant, enhanceLeetCode]);
 
   return (

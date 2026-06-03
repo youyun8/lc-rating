@@ -8,201 +8,208 @@
       "id": 2,
       "title": "1. 基礎題",
       "isLeaf": false,
-      "problems": [
-        {
-          "id": "191",
-          "title": "位 1 的個數",
-          "slug": "number-of-1-bits",
-          "src": "https://leetcode.cn/problems/number-of-1-bits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "231",
-          "title": "2 的冪",
-          "slug": "power-of-two",
-          "src": "https://leetcode.cn/problems/power-of-two/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "338",
-          "title": "位元位計數",
-          "slug": "counting-bits",
-          "src": "https://leetcode.cn/problems/counting-bits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "342",
-          "title": "4 的冪",
-          "slug": "power-of-four",
-          "src": "https://leetcode.cn/problems/power-of-four/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "461",
-          "title": "漢明距離",
-          "slug": "hamming-distance",
-          "src": "https://leetcode.cn/problems/hamming-distance/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "476",
-          "title": "數字的補數",
-          "slug": "number-complement",
-          "src": "https://leetcode.cn/problems/number-complement/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "面試題 05.01",
-          "title": "插入",
-          "slug": "insert-into-bits-lcci",
-          "src": "https://leetcode.cn/problems/insert-into-bits-lcci/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "693",
-          "title": "交替位二進位制數",
-          "slug": "binary-number-with-alternating-bits",
-          "src": "https://leetcode.cn/problems/binary-number-with-alternating-bits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "868",
-          "title": "二進位制間距",
-          "slug": "binary-gap",
-          "src": "https://leetcode.cn/problems/binary-gap/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1009",
-          "title": "十進位制整數的反碼",
-          "slug": "complement-of-base-10-integer",
-          "src": "https://leetcode.cn/problems/complement-of-base-10-integer/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1342",
-          "title": "將數字變成 0 的操作次數",
-          "slug": "number-of-steps-to-reduce-a-number-to-zero",
-          "src": "https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1356",
-          "title": "根據數字二進位制下 1 的數目排序",
-          "slug": "sort-integers-by-the-number-of-1-bits",
-          "src": "https://leetcode.cn/problems/sort-integers-by-the-number-of-1-bits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2154",
-          "title": "將找到的值乘以 2",
-          "slug": "keep-multiplying-found-values-by-two",
-          "src": "https://leetcode.cn/problems/keep-multiplying-found-values-by-two/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2220",
-          "title": "轉換數字的最少位翻轉次數",
-          "slug": "minimum-bit-flips-to-convert-number",
-          "src": "https://leetcode.cn/problems/minimum-bit-flips-to-convert-number/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2595",
-          "title": "奇偶位數",
-          "slug": "number-of-even-and-odd-bits",
-          "src": "https://leetcode.cn/problems/number-of-even-and-odd-bits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2657",
-          "title": "找到兩個陣列的字首公共陣列",
-          "slug": "find-the-prefix-common-array-of-two-arrays",
-          "src": "https://leetcode.cn/problems/find-the-prefix-common-array-of-two-arrays/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2917",
-          "title": "找出陣列中的 K-or 值",
-          "slug": "find-the-k-or-of-an-array",
-          "src": "https://leetcode.cn/problems/find-the-k-or-of-an-array/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3211",
-          "title": "生成不含相鄰零的二進位制字串",
-          "slug": "generate-binary-strings-without-adjacent-zeros",
-          "src": "https://leetcode.cn/problems/generate-binary-strings-without-adjacent-zeros/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3226",
-          "title": "使兩個整數相等的位更改次數",
-          "slug": "number-of-bit-changes-to-make-two-integers-equal",
-          "src": "https://leetcode.cn/problems/number-of-bit-changes-to-make-two-integers-equal/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3370",
-          "title": "僅含置位位的最小整數",
-          "slug": "smallest-number-with-all-set-bits",
-          "src": "https://leetcode.cn/problems/smallest-number-with-all-set-bits/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3827",
-          "title": "統計單位元整數",
-          "slug": "count-monobit-integers",
-          "src": "https://leetcode.cn/problems/count-monobit-integers/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        }
-      ],
+      "problems": [],
       "children": [
         {
+          "id": 16,
+          "title": "1.1 基礎題",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "191",
+              "title": "位 1 的個數",
+              "slug": "number-of-1-bits",
+              "src": "https://leetcode.cn/problems/number-of-1-bits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "231",
+              "title": "2 的冪",
+              "slug": "power-of-two",
+              "src": "https://leetcode.cn/problems/power-of-two/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "338",
+              "title": "位元位計數",
+              "slug": "counting-bits",
+              "src": "https://leetcode.cn/problems/counting-bits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "342",
+              "title": "4 的冪",
+              "slug": "power-of-four",
+              "src": "https://leetcode.cn/problems/power-of-four/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "461",
+              "title": "漢明距離",
+              "slug": "hamming-distance",
+              "src": "https://leetcode.cn/problems/hamming-distance/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "476",
+              "title": "數字的補數",
+              "slug": "number-complement",
+              "src": "https://leetcode.cn/problems/number-complement/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "面試題 05.01",
+              "title": "插入",
+              "slug": "insert-into-bits-lcci",
+              "src": "https://leetcode.cn/problems/insert-into-bits-lcci/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "693",
+              "title": "交替位二進位制數",
+              "slug": "binary-number-with-alternating-bits",
+              "src": "https://leetcode.cn/problems/binary-number-with-alternating-bits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "868",
+              "title": "二進位制間距",
+              "slug": "binary-gap",
+              "src": "https://leetcode.cn/problems/binary-gap/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1009",
+              "title": "十進位制整數的反碼",
+              "slug": "complement-of-base-10-integer",
+              "src": "https://leetcode.cn/problems/complement-of-base-10-integer/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1342",
+              "title": "將數字變成 0 的操作次數",
+              "slug": "number-of-steps-to-reduce-a-number-to-zero",
+              "src": "https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1356",
+              "title": "根據數字二進位制下 1 的數目排序",
+              "slug": "sort-integers-by-the-number-of-1-bits",
+              "src": "https://leetcode.cn/problems/sort-integers-by-the-number-of-1-bits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2154",
+              "title": "將找到的值乘以 2",
+              "slug": "keep-multiplying-found-values-by-two",
+              "src": "https://leetcode.cn/problems/keep-multiplying-found-values-by-two/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2220",
+              "title": "轉換數字的最少位翻轉次數",
+              "slug": "minimum-bit-flips-to-convert-number",
+              "src": "https://leetcode.cn/problems/minimum-bit-flips-to-convert-number/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2595",
+              "title": "奇偶位數",
+              "slug": "number-of-even-and-odd-bits",
+              "src": "https://leetcode.cn/problems/number-of-even-and-odd-bits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2657",
+              "title": "找到兩個陣列的字首公共陣列",
+              "slug": "find-the-prefix-common-array-of-two-arrays",
+              "src": "https://leetcode.cn/problems/find-the-prefix-common-array-of-two-arrays/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2917",
+              "title": "找出陣列中的 K-or 值",
+              "slug": "find-the-k-or-of-an-array",
+              "src": "https://leetcode.cn/problems/find-the-k-or-of-an-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3211",
+              "title": "生成不含相鄰零的二進位制字串",
+              "slug": "generate-binary-strings-without-adjacent-zeros",
+              "src": "https://leetcode.cn/problems/generate-binary-strings-without-adjacent-zeros/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3226",
+              "title": "使兩個整數相等的位更改次數",
+              "slug": "number-of-bit-changes-to-make-two-integers-equal",
+              "src": "https://leetcode.cn/problems/number-of-bit-changes-to-make-two-integers-equal/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3370",
+              "title": "僅含置位位的最小整數",
+              "slug": "smallest-number-with-all-set-bits",
+              "src": "https://leetcode.cn/problems/smallest-number-with-all-set-bits/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3827",
+              "title": "統計單位元整數",
+              "slug": "count-monobit-integers",
+              "src": "https://leetcode.cn/problems/count-monobit-integers/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        },
+        {
           "id": 3,
-          "title": "1.1 用位運算代替陣列操作",
+          "title": "1.2 用位運算代替陣列操作",
           "isLeaf": true,
           "problems": [
             {
@@ -219,7 +226,7 @@
         },
         {
           "id": 4,
-          "title": "1.2 反轉二進位制數",
+          "title": "1.3 反轉二進位制數",
           "isLeaf": true,
           "problems": [
             {
@@ -430,102 +437,109 @@
       "id": 6,
       "title": "3. 與或（AND/OR）的性質",
       "isLeaf": false,
-      "problems": [
-        {
-          "id": "1318",
-          "title": "或運算的最小翻轉次數",
-          "slug": "minimum-flips-to-make-a-or-b-equal-to-c",
-          "src": "https://leetcode.cn/problems/minimum-flips-to-make-a-or-b-equal-to-c/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2401",
-          "title": "最長優雅子陣列",
-          "slug": "longest-nice-subarray",
-          "src": "https://leetcode.cn/problems/longest-nice-subarray/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2419",
-          "title": "按位與最大的最長子陣列",
-          "slug": "longest-subarray-with-maximum-bitwise-and",
-          "src": "https://leetcode.cn/problems/longest-subarray-with-maximum-bitwise-and/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2680",
-          "title": "最大或值",
-          "slug": "maximum-or",
-          "src": "https://leetcode.cn/problems/maximum-or/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2871",
-          "title": "將陣列分割成最多數目的子陣列",
-          "slug": "split-array-into-maximum-number-of-subarrays",
-          "src": "https://leetcode.cn/problems/split-array-into-maximum-number-of-subarrays/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2980",
-          "title": "檢查按位或是否存在尾隨零",
-          "slug": "check-if-bitwise-or-has-trailing-zeros",
-          "src": "https://leetcode.cn/problems/check-if-bitwise-or-has-trailing-zeros/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3108",
-          "title": "帶權圖裡旅途的最小代價",
-          "slug": "minimum-cost-walk-in-weighted-graph",
-          "src": "https://leetcode.cn/problems/minimum-cost-walk-in-weighted-graph/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3117",
-          "title": "劃分陣列得到最小的值之和",
-          "slug": "minimum-sum-of-values-by-dividing-array",
-          "src": "https://leetcode.cn/problems/minimum-sum-of-values-by-dividing-array/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "3125",
-          "title": "使得按位與結果為 0 的最大數字",
-          "slug": "maximum-number-that-makes-result-of-bitwise-and-zero",
-          "src": "https://leetcode.cn/problems/maximum-number-that-makes-result-of-bitwise-and-zero/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3133",
-          "title": "陣列最後一個元素的最小值",
-          "slug": "minimum-array-end",
-          "src": "https://leetcode.cn/problems/minimum-array-end/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        }
-      ],
+      "problems": [],
       "children": [
         {
+          "id": 17,
+          "title": "3.1 與或（AND/OR）的性質",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "1318",
+              "title": "或運算的最小翻轉次數",
+              "slug": "minimum-flips-to-make-a-or-b-equal-to-c",
+              "src": "https://leetcode.cn/problems/minimum-flips-to-make-a-or-b-equal-to-c/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2401",
+              "title": "最長優雅子陣列",
+              "slug": "longest-nice-subarray",
+              "src": "https://leetcode.cn/problems/longest-nice-subarray/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2419",
+              "title": "按位與最大的最長子陣列",
+              "slug": "longest-subarray-with-maximum-bitwise-and",
+              "src": "https://leetcode.cn/problems/longest-subarray-with-maximum-bitwise-and/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2680",
+              "title": "最大或值",
+              "slug": "maximum-or",
+              "src": "https://leetcode.cn/problems/maximum-or/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2871",
+              "title": "將陣列分割成最多數目的子陣列",
+              "slug": "split-array-into-maximum-number-of-subarrays",
+              "src": "https://leetcode.cn/problems/split-array-into-maximum-number-of-subarrays/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2980",
+              "title": "檢查按位或是否存在尾隨零",
+              "slug": "check-if-bitwise-or-has-trailing-zeros",
+              "src": "https://leetcode.cn/problems/check-if-bitwise-or-has-trailing-zeros/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3108",
+              "title": "帶權圖裡旅途的最小代價",
+              "slug": "minimum-cost-walk-in-weighted-graph",
+              "src": "https://leetcode.cn/problems/minimum-cost-walk-in-weighted-graph/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3117",
+              "title": "劃分陣列得到最小的值之和",
+              "slug": "minimum-sum-of-values-by-dividing-array",
+              "src": "https://leetcode.cn/problems/minimum-sum-of-values-by-dividing-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "3125",
+              "title": "使得按位與結果為 0 的最大數字",
+              "slug": "maximum-number-that-makes-result-of-bitwise-and-zero",
+              "src": "https://leetcode.cn/problems/maximum-number-that-makes-result-of-bitwise-and-zero/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "3133",
+              "title": "陣列最後一個元素的最小值",
+              "slug": "minimum-array-end",
+              "src": "https://leetcode.cn/problems/minimum-array-end/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        },
+        {
           "id": 7,
-          "title": "3.1 AND/OR LogTrick",
+          "title": "3.2 AND/OR LogTrick",
           "isLeaf": true,
           "problems": [
             {
@@ -587,7 +601,7 @@
         },
         {
           "id": 8,
-          "title": "3.2 GCD LogTrick",
+          "title": "3.3 GCD LogTrick",
           "isLeaf": true,
           "problems": [
             {
@@ -645,75 +659,82 @@
       "id": 9,
       "title": "4. 拆位 / 貢獻法",
       "isLeaf": false,
-      "problems": [
-        {
-          "id": "477",
-          "title": "漢明距離總和",
-          "slug": "total-hamming-distance",
-          "src": "https://leetcode.cn/problems/total-hamming-distance/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1835",
-          "title": "所有數對按位與結果的異或和",
-          "slug": "find-xor-sum-of-all-pairs-bitwise-and",
-          "src": "https://leetcode.cn/problems/find-xor-sum-of-all-pairs-bitwise-and/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "1863",
-          "title": "找出所有子集的異或總和再求和",
-          "slug": "sum-of-all-subset-xor-totals",
-          "src": "https://leetcode.cn/problems/sum-of-all-subset-xor-totals/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2275",
-          "title": "按位與結果大於零的最長組合",
-          "slug": "largest-combination-with-bitwise-and-greater-than-zero",
-          "src": "https://leetcode.cn/problems/largest-combination-with-bitwise-and-greater-than-zero/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2425",
-          "title": "所有數對的異或和",
-          "slug": "bitwise-xor-of-all-pairings",
-          "src": "https://leetcode.cn/problems/bitwise-xor-of-all-pairings/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        },
-        {
-          "id": "2505",
-          "title": "所有子序列和的按位或",
-          "slug": "bitwise-or-of-all-subsequence-sums",
-          "src": "https://leetcode.cn/problems/bitwise-or-of-all-subsequence-sums/",
-          "solution": null,
-          "score": null,
-          "isPremium": true
-        },
-        {
-          "id": "3688",
-          "title": "偶數的按位或運算",
-          "slug": "bitwise-or-of-even-numbers-in-an-array",
-          "src": "https://leetcode.cn/problems/bitwise-or-of-even-numbers-in-an-array/",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        }
-      ],
+      "problems": [],
       "children": [
         {
+          "id": 18,
+          "title": "4.1 拆位 / 貢獻法",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "477",
+              "title": "漢明距離總和",
+              "slug": "total-hamming-distance",
+              "src": "https://leetcode.cn/problems/total-hamming-distance/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1835",
+              "title": "所有數對按位與結果的異或和",
+              "slug": "find-xor-sum-of-all-pairs-bitwise-and",
+              "src": "https://leetcode.cn/problems/find-xor-sum-of-all-pairs-bitwise-and/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "1863",
+              "title": "找出所有子集的異或總和再求和",
+              "slug": "sum-of-all-subset-xor-totals",
+              "src": "https://leetcode.cn/problems/sum-of-all-subset-xor-totals/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2275",
+              "title": "按位與結果大於零的最長組合",
+              "slug": "largest-combination-with-bitwise-and-greater-than-zero",
+              "src": "https://leetcode.cn/problems/largest-combination-with-bitwise-and-greater-than-zero/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2425",
+              "title": "所有數對的異或和",
+              "slug": "bitwise-xor-of-all-pairings",
+              "src": "https://leetcode.cn/problems/bitwise-xor-of-all-pairings/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            },
+            {
+              "id": "2505",
+              "title": "所有子序列和的按位或",
+              "slug": "bitwise-or-of-all-subsequence-sums",
+              "src": "https://leetcode.cn/problems/bitwise-or-of-all-subsequence-sums/",
+              "solution": null,
+              "score": null,
+              "isPremium": true
+            },
+            {
+              "id": "3688",
+              "title": "偶數的按位或運算",
+              "slug": "bitwise-or-of-even-numbers-in-an-array",
+              "src": "https://leetcode.cn/problems/bitwise-or-of-even-numbers-in-an-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false
+            }
+          ],
+          "children": []
+        },
+        {
           "id": 10,
-          "title": "4.1 進位制拆位",
+          "title": "4.2 進位制拆位",
           "isLeaf": true,
           "problems": [
             {

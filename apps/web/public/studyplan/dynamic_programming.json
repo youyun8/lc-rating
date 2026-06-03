@@ -896,17 +896,7 @@
       "id": 15,
       "title": "4. 經典線性 DP",
       "isLeaf": false,
-      "problems": [
-        {
-          "id": "3825",
-          "title": "按位與結果非零的最長上升子序列",
-          "slug": "longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
-          "src": "https://leetcode.cn/problems/longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
-          "solution": null,
-          "score": null,
-          "isPremium": false
-        }
-      ],
+      "problems": [],
       "children": [
         {
           "id": 16,
@@ -1244,6 +1234,15 @@
                   "title": "最長上升路徑的長度",
                   "slug": "length-of-the-longest-increasing-path",
                   "src": "https://leetcode.cn/problems/length-of-the-longest-increasing-path/",
+                  "solution": null,
+                  "score": null,
+                  "isPremium": false
+                },
+                {
+                  "id": "3825",
+                  "title": "按位與結果非零的最長上升子序列",
+                  "slug": "longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
+                  "src": "https://leetcode.cn/problems/longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
                   "solution": null,
                   "score": null,
                   "isPremium": false
