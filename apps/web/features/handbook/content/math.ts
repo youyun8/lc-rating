@@ -291,7 +291,7 @@ long long crt(long long r1, long long m1, long long r2, long long m2) {
       id: "advanced-combinatorics",
       title: "Advanced combinatorics & transforms",
       body: `- **Lucas' theorem** computes \`C(n, r) mod p\` for huge \`n, r\` and small prime \`p\` by multiplying \`C\` of the base-\`p\` digits.
-- **Catalan numbers** \`C_n = C(2n, n) / (n + 1)\` count balanced parentheses, BST shapes (LC 96 Unique Binary Search Trees), and triangulations.
+- **Catalan numbers** $C_n = \\binom{2n}{n} / (n + 1)$ count balanced parentheses, BST shapes (LC 96 Unique Binary Search Trees), and triangulations.
 - **Inclusion–exclusion & Möbius** count "coprime to n", "divisible by some set", and surjections — the backbone of counting problems like LC 1until divisor sums.
 - **Matrix exponentiation** (see the DP chapter) solves linear-recurrence counting in \`O(d^3 log k)\`.
 - **FFT / NTT** multiply polynomials (and thus do fast convolution / subset-sum counting) in \`O(n log n)\` — rare on LeetCode but the tool for "count pairs with sum s" at scale.

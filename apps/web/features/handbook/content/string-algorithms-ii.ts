@@ -51,6 +51,9 @@ Related: [Data Structures](/handbook/data-structures) (tries and suffix structur
       body: `Manacher computes odd and even palindrome radii in linear time. It replaces \`O(n^2)\` center expansion when the input can be large.
 
 \`\`\`cpp
+// Manacher's algorithm: find all palindromic substrings in O(n).
+// odd[i] = number of odd-length palindromes centered at i.
+// even[i] = number of even-length palindromes with right-center at i.
 struct Manacher {
   vector<int> odd, even;
 
@@ -59,18 +62,21 @@ struct Manacher {
     odd.assign(n, 0);
     even.assign(n, 0);
 
+    // [l, r] is the rightmost known palindrome window (odd-center pass).
     for (int i = 0, l = 0, r = -1; i < n; i++) {
+      // Use mirror symmetry inside the window, or start fresh from radius 1.
       int k = (i > r) ? 1 : min(odd[l + r - i], r - i + 1);
       while (0 <= i - k && i + k < n && s[i - k] == s[i + k]) {
-        k++;
+        k++;  // expand while characters match
       }
       odd[i] = k--;
       if (i + k > r) {
         l = i - k;
-        r = i + k;
+        r = i + k;  // update the rightmost palindrome boundary
       }
     }
 
+    // Even-length pass: center sits between index i-1 and i.
     for (int i = 0, l = 0, r = -1; i < n; i++) {
       int k = (i > r) ? 0 : min(even[l + r - i + 1], r - i + 1);
       while (0 <= i - k - 1 && i + k < n && s[i - k - 1] == s[i + k]) {
@@ -84,6 +90,7 @@ struct Manacher {
     }
   }
 
+  // Sum odd[i] + even[i] over all centers to count all palindromic substrings.
   long long countPalindromes() const {
     long long ans = 0;
     for (int x : odd) {
@@ -178,29 +185,35 @@ struct AhoCorasick {
       body: `A suffix array stores suffixes in lexicographic order. The LCP array stores common-prefix lengths of adjacent suffixes in that order.
 
 \`\`\`cpp
+// Suffix Array + LCP Array construction in O(n log^2 n) and O(n).
+// suffixArray: returns sa[] where sa[i] is the start of the i-th suffix in sorted order.
 vector<int> suffixArray(const string& s) {
   int n = s.size();
   vector<int> sa(n), rnk(n), tmp(n);
-  iota(sa.begin(), sa.end(), 0);
+  iota(sa.begin(), sa.end(), 0);  // initialize sa as [0, 1, ..., n-1]
   for (int i = 0; i < n; i++) {
-    rnk[i] = s[i];
+    rnk[i] = s[i];  // initial rank is the character value
   }
 
+  // Doubling: at each step, sort by (rank[i], rank[i+k]) for window size 2k.
   for (int k = 1;; k <<= 1) {
     auto cmp = [&](int i, int j) {
       if (rnk[i] != rnk[j]) {
         return rnk[i] < rnk[j];
       }
+      // Treat out-of-bounds rank as -1 (smallest possible).
       int ri = i + k < n ? rnk[i + k] : -1;
       int rj = j + k < n ? rnk[j + k] : -1;
       return ri < rj;
     };
     sort(sa.begin(), sa.end(), cmp);
+    // Recompute ranks: equal pairs get the same rank.
     tmp[sa[0]] = 0;
     for (int i = 1; i < n; i++) {
       tmp[sa[i]] = tmp[sa[i - 1]] + cmp(sa[i - 1], sa[i]);
     }
     rnk = tmp;
+    // All ranks are distinct -> suffix array is fully sorted.
     if (rnk[sa[n - 1]] == n - 1) {
       break;
     }
@@ -208,25 +221,26 @@ vector<int> suffixArray(const string& s) {
   return sa;
 }
 
+// lcpArray: Kasai's algorithm - builds LCP in O(n) using the inverse suffix array.
 vector<int> lcpArray(const string& s, const vector<int>& sa) {
   int n = s.size();
   vector<int> rank(n), lcp(max(0, n - 1));
   for (int i = 0; i < n; i++) {
-    rank[sa[i]] = i;
+    rank[sa[i]] = i;  // inverse of sa
   }
-  int h = 0;
+  int h = 0;  // carries over: lcp can only decrease by 1 between iterations
   for (int i = 0; i < n; i++) {
     if (rank[i] == n - 1) {
-      h = 0;
+      h = 0;  // last suffix has no successor; reset
       continue;
     }
-    int j = sa[rank[i] + 1];
+    int j = sa[rank[i] + 1];  // next suffix in sorted order
     while (i + h < n && j + h < n && s[i + h] == s[j + h]) {
-      h++;
+      h++;  // extend common prefix
     }
     lcp[rank[i]] = h;
     if (h) {
-      h--;
+      h--;  // Kasai invariant: lcp drops by at most 1 for the next suffix
     }
   }
   return lcp;
@@ -241,25 +255,29 @@ Distinct substrings count = \`n * (n + 1) / 2 - sum(lcp)\`.`,
       body: `A suffix automaton compactly represents all substrings of a string. It is useful for counting distinct substrings, longest common substring, and online substring queries.
 
 \`\`\`cpp
+// Suffix Automaton (SAM): accepts every substring of s as a path from state 0.
+// Each state represents an equivalence class of end positions (endpos sets).
 struct SuffixAutomaton {
   struct State {
-    int link = -1;
-    int len = 0;
+    int link = -1;  // suffix link -> longest proper suffix in a different class
+    int len = 0;    // length of the longest string in this state's class
     map<char, int> next;
   };
 
   vector<State> st;
-  int last = 0;
+  int last = 0;  // state corresponding to the entire current string
 
   SuffixAutomaton() {
-    st.push_back(State());
+    st.push_back(State());  // initial (root) state
   }
 
+  // Append character c, extending the automaton in amortized O(1).
   void extend(char c) {
     int cur = st.size();
     st.push_back(State());
     st[cur].len = st[last].len + 1;
 
+    // Walk suffix links from last, adding transitions to the new state.
     int p = last;
     while (p != -1 && !st[p].next.count(c)) {
       st[p].next[c] = cur;
@@ -267,15 +285,17 @@ struct SuffixAutomaton {
     }
 
     if (p == -1) {
-      st[cur].link = 0;
+      st[cur].link = 0;  // all suffixes covered; link to root
     } else {
-      int q = st[p].next[c];
+      int q = st[p].next[c];  // first ancestor that already has edge c
       if (st[p].len + 1 == st[q].len) {
-        st[cur].link = q;
+        st[cur].link = q;  // q is a solid state; link directly
       } else {
+        // Clone q to split the endpos class and fix lengths.
         int clone = st.size();
         st.push_back(st[q]);
         st[clone].len = st[p].len + 1;
+        // Redirect all transitions that pointed to q (with char c) to clone.
         while (p != -1 && st[p].next[c] == q) {
           st[p].next[c] = clone;
           p = st[p].link;
@@ -286,6 +306,7 @@ struct SuffixAutomaton {
     last = cur;
   }
 
+  // Each non-root state v contributes (len[v] - len[link[v]]) distinct substrings.
   long long countDistinctSubstrings() const {
     long long ans = 0;
     for (int v = 1; v < (int)st.size(); v++) {
@@ -295,6 +316,7 @@ struct SuffixAutomaton {
   }
 };
 
+// Build the SAM by extending one character at a time.
 SuffixAutomaton buildSAM(const string& s) {
   SuffixAutomaton sam;
   for (char c : s) {
@@ -376,33 +398,35 @@ struct PalindromicTree {
       body: `Booth's algorithm finds the lexicographically minimum rotation of a string in linear time.
 
 \`\`\`cpp
+// Booth's algorithm: find the lexicographically smallest rotation of s in O(n).
+// Doubling the string avoids explicit wraparound. i and j are candidate rotation starts.
 int minRotationIndex(const string& s) {
-  string t = s + s;
+  string t = s + s;  // concatenate to handle wrap-around comparisons
   int n = s.size();
-  int i = 0, j = 1, k = 0;
+  int i = 0, j = 1, k = 0;  // i, j: current best candidates; k: matched prefix length
   while (i < n && j < n && k < n) {
     if (t[i + k] == t[j + k]) {
-      k++;
+      k++;  // characters agree so far; extend the comparison
     } else if (t[i + k] > t[j + k]) {
-      i = i + k + 1;
+      i = i + k + 1;  // rotation i is larger; discard it and everything in between
       if (i <= j) {
-        i = j + 1;
+        i = j + 1;  // i must stay ahead of j
       }
       k = 0;
     } else {
-      j = j + k + 1;
+      j = j + k + 1;  // rotation j is larger; discard it
       if (j <= i) {
         j = i + 1;
       }
       k = 0;
     }
   }
-  return min(i, j);
+  return min(i, j);  // the surviving candidate is the lexicographically smallest start
 }
 
 string minRotation(string s) {
   int idx = minRotationIndex(s);
-  return s.substr(idx) + s.substr(0, idx);
+  return s.substr(idx) + s.substr(0, idx);  // rotate by splicing at the optimal index
 }
 \`\`\``,
     },

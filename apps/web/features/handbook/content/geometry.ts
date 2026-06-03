@@ -87,8 +87,10 @@ long double dist(Point a, Point b) {
       body: `Use an EPS-based sign function for doubles. Never compare floating values with \`==\` unless they came from the same integer expression.
 
 \`\`\`cpp
+// Floating-point geometry primitives with epsilon-based comparisons.
 const long double EPS = 1e-12L;
 
+// Returns +1, -1, or 0 depending on whether x is positive, negative, or near zero.
 int sgn(long double x) {
   if (x > EPS) {
     return 1;
@@ -100,13 +102,14 @@ int sgn(long double x) {
 }
 
 bool eq(long double a, long double b) {
-  return sgn(a - b) == 0;
+  return sgn(a - b) == 0;  // consider two values equal when they differ by at most EPS
 }
 
 struct DPoint {
   long double x, y;
 };
 
+// 2D cross product of position vectors a and b (z-component of a x b).
 long double cross(DPoint a, DPoint b) {
   return a.x * b.y - a.y * b.x;
 }
@@ -157,6 +160,7 @@ bool segmentsIntersect(Point a, Point b, Point c, Point d) {
       body: `Projection uses the dot product. Clamp the projection parameter to \`[0, 1]\` for distance to a segment.
 
 \`\`\`cpp
+// Vector type for displacement arithmetic separate from point positions.
 struct Vec {
   long double x, y;
 };
@@ -170,15 +174,16 @@ long double dot(Vec a, Vec b) {
 }
 
 long double norm2(Vec a) {
-  return dot(a, a);
+  return dot(a, a);  // squared length, avoids a sqrt when only comparison is needed
 }
 
+// Point-to-segment distance: project p onto line AB, clamp t to [0,1], measure gap.
 long double distancePointSegment(DPoint p, DPoint a, DPoint b) {
   Vec ab = b - a;
   Vec ap = p - a;
-  long double t = dot(ap, ab) / norm2(ab);
-  t = max((long double)0, min((long double)1, t));
-  DPoint proj{a.x + ab.x * t, a.y + ab.y * t};
+  long double t = dot(ap, ab) / norm2(ab);  // unclamped parameter along AB
+  t = max((long double)0, min((long double)1, t));  // clamp to segment endpoints
+  DPoint proj{a.x + ab.x * t, a.y + ab.y * t};  // closest point on segment to p
   long double dx = p.x - proj.x;
   long double dy = p.y - proj.y;
   return sqrt(dx * dx + dy * dy);
@@ -267,12 +272,16 @@ To keep collinear boundary points, change the \`<= 0\` tests to \`< 0\`.`,
       body: `After building a convex hull, rotating calipers finds the farthest pair in linear time over the hull size.
 
 \`\`\`cpp
+// Squared Euclidean distance (avoids floating point).
 long long dist2(Point a, Point b) {
   long long dx = a.x - b.x;
   long long dy = a.y - b.y;
   return dx * dx + dy * dy;
 }
 
+// Rotating Calipers: diameter of a convex hull (squared distance).
+// Iterates each edge and advances the antipodal vertex j while the
+// cross-product area (proportional to height) keeps increasing.
 long long convexDiameter2(vector<Point> hull) {
   int n = hull.size();
   if (n <= 1) {
@@ -283,13 +292,15 @@ long long convexDiameter2(vector<Point> hull) {
   }
 
   long long best = 0;
-  int j = 1;
+  int j = 1;  // antipodal vertex, shared across edge iterations
   for (int i = 0; i < n; i++) {
     int ni = (i + 1) % n;
+    // Advance j while rotating the caliper increases the perpendicular height.
     while (abs(cross(hull[ni] - hull[i], hull[(j + 1) % n] - hull[i])) >
            abs(cross(hull[ni] - hull[i], hull[j] - hull[i]))) {
       j = (j + 1) % n;
     }
+    // Check both endpoints of the current edge against the antipodal point.
     best = max(best, dist2(hull[i], hull[j]));
     best = max(best, dist2(hull[ni], hull[j]));
   }
@@ -375,10 +386,12 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) 
 - For ray casting, count boundary separately before toggling inside/outside.
 
 \`\`\`cpp
+// 128-bit cross product to avoid overflow with large integer coordinates.
 __int128 cross128(Point a, Point b) {
   return (__int128)a.x * b.y - (__int128)a.y * b.x;
 }
 
+// Returns -1, 0, or 1 for the sign of a 128-bit integer.
 int sign128(__int128 x) {
   return (x > 0) - (x < 0);
 }

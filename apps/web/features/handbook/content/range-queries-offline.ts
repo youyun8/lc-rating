@@ -194,40 +194,43 @@ vector<int> countSmaller(vector<int>& nums) {
       body: `Use a segment tree when the merge is not just a prefix sum, or when you need range updates with range queries.
 
 \`\`\`cpp
+// Segment Tree with lazy propagation: range add, range sum query.
 struct SegTree {
   int n;
   vector<long long> tree, lazy;
 
   SegTree(int n) : n(n), tree(4 * n, 0), lazy(4 * n, 0) {}
 
+  // Apply a pending add of 'add' to an entire node covering [l, r].
   void apply(int node, int l, int r, long long add) {
-    tree[node] += add * (r - l + 1);
+    tree[node] += add * (r - l + 1);  // update sum by add * segment length
     lazy[node] += add;
   }
 
+  // Push the lazy value down to children before subdividing.
   void push(int node, int l, int r) {
     if (lazy[node] == 0 || l == r) {
-      return;
+      return;  // nothing pending or leaf node
     }
     int mid = l + (r - l) / 2;
     apply(node * 2, l, mid, lazy[node]);
     apply(node * 2 + 1, mid + 1, r, lazy[node]);
-    lazy[node] = 0;
+    lazy[node] = 0;  // clear after propagation
   }
 
   void addRange(int ql, int qr, long long val, int node, int l, int r) {
     if (qr < l || r < ql) {
-      return;
+      return;  // segment fully outside query range
     }
     if (ql <= l && r <= qr) {
-      apply(node, l, r, val);
+      apply(node, l, r, val);  // segment fully inside: tag and stop
       return;
     }
-    push(node, l, r);
+    push(node, l, r);  // partial overlap: push before recursing
     int mid = l + (r - l) / 2;
     addRange(ql, qr, val, node * 2, l, mid);
     addRange(ql, qr, val, node * 2 + 1, mid + 1, r);
-    tree[node] = tree[node * 2] + tree[node * 2 + 1];
+    tree[node] = tree[node * 2] + tree[node * 2 + 1];  // pull up
   }
 
   long long querySum(int ql, int qr, int node, int l, int r) {
@@ -235,7 +238,7 @@ struct SegTree {
       return 0;
     }
     if (ql <= l && r <= qr) {
-      return tree[node];
+      return tree[node];  // fully covered: return stored sum
     }
     push(node, l, r);
     int mid = l + (r - l) / 2;
@@ -243,6 +246,7 @@ struct SegTree {
            querySum(ql, qr, node * 2 + 1, mid + 1, r);
   }
 
+  // Public wrappers that use node=1, l=0, r=n-1.
   void addRange(int l, int r, long long val) {
     addRange(l, r, val, 1, 0, n - 1);
   }
@@ -259,18 +263,21 @@ struct SegTree {
       body: `For immutable arrays and idempotent operations like min, max, gcd, and bitwise and/or, a sparse table answers queries in \`O(1)\` after \`O(n log n)\` preprocessing.
 
 \`\`\`cpp
+// Sparse Table for O(1) range minimum queries after O(n log n) build.
 struct SparseTable {
-  vector<vector<int>> st;
-  vector<int> lg;
+  vector<vector<int>> st;  // st[k][i] = min of a[i .. i + 2^k - 1]
+  vector<int> lg;          // lg[i] = floor(log2(i))
 
   SparseTable(const vector<int>& a) {
     int n = a.size();
+    // Precompute floor log2 values for O(1) level lookup.
     lg.assign(n + 1, 0);
     for (int i = 2; i <= n; i++) {
       lg[i] = lg[i / 2] + 1;
     }
     st.assign(lg[n] + 1, vector<int>(n));
     st[0] = a;
+    // Each level k doubles the span: combine two half-intervals of length 2^(k-1).
     for (int k = 1; k < (int)st.size(); k++) {
       for (int i = 0; i + (1 << k) <= n; i++) {
         st[k][i] = min(st[k - 1][i], st[k - 1][i + (1 << (k - 1))]);
@@ -278,6 +285,8 @@ struct SparseTable {
     }
   }
 
+  // Query min over [l, r] using two overlapping intervals of length 2^k.
+  // Overlap is harmless because min is idempotent.
   int rangeMin(int l, int r) const {
     int k = lg[r - l + 1];
     return min(st[k][l], st[k][r - (1 << k) + 1]);
@@ -357,31 +366,36 @@ For rectangle union area, sweep x-events and use a segment tree over compressed 
       body: `Mo's algorithm answers offline range queries by sorting them so the current window moves slowly. It works when adding or removing one endpoint can update the answer quickly.
 
 \`\`\`cpp
+// Mo's algorithm: offline range distinct-count queries in O((n + q) * sqrt(n)).
 struct MoQuery {
   int l, r, id;
 };
 
 vector<long long> distinctCount(vector<int>& a, vector<MoQuery> queries) {
   int n = a.size();
-  int block = max(1, (int)sqrt(n));
+  int block = max(1, (int)sqrt(n));  // block size ~ sqrt(n)
+  // Sort queries by block of left endpoint; within a block alternate
+  // right-endpoint direction to cut total pointer movement in half.
   sort(queries.begin(), queries.end(), [&](const MoQuery& x, const MoQuery& y) {
     int bx = x.l / block, by = y.l / block;
     if (bx != by) {
       return bx < by;
     }
-    return (bx & 1) ? x.r > y.r : x.r < y.r;
+    return (bx & 1) ? x.r > y.r : x.r < y.r;  // serpentine ordering
   });
 
-  unordered_map<int, int> freq;
+  unordered_map<int, int> freq;  // frequency of each value in current window
   vector<long long> ans(queries.size());
-  int curL = 0, curR = -1;
-  long long distinct = 0;
+  int curL = 0, curR = -1;  // current window is empty
+  long long distinct = 0;   // number of distinct values in current window
 
+  // Increment frequency; if first occurrence, increment distinct count.
   auto add = [&](int idx) {
     if (++freq[a[idx]] == 1) {
       distinct++;
     }
   };
+  // Decrement frequency; if element is removed entirely, decrement distinct count.
   auto remove = [&](int idx) {
     if (--freq[a[idx]] == 0) {
       distinct--;
@@ -389,6 +403,8 @@ vector<long long> distinctCount(vector<int>& a, vector<MoQuery> queries) {
   };
 
   for (auto q : queries) {
+    // Expand or contract the window to match [q.l, q.r].
+    // Expand left/right before shrinking to avoid an empty-window edge case.
     while (curL > q.l) {
       add(--curL);
     }
@@ -401,7 +417,7 @@ vector<long long> distinctCount(vector<int>& a, vector<MoQuery> queries) {
     while (curR > q.r) {
       remove(curR--);
     }
-    ans[q.id] = distinct;
+    ans[q.id] = distinct;  // store answer keyed by original query index
   }
   return ans;
 }

@@ -165,6 +165,7 @@ long long safeLcm(long long a, long long b) {
       body: `A debug macro should disappear on the judge but print useful state locally.
 
 \`\`\`cpp
+// Debug printing helpers: overloaded dbgPrint for scalars, pairs, and vectors.
 template <class T>
 void dbgPrint(const T& x) {
   cerr << x;
@@ -184,13 +185,14 @@ void dbgPrint(const vector<T>& v) {
   cerr << "[";
   for (int i = 0; i < (int)v.size(); i++) {
     if (i) {
-      cerr << ", ";
+      cerr << ", ";  // separator between elements
     }
     dbgPrint(v[i]);
   }
   cerr << "]";
 }
 
+// dbg(x) prints "x = <value>" to stderr in LOCAL builds; becomes a no-op in judge submissions.
 #ifdef LOCAL
 #define dbg(x)                         \\
   do {                                 \\
@@ -238,8 +240,10 @@ void runEdgeCases() {
       body: `When the idea is subtle, write a slow correct solution for tiny random tests and compare it with the optimized one. This catches off-by-one errors faster than manual inspection.
 
 \`\`\`cpp
+// Stress test harness for Maximum Subarray (Kadane's algorithm, LC 53).
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
+// O(n^2) brute force: try every subarray; used as the reference answer.
 int brute(vector<int> a) {
   int best = 0;
   for (int l = 0; l < (int)a.size(); l++) {
@@ -252,15 +256,17 @@ int brute(vector<int> a) {
   return best;
 }
 
+// Kadane's O(n): cur holds the max subarray sum ending at the current element.
 int fast(vector<int> a) {
   int best = 0, cur = 0;
   for (int x : a) {
-    cur = max(0, cur + x);
+    cur = max(0, cur + x);  // reset to 0 if extending would go negative
     best = max(best, cur);
   }
   return best;
 }
 
+// Run 10000 random small cases and compare brute vs fast; print divergence and exit.
 void stress() {
   for (int it = 0; it < 10000; it++) {
     int n = uniform_int_distribution<int>(1, 10)(rng);
@@ -340,7 +346,10 @@ int minCostClimbingStairs(vector<int>& cost) {
       body: `Some judges include adversarial keys that make \`unordered_map\` slow. A splitmix64 custom hash keeps expected performance stable.
 
 \`\`\`cpp
+// CustomHash: wraps splitmix64 to give unordered_map a collision-resistant hash,
+// defending against anti-hash tests that exploit the default identity hash.
 struct CustomHash {
+  // splitmix64 bijection: avalanches all input bits across the 64-bit output.
   static uint64_t splitmix64(uint64_t x) {
     x += 0x9e3779b97f4a7c15;
     x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
@@ -349,6 +358,8 @@ struct CustomHash {
   }
 
   size_t operator()(uint64_t x) const {
+    // A runtime-random seed ensures the hash differs between runs,
+    // preventing adversarial inputs crafted offline.
     static const uint64_t seed =
         chrono::steady_clock::now().time_since_epoch().count();
     return splitmix64(x + seed);

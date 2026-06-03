@@ -52,9 +52,11 @@ Related: [Range Queries & Offline Algorithms](/handbook/range-queries-offline) (
       body: `SCCs partition a directed graph into maximal groups where every node can reach every other node. Compressing each SCC gives a DAG.
 
 \`\`\`cpp
+// Tarjan's SCC: assigns each node a component id via DFS + explicit stack.
 struct SCC {
   int n, timer = 0, compCnt = 0;
   vector<vector<int>> g;
+  // disc: discovery time; low: lowest disc reachable; comp: SCC id of node
   vector<int> disc, low, comp, st;
   vector<char> inStack;
 
@@ -65,25 +67,27 @@ struct SCC {
   }
 
   void dfs(int u) {
-    disc[u] = low[u] = timer++;
+    disc[u] = low[u] = timer++;  // stamp discovery time
     st.push_back(u);
     inStack[u] = 1;
 
     for (int v : g[u]) {
       if (disc[v] == -1) {
         dfs(v);
-        low[u] = min(low[u], low[v]);
+        low[u] = min(low[u], low[v]);  // pull reachability info from child
       } else if (inStack[v]) {
+        // back edge to an ancestor still on the stack -> same SCC
         low[u] = min(low[u], disc[v]);
       }
     }
 
+    // u is a root of an SCC when no ancestor is reachable from its subtree
     if (low[u] == disc[u]) {
       while (true) {
         int v = st.back();
         st.pop_back();
         inStack[v] = 0;
-        comp[v] = compCnt;
+        comp[v] = compCnt;  // label every node in this SCC
         if (v == u) {
           break;
         }
@@ -95,16 +99,17 @@ struct SCC {
   vector<int> build() {
     for (int i = 0; i < n; i++) {
       if (disc[i] == -1) {
-        dfs(i);
+        dfs(i);  // handle disconnected components
       }
     }
     return comp;
   }
 
+  // Build the condensation DAG: one node per SCC, edges between distinct SCCs.
   vector<vector<int>> condensation() {
     build();
     vector<vector<int>> dag(compCnt);
-    set<pair<int, int>> seen;
+    set<pair<int, int>> seen;  // deduplicate parallel edges
     for (int u = 0; u < n; u++) {
       for (int v : g[u]) {
         if (comp[u] != comp[v] && seen.insert({comp[u], comp[v]}).second) {
@@ -176,11 +181,13 @@ struct TwoSAT {
       body: `Bipartite matching assigns left nodes to distinct right nodes. Kuhn's algorithm is short and often fast enough for moderate graphs; Hopcroft-Karp is faster for very large inputs.
 
 \`\`\`cpp
+// Kuhn's algorithm: maximum bipartite matching via augmenting paths.
 struct KuhnMatcher {
   int L, R;
   vector<vector<int>> g;
+  // matchR[v]: which left node is currently matched to right node v (-1 = free)
   vector<int> matchR, seen;
-  int iter = 0;
+  int iter = 0;  // iteration stamp avoids clearing the visited array each call
 
   KuhnMatcher(int L, int R) : L(L), R(R), g(L), matchR(R, -1), seen(L, 0) {}
 
@@ -188,12 +195,14 @@ struct KuhnMatcher {
     g[left].push_back(right);
   }
 
+  // Try to find an augmenting path starting from left node u.
   bool dfs(int u) {
     if (seen[u] == iter) {
-      return false;
+      return false;  // already visited in this round
     }
     seen[u] = iter;
     for (int v : g[u]) {
+      // Right node v is free, or its current match can be rerouted.
       if (matchR[v] == -1 || dfs(matchR[v])) {
         matchR[v] = u;
         return true;
@@ -205,7 +214,7 @@ struct KuhnMatcher {
   int maxMatching() {
     int ans = 0;
     for (int u = 0; u < L; u++) {
-      iter++;
+      iter++;  // bump stamp instead of clearing seen[]
       if (dfs(u)) {
         ans++;
       }
@@ -221,25 +230,28 @@ struct KuhnMatcher {
       body: `Max flow models capacities, edge-disjoint paths, assignment with capacities, and project selection. After max flow, nodes reachable from the source in the residual graph define the source side of a minimum cut.
 
 \`\`\`cpp
+// Dinic's max-flow: O(V^2 * E) via BFS level graph + blocking flow with DFS.
 struct Dinic {
   struct Edge {
-    int to, rev;
+    int to, rev;  // rev: index of reverse edge in g[to]
     long long cap;
   };
 
   int n;
   vector<vector<Edge>> g;
+  // level: BFS distance from source; it: current edge pointer (arc advance)
   vector<int> level, it;
 
   Dinic(int n) : n(n), g(n), level(n), it(n) {}
 
   void addEdge(int u, int v, long long cap) {
     Edge a{v, (int)g[v].size(), cap};
-    Edge b{u, (int)g[u].size(), 0};
+    Edge b{u, (int)g[u].size(), 0};  // reverse edge starts with 0 capacity
     g[u].push_back(a);
     g[v].push_back(b);
   }
 
+  // BFS to build the level graph; returns false when sink is unreachable.
   bool bfs(int s, int t) {
     fill(level.begin(), level.end(), -1);
     queue<int> q;
@@ -258,6 +270,7 @@ struct Dinic {
     return level[t] != -1;
   }
 
+  // DFS along level graph; it[u] skips saturated edges (arc-advance trick).
   long long dfs(int u, int t, long long f) {
     if (u == t) {
       return f;
@@ -268,7 +281,7 @@ struct Dinic {
         long long got = dfs(e.to, t, min(f, e.cap));
         if (got) {
           e.cap -= got;
-          g[e.to][e.rev].cap += got;
+          g[e.to][e.rev].cap += got;  // update reverse edge
           return got;
         }
       }
@@ -279,7 +292,7 @@ struct Dinic {
   long long maxFlow(int s, int t) {
     long long flow = 0;
     while (bfs(s, t)) {
-      fill(it.begin(), it.end(), 0);
+      fill(it.begin(), it.end(), 0);  // reset arc pointers for new phase
       while (long long pushed = dfs(s, t, LLONG_MAX / 4)) {
         flow += pushed;
       }
@@ -295,6 +308,7 @@ struct Dinic {
       body: `Min-cost flow is for "send k units with minimum total cost" where each edge has capacity and cost. The template below uses SPFA potentials style for clarity; for very large graphs, use Dijkstra with potentials.
 
 \`\`\`cpp
+// Min-Cost Max-Flow: SPFA (Bellman-Ford via queue) to find cheapest augmenting paths.
 struct MinCostMaxFlow {
   struct Edge {
     int to, rev, cap, cost;
@@ -305,6 +319,7 @@ struct MinCostMaxFlow {
 
   MinCostMaxFlow(int n) : n(n), g(n) {}
 
+  // Reverse edge carries negative cost to allow flow cancellation.
   void addEdge(int u, int v, int cap, int cost) {
     Edge a{v, (int)g[v].size(), cap, cost};
     Edge b{u, (int)g[u].size(), 0, -cost};
@@ -312,12 +327,14 @@ struct MinCostMaxFlow {
     g[v].push_back(b);
   }
 
+  // Send up to 'need' units of flow; returns {actual flow, total cost}.
   pair<int, long long> minCostFlow(int s, int t, int need) {
     int flow = 0;
     long long cost = 0;
     const int INF = 1e9;
 
     while (flow < need) {
+      // SPFA: shortest-path in residual graph (supports negative-cost edges).
       vector<int> dist(n, INF), pv(n, -1), pe(n, -1), inq(n, 0);
       queue<int> q;
       dist[s] = 0;
@@ -332,8 +349,8 @@ struct MinCostMaxFlow {
           Edge& e = g[u][i];
           if (e.cap > 0 && dist[u] + e.cost < dist[e.to]) {
             dist[e.to] = dist[u] + e.cost;
-            pv[e.to] = u;
-            pe[e.to] = i;
+            pv[e.to] = u;  // predecessor node
+            pe[e.to] = i;  // predecessor edge index
             if (!inq[e.to]) {
               q.push(e.to);
               inq[e.to] = 1;
@@ -343,20 +360,22 @@ struct MinCostMaxFlow {
       }
 
       if (dist[t] == INF) {
-        break;
+        break;  // sink unreachable: no more augmenting paths
       }
 
+      // Find bottleneck capacity along the shortest path.
       int add = need - flow;
       for (int v = t; v != s; v = pv[v]) {
         add = min(add, g[pv[v]][pe[v]].cap);
       }
+      // Augment along the path and update residual capacities.
       for (int v = t; v != s; v = pv[v]) {
         Edge& e = g[pv[v]][pe[v]];
         e.cap -= add;
         g[v][e.rev].cap += add;
       }
       flow += add;
-      cost += 1LL * add * dist[t];
+      cost += 1LL * add * dist[t];  // accumulate cost: units * cost-per-unit
     }
 
     return {flow, cost};
@@ -452,15 +471,17 @@ struct HLD {
       body: `When edges are added and removed over time, process queries offline with a segment tree over time and a rollback DSU. The DSU can undo unions when recursion leaves a time segment.
 
 \`\`\`cpp
+// DSU with rollback (no path compression): supports undo via a history stack.
 struct RollbackDSU {
   vector<int> p, sz;
-  vector<pair<int, int>> history;
+  vector<pair<int, int>> history;  // stores (node b, old size of root a) per unite
   int comps;
 
   RollbackDSU(int n) : p(n), sz(n, 1), comps(n) {
     iota(p.begin(), p.end(), 0);
   }
 
+  // Path compression is intentionally omitted to make rollback O(log n) correct.
   int find(int x) {
     while (x != p[x]) {
       x = p[x];
@@ -472,33 +493,35 @@ struct RollbackDSU {
     a = find(a);
     b = find(b);
     if (a == b) {
-      history.push_back({-1, -1});
+      history.push_back({-1, -1});  // sentinel: no structural change
       return false;
     }
     if (sz[a] < sz[b]) {
-      swap(a, b);
+      swap(a, b);  // union by size: attach smaller tree under larger
     }
-    history.push_back({b, sz[a]});
+    history.push_back({b, sz[a]});  // save enough info to undo this merge
     p[b] = a;
     sz[a] += sz[b];
     comps--;
     return true;
   }
 
+  // Capture current history length as a restore point.
   int snapshot() const {
     return history.size();
   }
 
+  // Undo all unite() calls made after the given snapshot.
   void rollback(int snap) {
     while ((int)history.size() > snap) {
       auto [b, oldSizeA] = history.back();
       history.pop_back();
       if (b == -1) {
-        continue;
+        continue;  // sentinel entry: nothing to reverse
       }
       int a = p[b];
-      sz[a] = oldSizeA;
-      p[b] = b;
+      sz[a] = oldSizeA;  // restore parent's size
+      p[b] = b;          // detach b back to its own root
       comps++;
     }
   }
