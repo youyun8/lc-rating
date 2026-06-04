@@ -1,0 +1,203 @@
+{
+  "id": 1,
+  "title": "排序（計數排序／基數排序／桶排序）",
+  "src": null,
+  "last_update": "2026-06-04T00:00:00+00:00",
+  "children": [
+    {
+      "id": 2,
+      "title": "1. 計數排序",
+      "isLeaf": true,
+      "children": [],
+      "problems": [
+        {
+          "id": "75",
+          "title": "顏色分類",
+          "slug": "sort-colors",
+          "src": "https://leetcode.cn/problems/sort-colors/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1051",
+          "title": "高度檢查器",
+          "slug": "height-checker",
+          "src": "https://leetcode.cn/problems/height-checker/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1122",
+          "title": "陣列的相對排序",
+          "slug": "relative-sort-array",
+          "src": "https://leetcode.cn/problems/relative-sort-array/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1366",
+          "title": "通過投票對團隊排名",
+          "slug": "rank-teams-by-votes",
+          "src": "https://leetcode.cn/problems/rank-teams-by-votes/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2418",
+          "title": "按身高排序",
+          "slug": "sort-the-people",
+          "src": "https://leetcode.cn/problems/sort-the-people/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2545",
+          "title": "根據第 K 場考試的分數排序",
+          "slug": "sort-the-students-by-their-kth-score",
+          "src": "https://leetcode.cn/problems/sort-the-students-by-their-kth-score/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2966",
+          "title": "劃分陣列並滿足最大差限制",
+          "slug": "divide-array-into-arrays-with-max-difference",
+          "src": "https://leetcode.cn/problems/divide-array-into-arrays-with-max-difference/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "3011",
+          "title": "判斷一個陣列是否可以變為有序",
+          "slug": "find-if-array-can-be-sorted",
+          "src": "https://leetcode.cn/problems/find-if-array-can-be-sorted/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "2. 基數排序",
+      "isLeaf": true,
+      "children": [],
+      "problems": [
+        {
+          "id": "164",
+          "title": "最大間距",
+          "slug": "maximum-gap",
+          "src": "https://leetcode.cn/problems/maximum-gap/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "912",
+          "title": "排序陣列",
+          "slug": "sort-an-array",
+          "src": "https://leetcode.cn/problems/sort-an-array/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "1985",
+          "title": "找出陣列中的第 K 大整數",
+          "slug": "find-the-kth-largest-integer-in-the-array",
+          "src": "https://leetcode.cn/problems/find-the-kth-largest-integer-in-the-array/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2191",
+          "title": "將雜亂無章的數字排序",
+          "slug": "sort-the-jumbled-numbers",
+          "src": "https://leetcode.cn/problems/sort-the-jumbled-numbers/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2343",
+          "title": "裁剪數字後查詢第 K 小的數字",
+          "slug": "query-kth-smallest-trimmed-number",
+          "src": "https://leetcode.cn/problems/query-kth-smallest-trimmed-number/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "3. 桶排序",
+      "isLeaf": true,
+      "children": [],
+      "problems": [
+        {
+          "id": "164",
+          "title": "最大間距",
+          "slug": "maximum-gap",
+          "src": "https://leetcode.cn/problems/maximum-gap/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "220",
+          "title": "存在重複元素 III",
+          "slug": "contains-duplicate-iii",
+          "src": "https://leetcode.cn/problems/contains-duplicate-iii/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "347",
+          "title": "前 K 個高頻元素",
+          "slug": "top-k-frequent-elements",
+          "src": "https://leetcode.cn/problems/top-k-frequent-elements/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "451",
+          "title": "根據字元出現頻率排序",
+          "slug": "sort-characters-by-frequency",
+          "src": "https://leetcode.cn/problems/sort-characters-by-frequency/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "692",
+          "title": "前 K 個高頻單詞",
+          "slug": "top-k-frequent-words",
+          "src": "https://leetcode.cn/problems/top-k-frequent-words/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        },
+        {
+          "id": "2070",
+          "title": "每一個查詢的最大美麗值",
+          "slug": "most-beautiful-item-for-each-query",
+          "src": "https://leetcode.cn/problems/most-beautiful-item-for-each-query/",
+          "solution": null,
+          "score": null,
+          "isPremium": false
+        }
+      ]
+    }
+  ]
+}

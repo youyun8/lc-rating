@@ -54,6 +54,7 @@ export const STUDYPLANS = {
   google_interview: "Google 面試準備",
   rating_2100: "Rating 2100",
   binary_search: "二分搜尋",
+  sorting: "排序",
   bitwise_operations: "位元運算",
   data_structure: "資料結構",
   dynamic_programming: "動態規劃",

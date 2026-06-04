@@ -3,6 +3,7 @@ import type { StudyPlanData } from "@/types";
 import googleInterviewData from "@/public/studyplan/google_interview.json";
 import rating2100Data from "@/public/studyplan/rating_2100.json";
 import binarySearchData from "@/public/studyplan/binary_search.json";
+import sortingData from "@/public/studyplan/sorting.json";
 import bitwiseOpsData from "@/public/studyplan/bitwise_operations.json";
 import dataStructureData from "@/public/studyplan/data_structure.json";
 import dpData from "@/public/studyplan/dynamic_programming.json";
@@ -19,6 +20,7 @@ export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
   google_interview: googleInterviewData as StudyPlanData.Root,
   rating_2100: rating2100Data as StudyPlanData.Root,
   binary_search: binarySearchData as StudyPlanData.Root,
+  sorting: sortingData as StudyPlanData.Root,
   bitwise_operations: bitwiseOpsData as StudyPlanData.Root,
   data_structure: dataStructureData as StudyPlanData.Root,
   dynamic_programming: dpData as StudyPlanData.Root,

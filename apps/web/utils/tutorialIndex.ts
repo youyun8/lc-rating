@@ -3,6 +3,7 @@ import type { TutorialData } from "@/types";
 import googleInterview from "@/public/tutorial/google_interview.json";
 import rating2100 from "@/public/tutorial/rating_2100.json";
 import binarySearch from "@/public/tutorial/binary_search.json";
+import sorting from "@/public/tutorial/sorting.json";
 import bitwiseOps from "@/public/tutorial/bitwise_operations.json";
 import dataStructure from "@/public/tutorial/data_structure.json";
 import dp from "@/public/tutorial/dynamic_programming.json";
@@ -19,6 +20,7 @@ export const tutorialDataMap: Record<string, TutorialData.Root> = {
   google_interview: googleInterview as TutorialData.Root,
   rating_2100: rating2100 as TutorialData.Root,
   binary_search: binarySearch as TutorialData.Root,
+  sorting: sorting as TutorialData.Root,
   bitwise_operations: bitwiseOps as TutorialData.Root,
   data_structure: dataStructure as TutorialData.Root,
   dynamic_programming: dp as TutorialData.Root,

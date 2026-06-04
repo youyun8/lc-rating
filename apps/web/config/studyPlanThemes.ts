@@ -12,6 +12,7 @@ import {
   Type,
   Trees,
   Trophy,
+  ArrowDownWideNarrow,
   type LucideIcon,
 } from "lucide-react";
 
@@ -25,6 +26,7 @@ export const studyPlanIcons: Record<string, LucideIcon> = {
   google_interview: Search,
   rating_2100: Trophy,
   binary_search: Search,
+  sorting: ArrowDownWideNarrow,
   bitwise_operations: Cpu,
   data_structure: Database,
   dynamic_programming: Layers,
@@ -59,6 +61,11 @@ export const studyPlanThemes: Record<string, StudyPlanTheme> = {
     gradient: "linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)",
     accent: "#3b82f6",
     accentDark: "#1e40af",
+  },
+  sorting: {
+    gradient: "linear-gradient(135deg, #84cc16 0%, #4d7c0f 100%)",
+    accent: "#84cc16",
+    accentDark: "#4d7c0f",
   },
   bitwise_operations: {
     gradient: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
