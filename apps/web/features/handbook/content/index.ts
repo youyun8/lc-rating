@@ -1,6 +1,7 @@
 import type { HandbookGroup, HandbookTopic, HandbookTopicRef } from "../model";
 import { competitiveProgrammingEssentials } from "./competitive-programming-essentials";
 import { binarySearch } from "./binary-search";
+import { sorting } from "./sorting";
 import { slidingWindow } from "./sliding-window";
 import { monotonicStack } from "./monotonic-stack";
 import { greedy } from "./greedy";
@@ -25,6 +26,7 @@ import { bitManipulation } from "./bit-manipulation";
 export const HANDBOOK_TOPICS: HandbookTopic[] = [
   competitiveProgrammingEssentials,
   binarySearch,
+  sorting,
   slidingWindow,
   monotonicStack,
   greedy,

@@ -1,4 +1,5 @@
 import {
+  ArrowDownWideNarrow,
   Binary,
   Boxes,
   Crosshair,
@@ -16,6 +17,7 @@ import {
 
 /** Resolves the lucide icon referenced by a topic's `icon` field. */
 export const HANDBOOK_ICONS: Record<string, LucideIcon> = {
+  ArrowDownWideNarrow,
   Crosshair,
   PanelsTopLeft,
   Layers,
