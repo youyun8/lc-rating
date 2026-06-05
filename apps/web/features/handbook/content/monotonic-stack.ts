@@ -18,10 +18,10 @@ Signals:
 - "**next greater / next smaller** element", "previous greater/smaller"
 - "**span**" or "how many days until a warmer temperature"
 - Largest rectangle in a **histogram**; maximal rectangle in a binary matrix
-- "Sum/min/max over all subarrays" via **contribution counting** (how many subarrays does each element dominate)
+- "Sum/min/max over all subarrays" via **contribution counting** (how many subarrays does each element dominate — see the [Contribution Method](/handbook/contribution))
 - Removing characters to get the smallest/largest result (monotonic + greedy)
 
-The companion structure, the **monotonic deque**, handles sliding-window extrema (see [Sliding Window](/handbook/sliding-window)).`,
+The companion structure, the **monotonic deque**, handles sliding-window extrema (see [Sliding Window](/handbook/sliding-window)); the [Monotonic Stack vs Deque](/handbook/monotonic-stack-vs-deque) page contrasts when to reach for each.`,
     },
     {
       id: "prerequisites",

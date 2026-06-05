@@ -5,10 +5,13 @@ import {
   Crosshair,
   Gauge,
   GitBranch,
+  GitCompare,
   Grid3x3,
   Layers,
   Network,
   PanelsTopLeft,
+  PencilRuler,
+  PieChart,
   Share2,
   Sigma,
   Type,
@@ -30,6 +33,9 @@ export const HANDBOOK_ICONS: Record<string, LucideIcon> = {
   Type,
   Binary,
   GitBranch,
+  GitCompare,
+  PieChart,
+  PencilRuler,
 };
 
 export function resolveHandbookIcon(name: string): LucideIcon {

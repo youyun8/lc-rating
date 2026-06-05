@@ -4,6 +4,8 @@ import { binarySearch } from "./binary-search";
 import { sorting } from "./sorting";
 import { slidingWindow } from "./sliding-window";
 import { monotonicStack } from "./monotonic-stack";
+import { monotonicStackVsDeque } from "./monotonic-stack-vs-deque";
+import { contribution } from "./contribution";
 import { greedy } from "./greedy";
 import { backtracking } from "./backtracking";
 import { dataStructures } from "./data-structures";
@@ -18,6 +20,7 @@ import { stringAlgorithmsII } from "./string-algorithms-ii";
 import { math } from "./math";
 import { geometry } from "./geometry";
 import { bitManipulation } from "./bit-manipulation";
+import { trialFilling } from "./trial-filling";
 
 /**
  * Ordered list of every handbook topic. The order doubles as the learning
@@ -29,6 +32,8 @@ export const HANDBOOK_TOPICS: HandbookTopic[] = [
   sorting,
   slidingWindow,
   monotonicStack,
+  monotonicStackVsDeque,
+  contribution,
   greedy,
   backtracking,
   dataStructures,
@@ -43,6 +48,7 @@ export const HANDBOOK_TOPICS: HandbookTopic[] = [
   math,
   geometry,
   bitManipulation,
+  trialFilling,
 ];
 
 /** Display order of the overview groups. */
