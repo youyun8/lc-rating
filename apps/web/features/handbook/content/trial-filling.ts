@@ -11,7 +11,7 @@ export const trialFilling: HandbookTopic = {
     {
       id: "overview",
       title: "Overview & when to use it",
-      body: `**Trial filling** (试填法) constructs an optimal answer **position by position**, starting from the most significant end. At each position you *try* a candidate value — the smallest character for a lexicographically minimal answer, or the highest bit for a maximal number — and then run a cheap **feasibility check**: *can the remaining positions still be completed into a valid answer?* If yes, commit and move on; if no, back off to the next candidate. Because the most significant position dominates the objective, a greedy "best feasible choice first" is provably optimal, and an exponential search space (\`2^B\` numbers, \`26^n\` strings) collapses to polynomial.
+      body: `**Trial filling** (試填法) constructs an optimal answer **position by position**, starting from the most significant end. At each position you *try* a candidate value — the smallest character for a lexicographically minimal answer, or the highest bit for a maximal number — and then run a cheap **feasibility check**: *can the remaining positions still be completed into a valid answer?* If yes, commit and move on; if no, back off to the next candidate. Because the most significant position dominates the objective, a greedy "best feasible choice first" is provably optimal, and an exponential search space (\`2^B\` numbers, \`26^n\` strings) collapses to polynomial.
 
 Signals:
 
@@ -88,7 +88,7 @@ The explicit \`rest * 1 <= remain <= rest * 26\` bound is the "can I finish?" or
     {
       id: "kth-order",
       title: "Filling to find the k-th element",
-      body: `When the answer is "the **k-th** value in lexicographic (or some structured) order", trial-fill the answer as a path down an **implicit trie**: at each node, *count* how many leaves live under each child; if a whole subtree has \`\\le k\` leaves, skip it (move to the next sibling), otherwise descend into it (fix that digit) and recurse.
+      body: `When the answer is "the **k-th** value in lexicographic (or some structured) order", trial-fill the answer as a path down an **implicit trie**: at each node, *count* how many leaves live under each child; if a whole subtree has \`<= k\` leaves, skip it (move to the next sibling), otherwise descend into it (fix that digit) and recurse.
 
 \`\`\`cpp
 // K-th smallest in lexicographical order (LC 440): descend the 10-ary trie
@@ -125,7 +125,7 @@ int findKthNumber(int n, int k) {
       title: "When the feasibility check is a DP or binary search",
       body: `The oracle "can I complete the rest?" is sometimes a closed-form bound (as in LC 1663), but often it is itself a subproblem:
 
-- **Counting / Digit DP.** Numbers At Most N Given Digit Set (LC 902) and Count Special Integers (LC 2376) fix each digit left to right while counting how many completions stay \`\\le N\` — trial filling where the check is a [digit DP](/handbook/dynamic-programming). Non-negative Integers without Consecutive Ones (LC 600) fills bits high-to-low with a "no two adjacent ones" count.
+- **Counting / Digit DP.** Numbers At Most N Given Digit Set (LC 902) and Count Special Integers (LC 2376) fix each digit left to right while counting how many completions stay \`<= N\` — trial filling where the check is a [digit DP](/handbook/dynamic-programming). Non-negative Integers without Consecutive Ones (LC 600) fills bits high-to-low with a "no two adjacent ones" count.
 - **Binary search on the value.** Maximum Number That Sum of the Prices Is ≤ K (LC 3007) binary-searches the answer, and the feasibility predicate counts set bits across a range — a counting check wrapped around the search.
 
 The pattern is robust: *the construction loop stays the same; only the "can I finish?" subroutine grows in sophistication.*`,
@@ -136,8 +136,8 @@ The pattern is robust: *the construction loop stays the same; only the "can I fi
       body: `| Variant | Time | Notes |
 | --- | --- | --- |
 | Bitwise high-to-low | \`O(B \\cdot \\text{check})\` | \`B\` bits; check often \`O(n)\` |
-| Lexicographic string | \`O(n \\cdot \\Sigma \\cdot \\text{check})\` | \`\\Sigma\` = alphabet size |
-| K-th via trie descent | \`O(\\log_b N \\cdot \\log_b N)\` | each step counts a subtree |
+| Lexicographic string | \`O(n \\cdot \\Sigma \\cdot \\text{check})\` | Σ = alphabet size |
+| K-th via trie descent | \`O((log n)^2)\` | each step counts a subtree |
 | Check = digit DP | \`O(\\text{digits} \\cdot \\text{states})\` | per feasibility call |
 
 Each position is decided once, so the cost is (number of positions) × (cost of one feasibility test) — never the exponential size of the answer space.`,

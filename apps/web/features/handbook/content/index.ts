@@ -3,7 +3,6 @@ import { competitiveProgrammingEssentials } from "./competitive-programming-esse
 import { binarySearch } from "./binary-search";
 import { sorting } from "./sorting";
 import { slidingWindow } from "./sliding-window";
-import { monotonicStack } from "./monotonic-stack";
 import { monotonicStackVsDeque } from "./monotonic-stack-vs-deque";
 import { contribution } from "./contribution";
 import { greedy } from "./greedy";
@@ -31,7 +30,6 @@ export const HANDBOOK_TOPICS: HandbookTopic[] = [
   binarySearch,
   sorting,
   slidingWindow,
-  monotonicStack,
   monotonicStackVsDeque,
   contribution,
   greedy,

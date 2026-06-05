@@ -29,7 +29,7 @@ There are three canonical shapes: **variable-size** (grow right, shrink left whi
 - Hash maps / frequency arrays for counting characters or values.
 - Prefix sums as a fallback when negatives break monotonicity.
 
-Related: [Binary Search](/handbook/binary-search), [Monotonic Stack](/handbook/monotonic-stack) (monotonic **deque** powers sliding-window maximum; see [Monotonic Stack vs Deque](/handbook/monotonic-stack-vs-deque)), and [Strings](/handbook/strings).`,
+Related: [Binary Search](/handbook/binary-search), [Monotonic Stack vs Deque](/handbook/monotonic-stack-vs-deque) (the monotonic **deque** powers sliding-window maximum), and [Strings](/handbook/strings).`,
     },
     {
       id: "variable",

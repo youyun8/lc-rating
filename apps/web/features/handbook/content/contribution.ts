@@ -11,13 +11,13 @@ export const contribution: HandbookTopic = {
     {
       id: "overview",
       title: "Overview & when to use it",
-      body: `The **contribution method** (贡献法) evaluates a sum of the form "**total over all** subarrays / subsequences / pairs / paths of \`f(X)\`" by exchanging the order of summation. Instead of iterating every structure \`X\` and computing \`f(X)\`, you flip the question: for each *atomic part* — an element, a single bit, a pair, a tree edge — ask **how much does this part add to the grand total across all structures?** Summing those independent contributions gives the answer.
+      body: `The **contribution method** (貢獻法) evaluates a sum of the form "**total over all** subarrays / subsequences / pairs / paths of \`f(X)\`" by exchanging the order of summation. Instead of iterating every structure \`X\` and computing \`f(X)\`, you flip the question: for each *atomic part* — an element, a single bit, a pair, a tree edge — ask **how much does this part add to the grand total across all structures?** Summing those independent contributions gives the answer.
 
 The recurring identity is:
 
 > total = Σ (value of a part) × (number of structures in which that part counts)
 
-A brute force over all \`O(n^2)\` subarrays or \`O(2^n)\` subsets collapses to \`O(n)\` or \`O(n \\log V)\` once the per-part count has a closed form.
+A brute force over all \`O(n^2)\` subarrays or \`O(2^n)\` subsets collapses to \`O(n)\` or \`O(n log V)\` once the per-part count has a closed form.
 
 Signals:
 
@@ -40,7 +40,7 @@ Patterns covered on this page:
       title: "Prerequisites",
       body: `- Basic combinatorial counting (how many subarrays/subsets contain an index).
 - Prefix sums and sorting for the pairwise and subsequence variants.
-- A [Monotonic Stack](/handbook/monotonic-stack) for the min/max domination spans.
+- A [Monotonic Stack](/handbook/monotonic-stack-vs-deque) for the min/max domination spans.
 - Bit operations for the per-bit split (see [Bit Manipulation](/handbook/bit-manipulation)).
 
 Related: [Sliding Window](/handbook/sliding-window), [Trees](/handbook/trees), [Math](/handbook/math).`,
@@ -48,7 +48,7 @@ Related: [Sliding Window](/handbook/sliding-window), [Trees](/handbook/trees), [
     {
       id: "positional",
       title: "Pattern 1: Positional subarray count",
-      body: `When \`f(\\text{subarray}) = \\text{sum}\`, every element contributes its value once per subarray that contains it. Index \`i\` (0-based) is the left end of \`i + 1\` choices and the right end of \`n - i\` choices, so it appears in \`(i + 1)(n - i)\` subarrays.
+      body: `When \`f(subarray) = sum\`, every element contributes its value once per subarray that contains it. Index \`i\` (0-based) is the left end of \`i + 1\` choices and the right end of \`n - i\` choices, so it appears in \`(i+1)*(n-i)\` subarrays.
 
 \`\`\`cpp
 // Sum of all subarray sums: a[i] appears in (i+1)*(n-i) subarrays
@@ -62,12 +62,12 @@ long long sumOfAllSubarraySums(vector<int>& a) {
 }
 \`\`\`
 
-**Restrict the count by a property of the subarray.** Sum of All Odd Length Subarrays (LC 1588) keeps only odd-length subarrays containing \`i\`; exactly \`\\lceil (i+1)(n-i) / 2 \\rceil\` of them qualify, so the contribution is \`a[i] \\cdot ((i+1)(n-i) + 1) / 2\`. The same "count then weight" idea drives Minimum Number of Operations to Move All Balls (LC 1769), where each box's distance is a prefix-count contribution.`,
+**Restrict the count by a property of the subarray.** Sum of All Odd Length Subarrays (LC 1588) keeps only odd-length subarrays containing \`i\`; exactly \`ceil((i+1)*(n-i) / 2)\` of them qualify, so the contribution is \`a[i] * ((i+1)*(n-i) + 1) / 2\`. The same "count then weight" idea drives Minimum Number of Operations to Move All Balls (LC 1769), where each box's distance is a prefix-count contribution.`,
     },
     {
       id: "domination",
       title: "Pattern 2: Min / max domination",
-      body: `When \`f(\\text{subarray})\` is a **min** or **max**, attribute each subarray to its extreme element. For \`a[i]\`, find the maximal span \`[\\text{left}, \\text{right}]\` over which it stays the minimum; it is then the minimum of \`\\text{left} \\times \\text{right}\` subarrays, contributing \`a[i] \\cdot \\text{left} \\cdot \\text{right}\`. A [Monotonic Stack](/handbook/monotonic-stack) computes both boundaries in \`O(n)\`.
+      body: `When \`f(subarray)\` is a **min** or **max**, attribute each subarray to its extreme element. For \`a[i]\`, find the maximal span \`[left, right]\` over which it stays the minimum; it is then the minimum of \`left*right\` subarrays, contributing \`a[i] * left * right\`. A [Monotonic Stack](/handbook/monotonic-stack-vs-deque) computes both boundaries in \`O(n)\`.
 
 \`\`\`cpp
 // left[i]*right[i] = # subarrays where a[i] is the minimum; sum the contributions
@@ -97,7 +97,7 @@ Sum of Subarray Ranges (LC 2104) = (sum of subarray maxima) − (sum of subarray
     {
       id: "bitwise",
       title: "Pattern 3: Per-bit contribution",
-      body: `For sums of **XOR / AND / OR** or Hamming distances over all pairs or subsets, the bits are independent: bit \`b\` contributes \`2^b \\times (\\text{number of structures whose aggregate has bit } b \\text{ set})\`. Solve one bit at a time, then weight by \`2^b\`.
+      body: `For sums of **XOR / AND / OR** or Hamming distances over all pairs or subsets, the bits are independent: bit \`b\` contributes \`2^b\` times the number of structures whose aggregate has bit \`b\` set. Solve one bit at a time, then weight by \`2^b\`.
 
 \`\`\`cpp
 // Total Hamming Distance between all pairs (LC 477)
@@ -144,12 +144,12 @@ long long sumPairwiseAbsDiff(vector<int> a) {
 }
 \`\`\`
 
-Sum of Absolute Differences in a Sorted Array (LC 1685) reports this contribution per index using both a prefix and a suffix sum. The "rank as a signed coefficient" idea also gives Sum of Distances (LC 2615) and any "\`Σ |x_i - x_j|\`" objective.`,
+Sum of Absolute Differences in a Sorted Array (LC 1685) reports this contribution per index using both a prefix and a suffix sum. The "rank as a signed coefficient" idea also gives Sum of Distances (LC 2615) and any "sum of \`|x_i - x_j|\`" objective.`,
     },
     {
       id: "subsequence",
       title: "Pattern 5: Subsequence contribution (powers of two)",
-      body: `For sums over all \`2^n\` **subsequences** where \`f\` is a max, min, or width, sort and count with powers of two: the element at rank \`i\` is the **max** of every subsequence chosen from the \`i\` smaller elements (\`2^i\` of them) and the **min** of \`2^{\\,n-1-i}\` subsequences.
+      body: `For sums over all \`2^n\` **subsequences** where \`f\` is a max, min, or width, sort and count with powers of two: the element at rank \`i\` is the **max** of every subsequence chosen from the \`i\` smaller elements (\`2^i\` of them) and the **min** of \`2^(n-1-i)\` subsequences.
 
 \`\`\`cpp
 // Sum of widths (max - min) over all subsequences (LC 891), mod 1e9+7
@@ -169,12 +169,12 @@ int sumSubseqWidths(vector<int>& a) {
 }
 \`\`\`
 
-The same \`2^k\` weighting solves Power of Heroes (LC 2681), where each value is the max of some subsequences and the min of others, contributing \`\\text{max} \\cdot \\text{min}^2\`.`,
+The same \`2^k\` weighting solves Power of Heroes (LC 2681), where each value is the max of some subsequences and the min of others, contributing \`max * min^2\`.`,
     },
     {
       id: "tree",
       title: "Pattern 6: Tree edge / path contribution",
-      body: `For sums of **path lengths over all pairs of nodes**, attribute the total to **edges**. Removing an edge splits the tree into a part of size \`\\text{sz}\` and a part of size \`n - \\text{sz}\`; every one of the \`\\text{sz}(n - \\text{sz})\` cross pairs uses that edge exactly once.
+      body: `For sums of **path lengths over all pairs of nodes**, attribute the total to **edges**. Removing an edge splits the tree into a part of size \`sz\` and a part of size \`n - sz\`; every one of the \`sz*(n-sz)\` cross pairs uses that edge exactly once.
 
 \`\`\`cpp
 // Sum of distances over all node pairs: each edge contributes sz*(n-sz)
@@ -194,7 +194,7 @@ long long sumAllPairDistances(int n, vector<vector<int>>& g) {
 }
 \`\`\`
 
-Weight the term by the edge cost for weighted trees; Minimum Fuel Cost to Report to the Capital (LC 2477) sums \`\\lceil \\text{sz} / \\text{seats} \\rceil\` per edge. Note that Sum of Distances in Tree (LC 834) — distances from *every* node — instead needs [rerooting](/handbook/trees), a close cousin of edge contribution.`,
+Weight the term by the edge cost for weighted trees; Minimum Fuel Cost to Report to the Capital (LC 2477) sums \`ceil(sz / seats)\` per edge. Note that Sum of Distances in Tree (LC 834) — distances from *every* node — instead needs [rerooting](/handbook/trees), a close cousin of edge contribution.`,
     },
     {
       id: "complexity",
@@ -203,9 +203,9 @@ Weight the term by the edge cost for weighted trees; Minimum Fuel Cost to Report
 | --- | --- | --- |
 | Positional subarray count | \`O(n)\` | \`O(1)\` |
 | Min/max domination | \`O(n)\` | \`O(n)\` |
-| Per-bit contribution | \`O(n \\log V)\` | \`O(1)\` |
-| Pairwise after sorting | \`O(n \\log n)\` | \`O(1)\` |
-| Subsequence powers of two | \`O(n \\log n)\` | \`O(n)\` |
+| Per-bit contribution | \`O(n log V)\` | \`O(1)\` |
+| Pairwise after sorting | \`O(n log n)\` | \`O(1)\` |
+| Subsequence powers of two | \`O(n log n)\` | \`O(n)\` |
 | Tree edge / path | \`O(n)\` | \`O(n)\` |
 
 The win is always the same: an \`O(n^2)\` or \`O(2^n)\` enumeration becomes near-linear once each part's count is a formula.`,
@@ -239,7 +239,7 @@ The win is always the same: an \`O(n^2)\` or \`O(2^n)\` enumeration becomes near
     {
       id: "pitfalls",
       title: "Pitfalls & tips",
-      body: `- **Overflow**: products like \`(i + 1)(n - i)\` and \`\\text{sz}(n - \\text{sz})\` overflow 32-bit — cast to \`long long\` (or apply the modulus) before multiplying.
+      body: `- **Overflow**: products like \`(i+1)*(n-i)\` and \`sz*(n-sz)\` overflow 32-bit — cast to \`long long\` (or apply the modulus) before multiplying.
 - **Tie handling in domination**: use one strict and one non-strict comparison so equal values land in exactly one element's span; otherwise pairs are double-counted or dropped.
 - **Ordered vs unordered pairs**: decide whether \`(i, j)\` and \`(j, i)\` both count; the pairwise formulas above count each unordered pair once.
 - **Modular subtraction**: when contributions can be negative (e.g. \`pw[i] - pw[n-1-i]\`), add \`MOD\` before the final \`% MOD\`.
