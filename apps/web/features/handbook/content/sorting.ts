@@ -16,7 +16,7 @@ export const sorting: HandbookTopic = {
 Reach for them when you see any of these signals:
 
 - Keys are **small integers**: scores \`0..100\`, letters \`a..z\`, ages, pixel values \`0..255\`.
-- The constraints spell out a **small bound** (\`1 <= nums[i] <= 1000\`) on the same order as \`n\`.
+- The constraints spell out a **small bound** ($1 \\le \\text{nums}[i] \\le 1000$) on the same order as \`n\`.
 - You must sort **large-range integers** but the **number of digits is fixed** (32-bit ints, fixed-length strings).
 - You need **Top-K by frequency** or the **maximum adjacent gap** in \`O(n)\`.
 
@@ -57,7 +57,7 @@ vector<int> countingSort(const vector<int>& a, int k) {
 }
 \`\`\`
 
-If you must carry whole records along (sort objects by a key) **and** keep equal keys in input order (stable), use the prefix-sum variant. The prefix sum tells you how many elements are \`<= v\`, i.e. where value \`v\` must end:
+If you must carry whole records along (sort objects by a key) **and** keep equal keys in input order (stable), use the prefix-sum variant. The prefix sum tells you how many elements are $\\le v$, i.e. where value \`v\` must end:
 
 \`\`\`cpp
 // Stable counting sort via prefix sums (the basis of radix sort)

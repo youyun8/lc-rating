@@ -219,7 +219,7 @@ Flip the back comparison to \`>=\` for a window **minimum**. Drop the \`pop_fron
     {
       id: "deque-two",
       title: "Deque pattern: two deques for max − min windows",
-      body: `When validity depends on both ends of the value range — "longest subarray where \`max - min <= limit\`" (LC 1438) — run **two** monotonic deques over the same sliding window: one decreasing (tracks the max at its front) and one increasing (tracks the min). Shrink \`left\` whenever \`maxDeque.front - minDeque.front > limit\`.
+      body: `When validity depends on both ends of the value range — "longest subarray where $\\max - \\min \\le \\text{limit}$" (LC 1438) — run **two** monotonic deques over the same sliding window: one decreasing (tracks the max at its front) and one increasing (tracks the min). Shrink \`left\` whenever \`maxDeque.front - minDeque.front > limit\`.
 
 \`\`\`cpp
 // Longest subarray with abs(max - min) <= limit (LC 1438)
@@ -312,7 +312,7 @@ So the rule of thumb: **a moving left boundary forces the second end.** If the r
       body: `Ask these in order:
 
 1. **Do I need, per element, "the next/previous bigger or smaller one"?** → monotonic **stack** (NGE, daily temperatures, stock span, histogram, contribution sums).
-2. **Do I need, per index/window, "the max or min over a range whose left bound is moving"?** → monotonic **deque** (sliding-window extrema, longest window with \`max - min <= limit\`).
+2. **Do I need, per index/window, "the max or min over a range whose left bound is moving"?** → monotonic **deque** (sliding-window extrema, longest window with $\\max - \\min \\le \\text{limit}$).
 3. **Is it a DP transition \`dp[i] = best(dp[j])\` where \`j\` ranges over a sliding window?** → monotonic **deque** (windowed-max DP).
 4. **Is the value an aggregate I can attribute to an element's span?** → monotonic **stack** feeding the [Contribution Method](/handbook/contribution).
 

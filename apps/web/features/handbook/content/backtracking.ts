@@ -17,7 +17,7 @@ Reach for backtracking when you see:
 
 - "Find **all** ...", "list **every** ...", "**count the number of ways** ...".
 - A solution that is a **sequence of decisions** (pick/skip an element, place a piece, choose a digit).
-- Small constraints — usually \`n <= 20\` for subsets/bitmask or \`n! \`-style explosions kept tiny by **pruning**.
+- Small constraints — usually $n \\le 20$ for subsets/bitmask or $n!$-style explosions kept tiny by **pruning**.
 
 The whole method is the *choose → explore → un-choose* loop. If you also need the **optimal** answer over overlapping subproblems rather than every configuration, that is the bridge to [Dynamic Programming](/handbook/dynamic-programming): memoize the recursion.`,
     },
@@ -26,7 +26,7 @@ The whole method is the *choose → explore → un-choose* loop. If you also nee
       title: "Prerequisites",
       body: `- Comfortable reading and writing **recursion** and tracing a call stack.
 - Knowing how a reference parameter (\`vector<int>& path\`) is shared across recursive calls, so changes must be undone.
-- Basic counting: how many subsets (\`2^n\`), permutations (\`n!\`), and combinations (\`C(n, k)\`) exist.
+- Basic counting: how many subsets ($2^n$), permutations ($n!$), and combinations ($C(n, k)$) exist.
 
 Related handbook topics: [Competitive Programming Essentials](/handbook/competitive-programming-essentials) (reading constraints to confirm exponential search fits), [Grid / Matrix](/handbook/grid) (backtracking on boards), [Bit Manipulation](/handbook/bit-manipulation) (subset/mask enumeration), and [Dynamic Programming](/handbook/dynamic-programming) (memoized recursion).`,
     },
@@ -240,7 +240,7 @@ The same shape solves Restore IP Addresses (LC 93, cut into 4 valid octets) and 
       title: "Advanced techniques (hard problems)",
       body: `**Memoized backtracking → DP.** When branches revisit the same state, cache results on that state. This is exactly top-down DP and collapses exponential recursion to polynomial: Word Break II (LC 140), Matchsticks to Square / Partition to K Equal Sum Subsets via bitmask memo (LC 698, LC 473), and Minimum Number of Work Sessions (LC 1986).
 
-**Bitmask state.** For \`n <= 20\`, represent "which elements are used" as an integer and memoize over it — the link between backtracking and [Bitmask DP](/handbook/dynamic-programming).
+**Bitmask state.** For $n \\le 20$, represent "which elements are used" as an integer and memoize over it — the link between backtracking and [Bitmask DP](/handbook/dynamic-programming).
 
 \`\`\`cpp
 // Count Hamiltonian-style assignments with a bitmask memo.
@@ -266,7 +266,7 @@ int dfs(int mask) {
 
 **Iterative deepening (IDA*).** When the depth of the answer is small but the tree is huge, repeatedly DFS with an increasing depth limit; add an admissible heuristic to prune (classic for puzzle solvers).
 
-**Meet in the middle.** Split the choices in half, enumerate each half (\`2^{n / 2}\`), and combine — turns \`2^{40}\` into a manageable \`2^{20}\` per side (see [Bit Manipulation](/handbook/bit-manipulation)).`,
+**Meet in the middle.** Split the choices in half, enumerate each half ($2^{n/2}$), and combine — turns $2^{40}$ into a manageable $2^{20}$ per side (see [Bit Manipulation](/handbook/bit-manipulation)).`,
     },
     {
       id: "complexity",
@@ -275,12 +275,12 @@ int dfs(int mask) {
 
 | Pattern | Configurations | Typical bound |
 | --- | --- | --- |
-| Subsets | \`2^n\` | \`O(n * 2^n)\` to emit |
-| Combinations \`C(n, k)\` | \`C(n, k)\` | \`O(k * C(n, k))\` |
-| Permutations | \`n!\` | \`O(n * n!)\` |
+| Subsets | $2^n$ | \`O(n * 2^n)\` to emit |
+| Combinations $C(n, k)$ | $C(n, k)$ | \`O(k * C(n, k))\` |
+| Permutations | $n!$ | \`O(n * n!)\` |
 | N-Queens | backtracked | \`O(n!)\` worst, far less pruned |
-| Partition into k groups | \`k^n\` raw | feasible with sorting + pruning |
-| Memoized over bitmask | \`2^n\` states | \`O(2^n * n)\` |`,
+| Partition into k groups | $k^n$ raw | feasible with sorting + pruning |
+| Memoized over bitmask | $2^n$ states | \`O(2^n * n)\` |`,
     },
     {
       id: "problems",

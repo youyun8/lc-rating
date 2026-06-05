@@ -175,7 +175,7 @@ vector<long long> bellman(int n, int src, vector<array<int, 3>>& edges) {
 }
 \`\`\`
 
-**Floyd-Warshall** computes all-pairs shortest paths in \`O(n^3)\` — fine for \`n <= ~400\`.
+**Floyd-Warshall** computes all-pairs shortest paths in \`O(n^3)\` — fine for $n \\le 400$ or so.
 
 \`\`\`cpp
 // Floyd-Warshall all-pairs shortest path

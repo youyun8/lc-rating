@@ -16,7 +16,7 @@ export const bitManipulation: HandbookTopic = {
 Signals:
 
 - "every element appears twice except one" / "find the missing number" → XOR.
-- "subsets of a set with \`n <= 20\`" → represent subsets as bitmasks.
+- "subsets of a set with $n \\le 20$" → represent subsets as bitmasks.
 - "is it a power of two", "count set bits", "swap without temp" → bit tricks.
 - Flags/permissions packed into a single integer.`,
     },
@@ -47,7 +47,7 @@ x &= ~(1 << i);           // clear bit i to 0
 x ^= (1 << i);            // toggle bit i
 \`\`\`
 
-Use \`1u << i\` or \`1LL << i\` when \`i >= 31\` to avoid signed overflow / UB.`,
+Use \`1u << i\` or \`1LL << i\` when $i \\ge 31$ to avoid signed overflow / UB.`,
     },
     {
       id: "tricks",
@@ -185,7 +185,7 @@ while (sub < (1 << n)) {
 
 **Sum over Subsets (SOS) DP** aggregates over all submasks in \`O(n·2^n)\` (see the DP chapter) — it solves Count Triplets That Can Form Two Arrays of Equal XOR-style and Number of Triplets with bitwise-AND zero (LC 982).
 
-**Meet in the middle.** When \`n ≤ ~40\`, split the set in half, enumerate the \`2^{n / 2}\` subset values of each half, then combine by sorting + two pointers or hashing. Closest Subsequence Sum (LC 1755) and Partition to minimize difference (LC 2035) use this to beat \`2^n\`.
+**Meet in the middle.** When $n \\le 40$ or so, split the set in half, enumerate the $2^{n/2}$ subset values of each half, then combine by sorting + two pointers or hashing. Closest Subsequence Sum (LC 1755) and Partition to minimize difference (LC 2035) use this to beat $2^n$.
 
 **Bitset acceleration.** A \`std::bitset\` packs 64 booleans per word, cutting reachability/subset-sum DP by a constant factor of ~64 (e.g. boolean knapsack feasibility for large capacities).`,
     },

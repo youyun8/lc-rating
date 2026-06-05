@@ -223,7 +223,7 @@ int search(vector<int>& a, int target) {
 
 **4. Find a peak / find the minimum of a rotated array.** Compare \`a[mid]\` to a neighbour or to \`a[r]\` to decide direction (LC 162, LC 153).
 
-**5. Kth-smallest via "count ≤ x".** If you can count how many elements are \`<= x\` in \`O(f(n))\`, binary search the value. Works for a sorted matrix (LC 378), the multiplication table (LC 668), and Kth-smallest distance pair (LC 719).
+**5. Kth-smallest via "count ≤ x".** If you can count how many elements are $\\le x$ in \`O(f(n))\`, binary search the value. Works for a sorted matrix (LC 378), the multiplication table (LC 668), and Kth-smallest distance pair (LC 719).
 
 \`\`\`cpp
 // Count entries <= x in an n*n row/col-sorted matrix, staircase from
@@ -333,7 +333,7 @@ double findMaxAverage(vector<int>& a, int k) {
 | --- | --- | --- |
 | Value / bound search | \`O(log n)\` | comparisons only |
 | Binary search on answer | \`O(log(hi - lo) * C)\` | \`C\` = cost of one \`check\` |
-| Kth-smallest by counting | \`O(log(range) * C)\` | \`C\` = cost to count \`<= x\`, often \`O(n)\` |
+| Kth-smallest by counting | \`O(log(range) * C)\` | \`C\` = cost to count elements $\\le x$, often \`O(n)\` |
 | Floating search | \`O(iterations * C)\` | fixed ~60–100 iterations |
 
 The whole game is making \`check\` cheap and *provably monotone*.`,

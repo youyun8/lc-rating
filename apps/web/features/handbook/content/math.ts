@@ -124,7 +124,7 @@ long long power(long long a, long long b, long long m) {
 }
 \`\`\`
 
-When \`m\` is **prime**, the modular inverse of \`a\` is \`a^(m - 2) mod m\` (Fermat's little theorem):
+When \`m\` is **prime**, the modular inverse of \`a\` is $a^{m-2} \\bmod m$ (Fermat's little theorem):
 
 \`\`\`cpp
 // Modular inverse for prime modulus m
@@ -171,7 +171,7 @@ Used for Unique Paths (closed form \`C(m + n - 2, m - 1)\`), counting-DP answers
 - **Digit sum / digit reverse**: peel digits with \`% 10\` and \`/ 10\`; watch for overflow on reverse (LC 7).
 - **Powers of two**: \`x\` is a power of two iff \`x > 0 && (x & (x - 1)) == 0\` (see [Bit Manipulation](/handbook/bit-manipulation)).
 - **GCD over an array** is associative — fold it; the whole array's GCD is the gcd of all elements.
-- **Geometry basics**: orientation via cross product sign \`(b - a) × (c - a)\`; area of a polygon via the shoelace formula.
+- **Geometry basics**: orientation via cross product sign $(b - a) \\times (c - a)$; area of a polygon via the shoelace formula.
 - **Expected value / probability**: linearity of expectation often turns a hard count into a sum of simple terms.`,
     },
     {
