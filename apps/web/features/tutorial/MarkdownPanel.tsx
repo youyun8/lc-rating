@@ -1,4 +1,4 @@
-import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
+import { HandbookSectionBody } from "@/features/handbook/HandbookSectionBody";
 import React from "react";
 
 interface TutorialMarkdownPanelProps {
@@ -30,7 +30,7 @@ export function TutorialMarkdownPanel({
         </div>
       </div>
       <div className="p-4 sm:p-5 md:p-6">
-        <StudyPlanMarkdownContent content={content} variant="plan" />
+        <HandbookSectionBody body={content} exampleLabel="範例" language="zh" />
       </div>
     </section>
   );
