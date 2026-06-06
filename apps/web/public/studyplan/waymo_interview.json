@@ -2,8 +2,8 @@
   "id": 1,
   "title": "Waymo 面試準備",
   "src": "",
-  "last_update": "2026-06-06T11:32:29.000Z",
-  "summary": "這份題單面向 Waymo 等自動駕駛公司的技術面試準備，所有題目都至少 1700 rating。題目對應自駕常見情境：路徑規劃與最短路、佔據網格、計算幾何與碰撞偵測、道路網建模、感測器資料流、車載即時系統與車隊平台設計。\n\n使用建議：先完成前六章建立共同基礎，再依弱項加做後續章節；每題復盤題型訊號、關鍵不變式、複雜度與可替代解法。",
+  "last_update": "2026-06-06T11:41:34.622Z",
+  "summary": "這份題單面向 Waymo 等自動駕駛公司的技術面試準備。題目對應自駕常見情境：路徑規劃與最短路、佔據網格、計算幾何與碰撞偵測、座標轉換、移動碰撞預測、道路網建模、感測器資料流、日誌解析、車載即時系統與車隊平台設計。\n\n使用建議：先完成前六章建立共同基礎，再依弱項加做後續章節；每題復盤題型訊號、關鍵不變式、複雜度與可替代解法。",
   "children": [
     {
       "id": 2,
@@ -11,6 +11,105 @@
       "summary": "路徑規劃常把 BFS/DFS/Dijkstra 包在網格、狀態壓縮或加權圖裡；練習時先明確狀態、邊權與 visited 維度，再選 BFS、0-1 BFS、Dijkstra 或 A*。",
       "isLeaf": true,
       "problems": [
+        {
+          "id": "3112",
+          "title": "訪問消失節點的最少時間",
+          "slug": "minimum-time-to-visit-disappearing-nodes",
+          "src": "https://leetcode.cn/problems/minimum-time-to-visit-disappearing-nodes/",
+          "solution": null,
+          "score": 1756.963553993,
+          "isPremium": false,
+          "subsection": "動態最短路 / 消失節點"
+        },
+        {
+          "id": "1129",
+          "title": "顏色交替的最短路徑",
+          "slug": "shortest-path-with-alternating-colors",
+          "src": "https://leetcode.cn/problems/shortest-path-with-alternating-colors/",
+          "solution": null,
+          "score": 1779.7534349429,
+          "isPremium": false,
+          "subsection": "分層圖 / 交替約束"
+        },
+        {
+          "id": "1514",
+          "title": "機率最大的路徑",
+          "slug": "path-with-maximum-probability",
+          "src": "https://leetcode.cn/problems/path-with-maximum-probability/",
+          "solution": null,
+          "score": 1846.4077077642,
+          "isPremium": false,
+          "subsection": "Dijkstra / 最大機率路徑"
+        },
+        {
+          "id": "1334",
+          "title": "閾值距離內鄰居最少的城市",
+          "slug": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance",
+          "src": "https://leetcode.cn/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
+          "solution": null,
+          "score": 1854.9547783559,
+          "isPremium": false,
+          "subsection": "Floyd / 距離閾值"
+        },
+        {
+          "id": "1786",
+          "title": "從第一個節點出發到最後一個節點的受限路徑數",
+          "slug": "number-of-restricted-paths-from-first-to-last-node",
+          "src": "https://leetcode.cn/problems/number-of-restricted-paths-from-first-to-last-node/",
+          "solution": null,
+          "score": 2078.5417326415,
+          "isPremium": false,
+          "subsection": "Dijkstra / 路徑計數"
+        },
+        {
+          "id": "1976",
+          "title": "到達目的地的方案數",
+          "slug": "number-of-ways-to-arrive-at-destination",
+          "src": "https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination/",
+          "solution": null,
+          "score": 2094.592426537,
+          "isPremium": false,
+          "subsection": "Dijkstra / 最短路方案數"
+        },
+        {
+          "id": "3244",
+          "title": "新增道路查詢後的最短距離 II",
+          "slug": "shortest-distance-after-road-addition-queries-ii",
+          "src": "https://leetcode.cn/problems/shortest-distance-after-road-addition-queries-ii/",
+          "solution": null,
+          "score": 2270.2002503611,
+          "isPremium": false,
+          "subsection": "動態最短路 / 區間維護"
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": 3,
+      "title": "2. 佔據網格與多源 BFS",
+      "summary": "感知輸出的佔據網格上，多數問題是距離場、可達區域、邊界逃離或含方向/時間的狀態搜尋。先想清楚單源還是多源、visited 是否需要含方向、時間與剩餘資源。",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "1162",
+          "title": "地圖分析",
+          "slug": "as-far-from-land-as-possible",
+          "src": "https://leetcode.cn/problems/as-far-from-land-as-possible/",
+          "solution": null,
+          "score": 1666.346990979,
+          "isPremium": false,
+          "subsection": "多源 BFS / 最近陸地距離"
+        },
+        {
+          "id": "1391",
+          "title": "檢查網格中是否存在有效路徑",
+          "slug": "check-if-there-is-a-valid-path-in-a-grid",
+          "src": "https://leetcode.cn/problems/check-if-there-is-a-valid-path-in-a-grid/",
+          "solution": null,
+          "score": 1745.6490739887,
+          "isPremium": false,
+          "subsection": "網格連通 / 路徑合法性"
+        },
         {
           "id": "1765",
           "title": "地圖中的最高點",
@@ -42,34 +141,14 @@
           "subsection": "網格 BFS / 剩餘資源"
         },
         {
-          "id": "1976",
-          "title": "到達目的地的方案數",
-          "slug": "number-of-ways-to-arrive-at-destination",
-          "src": "https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination/",
+          "id": "1368",
+          "title": "使網格圖至少有一條有效路徑的最小代價",
+          "slug": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+          "src": "https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
           "solution": null,
-          "score": 2094.592426537,
+          "score": 2068.806637566,
           "isPremium": false,
-          "subsection": "Dijkstra / 路徑計數"
-        },
-        {
-          "id": "2812",
-          "title": "找出最安全路徑",
-          "slug": "find-the-safest-path-in-a-grid",
-          "src": "https://leetcode.cn/problems/find-the-safest-path-in-a-grid/",
-          "solution": null,
-          "score": 2153.5854429139,
-          "isPremium": false,
-          "subsection": "多源 BFS / 二分 / 並查集"
-        },
-        {
-          "id": "2065",
-          "title": "最大化一張圖中的路徑價值",
-          "slug": "maximum-path-quality-of-a-graph",
-          "src": "https://leetcode.cn/problems/maximum-path-quality-of-a-graph/",
-          "solution": null,
-          "score": 2178.4249114144,
-          "isPremium": false,
-          "subsection": "限時 DFS / 回溯剪枝"
+          "subsection": "0-1 BFS / 方向代價"
         },
         {
           "id": "2503",
@@ -82,103 +161,242 @@
           "subsection": "離線查詢 / 最小堆"
         },
         {
-          "id": "3244",
-          "title": "新增道路查詢後的最短距離 II",
-          "slug": "shortest-distance-after-road-addition-queries-ii",
-          "src": "https://leetcode.cn/problems/shortest-distance-after-road-addition-queries-ii/",
+          "id": "2812",
+          "title": "找出最安全路徑",
+          "slug": "find-the-safest-path-in-a-grid",
+          "src": "https://leetcode.cn/problems/find-the-safest-path-in-a-grid/",
           "solution": null,
-          "score": 2270.2002503611,
+          "score": 2153.5854429139,
           "isPremium": false,
-          "subsection": "動態最短路 / 區間維護"
+          "subsection": "多源 BFS / 安全距離"
         },
         {
-          "id": "2699",
-          "title": "修改圖中的邊權",
-          "slug": "modify-graph-edge-weights",
-          "src": "https://leetcode.cn/problems/modify-graph-edge-weights/",
+          "id": "2258",
+          "title": "逃離火災",
+          "slug": "escape-the-spreading-fire",
+          "src": "https://leetcode.cn/problems/escape-the-spreading-fire/",
           "solution": null,
-          "score": 2873.9745576413,
+          "score": 2346.5717839654,
           "isPremium": false,
-          "subsection": "最短路 / 邊權構造"
+          "subsection": "火勢擴散 / 時間約束"
+        },
+        {
+          "id": "2577",
+          "title": "在網格圖中訪問一個格子的最少時間",
+          "slug": "minimum-time-to-visit-a-cell-in-a-grid",
+          "src": "https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid/",
+          "solution": null,
+          "score": 2381.625583289,
+          "isPremium": false,
+          "subsection": "網格 Dijkstra / 時間奇偶"
         }
       ],
       "children": []
     },
     {
-      "id": 3,
-      "title": "2. 佔據網格與多源 BFS",
-      "summary": "感知輸出的佔據網格上，多數問題是距離場、可達區域或逃出邊界。先想清楚單源還是多源、visited 是否需要含方向與剩餘資源。",
+      "id": 4,
+      "title": "3. 計算幾何、座標轉換與碰撞偵測",
+      "summary": "自駕幾何題常圍繞座標框轉換、AABB/線段/圓形碰撞、視野角度、凸包與最近距離。先固定座標系，再用叉積、點積、投影與掃描判斷幾何關係。",
       "isLeaf": true,
       "problems": [
         {
-          "id": "2096",
-          "title": "從二叉樹一個節點到另一個節點每一步的方向",
-          "slug": "step-by-step-directions-from-a-binary-tree-node-to-another",
-          "src": "https://leetcode.cn/problems/step-by-step-directions-from-a-binary-tree-node-to-another/",
+          "id": "3047",
+          "title": "求交集區域內的最大正方形面積",
+          "slug": "find-the-largest-area-of-square-inside-two-rectangles",
+          "src": "https://leetcode.cn/problems/find-the-largest-area-of-square-inside-two-rectangles/",
           "solution": null,
-          "score": 1804.5283324227,
+          "score": 1601.7402292728,
           "isPremium": false,
-          "subsection": "LCA 思維 / 路徑方向"
+          "subsection": "矩形相交 / 最大正方形"
         },
         {
-          "id": "1377",
-          "title": "T 秒後青蛙的位置",
-          "slug": "frog-position-after-t-seconds",
-          "src": "https://leetcode.cn/problems/frog-position-after-t-seconds/",
+          "id": "2249",
+          "title": "統計圓內格點數目",
+          "slug": "count-lattice-points-inside-a-circle",
+          "src": "https://leetcode.cn/problems/count-lattice-points-inside-a-circle/",
           "solution": null,
-          "score": 1823.8779711373,
+          "score": 1602.7242171967,
           "isPremium": false,
-          "subsection": "樹上機率 DFS"
+          "subsection": "圓內格點 / 距離平方"
         },
         {
-          "id": "2872",
-          "title": "可以被 K 整除連通塊的最大數目",
-          "slug": "maximum-number-of-k-divisible-components",
-          "src": "https://leetcode.cn/problems/maximum-number-of-k-divisible-components/",
+          "id": "1401",
+          "title": "圓和矩形是否有重疊",
+          "slug": "circle-and-rectangle-overlapping",
+          "src": "https://leetcode.cn/problems/circle-and-rectangle-overlapping/",
           "solution": null,
-          "score": 1967.5589835406,
+          "score": 1708.9983361411,
           "isPremium": false,
-          "subsection": "樹形 DFS / 子樹取模"
+          "subsection": "圓矩形重疊 / 投影距離"
         },
         {
-          "id": "2092",
-          "title": "找出知曉秘密的所有專家",
-          "slug": "find-all-people-with-secret",
-          "src": "https://leetcode.cn/problems/find-all-people-with-secret/",
+          "id": "939",
+          "title": "最小面積矩形",
+          "slug": "minimum-area-rectangle",
+          "src": "https://leetcode.cn/problems/minimum-area-rectangle/",
           "solution": null,
-          "score": 2003.5794613668,
+          "score": 1752.2621077596,
           "isPremium": false,
-          "subsection": "分批並查集 / 時間排序"
+          "subsection": "軸對齊矩形 / 點集哈希"
         },
         {
-          "id": "2477",
-          "title": "到達首都的最少油耗",
-          "slug": "minimum-fuel-cost-to-report-to-the-capital",
-          "src": "https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital/",
+          "id": "2101",
+          "title": "引爆最多的炸彈",
+          "slug": "detonate-the-maximum-bombs",
+          "src": "https://leetcode.cn/problems/detonate-the-maximum-bombs/",
           "solution": null,
-          "score": 2011.9703133514,
+          "score": 1880.0511044074,
           "isPremium": false,
-          "subsection": "樹上貢獻 / 子樹人數"
+          "subsection": "圓形影響範圍 / 圖搜尋"
         },
         {
-          "id": "2467",
-          "title": "樹上最大得分和路徑",
-          "slug": "most-profitable-path-in-a-tree",
-          "src": "https://leetcode.cn/problems/most-profitable-path-in-a-tree/",
+          "id": "858",
+          "title": "鏡面反射",
+          "slug": "mirror-reflection",
+          "src": "https://leetcode.cn/problems/mirror-reflection/",
           "solution": null,
-          "score": 2053.354609292,
+          "score": 1880.7433591583,
           "isPremium": false,
-          "subsection": "雙人樹路徑 / 時間戳"
+          "subsection": "反射幾何 / 數論"
         },
         {
-          "id": "2050",
-          "title": "並行課程 III",
-          "slug": "parallel-courses-iii",
-          "src": "https://leetcode.cn/problems/parallel-courses-iii/",
+          "id": "963",
+          "title": "最小面積矩形 II",
+          "slug": "minimum-area-rectangle-ii",
+          "src": "https://leetcode.cn/problems/minimum-area-rectangle-ii/",
           "solution": null,
-          "score": 2084.1404698713,
+          "score": 1990.7738526153,
           "isPremium": false,
-          "subsection": "拓撲 DP / DAG 最長路"
+          "subsection": "任意方向矩形 / 幾何哈希"
+        },
+        {
+          "id": "1610",
+          "title": "可見點的最大數目",
+          "slug": "maximum-number-of-visible-points",
+          "src": "https://leetcode.cn/problems/maximum-number-of-visible-points/",
+          "solution": null,
+          "score": 2147.1828941776,
+          "isPremium": false,
+          "subsection": "視野角度 / 極角排序"
+        },
+        {
+          "id": "1515",
+          "title": "服務中心的最佳位置",
+          "slug": "best-position-for-a-service-centre",
+          "src": "https://leetcode.cn/problems/best-position-for-a-service-centre/",
+          "solution": null,
+          "score": 2156.9515428364,
+          "isPremium": false,
+          "subsection": "幾何中位 / 連續最佳化"
+        },
+        {
+          "id": "1453",
+          "title": "圓形靶內的最大飛鏢數量",
+          "slug": "maximum-number-of-darts-inside-of-a-circular-dartboard",
+          "src": "https://leetcode.cn/problems/maximum-number-of-darts-inside-of-a-circular-dartboard/",
+          "solution": null,
+          "score": 2201.8209584221,
+          "isPremium": false,
+          "subsection": "圓覆蓋 / 角度掃描"
+        },
+        {
+          "id": "3102",
+          "title": "最小化曼哈頓距離",
+          "slug": "minimize-manhattan-distances",
+          "src": "https://leetcode.cn/problems/minimize-manhattan-distances/",
+          "solution": null,
+          "score": 2215.7283064325,
+          "isPremium": false,
+          "subsection": "曼哈頓距離 / 座標變換"
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": 5,
+      "title": "4. 道路網與場景圖建模",
+      "summary": "把路網與場景轉成樹、DAG 或一般圖後，重點是方向、父子關係、拓撲順序與子樹貢獻；關鍵路段問題用橋，互相可達群組用 SCC。",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "2316",
+          "title": "統計無向圖中無法互相到達點對數",
+          "slug": "count-unreachable-pairs-of-nodes-in-an-undirected-graph",
+          "src": "https://leetcode.cn/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/",
+          "solution": null,
+          "score": 1604.0695445163,
+          "isPremium": false,
+          "subsection": "連通塊 / 不可達點對"
+        },
+        {
+          "id": "1466",
+          "title": "重新規劃路線",
+          "slug": "reorder-routes-to-make-all-paths-lead-to-the-city-zero",
+          "src": "https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/",
+          "solution": null,
+          "score": 1633.6202302555,
+          "isPremium": false,
+          "subsection": "有向邊重定向"
+        },
+        {
+          "id": "2492",
+          "title": "兩個城市間路徑的最小分數",
+          "slug": "minimum-score-of-a-path-between-two-cities",
+          "src": "https://leetcode.cn/problems/minimum-score-of-a-path-between-two-cities/",
+          "solution": null,
+          "score": 1679.5737760149,
+          "isPremium": false,
+          "subsection": "連通塊 / 最小邊權"
+        },
+        {
+          "id": "2685",
+          "title": "統計完全連通分量的數量",
+          "slug": "count-the-number-of-complete-components",
+          "src": "https://leetcode.cn/problems/count-the-number-of-complete-components/",
+          "solution": null,
+          "score": 1769.4344566771,
+          "isPremium": false,
+          "subsection": "完全連通分量"
+        },
+        {
+          "id": "2192",
+          "title": "有向無環圖中一個節點的所有祖先",
+          "slug": "all-ancestors-of-a-node-in-a-directed-acyclic-graph",
+          "src": "https://leetcode.cn/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/",
+          "solution": null,
+          "score": 1787.8550568757,
+          "isPremium": false,
+          "subsection": "DAG 祖先集合"
+        },
+        {
+          "id": "1245",
+          "title": "樹的直徑",
+          "slug": "tree-diameter",
+          "src": "https://leetcode.cn/problems/tree-diameter/",
+          "solution": null,
+          "score": 1792.076794537,
+          "isPremium": false,
+          "subsection": "樹直徑"
+        },
+        {
+          "id": "1559",
+          "title": "二維網格圖中探測環",
+          "slug": "detect-cycles-in-2d-grid",
+          "src": "https://leetcode.cn/problems/detect-cycles-in-2d-grid/",
+          "solution": null,
+          "score": 1837.8252904904,
+          "isPremium": false,
+          "subsection": "網格圖找環"
+        },
+        {
+          "id": "2360",
+          "title": "圖中的最長環",
+          "slug": "longest-cycle-in-a-graph",
+          "src": "https://leetcode.cn/problems/longest-cycle-in-a-graph/",
+          "solution": null,
+          "score": 1897.1863301576,
+          "isPremium": false,
+          "subsection": "有向圖最長環"
         },
         {
           "id": "1192",
@@ -191,6 +409,16 @@
           "subsection": "Tarjan / 橋"
         },
         {
+          "id": "2876",
+          "title": "有向圖訪問計數",
+          "slug": "count-visited-nodes-in-a-directed-graph",
+          "src": "https://leetcode.cn/problems/count-visited-nodes-in-a-directed-graph/",
+          "solution": null,
+          "score": 2209.8785430371,
+          "isPremium": false,
+          "subsection": "功能圖 / 訪問計數"
+        },
+        {
           "id": "2581",
           "title": "統計可能的樹根數目",
           "slug": "count-number-of-possible-root-nodes",
@@ -198,35 +426,15 @@
           "solution": null,
           "score": 2228.3454693625,
           "isPremium": false,
-          "subsection": "換根 DP / 猜測計數"
-        },
-        {
-          "id": "2538",
-          "title": "最大價值和與最小价值和的差值",
-          "slug": "difference-between-maximum-and-minimum-price-sum",
-          "src": "https://leetcode.cn/problems/difference-between-maximum-and-minimum-price-sum/",
-          "solution": null,
-          "score": 2397.9722495587,
-          "isPremium": false,
-          "subsection": "樹形 DP / 路徑貢獻"
-        },
-        {
-          "id": "2603",
-          "title": "收集樹中金幣",
-          "slug": "collect-coins-in-a-tree",
-          "src": "https://leetcode.cn/problems/collect-coins-in-a-tree/",
-          "solution": null,
-          "score": 2711.8717381409,
-          "isPremium": false,
-          "subsection": "拓撲剝葉 / 樹剪枝"
+          "subsection": "換根 / 猜測計數"
         }
       ],
       "children": []
     },
     {
-      "id": 4,
-      "title": "3. 計算幾何與碰撞偵測",
-      "summary": "碰撞、邊界框相交、視野與點在多邊形內，靠叉積判方向、投影判重疊兩個原語。先寫好原語、定好 eps 與整數溢位策略，再套題。",
+      "id": 6,
+      "title": "5. 決策與動態規劃",
+      "summary": "變換車道、減速、選備援路線等決策常寫成 DP。先寫出狀態定義與轉移來源，再檢查能否用排序、前綴、單調性或記憶化降低複雜度。",
       "isLeaf": true,
       "problems": [
         {
@@ -267,7 +475,7 @@
           "solution": null,
           "score": 2068.0043466118,
           "isPremium": false,
-          "subsection": "區間 DP / 雙端選擇"
+          "subsection": "雙端選擇 DP"
         },
         {
           "id": "1799",
@@ -363,189 +571,21 @@
       "children": []
     },
     {
-      "id": 5,
-      "title": "4. 道路網與場景圖建模",
-      "summary": "把路網與場景轉成樹、DAG 或一般圖後，重點是方向、父子關係、拓撲順序與子樹貢獻；關鍵路段問題用橋，互相可達群組用 SCC。",
-      "isLeaf": true,
-      "problems": [
-        {
-          "id": "3170",
-          "title": "刪除星號以後字典序最小的字串",
-          "slug": "lexicographically-minimum-string-after-removing-stars",
-          "src": "https://leetcode.cn/problems/lexicographically-minimum-string-after-removing-stars/",
-          "solution": null,
-          "score": 1772.4702293335,
-          "isPremium": false,
-          "subsection": "字典序 / 堆與刪除"
-        },
-        {
-          "id": "1153",
-          "title": "字串轉化",
-          "slug": "string-transforms-into-another-string",
-          "src": "https://leetcode.cn/problems/string-transforms-into-another-string/",
-          "solution": null,
-          "score": 1949.0920823355,
-          "isPremium": false,
-          "subsection": "字元映射 / 圖環判斷"
-        },
-        {
-          "id": "2156",
-          "title": "查詢給定雜湊值的子串",
-          "slug": "find-substring-with-given-hash-value",
-          "src": "https://leetcode.cn/problems/find-substring-with-given-hash-value/",
-          "solution": null,
-          "score": 2062.9876807625,
-          "isPremium": false,
-          "subsection": "Rolling Hash / 反向滑窗"
-        },
-        {
-          "id": "3291",
-          "title": "形成目標字串需要的最少字串數 I",
-          "slug": "minimum-number-of-valid-strings-to-form-target-i",
-          "src": "https://leetcode.cn/problems/minimum-number-of-valid-strings-to-form-target-i/",
-          "solution": null,
-          "score": 2081.7120215224,
-          "isPremium": false,
-          "subsection": "Trie / DP / 前綴拼接"
-        },
-        {
-          "id": "1096",
-          "title": "花括號展開 II",
-          "slug": "brace-expansion-ii",
-          "src": "https://leetcode.cn/problems/brace-expansion-ii/",
-          "solution": null,
-          "score": 2348.5159376523,
-          "isPremium": false,
-          "subsection": "遞迴解析 / 集合運算"
-        },
-        {
-          "id": "2468",
-          "title": "根據限制分割訊息",
-          "slug": "split-message-based-on-limit",
-          "src": "https://leetcode.cn/problems/split-message-based-on-limit/",
-          "solution": null,
-          "score": 2381.6019709166,
-          "isPremium": false,
-          "subsection": "二分長度 / 字串構造"
-        },
-        {
-          "id": "1044",
-          "title": "最長重複子串",
-          "slug": "longest-duplicate-substring",
-          "src": "https://leetcode.cn/problems/longest-duplicate-substring/",
-          "solution": null,
-          "score": 2428.7985254341,
-          "isPremium": false,
-          "subsection": "二分 / Rolling Hash"
-        },
-        {
-          "id": "2272",
-          "title": "最大波動的子字串",
-          "slug": "substring-with-largest-variance",
-          "src": "https://leetcode.cn/problems/substring-with-largest-variance/",
-          "solution": null,
-          "score": 2515.7520586008,
-          "isPremium": false,
-          "subsection": "字元對枚舉 / Kadane"
-        },
-        {
-          "id": "3292",
-          "title": "形成目標字串需要的最少字串數 II",
-          "slug": "minimum-number-of-valid-strings-to-form-target-ii",
-          "src": "https://leetcode.cn/problems/minimum-number-of-valid-strings-to-form-target-ii/",
-          "solution": null,
-          "score": 2661.736901362,
-          "isPremium": false,
-          "subsection": "Z 函式 / 最短拼接"
-        },
-        {
-          "id": "2977",
-          "title": "轉換字串的最小成本 II",
-          "slug": "minimum-cost-to-convert-string-ii",
-          "src": "https://leetcode.cn/problems/minimum-cost-to-convert-string-ii/",
-          "solution": null,
-          "score": 2695.809667046,
-          "isPremium": false,
-          "subsection": "Floyd / 字串 DP"
-        }
-      ],
-      "children": []
-    },
-    {
-      "id": 6,
-      "title": "5. 決策與動態規劃",
-      "summary": "變換車道、減速、選備援路線等決策常寫成 DP。先寫出狀態定義與轉移來源，再檢查能否用排序、前綴、單調性或記憶化降低複雜度。",
-      "isLeaf": true,
-      "problems": [
-        {
-          "id": "1146",
-          "title": "快照陣列",
-          "slug": "snapshot-array",
-          "src": "https://leetcode.cn/problems/snapshot-array/",
-          "solution": null,
-          "score": 1770.8924569497,
-          "isPremium": false,
-          "subsection": "版本化陣列 / 二分查詢"
-        },
-        {
-          "id": "3092",
-          "title": "最高頻率的 ID",
-          "slug": "most-frequent-ids",
-          "src": "https://leetcode.cn/problems/most-frequent-ids/",
-          "solution": null,
-          "score": 1793.1160019698,
-          "isPremium": false,
-          "subsection": "懶刪除堆 / 頻率維護"
-        },
-        {
-          "id": "1001",
-          "title": "網格照明",
-          "slug": "grid-illumination",
-          "src": "https://leetcode.cn/problems/grid-illumination/",
-          "solution": null,
-          "score": 1873.0367582475,
-          "isPremium": false,
-          "subsection": "哈希計數 / 八方向清理"
-        },
-        {
-          "id": "895",
-          "title": "最大頻率堆疊",
-          "slug": "maximum-frequency-stack",
-          "src": "https://leetcode.cn/problems/maximum-frequency-stack/",
-          "solution": null,
-          "score": 2027.8772739639,
-          "isPremium": false,
-          "subsection": "頻率棧 / 雙鍵排序"
-        },
-        {
-          "id": "2402",
-          "title": "會議室 III",
-          "slug": "meeting-rooms-iii",
-          "src": "https://leetcode.cn/problems/meeting-rooms-iii/",
-          "solution": null,
-          "score": 2092.8943149547,
-          "isPremium": false,
-          "subsection": "雙堆 / 會議排程"
-        },
-        {
-          "id": "1851",
-          "title": "包含每個查詢的最小區間",
-          "slug": "minimum-interval-to-include-each-query",
-          "src": "https://leetcode.cn/problems/minimum-interval-to-include-each-query/",
-          "solution": null,
-          "score": 2286.1378742318,
-          "isPremium": false,
-          "subsection": "離線查詢 / 區間最小堆"
-        }
-      ],
-      "children": []
-    },
-    {
       "id": 7,
       "title": "6. 二分標定、貪心與滑動視窗",
       "summary": "參數標定與資源分配常有單調性。遇到最小最大、最小可行速率、固定邊界子陣列時，優先檢查二分答案、貪心或滑動視窗。",
       "isLeaf": true,
       "problems": [
+        {
+          "id": "2226",
+          "title": "每個小孩最多能分到多少糖果",
+          "slug": "maximum-candies-allocated-to-k-children",
+          "src": "https://leetcode.cn/problems/maximum-candies-allocated-to-k-children/",
+          "solution": null,
+          "score": 1646.1765343383,
+          "isPremium": false,
+          "subsection": "二分答案 / 資源分配"
+        },
         {
           "id": "1658",
           "title": "將 x 減到 0 的最小運算元",
@@ -577,6 +617,16 @@
           "subsection": "可達 DP / 滑窗計數"
         },
         {
+          "id": "2398",
+          "title": "預算內的最多機器人數目",
+          "slug": "maximum-number-of-robots-within-budget",
+          "src": "https://leetcode.cn/problems/maximum-number-of-robots-within-budget/",
+          "solution": null,
+          "score": 1917.2145829853,
+          "isPremium": false,
+          "subsection": "滑窗 / 預算約束"
+        },
+        {
           "id": "2106",
           "title": "摘水果",
           "slug": "maximum-fruits-harvested-after-at-most-k-steps",
@@ -584,7 +634,7 @@
           "solution": null,
           "score": 2062.3601158741,
           "isPremium": false,
-          "subsection": "滑窗 / 路徑代價"
+          "subsection": "雙指標 / 路徑代價"
         },
         {
           "id": "843",
@@ -621,10 +671,129 @@
     },
     {
       "id": 8,
-      "title": "7. 軌跡與區間排程",
-      "summary": "軌跡、預約、車道占用都是區間。幾乎都歸結為端點排序後一次線性掃描：合併重疊、最大同時並發、差分加值。",
+      "title": "7. 軌跡、時間窗與移動碰撞預測",
+      "summary": "軌跡、預約、車道占用與移動物體碰撞都可以先投影成時間/空間區間。端點排序、掃描線與差分可處理並發；相對速度與掃過區間可處理「未來 t 秒是否碰撞」。",
       "isLeaf": true,
       "problems": [
+        {
+          "id": "1288",
+          "title": "刪除被覆蓋區間",
+          "slug": "remove-covered-intervals",
+          "src": "https://leetcode.cn/problems/remove-covered-intervals/",
+          "solution": null,
+          "score": 1375.0234414965,
+          "isPremium": false,
+          "subsection": "區間覆蓋"
+        },
+        {
+          "id": "986",
+          "title": "區間列表的交集",
+          "slug": "interval-list-intersections",
+          "src": "https://leetcode.cn/problems/interval-list-intersections/",
+          "solution": null,
+          "score": 1541.6944600975,
+          "isPremium": false,
+          "subsection": "區間交集"
+        },
+        {
+          "id": "2580",
+          "title": "統計將重疊區間合併成組的方案數",
+          "slug": "count-ways-to-group-overlapping-ranges",
+          "src": "https://leetcode.cn/problems/count-ways-to-group-overlapping-ranges/",
+          "solution": null,
+          "score": 1631.5850830561,
+          "isPremium": false,
+          "subsection": "重疊區間分組"
+        },
+        {
+          "id": "2406",
+          "title": "將區間分為最少組數",
+          "slug": "divide-intervals-into-minimum-number-of-groups",
+          "src": "https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups/",
+          "solution": null,
+          "score": 1713.3954468582,
+          "isPremium": false,
+          "subsection": "最少組數 / 最大並發"
+        },
+        {
+          "id": "1024",
+          "title": "影片拼接",
+          "slug": "video-stitching",
+          "src": "https://leetcode.cn/problems/video-stitching/",
+          "solution": null,
+          "score": 1746.135917977,
+          "isPremium": false,
+          "subsection": "區間覆蓋 / 貪心"
+        },
+        {
+          "id": "1326",
+          "title": "灌溉花園的最少水龍頭數目",
+          "slug": "minimum-number-of-taps-to-open-to-water-a-garden",
+          "src": "https://leetcode.cn/problems/minimum-number-of-taps-to-open-to-water-a-garden/",
+          "solution": null,
+          "score": 1885.0178370385,
+          "isPremium": false,
+          "subsection": "區間覆蓋 / 最少選擇"
+        },
+        {
+          "id": "850",
+          "title": "矩形面積 II",
+          "slug": "rectangle-area-ii",
+          "src": "https://leetcode.cn/problems/rectangle-area-ii/",
+          "solution": null,
+          "score": 2235.9672341699,
+          "isPremium": false,
+          "subsection": "矩形面積 / 掃描線"
+        },
+        {
+          "id": "1851",
+          "title": "包含每個查詢的最小區間",
+          "slug": "minimum-interval-to-include-each-query",
+          "src": "https://leetcode.cn/problems/minimum-interval-to-include-each-query/",
+          "solution": null,
+          "score": 2286.1378742318,
+          "isPremium": false,
+          "subsection": "離線查詢 / 區間最小堆"
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": 9,
+      "title": "8. 感測器資料流、日誌解析與資料流暢度",
+      "summary": "感測器與車隊日誌常是連續資料流。練習時要能做滑動統計、Top-K 摘要、時間桶聚合、字串解析與 corrupted input 的防禦式處理。",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "974",
+          "title": "和可被 K 整除的子陣列",
+          "slug": "subarray-sums-divisible-by-k",
+          "src": "https://leetcode.cn/problems/subarray-sums-divisible-by-k/",
+          "solution": null,
+          "score": 1675.989407584,
+          "isPremium": false,
+          "subsection": "前綴和 / 模數桶"
+        },
+        {
+          "id": "1942",
+          "title": "最小未被佔據椅子的編號",
+          "slug": "the-number-of-the-smallest-unoccupied-chair",
+          "src": "https://leetcode.cn/problems/the-number-of-the-smallest-unoccupied-chair/",
+          "solution": null,
+          "score": 1695.2832486322,
+          "isPremium": false,
+          "subsection": "事件排序 / 最小可用資源"
+        },
+        {
+          "id": "2588",
+          "title": "統計美麗子陣列數目",
+          "slug": "count-the-number-of-beautiful-subarrays",
+          "src": "https://leetcode.cn/problems/count-the-number-of-beautiful-subarrays/",
+          "solution": null,
+          "score": 1696.8895579594,
+          "isPremium": false,
+          "subsection": "XOR 前綴 / 計數"
+        },
         {
           "id": "2962",
           "title": "統計最大元素出現至少 K 次的子陣列",
@@ -636,34 +805,44 @@
           "subsection": "滑窗計數 / 最大元素"
         },
         {
-          "id": "1368",
-          "title": "使網格圖至少有一條有效路徑的最小代價",
-          "slug": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
-          "src": "https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+          "id": "1348",
+          "title": "推文計數",
+          "slug": "tweet-counts-per-frequency",
+          "src": "https://leetcode.cn/problems/tweet-counts-per-frequency/",
           "solution": null,
-          "score": 2068.806637566,
+          "score": 2036.7206020719,
           "isPremium": false,
-          "subsection": "0-1 BFS / 方向代價"
+          "subsection": "時間序列 / 時間桶"
         },
         {
-          "id": "3821",
-          "title": "二進位制中恰好K個1的第N小整數",
-          "slug": "find-nth-smallest-integer-with-k-one-bits",
-          "src": "https://leetcode.cn/problems/find-nth-smallest-integer-with-k-one-bits/",
+          "id": "911",
+          "title": "線上選舉",
+          "slug": "online-election",
+          "src": "https://leetcode.cn/problems/online-election/",
           "solution": null,
-          "score": 2069.1534510743,
+          "score": 2000.8021428612,
           "isPremium": false,
-          "subsection": "組合計數 / 位元構造"
+          "subsection": "前綴勝者 / 時間查詢"
         },
         {
-          "id": "3123",
-          "title": "最短路徑中的邊",
-          "slug": "find-edges-in-shortest-paths",
-          "src": "https://leetcode.cn/problems/find-edges-in-shortest-paths/",
+          "id": "1032",
+          "title": "字元流",
+          "slug": "stream-of-characters",
+          "src": "https://leetcode.cn/problems/stream-of-characters/",
           "solution": null,
-          "score": 2093.0316157073,
+          "score": 1970.4608098164,
           "isPremium": false,
-          "subsection": "雙 Dijkstra / 最短路邊"
+          "subsection": "字元流 / Trie"
+        },
+        {
+          "id": "2296",
+          "title": "設計一個文本編輯器",
+          "slug": "design-a-text-editor",
+          "src": "https://leetcode.cn/problems/design-a-text-editor/",
+          "solution": null,
+          "score": 1911.8282317986,
+          "isPremium": false,
+          "subsection": "文字編輯器 / 雙棧"
         },
         {
           "id": "2223",
@@ -674,36 +853,6 @@
           "score": 2220.0903365738,
           "isPremium": false,
           "subsection": "Z 函式 / LCP 求和"
-        },
-        {
-          "id": "882",
-          "title": "細分圖中的可到達節點",
-          "slug": "reachable-nodes-in-subdivided-graph",
-          "src": "https://leetcode.cn/problems/reachable-nodes-in-subdivided-graph/",
-          "solution": null,
-          "score": 2328.4294689238,
-          "isPremium": false,
-          "subsection": "Dijkstra / 細分邊計數"
-        },
-        {
-          "id": "3797",
-          "title": "統計在矩形格子裡移動的路徑數目",
-          "slug": "count-routes-to-climb-a-rectangular-grid",
-          "src": "https://leetcode.cn/problems/count-routes-to-climb-a-rectangular-grid/",
-          "solution": null,
-          "score": 2375.5647445059,
-          "isPremium": false,
-          "subsection": "組合 DP / 網格路徑"
-        },
-        {
-          "id": "2577",
-          "title": "在網格圖中訪問一個格子的最少時間",
-          "slug": "minimum-time-to-visit-a-cell-in-a-grid",
-          "src": "https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid/",
-          "solution": null,
-          "score": 2381.625583289,
-          "isPremium": false,
-          "subsection": "Dijkstra / 時間奇偶"
         },
         {
           "id": "3404",
@@ -729,11 +878,21 @@
       "children": []
     },
     {
-      "id": 9,
-      "title": "8. 感測器資料流與平行處理",
-      "summary": "用演算法題補強資料平行、前綴掃描、分治歸約與受限記憶體下的摘要維護。重點不是框架，而是能把工作拆成可併行的資料流並說清楚瓶頸。",
+      "id": 10,
+      "title": "9. 車載即時系統、C++ 與位元狀態",
+      "summary": "強調固定容量、記憶體配置、位元狀態、延遲與邊界條件。目標是在受限資源下用簡潔資料結構維護狀態，並能討論 C++ ownership、溢位與最壞成本。",
       "isLeaf": true,
       "problems": [
+        {
+          "id": "1947",
+          "title": "最大相容性評分和",
+          "slug": "maximum-compatibility-score-sum",
+          "src": "https://leetcode.cn/problems/maximum-compatibility-score-sum/",
+          "solution": null,
+          "score": 1704.360891641,
+          "isPremium": false,
+          "subsection": "狀壓匹配 / 最大評分"
+        },
         {
           "id": "1011",
           "title": "在 D 天內送達包裹的能力",
@@ -785,6 +944,26 @@
           "subsection": "位元字串 / 區間代價"
         },
         {
+          "id": "2002",
+          "title": "兩個迴文子序列長度的最大乘積",
+          "slug": "maximum-product-of-the-length-of-two-palindromic-subsequences",
+          "src": "https://leetcode.cn/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/",
+          "solution": null,
+          "score": 1869.402439128,
+          "isPremium": false,
+          "subsection": "狀壓枚舉 / 回文檢查"
+        },
+        {
+          "id": "1255",
+          "title": "得分最高的單詞集合",
+          "slug": "maximum-score-words-formed-by-letters",
+          "src": "https://leetcode.cn/problems/maximum-score-words-formed-by-letters/",
+          "solution": null,
+          "score": 1881.6810367589,
+          "isPremium": false,
+          "subsection": "回溯 / 位元計數"
+        },
+        {
           "id": "2439",
           "title": "最小化陣列中的最大值",
           "slug": "minimize-maximum-of-array",
@@ -792,7 +971,7 @@
           "solution": null,
           "score": 1965.1266122355,
           "isPremium": false,
-          "subsection": "二分 / 前綴 / 上界檢查"
+          "subsection": "前綴平均 / 上界檢查"
         },
         {
           "id": "3811",
@@ -838,9 +1017,9 @@
       "children": []
     },
     {
-      "id": 10,
-      "title": "9. 車載即時系統與位元狀態",
-      "summary": "強調固定容量、記憶體配置、位元狀態、延遲與邊界條件。目標是在受限資源下用簡潔資料結構維護狀態並說清楚最壞成本。",
+      "id": 1101,
+      "title": "10. 車隊平台 API 與系統資料結構",
+      "summary": "車隊平台題常寫成一組 API：上報、查詢、排名、租借、淘汰。先定義 canonical state 與不變式，再選 heap、map、set、時間桶或多索引結構。",
       "isLeaf": true,
       "problems": [
         {
@@ -891,17 +1070,7 @@
           "solution": null,
           "score": 1851.1720518145,
           "isPremium": false,
-          "subsection": "路由器設計 / 隊列 / 集合"
-        },
-        {
-          "id": "2296",
-          "title": "設計一個文字編輯器",
-          "slug": "design-a-text-editor",
-          "src": "https://leetcode.cn/problems/design-a-text-editor/",
-          "solution": null,
-          "score": 1911.8282317986,
-          "isPremium": false,
-          "subsection": "文字編輯器 / 雙棧"
+          "subsection": "路由器設計 / 隊列"
         },
         {
           "id": "2102",
@@ -947,11 +1116,21 @@
       "children": []
     },
     {
-      "id": 1101,
-      "title": "10. 車隊平台 API 與系統資料結構",
-      "summary": "車隊平台題常寫成一組 API：上報、查詢、排名、租借、淘汰。先定義 canonical state 與不變式，再選 heap、map、set、時間桶或多索引結構。",
+      "id": 1102,
+      "title": "11. 狀態空間搜尋與壓縮 BFS",
+      "summary": "把「位置 + 已取得資源 + 操作狀態」視為圖上的節點；常見於航點全集、鑰匙門鎖、推箱子等題。重點是定義狀態、轉移和去重規則。",
       "isLeaf": true,
       "problems": [
+        {
+          "id": "943",
+          "title": "最短超級串",
+          "slug": "find-the-shortest-superstring",
+          "src": "https://leetcode.cn/problems/find-the-shortest-superstring/",
+          "solution": null,
+          "score": 2185.5444704515,
+          "isPremium": false,
+          "subsection": "狀壓 DP / 最短拼接"
+        },
         {
           "id": "847",
           "title": "訪問所有節點的最短路徑",
@@ -963,6 +1142,16 @@
           "subsection": "狀壓 BFS / 訪問全集"
         },
         {
+          "id": "1568",
+          "title": "使陸地分離的最少天數",
+          "slug": "minimum-number-of-days-to-disconnect-island",
+          "src": "https://leetcode.cn/problems/minimum-number-of-days-to-disconnect-island/",
+          "solution": null,
+          "score": 2208.5532172086,
+          "isPremium": false,
+          "subsection": "網格割點 / 連通性"
+        },
+        {
           "id": "864",
           "title": "獲取所有鑰匙的最短路徑",
           "slug": "shortest-path-to-get-all-keys",
@@ -971,6 +1160,16 @@
           "score": 2258.6371797452,
           "isPremium": false,
           "subsection": "鑰匙門鎖 / 狀態 BFS"
+        },
+        {
+          "id": "1434",
+          "title": "每個人戴不同帽子的方案數",
+          "slug": "number-of-ways-to-wear-different-hats-to-each-other",
+          "src": "https://leetcode.cn/problems/number-of-ways-to-wear-different-hats-to-each-other/",
+          "solution": null,
+          "score": 2273.2215764545,
+          "isPremium": false,
+          "subsection": "狀壓 DP / 分配計數"
         },
         {
           "id": "1263",
@@ -996,9 +1195,9 @@
       "children": []
     },
     {
-      "id": 1102,
-      "title": "11. 狀態空間搜尋與壓縮 BFS",
-      "summary": "把「位置 + 已取得資源 + 操作狀態」視為圖上的節點；常見於航點全集、鑰匙門鎖、推箱子等題。重點是定義狀態、轉移和去重規則。",
+      "id": 1103,
+      "title": "12. 多階段路徑規劃與約束",
+      "summary": "把一次最短路拆成多次 Dijkstra/BFS，或在邊權、時間、等待規則上加約束。常見訊號是「兩源匯合」「第二短」「限定時間」或「特殊道路」。",
       "isLeaf": true,
       "problems": [
         {
@@ -1022,6 +1221,16 @@
           "subsection": "特殊邊 / Dijkstra"
         },
         {
+          "id": "3377",
+          "title": "使兩個整數相等的數位操作",
+          "slug": "digit-operations-to-make-two-integers-equal",
+          "src": "https://leetcode.cn/problems/digit-operations-to-make-two-integers-equal/",
+          "solution": null,
+          "score": 2186.3802199168,
+          "isPremium": false,
+          "subsection": "狀態圖 / Dijkstra"
+        },
+        {
           "id": "2045",
           "title": "到達目的地的第二短時間",
           "slug": "second-minimum-time-to-reach-destination",
@@ -1030,6 +1239,16 @@
           "score": 2201.6219336792,
           "isPremium": false,
           "subsection": "次短路 / 交通燈等待"
+        },
+        {
+          "id": "3419",
+          "title": "圖的最大邊權的最小值",
+          "slug": "minimize-the-maximum-edge-weight-of-graph",
+          "src": "https://leetcode.cn/problems/minimize-the-maximum-edge-weight-of-graph/",
+          "solution": null,
+          "score": 2243.2051062979,
+          "isPremium": false,
+          "subsection": "二分答案 / 可達性"
         },
         {
           "id": "2203",
@@ -1055,11 +1274,21 @@
       "children": []
     },
     {
-      "id": 1103,
-      "title": "12. 多階段路徑規劃與約束",
-      "summary": "把一次最短路拆成多次 Dijkstra/BFS，或在邊權、時間、等待規則上加約束。常見訊號是「兩源匯合」「第二短」「限定時間」或「特殊道路」。",
+      "id": 1104,
+      "title": "13. 路網樹分解與子樹查詢",
+      "summary": "路網層級可用樹處理：Euler tour 判祖先、兩次 DFS 換根、刪邊後子樹貢獻或路徑 XOR。先把子樹範圍與父子方向固定清楚。",
       "isLeaf": true,
       "problems": [
+        {
+          "id": "1483",
+          "title": "樹節點的第 K 個祖先",
+          "slug": "kth-ancestor-of-a-tree-node",
+          "src": "https://leetcode.cn/problems/kth-ancestor-of-a-tree-node/",
+          "solution": null,
+          "score": 2115.0911494487,
+          "isPremium": false,
+          "subsection": "倍增 / k 級祖先"
+        },
         {
           "id": "2246",
           "title": "相鄰字元不同的最長路徑",
@@ -1079,6 +1308,26 @@
           "score": 2197.0951445919,
           "isPremium": false,
           "subsection": "換根 DP / 距離和"
+        },
+        {
+          "id": "1766",
+          "title": "互質樹",
+          "slug": "tree-of-coprimes",
+          "src": "https://leetcode.cn/problems/tree-of-coprimes/",
+          "solution": null,
+          "score": 2231.8099102949,
+          "isPremium": false,
+          "subsection": "DFS 序 / 祖先狀態"
+        },
+        {
+          "id": "2646",
+          "title": "最小化旅行的價格總和",
+          "slug": "minimize-the-total-price-of-the-trips",
+          "src": "https://leetcode.cn/problems/minimize-the-total-price-of-the-trips/",
+          "solution": null,
+          "score": 2238.2830745228,
+          "isPremium": false,
+          "subsection": "路徑計數 / 樹形 DP"
         },
         {
           "id": "2458",
@@ -1114,70 +1363,41 @@
       "children": []
     },
     {
-      "id": 1104,
-      "title": "13. 路網樹分解與子樹查詢",
-      "summary": "路網層級可用樹處理：Euler tour 判祖先、兩次 DFS 換根、刪邊後子樹貢獻或路徑 XOR。先把子樹範圍與父子方向固定清楚。",
-      "isLeaf": true,
-      "problems": [
-        {
-          "id": "3036",
-          "title": "匹配模式陣列的子陣列數目 II",
-          "slug": "number-of-subarrays-that-match-a-pattern-ii",
-          "src": "https://leetcode.cn/problems/number-of-subarrays-that-match-a-pattern-ii/",
-          "solution": null,
-          "score": 1894.5496928891,
-          "isPremium": false,
-          "subsection": "KMP / 模式陣列"
-        },
-        {
-          "id": "3316",
-          "title": "從原字串裡進行刪除操作的最多次數",
-          "slug": "find-maximum-removals-from-source-string",
-          "src": "https://leetcode.cn/problems/find-maximum-removals-from-source-string/",
-          "solution": null,
-          "score": 2062.2592219188,
-          "isPremium": false,
-          "subsection": "字串 DP / 可刪位置"
-        },
-        {
-          "id": "2430",
-          "title": "對字母串可執行的最大刪除數",
-          "slug": "maximum-deletions-on-a-string",
-          "src": "https://leetcode.cn/problems/maximum-deletions-on-a-string/",
-          "solution": null,
-          "score": 2101.867342004,
-          "isPremium": false,
-          "subsection": "LCP DP / 重複刪除"
-        },
-        {
-          "id": "3045",
-          "title": "統計前字尾下標對 II",
-          "slug": "count-prefix-and-suffix-pairs-ii",
-          "src": "https://leetcode.cn/problems/count-prefix-and-suffix-pairs-ii/",
-          "solution": null,
-          "score": 2327.5726642605,
-          "isPremium": false,
-          "subsection": "Trie / 前後綴對"
-        },
-        {
-          "id": "3303",
-          "title": "第一個幾乎相等子字串的下標",
-          "slug": "find-the-occurrence-of-first-almost-equal-substring",
-          "src": "https://leetcode.cn/problems/find-the-occurrence-of-first-almost-equal-substring/",
-          "solution": null,
-          "score": 2509.3686325754,
-          "isPremium": false,
-          "subsection": "Z 函式 / 一次錯配"
-        }
-      ],
-      "children": []
-    },
-    {
       "id": 1105,
       "title": "14. 高階 DP 與單調性優化",
       "summary": "當普通 DP 過不了時，檢查能否用排序、二分、單調隊列、前綴最值或狀態壓縮降低轉移成本。要能說清楚優化前後的複雜度。",
       "isLeaf": true,
       "problems": [
+        {
+          "id": "2830",
+          "title": "銷售利潤最大化",
+          "slug": "maximize-the-profit-as-the-salesman",
+          "src": "https://leetcode.cn/problems/maximize-the-profit-as-the-salesman/",
+          "solution": null,
+          "score": 1851.2677996923,
+          "isPremium": false,
+          "subsection": "加權排程 / 二分 DP"
+        },
+        {
+          "id": "1996",
+          "title": "遊戲中弱角色的數量",
+          "slug": "the-number-of-weak-characters-in-the-game",
+          "src": "https://leetcode.cn/problems/the-number-of-weak-characters-in-the-game/",
+          "solution": null,
+          "score": 1860.742934291,
+          "isPremium": false,
+          "subsection": "排序 / 前綴最值"
+        },
+        {
+          "id": "1340",
+          "title": "跳躍遊戲 V",
+          "slug": "jump-game-v",
+          "src": "https://leetcode.cn/problems/jump-game-v/",
+          "solution": null,
+          "score": 1866.3014601125,
+          "isPremium": false,
+          "subsection": "記憶化 DP / 單調範圍"
+        },
         {
           "id": "2008",
           "title": "計程車的最大盈利",
@@ -1186,7 +1406,7 @@
           "solution": null,
           "score": 1871.8245218615,
           "isPremium": false,
-          "subsection": "加權排程 / 二分 DP"
+          "subsection": "加權排程 / DP"
         },
         {
           "id": "1751",
@@ -1229,6 +1449,14 @@
           "subsection": "單調隊列 DP / 運輸箱"
         }
       ],
+      "children": []
+    },
+    {
+      "id": 9001,
+      "title": "15. 常見 Waymo 面試模式",
+      "summary": "用題目訊號回顧 Waymo 面試模式：路徑規劃、佔據網格、幾何/座標、移動碰撞、資料流/日誌、C++ 資源限制與平台 API。這一章適合最後一輪混合複習，搭配講義中的模式表回頭抽查前面章節。",
+      "isLeaf": true,
+      "problems": [],
       "children": []
     }
   ]

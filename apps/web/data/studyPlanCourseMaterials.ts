@@ -1,8 +1,8 @@
 const studyPlanCourseMaterials: Record<string, string> = {
   waymo_interview: [
     "**競程課程講義：Waymo 面試題的競程化整理**",
-    "這份題單把自動駕駛常見情境（路徑規劃、佔據網格、碰撞偵測、道路網建模、感測器資料流、車隊平台設計）對應到演算法 pattern。練習時建議把每題先歸類成一個已知 pattern，再補上面試需要的溝通：狀態定義、正確性、不變式、複雜度與邊界條件。",
-    "**常見 Pattern**：BFS / Dijkstra / A*、多源 BFS 距離場、計算幾何原語（叉積、AABB 重疊、凸包）、拓撲排序、並查集、區間掃描線、heap / set / Fenwick、二分答案、滑動視窗、bitmask BFS、換根 DP。",
+    "這份題單把自動駕駛常見情境（路徑規劃、佔據網格、碰撞偵測、座標轉換、移動物體預測、道路網建模、感測器資料流、日誌解析、車載即時系統、車隊平台設計）對應到演算法 pattern。練習時建議把每題先歸類成一個已知 pattern，再補上面試需要的溝通：狀態定義、正確性、不變式、複雜度與邊界條件。",
+    "**常見 Pattern**：BFS / Dijkstra / A*、多源 BFS 距離場、計算幾何原語（叉積、點積、AABB 重疊、凸包）、座標 frame 轉換、相對速度碰撞預測、拓撲排序、並查集、區間掃描線、資料流 Top-K、日誌時間桶聚合、C++ bounded buffer、heap / set / Fenwick、二分答案、滑動視窗、bitmask BFS、換根 DP。",
   ].join("\n\n"),
 
   rating_2100: [
@@ -145,8 +145,8 @@ const studyPlanDeepDiveMaterials: Record<string, string> = {
   waymo_interview: [
     "**教授講義補充：面試題的完整解題敘述**",
     "Waymo 類型題常把演算法包進自駕情境，同時考演算法選型與溝通品質。解題時不要只說「我用 BFS」或「我用 DP」，而要把題目拆成四件事：資料如何建模、狀態代表什麼、每一步如何保持不變式、複雜度是否符合限制。若能把這四件事說清楚，即使程式碼還沒寫完，面試官也能判斷你的方向是正確的。",
-    "**觀念起點**\n\nWaymo interview 題常把熟悉演算法包成接近自駕系統的敘述：路徑規劃像狀態圖最短路，校準流程像依賴圖，車隊平台像多索引資料結構，感測器資料流像受限空間下的摘要維護，碰撞偵測則回到計算幾何原語。讀題時先不要尋找模板名稱，而是先回答「目前局面由哪些資訊決定」以及「下一步操作會改變哪些資訊」。\n\n若題目要求設計 class 或 API，演算法只是其中一部分。你還要說清楚 canonical state 放在哪裡、查詢索引如何維護、更新時哪些舊資料要刪掉、tie-breaker 如何定義。這些說明能避免 heap stale entry、set comparator 不完整、map 與索引不同步等錯誤。",
-    "**常見模式總表**：\n- 狀態圖最短路：狀態包含位置、資源、mask、時間；等權用 BFS，0/1 權用 deque，非負權用 Dijkstra。\n- 依賴圖：先建有向邊，再用拓撲排序檢查 cycle；若需要最早完成時間，在拓撲序上做 DP。\n- 資料結構同步：API 題通常有一個 canonical state，再維護 heap / set / map 作查詢索引。\n- 字串比較：固定 pattern 用 KMP / Z；大量字典詞用 Trie；任意子串比較用 hash。\n- 資源限制：把 memory、操作次數、狀態總數寫成公式，再決定是否需要壓縮狀態。",
+    "**觀念起點**\n\nWaymo interview 題常把熟悉演算法包成接近自駕系統的敘述：路徑規劃像狀態圖最短路，校準流程像依賴圖，車隊平台像多索引資料結構，感測器資料流像受限空間下的摘要維護，碰撞偵測則回到計算幾何原語與座標 frame。讀題時先不要尋找模板名稱，而是先回答「目前局面由哪些資訊決定」以及「下一步操作會改變哪些資訊」。\n\n若題目要求設計 class 或 API，演算法只是其中一部分。你還要說清楚 canonical state 放在哪裡、查詢索引如何維護、更新時哪些舊資料要刪掉、tie-breaker 如何定義。這些說明能避免 heap stale entry、set comparator 不完整、map 與索引不同步等錯誤。",
+    "**常見模式總表**：\n- 狀態圖最短路：狀態包含位置、資源、mask、時間；等權用 BFS，0/1 權用 deque，非負權用 Dijkstra。\n- 座標與幾何：先固定 local/world/sensor frame，再用 rotation + translation、叉積、點積、投影或相對速度判斷碰撞。\n- 依賴圖：先建有向邊，再用拓撲排序檢查 cycle；若需要最早完成時間，在拓撲序上做 DP。\n- 資料流與日誌：只保留足以回答問題的摘要；CSV/event log 題先定義 corrupted input 的處理策略。\n- 資料結構同步：API 題通常有一個 canonical state，再維護 heap / set / map 作查詢索引。\n- 資源限制與 C++：把 memory、操作次數、狀態總數、ownership 與 thread-safety 寫成明確條件，再決定是否需要壓縮狀態或 bounded buffer。",
     "**面試解題骨架**：\n1. 先重述完整問題，包含輸入、輸出、限制與是否多次查詢。\n2. 定義狀態或資料結構的語意，避免只說容器名稱。\n3. 說明不變式，例如 BFS queue 的距離順序、拓撲排序的入度語意、API 索引與 canonical state 的同步關係。\n4. 用一個小例子手算一輪，確認狀態轉移與答案更新位置。\n5. 寫 C++ 時先完成邊界與資料結構初始化，再補主流程。",
     "**例題解析：帶資源的最短路**\n\n**完整問題**：給定一個 `rows x cols` 的 0/1 網格，`0` 表示空格、`1` 表示障礙。你從左上角 `(0, 0)` 出發，要走到右下角 `(rows - 1, cols - 1)`。每一步可以往上下左右相鄰格移動一次，並且最多可以消除 `k` 個障礙。請回傳最少步數；若無法到達，回傳 `-1`。\n\n題目訊號是「從起點走到終點」加上「最多消耗 k 次資源」。若只把 `(row, col)` 當狀態會錯，因為同一格剩餘資源不同，未來可走的路也不同。正確狀態是 `(row, col, remaining)`。若每一步成本相同，使用 BFS；若移動成本不等，才改成 Dijkstra。\n\n推導流程：\n1. 初始狀態 `(0, 0, k)`，距離是 0。\n2. 從狀態轉移到四個鄰格，若鄰格是障礙就消耗 1。\n3. 對同一格，只保留看過的最大 remaining；若新狀態 remaining 更小，沒有必要入隊。\n4. 第一次取出終點時，距離就是最短步數。",
     "```cpp\nint shortestPathWithResource(vector<vector<int>>& grid, int k) {\n  int rows = grid.size(), cols = grid[0].size();\n  const int kDirs[5] = {1, 0, -1, 0, 1};\n  vector<vector<int>> best(rows, vector<int>(cols, -1));\n  queue<array<int, 4>> q;\n\n  q.push({0, 0, k, 0});\n  best[0][0] = k;\n  while (!q.empty()) {\n    auto [row, col, left, dist] = q.front();\n    q.pop();\n    if (row == rows - 1 && col == cols - 1) {\n      return dist;\n    }\n    for (int dir = 0; dir < 4; ++dir) {\n      int next_row = row + kDirs[dir];\n      int next_col = col + kDirs[dir + 1];\n      if (next_row < 0 || next_row >= rows || next_col < 0 || next_col >= cols) {\n        continue;\n      }\n      int next_left = left - grid[next_row][next_col];\n      if (next_left < 0 || next_left <= best[next_row][next_col]) {\n        continue;\n      }\n      best[next_row][next_col] = next_left;\n      q.push({next_row, next_col, next_left, dist + 1});\n    }\n  }\n  return -1;\n}\n```",
