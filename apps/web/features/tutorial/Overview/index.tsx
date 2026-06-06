@@ -1,6 +1,6 @@
 "use client";
 
-import { STUDYPLANS } from "@/config/constants";
+import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import { Input } from "@/components/ui/input";
 import { BookOpen, FolderTree, LayoutGrid, Search } from "lucide-react";
 import Link from "next/link";
@@ -22,7 +22,7 @@ function TutorialOverview() {
   const planSearchMatches = useMemo(() => {
     if (!trimmedQuery) return {} as Record<string, TutorialSearchMatch[]>;
 
-    return Object.entries(STUDYPLANS).reduce<
+    return Object.entries(LECTURE_CATEGORIES).reduce<
       Record<string, TutorialSearchMatch[]>
     >((acc, [key, title]) => {
       const data = tutorialDataMap[key];
@@ -32,7 +32,7 @@ function TutorialOverview() {
   }, [trimmedQuery]);
 
   const filteredPlans = useMemo(() => {
-    return Object.entries(STUDYPLANS).filter(([key]) => {
+    return Object.entries(LECTURE_CATEGORIES).filter(([key]) => {
       if (!trimmedQuery) return true;
       const matches = planSearchMatches[key];
       return matches && matches.length > 0;
@@ -40,7 +40,7 @@ function TutorialOverview() {
   }, [trimmedQuery, planSearchMatches]);
 
   const overviewStats = useMemo(() => {
-    return Object.keys(STUDYPLANS).reduce(
+    return Object.keys(LECTURE_CATEGORIES).reduce(
       (acc, key) => {
         const stat = getTutorialSummary(tutorialDataMap[key]);
         acc.totalSections += stat.totalSections;
@@ -51,7 +51,7 @@ function TutorialOverview() {
     );
   }, []);
 
-  const totalPlans = Object.keys(STUDYPLANS).length;
+  const totalPlans = Object.keys(LECTURE_CATEGORIES).length;
 
   return (
     <div className="min-h-screen bg-background font-han">

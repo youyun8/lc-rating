@@ -1,23 +1,13 @@
+import { lectureContentMap } from "@/features/lecture/content";
 import type { TutorialData } from "@/types";
-import { fetchApi } from "@/utils/fetch";
-import { useQuery } from "@tanstack/react-query";
 
+/**
+ * Returns the authored lecture tree for a category. Content now lives in static
+ * TypeScript modules (`features/lecture/content`), so this is a synchronous
+ * lookup — no runtime fetch of `public/tutorial/*.json` (those files are gone).
+ * The `{ isPending, error }` shape is kept for backward compatibility.
+ */
 export function useTutorial(plan: string) {
-  const {
-    data: tutorial,
-    isPending,
-    error,
-  } = useQuery<TutorialData.Root>({
-    queryKey: [`tutorial/${plan}`],
-    queryFn: () =>
-      fetchApi(
-        `/tutorial/${plan}.json?t=${(new Date().getTime() / 100000).toFixed(
-          0,
-        )}`,
-        { cache: "no-store" },
-      ).then((res) => res.json()),
-    staleTime: 0,
-  });
-
-  return { tutorial, isPending, error };
+  const tutorial = lectureContentMap[plan] as TutorialData.Root | undefined;
+  return { tutorial, isPending: false, error: null as Error | null };
 }

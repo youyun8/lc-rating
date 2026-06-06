@@ -1,7 +1,6 @@
-import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
 import { Button } from "@/components/ui/button";
 import type { LectureSectionTutorial } from "@/data/lectureSectionTutorials";
-import { SectionPracticePanel } from "@/features/learning/components/SectionPracticePanel";
+import { HandbookSectionBody } from "@/features/handbook/HandbookSectionBody";
 import {
   ArrowLeft,
   ArrowRight,
@@ -26,8 +25,8 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
     summary: child.summary,
     childCount: child.childCount,
     totalSections: child.totalSections,
-    problemCount: child.practiceProblemCount,
-    problemIds: child.practiceProblemIds,
+    problemCount: 0,
+    problemIds: [],
     depth: child.depth,
   }));
 
@@ -100,19 +99,13 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
               </h2>
             </div>
             <div className="px-4 py-5 sm:px-6 md:py-7">
-              <StudyPlanMarkdownContent
-                content={section.content}
-                variant="lecture"
+              <HandbookSectionBody
+                body={section.content}
+                exampleLabel="範例"
+                language="zh"
               />
             </div>
           </article>
-
-          {section.practiceProblems.length > 0 && (
-            <SectionPracticePanel
-              problems={section.practiceProblems}
-              title="搭配練習"
-            />
-          )}
 
           <nav className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             {section.previous ? (

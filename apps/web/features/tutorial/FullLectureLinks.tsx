@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { STUDYPLANS } from "@/config/constants";
+import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import {
   defaultTheme,
   studyPlanIcons,
@@ -121,7 +121,7 @@ function FullLectureLinks() {
                   講義主題
                 </div>
                 <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {Object.keys(STUDYPLANS).length}
+                  {Object.keys(LECTURE_CATEGORIES).length}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   依題單主題分組

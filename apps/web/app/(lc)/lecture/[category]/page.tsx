@@ -1,11 +1,11 @@
-import { STUDYPLANS } from "@/config/constants";
+import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import type { Metadata } from "next";
 import { lazy } from "react";
 
 const Tutorial = lazy(() => import("@/features/tutorial"));
 
 export async function generateStaticParams() {
-  const categories = Object.keys(STUDYPLANS);
+  const categories = Object.keys(LECTURE_CATEGORIES);
   return categories.map((category) => ({
     category,
   }));
@@ -19,7 +19,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { category } = await params;
-  const title = STUDYPLANS[category as keyof typeof STUDYPLANS];
+  const title = LECTURE_CATEGORIES[category];
 
   if (!title) {
     return { title: "講義" };

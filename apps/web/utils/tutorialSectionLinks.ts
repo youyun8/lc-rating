@@ -1,4 +1,4 @@
-import { STUDYPLANS } from "@/config/constants";
+import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import type { TutorialData } from "@/types";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
@@ -22,7 +22,7 @@ function flattenTutorialSectionLinks(
 ): TutorialSectionLink[] {
   if (!sections) return [];
 
-  const planTitle = STUDYPLANS[planKey as keyof typeof STUDYPLANS] ?? planKey;
+  const planTitle = LECTURE_CATEGORIES[planKey] ?? planKey;
 
   return sections.flatMap((section) => {
     const slug = sectionAnchor(section.title);
@@ -51,10 +51,10 @@ function flattenTutorialSectionLinks(
 }
 
 export function getTutorialSectionLinkGroups() {
-  return Object.keys(STUDYPLANS)
+  return Object.keys(LECTURE_CATEGORIES)
     .map((planKey) => ({
       planKey,
-      planTitle: STUDYPLANS[planKey as keyof typeof STUDYPLANS] ?? planKey,
+      planTitle: LECTURE_CATEGORIES[planKey] ?? planKey,
       links: flattenTutorialSectionLinks(
         planKey,
         tutorialDataMap[planKey]?.children,

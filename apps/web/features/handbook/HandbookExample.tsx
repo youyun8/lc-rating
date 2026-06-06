@@ -5,8 +5,10 @@ import { ChevronRight, Lightbulb } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 interface HandbookExampleProps {
-  /** Card heading, shown after a 「例題：」 prefix (e.g. "Maximum XOR (LC 421)"). */
+  /** Card heading, shown after a 「<label>：」 prefix (e.g. "Maximum XOR (LC 421)"). */
   title: string;
+  /** Prefix shown before the title (e.g. "例題" in the handbook, "範例" in lectures). */
+  label?: string;
   /** The worked-example body (prose + code), rendered inside the card. */
   children: ReactNode;
 }
@@ -21,7 +23,11 @@ interface HandbookExampleProps {
  * (Ctrl+F) and anchor links keep working — matching the code-block toggles in
  * {@link StudyPlanMarkdownContent}.
  */
-export function HandbookExample({ title, children }: HandbookExampleProps) {
+export function HandbookExample({
+  title,
+  label = "例題",
+  children,
+}: HandbookExampleProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -34,7 +40,7 @@ export function HandbookExample({ title, children }: HandbookExampleProps) {
       >
         <Lightbulb className="h-4 w-4 shrink-0 text-lime-600 dark:text-lime-400" />
         <span className="min-w-0 flex-1">
-          <span className="text-lime-700 dark:text-lime-300">例題：</span>
+          <span className="text-lime-700 dark:text-lime-300">{label}：</span>
           {title}
         </span>
         <ChevronRight

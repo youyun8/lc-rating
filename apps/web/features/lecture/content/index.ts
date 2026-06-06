@@ -1,0 +1,54 @@
+import type { TutorialData } from "@/types";
+import { googleInterview } from "./google_interview";
+import { rating_2100 } from "./rating_2100";
+import { binarySearch } from "./binary_search";
+import { sorting } from "./sorting";
+import { bitwiseOperations } from "./bitwise_operations";
+import { dataStructure } from "./data_structure";
+import { dynamicProgramming } from "./dynamic_programming";
+import { graph } from "./graph";
+import { greedy } from "./greedy";
+import { grid } from "./grid";
+import { math } from "./math";
+import { monotonicStack } from "./monotonic_stack";
+import { slidingWindow } from "./sliding_window";
+import { string } from "./string";
+import { trees } from "./trees";
+
+/** Lecture category key -> display title. Lecture-owned; independent of STUDYPLANS. */
+export const LECTURE_CATEGORIES: Record<string, string> = {
+  google_interview: "Google 面試準備",
+  rating_2100: "Rating 2100",
+  binary_search: "二分搜尋",
+  sorting: "排序",
+  bitwise_operations: "位元運算",
+  data_structure: "資料結構",
+  dynamic_programming: "動態規劃",
+  graph: "圖論演算法",
+  greedy: "貪心",
+  grid: "網格圖",
+  math: "數學",
+  monotonic_stack: "單調堆疊",
+  sliding_window: "滑動視窗",
+  string: "字串",
+  trees: "樹和二元樹",
+};
+
+/** Lecture category key -> authored content tree. Replaces the old tutorial/*.json. */
+export const lectureContentMap: Record<string, TutorialData.Root> = {
+  google_interview: googleInterview,
+  rating_2100: rating_2100,
+  binary_search: binarySearch,
+  sorting: sorting,
+  bitwise_operations: bitwiseOperations,
+  data_structure: dataStructure,
+  dynamic_programming: dynamicProgramming,
+  graph: graph,
+  greedy: greedy,
+  grid: grid,
+  math: math,
+  monotonic_stack: monotonicStack,
+  sliding_window: slidingWindow,
+  string: string,
+  trees: trees,
+};

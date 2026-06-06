@@ -1,7 +1,7 @@
 "use client";
 
 import { useTutorial } from "@/hooks/useTutorial";
-import { STUDYPLANS } from "@/config/constants";
+import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import {
   studyPlanIcons,
   studyPlanThemes,
@@ -16,14 +16,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
-import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { TutorialMarkdownPanel } from "./MarkdownPanel";
 import { CourseMaterials } from "./CourseMaterials";
-import type { StudyPlanData } from "@/types";
-import {
-  flattenStudyPlanProblems,
-  getTutorialStats,
-} from "@/features/learning/utils/sectionTree";
+import { getTutorialStats } from "@/features/learning/utils/sectionTree";
 import {
   LectureSectionCards,
   makeLectureSectionCardItem,
@@ -36,39 +31,17 @@ interface TutorialProps {
 function Tutorial({ plan }: TutorialProps) {
   const { tutorial } = useTutorial(plan);
 
-  const planTitle =
-    STUDYPLANS[plan as keyof typeof STUDYPLANS] ?? tutorial?.title ?? plan;
+  const planTitle = LECTURE_CATEGORIES[plan] ?? tutorial?.title ?? plan;
   const Icon = studyPlanIcons[plan] ?? BookOpen;
   const theme = studyPlanThemes[plan] ?? defaultTheme;
-
-  const practiceBySectionId = useMemo(() => {
-    const map = new Map<number, StudyPlanData.Item[]>();
-    const studyPlan = studyPlanDataMap[plan];
-    if (!studyPlan) return map;
-
-    const walk = (section: StudyPlanData.Section) => {
-      const problems = flattenStudyPlanProblems(section);
-      if (problems.length > 0) {
-        map.set(section.id, problems);
-      }
-      section.children?.forEach(walk);
-    };
-    studyPlan.children.forEach(walk);
-    return map;
-  }, [plan]);
 
   const stats = useMemo(() => getTutorialStats(tutorial), [tutorial]);
   const sectionCardItems = useMemo(
     () =>
       tutorial?.children.map((section) =>
-        makeLectureSectionCardItem(
-          section,
-          plan,
-          0,
-          practiceBySectionId.get(section.id) ?? [],
-        ),
+        makeLectureSectionCardItem(section, plan, 0, []),
       ) ?? [],
-    [plan, practiceBySectionId, tutorial?.children],
+    [plan, tutorial?.children],
   );
 
   return (

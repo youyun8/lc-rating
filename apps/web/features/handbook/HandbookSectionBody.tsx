@@ -13,25 +13,39 @@ type Segment =
 
 interface HandbookSectionBodyProps {
   body: string;
+  /** Prefix on collapsible example cards ("例題" for handbook, "範例" for lectures). */
+  exampleLabel?: string;
+  /** ProblemList UI language for inline problem tables. */
+  language?: "en" | "zh";
 }
 
 /**
- * Renders a handbook section: prose is handed to {@link StudyPlanMarkdownContent},
- * while `| ID | Problem | (Rating) | Technique |` tables become interactive
- * {@link ProblemList} widgets so readers can track their progress (completed,
- * in progress, …) and store solutions — the same experience as the 講義 lectures.
+ * Renders a handbook/lecture section: prose is handed to
+ * {@link StudyPlanMarkdownContent}, `:::example` blocks become collapsible
+ * {@link HandbookExample} cards, and `| ID | Problem | (Rating) | Technique |`
+ * tables become interactive {@link ProblemList} widgets so readers can track
+ * progress and store solutions. Shared by the handbook and the 講義 lectures.
  */
-export function HandbookSectionBody({ body }: HandbookSectionBodyProps) {
+export function HandbookSectionBody({
+  body,
+  exampleLabel = "例題",
+  language = "en",
+}: HandbookSectionBodyProps) {
   const segments = useMemo(() => splitSectionBody(body), [body]);
-  return <>{renderSegments(segments, false)}</>;
+  return <>{renderSegments(segments, false, exampleLabel, language)}</>;
 }
 
 /**
  * Render parsed segments to JSX. `codeInitiallyOpen` is threaded down so code
- * blocks inside a 例題 card start expanded (the card itself is the collapsible),
- * avoiding a redundant second toggle.
+ * blocks inside an example card start expanded (the card itself is the
+ * collapsible), avoiding a redundant second toggle.
  */
-function renderSegments(segments: Segment[], codeInitiallyOpen: boolean) {
+function renderSegments(
+  segments: Segment[],
+  codeInitiallyOpen: boolean,
+  exampleLabel: string,
+  language: "en" | "zh",
+) {
   return segments.map((segment, idx) => {
     if (segment.kind === "problems") {
       return (
@@ -39,7 +53,7 @@ function renderSegments(segments: Segment[], codeInitiallyOpen: boolean) {
           <ProblemList
             problems={segment.problems}
             title={segment.title ?? "Core problems"}
-            language="en"
+            language={language}
           />
         </div>
       );
@@ -47,8 +61,13 @@ function renderSegments(segments: Segment[], codeInitiallyOpen: boolean) {
 
     if (segment.kind === "example") {
       return (
-        <HandbookExample key={idx} title={segment.title}>
-          {renderSegments(splitSectionBody(segment.content), true)}
+        <HandbookExample key={idx} title={segment.title} label={exampleLabel}>
+          {renderSegments(
+            splitSectionBody(segment.content),
+            true,
+            exampleLabel,
+            language,
+          )}
         </HandbookExample>
       );
     }
