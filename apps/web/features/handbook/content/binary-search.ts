@@ -366,7 +366,7 @@ The whole game is making \`check\` cheap and *provably monotone*.`,
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 4 | [Median of Two Sorted Arrays](https://leetcode.cn/problems/median-of-two-sorted-arrays) | partition by binary search |

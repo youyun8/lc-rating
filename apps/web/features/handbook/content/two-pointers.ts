@@ -53,8 +53,11 @@ vector<int> twoSum(vector<int>& a, int target) {
   while (l < r) {
     int sum = a[l] + a[r];
     if (sum == target) return {l + 1, r + 1};
-    if (sum < target) l++;   // need a bigger value
-    else r--;                // need a smaller value
+    if (sum < target) {
+      l++;  // need a bigger value
+    } else {
+      r--;  // need a smaller value
+    }
   }
   return {};
 }
@@ -271,7 +274,7 @@ The front-to-back version produces the merged list for Merge Two Sorted Lists (L
 | Opposite ends (already sorted) | \`O(n)\` | \`O(1)\` |
 | Opposite ends (must sort first) | \`O(n log n)\` | \`O(1)\`–\`O(n)\` for the sort |
 | Slow/fast write (in place) | \`O(n)\` | \`O(1)\` |
-| Fixed anchor + sweep (kSum) | \`O(n^(k - 1))\` | \`O(1)\` extra |
+| Fixed anchor + sweep (kSum) | \`O(n^{k - 1})\` | \`O(1)\` extra |
 | Dutch national flag partition | \`O(n)\` | \`O(1)\` |
 | Fast & slow cycle detection | \`O(n)\` | \`O(1)\` |
 | Merge two sorted sequences | \`O(m + n)\` | \`O(1)\` in place |
@@ -280,7 +283,7 @@ The pointer logic itself is always linear; whenever you see \`O(n log n)\` it is
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 11 | [Container With Most Water](https://leetcode.cn/problems/container-with-most-water) | opposite ends |

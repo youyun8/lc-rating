@@ -504,7 +504,7 @@ struct MergeSortTree {
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 303 | [Range Sum Query - Immutable](https://leetcode.cn/problems/range-sum-query-immutable) | prefix sums |

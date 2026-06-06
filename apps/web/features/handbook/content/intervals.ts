@@ -217,7 +217,7 @@ The sort is the bottleneck almost everywhere; once the data is ordered, the swee
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | sort + merge |

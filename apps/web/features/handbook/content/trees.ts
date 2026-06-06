@@ -422,7 +422,7 @@ vector<int> morrisInorder(TreeNode* root) {
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 94 / 144 / 145 | [Traversals](https://leetcode.cn/problems/binary-tree-inorder-traversal) | recursion / stack |

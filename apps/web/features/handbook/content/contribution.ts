@@ -235,7 +235,7 @@ The win is always the same: an $O(n^2)$ or $O(2^n)$ enumeration becomes near-lin
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Pattern |
 | --- | --- | --- |
 | 477 | [Total Hamming Distance](https://leetcode.cn/problems/total-hamming-distance) | per-bit |

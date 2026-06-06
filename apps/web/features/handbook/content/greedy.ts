@@ -246,7 +246,7 @@ The cost is almost always dominated by the initial sort or by heap operations.`,
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 55 / 45 | [Jump Game I/II](https://leetcode.cn/problems/jump-game) | farthest reach |

@@ -331,7 +331,7 @@ The same toolkit handles **Add Two Numbers** (LC 2, digit-by-digit with carry), 
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 206 | [Reverse Linked List](https://leetcode.cn/problems/reverse-linked-list) | reversal |

@@ -2,7 +2,7 @@
   "id": 1,
   "title": "技術面試準備",
   "src": "",
-  "last_update": "2026-06-06T11:56:16.752Z",
+  "last_update": "2026-06-06T15:57:15.639Z",
   "summary": "這份題單把技術面試常見的系統題拆成可複習的演算法與 C++ 主題：圖搜尋、矩陣批次處理、資料流摘要、日誌解析、並發區間、快取索引、資源邊界與狀態壓縮。\n\n使用建議：先完成前六章建立共同基礎，再依弱項加做後續章節；每題復盤題型訊號、關鍵不變式、複雜度、記憶體上限與可替代解法。",
   "children": [
     {
@@ -189,6 +189,26 @@
           "score": 2381.625583289,
           "isPremium": false,
           "subsection": "網格 Dijkstra / 時間奇偶"
+        },
+        {
+          "id": "3552",
+          "title": "網格傳送門旅遊",
+          "slug": "grid-teleportation-traversal",
+          "src": "https://leetcode.cn/problems/grid-teleportation-traversal/",
+          "solution": null,
+          "score": 2036.0285748447,
+          "isPremium": false,
+          "subsection": "網格 BFS / 傳送門壓縮"
+        },
+        {
+          "id": "3568",
+          "title": "清理教室的最少移動",
+          "slug": "minimum-moves-to-clean-the-classroom",
+          "src": "https://leetcode.cn/problems/minimum-moves-to-clean-the-classroom/",
+          "solution": null,
+          "score": 2143.028994471,
+          "isPremium": false,
+          "subsection": "狀態 BFS / 清掃任務"
         }
       ],
       "children": []
@@ -427,6 +447,36 @@
           "score": 2228.3454693625,
           "isPremium": false,
           "subsection": "換根 / 猜測計數"
+        },
+        {
+          "id": "3493",
+          "title": "屬性圖",
+          "slug": "properties-graph",
+          "src": "https://leetcode.cn/problems/properties-graph/",
+          "solution": null,
+          "score": 1565.0047379604,
+          "isPremium": false,
+          "subsection": "屬性圖 / 連通判斷"
+        },
+        {
+          "id": "3607",
+          "title": "電網維護",
+          "slug": "power-grid-maintenance",
+          "src": "https://leetcode.cn/problems/power-grid-maintenance/",
+          "solution": null,
+          "score": 1699.6848167364,
+          "isPremium": false,
+          "subsection": "動態連通 / 有序資源"
+        },
+        {
+          "id": "3608",
+          "title": "包含 K 個連通分量需要的最小時間",
+          "slug": "minimum-time-for-k-connected-components",
+          "src": "https://leetcode.cn/problems/minimum-time-for-k-connected-components/",
+          "solution": null,
+          "score": 1892.5363693543,
+          "isPremium": false,
+          "subsection": "並查集 / 時間二分"
         }
       ],
       "children": []
@@ -665,6 +715,26 @@
           "score": 2265.2118886972,
           "isPremium": false,
           "subsection": "二分答案 / 資源總量"
+        },
+        {
+          "id": "3413",
+          "title": "收集連續 K 個袋子可以獲得的最多硬幣數量",
+          "slug": "maximum-coins-from-k-consecutive-bags",
+          "src": "https://leetcode.cn/problems/maximum-coins-from-k-consecutive-bags/",
+          "solution": null,
+          "score": 2373.8124052261,
+          "isPremium": false,
+          "subsection": "前綴和 / 固定跨度窗口"
+        },
+        {
+          "id": "3652",
+          "title": "按策略買賣股票的最佳時機",
+          "slug": "best-time-to-buy-and-sell-stock-using-strategy",
+          "src": "https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-using-strategy/",
+          "solution": null,
+          "score": 1556.7777620299,
+          "isPremium": false,
+          "subsection": "前綴和 / 策略滑窗"
         }
       ],
       "children": []
@@ -754,6 +824,26 @@
           "score": 2286.1378742318,
           "isPremium": false,
           "subsection": "離線查詢 / 區間最小堆"
+        },
+        {
+          "id": "3454",
+          "title": "分割正方形 II",
+          "slug": "separate-squares-ii",
+          "src": "https://leetcode.cn/problems/separate-squares-ii/",
+          "solution": null,
+          "score": 2671.1046123182,
+          "isPremium": false,
+          "subsection": "掃描線 / 面積二分"
+        },
+        {
+          "id": "3480",
+          "title": "刪除一個衝突對後最大子陣列數目",
+          "slug": "maximize-subarrays-after-removing-one-conflicting-pair",
+          "src": "https://leetcode.cn/problems/maximize-subarrays-after-removing-one-conflicting-pair/",
+          "solution": null,
+          "score": 2763.6510278508,
+          "isPremium": false,
+          "subsection": "衝突區間 / 貢獻統計"
         }
       ],
       "children": []
@@ -873,6 +963,26 @@
           "score": 2843.655465882,
           "isPremium": false,
           "subsection": "Kadane 變形 / 分值映射"
+        },
+        {
+          "id": "3636",
+          "title": "查詢超過閾值頻率最高元素",
+          "slug": "threshold-majority-queries",
+          "src": "https://leetcode.cn/problems/threshold-majority-queries/",
+          "solution": null,
+          "score": 2451.042823679,
+          "isPremium": false,
+          "subsection": "多數查詢 / 頻率索引"
+        },
+        {
+          "id": "3679",
+          "title": "使庫存平衡的最少丟棄次數",
+          "slug": "minimum-discards-to-balance-inventory",
+          "src": "https://leetcode.cn/problems/minimum-discards-to-balance-inventory/",
+          "solution": null,
+          "score": 1638.8790725205,
+          "isPremium": false,
+          "subsection": "滑窗計數 / 庫存平衡"
         }
       ],
       "children": []
@@ -1111,6 +1221,26 @@
           "score": 2507.1382215756,
           "isPremium": false,
           "subsection": "離線連通 / 並查集"
+        },
+        {
+          "id": "3484",
+          "title": "設計電子表格",
+          "slug": "design-spreadsheet",
+          "src": "https://leetcode.cn/problems/design-spreadsheet/",
+          "solution": null,
+          "score": 1523.7317629862,
+          "isPremium": false,
+          "subsection": "表格 API / 狀態解析"
+        },
+        {
+          "id": "3709",
+          "title": "設計考試分數記錄器",
+          "slug": "design-exam-scores-tracker",
+          "src": "https://leetcode.cn/problems/design-exam-scores-tracker/",
+          "solution": null,
+          "score": 1647.51871302,
+          "isPremium": false,
+          "subsection": "分數追蹤 / 前綴索引"
         }
       ],
       "children": []
@@ -1190,6 +1320,26 @@
           "score": 2824.4551372454,
           "isPremium": false,
           "subsection": "區間翻轉 / 有序集合 BFS"
+        },
+        {
+          "id": "3594",
+          "title": "所有人渡河所需的最短時間",
+          "slug": "minimum-time-to-transport-all-individuals",
+          "src": "https://leetcode.cn/problems/minimum-time-to-transport-all-individuals/",
+          "solution": null,
+          "score": 2604.0450098035,
+          "isPremium": false,
+          "subsection": "狀壓最短路 / 搬運決策"
+        },
+        {
+          "id": "3629",
+          "title": "通過質數傳送到達終點的最少跳躍次數",
+          "slug": "minimum-jumps-to-reach-end-via-prime-teleportation",
+          "src": "https://leetcode.cn/problems/minimum-jumps-to-reach-end-via-prime-teleportation/",
+          "solution": null,
+          "score": 2139.3079901181,
+          "isPremium": false,
+          "subsection": "傳送狀態圖 / BFS"
         }
       ],
       "children": []
@@ -1269,6 +1419,36 @@
           "score": 2413.3969129689,
           "isPremium": false,
           "subsection": "時間限制 / 最短路 DP"
+        },
+        {
+          "id": "3604",
+          "title": "有向圖中到達終點的最少時間",
+          "slug": "minimum-time-to-reach-destination-in-directed-graph",
+          "src": "https://leetcode.cn/problems/minimum-time-to-reach-destination-in-directed-graph/",
+          "solution": null,
+          "score": 1844.6347254612,
+          "isPremium": false,
+          "subsection": "有向圖 / 時間最短路"
+        },
+        {
+          "id": "3620",
+          "title": "恢復網路路徑",
+          "slug": "network-recovery-pathways",
+          "src": "https://leetcode.cn/problems/network-recovery-pathways/",
+          "solution": null,
+          "score": 1998.0432529701,
+          "isPremium": false,
+          "subsection": "網路恢復 / 拓撲最短路"
+        },
+        {
+          "id": "3650",
+          "title": "邊反轉的最小路徑總成本",
+          "slug": "minimum-cost-path-with-edge-reversals",
+          "src": "https://leetcode.cn/problems/minimum-cost-path-with-edge-reversals/",
+          "solution": null,
+          "score": 1853.6535583817,
+          "isPremium": false,
+          "subsection": "邊反轉 / 最短路成本"
         }
       ],
       "children": []
@@ -1358,6 +1538,26 @@
           "score": 2460.3152437576,
           "isPremium": false,
           "subsection": "樹分割 / 子樹和"
+        },
+        {
+          "id": "3585",
+          "title": "樹中找到帶權中位節點",
+          "slug": "find-weighted-median-node-in-tree",
+          "src": "https://leetcode.cn/problems/find-weighted-median-node-in-tree/",
+          "solution": null,
+          "score": 2428.6733108929,
+          "isPremium": false,
+          "subsection": "帶權樹 / 中位節點查詢"
+        },
+        {
+          "id": "3590",
+          "title": "第 K 小的路徑異或和",
+          "slug": "kth-smallest-path-xor-sum",
+          "src": "https://leetcode.cn/problems/kth-smallest-path-xor-sum/",
+          "solution": null,
+          "score": 2645.836955523,
+          "isPremium": false,
+          "subsection": "樹路徑 XOR / 有序集合"
         }
       ],
       "children": []
@@ -1447,6 +1647,26 @@
           "score": 2610.0826855063,
           "isPremium": false,
           "subsection": "單調隊列 DP / 運輸箱"
+        },
+        {
+          "id": "3578",
+          "title": "統計極差最大為 K 的分割方式數",
+          "slug": "count-partitions-with-max-min-difference-at-most-k",
+          "src": "https://leetcode.cn/problems/count-partitions-with-max-min-difference-at-most-k/",
+          "solution": null,
+          "score": 2032.797382526,
+          "isPremium": false,
+          "subsection": "單調隊列 DP / 分割計數"
+        },
+        {
+          "id": "3768",
+          "title": "固定長度子陣列中的最小逆序對數目",
+          "slug": "minimum-inversion-count-in-subarrays-of-fixed-length",
+          "src": "https://leetcode.cn/problems/minimum-inversion-count-in-subarrays-of-fixed-length/",
+          "solution": null,
+          "score": 2157.7545069067,
+          "isPremium": false,
+          "subsection": "滑窗逆序 / 線段樹"
         }
       ],
       "children": []

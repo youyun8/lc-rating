@@ -226,7 +226,7 @@ Every index enters and exits the window once — that is the source of the linea
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 3 | [Longest Substring Without Repeating](https://leetcode.cn/problems/longest-substring-without-repeating-characters) | variable window |

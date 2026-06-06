@@ -20,6 +20,7 @@ export interface HandbookSection {
 /** Coarse grouping used only to organize the overview page. */
 export type HandbookGroup =
   | "Foundations"
+  | "System Design"
   | "Data Structures"
   | "Graphs & Grids"
   | "Dynamic Programming"

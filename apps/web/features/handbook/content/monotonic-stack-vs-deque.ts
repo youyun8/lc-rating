@@ -372,7 +372,7 @@ Both are amortized linear; the deque's tighter \`O(k)\` window space comes from 
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `**Monotonic stack (relationships / spans)**
 
 | ID | Problem | Technique |

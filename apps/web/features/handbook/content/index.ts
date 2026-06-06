@@ -1,5 +1,6 @@
 import type { HandbookGroup, HandbookTopic, HandbookTopicRef } from "../model";
 import { competitiveProgrammingEssentials } from "./competitive-programming-essentials";
+import { mlPerformanceSystemDesign } from "./ml-performance-system-design";
 import { binarySearch } from "./binary-search";
 import { sorting } from "./sorting";
 import { twoPointers } from "./two-pointers";
@@ -33,6 +34,7 @@ import { trialFilling } from "./trial-filling";
  */
 export const HANDBOOK_TOPICS: HandbookTopic[] = [
   competitiveProgrammingEssentials,
+  mlPerformanceSystemDesign,
   binarySearch,
   sorting,
   twoPointers,
@@ -64,6 +66,7 @@ export const HANDBOOK_TOPICS: HandbookTopic[] = [
 /** Display order of the overview groups. */
 export const HANDBOOK_GROUP_ORDER: HandbookGroup[] = [
   "Foundations",
+  "System Design",
   "Data Structures",
   "Graphs & Grids",
   "Dynamic Programming",

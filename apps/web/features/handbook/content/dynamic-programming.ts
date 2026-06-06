@@ -482,7 +482,7 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Pattern |
 | --- | --- | --- |
 | 64 / 62 | [Min Path Sum](https://leetcode.cn/problems/minimum-path-sum) / [Unique Paths](https://leetcode.cn/problems/unique-paths) | grid DP |

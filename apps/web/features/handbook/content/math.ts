@@ -329,7 +329,7 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 7 | [Reverse Integer](https://leetcode.cn/problems/reverse-integer) | digit peeling + overflow |

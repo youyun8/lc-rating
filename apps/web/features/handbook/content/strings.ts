@@ -386,7 +386,7 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 28 | [Find the Index (strStr)](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string) | KMP |

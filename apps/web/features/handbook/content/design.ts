@@ -355,7 +355,7 @@ The whole point of the genre is that *every* listed operation lands at \`O(1)\` 
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 146 | [LRU Cache](https://leetcode.cn/problems/lru-cache) | hashmap + list |

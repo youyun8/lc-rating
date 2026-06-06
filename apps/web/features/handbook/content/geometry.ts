@@ -371,7 +371,7 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) 
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 587 | [Erect the Fence](https://leetcode.cn/problems/erect-the-fence) | convex hull (monotonic chain) |

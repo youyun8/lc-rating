@@ -255,7 +255,7 @@ The win is uniform: an \`O(n^2)\` subarray scan or an \`O(m * n)\` update loop b
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 1 | [Two Sum](https://leetcode.cn/problems/two-sum) | hashmap complement |

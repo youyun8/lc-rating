@@ -212,7 +212,7 @@ Rule of thumb: range on the order of \`n\` → counting; range large but digit c
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 75 | [Sort Colors](https://leetcode.cn/problems/sort-colors) | counting sort (range {0,1,2}) |

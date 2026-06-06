@@ -167,7 +167,7 @@ Each position is decided once, so the cost is (number of positions) × (cost of 
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Fill order |
 | --- | --- | --- |
 | 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bits, high → low |

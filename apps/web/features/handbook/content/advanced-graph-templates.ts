@@ -561,7 +561,7 @@ struct RollbackDSU {
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `Explicit max-flow, 2-SAT, and HLD tasks are rare on LeetCode; the closest exercises share the underlying reductions — Tarjan low-link, bipartite matching, and the assignment problem.
 
 | ID | Problem | Technique |

@@ -383,7 +383,7 @@ These rarely appear on LeetCode but are decisive on the hardest contest problems
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 127 | [Word Ladder](https://leetcode.cn/problems/word-ladder) | BFS over states |

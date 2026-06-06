@@ -225,7 +225,7 @@ while (sub < (1 << n)) {
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 78 | [Subsets](https://leetcode.cn/problems/subsets) | mask enumeration |

@@ -280,7 +280,7 @@ A full sort is \`O(n log n)\`; the heap wins when \`k \\ll n\`, when only the ex
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 215 | [Kth Largest Element in an Array](https://leetcode.cn/problems/kth-largest-element-in-an-array) | top-K heap |

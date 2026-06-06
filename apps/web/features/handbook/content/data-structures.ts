@@ -453,7 +453,7 @@ class LRUCache {
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Structure |
 | --- | --- | --- |
 | 1 / 49 | [Two Sum](https://leetcode.cn/problems/two-sum) / [Group Anagrams](https://leetcode.cn/problems/group-anagrams) | hash map |

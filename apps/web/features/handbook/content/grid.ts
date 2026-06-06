@@ -355,7 +355,7 @@ Recurring lesson: when plain BFS/DFS is too weak, *enrich the state* (keys, fuel
     },
     {
       id: "problems",
-      title: "Representative LeetCode problems",
+      title: "LeetCode problems",
       body: `| ID | Problem | Technique |
 | --- | --- | --- |
 | 48 / 54 / 73 | [Rotate Image](https://leetcode.cn/problems/rotate-image) / [Spiral](https://leetcode.cn/problems/spiral-matrix) / [Set Zeroes](https://leetcode.cn/problems/set-matrix-zeroes) | in-place transforms |
