@@ -1,6 +1,6 @@
 import type { StudyPlanData } from "@/types";
 
-import googleInterviewData from "@/public/studyplan/google_interview.json";
+import waymoInterviewData from "@/public/studyplan/waymo_interview.json";
 import rating2100Data from "@/public/studyplan/rating_2100.json";
 import binarySearchData from "@/public/studyplan/binary_search.json";
 import sortingData from "@/public/studyplan/sorting.json";
@@ -17,7 +17,7 @@ import stringData from "@/public/studyplan/string.json";
 import treesData from "@/public/studyplan/trees.json";
 
 export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
-  google_interview: googleInterviewData as StudyPlanData.Root,
+  waymo_interview: waymoInterviewData as StudyPlanData.Root,
   rating_2100: rating2100Data as StudyPlanData.Root,
   binary_search: binarySearchData as StudyPlanData.Root,
   sorting: sortingData as StudyPlanData.Root,
