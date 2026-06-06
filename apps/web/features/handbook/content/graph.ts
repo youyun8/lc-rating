@@ -363,6 +363,25 @@ These rarely appear on LeetCode but are decisive on the hardest contest problems
 | 0-1 BFS | \`O(V + E)\` | weights in {0, 1} |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Most graph interview questions reduce to one of a handful of named patterns — recognizing which one is the whole game.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Flood fill / connected components | "count regions", "islands", "groups" | DFS/BFS or DSU, mark visited | [Number of Islands](https://leetcode.cn/problems/number-of-islands) |
+| BFS over implicit states | unweighted shortest path, "fewest steps/transformations" | BFS, mark visited at enqueue | [Word Ladder](https://leetcode.cn/problems/word-ladder) |
+| Topological ordering | dependencies, "prerequisites", "build order", detect cycle | Kahn in-degree BFS | [Course Schedule II](https://leetcode.cn/problems/course-schedule-ii) |
+| Dijkstra (with state) | non-negative weights, "cheapest"/"min effort" | min-heap, carry extra dims in node | [Network Delay Time](https://leetcode.cn/problems/network-delay-time) |
+| 0-1 BFS | edge costs only in $\\{0, 1\\}$ | deque: push-front 0, push-back 1 | [Min Cost Valid Path](https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid) |
+| Union-Find connectivity | "are these connected", merge groups, redundant edge | DSU with union by size + path compression | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) |
+| Minimum spanning tree | "connect everything at min total cost" | Kruskal (sort + DSU) or Prim | [Connect All Points](https://leetcode.cn/problems/min-cost-to-connect-all-points) |
+| Tarjan low-link | bridges / articulation points / SCC | one DFS tracking \`disc\`/\`low\` | [Critical Connections](https://leetcode.cn/problems/critical-connections-in-a-network) |
+
+- The trickiest is **Dijkstra with state**: when the answer depends on stops left, keys held, or parity, fold that dimension into the node so \`dist\` is keyed on \`(node, state)\` — otherwise the greedy "first finalize" guarantee breaks.
+- For a **hop-limited** cheapest path (Cheapest Flights, LC 787), prefer Bellman-Ford layered by hop count over plain Dijkstra.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

@@ -297,6 +297,24 @@ int dfs(int mask) {
 | Memoized over bitmask | $2^n$ states | \`O(2^n * n)\` |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Backtracking interview questions are nearly all variations on a few enumeration shapes — identify the configuration you are generating, then reach for the matching template.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Subsets (include/exclude) | "find all subsets / power set" | at each index, recurse skip then take | [Subsets](https://leetcode.cn/problems/subsets) |
+| Combinations | "pick \`k\` items, order irrelevant" | march a \`start\` index forward, prune by count | [Combinations](https://leetcode.cn/problems/combinations) |
+| Permutations | "all orderings / arrangements" | \`used[]\` array, choose any unused element | [Permutations](https://leetcode.cn/problems/permutations) |
+| Dedupe per level | repeated input values | sort, skip \`nums[i]==nums[i-1]\` at same depth | [Subsets II](https://leetcode.cn/problems/subsets-ii) |
+| Feasibility pruning | "sum to target" / "reuse allowed" | sort, cut the branch once running sum passes target | [Combination Sum](https://leetcode.cn/problems/combination-sum) |
+| Partition cuts | "split string/array into valid pieces" | branch over each cut point, validate the piece | [Palindrome Partitioning](https://leetcode.cn/problems/palindrome-partitioning) |
+| Board / occupancy markers | place pieces with \`O(1)\` validity | mark column/diagonal, recurse, unmark | [N-Queens](https://leetcode.cn/problems/n-queens) |
+| Bitmask memo | $n \\le 20$, states repeat | encode used set as int, memoize over the mask | [Partition to K Equal Sum Subsets](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets) |
+
+- The subtlest is dedupe per level: the guard \`i > start && nums[i] == nums[i-1]\` skips a repeated value only among **siblings** at the same depth — a deeper recursion may still legitimately reuse the same value.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

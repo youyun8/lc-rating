@@ -1,19 +1,25 @@
 import {
   ArrowDownWideNarrow,
+  ArrowLeftRight,
   Binary,
+  Blocks,
   Boxes,
+  CalendarRange,
   Crosshair,
   Gauge,
   GitBranch,
   GitCompare,
   Grid3x3,
+  Hash,
   Layers,
+  Link,
   Network,
   PanelsTopLeft,
   PencilRuler,
   PieChart,
   Share2,
   Sigma,
+  TrendingUp,
   Type,
   type LucideIcon,
 } from "lucide-react";
@@ -21,6 +27,7 @@ import {
 /** Resolves the lucide icon referenced by a topic's `icon` field. */
 export const HANDBOOK_ICONS: Record<string, LucideIcon> = {
   ArrowDownWideNarrow,
+  ArrowLeftRight,
   Crosshair,
   PanelsTopLeft,
   Layers,
@@ -32,10 +39,15 @@ export const HANDBOOK_ICONS: Record<string, LucideIcon> = {
   Sigma,
   Type,
   Binary,
+  Blocks,
+  CalendarRange,
   GitBranch,
   GitCompare,
+  Hash,
+  Link,
   PieChart,
   PencilRuler,
+  TrendingUp,
 };
 
 export function resolveHandbookIcon(name: string): LucideIcon {

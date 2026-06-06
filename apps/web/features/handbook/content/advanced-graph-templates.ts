@@ -542,6 +542,24 @@ struct RollbackDSU {
 | HLD + segment tree | \`O(log^2 n)\` per query | \`O(log n)\` chains times segment tree |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Advanced graph problems are almost always a *reduction* to one of these templates — name the reduction first, then drop in the trusted code.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| SCC condensation | "mutually reachable", collapse cycles to a DAG | Tarjan low-link, then condense | [Longest Cycle in a Graph](https://leetcode.cn/problems/longest-cycle-in-a-graph) |
+| Bridges / articulation | "critical edge/node", removal disconnects | one DFS tracking \`disc\`/\`low\` | [Critical Connections](https://leetcode.cn/problems/critical-connections-in-a-network) |
+| 2-SAT | two-literal boolean clauses, "at most one of" | implication graph + SCC | [Is Graph Bipartite?](https://leetcode.cn/problems/is-graph-bipartite) |
+| Bipartite matching | assign left to distinct right objects | Kuhn augmenting paths | [Maximum Students Taking Exam](https://leetcode.cn/problems/maximum-students-taking-exam) |
+| Assignment (min/max cost) | "match all, optimize total score/cost" | min-cost flow or Hungarian | [Maximum Compatibility Score Sum](https://leetcode.cn/problems/maximum-compatibility-score-sum) |
+| Max flow / min cut | capacities, disjoint paths, "minimum cut" | Dinic; min cut = max flow | [Minimum XOR Sum of Two Arrays](https://leetcode.cn/problems/minimum-xor-sum-of-two-arrays) |
+| Offline dynamic connectivity | edges added/removed over time | segment tree on time + rollback DSU | [Path Existence Queries II](https://leetcode.cn/problems/path-existence-queries-in-a-graph-ii) |
+
+- The subtlest is **assignment vs. plain matching**: if every left node *must* be matched and you optimize a total cost, it is min-cost max-flow (or Hungarian), not unweighted Kuhn — Kuhn only maximizes the *count* of matched pairs.
+- 2-SAT satisfiability is "no variable shares an SCC with its negation"; the recovered assignment direction depends on SCC numbering, so verify with a forced variable.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `Explicit max-flow, 2-SAT, and HLD tasks are rare on LeetCode; the closest exercises share the underlying reductions — Tarjan low-link, bipartite matching, and the assignment problem.

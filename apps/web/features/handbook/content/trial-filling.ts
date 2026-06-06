@@ -149,6 +149,23 @@ The pattern is robust: *the construction loop stays the same; only the "can I fi
 Each position is decided once, so the cost is (number of positions) × (cost of one feasibility test) — never the exponential size of the answer space.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Trial filling shows up in interviews disguised as several named greedy-construction patterns.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Greedy bit construction | "maximize/minimize a number or XOR" | Decide bits high → low; set a bit only if a completion stays feasible | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) |
+| Lexicographically smallest build | "smallest/largest string or array satisfying …" | Place the smallest feasible char left to right, with a "can I finish?" bound | [Smallest String With a Given Numeric Value](https://leetcode.cn/problems/smallest-string-with-a-given-numeric-value) |
+| K-th in order via trie descent | "find the k-th value in lexicographic order" | Count leaves per subtree; skip or descend one digit at a time | [K-th Smallest in Lexicographical Order](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order) |
+| Digit DP feasibility | "count/build numbers $\\le N$ with a digit rule" | Fix each digit left to right; the oracle is a counting DP | [Numbers At Most N Given Digit Set](https://leetcode.cn/problems/numbers-at-most-n-given-digit-set) |
+| Binary search + counting check | "largest value whose cost is $\\le K$" | Binary-search the answer; predicate counts over the candidate | [Maximum Number with Price Sum ≤ K](https://leetcode.cn/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k) |
+| Constraint-driven digit placement | "build a sequence matching given I/D or difference rules" | Greedily emit the smallest valid next digit and verify the rest | [Construct Smallest Number From DI String](https://leetcode.cn/problems/construct-smallest-number-from-di-string) |
+
+- The feasibility oracle is what distinguishes trial filling from naive greedy: a closed-form bound (LC 1663), a counting digit DP (LC 902), or a counting predicate wrapped in binary search (LC 3007).
+- For a *maximal* answer, try the largest candidate first; the loop mirrors the minimal case.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Fill order |

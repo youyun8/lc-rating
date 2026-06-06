@@ -353,6 +353,23 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) 
 | Closest pair of points | \`O(n log n)\` | divide and conquer or sweep |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Most geometry interview questions reduce to a few orientation- and hull-based patterns.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Orientation / collinearity | "are points on a line / which side" | Sign of \`cross(a, b, c)\`; exact with integer coordinates | [Check If It Is a Straight Line](https://leetcode.cn/problems/check-if-it-is-a-straight-line) |
+| Slope grouping | "max points on a line / count by direction" | Hash reduced slopes (gcd-normalized) per anchor point | [Max Points on a Line](https://leetcode.cn/problems/max-points-on-a-line) |
+| Shoelace area | "polygon / triangle area" | Signed twice-area via cross-product sum, then halve | [Largest Triangle Area](https://leetcode.cn/problems/largest-triangle-area) |
+| Convex hull | "smallest enclosing fence / extreme points" | Sort points, monotonic chain in \`O(n log n)\` | [Erect the Fence](https://leetcode.cn/problems/erect-the-fence) |
+| Squared-distance test | "points inside a circle / closest" | Compare \`dist2\` to \`r*r\`; avoid \`sqrt\` | [Queries on Number of Points Inside a Circle](https://leetcode.cn/problems/queries-on-number-of-points-inside-a-circle) |
+| Rotating calipers | "farthest pair / hull diameter" | Walk antipodal vertex around the hull in \`O(n)\` after building it | [Best Position for a Service Centre](https://leetcode.cn/problems/best-position-for-a-service-centre) |
+
+- Use integer \`long long\` cross products for orientation; switch to \`double\`/\`long double\` with EPS only for distances, angles, and circles.
+- Cross products can overflow near \`1e9\` coordinates — escalate to \`__int128\` for extreme constraints.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

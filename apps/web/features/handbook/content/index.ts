@@ -2,13 +2,19 @@ import type { HandbookGroup, HandbookTopic, HandbookTopicRef } from "../model";
 import { competitiveProgrammingEssentials } from "./competitive-programming-essentials";
 import { binarySearch } from "./binary-search";
 import { sorting } from "./sorting";
+import { twoPointers } from "./two-pointers";
 import { slidingWindow } from "./sliding-window";
+import { prefixSumHashing } from "./prefix-sum-hashing";
 import { monotonicStackVsDeque } from "./monotonic-stack-vs-deque";
 import { contribution } from "./contribution";
 import { greedy } from "./greedy";
+import { intervals } from "./intervals";
 import { backtracking } from "./backtracking";
+import { linkedList } from "./linked-list";
 import { dataStructures } from "./data-structures";
+import { heapPriorityQueue } from "./heap-priority-queue";
 import { rangeQueriesOffline } from "./range-queries-offline";
+import { design } from "./design";
 import { trees } from "./trees";
 import { graph } from "./graph";
 import { advancedGraphTemplates } from "./advanced-graph-templates";
@@ -29,13 +35,19 @@ export const HANDBOOK_TOPICS: HandbookTopic[] = [
   competitiveProgrammingEssentials,
   binarySearch,
   sorting,
+  twoPointers,
   slidingWindow,
+  prefixSumHashing,
   monotonicStackVsDeque,
   contribution,
   greedy,
+  intervals,
   backtracking,
+  linkedList,
   dataStructures,
+  heapPriorityQueue,
   rangeQueriesOffline,
+  design,
   trees,
   graph,
   advancedGraphTemplates,

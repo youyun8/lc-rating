@@ -207,6 +207,23 @@ while (sub < (1 << n)) {
 | Enumerate all submasks of all masks | \`O(3^n)\` |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Bit-manipulation interview questions map onto a small set of recurring patterns.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| XOR cancellation | "everything appears twice except one" | XOR the whole array; pairs cancel (\`a ^ a = 0\`) | [Single Number](https://leetcode.cn/problems/single-number) |
+| Index/value XOR | "find the missing number in $0..n$" | XOR all indices with all values | [Missing Number](https://leetcode.cn/problems/missing-number) |
+| Prefix XOR | "subarray XOR equals / count beautiful subarrays" | Maintain running prefix XOR; hash counts of seen prefixes | [XOR Queries of a Subarray](https://leetcode.cn/problems/xor-queries-of-a-subarray) |
+| Subset bitmask enumeration | "subsets of a set with $n \\le 20$" | Iterate masks \`0..2^n - 1\`; submasks via \`(sub - 1) & mask\` | [Subsets](https://leetcode.cn/problems/subsets) |
+| Bit tricks | "power of two / count set bits / lowest bit" | \`x & (x - 1)\`, \`x & -x\`, \`popcount\` | [Power of Two](https://leetcode.cn/problems/power-of-two) |
+| Bitwise Trie / linear basis | "maximum XOR pair or subset" | Insert bits high → low into a Trie or XOR basis | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) |
+
+- Prefix XOR turns "subarray with XOR \`k\`" into a two-sum-style hash count: a subarray has XOR \`k\` iff \`prefix[j] ^ prefix[i] == k\`.
+- The \`^\` XOR operator has *lower* precedence than comparison — parenthesize \`(x & 1) == 0\` and similar tests.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

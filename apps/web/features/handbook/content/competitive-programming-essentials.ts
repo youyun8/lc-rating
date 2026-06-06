@@ -388,6 +388,25 @@ unordered_map<long long, int, CustomHash> safeCount;
 | Permutation enumeration | \`O(n!)\` |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Most interview problems are one of a handful of named patterns; recognizing the signal lets you reach for the right template from this chapter instantly.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Two pointers | sorted array, pair/triple sum, in-place partition | converge \`l\`/\`r\` or fast/slow scan in \`O(n)\` | [Two Sum II](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted) |
+| Sliding window | longest/shortest contiguous range under a constraint | grow right, shrink left while invalid | [Longest Substring Without Repeating](https://leetcode.cn/problems/longest-substring-without-repeating-characters) |
+| Binary search on answer | "minimize the max / maximize the min" with a monotone check | search the value, verify with a greedy \`check\` | [Koko Eating Bananas](https://leetcode.cn/problems/koko-eating-bananas) |
+| Hashing for \`O(1)\` lookup | "have I seen this?" / complement / dedup | one pass with a hash map or set | [Two Sum](https://leetcode.cn/problems/two-sum) |
+| Top-K with a heap | "k largest/smallest/closest" | size-\`k\` heap, push and pop in \`O(log k)\` | [Kth Largest Element](https://leetcode.cn/problems/kth-largest-element-in-an-array) |
+| BFS/DFS on graph or grid | connectivity, shortest unweighted path, flood fill | queue (BFS) or recursion/stack (DFS) over \`O(V+E)\` | [Number of Islands](https://leetcode.cn/problems/number-of-islands) |
+| Dynamic programming | overlapping subproblems, "count ways" / "min cost" | define \`dp[i]\`, prove the transition | [Coin Change](https://leetcode.cn/problems/coin-change) |
+| Greedy + exchange argument | local best is provably globally safe | sort, then take the locally optimal item | [Jump Game](https://leetcode.cn/problems/jump-game) |
+
+- The hardest call is **greedy vs DP**: only use greedy when an exchange argument proves the local choice never hurts; otherwise fall back to DP.
+- **Binary search on answer** is the pattern most often missed — whenever feasibility is monotone in the answer, prefer it over hand-rolled greedy search.`,
+    },
+    {
       id: "pitfalls",
       title: "Pitfalls & tips",
       body: `- Use \`long long\` for sums, products, distances, and counts.

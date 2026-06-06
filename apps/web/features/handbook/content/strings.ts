@@ -366,6 +366,25 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
 | Trie | \`O(L)\` per op | \`O(total chars · alphabet)\` |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `String interviews recur as a few named patterns; spotting the signal picks the data structure before you write a line.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Two-pointer scan | palindrome / reverse / compare from both ends | converge \`i\`/\`j\`, skip or match | [Valid Palindrome](https://leetcode.cn/problems/valid-palindrome) |
+| Frequency / anagram key | "anagram", "permutation", char counts | 26-element count array or sorted-string key | [Group Anagrams](https://leetcode.cn/problems/group-anagrams) |
+| Sliding-window substring | "smallest/longest substring with …" | grow right, shrink left on a count condition | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) |
+| Expand-around-center | "longest palindromic substring/count" | expand from each of \`2n-1\` centers | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) |
+| KMP / prefix function | exact pattern search, period, border | build \`pi[]\`, never re-scan text | [Find the Index (strStr)](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string) |
+| Rolling hash | substring equality / duplicate by length | prefix hash, \`O(1)\` compare, binary-search length | [Longest Duplicate Substring](https://leetcode.cn/problems/longest-duplicate-substring) |
+| Trie / prefix tree | shared prefixes, autocomplete, word search | insert chars, walk \`O(L)\`; binary Trie for XOR | [Implement Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) |
+
+- Prefer rolling hash over suffix structures unless the problem *counts* substrings over all suffixes — hashing with a 64-bit unsigned modulus is shorter and fast enough for most "hard" tags.
+- The frequency-count key and the sliding window are the same idea at different scopes: a fixed multiset vs. a moving one.
+- KMP's prefix function alone (no search) answers border/period questions like repeated-substring and shortest-palindrome.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

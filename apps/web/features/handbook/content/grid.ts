@@ -335,6 +335,25 @@ Recurring lesson: when plain BFS/DFS is too weak, *enrich the state* (keys, fuel
 | Backtracking (word search) | \`O(mn * 4^L)\` | \`O(L)\` |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Grid questions map cleanly onto a few graph-on-cells patterns — pick the one matching the movement and cost model.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Flood fill / components | "count/size of regions", "islands" | DFS/BFS, mark in place | [Number of Islands](https://leetcode.cn/problems/number-of-islands) |
+| Multi-source BFS | spread from many origins at once, "minutes/distance to nearest" | seed queue with all sources at level 0 | [Rotting Oranges](https://leetcode.cn/problems/rotting-oranges) |
+| Plain BFS shortest path | unweighted moves, "fewest steps" | level-by-level BFS, 4/8-dir array | [Shortest Path in Binary Matrix](https://leetcode.cn/problems/shortest-path-in-binary-matrix) |
+| BFS/Dijkstra with state | keys, fuel, obstacle removals, parity | node = \`(r, c, state)\` in visited key | [Shortest Path to Get All Keys](https://leetcode.cn/problems/shortest-path-to-get-all-keys) |
+| Min-max path (Dijkstra) | minimize the *largest* cell/edge on a path | min-heap over cells, cost = \`max(...)\` | [Swim in Rising Water](https://leetcode.cn/problems/swim-in-rising-water) |
+| Backtracking on cells | "search a word", place items, undo on exit | DFS, mark then restore | [Word Search](https://leetcode.cn/problems/word-search) |
+| Broken-profile / bitmask DP | small dimension ($n \\le 12$), row-by-row constraints | DP over row masks | [Maximum Students Taking Exam](https://leetcode.cn/problems/maximum-students-taking-exam) |
+| In-place transforms | rotate, spiral, set-zeroes | index arithmetic, reuse the grid | [Rotate Image](https://leetcode.cn/problems/rotate-image) |
+
+- The most error-prone is **state in the node**: keys/fuel/removals must be part of the visited key or BFS will prune a cell that was reachable in a *different* state, silently dropping the optimal path.
+- Reuse the grid itself as the visited/distance marker when you may mutate the input; otherwise carry a separate \`seen\` array.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

@@ -228,6 +228,23 @@ Other hard greedies: Minimum Number of Taps to Water a Garden (LC 1326, interval
 The cost is almost always dominated by the initial sort or by heap operations.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Most greedy interview questions are one of a handful of recurring shapes — recognize the signal, pick the sort key or data structure, and have an exchange argument ready.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Interval scheduling | "max non-overlapping" / "fewest to remove" | sort by **end**, keep if start ≥ last end | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) |
+| Interval cover / merge | "merge overlaps" or "fewest points/arrows" | sort by **start** (or end), extend frontier | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) |
+| Heap-greedy | best next item changes as you go | priority queue, pull the current best each step | [Task Scheduler](https://leetcode.cn/problems/task-scheduler) |
+| Regret / lazy heap | overcommit, undo the worst past choice | take greedily, pop the worst on overrun | [Course Schedule III](https://leetcode.cn/problems/course-schedule-iii) |
+| Reachability / jump | "min jumps" / "can reach end" | track farthest reach, expand level frontier | [Jump Game II](https://leetcode.cn/problems/jump-game-ii) |
+| Sort-by-ratio / two pointer | exchange argument fixes a sort key | sort on the key, sweep with two pointers | [Boats to Save People](https://leetcode.cn/problems/boats-to-save-people) |
+| Two-pass for two sides | each element bound by both neighbours | left-to-right pass, then right-to-left, combine | [Candy](https://leetcode.cn/problems/candy) |
+
+- The subtlest is the regret heap: you deliberately take an infeasible-in-hindsight choice, then retroactively drop the single worst one with a max-heap — proving the kept set stays optimal is the crux.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

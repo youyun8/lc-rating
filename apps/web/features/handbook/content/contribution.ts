@@ -217,6 +217,23 @@ Weight the term by the edge cost for weighted trees; Minimum Fuel Cost to Report
 The win is always the same: an $O(n^2)$ or $O(2^n)$ enumeration becomes near-linear once each part's count is a formula.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Interviewers rarely say "use the contribution method" — they ask for a *total over all* something, and you recognize the atom to attribute it to.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Positional count | "sum over all subarrays" of element values | each index appears in $(i+1)(n-i)$ subarrays | [Sum of All Odd Length Subarrays](https://leetcode.cn/problems/sum-of-all-odd-length-subarrays) |
+| Min/max domination | "sum over all subarrays of min/max" | monotonic-stack span \`left * right\` per element | [Sum of Subarray Minimums](https://leetcode.cn/problems/sum-of-subarray-minimums) |
+| Per-bit split | XOR/AND/OR or Hamming sums over pairs/subsets | solve each bit independently, weight by $2^b$ | [Total Hamming Distance](https://leetcode.cn/problems/total-hamming-distance) |
+| Pairwise after sorting | "sum of $\\lvert a_i - a_j \\rvert$ over all pairs" | rank \`i\` is larger side of \`i\` pairs; prefix sum | [Sum of Absolute Differences](https://leetcode.cn/problems/sum-of-absolute-differences-in-a-sorted-array) |
+| Subsequence powers of two | "sum over all $2^n$ subsequences" of max/min/width | rank \`i\` is max of $2^i$, min of $2^{n-1-i}$ | [Sum of Subsequence Widths](https://leetcode.cn/problems/sum-of-subsequence-widths) |
+| Tree edge / path | "sum of path lengths over all node pairs" | each edge crossed by $s(n-s)$ pairs | [Sum of Distances in Tree](https://leetcode.cn/problems/sum-of-distances-in-tree) |
+
+- The subtlest is min/max domination: use one **strict** and one **non-strict** comparison so equal values fall into exactly one element's span, otherwise pairs are double-counted or dropped.
+- Picking the wrong atom is the usual failure — subarrays map to index spans, subsets to powers of two, pairs to sorted rank, trees to edges; the wrong choice has no closed-form count.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Pattern |

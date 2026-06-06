@@ -311,6 +311,23 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
 | nCr with precompute | \`O(n)\` setup, \`O(1)\` query |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Math interview questions cluster around a handful of recognizable number-theory and counting patterns.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Fast exponentiation | "x to a huge power" / "answer mod 1e9+7" | Binary exponentiation in \`O(log b)\`; modular inverse via $a^{m-2}$ | [Pow(x, n)](https://leetcode.cn/problems/powx-n) |
+| Sieve / primality | "primes / count primes up to n" | Sieve of Eratosthenes in \`O(n log log n)\`, or SPF for repeated factorization | [Count Primes](https://leetcode.cn/problems/count-primes) |
+| Factorization | "divisors / prime factors of a value" | Trial division to \`sqrt(n)\`, or a linear sieve for many queries | [Distinct Prime Factors of Product of Array](https://leetcode.cn/problems/distinct-prime-factors-of-product-of-array) |
+| GCD / Bézout | "fractions, jugs, reachability by steps" | \`gcd\` folds over arrays; a target is reachable iff divisible by the gcd | [Water and Jug Problem](https://leetcode.cn/problems/water-and-jug-problem) |
+| Combinatorics mod p | "number of ways" with large \`n\` | Precompute \`fact\`/\`invfact\`, answer \`nCr\` in \`O(1)\` | [Unique Paths](https://leetcode.cn/problems/unique-paths) |
+| Digit math | "reverse / sum / count digits" | Peel digits with \`% 10\` and \`/ 10\`; guard overflow | [Reverse Integer](https://leetcode.cn/problems/reverse-integer) |
+
+- Modular inverse via Fermat needs a **prime** modulus; for composite moduli fall back to extended GCD.
+- Cast to \`long long\` *before* multiplying and take \`% MOD\` after each multiply — overflow is the most common bug.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

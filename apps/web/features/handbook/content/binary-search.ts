@@ -347,6 +347,24 @@ double findMaxAverage(vector<int>& a, int k) {
 The whole game is making \`check\` cheap and *provably monotone*.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Binary search shows up in interviews as a small set of recognizable shapes — each is just the "find the boundary of a monotone predicate" idea wearing a different costume.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Lower/upper bound | sorted array, "first index \`>= x\`" or count of duplicates | hand-rolled or STL \`lower_bound\` / \`upper_bound\` | [First & Last Position](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array) |
+| Binary search on answer | "minimize the max / maximize the min" with a monotone \`check\` | search the value, verify feasibility greedily | [Capacity to Ship Packages](https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days) |
+| Rotated-array split | sorted array rotated at an unknown pivot | one half is always sorted — test which holds the target | [Search in Rotated Array](https://leetcode.cn/problems/search-in-rotated-sorted-array) |
+| Peak / direction by neighbour | no global order, but local slope points to the answer | compare \`a[mid]\` to a neighbour and walk uphill | [Find Peak Element](https://leetcode.cn/problems/find-peak-element) |
+| Kth-smallest by counting | "kth value" where counting "how many \`<= x\`" is cheap | binary search the value on the count predicate | [Kth Smallest in Sorted Matrix](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix) |
+| Partition by binary search | merge/median of two sorted arrays | search the cut so left halves form the lower half | [Median of Two Sorted Arrays](https://leetcode.cn/problems/median-of-two-sorted-arrays) |
+| Floating / parametric search | maximize a ratio or real-valued answer | fixed ~100 iterations on a monotone \`feasible(x)\` | [Maximum Average Subarray II](https://leetcode.cn/problems/maximum-average-subarray-ii) |
+
+- The whole technique hinges on the predicate being **monotone** (false…false, true…true); if \`check\` flips more than once, binary search is invalid.
+- For **maximize-the-minimum**, bias the midpoint up with \`mid = l + (r - l + 1) / 2\` so \`l == mid\` cannot loop forever.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

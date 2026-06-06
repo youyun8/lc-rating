@@ -461,6 +461,26 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
 | Digit | \`O(digits · states)\` | small |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Most DP interview questions are one of a handful of named shapes — recognizing the shape tells you the state and transition immediately.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Take-or-skip (1D) | "max value with no two adjacent" / pick a subsequence | \`dp[i] = max(dp[i-1], dp[i-2] + a[i])\` | [House Robber](https://leetcode.cn/problems/house-robber) |
+| Knapsack / subset-sum | bounded budget, items chosen once | iterate capacity downward, \`dp[c] = max(dp[c], dp[c-w]+v)\` | [Partition Equal Subset Sum](https://leetcode.cn/problems/partition-equal-subset-sum) |
+| Unbounded / coin counting | reusable items, "fewest" or "# ways" | iterate capacity upward; coins outer for combinations | [Coin Change](https://leetcode.cn/problems/coin-change) |
+| Two-sequence grid | align/compare two strings | \`dp[i][j]\` over prefixes, match vs. skip | [Edit Distance](https://leetcode.cn/problems/edit-distance) |
+| Patience / LIS | "longest increasing subsequence" | keep \`tails[]\`, \`lower_bound\` replace, \`O(n log n)\` | [Longest Increasing Subsequence](https://leetcode.cn/problems/longest-increasing-subsequence) |
+| Interval DP | optimize over a sub-range, choose a split | iterate by length, split at inner \`k\` | [Burst Balloons](https://leetcode.cn/problems/burst-balloons) |
+| State-machine | hold/idle/cooldown transitions per step | track one variable per state, roll forward | [Stock with Cooldown](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown) |
+| Bitmask DP | $n \\le 20$, "visit all" / assign subsets | \`dp[mask][i]\` over \`2^n\` subsets | [Shortest Path Visiting All Nodes](https://leetcode.cn/problems/shortest-path-visiting-all-nodes) |
+
+- The take-or-skip shape and knapsack differ only in whether you carry a budget dimension; if the budget is a tiny integer, fold it into the state.
+- For "# ways" vs. "min cost" the *only* change is the initial value (\`dp[0]=1\` vs. \`dp[0]=0\`, others \`0\` vs. \`INF\`) and \`+\` vs. \`min\` — the loops are identical.
+- The bitmask shape is the interview signal in disguise: any "\`n\` is suspiciously small ($\\le 20$)" hints at \`O(2^n \\cdot n)\`.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Pattern |

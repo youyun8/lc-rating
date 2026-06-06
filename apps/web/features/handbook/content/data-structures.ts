@@ -433,6 +433,25 @@ class LRUCache {
 | Segment tree (lazy) | \`O(log n)\` | \`O(log n)\` | \`O(n)\` |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Most data-structure interview questions are one of a handful of named patterns — recognizing the signal tells you which structure to reach for.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Prefix sum + hash map | "subarray sum/count equals K" | store running prefix in a map, look up \`sum - k\` | [Subarray Sum Equals K](https://leetcode.cn/problems/subarray-sum-equals-k) |
+| Top-K / streaming heap | "k largest", "merge k lists", "running median" | size-\`k\` heap or two balanced heaps | [Kth Largest Element](https://leetcode.cn/problems/kth-largest-element-in-an-array) |
+| Union-Find connectivity | "are these connected?", "count groups" | DSU with path compression + union by size | [Number of Provinces](https://leetcode.cn/problems/number-of-provinces) |
+| Point update + prefix query | "count smaller", dynamic rank/inversions | compress values, sweep, query a Fenwick tree | [Count of Smaller After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) |
+| Range update + range query | range add/assign with range sum/min | segment tree with lazy propagation | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) |
+| Hash map + linked list design | \`O(1)\` get/put with eviction | map of \`key → list iterator\`, splice on access | [LRU Cache](https://leetcode.cn/problems/lru-cache) |
+| Fast/slow pointers | cycle detection, find middle of a list | two pointers at 1x and 2x speed | [Linked List Cycle](https://leetcode.cn/problems/linked-list-cycle) |
+| Sweep line + active set | overlapping intervals / skyline | sort events, maintain a heap or multiset | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) |
+
+- Fenwick vs. segment tree: prefer Fenwick (shorter, faster) for point update + prefix sum; escalate to a lazy segment tree only when you need range updates or non-sum merges.
+- The two-heap median trick keeps the heaps balanced in size; the median is the top of the larger heap (or the average of both tops when equal).`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Structure |

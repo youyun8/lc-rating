@@ -194,6 +194,23 @@ A third face is the **pigeonhole bucket** for the maximum adjacent gap (LC 164):
 Rule of thumb: range on the order of \`n\` → counting; range large but digit count fixed → radix; ask for Top-K frequency or max gap, or data is uniform → bucket.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Non-comparison sorting surfaces in interviews whenever the keys are bounded integers — recognizing the key range or the "by frequency" phrasing points you straight at the right linear-time tool.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Counting sort | keys in a small range \`[0, k]\` with $k = O(n)$ | tally occurrences, pour out in order, \`O(n + k)\` | [Sort Colors](https://leetcode.cn/problems/sort-colors) |
+| Custom-order counting | sort by a bounded key in a caller-defined order | counting buckets visited in the desired order | [Relative Sort Array](https://leetcode.cn/problems/relative-sort-array) |
+| LSD radix sort | large-range integers but a fixed digit count | stable counting pass per digit, low to high | [Sort an Array](https://leetcode.cn/problems/sort-an-array) |
+| Frequency bucket | "Top-K most frequent" / sort by frequency | bucket by occurrence count, scan high to low | [Top K Frequent Elements](https://leetcode.cn/problems/top-k-frequent-elements) |
+| Pigeonhole / gap bucket | max adjacent gap, near-uniform spread | \`n+1\` buckets, compare each bucket's min/max | [Maximum Gap](https://leetcode.cn/problems/maximum-gap) |
+| Stable sort by mapped key | reorder records by a derived key, ties keep input order | precompute the key, run a stable per-key pass | [Sort the Jumbled Numbers](https://leetcode.cn/problems/sort-the-jumbled-numbers) |
+
+- **Radix demands a stable per-digit pass**: a non-stable inner sort scrambles the order established by lower digits, so iterate back-to-front with the prefix-sum placement.
+- **Frequency buckets size \`n + 1\`** (a value can appear up to \`n\` times), not \`n\`; off-by-one here silently drops the most frequent element.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

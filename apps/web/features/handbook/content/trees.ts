@@ -402,6 +402,25 @@ vector<int> morrisInorder(TreeNode* root) {
 \`h\` is the height: \`O(log n)\` if balanced, \`O(n)\` in the worst case.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Nearly every tree interview question reduces to a traversal plus "what do I return from each node"; these are the recurring shapes.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Postorder tree DP | aggregate up: height, diameter, path sum | return facts from children, update a global best | [Diameter of Binary Tree](https://leetcode.cn/problems/diameter-of-binary-tree) |
+| Tree DP with state | "rob / skip", choose-or-not per node | return a tuple of states, combine at the parent | [House Robber III](https://leetcode.cn/problems/house-robber-iii) |
+| Inorder on a BST | "kth smallest", validate sorted order | inorder yields sorted; count or check bounds | [Kth Smallest in BST](https://leetcode.cn/problems/kth-smallest-element-in-a-bst) |
+| Level-order BFS | per-level: right view, zigzag, averages | queue, snapshot \`q.size()\` per level | [Level Order Traversal](https://leetcode.cn/problems/binary-tree-level-order-traversal) |
+| LCA by postorder | deepest node containing both targets | recurse; the node where both sides return non-null | [LCA of a Binary Tree](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree) |
+| Build from traversals | reconstruct / serialize a tree | preorder gives root, inorder splits left/right | [Construct from Pre+Inorder](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal) |
+| Binary lifting | many "kth ancestor" / LCA queries | precompute \`up[k][v]\`, jump by powers of two | [Kth Ancestor of a Tree Node](https://leetcode.cn/problems/kth-ancestor-of-a-tree-node) |
+| Rerooting DP | per-node answer over the whole tree | two passes: subtree aggregate, then shift root | [Sum of Distances in Tree](https://leetcode.cn/problems/sum-of-distances-in-tree) |
+
+- The subtlest tree DP trap is the global-vs-returned split: the path *through* a node may use both children and updates the answer, but the value *returned* upward can extend only one branch.
+- BST validation must thread \`(lo, hi)\` bounds down the recursion — comparing a node only against its immediate children silently accepts invalid trees.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

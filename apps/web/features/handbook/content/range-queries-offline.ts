@@ -484,6 +484,25 @@ struct MergeSortTree {
 | Mo's algorithm | — | \`O((n + q) sqrt n)\` total | offline only |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Range-query problems collapse onto a few recurring patterns; the deciding signals are whether updates exist and whether the queries may be reordered (offline).
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Static prefix sum | immutable array, many range sums | precompute \`pre[]\`, answer in \`O(1)\` | [Range Sum Query - Immutable](https://leetcode.cn/problems/range-sum-query-immutable) |
+| Difference array | many range adds, one final read | \`diff[l] += v; diff[r+1] -= v\`, then prefix it | [Corporate Flight Bookings](https://leetcode.cn/problems/corporate-flight-bookings) |
+| Compression + Fenwick | huge values, "count smaller / inversions" | rank values, sweep, query a BIT | [Count of Smaller After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) |
+| Lazy segment tree | range update with range query | tag nodes, \`push\` lazily before recursing | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) |
+| Offline by threshold | queries on "values \`\\le x\` in [l, r]" | sort queries by \`x\`, add elements once | [Count of Range Sum](https://leetcode.cn/problems/count-of-range-sum) |
+| Sweep line + active set | intervals, rectangle union, "in bloom" | sort events, maintain covered length/count | [Number of Flowers in Full Bloom](https://leetcode.cn/problems/number-of-flowers-in-full-bloom) |
+| Mo's algorithm | offline, cheap add/remove of one endpoint | block-sort queries, slide two pointers | [Range Module](https://leetcode.cn/problems/range-module) |
+| Merge-sort / persistent tree | "kth smallest in [l, r]", "count \`\\le x\`" | per-node sorted lists or versioned trees | [Reverse Pairs](https://leetcode.cn/problems/reverse-pairs) |
+
+- Reach for offline ordering (threshold sort, sweep line, Mo's) only when every query is known up front; if answers must stream, you need an online structure instead.
+- For sweep line, fix the tie-break first: closed \`[l, r]\` adds before removes at the same coordinate, half-open \`[l, r)\` removes first.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

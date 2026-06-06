@@ -353,6 +353,24 @@ Quick mnemonic: **stack = relationships, deque = windows.**`,
 Both are amortized linear; the deque's tighter \`O(k)\` window space comes from continuously expiring its front.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Almost every interview question reachable with a monotonic structure folds into one of these named patterns — match the signal, then drop in the right loop.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Next greater element | "next/previous bigger or smaller per element" | decreasing stack of indices; answer on pop | [Daily Temperatures](https://leetcode.cn/problems/daily-temperatures) |
+| Histogram / span | widest or largest area bounded by smaller neighbours | increasing stack with a flushing sentinel | [Largest Rectangle in Histogram](https://leetcode.cn/problems/largest-rectangle-in-histogram) |
+| Contribution counting | "sum over all subarrays of min/max" | stack finds each element's domination span | [Sum of Subarray Minimums](https://leetcode.cn/problems/sum-of-subarray-minimums) |
+| Lexicographic removal | delete \`k\` chars/digits to make result smallest/largest | greedy pop while monotonic + budget left | [Remove K Digits](https://leetcode.cn/problems/remove-k-digits) |
+| Sliding-window extremum | "max/min of every length-k window" | deque, pop back for order, pop front for expiry | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) |
+| Two-deque range | "longest window with $\\max - \\min \\le \\text{limit}$" | parallel max-deque and min-deque, shrink left | [Longest Subarray with Abs Diff ≤ Limit](https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit) |
+| Windowed-max DP | \`dp[i] = a[i] + max(dp[i-k..i-1])\` | deque of decreasing \`dp\` values | [Jump Game VI](https://leetcode.cn/problems/jump-game-vi) |
+
+- The subtlest is contribution counting: the comparison must be **asymmetric** (\`>=\` on one side, \`>\` on the other) so equal values land in exactly one span and are not double-counted.
+- A stack solves it only when the query range has a **fixed left edge**; the moment the left bound slides you need the deque's front-eviction.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `**Monotonic stack (relationships / spans)**

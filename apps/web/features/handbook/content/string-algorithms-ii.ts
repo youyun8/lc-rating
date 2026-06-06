@@ -443,6 +443,24 @@ string minRotation(string s) {
 | Booth's algorithm | \`O(n)\` | — | least rotation |`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `These advanced templates each map to a recognizable interview signal; match the signal to the right linear-time tool instead of reaching for \`O(n^2)\`.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Linear palindrome radii | "count/longest palindromic substring", large \`n\` | Manacher \`odd[]\`/\`even[]\` in \`O(n)\` | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) |
+| Multi-pattern matching | match a dictionary of words in one text | Aho-Corasick trie + failure links | [Stream of Characters](https://leetcode.cn/problems/stream-of-characters) |
+| Aho-Corasick + DP | "min pieces / cost to build target" | automaton transitions drive a DP | [Minimum Valid Strings to Form Target II](https://leetcode.cn/problems/minimum-number-of-valid-strings-to-form-target-ii) |
+| Suffix array + LCP | distinct substrings / longest repeated | sort suffixes, Kasai LCP, sum formula | [Maximum Length of Repeated Subarray](https://leetcode.cn/problems/maximum-length-of-repeated-subarray) |
+| Suffix automaton | online substring queries, LCS of strings | extend per char, walk transitions | [Longest Common Subpath](https://leetcode.cn/problems/longest-common-subpath) |
+| Minimum rotation | "smallest rotation" / cyclic canonical form | Booth's algorithm on \`s + s\` in \`O(n)\` | [Orderly Queue](https://leetcode.cn/problems/orderly-queue) |
+
+- Distinct-substring counting has two routes: suffix array (\`n(n+1)/2 - sum(lcp)\`) or suffix automaton (\`sum(len[v] - len[link[v]])\`) — pick whichever you can write correctly under pressure.
+- Aho-Corasick shines when patterns are many but each short; for a single pattern, plain KMP from [Strings](/handbook/strings) is simpler.
+- Manacher and the palindromic tree overlap: use Manacher for radii/counts, the eertree only when you need every distinct palindrome as a node.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |

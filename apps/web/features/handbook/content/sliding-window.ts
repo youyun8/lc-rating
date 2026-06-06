@@ -207,6 +207,24 @@ int shortestSubarray(vector<int>& a, long long k) {
 Every index enters and exits the window once — that is the source of the linear bound.`,
     },
     {
+      id: "interview-patterns",
+      title: "Common interview patterns",
+      body: `Sliding-window questions cluster into a few recognizable shapes; the phrasing of the constraint tells you which template to drop in.
+
+| Pattern | Signal | Go-to move | Representative |
+| --- | --- | --- | --- |
+| Variable-size window | "longest/shortest contiguous range such that …" | grow right, shrink left while invalid | [Longest Substring Without Repeating](https://leetcode.cn/problems/longest-substring-without-repeating-characters) |
+| Minimum-length window | "smallest window covering …" | shrink while still valid, record on each shrink | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) |
+| Fixed-size window | window length \`k\` is given | add entering, drop leaving element each step | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) |
+| Anagram / permutation window | "find all anagrams" / "permutation in string" | fixed window + 26-slot freq and a \`matches\` counter | [Find All Anagrams](https://leetcode.cn/problems/find-all-anagrams-in-a-string) |
+| At-most-K → exactly-K | "exactly K distinct / odd / …" subarray count | \`exactly(K) = atMost(K) - atMost(K-1)\` | [Subarrays with K Distinct](https://leetcode.cn/problems/subarrays-with-k-different-integers) |
+| Monotonic-deque extrema | window max/min, or "max − min ≤ limit" | deque of indices, monotone values front to back | [Longest Subarray Abs Diff ≤ Limit](https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit) |
+| Prefix sums + deque | "sum ≥ K" with possibly **negative** values | monotone deque over prefix sums, not a raw window | [Shortest Subarray with Sum at Least K](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) |
+
+- **Negatives break the plain window**: growing the window no longer monotonically grows the sum, so "sum ≥ K" needs prefix sums plus a monotonic deque instead of shrink-from-left.
+- **Where you record the answer differs by goal**: maximize → record *after* shrinking back to valid; minimize → record *while* shrinking and still valid.`,
+    },
+    {
       id: "problems",
       title: "Representative LeetCode problems",
       body: `| ID | Problem | Technique |
