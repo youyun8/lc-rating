@@ -51,7 +51,7 @@ export const BILIBILI_0X3F_SPACE = {
 };
 
 export const STUDYPLANS = {
-  waymo_interview: "Waymo 面試準備",
+  technical_interview: "技術面試準備",
   rating_2100: "Rating 2100",
   binary_search: "二分搜尋",
   sorting: "排序",

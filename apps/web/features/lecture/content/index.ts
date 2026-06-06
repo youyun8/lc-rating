@@ -1,5 +1,5 @@
 import type { TutorialData } from "@/types";
-import { waymoInterview } from "./waymo_interview";
+import { technicalInterview } from "./technical_interview";
 import { rating_2100 } from "./rating_2100";
 import { binarySearch } from "./binary_search";
 import { sorting } from "./sorting";
@@ -17,7 +17,7 @@ import { trees } from "./trees";
 
 /** Lecture category key -> display title. Lecture-owned; independent of STUDYPLANS. */
 export const LECTURE_CATEGORIES: Record<string, string> = {
-  waymo_interview: "Waymo 面試準備",
+  technical_interview: "技術面試準備",
   rating_2100: "Rating 2100",
   binary_search: "二分搜尋",
   sorting: "排序",
@@ -36,7 +36,7 @@ export const LECTURE_CATEGORIES: Record<string, string> = {
 
 /** Lecture category key -> authored content tree. Replaces the old tutorial/*.json. */
 export const lectureContentMap: Record<string, TutorialData.Root> = {
-  waymo_interview: waymoInterview,
+  technical_interview: technicalInterview,
   rating_2100: rating_2100,
   binary_search: binarySearch,
   sorting: sorting,

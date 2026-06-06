@@ -23,7 +23,7 @@ export interface StudyPlanTheme {
 }
 
 export const studyPlanIcons: Record<string, LucideIcon> = {
-  waymo_interview: Search,
+  technical_interview: Cpu,
   rating_2100: Trophy,
   binary_search: Search,
   sorting: ArrowDownWideNarrow,
@@ -47,7 +47,7 @@ export const defaultTheme: StudyPlanTheme = {
 };
 
 export const studyPlanThemes: Record<string, StudyPlanTheme> = {
-  waymo_interview: {
+  technical_interview: {
     gradient: "linear-gradient(135deg, #2563eb 0%, #16a34a 100%)",
     accent: "#2563eb",
     accentDark: "#1d4ed8",
