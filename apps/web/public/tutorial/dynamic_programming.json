@@ -474,6 +474,12 @@
         }
       ],
       "summary": "DP 雜項：多為狀態維度怪異或優化冷門的題；先寫子集／值域較小的暴力版本，再對照標籤找對應優化關鍵字。\n\n**做法**：每題寫「暴力複雜度 → 觀察單調性或可離線 → 選資料結構」三行摘要；若與主線模板差異大，標記為賽後補強而非當日主線。"
+    },
+    {
+      "id": 9007,
+      "title": "21. 常見面試模式",
+      "src": null,
+      "summary": "動態規劃題在面試中最常見的考點，是辨認出「狀態」與「轉移」的結構。下表整理了幾類高頻 DP 模式，遇到時可先對照訊號快速定位解法方向。\n\n| 模式 | 訊號 | 核心做法 | 代表題 |\n| --- | --- | --- | --- |\n| 線性 DP | 沿陣列逐位決策、相鄰元素互斥 | `f[i]` 表示前 `i` 項的最佳解，由 `f[i-1]`、`f[i-2]` 轉移 | [打家劫舍](https://leetcode.cn/problems/house-robber) |\n| 背包 | 容量/總和上限下選或不選 | `f[j]` 表示容量 `j` 的最佳值，01 背包逆序、完全背包正序 | [分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum) |\n| 區間 DP | 對子區間合併、由小區間拼大區間 | 列舉區間長度與分割點 `k`，`f[i][j]` 由 `f[i][k]+f[k+1][j]` 轉移 | [戳氣球](https://leetcode.cn/problems/burst-balloons) |\n| 狀態機 DP | 有「持有/未持有」等有限狀態切換 | 每個狀態維護一條 DP，依動作在狀態間轉移 | [買賣股票的最佳時機含冷凍期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown) |\n| LIS | 求最長遞增子序列或其變形 | $O(n^2)$ DP 或貪心加二分達到 `O(n log n)` | [最長遞增子序列](https://leetcode.cn/problems/longest-increasing-subsequence) |\n| 狀態壓縮 DP | `n` 很小（約 $\\le 20$），需記錄集合 | 用二進位位元表示集合，`f[mask]` 列舉子集轉移 | [優美的排列](https://leetcode.cn/problems/beautiful-arrangement) |\n\n**小提醒**\n\n- 先想清楚「狀態定義」再寫轉移，狀態維度往往等於需要記住的資訊量。\n- 滾動陣列可把空間從 `O(nm)` 壓到 `O(m)`，但要注意 01 背包必須逆序列舉容量。\n- 區間 DP 與狀態壓縮 DP 容易超時，先估算狀態數乘以轉移成本是否可接受。"
     }
   ],
   "summary": "掌握動態規劃（DP）是沒有捷徑的，咱們唯一能做的，就是投入時間猛猛刷題。好比學數學，只看書看影片而不做習題，是不能說學會的。\n\n**本題單涵蓋**：\n- 入門\n- 背包\n- 劃分\n- 狀態機\n- 區間\n- 狀壓\n- 數位\n- 樹形\n- 優化\n\n我能做的，是幫你節省找題的時間，並把這些題分類整理好。有著相同套路的題，一起做效率會更高，也更能領悟到 DP 的精髓。每個小節的題目已按照難度分排序（右側數字為難度分）。\n\n![動態規劃演算法題 DP題單 動態規劃題單 入門動態規劃題目 動態規劃新手教程 力扣DP 力扣動態規劃 leetcode動態規劃 leetcode dp 靈茶山艾府 靈神 靈神題單](https://pic.leetcode.cn/1710769845-JRnIfA-dp-2.jpg)\n\n**記憶化搜尋**是新手村神器（甚至可以用到遊戲後期），推薦先看 [動態規劃入門：從記憶化搜尋到遞推](https://www.bilibili.com/video/BV1Xj411K7oF/)。\n\n但記憶化搜尋並不是萬能的，某些題目只有寫成遞推，才能結合資料結構等來優化時間複雜度，多數題目還可以優化空間複雜度。所以儘量在寫完記憶化搜尋後，把遞推的程式碼也寫一下。熟練之後直接寫遞推也可以。\n\n**C++ 0-1 背包模板**：\n\n```cpp\n// 背包 DP 入門：選或不選，取價值最大\nint knapsack(int capacity, vector<int>& weights, vector<int>& values) {\n  vector<int> dp(capacity + 1, 0);\n  for (int i = 0; i < weights.size(); ++i) {\n    for (int cap = capacity; cap >= weights[i]; --cap) {         // 倒序確保每件只選一次 {\n      dp[cap] = max(dp[cap], dp[cap - weights[i]] + values[i]);  // 不選 or 選\n    }\n  }\n}\nreturn dp[capacity];\n}\n```"
