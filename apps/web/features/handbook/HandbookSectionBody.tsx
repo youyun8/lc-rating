@@ -52,7 +52,7 @@ function renderSegments(
         <div key={idx} className="my-4">
           <ProblemList
             problems={segment.problems}
-            title={segment.title ?? "Core problems"}
+            title={segment.title ?? "Practice problems"}
             language={language}
           />
         </div>
