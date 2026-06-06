@@ -206,7 +206,11 @@ function splitSectionBody(body: string): Segment[] {
         inner.push(lines[j]!);
         j++;
       }
-      segments.push({ kind: "example", title, content: inner.join("\n").trim() });
+      segments.push({
+        kind: "example",
+        title,
+        content: inner.join("\n").trim(),
+      });
       i = j; // skip past the closing ":::"
       continue;
     }
