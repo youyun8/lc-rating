@@ -116,7 +116,8 @@ The same loop yields right-side view (last of each level, LC 199), zigzag order 
     {
       id: "bst",
       title: "Binary search trees",
-      body: `In a BST, \`left < node < right\`, so search/insert/delete cost \`O(h)\` and an **inorder traversal is sorted** — the key insight behind validation and Kth-smallest.
+      body: `:::example Validate Binary Search Tree (LC 98)
+In a BST, \`left < node < right\`, so search/insert/delete cost \`O(h)\` and an **inorder traversal is sorted** — the key insight behind validation and Kth-smallest.
 
 \`\`\`cpp
 // Validate BST using min/max bounds (LC 98)
@@ -131,7 +132,9 @@ bool valid(TreeNode* r, long lo, long hi) {
 }
 // call: valid(root, LONG_MIN, LONG_MAX)
 \`\`\`
+:::
 
+:::example Kth Smallest Element in a BST (LC 230)
 \`\`\`cpp
 // Kth smallest in a BST (LC 230) via inorder counting
 int kthSmallest(TreeNode* root, int k) {
@@ -151,12 +154,14 @@ int kthSmallest(TreeNode* root, int k) {
   }
   return -1;
 }
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "treedp",
       title: "Tree DP: aggregate answers up the tree",
-      body: `Return a tuple of facts from each child, combine at the parent, and update a global answer. Diameter and max path sum are the archetypes.
+      body: `:::example Diameter of Binary Tree (LC 543)
+Return a tuple of facts from each child, combine at the parent, and update a global answer. Diameter and max path sum are the archetypes.
 
 \`\`\`cpp
 // Diameter (longest path in edges, LC 543): height returns depth, updates best
@@ -170,7 +175,9 @@ int height(TreeNode* r) {
   return 1 + max(L, R);     // height contributed upward
 }
 \`\`\`
+:::
 
+:::example Binary Tree Maximum Path Sum (LC 124)
 \`\`\`cpp
 // Max path sum (LC 124): a node may "drop" a negative branch
 int maxSum = INT_MIN;
@@ -184,13 +191,15 @@ int gain(TreeNode* r) {
   return r->val + max(L, R);
 }
 \`\`\`
+:::
 
 House Robber III (LC 337) returns a pair {rob, skip} per node — the canonical tree DP with state.`,
     },
     {
       id: "lca",
       title: "Lowest common ancestor",
-      body: `The LCA is the deepest node that has both targets in its subtree. Postorder recursion finds it in one pass.
+      body: `:::example Lowest Common Ancestor of a Binary Tree (LC 236)
+The LCA is the deepest node that has both targets in its subtree. Postorder recursion finds it in one pass.
 
 \`\`\`cpp
 // LCA in a binary tree (LC 236)
@@ -206,13 +215,15 @@ TreeNode* lca(TreeNode* r, TreeNode* p, TreeNode* q) {
   return L ? L : R;  // both on one side (or neither)
 }
 \`\`\`
+:::
 
 In a **BST** the LCA is simpler: walk down, going left/right until \`p\` and \`q\` fall on opposite sides of the current node (LC 235).`,
     },
     {
       id: "construct",
       title: "Construction & serialization",
-      body: `Rebuild a tree from traversals using the fact that preorder gives the root and inorder splits left/right.
+      body: `:::example Construct Binary Tree from Preorder and Inorder Traversal (LC 105)
+Rebuild a tree from traversals using the fact that preorder gives the root and inorder splits left/right.
 
 \`\`\`cpp
 // Build tree from preorder + inorder (LC 105)
@@ -235,6 +246,7 @@ TreeNode* build(vector<int>& pre, vector<int>& in) {
   return go(0, (int)in.size() - 1);
 }
 \`\`\`
+:::
 
 Serialize/deserialize (LC 297) uses preorder with explicit null markers ("#") so the structure is recoverable.`,
     },
@@ -299,7 +311,8 @@ struct LCA {
     {
       id: "rerooting",
       title: "Rerooting DP & Morris traversal",
-      body: `**Rerooting** computes a per-node answer that depends on the *whole* tree (e.g. sum of distances to all other nodes) in \`O(n)\` with two DFS passes: one to get subtree aggregates and the root's answer, one to shift the root from parent to child.
+      body: `:::example Sum of Distances in Tree (LC 834)
+**Rerooting** computes a per-node answer that depends on the *whole* tree (e.g. sum of distances to all other nodes) in \`O(n)\` with two DFS passes: one to get subtree aggregates and the root's answer, one to shift the root from parent to child.
 
 \`\`\`cpp
 // Sum of Distances in Tree (LC 834): two passes
@@ -332,6 +345,7 @@ vector<int> sumOfDistancesInTree(int n, vector<vector<int>>& edges) {
   return ans;
 }
 \`\`\`
+:::
 
 **Morris traversal** does inorder in \`O(1)\` extra space by temporarily threading each node to its inorder successor.
 

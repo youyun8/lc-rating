@@ -44,7 +44,8 @@ If you cannot construct such an argument, treat greedy as a *guess* and verify a
     {
       id: "intervals",
       title: "Pattern: interval scheduling",
-      body: `**Maximum non-overlapping intervals** → sort by *end* time, greedily keep an interval if it starts after the last kept end.
+      body: `:::example Non-overlapping Intervals (LC 435)
+**Maximum non-overlapping intervals** → sort by *end* time, greedily keep an interval if it starts after the last kept end.
 
 \`\`\`cpp
 // Max number of non-overlapping intervals (LC 435 returns the count to remove)
@@ -60,6 +61,7 @@ int maxNonOverlap(vector<vector<int>>& iv) {
   return count;  // erase = iv.size() - count
 }
 \`\`\`
+:::
 
 **Merge intervals** (LC 56) → sort by *start*, extend the current block while overlapping.
 **Minimum arrows to burst balloons** (LC 452) → sort by end, shoot at each new end.
@@ -93,7 +95,8 @@ Heap-greedy also solves Task Scheduler (LC 621), Reorganize String (LC 767), IPO
     {
       id: "jump",
       title: "Pattern: reachability / jump games",
-      body: `Track the farthest reachable index; greedily extend the current "level".
+      body: `:::example Jump Game II (LC 45)
+Track the farthest reachable index; greedily extend the current "level".
 
 \`\`\`cpp
 // Minimum jumps to reach the end (LC 45) — BFS-like level expansion
@@ -109,13 +112,15 @@ int jump(vector<int>& a) {
   return jumps;
 }
 \`\`\`
+:::
 
 Can-jump (LC 55) is the boolean version: keep the max reach and fail if \`i > reach\`.`,
     },
     {
       id: "exchange-examples",
       title: "Pattern: sort-by-ratio / exchange arguments",
-      body: `Many optimization problems are solved by sorting on a cleverly chosen key justified by an exchange argument.
+      body: `:::example Assign Cookies (LC 455)
+Many optimization problems are solved by sorting on a cleverly chosen key justified by an exchange argument.
 
 \`\`\`cpp
 // Assign cookies to greedy children (LC 455): smallest cookie that satisfies
@@ -132,13 +137,15 @@ int findContentChildren(vector<int>& g, vector<int>& s) {
   return i;
 }
 \`\`\`
+:::
 
 Other "sort by the right key" classics: Gas Station (LC 134), Queue Reconstruction by Height (LC 406), Boats to Save People (LC 881), and Two City Scheduling (LC 1029, sort by cost difference).`,
     },
     {
       id: "advanced",
       title: "Advanced techniques (hard problems)",
-      body: `**Regret / lazy greedy with a heap (LC 871).** Drive as far as you can; whenever you get stuck, "regret" and retroactively refuel at the largest station you have already passed. The heap stores deferred options you can still claim.
+      body: `:::example Minimum Number of Refueling Stops (LC 871)
+**Regret / lazy greedy with a heap (LC 871).** Drive as far as you can; whenever you get stuck, "regret" and retroactively refuel at the largest station you have already passed. The heap stores deferred options you can still claim.
 
 \`\`\`cpp
 // Minimum Number of Refueling Stops (LC 871)
@@ -159,7 +166,9 @@ int minRefuelStops(int target, int startFuel, vector<vector<int>>& st) {
   return stops;
 }
 \`\`\`
+:::
 
+:::example Course Schedule III (LC 630)
 **Take-then-drop greedy (LC 630).** Sort by deadline, greedily take every course, and if total time overruns the current deadline, drop the longest course taken so far — a single max-heap maintains the optimal feasible set.
 
 \`\`\`cpp
@@ -180,7 +189,9 @@ int scheduleCourse(vector<vector<int>>& c) {
   return pq.size();
 }
 \`\`\`
+:::
 
+:::example Candy (LC 135)
 **Two-pass greedy for two-sided constraints (LC 135).** When each element must satisfy both its left and right neighbour, sweep left-to-right then right-to-left and combine.
 
 \`\`\`cpp
@@ -201,6 +212,7 @@ int candy(vector<int>& r) {
   return accumulate(c.begin(), c.end(), 0);
 }
 \`\`\`
+:::
 
 Other hard greedies: Minimum Number of Taps to Water a Garden (LC 1326, interval cover like Jump Game II), Video Stitching (LC 1024), and Minimum Cost to Hire K Workers (LC 857, sort by ratio + heap of the K smallest).`,
     },

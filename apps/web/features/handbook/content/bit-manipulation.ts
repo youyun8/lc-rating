@@ -76,7 +76,8 @@ Counting set bits for all numbers \`0..n\` in \`O(n)\` (LC 338): \`dp[i] = dp[i 
     {
       id: "xor",
       title: "XOR tricks",
-      body: `XOR cancels pairs (\`a ^ a = 0\`, \`a ^ 0 = a\`, commutative/associative), which solves a surprising number of problems.
+      body: `:::example Single Number (LC 136)
+XOR cancels pairs (\`a ^ a = 0\`, \`a ^ 0 = a\`, commutative/associative), which solves a surprising number of problems.
 
 \`\`\`cpp
 // Single Number (LC 136): everything cancels except the unique element
@@ -88,7 +89,9 @@ int singleNumber(vector<int>& a) {
   return x;
 }
 \`\`\`
+:::
 
+:::example Missing Number (LC 268)
 \`\`\`cpp
 // Missing Number (LC 268): XOR indices and values
 int missingNumber(vector<int>& a) {
@@ -99,13 +102,15 @@ int missingNumber(vector<int>& a) {
   return x;
 }
 \`\`\`
+:::
 
 Single Number II (LC 137, every element thrice but one) uses bit-count mod 3 per position; Single Number III (LC 260, two uniques) splits by a differing bit. XOR also gives the swap-without-temp trick and prefix-XOR for subarray-XOR queries (LC 1310).`,
     },
     {
       id: "subsets",
       title: "Subset & mask enumeration",
-      body: `With \`n\` items, iterate every subset as an integer \`0 .. 2^n - 1\`.
+      body: `:::example Subsets (LC 78)
+With \`n\` items, iterate every subset as an integer \`0 .. 2^n - 1\`.
 
 \`\`\`cpp
 // Enumerate all subsets of an n-element set (LC 78 Subsets)
@@ -124,6 +129,7 @@ vector<vector<int>> subsets(vector<int>& a) {
   return res;
 }
 \`\`\`
+:::
 
 To enumerate **submasks** of a mask (used in bitmask DP partition problems) in \`O(3^n)\` total:
 

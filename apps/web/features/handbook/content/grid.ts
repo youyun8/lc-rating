@@ -42,7 +42,8 @@ auto inBounds = [&](int r, int c) {
     {
       id: "floodfill",
       title: "Flood fill & connected components",
-      body: `Count or fill regions by visiting a cell and recursing into valid same-region neighbours. Marking the grid in place avoids a separate visited array.
+      body: `:::example Number of Islands (LC 200)
+Count or fill regions by visiting a cell and recursing into valid same-region neighbours. Marking the grid in place avoids a separate visited array.
 
 \`\`\`cpp
 // Number of Islands (LC 200): sink each island on first contact
@@ -69,13 +70,15 @@ int numIslands(vector<vector<char>>& g) {
   return count;
 }
 \`\`\`
+:::
 
 Variations: Max Area of Island (LC 695, return the size), Surrounded Regions (LC 130, flood from the border first), Number of Closed Islands (LC 1254), and Pacific Atlantic Water Flow (LC 417, two reverse floods).`,
     },
     {
       id: "multibfs",
       title: "Multi-source BFS",
-      body: `When something spreads simultaneously from several origins, seed the BFS queue with **all** sources at distance 0, then expand level by level. The level index is the elapsed time / distance.
+      body: `:::example Rotting Oranges (LC 994)
+When something spreads simultaneously from several origins, seed the BFS queue with **all** sources at distance 0, then expand level by level. The level index is the elapsed time / distance.
 
 \`\`\`cpp
 // Rotting Oranges (LC 994): minutes until all fresh oranges rot
@@ -111,13 +114,15 @@ int orangesRotting(vector<vector<int>>& g) {
   return fresh ? -1 : minutes;
 }
 \`\`\`
+:::
 
 01 Matrix (LC 542) and Walls and Gates (LC 286) are multi-source BFS computing the distance to the nearest source.`,
     },
     {
       id: "shortest",
       title: "Shortest path in a grid",
-      body: `Unweighted shortest path → plain BFS. With per-cell costs → Dijkstra; with 0/1 move costs → 0-1 BFS (deque).
+      body: `:::example Shortest Path in Binary Matrix (LC 1091)
+Unweighted shortest path → plain BFS. With per-cell costs → Dijkstra; with 0/1 move costs → 0-1 BFS (deque).
 
 \`\`\`cpp
 // Shortest path in a binary matrix, 8-directional (LC 1091)
@@ -153,13 +158,15 @@ int shortestPathBinaryMatrix(vector<vector<int>>& g) {
   return -1;
 }
 \`\`\`
+:::
 
 When you must track extra state (keys collected, remaining obstacle removals), make the BFS/Dijkstra node a tuple \`(r, c, state)\` (LC 1293 Shortest Path with Obstacle Elimination, LC 864 Shortest Path to Get All Keys).`,
     },
     {
       id: "backtracking",
       title: "Backtracking on grids",
-      body: `Search problems explore a path, mark cells, recurse, then **undo** the mark on the way out.
+      body: `:::example Word Search (LC 79)
+Search problems explore a path, mark cells, recurse, then **undo** the mark on the way out.
 
 \`\`\`cpp
 // Word Search (LC 79): DFS with backtracking
@@ -188,12 +195,14 @@ bool exist(vector<vector<char>>& b, string word) {
   }
   return false;
 }
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "transforms",
       title: "In-place matrix transforms",
-      body: `Layout problems are about index arithmetic, not algorithms.
+      body: `:::example Rotate Image (LC 48)
+Layout problems are about index arithmetic, not algorithms.
 
 \`\`\`cpp
 // Rotate image 90 degrees clockwise in place (LC 48): transpose then reverse
@@ -210,13 +219,15 @@ void rotate(vector<vector<int>>& a) {
   }
 }
 \`\`\`
+:::
 
 Spiral Matrix (LC 54) walks four shrinking boundaries; Set Matrix Zeroes (LC 73) uses the first row/column as flags for \`O(1)\` extra space.`,
     },
     {
       id: "grid-dijkstra",
       title: "Dijkstra & min-max paths on grids",
-      body: `When moving between cells has a cost — or you must minimize the *maximum* cell on a path — run Dijkstra with a min-heap over cells.
+      body: `:::example Swim in Rising Water (LC 778)
+When moving between cells has a cost — or you must minimize the *maximum* cell on a path — run Dijkstra with a min-heap over cells.
 
 \`\`\`cpp
 // Swim in Rising Water (LC 778): minimize the largest elevation on a path
@@ -245,13 +256,15 @@ int swimInWater(vector<vector<int>>& grid) {
   return -1;
 }
 \`\`\`
+:::
 
 Path With Minimum Effort (LC 1631) is the same template minimizing the maximum absolute height difference. For 0/1 move costs, prefer 0-1 BFS with a deque (LC 1368).`,
     },
     {
       id: "broken-profile",
       title: "Bitmask / broken-profile DP on grids",
-      body: `When grid dimensions are small in one direction (\`cols <= ~12\`), DP over **row bitmasks** — each mask encodes which cells in a row are chosen, with adjacency constraints between consecutive rows.
+      body: `:::example Maximum Students Taking Exam (LC 1349)
+When grid dimensions are small in one direction (\`cols <= ~12\`), DP over **row bitmasks** — each mask encodes which cells in a row are chosen, with adjacency constraints between consecutive rows.
 
 \`\`\`cpp
 // Maximum Students Taking Exam (LC 1349): DP over valid seating bitmasks per
@@ -293,6 +306,7 @@ int maxStudents(vector<vector<char>>& seats) {
   return best;
 }
 \`\`\`
+:::
 
 The same idea (broken-profile DP) tiles boards with dominoes (LC 1659 Maximize Grid Happiness pushes this to 3-state profiles).`,
     },

@@ -60,6 +60,7 @@ The three lines **choose / explore / un-choose** are the heart of it. Forgetting
       title: "Subsets, combinations, and permutations",
       body: `These three are the canonical patterns; almost everything else is a variation.
 
+:::example Subsets (LC 78)
 **Subsets** — at each index, either include the element or skip it.
 
 \`\`\`cpp
@@ -76,7 +77,9 @@ void subsets(vector<int>& nums, int i, vector<int>& path,
   path.pop_back();                   // undo
 }
 \`\`\`
+:::
 
+:::example Combinations (LC 77)
 **Combinations** — pick \`k\` items; pass a \`start\` index so each combination is generated once.
 
 \`\`\`cpp
@@ -95,7 +98,9 @@ void combine(int n, int k, int start, vector<int>& path,
   }
 }
 \`\`\`
+:::
 
+:::example Permutations (LC 46)
 **Permutations** — track which elements are already used.
 
 \`\`\`cpp
@@ -117,12 +122,14 @@ void permute(vector<int>& nums, vector<int>& path, vector<bool>& used,
     used[i] = false;
   }
 }
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "duplicates",
       title: "Handling duplicates",
-      body: `When the input has repeated values, sort first and **skip a value equal to its predecessor at the same tree depth**. This generates each distinct configuration once.
+      body: `:::example Subsets II (LC 90)
+When the input has repeated values, sort first and **skip a value equal to its predecessor at the same tree depth**. This generates each distinct configuration once.
 
 \`\`\`cpp
 // Subsets II with duplicates (LC 90): sort, then skip repeats per level.
@@ -139,6 +146,7 @@ void subsetsDup(vector<int>& nums, int start, vector<int>& path,
   }
 }
 \`\`\`
+:::
 
 The same \`i > start && nums[i] == nums[i - 1]\` guard deduplicates Combination Sum II (LC 40) and Permutations II (LC 47, where the guard becomes \`!used[i - 1]\`).`,
     },
@@ -152,6 +160,7 @@ The same \`i > start && nums[i] == nums[i - 1]\` guard deduplicates Combination 
 - **Symmetry breaking**: fix an order (e.g. require indices to increase) so you never generate the same set two ways.
 - **Constraint propagation**: maintain helper arrays (used columns/diagonals for N-Queens) so \`valid\` is \`O(1)\`.
 
+:::example Combination Sum (LC 39)
 \`\`\`cpp
 // Combination Sum (LC 39): prune as soon as the running sum passes target.
 void combinationSum(vector<int>& cand, int start, int target,
@@ -169,12 +178,14 @@ void combinationSum(vector<int>& cand, int start, int target,
     path.pop_back();
   }
 }
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "board",
       title: "Board problems: N-Queens & Sudoku",
-      body: `Board problems place pieces cell by cell, keeping \`O(1)\` validity checks via occupancy markers. (For grid path search and word search, see [Grid / Matrix](/handbook/grid).)
+      body: `:::example N-Queens (LC 51/52)
+Board problems place pieces cell by cell, keeping \`O(1)\` validity checks via occupancy markers. (For grid path search and word search, see [Grid / Matrix](/handbook/grid).)
 
 \`\`\`cpp
 // N-Queens count (LC 51/52): track attacked columns and both diagonals.
@@ -197,13 +208,15 @@ int placeQueens(int r) {
   return count;
 }
 \`\`\`
+:::
 
 Sudoku (LC 37) is the same idea: find the next empty cell, try digits 1–9 that are unused in the row, column, and 3×3 box, recurse, and undo. Choosing the **most-constrained** empty cell first (fewest legal digits) is a strong heuristic.`,
     },
     {
       id: "partition",
       title: "Partitioning & word problems",
-      body: `Many string and array problems are backtracking over **where to cut** or **how to assign** elements.
+      body: `:::example Palindrome Partitioning (LC 131)
+Many string and array problems are backtracking over **where to cut** or **how to assign** elements.
 
 \`\`\`cpp
 // Palindrome Partitioning (LC 131): cut the string into palindromic pieces.
@@ -232,6 +245,7 @@ void partition(const string& s, int start, vector<string>& path,
   }
 }
 \`\`\`
+:::
 
 The same shape solves Restore IP Addresses (LC 93, cut into 4 valid octets) and Letter Combinations of a Phone Number (LC 17, branch over each digit's letters). For "can we split into \`k\` equal-sum groups" (LC 698), backtrack by **assigning each number to a bucket** with sorting + pruning.`,
     },

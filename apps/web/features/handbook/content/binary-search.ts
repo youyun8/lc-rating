@@ -164,6 +164,7 @@ long long max_feasible(long long lo, long long hi, auto&& check) {
 }
 \`\`\`
 
+:::example Capacity to Ship Packages Within D Days (LC 1011)
 Example \`check\` for LeetCode 1011 (ship packages within D days at capacity \`cap\`):
 
 \`\`\`cpp
@@ -183,7 +184,8 @@ auto check = [&](int cap) {
   return days <= D;
 };
 // lo = max(weights), hi = sum(weights); answer = min_feasible(lo, hi, check)
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "variants",
@@ -192,6 +194,7 @@ auto check = [&](int cap) {
 
 **2. Insertion point.** \`lower_bound\` index is where \`x\` would be inserted. (LC 35 Search Insert Position.)
 
+:::example Search in Rotated Sorted Array (LC 33)
 **3. Rotated sorted array.** One half is always sorted — decide which, then test whether the target lies in it.
 
 \`\`\`cpp
@@ -220,6 +223,7 @@ int search(vector<int>& a, int target) {
   return -1;
 }
 \`\`\`
+:::
 
 **4. Find a peak / find the minimum of a rotated array.** Compare \`a[mid]\` to a neighbour or to \`a[r]\` to decide direction (LC 162, LC 153).
 
@@ -263,7 +267,8 @@ for (int it = 0; it < 100; it++) {
     {
       id: "advanced",
       title: "Advanced techniques (hard problems)",
-      body: `**Partition by binary search — median of two sorted arrays (LC 4).** Instead of merging, binary search the cut in the shorter array so the left halves of both arrays form the lower half of the merged array.
+      body: `:::example Median of Two Sorted Arrays (LC 4)
+**Partition by binary search — median of two sorted arrays (LC 4).** Instead of merging, binary search the cut in the shorter array so the left halves of both arrays form the lower half of the merged array.
 
 \`\`\`cpp
 // Median of two sorted arrays in O(log(min(m, n))) (LC 4)
@@ -288,7 +293,9 @@ double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
   return 0.0;
 }
 \`\`\`
+:::
 
+:::example Maximum Average Subarray II (LC 644)
 **Fractional / parametric binary search — maximize average (LC 644).** Binary search the answer value \`x\`; "average ≥ x" becomes "some window has sum of \`(a[i] - x) ≥ 0\`", checkable with a prefix-min sweep.
 
 \`\`\`cpp
@@ -321,6 +328,7 @@ double findMaxAverage(vector<int>& a, int k) {
   return lo;
 }
 \`\`\`
+:::
 
 **Binary search the answer with a heavy check.** The \`check(x)\` can itself be a greedy or DP — the search just needs it to be monotone. This unlocks many hard problems: split-array / painter problems (LC 410, LC 1highest via DP check), bouquets (LC 1482), magnetic force between balls (LC 1552), maximum candies (LC 2226), and finding a target in a hidden mountain array (LC 1095).
 

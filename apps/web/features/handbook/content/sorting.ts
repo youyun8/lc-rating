@@ -150,6 +150,7 @@ vector<int> bucketSort(vector<int>& a) {
 }
 \`\`\`
 
+:::example Top K Frequent Elements (LC 347)
 The interview-favourite cousin is the **frequency bucket**: index buckets by *occurrence count* to grab the Top-K most frequent values in \`O(n)\`, no sorting of frequencies required.
 
 \`\`\`cpp
@@ -176,6 +177,7 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
   return res;
 }
 \`\`\`
+:::
 
 A third face is the **pigeonhole bucket** for the maximum adjacent gap (LC 164): with \`n\` values spread over \`[mn, mx]\`, the largest gap is at least \`ceil((mx - mn) / (n - 1))\`, so it must straddle two buckets of that width — store only each bucket's min/max and the answer is \`max(nextMin - prevMax)\`, all in \`O(n)\`.`,
     },

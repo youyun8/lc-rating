@@ -34,7 +34,8 @@ Related: [Binary Search](/handbook/binary-search), [Monotonic Stack vs Deque](/h
     {
       id: "variable",
       title: "Template: variable-size window",
-      body: `Grow the window by moving \`right\`; whenever the window becomes invalid, shrink from \`left\` until it is valid again. Track the best valid window.
+      body: `:::example Longest Substring Without Repeating Characters (LC 3)
+Grow the window by moving \`right\`; whenever the window becomes invalid, shrink from \`left\` until it is valid again. Track the best valid window.
 
 \`\`\`cpp
 // Longest substring without repeating characters (LC 3)
@@ -52,6 +53,7 @@ int lengthOfLongestSubstring(string s) {
   return best;
 }
 \`\`\`
+:::
 
 The general "shrink while invalid" skeleton:
 
@@ -100,6 +102,7 @@ For "permutation in string" / "find all anagrams" (LC 567, LC 438), keep a frequ
 
 > exactly(K) = atMost(K) − atMost(K − 1)
 
+:::example Subarrays with K Distinct (LC 992)
 \`\`\`cpp
 // Count subarrays with exactly K distinct integers (LC 992)
 int subarraysWithKDistinct(vector<int>& a, int k) {
@@ -122,13 +125,15 @@ int subarraysWithKDistinct(vector<int>& a, int k) {
   return atMost(k) - atMost(k - 1);
 }
 \`\`\`
+:::
 
 The same trick counts subarrays with sum / product / odd-count constraints (LC 1248 Count Number of Nice Subarrays, LC 713 Subarray Product Less Than K).`,
     },
     {
       id: "deque",
       title: "Technique: monotonic deque for window extrema",
-      body: `To get the **maximum (or minimum) of every length-k window** in \`O(n)\`, keep a deque of indices whose values are monotonically decreasing; the front is always the window maximum.
+      body: `:::example Sliding Window Maximum (LC 239)
+To get the **maximum (or minimum) of every length-k window** in \`O(n)\`, keep a deque of indices whose values are monotonically decreasing; the front is always the window maximum.
 
 \`\`\`cpp
 // Sliding window maximum (LC 239)
@@ -150,13 +155,15 @@ vector<int> maxSlidingWindow(vector<int>& a, int k) {
   return res;
 }
 \`\`\`
+:::
 
 This deque idea generalizes to "longest subarray where max − min ≤ limit" (LC 1438) using two deques (one for max, one for min).`,
     },
     {
       id: "advanced",
       title: "Advanced techniques (hard problems)",
-      body: `**When negatives break the window: prefix sums + monotonic deque.** The plain shrinking window fails for "shortest subarray with sum ≥ K" when values can be negative, because growing the window no longer monotonically grows the sum. Switch to prefix sums and keep a deque of *increasing* prefix values.
+      body: `:::example Shortest Subarray with Sum at Least K (LC 862)
+**When negatives break the window: prefix sums + monotonic deque.** The plain shrinking window fails for "shortest subarray with sum ≥ K" when values can be negative, because growing the window no longer monotonically grows the sum. Switch to prefix sums and keep a deque of *increasing* prefix values.
 
 \`\`\`cpp
 // Shortest subarray with sum >= k, values may be negative (LC 862)
@@ -182,6 +189,7 @@ int shortestSubarray(vector<int>& a, long long k) {
   return best == INT_MAX ? -1 : best;
 }
 \`\`\`
+:::
 
 **Multi-word / structured windows.** Substring with Concatenation of All Words (LC 30) slides a window of fixed total length and matches a word-frequency map at each of the \`wordLen\` phase offsets. Minimum Window Subsequence (LC 727) uses a forward/backward two-pointer scan (or DP) because order — not just membership — must be preserved.
 

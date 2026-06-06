@@ -66,7 +66,8 @@ for (int i = 1; i < n; i++) {
     {
       id: "hashing",
       title: "Hashing: maps, sets, and the prefix-sum hash trick",
-      body: `Hash maps give \`O(1)\` average insert/lookup and are the glue of countless problems: two-sum, grouping anagrams, deduplication, frequency counting.
+      body: `:::example Subarray Sum Equals K (LC 560)
+Hash maps give \`O(1)\` average insert/lookup and are the glue of countless problems: two-sum, grouping anagrams, deduplication, frequency counting.
 
 \`\`\`cpp
 // Subarray sum equals k (LC 560): count prefix sums seen so far
@@ -82,13 +83,15 @@ int subarraySum(vector<int>& a, int k) {
   return res;
 }
 \`\`\`
+:::
 
 Tips: reserve capacity (\`m.reserve(n)\`) to cut rehashing; for adversarial inputs that target \`unordered_map\`, fall back to \`map\` or add a random salt. Use \`array\`/\`vector\` indexing when keys are small integers — it is far faster than hashing.`,
     },
     {
       id: "heap",
       title: "Heaps & the two-heap trick",
-      body: `A binary heap (\`priority_queue\`) gives \`O(log n)\` push/pop and \`O(1)\` top — ideal for "Kth largest", "merge K lists", and streaming medians.
+      body: `:::example Kth Largest Element in an Array (LC 215)
+A binary heap (\`priority_queue\`) gives \`O(log n)\` push/pop and \`O(1)\` top — ideal for "Kth largest", "merge K lists", and streaming medians.
 
 \`\`\`cpp
 // Kth largest element (LC 215) with a size-k min-heap: O(n log k)
@@ -103,7 +106,9 @@ int findKthLargest(vector<int>& a, int k) {
   return pq.top();
 }
 \`\`\`
+:::
 
+:::example Find Median from Data Stream (LC 295)
 \`\`\`cpp
 // Streaming median (LC 295): max-heap for low half, min-heap for high half
 class MedianFinder {
@@ -123,7 +128,8 @@ class MedianFinder {
     return lo.size() > hi.size() ? lo.top() : (lo.top() + hi.top()) / 2.0;
   }
 };
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "dsu",
@@ -241,7 +247,8 @@ If you only need point updates, prefer Fenwick — it is shorter and faster. Rea
     {
       id: "linkedlist",
       title: "Linked lists & the fast/slow pointer",
-      body: `Linked-list problems are about pointer choreography: a **dummy head** simplifies edge cases, and **fast/slow pointers** find the middle or detect cycles.
+      body: `:::example Reverse Linked List (LC 206) & Linked List Cycle (LC 141)
+Linked-list problems are about pointer choreography: a **dummy head** simplifies edge cases, and **fast/slow pointers** find the middle or detect cycles.
 
 \`\`\`cpp
 // Reverse a singly linked list (LC 206)
@@ -267,7 +274,8 @@ bool hasCycle(ListNode* head) {
   }
   return false;
 }
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "sparse-table",
@@ -368,7 +376,8 @@ vector<long long> mo(int n, vector<Query>& qs) {
     {
       id: "advanced-structures",
       title: "Advanced structures (hard problems)",
-      body: `**LRU / LFU caches.** A hash map of \`key → list iterator\` plus a doubly linked list gives \`O(1)\` get/put.
+      body: `:::example LRU Cache (LC 146)
+**LRU / LFU caches.** A hash map of \`key → list iterator\` plus a doubly linked list gives \`O(1)\` get/put.
 
 \`\`\`cpp
 // LRU Cache (LC 146): list front = most-recently-used
@@ -403,6 +412,7 @@ class LRUCache {
   }
 };
 \`\`\`
+:::
 
 **Sweep line + balanced multiset / heap.** The Skyline Problem (LC 218), Rectangle Area II (LC 850, segment tree over compressed y-coordinates), and My Calendar series (LC 729/731/732) sweep events and maintain active intervals.
 

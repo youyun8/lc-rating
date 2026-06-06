@@ -3,11 +3,13 @@
 import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
 import { ProblemList } from "@/features/studyplan/ProblemList";
 import type { StudyPlanData } from "@/types";
-import { Fragment, useMemo } from "react";
+import { useMemo } from "react";
+import { HandbookExample } from "./HandbookExample";
 
 type Segment =
   | { kind: "markdown"; content: string }
-  | { kind: "problems"; title?: string; problems: StudyPlanData.Item[] };
+  | { kind: "problems"; title?: string; problems: StudyPlanData.Item[] }
+  | { kind: "example"; title: string; content: string };
 
 interface HandbookSectionBodyProps {
   body: string;
@@ -21,29 +23,46 @@ interface HandbookSectionBodyProps {
  */
 export function HandbookSectionBody({ body }: HandbookSectionBodyProps) {
   const segments = useMemo(() => splitSectionBody(body), [body]);
+  return <>{renderSegments(segments, false)}</>;
+}
 
-  return (
-    <>
-      {segments.map((segment, idx) =>
-        segment.kind === "problems" ? (
-          <div key={idx} className="my-4">
-            <ProblemList
-              problems={segment.problems}
-              title={segment.title ?? "Core problems"}
-              language="en"
-            />
-          </div>
-        ) : (
-          <StudyPlanMarkdownContent
-            key={idx}
-            content={segment.content}
-            variant="lecture"
-            enhanceLeetCode
+/**
+ * Render parsed segments to JSX. `codeInitiallyOpen` is threaded down so code
+ * blocks inside a 例題 card start expanded (the card itself is the collapsible),
+ * avoiding a redundant second toggle.
+ */
+function renderSegments(segments: Segment[], codeInitiallyOpen: boolean) {
+  return segments.map((segment, idx) => {
+    if (segment.kind === "problems") {
+      return (
+        <div key={idx} className="my-4">
+          <ProblemList
+            problems={segment.problems}
+            title={segment.title ?? "Core problems"}
+            language="en"
           />
-        ),
-      )}
-    </>
-  );
+        </div>
+      );
+    }
+
+    if (segment.kind === "example") {
+      return (
+        <HandbookExample key={idx} title={segment.title}>
+          {renderSegments(splitSectionBody(segment.content), true)}
+        </HandbookExample>
+      );
+    }
+
+    return (
+      <StudyPlanMarkdownContent
+        key={idx}
+        content={segment.content}
+        variant="lecture"
+        enhanceLeetCode
+        codeInitiallyOpen={codeInitiallyOpen}
+      />
+    );
+  });
 }
 
 function isTableRow(line: string) {
@@ -155,6 +174,23 @@ function splitSectionBody(body: string): Segment[] {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]!;
     const next = lines[i + 1];
+
+    // A `:::example <title>` … `:::` block becomes a collapsible 例題 card. The
+    // inner body (prose + code, occasionally a table) is re-split when rendered.
+    const exampleMatch = line.trim().match(/^:::example\b(.*)$/);
+    if (exampleMatch) {
+      flushMarkdown();
+      const title = exampleMatch[1]!.trim();
+      const inner: string[] = [];
+      let j = i + 1;
+      while (j < lines.length && lines[j]!.trim() !== ":::") {
+        inner.push(lines[j]!);
+        j++;
+      }
+      segments.push({ kind: "example", title, content: inner.join("\n").trim() });
+      i = j; // skip past the closing ":::"
+      continue;
+    }
 
     // A markdown table starts with a header row followed by a separator row.
     if (isTableRow(line) && next !== undefined && isSeparatorRow(next)) {

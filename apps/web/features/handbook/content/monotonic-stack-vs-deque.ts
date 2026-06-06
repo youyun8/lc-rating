@@ -68,7 +68,8 @@ Variations are sign/direction flips:
     {
       id: "stack-histogram",
       title: "Stack pattern: largest rectangle in a histogram",
-      body: `For each bar, the widest rectangle of that height runs from the previous-smaller bar to the next-smaller bar. A single increasing stack computes both boundaries.
+      body: `:::example Largest Rectangle in Histogram (LC 84)
+For each bar, the widest rectangle of that height runs from the previous-smaller bar to the next-smaller bar. A single increasing stack computes both boundaries.
 
 \`\`\`cpp
 // Largest rectangle in histogram (LC 84); sentinel 0 flushes the stack
@@ -88,13 +89,15 @@ int largestRectangleArea(vector<int> h) {
   return best;
 }
 \`\`\`
+:::
 
 **Maximal Rectangle** in a 0/1 matrix (LC 85) reduces to running this per row over column-wise height histograms.`,
     },
     {
       id: "stack-contribution",
       title: "Stack pattern: contribution / subarray domination",
-      body: `Many "sum over all subarrays of (min/max)" problems ask, for each element, *in how many subarrays is it the minimum (or maximum)?* The stack finds the span where it stops being the extreme; the contribution is \`a[i] * left * right\`.
+      body: `:::example Sum of Subarray Minimums (LC 907)
+Many "sum over all subarrays of (min/max)" problems ask, for each element, *in how many subarrays is it the minimum (or maximum)?* The stack finds the span where it stops being the extreme; the contribution is \`a[i] * left * right\`.
 
 \`\`\`cpp
 // Sum of minimums of all subarrays (LC 907), mod 1e9+7
@@ -119,13 +122,15 @@ int sumSubarrayMins(vector<int>& a) {
   return ans;
 }
 \`\`\`
+:::
 
 The asymmetric strict/non-strict comparison (\`>=\` one side, \`>\` the other) avoids double-counting equal values. This is one entry in a larger toolkit — see the [Contribution Method](/handbook/contribution) for the per-bit, pairwise, subsequence, and tree variants.`,
     },
     {
       id: "stack-lexicographic",
       title: "Stack pattern: greedy lexicographic removal",
-      body: `When you delete characters/digits to make the result as small (or large) as possible while keeping order, greedily pop larger trailing elements while you still have deletions or future elements to spare.
+      body: `:::example Remove K Digits (LC 402)
+When you delete characters/digits to make the result as small (or large) as possible while keeping order, greedily pop larger trailing elements while you still have deletions or future elements to spare.
 
 \`\`\`cpp
 // Remove k digits to form the smallest number (LC 402)
@@ -145,13 +150,15 @@ string removeKdigits(string num, int k) {
   return res.empty() ? "0" : res;
 }
 \`\`\`
+:::
 
 The same idea powers Remove Duplicate Letters (LC 316) and Create Maximum Number (LC 321).`,
     },
     {
       id: "stack-advanced",
       title: "Stack pattern: advanced (trees, ramps, leaves)",
-      body: `**Greedy tree builder (LC 1130).** Minimum Cost Tree From Leaf Values pairs each leaf with the smaller of its neighbours; a decreasing stack pops a local minimum the moment a larger value arrives, charging it against its cheaper neighbour.
+      body: `:::example Minimum Cost Tree From Leaf Values (LC 1130)
+**Greedy tree builder (LC 1130).** Minimum Cost Tree From Leaf Values pairs each leaf with the smaller of its neighbours; a decreasing stack pops a local minimum the moment a larger value arrives, charging it against its cheaper neighbour.
 
 \`\`\`cpp
 // Minimum Cost Tree From Leaf Values (LC 1130)
@@ -170,7 +177,9 @@ int mctFromLeafValues(vector<int>& a) {
   return res;
 }
 \`\`\`
+:::
 
+:::example Maximum Width Ramp (LC 962)
 **Decreasing-stack candidates + reverse scan (LC 962).** Maximum Width Ramp builds a stack of indices whose values strictly decrease (the only possible left ends), then scans from the right to pop the widest matches.
 
 \`\`\`cpp
@@ -191,13 +200,15 @@ int maxWidthRamp(vector<int>& a) {
   return res;
 }
 \`\`\`
+:::
 
 **More.** Sum of Subarray Ranges (LC 2104) = max contributions − min contributions. Trapping Rain Water (LC 42), Next Greater Element IV (LC 2454, two stacks), and Steps to Make Array Non-decreasing (LC 2289) are all stack classics. A monotonic stack also builds a **Cartesian tree** in \`O(n)\`, the bridge to range-minimum and treap problems.`,
     },
     {
       id: "deque-window",
       title: "Deque pattern: sliding-window maximum / minimum",
-      body: `To get the **maximum (or minimum) of every length-k window** in \`O(n)\`, keep a deque of indices whose values are monotonically decreasing; the front is always the window maximum. The extra step versus a stack is **front eviction** of indices that have aged out of the window.
+      body: `:::example Sliding Window Maximum (LC 239)
+To get the **maximum (or minimum) of every length-k window** in \`O(n)\`, keep a deque of indices whose values are monotonically decreasing; the front is always the window maximum. The extra step versus a stack is **front eviction** of indices that have aged out of the window.
 
 \`\`\`cpp
 // Maximum of every length-k window (LC 239)
@@ -213,13 +224,15 @@ vector<int> maxSlidingWindow(vector<int>& a, int k) {
   return res;
 }
 \`\`\`
+:::
 
 Flip the back comparison to \`>=\` for a window **minimum**. Drop the \`pop_front\` line and you are back to a monotonic stack — but you lose the ability to answer windowed queries.`,
     },
     {
       id: "deque-two",
       title: "Deque pattern: two deques for max − min windows",
-      body: `When validity depends on both ends of the value range — "longest subarray where $\\max - \\min \\le \\text{limit}$" (LC 1438) — run **two** monotonic deques over the same sliding window: one decreasing (tracks the max at its front) and one increasing (tracks the min). Shrink \`left\` whenever \`maxDeque.front - minDeque.front > limit\`.
+      body: `:::example Longest Subarray with Abs Diff ≤ Limit (LC 1438)
+When validity depends on both ends of the value range — "longest subarray where $\\max - \\min \\le \\text{limit}$" (LC 1438) — run **two** monotonic deques over the same sliding window: one decreasing (tracks the max at its front) and one increasing (tracks the min). Shrink \`left\` whenever \`maxDeque.front - minDeque.front > limit\`.
 
 \`\`\`cpp
 // Longest subarray with abs(max - min) <= limit (LC 1438)
@@ -241,13 +254,15 @@ int longestSubarray(vector<int>& a, int limit) {
   return best;
 }
 \`\`\`
+:::
 
 Continuous Subarrays (LC 2762) is the same two-deque window with a counting objective.`,
     },
     {
       id: "deque-prefix",
       title: "Deque pattern: prefix sums + deque (negatives)",
-      body: `A plain shrinking window fails for "shortest subarray with sum >= k" when values can be **negative**, because growing the window no longer monotonically grows the sum. Switch to prefix sums and keep a deque of *increasing* prefix values.
+      body: `:::example Shortest Subarray with Sum at Least K (LC 862)
+A plain shrinking window fails for "shortest subarray with sum >= k" when values can be **negative**, because growing the window no longer monotonically grows the sum. Switch to prefix sums and keep a deque of *increasing* prefix values.
 
 \`\`\`cpp
 // Shortest subarray with sum >= k, values may be negative (LC 862)
@@ -268,13 +283,15 @@ int shortestSubarray(vector<int>& a, long long k) {
   return best == INT_MAX ? -1 : best;
 }
 \`\`\`
+:::
 
 This and the windowed-max cases below are why the [Sliding Window](/handbook/sliding-window) chapter leans on the deque whenever a single counter cannot certify the window in \`O(1)\`.`,
     },
     {
       id: "deque-dp",
       title: "Deque pattern: windowed-max DP optimization",
-      body: `A deque drops a factor of \`n\` from a DP whose transition is a max/min over a **sliding window of predecessors**, e.g. \`dp[i] = a[i] + max(dp[i-k .. i-1])\`.
+      body: `:::example Jump Game VI (LC 1696)
+A deque drops a factor of \`n\` from a DP whose transition is a max/min over a **sliding window of predecessors**, e.g. \`dp[i] = a[i] + max(dp[i-k .. i-1])\`.
 
 \`\`\`cpp
 // Jump Game VI (LC 1696): dp[i] = nums[i] + max(dp[i-k..i-1]) via deque
@@ -293,6 +310,7 @@ int maxResult(vector<int>& nums, int k) {
   return dp[n - 1];
 }
 \`\`\`
+:::
 
 Constrained Subsequence Sum (LC 1425) is the same recurrence with a "take or skip" twist; Maximum Number of Robots Within Budget (LC 2398) pairs the windowed max with a two-pointer cost window.`,
     },

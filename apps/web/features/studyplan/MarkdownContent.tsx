@@ -266,6 +266,12 @@ interface StudyPlanMarkdownContentProps {
    * 講義-style problem lists. Opt-in (used by the handbook).
    */
   enhanceLeetCode?: boolean;
+  /**
+   * Start each code block expanded instead of collapsed. Used when the markdown
+   * is rendered inside an already-collapsible container (e.g. a handbook 例題
+   * card) so readers don't face a redundant second toggle.
+   */
+  codeInitiallyOpen?: boolean;
 }
 
 export function StudyPlanMarkdownContent({
@@ -273,6 +279,7 @@ export function StudyPlanMarkdownContent({
   variant = "section",
   className,
   enhanceLeetCode = false,
+  codeInitiallyOpen = false,
 }: StudyPlanMarkdownContentProps) {
   const innerHtml = useRef<HTMLDivElement>(null);
 
@@ -369,11 +376,13 @@ export function StudyPlanMarkdownContent({
       header.appendChild(toggle);
       header.appendChild(copyButton);
 
-      // Start collapsed
-      pre.style.display = "none";
+      // Start collapsed, unless the caller wants code expanded (e.g. inside a
+      // handbook 例題 card that is itself the collapsible container).
+      pre.style.display = codeInitiallyOpen ? "" : "none";
       pre.style.margin = "0";
       pre.style.borderRadius = "0";
       pre.style.borderTop = "1px solid hsl(var(--border) / 0.6)";
+      if (codeInitiallyOpen) chevron.style.transform = "rotate(90deg)";
 
       toggle.addEventListener("click", () => {
         const isHidden = pre.style.display === "none";
@@ -416,7 +425,7 @@ export function StudyPlanMarkdownContent({
         }
       }
     });
-  }, [content, variant, enhanceLeetCode]);
+  }, [content, variant, enhanceLeetCode, codeInitiallyOpen]);
 
   return (
     <div

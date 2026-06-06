@@ -97,7 +97,8 @@ Sum of Subarray Ranges (LC 2104) = (sum of subarray maxima) − (sum of subarray
     {
       id: "bitwise",
       title: "Pattern 3: Per-bit contribution",
-      body: `For sums of **XOR / AND / OR** or Hamming distances over all pairs or subsets, the bits are independent: bit $b$ contributes $2^b$ times the number of structures whose aggregate has bit $b$ set. Solve one bit at a time, then weight by $2^b$.
+      body: `:::example Total Hamming Distance (LC 477)
+For sums of **XOR / AND / OR** or Hamming distances over all pairs or subsets, the bits are independent: bit $b$ contributes $2^b$ times the number of structures whose aggregate has bit $b$ set. Solve one bit at a time, then weight by $2^b$.
 
 \`\`\`cpp
 // Total Hamming Distance between all pairs (LC 477)
@@ -111,7 +112,9 @@ int totalHammingDistance(vector<int>& a) {
   return total;
 }
 \`\`\`
+:::
 
+:::example Sum of All Subset XOR Totals (LC 1863)
 A bit set in *any* element appears in exactly half of the $2^n$ subsets, so Sum of All Subset XOR Totals (LC 1863) needs no enumeration at all:
 
 \`\`\`cpp
@@ -122,6 +125,7 @@ int subsetXORSum(vector<int>& a) {
   return orAll << (a.size() - 1);  // each present bit is set in 2^(n-1) subsets
 }
 \`\`\`
+:::
 
 Each present bit lands in $2^{n-1}$ of the subsets, so the answer is simply the OR of all values shifted left by $n - 1$. The same per-bit split powers Count Beautiful Subarrays via prefix XOR (LC 2588) and OR/AND-over-all-subarrays totals.`,
     },
@@ -149,7 +153,8 @@ Sum of Absolute Differences in a Sorted Array (LC 1685) reports this contributio
     {
       id: "subsequence",
       title: "Pattern 5: Subsequence contribution (powers of two)",
-      body: `For sums over all $2^n$ **subsequences** where $f$ is a max, min, or width, sort and count with powers of two: the element at rank $i$ is the **max** of every subsequence chosen from the $i$ smaller elements ($2^i$ of them) and the **min** of $2^{n-1-i}$ subsequences.
+      body: `:::example Sum of Subsequence Widths (LC 891)
+For sums over all $2^n$ **subsequences** where $f$ is a max, min, or width, sort and count with powers of two: the element at rank $i$ is the **max** of every subsequence chosen from the $i$ smaller elements ($2^i$ of them) and the **min** of $2^{n-1-i}$ subsequences.
 
 \`\`\`cpp
 // Sum of widths (max - min) over all subsequences (LC 891), mod 1e9+7
@@ -168,6 +173,7 @@ int sumSubseqWidths(vector<int>& a) {
   return (int)((total % MOD + MOD) % MOD);
 }
 \`\`\`
+:::
 
 So each $a_i$ carries a net coefficient of $2^i - 2^{n-1-i}$. The same $2^k$ weighting solves Power of Heroes (LC 2681), where each value is the max of some subsequences and the min of others, contributing $\\max \\cdot \\min^2$.`,
     },

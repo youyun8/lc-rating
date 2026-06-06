@@ -223,6 +223,9 @@ Min Cost to Connect All Points (LC 1584) is a complete graph MST: build edges fr
       title: "Cycle detection & bipartite check",
       body: `**Undirected cycle**: a DFS that reaches a visited node which is not the parent (or a DSU union that fails). **Directed cycle**: DFS with three colors (white/gray/black) — an edge to a gray node is a back edge.
 
+:::example Is Graph Bipartite? (LC 785)
+The 2-coloring routine below applies this directly: BFS each component, color neighbours with the opposite color, and report failure on a same-color edge.
+
 \`\`\`cpp
 // Bipartite check via BFS 2-coloring (LC 785)
 bool isBipartite(vector<vector<int>>& g) {
@@ -250,13 +253,15 @@ bool isBipartite(vector<vector<int>>& g) {
   return true;
 }
 \`\`\`
+:::
 
 For strongly connected components on directed graphs, learn Tarjan's or Kosaraju's algorithm (advanced).`,
     },
     {
       id: "tarjan",
       title: "Tarjan: bridges, articulation points & SCC",
-      body: `A single DFS that tracks each node's discovery time and \`low\` value (the earliest reachable ancestor) finds **bridges** and **articulation points**. An edge \`u→v\` is a bridge when \`low[v] > disc[u]\` (no back edge skips it).
+      body: `:::example Critical Connections in a Network (LC 1192)
+A single DFS that tracks each node's discovery time and \`low\` value (the earliest reachable ancestor) finds **bridges** and **articulation points**. An edge \`u→v\` is a bridge when \`low[v] > disc[u]\` (no back edge skips it).
 
 \`\`\`cpp
 // Critical Connections / bridges (LC 1192) via Tarjan low-link
@@ -293,13 +298,15 @@ vector<vector<int>> criticalConnections(int n, vector<vector<int>>& conns) {
   return bridges;
 }
 \`\`\`
+:::
 
 **Strongly connected components (SCC).** Tarjan's (one DFS with a stack) or Kosaraju's (two DFS passes) partition a directed graph into SCCs in \`O(V + E)\`. Condensing each SCC to a single node yields a DAG — the standard preprocessing for "minimum nodes to reach all" and 2-SAT.`,
     },
     {
       id: "euler-dag",
       title: "Eulerian paths & DAG dynamic programming",
-      body: `**Eulerian path (Hierholzer).** Walk edges, deferring a node onto the output only when it has no unused edges; reverse at the end. The lexicographically smallest itinerary uses a \`multiset\` of destinations.
+      body: `:::example Reconstruct Itinerary (LC 332)
+**Eulerian path (Hierholzer).** Walk edges, deferring a node onto the output only when it has no unused edges; reverse at the end. The lexicographically smallest itinerary uses a \`multiset\` of destinations.
 
 \`\`\`cpp
 // Reconstruct Itinerary (LC 332): Hierholzer Eulerian path
@@ -327,6 +334,7 @@ vector<string> findItinerary(vector<vector<string>>& tickets) {
   return route;
 }
 \`\`\`
+:::
 
 **DAG longest/shortest path via topological order.** Once nodes are topologically sorted, relax edges in that order in \`O(V + E)\` — no Dijkstra needed. This is the engine behind Longest Increasing Path in a Matrix (LC 329, memoized DFS = DP on the implicit DAG) and Parallel Courses (LC 1136).`,
     },

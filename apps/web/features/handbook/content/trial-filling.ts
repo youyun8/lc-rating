@@ -34,7 +34,8 @@ Related: [Strings](/handbook/strings), [Backtracking](/handbook/backtracking) (t
     {
       id: "bitwise",
       title: "Filling bits from high to low",
-      body: `Because a higher bit outweighs all lower bits combined, decide bits from the most significant down. To **maximize** a value, greedily try to set each bit and keep it only if the target is still reachable.
+      body: `:::example Maximum XOR of Two Numbers (LC 421)
+Because a higher bit outweighs all lower bits combined, decide bits from the most significant down. To **maximize** a value, greedily try to set each bit and keep it only if the target is still reachable.
 
 \`\`\`cpp
 // Maximum XOR of two numbers, built bit by bit (LC 421)
@@ -55,13 +56,15 @@ int findMaximumXOR(vector<int>& a) {
   return best;
 }
 \`\`\`
+:::
 
 The same high-to-low discipline drives Minimize XOR (LC 2429) — place the required set bits on the highest positions of \`x\` to match \`num1\` — and Minimum Array End (LC 3133), which fills the free (zero) bits of the running value to keep it minimal.`,
     },
     {
       id: "lexicographic",
       title: "Filling characters left to right",
-      body: `To produce the **lexicographically smallest** string, walk left to right and, at each position, place the **smallest** character such that the remaining positions can still be completed. The feasibility check is what separates trial filling from a naive greedy that paints itself into a corner.
+      body: `:::example Smallest String With a Given Numeric Value (LC 1663)
+To produce the **lexicographically smallest** string, walk left to right and, at each position, place the **smallest** character such that the remaining positions can still be completed. The feasibility check is what separates trial filling from a naive greedy that paints itself into a corner.
 
 \`\`\`cpp
 // Smallest string of length n with numeric value k (LC 1663)
@@ -82,13 +85,15 @@ string getSmallestString(int n, int k) {
   return s;
 }
 \`\`\`
+:::
 
 The explicit $1 \\cdot \\text{rest} \\le \\text{remain} \\le 26 \\cdot \\text{rest}$ bound is the "can I finish?" oracle. Construct Smallest Number From DI String (LC 2375) and Numbers With Same Consecutive Differences (LC 967) use the same place-then-verify loop over digits.`,
     },
     {
       id: "kth-order",
       title: "Filling to find the k-th element",
-      body: `When the answer is "the **k-th** value in lexicographic (or some structured) order", trial-fill the answer as a path down an **implicit trie**: at each node, *count* how many leaves live under each child; if a whole subtree has $\\le k$ leaves, skip it (move to the next sibling), otherwise descend into it (fix that digit) and recurse.
+      body: `:::example K-th Smallest in Lexicographical Order (LC 440)
+When the answer is "the **k-th** value in lexicographic (or some structured) order", trial-fill the answer as a path down an **implicit trie**: at each node, *count* how many leaves live under each child; if a whole subtree has $\\le k$ leaves, skip it (move to the next sibling), otherwise descend into it (fix that digit) and recurse.
 
 \`\`\`cpp
 // K-th smallest in lexicographical order (LC 440): descend the 10-ary trie
@@ -117,6 +122,7 @@ int findKthNumber(int n, int k) {
   return (int)cur;
 }
 \`\`\`
+:::
 
 "Skip the subtree or descend into it" is trial filling with a *counting* feasibility test, the same engine behind digit-by-digit ranking problems.`,
     },

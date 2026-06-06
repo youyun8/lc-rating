@@ -32,7 +32,8 @@ Going further: [String Algorithms II](/handbook/string-algorithms-ii) (Manacher,
     {
       id: "twopointer",
       title: "Two pointers & frequency counting",
-      body: `Symmetric scanning solves palindromes, reversals, and comparisons; a 26-element array handles letter frequency in \`O(1)\` per step.
+      body: `:::example Valid Palindrome (LC 125)
+Symmetric scanning solves palindromes, reversals, and comparisons; a 26-element array handles letter frequency in \`O(1)\` per step.
 
 \`\`\`cpp
 // Valid palindrome ignoring non-alphanumerics (LC 125)
@@ -54,7 +55,9 @@ bool isPalindrome(string s) {
   return true;
 }
 \`\`\`
+:::
 
+:::example Group Anagrams (LC 49)
 \`\`\`cpp
 // Group anagrams (LC 49): signature = sorted letters (or a 26-count key)
 vector<vector<string>> groupAnagrams(vector<string>& strs) {
@@ -70,12 +73,14 @@ vector<vector<string>> groupAnagrams(vector<string>& strs) {
   }
   return res;
 }
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "palindrome",
       title: "Palindrome techniques",
-      body: `**Expand around center**: every palindrome has a center (a char or a gap); expand outward. \`O(n^2)\` but simple and usually enough.
+      body: `:::example Longest Palindromic Substring (LC 5)
+**Expand around center**: every palindrome has a center (a char or a gap); expand outward. \`O(n^2)\` but simple and usually enough.
 
 \`\`\`cpp
 // Longest palindromic substring (LC 5) via center expansion
@@ -98,6 +103,7 @@ string longestPalindrome(string s) {
   return s.substr(start, len);
 }
 \`\`\`
+:::
 
 For \`O(n)\` longest palindrome use **Manacher's algorithm** (advanced). Palindromic DP \`dp[i][j]\` (is \`s[i..j]\` a palindrome) powers Palindromic Substrings (LC 647) and Partitioning (LC 131/132).`,
     },

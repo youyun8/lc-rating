@@ -72,7 +72,8 @@ Derive top-down first; convert to bottom-up when you need speed or space.`,
     {
       id: "linear",
       title: "1D / linear DP",
-      body: `When the state is a single index and each \`dp[i]\` depends on a few previous values.
+      body: `:::example House Robber (LC 198)
+When the state is a single index and each \`dp[i]\` depends on a few previous values.
 
 \`\`\`cpp
 // House Robber (LC 198): rob[i] = max(skip this, rob this + dp[i-2])
@@ -86,6 +87,7 @@ int rob(vector<int>& a) {
   return max(take, skip);
 }
 \`\`\`
+:::
 
 Climbing Stairs (LC 70), Maximum Subarray / Kadane (LC 53), Decode Ways (LC 91), Word Break (LC 139), and Jump-style DP all fit this shape.`,
     },
@@ -107,6 +109,7 @@ int knapsack01(vector<int>& wt, vector<int>& val, int W) {
 }
 \`\`\`
 
+:::example Coin Change (LC 322)
 **Unbounded knapsack**: items reusable → iterate capacity **upward**.
 
 \`\`\`cpp
@@ -123,13 +126,15 @@ int coinChange(vector<int>& coins, int amount) {
   return dp[amount] >= INF ? -1 : dp[amount];
 }
 \`\`\`
+:::
 
 **Subset-sum / partition** (LC 416) is a boolean 0/1 knapsack: can we hit \`sum / 2\`? Coin Change II (LC 518) counts combinations (loop coins outer to avoid counting orderings).`,
     },
     {
       id: "lis",
       title: "Longest increasing subsequence",
-      body: `The \`O(n^2)\` DP is intuitive; the \`O(n log n)\` patience-sorting version is the one to memorize.
+      body: `:::example Longest Increasing Subsequence (LC 300)
+The \`O(n^2)\` DP is intuitive; the \`O(n log n)\` patience-sorting version is the one to memorize.
 
 \`\`\`cpp
 // LIS length in O(n log n) (LC 300): tails[k] = smallest tail of an LIS of
@@ -148,13 +153,15 @@ int lengthOfLIS(vector<int>& a) {
   return tails.size();
 }
 \`\`\`
+:::
 
 For non-decreasing subsequences use \`upper_bound\`. Russian Doll Envelopes (LC 354) sorts then runs LIS; Number of LIS (LC 673) augments the \`O(n^2)\` DP with counts.`,
     },
     {
       id: "twoseq",
       title: "Two-sequence DP (LCS, edit distance)",
-      body: `State \`dp[i][j]\` over prefixes of two strings; the transition compares \`a[i - 1]\` and \`b[j - 1]\`.
+      body: `:::example Longest Common Subsequence (LC 1143)
+State \`dp[i][j]\` over prefixes of two strings; the transition compares \`a[i - 1]\` and \`b[j - 1]\`.
 
 \`\`\`cpp
 // Longest Common Subsequence (LC 1143)
@@ -170,7 +177,9 @@ int lcs(string a, string b) {
   return dp[m][n];
 }
 \`\`\`
+:::
 
+:::example Edit Distance (LC 72)
 \`\`\`cpp
 // Edit Distance (LC 72): insert/delete/replace
 int minDistance(string a, string b) {
@@ -191,12 +200,14 @@ int minDistance(string a, string b) {
   }
   return dp[m][n];
 }
-\`\`\``,
+\`\`\`
+:::`,
     },
     {
       id: "interval",
       title: "Interval DP",
-      body: `State over a sub-range \`dp[l][r]\`; iterate by **increasing length** and split at an inner point \`k\`.
+      body: `:::example Burst Balloons (LC 312)
+State over a sub-range \`dp[l][r]\`; iterate by **increasing length** and split at an inner point \`k\`.
 
 \`\`\`cpp
 // Burst Balloons (LC 312): dp[l][r] = max coins bursting open interval (l, r)
@@ -219,13 +230,15 @@ int maxCoins(vector<int> nums) {
   return dp[1][n];
 }
 \`\`\`
+:::
 
 Matrix Chain order, Minimum Cost to Cut a Stick (LC 1547), and Stone Game variants are interval DP.`,
     },
     {
       id: "statemachine",
       title: "State-machine DP (stocks)",
-      body: `Model the problem as states (holding / not holding / cooldown) with transitions per step. The stock family is the canonical example.
+      body: `:::example Best Time to Buy and Sell Stock with Cooldown (LC 309)
+Model the problem as states (holding / not holding / cooldown) with transitions per step. The stock family is the canonical example.
 
 \`\`\`cpp
 // Best Time to Buy/Sell with cooldown (LC 309)
@@ -240,6 +253,7 @@ int maxProfit(vector<int>& p) {
   return max(sold, rest);
 }
 \`\`\`
+:::
 
 With at most \`k\` transactions (LC 188), use \`dp[k][holding]\` arrays.`,
     },
@@ -312,6 +326,7 @@ Used for Numbers With Repeated Digits (LC 1012), Count Numbers with Unique Digit
       title: "Transition optimization (monotonic queue, CHT, D&C, Knuth)",
       body: `When a DP is correct but too slow, the *transition* — not the state — is usually the bottleneck. The four standard accelerators:
 
+:::example Jump Game VI (LC 1696)
 **Monotonic-queue optimization.** When \`dp[i] = best(dp[i - k..i - 1]) + c[i]\` (a sliding-window extreme), a monotonic deque turns the \`O(nk)\` scan into \`O(n)\`.
 
 \`\`\`cpp
@@ -335,6 +350,7 @@ int maxResult(vector<int>& a, int k) {
   return dp[n - 1];
 }
 \`\`\`
+:::
 
 **Convex Hull Trick (CHT).** Transitions of the form \`dp[i] = min_j (dp[j] + b[j]·a[i])\` are linear functions of \`a[i]\`; maintain a lower/upper hull of lines for \`O(1)\` or \`O(log n)\` queries — amortizing \`O(n^2)\` down to \`O(n log n)\` or \`O(n)\`.
 
@@ -400,7 +416,8 @@ for (int b = 0; b < n; b++) {
     {
       id: "game-probability",
       title: "Game theory & probability DP",
-      body: `**Minimax / game DP.** Two-player optimal-play problems store the score *margin* for the player to move; each player maximizes their own outcome.
+      body: `:::example Predict the Winner (LC 486)
+**Minimax / game DP.** Two-player optimal-play problems store the score *margin* for the player to move; each player maximizes their own outcome.
 
 \`\`\`cpp
 // Predict the Winner (LC 486): dp[i][j] = best margin on a[i..j] for the mover
@@ -420,6 +437,7 @@ bool predictTheWinner(vector<int>& a) {
   return dp[0][n - 1] >= 0;
 }
 \`\`\`
+:::
 
 Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for impartial games) follow the same minimax skeleton.
 
