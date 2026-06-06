@@ -169,10 +169,14 @@ function complexityToKatex(text: string) {
       // Accept every spelling of the radicand — `sqrt(n)`, `sqrt{n}`, and the
       // bare `sqrt n` (the space-separated form used alongside `O(n log n)`).
       // Without the bare case, KaTeX rendered the literal letters s·q·r·t·n,
-      // i.e. the "O(sqrtn)" glitch.
-      .replace(/\bsqrt\s*\(\s*([^()]*?)\s*\)/g, "\\sqrt{$1}")
-      .replace(/\bsqrt\s*\{\s*([^{}]*?)\s*\}/g, "\\sqrt{$1}")
-      .replace(/\bsqrt\s+([A-Za-z0-9]+)/g, "\\sqrt{$1}")
+      // i.e. the "O(sqrtn)" glitch. The `(?<!\\)` guard stops a later rule from
+      // re-matching an already-converted `\sqrt{…}` (the paren form produces
+      // `\sqrt{n}`, which the brace rule would otherwise turn into `\\sqrt{n}` —
+      // KaTeX reads `\\` as a line break and renders the radicand as literal
+      // letters, the "O(⏎sqrtn)" glitch).
+      .replace(/(?<!\\)\bsqrt\s*\(\s*([^()]*?)\s*\)/g, "\\sqrt{$1}")
+      .replace(/(?<!\\)\bsqrt\s*\{\s*([^{}]*?)\s*\}/g, "\\sqrt{$1}")
+      .replace(/(?<!\\)\bsqrt\s+([A-Za-z0-9]+)/g, "\\sqrt{$1}")
       .replace(/\blog\b/g, "\\log")
       // Map bare min/max operators to their LaTeX commands so KaTeX renders
       // them upright instead of as the italic letters m\u00b7i\u00b7n / m\u00b7a\u00b7x (the same
