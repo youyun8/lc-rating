@@ -104,15 +104,15 @@ ListNode* reverseKGroup(ListNode* head, int k) {
   dummy.next = head;
   ListNode* groupPrev = &dummy;
   while (true) {
-    ListNode* kth = groupPrev;            // walk k nodes ahead
-    for (int i = 0; i < k && kth; i++) {
+    ListNode* kth = groupPrev;  // walk k nodes ahead
+    for (int i = 0; i < k && kth; ++i) {
       kth = kth->next;
     }
     if (!kth) {
-      break;                              // fewer than k left -> done
+      break;  // fewer than k left -> done
     }
-    ListNode* groupNext = kth->next;      // first node of the next group
-    ListNode* prev = groupNext;           // reverse [groupPrev->next .. kth]
+    ListNode* groupNext = kth->next;  // first node of the next group
+    ListNode* prev = groupNext;       // reverse [groupPrev->next .. kth]
     ListNode* cur = groupPrev->next;
     while (cur != groupNext) {
       ListNode* nxt = cur->next;
@@ -121,7 +121,7 @@ ListNode* reverseKGroup(ListNode* head, int k) {
       cur = nxt;
     }
     ListNode* newGroupPrev = groupPrev->next;  // old head is now the tail
-    groupPrev->next = kth;                      // wire prev group to new head
+    groupPrev->next = kth;                     // wire prev group to new head
     groupPrev = newGroupPrev;
   }
   return dummy.next;
@@ -162,16 +162,16 @@ ListNode* detectCycle(ListNode* head) {
   while (fast && fast->next) {
     slow = slow->next;
     fast = fast->next->next;
-    if (slow == fast) {            // cycle confirmed
+    if (slow == fast) {  // cycle confirmed
       ListNode* p = head;
-      while (p != slow) {          // walk in lockstep to the entrance
+      while (p != slow) {  // walk in lockstep to the entrance
         p = p->next;
         slow = slow->next;
       }
       return p;
     }
   }
-  return nullptr;                  // fast hit the end -> no cycle
+  return nullptr;  // fast hit the end -> no cycle
 }
 \`\`\`
 :::
@@ -223,10 +223,10 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
   ListNode dummy(0);
   dummy.next = head;
   ListNode *lead = &dummy, *trail = &dummy;
-  for (int i = 0; i < n; i++) {
-    lead = lead->next;     // open a gap of n nodes
+  for (int i = 0; i < n; ++i) {
+    lead = lead->next;  // open a gap of n nodes
   }
-  while (lead->next) {     // slide both to the end
+  while (lead->next) {  // slide both to the end
     lead = lead->next;
     trail = trail->next;
   }
@@ -245,12 +245,12 @@ void reorderList(ListNode* head) {
   if (!head || !head->next) {
     return;
   }
-  ListNode *slow = head, *fast = head;   // find middle (first of two middles)
+  ListNode *slow = head, *fast = head;  // find middle (first of two middles)
   while (fast->next && fast->next->next) {
     slow = slow->next;
     fast = fast->next->next;
   }
-  ListNode* second = slow->next;         // reverse the second half
+  ListNode* second = slow->next;  // reverse the second half
   slow->next = nullptr;
   ListNode* prev = nullptr;
   while (second) {
@@ -259,7 +259,7 @@ void reorderList(ListNode* head) {
     prev = second;
     second = nxt;
   }
-  ListNode* first = head;                // interleave the two halves
+  ListNode* first = head;  // interleave the two halves
   while (prev) {
     ListNode* f = first->next;
     ListNode* s = prev->next;
@@ -289,7 +289,7 @@ Node* copyRandomList(Node* head) {
   for (Node* p = head; p; p = p->next->next) {  // wire random on the copies
     p->next->random = p->random ? p->random->next : nullptr;
   }
-  Node* res = head->next;                        // unzip the interleaved lists
+  Node* res = head->next;  // unzip the interleaved lists
   for (Node* p = head; p; p = p->next) {
     Node* c = p->next;
     p->next = c->next;
@@ -316,6 +316,11 @@ The same toolkit handles **Add Two Numbers** (LC 2, digit-by-digit with carry), 
 | Two-pass / offset | delete or find by position | gap of \`n\` between two pointers | [Palindrome Linked List](https://leetcode.cn/problems/palindrome-linked-list) |`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced linked-list questions mix pointer surgery with another invariant: reverse a bounded segment, splice nodes across lists, or pair a list with a hashmap for O(1) lookup. Draw prev/current/next ownership before writing assignments.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Operation | Time | Space | Notes |
@@ -332,21 +337,14 @@ The same toolkit handles **Add Two Numbers** (LC 2, digit-by-digit with carry), 
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 206 | [Reverse Linked List](https://leetcode.cn/problems/reverse-linked-list) | reversal |
-| 21 | [Merge Two Sorted Lists](https://leetcode.cn/problems/merge-two-sorted-lists) | merging |
-| 19 | [Remove Nth Node From End of List](https://leetcode.cn/problems/remove-nth-node-from-end-of-list) | offset two pointers |
-| 141 | [Linked List Cycle](https://leetcode.cn/problems/linked-list-cycle) | fast & slow |
-| 142 | [Linked List Cycle II](https://leetcode.cn/problems/linked-list-cycle-ii) | fast & slow |
-| 876 | [Middle of the Linked List](https://leetcode.cn/problems/middle-of-the-linked-list) | fast & slow |
-| 234 | [Palindrome Linked List](https://leetcode.cn/problems/palindrome-linked-list) | middle + reverse |
-| 143 | [Reorder List](https://leetcode.cn/problems/reorder-list) | split + reverse + weave |
-| 25 | [Reverse Nodes in k-Group](https://leetcode.cn/problems/reverse-nodes-in-k-group) | reversal |
-| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | heap merge |
-| 2 | [Add Two Numbers](https://leetcode.cn/problems/add-two-numbers) | digit carry |
-| 138 | [Copy List with Random Pointer](https://leetcode.cn/problems/copy-list-with-random-pointer) | interleave clone |
-| 160 | [Intersection of Two Linked Lists](https://leetcode.cn/problems/intersection-of-two-linked-lists) | two pointers |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3507 | [Minimum Pair Removal to Sort Array I](https://leetcode.cn/problems/minimum-pair-removal-to-sort-array-i) | 1349 | linked list + heap simulation |
+| 3510 | [Minimum Pair Removal to Sort Array II](https://leetcode.cn/problems/minimum-pair-removal-to-sort-array-ii) | 2608 | linked list + ordered set |
+| 2487 | [Remove Nodes from Linked List](https://leetcode.cn/problems/remove-nodes-from-linked-list) | 1455 | monotonic stack over list |
+| 2816 | [Double a Number Represented as a Linked List](https://leetcode.cn/problems/double-a-number-represented-as-a-linked-list) | 1394 | carry propagation |
+| 25 | [Reverse Nodes in k-Group](https://leetcode.cn/problems/reverse-nodes-in-k-group) | - | reverse groups classic |
+| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | - | heap merge classic |`,
     },
     {
       id: "pitfalls",

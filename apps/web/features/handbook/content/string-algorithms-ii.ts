@@ -63,11 +63,11 @@ struct Manacher {
     even.assign(n, 0);
 
     // [l, r] is the rightmost known palindrome window (odd-center pass).
-    for (int i = 0, l = 0, r = -1; i < n; i++) {
+    for (int i = 0, l = 0, r = -1; i < n; ++i) {
       // Use mirror symmetry inside the window, or start fresh from radius 1.
       int k = (i > r) ? 1 : min(odd[l + r - i], r - i + 1);
       while (0 <= i - k && i + k < n && s[i - k] == s[i + k]) {
-        k++;  // expand while characters match
+        ++k;  // expand while characters match
       }
       odd[i] = k--;
       if (i + k > r) {
@@ -77,10 +77,10 @@ struct Manacher {
     }
 
     // Even-length pass: center sits between index i-1 and i.
-    for (int i = 0, l = 0, r = -1; i < n; i++) {
+    for (int i = 0, l = 0, r = -1; i < n; ++i) {
       int k = (i > r) ? 0 : min(even[l + r - i + 1], r - i + 1);
       while (0 <= i - k - 1 && i + k < n && s[i - k - 1] == s[i + k]) {
-        k++;
+        ++k;
       }
       even[i] = k--;
       if (i + k > r) {
@@ -115,9 +115,7 @@ struct AhoCorasick {
     int next[26];
     int link = 0;
     vector<int> out;
-    Node() {
-      fill(begin(next), end(next), -1);
-    }
+    Node() { fill(begin(next), end(next), -1); }
   };
 
   vector<Node> trie{Node()};
@@ -137,7 +135,7 @@ struct AhoCorasick {
 
   void build() {
     queue<int> q;
-    for (int c = 0; c < 26; c++) {
+    for (int c = 0; c < 26; ++c) {
       int v = trie[0].next[c];
       if (v == -1) {
         trie[0].next[c] = 0;
@@ -150,7 +148,7 @@ struct AhoCorasick {
     while (!q.empty()) {
       int u = q.front();
       q.pop();
-      for (int c = 0; c < 26; c++) {
+      for (int c = 0; c < 26; ++c) {
         int v = trie[u].next[c];
         if (v == -1) {
           trie[u].next[c] = trie[trie[u].link].next[c];
@@ -168,7 +166,7 @@ struct AhoCorasick {
   vector<pair<int, int>> search(const string& text) {
     vector<pair<int, int>> matches;  // {ending index, pattern id}
     int u = 0;
-    for (int i = 0; i < (int)text.size(); i++) {
+    for (int i = 0; i < (int)text.size(); ++i) {
       u = trie[u].next[text[i] - 'a'];
       for (int id : trie[u].out) {
         matches.push_back({i, id});
@@ -186,12 +184,13 @@ struct AhoCorasick {
 
 \`\`\`cpp
 // Suffix Array + LCP Array construction in O(n log^2 n) and O(n).
-// suffixArray: returns sa[] where sa[i] is the start of the i-th suffix in sorted order.
+// suffixArray: returns sa[] where sa[i] is the start of the i-th suffix in
+// sorted order.
 vector<int> suffixArray(const string& s) {
   int n = s.size();
   vector<int> sa(n), rnk(n), tmp(n);
   iota(sa.begin(), sa.end(), 0);  // initialize sa as [0, 1, ..., n-1]
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     rnk[i] = s[i];  // initial rank is the character value
   }
 
@@ -209,7 +208,7 @@ vector<int> suffixArray(const string& s) {
     sort(sa.begin(), sa.end(), cmp);
     // Recompute ranks: equal pairs get the same rank.
     tmp[sa[0]] = 0;
-    for (int i = 1; i < n; i++) {
+    for (int i = 1; i < n; ++i) {
       tmp[sa[i]] = tmp[sa[i - 1]] + cmp(sa[i - 1], sa[i]);
     }
     rnk = tmp;
@@ -221,22 +220,23 @@ vector<int> suffixArray(const string& s) {
   return sa;
 }
 
-// lcpArray: Kasai's algorithm - builds LCP in O(n) using the inverse suffix array.
+// lcpArray: Kasai's algorithm - builds LCP in O(n) using the inverse suffix
+// array.
 vector<int> lcpArray(const string& s, const vector<int>& sa) {
   int n = s.size();
   vector<int> rank(n), lcp(max(0, n - 1));
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     rank[sa[i]] = i;  // inverse of sa
   }
   int h = 0;  // carries over: lcp can only decrease by 1 between iterations
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     if (rank[i] == n - 1) {
       h = 0;  // last suffix has no successor; reset
       continue;
     }
     int j = sa[rank[i] + 1];  // next suffix in sorted order
     while (i + h < n && j + h < n && s[i + h] == s[j + h]) {
-      h++;  // extend common prefix
+      ++h;  // extend common prefix
     }
     lcp[rank[i]] = h;
     if (h) {
@@ -306,10 +306,11 @@ struct SuffixAutomaton {
     last = cur;
   }
 
-  // Each non-root state v contributes (len[v] - len[link[v]]) distinct substrings.
+  // Each non-root state v contributes (len[v] - len[link[v]]) distinct
+  // substrings.
   long long countDistinctSubstrings() const {
     long long ans = 0;
-    for (int v = 1; v < (int)st.size(); v++) {
+    for (int v = 1; v < (int)st.size(); ++v) {
       ans += st[v].len - st[st[v].link].len;
     }
     return ans;
@@ -338,9 +339,7 @@ struct PalindromicTree {
     int link = 0;
     int len = 0;
     int occ = 0;
-    Node(int len = 0) : len(len) {
-      fill(begin(next), end(next), 0);
-    }
+    Node(int len = 0) : len(len) { fill(begin(next), end(next), 0); }
   };
 
   vector<Node> tree;
@@ -386,9 +385,7 @@ struct PalindromicTree {
     tree[suff].occ++;
   }
 
-  int distinctPalindromes() const {
-    return (int)tree.size() - 2;
-  }
+  int distinctPalindromes() const { return (int)tree.size() - 2; }
 };
 \`\`\``,
     },
@@ -399,16 +396,19 @@ struct PalindromicTree {
 
 \`\`\`cpp
 // Booth's algorithm: find the lexicographically smallest rotation of s in O(n).
-// Doubling the string avoids explicit wraparound. i and j are candidate rotation starts.
+// Doubling the string avoids explicit wraparound. i and j are candidate
+// rotation starts.
 int minRotationIndex(const string& s) {
   string t = s + s;  // concatenate to handle wrap-around comparisons
   int n = s.size();
-  int i = 0, j = 1, k = 0;  // i, j: current best candidates; k: matched prefix length
+  int i = 0, j = 1,
+      k = 0;  // i, j: current best candidates; k: matched prefix length
   while (i < n && j < n && k < n) {
     if (t[i + k] == t[j + k]) {
-      k++;  // characters agree so far; extend the comparison
+      ++k;  // characters agree so far; extend the comparison
     } else if (t[i + k] > t[j + k]) {
-      i = i + k + 1;  // rotation i is larger; discard it and everything in between
+      i = i + k +
+          1;  // rotation i is larger; discard it and everything in between
       if (i <= j) {
         i = j + 1;  // i must stay ahead of j
       }
@@ -421,14 +421,21 @@ int minRotationIndex(const string& s) {
       k = 0;
     }
   }
-  return min(i, j);  // the surviving candidate is the lexicographically smallest start
+  return min(
+      i, j);  // the surviving candidate is the lexicographically smallest start
 }
 
 string minRotation(string s) {
   int idx = minRotationIndex(s);
-  return s.substr(idx) + s.substr(0, idx);  // rotate by splicing at the optimal index
+  return s.substr(idx) +
+         s.substr(0, idx);  // rotate by splicing at the optimal index
 }
 \`\`\``,
+    },
+    {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced string algorithms trade preprocessing for fast repeated matching. Use Z/KMP for one pattern, rolling hash with collision policy for substring equality, Aho-Corasick for many patterns, and suffix structures for global substring order.`,
     },
     {
       id: "complexity",
@@ -463,26 +470,14 @@ string minRotation(string s) {
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 5 | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) | Manacher |
-| 647 | [Palindromic Substrings](https://leetcode.cn/problems/palindromic-substrings) | Manacher radii |
-| 214 | [Shortest Palindrome](https://leetcode.cn/problems/shortest-palindrome) | prefix function or Manacher |
-| 1032 | [Stream of Characters](https://leetcode.cn/problems/stream-of-characters) | Aho-Corasick |
-| 718 | [Maximum Length of Repeated Subarray](https://leetcode.cn/problems/maximum-length-of-repeated-subarray) | longest common substring |
-| 1923 | [Longest Common Subpath](https://leetcode.cn/problems/longest-common-subpath) | suffix automaton or hashing |
-| 899 | [Orderly Queue](https://leetcode.cn/problems/orderly-queue) | minimum rotation |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3474 | [Lexicographically Smallest Generated String](https://leetcode.cn/problems/lexicographically-smallest-generated-string) | 2605 | string matching + greedy |
-| 3455 | [Shortest Matching Substring](https://leetcode.cn/problems/shortest-matching-substring) | 2303 | KMP / Z-function |
-| 3303 | [Find the Occurrence of First Almost Equal Substring](https://leetcode.cn/problems/find-the-occurrence-of-first-almost-equal-substring) | 2509 | Z-function |
-| 3292 | [Minimum Number of Valid Strings to Form Target II](https://leetcode.cn/problems/minimum-number-of-valid-strings-to-form-target-ii) | 2662 | Aho-Corasick + DP |
-| 3213 | [Construct String with Minimum Cost](https://leetcode.cn/problems/construct-string-with-minimum-cost) | 2171 | Aho-Corasick |
-| 3045 | [Count Prefix and Suffix Pairs II](https://leetcode.cn/problems/count-prefix-and-suffix-pairs-ii) | 2328 | Z-function + Trie |`,
+| 3455 | [Shortest Matching Substring](https://leetcode.cn/problems/shortest-matching-substring) | 2303 | string matching |
+| 3529 | [Count Cells in Overlapping Horizontal and Vertical Substrings](https://leetcode.cn/problems/count-cells-in-overlapping-horizontal-and-vertical-substrings) | 2105 | rolling hash / overlap |
+| 2223 | [Sum of Scores of Built Strings](https://leetcode.cn/problems/sum-of-scores-of-built-strings) | 2220 | Z-function |
+| 3031 | [Minimum Time to Revert Word to Initial State II](https://leetcode.cn/problems/minimum-time-to-revert-word-to-initial-state-ii) | 2278 | Z-function / periodicity |
+| 1392 | [Longest Happy Prefix](https://leetcode.cn/problems/longest-happy-prefix) | 1876 | KMP prefix |
+| 1044 | [Longest Duplicate Substring](https://leetcode.cn/problems/longest-duplicate-substring) | 2429 | rolling hash + binary search |`,
     },
     {
       id: "pitfalls",
@@ -496,13 +491,9 @@ string minRotation(string s) {
 \`\`\`cpp
 // Alphabet adapter for lowercase strings. Replace with a map for Unicode or
 // large alphabets.
-int charId(char c) {
-  return c - 'a';
-}
+int charId(char c) { return c - 'a'; }
 
-bool validLowercase(char c) {
-  return 'a' <= c && c <= 'z';
-}
+bool validLowercase(char c) { return 'a' <= c && c <= 'z'; }
 \`\`\``,
     },
   ],

@@ -150,5 +150,24 @@ Tie rollback to objective thresholds, not feelings: p99 regression, timeout incr
 
 For each prompt, practice a five-minute answer first. Then expand into sizing, bottlenecks, observability, and rollout details.`,
     },
+    {
+      id: "advanced-techniques",
+      title: "Advanced interview techniques",
+      body: `Advanced performance design answers separate model cost from systems cost. Carry a latency budget through each stage, define the fallback behavior for every timeout, and explain how rollout telemetry proves whether a change improved throughput, tail latency, and quality guardrails together.`,
+    },
+    {
+      id: "problems",
+      title: "LeetCode problems",
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3709 | [Design Exam Scores Tracker](https://leetcode.cn/problems/design-exam-scores-tracker) | 1648 | score tracking / prefix index |
+| 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | router / bounded queue |
+| 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | task manager / priority index |
+| 3484 | [Design Spreadsheet](https://leetcode.cn/problems/design-spreadsheet) | 1524 | spreadsheet state graph |
+| 2353 | [Design a Food Rating System](https://leetcode.cn/problems/design-a-food-rating-system) | 1782 | multi-index rating updates |
+| 1825 | [Finding Mk Average](https://leetcode.cn/problems/finding-mk-average) | 2396 | streaming window statistic |
+| 1912 | [Design Movie Rental System](https://leetcode.cn/problems/design-movie-rental-system) | 2182 | multi-index inventory |
+| 981 | [Time Based Key-Value Store](https://leetcode.cn/problems/time-based-key-value-store) | 1575 | versioned KV store |`,
+    },
   ],
 };

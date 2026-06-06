@@ -62,9 +62,7 @@ struct SCC {
 
   SCC(int n) : n(n), g(n), disc(n, -1), low(n), comp(n, -1), inStack(n, 0) {}
 
-  void addEdge(int u, int v) {
-    g[u].push_back(v);
-  }
+  void addEdge(int u, int v) { g[u].push_back(v); }
 
   void dfs(int u) {
     disc[u] = low[u] = timer++;  // stamp discovery time
@@ -92,12 +90,12 @@ struct SCC {
           break;
         }
       }
-      compCnt++;
+      ++compCnt;
     }
   }
 
   vector<int> build() {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
       if (disc[i] == -1) {
         dfs(i);  // handle disconnected components
       }
@@ -110,7 +108,7 @@ struct SCC {
     build();
     vector<vector<int>> dag(compCnt);
     set<pair<int, int>> seen;  // deduplicate parallel edges
-    for (int u = 0; u < n; u++) {
+    for (int u = 0; u < n; ++u) {
       for (int v : g[u]) {
         if (comp[u] != comp[v] && seen.insert({comp[u], comp[v]}).second) {
           dag[comp[u]].push_back(comp[v]);
@@ -134,17 +132,11 @@ struct TwoSAT {
 
   TwoSAT(int n) : n(n), scc(2 * n) {}
 
-  int id(int var, bool isTrue) const {
-    return 2 * var + (isTrue ? 0 : 1);
-  }
+  int id(int var, bool isTrue) const { return 2 * var + (isTrue ? 0 : 1); }
 
-  int neg(int x) const {
-    return x ^ 1;
-  }
+  int neg(int x) const { return x ^ 1; }
 
-  void addImplication(int a, int b) {
-    scc.addEdge(a, b);
-  }
+  void addImplication(int a, int b) { scc.addEdge(a, b); }
 
   void addOr(int aVar, bool aTrue, int bVar, bool bTrue) {
     int a = id(aVar, aTrue);
@@ -153,14 +145,12 @@ struct TwoSAT {
     addImplication(neg(b), a);
   }
 
-  void force(int var, bool value) {
-    addOr(var, value, var, value);
-  }
+  void force(int var, bool value) { addOr(var, value, var, value); }
 
   optional<vector<bool>> solve() {
     vector<int> comp = scc.build();
     vector<bool> assignment(n);
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
       if (comp[id(i, true)] == comp[id(i, false)]) {
         return nullopt;
       }
@@ -191,9 +181,7 @@ struct KuhnMatcher {
 
   KuhnMatcher(int L, int R) : L(L), R(R), g(L), matchR(R, -1), seen(L, 0) {}
 
-  void addEdge(int left, int right) {
-    g[left].push_back(right);
-  }
+  void addEdge(int left, int right) { g[left].push_back(right); }
 
   // Try to find an augmenting path starting from left node u.
   bool dfs(int u) {
@@ -213,10 +201,10 @@ struct KuhnMatcher {
 
   int maxMatching() {
     int ans = 0;
-    for (int u = 0; u < L; u++) {
-      iter++;  // bump stamp instead of clearing seen[]
+    for (int u = 0; u < L; ++u) {
+      ++iter;  // bump stamp instead of clearing seen[]
       if (dfs(u)) {
-        ans++;
+        ++ans;
       }
     }
     return ans;
@@ -275,7 +263,7 @@ struct Dinic {
     if (u == t) {
       return f;
     }
-    for (int& i = it[u]; i < (int)g[u].size(); i++) {
+    for (int& i = it[u]; i < (int)g[u].size(); ++i) {
       Edge& e = g[u][i];
       if (e.cap > 0 && level[e.to] == level[u] + 1) {
         long long got = dfs(e.to, t, min(f, e.cap));
@@ -308,7 +296,8 @@ struct Dinic {
       body: `Min-cost flow is for "send k units with minimum total cost" where each edge has capacity and cost. The template below uses SPFA potentials style for clarity; for very large graphs, use Dijkstra with potentials.
 
 \`\`\`cpp
-// Min-Cost Max-Flow: SPFA (Bellman-Ford via queue) to find cheapest augmenting paths.
+// Min-Cost Max-Flow: SPFA (Bellman-Ford via queue) to find cheapest augmenting
+// paths.
 struct MinCostMaxFlow {
   struct Edge {
     int to, rev, cap, cost;
@@ -345,7 +334,7 @@ struct MinCostMaxFlow {
         int u = q.front();
         q.pop();
         inq[u] = 0;
-        for (int i = 0; i < (int)g[u].size(); i++) {
+        for (int i = 0; i < (int)g[u].size(); ++i) {
           Edge& e = g[u][i];
           if (e.cap > 0 && dist[u] + e.cost < dist[e.to]) {
             dist[e.to] = dist[u] + e.cost;
@@ -394,8 +383,8 @@ struct HLD {
   vector<vector<int>> g;
   vector<int> parent, depth, heavy, head, pos, sz;
 
-  HLD(int n) : n(n), g(n), parent(n), depth(n), heavy(n, -1), head(n),
-               pos(n), sz(n) {}
+  HLD(int n)
+      : n(n), g(n), parent(n), depth(n), heavy(n, -1), head(n), pos(n), sz(n) {}
 
   void addEdge(int u, int v) {
     g[u].push_back(v);
@@ -474,14 +463,14 @@ struct HLD {
 // DSU with rollback (no path compression): supports undo via a history stack.
 struct RollbackDSU {
   vector<int> p, sz;
-  vector<pair<int, int>> history;  // stores (node b, old size of root a) per unite
+  vector<pair<int, int>>
+      history;  // stores (node b, old size of root a) per unite
   int comps;
 
-  RollbackDSU(int n) : p(n), sz(n, 1), comps(n) {
-    iota(p.begin(), p.end(), 0);
-  }
+  RollbackDSU(int n) : p(n), sz(n, 1), comps(n) { iota(p.begin(), p.end(), 0); }
 
-  // Path compression is intentionally omitted to make rollback O(log n) correct.
+  // Path compression is intentionally omitted to make rollback O(log n)
+  // correct.
   int find(int x) {
     while (x != p[x]) {
       x = p[x];
@@ -507,9 +496,7 @@ struct RollbackDSU {
   }
 
   // Capture current history length as a restore point.
-  int snapshot() const {
-    return history.size();
-  }
+  int snapshot() const { return history.size(); }
 
   // Undo all unite() calls made after the given snapshot.
   void rollback(int snap) {
@@ -522,7 +509,7 @@ struct RollbackDSU {
       int a = p[b];
       sz[a] = oldSizeA;  // restore parent's size
       p[b] = b;          // detach b back to its own root
-      comps++;
+      ++comps;
     }
   }
 };
@@ -562,29 +549,14 @@ struct RollbackDSU {
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `Explicit max-flow, 2-SAT, and HLD tasks are rare on LeetCode; the closest exercises share the underlying reductions — Tarjan low-link, bipartite matching, and the assignment problem.
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 1192 | [Critical Connections in a Network](https://leetcode.cn/problems/critical-connections-in-a-network) | Tarjan low-link |
-| 2360 | [Longest Cycle in a Graph](https://leetcode.cn/problems/longest-cycle-in-a-graph) | directed cycle detection |
-| 785 | [Is Graph Bipartite?](https://leetcode.cn/problems/is-graph-bipartite) | bipartite check |
-| 1349 | [Maximum Students Taking Exam](https://leetcode.cn/problems/maximum-students-taking-exam) | bipartite matching |
-| 1947 | [Maximum Compatibility Score Sum](https://leetcode.cn/problems/maximum-compatibility-score-sum) | assignment matching |
-| 1879 | [Minimum XOR Sum of Two Arrays](https://leetcode.cn/problems/minimum-xor-sum-of-two-arrays) | assignment cost |
-
-**Recent medium problems**
-
-These recent contest problems exercise the connectivity, MST, and DAG-ordering building blocks behind SCC condensation and rollback DSU.
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 3600 | [Maximize Spanning Tree Stability with Upgrades](https://leetcode.cn/problems/maximize-spanning-tree-stability-with-upgrades) | 2301 | MST / DSU |
 | 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | offline DSU |
-| 3600 | [Maximize Spanning Tree Stability with Upgrades](https://leetcode.cn/problems/maximize-spanning-tree-stability-with-upgrades) | 2301 | minimum spanning tree |
-| 3594 | [Minimum Time to Transport All Individuals](https://leetcode.cn/problems/minimum-time-to-transport-all-individuals) | 2604 | state-space BFS |
-| 3534 | [Path Existence Queries in a Graph II](https://leetcode.cn/problems/path-existence-queries-in-a-graph-ii) | 2507 | reachability + DSU |
-| 3530 | [Maximum Profit from Valid Topological Order in DAG](https://leetcode.cn/problems/maximum-profit-from-valid-topological-order-in-dag) | 2353 | topological order |
-| 3419 | [Minimize the Maximum Edge Weight of Graph](https://leetcode.cn/problems/minimize-the-maximum-edge-weight-of-graph) | 2243 | MST + binary search |`,
+| 3530 | [Maximum Profit from Valid Topological Order in DAG](https://leetcode.cn/problems/maximum-profit-from-valid-topological-order-in-dag) | 2353 | DAG topological DP |
+| 3534 | [Path Existence Queries in a Graph II](https://leetcode.cn/problems/path-existence-queries-in-a-graph-ii) | 2507 | offline graph queries |
+| 3615 | [Longest Palindromic Path in Graph](https://leetcode.cn/problems/longest-palindromic-path-in-graph) | 2463 | bitmask graph DP |
+| 1192 | [Critical Connections in a Network](https://leetcode.cn/problems/critical-connections-in-a-network) | 2085 | Tarjan bridges classic |`,
     },
     {
       id: "pitfalls",

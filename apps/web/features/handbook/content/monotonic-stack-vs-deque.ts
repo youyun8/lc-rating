@@ -47,7 +47,7 @@ vector<int> nextGreater(const vector<int>& a) {
   int n = a.size();
   vector<int> res(n, -1);
   stack<int> st;  // indices, values decreasing bottom->top
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     while (!st.empty() && a[st.top()] < a[i]) {
       res[st.top()] = i;  // a[i] is the next greater for st.top()
       st.pop();
@@ -77,7 +77,7 @@ int largestRectangleArea(vector<int> h) {
   h.push_back(0);  // sentinel forces all bars to pop
   stack<int> st;   // indices with increasing heights
   int best = 0;
-  for (int i = 0; i < (int)h.size(); i++) {
+  for (int i = 0; i < (int)h.size(); ++i) {
     while (!st.empty() && h[st.top()] >= h[i]) {
       int height = h[st.top()];
       st.pop();
@@ -106,7 +106,7 @@ int sumSubarrayMins(vector<int>& a) {
   int n = a.size();
   vector<long long> left(n), right(n);  // span where a[i] is the min
   stack<int> st;
-  for (int i = 0; i < n; i++) {  // strictly-smaller to the left
+  for (int i = 0; i < n; ++i) {  // strictly-smaller to the left
     while (!st.empty() && a[st.top()] >= a[i]) st.pop();
     left[i] = st.empty() ? i + 1 : i - st.top();
     st.push(i);
@@ -118,7 +118,8 @@ int sumSubarrayMins(vector<int>& a) {
     st.push(i);
   }
   long long ans = 0;
-  for (int i = 0; i < n; i++) ans = (ans + a[i] * left[i] % MOD * right[i]) % MOD;
+  for (int i = 0; i < n; ++i)
+    ans = (ans + a[i] * left[i] % MOD * right[i]) % MOD;
   return ans;
 }
 \`\`\`
@@ -173,7 +174,7 @@ int mctFromLeafValues(vector<int>& a) {
     }
     st.push_back(x);
   }
-  for (int i = 2; i < (int)st.size(); i++) res += st[i] * st[i - 1];
+  for (int i = 2; i < (int)st.size(); ++i) res += st[i] * st[i - 1];
   return res;
 }
 \`\`\`
@@ -187,7 +188,7 @@ int mctFromLeafValues(vector<int>& a) {
 int maxWidthRamp(vector<int>& a) {
   int n = a.size();
   stack<int> st;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     if (st.empty() || a[st.top()] > a[i]) st.push(i);
   }
   int res = 0;
@@ -215,7 +216,7 @@ To get the **maximum (or minimum) of every length-k window** in \`O(n)\`, keep a
 vector<int> maxSlidingWindow(vector<int>& a, int k) {
   deque<int> dq;  // indices, values decreasing front->back
   vector<int> res;
-  for (int i = 0; i < (int)a.size(); i++) {
+  for (int i = 0; i < (int)a.size(); ++i) {
     if (!dq.empty() && dq.front() <= i - k) dq.pop_front();  // expire (FRONT)
     while (!dq.empty() && a[dq.back()] <= a[i]) dq.pop_back();  // order (BACK)
     dq.push_back(i);
@@ -239,7 +240,7 @@ When validity depends on both ends of the value range — "longest subarray wher
 int longestSubarray(vector<int>& a, int limit) {
   deque<int> mx, mn;  // mx decreasing, mn increasing (store values)
   int left = 0, best = 0;
-  for (int right = 0; right < (int)a.size(); right++) {
+  for (int right = 0; right < (int)a.size(); ++right) {
     while (!mx.empty() && mx.back() < a[right]) mx.pop_back();
     while (!mn.empty() && mn.back() > a[right]) mn.pop_back();
     mx.push_back(a[right]);
@@ -247,7 +248,7 @@ int longestSubarray(vector<int>& a, int limit) {
     while (mx.front() - mn.front() > limit) {  // window invalid -> shrink
       if (mx.front() == a[left]) mx.pop_front();
       if (mn.front() == a[left]) mn.pop_front();
-      left++;
+      ++left;
     }
     best = max(best, right - left + 1);
   }
@@ -269,15 +270,16 @@ A plain shrinking window fails for "shortest subarray with sum >= k" when values
 int shortestSubarray(vector<int>& a, long long k) {
   int n = a.size();
   vector<long long> pre(n + 1, 0);
-  for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + a[i];
+  for (int i = 0; i < n; ++i) pre[i + 1] = pre[i] + a[i];
   deque<int> dq;  // indices, pre[] increasing front->back
   int best = INT_MAX;
-  for (int i = 0; i <= n; i++) {
+  for (int i = 0; i <= n; ++i) {
     while (!dq.empty() && pre[i] - pre[dq.front()] >= k) {  // valid window
       best = min(best, i - dq.front());
       dq.pop_front();
     }
-    while (!dq.empty() && pre[dq.back()] >= pre[i]) dq.pop_back();  // keep increasing
+    while (!dq.empty() && pre[dq.back()] >= pre[i])
+      dq.pop_back();  // keep increasing
     dq.push_back(i);
   }
   return best == INT_MAX ? -1 : best;
@@ -301,10 +303,11 @@ int maxResult(vector<int>& nums, int k) {
   deque<int> dq;  // indices, dp[] decreasing front->back
   dp[0] = nums[0];
   dq.push_back(0);
-  for (int i = 1; i < n; i++) {
-    if (dq.front() < i - k) dq.pop_front();      // window expiry (FRONT)
-    dp[i] = nums[i] + dp[dq.front()];            // best reachable predecessor
-    while (!dq.empty() && dp[dq.back()] <= dp[i]) dq.pop_back();  // order (BACK)
+  for (int i = 1; i < n; ++i) {
+    if (dq.front() < i - k) dq.pop_front();  // window expiry (FRONT)
+    dp[i] = nums[i] + dp[dq.front()];        // best reachable predecessor
+    while (!dq.empty() && dp[dq.back()] <= dp[i])
+      dq.pop_back();  // order (BACK)
     dq.push_back(i);
   }
   return dp[n - 1];
@@ -373,33 +376,14 @@ Both are amortized linear; the deque's tighter \`O(k)\` window space comes from 
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `**Monotonic stack (relationships / spans)**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 42 | [Trapping Rain Water](https://leetcode.cn/problems/trapping-rain-water) | decreasing stack (or two pointers) |
-| 84 | [Largest Rectangle in Histogram](https://leetcode.cn/problems/largest-rectangle-in-histogram) | histogram spans |
-| 85 | [Maximal Rectangle](https://leetcode.cn/problems/maximal-rectangle) | per-row histogram |
-| 316 | [Remove Duplicate Letters](https://leetcode.cn/problems/remove-duplicate-letters) | greedy + seen set |
-| 402 | [Remove K Digits](https://leetcode.cn/problems/remove-k-digits) | greedy monotonic removal |
-| 496 / 503 | [Next Greater Element I/II](https://leetcode.cn/problems/next-greater-element-i) | next greater (circular) |
-| 739 | [Daily Temperatures](https://leetcode.cn/problems/daily-temperatures) | next greater (distance) |
-| 901 | [Online Stock Span](https://leetcode.cn/problems/online-stock-span) | running span |
-| 907 | [Sum of Subarray Minimums](https://leetcode.cn/problems/sum-of-subarray-minimums) | contribution counting |
-| 962 | [Maximum Width Ramp](https://leetcode.cn/problems/maximum-width-ramp) | stack + reverse scan |
-| 1130 | [Minimum Cost Tree From Leaf Values](https://leetcode.cn/problems/minimum-cost-tree-from-leaf-values) | greedy monotonic stack |
-
-**Monotonic deque (windowed extrema)**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 239 | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) | monotonic deque |
-| 862 | [Shortest Subarray with Sum at Least K](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) | prefix sums + deque |
-| 1425 | [Constrained Subsequence Sum](https://leetcode.cn/problems/constrained-subsequence-sum) | windowed-max DP |
-| 1438 | [Longest Subarray with Abs Diff ≤ Limit](https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit) | two deques |
-| 1696 | [Jump Game VI](https://leetcode.cn/problems/jump-game-vi) | windowed-max DP |
-| 2398 | [Maximum Robots Within Budget](https://leetcode.cn/problems/maximum-number-of-robots-within-budget) | window + deque |
-| 2762 | [Continuous Subarrays](https://leetcode.cn/problems/continuous-subarrays) | two deques |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3420 | [Count Non Decreasing Subarrays After K Operations](https://leetcode.cn/problems/count-non-decreasing-subarrays-after-k-operations) | 2855 | sliding window + monotonic stack |
+| 3542 | [Minimum Operations to Convert All Elements to Zero](https://leetcode.cn/problems/minimum-operations-to-convert-all-elements-to-zero) | 1890 | monotonic stack |
+| 3578 | [Count Partitions with Max Min Difference at Most K](https://leetcode.cn/problems/count-partitions-with-max-min-difference-at-most-k) | 2033 | monotonic queue DP |
+| 3638 | [Maximum Balanced Shipments](https://leetcode.cn/problems/maximum-balanced-shipments) | 1463 | monotonic stack |
+| 3768 | [Minimum Inversion Count in Subarrays of Fixed Length](https://leetcode.cn/problems/minimum-inversion-count-in-subarrays-of-fixed-length) | 2158 | windowed inversions |
+| 84 | [Largest Rectangle in Histogram](https://leetcode.cn/problems/largest-rectangle-in-histogram) | - | stack classic |`,
     },
     {
       id: "pitfalls",

@@ -105,7 +105,7 @@ Push each number into the low half, shift its top to the high half, then rebalan
 \`\`\`cpp
 // Streaming median with two heaps (LC 295)
 class MedianFinder {
-  priority_queue<int> lo;                              // max-heap (low half)
+  priority_queue<int> lo;                             // max-heap (low half)
   priority_queue<int, vector<int>, greater<int>> hi;  // min-heap (high half)
 
  public:
@@ -167,10 +167,9 @@ Treat pair sums as a grid where row \`i\` (from \`nums1\`) and column \`j\` (fro
 vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2,
                                    int k) {
   // min-heap of (sum, i, j)
-  priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>,
-                 greater<>>
+  priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<>>
       pq;
-  for (int i = 0; i < (int)nums1.size() && i < k; i++) {
+  for (int i = 0; i < (int)nums1.size() && i < k; ++i) {
     pq.push({nums1[i] + nums2[0], i, 0});  // first column
   }
   vector<vector<int>> res;
@@ -229,14 +228,14 @@ int leastInterval(vector<char>& tasks, int n) {
   }
   int time = 0;
   while (!pq.empty()) {
-    vector<int> cooling;  // tasks run this cycle, awaiting cooldown
-    for (int i = 0; i <= n; i++) {     // one cooldown window of length n+1
+    vector<int> cooling;            // tasks run this cycle, awaiting cooldown
+    for (int i = 0; i <= n; ++i) {  // one cooldown window of length n+1
       if (!pq.empty()) {
         int cnt = pq.top();
         pq.pop();
         if (cnt - 1 > 0) cooling.push_back(cnt - 1);
       }
-      time++;
+      ++time;
       if (pq.empty() && cooling.empty()) break;  // nothing left to schedule
     }
     for (int c : cooling) pq.push(c);  // requeue after the window
@@ -263,6 +262,11 @@ int leastInterval(vector<char>& tasks, int n) {
 | Merge-to-one | "combine two cheapest until one left" | min-heap, push the merged cost back | [Minimum Cost to Connect Sticks](https://leetcode.cn/problems/minimum-cost-to-connect-sticks) |`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Hard heap problems often need more than one heap or a heap plus a truth map. Use lazy deletion for stale priorities, two heaps for balanced order statistics, and k-way merge when every source is individually sorted.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Operation / pattern | Time | Space |
@@ -281,20 +285,14 @@ A full sort is \`O(n log n)\`; the heap wins when \`k \\ll n\`, when only the ex
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 215 | [Kth Largest Element in an Array](https://leetcode.cn/problems/kth-largest-element-in-an-array) | top-K heap |
-| 347 | [Top K Frequent Elements](https://leetcode.cn/problems/top-k-frequent-elements) | top-K heap |
-| 692 | [Top K Frequent Words](https://leetcode.cn/problems/top-k-frequent-words) | top-K heap + tie-break |
-| 703 | [Kth Largest Element in a Stream](https://leetcode.cn/problems/kth-largest-element-in-a-stream) | streaming size-k heap |
-| 295 | [Find Median from Data Stream](https://leetcode.cn/problems/find-median-from-data-stream) | two heaps |
-| 502 | [IPO](https://leetcode.cn/problems/ipo) | two heaps (capital/profit) |
-| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | k-way merge |
-| 378 | [Kth Smallest in a Sorted Matrix](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix) | sorted-grid frontier |
-| 373 | [Find K Pairs with Smallest Sums](https://leetcode.cn/problems/find-k-pairs-with-smallest-sums) | sorted-grid frontier |
-| 1046 | [Last Stone Weight](https://leetcode.cn/problems/last-stone-weight) | greedy max-heap |
-| 621 | [Task Scheduler](https://leetcode.cn/problems/task-scheduler) | greedy scheduling |
-| 264 | [Ugly Number II](https://leetcode.cn/problems/ugly-number-ii) | k-way merge / heap |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3767 | [Maximize Points After Choosing K Tasks](https://leetcode.cn/problems/maximize-points-after-choosing-k-tasks) | 1704 | pick best tasks |
+| 3780 | [Maximum Sum of Three Numbers Divisible by Three](https://leetcode.cn/problems/maximum-sum-of-three-numbers-divisible-by-three) | 1585 | top residues |
+| 3781 | [Maximum Score After Binary Swaps](https://leetcode.cn/problems/maximum-score-after-binary-swaps) | 1823 | binary swaps / heap |
+| 3645 | [Maximum Total from Optimal Activation Order](https://leetcode.cn/problems/maximum-total-from-optimal-activation-order) | 2019 | activation heap |
+| 3572 | [Maximize Ysum by Picking a Triplet of Distinct Xvalues](https://leetcode.cn/problems/maximize-ysum-by-picking-a-triplet-of-distinct-xvalues) | 1319 | top values per key |
+| 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | lazy heap design |`,
     },
     {
       id: "pitfalls",

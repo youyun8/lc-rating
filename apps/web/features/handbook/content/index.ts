@@ -10,6 +10,7 @@ import { monotonicStackVsDeque } from "./monotonic-stack-vs-deque";
 import { contribution } from "./contribution";
 import { greedy } from "./greedy";
 import { intervals } from "./intervals";
+import { lineSweeping } from "./line-sweeping";
 import { backtracking } from "./backtracking";
 import { linkedList } from "./linked-list";
 import { dataStructures } from "./data-structures";
@@ -44,6 +45,7 @@ export const HANDBOOK_TOPICS: HandbookTopic[] = [
   contribution,
   greedy,
   intervals,
+  lineSweeping,
   backtracking,
   linkedList,
   dataStructures,

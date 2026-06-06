@@ -38,17 +38,17 @@ Related handbook topics: [Competitive Programming Essentials](/handbook/competit
 \`\`\`cpp
 // Generic skeleton: collect every complete configuration into 'results'.
 void backtrack(State& state, vector<Solution>& results) {
-  if (isComplete(state)) {        // reached a leaf -> record the answer
+  if (isComplete(state)) {  // reached a leaf -> record the answer
     results.push_back(extract(state));
     return;
   }
   for (Choice c : choices(state)) {
-    if (!valid(state, c)) {       // prune invalid branches early
+    if (!valid(state, c)) {  // prune invalid branches early
       continue;
     }
-    apply(state, c);              // choose
-    backtrack(state, results);    // explore
-    undo(state, c);               // un-choose (restore state)
+    apply(state, c);            // choose
+    backtrack(state, results);  // explore
+    undo(state, c);             // un-choose (restore state)
   }
 }
 \`\`\`
@@ -71,10 +71,10 @@ void subsets(vector<int>& nums, int i, vector<int>& path,
     out.push_back(path);
     return;
   }
-  subsets(nums, i + 1, path, out);   // skip nums[i]
+  subsets(nums, i + 1, path, out);  // skip nums[i]
   path.push_back(nums[i]);
-  subsets(nums, i + 1, path, out);   // take nums[i]
-  path.pop_back();                   // undo
+  subsets(nums, i + 1, path, out);  // take nums[i]
+  path.pop_back();                  // undo
 }
 \`\`\`
 :::
@@ -91,7 +91,7 @@ void combine(int n, int k, int start, vector<int>& path,
     return;
   }
   // Prune: stop if not enough numbers remain to fill path.
-  for (int x = start; x <= n - (k - (int)path.size()) + 1; x++) {
+  for (int x = start; x <= n - (k - (int)path.size()) + 1; ++x) {
     path.push_back(x);
     combine(n, k, x + 1, path, out);
     path.pop_back();
@@ -111,7 +111,7 @@ void permute(vector<int>& nums, vector<int>& path, vector<bool>& used,
     out.push_back(path);
     return;
   }
-  for (int i = 0; i < (int)nums.size(); i++) {
+  for (int i = 0; i < (int)nums.size(); ++i) {
     if (used[i]) {
       continue;
     }
@@ -136,7 +136,7 @@ When the input has repeated values, sort first and **skip a value equal to its p
 void subsetsDup(vector<int>& nums, int start, vector<int>& path,
                 vector<vector<int>>& out) {
   out.push_back(path);
-  for (int i = start; i < (int)nums.size(); i++) {
+  for (int i = start; i < (int)nums.size(); ++i) {
     if (i > start && nums[i] == nums[i - 1]) {
       continue;  // same value already tried at this depth
     }
@@ -163,13 +163,13 @@ The same \`i > start && nums[i] == nums[i - 1]\` guard deduplicates Combination 
 :::example Combination Sum (LC 39)
 \`\`\`cpp
 // Combination Sum (LC 39): prune as soon as the running sum passes target.
-void combinationSum(vector<int>& cand, int start, int target,
-                    vector<int>& path, vector<vector<int>>& out) {
+void combinationSum(vector<int>& cand, int start, int target, vector<int>& path,
+                    vector<vector<int>>& out) {
   if (target == 0) {
     out.push_back(path);
     return;
   }
-  for (int i = start; i < (int)cand.size(); i++) {
+  for (int i = start; i < (int)cand.size(); ++i) {
     if (cand[i] > target) {
       continue;  // sorted input -> later candidates are even larger
     }
@@ -197,7 +197,7 @@ int placeQueens(int r) {
     return 1;  // all rows filled -> one valid board
   }
   int count = 0;
-  for (int c = 0; c < n; c++) {
+  for (int c = 0; c < n; ++c) {
     if (col[c] || diag[r - c + n] || anti[r + c]) {
       continue;
     }
@@ -235,7 +235,7 @@ void partition(const string& s, int start, vector<string>& path,
     out.push_back(path);
     return;
   }
-  for (int end = start; end < (int)s.size(); end++) {
+  for (int end = start; end < (int)s.size(); ++end) {
     if (!isPalindrome(s, start, end)) {
       continue;
     }
@@ -258,8 +258,8 @@ The same shape solves Restore IP Addresses (LC 93, cut into 4 valid octets) and 
 
 \`\`\`cpp
 // Count Hamiltonian-style assignments with a bitmask memo.
-int n;                       // items
-vector<int> memo;            // size 1<<n, -1 = uncomputed
+int n;             // items
+vector<int> memo;  // size 1<<n, -1 = uncomputed
 int dfs(int mask) {
   if (mask == (1 << n) - 1) {
     return 1;
@@ -269,7 +269,7 @@ int dfs(int mask) {
   }
   int pos = __builtin_popcount(mask);  // assign item index 'pos' next
   int res = 0;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     if (!(mask & (1 << i)) && compatible(pos, i)) {
       res += dfs(mask | (1 << i));
     }
@@ -317,34 +317,14 @@ int dfs(int mask) {
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 78 | [Subsets](https://leetcode.cn/problems/subsets) | include / exclude |
-| 90 | [Subsets II](https://leetcode.cn/problems/subsets-ii) | dedupe per level |
-| 46 | [Permutations](https://leetcode.cn/problems/permutations) | used-array |
-| 47 | [Permutations II](https://leetcode.cn/problems/permutations-ii) | dedupe per level |
-| 77 | [Combinations](https://leetcode.cn/problems/combinations) | start index + pruning |
-| 39 | [Combination Sum](https://leetcode.cn/problems/combination-sum) | reuse + feasibility prune |
-| 40 | [Combination Sum II](https://leetcode.cn/problems/combination-sum-ii) | dedupe per level |
-| 17 | [Letter Combinations of a Phone Number](https://leetcode.cn/problems/letter-combinations-of-a-phone-number) | branch over digits |
-| 22 | [Generate Parentheses](https://leetcode.cn/problems/generate-parentheses) | constraint pruning |
-| 131 | [Palindrome Partitioning](https://leetcode.cn/problems/palindrome-partitioning) | partition cuts |
-| 93 | [Restore IP Addresses](https://leetcode.cn/problems/restore-ip-addresses) | partition into 4 octets |
-| 51 | [N-Queens](https://leetcode.cn/problems/n-queens) | board + occupancy markers |
-| 37 | [Sudoku Solver](https://leetcode.cn/problems/sudoku-solver) | constraint propagation |
-| 79 | [Word Search](https://leetcode.cn/problems/word-search) | grid DFS + undo |
-| 698 | [Partition to K Equal Sum Subsets](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets) | bucket assignment + pruning |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3669 | [Balanced K Factor Decomposition](https://leetcode.cn/problems/balanced-k-factor-decomposition) | 1917 | factor enumeration |
-| 3646 | [Next Special Palindrome Number](https://leetcode.cn/problems/next-special-palindrome-number) | 2445 | digit construction |
-| 2767 | [Partition String Into Minimum Beautiful Substrings](https://leetcode.cn/problems/partition-string-into-minimum-beautiful-substrings) | 1865 | partition DFS |
-| 2597 | [The Number of Beautiful Subsets](https://leetcode.cn/problems/the-number-of-beautiful-subsets) | 2023 | choose / skip + pruning |
-| 2305 | [Fair Distribution of Cookies](https://leetcode.cn/problems/fair-distribution-of-cookies) | 1887 | bucket assignment |
-| 2056 | [Number of Valid Move Combinations on Chessboard](https://leetcode.cn/problems/number-of-valid-move-combinations-on-chessboard) | 2611 | exhaustive search |`,
+| 3458 | [Select K Disjoint Special Substrings](https://leetcode.cn/problems/select-k-disjoint-special-substrings) | 2221 | disjoint substrings / search pruning |
+| 3533 | [Concatenated Divisibility](https://leetcode.cn/problems/concatenated-divisibility) | 2257 | bitmask permutation DP |
+| 3444 | [Minimum Increments for Target Multiples in an Array](https://leetcode.cn/problems/minimum-increments-for-target-multiples-in-an-array) | 2337 | LCM masks / subset search |
+| 3518 | [Smallest Palindromic Rearrangement II](https://leetcode.cn/problems/smallest-palindromic-rearrangement-ii) | 2375 | combinatorics pruning |
+| 51 | [N-Queens](https://leetcode.cn/problems/n-queens) | - | N-Queens classic |
+| 46 | [Permutations](https://leetcode.cn/problems/permutations) | - | permutation classic |`,
     },
     {
       id: "pitfalls",

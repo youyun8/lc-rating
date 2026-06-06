@@ -42,7 +42,7 @@ Grow the window by moving \`right\`; whenever the window becomes invalid, shrink
 int lengthOfLongestSubstring(string s) {
   vector<int> last(128, -1);  // last index each char was seen
   int left = 0, best = 0;
-  for (int right = 0; right < (int)s.size(); right++) {
+  for (int right = 0; right < (int)s.size(); ++right) {
     char c = s[right];
     if (last[c] >= left) {
       left = last[c] + 1;  // jump left past the duplicate
@@ -60,11 +60,11 @@ The general "shrink while invalid" skeleton:
 \`\`\`cpp
 // Generic variable window: maximize length subject to an invariant
 int left = 0, best = 0;
-for (int right = 0; right < n; right++) {
+for (int right = 0; right < n; ++right) {
   add(a[right]);      // include a[right]
   while (!valid()) {  // restore the invariant
     remove(a[left]);
-    left++;
+    ++left;
   }
   best = max(best, right - left + 1);
 }
@@ -81,11 +81,11 @@ For *minimum-length* windows, shrink as far as possible *while still valid* and 
 // Maximum average / sum of any length-k subarray
 double maxAverage(vector<int>& a, int k) {
   long long sum = 0;
-  for (int i = 0; i < k; i++) {
+  for (int i = 0; i < k; ++i) {
     sum += a[i];
   }
   long long best = sum;
-  for (int i = k; i < (int)a.size(); i++) {
+  for (int i = k; i < (int)a.size(); ++i) {
     sum += a[i] - a[i - k];  // slide: add new, drop old
     best = max(best, sum);
   }
@@ -109,13 +109,13 @@ int subarraysWithKDistinct(vector<int>& a, int k) {
   auto atMost = [&](int k) {
     unordered_map<int, int> cnt;
     int left = 0, res = 0;
-    for (int right = 0; right < (int)a.size(); right++) {
+    for (int right = 0; right < (int)a.size(); ++right) {
       if (++cnt[a[right]] == 1) {
         k--;  // new distinct value
       }
       while (k < 0) {
         if (--cnt[a[left++]] == 0) {
-          k++;
+          ++k;
         }
       }
       res += right - left + 1;  // # valid windows ending at right
@@ -140,7 +140,7 @@ To get the **maximum (or minimum) of every length-k window** in \`O(n)\`, keep a
 vector<int> maxSlidingWindow(vector<int>& a, int k) {
   deque<int> dq;  // indices, values decreasing front->back
   vector<int> res;
-  for (int i = 0; i < (int)a.size(); i++) {
+  for (int i = 0; i < (int)a.size(); ++i) {
     while (!dq.empty() && a[dq.back()] <= a[i]) {
       dq.pop_back();  // pop smaller
     }
@@ -170,12 +170,12 @@ This deque idea generalizes to "longest subarray where max − min ≤ limit" (L
 int shortestSubarray(vector<int>& a, long long k) {
   int n = a.size();
   vector<long long> pre(n + 1, 0);
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     pre[i + 1] = pre[i] + a[i];
   }
   deque<int> dq;  // indices, pre[] increasing front->back
   int best = INT_MAX;
-  for (int i = 0; i <= n; i++) {
+  for (int i = 0; i <= n; ++i) {
     // found a valid window
     while (!dq.empty() && pre[i] - pre[dq.front()] >= k) {
       best = min(best, i - dq.front());
@@ -227,39 +227,14 @@ Every index enters and exits the window once — that is the source of the linea
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 3 | [Longest Substring Without Repeating](https://leetcode.cn/problems/longest-substring-without-repeating-characters) | variable window |
-| 76 | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) | min-window with counts |
-| 209 | [Minimum Size Subarray Sum](https://leetcode.cn/problems/minimum-size-subarray-sum) | shrinking min-window |
-| 239 | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) | monotonic deque |
-| 424 | [Longest Repeating Char Replacement](https://leetcode.cn/problems/longest-repeating-character-replacement) | window with majority count |
-| 567 / 438 | [Permutation in String](https://leetcode.cn/problems/permutation-in-string) / [Find Anagrams](https://leetcode.cn/problems/find-all-anagrams-in-a-string) | fixed window + freq |
-| 713 | [Subarray Product Less Than K](https://leetcode.cn/problems/subarray-product-less-than-k) | product window |
-| 992 | [Subarrays with K Distinct](https://leetcode.cn/problems/subarrays-with-k-different-integers) | at-most-K trick |
-| 1248 | [Count Nice Subarrays](https://leetcode.cn/problems/count-number-of-nice-subarrays) | at-most-K trick |
-| 1438 | [Longest Subarray with Abs Diff ≤ Limit](https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit) | two deques |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 727 | [Minimum Window Subsequence](https://leetcode.cn/problems/minimum-window-subsequence) | two-pointer / DP |
-| 862 | [Shortest Subarray with Sum at Least K](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) | prefix sums + deque |
-| 2398 | [Maximum Number of Robots Within Budget](https://leetcode.cn/problems/maximum-number-of-robots-within-budget) | window + monotonic deque |
-| 2444 | [Count Subarrays With Fixed Bounds](https://leetcode.cn/problems/count-subarrays-with-fixed-bounds) | two-pointer window |
-| 2799 | [Count Complete Subarrays in an Array](https://leetcode.cn/problems/count-complete-subarrays-in-an-array) | at-most-K window |
-| 2962 | [Count Subarrays Where Max Element Appears at Least K Times](https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times) | window |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3578 | [Count Partitions With Max-Min Difference at Most K](https://leetcode.cn/problems/count-partitions-with-max-min-difference-at-most-k) | 2033 | window + monotonic deque |
-| 2762 | [Continuous Subarrays](https://leetcode.cn/problems/continuous-subarrays) | 1940 | window + two deques |
-| 2875 | [Minimum Size Subarray in Infinite Array](https://leetcode.cn/problems/minimum-size-subarray-in-infinite-array) | 1914 | window on doubled array |
-| 3097 | [Shortest Subarray With OR at Least K II](https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-ii) | 1891 | bit-count window |
-| 3346 | [Maximum Frequency of an Element After Operations I](https://leetcode.cn/problems/maximum-frequency-of-an-element-after-performing-operations-i) | 1865 | sort + window |`,
+| 3578 | [Count Partitions with Max Min Difference at Most K](https://leetcode.cn/problems/count-partitions-with-max-min-difference-at-most-k) | 2033 | sliding window / monotonic queue |
+| 3589 | [Count Prime Gap Balanced Subarrays](https://leetcode.cn/problems/count-prime-gap-balanced-subarrays) | 2235 | prime gaps / monotonic queue |
+| 3634 | [Minimum Removals to Balance Array](https://leetcode.cn/problems/minimum-removals-to-balance-array) | 1453 | sort + sliding window |
+| 3652 | [Best Time to Buy and Sell Stock Using Strategy](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-using-strategy) | 1557 | strategy window |
+| 3679 | [Minimum Discards to Balance Inventory](https://leetcode.cn/problems/minimum-discards-to-balance-inventory) | 1639 | inventory balance |
+| 3768 | [Minimum Inversion Count in Subarrays of Fixed Length](https://leetcode.cn/problems/minimum-inversion-count-in-subarrays-of-fixed-length) | 2158 | fixed window / segment tree |`,
     },
     {
       id: "pitfalls",

@@ -176,7 +176,7 @@ auto check = [&](int cap) {
       return false;
     }
     if (load + w > cap) {
-      days++;
+      ++days;
       load = 0;
     }
     load += w;
@@ -237,7 +237,7 @@ int countLE(const vector<vector<int>>& m, int x) {
   while (r >= 0 && c < n) {
     if (m[r][c] <= x) {  // whole column up to r qualifies
       cnt += r + 1;
-      c++;
+      ++c;
     } else {
       r--;
     }
@@ -251,7 +251,7 @@ int countLE(const vector<vector<int>>& m, int x) {
 \`\`\`cpp
 // ~100 iterations halves the interval to < 2^-100 — plenty of precision
 double lo = 0, hi = 1e9;
-for (int it = 0; it < 100; it++) {
+for (int it = 0; it < 100; ++it) {
   double mid = (lo + hi) / 2;
   if (check(mid)) {
     hi = mid;
@@ -305,7 +305,7 @@ double findMaxAverage(vector<int>& a, int k) {
          hi = *max_element(a.begin(), a.end());
   auto feasible = [&](double x) {
     double sum = 0, prefix = 0, minPrefix = 0;
-    for (int i = 0; i < (int)a.size(); i++) {
+    for (int i = 0; i < (int)a.size(); ++i) {
       sum += a[i] - x;
       if (i >= k) {
         prefix += a[i - k] - x;
@@ -367,40 +367,14 @@ The whole game is making \`check\` cheap and *provably monotone*.`,
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 4 | [Median of Two Sorted Arrays](https://leetcode.cn/problems/median-of-two-sorted-arrays) | partition by binary search |
-| 33 / 81 | [Search in Rotated Array](https://leetcode.cn/problems/search-in-rotated-sorted-array) | rotated-array split |
-| 34 | [First & Last Position](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array) | lower/upper bound |
-| 35 | [Search Insert Position](https://leetcode.cn/problems/search-insert-position) | insertion point |
-| 153 / 154 | [Find Minimum in Rotated Array](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array) | direction by \`a[r]\` |
-| 162 | [Find Peak Element](https://leetcode.cn/problems/find-peak-element) | local monotonicity |
-| 378 | [Kth Smallest in Sorted Matrix](https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix) | count ≤ x + value search |
-| 410 | [Split Array Largest Sum](https://leetcode.cn/problems/split-array-largest-sum) | min-feasible + greedy check |
-| 704 | [Binary Search](https://leetcode.cn/problems/binary-search) | plain value search |
-| 719 | [Kth Smallest Distance Pair](https://leetcode.cn/problems/find-k-th-smallest-pair-distance) | count ≤ x + two pointers |
-| 875 | [Koko Eating Bananas](https://leetcode.cn/problems/koko-eating-bananas) | min-feasible on answer |
-| 1011 | [Capacity to Ship Packages](https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days) | min-feasible on answer |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 2226 | [Maximum Candies Allocated to K Children](https://leetcode.cn/problems/maximum-candies-allocated-to-k-children) | BS on the answer |
-| 2560 | [House Robber IV](https://leetcode.cn/problems/house-robber-iv) | BS on answer + greedy check |
-| 2616 | [Minimize the Maximum Difference of Pairs](https://leetcode.cn/problems/minimize-the-maximum-difference-of-pairs) | BS on answer + greedy |
-| 2861 | [Maximum Number of Alloys](https://leetcode.cn/problems/maximum-number-of-alloys) | BS on answer |
-| 3296 | [Minimum Number of Seconds to Make Mountain Height Zero](https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero) | BS on answer |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3771 | [Total Score of Dungeon Runs](https://leetcode.cn/problems/total-score-of-dungeon-runs) | 1981 | BS on the answer |
-| 3733 | [Minimum Time to Complete All Deliveries](https://leetcode.cn/problems/minimum-time-to-complete-all-deliveries) | 1973 | BS on the answer |
-| 3356 | [Zero Array Transformation II](https://leetcode.cn/problems/zero-array-transformation-ii) | 1913 | BS + difference array |
-| 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | BS + DSU |
-| 3639 | [Minimum Time to Activate String](https://leetcode.cn/problems/minimum-time-to-activate-string) | 1853 | BS on the answer |`,
+| 3449 | [Maximize the Minimum Game Score](https://leetcode.cn/problems/maximize-the-minimum-game-score) | 2748 | binary search on answer |
+| 3464 | [Maximize the Distance Between Points on a Square](https://leetcode.cn/problems/maximize-the-distance-between-points-on-a-square) | 2806 | maximize minimum distance |
+| 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | time threshold / DSU check |
+| 3613 | [Minimize Maximum Component Cost](https://leetcode.cn/problems/minimize-maximum-component-cost) | 1642 | component-cost threshold |
+| 3733 | [Minimum Time to Complete All Deliveries](https://leetcode.cn/problems/minimum-time-to-complete-all-deliveries) | 1973 | answer search |
+| 4 | [Median of Two Sorted Arrays](https://leetcode.cn/problems/median-of-two-sorted-arrays) | - | partition classic |`,
     },
     {
       id: "pitfalls",

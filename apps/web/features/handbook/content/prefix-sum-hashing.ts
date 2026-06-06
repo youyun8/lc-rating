@@ -42,10 +42,10 @@ Build \`P\` once so each query is a single subtraction. Use a length-$(n+1)$ arr
 // Immutable range sum via a 1-indexed prefix array (LC 303)
 class NumArray {
   vector<long long> P;  // P[i] = sum of the first i elements
-public:
+ public:
   NumArray(vector<int>& a) {
     P.assign(a.size() + 1, 0);
-    for (int i = 0; i < (int)a.size(); i++) P[i + 1] = P[i] + a[i];
+    for (int i = 0; i < (int)a.size(); ++i) P[i + 1] = P[i] + a[i];
   }
   int sumRange(int l, int r) { return (int)(P[r + 1] - P[l]); }  // O(1)
 };
@@ -64,7 +64,7 @@ A subarray $(l, r)$ sums to \`k\` exactly when $P[r+1] - P[l] = k$, i.e. some ea
 // Count subarrays summing to k via prefix-count hashmap (LC 560)
 int subarraySum(vector<int>& a, int k) {
   unordered_map<long long, int> cnt;
-  cnt[0] = 1;          // empty prefix: enables subarrays from index 0
+  cnt[0] = 1;  // empty prefix: enables subarrays from index 0
   long long prefix = 0;
   int answer = 0;
   for (int x : a) {
@@ -88,14 +88,15 @@ This works even with **negative numbers**, where a sliding window would fail, be
 A subarray sum is divisible by \`k\` iff the two enclosing prefixes have the **same remainder** mod \`k\`. Count prefixes per remainder bucket; each pair within a bucket yields one valid subarray. Normalize the remainder into $[0, k)$ because C++ \`%\` can return a negative value.
 
 \`\`\`cpp
-// Count subarrays with sum divisible by k, grouping prefixes by remainder (LC 974)
+// Count subarrays with sum divisible by k, grouping prefixes by remainder (LC
+// 974)
 int subarraysDivByK(vector<int>& a, int k) {
   vector<int> cnt(k, 0);
   cnt[0] = 1;
   int prefix = 0, answer = 0;
   for (int x : a) {
     prefix = ((prefix + x) % k + k) % k;  // non-negative remainder
-    answer += cnt[prefix];                // pair with every earlier same-remainder prefix
+    answer += cnt[prefix];  // pair with every earlier same-remainder prefix
     cnt[prefix]++;
   }
   return answer;
@@ -116,8 +117,8 @@ long long beautifulSubarrays(vector<int>& a) {
   int prefix = 0;
   long long answer = 0;
   for (int x : a) {
-    prefix ^= x;             // running prefix XOR (^ is XOR)
-    answer += cnt[prefix];   // equal prefix XOR => subarray XOR is 0
+    prefix ^= x;            // running prefix XOR (^ is XOR)
+    answer += cnt[prefix];  // equal prefix XOR => subarray XOR is 0
     cnt[prefix]++;
   }
   return answer;
@@ -137,12 +138,13 @@ For repeated rectangle-sum queries on a fixed matrix, precompute $P[i][j]$ = sum
 // 2D immutable range sum with a padded prefix matrix (LC 304)
 class NumMatrix {
   vector<vector<long long>> P;
-public:
+
+ public:
   NumMatrix(vector<vector<int>>& m) {
     int R = m.size(), C = m[0].size();
     P.assign(R + 1, vector<long long>(C + 1, 0));
-    for (int i = 0; i < R; i++)
-      for (int j = 0; j < C; j++)
+    for (int i = 0; i < R; ++i)
+      for (int j = 0; j < C; ++j)
         P[i + 1][j + 1] = P[i][j + 1] + P[i + 1][j] - P[i][j] + m[i][j];
   }
   int sumRegion(int r1, int c1, int r2, int c2) {
@@ -169,11 +171,14 @@ vector<int> corpFlightBookings(vector<vector<int>>& bookings, int n) {
   for (auto& b : bookings) {
     int l = b[0] - 1, r = b[1] - 1;  // to 0-indexed
     diff[l] += b[2];
-    diff[r + 1] -= b[2];             // cancel the increment past the range
+    diff[r + 1] -= b[2];  // cancel the increment past the range
   }
   vector<int> answer(n);
   long long run = 0;
-  for (int i = 0; i < n; i++) { run += diff[i]; answer[i] = (int)run; }
+  for (int i = 0; i < n; ++i) {
+    run += diff[i];
+    answer[i] = (int)run;
+  }
   return answer;
 }
 \`\`\`
@@ -193,7 +198,7 @@ Store each value as you go and look up its complement \`target - x\` in one pass
 // One-pass complement lookup (LC 1)
 vector<int> twoSum(vector<int>& a, int target) {
   unordered_map<int, int> seen;  // value -> index
-  for (int i = 0; i < (int)a.size(); i++) {
+  for (int i = 0; i < (int)a.size(); ++i) {
     auto it = seen.find(target - a[i]);
     if (it != seen.end()) return {it->second, i};
     seen[a[i]] = i;
@@ -239,6 +244,11 @@ The **first-seen index** idiom anchors "longest subarray with a property": store
 | Complement / grouping | "two pieces sum to target", "group anagrams" | hashmap of value→index or canonical key | [Two Sum](https://leetcode.cn/problems/two-sum) |`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced prefix problems change what is accumulated. Track remainders, XOR masks, balance vectors, or ordered prefix sums; when equality is not enough, switch from hashmap to ordered set, Fenwick tree, or offline compression.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Technique | Build | Query / pass | Space |
@@ -256,20 +266,14 @@ The win is uniform: an \`O(n^2)\` subarray scan or an \`O(m * n)\` update loop b
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 1 | [Two Sum](https://leetcode.cn/problems/two-sum) | hashmap complement |
-| 303 | [Range Sum Query — Immutable](https://leetcode.cn/problems/range-sum-query-immutable) | 1D prefix sum |
-| 304 | [Range Sum Query 2D — Immutable](https://leetcode.cn/problems/range-sum-query-2d-immutable) | 2D prefix sum |
-| 560 | [Subarray Sum Equals K](https://leetcode.cn/problems/subarray-sum-equals-k) | prefix + hashmap |
-| 974 | [Subarray Sums Divisible by K](https://leetcode.cn/problems/subarray-sums-divisible-by-k) | prefix remainder |
-| 523 | [Continuous Subarray Sum](https://leetcode.cn/problems/continuous-subarray-sum) | remainder + first index |
-| 525 | [Contiguous Array](https://leetcode.cn/problems/contiguous-array) | ±1 remap + first index |
-| 49 | [Group Anagrams](https://leetcode.cn/problems/group-anagrams) | hashmap canonical key |
-| 325 | [Maximum Size Subarray Sum Equals k](https://leetcode.cn/problems/maximum-size-subarray-sum-equals-k) | prefix + first index |
-| 1109 | [Corporate Flight Bookings](https://leetcode.cn/problems/corporate-flight-bookings) | difference array |
-| 1094 | [Car Pooling](https://leetcode.cn/problems/car-pooling) | difference array on timeline |
-| 1248 | [Count Number of Nice Subarrays](https://leetcode.cn/problems/count-number-of-nice-subarrays) | prefix count of odds |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3728 | [Stable Subarrays with Equal Boundary and Interior Sum](https://leetcode.cn/problems/stable-subarrays-with-equal-boundary-and-interior-sum) | 1909 | prefix equality |
+| 3729 | [Count Distinct Subarrays Divisible by K in Sorted Array](https://leetcode.cn/problems/count-distinct-subarrays-divisible-by-k-in-sorted-array) | 2248 | distinct subarrays / prefix |
+| 3748 | [Count Stable Subarrays](https://leetcode.cn/problems/count-stable-subarrays) | 2209 | stable subarrays |
+| 3755 | [Find Maximum Balanced XOR Subarray Length](https://leetcode.cn/problems/find-maximum-balanced-xor-subarray-length) | 1663 | balanced XOR prefix |
+| 3654 | [Minimum Sum After Divisible Sum Deletions](https://leetcode.cn/problems/minimum-sum-after-divisible-sum-deletions) | 2039 | prefix DP |
+| 560 | [Subarray Sum Equals K](https://leetcode.cn/problems/subarray-sum-equals-k) | - | prefix hash classic |`,
     },
     {
       id: "pitfalls",

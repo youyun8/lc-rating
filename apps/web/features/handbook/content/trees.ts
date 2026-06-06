@@ -94,7 +94,7 @@ vector<vector<int>> levelOrder(TreeNode* root) {
   while (!q.empty()) {
     int sz = q.size();
     vector<int> level;
-    for (int i = 0; i < sz; i++) {
+    for (int i = 0; i < sz; ++i) {
       TreeNode* node = q.front();
       q.pop();
       level.push_back(node->val);
@@ -229,7 +229,7 @@ Rebuild a tree from traversals using the fact that preorder gives the root and i
 // Build tree from preorder + inorder (LC 105)
 TreeNode* build(vector<int>& pre, vector<int>& in) {
   unordered_map<int, int> pos;  // value -> index in inorder
-  for (int i = 0; i < (int)in.size(); i++) {
+  for (int i = 0; i < (int)in.size(); ++i) {
     pos[in[i]] = i;
   }
   int idx = 0;
@@ -264,7 +264,7 @@ struct LCA {
   LCA(int n, vector<vector<int>>& adj, int root = 0) {
     LOG = 1;
     while ((1 << LOG) < n) {
-      LOG++;
+      ++LOG;
     }
     depth.assign(n, 0);
     up.assign(LOG, vector<int>(n, root));
@@ -278,8 +278,8 @@ struct LCA {
       }
     };
     dfs(root, root);
-    for (int k = 1; k < LOG; k++) {
-      for (int v = 0; v < n; v++) {
+    for (int k = 1; k < LOG; ++k) {
+      for (int v = 0; v < n; ++v) {
         up[k][v] = up[k - 1][up[k - 1][v]];
       }
     }
@@ -289,7 +289,7 @@ struct LCA {
       swap(a, b);
     }
     int d = depth[a] - depth[b];
-    for (int k = 0; k < LOG; k++) {  // lift a up to b
+    for (int k = 0; k < LOG; ++k) {  // lift a up to b
       if (d & (1 << k)) {
         a = up[k][a];
       }
@@ -423,41 +423,16 @@ vector<int> morrisInorder(TreeNode* root) {
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 94 / 144 / 145 | [Traversals](https://leetcode.cn/problems/binary-tree-inorder-traversal) | recursion / stack |
-| 98 | [Validate BST](https://leetcode.cn/problems/validate-binary-search-tree) | bounds recursion |
-| 102 / 103 / 199 | [Level](https://leetcode.cn/problems/binary-tree-level-order-traversal) / [Zigzag](https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal) / [Right View](https://leetcode.cn/problems/binary-tree-right-side-view) | BFS |
-| 105 / 106 | [Construct from Traversals](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal) | divide & conquer |
-| 124 | [Max Path Sum](https://leetcode.cn/problems/binary-tree-maximum-path-sum) | tree DP with drop |
-| 226 | [Invert Binary Tree](https://leetcode.cn/problems/invert-binary-tree) | recursion |
-| 230 | [Kth Smallest in BST](https://leetcode.cn/problems/kth-smallest-element-in-a-bst) | inorder |
-| 235 / 236 | [LCA (BST / binary)](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree) | descent / postorder |
-| 297 | [Serialize and Deserialize](https://leetcode.cn/problems/serialize-and-deserialize-binary-tree) | preorder + null markers |
-| 337 | [House Robber III](https://leetcode.cn/problems/house-robber-iii) | tree DP with state |
-| 543 | [Diameter](https://leetcode.cn/problems/diameter-of-binary-tree) | tree DP |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 834 | [Sum of Distances in Tree](https://leetcode.cn/problems/sum-of-distances-in-tree) | rerooting DP |
-| 968 | [Binary Tree Cameras](https://leetcode.cn/problems/binary-tree-cameras) | greedy tree DP |
-| 979 | [Distribute Coins in Binary Tree](https://leetcode.cn/problems/distribute-coins-in-binary-tree) | flow-as-DP |
-| 1483 | [Kth Ancestor of a Tree Node](https://leetcode.cn/problems/kth-ancestor-of-a-tree-node) | binary lifting |
-| 2049 | [Count Nodes With the Highest Score](https://leetcode.cn/problems/count-nodes-with-the-highest-score) | tree DP |
-| 2458 | [Height of Binary Tree After Subtree Removal Queries](https://leetcode.cn/problems/height-of-binary-tree-after-subtree-removal-queries) | DFS in/out order |
-| 2467 | [Most Profitable Path in a Tree](https://leetcode.cn/problems/most-profitable-path-in-a-tree) | tree + BFS paths |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3331 | [Find Subtree Sizes After Changes](https://leetcode.cn/problems/find-subtree-sizes-after-changes) | 2046 | DFS + relabel |
-| 2477 | [Minimum Fuel Cost to Report to the Capital](https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital) | 2012 | tree DFS |
-| 3593 | [Minimum Increments to Equalize Leaf Paths](https://leetcode.cn/problems/minimum-increments-to-equalize-leaf-paths) | 1959 | tree DP (postorder) |
-| 3372 | [Maximize the Number of Target Nodes After Connecting Trees I](https://leetcode.cn/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i) | 1927 | tree BFS / DP |
-| 3067 | [Count Pairs of Connectable Servers in a Weighted Tree Network](https://leetcode.cn/problems/count-pairs-of-connectable-servers-in-a-weighted-tree-network) | 1909 | tree DFS |`,
+| 3786 | [Total Sum of Interaction Cost in Tree Groups](https://leetcode.cn/problems/total-sum-of-interaction-cost-in-tree-groups) | 2139 | tree interaction cost |
+| 3772 | [Maximum Subgraph Score in a Tree](https://leetcode.cn/problems/maximum-subgraph-score-in-a-tree) | 2235 | tree DP score |
+| 3593 | [Minimum Increments to Equalize Leaf Paths](https://leetcode.cn/problems/minimum-increments-to-equalize-leaf-paths) | 1959 | equalize leaf paths |
+| 3585 | [Find Weighted Median Node in Tree](https://leetcode.cn/problems/find-weighted-median-node-in-tree) | 2429 | weighted median query |
+| 3553 | [Minimum Weighted Subgraph with the Required Paths II](https://leetcode.cn/problems/minimum-weighted-subgraph-with-the-required-paths-ii) | 2411 | weighted subtree path |
+| 3544 | [Subtree Inversion Sum](https://leetcode.cn/problems/subtree-inversion-sum) | 2545 | subtree inversion DP |
+| 3425 | [Longest Special Path](https://leetcode.cn/problems/longest-special-path) | 2435 | special path |
+| 968 | [Binary Tree Cameras](https://leetcode.cn/problems/binary-tree-cameras) | 2124 | tree camera classic |`,
     },
     {
       id: "pitfalls",

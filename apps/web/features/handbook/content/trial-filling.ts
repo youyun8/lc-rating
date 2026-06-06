@@ -42,13 +42,13 @@ Because a higher bit outweighs all lower bits combined, decide bits from the mos
 int findMaximumXOR(vector<int>& a) {
   int best = 0, mask = 0;
   for (int b = 30; b >= 0; b--) {
-    mask |= (1 << b);                 // only consider the top bits so far
+    mask |= (1 << b);  // only consider the top bits so far
     unordered_set<int> prefixes;
     for (int x : a) prefixes.insert(x & mask);
     int candidate = best | (1 << b);  // TRY to make this bit a 1
     for (int p : prefixes) {
       if (prefixes.count(candidate ^ p)) {  // some pair achieves this prefix
-        best = candidate;             // feasible -> commit the bit
+        best = candidate;                   // feasible -> commit the bit
         break;
       }
     }
@@ -70,9 +70,9 @@ To produce the **lexicographically smallest** string, walk left to right and, at
 // Smallest string of length n with numeric value k (LC 1663)
 string getSmallestString(int n, int k) {
   string s;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     int rest = n - i - 1;  // positions after this one
-    for (int c = 1; c <= 26; c++) {
+    for (int c = 1; c <= 26; ++c) {
       int remain = k - c;  // value left for the rest
       // feasible iff 'rest' chars each in [1,26] can sum to 'remain'
       if (remain >= rest * 1 && remain <= rest * 26) {
@@ -99,7 +99,7 @@ When the answer is "the **k-th** value in lexicographic (or some structured) ord
 // K-th smallest in lexicographical order (LC 440): descend the 10-ary trie
 int findKthNumber(int n, int k) {
   long long cur = 1;
-  k--;  // cur = 1 is the 1st number
+  k--;                                       // cur = 1 is the 1st number
   auto countUnder = [&](long long prefix) {  // # numbers with this prefix, <= n
     long long steps = 0, lo = prefix, hi = prefix;
     while (lo <= n) {
@@ -111,10 +111,10 @@ int findKthNumber(int n, int k) {
   };
   while (k > 0) {
     long long cnt = countUnder(cur);
-    if (cnt <= k) {       // whole subtree is too early -> skip to next sibling
+    if (cnt <= k) {  // whole subtree is too early -> skip to next sibling
       k -= cnt;
-      cur++;
-    } else {              // answer is inside -> descend (fill next digit)
+      ++cur;
+    } else {  // answer is inside -> descend (fill next digit)
       cur *= 10;
       k--;
     }
@@ -135,6 +135,11 @@ int findKthNumber(int n, int k) {
 - **Binary search on the value.** Maximum Number That Sum of the Prices Is ≤ K (LC 3007) binary-searches the answer, and the feasibility predicate counts set bits across a range — a counting check wrapped around the search.
 
 The pattern is robust: *the construction loop stays the same; only the "can I finish?" subroutine grows in sophistication.*`,
+    },
+    {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced trial filling depends on a fast feasibility check. Fill the most significant position first, prove that the remaining suffix can still be completed, and cache or binary-search the feasibility test when direct construction is too expensive.`,
     },
     {
       id: "complexity",
@@ -168,26 +173,14 @@ Each position is decided once, so the cost is (number of positions) × (cost of 
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Fill order |
-| --- | --- | --- |
-| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bits, high → low |
-| 440 | [K-th Smallest in Lexicographical Order](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order) | trie descent |
-| 967 | [Numbers With Same Consecutive Differences](https://leetcode.cn/problems/numbers-with-same-consecutive-differences) | digits, left → right |
-| 1663 | [Smallest String With a Given Numeric Value](https://leetcode.cn/problems/smallest-string-with-a-given-numeric-value) | chars, left → right |
-| 1980 | [Find Unique Binary String](https://leetcode.cn/problems/find-unique-binary-string) | bit per position |
-| 2375 | [Construct Smallest Number From DI String](https://leetcode.cn/problems/construct-smallest-number-from-di-string) | digits, left → right |
-| 2429 | [Minimize XOR](https://leetcode.cn/problems/minimize-xor) | bits, high → low |
-
-**Advanced practice problems**
-
-| ID | Problem | Feasibility check |
-| --- | --- | --- |
-| 600 | [Non-negative Integers without Consecutive Ones](https://leetcode.cn/problems/non-negative-integers-without-consecutive-ones) | digit DP over bits |
-| 902 | [Numbers At Most N Given Digit Set](https://leetcode.cn/problems/numbers-at-most-n-given-digit-set) | digit DP count |
-| 2376 | [Count Special Integers](https://leetcode.cn/problems/count-special-integers) | digit DP with mask |
-| 2935 | [Maximum Strong Pair XOR II](https://leetcode.cn/problems/maximum-strong-pair-xor-ii) | bit trie + window |
-| 3007 | [Maximum Number with Price Sum ≤ K](https://leetcode.cn/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k) | binary search + bit count |
-| 3133 | [Minimum Array End](https://leetcode.cn/problems/minimum-array-end) | fill free bits |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3766 | [Minimum Operations to Make Binary Palindrome](https://leetcode.cn/problems/minimum-operations-to-make-binary-palindrome) | 1657 | fill bits to palindrome |
+| 3517 | [Smallest Palindromic Rearrangement I](https://leetcode.cn/problems/smallest-palindromic-rearrangement-i) | 1357 | palindrome construction |
+| 3518 | [Smallest Palindromic Rearrangement II](https://leetcode.cn/problems/smallest-palindromic-rearrangement-ii) | 2375 | k-th palindrome arrangement |
+| 3474 | [Lexicographically Smallest Generated String](https://leetcode.cn/problems/lexicographically-smallest-generated-string) | 2605 | lexicographic construction |
+| 2429 | [Minimize XOR](https://leetcode.cn/problems/minimize-xor) | 1532 | minimize XOR classic |
+| 31 | [Next Permutation](https://leetcode.cn/problems/next-permutation) | - | next permutation classic |`,
     },
     {
       id: "pitfalls",

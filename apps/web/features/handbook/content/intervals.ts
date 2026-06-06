@@ -21,7 +21,7 @@ Signals that you are looking at an interval problem:
 - "**minimum number of rooms / platforms / machines**", "maximum concurrent …"
 - "apply many **range updates**", "car pooling", "+1 over a span"
 
-The two engines below cover nearly all of them: **sort + linear merge/scan** for merging and greedy scheduling, and **sweep line / difference array** for concurrency and range updates.`,
+The two engines below cover nearly all of them: **sort + linear merge/scan** for merging and greedy scheduling, and **sweep line / difference array** for concurrency and range updates. For a deeper treatment of event ordering, active sets, coordinate compression, and rectangle sweeps, continue with [Line Sweeping](/handbook/line-sweeping).`,
     },
     {
       id: "prerequisites",
@@ -42,7 +42,8 @@ Before any sweep, the atomic question is whether **two** intervals touch at all 
 // Do closed intervals [a, b] and [c, d] overlap?
 bool overlap(vector<int>& x, vector<int>& y) {
   // Each interval must start at or before the other ends.
-  return x[0] <= y[1] && y[0] <= x[1];  // use < on both for strict crossing (no touching)
+  return x[0] <= y[1] &&
+         y[0] <= x[1];  // use < on both for strict crossing (no touching)
 }
 \`\`\`
 :::
@@ -98,7 +99,7 @@ vector<vector<int>> insert(vector<vector<int>>& iv, vector<int> nw) {
   while (i < n && iv[i][0] <= nw[1]) {                       // overlapping
     nw[0] = min(nw[0], iv[i][0]);
     nw[1] = max(nw[1], iv[i][1]);
-    i++;
+    ++i;
   }
   out.push_back(nw);
   while (i < n) out.push_back(iv[i++]);  // strictly right
@@ -123,7 +124,7 @@ int eraseOverlapIntervals(vector<vector<int>>& iv) {
   int kept = 0, end = INT_MIN;
   for (auto& x : iv) {
     if (x[0] >= end) {  // no clash with the last kept -> take it
-      kept++;
+      ++kept;
       end = x[1];
     }
   }
@@ -145,16 +146,17 @@ The **minimum number of rooms** equals the **maximum concurrency** — the large
 int minMeetingRooms(vector<vector<int>>& iv) {
   int n = iv.size();
   vector<int> starts(n), ends(n);
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     starts[i] = iv[i][0];
     ends[i] = iv[i][1];
   }
   sort(starts.begin(), starts.end());
   sort(ends.begin(), ends.end());
   int rooms = 0, best = 0, j = 0;
-  for (int i = 0; i < n; i++) {
-    while (j < n && ends[j] <= starts[i]) j++;  // a room freed before this start
-    rooms = i - j + 1;                           // active = started - finished
+  for (int i = 0; i < n; ++i) {
+    while (j < n && ends[j] <= starts[i])
+      ++j;              // a room freed before this start
+    rooms = i - j + 1;  // active = started - finished
     best = max(best, rooms);
   }
   return best;
@@ -176,8 +178,8 @@ bool carPooling(vector<vector<int>>& trips, int capacity) {
     diff[t[2]] -= t[0];  // and leave at to (half-open end)
   }
   int load = 0;
-  for (int i = 0; i <= 1000; i++) {
-    load += diff[i];               // running concurrency
+  for (int i = 0; i <= 1000; ++i) {
+    load += diff[i];  // running concurrency
     if (load > capacity) return false;
   }
   return true;
@@ -202,6 +204,11 @@ Corporate Flight Bookings (LC 1109) is the same difference-array trick for "sum 
 | Partition by reach | "split string into max parts" | track farthest needed end | [Partition Labels](https://leetcode.cn/problems/partition-labels) |`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced interval tasks come from dynamic endpoints and many queries. Convert closed/open endpoint policy first, then choose between sweep-line events, active heaps, ordered interval maps, or coordinate-compressed segment trees.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Pattern | Time | Space |
@@ -218,19 +225,14 @@ The sort is the bottleneck almost everywhere; once the data is ordered, the swee
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | sort + merge |
-| 57 | [Insert Interval](https://leetcode.cn/problems/insert-interval) | linear insert + merge |
-| 435 | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) | greedy by end |
-| 452 | [Burst Balloons (arrows)](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons) | greedy by end |
-| 253 | [Meeting Rooms II](https://leetcode.cn/problems/meeting-rooms-ii) | sweep / min-heap |
-| 1094 | [Car Pooling](https://leetcode.cn/problems/car-pooling) | difference array |
-| 1109 | [Corporate Flight Bookings](https://leetcode.cn/problems/corporate-flight-bookings) | difference array |
-| 763 | [Partition Labels](https://leetcode.cn/problems/partition-labels) | farthest-reach sweep |
-| 986 | [Interval List Intersections](https://leetcode.cn/problems/interval-list-intersections) | two pointers |
-| 759 | [Employee Free Time](https://leetcode.cn/problems/employee-free-time) | merge then gaps |
-| 218 | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) | sweep + max-heap |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3454 | [Separate Squares II](https://leetcode.cn/problems/separate-squares-ii) | 2671 | line sweep / area |
+| 3480 | [Maximize Subarrays After Removing One Conflicting Pair](https://leetcode.cn/problems/maximize-subarrays-after-removing-one-conflicting-pair) | 2764 | conflict intervals |
+| 3439 | [Reschedule Meetings for Maximum Free Time I](https://leetcode.cn/problems/reschedule-meetings-for-maximum-free-time-i) | 1729 | meeting reschedule |
+| 2406 | [Divide Intervals Into Minimum Number of Groups](https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups) | 1713 | minimum groups |
+| 1851 | [Minimum Interval to Include Each Query](https://leetcode.cn/problems/minimum-interval-to-include-each-query) | 2286 | offline interval heap |
+| 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | - | merge intervals classic |`,
     },
     {
       id: "pitfalls",

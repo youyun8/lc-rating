@@ -30,8 +30,8 @@ bool likelyFits(long long operations, double seconds = 2.0) {
 
 // Example: n = 2e5 -> O(n log n) is fine, O(n^2) is not.
 long long n = 200000;
-cout << likelyFits((long long)n * 20) << "\\n";      // O(n log n)
-cout << likelyFits((long long)n * n) << "\\n";       // O(n^2)
+cout << likelyFits((long long)n * 20) << "\\n";  // O(n log n)
+cout << likelyFits((long long)n * n) << "\\n";   // O(n^2)
 \`\`\``,
     },
     {
@@ -150,9 +150,7 @@ long long mulMod(long long a, long long b, long long mod) {
   return (__int128)normMod(a, mod) * normMod(b, mod) % mod;
 }
 
-long long safeMid(long long l, long long r) {
-  return l + (r - l) / 2;
-}
+long long safeMid(long long l, long long r) { return l + (r - l) / 2; }
 
 long long safeLcm(long long a, long long b) {
   return a / std::gcd(a, b) * b;  // divide first
@@ -183,7 +181,7 @@ void dbgPrint(const pair<A, B>& p) {
 template <class T>
 void dbgPrint(const vector<T>& v) {
   cerr << "[";
-  for (int i = 0; i < (int)v.size(); i++) {
+  for (int i = 0; i < (int)v.size(); ++i) {
     if (i) {
       cerr << ", ";  // separator between elements
     }
@@ -192,13 +190,14 @@ void dbgPrint(const vector<T>& v) {
   cerr << "]";
 }
 
-// dbg(x) prints "x = <value>" to stderr in LOCAL builds; becomes a no-op in judge submissions.
+// dbg(x) prints "x = <value>" to stderr in LOCAL builds; becomes a no-op in
+// judge submissions.
 #ifdef LOCAL
-#define dbg(x)                         \\
-  do {                                 \\
-    cerr << #x << " = ";               \\
-    dbgPrint(x);                       \\
-    cerr << "\\n";                     \\
+#define dbg(x)        \\
+  do {                \\
+    cerr << #x << " = "; \\
+    dbgPrint(x);     \\
+    cerr << "\\n";   \\
   } while (0)
 #else
 #define dbg(x) ((void)0)
@@ -212,19 +211,12 @@ void dbgPrint(const vector<T>& v) {
 
 \`\`\`cpp
 // Example harness for an array problem. Replace solveVec with your function.
-int solveVec(vector<int> a) {
-  return (int)a.size();
-}
+int solveVec(vector<int> a) { return (int)a.size(); }
 
 void runEdgeCases() {
   vector<vector<int>> tests = {
-      {},
-      {1},
-      {1, 1, 1},
-      {1, 2, 3, 4},
-      {4, 3, 2, 1},
-      {-5, 0, 5},
-      {INT_MAX, INT_MAX},
+      {},           {1},        {1, 1, 1},          {1, 2, 3, 4},
+      {4, 3, 2, 1}, {-5, 0, 5}, {INT_MAX, INT_MAX},
   };
 
   for (auto t : tests) {
@@ -246,9 +238,9 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 // O(n^2) brute force: try every subarray; used as the reference answer.
 int brute(vector<int> a) {
   int best = 0;
-  for (int l = 0; l < (int)a.size(); l++) {
+  for (int l = 0; l < (int)a.size(); ++l) {
     int sum = 0;
-    for (int r = l; r < (int)a.size(); r++) {
+    for (int r = l; r < (int)a.size(); ++r) {
       sum += a[r];
       best = max(best, sum);
     }
@@ -266,9 +258,10 @@ int fast(vector<int> a) {
   return best;
 }
 
-// Run 10000 random small cases and compare brute vs fast; print divergence and exit.
+// Run 10000 random small cases and compare brute vs fast; print divergence and
+// exit.
 void stress() {
-  for (int it = 0; it < 10000; it++) {
+  for (int it = 0; it < 10000; ++it) {
     int n = uniform_int_distribution<int>(1, 10)(rng);
     vector<int> a(n);
     for (int& x : a) {
@@ -318,7 +311,7 @@ int maxNonOverlapping(vector<pair<int, int>> intervals) {
   int ans = 0, lastEnd = INT_MIN;
   for (auto [l, r] : intervals) {
     if (l >= lastEnd) {
-      ans++;
+      ++ans;
       lastEnd = r;
     }
   }
@@ -333,7 +326,7 @@ int maxNonOverlapping(vector<pair<int, int>> intervals) {
 int minCostClimbingStairs(vector<int>& cost) {
   int n = cost.size();
   vector<int> dp(n + 1, 0);
-  for (int i = 2; i <= n; i++) {
+  for (int i = 2; i <= n; ++i) {
     dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
   }
   return dp[n];
@@ -346,8 +339,9 @@ int minCostClimbingStairs(vector<int>& cost) {
       body: `Some judges include adversarial keys that make \`unordered_map\` slow. A splitmix64 custom hash keeps expected performance stable.
 
 \`\`\`cpp
-// CustomHash: wraps splitmix64 to give unordered_map a collision-resistant hash,
-// defending against anti-hash tests that exploit the default identity hash.
+// CustomHash: wraps splitmix64 to give unordered_map a collision-resistant
+// hash, defending against anti-hash tests that exploit the default identity
+// hash.
 struct CustomHash {
   // splitmix64 bijection: avalanches all input bits across the 64-bit output.
   static uint64_t splitmix64(uint64_t x) {
@@ -368,6 +362,11 @@ struct CustomHash {
 
 unordered_map<long long, int, CustomHash> safeCount;
 \`\`\``,
+    },
+    {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `For harder contests, pair the basic template with stress testing and invariant checks. Reduce constants only after the asymptotic choice is fixed, keep a brute-force oracle for small cases, and use randomized tests to catch boundary bugs before optimizing.`,
     },
     {
       id: "complexity",
@@ -405,6 +404,18 @@ unordered_map<long long, int, CustomHash> safeCount;
 
 - The hardest call is **greedy vs DP**: only use greedy when an exchange argument proves the local choice never hurts; otherwise fall back to DP.
 - **Binary search on answer** is the pattern most often missed — whenever feasibility is monotone in the answer, prefer it over hand-rolled greedy search.`,
+    },
+    {
+      id: "problems",
+      title: "LeetCode problems",
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3427 | [Sum of Variable Length Subarrays](https://leetcode.cn/problems/sum-of-variable-length-subarrays) | 1216 | prefix basics / constraints |
+| 3522 | [Calculate Score After Performing Instructions](https://leetcode.cn/problems/calculate-score-after-performing-instructions) | 1239 | simulation / state tracing |
+| 3541 | [Find Most Frequent Vowel and Consonant](https://leetcode.cn/problems/find-most-frequent-vowel-and-consonant) | 1239 | frequency counting |
+| 3545 | [Minimum Deletions for at Most K Distinct Characters](https://leetcode.cn/problems/minimum-deletions-for-at-most-k-distinct-characters) | 1211 | counting / greedy |
+| 3402 | [Minimum Operations to Make Columns Strictly Increasing](https://leetcode.cn/problems/minimum-operations-to-make-columns-strictly-increasing) | 1246 | matrix constraints |
+| 3502 | [Minimum Cost to Reach Every Position](https://leetcode.cn/problems/minimum-cost-to-reach-every-position) | 1244 | array scan |`,
     },
     {
       id: "pitfalls",

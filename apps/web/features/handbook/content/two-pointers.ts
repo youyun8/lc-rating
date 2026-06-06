@@ -54,7 +54,7 @@ vector<int> twoSum(vector<int>& a, int target) {
     int sum = a[l] + a[r];
     if (sum == target) return {l + 1, r + 1};
     if (sum < target) {
-      l++;  // need a bigger value
+      ++l;  // need a bigger value
     } else {
       r--;  // need a smaller value
     }
@@ -74,8 +74,10 @@ int maxArea(vector<int>& h) {
   while (l < r) {
     int area = min(h[l], h[r]) * (r - l);
     best = max(best, area);
-    if (h[l] < h[r]) l++;    // move the shorter wall; the taller can't help
-    else r--;
+    if (h[l] < h[r])
+      ++l;  // move the shorter wall; the taller can't help
+    else
+      r--;
   }
   return best;
 }
@@ -92,8 +94,9 @@ bool isPalindrome(string s) {
   while (l < r) {
     while (l < r && !isalnum((unsigned char)s[l])) l++;
     while (l < r && !isalnum((unsigned char)s[r])) r--;
-    if (tolower((unsigned char)s[l]) != tolower((unsigned char)s[r])) return false;
-    l++;
+    if (tolower((unsigned char)s[l]) != tolower((unsigned char)s[r]))
+      return false;
+    ++l;
     r--;
   }
   return true;
@@ -115,10 +118,10 @@ Keep an element only when it differs from the last one written. \`slow\` ends as
 // Remove duplicates from a sorted array in place (LC 26)
 int removeDuplicates(vector<int>& a) {
   if (a.empty()) return 0;
-  int slow = 0;                       // last unique position written
-  for (int fast = 1; fast < (int)a.size(); fast++) {
+  int slow = 0;  // last unique position written
+  for (int fast = 1; fast < (int)a.size(); ++fast) {
     if (a[fast] != a[slow]) {
-      a[++slow] = a[fast];            // write the next distinct value
+      a[++slow] = a[fast];  // write the next distinct value
     }
   }
   return slow + 1;
@@ -133,10 +136,10 @@ int removeDuplicates(vector<int>& a) {
 // Move all zeroes to the end, keeping order (LC 283)
 void moveZeroes(vector<int>& a) {
   int slow = 0;
-  for (int fast = 0; fast < (int)a.size(); fast++) {
+  for (int fast = 0; fast < (int)a.size(); ++fast) {
     if (a[fast] != 0) {
-      swap(a[slow], a[fast]);         // bring the non-zero to the front block
-      slow++;
+      swap(a[slow], a[fast]);  // bring the non-zero to the front block
+      ++slow;
     }
   }
 }
@@ -159,18 +162,20 @@ vector<vector<int>> threeSum(vector<int>& a) {
   sort(a.begin(), a.end());
   vector<vector<int>> res;
   int n = a.size();
-  for (int i = 0; i + 2 < n; i++) {
-    if (i > 0 && a[i] == a[i - 1]) continue;   // dedup the anchor
+  for (int i = 0; i + 2 < n; ++i) {
+    if (i > 0 && a[i] == a[i - 1]) continue;  // dedup the anchor
     int l = i + 1, r = n - 1;
     while (l < r) {
       int sum = a[i] + a[l] + a[r];
-      if (sum < 0) l++;
-      else if (sum > 0) r--;
+      if (sum < 0)
+        ++l;
+      else if (sum > 0)
+        r--;
       else {
         res.push_back({a[i], a[l], a[r]});
         while (l < r && a[l] == a[l + 1]) l++;  // dedup left
         while (l < r && a[r] == a[r - 1]) r--;  // dedup right
-        l++;
+        ++l;
         r--;
       }
     }
@@ -188,9 +193,12 @@ Three pointers carve the array into [0s | 1s | unscanned | 2s]. \`lo\` is the 0/
 void sortColors(vector<int>& a) {
   int lo = 0, i = 0, hi = (int)a.size() - 1;
   while (i <= hi) {
-    if (a[i] == 0) swap(a[lo++], a[i++]);
-    else if (a[i] == 2) swap(a[i], a[hi--]);  // do NOT i++ here
-    else i++;
+    if (a[i] == 0)
+      swap(a[lo++], a[i++]);
+    else if (a[i] == 2)
+      swap(a[i], a[hi--]);  // do NOT i++ here
+    else
+      ++i;
   }
 }
 \`\`\`
@@ -214,13 +222,13 @@ ListNode* detectCycle(ListNode* head) {
   while (fast && fast->next) {
     slow = slow->next;
     fast = fast->next->next;
-    if (slow == fast) {                 // cycle confirmed
+    if (slow == fast) {  // cycle confirmed
       ListNode* p = head;
-      while (p != slow) {               // both move one step now
+      while (p != slow) {  // both move one step now
         p = p->next;
         slow = slow->next;
       }
-      return p;                         // cycle entrance
+      return p;  // cycle entrance
     }
   }
   return nullptr;
@@ -243,8 +251,10 @@ The exact pointer mechanics — finding the middle, detecting and entering a cyc
 void merge(vector<int>& a, int m, vector<int>& b, int n) {
   int i = m - 1, j = n - 1, k = m + n - 1;
   while (j >= 0) {
-    if (i >= 0 && a[i] > b[j]) a[k--] = a[i--];
-    else a[k--] = b[j--];               // b exhausted last, so drive on j
+    if (i >= 0 && a[i] > b[j])
+      a[k--] = a[i--];
+    else
+      a[k--] = b[j--];  // b exhausted last, so drive on j
   }
 }
 \`\`\`
@@ -267,6 +277,11 @@ The front-to-back version produces the merged list for Merge Two Sorted Lists (L
 | Merge two sorted | combine sorted inputs | compare fronts (or backs) | [Merge Sorted Array](https://leetcode.cn/problems/merge-sorted-array) |`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Hard two-pointer problems hide the monotonic dimension. Sort or transform the data until moving one pointer only helps in one direction; for kSum, fix anchors recursively and let the innermost layer use the converging sweep.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Variant | Time | Space |
@@ -284,22 +299,14 @@ The pointer logic itself is always linear; whenever you see \`O(n log n)\` it is
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 11 | [Container With Most Water](https://leetcode.cn/problems/container-with-most-water) | opposite ends |
-| 15 | [3Sum](https://leetcode.cn/problems/3sum) | fixed anchor + sweep |
-| 16 | [3Sum Closest](https://leetcode.cn/problems/3sum-closest) | fixed anchor + sweep |
-| 26 | [Remove Duplicates from Sorted Array](https://leetcode.cn/problems/remove-duplicates-from-sorted-array) | slow/fast write |
-| 42 | [Trapping Rain Water](https://leetcode.cn/problems/trapping-rain-water) | opposite ends |
-| 75 | [Sort Colors](https://leetcode.cn/problems/sort-colors) | three-way partition |
-| 88 | [Merge Sorted Array](https://leetcode.cn/problems/merge-sorted-array) | merge from back |
-| 125 | [Valid Palindrome](https://leetcode.cn/problems/valid-palindrome) | opposite ends |
-| 142 | [Linked List Cycle II](https://leetcode.cn/problems/linked-list-cycle-ii) | fast & slow |
-| 167 | [Two Sum II](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted) | opposite ends |
-| 283 | [Move Zeroes](https://leetcode.cn/problems/move-zeroes) | slow/fast write |
-| 287 | [Find the Duplicate Number](https://leetcode.cn/problems/find-the-duplicate-number) | fast & slow |
-| 680 | [Valid Palindrome II](https://leetcode.cn/problems/valid-palindrome-ii) | opposite ends + skip |
-| 844 | [Backspace String Compare](https://leetcode.cn/problems/backspace-string-compare) | reverse two pointers |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3455 | [Shortest Matching Substring](https://leetcode.cn/problems/shortest-matching-substring) | 2303 | two pointers / string matching |
+| 3633 | [Earliest Finish Time for Land and Water Rides I](https://leetcode.cn/problems/earliest-finish-time-for-land-and-water-rides-i) | 1343 | two arrays / earliest finish |
+| 3635 | [Earliest Finish Time for Land and Water Rides II](https://leetcode.cn/problems/earliest-finish-time-for-land-and-water-rides-ii) | 1870 | two arrays / sorting |
+| 3722 | [Lexicographically Smallest String After Reverse](https://leetcode.cn/problems/lexicographically-smallest-string-after-reverse) | 1414 | binary search + reverse |
+| 3766 | [Minimum Operations to Make Binary Palindrome](https://leetcode.cn/problems/minimum-operations-to-make-binary-palindrome) | 1657 | two pointers / bit palindrome |
+| 15 | [3Sum](https://leetcode.cn/problems/3sum) | - | fixed anchor classic |`,
     },
     {
       id: "pitfalls",

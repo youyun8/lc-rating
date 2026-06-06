@@ -55,7 +55,7 @@ Related: [Sliding Window](/handbook/sliding-window), [Trees](/handbook/trees), [
 long long sumOfAllSubarraySums(vector<int>& a) {
   int n = a.size();
   long long total = 0;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     total += 1LL * a[i] * (i + 1) * (n - i);  // # subarrays covering index i
   }
   return total;
@@ -70,12 +70,13 @@ long long sumOfAllSubarraySums(vector<int>& a) {
       body: `When $f(\\text{subarray})$ is a **min** or **max**, attribute each subarray to its extreme element. For $a_i$, find the maximal span $[\\text{left}, \\text{right}]$ over which it stays the minimum; it is then the minimum of $\\text{left} \\cdot \\text{right}$ subarrays, contributing $a_i \\cdot \\text{left} \\cdot \\text{right}$. A [Monotonic Stack](/handbook/monotonic-stack-vs-deque) computes both boundaries in $O(n)$.
 
 \`\`\`cpp
-// left[i]*right[i] = # subarrays where a[i] is the minimum; sum the contributions
+// left[i]*right[i] = # subarrays where a[i] is the minimum; sum the
+// contributions
 long long sumSubarrayMins(vector<int>& a) {
   int n = a.size();
   vector<int> left(n), right(n);
   stack<int> st;
-  for (int i = 0; i < n; i++) {  // strictly-smaller element to the left
+  for (int i = 0; i < n; ++i) {  // strictly-smaller element to the left
     while (!st.empty() && a[st.top()] >= a[i]) st.pop();
     left[i] = st.empty() ? i + 1 : i - st.top();
     st.push(i);
@@ -87,7 +88,7 @@ long long sumSubarrayMins(vector<int>& a) {
     st.push(i);
   }
   long long total = 0;
-  for (int i = 0; i < n; i++) total += 1LL * a[i] * left[i] * right[i];
+  for (int i = 0; i < n; ++i) total += 1LL * a[i] * left[i] * right[i];
   return total;
 }
 \`\`\`
@@ -104,7 +105,7 @@ For sums of **XOR / AND / OR** or Hamming distances over all pairs or subsets, t
 // Total Hamming Distance between all pairs (LC 477)
 int totalHammingDistance(vector<int>& a) {
   int n = a.size(), total = 0;
-  for (int b = 0; b < 30; b++) {
+  for (int b = 0; b < 30; ++b) {
     int ones = 0;
     for (int x : a) ones += (x >> b) & 1;
     total += ones * (n - ones);  // each (one, zero) pair differs in bit b
@@ -140,7 +141,7 @@ long long sumPairwiseAbsDiff(vector<int> a) {
   sort(a.begin(), a.end());
   int n = a.size();
   long long total = 0, prefix = 0;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     total += 1LL * i * a[i] - prefix;  // a[i] beats the i smaller elements
     prefix += a[i];
   }
@@ -164,9 +165,9 @@ int sumSubseqWidths(vector<int>& a) {
   int n = a.size();
   vector<long long> pw(n);
   pw[0] = 1;
-  for (int i = 1; i < n; i++) pw[i] = pw[i - 1] * 2 % MOD;
+  for (int i = 1; i < n; ++i) pw[i] = pw[i - 1] * 2 % MOD;
   long long total = 0;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     // a[i] is the max of 2^i subseqs and the min of 2^(n-1-i)
     total = (total + (pw[i] - pw[n - 1 - i]) * a[i]) % MOD;
   }
@@ -203,6 +204,11 @@ long long sumAllPairDistances(int n, vector<vector<int>>& g) {
 Weight the term by the edge cost for weighted trees; Minimum Fuel Cost to Report to the Capital (LC 2477) sums $\\lceil s / \\text{seats} \\rceil$ per edge. Note that Sum of Distances in Tree (LC 834) — distances from *every* node — instead needs [rerooting](/handbook/trees), a close cousin of edge contribution.`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Hard contribution problems usually combine two decompositions: first choose the owner of a value, bit, edge, or boundary; then count how many objects it owns. Monotonic stacks, sorted order, and subtree sizes are common helpers for making that ownership unique.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Pattern | Time | Space |
@@ -236,28 +242,14 @@ The win is always the same: an $O(n^2)$ or $O(2^n)$ enumeration becomes near-lin
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Pattern |
-| --- | --- | --- |
-| 477 | [Total Hamming Distance](https://leetcode.cn/problems/total-hamming-distance) | per-bit |
-| 891 | [Sum of Subsequence Widths](https://leetcode.cn/problems/sum-of-subsequence-widths) | subsequence powers of two |
-| 907 | [Sum of Subarray Minimums](https://leetcode.cn/problems/sum-of-subarray-minimums) | min domination |
-| 1588 | [Sum of All Odd Length Subarrays](https://leetcode.cn/problems/sum-of-all-odd-length-subarrays) | positional count |
-| 1685 | [Sum of Absolute Differences](https://leetcode.cn/problems/sum-of-absolute-differences-in-a-sorted-array) | pairwise |
-| 1769 | [Move All Balls to Each Box](https://leetcode.cn/problems/minimum-number-of-operations-to-move-all-balls-to-each-box) | prefix contribution |
-| 1863 | [Sum of All Subset XOR Totals](https://leetcode.cn/problems/sum-of-all-subset-xor-totals) | per-bit |
-| 2104 | [Sum of Subarray Ranges](https://leetcode.cn/problems/sum-of-subarray-ranges) | min + max domination |
-
-**Advanced practice problems**
-
-| ID | Problem | Pattern |
-| --- | --- | --- |
-| 834 | [Sum of Distances in Tree](https://leetcode.cn/problems/sum-of-distances-in-tree) | rerooting / edge contribution |
-| 1856 | [Maximum Subarray Min-Product](https://leetcode.cn/problems/maximum-subarray-min-product) | min span + prefix sums |
-| 2281 | [Sum of Total Strength of Wizards](https://leetcode.cn/problems/sum-of-total-strength-of-wizards) | min domination + double prefix |
-| 2477 | [Minimum Fuel Cost to Report to the Capital](https://leetcode.cn/problems/minimum-fuel-cost-to-report-to-the-capital) | tree edge contribution |
-| 2588 | [Count the Number of Beautiful Subarrays](https://leetcode.cn/problems/count-the-number-of-beautiful-subarrays) | per-bit prefix XOR |
-| 2615 | [Sum of Distances](https://leetcode.cn/problems/sum-of-distances) | pairwise by value |
-| 2681 | [Power of Heroes](https://leetcode.cn/problems/power-of-heroes) | subsequence powers of two |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3480 | [Maximize Subarrays After Removing One Conflicting Pair](https://leetcode.cn/problems/maximize-subarrays-after-removing-one-conflicting-pair) | 2764 | conflict pair contribution |
+| 3428 | [Maximum and Minimum Sums of at Most Size K Subsequences](https://leetcode.cn/problems/maximum-and-minimum-sums-of-at-most-size-k-subsequences) | 2028 | subsequence contribution |
+| 3434 | [Maximum Frequency After Subarray Operation](https://leetcode.cn/problems/maximum-frequency-after-subarray-operation) | 2094 | frequency contribution |
+| 3529 | [Count Cells in Overlapping Horizontal and Vertical Substrings](https://leetcode.cn/problems/count-cells-in-overlapping-horizontal-and-vertical-substrings) | 2105 | overlap contribution |
+| 2104 | [Sum of Subarray Ranges](https://leetcode.cn/problems/sum-of-subarray-ranges) | 1504 | subarray min/max contribution |
+| 2281 | [Sum of Total Strength of Wizards](https://leetcode.cn/problems/sum-of-total-strength-of-wizards) | 2621 | prefix contribution classic |`,
     },
     {
       id: "pitfalls",

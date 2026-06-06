@@ -59,10 +59,10 @@ int numIslands(vector<vector<char>>& g) {
     sink(r, c - 1);
     sink(r, c + 1);
   };
-  for (int r = 0; r < m; r++) {
-    for (int c = 0; c < n; c++) {
+  for (int r = 0; r < m; ++r) {
+    for (int c = 0; c < n; ++c) {
       if (g[r][c] == '1') {
-        count++;
+        ++count;
         sink(r, c);
       }
     }
@@ -85,22 +85,22 @@ When something spreads simultaneously from several origins, seed the BFS queue w
 int orangesRotting(vector<vector<int>>& g) {
   int m = g.size(), n = g[0].size(), fresh = 0, minutes = 0;
   queue<pair<int, int>> q;
-  for (int r = 0; r < m; r++) {
-    for (int c = 0; c < n; c++) {
+  for (int r = 0; r < m; ++r) {
+    for (int c = 0; c < n; ++c) {
       if (g[r][c] == 2) {
         q.push({r, c});  // every rotten cell is a source
       } else if (g[r][c] == 1) {
-        fresh++;
+        ++fresh;
       }
     }
   }
   const int dx[4] = {-1, 1, 0, 0}, dy[4] = {0, 0, -1, 1};
   while (!q.empty() && fresh) {
     int sz = q.size();
-    for (int i = 0; i < sz; i++) {
+    for (int i = 0; i < sz; ++i) {
       auto [r, c] = q.front();
       q.pop();
-      for (int d = 0; d < 4; d++) {
+      for (int d = 0; d < 4; ++d) {
         int nr = r + dx[d], nc = c + dy[d];
         if (nr >= 0 && nr < m && nc >= 0 && nc < n && g[nr][nc] == 1) {
           g[nr][nc] = 2;
@@ -109,7 +109,7 @@ int orangesRotting(vector<vector<int>>& g) {
         }
       }
     }
-    minutes++;
+    ++minutes;
   }
   return fresh ? -1 : minutes;
 }
@@ -137,14 +137,14 @@ int shortestPathBinaryMatrix(vector<vector<int>>& g) {
   int dist = 1;
   while (!q.empty()) {
     int sz = q.size();
-    for (int i = 0; i < sz; i++) {
+    for (int i = 0; i < sz; ++i) {
       auto [r, c] = q.front();
       q.pop();
       if (r == n - 1 && c == n - 1) {
         return dist;
       }
-      for (int dr = -1; dr <= 1; dr++) {
-        for (int dc = -1; dc <= 1; dc++) {
+      for (int dr = -1; dr <= 1; ++dr) {
+        for (int dc = -1; dc <= 1; ++dc) {
           int nr = r + dr, nc = c + dc;
           if (nr >= 0 && nr < n && nc >= 0 && nc < n && g[nr][nc] == 0) {
             g[nr][nc] = 1;
@@ -153,7 +153,7 @@ int shortestPathBinaryMatrix(vector<vector<int>>& g) {
         }
       }
     }
-    dist++;
+    ++dist;
   }
   return -1;
 }
@@ -186,8 +186,8 @@ bool exist(vector<vector<char>>& b, string word) {
     b[r][c] = tmp;  // restore (backtrack)
     return found;
   };
-  for (int r = 0; r < m; r++) {
-    for (int c = 0; c < n; c++) {
+  for (int r = 0; r < m; ++r) {
+    for (int c = 0; c < n; ++c) {
       if (dfs(r, c, 0)) {
         return true;
       }
@@ -209,8 +209,8 @@ Layout problems are about index arithmetic, not algorithms.
 // rows
 void rotate(vector<vector<int>>& a) {
   int n = a.size();
-  for (int i = 0; i < n; i++) {
-    for (int j = i + 1; j < n; j++) {
+  for (int i = 0; i < n; ++i) {
+    for (int j = i + 1; j < n; ++j) {
       swap(a[i][j], a[j][i]);
     }
   }
@@ -245,7 +245,7 @@ int swimInWater(vector<vector<int>>& grid) {
     if (r == n - 1 && c == n - 1) {
       return t;
     }
-    for (int d = 0; d < 4; d++) {
+    for (int d = 0; d < 4; ++d) {
       int nr = r + dx[d], nc = c + dy[d];
       if (nr >= 0 && nr < n && nc >= 0 && nc < n && !seen[nr][nc]) {
         seen[nr][nc] = 1;
@@ -272,8 +272,8 @@ When grid dimensions are small in one direction (\`cols <= ~12\`), DP over **row
 int maxStudents(vector<vector<char>>& seats) {
   int m = seats.size(), n = seats[0].size();
   vector<int> good(m, 0);
-  for (int i = 0; i < m; i++) {
-    for (int j = 0; j < n; j++) {
+  for (int i = 0; i < m; ++i) {
+    for (int j = 0; j < n; ++j) {
       if (seats[i][j] == '.') {
         good[i] |= (1 << j);
       }
@@ -285,12 +285,12 @@ int maxStudents(vector<vector<char>>& seats) {
   vector<vector<int>> dp(m + 1, vector<int>(1 << n, -1));
   dp[0][0] = 0;
   int best = 0;
-  for (int i = 0; i < m; i++) {
-    for (int prev = 0; prev < (1 << n); prev++) {
+  for (int i = 0; i < m; ++i) {
+    for (int prev = 0; prev < (1 << n); ++prev) {
       if (dp[i][prev] < 0) {
         continue;
       }
-      for (int cur = 0; cur < (1 << n); cur++) {
+      for (int cur = 0; cur < (1 << n); ++cur) {
         if (!ok(i, cur)) {
           continue;
         }
@@ -356,41 +356,16 @@ Recurring lesson: when plain BFS/DFS is too weak, *enrich the state* (keys, fuel
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 48 / 54 / 73 | [Rotate Image](https://leetcode.cn/problems/rotate-image) / [Spiral](https://leetcode.cn/problems/spiral-matrix) / [Set Zeroes](https://leetcode.cn/problems/set-matrix-zeroes) | in-place transforms |
-| 64 | [Minimum Path Sum](https://leetcode.cn/problems/minimum-path-sum) | grid DP |
-| 79 | [Word Search](https://leetcode.cn/problems/word-search) | backtracking |
-| 130 | [Surrounded Regions](https://leetcode.cn/problems/surrounded-regions) | border flood |
-| 200 | [Number of Islands](https://leetcode.cn/problems/number-of-islands) | flood fill |
-| 417 | [Pacific Atlantic Water Flow](https://leetcode.cn/problems/pacific-atlantic-water-flow) | reverse multi-flood |
-| 542 | [01 Matrix](https://leetcode.cn/problems/01-matrix) | multi-source BFS |
-| 695 | [Max Area of Island](https://leetcode.cn/problems/max-area-of-island) | flood fill + size |
-| 994 | [Rotting Oranges](https://leetcode.cn/problems/rotting-oranges) | multi-source BFS |
-| 1091 | [Shortest Path in Binary Matrix](https://leetcode.cn/problems/shortest-path-in-binary-matrix) | BFS (8-dir) |
-| 1293 | [Shortest Path with Obstacles](https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination) | BFS with state |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 407 | [Trapping Rain Water II](https://leetcode.cn/problems/trapping-rain-water-ii) | heap BFS |
-| 778 | [Swim in Rising Water](https://leetcode.cn/problems/swim-in-rising-water) | min-max Dijkstra |
-| 864 | [Shortest Path to Get All Keys](https://leetcode.cn/problems/shortest-path-to-get-all-keys) | BFS with bitmask state |
-| 2258 | [Escape the Spreading Fire](https://leetcode.cn/problems/escape-the-spreading-fire) | BFS + binary search |
-| 2577 | [Minimum Time to Visit a Cell In a Grid](https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid) | Dijkstra |
-| 2684 | [Maximum Number of Moves in a Grid](https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid) | DP / BFS |
-| 2812 | [Find the Safest Path in a Grid](https://leetcode.cn/problems/find-the-safest-path-in-a-grid) | multi-source BFS + binary search |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3240 | [Minimum Number of Flips to Make Binary Grid Palindromic II](https://leetcode.cn/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-ii) | 2080 | grid + greedy/counting |
-| 3552 | [Grid Teleportation Traversal](https://leetcode.cn/problems/grid-teleportation-traversal) | 2036 | 0-1 BFS |
-| 3122 | [Minimum Number of Operations to Satisfy Conditions](https://leetcode.cn/problems/minimum-number-of-operations-to-satisfy-conditions) | 1905 | grid DP / counting |
-| 3665 | [Twisted Mirror Path Count](https://leetcode.cn/problems/twisted-mirror-path-count) | 1883 | grid DFS / DP |
-| 3742 | [Maximum Path Score in a Grid](https://leetcode.cn/problems/maximum-path-score-in-a-grid) | 1804 | grid DP |`,
+| 3742 | [Maximum Path Score in a Grid](https://leetcode.cn/problems/maximum-path-score-in-a-grid) | 1804 | grid DP |
+| 3665 | [Twisted Mirror Path Count](https://leetcode.cn/problems/twisted-mirror-path-count) | 1883 | mirror path DP |
+| 3619 | [Count Islands with Total Value Divisible by K](https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k) | 1461 | island components |
+| 3568 | [Minimum Moves to Clean the Classroom](https://leetcode.cn/problems/minimum-moves-to-clean-the-classroom) | 2143 | state BFS |
+| 3552 | [Grid Teleportation Traversal](https://leetcode.cn/problems/grid-teleportation-traversal) | 2036 | portal BFS |
+| 3548 | [Equal Sum Grid Partition II](https://leetcode.cn/problems/equal-sum-grid-partition-ii) | 2245 | matrix prefix split |
+| 3459 | [Length of Longest V Shaped Diagonal Segment](https://leetcode.cn/problems/length-of-longest-v-shaped-diagonal-segment) | 2531 | diagonal DP |
+| 200 | [Number of Islands](https://leetcode.cn/problems/number-of-islands) | - | flood fill classic |`,
     },
     {
       id: "pitfalls",

@@ -108,7 +108,7 @@ class LFUCache {
     int f = it->freq, key = it->key, val = it->val;
     buckets[f].erase(it);
     if (buckets[f].empty() && f == minFreq) {
-      minFreq++;  // that bucket is gone, next-least is f+1
+      ++minFreq;  // that bucket is gone, next-least is f+1
     }
     buckets[f + 1].push_front({key, val, f + 1});
     pos[key] = buckets[f + 1].begin();
@@ -335,6 +335,11 @@ If timestamps could arrive *out of order*, swap the \`vector\` for a \`map<int, 
 | Trie-backed lookup | prefix / wildcard membership | character-indexed trie nodes, DFS for \`.\` | [Add and Search Words](https://leetcode.cn/problems/design-add-and-search-words-data-structure) |`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced design problems are mostly synchronization problems. Keep one canonical source of truth, derive every heap/set/index from it, and make updates transactional: remove old index entries, mutate the truth, then insert fresh index entries.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Design | Operation | Cost |
@@ -356,21 +361,20 @@ The whole point of the genre is that *every* listed operation lands at \`O(1)\` 
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 146 | [LRU Cache](https://leetcode.cn/problems/lru-cache) | hashmap + list |
-| 155 | [Min Stack](https://leetcode.cn/problems/min-stack) | auxiliary stack |
-| 208 | [Implement Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) | trie nodes |
-| 211 | [Add and Search Words](https://leetcode.cn/problems/design-add-and-search-words-data-structure) | trie + DFS wildcard |
-| 295 | [Find Median from Data Stream](https://leetcode.cn/problems/find-median-from-data-stream) | two heaps |
-| 355 | [Design Twitter](https://leetcode.cn/problems/design-twitter) | hashmap + heap |
-| 380 | [Insert Delete GetRandom O(1)](https://leetcode.cn/problems/insert-delete-getrandom-o1) | array + hashmap |
-| 460 | [LFU Cache](https://leetcode.cn/problems/lfu-cache) | frequency buckets |
-| 622 | [Design Circular Queue](https://leetcode.cn/problems/design-circular-queue) | ring buffer |
-| 705 | [Design HashSet](https://leetcode.cn/problems/design-hashset) | buckets + chaining |
-| 706 | [Design HashMap](https://leetcode.cn/problems/design-hashmap) | buckets + chaining |
-| 981 | [Time Based Key-Value Store](https://leetcode.cn/problems/time-based-key-value-store) | versioned binary search |
-| 1472 | [Design Browser History](https://leetcode.cn/problems/design-browser-history) | stack / array + cursor |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3709 | [Design Exam Scores Tracker](https://leetcode.cn/problems/design-exam-scores-tracker) | 1648 | prefix-index design |
+| 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | router queue / ordered set |
+| 3484 | [Design Spreadsheet](https://leetcode.cn/problems/design-spreadsheet) | 1524 | spreadsheet state |
+| 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | task manager / heap |
+| 2353 | [Design a Food Rating System](https://leetcode.cn/problems/design-a-food-rating-system) | 1782 | multi-index ratings |
+| 2102 | [Sequentially Ordinal Rank Tracker](https://leetcode.cn/problems/sequentially-ordinal-rank-tracker) | 2159 | rank tracker |
+| 1912 | [Design Movie Rental System](https://leetcode.cn/problems/design-movie-rental-system) | 2182 | movie rental / multi-index |
+| 1825 | [Finding Mk Average](https://leetcode.cn/problems/finding-mk-average) | 2396 | MK average / balanced sets |
+| 1472 | [Design Browser History](https://leetcode.cn/problems/design-browser-history) | 1454 | browser history |
+| 981 | [Time Based Key-Value Store](https://leetcode.cn/problems/time-based-key-value-store) | 1575 | versioned key-value |
+| 460 | [LFU Cache](https://leetcode.cn/problems/lfu-cache) | - | LFU cache |
+| 146 | [LRU Cache](https://leetcode.cn/problems/lru-cache) | - | LRU cache |`,
     },
     {
       id: "pitfalls",

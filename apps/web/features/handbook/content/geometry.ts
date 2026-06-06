@@ -58,17 +58,11 @@ struct Point {
   }
 };
 
-Point operator-(Point a, Point b) {
-  return {a.x - b.x, a.y - b.y};
-}
+Point operator-(Point a, Point b) { return {a.x - b.x, a.y - b.y}; }
 
-long long dot(Point a, Point b) {
-  return a.x * b.x + a.y * b.y;
-}
+long long dot(Point a, Point b) { return a.x * b.x + a.y * b.y; }
 
-long long cross(Point a, Point b) {
-  return a.x * b.y - a.y * b.x;
-}
+long long cross(Point a, Point b) { return a.x * b.y - a.y * b.x; }
 
 long long cross(Point a, Point b, Point c) {
   return cross(b - a, c - a);  // signed twice-area of triangle abc
@@ -90,7 +84,8 @@ long double dist(Point a, Point b) {
 // Floating-point geometry primitives with epsilon-based comparisons.
 const long double EPS = 1e-12L;
 
-// Returns +1, -1, or 0 depending on whether x is positive, negative, or near zero.
+// Returns +1, -1, or 0 depending on whether x is positive, negative, or near
+// zero.
 int sgn(long double x) {
   if (x > EPS) {
     return 1;
@@ -102,7 +97,8 @@ int sgn(long double x) {
 }
 
 bool eq(long double a, long double b) {
-  return sgn(a - b) == 0;  // consider two values equal when they differ by at most EPS
+  return sgn(a - b) ==
+         0;  // consider two values equal when they differ by at most EPS
 }
 
 struct DPoint {
@@ -110,9 +106,7 @@ struct DPoint {
 };
 
 // 2D cross product of position vectors a and b (z-component of a x b).
-long double cross(DPoint a, DPoint b) {
-  return a.x * b.y - a.y * b.x;
-}
+long double cross(DPoint a, DPoint b) { return a.x * b.y - a.y * b.x; }
 \`\`\``,
     },
     {
@@ -124,17 +118,16 @@ long double cross(DPoint a, DPoint b) {
 int orientation(Point a, Point b, Point c) {
   long long v = cross(a, b, c);
   if (v > 0) {
-    return 1;   // counterclockwise
+    return 1;  // counterclockwise
   }
   if (v < 0) {
     return -1;  // clockwise
   }
-  return 0;     // collinear
+  return 0;  // collinear
 }
 
 bool onSegment(Point a, Point b, Point p) {
-  return cross(a, b, p) == 0 &&
-         min(a.x, b.x) <= p.x && p.x <= max(a.x, b.x) &&
+  return cross(a, b, p) == 0 && min(a.x, b.x) <= p.x && p.x <= max(a.x, b.x) &&
          min(a.y, b.y) <= p.y && p.y <= max(a.y, b.y);
 }
 
@@ -149,8 +142,8 @@ bool segmentsIntersect(Point a, Point b, Point c, Point d) {
     return true;
   }
 
-  return onSegment(a, b, c) || onSegment(a, b, d) ||
-         onSegment(c, d, a) || onSegment(c, d, b);
+  return onSegment(a, b, c) || onSegment(a, b, d) || onSegment(c, d, a) ||
+         onSegment(c, d, b);
 }
 \`\`\``,
     },
@@ -165,24 +158,23 @@ struct Vec {
   long double x, y;
 };
 
-Vec operator-(DPoint a, DPoint b) {
-  return {a.x - b.x, a.y - b.y};
-}
+Vec operator-(DPoint a, DPoint b) { return {a.x - b.x, a.y - b.y}; }
 
-long double dot(Vec a, Vec b) {
-  return a.x * b.x + a.y * b.y;
-}
+long double dot(Vec a, Vec b) { return a.x * b.x + a.y * b.y; }
 
 long double norm2(Vec a) {
-  return dot(a, a);  // squared length, avoids a sqrt when only comparison is needed
+  return dot(
+      a, a);  // squared length, avoids a sqrt when only comparison is needed
 }
 
-// Point-to-segment distance: project p onto line AB, clamp t to [0,1], measure gap.
+// Point-to-segment distance: project p onto line AB, clamp t to [0,1], measure
+// gap.
 long double distancePointSegment(DPoint p, DPoint a, DPoint b) {
   Vec ab = b - a;
   Vec ap = p - a;
   long double t = dot(ap, ab) / norm2(ab);  // unclamped parameter along AB
-  t = max((long double)0, min((long double)1, t));  // clamp to segment endpoints
+  t = max((long double)0,
+          min((long double)1, t));              // clamp to segment endpoints
   DPoint proj{a.x + ab.x * t, a.y + ab.y * t};  // closest point on segment to p
   long double dx = p.x - proj.x;
   long double dy = p.y - proj.y;
@@ -199,7 +191,7 @@ long double distancePointSegment(DPoint p, DPoint a, DPoint b) {
 long long twicePolygonArea(const vector<Point>& p) {
   long long area2 = 0;
   int n = p.size();
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     area2 += cross(p[i], p[(i + 1) % n]);
   }
   return llabs(area2);
@@ -293,7 +285,7 @@ long long convexDiameter2(vector<Point> hull) {
 
   long long best = 0;
   int j = 1;  // antipodal vertex, shared across edge iterations
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     int ni = (i + 1) % n;
     // Advance j while rotating the caliper increases the perpendicular height.
     while (abs(cross(hull[ni] - hull[i], hull[(j + 1) % n] - hull[i])) >
@@ -319,7 +311,8 @@ bool insideCircle(Point p, Point center, long long radius) {
 }
 
 // Intersection count between two circles using double distances.
-int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) {
+int circleIntersectionCount(DPoint a, long double ra, DPoint b,
+                            long double rb) {
   long double dx = a.x - b.x;
   long double dy = a.y - b.y;
   long double d = sqrt(dx * dx + dy * dy);
@@ -338,6 +331,11 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) 
   return 2;
 }
 \`\`\``,
+    },
+    {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced geometry is won by choosing stable primitives. Prefer integer cross products and squared distances when possible; isolate floating-point tolerance in one comparator; and convert Manhattan distance, angular sweep, and area-union tasks into sorted one-dimensional events.`,
     },
     {
       id: "complexity",
@@ -372,26 +370,15 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b, long double rb) 
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 587 | [Erect the Fence](https://leetcode.cn/problems/erect-the-fence) | convex hull (monotonic chain) |
-| 149 | [Max Points on a Line](https://leetcode.cn/problems/max-points-on-a-line) | collinearity via cross product |
-| 1232 | [Check If It Is a Straight Line](https://leetcode.cn/problems/check-if-it-is-a-straight-line) | orientation test |
-| 812 | [Largest Triangle Area](https://leetcode.cn/problems/largest-triangle-area) | shoelace area |
-| 1453 | [Maximum Number of Darts Inside of a Circle](https://leetcode.cn/problems/maximum-number-of-darts-inside-of-a-circular-dartboard) | circle through two points |
-| 1828 | [Queries on Number of Points Inside a Circle](https://leetcode.cn/problems/queries-on-number-of-points-inside-a-circle) | squared-distance test |
-| 1515 | [Best Position for a Service Centre](https://leetcode.cn/problems/best-position-for-a-service-centre) | geometric median |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3625 | [Count Number of Trapezoids II](https://leetcode.cn/problems/count-number-of-trapezoids-ii) | 2643 | slope grouping |
-| 3588 | [Find Maximum Area of a Triangle](https://leetcode.cn/problems/find-maximum-area-of-a-triangle) | 1819 | shoelace area |
-| 3382 | [Maximum Area Rectangle With Point Constraints II](https://leetcode.cn/problems/maximum-area-rectangle-with-point-constraints-ii) | 2723 | sweep + geometry |
-| 3235 | [Check if the Rectangle Corner Is Reachable](https://leetcode.cn/problems/check-if-the-rectangle-corner-is-reachable) | 3774 | circle-line geometry |
-| 3102 | [Minimize Manhattan Distances](https://leetcode.cn/problems/minimize-manhattan-distances) | 2216 | Manhattan to Chebyshev |
-| 3027 | [Find the Number of Ways to Place People II](https://leetcode.cn/problems/find-the-number-of-ways-to-place-people-ii) | 2020 | orientation + sorting |`,
+| 3464 | [Maximize the Distance Between Points on a Square](https://leetcode.cn/problems/maximize-the-distance-between-points-on-a-square) | 2806 | distance on square |
+| 3454 | [Separate Squares II](https://leetcode.cn/problems/separate-squares-ii) | 2671 | area sweep |
+| 3531 | [Count Covered Buildings](https://leetcode.cn/problems/count-covered-buildings) | 1519 | covered buildings |
+| 3102 | [Minimize Manhattan Distances](https://leetcode.cn/problems/minimize-manhattan-distances) | 2216 | Manhattan transform |
+| 3047 | [Find the Largest Area of Square Inside Two Rectangles](https://leetcode.cn/problems/find-the-largest-area-of-square-inside-two-rectangles) | 1602 | rectangle intersection |
+| 1453 | [Maximum Number of Darts Inside of a Circular Dartboard](https://leetcode.cn/problems/maximum-number-of-darts-inside-of-a-circular-dartboard) | 2202 | circle coverage |
+| 1610 | [Maximum Number of Visible Points](https://leetcode.cn/problems/maximum-number-of-visible-points) | 2147 | angle sweep |`,
     },
     {
       id: "pitfalls",
@@ -409,9 +396,7 @@ __int128 cross128(Point a, Point b) {
 }
 
 // Returns -1, 0, or 1 for the sign of a 128-bit integer.
-int sign128(__int128 x) {
-  return (x > 0) - (x < 0);
-}
+int sign128(__int128 x) { return (x > 0) - (x < 0); }
 \`\`\``,
     },
   ],

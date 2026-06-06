@@ -58,14 +58,12 @@ struct PrefixSum {
   vector<long long> pre;
 
   PrefixSum(const vector<int>& a) : pre(a.size() + 1, 0) {
-    for (int i = 0; i < (int)a.size(); i++) {
+    for (int i = 0; i < (int)a.size(); ++i) {
       pre[i + 1] = pre[i] + a[i];
     }
   }
 
-  long long sum(int l, int r) const {
-    return pre[r + 1] - pre[l];
-  }
+  long long sum(int l, int r) const { return pre[r + 1] - pre[l]; }
 };
 
 // Range add updates, then build the final array once.
@@ -77,7 +75,7 @@ vector<long long> applyRangeAdds(int n, vector<array<int, 3>> updates) {
       diff[r + 1] -= v;
     }
   }
-  for (int i = 1; i < n; i++) {
+  for (int i = 1; i < n; ++i) {
     diff[i] += diff[i - 1];
   }
   diff.pop_back();
@@ -94,9 +92,7 @@ vector<long long> applyRangeAdds(int n, vector<array<int, 3>> updates) {
 struct Compressor {
   vector<long long> xs;
 
-  void add(long long x) {
-    xs.push_back(x);
-  }
+  void add(long long x) { xs.push_back(x); }
 
   void build() {
     sort(xs.begin(), xs.end());
@@ -107,9 +103,7 @@ struct Compressor {
     return lower_bound(xs.begin(), xs.end(), x) - xs.begin();
   }
 
-  int size() const {
-    return xs.size();
-  }
+  int size() const { return xs.size(); }
 };
 
 // Example: compress array values to 1-indexed Fenwick positions.
@@ -120,7 +114,7 @@ vector<int> compressValues(vector<int> a) {
   }
   cp.build();
   vector<int> rank(a.size());
-  for (int i = 0; i < (int)a.size(); i++) {
+  for (int i = 0; i < (int)a.size(); ++i) {
     rank[i] = cp.get(a[i]) + 1;
   }
   return rank;
@@ -251,9 +245,7 @@ struct SegTree {
     addRange(l, r, val, 1, 0, n - 1);
   }
 
-  long long querySum(int l, int r) {
-    return querySum(l, r, 1, 0, n - 1);
-  }
+  long long querySum(int l, int r) { return querySum(l, r, 1, 0, n - 1); }
 };
 \`\`\``,
     },
@@ -272,14 +264,15 @@ struct SparseTable {
     int n = a.size();
     // Precompute floor log2 values for O(1) level lookup.
     lg.assign(n + 1, 0);
-    for (int i = 2; i <= n; i++) {
+    for (int i = 2; i <= n; ++i) {
       lg[i] = lg[i / 2] + 1;
     }
     st.assign(lg[n] + 1, vector<int>(n));
     st[0] = a;
-    // Each level k doubles the span: combine two half-intervals of length 2^(k-1).
-    for (int k = 1; k < (int)st.size(); k++) {
-      for (int i = 0; i + (1 << k) <= n; i++) {
+    // Each level k doubles the span: combine two half-intervals of length
+    // 2^(k-1).
+    for (int k = 1; k < (int)st.size(); ++k) {
+      for (int i = 0; i + (1 << k) <= n; ++i) {
         st[k][i] = min(st[k - 1][i], st[k - 1][i + (1 << (k - 1))]);
       }
     }
@@ -308,7 +301,7 @@ struct ThresholdQuery {
 vector<int> countLE(vector<int>& a, vector<ThresholdQuery> queries) {
   int n = a.size();
   vector<pair<int, int>> items;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     items.push_back({a[i], i});
   }
   sort(items.begin(), items.end());
@@ -321,7 +314,7 @@ vector<int> countLE(vector<int>& a, vector<ThresholdQuery> queries) {
   for (auto q : queries) {
     while (ptr < n && items[ptr].first <= q.x) {
       fw.add(items[ptr].second + 1, 1);
-      ptr++;
+      ++ptr;
     }
     ans[q.id] = fw.sumRange(q.l + 1, q.r + 1);
   }
@@ -392,10 +385,11 @@ vector<long long> distinctCount(vector<int>& a, vector<MoQuery> queries) {
   // Increment frequency; if first occurrence, increment distinct count.
   auto add = [&](int idx) {
     if (++freq[a[idx]] == 1) {
-      distinct++;
+      ++distinct;
     }
   };
-  // Decrement frequency; if element is removed entirely, decrement distinct count.
+  // Decrement frequency; if element is removed entirely, decrement distinct
+  // count.
   auto remove = [&](int idx) {
     if (--freq[a[idx]] == 0) {
       distinct--;
@@ -464,11 +458,14 @@ struct MergeSortTree {
            countLE(ql, qr, x, node * 2 + 1, mid + 1, r);
   }
 
-  int countLE(int l, int r, int x) {
-    return countLE(l, r, x, 1, 0, n - 1);
-  }
+  int countLE(int l, int r, int x) { return countLE(l, r, x, 1, 0, n - 1); }
 };
 \`\`\``,
+    },
+    {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Hard offline query problems are about choosing a processing order. Sort queries by threshold, sweep events by coordinate, or use Mo's ordering when endpoints move; the data structure should only maintain the active set for the current order.`,
     },
     {
       id: "complexity",
@@ -505,31 +502,14 @@ struct MergeSortTree {
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 303 | [Range Sum Query - Immutable](https://leetcode.cn/problems/range-sum-query-immutable) | prefix sums |
-| 304 | [Range Sum Query 2D - Immutable](https://leetcode.cn/problems/range-sum-query-2d-immutable) | 2D prefix sums |
-| 1109 | [Corporate Flight Bookings](https://leetcode.cn/problems/corporate-flight-bookings) | difference array |
-| 307 | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) | Fenwick or segment tree |
-| 315 | [Count of Smaller Numbers After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) | Fenwick + compression |
-| 327 | [Count of Range Sum](https://leetcode.cn/problems/count-of-range-sum) | prefix sums + Fenwick |
-| 493 | [Reverse Pairs](https://leetcode.cn/problems/reverse-pairs) | merge sort or Fenwick |
-| 218 | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) | sweep line |
-| 850 | [Rectangle Area II](https://leetcode.cn/problems/rectangle-area-ii) | sweep line + segment tree |
-| 2251 | [Number of Flowers in Full Bloom](https://leetcode.cn/problems/number-of-flowers-in-full-bloom) | offline events + sorting |
-| 715 | [Range Module](https://leetcode.cn/problems/range-module) | interval segment tree |
-| 699 | [Falling Squares](https://leetcode.cn/problems/falling-squares) | compression + segment tree |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3777 | [Minimum Deletions to Make Alternating Substring](https://leetcode.cn/problems/minimum-deletions-to-make-alternating-substring) | 2202 | segment tree |
-| 3768 | [Minimum Inversion Count in Subarrays of Fixed Length](https://leetcode.cn/problems/minimum-inversion-count-in-subarrays-of-fixed-length) | 2158 | Fenwick + merge sort |
-| 3748 | [Count Stable Subarrays](https://leetcode.cn/problems/count-stable-subarrays) | 2209 | prefix sums |
-| 3739 | [Count Subarrays With Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | segment tree + merge sort |
-| 3691 | [Maximum Total Subarray Value II](https://leetcode.cn/problems/maximum-total-subarray-value-ii) | 2469 | segment tree |
-| 3636 | [Threshold Majority Queries](https://leetcode.cn/problems/threshold-majority-queries) | 2451 | offline queries |`,
+| 3768 | [Minimum Inversion Count in Subarrays of Fixed Length](https://leetcode.cn/problems/minimum-inversion-count-in-subarrays-of-fixed-length) | 2158 | fixed-window inversions |
+| 3739 | [Count Subarrays with Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | majority range queries |
+| 3636 | [Threshold Majority Queries](https://leetcode.cn/problems/threshold-majority-queries) | 2451 | threshold frequency queries |
+| 3454 | [Separate Squares II](https://leetcode.cn/problems/separate-squares-ii) | 2671 | line sweep + segment tree |
+| 3534 | [Path Existence Queries in a Graph II](https://leetcode.cn/problems/path-existence-queries-in-a-graph-ii) | 2507 | offline graph queries |
+| 715 | [Range Module](https://leetcode.cn/problems/range-module) | - | range module classic |`,
     },
     {
       id: "pitfalls",
@@ -541,7 +521,8 @@ struct MergeSortTree {
 - For Mo's algorithm, all queries must be known in advance.
 
 \`\`\`cpp
-// Closed intervals [l, r] need additions before removals at the same coordinate.
+// Closed intervals [l, r] need additions before removals at the same
+// coordinate.
 sort(events.begin(), events.end(), [](auto a, auto b) {
   if (a.x != b.x) {
     return a.x < b.x;

@@ -58,7 +58,7 @@ long long f(int i) {
 // Same DP, tabulated, with O(1) rolling space
 long long fib(int n) {
   long long a = 0, b = 1;
-  for (int i = 2; i <= n; i++) {
+  for (int i = 2; i <= n; ++i) {
     long long c = a + b;
     a = b;
     b = c;
@@ -100,7 +100,7 @@ Climbing Stairs (LC 70), Maximum Subarray / Kadane (LC 53), Decode Ways (LC 91),
 // 0/1 knapsack: max value within capacity W
 int knapsack01(vector<int>& wt, vector<int>& val, int W) {
   vector<int> dp(W + 1, 0);
-  for (int i = 0; i < (int)wt.size(); i++) {
+  for (int i = 0; i < (int)wt.size(); ++i) {
     for (int c = W; c >= wt[i]; c--) {  // downward: each item once
       dp[c] = max(dp[c], dp[c - wt[i]] + val[i]);
     }
@@ -119,7 +119,7 @@ int coinChange(vector<int>& coins, int amount) {
   vector<int> dp(amount + 1, INF);
   dp[0] = 0;
   for (int c : coins) {
-    for (int a = c; a <= amount; a++) {
+    for (int a = c; a <= amount; ++a) {
       dp[a] = min(dp[a], dp[a - c] + 1);
     }
   }
@@ -168,8 +168,8 @@ State \`dp[i][j]\` over prefixes of two strings; the transition compares \`a[i -
 int lcs(string a, string b) {
   int m = a.size(), n = b.size();
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-  for (int i = 1; i <= m; i++) {
-    for (int j = 1; j <= n; j++) {
+  for (int i = 1; i <= m; ++i) {
+    for (int j = 1; j <= n; ++j) {
       dp[i][j] = (a[i - 1] == b[j - 1]) ? dp[i - 1][j - 1] + 1
                                         : max(dp[i - 1][j], dp[i][j - 1]);
     }
@@ -185,14 +185,14 @@ int lcs(string a, string b) {
 int minDistance(string a, string b) {
   int m = a.size(), n = b.size();
   vector<vector<int>> dp(m + 1, vector<int>(n + 1));
-  for (int i = 0; i <= m; i++) {
+  for (int i = 0; i <= m; ++i) {
     dp[i][0] = i;
   }
-  for (int j = 0; j <= n; j++) {
+  for (int j = 0; j <= n; ++j) {
     dp[0][j] = j;
   }
-  for (int i = 1; i <= m; i++) {
-    for (int j = 1; j <= n; j++) {
+  for (int i = 1; i <= m; ++i) {
+    for (int j = 1; j <= n; ++j) {
       dp[i][j] = (a[i - 1] == b[j - 1])
                      ? dp[i - 1][j - 1]
                      : 1 + min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]});
@@ -214,14 +214,14 @@ State over a sub-range \`dp[l][r]\`; iterate by **increasing length** and split 
 int maxCoins(vector<int> nums) {
   int n = nums.size();
   vector<int> a(n + 2, 1);
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     a[i + 1] = nums[i];  // padded with 1s
   }
   vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
-  for (int len = 1; len <= n; len++) {
-    for (int l = 1; l + len - 1 <= n; l++) {
+  for (int len = 1; len <= n; ++len) {
+    for (int l = 1; l + len - 1 <= n; ++l) {
       int r = l + len - 1;
-      for (int k = l; k <= r; k++) {  // k is the last balloon burst
+      for (int k = l; k <= r; ++k) {  // k is the last balloon burst
         dp[l][r] = max(
             dp[l][r], dp[l][k - 1] + a[l - 1] * a[k] * a[r + 1] + dp[k + 1][r]);
       }
@@ -267,13 +267,13 @@ With at most \`k\` transactions (LC 188), use \`dp[k][holding]\` arrays.`,
 int tsp(vector<vector<int>>& dist) {
   int n = dist.size(), FULL = (1 << n) - 1;
   vector<vector<int>> dp(1 << n, vector<int>(n, 1e9));
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     dp[1 << i][i] = 0;
   }
-  for (int mask = 1; mask <= FULL; mask++) {
-    for (int u = 0; u < n; u++) {
+  for (int mask = 1; mask <= FULL; ++mask) {
+    for (int u = 0; u < n; ++u) {
       if (mask & (1 << u)) {
-        for (int v = 0; v < n; v++) {
+        for (int v = 0; v < n; ++v) {
           if (!(mask & (1 << v))) {
             dp[mask | (1 << v)][v] =
                 min(dp[mask | (1 << v)][v], dp[mask][u] + dist[u][v]);
@@ -306,7 +306,7 @@ int dfs(int pos, int prev, bool tight, bool started) {
     return memo[pos][prev];
   }
   int hi = tight ? s[pos] - '0' : 9, res = 0;
-  for (int d = 0; d <= hi; d++) {
+  for (int d = 0; d <= hi; ++d) {
     if (started && d == prev) {
       continue;  // property check
     }
@@ -337,7 +337,7 @@ int maxResult(vector<int>& a, int k) {
   deque<int> dq;  // indices, dp[] decreasing
   dp[0] = a[0];
   dq.push_back(0);
-  for (int i = 1; i < n; i++) {
+  for (int i = 1; i < n; ++i) {
     while (!dq.empty() && dq.front() < i - k) {
       dq.pop_front();  // drop out-of-window
     }
@@ -370,10 +370,10 @@ const long long MOD = 1e9 + 7;
 Matrix mul(const Matrix& A, const Matrix& B) {
   int n = A.size(), m = B[0].size(), p = B.size();
   Matrix C(n, vector<long long>(m, 0));
-  for (int i = 0; i < n; i++) {
-    for (int k = 0; k < p; k++) {
+  for (int i = 0; i < n; ++i) {
+    for (int k = 0; k < p; ++k) {
       if (A[i][k]) {
-        for (int j = 0; j < m; j++) {
+        for (int j = 0; j < m; ++j) {
           C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD;
         }
       }
@@ -384,7 +384,7 @@ Matrix mul(const Matrix& A, const Matrix& B) {
 Matrix matpow(Matrix A, long long e) {
   int n = A.size();
   Matrix R(n, vector<long long>(n, 0));
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     R[i][i] = 1;  // identity
   }
   while (e > 0) {
@@ -404,8 +404,8 @@ Use it for Student Attendance Record II (LC 552), Knight Dialer (LC 935), and Co
 
 \`\`\`cpp
 // SOS DP: f[mask] becomes the sum over all submasks of mask
-for (int b = 0; b < n; b++) {
-  for (int mask = 0; mask < (1 << n); mask++) {
+for (int b = 0; b < n; ++b) {
+  for (int mask = 0; mask < (1 << n); ++mask) {
     if (mask & (1 << b)) {
       f[mask] += f[mask ^ (1 << b)];
     }
@@ -424,11 +424,11 @@ for (int b = 0; b < n; b++) {
 bool predictTheWinner(vector<int>& a) {
   int n = a.size();
   vector<vector<int>> dp(n, vector<int>(n, 0));
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     dp[i][i] = a[i];
   }
-  for (int len = 2; len <= n; len++) {
-    for (int i = 0; i + len - 1 < n; i++) {
+  for (int len = 2; len <= n; ++len) {
+    for (int i = 0; i + len - 1 < n; ++i) {
       int j = i + len - 1;
       // take left or right
       dp[i][j] = max(a[i] - dp[i + 1][j], a[j] - dp[i][j - 1]);
@@ -444,6 +444,11 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
 **Probability / expectation DP.** States hold a probability or expected value; transitions weight by outcome probabilities. New 21 Game (LC 837) uses a sliding-window sum of probabilities; Soup Servings (LC 808) memoizes on remaining amounts and converges for large inputs.
 
 **DP + binary search.** Weighted interval scheduling — Maximum Profit in Job Scheduling (LC 1235) — sorts by end time and binary-searches the latest non-overlapping job for each transition, \`O(n log n)\`. (LIS in \`O(n log n)\` is the same idea.)`,
+    },
+    {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `When plain DP is too slow, keep the state meaning fixed and optimize only the transition search. Common upgrades are monotonic queues for windowed transitions, binary search for compatible predecessors, convex-hull tricks for linear costs, and bitmask compression for small sets.`,
     },
     {
       id: "complexity",
@@ -483,42 +488,16 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Pattern |
-| --- | --- | --- |
-| 64 / 62 | [Min Path Sum](https://leetcode.cn/problems/minimum-path-sum) / [Unique Paths](https://leetcode.cn/problems/unique-paths) | grid DP |
-| 70 / 198 / 53 | [Stairs](https://leetcode.cn/problems/climbing-stairs) / [Robber](https://leetcode.cn/problems/house-robber) / [Max Subarray](https://leetcode.cn/problems/maximum-subarray) | linear DP |
-| 300 / 354 / 673 | [LIS family](https://leetcode.cn/problems/longest-increasing-subsequence) | LIS |
-| 309 / 188 | [Stock with Cooldown](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown) / [k Transactions](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv) | state-machine DP |
-| 312 | [Burst Balloons](https://leetcode.cn/problems/burst-balloons) | interval DP |
-| 322 / 518 | [Coin Change I/II](https://leetcode.cn/problems/coin-change) | unbounded knapsack |
-| 337 | [House Robber III](https://leetcode.cn/problems/house-robber-iii) | tree DP |
-| 416 | [Partition Equal Subset Sum](https://leetcode.cn/problems/partition-equal-subset-sum) | 0/1 knapsack |
-| 698 / 847 | [Partition K Subsets](https://leetcode.cn/problems/partition-to-k-equal-sum-subsets) / [Visit All Nodes](https://leetcode.cn/problems/shortest-path-visiting-all-nodes) | bitmask DP |
-| 1143 / 72 | [LCS](https://leetcode.cn/problems/longest-common-subsequence) / [Edit Distance](https://leetcode.cn/problems/edit-distance) | two-sequence DP |
-| 1547 | [Min Cost to Cut a Stick](https://leetcode.cn/problems/minimum-cost-to-cut-a-stick) | interval DP |
-
-**Advanced practice problems**
-
-| ID | Problem | Pattern |
-| --- | --- | --- |
-| 552 | [Student Attendance Record II](https://leetcode.cn/problems/student-attendance-record-ii) | matrix exponentiation |
-| 877 | [Stone Game](https://leetcode.cn/problems/stone-game) | minimax DP |
-| 1235 | [Maximum Profit in Job Scheduling](https://leetcode.cn/problems/maximum-profit-in-job-scheduling) | DP + binary search |
-| 1696 | [Jump Game VI](https://leetcode.cn/problems/jump-game-vi) | monotonic-queue DP |
-| 2008 | [Maximum Earnings From Taxi](https://leetcode.cn/problems/maximum-earnings-from-taxi) | DP + binary search |
-| 2218 | [Maximum Value of K Coins From Piles](https://leetcode.cn/problems/maximum-value-of-k-coins-from-piles) | group knapsack |
-| 2266 | [Count Number of Texts](https://leetcode.cn/problems/count-number-of-texts) | linear DP |
-| 2466 | [Count Ways To Build Good Strings](https://leetcode.cn/problems/count-ways-to-build-good-strings) | counting DP |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Pattern |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3685 | [Subsequence Sum After Capping Elements](https://leetcode.cn/problems/subsequence-sum-after-capping-elements) | 2073 | knapsack DP |
-| 3654 | [Minimum Sum After Divisible Sum Deletions](https://leetcode.cn/problems/minimum-sum-after-divisible-sum-deletions) | 2039 | DP + prefix |
-| 3686 | [Number of Stable Subsequences](https://leetcode.cn/problems/number-of-stable-subsequences) | 1969 | counting DP |
-| 3599 | [Partition Array to Minimize XOR](https://leetcode.cn/problems/partition-array-to-minimize-xor) | 1955 | bitmask / interval DP |
-| 3738 | [Longest Non-Decreasing Subarray After One Replacement](https://leetcode.cn/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element) | 1811 | DP |`,
+| 3743 | [Maximize Cyclic Partition Score](https://leetcode.cn/problems/maximize-cyclic-partition-score) | 3125 | cyclic partition DP |
+| 3738 | [Longest Non Decreasing Subarray After Replacing at Most One Element](https://leetcode.cn/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element) | 1811 | array DP |
+| 3686 | [Number of Stable Subsequences](https://leetcode.cn/problems/number-of-stable-subsequences) | 1969 | stable subsequence DP |
+| 3685 | [Subsequence Sum After Capping Elements](https://leetcode.cn/problems/subsequence-sum-after-capping-elements) | 2073 | subsequence sum DP |
+| 3654 | [Minimum Sum After Divisible Sum Deletions](https://leetcode.cn/problems/minimum-sum-after-divisible-sum-deletions) | 2039 | prefix DP |
+| 3603 | [Minimum Cost Path with Alternating Directions II](https://leetcode.cn/problems/minimum-cost-path-with-alternating-directions-ii) | 1639 | matrix DP |
+| 3578 | [Count Partitions with Max Min Difference at Most K](https://leetcode.cn/problems/count-partitions-with-max-min-difference-at-most-k) | 2033 | monotonic queue DP |
+| 887 | [Super Egg Drop](https://leetcode.cn/problems/super-egg-drop) | 2377 | advanced DP classic |`,
     },
     {
       id: "pitfalls",

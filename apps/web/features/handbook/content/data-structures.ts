@@ -42,7 +42,7 @@ Related: [Monotonic Stack vs Deque](/handbook/monotonic-stack-vs-deque), [Trees 
 \`\`\`cpp
 // 1D prefix sum: sum of a[l..r] inclusive
 vector<long long> pre(n + 1, 0);
-for (int i = 0; i < n; i++) {
+for (int i = 0; i < n; ++i) {
   pre[i + 1] = pre[i] + a[i];
 }
 auto rangeSum = [&](int l, int r) { return pre[r + 1] - pre[l]; };
@@ -56,7 +56,7 @@ auto update = [&](int l, int r, long long val) {
   diff[r + 1] -= val;
 };
 // materialize
-for (int i = 1; i < n; i++) {
+for (int i = 1; i < n; ++i) {
   diff[i] += diff[i - 1];
 }
 \`\`\`
@@ -290,16 +290,16 @@ struct SparseTable {
   SparseTable(const vector<int>& a) {
     int n = a.size(), K = 1;
     while ((1 << K) <= n) {
-      K++;
+      ++K;
     }
     lg.assign(n + 1, 0);
-    for (int i = 2; i <= n; i++) {
+    for (int i = 2; i <= n; ++i) {
       lg[i] = lg[i / 2] + 1;
     }
     st.assign(K, vector<int>(n));
     st[0] = a;
-    for (int j = 1; j < K; j++) {
-      for (int i = 0; i + (1 << j) <= n; i++) {
+    for (int j = 1; j < K; ++j) {
+      for (int i = 0; i + (1 << j) <= n; ++i) {
         st[j][i] = min(st[j - 1][i], st[j - 1][i + (1 << (j - 1))]);
       }
     }
@@ -454,41 +454,14 @@ class LRUCache {
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Structure |
-| --- | --- | --- |
-| 1 / 49 | [Two Sum](https://leetcode.cn/problems/two-sum) / [Group Anagrams](https://leetcode.cn/problems/group-anagrams) | hash map |
-| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | heap |
-| 206 / 141 | [Reverse List](https://leetcode.cn/problems/reverse-linked-list) / [Cycle](https://leetcode.cn/problems/linked-list-cycle) | linked-list pointers |
-| 215 | [Kth Largest](https://leetcode.cn/problems/kth-largest-element-in-an-array) | heap |
-| 295 | [Find Median from Data Stream](https://leetcode.cn/problems/find-median-from-data-stream) | two heaps |
-| 304 | [Range Sum Query 2D](https://leetcode.cn/problems/range-sum-query-2d-immutable) | 2D prefix sum |
-| 307 | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) | Fenwick / segment tree |
-| 315 | [Count of Smaller After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) | Fenwick / merge sort |
-| 547 | [Number of Provinces](https://leetcode.cn/problems/number-of-provinces) | DSU |
-| 560 | [Subarray Sum Equals K](https://leetcode.cn/problems/subarray-sum-equals-k) | prefix sum + hash |
-| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | DSU cycle detect |
-
-**Advanced practice problems**
-
-| ID | Problem | Structure |
-| --- | --- | --- |
-| 146 | [LRU Cache](https://leetcode.cn/problems/lru-cache) | hash map + linked list |
-| 218 | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) | sweep line + heap |
-| 715 | [Range Module](https://leetcode.cn/problems/range-module) | ordered interval map |
-| 1157 | [Online Majority Element In Subarray](https://leetcode.cn/problems/online-majority-element-in-subarray) | merge-sort tree |
-| 2080 | [Range Frequency Queries](https://leetcode.cn/problems/range-frequency-queries) | per-value binary search |
-| 2286 | [Booking Concert Tickets in Groups](https://leetcode.cn/problems/booking-concert-tickets-in-groups) | segment tree |
-| 2736 | [Maximum Sum Queries](https://leetcode.cn/problems/maximum-sum-queries) | offline + monotonic stack / BIT |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Structure |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3739 | [Count Subarrays With Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | Fenwick / segment tree |
-| 3624 | [Number of Integers With Popcount-Depth Equal to K II](https://leetcode.cn/problems/number-of-integers-with-popcount-depth-equal-to-k-ii) | 2086 | segment tree |
-| 3645 | [Maximum Total From Optimal Activation Order](https://leetcode.cn/problems/maximum-total-from-optimal-activation-order) | 2019 | heap (priority queue) |
-| 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | design + ordered set |
-| 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | heap / ordered set |`,
+| 3739 | [Count Subarrays with Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | majority queries / segment tree |
+| 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | router / ordered set |
+| 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | task manager / heap |
+| 3636 | [Threshold Majority Queries](https://leetcode.cn/problems/threshold-majority-queries) | 2451 | threshold majority queries |
+| 3709 | [Design Exam Scores Tracker](https://leetcode.cn/problems/design-exam-scores-tracker) | 1648 | score tracker / prefix index |
+| 3590 | [Kth Smallest Path XOR Sum](https://leetcode.cn/problems/kth-smallest-path-xor-sum) | 2646 | tree paths / ordered set |`,
     },
     {
       id: "pitfalls",

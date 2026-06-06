@@ -48,7 +48,7 @@ vector<int> countingSort(const vector<int>& a, int k) {
     cnt[x]++;  // 1) tally occurrences of each value
   }
   vector<int> res;
-  for (int v = 0; v <= k; v++) {  // 2) pour values out in ascending order
+  for (int v = 0; v <= k; ++v) {  // 2) pour values out in ascending order
     while (cnt[v]-- > 0) {
       res.push_back(v);
     }
@@ -67,7 +67,7 @@ vector<int> stableCountingSort(const vector<int>& a, int k) {
   for (int x : a) {
     cnt[x]++;
   }
-  for (int v = 1; v <= k; v++) {
+  for (int v = 1; v <= k; ++v) {
     cnt[v] += cnt[v - 1];  // prefix sum: cnt[v] == count of values <= v
   }
   for (int i = n - 1; i >= 0; i--) {  // iterate from the back to stay stable
@@ -98,7 +98,7 @@ void radixSort(vector<int>& a) {
     for (int x : a) {
       cnt[(x / exp) % 10]++;  // distribution of this digit
     }
-    for (int d = 1; d < 10; d++) {
+    for (int d = 1; d < 10; ++d) {
       cnt[d] += cnt[d - 1];  // prefix sum -> final positions
     }
     for (int i = n - 1; i >= 0; i--) {  // back to front keeps the pass stable
@@ -182,6 +182,11 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
 A third face is the **pigeonhole bucket** for the maximum adjacent gap (LC 164): with \`n\` values spread over \`[mn, mx]\`, the largest gap is at least \`ceil((mx - mn) / (n - 1))\`, so it must straddle two buckets of that width — store only each bucket's min/max and the answer is \`max(nextMin - prevMax)\`, all in \`O(n)\`.`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Advanced non-comparison sorting starts with value-domain control. Compress sparse values, bucket by digit or frequency, and only use radix/counting when the key range and stability requirements are explicit.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Technique | Best for | Time | Extra space | Stable |
@@ -213,23 +218,14 @@ Rule of thumb: range on the order of \`n\` → counting; range large but digit c
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 75 | [Sort Colors](https://leetcode.cn/problems/sort-colors) | counting sort (range {0,1,2}) |
-| 1051 | [Height Checker](https://leetcode.cn/problems/height-checker) | counting sort + compare |
-| 1122 | [Relative Sort Array](https://leetcode.cn/problems/relative-sort-array) | counting sort + custom order |
-| 1366 | [Rank Teams by Votes](https://leetcode.cn/problems/rank-teams-by-votes) | per-rank vote counts |
-| 2418 | [Sort the People](https://leetcode.cn/problems/sort-the-people) | sort by bounded key |
-| 164 | [Maximum Gap](https://leetcode.cn/problems/maximum-gap) | radix / pigeonhole bucket |
-| 912 | [Sort an Array](https://leetcode.cn/problems/sort-an-array) | implement LSD radix sort |
-| 1985 | [Find the Kth Largest Integer in the Array](https://leetcode.cn/problems/find-the-kth-largest-integer-in-the-array) | length then digit (radix) order |
-| 2191 | [Sort the Jumbled Numbers](https://leetcode.cn/problems/sort-the-jumbled-numbers) | sort by mapped key, stable |
-| 2343 | [Query Kth Smallest Trimmed Number](https://leetcode.cn/problems/query-kth-smallest-trimmed-number) | per-digit stable sort |
-| 220 | [Contains Duplicate III](https://leetcode.cn/problems/contains-duplicate-iii) | bucket by width \`t + 1\` |
-| 347 | [Top K Frequent Elements](https://leetcode.cn/problems/top-k-frequent-elements) | frequency bucket |
-| 451 | [Sort Characters By Frequency](https://leetcode.cn/problems/sort-characters-by-frequency) | frequency bucket |
-| 692 | [Top K Frequent Words](https://leetcode.cn/problems/top-k-frequent-words) | frequency bucket + tie-break |
-| 2070 | [Most Beautiful Item for Each Query](https://leetcode.cn/problems/most-beautiful-item-for-each-query) | sort + prefix max |`,
+      body: `| ID | Problem | Rating | Labels |
+| --- | --- | --- | --- |
+| 3541 | [Find Most Frequent Vowel and Consonant](https://leetcode.cn/problems/find-most-frequent-vowel-and-consonant) | 1239 | frequency counting |
+| 3545 | [Minimum Deletions for at Most K Distinct Characters](https://leetcode.cn/problems/minimum-deletions-for-at-most-k-distinct-characters) | 1211 | counting / greedy |
+| 3517 | [Smallest Palindromic Rearrangement I](https://leetcode.cn/problems/smallest-palindromic-rearrangement-i) | 1357 | counting characters |
+| 3446 | [Sort Matrix by Diagonals](https://leetcode.cn/problems/sort-matrix-by-diagonals) | 1373 | diagonal sorting |
+| 3478 | [Choose K Elements with Maximum Sum](https://leetcode.cn/problems/choose-k-elements-with-maximum-sum) | 1753 | sort + heap |
+| 3507 | [Minimum Pair Removal to Sort Array I](https://leetcode.cn/problems/minimum-pair-removal-to-sort-array-i) | 1349 | ordered simulation |`,
     },
     {
       id: "pitfalls",

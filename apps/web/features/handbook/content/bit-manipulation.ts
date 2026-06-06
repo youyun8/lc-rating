@@ -96,7 +96,7 @@ int singleNumber(vector<int>& a) {
 // Missing Number (LC 268): XOR indices and values
 int missingNumber(vector<int>& a) {
   int x = a.size();
-  for (int i = 0; i < (int)a.size(); i++) {
+  for (int i = 0; i < (int)a.size(); ++i) {
     x ^= i ^ a[i];
   }
   return x;
@@ -117,9 +117,9 @@ With \`n\` items, iterate every subset as an integer \`0 .. 2^n - 1\`.
 vector<vector<int>> subsets(vector<int>& a) {
   int n = a.size();
   vector<vector<int>> res;
-  for (int mask = 0; mask < (1 << n); mask++) {
+  for (int mask = 0; mask < (1 << n); ++mask) {
     vector<int> cur;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
       if (mask & (1 << i)) {
         cur.push_back(a[i]);
       }
@@ -226,40 +226,16 @@ while (sub < (1 << n)) {
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 78 | [Subsets](https://leetcode.cn/problems/subsets) | mask enumeration |
-| 136 / 137 / 260 | [Single Number I/II/III](https://leetcode.cn/problems/single-number) | XOR / bit-count |
-| 190 | [Reverse Bits](https://leetcode.cn/problems/reverse-bits) | bit-by-bit |
-| 191 | [Number of 1 Bits](https://leetcode.cn/problems/number-of-1-bits) | popcount |
-| 201 | [Bitwise AND of Range](https://leetcode.cn/problems/bitwise-and-of-numbers-range) | common prefix |
-| 231 | [Power of Two](https://leetcode.cn/problems/power-of-two) | \`x & (x - 1)\` |
-| 268 | [Missing Number](https://leetcode.cn/problems/missing-number) | XOR |
-| 338 | [Counting Bits](https://leetcode.cn/problems/counting-bits) | bit DP |
-| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
-| 1310 | [XOR Queries of a Subarray](https://leetcode.cn/problems/xor-queries-of-a-subarray) | prefix XOR |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 982 | [Triples with Bitwise AND Equal To Zero](https://leetcode.cn/problems/triples-with-bitwise-and-equal-to-zero) | SOS DP |
-| 1707 | [Maximum XOR With an Element From Array](https://leetcode.cn/problems/maximum-xor-with-an-element-from-array) | bitwise Trie |
-| 1755 | [Closest Subsequence Sum](https://leetcode.cn/problems/closest-subsequence-sum) | meet in the middle |
-| 2411 | [Smallest Subarrays With Maximum Bitwise OR](https://leetcode.cn/problems/smallest-subarrays-with-maximum-bitwise-or) | bit-position tracking |
-| 2429 | [Minimize XOR](https://leetcode.cn/problems/minimize-xor) | greedy bits |
-| 2588 | [Count the Number of Beautiful Subarrays](https://leetcode.cn/problems/count-the-number-of-beautiful-subarrays) | prefix XOR |
-| 2680 | [Maximum OR](https://leetcode.cn/problems/maximum-or) | prefix / suffix OR |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 2857 | [Count Pairs of Points With Distance K](https://leetcode.cn/problems/count-pairs-of-points-with-distance-k) | 2082 | XOR + hashing |
-| 2741 | [Special Permutations](https://leetcode.cn/problems/special-permutations) | 2021 | bitmask DP |
-| 2564 | [Substring XOR Queries](https://leetcode.cn/problems/substring-xor-queries) | 1959 | prefix XOR / bits |
-| 3133 | [Minimum Array End](https://leetcode.cn/problems/minimum-array-end) | 1935 | bit construction |
-| 3514 | [Number of Unique XOR Triplets II](https://leetcode.cn/problems/number-of-unique-xor-triplets-ii) | 1884 | XOR enumeration |`,
+| 3757 | [Number of Effective Subsequences](https://leetcode.cn/problems/number-of-effective-subsequences) | 2519 | bit combinatorics |
+| 3766 | [Minimum Operations to Make Binary Palindrome](https://leetcode.cn/problems/minimum-operations-to-make-binary-palindrome) | 1657 | binary palindrome |
+| 3670 | [Maximum Product of Two Integers with No Common Bits](https://leetcode.cn/problems/maximum-product-of-two-integers-with-no-common-bits) | 2234 | disjoint bits DP |
+| 3615 | [Longest Palindromic Path in Graph](https://leetcode.cn/problems/longest-palindromic-path-in-graph) | 2463 | graph bitmask DP |
+| 3599 | [Partition Array to Minimize XOR](https://leetcode.cn/problems/partition-array-to-minimize-xor) | 1955 | prefix XOR partition |
+| 3533 | [Concatenated Divisibility](https://leetcode.cn/problems/concatenated-divisibility) | 2257 | bitmask permutation |
+| 3444 | [Minimum Increments for Target Multiples in an Array](https://leetcode.cn/problems/minimum-increments-for-target-multiples-in-an-array) | 2337 | LCM masks |
+| 1310 | [XOR Queries of a Subarray](https://leetcode.cn/problems/xor-queries-of-a-subarray) | 1460 | prefix XOR classic |`,
     },
     {
       id: "pitfalls",

@@ -67,7 +67,7 @@ long long extgcd(long long a, long long b, long long& x, long long& y) {
 vector<bool> sieve(int n) {
   vector<bool> isPrime(n + 1, true);
   isPrime[0] = isPrime[1] = false;
-  for (int i = 2; (long long)i * i <= n; i++) {
+  for (int i = 2; (long long)i * i <= n; ++i) {
     if (isPrime[i]) {
       for (int j = i * i; j <= n; j += i) {
         isPrime[j] = false;
@@ -84,12 +84,12 @@ Trial-division factorization up to \`sqrt(n)\` is enough for single numbers:
 // Prime factorization of n: list of (prime, exponent)
 vector<pair<long long, int>> factorize(long long n) {
   vector<pair<long long, int>> f;
-  for (long long p = 2; p * p <= n; p++) {
+  for (long long p = 2; p * p <= n; ++p) {
     if (n % p == 0) {
       int e = 0;
       while (n % p == 0) {
         n /= p;
-        e++;
+        ++e;
       }
       f.push_back({p, e});
     }
@@ -145,7 +145,7 @@ const int MX = 200000;
 long long fact[MX + 1], invfact[MX + 1];
 void initComb() {
   fact[0] = 1;
-  for (int i = 1; i <= MX; i++) {
+  for (int i = 1; i <= MX; ++i) {
     fact[i] = fact[i - 1] * i % MOD;
   }
   invfact[MX] = power(fact[MX], MOD - 2, MOD);  // see binary exponentiation
@@ -183,7 +183,7 @@ Used for Unique Paths (closed form \`C(m + n - 2, m - 1)\`), counting-DP answers
 // Linear sieve: smallest prime factor + primes, O(n)
 vector<int> linearSieve(int n) {
   vector<int> spf(n + 1, 0), primes;
-  for (int i = 2; i <= n; i++) {
+  for (int i = 2; i <= n; ++i) {
     if (!spf[i]) {
       spf[i] = i;
       primes.push_back(i);
@@ -232,7 +232,7 @@ bool isPrime(long long n) {
   int s = 0;
   while (!(d & 1)) {
     d >>= 1;
-    s++;
+    ++s;
   }
   for (long long a : {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}) {
     long long x = powmod(a, d, n);
@@ -240,7 +240,7 @@ bool isPrime(long long n) {
       continue;
     }
     bool composite = true;
-    for (int i = 0; i < s - 1; i++) {
+    for (int i = 0; i < s - 1; ++i) {
       x = mulmod(x, x, n);
       if (x == n - 1) {
         composite = false;
@@ -257,7 +257,7 @@ long long pollard(long long n) {
   if (n % 2 == 0) {
     return 2;
   }
-  for (long long c = 1;; c++) {
+  for (long long c = 1;; ++c) {
     long long x = 2, y = 2, d = 1;
     auto f = [&](long long v) { return (mulmod(v, v, n) + c) % n; };
     while (d == 1) {
@@ -330,39 +330,16 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 7 | [Reverse Integer](https://leetcode.cn/problems/reverse-integer) | digit peeling + overflow |
-| 9 | [Palindrome Number](https://leetcode.cn/problems/palindrome-number) | digit math |
-| 50 | [Pow(x, n)](https://leetcode.cn/problems/powx-n) | binary exponentiation |
-| 62 | [Unique Paths](https://leetcode.cn/problems/unique-paths) | combinatorics (\`nCr\`) |
-| 204 | [Count Primes](https://leetcode.cn/problems/count-primes) | sieve |
-| 233 | [Number of Digit One](https://leetcode.cn/problems/number-of-digit-one) | digit counting |
-| 365 | [Water and Jug Problem](https://leetcode.cn/problems/water-and-jug-problem) | GCD (Bézout) |
-| 372 | [Super Pow](https://leetcode.cn/problems/super-pow) | modular exponentiation |
-| 535 | [Encode/Decode TinyURL](https://leetcode.cn/problems/encode-and-decode-tinyurl) | base conversion |
-| 1735 | [Count Ways to Make Array Product](https://leetcode.cn/problems/count-ways-to-make-array-with-product) | factorization + combinatorics |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 372 | [Super Pow](https://leetcode.cn/problems/super-pow) | modular exponentiation |
-| 2400 | [Number of Ways to Reach a Position After Exactly k Steps](https://leetcode.cn/problems/number-of-ways-to-reach-a-position-after-exactly-k-steps) | combinatorics (nCr) |
-| 2521 | [Distinct Prime Factors of Product of Array](https://leetcode.cn/problems/distinct-prime-factors-of-product-of-array) | sieve / factorization |
-| 2543 | [Check if Point Is Reachable](https://leetcode.cn/problems/check-if-point-is-reachable) | gcd |
-| 2761 | [Prime Pairs With Target Sum](https://leetcode.cn/problems/prime-pairs-with-target-sum) | sieve |
-| 2954 | [Count the Number of Infection Sequences](https://leetcode.cn/problems/count-the-number-of-infection-sequences) | combinatorics |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3524 | [Find X Value of Array I](https://leetcode.cn/problems/find-x-value-of-array-i) | 2008 | modular arithmetic |
-| 3756 | [Concatenate Non-Zero Digits and Multiply by Sum II](https://leetcode.cn/problems/concatenate-non-zero-digits-and-multiply-by-sum-ii) | 1968 | digit math |
-| 3669 | [Balanced K-Factor Decomposition](https://leetcode.cn/problems/balanced-k-factor-decomposition) | 1917 | factorization + search |
-| 3747 | [Count Distinct Integers After Removing Zeros](https://leetcode.cn/problems/count-distinct-integers-after-removing-zeros) | 1848 | digit math |
-| 3558 | [Number of Ways to Assign Edge Weights I](https://leetcode.cn/problems/number-of-ways-to-assign-edge-weights-i) | 1845 | combinatorics |`,
+| 3753 | [Total Waviness of Numbers in Range II](https://leetcode.cn/problems/total-waviness-of-numbers-in-range-ii) | 2297 | digit DP |
+| 3751 | [Total Waviness of Numbers in Range I](https://leetcode.cn/problems/total-waviness-of-numbers-in-range-i) | 1404 | digit DP enumeration |
+| 3747 | [Count Distinct Integers After Removing Zeros](https://leetcode.cn/problems/count-distinct-integers-after-removing-zeros) | 1848 | number DP |
+| 3704 | [Count No Zero Pairs That Sum to N](https://leetcode.cn/problems/count-no-zero-pairs-that-sum-to-n) | 2419 | constructive math |
+| 3539 | [Find Sum of Array Product of Magical Sequences](https://leetcode.cn/problems/find-sum-of-array-product-of-magical-sequences) | 2694 | combinatorics DP |
+| 3519 | [Count Numbers with Non Decreasing Digits](https://leetcode.cn/problems/count-numbers-with-non-decreasing-digits) | 2246 | digit DP |
+| 3444 | [Minimum Increments for Target Multiples in an Array](https://leetcode.cn/problems/minimum-increments-for-target-multiples-in-an-array) | 2337 | LCM / number theory |
+| 3589 | [Count Prime Gap Balanced Subarrays](https://leetcode.cn/problems/count-prime-gap-balanced-subarrays) | 2235 | prime gaps |`,
     },
     {
       id: "pitfalls",

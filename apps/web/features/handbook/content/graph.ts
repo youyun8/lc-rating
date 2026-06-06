@@ -93,13 +93,13 @@ Word Ladder (LC 127) and Open the Lock (LC 752) are BFS over implicit graphs of 
 // 207/210)
 vector<int> topoSort(int n, vector<vector<int>>& g) {
   vector<int> indeg(n, 0), order;
-  for (int u = 0; u < n; u++) {
+  for (int u = 0; u < n; ++u) {
     for (int v : g[u]) {
       indeg[v]++;
     }
   }
   queue<int> q;
-  for (int u = 0; u < n; u++) {
+  for (int u = 0; u < n; ++u) {
     if (indeg[u] == 0) {
       q.push(u);
     }
@@ -164,7 +164,7 @@ vector<long long> bellman(int n, int src, vector<array<int, 3>>& edges) {
   const long long INF = LLONG_MAX;
   vector<long long> dist(n, INF);
   dist[src] = 0;
-  for (int i = 0; i < n - 1; i++) {
+  for (int i = 0; i < n - 1; ++i) {
     for (auto& [u, v, w] : edges) {
       if (dist[u] != INF && dist[u] + w < dist[v]) {
         dist[v] = dist[u] + w;
@@ -179,9 +179,9 @@ vector<long long> bellman(int n, int src, vector<array<int, 3>>& edges) {
 
 \`\`\`cpp
 // Floyd-Warshall all-pairs shortest path
-for (int k = 0; k < n; k++) {
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
+for (int k = 0; k < n; ++k) {
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
       if (d[i][k] + d[k][j] < d[i][j]) {
         d[i][j] = d[i][k] + d[k][j];
       }
@@ -231,7 +231,7 @@ The 2-coloring routine below applies this directly: BFS each component, color ne
 bool isBipartite(vector<vector<int>>& g) {
   int n = g.size();
   vector<int> color(n, -1);
-  for (int s = 0; s < n; s++) {
+  for (int s = 0; s < n; ++s) {
     if (color[s] == -1) {
       queue<int> q;
       q.push(s);
@@ -290,7 +290,7 @@ vector<vector<int>> criticalConnections(int n, vector<vector<int>>& conns) {
       }
     }
   };
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     if (disc[i] == -1) {
       dfs(i, -1);
     }
@@ -350,6 +350,11 @@ vector<string> findItinerary(vector<vector<string>>& tickets) {
 These rarely appear on LeetCode but are decisive on the hardest contest problems — recognize the *reduction* (assignment → matching, capacity → flow) and reuse a known template.`,
     },
     {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `For harder graph tasks, first decide whether extra information belongs in the node state, the edge weight, or a preprocessing pass. Multi-source distances, reverse-graph distances, SCC condensation, and offline DSU often turn an apparent custom search into a standard template.`,
+    },
+    {
       id: "complexity",
       title: "Complexity cheatsheet",
       body: `| Algorithm | Time | Notes |
@@ -384,41 +389,16 @@ These rarely appear on LeetCode but are decisive on the hardest contest problems
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 127 | [Word Ladder](https://leetcode.cn/problems/word-ladder) | BFS over states |
-| 200 | [Number of Islands](https://leetcode.cn/problems/number-of-islands) | DFS/BFS components |
-| 207 / 210 | [Course Schedule I/II](https://leetcode.cn/problems/course-schedule) | topological sort |
-| 269 | [Alien Dictionary](https://leetcode.cn/problems/alien-dictionary) | topo sort |
-| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | DSU cycle |
-| 743 | [Network Delay Time](https://leetcode.cn/problems/network-delay-time) | Dijkstra |
-| 785 | [Is Graph Bipartite](https://leetcode.cn/problems/is-graph-bipartite) | 2-coloring |
-| 787 | [Cheapest Flights K Stops](https://leetcode.cn/problems/cheapest-flights-within-k-stops) | Bellman-Ford |
-| 1368 | [Min Cost Valid Path](https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid) | 0-1 BFS |
-| 1584 | [Connect All Points](https://leetcode.cn/problems/min-cost-to-connect-all-points) | MST |
-| 1631 | [Path With Minimum Effort](https://leetcode.cn/problems/path-with-minimum-effort) | Dijkstra variant |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 329 | [Longest Increasing Path in a Matrix](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix) | DAG memo DP |
-| 332 | [Reconstruct Itinerary](https://leetcode.cn/problems/reconstruct-itinerary) | Eulerian path |
-| 1192 | [Critical Connections in a Network](https://leetcode.cn/problems/critical-connections-in-a-network) | Tarjan bridges |
-| 1976 | [Number of Ways to Arrive at Destination](https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination) | Dijkstra + counting |
-| 2092 | [Find All People With Secret](https://leetcode.cn/problems/find-all-people-with-secret) | DSU by event time |
-| 2290 | [Minimum Obstacle Removal to Reach Corner](https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner) | 0-1 BFS |
-| 2421 | [Number of Good Paths](https://leetcode.cn/problems/number-of-good-paths) | DSU |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 2508 | [Add Edges to Make Degrees of All Nodes Even](https://leetcode.cn/problems/add-edges-to-make-degrees-of-all-nodes-even) | 2060 | degree analysis |
-| 2948 | [Make Lexicographically Smallest Array by Swapping](https://leetcode.cn/problems/make-lexicographically-smallest-array-by-swapping-elements) | 2047 | DSU components |
-| 3342 | [Find Minimum Time to Reach Last Room II](https://leetcode.cn/problems/find-minimum-time-to-reach-last-room-ii) | 1862 | Dijkstra |
-| 2976 | [Minimum Cost to Convert String I](https://leetcode.cn/problems/minimum-cost-to-convert-string-i) | 1882 | Floyd–Warshall |
-| 3604 | [Minimum Time to Reach Destination in Directed Graph](https://leetcode.cn/problems/minimum-time-to-reach-destination-in-directed-graph) | 1845 | time-aware Dijkstra |`,
+| 3710 | [Maximum Partition Factor](https://leetcode.cn/problems/maximum-partition-factor) | 2135 | connectivity threshold |
+| 3620 | [Network Recovery Pathways](https://leetcode.cn/problems/network-recovery-pathways) | 1998 | DAG shortest path |
+| 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | DSU over time |
+| 3607 | [Power Grid Maintenance](https://leetcode.cn/problems/power-grid-maintenance) | 1700 | power-grid maintenance |
+| 3604 | [Minimum Time to Reach Destination in Directed Graph](https://leetcode.cn/problems/minimum-time-to-reach-destination-in-directed-graph) | 1845 | directed shortest path |
+| 3600 | [Maximize Spanning Tree Stability with Upgrades](https://leetcode.cn/problems/maximize-spanning-tree-stability-with-upgrades) | 2301 | MST with upgrades |
+| 3594 | [Minimum Time to Transport All Individuals](https://leetcode.cn/problems/minimum-time-to-transport-all-individuals) | 2604 | state shortest path |
+| 127 | [Word Ladder](https://leetcode.cn/problems/word-ladder) | - | BFS classic |`,
     },
     {
       id: "pitfalls",

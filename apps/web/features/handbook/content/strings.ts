@@ -41,7 +41,7 @@ bool isPalindrome(string s) {
   int i = 0, j = s.size() - 1;
   while (i < j) {
     while (i < j && !isalnum(s[i])) {
-      i++;
+      ++i;
     }
     while (i < j && !isalnum(s[j])) {
       j--;
@@ -49,7 +49,7 @@ bool isPalindrome(string s) {
     if (tolower(s[i]) != tolower(s[j])) {
       return false;
     }
-    i++;
+    ++i;
     j--;
   }
   return true;
@@ -89,14 +89,14 @@ string longestPalindrome(string s) {
   auto expand = [&](int l, int r) {
     while (l >= 0 && r < (int)s.size() && s[l] == s[r]) {
       l--;
-      r++;
+      ++r;
     }
     if (r - l - 1 > len) {
       len = r - l - 1;
       start = l + 1;
     }
   };
-  for (int i = 0; i < (int)s.size(); i++) {
+  for (int i = 0; i < (int)s.size(); ++i) {
     expand(i, i);
     expand(i, i + 1);
   }
@@ -117,13 +117,13 @@ For \`O(n)\` longest palindrome use **Manacher's algorithm** (advanced). Palindr
 vector<int> prefixFunc(const string& p) {
   int m = p.size();
   vector<int> pi(m, 0);
-  for (int i = 1; i < m; i++) {
+  for (int i = 1; i < m; ++i) {
     int j = pi[i - 1];
     while (j > 0 && p[i] != p[j]) {
       j = pi[j - 1];
     }
     if (p[i] == p[j]) {
-      j++;
+      ++j;
     }
     pi[i] = j;
   }
@@ -139,12 +139,12 @@ int kmp(const string& t, const string& p) {
   }
   vector<int> pi = prefixFunc(p);
   int j = 0;
-  for (int i = 0; i < (int)t.size(); i++) {
+  for (int i = 0; i < (int)t.size(); ++i) {
     while (j > 0 && t[i] != p[j]) {
       j = pi[j - 1];
     }
     if (t[i] == p[j]) {
-      j++;
+      ++j;
     }
     if (j == (int)p.size()) {
       return i - j + 1;  // full match
@@ -167,7 +167,7 @@ vector<int> zFunction(const string& s) {
   int n = s.size();
   vector<int> z(n, 0);
   z[0] = n;
-  for (int i = 1, l = 0, r = 0; i < n; i++) {
+  for (int i = 1, l = 0, r = 0; i < n; ++i) {
     if (i < r) {
       z[i] = min(r - i, z[i - l]);
     }
@@ -193,7 +193,7 @@ void buildHash(const string& s) {
   int n = s.size();
   h.assign(n + 1, 0);
   pw.assign(n + 1, 1);
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     h[i + 1] = h[i] * B + s[i];
     pw[i + 1] = pw[i] * B;
   }
@@ -264,7 +264,7 @@ string longestPalindromeManacher(const string& s) {
   t += "#$";  // sentinels remove bounds checks
   int n = t.size(), center = 0, right = 0;
   vector<int> p(n, 0);  // p[i] = palindrome radius at i
-  for (int i = 1; i < n - 1; i++) {
+  for (int i = 1; i < n - 1; ++i) {
     if (i < right) {
       p[i] = min(right - i, p[2 * center - i]);  // mirror
     }
@@ -277,7 +277,7 @@ string longestPalindromeManacher(const string& s) {
     }
   }
   int len = 0, c = 0;
-  for (int i = 1; i < n - 1; i++) {
+  for (int i = 1; i < n - 1; ++i) {
     if (p[i] > len) {
       len = p[i];
       c = i;
@@ -320,7 +320,7 @@ struct AhoCorasick {
   }
   void build() {  // BFS to set fail links / goto automaton
     queue<int> q;
-    for (int k = 0; k < 26; k++) {
+    for (int k = 0; k < 26; ++k) {
       if (t[0].nxt[k]) {
         q.push(t[0].nxt[k]);
       }
@@ -328,7 +328,7 @@ struct AhoCorasick {
     while (!q.empty()) {
       int u = q.front();
       q.pop();
-      for (int k = 0; k < 26; k++) {
+      for (int k = 0; k < 26; ++k) {
         int v = t[u].nxt[k];
         if (!v) {
           t[u].nxt[k] = t[t[u].fail].nxt[k];  // follow fail on miss
@@ -353,6 +353,11 @@ Aho–Corasick powers Stream of Characters (LC 1032) and dictionary-replacement 
 - **Double hashing.** To make rolling-hash comparisons collision-safe under adversarial tests, compare two independent hashes (different bases/moduli), or use a single random 64-bit modulus. This is the pragmatic path for Longest Duplicate Substring (LC 1044) and Distinct Echo Substrings (LC 1316).
 
 For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice; reach for suffix automata only when substring *counting* over all suffixes is required.`,
+    },
+    {
+      id: "advanced-techniques",
+      title: "Advanced techniques",
+      body: `Hard string problems usually combine a local scan with a global index: rolling hashes for equality, tries for shared prefixes, automata for many patterns, and DP when edits or subsequences break direct scanning.`,
     },
     {
       id: "complexity",
@@ -387,39 +392,16 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 28 | [Find the Index (strStr)](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string) | KMP |
-| 49 / 242 | [Anagrams](https://leetcode.cn/problems/group-anagrams) | frequency counting |
-| 76 | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) | sliding window |
-| 125 / 5 / 647 | [Palindrome family](https://leetcode.cn/problems/valid-palindrome) | two pointers / expand |
-| 131 / 132 | [Palindrome Partitioning](https://leetcode.cn/problems/palindrome-partitioning) | DP |
-| 208 / 211 / 212 | [Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) / [Add&Search](https://leetcode.cn/problems/design-add-and-search-words-data-structure) / [Word Search II](https://leetcode.cn/problems/word-search-ii) | Trie |
-| 214 | [Shortest Palindrome](https://leetcode.cn/problems/shortest-palindrome) | KMP / hash |
-| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | bitwise Trie |
-| 459 | [Repeated Substring Pattern](https://leetcode.cn/problems/repeated-substring-pattern) | prefix function |
-| 1044 | [Longest Duplicate Substring](https://leetcode.cn/problems/longest-duplicate-substring) | rolling hash + binary search |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 5 | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) | Manacher |
-| 1032 | [Stream of Characters](https://leetcode.cn/problems/stream-of-characters) | Aho–Corasick |
-| 1316 | [Distinct Echo Substrings](https://leetcode.cn/problems/distinct-echo-substrings) | rolling hash |
-| 1392 | [Longest Happy Prefix](https://leetcode.cn/problems/longest-happy-prefix) | prefix function |
-| 3008 | [Find Beautiful Indices in the Given Array II](https://leetcode.cn/problems/find-beautiful-indices-in-the-given-array-ii) | KMP / Z-function |
-| 3031 | [Minimum Time to Revert Word to Initial State II](https://leetcode.cn/problems/minimum-time-to-revert-word-to-initial-state-ii) | Z-function |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3614 | [Process String With Special Operations II](https://leetcode.cn/problems/process-string-with-special-operations-ii) | 2011 | simulation / indexing |
-| 3472 | [Longest Palindromic Subsequence After at Most K Operations](https://leetcode.cn/problems/longest-palindromic-subsequence-after-at-most-k-operations) | 1884 | interval DP |
-| 3781 | [Maximum Score After Binary Swaps](https://leetcode.cn/problems/maximum-score-after-binary-swaps) | 1823 | greedy on string |
-| 3335 | [Total Characters in String After Transformations I](https://leetcode.cn/problems/total-characters-in-string-after-transformations-i) | 1806 | counting recurrence |
-| 3703 | [Remove K Balanced Substrings](https://leetcode.cn/problems/remove-k-balanced-substrings) | 1802 | stack |`,
+| 3694 | [Distinct Points Reachable After Substring Removal](https://leetcode.cn/problems/distinct-points-reachable-after-substring-removal) | 1739 | prefix balance string |
+| 3714 | [Longest Balanced Substring II](https://leetcode.cn/problems/longest-balanced-substring-ii) | 2202 | balanced substring |
+| 3474 | [Lexicographically Smallest Generated String](https://leetcode.cn/problems/lexicographically-smallest-generated-string) | 2605 | string construction |
+| 3455 | [Shortest Matching Substring](https://leetcode.cn/problems/shortest-matching-substring) | 2303 | shortest match |
+| 3445 | [Maximum Difference Between Even and Odd Frequency II](https://leetcode.cn/problems/maximum-difference-between-even-and-odd-frequency-ii) | 2694 | frequency difference window |
+| 3472 | [Longest Palindromic Subsequence After at Most K Operations](https://leetcode.cn/problems/longest-palindromic-subsequence-after-at-most-k-operations) | 1884 | palindrome DP |
+| 3563 | [Lexicographically Smallest String After Adjacent Removals](https://leetcode.cn/problems/lexicographically-smallest-string-after-adjacent-removals) | 2585 | string DP |
+| 3 | [Longest Substring Without Repeating Characters](https://leetcode.cn/problems/longest-substring-without-repeating-characters) | - | sliding string classic |`,
     },
     {
       id: "pitfalls",

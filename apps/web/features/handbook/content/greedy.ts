@@ -54,7 +54,7 @@ int maxNonOverlap(vector<vector<int>>& iv) {
   int count = 0, end = INT_MIN;
   for (auto& x : iv) {
     if (x[0] >= end) {  // take it; advance the frontier
-      count++;
+      ++count;
       end = x[1];
     }
   }
@@ -76,7 +76,7 @@ int maxNonOverlap(vector<vector<int>>& iv) {
 // Minimum cost to connect ropes / merge stones-style (Huffman-like)
 long long connectSticks(vector<int>& sticks) {
   priority_queue<long long, vector<long long>, greater<>> pq(sticks.begin(),
-                                                            sticks.end());
+                                                             sticks.end());
   long long cost = 0;
   while (pq.size() > 1) {
     long long a = pq.top();
@@ -102,10 +102,10 @@ Track the farthest reachable index; greedily extend the current "level".
 // Minimum jumps to reach the end (LC 45) — BFS-like level expansion
 int jump(vector<int>& a) {
   int jumps = 0, curEnd = 0, farthest = 0;
-  for (int i = 0; i + 1 < (int)a.size(); i++) {
+  for (int i = 0; i + 1 < (int)a.size(); ++i) {
     farthest = max(farthest, i + a[i]);
     if (i == curEnd) {  // finished a level
-      jumps++;
+      ++jumps;
       curEnd = farthest;
     }
   }
@@ -130,9 +130,9 @@ int findContentChildren(vector<int>& g, vector<int>& s) {
   int i = 0, j = 0;
   while (i < (int)g.size() && j < (int)s.size()) {
     if (s[j] >= g[i]) {
-      i++;  // this cookie satisfies child i
+      ++i;  // this cookie satisfies child i
     }
-    j++;
+    ++j;
   }
   return i;
 }
@@ -161,7 +161,7 @@ int minRefuelStops(int target, int startFuel, vector<vector<int>>& st) {
     }
     fuel += pq.top();
     pq.pop();
-    stops++;  // claim the best deferred refuel
+    ++stops;  // claim the best deferred refuel
   }
   return stops;
 }
@@ -199,7 +199,7 @@ int scheduleCourse(vector<vector<int>>& c) {
 int candy(vector<int>& r) {
   int n = r.size();
   vector<int> c(n, 1);
-  for (int i = 1; i < n; i++) {
+  for (int i = 1; i < n; ++i) {
     if (r[i] > r[i - 1]) {
       c[i] = c[i - 1] + 1;
     }
@@ -247,41 +247,14 @@ The cost is almost always dominated by the initial sort or by heap operations.`,
     {
       id: "problems",
       title: "LeetCode problems",
-      body: `| ID | Problem | Technique |
-| --- | --- | --- |
-| 55 / 45 | [Jump Game I/II](https://leetcode.cn/problems/jump-game) | farthest reach |
-| 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | sort by start |
-| 134 | [Gas Station](https://leetcode.cn/problems/gas-station) | running deficit |
-| 253 | [Meeting Rooms II](https://leetcode.cn/problems/meeting-rooms-ii) | sweep / min-heap |
-| 406 | [Queue Reconstruction by Height](https://leetcode.cn/problems/queue-reconstruction-by-height) | sort + insert |
-| 435 | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) | sort by end |
-| 452 | [Burst Balloons (arrows)](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons) | sort by end |
-| 455 | [Assign Cookies](https://leetcode.cn/problems/assign-cookies) | sorted two-pointer |
-| 621 | [Task Scheduler](https://leetcode.cn/problems/task-scheduler) | heap / math |
-| 767 | [Reorganize String](https://leetcode.cn/problems/reorganize-string) | max-heap |
-| 881 | [Boats to Save People](https://leetcode.cn/problems/boats-to-save-people) | two pointers |
-
-**Advanced practice problems**
-
-| ID | Problem | Technique |
-| --- | --- | --- |
-| 135 | [Candy](https://leetcode.cn/problems/candy) | two-pass greedy |
-| 630 | [Course Schedule III](https://leetcode.cn/problems/course-schedule-iii) | take-then-drop heap |
-| 871 | [Minimum Number of Refueling Stops](https://leetcode.cn/problems/minimum-number-of-refueling-stops) | regret heap |
-| 1921 | [Eliminate Maximum Number of Monsters](https://leetcode.cn/problems/eliminate-maximum-number-of-monsters) | sort by arrival time |
-| 2171 | [Removing Minimum Number of Magic Beans](https://leetcode.cn/problems/removing-minimum-number-of-magic-beans) | sort + prefix greedy |
-| 2410 | [Maximum Matching of Players With Trainers](https://leetcode.cn/problems/maximum-matching-of-players-with-trainers) | sort + two pointers |
-| 2790 | [Maximum Number of Groups With Increasing Length](https://leetcode.cn/problems/maximum-number-of-groups-with-increasing-length) | greedy |
-
-**Recent medium problems**
-
-| ID | Problem | Rating | Technique |
+      body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
-| 3785 | [Minimum Swaps to Avoid Forbidden Values](https://leetcode.cn/problems/minimum-swaps-to-avoid-forbidden-values) | 2052 | greedy |
-| 3720 | [Lexicographically Smallest Permutation Greater Than Target](https://leetcode.cn/problems/lexicographically-smallest-permutation-greater-than-target) | 1958 | greedy construction |
-| 3635 | [Earliest Finish Time for Land and Water Rides II](https://leetcode.cn/problems/earliest-finish-time-for-land-and-water-rides-ii) | 1870 | greedy + sort |
-| 3752 | [Lexicographically Smallest Negated Permutation That Sums to Target](https://leetcode.cn/problems/lexicographically-smallest-negated-permutation-that-sums-to-target) | 1827 | greedy construction |
-| 3588 | [Find Maximum Area of a Triangle](https://leetcode.cn/problems/find-maximum-area-of-a-triangle) | 1819 | greedy extremes |`,
+| 3767 | [Maximize Points After Choosing K Tasks](https://leetcode.cn/problems/maximize-points-after-choosing-k-tasks) | 1704 | task selection / heap |
+| 3780 | [Maximum Sum of Three Numbers Divisible by Three](https://leetcode.cn/problems/maximum-sum-of-three-numbers-divisible-by-three) | 1585 | modulo greedy |
+| 3781 | [Maximum Score After Binary Swaps](https://leetcode.cn/problems/maximum-score-after-binary-swaps) | 1823 | heap greedy |
+| 3645 | [Maximum Total from Optimal Activation Order](https://leetcode.cn/problems/maximum-total-from-optimal-activation-order) | 2019 | activation order |
+| 3605 | [Minimum Stability Factor of Array](https://leetcode.cn/problems/minimum-stability-factor-of-array) | 2410 | binary search + greedy |
+| 871 | [Minimum Number of Refueling Stops](https://leetcode.cn/problems/minimum-number-of-refueling-stops) | 2074 | regret heap classic |`,
     },
     {
       id: "pitfalls",
