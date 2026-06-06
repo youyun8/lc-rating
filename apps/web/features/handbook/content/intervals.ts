@@ -33,6 +33,32 @@ The two engines below cover nearly all of them: **sort + linear merge/scan** for
 Also handy: prefix sums for the difference-array form of range updates, and a comfort with half-open intervals $[s, e)$ to dodge off-by-one bugs at the endpoints.`,
     },
     {
+      id: "overlap-test",
+      title: "Do two intervals overlap?",
+      body: `:::example Overlap test for two intervals
+Before any sweep, the atomic question is whether **two** intervals touch at all — and that needs no sorting. Two closed intervals \`[a, b]\` and \`[c, d]\` overlap exactly when **each one starts at or before the other ends**, i.e. \`a <= d && c <= b\`. The symmetric phrasing is the easy way to remember it: they are *disjoint* only if one ends entirely before the other starts (\`b < c\` or \`d < a\`), so negating that gives the test below.
+
+\`\`\`cpp
+// Do closed intervals [a, b] and [c, d] overlap?
+bool overlap(vector<int>& x, vector<int>& y) {
+  // Each interval must start at or before the other ends.
+  return x[0] <= y[1] && y[0] <= x[1];  // use < on both for strict crossing (no touching)
+}
+\`\`\`
+:::
+
+Whether touching endpoints count is a deliberate choice: with \`<=\`, \`[1, 2]\` and \`[2, 3]\` overlap; with \`<\` they do not. Keep that choice consistent everywhere you test overlap. When you also need *how much* they share, intersect them directly — the common part is \`[max(starts), min(ends)]\`, which is non-empty precisely when \`max(starts) <= min(ends)\`. Clamping the width at zero turns the same formula into an overlap-length helper that the merge, intersection, and sweep patterns below all reuse.
+
+\`\`\`cpp
+// Overlap length (0 when disjoint); the intersection is [lo, hi].
+int overlapLength(vector<int>& x, vector<int>& y) {
+  int lo = max(x[0], y[0]);
+  int hi = min(x[1], y[1]);
+  return max(0, hi - lo);  // hi - lo can be negative when they miss
+}
+\`\`\``,
+    },
+    {
       id: "merge",
       title: "Sort by start, then merge",
       body: `:::example Merge Intervals (LC 56)
