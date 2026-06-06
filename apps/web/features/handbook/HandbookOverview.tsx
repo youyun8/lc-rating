@@ -6,6 +6,11 @@ import { BookOpen, GraduationCap, Search } from "lucide-react";
 import { HANDBOOK_TOPICS, getHandbookTopicsByGroup } from "./content";
 import { resolveHandbookIcon } from "./icons";
 import type { HandbookTopic } from "./model";
+import { LeetCodeIdResults } from "@/components/common/LeetCodeIdResults";
+import {
+  parseLeetCodeId,
+  searchHandbookByLeetCodeId,
+} from "@/utils/leetcodeContentIndex";
 
 function matchesQuery(topic: HandbookTopic, q: string): boolean {
   if (!q) return true;
@@ -52,6 +57,13 @@ function TopicCard({ topic }: { topic: HandbookTopic }) {
 export default function HandbookOverview() {
   const [query, setQuery] = useState("");
   const q = query.trim().toLowerCase();
+
+  // A purely-numeric query is treated as a LeetCode id lookup.
+  const lcId = useMemo(() => parseLeetCodeId(query), [query]);
+  const lcHits = useMemo(
+    () => (lcId === null ? [] : searchHandbookByLeetCodeId(lcId)),
+    [lcId],
+  );
 
   const groups = useMemo(() => {
     return getHandbookTopicsByGroup()
@@ -110,41 +122,48 @@ export default function HandbookOverview() {
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search topics and sections…"
+                placeholder="Search topics, sections, or a LeetCode ID…"
                 className="w-full rounded-xl border border-border/60 bg-background py-2.5 pl-9 pr-3 text-sm text-foreground outline-none transition-colors focus:border-primary/50"
               />
             </div>
           </div>
         </section>
 
-        {/* Groups */}
-        <div className="mt-6 space-y-8">
-          {groups.map(({ group, topics }) => (
-            <section key={group}>
-              <div className="mb-3 flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-muted-foreground" />
-                <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                  {group}
-                </h2>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {topics.map((topic) => (
-                  <TopicCard key={topic.slug} topic={topic} />
-                ))}
-              </div>
-            </section>
-          ))}
+        {/* LeetCode ID lookup results */}
+        {lcId !== null && (
+          <LeetCodeIdResults id={lcId} hits={lcHits} language="en" />
+        )}
 
-          {groups.length === 0 && (
-            <p className="py-12 text-center text-sm text-muted-foreground">
-              No topics match{" "}
-              <span className="font-medium text-foreground">
-                &ldquo;{query}&rdquo;
-              </span>
-              .
-            </p>
-          )}
-        </div>
+        {/* Groups */}
+        {lcId === null && (
+          <div className="mt-6 space-y-8">
+            {groups.map(({ group, topics }) => (
+              <section key={group}>
+                <div className="mb-3 flex items-center gap-2">
+                  <BookOpen className="h-4 w-4 text-muted-foreground" />
+                  <h2 className="text-lg font-semibold tracking-tight text-foreground">
+                    {group}
+                  </h2>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {topics.map((topic) => (
+                    <TopicCard key={topic.slug} topic={topic} />
+                  ))}
+                </div>
+              </section>
+            ))}
+
+            {groups.length === 0 && (
+              <p className="py-12 text-center text-sm text-muted-foreground">
+                No topics match{" "}
+                <span className="font-medium text-foreground">
+                  &ldquo;{query}&rdquo;
+                </span>
+                .
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
