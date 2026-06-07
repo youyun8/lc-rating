@@ -3803,11 +3803,13 @@ function practiceTable(title: PracticeProblem["tier"], rows: PracticeProblem[]):
   const header = [
     `**${title}**`,
     "",
-    "| LC | Problem | Rating | Difficulty | Sub-pattern | Why useful | Order |",
-    "|---:|---|---:|---|---|---|---:|",
+    // Keep this four-column shape so HandbookSectionBody upgrades it to
+    // ProblemList, which applies the EN/CN LeetCode host from site settings.
+    "| ID | Problem | Rating | Technique |",
+    "|---:|---|---:|---|",
   ];
   const body = rows.map((problem) =>
-    `| ${problem.id} | [${problem.title}](https://leetcode.com/problems/${problem.slug}) | ~${problem.rating} | ${problem.difficulty} | ${problem.subPattern} | ${problem.why} | ${problem.order} |`,
+    `| ${problem.id} | [${problem.title}](https://leetcode.com/problems/${problem.slug}) | ${problem.rating} | ${problem.order}. ${problem.subPattern} (${problem.difficulty}) |`,
   );
   return [...header, ...body].join("\n");
 }
