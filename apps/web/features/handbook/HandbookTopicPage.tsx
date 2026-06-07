@@ -118,7 +118,10 @@ export function HandbookTopicPage({
                 <h2 className="mb-3 border-b border-border/60 pb-2 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
                   {s.title}
                 </h2>
-                <HandbookSectionBody body={s.body} />
+                <HandbookSectionBody
+                  body={s.body}
+                  problemLabelSource="problemset"
+                />
               </section>
             ))}
 

@@ -100,8 +100,8 @@ export default function HandbookOverview() {
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                   A structured handbook for rating 1700+ pattern recognition:
-                  constraints, invariants, proof intuition, C++17 templates,
-                  and focused practice problems.
+                  constraints, invariants, proof intuition, C++17 templates, and
+                  focused practice problems.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3 self-start">

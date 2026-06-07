@@ -2,7 +2,7 @@ import type { TagMap } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { fetchApi } from "@/utils/fetch";
 
-export function useTags() {
+export function useTags(enabled = true) {
   const {
     data: tagMap,
     isPending,
@@ -13,6 +13,7 @@ export function useTags() {
       fetchApi(
         "/problemset/tags.json?t=" + (new Date().getTime() / 100000).toFixed(0),
       ).then((res) => res.json()),
+    enabled,
     staleTime: 3600 * 1000, // 1 hour
   });
 

@@ -378,11 +378,13 @@ export function StudyPlanMarkdownContent({
 
       // Start collapsed, unless the caller wants code expanded (e.g. inside a
       // handbook 例題 card that is itself the collapsible container).
-      pre.style.display = codeInitiallyOpen ? "" : "none";
+      const isInsideDetails = Boolean(pre.closest("details"));
+      const shouldOpenCode = codeInitiallyOpen || isInsideDetails;
+      pre.style.display = shouldOpenCode ? "" : "none";
       pre.style.margin = "0";
       pre.style.borderRadius = "0";
       pre.style.borderTop = "1px solid hsl(var(--border) / 0.6)";
-      if (codeInitiallyOpen) chevron.style.transform = "rotate(90deg)";
+      if (shouldOpenCode) chevron.style.transform = "rotate(90deg)";
 
       toggle.addEventListener("click", () => {
         const isHidden = pre.style.display === "none";
@@ -393,6 +395,52 @@ export function StudyPlanMarkdownContent({
       pre.parentNode?.insertBefore(wrapper, pre);
       wrapper.appendChild(header);
       wrapper.appendChild(pre);
+    });
+
+    innerHtml.current.querySelectorAll("details").forEach((details) => {
+      if (details.getAttribute("data-styled-details") === "true") return;
+      const summary = details.querySelector("summary");
+      if (!summary) return;
+
+      details.setAttribute("data-styled-details", "true");
+      details.className =
+        "not-prose my-5 overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm ring-1 ring-black/[0.02] transition-colors dark:ring-white/[0.03]";
+      summary.className =
+        "group flex cursor-pointer list-none items-center gap-3 bg-gradient-to-r from-muted/70 to-background px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:from-muted [&::-webkit-details-marker]:hidden";
+
+      const chevron = document.createElement("span");
+      chevron.className =
+        "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform duration-200";
+      chevron.innerHTML = CHEVRON_SVG;
+
+      const title = document.createElement("span");
+      title.className = "min-w-0 flex-1 truncate";
+      title.textContent = summary.textContent?.trim() || "Details";
+
+      const badge = document.createElement("span");
+      badge.className =
+        "hidden shrink-0 rounded-full border border-border/60 bg-background/80 px-2 py-0.5 text-[11px] font-medium text-muted-foreground sm:inline-flex";
+      badge.textContent = "expand";
+
+      summary.textContent = "";
+      summary.appendChild(chevron);
+      summary.appendChild(title);
+      summary.appendChild(badge);
+
+      const content = document.createElement("div");
+      content.className =
+        "space-y-4 border-t border-border/60 bg-background/70 px-4 py-4";
+      while (summary.nextSibling) {
+        content.appendChild(summary.nextSibling);
+      }
+      details.appendChild(content);
+
+      const syncState = () => {
+        chevron.style.transform = details.open ? "rotate(90deg)" : "";
+        badge.textContent = details.open ? "collapse" : "expand";
+      };
+      details.addEventListener("toggle", syncState);
+      syncState();
     });
 
     // Collapse any table column whose body cells are all identical into a

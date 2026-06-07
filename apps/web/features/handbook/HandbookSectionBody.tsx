@@ -17,6 +17,8 @@ interface HandbookSectionBodyProps {
   exampleLabel?: string;
   /** ProblemList UI language for inline problem tables. */
   language?: "en" | "zh";
+  /** Label source for inline LeetCode problem tables. */
+  problemLabelSource?: "subsection" | "problemset";
 }
 
 /**
@@ -30,9 +32,20 @@ export function HandbookSectionBody({
   body,
   exampleLabel = "例題",
   language = "en",
+  problemLabelSource = "subsection",
 }: HandbookSectionBodyProps) {
   const segments = useMemo(() => splitSectionBody(body), [body]);
-  return <>{renderSegments(segments, false, exampleLabel, language)}</>;
+  return (
+    <>
+      {renderSegments(
+        segments,
+        false,
+        exampleLabel,
+        language,
+        problemLabelSource,
+      )}
+    </>
+  );
 }
 
 /**
@@ -45,6 +58,7 @@ function renderSegments(
   codeInitiallyOpen: boolean,
   exampleLabel: string,
   language: "en" | "zh",
+  problemLabelSource: "subsection" | "problemset",
 ) {
   return segments.map((segment, idx) => {
     if (segment.kind === "problems") {
@@ -54,6 +68,7 @@ function renderSegments(
             problems={segment.problems}
             title={segment.title ?? "Practice problems"}
             language={language}
+            labelSource={problemLabelSource}
           />
         </div>
       );
@@ -67,6 +82,7 @@ function renderSegments(
             true,
             exampleLabel,
             language,
+            problemLabelSource,
           )}
         </HandbookExample>
       );

@@ -1,3 +1,4 @@
+import { I18NTag } from "@/components/common/I18NTag";
 import { ProgressSelector } from "@/components/common/ProgressSelector";
 import { ratingInfo } from "@/components/common/RatingCircle";
 import { LC_HOST_EN, LC_HOST_ZH } from "@/config/constants";
@@ -5,7 +6,8 @@ import { useProgressMap } from "@/features/userData";
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { useOptions } from "@/hooks/useOptions";
 import { useProblems } from "@/hooks/useProblems";
-import type { ProblemMap } from "@/types";
+import { useTags } from "@/hooks/useTags";
+import type { ProblemMap, TagMap } from "@/types";
 import { StudyPlanData } from "@/types";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import React, { useMemo } from "react";
@@ -16,6 +18,8 @@ interface ProblemListProps {
   title?: string;
   /** UI language for the header/labels. Defaults to "zh" (studyplan/lectures). */
   language?: "zh" | "en";
+  /** Which label chips to show under each problem title. */
+  labelSource?: "subsection" | "problemset";
 }
 
 function getSortableProblemIndex(problem: StudyPlanData.Item) {
@@ -98,13 +102,29 @@ function normalizedStudyPlanSlug(slug: string) {
   return slug.replace(/^\/+|\/+$/g, "").toLowerCase();
 }
 
-function getProblemLabels(problem: StudyPlanData.Item) {
+function getSubsectionLabels(problem: StudyPlanData.Item) {
   return (
     problem.subsection
       ?.split(" / ")
       .map((label) => label.trim())
       .filter(Boolean) ?? []
   );
+}
+
+function getProblemsetTags(
+  problem: StudyPlanData.Item,
+  problemMap: ProblemMap | undefined,
+  tagMap: TagMap | undefined,
+) {
+  const problemId = problem.id?.toString();
+  if (!problemId) {
+    return [];
+  }
+
+  const tagIds = problemMap?.[problemId]?.tagIds ?? [];
+  return tagIds
+    .map((tagId) => tagMap?.[tagId])
+    .filter((tag): tag is NonNullable<typeof tag> => Boolean(tag));
 }
 
 /** Same numeric/LC id listed twice with different slugs (data typo or alternate URLs). */
@@ -161,10 +181,16 @@ function mergeStudyPlanProblemsById(
 }
 
 const ProblemList = React.memo(
-  ({ problems, title, language = "zh" }: ProblemListProps) => {
+  ({
+    problems,
+    title,
+    language = "zh",
+    labelSource = "subsection",
+  }: ProblemListProps) => {
     const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
     const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
     const { problemMap } = useProblems();
+    const { tagMap } = useTags(labelSource === "problemset");
     const progress = useProgressMap();
     const { getOption } = useOptions();
     const pendingOption = getOption();
@@ -215,7 +241,8 @@ const ProblemList = React.memo(
         {enrichedProblems.map((problem, idx) => {
           const problemId = problem.id?.toString();
           const info = ratingInfo(problem.score || 0);
-          const labels = getProblemLabels(problem);
+          const subsectionLabels = getSubsectionLabels(problem);
+          const problemsetTags = getProblemsetTags(problem, problemMap, tagMap);
           const statusKey = problemId ? progress[problemId] : undefined;
           const statusOption = getOption(statusKey);
           const hasStarted =
@@ -250,18 +277,30 @@ const ProblemList = React.memo(
                     ? problem.title
                     : `${problem.id}. ${problem.title}`}
                 </a>
-                {labels.length > 0 && (
+                {labelSource === "problemset" && problemsetTags.length > 0 && (
                   <div className="mt-1.5 flex flex-wrap gap-1">
-                    {labels.map((label) => (
-                      <span
-                        key={label}
-                        className="inline-flex max-w-[24ch] items-center truncate rounded-md border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[11px] leading-tight text-muted-foreground"
-                      >
-                        {label}
-                      </span>
+                    {problemsetTags.map((tag) => (
+                      <I18NTag
+                        key={tag.id}
+                        label={{ zh: tag.zh, en: tag.en }}
+                        className="max-w-[24ch] truncate text-[11px] leading-tight"
+                      />
                     ))}
                   </div>
                 )}
+                {labelSource === "subsection" &&
+                  subsectionLabels.length > 0 && (
+                    <div className="mt-1.5 flex flex-wrap gap-1">
+                      {subsectionLabels.map((label) => (
+                        <span
+                          key={label}
+                          className="inline-flex max-w-[24ch] items-center truncate rounded-md border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[11px] leading-tight text-muted-foreground"
+                        >
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+                  )}
               </div>
               <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
                 <div className="flex items-center gap-2">
