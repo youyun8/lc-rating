@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { BookOpen, GraduationCap, Search } from "lucide-react";
-import { HANDBOOK_TOPICS, getHandbookTopicsByGroup } from "./content";
+import {
+  HANDBOOK_GROUP_DESCRIPTIONS,
+  HANDBOOK_TOPICS,
+  getHandbookTopicsByGroup,
+} from "./content";
 import { resolveHandbookIcon } from "./icons";
 import type { HandbookTopic } from "./model";
 import { LeetCodeIdResults } from "@/components/common/LeetCodeIdResults";
@@ -89,15 +93,15 @@ export default function HandbookOverview() {
               <div className="max-w-2xl space-y-2">
                 <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/30 px-3 py-1 text-xs font-medium text-muted-foreground">
                   <GraduationCap className="h-3.5 w-3.5" />
-                  Algorithm Handbook
+                  Pattern Handbook
                 </div>
                 <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  Contest Algorithms Handbook
+                  LeetCode Pattern Handbook
                 </h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  A structured, self-contained course covering every core
-                  algorithm topic — concepts, LeetCode techniques, and
-                  ready-to-use C++ templates. Pick a topic to start reading.
+                  A structured handbook for rating 1700+ pattern recognition:
+                  constraints, invariants, proof intuition, C++17 templates,
+                  and focused practice problems.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3 self-start">
@@ -139,11 +143,16 @@ export default function HandbookOverview() {
           <div className="mt-6 space-y-8">
             {groups.map(({ group, topics }) => (
               <section key={group}>
-                <div className="mb-3 flex items-center gap-2">
-                  <BookOpen className="h-4 w-4 text-muted-foreground" />
-                  <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                    {group}
-                  </h2>
+                <div className="mb-3 flex items-start gap-2">
+                  <BookOpen className="mt-1 h-4 w-4 shrink-0 text-muted-foreground" />
+                  <div>
+                    <h2 className="text-lg font-semibold tracking-tight text-foreground">
+                      {group}
+                    </h2>
+                    <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
+                      {HANDBOOK_GROUP_DESCRIPTIONS[group]}
+                    </p>
+                  </div>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {topics.map((topic) => (

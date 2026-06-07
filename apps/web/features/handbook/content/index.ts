@@ -1,79 +1,55 @@
 import type { HandbookGroup, HandbookTopic, HandbookTopicRef } from "../model";
-import { competitiveProgrammingEssentials } from "./competitive-programming-essentials";
 import { mlPerformanceSystemDesign } from "./ml-performance-system-design";
-import { binarySearch } from "./binary-search";
-import { sorting } from "./sorting";
-import { twoPointers } from "./two-pointers";
-import { slidingWindow } from "./sliding-window";
-import { prefixSumHashing } from "./prefix-sum-hashing";
-import { monotonicStackVsDeque } from "./monotonic-stack-vs-deque";
-import { contribution } from "./contribution";
-import { greedy } from "./greedy";
-import { intervals } from "./intervals";
-import { lineSweeping } from "./line-sweeping";
-import { backtracking } from "./backtracking";
-import { linkedList } from "./linked-list";
-import { dataStructures } from "./data-structures";
-import { heapPriorityQueue } from "./heap-priority-queue";
-import { rangeQueriesOffline } from "./range-queries-offline";
-import { design } from "./design";
-import { trees } from "./trees";
-import { graph } from "./graph";
-import { advancedGraphTemplates } from "./advanced-graph-templates";
-import { grid } from "./grid";
-import { dynamicProgramming } from "./dynamic-programming";
-import { strings } from "./strings";
-import { stringAlgorithmsII } from "./string-algorithms-ii";
-import { math } from "./math";
-import { geometry } from "./geometry";
-import { bitManipulation } from "./bit-manipulation";
-import { trialFilling } from "./trial-filling";
+import { PATTERN_HANDBOOK_TOPICS } from "./pattern-handbook";
 
 /**
- * Ordered list of every handbook topic. The order doubles as the learning
- * path used for prev/next navigation on each topic page.
+ * Ordered list of every handbook topic. The order doubles as the learning path
+ * used for previous/next navigation on each topic page.
  */
 export const HANDBOOK_TOPICS: HandbookTopic[] = [
-  competitiveProgrammingEssentials,
+  ...PATTERN_HANDBOOK_TOPICS,
   mlPerformanceSystemDesign,
-  binarySearch,
-  sorting,
-  twoPointers,
-  slidingWindow,
-  prefixSumHashing,
-  monotonicStackVsDeque,
-  contribution,
-  greedy,
-  intervals,
-  lineSweeping,
-  backtracking,
-  linkedList,
-  dataStructures,
-  heapPriorityQueue,
-  rangeQueriesOffline,
-  design,
-  trees,
-  graph,
-  advancedGraphTemplates,
-  grid,
-  dynamicProgramming,
-  strings,
-  stringAlgorithmsII,
-  math,
-  geometry,
-  bitManipulation,
-  trialFilling,
 ];
 
 /** Display order of the overview groups. */
 export const HANDBOOK_GROUP_ORDER: HandbookGroup[] = [
-  "Foundations",
-  "System Design",
-  "Data Structures",
-  "Graphs & Grids",
+  "Problem-Solving Mindset",
+  "Enumeration and Counting",
+  "Core Array/String Patterns",
+  "Data Structure Patterns",
+  "Greedy Patterns",
+  "Graph Patterns",
   "Dynamic Programming",
-  "Strings & Math",
+  "Range Query and Offline Techniques",
+  "Bit and Math Patterns",
+  "Advanced Mixed Patterns",
+  "ML Performance System Design",
 ];
+
+export const HANDBOOK_GROUP_DESCRIPTIONS: Record<HandbookGroup, string> = {
+  "Problem-Solving Mindset":
+    "How to read constraints, move from brute force to optimized patterns, and reason with invariants and proofs.",
+  "Enumeration and Counting":
+    "Choosing the right owner, endpoint, pivot, or contribution unit so large candidate sets become countable.",
+  "Core Array/String Patterns":
+    "High-frequency contiguous and value-space techniques for arrays and strings.",
+  "Data Structure Patterns":
+    "Compact structures that preserve only the candidates, ranks, and boundaries needed for fast updates.",
+  "Greedy Patterns":
+    "Local-choice patterns backed by exchange, feasibility, and stays-ahead proofs.",
+  "Graph Patterns":
+    "Graph correctness ideas for connectivity, cuts, and safe edge choices.",
+  "Dynamic Programming":
+    "State and transition design for overlapping subproblems, interval decisions, and optimized recurrences.",
+  "Range Query and Offline Techniques":
+    "Reordering events and queries so range state can be maintained incrementally.",
+  "Bit and Math Patterns":
+    "Mask-based state compression and small-domain encodings for exponential-looking problems.",
+  "Advanced Mixed Patterns":
+    "Cross-cutting proof and implementation contracts that make multiple patterns reliable.",
+  "ML Performance System Design":
+    "Interview-focused ML performance system design: serving, scheduling, profiling, distributed training, optimization, and tradeoffs.",
+};
 
 const TOPIC_BY_SLUG = new Map(HANDBOOK_TOPICS.map((t) => [t.slug, t]));
 

@@ -1,5 +1,5 @@
 /**
- * Data model for the standalone Algorithm Handbook (/handbook).
+ * Data model for the standalone LeetCode Pattern Handbook (/handbook).
  *
  * The handbook is intentionally self-contained: it does NOT reuse the
  * STUDYPLANS config, the tutorial JSON files, or the lecture data loaders.
@@ -19,12 +19,17 @@ export interface HandbookSection {
 
 /** Coarse grouping used only to organize the overview page. */
 export type HandbookGroup =
-  | "Foundations"
-  | "System Design"
-  | "Data Structures"
-  | "Graphs & Grids"
+  | "Problem-Solving Mindset"
+  | "Enumeration and Counting"
+  | "Core Array/String Patterns"
+  | "Data Structure Patterns"
+  | "Greedy Patterns"
+  | "Graph Patterns"
   | "Dynamic Programming"
-  | "Strings & Math";
+  | "Range Query and Offline Techniques"
+  | "Bit and Math Patterns"
+  | "Advanced Mixed Patterns"
+  | "ML Performance System Design";
 
 /** A full topic lecture. */
 export interface HandbookTopic {

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { lazy } from "react";
 
 export const metadata: Metadata = {
-  title: "Algorithm Handbook",
+  title: "LeetCode Pattern Handbook",
   description:
-    "Comprehensive competitive-programming lectures with LeetCode techniques and C++ templates, organized by topic.",
+    "A structured LeetCode and competitive-programming pattern handbook focused on rating 1700+ recognition, invariants, proof ideas, and C++17 templates.",
 };
 
 const HandbookOverview = lazy(
