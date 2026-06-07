@@ -372,6 +372,16 @@ int circleIntersectionCount(DPoint a, long double ra, DPoint b,
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2250 | [Count Number of Rectangles Containing Each Point](https://leetcode.cn/problems/count-number-of-rectangles-containing-each-point) | 1998 | rectangle containment |
+| 3027 | [Find the Number of Ways to Place People II](https://leetcode.cn/problems/find-the-number-of-ways-to-place-people-ii) | 2020 | dominance geometry |
+| 3235 | [Check if the Rectangle Corner Is Reachable](https://leetcode.cn/problems/check-if-the-rectangle-corner-is-reachable) | 3774 | circle barriers / DSU |
+| 149 | [Max Points on a Line](https://leetcode.cn/problems/max-points-on-a-line) | - | slopes / collinearity |
+| 223 | [Rectangle Area](https://leetcode.cn/problems/rectangle-area) | - | rectangle overlap area |
+| 587 | [Erect the Fence](https://leetcode.cn/problems/erect-the-fence) | - | convex hull |
+| 812 | [Largest Triangle Area](https://leetcode.cn/problems/largest-triangle-area) | - | cross product area |
+| 836 | [Rectangle Overlap](https://leetcode.cn/problems/rectangle-overlap) | - | interval overlap in 2D |
+| 939 | [Minimum Area Rectangle](https://leetcode.cn/problems/minimum-area-rectangle) | - | axis-aligned rectangles |
+| 963 | [Minimum Area Rectangle II](https://leetcode.cn/problems/minimum-area-rectangle-ii) | - | rotated rectangles |
 | 3464 | [Maximize the Distance Between Points on a Square](https://leetcode.cn/problems/maximize-the-distance-between-points-on-a-square) | 2806 | distance on square |
 | 3454 | [Separate Squares II](https://leetcode.cn/problems/separate-squares-ii) | 2671 | area sweep |
 | 3531 | [Count Covered Buildings](https://leetcode.cn/problems/count-covered-buildings) | 1519 | covered buildings |

@@ -319,6 +319,16 @@ int dfs(int mask) {
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1601 | [Maximum Number of Achievable Transfer Requests](https://leetcode.cn/problems/maximum-number-of-achievable-transfer-requests) | 2119 | subset/backtracking balance |
+| 1723 | [Find Minimum Time to Finish All Jobs](https://leetcode.cn/problems/find-minimum-time-to-finish-all-jobs) | 2284 | assignment backtracking |
+| 2305 | [Fair Distribution of Cookies](https://leetcode.cn/problems/fair-distribution-of-cookies) | 1887 | bucket assignment pruning |
+| 17 | [Letter Combinations of a Phone Number](https://leetcode.cn/problems/letter-combinations-of-a-phone-number) | - | branching tree |
+| 37 | [Sudoku Solver](https://leetcode.cn/problems/sudoku-solver) | - | constraint backtracking |
+| 39 | [Combination Sum](https://leetcode.cn/problems/combination-sum) | - | choose with reuse |
+| 40 | [Combination Sum II](https://leetcode.cn/problems/combination-sum-ii) | - | skip duplicate choices |
+| 78 | [Subsets](https://leetcode.cn/problems/subsets) | - | include/exclude |
+| 79 | [Word Search](https://leetcode.cn/problems/word-search) | - | grid backtracking |
+| 131 | [Palindrome Partitioning](https://leetcode.cn/problems/palindrome-partitioning) | - | partition DFS |
 | 3458 | [Select K Disjoint Special Substrings](https://leetcode.cn/problems/select-k-disjoint-special-substrings) | 2221 | disjoint substrings / search pruning |
 | 3533 | [Concatenated Divisibility](https://leetcode.cn/problems/concatenated-divisibility) | 2257 | bitmask permutation DP |
 | 3444 | [Minimum Increments for Target Multiples in an Array](https://leetcode.cn/problems/minimum-increments-for-target-multiples-in-an-array) | 2337 | LCM masks / subset search |

@@ -339,6 +339,16 @@ The same toolkit handles **Add Two Numbers** (LC 2, digit-by-digit with carry), 
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2289 | [Steps to Make Array Non-decreasing](https://leetcode.cn/problems/steps-to-make-array-non-decreasing) | 2482 | list-like removal rounds |
+| 2296 | [Design a Text Editor](https://leetcode.cn/problems/design-a-text-editor) | 1912 | cursor linked-list buffer |
+| 2 | [Add Two Numbers](https://leetcode.cn/problems/add-two-numbers) | - | carry through list |
+| 19 | [Remove Nth Node From End of List](https://leetcode.cn/problems/remove-nth-node-from-end-of-list) | - | fast/slow offset |
+| 21 | [Merge Two Sorted Lists](https://leetcode.cn/problems/merge-two-sorted-lists) | - | pointer merge |
+| 141 | [Linked List Cycle](https://leetcode.cn/problems/linked-list-cycle) | - | fast/slow cycle |
+| 142 | [Linked List Cycle II](https://leetcode.cn/problems/linked-list-cycle-ii) | - | cycle entry |
+| 160 | [Intersection of Two Linked Lists](https://leetcode.cn/problems/intersection-of-two-linked-lists) | - | two-runner alignment |
+| 206 | [Reverse Linked List](https://leetcode.cn/problems/reverse-linked-list) | - | pointer reversal |
+| 234 | [Palindrome Linked List](https://leetcode.cn/problems/palindrome-linked-list) | - | split/reverse/compare |
 | 3507 | [Minimum Pair Removal to Sort Array I](https://leetcode.cn/problems/minimum-pair-removal-to-sort-array-i) | 1349 | linked list + heap simulation |
 | 3510 | [Minimum Pair Removal to Sort Array II](https://leetcode.cn/problems/minimum-pair-removal-to-sort-array-ii) | 2608 | linked list + ordered set |
 | 2487 | [Remove Nodes from Linked List](https://leetcode.cn/problems/remove-nodes-from-linked-list) | 1455 | monotonic stack over list |

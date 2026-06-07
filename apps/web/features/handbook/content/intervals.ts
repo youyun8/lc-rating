@@ -227,6 +227,15 @@ The sort is the bottleneck almost everywhere; once the data is ordered, the swee
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1751 | [Maximum Number of Events That Can Be Attended II](https://leetcode.cn/problems/maximum-number-of-events-that-can-be-attended-ii) | 2041 | weighted interval DP |
+| 2402 | [Meeting Rooms III](https://leetcode.cn/problems/meeting-rooms-iii) | 2093 | room assignment heap |
+| 2589 | [Minimum Time to Complete All Tasks](https://leetcode.cn/problems/minimum-time-to-complete-all-tasks) | 2381 | interval scheduling with coverage |
+| 57 | [Insert Interval](https://leetcode.cn/problems/insert-interval) | - | merge inserted range |
+| 435 | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) | - | erase overlaps |
+| 452 | [Minimum Number of Arrows to Burst Balloons](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons) | - | interval stabbing |
+| 729 | [My Calendar I](https://leetcode.cn/problems/my-calendar-i) | - | interval booking |
+| 986 | [Interval List Intersections](https://leetcode.cn/problems/interval-list-intersections) | - | two interval lists |
+| 1288 | [Remove Covered Intervals](https://leetcode.cn/problems/remove-covered-intervals) | - | sort and sweep |
 | 3454 | [Separate Squares II](https://leetcode.cn/problems/separate-squares-ii) | 2671 | line sweep / area |
 | 3480 | [Maximize Subarrays After Removing One Conflicting Pair](https://leetcode.cn/problems/maximize-subarrays-after-removing-one-conflicting-pair) | 2764 | conflict intervals |
 | 3439 | [Reschedule Meetings for Maximum Free Time I](https://leetcode.cn/problems/reschedule-meetings-for-maximum-free-time-i) | 1729 | meeting reschedule |

@@ -287,6 +287,18 @@ A full sort is \`O(n log n)\`; the heap wins when \`k \\ll n\`, when only the ex
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1882 | [Process Tasks Using Servers](https://leetcode.cn/problems/process-tasks-using-servers) | 1979 | two priority queues |
+| 2163 | [Minimum Difference in Sums After Removal of Elements](https://leetcode.cn/problems/minimum-difference-in-sums-after-removal-of-elements) | 2225 | prefix/suffix heaps |
+| 2532 | [Time to Cross a Bridge](https://leetcode.cn/problems/time-to-cross-a-bridge) | 2589 | multi-heap simulation |
+| 2542 | [Maximum Subsequence Score](https://leetcode.cn/problems/maximum-subsequence-score) | 2056 | sort + size-k heap |
+| 23 | [Merge k Sorted Lists](https://leetcode.cn/problems/merge-k-sorted-lists) | - | k-way merge |
+| 215 | [Kth Largest Element in an Array](https://leetcode.cn/problems/kth-largest-element-in-an-array) | - | size-k heap / quickselect |
+| 295 | [Find Median from Data Stream](https://leetcode.cn/problems/find-median-from-data-stream) | - | two heaps |
+| 347 | [Top K Frequent Elements](https://leetcode.cn/problems/top-k-frequent-elements) | - | frequency heap |
+| 621 | [Task Scheduler](https://leetcode.cn/problems/task-scheduler) | - | cooldown heap/counts |
+| 692 | [Top K Frequent Words](https://leetcode.cn/problems/top-k-frequent-words) | - | heap tie-breaking |
+| 703 | [Kth Largest Element in a Stream](https://leetcode.cn/problems/kth-largest-element-in-a-stream) | - | streaming size-k heap |
+| 973 | [K Closest Points to Origin](https://leetcode.cn/problems/k-closest-points-to-origin) | - | distance heap |
 | 3767 | [Maximize Points After Choosing K Tasks](https://leetcode.cn/problems/maximize-points-after-choosing-k-tasks) | 1704 | pick best tasks |
 | 3780 | [Maximum Sum of Three Numbers Divisible by Three](https://leetcode.cn/problems/maximum-sum-of-three-numbers-divisible-by-three) | 1585 | top residues |
 | 3781 | [Maximum Score After Binary Swaps](https://leetcode.cn/problems/maximum-score-after-binary-swaps) | 1823 | binary swaps / heap |

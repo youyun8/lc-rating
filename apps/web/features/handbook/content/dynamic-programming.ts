@@ -490,6 +490,18 @@ Stone Game (LC 877), Stone Game II/III, and Nim (LC 292, Sprague–Grundy for im
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1547 | [Minimum Cost to Cut a Stick](https://leetcode.cn/problems/minimum-cost-to-cut-a-stick) | 2116 | interval DP |
+| 1575 | [Count All Possible Routes](https://leetcode.cn/problems/count-all-possible-routes) | 2055 | fuel-state DP |
+| 1931 | [Painting a Grid With Three Different Colors](https://leetcode.cn/problems/painting-a-grid-with-three-different-colors) | 2170 | profile DP |
+| 10 | [Regular Expression Matching](https://leetcode.cn/problems/regular-expression-matching) | - | string DP |
+| 70 | [Climbing Stairs](https://leetcode.cn/problems/climbing-stairs) | - | one-dimensional DP |
+| 72 | [Edit Distance](https://leetcode.cn/problems/edit-distance) | - | two-string DP |
+| 198 | [House Robber](https://leetcode.cn/problems/house-robber) | - | choose/skip DP |
+| 300 | [Longest Increasing Subsequence](https://leetcode.cn/problems/longest-increasing-subsequence) | - | sequence DP / patience |
+| 312 | [Burst Balloons](https://leetcode.cn/problems/burst-balloons) | - | interval DP |
+| 322 | [Coin Change](https://leetcode.cn/problems/coin-change) | - | unbounded knapsack |
+| 416 | [Partition Equal Subset Sum](https://leetcode.cn/problems/partition-equal-subset-sum) | - | 0/1 knapsack |
+| 1143 | [Longest Common Subsequence](https://leetcode.cn/problems/longest-common-subsequence) | - | two-string DP |
 | 3743 | [Maximize Cyclic Partition Score](https://leetcode.cn/problems/maximize-cyclic-partition-score) | 3125 | cyclic partition DP |
 | 3738 | [Longest Non Decreasing Subarray After Replacing at Most One Element](https://leetcode.cn/problems/longest-non-decreasing-subarray-after-replacing-at-most-one-element) | 1811 | array DP |
 | 3686 | [Number of Stable Subsequences](https://leetcode.cn/problems/number-of-stable-subsequences) | 1969 | stable subsequence DP |

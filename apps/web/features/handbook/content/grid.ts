@@ -358,6 +358,17 @@ Recurring lesson: when plain BFS/DFS is too weak, *enrich the state* (keys, fuel
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1568 | [Minimum Number of Days to Disconnect Island](https://leetcode.cn/problems/minimum-number-of-days-to-disconnect-island) | 2209 | grid articulation reasoning |
+| 1970 | [Last Day Where You Can Still Cross](https://leetcode.cn/problems/last-day-where-you-can-still-cross) | 2124 | binary search + flood fill |
+| 2290 | [Minimum Obstacle Removal to Reach Corner](https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner) | 2138 | 0-1 BFS on grid |
+| 2328 | [Number of Increasing Paths in a Grid](https://leetcode.cn/problems/number-of-increasing-paths-in-a-grid) | 2001 | memoized grid DP |
+| 130 | [Surrounded Regions](https://leetcode.cn/problems/surrounded-regions) | - | boundary flood fill |
+| 417 | [Pacific Atlantic Water Flow](https://leetcode.cn/problems/pacific-atlantic-water-flow) | - | reverse DFS/BFS |
+| 542 | [01 Matrix](https://leetcode.cn/problems/01-matrix) | - | multi-source BFS |
+| 695 | [Max Area of Island](https://leetcode.cn/problems/max-area-of-island) | - | component DFS |
+| 994 | [Rotting Oranges](https://leetcode.cn/problems/rotting-oranges) | - | BFS layers |
+| 1091 | [Shortest Path in Binary Matrix](https://leetcode.cn/problems/shortest-path-in-binary-matrix) | - | 8-direction BFS |
+| 1293 | [Shortest Path in a Grid with Obstacles Elimination](https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination) | - | state BFS |
 | 3742 | [Maximum Path Score in a Grid](https://leetcode.cn/problems/maximum-path-score-in-a-grid) | 1804 | grid DP |
 | 3665 | [Twisted Mirror Path Count](https://leetcode.cn/problems/twisted-mirror-path-count) | 1883 | mirror path DP |
 | 3619 | [Count Islands with Total Value Divisible by K](https://leetcode.cn/problems/count-islands-with-total-value-divisible-by-k) | 1461 | island components |

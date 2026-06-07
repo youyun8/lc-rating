@@ -369,6 +369,14 @@ Implementation checklist:
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2276 | [Count Integers in Intervals](https://leetcode.cn/problems/count-integers-in-intervals) | 2222 | dynamic covered length |
+| 2402 | [Meeting Rooms III](https://leetcode.cn/problems/meeting-rooms-iii) | 2093 | meeting-room sweep |
+| 2589 | [Minimum Time to Complete All Tasks](https://leetcode.cn/problems/minimum-time-to-complete-all-tasks) | 2381 | timeline coverage sweep |
+| 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | - | endpoint ordering |
+| 57 | [Insert Interval](https://leetcode.cn/problems/insert-interval) | - | merge with sweep |
+| 729 | [My Calendar I](https://leetcode.cn/problems/my-calendar-i) | - | booking conflicts |
+| 731 | [My Calendar II](https://leetcode.cn/problems/my-calendar-ii) | - | double-booking sweep |
+| 986 | [Interval List Intersections](https://leetcode.cn/problems/interval-list-intersections) | - | two-list sweep |
 | 3454 | [Separate Squares II](https://leetcode.cn/problems/separate-squares-ii) | 2671 | area sweep / binary search |
 | 850 | [Rectangle Area II](https://leetcode.cn/problems/rectangle-area-ii) | 2236 | rectangle union / segment tree |
 | 1851 | [Minimum Interval to Include Each Query](https://leetcode.cn/problems/minimum-interval-to-include-each-query) | 2286 | offline sweep + heap |

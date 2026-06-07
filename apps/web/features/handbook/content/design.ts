@@ -363,6 +363,16 @@ The whole point of the genre is that *every* listed operation lands at \`O(1)\` 
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2276 | [Count Integers in Intervals](https://leetcode.cn/problems/count-integers-in-intervals) | 2222 | interval data structure |
+| 2296 | [Design a Text Editor](https://leetcode.cn/problems/design-a-text-editor) | 1912 | editor buffer design |
+| 2642 | [Design Graph With Shortest Path Calculator](https://leetcode.cn/problems/design-graph-with-shortest-path-calculator) | 1811 | graph API design |
+| 155 | [Min Stack](https://leetcode.cn/problems/min-stack) | - | stack API design |
+| 208 | [Implement Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) | - | prefix-tree API |
+| 225 | [Implement Stack using Queues](https://leetcode.cn/problems/implement-stack-using-queues) | - | adapter design |
+| 232 | [Implement Queue using Stacks](https://leetcode.cn/problems/implement-queue-using-stacks) | - | amortized adapter |
+| 380 | [Insert Delete GetRandom O(1)](https://leetcode.cn/problems/insert-delete-getrandom-o1) | - | hash map + array design |
+| 432 | [All O(1) Data Structure](https://leetcode.cn/problems/all-oone-data-structure) | - | bucketed linked lists |
+| 622 | [Design Circular Queue](https://leetcode.cn/problems/design-circular-queue) | - | bounded queue |
 | 3709 | [Design Exam Scores Tracker](https://leetcode.cn/problems/design-exam-scores-tracker) | 1648 | prefix-index design |
 | 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | router queue / ordered set |
 | 3484 | [Design Spreadsheet](https://leetcode.cn/problems/design-spreadsheet) | 1524 | spreadsheet state |

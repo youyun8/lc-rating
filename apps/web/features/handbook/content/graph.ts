@@ -391,6 +391,17 @@ These rarely appear on LeetCode but are decisive on the hardest contest problems
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1514 | [Path with Maximum Probability](https://leetcode.cn/problems/path-with-maximum-probability) | 1846 | Dijkstra variant |
+| 1976 | [Number of Ways to Arrive at Destination](https://leetcode.cn/problems/number-of-ways-to-arrive-at-destination) | 2095 | shortest path counting |
+| 2097 | [Valid Arrangement of Pairs](https://leetcode.cn/problems/valid-arrangement-of-pairs) | 2651 | Eulerian path |
+| 133 | [Clone Graph](https://leetcode.cn/problems/clone-graph) | - | DFS/BFS graph copy |
+| 207 | [Course Schedule](https://leetcode.cn/problems/course-schedule) | - | cycle detection / topo |
+| 210 | [Course Schedule II](https://leetcode.cn/problems/course-schedule-ii) | - | topological order |
+| 399 | [Evaluate Division](https://leetcode.cn/problems/evaluate-division) | - | weighted graph queries |
+| 684 | [Redundant Connection](https://leetcode.cn/problems/redundant-connection) | - | DSU cycle |
+| 743 | [Network Delay Time](https://leetcode.cn/problems/network-delay-time) | - | Dijkstra |
+| 785 | [Is Graph Bipartite?](https://leetcode.cn/problems/is-graph-bipartite) | - | graph coloring |
+| 1584 | [Min Cost to Connect All Points](https://leetcode.cn/problems/min-cost-to-connect-all-points) | - | MST |
 | 3710 | [Maximum Partition Factor](https://leetcode.cn/problems/maximum-partition-factor) | 2135 | connectivity threshold |
 | 3620 | [Network Recovery Pathways](https://leetcode.cn/problems/network-recovery-pathways) | 1998 | DAG shortest path |
 | 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | DSU over time |

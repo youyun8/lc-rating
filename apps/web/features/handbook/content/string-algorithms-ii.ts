@@ -472,6 +472,15 @@ string minRotation(string s) {
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2781 | [Length of the Longest Valid Substring](https://leetcode.cn/problems/length-of-the-longest-valid-substring) | 2204 | forbidden substring matching |
+| 3045 | [Count Prefix and Suffix Pairs II](https://leetcode.cn/problems/count-prefix-and-suffix-pairs-ii) | 2328 | trie / string hashing |
+| 28 | [Find the Index of the First Occurrence](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string) | - | KMP baseline |
+| 187 | [Repeated DNA Sequences](https://leetcode.cn/problems/repeated-dna-sequences) | - | rolling hash |
+| 214 | [Shortest Palindrome](https://leetcode.cn/problems/shortest-palindrome) | - | KMP / rolling hash |
+| 459 | [Repeated Substring Pattern](https://leetcode.cn/problems/repeated-substring-pattern) | - | prefix function / period |
+| 647 | [Palindromic Substrings](https://leetcode.cn/problems/palindromic-substrings) | - | palindrome radii |
+| 1032 | [Stream of Characters](https://leetcode.cn/problems/stream-of-characters) | - | Aho-Corasick / reversed trie |
+| 1923 | [Longest Common Subpath](https://leetcode.cn/problems/longest-common-subpath) | - | rolling hash + binary search |
 | 3455 | [Shortest Matching Substring](https://leetcode.cn/problems/shortest-matching-substring) | 2303 | string matching |
 | 3529 | [Count Cells in Overlapping Horizontal and Vertical Substrings](https://leetcode.cn/problems/count-cells-in-overlapping-horizontal-and-vertical-substrings) | 2105 | rolling hash / overlap |
 | 2223 | [Sum of Scores of Built Strings](https://leetcode.cn/problems/sum-of-scores-of-built-strings) | 2220 | Z-function |

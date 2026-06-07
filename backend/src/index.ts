@@ -298,6 +298,7 @@ app.get("/api/login/github", async (c) => {
       client_id: c.env.GITHUB_CLIENT_ID,
       redirect_uri: redirectUri,
       scope: "read:user",
+      prompt: "select_account",
     });
 
   return c.redirect(githubAuthUrl);

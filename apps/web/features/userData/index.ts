@@ -3,7 +3,13 @@
 // the underlying zustand stores, localStorage keys, auth tokens and cloud
 // transport so the UI can speak purely in user terms.
 
-export { useSyncState, useCloudSync, signIn, signOut } from "./sync";
+export {
+  useSyncState,
+  useCloudSync,
+  signIn,
+  reauthenticate,
+  signOut,
+} from "./sync";
 
 export {
   useProgressStats,

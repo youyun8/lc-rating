@@ -394,6 +394,17 @@ For most LeetCode "hard" string tasks, KMP / Z / rolling hash / Manacher suffice
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1531 | [String Compression II](https://leetcode.cn/problems/string-compression-ii) | 2576 | string DP |
+| 1639 | [Number of Ways to Form a Target String Given a Dictionary](https://leetcode.cn/problems/number-of-ways-to-form-a-target-string-given-a-dictionary) | 2082 | column DP |
+| 2272 | [Substring With Largest Variance](https://leetcode.cn/problems/substring-with-largest-variance) | 2516 | Kadane over characters |
+| 5 | [Longest Palindromic Substring](https://leetcode.cn/problems/longest-palindromic-substring) | - | expand around center |
+| 14 | [Longest Common Prefix](https://leetcode.cn/problems/longest-common-prefix) | - | prefix scan |
+| 28 | [Find the Index of the First Occurrence](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string) | - | string matching |
+| 49 | [Group Anagrams](https://leetcode.cn/problems/group-anagrams) | - | frequency key |
+| 76 | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) | - | covering window |
+| 125 | [Valid Palindrome](https://leetcode.cn/problems/valid-palindrome) | - | two-pointer scan |
+| 208 | [Implement Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) | - | prefix tree |
+| 242 | [Valid Anagram](https://leetcode.cn/problems/valid-anagram) | - | character counts |
 | 3694 | [Distinct Points Reachable After Substring Removal](https://leetcode.cn/problems/distinct-points-reachable-after-substring-removal) | 1739 | prefix balance string |
 | 3714 | [Longest Balanced Substring II](https://leetcode.cn/problems/longest-balanced-substring-ii) | 2202 | balanced substring |
 | 3474 | [Lexicographically Smallest Generated String](https://leetcode.cn/problems/lexicographically-smallest-generated-string) | 2605 | string construction |

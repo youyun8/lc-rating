@@ -456,6 +456,17 @@ class LRUCache {
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1847 | [Closest Room](https://leetcode.cn/problems/closest-room) | 2082 | ordered set queries |
+| 2276 | [Count Integers in Intervals](https://leetcode.cn/problems/count-integers-in-intervals) | 2222 | ordered interval set |
+| 2736 | [Maximum Sum Queries](https://leetcode.cn/problems/maximum-sum-queries) | 2533 | offline ordered structure |
+| 155 | [Min Stack](https://leetcode.cn/problems/min-stack) | - | stack with auxiliary min |
+| 208 | [Implement Trie](https://leetcode.cn/problems/implement-trie-prefix-tree) | - | prefix tree |
+| 225 | [Implement Stack using Queues](https://leetcode.cn/problems/implement-stack-using-queues) | - | queue simulation |
+| 232 | [Implement Queue using Stacks](https://leetcode.cn/problems/implement-queue-using-stacks) | - | two-stack queue |
+| 307 | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) | - | Fenwick / segment tree |
+| 380 | [Insert Delete GetRandom O(1)](https://leetcode.cn/problems/insert-delete-getrandom-o1) | - | hash map + array |
+| 705 | [Design HashSet](https://leetcode.cn/problems/design-hashset) | - | hash table design |
+| 706 | [Design HashMap](https://leetcode.cn/problems/design-hashmap) | - | hash table design |
 | 3739 | [Count Subarrays with Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | majority queries / segment tree |
 | 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | router / ordered set |
 | 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | task manager / heap |

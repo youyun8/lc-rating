@@ -249,6 +249,16 @@ The cost is almost always dominated by the initial sort or by heap operations.`,
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1642 | [Furthest Building You Can Reach](https://leetcode.cn/problems/furthest-building-you-can-reach) | 1962 | regret heap greedy |
+| 1675 | [Minimize Deviation in Array](https://leetcode.cn/problems/minimize-deviation-in-array) | 2533 | normalize then shrink maximum |
+| 2136 | [Earliest Possible Day of Full Bloom](https://leetcode.cn/problems/earliest-possible-day-of-full-bloom) | 2033 | sort by grow time |
+| 45 | [Jump Game II](https://leetcode.cn/problems/jump-game-ii) | - | farthest reach greedy |
+| 55 | [Jump Game](https://leetcode.cn/problems/jump-game) | - | reachability greedy |
+| 134 | [Gas Station](https://leetcode.cn/problems/gas-station) | - | reset on negative prefix |
+| 435 | [Non-overlapping Intervals](https://leetcode.cn/problems/non-overlapping-intervals) | - | sort by end |
+| 452 | [Minimum Number of Arrows to Burst Balloons](https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons) | - | interval covering |
+| 621 | [Task Scheduler](https://leetcode.cn/problems/task-scheduler) | - | frequency greedy |
+| 763 | [Partition Labels](https://leetcode.cn/problems/partition-labels) | - | last occurrence boundary |
 | 3767 | [Maximize Points After Choosing K Tasks](https://leetcode.cn/problems/maximize-points-after-choosing-k-tasks) | 1704 | task selection / heap |
 | 3780 | [Maximum Sum of Three Numbers Divisible by Three](https://leetcode.cn/problems/maximum-sum-of-three-numbers-divisible-by-three) | 1585 | modulo greedy |
 | 3781 | [Maximum Score After Binary Swaps](https://leetcode.cn/problems/maximum-score-after-binary-swaps) | 1823 | heap greedy |

@@ -332,6 +332,18 @@ For modular counting, precompute factorials once and lean on Fermat inverses; es
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1553 | [Minimum Number of Days to Eat N Oranges](https://leetcode.cn/problems/minimum-number-of-days-to-eat-n-oranges) | 2048 | number-state memoization |
+| 1739 | [Building Boxes](https://leetcode.cn/problems/building-boxes) | 2198 | tetrahedral numbers |
+| 2338 | [Count the Number of Ideal Arrays](https://leetcode.cn/problems/count-the-number-of-ideal-arrays) | 2615 | factorization combinatorics |
+| 7 | [Reverse Integer](https://leetcode.cn/problems/reverse-integer) | - | overflow-aware arithmetic |
+| 50 | [Pow(x, n)](https://leetcode.cn/problems/powx-n) | - | fast exponentiation |
+| 69 | [Sqrt(x)](https://leetcode.cn/problems/sqrtx) | - | integer binary search |
+| 172 | [Factorial Trailing Zeroes](https://leetcode.cn/problems/factorial-trailing-zeroes) | - | factor counting |
+| 204 | [Count Primes](https://leetcode.cn/problems/count-primes) | - | sieve |
+| 233 | [Number of Digit One](https://leetcode.cn/problems/number-of-digit-one) | - | digit counting |
+| 319 | [Bulb Switcher](https://leetcode.cn/problems/bulb-switcher) | - | square numbers |
+| 400 | [Nth Digit](https://leetcode.cn/problems/nth-digit) | - | digit blocks |
+| 878 | [Nth Magical Number](https://leetcode.cn/problems/nth-magical-number) | - | lcm + answer search |
 | 3753 | [Total Waviness of Numbers in Range II](https://leetcode.cn/problems/total-waviness-of-numbers-in-range-ii) | 2297 | digit DP |
 | 3751 | [Total Waviness of Numbers in Range I](https://leetcode.cn/problems/total-waviness-of-numbers-in-range-i) | 1404 | digit DP enumeration |
 | 3747 | [Count Distinct Integers After Removing Zeros](https://leetcode.cn/problems/count-distinct-integers-after-removing-zeros) | 1848 | number DP |

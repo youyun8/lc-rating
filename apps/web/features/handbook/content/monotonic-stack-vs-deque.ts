@@ -378,6 +378,15 @@ Both are amortized linear; the deque's tighter \`O(k)\` window space comes from 
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1856 | [Maximum Subarray Min-Product](https://leetcode.cn/problems/maximum-subarray-min-product) | 2051 | monotonic stack spans |
+| 2289 | [Steps to Make Array Non-decreasing](https://leetcode.cn/problems/steps-to-make-array-non-decreasing) | 2482 | monotonic stack with rounds |
+| 2454 | [Next Greater Element IV](https://leetcode.cn/problems/next-greater-element-iv) | 2175 | second greater element |
+| 42 | [Trapping Rain Water](https://leetcode.cn/problems/trapping-rain-water) | - | monotonic stack / two pointers |
+| 85 | [Maximal Rectangle](https://leetcode.cn/problems/maximal-rectangle) | - | histogram per row |
+| 239 | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) | - | monotonic deque |
+| 496 | [Next Greater Element I](https://leetcode.cn/problems/next-greater-element-i) | - | next greater stack |
+| 503 | [Next Greater Element II](https://leetcode.cn/problems/next-greater-element-ii) | - | circular stack |
+| 739 | [Daily Temperatures](https://leetcode.cn/problems/daily-temperatures) | - | next warmer day |
 | 3420 | [Count Non Decreasing Subarrays After K Operations](https://leetcode.cn/problems/count-non-decreasing-subarrays-after-k-operations) | 2855 | sliding window + monotonic stack |
 | 3542 | [Minimum Operations to Convert All Elements to Zero](https://leetcode.cn/problems/minimum-operations-to-convert-all-elements-to-zero) | 1890 | monotonic stack |
 | 3578 | [Count Partitions with Max Min Difference at Most K](https://leetcode.cn/problems/count-partitions-with-max-min-difference-at-most-k) | 2033 | monotonic queue DP |

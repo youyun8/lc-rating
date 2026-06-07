@@ -369,6 +369,15 @@ The whole game is making \`check\` cheap and *provably monotone*.`,
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1898 | [Maximum Number of Removable Characters](https://leetcode.cn/problems/maximum-number-of-removable-characters) | 1913 | binary search removable count |
+| 2040 | [Kth Smallest Product of Two Sorted Arrays](https://leetcode.cn/problems/kth-smallest-product-of-two-sorted-arrays) | 2518 | value-space binary search |
+| 2141 | [Maximum Running Time of N Computers](https://leetcode.cn/problems/maximum-running-time-of-n-computers) | 2265 | feasibility by total power |
+| 34 | [Find First and Last Position](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array) | - | lower/upper bound |
+| 35 | [Search Insert Position](https://leetcode.cn/problems/search-insert-position) | - | insertion point |
+| 153 | [Find Minimum in Rotated Sorted Array](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array) | - | rotated array |
+| 704 | [Binary Search](https://leetcode.cn/problems/binary-search) | - | template classic |
+| 875 | [Koko Eating Bananas](https://leetcode.cn/problems/koko-eating-bananas) | - | binary search on answer |
+| 1011 | [Capacity To Ship Packages Within D Days](https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days) | - | minimum feasible capacity |
 | 3449 | [Maximize the Minimum Game Score](https://leetcode.cn/problems/maximize-the-minimum-game-score) | 2748 | binary search on answer |
 | 3464 | [Maximize the Distance Between Points on a Square](https://leetcode.cn/problems/maximize-the-distance-between-points-on-a-square) | 2806 | maximize minimum distance |
 | 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | time threshold / DSU check |

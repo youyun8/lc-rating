@@ -425,6 +425,17 @@ vector<int> morrisInorder(TreeNode* root) {
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2322 | [Minimum Score After Removals on a Tree](https://leetcode.cn/problems/minimum-score-after-removals-on-a-tree) | 2392 | subtree XOR reasoning |
+| 2458 | [Height of Binary Tree After Subtree Removal Queries](https://leetcode.cn/problems/height-of-binary-tree-after-subtree-removal-queries) | 2299 | rerooted height queries |
+| 2581 | [Count Number of Possible Root Nodes](https://leetcode.cn/problems/count-number-of-possible-root-nodes) | 2228 | rerooting with guesses |
+| 98 | [Validate Binary Search Tree](https://leetcode.cn/problems/validate-binary-search-tree) | - | BST bounds |
+| 102 | [Binary Tree Level Order Traversal](https://leetcode.cn/problems/binary-tree-level-order-traversal) | - | BFS levels |
+| 104 | [Maximum Depth of Binary Tree](https://leetcode.cn/problems/maximum-depth-of-binary-tree) | - | recursive height |
+| 105 | [Construct Binary Tree from Preorder and Inorder](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal) | - | build from traversals |
+| 124 | [Binary Tree Maximum Path Sum](https://leetcode.cn/problems/binary-tree-maximum-path-sum) | - | tree DP global answer |
+| 236 | [Lowest Common Ancestor of a Binary Tree](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree) | - | postorder LCA |
+| 437 | [Path Sum III](https://leetcode.cn/problems/path-sum-iii) | - | prefix sums on tree |
+| 543 | [Diameter of Binary Tree](https://leetcode.cn/problems/diameter-of-binary-tree) | - | postorder diameter |
 | 3786 | [Total Sum of Interaction Cost in Tree Groups](https://leetcode.cn/problems/total-sum-of-interaction-cost-in-tree-groups) | 2139 | tree interaction cost |
 | 3772 | [Maximum Subgraph Score in a Tree](https://leetcode.cn/problems/maximum-subgraph-score-in-a-tree) | 2235 | tree DP score |
 | 3593 | [Minimum Increments to Equalize Leaf Paths](https://leetcode.cn/problems/minimum-increments-to-equalize-leaf-paths) | 1959 | equalize leaf paths |

@@ -229,6 +229,17 @@ Every index enters and exits the window once — that is the source of the linea
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1838 | [Frequency of the Most Frequent Element](https://leetcode.cn/problems/frequency-of-the-most-frequent-element) | 1876 | sort + expandable window |
+| 2302 | [Count Subarrays With Score Less Than K](https://leetcode.cn/problems/count-subarrays-with-score-less-than-k) | 1808 | positive-sum window |
+| 2398 | [Maximum Number of Robots Within Budget](https://leetcode.cn/problems/maximum-number-of-robots-within-budget) | 1917 | window + monotonic deque |
+| 3 | [Longest Substring Without Repeating Characters](https://leetcode.cn/problems/longest-substring-without-repeating-characters) | - | variable window |
+| 76 | [Minimum Window Substring](https://leetcode.cn/problems/minimum-window-substring) | - | minimum covering window |
+| 239 | [Sliding Window Maximum](https://leetcode.cn/problems/sliding-window-maximum) | - | monotonic deque |
+| 424 | [Longest Repeating Character Replacement](https://leetcode.cn/problems/longest-repeating-character-replacement) | - | max frequency window |
+| 438 | [Find All Anagrams in a String](https://leetcode.cn/problems/find-all-anagrams-in-a-string) | - | fixed-size frequency window |
+| 904 | [Fruit Into Baskets](https://leetcode.cn/problems/fruit-into-baskets) | - | at most two types |
+| 992 | [Subarrays with K Different Integers](https://leetcode.cn/problems/subarrays-with-k-different-integers) | - | exactly K via at-most |
+| 862 | [Shortest Subarray with Sum at Least K](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) | - | prefix deque with negatives |
 | 3578 | [Count Partitions with Max Min Difference at Most K](https://leetcode.cn/problems/count-partitions-with-max-min-difference-at-most-k) | 2033 | sliding window / monotonic queue |
 | 3589 | [Count Prime Gap Balanced Subarrays](https://leetcode.cn/problems/count-prime-gap-balanced-subarrays) | 2235 | prime gaps / monotonic queue |
 | 3634 | [Minimum Removals to Balance Array](https://leetcode.cn/problems/minimum-removals-to-balance-array) | 1453 | sort + sliding window |

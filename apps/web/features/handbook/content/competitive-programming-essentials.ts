@@ -410,6 +410,15 @@ unordered_map<long long, int, CustomHash> safeCount;
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1590 | [Make Sum Divisible by P](https://leetcode.cn/problems/make-sum-divisible-by-p) | 2039 | prefix modulo warm-up |
+| 1838 | [Frequency of the Most Frequent Element](https://leetcode.cn/problems/frequency-of-the-most-frequent-element) | 1876 | sort + sliding window |
+| 2092 | [Find All People With Secret](https://leetcode.cn/problems/find-all-people-with-secret) | 2004 | time-grouped graph traversal |
+| 1 | [Two Sum](https://leetcode.cn/problems/two-sum) | - | hash map warm-up |
+| 20 | [Valid Parentheses](https://leetcode.cn/problems/valid-parentheses) | - | stack basics |
+| 70 | [Climbing Stairs](https://leetcode.cn/problems/climbing-stairs) | - | DP basics |
+| 88 | [Merge Sorted Array](https://leetcode.cn/problems/merge-sorted-array) | - | two pointers / in-place |
+| 200 | [Number of Islands](https://leetcode.cn/problems/number-of-islands) | - | grid DFS/BFS |
+| 704 | [Binary Search](https://leetcode.cn/problems/binary-search) | - | binary search invariant |
 | 3427 | [Sum of Variable Length Subarrays](https://leetcode.cn/problems/sum-of-variable-length-subarrays) | 1216 | prefix basics / constraints |
 | 3522 | [Calculate Score After Performing Instructions](https://leetcode.cn/problems/calculate-score-after-performing-instructions) | 1239 | simulation / state tracing |
 | 3541 | [Find Most Frequent Vowel and Consonant](https://leetcode.cn/problems/find-most-frequent-vowel-and-consonant) | 1239 | frequency counting |

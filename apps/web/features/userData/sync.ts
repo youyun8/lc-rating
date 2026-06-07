@@ -22,6 +22,9 @@ interface SyncState {
   lastSyncedAt: number | null;
 }
 
+const GITHUB_SIGN_IN_APPROVAL_MESSAGE =
+  "即將前往 GitHub 登入，並授權本站讀取你的 GitHub 基本帳號資訊。是否繼續？";
+
 /** Internal: read the raw auth token. Not part of the public facade surface. */
 export function readToken(): string | null {
   if (typeof window === "undefined") return null;
@@ -92,9 +95,28 @@ export function useSyncState(): SyncState {
 }
 
 /** Start the GitHub sign-in flow. No-op when sync is not configured. */
-export function signIn() {
-  if (!API_BASE || typeof window === "undefined") return;
+function requestGitHubSignInApproval() {
+  if (!API_BASE || typeof window === "undefined") return false;
+  return window.confirm(GITHUB_SIGN_IN_APPROVAL_MESSAGE);
+}
+
+function redirectToGitHubLogin() {
   window.location.href = `${API_BASE}/api/login/github`;
+}
+
+/** Start the GitHub sign-in flow after user approval. */
+export function signIn() {
+  if (!requestGitHubSignInApproval()) return false;
+  redirectToGitHubLogin();
+  return true;
+}
+
+/** Clear the current token and start a new GitHub sign-in after approval. */
+export function reauthenticate() {
+  if (!requestGitHubSignInApproval()) return false;
+  clearAuthToken();
+  redirectToGitHubLogin();
+  return true;
 }
 
 /** Sign out locally. Saved progress is kept on this device. */

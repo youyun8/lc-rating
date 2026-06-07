@@ -551,6 +551,16 @@ struct RollbackDSU {
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1761 | [Minimum Degree of a Connected Trio in a Graph](https://leetcode.cn/problems/minimum-degree-of-a-connected-trio-in-a-graph) | 2005 | triangle enumeration |
+| 2097 | [Valid Arrangement of Pairs](https://leetcode.cn/problems/valid-arrangement-of-pairs) | 2651 | Eulerian trail |
+| 2608 | [Shortest Cycle in a Graph](https://leetcode.cn/problems/shortest-cycle-in-a-graph) | 1904 | cycle BFS |
+| 332 | [Reconstruct Itinerary](https://leetcode.cn/problems/reconstruct-itinerary) | - | Eulerian path |
+| 753 | [Cracking the Safe](https://leetcode.cn/problems/cracking-the-safe) | - | De Bruijn / Euler tour |
+| 847 | [Shortest Path Visiting All Nodes](https://leetcode.cn/problems/shortest-path-visiting-all-nodes) | - | bitmask BFS |
+| 1203 | [Sort Items by Groups Respecting Dependencies](https://leetcode.cn/problems/sort-items-by-groups-respecting-dependencies) | - | grouped topological sort |
+| 1489 | [Critical and Pseudo-Critical Edges in MST](https://leetcode.cn/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree) | - | MST edge classification |
+| 1514 | [Path with Maximum Probability](https://leetcode.cn/problems/path-with-maximum-probability) | - | multiplicative Dijkstra |
+| 1579 | [Remove Max Number of Edges to Keep Graph Traversable](https://leetcode.cn/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable) | - | shared DSU |
 | 3600 | [Maximize Spanning Tree Stability with Upgrades](https://leetcode.cn/problems/maximize-spanning-tree-stability-with-upgrades) | 2301 | MST / DSU |
 | 3608 | [Minimum Time for K Connected Components](https://leetcode.cn/problems/minimum-time-for-k-connected-components) | 1893 | offline DSU |
 | 3530 | [Maximum Profit from Valid Topological Order in DAG](https://leetcode.cn/problems/maximum-profit-from-valid-topological-order-in-dag) | 2353 | DAG topological DP |

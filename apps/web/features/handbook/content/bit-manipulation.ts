@@ -228,6 +228,17 @@ while (sub < (1 << n)) {
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1803 | [Count Pairs With XOR in a Range](https://leetcode.cn/problems/count-pairs-with-xor-in-a-range) | 2479 | binary trie counts |
+| 2564 | [Substring XOR Queries](https://leetcode.cn/problems/substring-xor-queries) | 1959 | bounded binary substrings |
+| 2939 | [Maximum XOR Product](https://leetcode.cn/problems/maximum-xor-product) | 2128 | bitwise product optimization |
+| 136 | [Single Number](https://leetcode.cn/problems/single-number) | - | XOR cancellation |
+| 137 | [Single Number II](https://leetcode.cn/problems/single-number-ii) | - | bit counts modulo 3 |
+| 191 | [Number of 1 Bits](https://leetcode.cn/problems/number-of-1-bits) | - | popcount |
+| 201 | [Bitwise AND of Numbers Range](https://leetcode.cn/problems/bitwise-and-of-numbers-range) | - | common prefix bits |
+| 231 | [Power of Two](https://leetcode.cn/problems/power-of-two) | - | lowbit test |
+| 338 | [Counting Bits](https://leetcode.cn/problems/counting-bits) | - | bit DP |
+| 371 | [Sum of Two Integers](https://leetcode.cn/problems/sum-of-two-integers) | - | carry with bit ops |
+| 421 | [Maximum XOR of Two Numbers](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array) | - | binary trie / greedy bits |
 | 3757 | [Number of Effective Subsequences](https://leetcode.cn/problems/number-of-effective-subsequences) | 2519 | bit combinatorics |
 | 3766 | [Minimum Operations to Make Binary Palindrome](https://leetcode.cn/problems/minimum-operations-to-make-binary-palindrome) | 1657 | binary palindrome |
 | 3670 | [Maximum Product of Two Integers with No Common Bits](https://leetcode.cn/problems/maximum-product-of-two-integers-with-no-common-bits) | 2234 | disjoint bits DP |

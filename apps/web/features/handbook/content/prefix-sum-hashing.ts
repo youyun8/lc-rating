@@ -268,6 +268,15 @@ The win is uniform: an \`O(n^2)\` subarray scan or an \`O(m * n)\` update loop b
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1590 | [Make Sum Divisible by P](https://leetcode.cn/problems/make-sum-divisible-by-p) | 2039 | prefix remainder deletion |
+| 2025 | [Maximum Number of Ways to Partition an Array](https://leetcode.cn/problems/maximum-number-of-ways-to-partition-an-array) | 2218 | prefix/suffix balance |
+| 2488 | [Count Subarrays With Median K](https://leetcode.cn/problems/count-subarrays-with-median-k) | 1999 | balance prefix counts |
+| 303 | [Range Sum Query - Immutable](https://leetcode.cn/problems/range-sum-query-immutable) | - | 1D prefix sum |
+| 304 | [Range Sum Query 2D - Immutable](https://leetcode.cn/problems/range-sum-query-2d-immutable) | - | 2D prefix sum |
+| 523 | [Continuous Subarray Sum](https://leetcode.cn/problems/continuous-subarray-sum) | - | prefix modulo |
+| 525 | [Contiguous Array](https://leetcode.cn/problems/contiguous-array) | - | balance prefix |
+| 724 | [Find Pivot Index](https://leetcode.cn/problems/find-pivot-index) | - | left/right prefix |
+| 974 | [Subarray Sums Divisible by K](https://leetcode.cn/problems/subarray-sums-divisible-by-k) | - | remainder counts |
 | 3728 | [Stable Subarrays with Equal Boundary and Interior Sum](https://leetcode.cn/problems/stable-subarrays-with-equal-boundary-and-interior-sum) | 1909 | prefix equality |
 | 3729 | [Count Distinct Subarrays Divisible by K in Sorted Array](https://leetcode.cn/problems/count-distinct-subarrays-divisible-by-k-in-sorted-array) | 2248 | distinct subarrays / prefix |
 | 3748 | [Count Stable Subarrays](https://leetcode.cn/problems/count-stable-subarrays) | 2209 | stable subarrays |

@@ -244,6 +244,12 @@ The win is always the same: an $O(n^2)$ or $O(2^n)$ enumeration becomes near-lin
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2262 | [Total Appeal of a String](https://leetcode.cn/problems/total-appeal-of-a-string) | 2033 | last-position contribution |
+| 2916 | [Subarrays Distinct Element Sum of Squares II](https://leetcode.cn/problems/subarrays-distinct-element-sum-of-squares-ii) | 2816 | incremental contribution |
+| 828 | [Count Unique Characters of All Substrings](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string) | - | character contribution |
+| 891 | [Sum of Subsequence Widths](https://leetcode.cn/problems/sum-of-subsequence-widths) | - | sorted subset contribution |
+| 907 | [Sum of Subarray Minimums](https://leetcode.cn/problems/sum-of-subarray-minimums) | - | monotonic span contribution |
+| 2681 | [Power of Heroes](https://leetcode.cn/problems/power-of-heroes) | - | sorted contribution |
 | 3480 | [Maximize Subarrays After Removing One Conflicting Pair](https://leetcode.cn/problems/maximize-subarrays-after-removing-one-conflicting-pair) | 2764 | conflict pair contribution |
 | 3428 | [Maximum and Minimum Sums of at Most Size K Subsequences](https://leetcode.cn/problems/maximum-and-minimum-sums-of-at-most-size-k-subsequences) | 2028 | subsequence contribution |
 | 3434 | [Maximum Frequency After Subarray Operation](https://leetcode.cn/problems/maximum-frequency-after-subarray-operation) | 2094 | frequency contribution |

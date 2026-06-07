@@ -504,6 +504,15 @@ struct MergeSortTree {
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1906 | [Minimum Absolute Difference Queries](https://leetcode.cn/problems/minimum-absolute-difference-queries) | 2147 | offline range frequency |
+| 2276 | [Count Integers in Intervals](https://leetcode.cn/problems/count-integers-in-intervals) | 2222 | dynamic range coverage |
+| 2736 | [Maximum Sum Queries](https://leetcode.cn/problems/maximum-sum-queries) | 2533 | offline queries + Fenwick/set |
+| 218 | [The Skyline Problem](https://leetcode.cn/problems/the-skyline-problem) | - | sweep + ordered active set |
+| 307 | [Range Sum Query - Mutable](https://leetcode.cn/problems/range-sum-query-mutable) | - | Fenwick / segment tree |
+| 315 | [Count of Smaller Numbers After Self](https://leetcode.cn/problems/count-of-smaller-numbers-after-self) | - | offline ranks + Fenwick |
+| 327 | [Count of Range Sum](https://leetcode.cn/problems/count-of-range-sum) | - | prefix ranges |
+| 493 | [Reverse Pairs](https://leetcode.cn/problems/reverse-pairs) | - | merge sort / BIT |
+| 699 | [Falling Squares](https://leetcode.cn/problems/falling-squares) | - | coordinate compression |
 | 3768 | [Minimum Inversion Count in Subarrays of Fixed Length](https://leetcode.cn/problems/minimum-inversion-count-in-subarrays-of-fixed-length) | 2158 | fixed-window inversions |
 | 3739 | [Count Subarrays with Majority Element II](https://leetcode.cn/problems/count-subarrays-with-majority-element-ii) | 2090 | majority range queries |
 | 3636 | [Threshold Majority Queries](https://leetcode.cn/problems/threshold-majority-queries) | 2451 | threshold frequency queries |

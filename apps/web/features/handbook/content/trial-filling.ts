@@ -175,6 +175,16 @@ Each position is decided once, so the cost is (number of positions) × (cost of 
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1718 | [Construct the Lexicographically Largest Valid Sequence](https://leetcode.cn/problems/construct-the-lexicographically-largest-valid-sequence) | 2080 | try largest feasible value |
+| 2030 | [Smallest K-Length Subsequence With Occurrences of a Letter](https://leetcode.cn/problems/smallest-k-length-subsequence-with-occurrences-of-a-letter) | 2562 | greedy stack with quotas |
+| 3302 | [Find the Lexicographically Smallest Valid Sequence](https://leetcode.cn/problems/find-the-lexicographically-smallest-valid-sequence) | 2474 | feasible mismatch placement |
+| 321 | [Create Maximum Number](https://leetcode.cn/problems/create-maximum-number) | - | greedy trial merge |
+| 440 | [K-th Smallest in Lexicographical Order](https://leetcode.cn/problems/k-th-smallest-in-lexicographical-order) | - | count-and-descend |
+| 556 | [Next Greater Element III](https://leetcode.cn/problems/next-greater-element-iii) | - | next permutation digits |
+| 670 | [Maximum Swap](https://leetcode.cn/problems/maximum-swap) | - | most significant swap |
+| 738 | [Monotone Increasing Digits](https://leetcode.cn/problems/monotone-increasing-digits) | - | digit repair |
+| 1663 | [Smallest String With a Given Numeric Value](https://leetcode.cn/problems/smallest-string-with-a-given-numeric-value) | - | lexicographic construction |
+| 2375 | [Construct Smallest Number From DI String](https://leetcode.cn/problems/construct-smallest-number-from-di-string) | - | constraint-driven placement |
 | 3766 | [Minimum Operations to Make Binary Palindrome](https://leetcode.cn/problems/minimum-operations-to-make-binary-palindrome) | 1657 | fill bits to palindrome |
 | 3517 | [Smallest Palindromic Rearrangement I](https://leetcode.cn/problems/smallest-palindromic-rearrangement-i) | 1357 | palindrome construction |
 | 3518 | [Smallest Palindromic Rearrangement II](https://leetcode.cn/problems/smallest-palindromic-rearrangement-ii) | 2375 | k-th palindrome arrangement |

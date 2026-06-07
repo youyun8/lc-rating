@@ -7,6 +7,7 @@ import {
   LC_RATING_PROBLEM_SOLUTIONS_KEY,
   LC_RATING_PROGRESS_KEY,
 } from "@/config/constants";
+import { reauthenticate } from "@/features/userData";
 import { useSiteStorage } from "@/hooks/useSiteStorage";
 import {
   clearAuthToken,
@@ -237,8 +238,7 @@ export function useTroubleshoot() {
       toast("未設定後端，無法登入");
       return;
     }
-    clearAuthToken();
-    window.location.href = `${API_BASE}/api/login/github`;
+    reauthenticate();
   }, []);
 
   const handleClearCache = useCallback(() => {

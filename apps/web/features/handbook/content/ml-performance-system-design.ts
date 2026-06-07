@@ -160,6 +160,14 @@ For each prompt, practice a five-minute answer first. Then expand into sizing, b
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 2276 | [Count Integers in Intervals](https://leetcode.cn/problems/count-integers-in-intervals) | 2222 | dynamic interval index |
+| 2296 | [Design a Text Editor](https://leetcode.cn/problems/design-a-text-editor) | 1912 | mutable text buffer |
+| 2642 | [Design Graph With Shortest Path Calculator](https://leetcode.cn/problems/design-graph-with-shortest-path-calculator) | 1811 | mutable weighted graph |
+| 146 | [LRU Cache](https://leetcode.cn/problems/lru-cache) | - | cache eviction |
+| 295 | [Find Median from Data Stream](https://leetcode.cn/problems/find-median-from-data-stream) | - | streaming statistic |
+| 355 | [Design Twitter](https://leetcode.cn/problems/design-twitter) | - | feed ranking / fanout |
+| 380 | [Insert Delete GetRandom O(1)](https://leetcode.cn/problems/insert-delete-getrandom-o1) | - | online state updates |
+| 706 | [Design HashMap](https://leetcode.cn/problems/design-hashmap) | - | storage primitive |
 | 3709 | [Design Exam Scores Tracker](https://leetcode.cn/problems/design-exam-scores-tracker) | 1648 | score tracking / prefix index |
 | 3508 | [Implement Router](https://leetcode.cn/problems/implement-router) | 1851 | router / bounded queue |
 | 3408 | [Design Task Manager](https://leetcode.cn/problems/design-task-manager) | 1807 | task manager / priority index |

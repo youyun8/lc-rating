@@ -301,6 +301,14 @@ The pointer logic itself is always linear; whenever you see \`O(n log n)\` it is
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1574 | [Shortest Subarray to be Removed to Make Array Sorted](https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted) | 1932 | prefix/suffix two pointers |
+| 1755 | [Closest Subsequence Sum](https://leetcode.cn/problems/closest-subsequence-sum) | 2364 | meet-in-the-middle two pointers |
+| 2516 | [Take K of Each Character From Left and Right](https://leetcode.cn/problems/take-k-of-each-character-from-left-and-right) | 1948 | two-ended window |
+| 11 | [Container With Most Water](https://leetcode.cn/problems/container-with-most-water) | - | opposite ends |
+| 26 | [Remove Duplicates from Sorted Array](https://leetcode.cn/problems/remove-duplicates-from-sorted-array) | - | slow/fast write |
+| 88 | [Merge Sorted Array](https://leetcode.cn/problems/merge-sorted-array) | - | merge from back |
+| 125 | [Valid Palindrome](https://leetcode.cn/problems/valid-palindrome) | - | inward scan |
+| 167 | [Two Sum II](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted) | - | sorted pair sum |
 | 3455 | [Shortest Matching Substring](https://leetcode.cn/problems/shortest-matching-substring) | 2303 | two pointers / string matching |
 | 3633 | [Earliest Finish Time for Land and Water Rides I](https://leetcode.cn/problems/earliest-finish-time-for-land-and-water-rides-i) | 1343 | two arrays / earliest finish |
 | 3635 | [Earliest Finish Time for Land and Water Rides II](https://leetcode.cn/problems/earliest-finish-time-for-land-and-water-rides-ii) | 1870 | two arrays / sorting |

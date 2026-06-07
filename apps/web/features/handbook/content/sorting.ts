@@ -220,6 +220,14 @@ Rule of thumb: range on the order of \`n\` → counting; range large but digit c
       title: "LeetCode problems",
       body: `| ID | Problem | Rating | Labels |
 | --- | --- | --- | --- |
+| 1649 | [Create Sorted Array through Instructions](https://leetcode.cn/problems/create-sorted-array-through-instructions) | 2208 | ranked insertion counts |
+| 2009 | [Minimum Number of Operations to Make Array Continuous](https://leetcode.cn/problems/minimum-number-of-operations-to-make-array-continuous) | 2084 | sort + unique window |
+| 2366 | [Minimum Replacements to Sort the Array](https://leetcode.cn/problems/minimum-replacements-to-sort-the-array) | 2060 | reverse greedy after sort invariant |
+| 56 | [Merge Intervals](https://leetcode.cn/problems/merge-intervals) | - | sort by start |
+| 75 | [Sort Colors](https://leetcode.cn/problems/sort-colors) | - | Dutch flag / counting |
+| 215 | [Kth Largest Element in an Array](https://leetcode.cn/problems/kth-largest-element-in-an-array) | - | quickselect |
+| 347 | [Top K Frequent Elements](https://leetcode.cn/problems/top-k-frequent-elements) | - | bucket by frequency |
+| 912 | [Sort an Array](https://leetcode.cn/problems/sort-an-array) | - | merge/heap/radix sort |
 | 3541 | [Find Most Frequent Vowel and Consonant](https://leetcode.cn/problems/find-most-frequent-vowel-and-consonant) | 1239 | frequency counting |
 | 3545 | [Minimum Deletions for at Most K Distinct Characters](https://leetcode.cn/problems/minimum-deletions-for-at-most-k-distinct-characters) | 1211 | counting / greedy |
 | 3517 | [Smallest Palindromic Rearrangement I](https://leetcode.cn/problems/smallest-palindromic-rearrangement-i) | 1357 | counting characters |
