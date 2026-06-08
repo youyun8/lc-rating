@@ -9,6 +9,7 @@ import {
   getHandbookTopicsByGroup,
 } from "./content";
 import { resolveHandbookIcon } from "./icons";
+import { InterviewFrequencyBadge } from "./InterviewFrequencyBadge";
 import type { HandbookTopic } from "./model";
 import { LeetCodeIdResults } from "@/components/common/LeetCodeIdResults";
 import {
@@ -35,13 +36,17 @@ function TopicCard({ topic }: { topic: HandbookTopic }) {
       href={`/handbook/${topic.slug}`}
       className="group flex flex-col gap-3 rounded-2xl border border-border/60 bg-card p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-start gap-3">
         <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-lime-500/10 text-lime-600 dark:text-lime-400">
           <Icon className="h-5 w-5" />
         </span>
-        <h3 className="text-base font-semibold tracking-tight text-foreground">
+        <h3 className="flex-1 text-base font-semibold tracking-tight text-foreground">
           {topic.title}
         </h3>
+        <InterviewFrequencyBadge
+          frequency={topic.interviewFrequency}
+          className="shrink-0"
+        />
       </div>
       <p className="text-sm leading-relaxed text-muted-foreground">
         {topic.tagline}

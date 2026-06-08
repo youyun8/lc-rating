@@ -403,14 +403,16 @@ export function StudyPlanMarkdownContent({
       if (!summary) return;
 
       details.setAttribute("data-styled-details", "true");
+      // A clear left color bar marks the block as collapsible; the header tints
+      // with the same accent so the trigger reads as one tappable strip.
       details.className =
-        "not-prose my-5 overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm ring-1 ring-black/[0.02] transition-colors dark:ring-white/[0.03]";
+        "not-prose my-5 overflow-hidden rounded-xl border border-border/60 border-l-4 border-l-primary bg-card shadow-sm transition-colors";
       summary.className =
-        "group flex cursor-pointer list-none items-center gap-3 bg-gradient-to-r from-muted/70 to-background px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:from-muted [&::-webkit-details-marker]:hidden";
+        "group flex cursor-pointer list-none items-center gap-3 bg-primary/[0.07] px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-primary/[0.12] [&::-webkit-details-marker]:hidden";
 
       const chevron = document.createElement("span");
       chevron.className =
-        "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform duration-200";
+        "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary transition-transform duration-200";
       chevron.innerHTML = CHEVRON_SVG;
 
       const title = document.createElement("span");

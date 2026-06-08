@@ -12827,7 +12827,7 @@ function numberedList(items: string[]): string {
 
 function templateMarkdown(keys: string[]): string {
   return keys
-    .map((key, index) => {
+    .map((key) => {
       const template = TEMPLATES[key];
       const meta = TEMPLATE_META[key];
       const basis = TEMPLATE_BASIS[key];
@@ -12848,13 +12848,9 @@ function templateMarkdown(keys: string[]): string {
         template.code,
         "```",
       ].join("\n");
-      // The first template of every topic is expanded by default; the rest are
-      // collapsed, per the unified collapsible contract.
-      return collapsible(
-        `${meta.name} — ${meta.complexity}`,
-        body,
-        index === 0,
-      );
+      // Every C++17 template is collapsed by default so the section stays
+      // compact; readers expand the templates they want to study.
+      return collapsible(`${meta.name} — ${meta.complexity}`, body);
     })
     .join("\n\n");
 }
@@ -12931,7 +12927,7 @@ function relatedMarkdown(slugs: string[]): string {
 /**
  * Runtime guard enforcing the handbook's collapsible contract:
  *  - section 10 (LeetCode Problems) is NEVER wrapped in a collapsible, and
- *  - the C++17 templates section opens with exactly one expanded template.
+ *  - every template in the C++17 templates section is collapsed by default.
  * Throws during module load (and therefore at build time) on violation.
  */
 function assertSectionsAreValid(topic: HandbookTopic): HandbookTopic {
@@ -12944,11 +12940,9 @@ function assertSectionsAreValid(topic: HandbookTopic): HandbookTopic {
   const templates = topic.sections.find((s) => s.id === "cpp17-templates");
   if (templates) {
     const openCount = (templates.body.match(/<details open>/g) ?? []).length;
-    const totalCount = (templates.body.match(/<details(?: open)?>/g) ?? [])
-      .length;
-    if (totalCount > 0 && openCount !== 1) {
+    if (openCount !== 0) {
       throw new Error(
-        `Section 7 of "${topic.slug}" must have exactly one template expanded by default (found ${openCount}).`,
+        `Section 7 of "${topic.slug}" must have every template collapsed by default (found ${openCount} expanded).`,
       );
     }
   }
