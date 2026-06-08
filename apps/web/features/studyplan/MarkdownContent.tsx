@@ -5,7 +5,7 @@ import hljs from "highlight.js";
 import markedKatex from "marked-katex-extension";
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 
 const marked = new Marked(
   markedHighlight({
@@ -282,6 +282,7 @@ export function StudyPlanMarkdownContent({
   codeInitiallyOpen = false,
 }: StudyPlanMarkdownContentProps) {
   const innerHtml = useRef<HTMLDivElement>(null);
+  const markup = useMemo(() => createMarkup(content), [content]);
 
   useEffect(() => {
     const CHEVRON_SVG =
@@ -508,7 +509,7 @@ export function StudyPlanMarkdownContent({
             : "prose-sm sm:prose-base",
         className,
       )}
-      dangerouslySetInnerHTML={createMarkup(content)}
+      dangerouslySetInnerHTML={markup}
     />
   );
 }
