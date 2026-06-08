@@ -1,7 +1,6 @@
 import { I18NTag } from "@/components/common/I18NTag";
 import { ProgressSelector } from "@/components/common/ProgressSelector";
 import { ratingInfo } from "@/components/common/RatingCircle";
-import { LC_HOST_EN, LC_HOST_ZH } from "@/config/constants";
 import { useProgressMap } from "@/features/userData";
 import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
 import { useOptions } from "@/hooks/useOptions";
@@ -9,6 +8,7 @@ import { useProblems } from "@/hooks/useProblems";
 import { useTags } from "@/hooks/useTags";
 import type { ProblemMap, TagMap } from "@/types";
 import { StudyPlanData } from "@/types";
+import { getLeetCodeProblemUrl } from "@/utils/leetcodeLinks";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
 import React, { useMemo } from "react";
 import { ProblemSolution } from "./ProblemSolution";
@@ -188,7 +188,6 @@ const ProblemList = React.memo(
     labelSource = "subsection",
   }: ProblemListProps) => {
     const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
-    const LC_HOST = linkLanguage === "zh" ? LC_HOST_ZH : LC_HOST_EN;
     const { problemMap } = useProblems();
     const { tagMap } = useTags(labelSource === "problemset");
     const progress = useProgressMap();
@@ -267,7 +266,7 @@ const ProblemList = React.memo(
             >
               <div className="min-w-0 flex-1">
                 <a
-                  href={`${LC_HOST}/problems/${problem.slug}`}
+                  href={getLeetCodeProblemUrl(problem.slug, linkLanguage)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="min-w-0 text-sm font-medium leading-snug text-foreground transition-colors hover:text-primary sm:text-[15px]"

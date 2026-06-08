@@ -1,6 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useGlobalSettingsStore } from "@/hooks/useGlobalSettings";
+import {
+  isLeetCodeUrl,
+  resolveLeetCodeProblemHref,
+} from "@/utils/leetcodeLinks";
 import hljs from "highlight.js";
 import markedKatex from "marked-katex-extension";
 import { Marked } from "marked";
@@ -233,12 +238,6 @@ function shouldRenderAsPlainText(math: string) {
   return /^\([A-Za-z_][\w\s,]*\)$/.test(normalized);
 }
 
-const LEETCODE_HOST_RE = /leetcode\.(cn|com)/i;
-
-function isLeetCodeLink(href: string | null) {
-  return !!href && LEETCODE_HOST_RE.test(href);
-}
-
 function createMarkup(md: string) {
   const normalizedMarkdown = normalizeInlineMath(normalizeCppCodeBlocks(md));
   const parsed = marked.parse(normalizedMarkdown);
@@ -282,6 +281,7 @@ export function StudyPlanMarkdownContent({
   codeInitiallyOpen = false,
 }: StudyPlanMarkdownContentProps) {
   const innerHtml = useRef<HTMLDivElement>(null);
+  const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
   const markup = useMemo(() => createMarkup(content), [content]);
 
   useEffect(() => {
@@ -304,7 +304,12 @@ export function StudyPlanMarkdownContent({
       link.removeAttribute("style");
       link.setAttribute("target", "_blank");
       link.setAttribute("rel", "noopener noreferrer");
-      if (enhanceLeetCode && isLeetCodeLink(link.getAttribute("href"))) {
+      const href = link.getAttribute("href");
+      const resolvedHref = resolveLeetCodeProblemHref(href, linkLanguage);
+      if (resolvedHref !== href) {
+        link.setAttribute("href", resolvedHref ?? "");
+      }
+      if (enhanceLeetCode && isLeetCodeUrl(resolvedHref)) {
         link.className =
           "font-medium text-orange-600 underline underline-offset-4 dark:text-orange-400";
       } else {
@@ -547,7 +552,7 @@ export function StudyPlanMarkdownContent({
 
       item.replaceChildren(row);
     });
-  }, [content, variant, enhanceLeetCode, codeInitiallyOpen]);
+  }, [content, variant, enhanceLeetCode, codeInitiallyOpen, linkLanguage]);
 
   return (
     <div
