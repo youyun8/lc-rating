@@ -47,10 +47,10 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
       columns={columns}
       key2Label={key2Label}
       minWidth="w-full table-auto"
-      headerClassName="flex items-center justify-center text-center text-xs font-medium tracking-wider text-muted-foreground"
-      headerBorderClassName="border-b border-border/60 bg-muted/30 align-top whitespace-normal"
-      cellBorderClassName="border-b border-border/60 align-top whitespace-normal"
-      rowClassName="hover:bg-muted/20 transition-colors"
+      headerClassName="flex items-center justify-center text-center text-xs font-normal tracking-wider text-lime-900 dark:text-lime-100"
+      headerBorderClassName="border-b border-lime-200/80 bg-lime-50/80 align-top whitespace-normal dark:border-lime-900/60 dark:bg-lime-950/30"
+      cellBorderClassName="border-b border-lime-100/80 align-top whitespace-normal dark:border-lime-900/40"
+      rowClassName="transition-colors hover:bg-lime-50/70 dark:hover:bg-lime-950/25"
     />
   );
 });

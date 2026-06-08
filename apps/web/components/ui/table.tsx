@@ -24,7 +24,7 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
     <thead
       data-slot="table-header"
       className={cn(
-        "bg-muted/40 [&_tr]:border-b [&_tr]:border-border/70",
+        "bg-lime-50/80 dark:bg-lime-950/30 [&_tr]:border-b [&_tr]:border-lime-200/80 dark:[&_tr]:border-lime-900/60",
         className,
       )}
       {...props}
@@ -47,7 +47,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
     <tr
       data-slot="table-row"
       className={cn(
-        "hover:bg-primary/[0.04] data-[state=selected]:bg-primary/[0.08] border-b transition-colors",
+        "border-b border-lime-100/80 transition-colors hover:bg-lime-50/70 data-[state=selected]:bg-lime-100/80 dark:border-lime-900/40 dark:hover:bg-lime-950/25 dark:data-[state=selected]:bg-lime-950/40",
         className,
       )}
       {...props}
@@ -60,7 +60,7 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
     <th
       data-slot="table-head"
       className={cn(
-        "text-muted-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "h-10 px-2 text-left align-middle font-normal whitespace-nowrap text-lime-900 dark:text-lime-100 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         className,
       )}
       {...props}

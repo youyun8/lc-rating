@@ -117,7 +117,7 @@ const Navigator = React.memo(() => {
                 <Link
                   key={href}
                   href={href}
-                  className={`relative flex items-center gap-1.5 h-full px-3 text-base font-semibold transition-colors ${
+                  className={`relative flex items-center gap-1.5 h-full px-3 text-base font-normal transition-colors ${
                     isActive
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -161,7 +161,7 @@ const Navigator = React.memo(() => {
                     <Link
                       key={href}
                       href={href}
-                      className={`flex items-center gap-1.5 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${
+                      className={`flex items-center gap-1.5 rounded-xl px-3 py-3 text-sm font-normal transition-colors ${
                         isActive
                           ? "bg-background text-foreground shadow-sm"
                           : "text-muted-foreground hover:bg-background/80 hover:text-foreground"

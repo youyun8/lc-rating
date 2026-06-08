@@ -45,17 +45,17 @@ const SCORING = [
   {
     weight: "40%",
     label: "Company-frequency tags",
-    desc: "How often the chapter’s problems are tagged as asked by top companies (FAANG, Microsoft, …).",
+    desc: "How often the chapter's problems are tagged as asked by top companies (FAANG, Microsoft, …).",
   },
   {
     weight: "30%",
     label: "Contest appearance",
-    desc: "Share of the chapter’s problems rated in the 1700–2000 contest band.",
+    desc: "Share of the chapter's problems rated in the 1700–2000 contest band.",
   },
   {
     weight: "30%",
     label: "Study-guide prominence",
-    desc: "Coverage across the NeetCode roadmap, Grind 75/150, Blind 75, and Sean Prashad’s list.",
+    desc: "Coverage across the NeetCode roadmap, Grind 75/150, Blind 75, and Sean Prashad's list.",
   },
 ];
 
