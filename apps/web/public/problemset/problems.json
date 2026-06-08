@@ -3495,7 +3495,7 @@
   },
   "1366": {
     "id": "1366",
-    "title": "通過投票對團隊排名",
+    "title": "透過投票對團隊排名",
     "titleSlug": "rank-teams-by-votes",
     "rating": 1626.3266982141,
     "premium": false,
@@ -4390,7 +4390,7 @@
   },
   "1460": {
     "id": "1460",
-    "title": "通過翻轉子陣列使兩個陣列相等",
+    "title": "透過翻轉子陣列使兩個陣列相等",
     "titleSlug": "make-two-arrays-equal-by-reversing-subarrays",
     "rating": 1151.5250329621,
     "premium": false,
@@ -5552,7 +5552,7 @@
   },
   "1585": {
     "id": "1585",
-    "title": "檢查字串是否可以通過排序子字串得到另一個字串",
+    "title": "檢查字串是否可以透過排序子字串得到另一個字串",
     "titleSlug": "check-if-string-is-transformable-with-substring-sort-operations",
     "rating": 2333.0078041754,
     "premium": false,
@@ -6025,7 +6025,7 @@
   },
   "1639": {
     "id": "1639",
-    "title": "通過給定詞典構造目標字串的方案數",
+    "title": "透過給定詞典構造目標字串的方案數",
     "titleSlug": "number-of-ways-to-form-a-target-string-given-a-dictionary",
     "rating": 2081.6909344021,
     "premium": false,
@@ -6120,7 +6120,7 @@
   },
   "1649": {
     "id": "1649",
-    "title": "通過指令建立有序陣列",
+    "title": "透過指令建立有序陣列",
     "titleSlug": "create-sorted-array-through-instructions",
     "rating": 2207.8565809952,
     "premium": false,
@@ -7168,7 +7168,7 @@
   },
   "1764": {
     "id": "1764",
-    "title": "通過連線另一個陣列的子陣列得到一個陣列",
+    "title": "透過連線另一個陣列的子陣列得到一個陣列",
     "titleSlug": "form-array-by-concatenating-subarrays-of-another-array",
     "rating": 1588.3835994255,
     "premium": false,
@@ -7273,7 +7273,7 @@
   },
   "1775": {
     "id": "1775",
-    "title": "通過最少操作次數使陣列的和相等",
+    "title": "透過最少操作次數使陣列的和相等",
     "titleSlug": "equal-sum-arrays-with-minimum-number-of-operations",
     "rating": 1850.4091449367,
     "premium": false,
@@ -7425,7 +7425,7 @@
   },
   "1792": {
     "id": "1792",
-    "title": "最大平均通過率",
+    "title": "最大平均透過率",
     "titleSlug": "maximum-average-pass-ratio",
     "rating": 1817.9978644712,
     "premium": false,
@@ -10420,7 +10420,7 @@
   },
   "2120": {
     "id": "2120",
-    "title": "執行所有後綴指令",
+    "title": "執行所有字尾指令",
     "titleSlug": "execution-of-all-suffix-instructions-staying-in-a-grid",
     "rating": 1379.8787648129,
     "premium": false,
@@ -10470,7 +10470,7 @@
   },
   "2125": {
     "id": "2125",
-    "title": "銀行中的雷射束數量",
+    "title": "銀行中的鐳射束數量",
     "titleSlug": "number-of-laser-beams-in-a-bank",
     "rating": 1280.2203734882,
     "premium": false,
@@ -11889,7 +11889,7 @@
   },
   "2279": {
     "id": "2279",
-    "title": "裝滿石頭的背包的最大數量",
+    "title": "裝滿石頭的揹包的最大數量",
     "titleSlug": "maximum-bags-with-full-capacity-of-rocks",
     "rating": 1249.2572200035,
     "premium": false,
@@ -12056,7 +12056,7 @@
   },
   "2296": {
     "id": "2296",
-    "title": "設計一個文本編輯器",
+    "title": "設計一個文字編輯器",
     "titleSlug": "design-a-text-editor",
     "rating": 1911.8282317986,
     "premium": false,
@@ -14537,7 +14537,7 @@
   },
   "2551": {
     "id": "2551",
-    "title": "將珠子放入背包中",
+    "title": "將珠子放入揹包中",
     "titleSlug": "put-marbles-in-bags",
     "rating": 2042.4005521254,
     "premium": false,
@@ -16776,7 +16776,7 @@
   },
   "2839": {
     "id": "2839",
-    "title": "判斷通過操作能否讓字串相等 I",
+    "title": "判斷透過操作能否讓字串相等 I",
     "titleSlug": "check-if-strings-can-be-made-equal-with-operations-i",
     "rating": 1285.1547123119,
     "premium": false,
@@ -16787,7 +16787,7 @@
   },
   "2840": {
     "id": "2840",
-    "title": "判斷通過操作能否讓字串相等 II",
+    "title": "判斷透過操作能否讓字串相等 II",
     "titleSlug": "check-if-strings-can-be-made-equal-with-operations-ii",
     "rating": 1486.2147876747,
     "premium": false,
@@ -18260,7 +18260,7 @@
   },
   "3012": {
     "id": "3012",
-    "title": "通過操作使陣列長度最小",
+    "title": "透過操作使陣列長度最小",
     "titleSlug": "minimize-length-of-array-using-operations",
     "rating": 1832.7167755024,
     "premium": false,
@@ -18571,7 +18571,7 @@
   },
   "3042": {
     "id": "3042",
-    "title": "統計前後綴下標對 I",
+    "title": "統計前字尾下標對 I",
     "titleSlug": "count-prefix-and-suffix-pairs-i",
     "rating": 1214.2480880984,
     "premium": false,
@@ -18619,7 +18619,7 @@
   },
   "3045": {
     "id": "3045",
-    "title": "統計前後綴下標對 II",
+    "title": "統計前字尾下標對 II",
     "titleSlug": "count-prefix-and-suffix-pairs-ii",
     "rating": 2327.5726642605,
     "premium": false,
@@ -21042,7 +21042,7 @@
   },
   "3318": {
     "id": "3318",
-    "title": "計算子陣列的 x-sum I",
+    "title": "計運算元陣列的 x-sum I",
     "titleSlug": "find-x-sum-of-all-k-long-subarrays-i",
     "rating": 1457.5078616972,
     "premium": false,
@@ -21075,7 +21075,7 @@
   },
   "3321": {
     "id": "3321",
-    "title": "計算子陣列的 x-sum II",
+    "title": "計運算元陣列的 x-sum II",
     "titleSlug": "find-x-sum-of-all-k-long-subarrays-ii",
     "rating": 2598.4563109814,
     "premium": false,
@@ -24157,7 +24157,7 @@
   },
   "3629": {
     "id": "3629",
-    "title": "通過質數傳送到達終點的最少跳躍次數",
+    "title": "透過質數傳送到達終點的最少跳躍次數",
     "titleSlug": "minimum-jumps-to-reach-end-via-prime-teleportation",
     "rating": 2139.3079901181,
     "premium": false,
@@ -25693,7 +25693,7 @@
   },
   "3785": {
     "id": "3785",
-    "title": "避免停用值的最小交換次數",
+    "title": "避免禁用值的最小交換次數",
     "titleSlug": "minimum-swaps-to-avoid-forbidden-values",
     "rating": 2051.519347574,
     "premium": false,
@@ -26441,7 +26441,7 @@
   },
   "3868": {
     "id": "3868",
-    "title": "通過交換使陣列相等的最小花費",
+    "title": "透過交換使陣列相等的最小花費",
     "titleSlug": "minimum-cost-to-equalize-arrays-using-swaps",
     "rating": 1578.9554353833,
     "premium": false,
@@ -26793,7 +26793,7 @@
   },
   "3905": {
     "id": "3905",
-    "title": "多源影像渲染",
+    "title": "多源影象渲染",
     "titleSlug": "multi-source-flood-fill",
     "rating": 1671.4061227694,
     "premium": false,
@@ -27169,7 +27169,7 @@
     "id": "3945",
     "title": "計算數字頻率得分",
     "titleSlug": "digit-frequency-score",
-    "rating": 0,
+    "rating": 1201.2169110885,
     "premium": false,
     "_hash": "3068592210",
     "contestId": "1363",
@@ -27180,7 +27180,7 @@
     "id": "3946",
     "title": "購買最多物品數目 I",
     "titleSlug": "maximum-number-of-items-from-sale-i",
-    "rating": 0,
+    "rating": 1728.0374911688,
     "premium": false,
     "_hash": "2045640391",
     "contestId": "1363",
@@ -27191,7 +27191,7 @@
     "id": "3947",
     "title": "購買最多物品數目 II",
     "titleSlug": "maximum-number-of-items-from-sale-ii",
-    "rating": 0,
+    "rating": 2215.4516632445,
     "premium": false,
     "_hash": "2678582250",
     "contestId": "1363",
@@ -27202,11 +27202,99 @@
     "id": "3948",
     "title": "字典序最大的 MEX 陣列",
     "titleSlug": "lexicographically-maximum-mex-array",
-    "rating": 0,
+    "rating": 2122.2230904777,
     "premium": false,
     "_hash": "2600903443",
     "contestId": "1363",
     "solutionId": "2600903443",
+    "tagIds": []
+  },
+  "3950": {
+    "id": "3950",
+    "title": "恰好一對連續置位",
+    "titleSlug": "exactly-one-consecutive-set-bits-pair",
+    "rating": 0,
+    "premium": false,
+    "_hash": "1179722390",
+    "contestId": "1362",
+    "solutionId": "1179722390",
+    "tagIds": []
+  },
+  "3951": {
+    "id": "3951",
+    "title": "維持亮度的最小總能量",
+    "titleSlug": "minimum-energy-to-maintain-brightness",
+    "rating": 0,
+    "premium": false,
+    "_hash": "53063134",
+    "contestId": "1362",
+    "solutionId": "53063134",
+    "tagIds": []
+  },
+  "3952": {
+    "id": "3952",
+    "title": "下標覆蓋處的最大總和",
+    "titleSlug": "maximum-total-value-of-covered-indices",
+    "rating": 0,
+    "premium": false,
+    "_hash": "3019756199",
+    "contestId": "1362",
+    "solutionId": "3019756199",
+    "tagIds": []
+  },
+  "3953": {
+    "id": "3953",
+    "title": "互質元素的最大得分",
+    "titleSlug": "maximum-score-with-co-prime-element",
+    "rating": 0,
+    "premium": false,
+    "_hash": "1265840001",
+    "contestId": "1362",
+    "solutionId": "1265840001",
+    "tagIds": []
+  },
+  "3954": {
+    "id": "3954",
+    "title": "區間內的相容數字之和 I",
+    "titleSlug": "sum-of-compatible-numbers-in-range-i",
+    "rating": 0,
+    "premium": false,
+    "_hash": "926823654",
+    "contestId": "1365",
+    "solutionId": "926823654",
+    "tagIds": []
+  },
+  "3955": {
+    "id": "3955",
+    "title": "成本限制的有效二進位制字串",
+    "titleSlug": "valid-binary-strings-with-cost-limit",
+    "rating": 0,
+    "premium": false,
+    "_hash": "2389953759",
+    "contestId": "1365",
+    "solutionId": "2389953759",
+    "tagIds": []
+  },
+  "3956": {
+    "id": "3956",
+    "title": "非重疊子陣列最大和 I",
+    "titleSlug": "maximum-sum-of-m-non-overlapping-subarrays-i",
+    "rating": 0,
+    "premium": false,
+    "_hash": "2027593794",
+    "contestId": "1365",
+    "solutionId": "2027593794",
+    "tagIds": []
+  },
+  "3957": {
+    "id": "3957",
+    "title": "非重疊子陣列最大和 II",
+    "titleSlug": "maximum-sum-of-m-non-overlapping-subarrays-ii",
+    "rating": 0,
+    "premium": false,
+    "_hash": "1797923761",
+    "contestId": "1365",
+    "solutionId": "1797923761",
     "tagIds": []
   },
   "828": {
@@ -27255,7 +27343,7 @@
   },
   "832": {
     "id": "832",
-    "title": "翻轉影像",
+    "title": "翻轉影象",
     "titleSlug": "flipping-an-image",
     "rating": 1243.1009943284,
     "premium": false,
@@ -27294,7 +27382,7 @@
   },
   "835": {
     "id": "835",
-    "title": "影像重疊",
+    "title": "影象重疊",
     "titleSlug": "image-overlap",
     "rating": 1969.9845549158,
     "premium": false,
@@ -28773,7 +28861,7 @@
   },
   "959": {
     "id": "959",
-    "title": "由斜槓劃分區域",
+    "title": "由斜槓劃分割槽域",
     "titleSlug": "regions-cut-by-slashes",
     "rating": 2135.5738659086,
     "premium": false,
