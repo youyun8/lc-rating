@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { type ProblemSolution as ProblemSolutionType } from "@/features/userData";
 import { cn } from "@/lib/utils";
-import { Check, Copy, Trash2 } from "lucide-react";
+import { Check, Code2, Copy, Trash2 } from "lucide-react";
 import { useMemo } from "react";
 import { CodeEditor } from "./CodeEditor";
 import {
@@ -90,8 +90,9 @@ interface SolutionViewCardProps {
 
 export function SolutionViewCard({ index, solution }: SolutionViewCardProps) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm">
-      <div className="flex flex-wrap items-center gap-2 border-b border-border/60 bg-muted/30 px-3 py-2 sm:px-4">
+    <div className="overflow-hidden rounded-xl border border-border/60 border-l-4 border-l-muted-foreground/30 bg-card shadow-sm">
+      <div className="flex flex-wrap items-center gap-2 border-b border-border/60 bg-muted/25 px-3 py-2 sm:px-4">
+        <Code2 className="h-4 w-4 shrink-0 text-muted-foreground" />
         <SolutionNumber index={index} />
         {solution.title ? (
           <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
@@ -126,7 +127,7 @@ export function SolutionEditCard({
   onDelete,
 }: SolutionEditCardProps) {
   return (
-    <div className="rounded-xl border border-border/60 bg-muted/10 p-3 shadow-sm sm:p-4">
+    <div className="rounded-xl border border-border/60 border-l-4 border-l-muted-foreground/30 bg-muted/10 p-3 shadow-sm sm:p-4">
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <SolutionNumber index={index} />
         <Input

@@ -9054,7 +9054,7 @@ const TOPIC_DEFINITIONS: PatternTopicDefinition[] = [
       "Both pointers move in the same direction (left and right both advance), which distinguishes it from opposite-direction two pointers.",
     ],
     motivation: [
-      "Brute force for 'longest substring without repeats' tests every substring and rescans it for duplicates. Example: `s = \\\"abcabcbb\\\"` re-examines overlapping ranges — `O(n^2)` or worse.",
+      "Brute force for 'longest substring without repeats' tests every substring and rescans it for duplicates. Example: `s = \"abcabcbb\"` re-examines overlapping ranges — `O(n^2)` or worse.",
       "Maintain a window `[left, right]` plus a set/count of its characters; extend `right`, and when a duplicate appears, advance `left` until the window is valid again.",
       "Each character enters and leaves the window at most once, so the work is `O(n)`. The repeated scanning of overlapping ranges is exactly what the window removes.",
       "For 'exactly k distinct', compute `atMost(k) - atMost(k-1)`: each at-most count is a single monotone window, and their difference isolates the exact case.",

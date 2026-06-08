@@ -286,6 +286,12 @@ export function StudyPlanMarkdownContent({
   useEffect(() => {
     const CHEVRON_SVG =
       '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+    // Layout-matching glyphs for the collapsible headers (see HandbookExample):
+    // a code icon for neutral code blocks, an info glyph for lime <details>.
+    const CODE_SVG =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
+    const INFO_SVG =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
     if (!innerHtml.current) return;
 
     const imageClassName =
@@ -328,8 +334,10 @@ export function StudyPlanMarkdownContent({
 
       const wrapper = document.createElement("div");
       wrapper.setAttribute("data-code-toggle", "true");
+      // Neutral accent bar keeps code distinct from the lime prose admonitions,
+      // while the icon-left / chevron-right header matches HandbookExample.
       wrapper.className =
-        "not-prose my-4 overflow-hidden rounded-xl border border-border/60";
+        "not-prose my-4 overflow-hidden rounded-xl border border-border/60 border-l-4 border-l-muted-foreground/30";
 
       const header = document.createElement("div");
       header.className =
@@ -340,14 +348,18 @@ export function StudyPlanMarkdownContent({
       toggle.className =
         "flex min-w-0 flex-1 cursor-pointer select-none items-center gap-2 text-left";
 
-      const chevron = document.createElement("span");
-      chevron.className =
-        "shrink-0 transition-transform duration-200 flex items-center";
-      chevron.innerHTML = CHEVRON_SVG;
+      const icon = document.createElement("span");
+      icon.className = "flex shrink-0 items-center text-muted-foreground";
+      icon.innerHTML = CODE_SVG;
 
       const labelEl = document.createElement("span");
       labelEl.className = "min-w-0 flex-1 truncate font-medium";
       labelEl.textContent = label;
+
+      const chevron = document.createElement("span");
+      chevron.className =
+        "flex shrink-0 cursor-pointer items-center text-muted-foreground transition-transform duration-200";
+      chevron.innerHTML = CHEVRON_SVG;
 
       const copyButton = document.createElement("button");
       copyButton.type = "button";
@@ -371,10 +383,11 @@ export function StudyPlanMarkdownContent({
         }
       });
 
-      toggle.appendChild(chevron);
+      toggle.appendChild(icon);
       toggle.appendChild(labelEl);
       header.appendChild(toggle);
       header.appendChild(copyButton);
+      header.appendChild(chevron);
 
       // Start collapsed, unless the caller wants code expanded (e.g. inside a
       // handbook 例題 card that is itself the collapsible container).
@@ -386,11 +399,13 @@ export function StudyPlanMarkdownContent({
       pre.style.borderTop = "1px solid hsl(var(--border) / 0.6)";
       if (shouldOpenCode) chevron.style.transform = "rotate(90deg)";
 
-      toggle.addEventListener("click", () => {
+      const toggleCode = () => {
         const isHidden = pre.style.display === "none";
         pre.style.display = isHidden ? "" : "none";
         chevron.style.transform = isHidden ? "rotate(90deg)" : "";
-      });
+      };
+      toggle.addEventListener("click", toggleCode);
+      chevron.addEventListener("click", toggleCode);
 
       pre.parentNode?.insertBefore(wrapper, pre);
       wrapper.appendChild(header);
@@ -403,35 +418,35 @@ export function StudyPlanMarkdownContent({
       if (!summary) return;
 
       details.setAttribute("data-styled-details", "true");
-      // A clear left color bar marks the block as collapsible; the header tints
-      // with the same accent so the trigger reads as one tappable strip.
+      // Lime left bar + tinted header mirror HandbookExample so every prose
+      // admonition reads the same: info glyph left, title, chevron right.
       details.className =
-        "not-prose my-5 overflow-hidden rounded-xl border border-border/60 border-l-4 border-l-primary bg-card shadow-sm transition-colors";
+        "not-prose my-5 overflow-hidden rounded-xl border border-lime-500/30 border-l-4 border-l-lime-500 bg-lime-500/5 shadow-sm transition-colors";
       summary.className =
-        "group flex cursor-pointer list-none items-center gap-3 bg-primary/[0.07] px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-primary/[0.12] [&::-webkit-details-marker]:hidden";
+        "group flex cursor-pointer list-none select-none items-center gap-2 bg-lime-500/10 px-4 py-3 text-sm font-medium text-foreground transition-colors hover:bg-lime-500/15 [&::-webkit-details-marker]:hidden";
 
-      const chevron = document.createElement("span");
-      chevron.className =
-        "flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary transition-transform duration-200";
-      chevron.innerHTML = CHEVRON_SVG;
+      const icon = document.createElement("span");
+      icon.className =
+        "flex shrink-0 items-center text-lime-600 dark:text-lime-400";
+      icon.innerHTML = INFO_SVG;
 
       const title = document.createElement("span");
       title.className = "min-w-0 flex-1 truncate";
       title.textContent = summary.textContent?.trim() || "Details";
 
-      const badge = document.createElement("span");
-      badge.className =
-        "hidden shrink-0 rounded-full border border-border/60 bg-background/80 px-2 py-0.5 text-[11px] font-medium text-muted-foreground sm:inline-flex";
-      badge.textContent = "expand";
+      const chevron = document.createElement("span");
+      chevron.className =
+        "flex shrink-0 items-center text-muted-foreground transition-transform duration-200";
+      chevron.innerHTML = CHEVRON_SVG;
 
       summary.textContent = "";
-      summary.appendChild(chevron);
+      summary.appendChild(icon);
       summary.appendChild(title);
-      summary.appendChild(badge);
+      summary.appendChild(chevron);
 
       const content = document.createElement("div");
       content.className =
-        "space-y-4 border-t border-border/60 bg-background/70 px-4 py-4";
+        "space-y-4 border-t border-lime-500/20 bg-background/70 px-4 py-4";
       while (summary.nextSibling) {
         content.appendChild(summary.nextSibling);
       }
@@ -439,7 +454,6 @@ export function StudyPlanMarkdownContent({
 
       const syncState = () => {
         chevron.style.transform = details.open ? "rotate(90deg)" : "";
-        badge.textContent = details.open ? "collapse" : "expand";
       };
       details.addEventListener("toggle", syncState);
       syncState();
