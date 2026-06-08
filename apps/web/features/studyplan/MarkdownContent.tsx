@@ -490,6 +490,80 @@ export function StudyPlanMarkdownContent({
         }
       }
     });
+
+    // Lay out multi-item table cells (e.g. the Enumeration Taxonomy "Practice
+    // Problems" column, where entries are joined by <br>) as a spaced vertical
+    // list, and lift the trailing "(rating) [tier]" text into tidy badges — so
+    // the cell reads as a clean list instead of a cramped run-on block.
+    const TIER_BADGE: Record<string, string> = {
+      Core: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
+      Advanced: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
+      Challenge: "bg-rose-500/15 text-rose-700 dark:text-rose-300",
+    };
+    innerHtml.current.querySelectorAll("td").forEach((cell) => {
+      if (cell.getAttribute("data-list-cell") === "true") return;
+      if (!cell.querySelector("br")) return;
+      const items = cell.innerHTML
+        .split(/<br\s*\/?>/i)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      if (items.length < 2) return;
+
+      cell.setAttribute("data-list-cell", "true");
+      cell.style.verticalAlign = "top";
+
+      const list = document.createElement("div");
+      list.className = "flex flex-col gap-1.5";
+
+      for (const item of items) {
+        const row = document.createElement("div");
+        row.className =
+          "flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 leading-snug";
+
+        // Peel a trailing " [Tier]" then " (rating)" off the entry; whatever
+        // remains (usually the problem link) is shown first, badges after.
+        let html = item;
+        let tier = "";
+        let rating = "";
+        const tierMatch = html.match(/\s*\[(Core|Advanced|Challenge)\]\s*$/i);
+        if (tierMatch) {
+          tier = tierMatch[1]!;
+          html = html.slice(0, tierMatch.index ?? html.length).trim();
+        }
+        const ratingMatch = html.match(/\s*\((\d{3,4})\)\s*$/);
+        if (ratingMatch) {
+          rating = ratingMatch[1]!;
+          html = html.slice(0, ratingMatch.index ?? html.length).trim();
+        }
+
+        const label = document.createElement("span");
+        label.className = "min-w-0";
+        label.innerHTML = html;
+        row.appendChild(label);
+
+        if (rating) {
+          const badge = document.createElement("span");
+          badge.className =
+            "inline-flex shrink-0 items-center rounded bg-muted px-1.5 py-0.5 text-xs font-medium tabular-nums text-muted-foreground";
+          badge.textContent = rating;
+          row.appendChild(badge);
+        }
+        if (tier) {
+          const key =
+            tier.charAt(0).toUpperCase() + tier.slice(1).toLowerCase();
+          const badge = document.createElement("span");
+          badge.className =
+            "inline-flex shrink-0 items-center rounded px-1.5 py-0.5 text-xs font-medium " +
+            (TIER_BADGE[key] ?? "bg-muted text-muted-foreground");
+          badge.textContent = key;
+          row.appendChild(badge);
+        }
+
+        list.appendChild(row);
+      }
+
+      cell.replaceChildren(list);
+    });
   }, [content, variant, enhanceLeetCode, codeInitiallyOpen]);
 
   return (

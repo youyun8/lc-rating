@@ -8,6 +8,7 @@ green), plus structural tsx assertions and `g++ -std=c++17 -Wall -Wextra`
 compilation of every C++ snippet.
 
 ## 1. Topic data entries created
+
 - **17 new topics**: 16 from Task 5B + Game Theory (Task 7):
   two-pointers-opposite, sliding-window, backtracking, hash-map-frequency,
   sorting-as-a-tool, tree-traversal, graph-traversal, union-find,
@@ -21,6 +22,7 @@ compilation of every C++ snippet.
   layered deep dive**, both with collapsible worked examples.
 
 ## 2. Topic data entries modified
+
 - **26 pattern topics** modified by the unified collapsible builder + numbered
   Core Idea + analogy-first Concept (Tasks 2, 3).
 - **7 topics** fully rewritten in tutorial style (Task 3 — the Problem-Solving
@@ -35,9 +37,10 @@ compilation of every C++ snippet.
   No rendering library was added; the existing `<details>` primitive is reused.
 
 ## 3. LeetCode problems added
+
 - **~99 problem entries authored** across new content (16 topics ≈ 92, Game
   Theory 3, DP additions 4). Existing topics were brought to their frequency-
-  table targets: 14 removed from over-target *named* topics (Task 5A) and a
+  table targets: 14 removed from over-target _named_ topics (Task 5A) and a
   further ~70 removed by the catch-all trim of the 18 unnamed original topics
   (each 7→3). The handbook now references **194** problem links across the 43
   pattern topics.
@@ -50,12 +53,14 @@ compilation of every C++ snippet.
   non-contest (no zerotrac rating exists) and keep curated estimates. See §8.
 
 ## 4. New categories added to the handbook index
+
 - **4**: "Recursion and Search", "Tree Patterns", "String Patterns", "Math
   Patterns" — added to the `HandbookGroup` union (`model.ts`) and to
   `HANDBOOK_GROUP_ORDER` + `HANDBOOK_GROUP_DESCRIPTIONS` (`content/index.ts`).
   ("Data Structure Patterns", required by Heap Patterns, already existed.)
 
 ## 5. Collapsible units added site-wide (Task 2)
+
 - The handbook renders **282** `<details>` collapsible units across the 43
   pattern topics, all through one shared `collapsible()` helper (no new library).
 - Task 2 newly made Common Variants, Recognition Checklist, and Related Topics
@@ -68,6 +73,7 @@ compilation of every C++ snippet.
   Verified: all 43 pattern topics pass; §10 is non-collapsible everywhere.
 
 ## 6. QA summary (across all tasks)
+
 - BUILD `pnpm build`: PASS (4/4) after every task.
 - TYPES `pnpm check-types`: PASS (3/3) after every task.
 - LINT `pnpm lint`: PASS (2/2, `--max-warnings 0`) after every task.
@@ -81,12 +87,14 @@ compilation of every C++ snippet.
 - Unresolved hard failures: **0**.
 
 ## 7. Unresolved issues requiring human review
+
 - None that are defects; the build is fully green.
 - One deliberate deviation (see §8): the frequency table's catch-all "all other
   existing topics → 3" was not applied to foundational mindset/enumeration
   topics.
 
 ## 8. Known limitations / assumptions
+
 - **Data model reality (Task 1).** The handbook is a structured
   `PatternTopicDefinition` model + shared `TEMPLATES` registry compiled into 12
   markdown sections by `createTopic()` — not free-form markdown. All work
@@ -120,4 +128,4 @@ compilation of every C++ snippet.
 - **Verification method.** Collapsible/render behavior was validated via the
   production build (all `/handbook/[topic]` pages prerender) plus structural tsx
   assertions, not an interactive browser session.
-</content>
+  </content>
