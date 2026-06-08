@@ -22,12 +22,16 @@ export type HandbookGroup =
   | "Problem-Solving Mindset"
   | "Enumeration and Counting"
   | "Core Array/String Patterns"
+  | "String Patterns"
+  | "Recursion and Search"
+  | "Tree Patterns"
+  | "Graph Patterns"
   | "Data Structure Patterns"
   | "Greedy Patterns"
-  | "Graph Patterns"
   | "Dynamic Programming"
   | "Range Query and Offline Techniques"
   | "Bit and Math Patterns"
+  | "Math Patterns"
   | "Advanced Mixed Patterns"
   | "ML Performance System Design";
 

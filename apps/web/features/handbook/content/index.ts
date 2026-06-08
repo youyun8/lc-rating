@@ -16,12 +16,16 @@ export const HANDBOOK_GROUP_ORDER: HandbookGroup[] = [
   "Problem-Solving Mindset",
   "Enumeration and Counting",
   "Core Array/String Patterns",
+  "String Patterns",
+  "Recursion and Search",
+  "Tree Patterns",
+  "Graph Patterns",
   "Data Structure Patterns",
   "Greedy Patterns",
-  "Graph Patterns",
   "Dynamic Programming",
   "Range Query and Offline Techniques",
   "Bit and Math Patterns",
+  "Math Patterns",
   "Advanced Mixed Patterns",
   "ML Performance System Design",
 ];
@@ -33,18 +37,26 @@ export const HANDBOOK_GROUP_DESCRIPTIONS: Record<HandbookGroup, string> = {
     "Choosing the right owner, endpoint, pivot, or contribution unit so large candidate sets become countable.",
   "Core Array/String Patterns":
     "High-frequency contiguous and value-space techniques for arrays and strings.",
+  "String Patterns":
+    "Linear-time matching and prefix-tree techniques: failure functions, hashing, and tries.",
+  "Recursion and Search":
+    "Systematic exploration of choice trees with pruning, and divide-and-conquer decompositions.",
+  "Tree Patterns":
+    "Traversal orders and return-value-vs-parameter design for rooted-tree recursion and level-order search.",
+  "Graph Patterns":
+    "Graph correctness ideas for connectivity, cuts, traversal, ordering, and safe edge choices.",
   "Data Structure Patterns":
     "Compact structures that preserve only the candidates, ranks, and boundaries needed for fast updates.",
   "Greedy Patterns":
     "Local-choice patterns backed by exchange, feasibility, and stays-ahead proofs.",
-  "Graph Patterns":
-    "Graph correctness ideas for connectivity, cuts, and safe edge choices.",
   "Dynamic Programming":
     "State and transition design for overlapping subproblems, interval decisions, and optimized recurrences.",
   "Range Query and Offline Techniques":
     "Reordering events and queries so range state can be maintained incrementally.",
   "Bit and Math Patterns":
     "Mask-based state compression and small-domain encodings for exponential-looking problems.",
+  "Math Patterns":
+    "Number-theory toolkit and adversarial game analysis: GCD/modular arithmetic, sieves, Nim, and Grundy values.",
   "Advanced Mixed Patterns":
     "Cross-cutting proof and implementation contracts that make multiple patterns reliable.",
   "ML Performance System Design":
