@@ -375,3 +375,62 @@ glance instead of decoding the code.
   official LeetCode problems API, then validated — 0 invalid slugs.
 - Links use leetcode.cn per the content guideline.
 - BUILD/TYPES/LINT all green; file Prettier-formatted.
+
+---
+
+## QA Report — Enumeration Taxonomy Practice Problems — 2026-06-08 04:12 UTC
+
+### Passed
+- BUILD: `pnpm build` (4/4) and `pnpm check-types` (3/3) — zero errors.
+- LINT: `pnpm lint` (2/2, `--max-warnings 0`) — zero errors.
+- TABLE STRUCTURE: the Enumeration Viewpoint Taxonomy table now has 5 columns
+  (added "Practice Problems" after "Representative problem"); the original 4
+  columns are byte-for-byte unchanged. All 9 viewpoint rows have a populated
+  Practice Problems cell (≥1 entry). Problems within every cell are sorted by
+  rating ascending with unrated/estimated first (verified for all 9 rows).
+- SECTION 10 SYNC: all 51 distinct taxonomy problems (9 representative + 42
+  practice) appear exactly once in Section 10; 0 duplicates; nothing removed
+  (the 3 pre-existing problems remain). Section 10 total = 54 rows.
+- COLLAPSIBLE: Section 10 is not wrapped in any `<details>`/`:::example`
+  (verified) and renders as always-visible ProblemList tables.
+- NO INVENTED PROBLEMS: every problem number/title/slug was generated from and
+  validated against the official LeetCode problems API; 0 non-real IDs. Ratings
+  come from the zerotrac dataset; 6 unrated non-contest classics (713, 523, 731,
+  410, 689, 421) use difficulty-based estimates and are shown WITHOUT a rating
+  in the table (per "rating if known") — they are tiered Core.
+- All Practice Problems links point to leetcode.cn.
+- No content outside the Enumeration Strategy topic was modified.
+
+### Failed / Auto-fixed
+- Cell sort initially placed estimated-rating problems by their estimate; fixed
+  so unrated/estimated problems sort first (they are not "known" ratings),
+  matching the spec. Re-verified: all 9 cells sortAsc=true.
+
+### Unresolved / Low-coverage
+- **Enumerate the smaller side (small-to-large merging)**: only 2 real problems
+  found total — 2003 (representative) + 2421 Number of Good Paths (practice).
+  This viewpoint is genuinely rare on LeetCode; logged per spec (< 3).
+
+### 5:3:2 split (logged, not rebalanced)
+- Section 10 after sync: 54 problems → Core 34 / Advanced 11 / Challenge 9.
+- Ideal 5:3:2 for 54 ≈ 27 / 16 / 11. Actual deviates Core-heavy (Core +7,
+  Advanced −5): most taxonomy practice problems are sub-2000 (Core), and the 2
+  pre-existing 2000+ problems (1761, 1601) retain their original "Core" labels
+  (not modified). Per spec, not force-rebalanced.
+- Note: tiers for newly added problems follow the task thresholds (Core <2000 or
+  unrated, Advanced 2000–2299, Challenge 2300+); pre-existing labels untouched.
+
+### Summary table
+
+| Viewpoint | Practice-column problems | New added to Section 10 (incl. rep) |
+| --- | ---: | ---: |
+| Enumerate the owner / contributor | 4 | 5 |
+| Enumerate the right endpoint | 7 | 8 |
+| Enumerate the pivot / middle | 5 | 6 |
+| Enumerate the contribution unit | 5 | 6 |
+| Enumerate the value domain | 7 | 8 |
+| Enumerate the cut point | 5 | 6 |
+| Enumerate the smaller side | 1 | 2 |
+| Enumerate bit by bit | 3 | 4 |
+| Enumerate the trigger / event | 5 | 6 |
+| **Total** | **42** | **51** |
