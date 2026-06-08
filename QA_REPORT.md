@@ -3,6 +3,7 @@
 ## QA Report — Task 1 (Explore & document) — 2026-06-08 01:39 UTC
 
 ### Passed
+
 - Type baseline: `pnpm check-types` → 3/3 tasks successful (run before any edit).
 - Architecture documented: `NOTES.md` written with the full data model, file
   paths, builder pipeline, collapsible inventory, and constraints.
@@ -12,9 +13,11 @@
   extend this model.
 
 ### Failed / Auto-fixed
+
 - None.
 
 ### Unresolved
+
 - None.
 
 ---
@@ -22,6 +25,7 @@
 ## QA Report — Task 2 (Unified collapsible system) — 2026-06-08 01:39 UTC
 
 ### Passed
+
 - BUILD: `pnpm build` → 4/4 tasks successful (handbook pages prerendered).
 - BUILD: `pnpm check-types` → 3/3 successful, zero errors.
 - LINT: `pnpm lint` → 2/2 successful, `--max-warnings 0`, zero errors.
@@ -46,22 +50,26 @@
   have exactly one default-open template. This enforces the constraint as code.
 
 ### Failed / Auto-fixed
+
 - Initial verification script failed with `ERR_MODULE_NOT_FOUND` (relative
   import resolved against `/tmp`). Fixed by using an absolute import path;
   re-ran → "OK all 26 topics pass collapsible contract".
 
 ### Unresolved
+
 - None.
 
 ### Problem counts (Task 2 made no problem-list changes)
+
 - N/A — Task 2 only changed collapsible markup. Problem lists untouched.
-</content>
+  </content>
 
 ---
 
 ## QA Report — Task 4 (Expand sections) — 2026-06-08 02:03 UTC
 
 ### Passed
+
 - STRUCTURE audit (tsx over all 26 topics): every topic has ≥4 variants (§6).
 - Five topics had only 1 template; added a meaningful 2nd to each, so all
   topics now have ≥2 templates (§7):
@@ -81,14 +89,17 @@
   errors, no warnings.
 
 ### Failed / Auto-fixed
+
 - None.
 
 ### Unresolved
+
 - §8 "name the hidden cost" is satisfied but still partly generic for the 19
   topics not rewritten in Task 3; sharpening those is a candidate for a later
   prose pass.
 
 ### Problem counts
+
 - Unchanged in Task 4 (problem lists were not touched).
 
 ---
@@ -96,6 +107,7 @@
 ## QA Report — Task 6 (Enumeration Viewpoint Taxonomy) — 2026-06-08 02:03 UTC
 
 ### Passed
+
 - Added an "Enumeration Viewpoint Taxonomy" subsection to the
   `enumeration-strategy` topic (appended to §4 Core Idea via a new optional
   `coreIdeaAppendix` field on the definition + builder support).
@@ -112,9 +124,11 @@
 - BUILD/TYPES/LINT all green.
 
 ### Failed / Auto-fixed
+
 - None.
 
 ### Unresolved
+
 - None.
 
 ---
@@ -122,6 +136,7 @@
 ## QA Report — Task 3 (Tutorial writing quality) — 2026-06-08 02:03 UTC
 
 ### Scope
+
 - Two global builder improvements applied to ALL 26 topics:
   - §1 now renders the first `concept` entry as a lead paragraph (analogy-first)
     instead of a bullet (`conceptMarkdown`).
@@ -135,6 +150,7 @@
   concrete counter-example input, §11 four topic-specific questions.
 
 ### Passed
+
 - Marker check (tsx) over the 7 topics: lead paragraph in §1, numbered §4,
   bold named invariant in §5, "Counter-example" in §9, and §10 still
   non-collapsible — all 7 PASS.
@@ -142,11 +158,13 @@
 - BUILD (4/4), TYPES (3/3), LINT (2/2, max-warnings 0) all green.
 
 ### Failed / Auto-fixed
+
 - A `mistakes`/`recognition` block is shared verbatim by ~20 topics; two Edit
   calls hit multiple matches. Auto-fixed by re-anchoring on each topic's unique
   `templateKeys`/`related` block. Outcome: correct single-topic replacement.
 
 ### Unresolved
+
 - 19 non-mindset topics retain their original (accurate, concise) prose for
   §1–§3/§9. They benefit from the global §1/§4 builder changes but have not had a
   full per-topic tutorial rewrite. Documented as a deliberate scope boundary for
@@ -157,6 +175,7 @@
 ## QA Report — Task 7 (Game Theory topic) — 2026-06-08 02:45 UTC
 
 ### Passed
+
 - New topic `game-theory` in the new "Math Patterns" group, 12 sections.
 - 4 templates (`game_nim_xor`, `game_grundy`, `game_interval_dp`,
   `game_pn_table`), first expanded by default; all compiled with
@@ -168,9 +187,11 @@
 - BUILD/TYPES/LINT all green.
 
 ### Failed / Auto-fixed
+
 - Typo "negition" → "negation" caught and fixed before build.
 
 ### Unresolved
+
 - None. (Problem ratings are best-effort from knowledge — see FINAL_REPORT §8.)
 
 ---
@@ -178,6 +199,7 @@
 ## QA Report — Task 5 (Problem counts + 16 new topics) — 2026-06-08 02:45 UTC
 
 ### Passed (Step B — 16 new topics)
+
 - Added 16 topics: two-pointers-opposite, sliding-window, backtracking,
   hash-map-frequency, sorting-as-a-tool, tree-traversal, graph-traversal,
   union-find, segment-tree-and-fenwick-tree, topological-sort, interval-merging,
@@ -195,6 +217,7 @@
   (host swapped to .cn at render by ProblemList).
 
 ### Passed (Step A — existing topic counts; add/remove authorized by user)
+
 - dp-state-design 7→9 (4/3/2, +2 real Core/Adv DP problems).
 - dp-transition-design 7→9 (4/3/2, +2 Core, retag 1 Challenge→Advanced).
 - binary-search-on-answer 7→6 (2/2/2); monotonic-data-structures 7→5 (3/1/1);
@@ -206,13 +229,15 @@
   (exactly one open template, §10 never collapsible).
 
 ### Failed / Auto-fixed
+
 - Several Edit anchors hit multiple matches because problem IDs/blocks are shared
   across topics; re-anchored on each topic's unique practice array / `why` text.
 
 ### Unresolved / deliberate deviations
+
 - "All other existing topics → 3" was NOT applied to the ~19 foundational
   mindset/enumeration topics: bulk-cutting curated real problems from 7→3 is
-  destructive with little pedagogical gain. The explicit *named* targets in the
+  destructive with little pedagogical gain. The explicit _named_ targets in the
   table were applied; the catch-all reduction was intentionally skipped. See
   FINAL_REPORT §8.
 
@@ -221,6 +246,7 @@
 ## QA Report — Catch-all trim + rating verification — 2026-06-08 03:13 UTC
 
 ### Passed (catch-all trim, Task 5A completion)
+
 - Applied "all other existing topics → 3" to the 18 unnamed original topics
   (constraint-driven-thinking, brute-force-to-optimization, invariant-thinking,
   feasibility-check, state-design, boundary-and-edge-case-thinking,
@@ -234,6 +260,7 @@
 - Total problem links across the 43 pattern topics: 194.
 
 ### Passed (rating verification against authoritative source)
+
 - Fetched the zerotrac contest-rating dataset
   (raw.githubusercontent.com/zerotrac/leetcode_problem_rating) — 902 KB JSON.
 - Cross-checked every practice problem by ID: 109 are contest-rated in zerotrac,
@@ -248,12 +275,14 @@
   authored estimates because no canonical contest rating exists for them.
 
 ### Build / Lint / Types
+
 - `pnpm check-types` (3/3), `pnpm lint` (2/2, max-warnings 0), `pnpm build`
   (4/4) — all green. File reformatted with Prettier.
 - Final integrity sweep: all 43 pattern topics pass the collapsible contract,
   5:3:2 splits, and §10-non-collapsible assertions.
 
 ### Unresolved
+
 - None.
 
 ---
@@ -264,16 +293,17 @@ The 83 classic / non-contest problems have no zerotrac contest rating, so a
 representative sample was spot-checked against community sources to confirm the
 `difficulty` labels and the sensibleness of the authored `rating` estimates.
 
-| ID | Problem | Our difficulty / est. rating | Community signal | Source |
-| --: | --- | --- | --- | --- |
-| 1 | Two Sum | Easy / 1200 | Easy, ~57% acceptance, Blind 75 staple | [leetcode](https://leetcode.com/problems/two-sum/), [neetcode](https://neetcode.io/problems/two-integer-sum/question) |
-| 15 | 3Sum | Medium / 1550 | Medium, ~mid-30s% acceptance, Blind 75 | [leetcode](https://leetcode.com/problems/3sum/), [neetcode](https://neetcode.io/solutions/3sum) |
-| 200 | Number of Islands | Medium / 1500 | Medium, ~42.6% acceptance, NeetCode 150 | [leetcode](https://leetcode.com/problems/number-of-islands/), [neetcode](https://neetcode.io/problems/count-number-of-islands) |
-| 23 | Merge k Sorted Lists | Hard / 1900 | Hard, ~59.7% acceptance, Blind 75 + NeetCode 150 | [leetcode](https://leetcode.com/problems/merge-k-sorted-lists/), [algomap](https://algomap.io/problems/merge-k-sorted-lists) |
-| 42 | Trapping Rain Water | Hard / 1900 | Hard, top interview problem | [leetcode](https://leetcode.com/problems/trapping-rain-water/), [neetcode](https://neetcode.io/solutions/trapping-rain-water) |
-| 297 | Serialize and Deserialize Binary Tree | Hard / 1900 | Hard, BFS/DFS classic | [leetcode](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/), [walkccc](https://walkccc.me/LeetCode/problems/297/) |
+|  ID | Problem                               | Our difficulty / est. rating | Community signal                                 | Source                                                                                                                                 |
+| --: | ------------------------------------- | ---------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+|   1 | Two Sum                               | Easy / 1200                  | Easy, ~57% acceptance, Blind 75 staple           | [leetcode](https://leetcode.com/problems/two-sum/), [neetcode](https://neetcode.io/problems/two-integer-sum/question)                  |
+|  15 | 3Sum                                  | Medium / 1550                | Medium, ~mid-30s% acceptance, Blind 75           | [leetcode](https://leetcode.com/problems/3sum/), [neetcode](https://neetcode.io/solutions/3sum)                                        |
+| 200 | Number of Islands                     | Medium / 1500                | Medium, ~42.6% acceptance, NeetCode 150          | [leetcode](https://leetcode.com/problems/number-of-islands/), [neetcode](https://neetcode.io/problems/count-number-of-islands)         |
+|  23 | Merge k Sorted Lists                  | Hard / 1900                  | Hard, ~59.7% acceptance, Blind 75 + NeetCode 150 | [leetcode](https://leetcode.com/problems/merge-k-sorted-lists/), [algomap](https://algomap.io/problems/merge-k-sorted-lists)           |
+|  42 | Trapping Rain Water                   | Hard / 1900                  | Hard, top interview problem                      | [leetcode](https://leetcode.com/problems/trapping-rain-water/), [neetcode](https://neetcode.io/solutions/trapping-rain-water)          |
+| 297 | Serialize and Deserialize Binary Tree | Hard / 1900                  | Hard, BFS/DFS classic                            | [leetcode](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/), [walkccc](https://walkccc.me/LeetCode/problems/297/) |
 
 ### Findings
+
 - Every spot-checked `difficulty` label matches the official/community label.
 - The authored estimates are consistently ordered by difficulty band
   (Easy ≈ 1200, Medium ≈ 1500–1550, Hard ≈ 1900), matching community perception
@@ -290,22 +320,23 @@ representative sample was spot-checked against community sources to confirm the
 Spot-checked 12 more non-contest problems (18 total now), spread across topics
 and difficulty bands, against community/official sources.
 
-| ID | Problem | Our label | Official/community | Result |
-| --: | --- | --- | --- | --- |
-| 167 | Two Sum II | Medium | Medium (reclassified from Easy; Top Interview 150) | label ✓; rating 1200→1300 (band fit) |
-| 128 | Longest Consecutive Sequence | Medium | Medium (reclassified from Hard, Sep 2021) | ✓ |
-| 124 | Binary Tree Maximum Path Sum | Hard | Hard (~40% acc.) | ✓ |
-| 295 | Find Median from Data Stream | Hard | Hard (51.3% acc., NeetCode 150) | ✓ |
-| 28 | First Occurrence in a String | Easy | Easy | ✓ |
-| 164 | Maximum Gap | Hard | **Medium** (reclassified; widely called hard) | **corrected → Medium, 1850** |
-| 502 | IPO | Hard | Hard (greedy + heap) | ✓ |
-| 486 | Predict the Winner | Medium | Medium (47.9% acc.) | ✓ |
-| 127 | Word Ladder | Hard | Hard | ✓ |
-| 214 | Shortest Palindrome | Hard | Hard | ✓ |
-| 204 | Count Primes | Medium | Medium | ✓ |
-| 79 | Word Search | Medium | Medium | ✓ |
+|  ID | Problem                      | Our label | Official/community                                 | Result                               |
+| --: | ---------------------------- | --------- | -------------------------------------------------- | ------------------------------------ |
+| 167 | Two Sum II                   | Medium    | Medium (reclassified from Easy; Top Interview 150) | label ✓; rating 1200→1300 (band fit) |
+| 128 | Longest Consecutive Sequence | Medium    | Medium (reclassified from Hard, Sep 2021)          | ✓                                    |
+| 124 | Binary Tree Maximum Path Sum | Hard      | Hard (~40% acc.)                                   | ✓                                    |
+| 295 | Find Median from Data Stream | Hard      | Hard (51.3% acc., NeetCode 150)                    | ✓                                    |
+|  28 | First Occurrence in a String | Easy      | Easy                                               | ✓                                    |
+| 164 | Maximum Gap                  | Hard      | **Medium** (reclassified; widely called hard)      | **corrected → Medium, 1850**         |
+| 502 | IPO                          | Hard      | Hard (greedy + heap)                               | ✓                                    |
+| 486 | Predict the Winner           | Medium    | Medium (47.9% acc.)                                | ✓                                    |
+| 127 | Word Ladder                  | Hard      | Hard                                               | ✓                                    |
+| 214 | Shortest Palindrome          | Hard      | Hard                                               | ✓                                    |
+| 204 | Count Primes                 | Medium    | Medium                                             | ✓                                    |
+|  79 | Word Search                  | Medium    | Medium                                             | ✓                                    |
 
 ### Outcome
+
 - 18/18 problems verified. **17 labels already correct**; **1 correction**: 164
   Maximum Gap was reclassified by LeetCode from Hard to Medium — updated
   difficulty to Medium and rating 1900→1850.
@@ -322,10 +353,11 @@ and difficulty bands, against community/official sources.
 To cover the remaining ~62 non-contest problems definitively (rather than one web
 search at a time), fetched LeetCode's official problems API
 (`leetcode.com/api/problems/all/`, 3,957 problems) which carries the official
-difficulty and acceptance rate for *every* problem — contest and classic alike —
+difficulty and acceptance rate for _every_ problem — contest and classic alike —
 and cross-checked all 192 practice blocks by problem ID.
 
 ### Results
+
 - **192/192 blocks matched to a LeetCode problem; 0 not-found; 0 slug mismatches**
   (confirms every slug across the handbook is correct).
 - **14 difficulty mislabels corrected** to the official value (mostly inherited
@@ -348,6 +380,7 @@ and cross-checked all 192 practice blocks by problem ID.
   108 Medium / 76 Hard / 10 Easy. No compound labels remain.
 
 ### Coverage summary
+
 - Difficulty labels: **100% verified against the official LeetCode API.**
 - Ratings: 109 contest problems set to authoritative zerotrac values; the
   remaining classic/non-contest problems keep reasoned estimates (no canonical
@@ -381,6 +414,7 @@ glance instead of decoding the code.
 ## QA Report — Enumeration Taxonomy Practice Problems — 2026-06-08 04:12 UTC
 
 ### Passed
+
 - BUILD: `pnpm build` (4/4) and `pnpm check-types` (3/3) — zero errors.
 - LINT: `pnpm lint` (2/2, `--max-warnings 0`) — zero errors.
 - TABLE STRUCTURE: the Enumeration Viewpoint Taxonomy table now has 5 columns
@@ -402,16 +436,19 @@ glance instead of decoding the code.
 - No content outside the Enumeration Strategy topic was modified.
 
 ### Failed / Auto-fixed
+
 - Cell sort initially placed estimated-rating problems by their estimate; fixed
   so unrated/estimated problems sort first (they are not "known" ratings),
   matching the spec. Re-verified: all 9 cells sortAsc=true.
 
 ### Unresolved / Low-coverage
+
 - **Enumerate the smaller side (small-to-large merging)**: only 2 real problems
   found total — 2003 (representative) + 2421 Number of Good Paths (practice).
   This viewpoint is genuinely rare on LeetCode; logged per spec (< 3).
 
 ### 5:3:2 split (logged, not rebalanced)
+
 - Section 10 after sync: 54 problems → Core 34 / Advanced 11 / Challenge 9.
 - Ideal 5:3:2 for 54 ≈ 27 / 16 / 11. Actual deviates Core-heavy (Core +7,
   Advanced −5): most taxonomy practice problems are sub-2000 (Core), and the 2
@@ -422,15 +459,172 @@ glance instead of decoding the code.
 
 ### Summary table
 
-| Viewpoint | Practice-column problems | New added to Section 10 (incl. rep) |
-| --- | ---: | ---: |
-| Enumerate the owner / contributor | 4 | 5 |
-| Enumerate the right endpoint | 7 | 8 |
-| Enumerate the pivot / middle | 5 | 6 |
-| Enumerate the contribution unit | 5 | 6 |
-| Enumerate the value domain | 7 | 8 |
-| Enumerate the cut point | 5 | 6 |
-| Enumerate the smaller side | 1 | 2 |
-| Enumerate bit by bit | 3 | 4 |
-| Enumerate the trigger / event | 5 | 6 |
-| **Total** | **42** | **51** |
+| Viewpoint                         | Practice-column problems | New added to Section 10 (incl. rep) |
+| --------------------------------- | -----------------------: | ----------------------------------: |
+| Enumerate the owner / contributor |                        4 |                                   5 |
+| Enumerate the right endpoint      |                        7 |                                   8 |
+| Enumerate the pivot / middle      |                        5 |                                   6 |
+| Enumerate the contribution unit   |                        5 |                                   6 |
+| Enumerate the value domain        |                        7 |                                   8 |
+| Enumerate the cut point           |                        5 |                                   6 |
+| Enumerate the smaller side        |                        1 |                                   2 |
+| Enumerate bit by bit              |                        3 |                                   4 |
+| Enumerate the trigger / event     |                        5 |                                   6 |
+| **Total**                         |                   **42** |                              **51** |
+
+---
+
+## QA Report — Follow-up Task 1 (Minimum 15 problems per chapter) — 2026-06-08 07:30 UTC
+
+### Passed
+
+- BUILD: `pnpm build` (4/4) — handbook pages prerendered; the module-load
+  `assertSectionsAreValid` guard passed (Section 10 never collapsible).
+- BUILD: `pnpm check-types` (3/3) — zero errors.
+- LINT: `pnpm lint` (2/2, `--max-warnings 0`) — zero errors.
+- PROBLEM COUNTS: every one of the 43 pattern chapters now has ≥15 problems
+  (42 expanded to exactly 15; enumeration-strategy already at 54, untouched).
+  Audited by parsing the rendered Section 10 of every topic. Below-15 count: 0.
+- 5:3:2 SPLIT: every expanded chapter is 8 Core / 4 Advanced / 3 Challenge.
+  For total 15 the ideal 5:3:2 is 7.5 / 4.5 / 3.0, so 8/4/3 is within the ±1
+  rounding tolerance on every tier. enumeration-strategy 34/11/9 (total 54)
+  is also within ±1 of 27/16/11.
+- NO INVENTED PROBLEMS: all 439 added problems were selected from the official
+  LeetCode GraphQL problem set (`questionList` by topic tag — id, title, slug,
+  difficulty, paidOnly all authoritative). Ratings come from the zerotrac
+  contest-rating dataset; 10 added problems are non-contest classics shown
+  WITHOUT a rating (rating 0 → "Unrated" badge, per "rating if known").
+- NO PREMIUM: every added problem is non-`paidOnly`, so all leetcode.cn links
+  resolve.
+- NO DUPLICATION: the 439 added problems are globally distinct and none collide
+  with any problem already present in any chapter (0 cross-chapter duplicates).
+- TIERING: per chapter, problems are banded by contest rating — Core picks
+  rated-low/representative (task priority #1: "known contest ratings"),
+  Advanced ~1900–2300, Challenge 2300+ — so tiers track difficulty.
+- LINKS: authored as `leetcode.com/problems/<slug>`; ProblemList swaps the host
+  to leetcode.cn from site settings (unchanged render path).
+
+### Failed / Auto-fixed
+
+- sweep-line shortfall (auto-fixed): the `line-sweep` LeetCode tag has only 8
+  problems and most were already used, so the tag pool could not reach 15.
+  LeetCode under-tags sweep-line problems. Fixed by adding a curated SEED list
+  of genuine sweep-line / interval problems (Skyline, My Calendar I, Falling
+  Squares, Interval List Intersections, Corporate Flight Bookings, Points That
+  Intersect With Cars, Max Profit in Job Scheduling, Separate Squares II, …),
+  each verified to exist in the LeetCode DB. Result: 8/4/3, all genuine
+  sweep-line problems. No shortfall remains.
+- Initial selection bug (auto-fixed pre-write): a string/number id mismatch made
+  every problem look unrated, collapsing the rating bands. Caught in a dry run
+  (all 433 showed rating 0); fixed the numeric coercion and re-ran — ratings
+  populated, 0 reused, bands correct — before any file write.
+
+### Unresolved
+
+- None. No chapter required a shortfall log; all 43 reach ≥15 with real problems.
+
+### Summary table (Chapter | Previous count | New count | Core | Advanced | Challenge)
+
+| Chapter                         | Previous count | New count | Core | Advanced | Challenge |
+| ------------------------------- | -------------: | --------: | ---: | -------: | --------: |
+| backtracking                    |             12 |        15 |    8 |        4 |         3 |
+| binary-search-on-answer         |              6 |        15 |    8 |        4 |         3 |
+| boundary-and-edge-case-thinking |              3 |        15 |    8 |        4 |         3 |
+| brute-force-to-optimization     |              3 |        15 |    8 |        4 |         3 |
+| constraint-driven-thinking      |              3 |        15 |    8 |        4 |         3 |
+| contribution-counting           |              3 |        15 |    8 |        4 |         3 |
+| coordinate-compression          |              3 |        15 |    8 |        4 |         3 |
+| cut-property                    |              3 |        15 |    8 |        4 |         3 |
+| difference-array                |              4 |        15 |    8 |        4 |         3 |
+| divide-and-conquer              |              3 |        15 |    8 |        4 |         3 |
+| dp-state-design                 |              9 |        15 |    8 |        4 |         3 |
+| dp-transition-design            |              9 |        15 |    8 |        4 |         3 |
+| enumerate-pivot-middle          |              3 |        15 |    8 |        4 |         3 |
+| enumeration-strategy            |             54 |        54 |   34 |       11 |         9 |
+| exchange-argument               |              3 |        15 |    8 |        4 |         3 |
+| feasibility-check               |              3 |        15 |    8 |        4 |         3 |
+| fix-right-maintain-left         |              3 |        15 |    8 |        4 |         3 |
+| game-theory                     |              3 |        15 |    8 |        4 |         3 |
+| graph-traversal                 |             10 |        15 |    8 |        4 |         3 |
+| greedy-construction             |              3 |        15 |    8 |        4 |         3 |
+| greedy-stays-ahead              |              3 |        15 |    8 |        4 |         3 |
+| hash-map-frequency              |              9 |        15 |    8 |        4 |         3 |
+| heap-patterns                   |              5 |        15 |    8 |        4 |         3 |
+| interval-merging                |              5 |        15 |    8 |        4 |         3 |
+| invariant-thinking              |              3 |        15 |    8 |        4 |         3 |
+| loop-invariant                  |              3 |        15 |    8 |        4 |         3 |
+| monotonic-data-structures       |              5 |        15 |    8 |        4 |         3 |
+| number-theory-and-math          |              3 |        15 |    8 |        4 |         3 |
+| offline-query-processing        |              3 |        15 |    8 |        4 |         3 |
+| prefix-suffix-decomposition     |              4 |        15 |    8 |        4 |         3 |
+| proof-techniques                |              3 |        15 |    8 |        4 |         3 |
+| segment-tree-and-fenwick-tree   |              4 |        15 |    8 |        4 |         3 |
+| sliding-window                  |              6 |        15 |    8 |        4 |         3 |
+| sorting-as-a-tool               |              5 |        15 |    8 |        4 |         3 |
+| state-compression               |              3 |        15 |    8 |        4 |         3 |
+| state-design                    |              3 |        15 |    8 |        4 |         3 |
+| string-matching                 |              3 |        15 |    8 |        4 |         3 |
+| sweep-line                      |              5 |        15 |    8 |        4 |         3 |
+| topological-sort                |              3 |        15 |    8 |        4 |         3 |
+| tree-traversal                  |             11 |        15 |    8 |        4 |         3 |
+| trie                            |              3 |        15 |    8 |        4 |         3 |
+| two-pointers-opposite           |              6 |        15 |    8 |        4 |         3 |
+| union-find                      |              4 |        15 |    8 |        4 |         3 |
+
+> 42 chapters expanded to 15; enumeration-strategy (54) left untouched per spec
+> ("Chapters that already have 15 or more problems are not touched").
+> The ML Performance System Design topic has no Section 10 problem list and is
+> out of scope.
+
+---
+
+## QA Report — Follow-up Task 2 (Interview-frequency ranking + badges) — 2026-06-08 08:10 UTC
+
+### Passed
+
+- BUILD: `pnpm build` (4/4) — `/handbook/interview-frequency` prerendered as a
+  Static route; all 44 `/handbook/[topic]` pages prerendered.
+- BUILD: `pnpm check-types` (3/3) — zero errors. The new required
+  `interviewFrequency` field on `HandbookTopic` forced every topic (pattern
+  topics via `createTopic`, plus the ML topic) to set a value — a compile-time
+  guarantee of no missing/undefined values.
+- LINT: `pnpm lint` (2/2, `--max-warnings 0`) — zero errors.
+- STEP A — RANKING: all 44 chapters ranked by a documented composite
+  `0.40*S1 + 0.30*S2 + 0.30*S3` (company-frequency 40% synthesized 0-100;
+  contest-band 30% objective = #Section-10 problems rated 1700-2000, normalized;
+  study-guide prominence 30% synthesized from NeetCode/Grind/Blind/Prashad).
+  Tiers High=1-5, Medium=6-15, Low=16+ → 5/10/29. Full ranked table + rationale
+  documented in `NOTES.md` ("Interview Frequency Ranking"). Single source of
+  truth: `content/interview-frequency.ts`.
+- STEP B — RANKING PAGE: route `/handbook/interview-frequency` renders without
+  errors (verified in prerendered HTML). Intro paragraph states the three
+  sources and weights. Table columns Rank | Chapter (link) | Frequency (badge) |
+  Rationale, sorted by rank ascending. All 44 chapter links resolve to real
+  topic pages (`/lc-rating/handbook/<slug>`, all 44 distinct & valid). The page
+  is linked from the handbook index hero ("Chapters by interview frequency →")
+  and from every chapter's frequency badge.
+- STEP C — PER-CHAPTER BADGE: every chapter page shows a badge next to the title
+  via the shared `InterviewFrequencyBadge`. Verified in prerendered HTML on one
+  of each tier: dp-state-design → "Interview Frequency: High" (emerald/green),
+  tree-traversal → Medium (amber/yellow), game-theory → Low (zinc/gray). The
+  ranking page uses the SAME component, so colors match exactly.
+- DATA-LAYER COMPLETENESS: a verification pass over all 44 topics found 0
+  missing, 0 mismatches vs. the ranking, and 0 ranking slugs without a topic.
+- SECTION 10: unchanged by Task 2 (the module-load guard still passes —
+  Section 10 remains non-collapsible). No problems were added or removed.
+- NO NEW DEPENDENCIES: reused existing shadcn/ui Badge + Table and Tailwind.
+
+### Failed / Auto-fixed
+
+- None.
+
+### Unresolved
+
+- The 40% company-frequency (S1) and 30% study-guide (S3) inputs are synthesized
+  prominence scores (LeetCode's per-company "asked by" frequency data is premium-
+  gated and not freely fetchable). The 30% contest-band component (S2) is fully
+  objective from the repo's rating data. Methodology, weights, and per-chapter
+  rationale are documented in NOTES.md for transparency/reproducibility.
+- enumeration-strategy ranks Medium largely because its 54-problem Section 10
+  yields the highest contest-band count (12 → S2=100); this faithfully applies
+  the specified "more 1700-2000 problems ⇒ higher frequency" rule (30% weight).

@@ -11,6 +11,9 @@ export const mlPerformanceSystemDesign: HandbookTopic = {
     "A practical framework for ML performance system design interviews: workloads, bottlenecks, GPU scheduling, profiling, optimization, and tradeoffs.",
   icon: "Gauge",
   group: "ML Performance System Design",
+  // Specialized ML-infra interview track, outside the standard coding-pattern
+  // frequency lists (ranked Low in content/interview-frequency.ts).
+  interviewFrequency: "Low",
   sections: [
     {
       id: "interview-goal",

@@ -35,6 +35,9 @@ export type HandbookGroup =
   | "Advanced Mixed Patterns"
   | "ML Performance System Design";
 
+/** Interview-frequency tier for a chapter (see content/interview-frequency.ts). */
+export type InterviewFrequency = "High" | "Medium" | "Low";
+
 /** A full topic lecture. */
 export interface HandbookTopic {
   /** URL segment, e.g. "binary-search". */
@@ -47,6 +50,8 @@ export interface HandbookTopic {
   icon: string;
   /** Overview grouping. */
   group: HandbookGroup;
+  /** How often this pattern appears in real interviews (High/Medium/Low). */
+  interviewFrequency: InterviewFrequency;
   /** Ordered lecture sections. */
   sections: HandbookSection[];
 }

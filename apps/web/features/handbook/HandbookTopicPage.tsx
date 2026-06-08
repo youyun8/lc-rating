@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronRight, List } from "lucide-react";
 import { HandbookSectionBody } from "./HandbookSectionBody";
+import { InterviewFrequencyBadge } from "./InterviewFrequencyBadge";
 import { cn } from "@/lib/utils";
 import { resolveHandbookIcon } from "./icons";
 import type { HandbookTopic, HandbookTopicRef } from "./model";
@@ -69,9 +70,17 @@ export function HandbookTopicPage({
               <Icon className="h-6 w-6" />
             </span>
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                {topic.title}
-              </h1>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                  {topic.title}
+                </h1>
+                <Link href="/handbook/interview-frequency">
+                  <InterviewFrequencyBadge
+                    frequency={topic.interviewFrequency}
+                    withLabel
+                  />
+                </Link>
+              </div>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {topic.tagline}
               </p>

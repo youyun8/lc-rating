@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { BookOpen, GraduationCap, Search } from "lucide-react";
+import { BarChart3, BookOpen, GraduationCap, Search } from "lucide-react";
 import {
   HANDBOOK_GROUP_DESCRIPTIONS,
   HANDBOOK_TOPICS,
@@ -103,6 +103,14 @@ export default function HandbookOverview() {
                   constraints, invariants, proof intuition, C++17 templates, and
                   focused practice problems.
                 </p>
+                <Link
+                  href="/handbook/interview-frequency"
+                  className="inline-flex items-center gap-2 rounded-xl border border-border/60 bg-card px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  <BarChart3 className="h-4 w-4" />
+                  Chapters by interview frequency
+                  <span aria-hidden>→</span>
+                </Link>
               </div>
               <div className="flex flex-wrap gap-3 self-start">
                 <div className="rounded-2xl border border-border/60 bg-card px-4 py-3 text-center shadow-sm">
