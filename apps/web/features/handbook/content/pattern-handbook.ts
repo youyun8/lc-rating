@@ -1604,6 +1604,367 @@ const TEMPLATE_META: Record<string, TemplateMeta> = {
 };
 
 /**
+ * What each template implements, so readers know it at a glance. A template is
+ * either `lc` (its code is essentially the solution to a specific LeetCode
+ * problem — rendered as a linked "Based on" reference) or `pattern` (a generic
+ * technique — rendered as a detailed "Pattern" description). IDs/slugs/titles
+ * were taken from the official LeetCode problems API.
+ */
+const TEMPLATE_BASIS: Record<
+  string,
+  { lc?: { id: number; slug: string; title: string }; pattern?: string }
+> = {
+  brute_force_to_prefix: {
+    lc: {
+      id: 1590,
+      slug: "make-sum-divisible-by-p",
+      title: "Make Sum Divisible by P",
+    },
+  },
+  answer_search: {
+    lc: {
+      id: 1011,
+      slug: "capacity-to-ship-packages-within-d-days",
+      title: "Capacity To Ship Packages Within D Days",
+    },
+  },
+  contribution_mono: {
+    lc: {
+      id: 907,
+      slug: "sum-of-subarray-minimums",
+      title: "Sum of Subarray Minimums",
+    },
+  },
+  longest_window: {
+    lc: {
+      id: 1004,
+      slug: "max-consecutive-ones-iii",
+      title: "Max Consecutive Ones III",
+    },
+  },
+  shortest_window: {
+    lc: {
+      id: 209,
+      slug: "minimum-size-subarray-sum",
+      title: "Minimum Size Subarray Sum",
+    },
+  },
+  exactly_k_distinct: {
+    lc: {
+      id: 992,
+      slug: "subarrays-with-k-different-integers",
+      title: "Subarrays with K Different Integers",
+    },
+  },
+  bitwise_or_window: {
+    lc: {
+      id: 3097,
+      slug: "shortest-subarray-with-or-at-least-k-ii",
+      title: "Shortest Subarray With OR at Least K II",
+    },
+  },
+  difference_matrix: {
+    lc: {
+      id: 2536,
+      slug: "increment-submatrices-by-one",
+      title: "Increment Submatrices by One",
+    },
+  },
+  monotonic_deque: {
+    lc: {
+      id: 239,
+      slug: "sliding-window-maximum",
+      title: "Sliding Window Maximum",
+    },
+  },
+  coordinate_compression_fenwick: {
+    lc: {
+      id: 315,
+      slug: "count-of-smaller-numbers-after-self",
+      title: "Count of Smaller Numbers After Self",
+    },
+  },
+  exchange_greedy: {
+    lc: {
+      id: 435,
+      slug: "non-overlapping-intervals",
+      title: "Non-overlapping Intervals",
+    },
+  },
+  greedy_lexicographic: {
+    lc: {
+      id: 2030,
+      slug: "smallest-k-length-subsequence-with-occurrences-of-a-letter",
+      title: "Smallest K-Length Subsequence With Occurrences of a Letter",
+    },
+  },
+  remaining_sum_construction: {
+    lc: {
+      id: 1663,
+      slug: "smallest-string-with-a-given-numeric-value",
+      title: "Smallest String With A Given Numeric Value",
+    },
+  },
+  frequency_construction: {
+    lc: { id: 767, slug: "reorganize-string", title: "Reorganize String" },
+  },
+  state_bfs: {
+    lc: {
+      id: 847,
+      slug: "shortest-path-visiting-all-nodes",
+      title: "Shortest Path Visiting All Nodes",
+    },
+  },
+  bitmask_dp: {
+    lc: {
+      id: 1879,
+      slug: "minimum-xor-sum-of-two-arrays",
+      title: "Minimum XOR Sum of Two Arrays",
+    },
+  },
+  sweep_difference: {
+    lc: {
+      id: 2251,
+      slug: "number-of-flowers-in-full-bloom",
+      title: "Number of Flowers in Full Bloom",
+    },
+  },
+  sweep_heap: {
+    lc: { id: 253, slug: "meeting-rooms-ii", title: "Meeting Rooms II" },
+  },
+  dp_state: {
+    lc: {
+      id: 1937,
+      slug: "maximum-number-of-points-with-cost",
+      title: "Maximum Number of Points with Cost",
+    },
+  },
+  dp_transition: {
+    lc: {
+      id: 1547,
+      slug: "minimum-cost-to-cut-a-stick",
+      title: "Minimum Cost to Cut a Stick",
+    },
+  },
+  exchange_swap_sort: {
+    lc: { id: 179, slug: "largest-number", title: "Largest Number" },
+  },
+  dp_state_machine: {
+    lc: {
+      id: 714,
+      slug: "best-time-to-buy-and-sell-stock-with-transaction-fee",
+      title: "Best Time to Buy and Sell Stock with Transaction Fee",
+    },
+  },
+  game_interval_dp: {
+    lc: { id: 486, slug: "predict-the-winner", title: "Predict the Winner" },
+  },
+  two_pointers_opposite: {
+    lc: {
+      id: 167,
+      slug: "two-sum-ii-input-array-is-sorted",
+      title: "Two Sum II - Input Array Is Sorted",
+    },
+  },
+  three_sum: { lc: { id: 15, slug: "3sum", title: "3Sum" } },
+  backtrack_permute: {
+    lc: { id: 46, slug: "permutations", title: "Permutations" },
+  },
+  backtrack_subsets: { lc: { id: 78, slug: "subsets", title: "Subsets" } },
+  backtrack_combination_sum: {
+    lc: { id: 39, slug: "combination-sum", title: "Combination Sum" },
+  },
+  hashmap_two_sum: { lc: { id: 1, slug: "two-sum", title: "Two Sum" } },
+  prefix_count_hashmap: {
+    lc: {
+      id: 560,
+      slug: "subarray-sum-equals-k",
+      title: "Subarray Sum Equals K",
+    },
+  },
+  tree_dfs: {
+    lc: {
+      id: 543,
+      slug: "diameter-of-binary-tree",
+      title: "Diameter of Binary Tree",
+    },
+  },
+  tree_bfs_levels: {
+    lc: {
+      id: 102,
+      slug: "binary-tree-level-order-traversal",
+      title: "Binary Tree Level Order Traversal",
+    },
+  },
+  grid_dfs: {
+    lc: { id: 200, slug: "number-of-islands", title: "Number of Islands" },
+  },
+  multi_source_bfs: {
+    lc: { id: 994, slug: "rotting-oranges", title: "Rotting Oranges" },
+  },
+  topo_kahn: {
+    lc: { id: 210, slug: "course-schedule-ii", title: "Course Schedule II" },
+  },
+  topo_dfs: {
+    lc: { id: 207, slug: "course-schedule", title: "Course Schedule" },
+  },
+  merge_intervals: {
+    lc: { id: 56, slug: "merge-intervals", title: "Merge Intervals" },
+  },
+  kmp: {
+    lc: {
+      id: 28,
+      slug: "find-the-index-of-the-first-occurrence-in-a-string",
+      title: "Find the Index of the First Occurrence in a String",
+    },
+  },
+  trie_pointer: {
+    lc: {
+      id: 208,
+      slug: "implement-trie-prefix-tree",
+      title: "Implement Trie (Prefix Tree)",
+    },
+  },
+  trie_xor: {
+    lc: {
+      id: 421,
+      slug: "maximum-xor-of-two-numbers-in-an-array",
+      title: "Maximum XOR of Two Numbers in an Array",
+    },
+  },
+  two_heap_median: {
+    lc: {
+      id: 295,
+      slug: "find-median-from-data-stream",
+      title: "Find Median from Data Stream",
+    },
+  },
+  merge_k_heap: {
+    lc: { id: 23, slug: "merge-k-sorted-lists", title: "Merge k Sorted Lists" },
+  },
+  sieve: { lc: { id: 204, slug: "count-primes", title: "Count Primes" } },
+  quickselect: {
+    lc: {
+      id: 215,
+      slug: "kth-largest-element-in-an-array",
+      title: "Kth Largest Element in an Array",
+    },
+  },
+  greedy_builder: {
+    pattern:
+      "Greedy lexicographic construction: try the smallest candidate at each position and accept it only if a feasibility check proves the remaining positions can still complete a valid answer.",
+  },
+  constraint_scan: {
+    pattern:
+      "Counts subarrays whose running additive cost stays within a limit by sliding a window whose left edge only moves forward (the 'at most' counting trick).",
+  },
+  loop_invariant_binary_search: {
+    pattern:
+      "The lower_bound idiom: half-open binary search over [low, high) returning the first index where a monotone predicate becomes true.",
+  },
+  enumerate_middle: {
+    pattern:
+      "Counts increasing triples by fixing the middle element and using two Fenwick trees for 'smaller to the left' and 'greater to the right' (the technique behind LeetCode 2179 / 2552).",
+  },
+  subset_enumeration: {
+    pattern:
+      "Submask-sum DP: for each mask, iterate its submasks via `submask = (submask - 1) & mask` (O(3^n)) to combine a chosen submask with its complement.",
+  },
+  pair_contribution: {
+    pattern:
+      "Sums a quantity over all pairs after sorting: each element's contribution is `i*nums[i] - prefixSum` (the sorted-pairs trick behind LeetCode 1685).",
+  },
+  prefix_contribution: {
+    pattern:
+      "Prefix-max / suffix-min split scan: precompute the running max from the left and min from the right, then evaluate every cut point in O(1) (e.g. LeetCode 915).",
+  },
+  at_most_k_distinct: {
+    pattern:
+      "Sliding-window helper counting subarrays with at most k distinct values; subtracting two such counts yields exactly-k (e.g. LeetCode 340 / 992).",
+  },
+  prefix_suffix_counts: {
+    pattern:
+      "Counts x..x patterns by fixing the middle index and multiplying matching prefix and suffix character counts (technique behind LeetCode 1930).",
+  },
+  difference_array: {
+    pattern:
+      "Difference array: apply many range-add updates as +d at l and -d at r+1, then take a prefix sum to materialize the final array (e.g. LeetCode 1109).",
+  },
+  monotonic_stack: {
+    pattern:
+      "Finds the next greater element for each position using a decreasing monotonic stack (basis for LeetCode 496 / 503 / 739).",
+  },
+  interval_cover_greedy: {
+    pattern:
+      "Minimum intervals to cover [0, target]: repeatedly jump to the farthest right end reachable from the current coverage (e.g. LeetCode 1024 / 45).",
+  },
+  mst_kruskal: {
+    pattern:
+      "Kruskal's MST: sort edges by weight and add each that joins two components via union-find (the cut property; e.g. LeetCode 1584 / 1135).",
+  },
+  offline_fenwick: {
+    pattern:
+      "Offline range-count queries: sort values and queries by a threshold, insert values into a Fenwick tree as the threshold grows, answer each as a prefix range.",
+  },
+  sweep_events: {
+    pattern:
+      "Event-sort sweep for peak concurrency: emit +1/-1 events at interval ends, sort by coordinate, and track the running maximum (e.g. LeetCode 253).",
+  },
+  sweep_compressed_fenwick: {
+    pattern:
+      "Coordinate-compressed sweep: turn each interval into +1/-1 range-add events on a Fenwick tree over compressed coordinates, then read coverage at query points.",
+  },
+  coordinate_compress: {
+    pattern:
+      "Coordinate compression: map arbitrary values to dense ranks 0..m-1 via sort + unique + lower_bound so they can index counting arrays or Fenwick trees.",
+  },
+  mst_prim: {
+    pattern:
+      "Prim's MST: grow the tree from a seed node, pulling the lightest edge crossing the cut from a min-heap (the cut property from the node side; e.g. LeetCode 1584).",
+  },
+  dp_knapsack: {
+    pattern:
+      "0/1 knapsack: each item used at most once; iterating capacity downward ensures each item updates each capacity state only once (e.g. LeetCode 416 / 474).",
+  },
+  game_nim_xor: {
+    pattern:
+      "Multi-pile Nim winner test: the player to move wins iff the XOR of all pile sizes is nonzero (Sprague-Grundy applied to Nim).",
+  },
+  game_grundy: {
+    pattern:
+      "Sprague-Grundy values: g(state) = mex of reachable states' Grundy values (memoized); XOR independent components to decide the overall winner.",
+  },
+  game_pn_table: {
+    pattern:
+      "P/N position table for a small single-pile take-away game (Bash / Divisor games): a state is winning iff some move reaches a losing (P) state.",
+  },
+  z_function: {
+    pattern:
+      "Z-function: z[i] is the length of the longest substring from i matching a prefix of the string, built via the rolling Z-box in O(n).",
+  },
+  union_find: {
+    pattern:
+      "Disjoint Set Union with path compression + union by rank: near-O(alpha(n)) connectivity and component counting under incremental unions (e.g. LeetCode 547 / 684).",
+  },
+  segment_tree_lazy: {
+    pattern:
+      "Segment tree with lazy propagation for range-add + range-sum; lazy tags defer updates to children until a node is split (generalizes LeetCode 307 to range updates).",
+  },
+  fast_pow: {
+    pattern:
+      "Binary exponentiation: compute base^exp (mod m) in O(log exp) by squaring the base and multiplying on each set bit of the exponent.",
+  },
+  fenwick_basic: {
+    pattern:
+      "Fenwick (binary indexed) tree: point updates and prefix/range sums in O(log n) using lowbit jumps (e.g. LeetCode 307).",
+  },
+  merge_sort_count: {
+    pattern:
+      "Counts inversions while merge-sorting: when a right-half element is taken, all remaining left-half elements form inversions with it (basis for LeetCode 315 / 493).",
+  },
+};
+
+/**
  * The single, unified collapsible primitive for the whole handbook. Every
  * collapsible block (templates, variants, checklist, related topics, proof
  * sketch, taxonomy worked examples) is emitted through this helper so the
@@ -7071,10 +7432,18 @@ function templateMarkdown(keys: string[]): string {
     .map((key, index) => {
       const template = TEMPLATES[key];
       const meta = TEMPLATE_META[key];
-      if (!template || !meta) {
-        throw new Error(`Missing handbook template or meta: ${key}`);
+      const basis = TEMPLATE_BASIS[key];
+      if (!template || !meta || !basis) {
+        throw new Error(`Missing handbook template, meta, or basis: ${key}`);
       }
+      // Tell the reader exactly what the code implements: a linked LeetCode
+      // reference when it solves one problem, or a detailed pattern description.
+      const basisLine = basis.lc
+        ? `_Based on:_ [LeetCode ${basis.lc.id}. ${basis.lc.title}](https://leetcode.cn/problems/${basis.lc.slug}/)`
+        : `_Pattern:_ ${basis.pattern}`;
       const body = [
+        basisLine,
+        "",
         `_When to use:_ ${meta.whenToUse}`,
         "",
         "```cpp",

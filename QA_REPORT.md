@@ -353,3 +353,25 @@ and cross-checked all 192 practice blocks by problem ID.
   remaining classic/non-contest problems keep reasoned estimates (no canonical
   numeric rating exists), with 18 spot-checked against community sources.
 - BUILD/TYPES/LINT all green after corrections; file Prettier-formatted.
+
+---
+
+## Template provenance ("Based on" / "Pattern") — 2026-06-08
+
+Each C++17 template now states what it implements, so readers recognize it at a
+glance instead of decoding the code.
+
+- Added a `TEMPLATE_BASIS` map (one entry per template) and rendered a line in
+  every template body, just under the trigger:
+  - **`_Based on:_ [LeetCode N. Title](https://leetcode.cn/problems/<slug>/)`**
+    for templates whose code is essentially the solution to one LeetCode problem
+    (59 rendered blocks).
+  - **`_Pattern:_ <detailed description>`** for generic-technique templates
+    (42 rendered blocks), each describing what the code does and citing the
+    representative LeetCode problems behind the technique.
+- Coverage: all 72 template keys have a basis entry; across topics, 101 rendered
+  template blocks, 0 missing a basis line.
+- The 44 distinct LeetCode IDs/slugs/titles were generated directly from the
+  official LeetCode problems API, then validated — 0 invalid slugs.
+- Links use leetcode.cn per the content guideline.
+- BUILD/TYPES/LINT all green; file Prettier-formatted.
