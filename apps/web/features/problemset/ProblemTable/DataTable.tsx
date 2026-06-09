@@ -59,10 +59,8 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
       highlightKey={highlightKey}
       minWidth="min-w-[760px]"
       applySizeStyles
-      headerClassName="flex items-center justify-center text-xs font-normal tracking-wider text-lime-900 dark:text-lime-100"
-      headerBorderClassName="border-b border-lime-200/80 bg-lime-50/80 dark:border-lime-900/60 dark:bg-lime-950/30"
-      cellBorderClassName="border-b border-lime-100/80 align-middle dark:border-lime-900/40"
-      rowClassName="transition-colors hover:bg-lime-50/70 dark:hover:bg-lime-950/25"
+      headerClassName="flex items-center justify-center text-xs font-medium tracking-wide text-muted-foreground"
+      cellBorderClassName="align-middle"
     />
   );
 });

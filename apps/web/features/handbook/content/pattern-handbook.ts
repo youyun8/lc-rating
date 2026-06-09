@@ -1995,6 +1995,386 @@ function taxonomyExample(title: string, prose: string, code: string): string {
   );
 }
 
+/** One curated practice problem for an enumeration viewpoint. */
+interface TaxonomyPracticeProblem {
+  id: number;
+  title: string;
+  slug: string;
+  /** Zerotrac rating; omit when unknown — ProblemList backfills it from problem data. */
+  rating?: number;
+  tier: "Core" | "Advanced" | "Challenge";
+}
+
+/**
+ * Practice problems for the Enumeration Viewpoint Taxonomy, grouped by the
+ * viewpoint they train. Each group is emitted as a `| ID | Problem | Rating |
+ * Tier |` table (see {@link taxonomyPracticeTable}) so HandbookSectionBody
+ * upgrades it into an interactive ProblemList — one table per viewpoint, with
+ * progress tracking, EN/CN links, rating pills, and the tier as a chip.
+ */
+const ENUMERATION_TAXONOMY_PRACTICE: {
+  viewpoint: string;
+  problems: TaxonomyPracticeProblem[];
+}[] = [
+  {
+    viewpoint: "Enumerate the owner / contributor",
+    problems: [
+      {
+        id: 828,
+        title: "Count Unique Characters of All Substrings of a Given String",
+        slug: "count-unique-characters-of-all-substrings-of-a-given-string",
+        rating: 2034,
+        tier: "Advanced",
+      },
+      {
+        id: 1856,
+        title: "Maximum Subarray Min-Product",
+        slug: "maximum-subarray-min-product",
+        rating: 2051,
+        tier: "Advanced",
+      },
+      {
+        id: 2818,
+        title: "Apply Operations to Maximize Score",
+        slug: "apply-operations-to-maximize-score",
+        rating: 2397,
+        tier: "Challenge",
+      },
+      {
+        id: 2281,
+        title: "Sum of Total Strength of Wizards",
+        slug: "sum-of-total-strength-of-wizards",
+        rating: 2621,
+        tier: "Challenge",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate the right endpoint",
+    problems: [
+      {
+        id: 713,
+        title: "Subarray Product Less Than K",
+        slug: "subarray-product-less-than-k",
+        tier: "Core",
+      },
+      {
+        id: 2799,
+        title: "Count Complete Subarrays in an Array",
+        slug: "count-complete-subarrays-in-an-array",
+        rating: 1398,
+        tier: "Core",
+      },
+      {
+        id: 3325,
+        title: "Count Substrings With K-Frequency Characters I",
+        slug: "count-substrings-with-k-frequency-characters-i",
+        rating: 1455,
+        tier: "Core",
+      },
+      {
+        id: 1248,
+        title: "Count Number of Nice Subarrays",
+        slug: "count-number-of-nice-subarrays",
+        rating: 1624,
+        tier: "Core",
+      },
+      {
+        id: 1358,
+        title: "Number of Substrings Containing All Three Characters",
+        slug: "number-of-substrings-containing-all-three-characters",
+        rating: 1646,
+        tier: "Core",
+      },
+      {
+        id: 2762,
+        title: "Continuous Subarrays",
+        slug: "continuous-subarrays",
+        rating: 1940,
+        tier: "Core",
+      },
+      {
+        id: 992,
+        title: "Subarrays with K Different Integers",
+        slug: "subarrays-with-k-different-integers",
+        rating: 2210,
+        tier: "Advanced",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate the pivot / middle",
+    problems: [
+      {
+        id: 1534,
+        title: "Count Good Triplets",
+        slug: "count-good-triplets",
+        rating: 1279,
+        tier: "Core",
+      },
+      {
+        id: 1685,
+        title: "Sum of Absolute Differences in a Sorted Array",
+        slug: "sum-of-absolute-differences-in-a-sorted-array",
+        rating: 1496,
+        tier: "Core",
+      },
+      {
+        id: 2222,
+        title: "Number of Ways to Select Buildings",
+        slug: "number-of-ways-to-select-buildings",
+        rating: 1657,
+        tier: "Core",
+      },
+      {
+        id: 2179,
+        title: "Count Good Triplets in an Array",
+        slug: "count-good-triplets-in-an-array",
+        rating: 2272,
+        tier: "Advanced",
+      },
+      {
+        id: 2552,
+        title: "Count Increasing Quadruplets",
+        slug: "count-increasing-quadruplets",
+        rating: 2433,
+        tier: "Challenge",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate the contribution unit",
+    problems: [
+      {
+        id: 1814,
+        title: "Count Nice Pairs in an Array",
+        slug: "count-nice-pairs-in-an-array",
+        rating: 1738,
+        tier: "Core",
+      },
+      {
+        id: 2615,
+        title: "Sum of Distances",
+        slug: "sum-of-distances",
+        rating: 1793,
+        tier: "Core",
+      },
+      {
+        id: 2681,
+        title: "Power of Heroes",
+        slug: "power-of-heroes",
+        rating: 2060,
+        tier: "Advanced",
+      },
+      {
+        id: 891,
+        title: "Sum of Subsequence Widths",
+        slug: "sum-of-subsequence-widths",
+        rating: 2183,
+        tier: "Advanced",
+      },
+      {
+        id: 2916,
+        title: "Subarrays Distinct Element Sum of Squares II",
+        slug: "subarrays-distinct-element-sum-of-squares-ii",
+        rating: 2816,
+        tier: "Challenge",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate the value domain (差值、餘數、GCD)",
+    problems: [
+      {
+        id: 523,
+        title: "Continuous Subarray Sum",
+        slug: "continuous-subarray-sum",
+        tier: "Core",
+      },
+      {
+        id: 2748,
+        title: "Number of Beautiful Pairs",
+        slug: "number-of-beautiful-pairs",
+        rating: 1301,
+        tier: "Core",
+      },
+      {
+        id: 2470,
+        title: "Number of Subarrays With LCM Equal to K",
+        slug: "number-of-subarrays-with-lcm-equal-to-k",
+        rating: 1560,
+        tier: "Core",
+      },
+      {
+        id: 2447,
+        title: "Number of Subarrays With GCD Equal to K",
+        slug: "number-of-subarrays-with-gcd-equal-to-k",
+        rating: 1603,
+        tier: "Core",
+      },
+      {
+        id: 974,
+        title: "Subarray Sums Divisible by K",
+        slug: "subarray-sums-divisible-by-k",
+        rating: 1676,
+        tier: "Core",
+      },
+      {
+        id: 2183,
+        title: "Count Array Pairs Divisible by K",
+        slug: "count-array-pairs-divisible-by-k",
+        rating: 2246,
+        tier: "Advanced",
+      },
+      {
+        id: 952,
+        title: "Largest Component Size by Common Factor",
+        slug: "largest-component-size-by-common-factor",
+        rating: 2272,
+        tier: "Advanced",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate the cut point (two-cut / three-segment)",
+    problems: [
+      {
+        id: 410,
+        title: "Split Array Largest Sum",
+        slug: "split-array-largest-sum",
+        tier: "Core",
+      },
+      {
+        id: 915,
+        title: "Partition Array into Disjoint Intervals",
+        slug: "partition-array-into-disjoint-intervals",
+        rating: 1501,
+        tier: "Core",
+      },
+      {
+        id: 1031,
+        title: "Maximum Sum of Two Non-Overlapping Subarrays",
+        slug: "maximum-sum-of-two-non-overlapping-subarrays",
+        rating: 1680,
+        tier: "Core",
+      },
+      {
+        id: 1043,
+        title: "Partition Array for Maximum Sum",
+        slug: "partition-array-for-maximum-sum",
+        rating: 1916,
+        tier: "Core",
+      },
+      {
+        id: 813,
+        title: "Largest Sum of Averages",
+        slug: "largest-sum-of-averages",
+        rating: 1937,
+        tier: "Core",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate the smaller side (small-to-large merging)",
+    problems: [
+      {
+        id: 2421,
+        title: "Number of Good Paths",
+        slug: "number-of-good-paths",
+        rating: 2445,
+        tier: "Challenge",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate bit by bit (greedy from the high bit)",
+    problems: [
+      {
+        id: 2429,
+        title: "Minimize XOR",
+        slug: "minimize-xor",
+        rating: 1532,
+        tier: "Core",
+      },
+      {
+        id: 2935,
+        title: "Maximum Strong Pair XOR II",
+        slug: "maximum-strong-pair-xor-ii",
+        rating: 2349,
+        tier: "Challenge",
+      },
+      {
+        id: 1707,
+        title: "Maximum XOR With an Element From Array",
+        slug: "maximum-xor-with-an-element-from-array",
+        rating: 2359,
+        tier: "Challenge",
+      },
+    ],
+  },
+  {
+    viewpoint: "Enumerate the trigger / event (event-driven)",
+    problems: [
+      {
+        id: 731,
+        title: "My Calendar II",
+        slug: "my-calendar-ii",
+        tier: "Core",
+      },
+      {
+        id: 1094,
+        title: "Car Pooling",
+        slug: "car-pooling",
+        rating: 1441,
+        tier: "Core",
+      },
+      {
+        id: 759,
+        title: "Employee Free Time",
+        slug: "employee-free-time",
+        rating: 1710,
+        tier: "Core",
+      },
+      {
+        id: 2402,
+        title: "Meeting Rooms III",
+        slug: "meeting-rooms-iii",
+        rating: 2093,
+        tier: "Advanced",
+      },
+      {
+        id: 1851,
+        title: "Minimum Interval to Include Each Query",
+        slug: "minimum-interval-to-include-each-query",
+        rating: 2286,
+        tier: "Advanced",
+      },
+    ],
+  },
+];
+
+/**
+ * Render one viewpoint's problems as a `| ID | Problem | Rating | Tier |`
+ * markdown table with a bold caption. The caption becomes the ProblemList
+ * title; the Tier column becomes a chip under each problem.
+ */
+function taxonomyPracticeTable(group: {
+  viewpoint: string;
+  problems: TaxonomyPracticeProblem[];
+}): string {
+  const rows = group.problems.map(
+    (p) =>
+      `| ${p.id} | [${p.title}](https://leetcode.cn/problems/${p.slug}/) | ${p.rating ?? ""} | ${p.tier} |`,
+  );
+  return [
+    `**${group.viewpoint}**`,
+    "",
+    "| ID | Problem | Rating | Tier |",
+    "|---:|---|---:|---|",
+    ...rows,
+  ].join("\n");
+}
+
 /**
  * TASK 6 — Enumeration Viewpoint Taxonomy. A reference table plus one collapsed
  * worked example per newly-added viewpoint. Appended to section 4 (Core Idea) of
@@ -2020,74 +2400,9 @@ const ENUMERATION_TAXONOMY: string = [
   "",
   "#### Practice problems",
   "",
-  "_Enumerate the owner / contributor_",
+  "Each viewpoint has its own problem table — track progress and open solutions inline.",
   "",
-  "- [828. Count Unique Characters of All Substrings of a Given String](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string/) (2034) [Advanced]",
-  "- [1856. Maximum Subarray Min-Product](https://leetcode.cn/problems/maximum-subarray-min-product/) (2051) [Advanced]",
-  "- [2818. Apply Operations to Maximize Score](https://leetcode.cn/problems/apply-operations-to-maximize-score/) (2397) [Challenge]",
-  "- [2281. Sum of Total Strength of Wizards](https://leetcode.cn/problems/sum-of-total-strength-of-wizards/) (2621) [Challenge]",
-  "",
-  "_Enumerate the right endpoint_",
-  "",
-  "- [713. Subarray Product Less Than K](https://leetcode.cn/problems/subarray-product-less-than-k/) [Core]",
-  "- [2799. Count Complete Subarrays in an Array](https://leetcode.cn/problems/count-complete-subarrays-in-an-array/) (1398) [Core]",
-  "- [3325. Count Substrings With K-Frequency Characters I](https://leetcode.cn/problems/count-substrings-with-k-frequency-characters-i/) (1455) [Core]",
-  "- [1248. Count Number of Nice Subarrays](https://leetcode.cn/problems/count-number-of-nice-subarrays/) (1624) [Core]",
-  "- [1358. Number of Substrings Containing All Three Characters](https://leetcode.cn/problems/number-of-substrings-containing-all-three-characters/) (1646) [Core]",
-  "- [2762. Continuous Subarrays](https://leetcode.cn/problems/continuous-subarrays/) (1940) [Core]",
-  "- [992. Subarrays with K Different Integers](https://leetcode.cn/problems/subarrays-with-k-different-integers/) (2210) [Advanced]",
-  "",
-  "_Enumerate the pivot / middle_",
-  "",
-  "- [1534. Count Good Triplets](https://leetcode.cn/problems/count-good-triplets/) (1279) [Core]",
-  "- [1685. Sum of Absolute Differences in a Sorted Array](https://leetcode.cn/problems/sum-of-absolute-differences-in-a-sorted-array/) (1496) [Core]",
-  "- [2222. Number of Ways to Select Buildings](https://leetcode.cn/problems/number-of-ways-to-select-buildings/) (1657) [Core]",
-  "- [2179. Count Good Triplets in an Array](https://leetcode.cn/problems/count-good-triplets-in-an-array/) (2272) [Advanced]",
-  "- [2552. Count Increasing Quadruplets](https://leetcode.cn/problems/count-increasing-quadruplets/) (2433) [Challenge]",
-  "",
-  "_Enumerate the contribution unit_",
-  "",
-  "- [1814. Count Nice Pairs in an Array](https://leetcode.cn/problems/count-nice-pairs-in-an-array/) (1738) [Core]",
-  "- [2615. Sum of Distances](https://leetcode.cn/problems/sum-of-distances/) (1793) [Core]",
-  "- [2681. Power of Heroes](https://leetcode.cn/problems/power-of-heroes/) (2060) [Advanced]",
-  "- [891. Sum of Subsequence Widths](https://leetcode.cn/problems/sum-of-subsequence-widths/) (2183) [Advanced]",
-  "- [2916. Subarrays Distinct Element Sum of Squares II](https://leetcode.cn/problems/subarrays-distinct-element-sum-of-squares-ii/) (2816) [Challenge]",
-  "",
-  "_Enumerate the value domain (差值、餘數、GCD)_",
-  "",
-  "- [523. Continuous Subarray Sum](https://leetcode.cn/problems/continuous-subarray-sum/) [Core]",
-  "- [2748. Number of Beautiful Pairs](https://leetcode.cn/problems/number-of-beautiful-pairs/) (1301) [Core]",
-  "- [2470. Number of Subarrays With LCM Equal to K](https://leetcode.cn/problems/number-of-subarrays-with-lcm-equal-to-k/) (1560) [Core]",
-  "- [2447. Number of Subarrays With GCD Equal to K](https://leetcode.cn/problems/number-of-subarrays-with-gcd-equal-to-k/) (1603) [Core]",
-  "- [974. Subarray Sums Divisible by K](https://leetcode.cn/problems/subarray-sums-divisible-by-k/) (1676) [Core]",
-  "- [2183. Count Array Pairs Divisible by K](https://leetcode.cn/problems/count-array-pairs-divisible-by-k/) (2246) [Advanced]",
-  "- [952. Largest Component Size by Common Factor](https://leetcode.cn/problems/largest-component-size-by-common-factor/) (2272) [Advanced]",
-  "",
-  "_Enumerate the cut point (two-cut / three-segment)_",
-  "",
-  "- [410. Split Array Largest Sum](https://leetcode.cn/problems/split-array-largest-sum/) [Core]",
-  "- [915. Partition Array into Disjoint Intervals](https://leetcode.cn/problems/partition-array-into-disjoint-intervals/) (1501) [Core]",
-  "- [1031. Maximum Sum of Two Non-Overlapping Subarrays](https://leetcode.cn/problems/maximum-sum-of-two-non-overlapping-subarrays/) (1680) [Core]",
-  "- [1043. Partition Array for Maximum Sum](https://leetcode.cn/problems/partition-array-for-maximum-sum/) (1916) [Core]",
-  "- [813. Largest Sum of Averages](https://leetcode.cn/problems/largest-sum-of-averages/) (1937) [Core]",
-  "",
-  "_Enumerate the smaller side (small-to-large merging)_",
-  "",
-  "- [2421. Number of Good Paths](https://leetcode.cn/problems/number-of-good-paths/) (2445) [Challenge]",
-  "",
-  "_Enumerate bit by bit (greedy from the high bit)_",
-  "",
-  "- [2429. Minimize XOR](https://leetcode.cn/problems/minimize-xor/) (1532) [Core]",
-  "- [2935. Maximum Strong Pair XOR II](https://leetcode.cn/problems/maximum-strong-pair-xor-ii/) (2349) [Challenge]",
-  "- [1707. Maximum XOR With an Element From Array](https://leetcode.cn/problems/maximum-xor-with-an-element-from-array/) (2359) [Challenge]",
-  "",
-  "_Enumerate the trigger / event (event-driven)_",
-  "",
-  "- [731. My Calendar II](https://leetcode.cn/problems/my-calendar-ii/) [Core]",
-  "- [1094. Car Pooling](https://leetcode.cn/problems/car-pooling/) (1441) [Core]",
-  "- [759. Employee Free Time](https://leetcode.cn/problems/employee-free-time/) (1710) [Core]",
-  "- [2402. Meeting Rooms III](https://leetcode.cn/problems/meeting-rooms-iii/) (2093) [Advanced]",
-  "- [1851. Minimum Interval to Include Each Query](https://leetcode.cn/problems/minimum-interval-to-include-each-query/) (2286) [Advanced]",
+  ENUMERATION_TAXONOMY_PRACTICE.map(taxonomyPracticeTable).join("\n\n"),
   "",
   taxonomyExample(
     "Enumerate the value domain (GCD)",

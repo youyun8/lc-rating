@@ -495,63 +495,6 @@ export function StudyPlanMarkdownContent({
         }
       }
     });
-
-    // Lift the trailing "(rating) [tier]" off practice-problem bullets (e.g.
-    // the Enumeration Taxonomy "Practice problems" lists) into tidy badges — a
-    // muted rating chip plus a difficulty-colored tier pill — so the bullets
-    // read cleanly instead of trailing raw "(2034) [Advanced]" text. Gated on a
-    // recognized tier tag so ordinary bullet lists are left untouched.
-    const TIER_BADGE: Record<string, string> = {
-      Core: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
-      Advanced: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
-      Challenge: "bg-rose-500/15 text-rose-700 dark:text-rose-300",
-    };
-    innerHtml.current.querySelectorAll("li").forEach((item) => {
-      if (item.getAttribute("data-badged") === "true") return;
-      if (!item.querySelector("a")) return;
-
-      let html = item.innerHTML.trim();
-      const tierMatch = html.match(/\s*\[(Core|Advanced|Challenge)\]\s*$/i);
-      if (!tierMatch) return; // only practice-problem bullets carry a tier tag
-      const tier = tierMatch[1]!;
-      html = html.slice(0, tierMatch.index ?? html.length).trim();
-
-      let rating = "";
-      const ratingMatch = html.match(/\s*\((\d{3,4})\)\s*$/);
-      if (ratingMatch) {
-        rating = ratingMatch[1]!;
-        html = html.slice(0, ratingMatch.index ?? html.length).trim();
-      }
-
-      item.setAttribute("data-badged", "true");
-
-      const row = document.createElement("span");
-      row.className =
-        "inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5";
-
-      const label = document.createElement("span");
-      label.className = "min-w-0";
-      label.innerHTML = html;
-      row.appendChild(label);
-
-      if (rating) {
-        const badge = document.createElement("span");
-        badge.className =
-          "inline-flex shrink-0 items-center rounded bg-muted px-1.5 py-0.5 text-xs font-medium tabular-nums text-muted-foreground";
-        badge.textContent = rating;
-        row.appendChild(badge);
-      }
-
-      const key = tier.charAt(0).toUpperCase() + tier.slice(1).toLowerCase();
-      const tierBadge = document.createElement("span");
-      tierBadge.className =
-        "inline-flex shrink-0 items-center rounded px-1.5 py-0.5 text-xs font-medium " +
-        (TIER_BADGE[key] ?? "bg-muted text-muted-foreground");
-      tierBadge.textContent = key;
-      row.appendChild(tierBadge);
-
-      item.replaceChildren(row);
-    });
   }, [content, variant, enhanceLeetCode, codeInitiallyOpen, linkLanguage]);
 
   return (

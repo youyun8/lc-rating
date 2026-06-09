@@ -260,7 +260,7 @@
 /* Markdown 內容樣式 */
 .prose table,
 [data-slot="card-description"] table {
-  @apply mb-5 w-full border-collapse border-lime-200/80 text-sm dark:border-lime-900/60 sm:text-base;
+  @apply mb-5 w-full border-collapse border-border text-sm sm:text-base;
   display: block;
   overflow-x: auto;
 }
@@ -269,17 +269,12 @@
 .prose td,
 [data-slot="card-description"] th,
 [data-slot="card-description"] td {
-  @apply border border-lime-100/80 px-4 py-2 text-base dark:border-lime-900/40;
+  @apply border border-border px-4 py-2 text-base;
 }
 
 .prose th,
 [data-slot="card-description"] th {
-  @apply bg-lime-50/80 font-normal text-lime-900 dark:bg-lime-950/30 dark:text-lime-100;
-}
-
-.prose tr:nth-child(even),
-[data-slot="card-description"] tr:nth-child(even) {
-  @apply bg-lime-50/40 dark:bg-lime-950/20;
+  @apply bg-muted/50 font-medium text-foreground;
 }
 
 .prose p,
