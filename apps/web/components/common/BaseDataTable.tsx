@@ -14,7 +14,7 @@ import {
   flexRender,
   Table as TanstackTable,
 } from "@tanstack/react-table";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface BaseDataTableProps<TData> {
   table: TanstackTable<TData>;
@@ -24,14 +24,6 @@ interface BaseDataTableProps<TData> {
   headerClassName?: string;
   headerBorderClassName?: string;
   cellBorderClassName?: string;
-  rowClassName?: string;
-  separator?: React.ReactNode;
-  renderHeaderExtra?: (header: {
-    column: {
-      getCanSort: () => boolean;
-      getToggleSortingHandler: () => ((event: unknown) => void) | undefined;
-    };
-  }) => React.ReactNode;
   /** When true, applies each column's TanStack size as an inline width style on <th> elements. Useful with table-fixed layout. */
   applySizeStyles?: boolean;
   /** Changing this value triggers a brief highlight animation on visible rows. */
@@ -46,8 +38,6 @@ export function BaseDataTable<TData>({
   headerClassName = "flex items-center justify-center",
   headerBorderClassName = "",
   cellBorderClassName = "",
-  rowClassName,
-  separator,
   applySizeStyles = false,
   highlightKey,
 }: BaseDataTableProps<TData>) {
@@ -86,8 +76,6 @@ export function BaseDataTable<TData>({
           </div>
         </div>
       </div>
-
-      {separator}
 
       <div className="px-3 pt-2 text-xs text-muted-foreground sm:hidden">
         可左右滑動查看完整表格
@@ -143,10 +131,7 @@ export function BaseDataTable<TData>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   data-problem-id={row.id}
-                  className={cn(
-                    rowClassName,
-                    isHighlighted && "animate-search-highlight",
-                  )}
+                  className={cn(isHighlighted && "animate-search-highlight")}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className={cellBorderClassName}>
@@ -171,8 +156,6 @@ export function BaseDataTable<TData>({
           </TableBody>
         </Table>
       </div>
-
-      {separator}
 
       <div className="border-t border-border/60 bg-muted/20 px-3 py-3">
         <div className="flex flex-col gap-3">{pageControl}</div>
