@@ -95,7 +95,7 @@ function TutorialOverview() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3 2xl:gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 2xl:gap-4">
               <StatCard
                 icon={LayoutGrid}
                 label="講義主題"

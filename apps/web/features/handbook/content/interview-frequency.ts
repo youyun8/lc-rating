@@ -69,274 +69,295 @@ export const INTERVIEW_FREQUENCY_RANKING: InterviewFrequencyEntry[] = [
       "Longest/shortest-substring questions are a top-frequency FAANG pattern and a dedicated section in every roadmap.",
   },
   {
-    slug: "tree-traversal",
+    slug: "linked-list-patterns",
     rank: 6,
+    frequency: "Medium",
+    rationale:
+      "Reverse-list, cycle, and merge questions anchor the linked-list block of Blind 75 / Grind 75 and remain a default phone-screen warm-up, though the pattern is nearly absent from contests.",
+  },
+  {
+    slug: "tree-traversal",
+    rank: 7,
     frequency: "Medium",
     rationale:
       "Binary-tree DFS/BFS return-value design is interview bread-and-butter and a large NeetCode/Grind block.",
   },
   {
     slug: "heap-patterns",
-    rank: 7,
+    rank: 8,
     frequency: "Medium",
     rationale:
       "Top-K and merge-k-lists heap problems are frequently asked and a standard roadmap section.",
   },
   {
+    slug: "design-data-structures",
+    rank: 9,
+    frequency: "Medium",
+    rationale:
+      "LRU Cache is among the most-asked implementation questions at large companies, and design problems headline study lists despite contributing no contest-rating signal.",
+  },
+  {
     slug: "binary-search-on-answer",
-    rank: 8,
+    rank: 10,
     frequency: "Medium",
     rationale:
       "Binary search and its 'search the answer' variant (Koko, ship-within-days) are a top-tier, guide-prominent pattern.",
   },
   {
     slug: "interval-merging",
-    rank: 9,
+    rank: 11,
     frequency: "Medium",
     rationale:
       "Merge/insert intervals and meeting-rooms are classic high-frequency questions in every list.",
   },
   {
+    slug: "shortest-paths",
+    rank: 12,
+    frequency: "Medium",
+    rationale:
+      "Dijkstra and Bellman-Ford anchor the advanced-graph block of study roadmaps and appear frequently in the 1700-2000 contest band, though company screens reach for them less often than core traversal.",
+  },
+  {
     slug: "dp-transition-design",
-    rank: 10,
+    rank: 13,
     frequency: "Medium",
     rationale:
       "The transition half of DP (knapsack, edit distance) is a high-frequency follow-up across study guides.",
   },
   {
     slug: "backtracking",
-    rank: 11,
+    rank: 14,
     frequency: "Medium",
     rationale:
       "Subsets/permutations/combination-sum recur constantly and form a full roadmap section.",
   },
   {
     slug: "topological-sort",
-    rank: 12,
+    rank: 15,
     frequency: "Medium",
     rationale:
       "Course-Schedule-style ordering is a common graph follow-up and a named pattern in NeetCode/Prashad.",
   },
   {
     slug: "sorting-as-a-tool",
-    rank: 13,
-    frequency: "Medium",
+    rank: 16,
+    frequency: "Low",
     rationale:
       "Sort-then-scan setups underpin many medium questions and appear throughout the curated lists.",
   },
   {
     slug: "monotonic-data-structures",
-    rank: 14,
-    frequency: "Medium",
+    rank: 17,
+    frequency: "Low",
     rationale:
       "Daily-temperatures / next-greater monotonic-stack questions recur and form a recognizable pattern unit.",
   },
   {
     slug: "enumeration-strategy",
-    rank: 15,
-    frequency: "Medium",
+    rank: 18,
+    frequency: "Low",
     rationale:
       "Choosing what to enumerate is a broadly useful counting meta-pattern with moderate direct exposure.",
   },
   {
     slug: "prefix-suffix-decomposition",
-    rank: 16,
+    rank: 19,
     frequency: "Low",
     rationale:
       "Prefix-sum / product-of-array-except-self problems are common and a standard list entry.",
   },
   {
     slug: "union-find",
-    rank: 17,
+    rank: 20,
     frequency: "Low",
     rationale:
       "Connected-components and redundant-connection problems show up regularly and have a dedicated roadmap unit.",
   },
   {
     slug: "fix-right-maintain-left",
-    rank: 18,
+    rank: 21,
     frequency: "Low",
     rationale:
       "The expand-right / shrink-left counting variant of sliding window is a common medium follow-up.",
   },
   {
     slug: "trie",
-    rank: 19,
+    rank: 22,
     frequency: "Low",
     rationale:
       "Implement-Trie and word-search-II appear in NeetCode/Grind, with moderate live-interview frequency.",
   },
   {
     slug: "feasibility-check",
-    rank: 20,
+    rank: 23,
     frequency: "Low",
     rationale:
       "Binary-search feasibility checks are a recurring medium/hard device, moderately represented in guides.",
   },
   {
     slug: "greedy-construction",
-    rank: 21,
+    rank: 24,
     frequency: "Low",
     rationale:
       "Jump-game / gas-station greedy constructions are frequently asked and appear across study guides.",
   },
   {
     slug: "state-compression",
-    rank: 22,
+    rank: 25,
     frequency: "Low",
     rationale:
       "Bitmask DP surfaces in harder/senior loops and competitive prep, with low everyday frequency.",
   },
   {
     slug: "number-theory-and-math",
-    rank: 23,
+    rank: 26,
     frequency: "Low",
     rationale:
       "GCD/primes/pow problems show up periodically and have a math section in most roadmaps.",
   },
   {
     slug: "difference-array",
-    rank: 24,
+    rank: 27,
     frequency: "Low",
     rationale:
       "Range-update / corporate-flight-bookings problems appear at a moderate, mostly-medium frequency.",
   },
   {
     slug: "string-matching",
-    rank: 25,
+    rank: 28,
     frequency: "Low",
     rationale:
       "KMP/Rabin-Karp and find-the-index questions appear at a moderate rate, mostly at string-heavy companies.",
   },
   {
     slug: "state-design",
-    rank: 26,
+    rank: 29,
     frequency: "Low",
     rationale:
       "Naming the right state is a practically important meta-skill underlying many DP/graph interview questions.",
   },
   {
     slug: "constraint-driven-thinking",
-    rank: 27,
+    rank: 30,
     frequency: "Low",
     rationale:
       "Reading constraints to pick an approach is a high-value meta-skill rather than a tagged interview topic.",
   },
   {
     slug: "brute-force-to-optimization",
-    rank: 28,
+    rank: 31,
     frequency: "Low",
     rationale:
       "The optimize-from-brute-force mindset matters in every interview but is not itself a tagged question type.",
   },
   {
     slug: "boundary-and-edge-case-thinking",
-    rank: 29,
+    rank: 32,
     frequency: "Low",
     rationale:
       "Edge-case discipline is rewarded in every interview but is a cross-cutting skill, not a standalone topic.",
   },
   {
     slug: "divide-and-conquer",
-    rank: 30,
+    rank: 33,
     frequency: "Low",
     rationale:
       "Merge-sort, sort-list, and count-of-smaller divide-and-conquer questions feature in most lists.",
   },
   {
     slug: "greedy-stays-ahead",
-    rank: 31,
+    rank: 34,
     frequency: "Low",
     rationale:
       "The stays-ahead proof style backs several greedy answers but is rarely the explicit ask.",
   },
   {
     slug: "enumerate-pivot-middle",
-    rank: 32,
+    rank: 35,
     frequency: "Low",
     rationale:
       "Fix-the-middle counting (3Sum-like, count-triplets) is an occasional contest-flavored medium.",
   },
   {
     slug: "segment-tree-and-fenwick-tree",
-    rank: 33,
+    rank: 36,
     frequency: "Low",
     rationale:
       "Rare in standard interviews but a staple of contests and senior/competitive study tracks.",
   },
   {
     slug: "exchange-argument",
-    rank: 34,
+    rank: 37,
     frequency: "Low",
     rationale:
       "A greedy-correctness proof tool seen mainly in competitive programming, seldom asked explicitly.",
   },
   {
     slug: "loop-invariant",
-    rank: 35,
+    rank: 38,
     frequency: "Low",
     rationale:
       "A correctness-discipline contract that supports binary-search/two-pointer answers rather than being asked.",
   },
   {
     slug: "invariant-thinking",
-    rank: 36,
+    rank: 39,
     frequency: "Low",
     rationale:
       "Reasoning with invariants strengthens many answers but is taught as a method, not asked directly.",
   },
   {
     slug: "sweep-line",
-    rank: 37,
+    rank: 40,
     frequency: "Low",
     rationale:
       "Meeting-rooms-II and skyline sweeps appear occasionally, mostly as harder follow-ups.",
   },
   {
     slug: "cut-property",
-    rank: 38,
+    rank: 41,
     frequency: "Low",
     rationale:
       "The MST safe-edge argument is rarely interviewed outside specialized roles, but foundational in theory.",
   },
   {
     slug: "game-theory",
-    rank: 39,
+    rank: 42,
     frequency: "Low",
     rationale:
       "Stone-game / Nim questions appear infrequently and only at a few companies, but feature in DP study sets.",
   },
   {
     slug: "contribution-counting",
-    rank: 40,
+    rank: 43,
     frequency: "Low",
     rationale:
       "Sum-of-subarray-minimums contribution counting is a contest-leaning technique, uncommon in interviews.",
   },
   {
     slug: "proof-techniques",
-    rank: 41,
+    rank: 44,
     frequency: "Low",
     rationale:
       "Induction/exchange/contradiction proofs are a meta-skill for justifying solutions, not an interview topic.",
   },
   {
     slug: "offline-query-processing",
-    rank: 42,
+    rank: 45,
     frequency: "Low",
     rationale:
       "Reordering queries offline is almost exclusively a competitive-programming technique.",
   },
   {
     slug: "coordinate-compression",
-    rank: 43,
+    rank: 46,
     frequency: "Low",
     rationale:
       "A preprocessing step for BIT/segment-tree problems; rare in interviews, common in contests.",
   },
   {
     slug: "ml-performance-system-design",
-    rank: 44,
+    rank: 47,
     frequency: "Low",
     rationale:
       "A specialized ML-infra interview track, outside the standard coding-pattern frequency lists.",

@@ -65,7 +65,7 @@ export function StudyPlanCard({
   return (
     <Link href={`/studyplan/${planKey}`} className="block h-full">
       <div
-        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--card-accent-dark)]/50 hover:shadow-lg"
         style={
           { "--card-accent-dark": theme.accentDark } as React.CSSProperties
         }
@@ -84,7 +84,7 @@ export function StudyPlanCard({
             </Badge>
           </div>
           <div className="relative flex h-full items-center justify-center">
-            <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/20">
+            <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-110">
               <Icon className="h-8 w-8 text-white drop-shadow-sm" />
             </div>
           </div>
@@ -188,7 +188,7 @@ export function StudyPlanCard({
                 <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-muted">
                   <div
                     className="h-full rounded-full transition-all duration-500"
-                    style={{ width: `${pct}%`, backgroundColor: theme.accent }}
+                    style={{ width: `${pct}%`, background: theme.gradient }}
                   />
                 </div>
               </div>
