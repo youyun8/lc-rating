@@ -28,7 +28,7 @@ export function StatCard({ icon: Icon, label, value, hint }: StatCardProps) {
         )}
       </div>
       {hint && (
-        <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-1.5 hidden text-xs leading-relaxed text-muted-foreground sm:block">
           {hint}
         </p>
       )}

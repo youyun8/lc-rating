@@ -116,7 +116,7 @@ function StudyPlanOverview() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:gap-4">
+            <div className="grid grid-cols-2 gap-3 xl:grid-cols-4 2xl:gap-4">
               <StatCard
                 icon={LayoutGrid}
                 label="題單總數"

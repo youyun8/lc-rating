@@ -131,7 +131,10 @@ export function BaseDataTable<TData>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   data-problem-id={row.id}
-                  className={cn(isHighlighted && "animate-search-highlight")}
+                  className={cn(
+                    "even:bg-muted/20 hover:bg-accent/40",
+                    isHighlighted && "animate-search-highlight",
+                  )}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className={cellBorderClassName}>
