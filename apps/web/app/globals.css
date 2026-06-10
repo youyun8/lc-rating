@@ -50,7 +50,7 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.984 0.004 120);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -153,6 +153,41 @@
     @apply bg-background text-foreground;
   }
 
+  /* Subtle fixed brand washes so pages have depth without competing with
+     content; sits behind everything and ignores pointer events. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        56rem 30rem at 88% -12%,
+        color-mix(in oklab, var(--brand-start) 8%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        48rem 26rem at -8% -4%,
+        color-mix(in oklab, var(--brand-mid) 6%, transparent),
+        transparent 70%
+      );
+  }
+
+  .dark body::before {
+    background:
+      radial-gradient(
+        56rem 30rem at 88% -12%,
+        color-mix(in oklab, var(--brand-start) 5%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        48rem 26rem at -8% -4%,
+        color-mix(in oklab, var(--brand-mid) 4%, transparent),
+        transparent 70%
+      );
+  }
+
   /* Use the generic monospace keyword so code honors the browser's
      configured fixed-width font, overriding Tailwind preflight's concrete
      mono stack (which resolves to an installed font first). */
@@ -219,12 +254,26 @@
     opacity: 1;
   }
 
-  .stat-card-icon {
-    @apply text-primary;
+  .stat-card-chip {
+    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-200;
   }
 
-  .stat-card svg {
-    @apply text-primary/80;
+  .stat-card:hover .stat-card-chip {
+    @apply bg-primary/15;
+  }
+
+  .page-title {
+    @apply flex items-center gap-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl;
+  }
+
+  .page-title::before {
+    content: "";
+    @apply h-7 w-1.5 shrink-0 rounded-full sm:h-8;
+    background-image: linear-gradient(
+      180deg,
+      var(--brand-start, #84cc16),
+      var(--brand-mid, #65a30d)
+    );
   }
 
   @keyframes motion-rise {

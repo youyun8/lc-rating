@@ -4,6 +4,7 @@ import { useContests } from "@/hooks/useContests";
 import { useProblems } from "@/hooks/useProblems";
 import { useSolutions } from "@/hooks/useSolutions";
 import { useTags } from "@/hooks/useTags";
+import { StatCard } from "@/components/common/StatCard";
 import { Problem, Solution } from "@/types";
 import { Quodra } from "@/types/common";
 import { normalizeDisplayText } from "@/utils/normalizeDisplayText";
@@ -147,7 +148,9 @@ function ContestPage() {
         : 0;
     const hardestRating =
       ratedProblems.length > 0
-        ? Math.max(...ratedProblems.map((item) => item.problem.rating))
+        ? Math.round(
+            Math.max(...ratedProblems.map((item) => item.problem.rating)),
+          )
         : 0;
 
     return {
@@ -164,9 +167,7 @@ function ContestPage() {
         <div className="flex flex-col gap-6 p-5 sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl space-y-2">
-              <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                競賽
-              </h1>
+              <h1 className="page-title">競賽</h1>
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                 歷屆週賽與雙週賽題目，依場次顯示每題的難度分級。
               </p>
@@ -185,58 +186,35 @@ function ContestPage() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="stat-card">
-              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                <Swords className="h-4 w-4" />
-                比賽總數
-              </div>
-              <p className="mt-2 text-2xl font-semibold text-foreground">
-                {isPending ? "--" : contestCount}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                收錄每場競賽的四道題目
-              </p>
-            </div>
-
-            <div className="stat-card">
-              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                <FileText className="h-4 w-4" />
-                題目總數
-              </div>
-              <p className="mt-2 text-2xl font-semibold text-foreground">
-                {isPending ? "--" : overviewStats.totalProblems}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                各場比賽合計的題目數
-              </p>
-            </div>
-
-            <div className="stat-card">
-              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                <Sparkles className="h-4 w-4" />
-                題解覆蓋
-              </div>
-              <p className="mt-2 text-2xl font-semibold text-foreground">
-                {isPending ? "--" : overviewStats.solutionCount}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                可跳轉的 0x3F 對應題解數
-              </p>
-            </div>
-
-            <div className="stat-card">
-              <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                <Gauge className="h-4 w-4" />
-                難度概況
-              </div>
-              <p className="mt-2 text-2xl font-semibold text-foreground">
-                {isPending ? "--" : overviewStats.averageRating}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                平均 rating；最高約{" "}
-                {isPending ? "--" : overviewStats.hardestRating}
-              </p>
-            </div>
+            <StatCard
+              icon={Swords}
+              label="比賽總數"
+              value={isPending ? "--" : contestCount}
+              hint="收錄每場競賽的四道題目"
+            />
+            <StatCard
+              icon={FileText}
+              label="題目總數"
+              value={isPending ? "--" : overviewStats.totalProblems}
+              hint="各場比賽合計的題目數"
+            />
+            <StatCard
+              icon={Sparkles}
+              label="題解覆蓋"
+              value={isPending ? "--" : overviewStats.solutionCount}
+              hint="可跳轉的 0x3F 對應題解數"
+            />
+            <StatCard
+              icon={Gauge}
+              label="難度概況"
+              value={isPending ? "--" : overviewStats.averageRating}
+              hint={
+                <>
+                  平均 rating；最高約{" "}
+                  {isPending ? "--" : overviewStats.hardestRating}
+                </>
+              }
+            />
           </div>
         </div>
       </section>

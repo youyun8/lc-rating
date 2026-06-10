@@ -2,6 +2,7 @@
 
 import { STUDYPLANS } from "@/config/constants";
 import { Input } from "@/components/ui/input";
+import { StatCard } from "@/components/common/StatCard";
 import {
   BookOpen,
   CheckCircle2,
@@ -102,9 +103,7 @@ function StudyPlanOverview() {
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl space-y-2">
-                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  題單
-                </h1>
+                <h1 className="page-title">題單</h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                   由靈茶山艾府（0x3F）整理的演算法主題題單，按知識點分層規劃。
                 </p>
@@ -118,57 +117,30 @@ function StudyPlanOverview() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 2xl:gap-4">
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <LayoutGrid className="h-4 w-4" />
-                  題單總數
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {counts.all}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  涵蓋常見演算法與資料結構主題
-                </p>
-              </div>
-
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <BookOpen className="h-4 w-4" />
-                  題目總數
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {overviewStats.totalProblems}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  所有題單合計可練習的題目數
-                </p>
-              </div>
-
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <FolderTree className="h-4 w-4" />
-                  章節覆蓋
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {overviewStats.totalSections}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  支援依章節層級快速定位學習路線
-                </p>
-              </div>
-
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <CheckCircle2 className="h-4 w-4" />
-                  已完成題目
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {overviewStats.completedProblems}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  已標記為 AC 的題目數
-                </p>
-              </div>
+              <StatCard
+                icon={LayoutGrid}
+                label="題單總數"
+                value={counts.all}
+                hint="涵蓋常見演算法與資料結構主題"
+              />
+              <StatCard
+                icon={BookOpen}
+                label="題目總數"
+                value={overviewStats.totalProblems}
+                hint="所有題單合計可練習的題目數"
+              />
+              <StatCard
+                icon={FolderTree}
+                label="章節覆蓋"
+                value={overviewStats.totalSections}
+                hint="支援依章節層級快速定位學習路線"
+              />
+              <StatCard
+                icon={CheckCircle2}
+                label="已完成題目"
+                value={overviewStats.completedProblems}
+                hint="已標記為 AC 的題目數"
+              />
             </div>
           </div>
         </section>

@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { StatCard } from "@/components/common/StatCard";
 import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import {
   defaultTheme,
@@ -84,9 +85,7 @@ function FullLectureLinks() {
                   <BookOpen className="h-3.5 w-3.5" />
                   完整講義
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  完整講義索引
-                </h1>
+                <h1 className="page-title">完整講義索引</h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                   彙整所有章節的完整講義連結，可依主題或章節名稱搜尋。
                 </p>
@@ -102,44 +101,24 @@ function FullLectureLinks() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3 2xl:gap-4">
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <LayoutList className="h-4 w-4" />
-                  完整講義
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {totalLinks}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  所有章節詳解頁
-                </p>
-              </div>
-
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <FolderTree className="h-4 w-4" />
-                  講義主題
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {Object.keys(LECTURE_CATEGORIES).length}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  依題單主題分組
-                </p>
-              </div>
-
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <Search className="h-4 w-4" />
-                  目前顯示
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {filteredTotal}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  符合搜尋條件
-                </p>
-              </div>
+              <StatCard
+                icon={LayoutList}
+                label="完整講義"
+                value={totalLinks}
+                hint="所有章節詳解頁"
+              />
+              <StatCard
+                icon={FolderTree}
+                label="講義主題"
+                value={Object.keys(LECTURE_CATEGORIES).length}
+                hint="依題單主題分組"
+              />
+              <StatCard
+                icon={Search}
+                label="目前顯示"
+                value={filteredTotal}
+                hint="符合搜尋條件"
+              />
             </div>
           </div>
         </section>

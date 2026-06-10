@@ -2,6 +2,7 @@
 
 import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import { Input } from "@/components/ui/input";
+import { StatCard } from "@/components/common/StatCard";
 import { BookOpen, FolderTree, LayoutGrid, Search } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
@@ -72,9 +73,7 @@ function TutorialOverview() {
           <div className="flex flex-col gap-5 p-4 sm:p-6 xl:gap-6 xl:p-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-2xl space-y-2">
-                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  講義
-                </h1>
+                <h1 className="page-title">講義</h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                   依主題整理的演算法筆記與模板，適合學習與複習；題目練習請至對應題單。
                 </p>
@@ -97,44 +96,24 @@ function TutorialOverview() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3 2xl:gap-4">
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <LayoutGrid className="h-4 w-4" />
-                  講義主題
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {totalPlans}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  涵蓋常見演算法與資料結構
-                </p>
-              </div>
-
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <FolderTree className="h-4 w-4" />
-                  章節總數
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {overviewStats.totalSections}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  可依章節層級快速跳轉
-                </p>
-              </div>
-
-              <div className="stat-card">
-                <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  <BookOpen className="h-4 w-4" />
-                  筆記總數
-                </div>
-                <p className="mt-2 text-2xl font-semibold text-foreground">
-                  {overviewStats.documentedSections}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  已整理筆記的章節數
-                </p>
-              </div>
+              <StatCard
+                icon={LayoutGrid}
+                label="講義主題"
+                value={totalPlans}
+                hint="涵蓋常見演算法與資料結構"
+              />
+              <StatCard
+                icon={FolderTree}
+                label="章節總數"
+                value={overviewStats.totalSections}
+                hint="可依章節層級快速跳轉"
+              />
+              <StatCard
+                icon={BookOpen}
+                label="筆記總數"
+                value={overviewStats.documentedSections}
+                hint="已整理筆記的章節數"
+              />
             </div>
           </div>
         </section>

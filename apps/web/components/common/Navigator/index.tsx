@@ -102,7 +102,7 @@ const Navigator = React.memo(() => {
           >
             <span
               aria-hidden
-              className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-lime-500 text-white shadow-sm transition-transform group-hover:scale-105"
+              className="brand-gradient inline-flex h-6 w-6 items-center justify-center rounded-lg text-white shadow-sm transition-transform group-hover:scale-105"
             >
               <Code2 className="h-4 w-4" strokeWidth={2.5} />
             </span>
@@ -110,24 +110,21 @@ const Navigator = React.memo(() => {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="ml-6 hidden h-full items-center gap-1 md:flex">
+          <div className="ml-6 hidden items-center gap-1 md:flex">
             {navLinks.map(({ href, label, match, icon: Icon }) => {
               const isActive = pathname.startsWith(match);
               return (
                 <Link
                   key={href}
                   href={href}
-                  className={`relative flex items-center gap-1.5 h-full px-3 text-base font-normal transition-colors ${
+                  className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[15px] transition-colors ${
                     isActive
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-accent font-medium text-accent-foreground"
+                      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
                   {Icon && <Icon className="h-4 w-4" />}
                   {label}
-                  {isActive && (
-                    <span className="absolute -bottom-1.5 left-1/2 h-1 w-4/5 -translate-x-1/2 rounded-full bg-lime-500" />
-                  )}
                 </Link>
               );
             })}
