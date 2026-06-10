@@ -41,3 +41,6 @@ yarn-error.log*
 # ui
 dist/
 backend/.wrangler.generated.toml
+
+# cloudflare wrangler local dev state
+.wrangler/
