@@ -100,9 +100,7 @@ export default function HandbookOverview() {
                   <GraduationCap className="h-3.5 w-3.5" />
                   Pattern Handbook
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  LeetCode Pattern Handbook
-                </h1>
+                <h1 className="page-title">LeetCode Pattern Handbook</h1>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                   A structured handbook for rating 1700+ pattern recognition:
                   constraints, invariants, proof intuition, C++17 templates, and
