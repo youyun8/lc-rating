@@ -83,6 +83,11 @@ export function TutorialCard({
           <h3 className="text-base font-bold tracking-tight transition-colors group-hover:text-[var(--card-accent-dark)] sm:text-lg">
             {title}
           </h3>
+          {data.description && (
+            <p className="mt-2 line-clamp-3 text-sm leading-6 text-muted-foreground">
+              {data.description}
+            </p>
+          )}
           <div className="mt-3 flex flex-wrap gap-2">
             <span className="inline-flex items-center rounded-full border border-border/60 bg-muted/30 px-2.5 py-1 text-xs font-medium text-muted-foreground">
               {totalSections} 個章節

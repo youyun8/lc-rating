@@ -96,7 +96,7 @@ export function LectureSectionCard({
           {item.title}
         </h3>
         <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">
-          {getSummaryPreview(item.summary)}
+          {getSummaryPreview(item.description ?? item.summary)}
         </p>
 
         <div className="mt-auto flex flex-wrap gap-2 pt-5 text-xs text-muted-foreground">

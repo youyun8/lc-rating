@@ -20,6 +20,8 @@ interface ProblemListProps {
   language?: "zh" | "en";
   /** Which label chips to show under each problem title. */
   labelSource?: "subsection" | "problemset";
+  /** Keep authored order instead of sorting by rating and problem id. */
+  preserveOrder?: boolean;
 }
 
 function getSortableProblemIndex(problem: StudyPlanData.Item) {
@@ -82,7 +84,10 @@ function studyPlanProblemCanonicalScore(problem: StudyPlanData.Item) {
   return score;
 }
 
-function dedupeStudyPlanProblems(problems: StudyPlanData.Item[]) {
+function dedupeStudyPlanProblems(
+  problems: StudyPlanData.Item[],
+  preserveOrder = false,
+) {
   const byKey = new Map<string, StudyPlanData.Item>();
   for (const problem of problems) {
     const key = studyPlanProblemDedupeKey(problem);
@@ -95,7 +100,8 @@ function dedupeStudyPlanProblems(problems: StudyPlanData.Item[]) {
       byKey.set(key, problem);
     }
   }
-  return Array.from(byKey.values()).sort(compareStudyPlanProblems);
+  const deduped = Array.from(byKey.values());
+  return preserveOrder ? deduped : deduped.sort(compareStudyPlanProblems);
 }
 
 function normalizedStudyPlanSlug(slug: string) {
@@ -131,8 +137,9 @@ function getProblemsetTags(
 function mergeStudyPlanProblemsById(
   problems: StudyPlanData.Item[],
   problemMap: ProblemMap | undefined,
+  preserveOrder = false,
 ) {
-  const fromSlug = dedupeStudyPlanProblems(problems);
+  const fromSlug = dedupeStudyPlanProblems(problems, preserveOrder);
   if (!problemMap) {
     return fromSlug;
   }
@@ -177,7 +184,8 @@ function mergeStudyPlanProblemsById(
     }
   }
 
-  return fromSlug.filter((p) => !losers.has(p)).sort(compareStudyPlanProblems);
+  const merged = fromSlug.filter((p) => !losers.has(p));
+  return preserveOrder ? merged : merged.sort(compareStudyPlanProblems);
 }
 
 const ProblemList = React.memo(
@@ -186,6 +194,7 @@ const ProblemList = React.memo(
     title,
     language = "zh",
     labelSource = "subsection",
+    preserveOrder = false,
   }: ProblemListProps) => {
     const linkLanguage = useGlobalSettingsStore((state) => state.linkLanguage);
     const { problemMap } = useProblems();
@@ -215,8 +224,8 @@ const ProblemList = React.memo(
           score: fallbackScore ?? problem.score,
         };
       });
-      return mergeStudyPlanProblemsById(mapped, problemMap);
-    }, [problems, problemMap]);
+      return mergeStudyPlanProblemsById(mapped, problemMap, preserveOrder);
+    }, [preserveOrder, problems, problemMap]);
 
     const isEnglish = language === "en";
     const count = enrichedProblems.length;

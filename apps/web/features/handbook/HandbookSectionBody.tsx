@@ -8,7 +8,12 @@ import { HandbookExample } from "./HandbookExample";
 
 type Segment =
   | { kind: "markdown"; content: string }
-  | { kind: "problems"; title?: string; problems: StudyPlanData.Item[] }
+  | {
+      kind: "problems";
+      title?: string;
+      problems: StudyPlanData.Item[];
+      preserveOrder?: boolean;
+    }
   | { kind: "example"; title: string; content: string };
 
 interface HandbookSectionBodyProps {
@@ -24,9 +29,10 @@ interface HandbookSectionBodyProps {
 /**
  * Renders a handbook/lecture section: prose is handed to
  * {@link StudyPlanMarkdownContent}, `:::example` blocks become collapsible
- * {@link HandbookExample} cards, and `| ID | Problem | (Rating) | Technique |`
- * tables become interactive {@link ProblemList} widgets so readers can track
- * progress and store solutions. Shared by the handbook and the 講義 lectures.
+ * {@link HandbookExample} cards, and LeetCode problem tables such as
+ * `| ID | Problem | (Rating) | Technique |` or `| LC ID | Title | ... |`
+ * become interactive {@link ProblemList} widgets so readers can track progress
+ * and store solutions. Shared by the handbook and the 講義 lectures.
  */
 export function HandbookSectionBody({
   body,
@@ -66,9 +72,10 @@ function renderSegments(
         <div key={idx} className="my-4">
           <ProblemList
             problems={segment.problems}
-            title={segment.title ?? "Practice problems"}
+            title={segment.title}
             language={language}
             labelSource={problemLabelSource}
+            preserveOrder={segment.preserveOrder}
           />
         </div>
       );
@@ -114,6 +121,14 @@ function parseCells(line: string) {
     .replace(/^\||\|$/g, "")
     .split("|")
     .map((cell) => cell.trim());
+}
+
+function normalizeHeader(header: string) {
+  return header.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function findHeaderIndex(headers: string[], aliases: string[]) {
+  return headers.findIndex((header) => aliases.includes(header));
 }
 
 function slugFromUrl(url: string) {
@@ -240,15 +255,34 @@ function splitSectionBody(body: string): Segment[] {
         j++;
       }
 
-      const headers = parseCells(tableLines[0]!).map((h) => h.toLowerCase());
-      const idCol = headers.findIndex((h) => h === "id");
-      const problemCol = headers.findIndex((h) => h === "problem");
+      const headers = parseCells(tableLines[0]!).map(normalizeHeader);
+      const idCol = findHeaderIndex(headers, ["id", "lc id"]);
+      const problemCol = findHeaderIndex(headers, ["problem", "title"]);
 
       if (idCol !== -1 && problemCol !== -1) {
-        const ratingCol = headers.findIndex((h) => h === "rating");
-        const techCol = headers.findIndex(
-          (_, idx) => idx !== idCol && idx !== problemCol && idx !== ratingCol,
+        const ratingCol = findHeaderIndex(headers, ["rating"]);
+        const explicitTechCol = findHeaderIndex(headers, [
+          "technique",
+          "sub-section in lecture",
+          "subsection",
+        ]);
+        const techCol =
+          explicitTechCol !== -1
+            ? explicitTechCol
+            : headers.findIndex(
+                (_, idx) =>
+                  idx !== idCol && idx !== problemCol && idx !== ratingCol,
+              );
+
+        const ignoredMetadataCols = new Set(
+          ["#", "i", "f", "l", "score", "why it matters"]
+            .map((header) => headers.indexOf(header))
+            .filter((idx) => idx !== -1),
         );
+        const fallbackTechCol =
+          explicitTechCol === -1 && ignoredMetadataCols.has(techCol)
+            ? -1
+            : techCol;
 
         // Use a bold caption directly above the table as the list title.
         let title: string | undefined;
@@ -268,9 +302,14 @@ function splitSectionBody(body: string): Segment[] {
           id: idCol,
           problem: problemCol,
           rating: ratingCol,
-          tech: techCol,
+          tech: fallbackTechCol,
         });
-        segments.push({ kind: "problems", title, problems });
+        segments.push({
+          kind: "problems",
+          title,
+          problems,
+          preserveOrder: headers.includes("#") && headers.includes("score"),
+        });
 
         i = j - 1;
         continue;

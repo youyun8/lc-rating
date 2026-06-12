@@ -10,6 +10,7 @@ import {
 export interface LectureSectionCardItem {
   id: number;
   title: string;
+  description?: string;
   slug: string;
   href: string;
   summary?: string;
@@ -86,6 +87,7 @@ export function makeLectureSectionCardItem(
   return {
     id: section.id,
     title: section.title,
+    description: section.description,
     slug,
     href: `/lecture/${planKey}/${slug}`,
     summary: section.summary,

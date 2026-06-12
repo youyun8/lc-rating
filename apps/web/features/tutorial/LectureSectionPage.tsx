@@ -20,6 +20,7 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
   const childItems = section.children.map((child) => ({
     id: child.id,
     title: child.title,
+    description: child.description,
     slug: child.slug,
     href: `/lecture/${section.planKey}/${child.slug}`,
     summary: child.summary,
@@ -66,9 +67,10 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
                 {section.title}
               </h1>
               <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-                {hasChildren
-                  ? "先選擇此單元底下的子單元；到最細層後會顯示完整講義與搭配題目。"
-                  : "依序展開觀念、模式、例題推導與 C++ 實作骨架。"}
+                {section.description ??
+                  (hasChildren
+                    ? "先選擇此單元底下的子單元；到最細層後會顯示完整講義與搭配題目。"
+                    : "依序展開觀念、模式、例題推導與 C++ 實作骨架。")}
               </p>
             </div>
 

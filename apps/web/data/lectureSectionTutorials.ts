@@ -11,6 +11,7 @@ interface LectureSectionNavItem {
 }
 
 interface LectureSectionChildItem extends LectureSectionNavItem {
+  description?: string;
   summary?: string;
   childCount: number;
   totalSections: number;
@@ -19,6 +20,7 @@ interface LectureSectionChildItem extends LectureSectionNavItem {
 export interface LectureSectionTutorial {
   id: number;
   title: string;
+  description?: string;
   slug: string;
   planKey: string;
   planTitle: string;
@@ -111,6 +113,7 @@ export function getLectureSectionTutorial(
   return {
     id: indexed.id,
     title: indexed.title,
+    description: indexed.section.description,
     slug: indexed.slug,
     planKey,
     planTitle: getPlanTitle(planKey),
@@ -125,6 +128,7 @@ export function getLectureSectionTutorial(
     children: (indexed.section.children ?? []).map((child) => ({
       id: child.id,
       title: child.title,
+      description: child.description,
       slug: sectionAnchor(child.title),
       depth: indexed.depth + 1,
       summary: child.summary,

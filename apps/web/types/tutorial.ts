@@ -6,6 +6,7 @@
 export interface Section {
   id: number;
   title: string;
+  description?: string;
   src?: string | null;
   summary?: string;
   children?: Section[];
@@ -14,6 +15,7 @@ export interface Section {
 export interface Root {
   id: number;
   title: string;
+  description?: string;
   src: string | null;
   last_update: string | null;
   summary?: string;

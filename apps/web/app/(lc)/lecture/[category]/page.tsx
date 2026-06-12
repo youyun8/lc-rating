@@ -1,6 +1,7 @@
 import { LECTURE_CATEGORIES } from "@/features/lecture/content";
 import type { Metadata } from "next";
 import { lazy } from "react";
+import { tutorialDataMap } from "@/utils/tutorialIndex";
 
 const Tutorial = lazy(() => import("@/features/tutorial"));
 
@@ -27,7 +28,9 @@ export async function generateMetadata({
 
   return {
     title: `${title}講義`,
-    description: `${title}主題講義與筆記，依章節順序整理。`,
+    description:
+      tutorialDataMap[category]?.description ??
+      `${title}主題講義與筆記，依章節順序整理。`,
   };
 }
 

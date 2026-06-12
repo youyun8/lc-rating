@@ -26,7 +26,9 @@ export async function generateMetadata({
 
   return {
     title: `${lectureSection.title}（${lectureSection.planTitle}）`,
-    description: `${lectureSection.planTitle}・${lectureSection.title} 的講義筆記，含重點整理與相關練習題。`,
+    description:
+      lectureSection.description ??
+      `${lectureSection.planTitle}・${lectureSection.title} 的講義筆記，含重點整理與相關練習題。`,
   };
 }
 

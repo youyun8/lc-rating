@@ -78,6 +78,11 @@ function Tutorial({ plan }: TutorialProps) {
                       <h1 className="text-xl font-bold tracking-tight text-white sm:text-3xl xl:text-4xl">
                         {tutorial.title}
                       </h1>
+                      {tutorial.description && (
+                        <p className="mt-2 max-w-3xl text-sm leading-6 text-white/80 sm:text-base">
+                          {tutorial.description}
+                        </p>
+                      )}
                       <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-white/70 sm:text-sm">
                         {tutorial.src && (
                           <>
