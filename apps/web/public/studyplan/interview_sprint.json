@@ -1,0 +1,677 @@
+{
+  "id": 1,
+  "title": "面試衝刺計畫（2.5 週優先題單）",
+  "src": "",
+  "last_update": "2026-06-12T00:00:00.000Z",
+  "children": [
+    {
+      "id": 3,
+      "title": "2. 高優題單",
+      "children": [
+        {
+          "id": 31,
+          "title": "2.1 滑動視窗（6 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "3",
+              "title": "無重複字元的最長子串",
+              "slug": "longest-substring-without-repeating-characters",
+              "src": "https://leetcode.cn/problems/longest-substring-without-repeating-characters/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "越短越合法/求最長"
+            },
+            {
+              "id": "209",
+              "title": "長度最小的子陣列",
+              "slug": "minimum-size-subarray-sum",
+              "src": "https://leetcode.cn/problems/minimum-size-subarray-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "越長越合法/求最短"
+            },
+            {
+              "id": "76",
+              "title": "最小覆蓋子串",
+              "slug": "minimum-window-substring",
+              "src": "https://leetcode.cn/problems/minimum-window-substring/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "越長越合法/求最短"
+            },
+            {
+              "id": "1004",
+              "title": "最大連續 1 的個數 III",
+              "slug": "max-consecutive-ones-iii",
+              "src": "https://leetcode.cn/problems/max-consecutive-ones-iii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "越短越合法/求最長"
+            },
+            {
+              "id": "713",
+              "title": "乘積小於 K 的子陣列",
+              "slug": "subarray-product-less-than-k",
+              "src": "https://leetcode.cn/problems/subarray-product-less-than-k/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "求子陣列個數/越短越合法"
+            },
+            {
+              "id": "992",
+              "title": "K 個不同整數的子陣列",
+              "slug": "subarrays-with-k-different-integers",
+              "src": "https://leetcode.cn/problems/subarrays-with-k-different-integers/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "恰好型滑動視窗"
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "title": "2.2 二分搜尋（6 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "875",
+              "title": "愛吃香蕉的珂珂",
+              "slug": "koko-eating-bananas",
+              "src": "https://leetcode.cn/problems/koko-eating-bananas/",
+              "solution": null,
+              "score": 1766,
+              "isPremium": false,
+              "subsection": "求最小（答案二分）"
+            },
+            {
+              "id": "1011",
+              "title": "在 D 天內送達包裹的能力",
+              "slug": "capacity-to-ship-packages-within-d-days",
+              "src": "https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days/",
+              "solution": null,
+              "score": 1725,
+              "isPremium": false,
+              "subsection": "求最小（答案二分）"
+            },
+            {
+              "id": "33",
+              "title": "搜尋旋轉排序陣列",
+              "slug": "search-in-rotated-sorted-array",
+              "src": "https://leetcode.cn/problems/search-in-rotated-sorted-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "旋轉排序陣列"
+            },
+            {
+              "id": "153",
+              "title": "尋找旋轉排序陣列中的最小值",
+              "slug": "find-minimum-in-rotated-sorted-array",
+              "src": "https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "旋轉排序陣列"
+            },
+            {
+              "id": "410",
+              "title": "分割陣列的最大值",
+              "slug": "split-array-largest-sum",
+              "src": "https://leetcode.cn/problems/split-array-largest-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "最小化最大值"
+            },
+            {
+              "id": "162",
+              "title": "尋找峰值",
+              "slug": "find-peak-element",
+              "src": "https://leetcode.cn/problems/find-peak-element/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "峰值搜尋"
+            }
+          ]
+        },
+        {
+          "id": 33,
+          "title": "2.3 單調堆疊與單調佇列（5 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "739",
+              "title": "每日溫度",
+              "slug": "daily-temperatures",
+              "src": "https://leetcode.cn/problems/daily-temperatures/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "next-greater 基礎"
+            },
+            {
+              "id": "239",
+              "title": "滑動視窗最大值",
+              "slug": "sliding-window-maximum",
+              "src": "https://leetcode.cn/problems/sliding-window-maximum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "單調佇列"
+            },
+            {
+              "id": "84",
+              "title": "柱狀圖中最大的矩形",
+              "slug": "largest-rectangle-in-histogram",
+              "src": "https://leetcode.cn/problems/largest-rectangle-in-histogram/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "矩形"
+            },
+            {
+              "id": "42",
+              "title": "接雨水",
+              "slug": "trapping-rain-water",
+              "src": "https://leetcode.cn/problems/trapping-rain-water/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "矩形"
+            },
+            {
+              "id": "907",
+              "title": "子陣列的最小值之和",
+              "slug": "sum-of-subarray-minimums",
+              "src": "https://leetcode.cn/problems/sum-of-subarray-minimums/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "貢獻法"
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "title": "2.4 資料結構（9 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "560",
+              "title": "和為 K 的子陣列",
+              "slug": "subarray-sum-equals-k",
+              "src": "https://leetcode.cn/problems/subarray-sum-equals-k/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "字首和與雜湊表"
+            },
+            {
+              "id": "23",
+              "title": "合併 K 個升序連結串列",
+              "slug": "merge-k-sorted-lists",
+              "src": "https://leetcode.cn/problems/merge-k-sorted-lists/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "堆／K 路歸併"
+            },
+            {
+              "id": "253",
+              "title": "會議室 II",
+              "slug": "meeting-rooms-ii",
+              "src": "https://leetcode.cn/problems/meeting-rooms-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": true,
+              "subsection": "堆／區間並發"
+            },
+            {
+              "id": "155",
+              "title": "最小堆疊",
+              "slug": "min-stack",
+              "src": "https://leetcode.cn/problems/min-stack/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "堆疊／設計"
+            },
+            {
+              "id": "721",
+              "title": "賬戶合併",
+              "slug": "accounts-merge",
+              "src": "https://leetcode.cn/problems/accounts-merge/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "並查集"
+            },
+            {
+              "id": "295",
+              "title": "資料流的中位數",
+              "slug": "find-median-from-data-stream",
+              "src": "https://leetcode.cn/problems/find-median-from-data-stream/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "堆／對頂堆"
+            },
+            {
+              "id": "735",
+              "title": "小行星碰撞",
+              "slug": "asteroid-collision",
+              "src": "https://leetcode.cn/problems/asteroid-collision/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "堆疊／鄰項消除"
+            },
+            {
+              "id": "974",
+              "title": "和可被 K 整除的子陣列",
+              "slug": "subarray-sums-divisible-by-k",
+              "src": "https://leetcode.cn/problems/subarray-sums-divisible-by-k/",
+              "solution": null,
+              "score": 1676,
+              "isPremium": false,
+              "subsection": "字首和與雜湊表"
+            },
+            {
+              "id": "208",
+              "title": "實現 Trie（字首樹）",
+              "slug": "implement-trie-prefix-tree",
+              "src": "https://leetcode.cn/problems/implement-trie-prefix-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "字典樹"
+            }
+          ]
+        },
+        {
+          "id": 35,
+          "title": "2.5 網格圖（6 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "200",
+              "title": "島嶼數量",
+              "slug": "number-of-islands",
+              "src": "https://leetcode.cn/problems/number-of-islands/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "網格圖 DFS"
+            },
+            {
+              "id": "994",
+              "title": "腐爛的橘子",
+              "slug": "rotting-oranges",
+              "src": "https://leetcode.cn/problems/rotting-oranges/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "多源 BFS"
+            },
+            {
+              "id": "417",
+              "title": "太平洋大西洋水流問題",
+              "slug": "pacific-atlantic-water-flow",
+              "src": "https://leetcode.cn/problems/pacific-atlantic-water-flow/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "網格圖 DFS"
+            },
+            {
+              "id": "1091",
+              "title": "二進位制矩陣中的最短路徑",
+              "slug": "shortest-path-in-binary-matrix",
+              "src": "https://leetcode.cn/problems/shortest-path-in-binary-matrix/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "網格圖 BFS"
+            },
+            {
+              "id": "1293",
+              "title": "網格中的最短路徑",
+              "slug": "shortest-path-in-a-grid-with-obstacles-elimination",
+              "src": "https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination/",
+              "solution": null,
+              "score": 1967,
+              "isPremium": false,
+              "subsection": "帶狀態 BFS"
+            },
+            {
+              "id": "1368",
+              "title": "使網格圖至少有一條有效路徑的最小代價",
+              "slug": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+              "src": "https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+              "solution": null,
+              "score": 2069,
+              "isPremium": false,
+              "subsection": "0-1 BFS"
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "title": "2.6 圖論演算法（7 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "207",
+              "title": "課程表",
+              "slug": "course-schedule",
+              "src": "https://leetcode.cn/problems/course-schedule/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "拓撲排序"
+            },
+            {
+              "id": "210",
+              "title": "課程表 II",
+              "slug": "course-schedule-ii",
+              "src": "https://leetcode.cn/problems/course-schedule-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "拓撲排序"
+            },
+            {
+              "id": "743",
+              "title": "網路延遲時間",
+              "slug": "network-delay-time",
+              "src": "https://leetcode.cn/problems/network-delay-time/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "Dijkstra"
+            },
+            {
+              "id": "547",
+              "title": "省份數量",
+              "slug": "number-of-provinces",
+              "src": "https://leetcode.cn/problems/number-of-provinces/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "DFS 連通分量"
+            },
+            {
+              "id": "127",
+              "title": "單詞接龍",
+              "slug": "word-ladder",
+              "src": "https://leetcode.cn/problems/word-ladder/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "建模 + BFS 最短路"
+            },
+            {
+              "id": "752",
+              "title": "開啟轉盤鎖",
+              "slug": "open-the-lock",
+              "src": "https://leetcode.cn/problems/open-the-lock/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "建模 + BFS 最短路"
+            },
+            {
+              "id": "787",
+              "title": "K 站中轉內最便宜的航班",
+              "slug": "cheapest-flights-within-k-stops",
+              "src": "https://leetcode.cn/problems/cheapest-flights-within-k-stops/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "最短路（K 步限制）"
+            }
+          ]
+        },
+        {
+          "id": 37,
+          "title": "2.7 動態規劃（10 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "198",
+              "title": "打家劫舍",
+              "slug": "house-robber",
+              "src": "https://leetcode.cn/problems/house-robber/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "入門 DP"
+            },
+            {
+              "id": "322",
+              "title": "零錢兌換",
+              "slug": "coin-change",
+              "src": "https://leetcode.cn/problems/coin-change/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "完全背包"
+            },
+            {
+              "id": "300",
+              "title": "最長遞增子序列",
+              "slug": "longest-increasing-subsequence",
+              "src": "https://leetcode.cn/problems/longest-increasing-subsequence/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "LIS"
+            },
+            {
+              "id": "139",
+              "title": "單詞拆分",
+              "slug": "word-break",
+              "src": "https://leetcode.cn/problems/word-break/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "劃分型 DP"
+            },
+            {
+              "id": "1143",
+              "title": "最長公共子序列",
+              "slug": "longest-common-subsequence",
+              "src": "https://leetcode.cn/problems/longest-common-subsequence/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "LCS"
+            },
+            {
+              "id": "416",
+              "title": "分割等和子集",
+              "slug": "partition-equal-subset-sum",
+              "src": "https://leetcode.cn/problems/partition-equal-subset-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "0-1 背包"
+            },
+            {
+              "id": "64",
+              "title": "最小路徑和",
+              "slug": "minimum-path-sum",
+              "src": "https://leetcode.cn/problems/minimum-path-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "網格圖 DP"
+            },
+            {
+              "id": "72",
+              "title": "編輯距離",
+              "slug": "edit-distance",
+              "src": "https://leetcode.cn/problems/edit-distance/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "雙序列 DP"
+            },
+            {
+              "id": "309",
+              "title": "買賣股票的最佳時機含冷凍期",
+              "slug": "best-time-to-buy-and-sell-stock-with-cooldown",
+              "src": "https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "狀態機 DP"
+            },
+            {
+              "id": "1235",
+              "title": "規劃兼職工作",
+              "slug": "maximum-profit-in-job-scheduling",
+              "src": "https://leetcode.cn/problems/maximum-profit-in-job-scheduling/",
+              "solution": null,
+              "score": 2023,
+              "isPremium": false,
+              "subsection": "帶權區間排程"
+            }
+          ]
+        },
+        {
+          "id": 38,
+          "title": "2.8 樹和二元樹（6 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "236",
+              "title": "二叉樹的最近公共祖先",
+              "slug": "lowest-common-ancestor-of-a-binary-tree",
+              "src": "https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "最近公共祖先"
+            },
+            {
+              "id": "543",
+              "title": "二叉樹的直徑",
+              "slug": "diameter-of-binary-tree",
+              "src": "https://leetcode.cn/problems/diameter-of-binary-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "二叉樹的直徑"
+            },
+            {
+              "id": "124",
+              "title": "二叉樹中的最大路徑和",
+              "slug": "binary-tree-maximum-path-sum",
+              "src": "https://leetcode.cn/problems/binary-tree-maximum-path-sum/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "二叉樹的直徑"
+            },
+            {
+              "id": "98",
+              "title": "驗證二叉搜索樹",
+              "slug": "validate-binary-search-tree",
+              "src": "https://leetcode.cn/problems/validate-binary-search-tree/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "二叉搜索樹"
+            },
+            {
+              "id": "199",
+              "title": "二叉樹的右檢視",
+              "slug": "binary-tree-right-side-view",
+              "src": "https://leetcode.cn/problems/binary-tree-right-side-view/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "自頂向下 DFS"
+            },
+            {
+              "id": "230",
+              "title": "二叉搜索樹中第 K 小的元素",
+              "slug": "kth-smallest-element-in-a-bst",
+              "src": "https://leetcode.cn/problems/kth-smallest-element-in-a-bst/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "二叉搜索樹"
+            }
+          ]
+        },
+        {
+          "id": 39,
+          "title": "2.9 貪心與區間（5 題）",
+          "isLeaf": true,
+          "problems": [
+            {
+              "id": "56",
+              "title": "合併區間",
+              "slug": "merge-intervals",
+              "src": "https://leetcode.cn/problems/merge-intervals/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "合併區間"
+            },
+            {
+              "id": "55",
+              "title": "跳躍遊戲",
+              "slug": "jump-game",
+              "src": "https://leetcode.cn/problems/jump-game/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "最遠可達貪心"
+            },
+            {
+              "id": "435",
+              "title": "無重疊區間",
+              "slug": "non-overlapping-intervals",
+              "src": "https://leetcode.cn/problems/non-overlapping-intervals/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "不相交區間"
+            },
+            {
+              "id": "763",
+              "title": "劃分字母區間",
+              "slug": "partition-labels",
+              "src": "https://leetcode.cn/problems/partition-labels/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "合併區間"
+            },
+            {
+              "id": "45",
+              "title": "跳躍遊戲 II",
+              "slug": "jump-game-ii",
+              "src": "https://leetcode.cn/problems/jump-game-ii/",
+              "solution": null,
+              "score": null,
+              "isPremium": false,
+              "subsection": "區間覆蓋"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

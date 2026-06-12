@@ -61,6 +61,7 @@ export const STUDYPLANS = {
   graph: "圖論演算法",
   greedy: "貪心",
   grid: "網格圖",
+  interview_sprint: "面試衝刺計畫",
   math: "數學",
   monotonic_stack: "單調堆疊",
   sliding_window: "滑動視窗",

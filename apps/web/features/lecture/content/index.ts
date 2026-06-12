@@ -9,6 +9,7 @@ import { dynamicProgramming } from "./dynamic_programming";
 import { graph } from "./graph";
 import { greedy } from "./greedy";
 import { grid } from "./grid";
+import { interviewSprint } from "./interview_sprint";
 import { math } from "./math";
 import { monotonicStack } from "./monotonic_stack";
 import { slidingWindow } from "./sliding_window";
@@ -17,6 +18,7 @@ import { trees } from "./trees";
 
 /** Lecture category key -> display title. Lecture-owned; independent of STUDYPLANS. */
 export const LECTURE_CATEGORIES: Record<string, string> = {
+  interview_sprint: "面試衝刺計畫",
   technical_interview: "技術面試準備",
   rating_2100: "Rating 2100",
   binary_search: "二分搜尋",
@@ -46,6 +48,7 @@ export const lectureContentMap: Record<string, TutorialData.Root> = {
   graph: graph,
   greedy: greedy,
   grid: grid,
+  interview_sprint: interviewSprint,
   math: math,
   monotonic_stack: monotonicStack,
   sliding_window: slidingWindow,

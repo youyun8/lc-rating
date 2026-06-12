@@ -10,6 +10,7 @@ import dpData from "@/public/studyplan/dynamic_programming.json";
 import graphData from "@/public/studyplan/graph.json";
 import greedyData from "@/public/studyplan/greedy.json";
 import gridData from "@/public/studyplan/grid.json";
+import interviewSprintData from "@/public/studyplan/interview_sprint.json";
 import mathData from "@/public/studyplan/math.json";
 import monotonicStackData from "@/public/studyplan/monotonic_stack.json";
 import slidingWindowData from "@/public/studyplan/sliding_window.json";
@@ -27,6 +28,7 @@ export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
   graph: graphData as StudyPlanData.Root,
   greedy: greedyData as StudyPlanData.Root,
   grid: gridData as StudyPlanData.Root,
+  interview_sprint: interviewSprintData as StudyPlanData.Root,
   math: mathData as StudyPlanData.Root,
   monotonic_stack: monotonicStackData as StudyPlanData.Root,
   sliding_window: slidingWindowData as StudyPlanData.Root,
