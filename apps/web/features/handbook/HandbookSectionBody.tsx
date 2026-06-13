@@ -143,13 +143,35 @@ function parseProblemId(token: string): string | number | undefined {
 }
 
 /**
- * Split a technique cell into individual labels. Both ` / ` and ` + ` act as
- * separators (e.g. "BS on answer + greedy check" → "BS on answer", "greedy
- * check"), then re-join with ` / ` so {@link ProblemList} renders one chip each.
+ * Turn a raw technique/label cell into clean chip text.
+ *
+ * Lecture tables author this column in a few different shapes that all need
+ * tidying before it becomes a chip:
+ * - cross-references like `"sliding_window → 越短越合法/求最長"` carry a plan-key
+ *   prefix that is noise to the reader,
+ * - performance chapters prepend an all-caps reading marker `"[ADVANCED / NICHE]"`,
+ * - many cells append a `"；邊界：…"` boundary note that is far too long for a chip,
+ * - some wrap snippets in inline-code backticks.
+ *
+ * After stripping those, genuine multi-technique cells still separate parts with
+ * ` / ` or ` + ` (e.g. `"BS on answer + greedy check"`); we re-join those with
+ * ` / ` so {@link ProblemList} renders one chip each. A bare `/` inside a single
+ * concept name (e.g. `"越短越合法/求最長"`) is deliberately left intact.
  */
 function techToSubsection(tech: string): string | undefined {
-  const labels = tech
-    .split(/\s+\+\s+|\s*\/\s*/)
+  let cleaned = tech.trim();
+  // Drop a leading plan-key cross-reference prefix ("binary_search → …").
+  cleaned = cleaned.replace(/^[a-z0-9_]+\s*→\s*/, "");
+  // Drop an all-caps reading marker ("[ADVANCED / NICHE] …"); this is anchored
+  // and caps-only so it never touches a markdown link like "[兩數相除](…)".
+  cleaned = cleaned.replace(/^\[[A-Z][A-Z\s/]*\]\s*/, "");
+  // Keep only the technique, dropping the trailing "；邊界：…" note.
+  cleaned = cleaned.split("；")[0]!;
+  // Inline-code backticks render as literal text in a chip.
+  cleaned = cleaned.replace(/`/g, "").trim();
+
+  const labels = cleaned
+    .split(/\s+\+\s+|\s+\/\s+/)
     .map((t) => t.trim())
     .filter(Boolean);
   return labels.length > 0 ? labels.join(" / ") : undefined;
