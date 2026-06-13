@@ -12,7 +12,8 @@
     "format:data": "prettier --write \"public/**/*.json\"",
     "parser:extract": "tsx ./lc-parser/extract_html2md.ts",
     "parser:process": "tsx ./lc-parser/process.ts",
-    "test": "tsx ./lc-parser/smoke_test.ts"
+    "test": "tsx ./lc-parser/smoke_test.ts",
+    "test:unit": "tsx --test \"./**/*.test.ts\""
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^1.0.28",

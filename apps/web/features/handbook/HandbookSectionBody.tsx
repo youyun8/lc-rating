@@ -3,6 +3,7 @@
 import { StudyPlanMarkdownContent } from "@/features/studyplan/MarkdownContent";
 import { ProblemList } from "@/features/studyplan/ProblemList";
 import type { StudyPlanData } from "@/types";
+import { normalizeTechniqueLabels } from "@/utils/techniqueLabel";
 import { useMemo } from "react";
 import { HandbookExample } from "./HandbookExample";
 
@@ -143,15 +144,13 @@ function parseProblemId(token: string): string | number | undefined {
 }
 
 /**
- * Split a technique cell into individual labels. Both ` / ` and ` + ` act as
- * separators (e.g. "BS on answer + greedy check" → "BS on answer", "greedy
- * check"), then re-join with ` / ` so {@link ProblemList} renders one chip each.
+ * Turn a raw lecture technique/label cell into a `subsection` string for
+ * {@link ProblemList}. The real work lives in {@link normalizeTechniqueLabels};
+ * here we just re-join the cleaned chips with the " / " delimiter that
+ * `getSubsectionLabels` later splits on.
  */
 function techToSubsection(tech: string): string | undefined {
-  const labels = tech
-    .split(/\s+\+\s+|\s*\/\s*/)
-    .map((t) => t.trim())
-    .filter(Boolean);
+  const labels = normalizeTechniqueLabels(tech);
   return labels.length > 0 ? labels.join(" / ") : undefined;
 }
 
