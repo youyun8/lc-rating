@@ -56,20 +56,6 @@ function categoryRows(sectionIds: number[]) {
     .map(problemToTableRow);
 }
 
-function allPracticeRows() {
-  const seen = new Set<string>();
-  return practiceSections.flatMap((section) =>
-    (section.problems ?? [])
-      .filter((problem) => {
-        const key = `${problem.id}:${problem.slug}`;
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-      })
-      .map(problemToTableRow),
-  );
-}
-
 /** Join authored lines into a markdown summary. Keeps long, code-heavy section
  *  bodies readable in source while still emitting a single markdown string. */
 function md(...lines: string[]) {
