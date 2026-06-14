@@ -18,8 +18,10 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { TutorialMarkdownPanel } from "./MarkdownPanel";
 import { CourseMaterials } from "./CourseMaterials";
+import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { getTutorialStats } from "@/features/learning/utils/sectionTree";
 import {
+  getStudyPlanProblemsForSection,
   LectureSectionCards,
   makeLectureSectionCardItem,
 } from "@/features/tutorial/LectureSectionCards";
@@ -39,7 +41,12 @@ function Tutorial({ plan }: TutorialProps) {
   const sectionCardItems = useMemo(
     () =>
       tutorial?.children.map((section) =>
-        makeLectureSectionCardItem(section, plan, 0, []),
+        makeLectureSectionCardItem(
+          section,
+          plan,
+          0,
+          getStudyPlanProblemsForSection(studyPlanDataMap[plan], section.id),
+        ),
       ) ?? [],
     [plan, tutorial?.children],
   );

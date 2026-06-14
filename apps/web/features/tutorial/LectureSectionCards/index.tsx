@@ -7,7 +7,10 @@ import { useMemo } from "react";
 import { getCardProgressState, type LectureSectionCardItem } from "./cardModel";
 import { LectureSectionCard } from "./LectureSectionCard";
 
-export { makeLectureSectionCardItem } from "./cardModel";
+export {
+  getStudyPlanProblemsForSection,
+  makeLectureSectionCardItem,
+} from "./cardModel";
 
 interface LectureSectionCardsProps {
   title: string;

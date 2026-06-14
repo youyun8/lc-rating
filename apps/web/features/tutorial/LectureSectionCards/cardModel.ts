@@ -49,7 +49,7 @@ export function getLevelLabel(depth: number) {
   return "細分單元";
 }
 
-function getProblemIds(problems: StudyPlanData.Item[]) {
+export function getProblemIds(problems: StudyPlanData.Item[]) {
   return Array.from(
     new Set(
       problems
@@ -57,6 +57,37 @@ function getProblemIds(problems: StudyPlanData.Item[]) {
         .filter((id): id is string => Boolean(id)),
     ),
   );
+}
+
+function findStudyPlanSectionById(
+  sections: StudyPlanData.Section[] | undefined,
+  sectionId: number,
+): StudyPlanData.Section | undefined {
+  for (const section of sections ?? []) {
+    if (section.id === sectionId) return section;
+
+    const childMatch = findStudyPlanSectionById(section.children, sectionId);
+    if (childMatch) return childMatch;
+  }
+}
+
+export function getStudyPlanProblemsForSection(
+  root: StudyPlanData.Root | undefined,
+  sectionId: number,
+): StudyPlanData.Item[] {
+  const section = findStudyPlanSectionById(root?.children, sectionId);
+  if (!section) return [];
+
+  return collectStudyPlanProblems(section);
+}
+
+function collectStudyPlanProblems(
+  section: StudyPlanData.Section,
+): StudyPlanData.Item[] {
+  return [
+    ...(section.problems ?? []),
+    ...(section.children ?? []).flatMap(collectStudyPlanProblems),
+  ];
 }
 
 function countTutorialDescendants(section: TutorialData.Section): number {

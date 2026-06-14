@@ -10,6 +10,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { LectureSectionCards } from "@/features/tutorial/LectureSectionCards";
+import {
+  getProblemIds,
+  getStudyPlanProblemsForSection,
+} from "@/features/tutorial/LectureSectionCards/cardModel";
+import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 
 interface LectureSectionPageProps {
   section: LectureSectionTutorial;
@@ -17,19 +22,26 @@ interface LectureSectionPageProps {
 
 export function LectureSectionPage({ section }: LectureSectionPageProps) {
   const hasChildren = section.children.length > 0;
-  const childItems = section.children.map((child) => ({
-    id: child.id,
-    title: child.title,
-    description: child.description,
-    slug: child.slug,
-    href: `/lecture/${section.planKey}/${child.slug}`,
-    summary: child.summary,
-    childCount: child.childCount,
-    totalSections: child.totalSections,
-    problemCount: 0,
-    problemIds: [],
-    depth: child.depth,
-  }));
+  const studyPlan = studyPlanDataMap[section.planKey];
+  const childItems = section.children.map((child) => {
+    const problemIds = getProblemIds(
+      getStudyPlanProblemsForSection(studyPlan, child.id),
+    );
+
+    return {
+      id: child.id,
+      title: child.title,
+      description: child.description,
+      slug: child.slug,
+      href: `/lecture/${section.planKey}/${child.slug}`,
+      summary: child.summary,
+      childCount: child.childCount,
+      totalSections: child.totalSections,
+      problemCount: problemIds.length,
+      problemIds,
+      depth: child.depth,
+    };
+  });
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background font-han">
