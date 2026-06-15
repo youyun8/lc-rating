@@ -190,7 +190,7 @@
   },
   "1030458351": {
     "id": "1030458351",
-    "title": "非暴力做法：數位 DP（Python/Java/C++/Go）",
+    "title": "兩種方法：數位 DP / 數學公式（Python/Java/C++/Go）",
     "titleSlug": "fei-bao-li-zuo-fa-shu-wei-dppythonjavacg-wffg",
     "time": 1763856916701,
     "problemId": "3751"
@@ -1576,7 +1576,7 @@
   },
   "1331006046": {
     "id": "1331006046",
-    "title": "本質是維護字首最小值，簡潔寫法！附變形題（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "兩種方法：儲存字首最小值 / 儲存差值，不用輔助堆疊（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "ben-zhi-shi-wei-hu-qian-zhui-zui-xiao-zh-x0g8",
     "time": 1730511157402,
     "problemId": "155"
@@ -1734,6 +1734,13 @@
     "titleSlug": "mo-ban-ding-chang-hua-dong-chuang-kou-py-85sh",
     "time": 1738399690711,
     "problemId": "1343"
+  },
+  "1376741128": {
+    "id": "1376741128",
+    "title": "等價轉化，O(1) 公式（Python/Java/C++/Go）",
+    "titleSlug": "deng-jie-zhuan-hua-o1-gong-shi-pythonjav-2nrw",
+    "time": 1781074087346,
+    "problemId": "3958"
   },
   "1377831845": {
     "id": "1377831845",
@@ -2868,6 +2875,13 @@
     "titleSlug": "bing-cha-ji-fen-zu-pai-xu-by-endlesschen-kfav",
     "time": 1630814816444,
     "problemId": "1998"
+  },
+  "1642110941": {
+    "id": "1642110941",
+    "title": "值域樹狀陣列 + 最佳化（Python/Java/C++/Go）",
+    "titleSlug": "zhi-yu-shu-zhuang-shu-zu-by-endlesscheng-txva",
+    "time": 1781414005356,
+    "problemId": "3962"
   },
   "164313417": {
     "id": "164313417",
@@ -4544,7 +4558,7 @@
   },
   "20438516": {
     "id": "20438516",
-    "title": "本質是維護字首最小值，簡潔寫法，附變形題（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "兩種方法：儲存字首最小值 / 儲存差值，不用輔助堆疊（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "ben-zhi-shi-wei-hu-qian-zhui-zui-xiao-zh-4lee",
     "time": 1759672002189,
     "problemId": "面試題 03.02"
@@ -5125,7 +5139,7 @@
   },
   "2188606245": {
     "id": "2188606245",
-    "title": "沒想明白？一個影片講透！（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "龜兔賽跑（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "mei-xiang-ming-bai-yi-ge-shi-pin-jiang-t-wzwm",
     "time": 1669798096020,
     "problemId": "876"
@@ -6200,6 +6214,13 @@
     "titleSlug": "la-ge-lang-ri-cha-zhi-by-endlesscheng-ac1c",
     "time": 1777596178339,
     "problemId": "3916"
+  },
+  "2415890648": {
+    "id": "2415890648",
+    "title": "維護出現次數的出現次數 + 最佳化（Python/Java/C++/Go）",
+    "titleSlug": "yue-du-li-jie-pythonjavacgo-by-endlessch-msys",
+    "time": 1781412247472,
+    "problemId": "3960"
   },
   "2421996109": {
     "id": "2421996109",
@@ -8716,7 +8737,7 @@
   },
   "2982198446": {
     "id": "2982198446",
-    "title": "快慢指標",
+    "title": "龜兔賽跑（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "kuai-man-zhi-zhen-by-endlesscheng-jodm",
     "time": 1638677202040,
     "problemId": "2095"
@@ -9343,6 +9364,13 @@
     "titleSlug": "cong-zuo-dao-you-cao-zuo-jian-ji-xie-fa-yzcde",
     "time": 1719098636795,
     "problemId": "3192"
+  },
+  "3126810345": {
+    "id": "3126810345",
+    "title": "把最小值彙集到一起，一次遍歷（Python/Java/C++/Go）",
+    "titleSlug": "ba-dan-yuan-ji-zhong-dao-yi-ge-she-bei-z-afnf",
+    "time": 1781420386060,
+    "problemId": "3961"
   },
   "3130296264": {
     "id": "3130296264",
@@ -10345,6 +10373,13 @@
     "time": 1662264488538,
     "problemId": "2401"
   },
+  "3357243016": {
+    "id": "3357243016",
+    "title": "不用字串的做法（Python/Java/C++/Go）",
+    "titleSlug": "bu-yong-zi-fu-chuan-de-zuo-fa-pythonjava-lhyh",
+    "time": 1781415703001,
+    "problemId": "3959"
+  },
   "3357632986": {
     "id": "3357632986",
     "title": "回溯不會寫？套路在此！（Python/Java/C++/Go）",
@@ -10827,6 +10862,13 @@
     "titleSlug": "jian-ji-gao-xiao-ji-suan-dao-yu-de-mian-ab4h7",
     "time": 1718188272293,
     "problemId": "827"
+  },
+  "3469541764": {
+    "id": "3469541764",
+    "title": "兩次掃描，傳播約束（Python/Java/C++/C/Go/JS/Rust）",
+    "titleSlug": "liang-ci-sao-miao-chuan-bo-yue-shu-pytho-kigb",
+    "time": 1780981178505,
+    "problemId": "1840"
   },
   "3469926498": {
     "id": "3469926498",
@@ -15651,6 +15693,13 @@
     "time": 1740284331979,
     "problemId": "3464"
   },
+  "739255468": {
+    "id": "739255468",
+    "title": "兩種方法：建立新陣列 / 原地交換（Python/Java/C++/C/Go/JS/Rust）",
+    "titleSlug": "liang-chong-fang-fa-chuang-jian-xin-shu-0has3",
+    "time": 1780712134667,
+    "problemId": "1470"
+  },
   "746573214": {
     "id": "746573214",
     "title": "倒序回答 + 並查集（Python/Java/C++/Go）",
@@ -15730,7 +15779,7 @@
   },
   "761142635": {
     "id": "761142635",
-    "title": "數位 DP 通用模板，兩種寫法：引數/貢獻（Python/Java/C++/Go）",
+    "title": "兩種方法：數位 DP / 數學公式（Python/Java/C++/Go）",
     "titleSlug": "by-endlesscheng-h9ua",
     "time": 1628570169962,
     "problemId": "233"
@@ -16346,7 +16395,7 @@
   },
   "910992370": {
     "id": "910992370",
-    "title": "上下界數位 DP，兩種寫法：引數/貢獻（Python/Java/C++/Go）",
+    "title": "兩種方法：數位 DP / 數學公式（Python/Java/C++/Go）",
     "titleSlug": "shang-xia-jie-shu-wei-dppythonjavacgo-by-74vp",
     "time": 1763856847237,
     "problemId": "3753"
