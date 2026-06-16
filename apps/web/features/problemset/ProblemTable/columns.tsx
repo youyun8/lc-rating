@@ -53,7 +53,7 @@ export const getColumns = () => [
               ? problem.title
               : `${problem.id}. ${problem.title}`
           }
-          className="block max-w-full whitespace-normal break-words text-sm font-medium leading-6 text-foreground transition-colors hover:text-primary sm:truncate"
+          className="block max-w-full whitespace-normal break-words text-sm font-normal leading-6 text-foreground transition-colors hover:text-primary sm:truncate"
         />
       );
     },

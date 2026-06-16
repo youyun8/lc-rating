@@ -100,7 +100,7 @@ const generate = (
                     ? Q.problem.title
                     : `${Q.problem.id}. ${Q.problem.title}`
                 }
-                className="min-w-0 whitespace-normal break-words text-sm font-medium leading-5 text-foreground transition-colors hover:text-primary hover:underline sm:line-clamp-2"
+                className="min-w-0 whitespace-normal break-words text-sm font-normal leading-5 text-foreground transition-colors hover:text-primary hover:underline sm:line-clamp-2"
               />
               <span
                 className="mt-0.5 inline-flex shrink-0 items-center rounded-full px-1.5 py-0.5 text-xs font-semibold tabular-nums"

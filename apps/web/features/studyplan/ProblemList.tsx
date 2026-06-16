@@ -278,7 +278,7 @@ const ProblemList = React.memo(
                   href={getLeetCodeProblemUrl(problem.slug, linkLanguage)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="min-w-0 text-sm font-medium leading-snug text-foreground transition-colors hover:text-primary sm:text-[15px]"
+                  className="min-w-0 text-sm font-normal leading-snug text-foreground transition-colors hover:text-primary sm:text-[15px]"
                 >
                   {problem.id?.toString() === "1000000000" ||
                   problem.title.startsWith(`${problem.id}`)
