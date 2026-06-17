@@ -6,33 +6,40 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
   SidebarRail,
   SidebarResizeHandle,
   SidebarSeparator,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
-  SidebarMenuSub,
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { STUDYPLANS } from "@/config/constants";
 import { studyPlanIcons } from "@/config/studyPlanThemes";
-import { cn } from "@/lib/utils";
-import { BookOpen, ChevronRight } from "lucide-react";
+import { BookOpen, ChevronRight, PanelLeftClose } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { sectionAnchor } from "@/utils/sectionAnchor";
+import { useEffect, useState } from "react";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
-import { ChapterLink, getSectionHref, SubTopicItem } from "./sidebarNav";
+import { SectionTreeItem } from "./sidebarNav";
 
 /** Renders a chapter sidebar on study-plan and lecture detail pages. */
 export function GlobalStudyPlanSidebar() {
   const rawPathname = usePathname();
   const pathname = rawPathname ?? "";
   const { isMobile, open, openMobile, setOpen, setOpenMobile } = useSidebar();
+  const [currentHash, setCurrentHash] = useState("");
+
+  useEffect(() => {
+    const updateHash = () => setCurrentHash(window.location.hash.slice(1));
+
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+
+    return () => window.removeEventListener("hashchange", updateHash);
+  }, [pathname]);
 
   const pageType = pathname.startsWith("/lecture/")
     ? "lecture"
@@ -65,28 +72,27 @@ export function GlobalStudyPlanSidebar() {
       ? pathname.replace(`/lecture/${currentPlanKey}`, "").replace(/^\//, "") ||
         null
       : null;
-
-  const isLectureLink = pageType === "lecture" && Boolean(currentPlanKey);
+  const activeSlug = pageType === "lecture" ? currentSlug : currentHash || null;
 
   return (
-    <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-primary/30">
-      <SidebarHeader className="gap-3 p-4">
-        <div className="flex items-start justify-between gap-2">
-          <SidebarMenuButton asChild className="w-fit -ml-2">
+    <Sidebar className="top-[var(--navbar-height)] h-[calc(100vh-var(--navbar-height))] border-r border-sidebar-border/70">
+      <SidebarHeader className="gap-2 px-3 py-2">
+        <div className="flex items-center justify-between gap-2">
+          <SidebarMenuButton asChild className="-ml-1 h-9 min-w-0 flex-1">
             <Link
               href={backHref}
-              className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
+              className="flex items-center gap-2 text-sidebar-foreground/75 hover:text-sidebar-foreground"
             >
-              <ChevronRight className="h-4 w-4 rotate-180" />
-              <span className="text-xs">{backLabel}</span>
+              <ChevronRight className="h-4 w-4 shrink-0 rotate-180" />
+              <span className="truncate text-sm">{backLabel}</span>
             </Link>
           </SidebarMenuButton>
           {(isMobile ? openMobile : open) && (
             <Button
               type="button"
               variant="ghost"
-              size="sm"
-              className="h-8 border border-sidebar-border/60 bg-transparent px-2.5 text-xs text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              size="icon"
+              className="h-9 w-9 shrink-0 rounded-lg text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               onClick={() => {
                 if (isMobile) {
                   setOpenMobile(false);
@@ -94,101 +100,51 @@ export function GlobalStudyPlanSidebar() {
                 }
                 setOpen(false);
               }}
+              aria-label="收合側欄"
+              title="收合側欄"
             >
-              隱藏側欄
+              <PanelLeftClose className="h-4 w-4" />
             </Button>
           )}
         </div>
-        <div className="relative overflow-hidden rounded-2xl border border-sidebar-border/60 bg-sidebar-accent/15 p-3">
-          <div className="flex items-center gap-2.5">
-            {(() => {
-              const Icon = studyPlanIcons[currentPlanKey as string] || BookOpen;
-              return (
-                <span className="brand-gradient inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white shadow-sm">
-                  <Icon className="h-4 w-4" />
-                </span>
-              );
-            })()}
-            <div className="min-w-0 flex-1">
-              <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                {pageType === "lecture" ? "講義" : "題單"}
-              </p>
-              <p className="truncate text-base font-bold leading-tight text-foreground">
-                {currentPlanTitle}
-              </p>
-            </div>
+        <div className="flex items-center gap-2 rounded-lg px-2 py-2 text-sidebar-foreground">
+          {(() => {
+            const Icon = studyPlanIcons[currentPlanKey as string] || BookOpen;
+            return (
+              <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-accent-foreground">
+                <Icon className="h-4 w-4" />
+              </span>
+            );
+          })()}
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-[13px] font-semibold leading-tight">
+              {currentPlanTitle}
+            </p>
+            <p className="text-xs leading-tight text-sidebar-foreground/55">
+              {pageType === "lecture" ? "講義" : "題單"}
+            </p>
           </div>
         </div>
       </SidebarHeader>
-      <SidebarSeparator />
-      <SidebarContent>
+      <SidebarSeparator className="bg-sidebar-border/60" />
+      <SidebarContent className="px-1.5 pb-3 pt-1">
         {data && (
-          <SidebarGroup>
-            <SidebarGroupLabel className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground/80">
+          <SidebarGroup className="p-1">
+            <SidebarGroupLabel className="h-7 px-2 text-xs font-medium text-sidebar-foreground/55">
               章節導覽
             </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu className="gap-0.5">
-                {data.children.map((section, index) => {
-                  const href = getSectionHref(
-                    section,
-                    pageType,
-                    currentPlanKey,
-                  );
-                  const isActive =
-                    isLectureLink &&
-                    currentSlug === sectionAnchor(section.title);
-                  const hasChildren =
-                    section.children && section.children.length > 0;
-
-                  return (
-                    <SidebarMenuItem key={section.id}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={isActive}
-                        className="group/chapter h-auto py-2"
-                      >
-                        <ChapterLink
-                          href={href}
-                          isLectureLink={isLectureLink}
-                          className="flex items-center gap-2"
-                        >
-                          <span
-                            className={cn(
-                              "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-[10px] font-semibold tabular-nums transition-colors",
-                              isActive
-                                ? "border-transparent bg-sidebar-primary/15 text-sidebar-primary"
-                                : "border-sidebar-border/60 text-muted-foreground/80 group-hover/chapter:border-sidebar-primary/40 group-hover/chapter:text-sidebar-primary",
-                            )}
-                          >
-                            {index + 1}
-                          </span>
-                          <span
-                            className={cn(
-                              "truncate text-sm font-medium",
-                              isActive && "font-semibold text-sidebar-primary",
-                            )}
-                          >
-                            {section.title.replace(/^\d+\.\s*/, "")}
-                          </span>
-                        </ChapterLink>
-                      </SidebarMenuButton>
-                      {hasChildren && (
-                        <SidebarMenuSub className="mt-0.5 gap-0.5 border-l-sidebar-border/60 pl-3">
-                          {section.children!.map((child) => (
-                            <SubTopicItem
-                              key={child.id}
-                              section={child}
-                              pageType={pageType}
-                              currentPlanKey={currentPlanKey}
-                              currentSlug={currentSlug}
-                            />
-                          ))}
-                        </SidebarMenuSub>
-                      )}
-                    </SidebarMenuItem>
-                  );
-                })}
+                {data.children.map((section, index) => (
+                  <SectionTreeItem
+                    key={section.id}
+                    section={section}
+                    pageType={pageType}
+                    currentPlanKey={currentPlanKey}
+                    activeSlug={activeSlug}
+                    indexLabel={`${index + 1}`}
+                  />
+                ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>

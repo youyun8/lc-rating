@@ -22,9 +22,10 @@ test("keeps a bare a/b concept name intact, splits a spaced a / b", () => {
 });
 
 test("keeps ' + ' compound techniques together", () => {
-  assert.deepEqual(normalizeTechniqueLabels("XOR + popcount，O(1)；邊界：相等為 0"), [
-    "XOR + popcount",
-  ]);
+  assert.deepEqual(
+    normalizeTechniqueLabels("XOR + popcount，O(1)；邊界：相等為 0"),
+    ["XOR + popcount"],
+  );
   assert.deepEqual(normalizeTechniqueLabels("雜湊 + 雙向鏈結串列"), [
     "雜湊 + 雙向鏈結串列",
   ]);
@@ -32,7 +33,9 @@ test("keeps ' + ' compound techniques together", () => {
 
 test("strips the all-caps reading marker without touching markdown links", () => {
   assert.deepEqual(
-    normalizeTechniqueLabels("[ADVANCED / NICHE] 公共前綴；邊界：跨 2 的冪歸 0"),
+    normalizeTechniqueLabels(
+      "[ADVANCED / NICHE] 公共前綴；邊界：跨 2 的冪歸 0",
+    ),
     ["公共前綴"],
   );
   assert.deepEqual(
@@ -57,7 +60,9 @@ test("drops complexity, code snippets and boundary notes", () => {
     ["前綴和佈局"],
   );
   assert.deepEqual(
-    normalizeTechniqueLabels("[ADVANCED / NICHE] 逐位統計貢獻 O(32n)；邊界：避免 O(n^2)"),
+    normalizeTechniqueLabels(
+      "[ADVANCED / NICHE] 逐位統計貢獻 O(32n)；邊界：避免 O(n^2)",
+    ),
     ["逐位統計貢獻"],
   );
 });
@@ -73,13 +78,15 @@ test("drops a trailing latin operation note on a CJK-led pattern", () => {
 
 test("splits genuine either/or alternatives", () => {
   assert.deepEqual(
-    normalizeTechniqueLabels("[ADVANCED / NICHE] 逐位模 3 / 狀態機；邊界：負數補碼"),
+    normalizeTechniqueLabels(
+      "[ADVANCED / NICHE] 逐位模 3 / 狀態機；邊界：負數補碼",
+    ),
     ["逐位模 3", "狀態機"],
   );
-  assert.deepEqual(normalizeTechniqueLabels("多源 BFS / 兩遍 DP；邊界：無 0、全 0"), [
-    "多源 BFS",
-    "兩遍 DP",
-  ]);
+  assert.deepEqual(
+    normalizeTechniqueLabels("多源 BFS / 兩遍 DP；邊界：無 0、全 0"),
+    ["多源 BFS", "兩遍 DP"],
+  );
 });
 
 test("returns an empty list for empty input", () => {
