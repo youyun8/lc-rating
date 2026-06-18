@@ -1322,6 +1322,38 @@ export function practiceSectionId(topicId: number): number {
   return topicId * 10 + 9;
 }
 
+function isDuplicateTopicCard(subtopic: Q3Subtopic, topicTitle: string) {
+  return subtopic.title.trim() === topicTitle.trim();
+}
+
+function buildSubtopicGuide(subtopics: Q3Subtopic[]) {
+  if (subtopics.length === 0) {
+    return "## 涵蓋主題\n\n本模式的重點已整合在下方總覽與題表中；先確認讀題訊號，再依必修、進階、挑戰順序練習。";
+  }
+
+  const rows = subtopics
+    .map(
+      (subtopic, index) =>
+        `${index + 1}. **${subtopic.title}**：${subtopic.blurb}`,
+    )
+    .join("\n");
+
+  return `## 涵蓋主題\n\n模式總覽先整理核心直覺與讀題訊號；下面只列出需要獨立展開的細分技巧，模式本身的基礎概念已併入本頁總覽。\n\n${rows}`;
+}
+
+function enrichOverviewWithSubtopicGuide(
+  overview: string,
+  subtopics: Q3Subtopic[],
+) {
+  const guide = buildSubtopicGuide(subtopics);
+  const withGuide = overview.replace(
+    /^## 涵蓋主題\n\n[\s\S]*?(?=\n\n## )/,
+    guide,
+  );
+
+  return withGuide === overview ? `${guide}\n\n${overview}` : withGuide;
+}
+
 export function buildPatternSection(
   topicId: number,
   title: string,
@@ -1330,19 +1362,31 @@ export function buildPatternSection(
   withTopicPractice: (summary: string, topicId: number) => string,
 ): TutorialData.Section {
   const subtopics = Q3_SUBTOPICS[topicId] ?? [];
+  const visibleSubtopics = subtopics
+    .map((subtopic, index) => ({ subtopic, index }))
+    .filter(({ subtopic }) => !isDuplicateTopicCard(subtopic, title));
+  const overviewSummary = withTopicPractice(
+    enrichOverviewWithSubtopicGuide(
+      overview,
+      visibleSubtopics.map(({ subtopic }) => subtopic),
+    ),
+    topicId,
+  );
+
   return {
     id: topicId,
     title,
     description,
-    summary: `## 章節導覽\n\n本模式共有 ${subtopics.length} 個子主題講義，外加「搭配追蹤題單」。建議先讀「模式總覽」，再依序閱讀子主題，最後練題。`,
+    summary: `## 章節導覽\n\n本模式共有 ${visibleSubtopics.length} 個細分子主題講義；「模式總覽」頁已包含核心直覺、讀題訊號、模板與帶 Labels 的完整題表。建議先讀總覽並挑必修題練手，再依卡片順序補強細分技巧。`,
     children: [
       {
         id: overviewSectionId(topicId),
         title: "模式總覽",
-        description: "本模式的整體直覺、讀題訊號、模板與常見錯誤。",
-        summary: overview,
+        description:
+          "本模式的整體直覺、讀題訊號、模板、常見錯誤與完整練習題表。",
+        summary: overviewSummary,
       },
-      ...subtopics.map((st, index) => ({
+      ...visibleSubtopics.map(({ subtopic: st, index }) => ({
         id: subtopicSectionId(topicId, index),
         title: st.title,
         description: st.blurb,

@@ -26,9 +26,12 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
   const studyPlan = studyPlanDataMap[section.planKey];
   const descriptionBullets = parseDescriptionBullets(section.description);
   const childItems = section.children.map((child) => {
-    const problemIds = getProblemIds(
-      getStudyPlanProblemsForSection(studyPlan, child.id),
-    );
+    const childProblems = getStudyPlanProblemsForSection(studyPlan, child.id);
+    const problemsForProgress =
+      child.title === "模式總覽" && childProblems.length === 0
+        ? getStudyPlanProblemsForSection(studyPlan, section.id)
+        : childProblems;
+    const problemIds = getProblemIds(problemsForProgress);
 
     return {
       id: child.id,
