@@ -269,6 +269,7 @@ function splitSectionBody(body: string): Segment[] {
           "technique",
           "sub-section in lecture",
           "subsection",
+          "labels",
           "解法重點",
           "核心",
           "模式",
