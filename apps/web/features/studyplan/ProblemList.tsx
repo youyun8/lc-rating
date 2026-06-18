@@ -210,10 +210,17 @@ const ProblemList = React.memo(
         const fallbackScore =
           problemId && problemMap ? problemMap[problemId]?.rating : undefined;
 
+        const fallbackSlug =
+          problemId && problemMap
+            ? problemMap[problemId]?.titleSlug
+            : undefined;
+        const slug = problem.slug || fallbackSlug || "";
+
         if (problem.score !== null && problem.score !== undefined) {
           return {
             ...problem,
             title: normalizeDisplayText(problem.title),
+            slug,
             score: problem.score,
           };
         }
@@ -221,6 +228,7 @@ const ProblemList = React.memo(
         return {
           ...problem,
           title: normalizeDisplayText(problem.title),
+          slug,
           score: fallbackScore ?? problem.score,
         };
       });

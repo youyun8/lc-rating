@@ -255,15 +255,24 @@ function splitSectionBody(body: string): Segment[] {
       }
 
       const headers = parseCells(tableLines[0]!).map(normalizeHeader);
-      const idCol = findHeaderIndex(headers, ["id", "lc id"]);
-      const problemCol = findHeaderIndex(headers, ["problem", "title"]);
+      const idCol = findHeaderIndex(headers, ["id", "lc id", "題號"]);
+      const problemCol = findHeaderIndex(headers, [
+        "problem",
+        "title",
+        "題目",
+        "題名",
+      ]);
 
       if (idCol !== -1 && problemCol !== -1) {
-        const ratingCol = findHeaderIndex(headers, ["rating"]);
+        const ratingCol = findHeaderIndex(headers, ["rating", "評分"]);
         const explicitTechCol = findHeaderIndex(headers, [
           "technique",
           "sub-section in lecture",
           "subsection",
+          "解法重點",
+          "核心",
+          "模式",
+          "子模式",
         ]);
         const techCol =
           explicitTechCol !== -1
@@ -274,7 +283,21 @@ function splitSectionBody(body: string): Segment[] {
               );
 
         const ignoredMetadataCols = new Set(
-          ["#", "i", "f", "l", "score", "why it matters"]
+          [
+            "#",
+            "i",
+            "f",
+            "l",
+            "score",
+            "why it matters",
+            "狀態",
+            "優先級",
+            "類型",
+            "競賽",
+            "難度",
+            "複習頻率",
+            "備註",
+          ]
             .map((header) => headers.indexOf(header))
             .filter((idx) => idx !== -1),
         );
