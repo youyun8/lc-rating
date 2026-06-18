@@ -22,11 +22,11 @@ export async function generateMetadata({
   const data = getHandbookTopic(topic);
 
   if (!data) {
-    return { title: "LeetCode Pattern Handbook" };
+    return { title: "LeetCode 模式手冊" };
   }
 
   return {
-    title: `${data.title} — LeetCode Pattern Handbook`,
+    title: `${data.title} — LeetCode 模式手冊`,
     description: data.tagline,
   };
 }

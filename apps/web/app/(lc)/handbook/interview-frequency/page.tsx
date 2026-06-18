@@ -15,9 +15,9 @@ import { INTERVIEW_FREQUENCY_RANKING } from "@/features/handbook/content/intervi
 import type { InterviewFrequency } from "@/features/handbook/model";
 
 export const metadata: Metadata = {
-  title: "Chapters by Interview Frequency — LeetCode Pattern Handbook",
+  title: "依訪談頻率劃分的章節 — LeetCode 模式手冊",
   description:
-    "Handbook chapters ranked by how frequently the pattern appears in real software-engineering interviews, combining LeetCode company-frequency tags, contest appearance rate, and study-guide prominence.",
+    "依模式在真實軟體工程面試中的出現頻率排列手冊章節，綜合 LeetCode 公司標籤、競賽出現比例與學習指南能見度。",
 };
 
 /** Tiers, rendered top to bottom. */
@@ -27,16 +27,16 @@ const TIER_ORDER: InterviewFrequency[] = ["High", "Medium", "Low"];
 const TIER_META: Record<InterviewFrequency, { ranks: string; blurb: string }> =
   {
     High: {
-      ranks: "Ranks 1–5",
-      blurb: "Asked in almost every screen — master these first.",
+      ranks: "排名 1–5",
+      blurb: "幾乎每輪面試都可能遇到，優先掌握。",
     },
     Medium: {
-      ranks: "Ranks 6–15",
-      blurb: "Frequently asked; the backbone of most study lists.",
+      ranks: "排名 6–15",
+      blurb: "常見且穩定，是多數刷題清單的主幹。",
     },
     Low: {
-      ranks: "Ranks 16+",
-      blurb: "Situational, advanced, or competitive-leaning patterns.",
+      ranks: "排名 16+",
+      blurb: "較情境化、進階，或更偏競賽導向的模式。",
     },
   };
 
@@ -44,18 +44,18 @@ const TIER_META: Record<InterviewFrequency, { ranks: string; blurb: string }> =
 const SCORING = [
   {
     weight: "40%",
-    label: "Company-frequency tags",
-    desc: "How often the chapter's problems are tagged as asked by top companies (FAANG, Microsoft, …).",
+    label: "公司頻率標籤",
+    desc: "本章的問題被標記為頂級公司（FAANG、微軟等）提出的問題的頻率。",
   },
   {
     weight: "30%",
-    label: "Contest appearance",
-    desc: "Share of the chapter's problems rated in the 1700–2000 contest band.",
+    label: "大賽亮相",
+    desc: "本章問題的評分範圍為 1700-2000 分。",
   },
   {
     weight: "30%",
-    label: "Study-guide prominence",
-    desc: "Coverage across the NeetCode roadmap, Grind 75/150, Blind 75, and Sean Prashad's list.",
+    label: "學習指南的突出地位",
+    desc: "涵蓋 NeetCode 路線圖、Grind 75/150、Blind 75 和 Sean Prashad 的清單。",
   },
 ];
 
@@ -72,30 +72,26 @@ export default function Page() {
         {/* Breadcrumb */}
         <nav className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground">
           <Link href="/handbook" className="hover:text-foreground">
-            Handbook
+            手冊
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="font-medium text-foreground">
-            Interview Frequency
-          </span>
+          <span className="font-medium text-foreground">面試頻率</span>
         </nav>
 
         {/* Hero */}
         <header className="mb-6 rounded-3xl border border-border/60 bg-background/80 p-5 shadow-sm sm:p-7">
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Chapters by Interview Frequency
+            依面試頻率排列章節
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Every handbook chapter ranked by how often its pattern shows up in
-            real software-engineering interviews, scored from three weighted
-            sources.
+            依每個模式在真實軟體工程面試中的常見程度排序，分數來自三個加權來源。
           </p>
         </header>
 
         {/* How the score is built */}
         <section className="mb-6">
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-            How the score is built
+            分數如何組成
           </h2>
           <ul className="grid gap-3 sm:grid-cols-3">
             {SCORING.map((s) => (
@@ -120,16 +116,16 @@ export default function Page() {
         {/* Tiers at a glance */}
         <section className="mb-8">
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-            Tiers at a glance
+            分級總覽
           </h2>
           <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-28">Tier</TableHead>
-                  <TableHead className="w-28">Ranks</TableHead>
-                  <TableHead className="w-20 text-right">Chapters</TableHead>
-                  <TableHead>What it means</TableHead>
+                  <TableHead className="w-28">等級</TableHead>
+                  <TableHead className="w-28">排名</TableHead>
+                  <TableHead className="w-20 text-right">章節數</TableHead>
+                  <TableHead>意義</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -164,10 +160,11 @@ export default function Page() {
                 <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
                   <InterviewFrequencyBadge frequency={tier} />
                   <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                    {tier} frequency
+                    {tier === "High" ? "高" : tier === "Medium" ? "中" : "低"}
+                    頻率
                   </h2>
                   <span className="text-xs text-muted-foreground">
-                    {TIER_META[tier].ranks} · {entries.length} chapters
+                    {TIER_META[tier].ranks} · {entries.length} 個章節
                   </span>
                 </div>
                 <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">

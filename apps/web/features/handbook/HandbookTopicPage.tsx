@@ -129,6 +129,7 @@ export function HandbookTopicPage({
                 </h2>
                 <HandbookSectionBody
                   body={s.body}
+                  language="zh"
                   problemLabelSource="problemset"
                 />
               </section>

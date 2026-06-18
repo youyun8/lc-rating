@@ -38,329 +38,310 @@ export const INTERVIEW_FREQUENCY_RANKING: InterviewFrequencyEntry[] = [
     rank: 1,
     frequency: "High",
     rationale:
-      "Choosing the DP state is the crux of the heavily-tested DP block in Blind 75 / NeetCode 150.",
+      "選擇 DP 狀態是 Blind 75 / NeetCode 150 中經過嚴格測試的 DP 區塊的關鍵。",
   },
   {
     slug: "hash-map-frequency",
     rank: 2,
     frequency: "High",
     rationale:
-      "The single most common interview tool — Two Sum, anagram, and subarray-sum problems open nearly every FAANG screen and headline every study list.",
+      "最常見的面試工具——Two Sum、anagram 和 subarray-sum 問題幾乎打開了每個 FAANG 螢幕，並成為每個研究清單的標題。",
   },
   {
     slug: "two-pointers-opposite",
     rank: 3,
     frequency: "High",
     rationale:
-      "A Blind 75 / NeetCode / Grind staple (3Sum, container-with-water) asked across virtually all top companies.",
+      "幾乎所有頂級公司都詢問過 Blind 75 / NeetCode / 研磨主食（3Sum，裝有水的容器）。",
   },
   {
     slug: "graph-traversal",
     rank: 4,
     frequency: "High",
     rationale:
-      "Number-of-islands-style BFS/DFS is among the most-asked patterns and central to every graph study unit.",
+      "島嶼數樣式 BFS/DFS 是最常被問到的模式之一，也是每個圖形研究單元的核心。",
   },
   {
     slug: "sliding-window",
     rank: 5,
     frequency: "High",
     rationale:
-      "Longest/shortest-substring questions are a top-frequency FAANG pattern and a dedicated section in every roadmap.",
+      "最長/最短子字串問題是最常見的 FAANG 模式，並且在每個路線圖中都有一個專用部分。",
   },
   {
     slug: "linked-list-patterns",
     rank: 6,
     frequency: "Medium",
     rationale:
-      "Reverse-list, cycle, and merge questions anchor the linked-list block of Blind 75 / Grind 75 and remain a default phone-screen warm-up, though the pattern is nearly absent from contests.",
+      "反向清單、循環和合併問題固定在 Blind 75 / Grind 75 的鍊錶塊中，並且仍然是預設的手機螢幕熱身，儘管這種模式在比賽中幾乎不存在。",
   },
   {
     slug: "tree-traversal",
     rank: 7,
     frequency: "Medium",
     rationale:
-      "Binary-tree DFS/BFS return-value design is interview bread-and-butter and a large NeetCode/Grind block.",
+      "二元樹 DFS/BFS 回傳值設計是面試的基礎和一個大的 NeetCode/Grind 區塊。",
   },
   {
     slug: "heap-patterns",
     rank: 8,
     frequency: "Medium",
-    rationale:
-      "Top-K and merge-k-lists heap problems are frequently asked and a standard roadmap section.",
+    rationale: "Top-K 和 merge-k-lists 堆問題是經常被問到的標準路線圖部分。",
   },
   {
     slug: "design-data-structures",
     rank: 9,
     frequency: "Medium",
     rationale:
-      "LRU Cache is among the most-asked implementation questions at large companies, and design problems headline study lists despite contributing no contest-rating signal.",
+      "LRU 快取是大公司中最常被問到的實施問題之一，儘管沒有提供任何競爭評級訊號，但設計問題仍成為研究的頭條新聞。",
   },
   {
     slug: "binary-search-on-answer",
     rank: 10,
     frequency: "Medium",
     rationale:
-      "Binary search and its 'search the answer' variant (Koko, ship-within-days) are a top-tier, guide-prominent pattern.",
+      "二分搜尋及其「搜尋答案」變體（Koko，幾天內發貨）是一種頂級的、引導突出的模式。",
   },
   {
     slug: "interval-merging",
     rank: 11,
     frequency: "Medium",
-    rationale:
-      "Merge/insert intervals and meeting-rooms are classic high-frequency questions in every list.",
+    rationale: "合併/插入間隔和會議室是每個清單中的經典高頻問題。",
   },
   {
     slug: "shortest-paths",
     rank: 12,
     frequency: "Medium",
     rationale:
-      "Dijkstra and Bellman-Ford anchor the advanced-graph block of study roadmaps and appear frequently in the 1700-2000 contest band, though company screens reach for them less often than core traversal.",
+      "Dijkstra 和 Bellman-Ford 錨定了學習路線圖的高級圖形塊，並經常出現在 1700-2000 競賽區間中，儘管公司螢幕上觸及它們的頻率低於核心遍歷。",
   },
   {
     slug: "dp-transition-design",
     rank: 13,
     frequency: "Medium",
-    rationale:
-      "The transition half of DP (knapsack, edit distance) is a high-frequency follow-up across study guides.",
+    rationale: "DP（背包、編輯距離）的過渡部分是跨學習指南的高頻跟進。",
   },
   {
     slug: "backtracking",
     rank: 14,
     frequency: "Medium",
-    rationale:
-      "Subsets/permutations/combination-sum recur constantly and form a full roadmap section.",
+    rationale: "子集/排列/組合和不斷重複並形成完整的路線圖部分。",
   },
   {
     slug: "topological-sort",
     rank: 15,
     frequency: "Medium",
-    rationale:
-      "Course-Schedule-style ordering is a common graph follow-up and a named pattern in NeetCode/Prashad.",
+    rationale: "課程表式排序是 NeetCode/Prashad 中常見的圖形後續和命名模式。",
   },
   {
     slug: "sorting-as-a-tool",
     rank: 16,
     frequency: "Low",
     rationale:
-      "Sort-then-scan setups underpin many medium questions and appear throughout the curated lists.",
+      "「排序然後掃描」設定是許多中等問題的基礎，並出現在整個策劃清單中。",
   },
   {
     slug: "monotonic-data-structures",
     rank: 17,
     frequency: "Low",
     rationale:
-      "Daily-temperatures / next-greater monotonic-stack questions recur and form a recognizable pattern unit.",
+      "每日溫度/下一個更大的單調堆疊問題重複出現並形成可識別的模式單元。",
   },
   {
     slug: "enumeration-strategy",
     rank: 18,
     frequency: "Low",
     rationale:
-      "Choosing what to enumerate is a broadly useful counting meta-pattern with moderate direct exposure.",
+      "選擇要列舉的內容是一種廣泛有用的數數元模式，具有適度的直接暴露。",
   },
   {
     slug: "prefix-suffix-decomposition",
     rank: 19,
     frequency: "Low",
-    rationale:
-      "Prefix-sum / product-of-array-except-self problems are common and a standard list entry.",
+    rationale: "前綴和/除自身之外的陣列的乘積問題很常見，並且是標準清單條目。",
   },
   {
     slug: "union-find",
     rank: 20,
     frequency: "Low",
-    rationale:
-      "Connected-components and redundant-connection problems show up regularly and have a dedicated roadmap unit.",
+    rationale: "連接組件和冗餘連接問題定期出現，並有一個專門的路線圖單元。",
   },
   {
     slug: "fix-right-maintain-left",
     rank: 21,
     frequency: "Low",
-    rationale:
-      "The expand-right / shrink-left counting variant of sliding window is a common medium follow-up.",
+    rationale: "滑動視窗的右擴展/左收縮計數變體是常見的中等後續操作。",
   },
   {
     slug: "trie",
     rank: 22,
     frequency: "Low",
     rationale:
-      "Implement-Trie and word-search-II appear in NeetCode/Grind, with moderate live-interview frequency.",
+      "Implement-Trie和word-search-II出現在NeetCode/Grind中，現場訪談頻率適中。",
   },
   {
     slug: "feasibility-check",
     rank: 23,
     frequency: "Low",
     rationale:
-      "Binary-search feasibility checks are a recurring medium/hard device, moderately represented in guides.",
+      "二分搜尋可行性檢查是一種經常出現的中/硬設備，在指南中有所體現。",
   },
   {
     slug: "greedy-construction",
     rank: 24,
     frequency: "Low",
-    rationale:
-      "Jump-game / gas-station greedy constructions are frequently asked and appear across study guides.",
+    rationale: "跳躍遊戲/加油站貪婪結構經常被被問到並出現在學習指南中。",
   },
   {
     slug: "state-compression",
     rank: 25,
     frequency: "Low",
-    rationale:
-      "Bitmask DP surfaces in harder/senior loops and competitive prep, with low everyday frequency.",
+    rationale: "Bitmask DP 出現在較難/進階循環和競爭性準備中，日常頻率較低。",
   },
   {
     slug: "number-theory-and-math",
     rank: 26,
     frequency: "Low",
     rationale:
-      "GCD/primes/pow problems show up periodically and have a math section in most roadmaps.",
+      "GCD/質數/pow 問題會定期出現，並且在大多數路線圖中都有數學部分。",
   },
   {
     slug: "difference-array",
     rank: 27,
     frequency: "Low",
-    rationale:
-      "Range-update / corporate-flight-bookings problems appear at a moderate, mostly-medium frequency.",
+    rationale: "航程更新/公司航班預訂問題的出現​​頻率適中，大部分為中等頻率。",
   },
   {
     slug: "string-matching",
     rank: 28,
     frequency: "Low",
     rationale:
-      "KMP/Rabin-Karp and find-the-index questions appear at a moderate rate, mostly at string-heavy companies.",
+      "KMP/Rabin-Karp 和查找索引問題的出現​​率適中，主要出現在字串較多的公司。",
   },
   {
     slug: "state-design",
     rank: 29,
     frequency: "Low",
     rationale:
-      "Naming the right state is a practically important meta-skill underlying many DP/graph interview questions.",
+      "命名正確的狀態是許多 DP/圖面試問題背後的一項實際上很重要的元技能。",
   },
   {
     slug: "constraint-driven-thinking",
     rank: 30,
     frequency: "Low",
-    rationale:
-      "Reading constraints to pick an approach is a high-value meta-skill rather than a tagged interview topic.",
+    rationale: "閱讀約束來選擇方法是一項高價值的元技能，而不是標記的面試主題。",
   },
   {
     slug: "brute-force-to-optimization",
     rank: 31,
     frequency: "Low",
     rationale:
-      "The optimize-from-brute-force mindset matters in every interview but is not itself a tagged question type.",
+      "從暴力中優化的心態在每次面試中都很重要，但它本身並不是一種標記問題類型。",
   },
   {
     slug: "boundary-and-edge-case-thinking",
     rank: 32,
     frequency: "Low",
     rationale:
-      "Edge-case discipline is rewarded in every interview but is a cross-cutting skill, not a standalone topic.",
+      "每次面試都會獎勵邊緣案例紀律，但它是一項跨領域技能，而不是一個獨立的主題。",
   },
   {
     slug: "divide-and-conquer",
     rank: 33,
     frequency: "Low",
     rationale:
-      "Merge-sort, sort-list, and count-of-smaller divide-and-conquer questions feature in most lists.",
+      "大多數清單中都包含合併排序、排序清單和較小的分而治之問題的計數。",
   },
   {
     slug: "greedy-stays-ahead",
     rank: 34,
     frequency: "Low",
-    rationale:
-      "The stays-ahead proof style backs several greedy answers but is rarely the explicit ask.",
+    rationale: "保持領先的證明方式支持幾個貪婪的答案，但很少是明確的要求。",
   },
   {
     slug: "enumerate-pivot-middle",
     rank: 35,
     frequency: "Low",
     rationale:
-      "Fix-the-middle counting (3Sum-like, count-triplets) is an occasional contest-flavored medium.",
+      "固定中間計數（類似 3Sum，計數三元組）是一種偶爾具有競賽風格的媒介。",
   },
   {
     slug: "segment-tree-and-fenwick-tree",
     rank: 36,
     frequency: "Low",
     rationale:
-      "Rare in standard interviews but a staple of contests and senior/competitive study tracks.",
+      "在標準面試中很少見，但卻是競賽和高級/競爭性學習課程的主要內容。",
   },
   {
     slug: "exchange-argument",
     rank: 37,
     frequency: "Low",
-    rationale:
-      "A greedy-correctness proof tool seen mainly in competitive programming, seldom asked explicitly.",
+    rationale: "貪婪正確性證明工具主要出現在競賽程式設計中，很少明確詢問。",
   },
   {
     slug: "loop-invariant",
     rank: 38,
     frequency: "Low",
-    rationale:
-      "A correctness-discipline contract that supports binary-search/two-pointer answers rather than being asked.",
+    rationale: "一個正確性紀律合約，支持二分搜尋/雙指標答案而不是被詢問。",
   },
   {
     slug: "invariant-thinking",
     rank: 39,
     frequency: "Low",
     rationale:
-      "Reasoning with invariants strengthens many answers but is taught as a method, not asked directly.",
+      "使用不變量進行推理可以強化許多答案，但它是作為一種方法來教導的，而不是直接提出的。",
   },
   {
     slug: "sweep-line",
     rank: 40,
     frequency: "Low",
-    rationale:
-      "Meeting-rooms-II and skyline sweeps appear occasionally, mostly as harder follow-ups.",
+    rationale: "會議室-II 和天際線掃描偶爾會出現，大多是更困難的後續行動。",
   },
   {
     slug: "cut-property",
     rank: 41,
     frequency: "Low",
     rationale:
-      "The MST safe-edge argument is rarely interviewed outside specialized roles, but foundational in theory.",
+      "MST 安全邊緣論點很少在專業角色之外接受採訪，但在理論上是基礎性的。",
   },
   {
     slug: "game-theory",
     rank: 42,
     frequency: "Low",
     rationale:
-      "Stone-game / Nim questions appear infrequently and only at a few companies, but feature in DP study sets.",
+      "Stone-game / Nim 問題很少出現，並且僅在少數公司中出現，但在 DP 研究集中出現。",
   },
   {
     slug: "contribution-counting",
     rank: 43,
     frequency: "Low",
     rationale:
-      "Sum-of-subarray-minimums contribution counting is a contest-leaning technique, uncommon in interviews.",
+      "子數組最小值總和貢獻計數是一種傾向於競賽的技術，在面試中並不常見。",
   },
   {
     slug: "proof-techniques",
     rank: 44,
     frequency: "Low",
     rationale:
-      "Induction/exchange/contradiction proofs are a meta-skill for justifying solutions, not an interview topic.",
+      "歸納/交換/矛盾證明是證明解決方案合理性的元技能，而不是面試主題。",
   },
   {
     slug: "offline-query-processing",
     rank: 45,
     frequency: "Low",
-    rationale:
-      "Reordering queries offline is almost exclusively a competitive-programming technique.",
+    rationale: "離線重新排序查詢幾乎完全是一種競爭性程式設計技術。",
   },
   {
     slug: "coordinate-compression",
     rank: 46,
     frequency: "Low",
-    rationale:
-      "A preprocessing step for BIT/segment-tree problems; rare in interviews, common in contests.",
+    rationale: "BIT/線段樹問題的預處理步驟；在訪談中很少見，在比賽中常見。",
   },
   {
     slug: "ml-performance-system-design",
     rank: 47,
     frequency: "Low",
-    rationale:
-      "A specialized ML-infra interview track, outside the standard coding-pattern frequency lists.",
+    rationale: "專門的 ML-infra 訪談軌道，位於標準編碼模式頻率清單之外。",
   },
 ];
 

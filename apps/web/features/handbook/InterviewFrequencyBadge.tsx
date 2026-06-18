@@ -14,6 +14,12 @@ const FREQUENCY_CLASSES: Record<InterviewFrequency, string> = {
   Low: "border-zinc-400/30 bg-zinc-500/15 text-zinc-600 dark:text-zinc-400",
 };
 
+const FREQUENCY_LABELS: Record<InterviewFrequency, string> = {
+  High: "高",
+  Medium: "中",
+  Low: "低",
+};
+
 interface InterviewFrequencyBadgeProps {
   frequency: InterviewFrequency;
   /** When true, prefix the label with "Interview Frequency:". */
@@ -32,7 +38,9 @@ export function InterviewFrequencyBadge({
       variant="outline"
       className={cn(FREQUENCY_CLASSES[frequency], className)}
     >
-      {withLabel ? `Interview Frequency: ${frequency}` : frequency}
+      {withLabel
+        ? `面試頻率：${FREQUENCY_LABELS[frequency]}`
+        : FREQUENCY_LABELS[frequency]}
     </Badge>
   );
 }
