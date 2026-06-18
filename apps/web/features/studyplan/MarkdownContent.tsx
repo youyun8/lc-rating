@@ -325,6 +325,21 @@ export function StudyPlanMarkdownContent({
       img.className = imageClassName;
     });
 
+    // Turn each section heading (h2) into a labelled accent band so callouts
+    // like 「典型讀題訊號」 read as titled sections instead of a flat bold line.
+    // Opt-in via enhanceLeetCode so this only touches the lecture/handbook
+    // surfaces, never the plain study-plan prose.
+    if (enhanceLeetCode) {
+      innerHtml.current
+        .querySelectorAll<HTMLHeadingElement>("h2")
+        .forEach((heading) => {
+          if (heading.getAttribute("data-section-heading") === "true") return;
+          heading.setAttribute("data-section-heading", "true");
+          heading.className =
+            "not-prose mb-3 mt-8 flex items-center gap-2.5 border-l-4 border-l-primary/70 bg-primary/5 px-3.5 py-2 text-lg font-semibold tracking-tight text-foreground first:mt-0 sm:text-xl";
+        });
+    }
+
     // Wrap each <pre> code block in a collapsible toggle container
     innerHtml.current.querySelectorAll("pre").forEach((pre) => {
       if (pre.parentElement?.getAttribute("data-code-toggle") === "true")
