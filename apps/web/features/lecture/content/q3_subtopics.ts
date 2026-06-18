@@ -51,7 +51,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "暴力法枚舉所有區間是 O(n²)。若「右端固定時，合法左端形成連續區間」，或「左端固定時，達標右端形成連續區間」，就能把重複檢查壓成單向移動。關鍵不是兩個指標本身，而是你能說清楚視窗內維持的不變式。",
         when: "- 題目明確要求連續子陣列或子字串。\n- 限制涉及最多/至少 K 次替換、刪除、不同值、零或特殊字元。\n- 全正數時的和、乘積、分數限制常具備單調性。\n- 暴力枚舉區間後，發現相鄰區間只差一格。",
-        how: "基本骨架：\n\n```cpp\nint left = 0;\nfor (int right = 0; right < n; ++right) {\n  add(nums[right]);           // 右端進，更新摘要\n  while (invalid()) {         // 違反不變式就縮左端\n    remove(nums[left++]);\n  }\n  updateAnswer();             // 依題型計數或更新最值\n}\n```\n\n不變式要先定義：視窗內維護什麼量（和、頻次、種類數、違規數）？何時算合法？答案是在右端驅動時加 `right-left+1`，還是左端驅動時加 `n-right`？",
+        how: "基本骨架：\n\n```cpp\nint left = 0;\nfor (int right = 0; right < n; ++right) {\n  add(nums[right]);    // 右端進，更新摘要\n  while (invalid()) {  // 違反不變式就縮左端\n    remove(nums[left++]);\n  }\n  updateAnswer();  // 依題型計數或更新最值\n}\n```\n\n不變式要先定義：視窗內維護什麼量（和、頻次、種類數、違規數）？何時算合法？答案是在右端驅動時加 `right-left+1`，還是左端驅動時加 `n-right`？",
         mistakes:
           "- 含負數的和通常不能直接滑窗，因為右端擴張後和不一定只變大。\n- 計數前未確認不變式已恢復。\n- 左端驅動與右端驅動的加答案公式混用。\n- 用 `if` 縮左端，但實際需要 `while` 縮到合法。",
         checklist: [
@@ -70,7 +70,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "暴力對每個起點重算 k 個數是 O(nk)。定長視窗利用「舊視窗 + 新右端 − 舊左端 = 新視窗摘要」這個局部性，把每步壓成 O(1)。",
         when: "- 題目給定固定長度 k，要在所有長度 k 的連續區間中找答案。\n- 答案只跟視窗內某個彙總量有關：總和、平均、某字元數量、是否有重複。\n- 暴力法是「對每個起點重算 k 個數」，相鄰視窗高度重疊。",
-        how: "```cpp\nint sum = 0;\nfor (int i = 0; i < n; ++i) {\n  sum += nums[i];              // 右端進\n  if (i >= k) sum -= nums[i-k]; // 視窗滿了，左端出\n  if (i >= k - 1) ans = max(ans, sum); // 剛好滿 k 才結算\n}\n```\n\n四步：① 決定視窗內維護的量；② 右端進元素；③ 長度超過 k 就移左端；④ 在 `i >= k-1` 時讀取答案。頻次、distinct 個數等同理，只是狀態結構不同。",
+        how: "```cpp\nint sum = 0;\nfor (int i = 0; i < n; ++i) {\n  sum += nums[i];                       // 右端進\n  if (i >= k) sum -= nums[i - k];       // 視窗滿了，左端出\n  if (i >= k - 1) ans = max(ans, sum);  // 剛好滿 k 才結算\n}\n```\n\n四步：① 決定視窗內維護的量；② 右端進元素；③ 長度超過 k 就移左端；④ 在 `i >= k-1` 時讀取答案。頻次、distinct 個數等同理，只是狀態結構不同。",
         mistakes:
           "- 進、出、結算的下標時機 off-by-one。\n- 移出元素後頻次為 0 未刪除鍵，distinct 計數錯誤。\n- 在視窗未滿 k 時就更新答案。\n- 環形陣列忘記取模或複製處理。",
         checklist: [
@@ -108,7 +108,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "至多型條件對左端單調：左端越右，視窗越短，越容易滿足「不超過 K」。因此固定右端時，合法左端形成連續區間 `[left, right]`，可一次計入 `right-left+1` 個子陣列。",
         when: "- 最多翻 k 個 0（1004）、至多 k 種不同字元（340）、最多 k 次替換（424）。\n- 題目問「至多」或可作為「恰好」的基礎函數 atMost(K)。\n- 需要數合法子陣列個數，且條件是「不超過某上限」。",
-        how: "以「至多 K 種不同整數」為例：\n\n```cpp\nunordered_map<int,int> cnt;\nint left = 0, kinds = 0, ans = 0;\nfor (int right = 0; right < n; ++right) {\n  if (cnt[nums[right]]++ == 0) ++kinds;\n  while (kinds > K) {\n    if (--cnt[nums[left]] == 0) --kinds;\n    ++left;\n  }\n  ans += right - left + 1; // 以 right 結尾的合法段數\n}\n```\n\n不變式：`kinds <= K` 始終成立；超標就縮左端。",
+        how: "以「至多 K 種不同整數」為例：\n\n```cpp\nunordered_map<int, int> cnt;\nint left = 0, kinds = 0, ans = 0;\nfor (int right = 0; right < n; ++right) {\n  if (cnt[nums[right]]++ == 0) ++kinds;\n  while (kinds > K) {\n    if (--cnt[nums[left]] == 0) --kinds;\n    ++left;\n  }\n  ans += right - left + 1;  // 以 right 結尾的合法段數\n}\n```\n\n不變式：`kinds <= K` 始終成立；超標就縮左端。",
         mistakes:
           "- 把「至多 K 種」與「某字元至多 K 次」的狀態維護搞混。\n- 種類數減到 0 時未 erase 鍵，kinds 不減。\n- K 為 0 或負數時邊界未特判。\n- 計數時窗口尚未恢復合法就加答案。",
         checklist: [
@@ -146,7 +146,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "合法具單調性時，`[left, right]` 合法 ⇒ 所有更短的右端對齊後綴 `[left+1, right]..[right, right]` 也合法。反之 `[left-1, right]` 不合法。因此不必逐一枚舉左端，一次加 `right-left+1`。",
         when: "- 713（乘積小於 K 的子陣列數）、乘積/和/種類數「不超過」上限的計數題。\n- 條件是越短越合法。\n- 問「有多少個合法子陣列」而非最長/最短。",
-        how: "```cpp\nfor (int right = 0; right < n; ++right) {\n  add(nums[right]);\n  while (invalid()) remove(nums[left++]);\n  ans += right - left + 1; // 以 right 為右端的段數\n}\n```\n\n與求最長的差別在第三步：合法後不是更新 max，而是累加段數。",
+        how: "```cpp\nfor (int right = 0; right < n; ++right) {\n  add(nums[right]);\n  while (invalid()) remove(nums[left++]);\n  ans += right - left + 1;  // 以 right 為右端的段數\n}\n```\n\n與求最長的差別在第三步：合法後不是更新 max，而是累加段數。",
         mistakes:
           "- 在越長越合法的題目誤用 right-left+1，應改用 left。\n- 縮左後未確認合法就計數。\n- 空視窗時 left>right 未防護。\n- 條件不具「越短越合法」卻套用公式。",
         checklist: [
@@ -165,7 +165,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "2516（每種字元至少取 K 個）等題：左端固定後，右端單調擴張直到達標，之後更右的右端都仍達標。這讓每個左端只需找一次臨界右端，而非枚舉所有右端。",
         when: "- 條件是越長越合法：包含足夠元素、覆蓋目標、最大值出現至少 K 次。\n- 1358、2962 等「越長越合法」的計數題用 `ans += left`。\n- 左端固定後，達標右端形成連續後綴。",
-        how: "```cpp\nfor (int left = 0; left < n; ++left) {\n  while (right < n && !valid()) expandRight();\n  if (!valid()) break;\n  ans += n - right; // 或依題型調整\n  shrinkLeftState();\n}\n```\n\n也可用右端主迴圈、達標後縮左到最短，此時 `ans += left`（左端可取 0..left-1）。",
+        how: "```cpp\nfor (int left = 0; left < n; ++left) {\n  while (right < n && !valid()) expandRight();\n  if (!valid()) break;\n  ans += n - right;  // 或依題型調整\n  shrinkLeftState();\n}\n```\n\n也可用右端主迴圈、達標後縮左到最短，此時 `ans += left`（左端可取 0..left-1）。",
         mistakes:
           "- 與右端驅動的 right-left+1 混用。\n- 縮左後 right 指標未正確維護，漏掉或重複計數。\n- 達標條件判斷錯誤，導致 n-right 多算。\n- 左端移動時未同步更新視窗狀態。",
         checklist: [
@@ -285,7 +285,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "一維前綴是「到目前為止」；二維是「到目前矩形為止」。查詢時用大矩形減掉三塊多算的部分，加回重複減去的角落。",
       when: "- 304（二維區域和檢索）、1277（統計全為 1 的正方形子矩陣）。\n- 矩陣中反覆查詢矩形和。\n- 固定矩形大小滑動時，可用二維前綴 O(1) 取每個窗口和。",
-      how: "```cpp\n// 建表：P[i+1][j+1] = grid[i][j] + P[i][j+1] + P[i+1][j] - P[i][j]\n// 查詢 (r1,c1,r2,c2)：\nint sum = P[r2+1][c2+1] - P[r1][c2+1] - P[r2+1][c1] + P[r1][c1];\n```\n\n注意 +1 偏移與閉區間邊界。",
+      how: "```cpp\n// 建表：P[i+1][j+1] = grid[i][j] + P[i][j+1] + P[i+1][j] - P[i][j]\n// 查詢 (r1,c1,r2,c2)：\nint sum = P[r2 + 1][c2 + 1] - P[r1][c2 + 1] - P[r2 + 1][c1] + P[r1][c1];\n```\n\n注意 +1 偏移與閉區間邊界。",
       mistakes:
         "- +1 偏移與矩形邊界搞混。\n- 加減四塊時符號錯誤。\n- 建表與查詢的座標系不一致。\n- 未考慮空矩陣或單格邊界。",
       checklist: [
@@ -305,7 +305,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "若 x 可行則所有更寬鬆（或更嚴格）的值也可行，答案空間就有單調性。二分負責找邊界；真正的難點是設計正確的 check(x)。",
         when: "- 最小化最大值、最大化最小值、最少時間、最小速度、最小容量。\n- 直接構造最佳值困難，但驗證某值很容易。\n- 限制值在大範圍整數內，O(log answer × check) 可接受。",
-        how: "```cpp\n// 最小化最大值：找第一個可行值\nwhile (left < right) {\n  long long mid = left + (right - left) / 2;\n  if (check(mid)) right = mid;\n  else left = mid + 1;\n}\n\n// 最大化最小值：找最後一個可行值\nwhile (left < right) {\n  long long mid = left + (right - left + 1) / 2;\n  if (check(mid)) left = mid;\n  else right = mid - 1;\n}\n```",
+        how: "```cpp\n// 最小化最大值：找第一個可行值\nwhile (left < right) {\n  long long mid = left + (right - left) / 2;\n  if (check(mid)) {\n    right = mid;\n  } else {\n    left = mid + 1;\n  }\n}\n\n// 最大化最小值：找最後一個可行值\nwhile (left < right) {\n  long long mid = left + (right - left + 1) / 2;\n  if (check(mid)) {\n    left = mid;\n  } else {\n    right = mid - 1;\n  }\n}\n```",
         mistakes:
           "- check(x) 沒有單調性卻硬二分。\n- 右邊界不包含答案。\n- first true 與 last true 的 mid 偏移混用。\n- 計數相乘忘記 long long。",
         checklist: [
@@ -362,7 +362,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "二分的價值在於把「找最優」變成「判斷可行」。check 的品質決定整題正確性與複雜度。好的 check 通常是 O(n) 或 O(n log n) 掃描。",
         when: "- 所有答案二分題都依賴 check。\n- 驗證比構造簡單：能否在 x 天完成、能否用 x 容量運完、能否使距離至少 x。",
-        how: "設計 check 的步驟：\n1. 明確 x 的語意（最大段和？最小間距？）。\n2. 用貪心/計數模擬：在限制 x 下能完成多少？\n3. 回傳 true/false，不更新全局最優。\n\n```cpp\nbool check(int x) {\n  int groups = 1;\n  long long cur = 0;\n  for (int v : nums) {\n    if (cur + v > x) { ++groups; cur = 0; }\n    cur += v;\n  }\n  return groups <= m;\n}\n```",
+        how: "設計 check 的步驟：\n1. 明確 x 的語意（最大段和？最小間距？）。\n2. 用貪心/計數模擬：在限制 x 下能完成多少？\n3. 回傳 true/false，不更新全局最優。\n\n```cpp\nbool check(int x) {\n  int groups = 1;\n  long long cur = 0;\n  for (int v : nums) {\n    if (cur + v > x) {\n      ++groups;\n      cur = 0;\n    }\n    cur += v;\n  }\n  return groups <= m;\n}\n```",
         mistakes:
           "- check 沒有單調性。\n- check 內部做了不該做的全局最優化。\n- 複雜度太高導致 TLE。\n- 邊界條件（空輸入、x=0）未處理。",
         checklist: [
@@ -381,7 +381,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "若問題有「按某順序處理，局部最優不影響可行性判斷」的結構，check 可用貪心 O(n log n)。排序目的要清楚：按右端點、按截止時間、按大小等。",
         when: "- 410、1482、1751 等 check 需排序後貪心放置。\n- 驗證「能否分成不超過 m 段且每段 ≤ x」。\n- 會議室、任務排程的可行性。",
-        how: "```cpp\nbool check(long long x) {\n  sort(items.begin(), items.end(), byDeadline);\n  long long cur = 0;\n  for (auto& it : items) {\n    if (cur + it.cost > x) return false; // 或開新組\n    cur += it.cost;\n  }\n  return true;\n}\n```\n\n排序鍵必須有交換論證或標準貪心理由。",
+        how: "```cpp\nbool check(long long x) {\n  sort(items.begin(), items.end(), byDeadline);\n  long long cur = 0;\n  for (auto& it : items) {\n    if (cur + it.cost > x) return false;  // 或開新組\n    cur += it.cost;\n  }\n  return true;\n}\n```\n\n排序鍵必須有交換論證或標準貪心理由。",
         mistakes:
           "- 排序鍵選錯，貪心不正確。\n- 開新組的條件與題意不符。\n- 忘記排序導致 check 錯誤。\n- 把貪心檢查當成直接求最優解。",
         checklist: [
@@ -400,7 +400,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "1870（運貨）、2187（完成旅途的最少時間）等：給定速度 x，計算能在時間 T 內完成多少件，再判斷是否 ≥ 需求。把連續答案離散化成計數問題。",
         when: "- 最少時間內能完成多少、給定速度能運多少。\n- check 需累加趟數、件數、天數。\n- 乘法或除法可能溢位，需 long long。",
-        how: "```cpp\nbool check(long long speed) {\n  long long done = 0;\n  for (int t : times) {\n    done += speed / t; // 或 ceil 公式\n    if (done >= need) return true;\n  }\n  return done >= need;\n}\n```\n\n注意整除、上取整與溢位。",
+        how: "```cpp\nbool check(long long speed) {\n  long long done = 0;\n  for (int t : times) {\n    done += speed / t;  // 或 ceil 公式\n    if (done >= need) return true;\n  }\n  return done >= need;\n}\n```\n\n注意整除、上取整與溢位。",
         mistakes:
           "- 計數公式錯誤（該用 ceil 卻用 floor）。\n- 累加溢位未用 long long。\n- 提前 break 條件錯誤。\n- 把計數結果當答案而非比較用。",
         checklist: [
@@ -421,7 +421,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "若未來只在乎目前候選中的極值，堆積比每次掃描 O(n) 更優。貪心正確性常靠交換論證：把最好資源留給最緊迫需求，或先處理最高優先級。",
         when: "- 反覆取目前最大/最小。\n- 2530（最大運行時間）、871（最低加油）、1642（最便宜書）。\n- 候選動態加入，需快速取極值。",
-        how: "```cpp\npriority_queue<int> best; // 最大堆\nfor (auto& event : events) {\n  if (canAdd(event)) best.push(value(event));\n  if (needHelp()) {\n    if (best.empty()) return fail;\n    use(best.top()); best.pop();\n  }\n}\n```\n\n明確堆裡放的是候選、已選還是可反悔項。",
+        how: "```cpp\npriority_queue<int> best;  // 最大堆\nfor (auto& event : events) {\n  if (canAdd(event)) best.push(value(event));\n  if (needHelp()) {\n    if (best.empty()) return fail;\n    use(best.top());\n    best.pop();\n  }\n}\n```\n\n明確堆裡放的是候選、已選還是可反悔項。",
         mistakes:
           "- min-heap/max-heap 選反。\n- 堆中元素語意不清。\n- 該用堆卻每次掃描。\n- 貪心無交換論證只是看起來合理。",
         checklist: [
@@ -437,7 +437,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "若「多選了可以事後刪最差的」且刪最差不會讓後續更差，這個貪心成立。例如選最多 k 個任務，超過就踢掉利潤最小的。",
       when: "- 2163（使數字非遞減的最少操作）、買賣、選任務超過 k 個。\n- 限制是「最多選 k 個」而非「恰好 k 個」。\n- 事後移除最差比事前判斷容易。",
-      how: "```cpp\npriority_queue<int, vector<int>, greater<int>> kept; // 最小堆存已選\nlong long sum = 0;\nfor (int x : profits) {\n  kept.push(x); sum += x;\n  if ((int)kept.size() > k) {\n    sum -= kept.top(); kept.pop();\n  }\n}\n```",
+      how: "```cpp\npriority_queue<int, vector<int>, greater<int>> kept;  // 最小堆存已選\nlong long sum = 0;\nfor (int x : profits) {\n  kept.push(x);\n  sum += x;\n  if ((int)kept.size() > k) {\n    sum -= kept.top();\n    kept.pop();\n  }\n}\n```",
       mistakes:
         "- 踢錯極值（該踢最大卻踢最小）。\n- 堆大小與 k 的關係搞反。\n- 先拿再反悔用於不能事後刪的約束。\n- 忘記同步更新累加和。",
       checklist: [
@@ -452,7 +452,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "昂貴資源留到真正需要時才用，不會浪費在還能用便宜方案解決的時刻。堆積保存「目前可用的最佳補救選項」。",
       when: "- 1642、630（課程表 III）、2402（會議室 III）。\n- 多種資源，有優先使用順序。\n- 每步先消耗免費/便宜，不足再取堆頂。",
-      how: "```cpp\nfor (auto& task : sortedByDeadline) {\n  if (cheapEnough(task)) useCheap(task);\n  else if (!heap.empty()) { use(heap.top()); heap.pop(); }\n  else return fail;\n}\n```\n\n排序順序（如按截止時間）常是貪心正確性的關鍵。",
+      how: "```cpp\nfor (auto& task : sortedByDeadline) {\n  if (cheapEnough(task)) {\n    useCheap(task);\n  } else if (!heap.empty()) {\n    use(heap.top());\n    heap.pop();\n  } else {\n    return fail;\n  }\n}\n```\n\n排序順序（如按截止時間）常是貪心正確性的關鍵。",
       mistakes:
         "- 過早使用昂貴資源。\n- 堆中候選未按時機更新。\n- 排序順序錯誤導致貪心失效。\n- 便宜資源條件判斷錯誤。",
       checklist: [
@@ -486,7 +486,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "把狀態空間切成兩半，每半用堆維護極值。釋放時從忙碌堆移到可用堆；分配時從可用堆取最優。適合模擬排程與資源池。",
       when: "- 2402（會議室 III）、1882（追趕王國）。\n- 資源會從忙碌變可用（時間到期）。\n- 需在兩種集合間轉移並取極值。",
-      how: "```cpp\npriority_queue<int> available;   // 可用，取最大編號\npriority_queue<int, vector<int>, greater<int>> busy; // 忙碌，按釋放時間\n// 時間到：busy.top 釋放 → push 到 available\n// 分配：從 available 取頂\n```",
+      how: "```cpp\npriority_queue<int> available;  // 可用，取最大編號\npriority_queue<int, vector<int>, greater<int>> busy;  // 忙碌，按釋放時間\n// 時間到：busy.top 釋放 → push 到 available\n// 分配：從 available 取頂\n```",
       mistakes:
         "- 兩堆語意搞混。\n- 釋放時間未排序，busy 堆鍵錯誤。\n- 轉移時未從一個堆刪除就加入另一個。\n- 時間事件處理順序錯誤。",
       checklist: [
@@ -501,7 +501,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "時間單向前進，堆保證在任意時刻快速取最該處理的任務。經典模型：會議室、任務調度、CPU 排程。",
       when: "- 2530、1834（單線程 CPU）、1705（吃香蕉的最少時間）。\n- 任務有到達時間、處理時間、優先級。\n- 需按時間模擬並動態選下一個。",
-      how: "```cpp\nsort(events);\npriority_queue<Task> pq;\nfor (auto& e : events) {\n  advanceTime(e.time);\n  pq.push(e);\n  auto t = pq.top(); pq.pop();\n  process(t);\n}\n```\n\n堆鍵可能是處理時間、利潤、截止時間。",
+      how: "```cpp\nsort(events);\npriority_queue<Task> pq;\nfor (auto& e : events) {\n  advanceTime(e.time);\n  pq.push(e);\n  auto t = pq.top();\n  pq.pop();\n  process(t);\n}\n```\n\n堆鍵可能是處理時間、利潤、截止時間。",
       mistakes:
         "- 事件未按時間排序。\n- 堆鍵與優先級定義不符。\n- 時間前進時未釋放已完成任務。\n- 同時多個事件時處理順序錯。",
       checklist: [
@@ -518,7 +518,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "排序後區間關係變局部：下一個區間只需與目前合併段、活躍集合或最早結束者互動。差分事件把區間加減轉成端點變化。",
       when: "- 會議、預訂、工作日、天數覆蓋、最少分組。\n- 需要最大同時存在數、合併後長度、未覆蓋區間。\n- 查詢點與區間配對。",
-      how: "```cpp\nvector<pair<int,int>> events;\nfor (auto [l,r] : intervals) {\n  events.push_back({l, 1});\n  events.push_back({r+1, -1});\n}\nsort(events.begin(), events.end());\nint active = 0, best = 0;\nfor (auto [x,d] : events) {\n  active += d;\n  best = max(best, active);\n}\n```",
+      how: "```cpp\nvector<pair<int, int>> events;\nfor (auto [l, r] : intervals) {\n  events.push_back({l, 1});\n  events.push_back({r + 1, -1});\n}\nsort(events.begin(), events.end());\nint active = 0, best = 0;\nfor (auto [x, d] : events) {\n  active += d;\n  best = max(best, active);\n}\n```",
       mistakes:
         "- 閉區間與半開區間混淆。\n- 同一座標 start/end 處理順序錯。\n- 按錯端點排序。\n- r+1 溢位未用 long long。",
       checklist: [
@@ -533,7 +533,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "排序後只需比較目前合併段與下一個區間是否重疊，不需回頭。O(n log n) 排序 + O(n) 掃描。",
       when: "- 56（合併區間）、57（插入區間）、759（員工空閒時間）。\n- 輸出合併後的不重疊區間列表。\n- 重疊定義：next.left <= cur.right（閉區間）。",
-      how: "```cpp\nsort(intervals.begin(), intervals.end());\nvector<vector<int>> ans;\nfor (auto& in : intervals) {\n  if (ans.empty() || in[0] > ans.back()[1]) ans.push_back(in);\n  else ans.back()[1] = max(ans.back()[1], in[1]);\n}\n```",
+      how: "```cpp\nsort(intervals.begin(), intervals.end());\nvector<vector<int>> ans;\nfor (auto& in : intervals) {\n  if (ans.empty() || in[0] > ans.back()[1]) {\n    ans.push_back(in);\n  } else {\n    ans.back()[1] = max(ans.back()[1], in[1]);\n  }\n}\n```",
       mistakes:
         "- 未排序就合併。\n- 重疊判斷用 < 而非 <=。\n- 合併時只更新 right 未取 max。\n- 半開區間用閉區間公式。",
       checklist: [
@@ -563,7 +563,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "區間對全局的影響只在邊界發生。掃描線掃過座標軸，active 變化只在事件點。適合大量區間修改、查詢覆蓋。",
       when: "- 1094、1109（航班訂位統計）、1453（最大連續子陣列）。\n- 需要每個位置的覆蓋次數或最大覆蓋。\n- 區間加減操作可拆成兩個事件。",
-      how: "```cpp\nmap<long long, int> diff;\nfor (auto [l,r] : intervals) {\n  diff[l]++;\n  diff[r+1]--;\n}\nlong long x = 0, best = 0;\nfor (auto [coord, delta] : diff) {\n  x += delta;\n  best = max(best, x);\n}\n```",
+      how: "```cpp\nmap<long long, int> diff;\nfor (auto [l, r] : intervals) {\n  diff[l]++;\n  diff[r + 1]--;\n}\nlong long x = 0, best = 0;\nfor (auto [coord, delta] : diff) {\n  x += delta;\n  best = max(best, x);\n}\n```",
       mistakes:
         "- 閉區間忘記 r+1 處 -1。\n- 同一座標多事件未累加 delta。\n- 用陣列差分但座標範圍太大未壓縮。\n- 掃描順序未排序。",
       checklist: [
@@ -613,7 +613,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "若舊候選比新候選差且更遠，它就永遠不會再成為答案。彈出被支配者，保留可能最佳的少數候選。",
         when: "- 下一個更大/更小、視窗極值、DP 轉移候選。\n- 739、239、862、907。\n- 需要 O(n) 找每個位置左右第一個更大/更小。",
-        how: "```cpp\n// 單調遞減堆疊（找下一個更大）\nstack<int> st;\nfor (int i = 0; i < n; ++i) {\n  while (!st.empty() && nums[st.top()] < nums[i]) {\n    int j = st.top(); st.pop();\n    // j 的下一個更大是 i\n  }\n  st.push(i);\n}\n```",
+        how: "```cpp\n// 單調遞減堆疊（找下一個更大）\nstack<int> st;\nfor (int i = 0; i < n; ++i) {\n  while (!st.empty() && nums[st.top()] < nums[i]) {\n    int j = st.top();\n    st.pop();\n    // j 的下一個更大是 i\n  }\n  st.push(i);\n}\n```",
         mistakes:
           "- 忘記存下標，無法算距離或過期。\n- 重複值比較 < 與 <= 不統一。\n- 堆疊與佇列混用：佇列要處理過期。\n- 單調方向選反。",
         checklist: [
@@ -629,7 +629,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "遞增棧保證棧內元素單調上升。新元素更小，表示它是棧頂右側第一個更小者。",
       when: "- 496、503、907（子陣列最小值之和）。\n- 貢獻法需要「作為最小值的左右邊界」。\n- 單調棧模板題。",
-      how: "```cpp\nvector<int> st;\nfor (int i = 0; i < n; ++i) {\n  while (!st.empty() && nums[st.back()] > nums[i]) {\n    int j = st.back(); st.pop_back();\n    nextSmaller[j] = i;\n  }\n  st.push_back(i);\n}\n```",
+      how: "```cpp\nvector<int> st;\nfor (int i = 0; i < n; ++i) {\n  while (!st.empty() && nums[st.back()] > nums[i]) {\n    int j = st.back();\n    st.pop_back();\n    nextSmaller[j] = i;\n  }\n  st.push_back(i);\n}\n```",
       mistakes:
         "- 用遞減棧找更小（方向反了）。\n- 未處理棧內剩餘元素（無下一個更小）。\n- 左右掃描方向搞反。\n- 重複值 tie-break 與貢獻法不一致。",
       checklist: [
@@ -677,13 +677,13 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "prefix[j] - prefix[i] ≥ K ⇔ prefix[i] ≤ prefix[j] - K。對固定 j，要找最小的 i 使 prefix[i] 夠小，單調 deque 維護遞增前綴值的下標。",
         when: "- 862、209（全正數用滑窗，有負數改單調佇列）。\n- 和至少 K 的最短子陣列，陣列可有負數。\n- 滑動視窗因負數失效。",
-        how: "```cpp\ndeque<int> dq; // 存下標，prefix 遞增\ndq.push_back(0);\nfor (int j = 1; j <= n; ++j) {\n  while (!dq.empty() && prefix[j] - prefix[dq.front()] >= K)\n    ans = min(ans, j - dq.front()), dq.pop_front();\n  while (!dq.empty() && prefix[dq.back()] >= prefix[j])\n    dq.pop_back();\n  dq.push_back(j);\n}\n```",
+        how: "```cpp\ndeque<int> dq;  // 存下標，prefix 遞增\ndq.push_back(0);\nfor (int j = 1; j <= n; ++j) {\n  while (!dq.empty() && prefix[j] - prefix[dq.front()] >= K) {\n    ans = min(ans, j - dq.front());\n    dq.pop_front();\n  }\n  while (!dq.empty() && prefix[dq.back()] >= prefix[j]) {\n    dq.pop_back();\n  }\n  dq.push_back(j);\n}\n```",
         mistakes:
           "- 全正數仍用複雜單調佇列（應滑窗）。\n- deque 未維持 prefix 遞增。\n- 空前綴下標 0 未初始化。\n- pop_front 時更新答案的時機錯。",
         checklist: [
           "陣列有負數嗎？還能用滑窗嗎？",
           "deque 維持 prefix 遞增下標嗎？",
-          "prefix[0] 與下標 0 初始化了吗？",
+          "prefix[0] 與下標 0 初始化了嗎？",
           "達標時更新最短再 pop_front 嗎？",
         ],
       },
@@ -714,7 +714,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "BFS 按距離遞增順序探索，類似水波紋擴散。第一次到達 = 最少邊數。用 `dist[v]=-1` 標未訪問，入隊時設 dist。",
       when: "- 1091（二維網格最短路）、1926（迷宮最短路）、127（單詞接龍）。\n- 每步代價相同（一步、一天、一次操作）。\n- 問最少步數、最少天數。",
-      how: "```cpp\nqueue<pair<int,int>> q;\ndist[start] = 0; q.push(start);\nwhile (!q.empty()) {\n  auto [d, u] = q.front(); q.pop();\n  if (d != dist[u]) continue;\n  for (auto v : adj[u])\n    if (dist[v] == -1) dist[v] = d + 1, q.push({dist[v], v});\n}\n```",
+      how: "```cpp\nqueue<pair<int, int>> q;\ndist[start] = 0;\nq.push(start);\nwhile (!q.empty()) {\n  auto [d, u] = q.front();\n  q.pop();\n  if (d != dist[u]) continue;\n  for (auto v : adj[u]) {\n    if (dist[v] == -1) {\n      dist[v] = d + 1;\n      q.push({dist[v], v});\n    }\n  }\n}\n```",
       mistakes:
         "- 用 Dijkstra 處理全 1 邊權（多餘 log）。\n- 未標記 visited 造成重複入隊 TLE。\n- 四方向網格邊界、障礙未檢查。\n- 起點終點相同未特判。",
       checklist: [
@@ -729,7 +729,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "0 邊不增加距離，應立即處理（放隊首）；1 邊放隊尾。是 Dijkstra 在 0/1 邊權下的特化，比堆更快。",
       when: "- 1368（最小費用路徑，移動 1、消除障礙 0）、2290（到達角落的最少障礙移除）。\n- 每步代價 0 或 1。\n- 網格中「免費移動」與「付費操作」混合。",
-      how: "```cpp\ndeque<pair<int,int>> dq;\ndist[start] = 0; dq.push_front({0, start});\nwhile (!dq.empty()) {\n  auto [d, u] = dq.front(); dq.pop_front();\n  if (d != dist[u]) continue;\n  for (auto [v, w] : adj[u]) {\n    if (d + w < dist[v]) {\n      dist[v] = d + w;\n      if (w == 0) dq.push_front({dist[v], v});\n      else dq.push_back({dist[v], v});\n    }\n  }\n}\n```",
+      how: "```cpp\ndeque<pair<int, int>> dq;\ndist[start] = 0;\ndq.push_front({0, start});\nwhile (!dq.empty()) {\n  auto [d, u] = dq.front();\n  dq.pop_front();\n  if (d != dist[u]) continue;\n  for (auto [v, w] : adj[u]) {\n    if (d + w < dist[v]) {\n      dist[v] = d + w;\n      if (w == 0)\n        dq.push_front({dist[v], v});\n      else\n        dq.push_back({dist[v], v});\n    }\n  }\n}\n```",
       mistakes:
         "- w=0 時 push_back（應 push_front）。\n- 未檢查 d!=dist[u] 造成重複擴展。\n- 用 BFS 處理 1 成本邊（距離不單調）。\n- 狀態維度不足（只存位置未存剩餘資源）。",
       checklist: [
@@ -744,7 +744,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "非負權保證取出堆頂時距離已最終確定。同一節點可能多次入堆，取出時若 cost!=dist[u] 則為過期項目，continue 跳過。",
       when: "- 1631（最小體力消耗）、1514（概率最大路徑）、2577（最少時間）。\n- 邊權為正或零，非 0/1 一般情形。\n- 網格移動有不同代價。",
-      how: "```cpp\npriority_queue<pair<long long,int>, vector<...>, greater<...>> pq;\ndist[s] = 0; pq.push({0, s});\nwhile (!pq.empty()) {\n  auto [d, u] = pq.top(); pq.pop();\n  if (d != dist[u]) continue;\n  for (auto [v, w] : adj[u])\n    if (d + w < dist[v]) dist[v] = d + w, pq.push({dist[v], v});\n}\n```",
+      how: "```cpp\npriority_queue<pair<long long, int>, vector<...>, greater<...>> pq;\ndist[s] = 0;\npq.push({0, s});\nwhile (!pq.empty()) {\n  auto [d, u] = pq.top();\n  pq.pop();\n  if (d != dist[u]) continue;\n  for (auto [v, w] : adj[u]) {\n    if (d + w < dist[v]) {\n      dist[v] = d + w;\n      pq.push({dist[v], v});\n    }\n  }\n}\n```",
       mistakes:
         "- 有負權邊仍用 Dijkstra。\n- 未跳過 stale entry。\n- dist 用 int 溢位。\n- 無向圖只加一條邊。",
       checklist: [
@@ -759,7 +759,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "若最短路依賴「還能消除幾次障礙」「已收集哪些鑰匙」等，只看 (r,c) 不夠。把額外資訊編進狀態，圖變大但模型正確。",
       when: "- 1293（網格最短路有消除次數）、864（短詞網格）、1778（最近多點）。\n- visited 不能只看位置。\n- 有剩餘資源、 bitmask、時間條件。",
-      how: "```cpp\n// 狀態 (r, c, k)\nusing State = tuple<int,int,int>;\nmap<State, int> dist;\ndist[{sr,sc,k}] = 0;\nqueue<State> q; q.push({sr,sc,k});\n```\n\n狀態數可能很大，需評估是否可承受；有時可壓縮或用 bitset。",
+      how: "```cpp\n// 狀態 (r, c, k)\nusing State = tuple<int, int, int>;\nmap<State, int> dist;\ndist[{sr, sc, k}] = 0;\nqueue<State> q;\nq.push({sr, sc, k});\n```\n\n狀態數可能很大，需評估是否可承受；有時可壓縮或用 bitset。",
       mistakes:
         "- visited 只標 (r,c)，忽略 k/mask。\n- 狀態空間爆炸未優化。\n- 轉移遺漏某種操作。\n- 終點狀態條件不完整。",
       checklist: [
@@ -774,7 +774,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "網格題的第一步常是定義 neighbors 函數，統一處理邊界與障礙。BFS/0-1 BFS/Dijkstra 在鄰接函數上運作。",
       when: "- 幾乎所有網格最短路題。\n- 1091、1293、1631、2577。\n- 移動、消除、收集類網格題。",
-      how: "```cpp\nconst int dr[4] = {-1,1,0,0}, dc[4] = {0,0,-1,1};\nauto valid = [&](int r, int c) {\n  return r>=0 && r<n && c>=0 && c<m && grid[r][c] != '#';\n};\nfor (int d = 0; d < 4; ++d) {\n  int nr = r + dr[d], nc = c + dc[d];\n  if (valid(nr, nc)) relax({nr, nc});\n}\n```",
+      how: "```cpp\nconst int dr[4] = {-1, 1, 0, 0}, dc[4] = {0, 0, -1, 1};\nauto valid = [&](int r, int c) {\n  return r >= 0 && r < n && c >= 0 && c < m && grid[r][c] != '#';\n};\nfor (int d = 0; d < 4; ++d) {\n  int nr = r + dr[d], nc = c + dc[d];\n  if (valid(nr, nc)) relax({nr, nc});\n}\n```",
       mistakes:
         "- 邊界 off-by-one。\n- 障礙字元判斷錯誤。\n- 八方向與四方向搞混。\n- 起點終點在障礙上未特判。",
       checklist: [
@@ -792,7 +792,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "lazy deletion：不從堆中刪除舊條目，取出時驗證。攤還下每條邊最多觸發常數次有效擴展。",
         when: "- 所有 Dijkstra 實作。\n- 0-1 BFS 也可用 d!=dist[u] 防重複。\n- 堆中可能有 stale 條目時。",
-        how: "```cpp\nauto [cost, u] = pq.top(); pq.pop();\nif (cost != dist[u]) continue; // 過期項目\n```",
+        how: "```cpp\nauto [cost, u] = pq.top();\npq.pop();\nif (cost != dist[u]) continue;  // 過期項目\n```",
         mistakes:
           "- 不檢查就擴展，重複且可能錯誤。\n- dist 未初始化為 INF。\n- 用 visited 永久標記而非 dist 比較（可能錯）。\n- 0-1 BFS 忘記同樣檢查。",
         checklist: [
@@ -810,7 +810,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "若未來只依賴過去的少數摘要，就有最優子結構。先寫暴力遞迴，找重複子問題，再改為自底向上或滾動陣列。",
       when: "- 每個元素可選可不選、最多 K 個、不重疊區間。\n- 排序後找上一個相容物件。\n- 問最大/最小值、方案數。",
-      how: "三步：① 定義 `dp[i]` 或 `dp[i][k]` 語意；② 寫轉移（選/不選、max/min）；③ 定初值與遍歷順序。\n\n```cpp\nfor (int i = 0; i < n; ++i) {\n  dp[i] = max(dp[i-1], dp[i-2] + nums[i]);\n}\n```",
+      how: "三步：① 定義 `dp[i]` 或 `dp[i][k]` 語意；② 寫轉移（選/不選、max/min）；③ 定初值與遍歷順序。\n\n```cpp\nfor (int i = 0; i < n; ++i) {\n  dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);\n}\n```",
       mistakes:
         "- dp 定義含糊，轉移矛盾。\n- 初始化非法狀態為 0。\n- 遍歷順序錯，讀到未算好的狀態。\n- 該用 DP 卻用貪心。",
       checklist: [
@@ -825,7 +825,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "取 nums[i] 就不能取 i-1，所以 take 來自 i-2。不取則來自 i-1。可壓成兩個變數 skip/take 滾動。",
       when: "- 198、213、337、740。\n- 相鄰不能同時選。\n- 最大化選取總和。",
-      how: "```cpp\nlong long skip = 0, take = 0;\nfor (int x : nums) {\n  long long ntake = skip + x;\n  long long nskip = max(skip, take);\n  skip = nskip; take = ntake;\n}\nreturn max(skip, take);\n```",
+      how: "```cpp\nlong long skip = 0, take = 0;\nfor (int x : nums) {\n  long long ntake = skip + x;\n  long long nskip = max(skip, take);\n  skip = nskip;\n  take = ntake;\n}\nreturn max(skip, take);\n```",
       mistakes:
         "- 相鄰限制卻用 dp[i-1]+x。\n- 環形未拆成兩段線性。\n- 樹形 DP 父子同選未禁止。\n- 滾動時變數覆蓋順序錯。",
       checklist: [
@@ -843,7 +843,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "k 維度追蹤資源消耗。類似背包但限制選取個數而非容量。可壓成一維 k，注意 k 遍歷方向。",
         when: "- 1235（規劃日程）、2140（兩場比賽最高分）、1881（插入後最大子陣列和）。\n- 最多選 k 個、恰好 k 段。\n- 有選取數量上限。",
-        how: "```cpp\nfor (int i = 0; i < n; ++i)\n  for (int k = K; k >= 1; --k)\n    dp[k] = max(dp[k], dp[k-1] + value[i]);\n```\n\n依問題決定 k 正序還是倒序。",
+        how: "```cpp\nfor (int i = 0; i < n; ++i) {\n  for (int k = K; k >= 1; --k) {\n    dp[k] = max(dp[k], dp[k - 1] + value[i]);\n  }\n}\n```\n\n依問題決定 k 正序還是倒序。",
         mistakes:
           "- k 維遍歷方向錯（0/1 背包需倒序）。\n- 混淆「至多 k」與「恰好 k」。\n- dp[k] 初值錯誤。\n- i 與 k 語意搞混。",
         checklist: [
@@ -859,7 +859,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "類似區間調度：排序後，每個區間只與之前的相容區間轉移。1235、1751 是代表題。",
       when: "- 1235、1751、2008（出租車）。\n- 選區間、選任務，不能時間重疊。\n- 最大化選取總權重。",
-      how: "```cpp\nsort(intervals, byEnd);\nfor (int i = 0; i < n; ++i) {\n  int p = lastNonOverlap(i); // 二分\n  dp[i] = max(dp[i-1], dp[p] + profit[i]);\n}\n```",
+      how: "```cpp\nsort(intervals, byEnd);\nfor (int i = 0; i < n; ++i) {\n  int p = lastNonOverlap(i);  // 二分\n  dp[i] = max(dp[i - 1], dp[p] + profit[i]);\n}\n```",
       mistakes:
         "- 未排序就轉移。\n- 重疊判斷錯誤（應 end<=start）。\n- 二分邊界 off-by-one。\n- dp[i] 語意是「考慮前 i 個」還是「以 i 結尾」。",
       checklist: [
@@ -874,7 +874,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "若 dp[i] 只依賴 dp[i-1] 和 dp[i-2]，不需存整表。滾動時注意讀寫順序，避免覆蓋仍需要的舊值。",
       when: "- 198、322、300、70。\n- 空間優化要求。\n- 轉移只依賴固定前幾項。",
-      how: "```cpp\n// 0/1 背包壓縮到一維\ndp[0] = 0;\nfor (int i = 0; i < n; ++i)\n  for (int c = C; c >= w[i]; --c)\n    dp[c] = max(dp[c], dp[c-w[i]] + v[i]);\n```",
+      how: "```cpp\n// 0/1 背包壓縮到一維\ndp[0] = 0;\nfor (int i = 0; i < n; ++i) {\n  for (int c = C; c >= w[i]; --c) {\n    dp[c] = max(dp[c], dp[c - w[i]] + v[i]);\n  }\n}\n```",
       mistakes:
         "- 完全背包卻倒序遍歷容量。\n- 滾動時讀到已覆蓋的新值。\n- 壓縮後初值錯誤。\n- 多維依賴卻強行壓成一維。",
       checklist: [
@@ -892,7 +892,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "例如 dp[i] 需 max{dp[j] | j<i 且 compatible(j,i)}。若 i 遞增且查詢條件單調，可維護資料結構插入 dp[j]。",
         when: "- 3186、2320、2830、3077。\n- 轉移需查前綴最大、滿足約束的最優 j。\n- O(n²) DP 需優化到 O(n log n)。",
-        how: "```cpp\nmap<int, long long> best; // key 為某屬性，value 為 dp 最優\nfor (int i = 0; i < n; ++i) {\n  dp[i] = query(best, i) + gain[i];\n  best[key(i)] = max(best[key(i)], dp[i]);\n}\n```",
+        how: "```cpp\nmap<int, long long> best;  // key 為某屬性，value 為 dp 最優\nfor (int i = 0; i < n; ++i) {\n  dp[i] = query(best, i) + gain[i];\n  best[key(i)] = max(best[key(i)], dp[i]);\n}\n```",
         mistakes:
           "- 資料結構 key 設計錯誤。\n- 查詢條件與插入不同步。\n- 忘記維護單調性。\n- 複雜度仍為 O(n²)。",
         checklist: [
@@ -941,9 +941,9 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       {
         what: "前後更小元素：用單調棧對每個 i 找 prevLess[i]（左邊第一個更小）和 nextLess[i]（右邊第一個更小或相等，依 tie-break）。在 (prevLess, nextLess) 開區間內，nums[i] 是子陣列最小值。",
         intuition:
-          "907：子陣列最小值之和 = Σ nums[i] × (i-prevLess) × (nextLess-i)。重複值需統一 tie-break（通常左側严格小、右側小于等于）。",
+          "907：子陣列最小值之和 = Σ nums[i] × (i-prevLess) × (nextLess-i)。重複值需統一 tie-break（通常左側嚴格小、右側小於等於）。",
         when: "- 907、2104（子陣列和中的最大子陣列和）。\n- 元素作為子陣列最小值的貢獻。\n- 需單調棧找邊界。",
-        how: "```cpp\n// 左邊第一個严格更小，右邊第一個更小或相等\nwhile (!st.empty() && nums[st.top()] >= nums[i]) st.pop();\nprevLess[i] = st.empty() ? -1 : st.top();\n```\n\n左右掃描或一次掃描+兩種比較符。",
+        how: "```cpp\n// 左邊第一個嚴格更小，右邊第一個更小或相等\nwhile (!st.empty() && nums[st.top()] >= nums[i]) st.pop();\nprevLess[i] = st.empty() ? -1 : st.top();\n```\n\n左右掃描或一次掃描+兩種比較符。",
         mistakes:
           "- 重複值 < 與 <= 混用導致重複計數。\n- 左右掃描 tie-break 不一致。\n- 開區間與閉區間搞混。\n- 棧內剩餘邊界設為 -1/n。",
         checklist: [
@@ -1036,7 +1036,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "896（單一數字 OR）、898（子陣列 OR 能整除查詢）都利用 OR 值種類少。每個右端 O(32) 更新。",
         when: "- 898、2044（計數 OR 值）、2433。\n- 子陣列 OR 統計、查詢。\n- 需要枚舉子陣列 OR 但 n 很大。",
-        how: "```cpp\nunordered_map<int, long long> cur, nxt;\nfor (int x : nums) {\n  nxt.clear(); nxt[x] = 1;\n  for (auto [v, c] : cur) nxt[v | x] += c;\n  cur.swap(nxt);\n}\n```",
+        how: "```cpp\nunordered_map<int, long long> cur, nxt;\nfor (int x : nums) {\n  nxt.clear();\n  nxt[x] = 1;\n  for (auto [v, c] : cur) nxt[v | x] += c;\n  cur.swap(nxt);\n}\n```",
         mistakes:
           "- 以為 OR 值有 O(n) 種 TLE。\n- 未合併相同 OR 值的計數。\n- 滑窗 OR 用減法維護。\n- map 改用 vector 可常數優化。",
         checklist: [
@@ -1055,7 +1055,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "1521、3209 等題。AND 單調遞減（bit 意義上），集合大小有界。",
         when: "- 1521、3209、AND 子陣列查詢。\n- 統計不同 AND 值。\n- 與 OR 壓縮對稱的題型。",
-        how: "```cpp\nfor (int x : nums) {\n  nxt.clear(); nxt[x] = 1;\n  for (auto [v, c] : cur) nxt[v & x] += c;\n  cur.swap(nxt);\n}\n```",
+        how: "```cpp\nfor (int x : nums) {\n  nxt.clear();\n  nxt[x] = 1;\n  for (auto [v, c] : cur) nxt[v & x] += c;\n  cur.swap(nxt);\n}\n```",
         mistakes:
           "- 初始 AND 值設為 0（應從 x 開始）。\n- 與 OR 模板混淆（| 寫成 &）。\n- 空子陣列處理錯誤。\n- 未累加計數。",
         checklist: [
@@ -1071,7 +1071,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "XOR 自反：a^a=0，a^0=a。可配合 trie 找最大異或對、計數異或為 k 的子陣列。",
       when: "- 1442、1863、2411、1371。\n- 子陣列 XOR 等於 k、最大 XOR。\n- 不能用 OR/AND 壓縮。",
-      how: "```cpp\nint prefix = 0;\nmap<int,int> freq{{0,1}};\nfor (int x : nums) {\n  prefix ^= x;\n  ans += freq[prefix ^ k];\n  ++freq[prefix];\n}\n```",
+      how: "```cpp\nint prefix = 0;\nmap<int, int> freq{{0, 1}};\nfor (int x : nums) {\n  prefix ^= x;\n  ans += freq[prefix ^ k];\n  ++freq[prefix];\n}\n```",
       mistakes:
         "- 對 XOR 用 OR 壓縮模板。\n- 空前綴 prefix=0 未入 map。\n- trie 位元順序錯誤。\n- 異或與加法混淆。",
       checklist: [
@@ -1085,7 +1085,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       what: "bitset 把布林陣列壓成機器字，支援 O(n/w) 的移位、或、與操作。常用於「可達和」DP：dp |= dp << weight。C++ `bitset<MAX>` 或 vector<uint64_t>。",
       intuition:
         "若 DP 狀態是「哪些和可達」，bitset 比逐個更新快 w 倍（w=字長）。適合背包可達性、子集和。",
-      when: "- 可達和、子集划分、有限狀態集合转移。\n- 狀態是 0/1 可達向量。\n- n 不大但和很大。",
+      when: "- 可達和、子集劃分、有限狀態集合轉移。\n- 狀態是 0/1 可達向量。\n- n 不大但和很大。",
       how: "```cpp\nbitset<MAXS> dp;\ndp[0] = 1;\nfor (int w : weights) dp |= dp << w;\nreturn dp[sum];\n```",
       mistakes:
         "- MAXS 開太小溢位。\n- 移位方向錯誤。\n- 該用值 DP 卻用 bitset 可達性。\n- 未考慮空間限制。",
@@ -1104,7 +1104,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "把「集合狀態」編碼成整數，轉移用位運算：mask | (1<<c)、popcount(mask)==k。",
         when: "- 1074（二進位矩陣）、1442、狀態 BFS mask。\n- 字母種類少、需追蹤已出現集合。\n- 2^k 可接受（k≤20）。",
-        how: "```cpp\nint mask = 0;\nmask |= 1 << (c - 'a');\nif (__builtin_popcount(mask) == k) { /* 合法 */ }\n```",
+        how: "```cpp\nint mask = 0;\nmask |= 1 << (c - 'a');\nif (__builtin_popcount(mask) == k) {\n  // 合法\n}\n```",
         mistakes:
           "- k 太大 2^k 爆炸。\n- 1<<26 溢位（用 1LL<<26）。\n- popcount 與種類數語意混。\n- mask 未初始化。",
         checklist: [
@@ -1156,7 +1156,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       intuition:
         "若查詢是「比 x 大的最小值」「第 k 小」「範圍內個數」，有序集合比 heap 更靈活。",
       when: "- 1912（設計電影評分系統）、2102（旅館預訂）、220（存在重複元素 III 的 set 查鄰居）。\n- 需要前驅後繼、範圍查詢。\n- 元素會刪除，不能只 push heap。",
-      how: "```cpp\nmultiset<int> ms;\nms.insert(x);\nms.erase(ms.find(old)); // 刪一個\nauto it = ms.lower_bound(x); // >= x 最小\n```",
+      how: "```cpp\nmultiset<int> ms;\nms.insert(x);\nms.erase(ms.find(old));       // 刪一個\nauto it = ms.lower_bound(x);  // >= x 最小\n```",
       mistakes:
         "- multiset erase(x) 刪光所有 x。\n- lower_bound 返回 end 未檢查。\n- 應 unique 卻用 multiset。\n- 迭代器失效後仍使用。",
       checklist: [
@@ -1174,7 +1174,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "雙向映射讓「按值更新」與「按頻次查詢」都高效。更新時先從舊頻次桶移除，再加入新頻次桶。",
         when: "- 981、3408、頻次統計設計題。\n- 查「最高頻元素」「出現 exactly k 次的值」。\n- 需要動態維護頻次分布。",
-        how: "```cpp\nvoid add(int x) {\n  int old = cnt[x]++;\n  bucket[old].erase(x);\n  bucket[old+1].insert(x);\n}\n```",
+        how: "```cpp\nvoid add(int x) {\n  int old = cnt[x]++;\n  bucket[old].erase(x);\n  bucket[old + 1].insert(x);\n}\n```",
         mistakes:
           "- 頻次減到 0 未從 bucket 移除。\n- 空 bucket 未清理。\n- 多個同頻次值的 tie-break 錯。\n- cnt 與 bucket 不同步。",
         checklist: [
@@ -1208,7 +1208,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
         intuition:
           "權威資料可能存於 vector，但需要快速按 id 或時間查找。輔助 map 是第二索引。",
         when: "- 1146（快照陣列）、2349（最高可見樓層）、981。\n- 按 id、時間、版本查詢。\n- 需 random access by key。",
-        how: "```cpp\nunordered_map<int,int> idToIndex;\nvector<Item> items;\nvoid update(int id, int val) {\n  if (!idToIndex.count(id)) idToIndex[id] = items.size(), items.push_back({id,val});\n  else items[idToIndex[id]].val = val;\n}\n```",
+        how: "```cpp\nunordered_map<int, int> idToIndex;\nvector<Item> items;\nvoid update(int id, int val) {\n  if (!idToIndex.count(id)) {\n    idToIndex[id] = items.size();\n    items.push_back({id, val});\n  } else {\n    items[idToIndex[id]].val = val;\n  }\n}\n```",
         mistakes:
           "- 刪除後 idToIndex 未更新。\n- 時間戳未排序，二分查錯。\n- 版本列表未 append 只 overwrite。\n- 快照未 copy-on-write。",
         checklist: [
@@ -1237,77 +1237,77 @@ export const Q3_PATTERN_META: Record<
     description:
       "用一段連續區間承載當前狀態，右端負責擴張、左端負責收縮，藉此維持視窗的不變式。如此一來，原本要枚舉所有區間的工作就被壓縮到線性時間。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n視窗就是目前正在考慮的一段連續子陣列或子字串。初學者可以把它想成一把尺：右端點負責把新元素納入，左端點負責丟掉已經不適合的元素。關鍵不是兩個指標本身，而是你能否說清楚視窗內一直維持的條件。定長視窗的長度固定，例如每次只看 k 個元素；不定長視窗則依照條件伸縮。\n\n## 核心直覺\n\n如果右端點往右移時，某個條件只會朝一個方向變化，左端點就不需要回頭。這讓每個元素最多進入一次、離開一次。至多 K 維護「違規量不超過 K」；恰好 K 則常用 atMost(K) - atMost(K - 1)，因為所有至多 K 的集合扣掉至多 K - 1，剩下的正好是 K。\n\n## 典型讀題訊號\n\n- 題目明確要求連續子陣列或子字串。\n- 限制包含最多 K 次替換、刪除、不同值、零或特殊字元。\n- 全為正數時的和、乘積、分數限制常具備單調性。\n- 答案可依每個右端點新增 right - left + 1 個合法區間，或依每個左端點一次加上右側剩餘數量。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long atMostKDistinct(vector<int>& nums, int k) {\n    if (k < 0) return 0;\n    unordered_map<int, int> freq;\n    long long ans = 0;\n    int left = 0;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n        if (++freq[nums[right]] == 1) --k;\n        while (k < 0) {\n            if (--freq[nums[left]] == 0) ++k;\n            ++left;\n        }\n        ans += right - left + 1;\n    }\n    return ans;\n}\n```\n\n## 常見錯誤\n\n- 含負數的和通常不能直接滑窗，因為右端擴張後和不一定只變大。\n- 計數前必須確認不變式已恢復。\n- OR 視窗移出元素不能直接減掉，要用每個 bit 的頻次重建。\n- 左端驅動與右端驅動的加答案公式不同，混用會多算或少算。\n\n## 建議練習順序\n\n- 必修：先做 209、713、1004、1358，練右端驅動與基本縮窗。\n- 進階：做 992、2024、2302、2516，練 atMost 差分與左端驅動。\n- 挑戰：做 2762、2831、2962、3097，練頻次、位置陣列與位元視窗。\n\n## 我能認出這個模式嗎？\n\n- 我能說出視窗代表哪一段資料嗎？\n- 我知道不變式是「至多」、「至少」還是「固定長度」嗎？\n- 右端加入後，要在什麼條件下縮左端？\n- 答案是加 right-left+1、加 n-right，還是更新最長/最短？\n- 如果題目問恰好 K，我是否先檢查 atMost 差分？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n視窗就是目前正在考慮的一段連續子陣列或子字串。初學者可以把它想成一把尺：右端點負責把新元素納入，左端點負責丟掉已經不適合的元素。關鍵不是兩個指標本身，而是你能否說清楚視窗內一直維持的條件。定長視窗的長度固定，例如每次只看 k 個元素；不定長視窗則依照條件伸縮。\n\n## 核心直覺\n\n如果右端點往右移時，某個條件只會朝一個方向變化，左端點就不需要回頭。這讓每個元素最多進入一次、離開一次。至多 K 維護「違規量不超過 K」；恰好 K 則常用 atMost(K) - atMost(K - 1)，因為所有至多 K 的集合扣掉至多 K - 1，剩下的正好是 K。\n\n## 典型讀題訊號\n\n- 題目明確要求連續子陣列或子字串。\n- 限制包含最多 K 次替換、刪除、不同值、零或特殊字元。\n- 全為正數時的和、乘積、分數限制常具備單調性。\n- 答案可依每個右端點新增 right - left + 1 個合法區間，或依每個左端點一次加上右側剩餘數量。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long atMostKDistinct(vector<int>& nums, int k) {\n  if (k < 0) return 0;\n  unordered_map<int, int> freq;\n  long long ans = 0;\n  int left = 0;\n  for (int right = 0; right < (int)nums.size(); ++right) {\n    if (++freq[nums[right]] == 1) --k;\n    while (k < 0) {\n      if (--freq[nums[left]] == 0) ++k;\n      ++left;\n    }\n    ans += right - left + 1;\n  }\n  return ans;\n}\n```\n\n## 常見錯誤\n\n- 含負數的和通常不能直接滑窗，因為右端擴張後和不一定只變大。\n- 計數前必須確認不變式已恢復。\n- OR 視窗移出元素不能直接減掉，要用每個 bit 的頻次重建。\n- 左端驅動與右端驅動的加答案公式不同，混用會多算或少算。\n\n## 建議練習順序\n\n- 必修：先做 209、713、1004、1358，練右端驅動與基本縮窗。\n- 進階：做 992、2024、2302、2516，練 atMost 差分與左端驅動。\n- 挑戰：做 2762、2831、2962、3097，練頻次、位置陣列與位元視窗。\n\n## 我能認出這個模式嗎？\n\n- 我能說出視窗代表哪一段資料嗎？\n- 我知道不變式是「至多」、「至少」還是「固定長度」嗎？\n- 右端加入後，要在什麼條件下縮左端？\n- 答案是加 right-left+1、加 n-right，還是更新最長/最短？\n- 如果題目問恰好 K，我是否先檢查 atMost 差分？",
   },
   93006: {
     title: "前綴和與雜湊表",
     description:
       "把子陣列和改寫成兩個前綴值相減，再用雜湊表記住先前出現過的前綴。這套做法特別適合含負數、和等於 K 或整除等查詢。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n前綴和 prefix[i] 表示前 i 個元素的總和。子陣列 i..j 的和等於 prefix[j+1] - prefix[i]，所以「找子陣列」會變成「找以前是否有某個前綴」。雜湊表的用途是快速回答：這個需要的前綴以前出現幾次、最早在哪裡、或對應的最佳值是多少。\n\n## 核心直覺\n\n暴力枚舉左端和右端是 O(n^2)。如果右端已固定，合法左端只取決於以前的 prefix 值，就能在 O(1) 平均時間查出答案。模數前綴也是同一件事：兩個前綴除以 k 餘數相同，差值就能被 k 整除。二維前綴把矩形和拆成四塊相加相減。\n\n## 典型讀題訊號\n\n- 子陣列和可以為正也可以為負，滑窗失去單調性。\n- 題目要求和等於 K、和能被 K 整除、奇偶數量剛好 K、平衡 0/1。\n- 需要統計以前有多少狀態與目前狀態配對。\n- 矩陣中反覆查矩形和。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long countSubarraySum(vector<int>& nums, long long target) {\n    unordered_map<long long, long long> freq;\n    freq[0] = 1;\n    long long prefix = 0, ans = 0;\n    for (int x : nums) {\n        prefix += x;\n        ans += freq[prefix - target];\n        ++freq[prefix];\n    }\n    return ans;\n}\n```\n\n## 常見錯誤\n\n- 忘記先放空前綴 freq[0]=1。\n- 查答案與加入目前前綴的順序反了，會把空子陣列算進去。\n- C++ 負數取模仍可能是負的。\n- 二維前綴常錯在 +1 偏移與矩形邊界。\n\n## 建議練習順序\n\n- 必修：560、974、1248。\n- 進階：1590、2488、3026。\n- 挑戰：1074、1915、2025。\n\n## 我能認出這個模式嗎？\n\n- 我能寫出子陣列條件對應的 prefix[j]-prefix[i] 嗎？\n- 固定右端時，需要查以前的哪個前綴？\n- map 裡要存頻次、最早下標、最小前綴，還是多個狀態？\n- 是否需要處理負餘數或空前綴？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n前綴和 prefix[i] 表示前 i 個元素的總和。子陣列 i..j 的和等於 prefix[j+1] - prefix[i]，所以「找子陣列」會變成「找以前是否有某個前綴」。雜湊表的用途是快速回答：這個需要的前綴以前出現幾次、最早在哪裡、或對應的最佳值是多少。\n\n## 核心直覺\n\n暴力枚舉左端和右端是 O(n^2)。如果右端已固定，合法左端只取決於以前的 prefix 值，就能在 O(1) 平均時間查出答案。模數前綴也是同一件事：兩個前綴除以 k 餘數相同，差值就能被 k 整除。二維前綴把矩形和拆成四塊相加相減。\n\n## 典型讀題訊號\n\n- 子陣列和可以為正也可以為負，滑窗失去單調性。\n- 題目要求和等於 K、和能被 K 整除、奇偶數量剛好 K、平衡 0/1。\n- 需要統計以前有多少狀態與目前狀態配對。\n- 矩陣中反覆查矩形和。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long countSubarraySum(vector<int>& nums, long long target) {\n  unordered_map<long long, long long> freq;\n  freq[0] = 1;\n  long long prefix = 0, ans = 0;\n  for (int x : nums) {\n    prefix += x;\n    ans += freq[prefix - target];\n    ++freq[prefix];\n  }\n  return ans;\n}\n```\n\n## 常見錯誤\n\n- 忘記先放空前綴 freq[0]=1。\n- 查答案與加入目前前綴的順序反了，會把空子陣列算進去。\n- C++ 負數取模仍可能是負的。\n- 二維前綴常錯在 +1 偏移與矩形邊界。\n\n## 建議練習順序\n\n- 必修：560、974、1248。\n- 進階：1590、2488、3026。\n- 挑戰：1074、1915、2025。\n\n## 我能認出這個模式嗎？\n\n- 我能寫出子陣列條件對應的 prefix[j]-prefix[i] 嗎？\n- 固定右端時，需要查以前的哪個前綴？\n- map 裡要存頻次、最早下標、最小前綴，還是多個狀態？\n- 是否需要處理負餘數或空前綴？",
   },
   93007: {
     title: "答案二分搜尋",
     description:
       "不直接構造答案，而是先猜一個值 x，再用 check(x) 判斷它是否可行。只要可行性具有單調性，就能靠二分不斷縮小範圍逼近答案。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n答案二分搜尋用在答案本身是一個數值，而且「候選值變大或變小後，可行性會保持同一方向」的問題。最小化最大值通常找第一個可行值；最大化最小值通常找最後一個可行值。真正的難點不是二分，而是設計 check(x)。\n\n## 核心直覺\n\n如果 x 可行，而所有比 x 更寬鬆的值也可行，就有單調性。二分只負責找邊界；check(x) 需要用貪心、計數或一次掃描回答「用這個限制能不能完成」。\n\n## 典型讀題訊號\n\n- 題目問最小的最大值、最大的最小值、最少時間、最小速度、最小容量。\n- 直接構造最佳值困難，但驗證某個值很容易。\n- 限制值在大範圍整數內，O(log answer * check) 可接受。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long firstTrue(long long left, long long right) {\n    while (left < right) {\n        long long mid = left + (right - left) / 2;\n        if (check(mid)) right = mid;\n        else left = mid + 1;\n    }\n    return left;\n}\n\nlong long lastTrue(long long left, long long right) {\n    while (left < right) {\n        long long mid = left + (right - left + 1) / 2;\n        if (check(mid)) left = mid;\n        else right = mid - 1;\n    }\n    return left;\n}\n```\n\n## 常見錯誤\n\n- check(x) 沒有單調性卻硬二分。\n- 右邊界不包含答案。\n- first true 與 last true 的 mid 偏移混用。\n- 計數相乘或累加忘記 long long。\n\n## 建議練習順序\n\n- 必修：410、875、1482、1552。\n- 進階：1760、1870、2187、2517。\n- 挑戰：2616、2861。\n\n## 我能認出這個模式嗎？\n\n- 候選答案 x 變大時，題目是更容易還是更難？\n- 我要找 first true 還是 last true？\n- check(x) 是否只回傳可行/不可行，不偷算答案？\n- left/right 是否保證包住答案？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n答案二分搜尋用在答案本身是一個數值，而且「候選值變大或變小後，可行性會保持同一方向」的問題。最小化最大值通常找第一個可行值；最大化最小值通常找最後一個可行值。真正的難點不是二分，而是設計 check(x)。\n\n## 核心直覺\n\n如果 x 可行，而所有比 x 更寬鬆的值也可行，就有單調性。二分只負責找邊界；check(x) 需要用貪心、計數或一次掃描回答「用這個限制能不能完成」。\n\n## 典型讀題訊號\n\n- 題目問最小的最大值、最大的最小值、最少時間、最小速度、最小容量。\n- 直接構造最佳值困難，但驗證某個值很容易。\n- 限制值在大範圍整數內，O(log answer * check) 可接受。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long firstTrue(long long left, long long right) {\n  while (left < right) {\n    long long mid = left + (right - left) / 2;\n    if (check(mid))\n      right = mid;\n    else\n      left = mid + 1;\n  }\n  return left;\n}\n\nlong long lastTrue(long long left, long long right) {\n  while (left < right) {\n    long long mid = left + (right - left + 1) / 2;\n    if (check(mid))\n      left = mid;\n    else\n      right = mid - 1;\n  }\n  return left;\n}\n```\n\n## 常見錯誤\n\n- check(x) 沒有單調性卻硬二分。\n- 右邊界不包含答案。\n- first true 與 last true 的 mid 偏移混用。\n- 計數相乘或累加忘記 long long。\n\n## 建議練習順序\n\n- 必修：410、875、1482、1552。\n- 進階：1760、1870、2187、2517。\n- 挑戰：2616、2861。\n\n## 我能認出這個模式嗎？\n\n- 候選答案 x 變大時，題目是更容易還是更難？\n- 我要找 first true 還是 last true？\n- check(x) 是否只回傳可行/不可行，不偷算答案？\n- left/right 是否保證包住答案？",
   },
   93008: {
     title: "堆積貪心",
     description:
       "用 priority_queue 隨時保存當前最佳候選，必要時才取用，或反悔換掉先前最差的決定。它的核心是每一步都安全地取出最大或最小值。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n堆積適合「每一步都要從目前候選中取最大或最小」的題目。貪心的核心是定義候選集合與反悔規則：先把可能有用的東西放進堆，真正遇到瓶頸時才拿出最好的，或先做決定，發現資源超量時把最差的決定換掉。\n\n## 核心直覺\n\n如果未來只在乎目前候選中的最大值或最小值，堆積就能讓每次選擇 O(log n)。局部最優能成立通常因為交換論證：把昂貴資源留給更大的缺口，或把最短/最高優先級任務先處理，不會讓後續更差。\n\n## 典型讀題訊號\n\n- 反覆取目前最大/最小。\n- 資源有限，需要必要時才使用。\n- 任務有到達時間、處理時間、房間、伺服器等優先級。\n- 刪除或更新造成堆裡可能有舊資料。\n\n\n## C++ 模板或偽程式\n\n```cpp\npriority_queue<int> best;\nfor (auto event : events) {\n    while (can_add_candidate(event)) best.push(candidate_value);\n    if (need_help()) {\n        if (best.empty()) return -1;\n        use(best.top());\n        best.pop();\n    }\n}\n```\n\n## 常見錯誤\n\n- 堆中元素語意不清：到底是候選、已選、還是可反悔項目。\n- min-heap/max-heap 選反。\n- 更新資料後忘記處理 stale entry。\n- 貪心沒有單調或交換理由，只是看起來合理。\n\n## 建議練習順序\n\n- 必修：1642、871、2530。\n- 進階：1834、1882、2402、3066。\n- 挑戰：2163。\n\n## 我能認出這個模式嗎？\n\n- 我需要每次取最大還是最小？\n- 堆裡保存的是候選還是已分配資源？\n- 何時把元素放進堆、何時拿出來？\n- 如果資料會更新，堆頂是否需要驗證過期？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n堆積適合「每一步都要從目前候選中取最大或最小」的題目。貪心的核心是定義候選集合與反悔規則：先把可能有用的東西放進堆，真正遇到瓶頸時才拿出最好的，或先做決定，發現資源超量時把最差的決定換掉。\n\n## 核心直覺\n\n如果未來只在乎目前候選中的最大值或最小值，堆積就能讓每次選擇 O(log n)。局部最優能成立通常因為交換論證：把昂貴資源留給更大的缺口，或把最短/最高優先級任務先處理，不會讓後續更差。\n\n## 典型讀題訊號\n\n- 反覆取目前最大/最小。\n- 資源有限，需要必要時才使用。\n- 任務有到達時間、處理時間、房間、伺服器等優先級。\n- 刪除或更新造成堆裡可能有舊資料。\n\n\n## C++ 模板或偽程式\n\n```cpp\npriority_queue<int> best;\nfor (auto event : events) {\n  while (can_add_candidate(event)) best.push(candidate_value);\n  if (need_help()) {\n    if (best.empty()) return -1;\n    use(best.top());\n    best.pop();\n  }\n}\n```\n\n## 常見錯誤\n\n- 堆中元素語意不清：到底是候選、已選、還是可反悔項目。\n- min-heap/max-heap 選反。\n- 更新資料後忘記處理 stale entry。\n- 貪心沒有單調或交換理由，只是看起來合理。\n\n## 建議練習順序\n\n- 必修：1642、871、2530。\n- 進階：1834、1882、2402、3066。\n- 挑戰：2163。\n\n## 我能認出這個模式嗎？\n\n- 我需要每次取最大還是最小？\n- 堆裡保存的是候選還是已分配資源？\n- 何時把元素放進堆、何時拿出來？\n- 如果資料會更新，堆頂是否需要驗證過期？",
   },
   93009: {
     title: "區間與掃描線",
     description:
       "先把區間端點排序成一連串事件，再依序維護覆蓋數、重疊數或活躍集合。這套思路可以涵蓋合併區間、會議室與差分等題型。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n區間題的第一步通常是排序。合併區間要按左端點排序；選最多不重疊區間常按右端點排序；查詢每個點被哪些區間覆蓋，則把左右端點拆成事件掃描。掃描線的狀態是「目前活著的區間」。\n\n## 核心直覺\n\n排序後，區間的相對關係變得局部：下一個區間只需要和目前合併段、目前活躍集合或目前最早結束者互動。差分事件把很多區間加減轉成在端點處變化。座標很大但事件很少時，先壓縮座標。\n\n## 典型讀題訊號\n\n- 會議、預訂、工作日、天數覆蓋、最少分組。\n- 需要最大同時存在數、合併後長度、未覆蓋區間。\n- 查詢點與區間配對，或需要隨掃描維護最短/最小活躍區間。\n\n\n## C++ 模板或偽程式\n\n```cpp\nvector<pair<int,int>> events;\nfor (auto [l, r] : intervals) {\n    events.push_back({l, 1});\n    events.push_back({r + 1, -1}); // closed interval\n}\nsort(events.begin(), events.end());\nint active = 0, best = 0;\nfor (auto [x, delta] : events) {\n    active += delta;\n    best = max(best, active);\n}\n```\n\n## 常見錯誤\n\n- 閉區間與半開區間混淆。\n- 同一座標 start/end 處理順序錯。\n- 按左端或右端排序的目的不清。\n- 座標 r+1 可能溢位，要用 long long 或事件排序 tie-break。\n\n## 建議練習順序\n\n- 必修：56、1094、2406。\n- 進階：1288、1943、2054、3169。\n- 挑戰：1851、2589。\n\n## 我能認出這個模式嗎？\n\n- 這題是在合併區間、數重疊，還是回答查詢？\n- 端點是閉區間還是半開區間？\n- 我應該按左端、右端，還是拆事件排序？\n- 是否需要活躍集合或座標壓縮？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n區間題的第一步通常是排序。合併區間要按左端點排序；選最多不重疊區間常按右端點排序；查詢每個點被哪些區間覆蓋，則把左右端點拆成事件掃描。掃描線的狀態是「目前活著的區間」。\n\n## 核心直覺\n\n排序後，區間的相對關係變得局部：下一個區間只需要和目前合併段、目前活躍集合或目前最早結束者互動。差分事件把很多區間加減轉成在端點處變化。座標很大但事件很少時，先壓縮座標。\n\n## 典型讀題訊號\n\n- 會議、預訂、工作日、天數覆蓋、最少分組。\n- 需要最大同時存在數、合併後長度、未覆蓋區間。\n- 查詢點與區間配對，或需要隨掃描維護最短/最小活躍區間。\n\n\n## C++ 模板或偽程式\n\n```cpp\nvector<pair<int, int>> events;\nfor (auto [l, r] : intervals) {\n  events.push_back({l, 1});\n  events.push_back({r + 1, -1});  // closed interval\n}\nsort(events.begin(), events.end());\nint active = 0, best = 0;\nfor (auto [x, delta] : events) {\n  active += delta;\n  best = max(best, active);\n}\n```\n\n## 常見錯誤\n\n- 閉區間與半開區間混淆。\n- 同一座標 start/end 處理順序錯。\n- 按左端或右端排序的目的不清。\n- 座標 r+1 可能溢位，要用 long long 或事件排序 tie-break。\n\n## 建議練習順序\n\n- 必修：56、1094、2406。\n- 進階：1288、1943、2054、3169。\n- 挑戰：1851、2589。\n\n## 我能認出這個模式嗎？\n\n- 這題是在合併區間、數重疊，還是回答查詢？\n- 端點是閉區間還是半開區間？\n- 我應該按左端、右端，還是拆事件排序？\n- 是否需要活躍集合或座標壓縮？",
   },
   93010: {
     title: "單調堆疊與單調佇列",
     description:
       "維護一個單調遞增或遞減的候選集合，當新元素到來時就彈出被它支配的舊元素。常用來求下一個更大或更小值，以及視窗極值。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n單調性表示資料在結構內保持遞增或遞減。單調堆疊多用來找某元素左/右第一個更大或更小；單調佇列多用在下標會過期的視窗或前綴最佳值。元素能被彈出，是因為新元素在值與位置上都比它更有競爭力。\n\n## 核心直覺\n\n如果一個舊候選比新候選差，而且新候選更靠近未來，它就永遠不會再成為最佳答案。類凸性轉移可以先理解為：DP 轉移裡有一批候選，但它們的優劣順序會隨 i 單調移動，因此可以用 deque 保留可能最佳的少數候選。\n\n## 典型讀題訊號\n\n- 找下一個更大/更小、前一個更大/更小。\n- 固定視窗最大值或最小值。\n- 含負數的最短子陣列不能滑窗，但前綴和可用 deque。\n- DP 轉移要從一段候選中取最優，且候選會過期或被支配。\n\n\n## C++ 模板或偽程式\n\n```cpp\ndeque<int> dq;\nfor (int i = 0; i < n; ++i) {\n    while (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n    while (!dq.empty() && nums[dq.back()] <= nums[i]) dq.pop_back();\n    dq.push_back(i);\n    if (i >= k - 1) ans.push_back(nums[dq.front()]);\n}\n```\n\n## 常見錯誤\n\n- 忘記存下標，導致無法判斷距離或過期。\n- 重複值比較用 < 還是 <= 沒有統一，貢獻法會重複計算。\n- deque 隊首過期未移除。\n- 把單調堆疊和單調佇列混用：前者不處理過期，後者要處理視窗邊界。\n\n## 建議練習順序\n\n- 必修：739、239、901。\n- 進階：862、907、1673、2104。\n- 挑戰：2945。\n\n## 我能認出這個模式嗎？\n\n- 我要找更大還是更小？往左找還是往右找？\n- 結構內要保持遞增還是遞減？\n- 元素被彈出後，為什麼未來不需要它？\n- 是否有視窗長度或下標過期條件？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n單調性表示資料在結構內保持遞增或遞減。單調堆疊多用來找某元素左/右第一個更大或更小；單調佇列多用在下標會過期的視窗或前綴最佳值。元素能被彈出，是因為新元素在值與位置上都比它更有競爭力。\n\n## 核心直覺\n\n如果一個舊候選比新候選差，而且新候選更靠近未來，它就永遠不會再成為最佳答案。類凸性轉移可以先理解為：DP 轉移裡有一批候選，但它們的優劣順序會隨 i 單調移動，因此可以用 deque 保留可能最佳的少數候選。\n\n## 典型讀題訊號\n\n- 找下一個更大/更小、前一個更大/更小。\n- 固定視窗最大值或最小值。\n- 含負數的最短子陣列不能滑窗，但前綴和可用 deque。\n- DP 轉移要從一段候選中取最優，且候選會過期或被支配。\n\n\n## C++ 模板或偽程式\n\n```cpp\ndeque<int> dq;\nfor (int i = 0; i < n; ++i) {\n  while (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n  while (!dq.empty() && nums[dq.back()] <= nums[i]) dq.pop_back();\n  dq.push_back(i);\n  if (i >= k - 1) ans.push_back(nums[dq.front()]);\n}\n```\n\n## 常見錯誤\n\n- 忘記存下標，導致無法判斷距離或過期。\n- 重複值比較用 < 還是 <= 沒有統一，貢獻法會重複計算。\n- deque 隊首過期未移除。\n- 把單調堆疊和單調佇列混用：前者不處理過期，後者要處理視窗邊界。\n\n## 建議練習順序\n\n- 必修：739、239、901。\n- 進階：862、907、1673、2104。\n- 挑戰：2945。\n\n## 我能認出這個模式嗎？\n\n- 我要找更大還是更小？往左找還是往右找？\n- 結構內要保持遞增還是遞減？\n- 元素被彈出後，為什麼未來不需要它？\n- 是否有視窗長度或下標過期條件？",
   },
   93011: {
     title: "圖論：BFS / 0-1 BFS / Dijkstra",
     description:
       "把網格或操作過程建模成一張狀態圖，再依邊權選擇演算法。邊權全為 1 時用 BFS，只有 0 或 1 時用 0-1 BFS，非負權重則用 Dijkstra。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n圖建模就是決定「節點代表什麼狀態，邊代表什麼操作」。在網格中，節點可以是 (row, col)，但如果題目有剩餘可消除障礙、目前時間、mask 或上一個方向，這些也可能是狀態的一部分。\n\n## 核心直覺\n\n邊權全是 1 時，BFS 按層擴展，第一次到達就是最短。邊權只有 0/1 時，0-1 BFS 用 deque：0 成本放前面，1 成本放後面。邊權是任意非負數時，用 Dijkstra。priority_queue 可能保留舊距離，取出時若 cost != dist[state] 就是過期項目，必須跳過。\n\n## 典型讀題訊號\n\n- 網格移動、最少步數、最小代價、最小時間。\n- 每一步代價全為 1、只有 0/1，或是非負權重。\n- visited 不能只看位置，還要看剩餘資源或時間條件。\n\n\n## C++ 模板或偽程式\n\n```cpp\npriority_queue<State, vector<State>, greater<State>> pq;\ndist[start] = 0;\npq.push({0, start});\nwhile (!pq.empty()) {\n    auto [cost, state] = pq.top();\n    pq.pop();\n    if (cost != dist[state]) continue;\n    for (auto [next, w] : neighbors(state)) {\n        if (cost + w < dist[next]) {\n            dist[next] = cost + w;\n            pq.push({dist[next], next});\n        }\n    }\n}\n```\n\n## 常見錯誤\n\n- visited 狀態缺少剩餘資源，導致把不同狀態錯當同一格。\n- 0-1 BFS 邊權為 0 時沒有 push_front。\n- Dijkstra 沒跳過 stale entry，造成重複擴展或錯誤。\n- 網格邊界、起點終點障礙、時間奇偶等待處理錯。\n\n## 建議練習順序\n\n- 必修：1091、1926、1368、1631。\n- 進階：1293、2290、2812。\n- 挑戰：2577。\n\n## 我能認出這個模式嗎？\n\n- 節點狀態除了位置還需要哪些資訊？\n- 邊權是 1、0/1，還是任意非負？\n- 第一次到達是否一定最短？\n- priority_queue 取出時是否檢查過期項目？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n圖建模就是決定「節點代表什麼狀態，邊代表什麼操作」。在網格中，節點可以是 (row, col)，但如果題目有剩餘可消除障礙、目前時間、mask 或上一個方向，這些也可能是狀態的一部分。\n\n## 核心直覺\n\n邊權全是 1 時，BFS 按層擴展，第一次到達就是最短。邊權只有 0/1 時，0-1 BFS 用 deque：0 成本放前面，1 成本放後面。邊權是任意非負數時，用 Dijkstra。priority_queue 可能保留舊距離，取出時若 cost != dist[state] 就是過期項目，必須跳過。\n\n## 典型讀題訊號\n\n- 網格移動、最少步數、最小代價、最小時間。\n- 每一步代價全為 1、只有 0/1，或是非負權重。\n- visited 不能只看位置，還要看剩餘資源或時間條件。\n\n\n## C++ 模板或偽程式\n\n```cpp\npriority_queue<State, vector<State>, greater<State>> pq;\ndist[start] = 0;\npq.push({0, start});\nwhile (!pq.empty()) {\n  auto [cost, state] = pq.top();\n  pq.pop();\n  if (cost != dist[state]) continue;\n  for (auto [next, w] : neighbors(state)) {\n    if (cost + w < dist[next]) {\n      dist[next] = cost + w;\n      pq.push({dist[next], next});\n    }\n  }\n}\n```\n\n## 常見錯誤\n\n- visited 狀態缺少剩餘資源，導致把不同狀態錯當同一格。\n- 0-1 BFS 邊權為 0 時沒有 push_front。\n- Dijkstra 沒跳過 stale entry，造成重複擴展或錯誤。\n- 網格邊界、起點終點障礙、時間奇偶等待處理錯。\n\n## 建議練習順序\n\n- 必修：1091、1926、1368、1631。\n- 進階：1293、2290、2812。\n- 挑戰：2577。\n\n## 我能認出這個模式嗎？\n\n- 節點狀態除了位置還需要哪些資訊？\n- 邊權是 1、0/1，還是任意非負？\n- 第一次到達是否一定最短？\n- priority_queue 取出時是否檢查過期項目？",
   },
   93012: {
     title: "動態規劃",
     description:
       "用狀態記住處理到目前為止的最佳答案，轉移則描述最後一步是怎麼來的。最終目的是把重複的選擇樹壓縮成一張表或少數幾個變數。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\nDP 狀態是一句精確定義，例如 dp[i] 表示處理前 i 個物件後的最大值。轉移就是最後一步如何來：選目前、跳過目前、結束一段、延續一段。初學者不要先背公式，要先把暴力遞迴的重複子問題說出來。\n\n## 核心直覺\n\n當未來只需要知道過去的少數摘要，而不需要完整路徑，就能 DP。選或不選是最常見模型；至多 K 個選擇多一維 k；不重疊子陣列需要狀態表示目前是否在一段中。狀態壓縮則是發現轉移只依賴前一層或少數變數。\n\n## 典型讀題訊號\n\n- 每個元素或區間可選可不選。\n- 要求最多 K 個、剛好 K 段、不重疊。\n- 排序後找上一個相容物件。\n- 轉移需要查歷史最佳值，可能用 map、heap、Fenwick tree 優化。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long robLike(vector<int>& a) {\n    long long skip = 0, take = 0;\n    for (int x : a) {\n        long long ntake = skip + x;\n        long long nskip = max(skip, take);\n        take = ntake;\n        skip = nskip;\n    }\n    return max(skip, take);\n}\n```\n\n## 常見錯誤\n\n- dp[i] 定義含糊，導致轉移互相矛盾。\n- 初始化不可能狀態為 0，讓非法方案參與轉移。\n- k 維度倒序/正序更新錯。\n- 不重疊問題忘記找相容前狀態。\n\n## 建議練習順序\n\n- 必修：198、2140、1235。\n- 進階：689、1751、2320、2830、3186。\n- 挑戰：3077。\n\n## 我能認出這個模式嗎？\n\n- dp 狀態代表處理到哪裡、用了多少資源、是否在段內？\n- 最後一步是選、跳過、開始段、還是結束段？\n- 轉移依賴哪些舊狀態？能壓縮嗎？\n- 是否有不可能狀態需要 -INF？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\nDP 狀態是一句精確定義，例如 dp[i] 表示處理前 i 個物件後的最大值。轉移就是最後一步如何來：選目前、跳過目前、結束一段、延續一段。初學者不要先背公式，要先把暴力遞迴的重複子問題說出來。\n\n## 核心直覺\n\n當未來只需要知道過去的少數摘要，而不需要完整路徑，就能 DP。選或不選是最常見模型；至多 K 個選擇多一維 k；不重疊子陣列需要狀態表示目前是否在一段中。狀態壓縮則是發現轉移只依賴前一層或少數變數。\n\n## 典型讀題訊號\n\n- 每個元素或區間可選可不選。\n- 要求最多 K 個、剛好 K 段、不重疊。\n- 排序後找上一個相容物件。\n- 轉移需要查歷史最佳值，可能用 map、heap、Fenwick tree 優化。\n\n\n## C++ 模板或偽程式\n\n```cpp\nlong long robLike(vector<int>& a) {\n  long long skip = 0, take = 0;\n  for (int x : a) {\n    long long ntake = skip + x;\n    long long nskip = max(skip, take);\n    take = ntake;\n    skip = nskip;\n  }\n  return max(skip, take);\n}\n```\n\n## 常見錯誤\n\n- dp[i] 定義含糊，導致轉移互相矛盾。\n- 初始化不可能狀態為 0，讓非法方案參與轉移。\n- k 維度倒序/正序更新錯。\n- 不重疊問題忘記找相容前狀態。\n\n## 建議練習順序\n\n- 必修：198、2140、1235。\n- 進階：689、1751、2320、2830、3186。\n- 挑戰：3077。\n\n## 我能認出這個模式嗎？\n\n- dp 狀態代表處理到哪裡、用了多少資源、是否在段內？\n- 最後一步是選、跳過、開始段、還是結束段？\n- 轉移依賴哪些舊狀態？能壓縮嗎？\n- 是否有不可能狀態需要 -INF？",
   },
   93013: {
     title: "貢獻法",
     description:
       "換個視角，計算每個元素被多少子陣列使用，再由它的前後邊界算出現次數 L×R。如此就能避開列舉所有子陣列的平方級工作量。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n貢獻法把視角從「每個子陣列算一次」換成「每個元素被多少子陣列使用」。如果某元素左邊有 L 種起點、右邊有 R 種終點，那它對答案的出現次數通常是 L*R。難點是找出它在哪些範圍內扮演唯一字元、最小值或最大值。\n\n## 核心直覺\n\n所有子陣列數量是 O(n^2)，但每個元素的有效邊界可用前後出現位置或單調堆疊在 O(n) 找到。前後出現位置處理「唯一」或「第一次/最後一次」；前後更小/更大處理「最小值/最大值」。\n\n## 典型讀題訊號\n\n- 題目問所有子陣列/子字串的總和。\n- 答案可拆成每個元素、字元或數值的影響。\n- 需要計算某元素作為唯一字元、最小值、最大值的次數。\n\n\n## C++ 模板或偽程式\n\n```cpp\n// nums[i] as minimum: previous strictly less, next less or equal\nlong long contribution = 1LL * (i - prevLess[i]) * (nextLessEq[i] - i) * nums[i];\n```\n\n## 常見錯誤\n\n- 重複值 tie-break 不一致，造成重複歸屬或漏算。\n- 左右距離少算 1。\n- 貢獻值乘法溢位，需 long long。\n- 把每個子陣列枚舉後再優化，錯過換視角的機會。\n\n## 建議練習順序\n\n- 必修：828、907、2104。\n- 進階：1856、2262、2681。\n- 挑戰：2916、3428。\n\n## 我能認出這個模式嗎？\n\n- 答案能否拆成每個元素的加總？\n- 每個元素的左邊界和右邊界由什麼決定？\n- 重複值要歸給左邊還是右邊？\n- 次數是否是 leftChoices * rightChoices？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n貢獻法把視角從「每個子陣列算一次」換成「每個元素被多少子陣列使用」。如果某元素左邊有 L 種起點、右邊有 R 種終點，那它對答案的出現次數通常是 L*R。難點是找出它在哪些範圍內扮演唯一字元、最小值或最大值。\n\n## 核心直覺\n\n所有子陣列數量是 O(n^2)，但每個元素的有效邊界可用前後出現位置或單調堆疊在 O(n) 找到。前後出現位置處理「唯一」或「第一次/最後一次」；前後更小/更大處理「最小值/最大值」。\n\n## 典型讀題訊號\n\n- 題目問所有子陣列/子字串的總和。\n- 答案可拆成每個元素、字元或數值的影響。\n- 需要計算某元素作為唯一字元、最小值、最大值的次數。\n\n\n## C++ 模板或偽程式\n\n```cpp\n// nums[i] as minimum: previous strictly less, next less or equal\nlong long contribution =\n    1LL * (i - prevLess[i]) * (nextLessEq[i] - i) * nums[i];\n```\n\n## 常見錯誤\n\n- 重複值 tie-break 不一致，造成重複歸屬或漏算。\n- 左右距離少算 1。\n- 貢獻值乘法溢位，需 long long。\n- 把每個子陣列枚舉後再優化，錯過換視角的機會。\n\n## 建議練習順序\n\n- 必修：828、907、2104。\n- 進階：1856、2262、2681。\n- 挑戰：2916、3428。\n\n## 我能認出這個模式嗎？\n\n- 答案能否拆成每個元素的加總？\n- 每個元素的左邊界和右邊界由什麼決定？\n- 重複值要歸給左邊還是右邊？\n- 次數是否是 leftChoices * rightChoices？",
   },
   93014: {
     title: "位元技巧",
     description:
       "利用 AND、OR、XOR 的代數性質來解題：OR 或 AND 子陣列產生的不同值通常很少，而且可以用整數 mask 壓縮集合狀態。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n位元操作包含 &, |, ^, ~, <<, >>。OR 只會把 bit 從 0 變 1；AND 只會把 bit 從 1 變 0；XOR 則是翻轉，沒有單調性。這三者的差異決定解法：OR/AND 子陣列的不同值通常很少，XOR 則常用前綴 XOR 或 trie。\n\n## 核心直覺\n\n對固定右端點，把所有以它結尾的子陣列 OR 值存成集合。每往左多加一個數，OR 的 bit 只能增加，因此不同結果最多約 32 個；AND 同理只能減少。有限 mask 狀態適合字母種類少、集合小、奇偶性小的題目。bitset 則可把一排布林 DP 壓成機器位元並批次位移。\n\n## 典型讀題訊號\n\n- 題目直接出現 AND、OR、XOR、mask、子集。\n- 數值範圍在 2^20 以內或字母種類很少。\n- 需要維護子陣列位元值、前綴 XOR、可達集合。\n\n\n## C++ 模板或偽程式\n\n```cpp\nunordered_map<int, long long> cur, next;\nfor (int x : nums) {\n    next.clear();\n    next[x]++;\n    for (auto [value, cnt] : cur) next[value | x] += cnt;\n    cur.swap(next);\n    // cur contains compressed OR states ending here\n}\n```\n\n## 常見錯誤\n\n- 把 XOR 當成 OR/AND 一樣單調。\n- mask 位數超過 int 範圍，1<<bit 溢位。\n- AND 初始值錯，應由第一個元素開始或用全 1。\n- 滑窗維護 OR 時忘記 bit 頻次。\n\n## 建議練習順序\n\n- 必修：1863、2433、898、1442。\n- 進階：2044、2411、2564、3209。\n- 挑戰：1521、3277。\n\n## 我能認出這個模式嗎？\n\n- 這題是 OR、AND 還是 XOR？它是否單調？\n- 狀態值數量是否被 bit 數限制？\n- mask 需要多少位，會不會溢位？\n- 能否用前綴 XOR 或 bitset 批次處理？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n位元操作包含 &, |, ^, ~, <<, >>。OR 只會把 bit 從 0 變 1；AND 只會把 bit 從 1 變 0；XOR 則是翻轉，沒有單調性。這三者的差異決定解法：OR/AND 子陣列的不同值通常很少，XOR 則常用前綴 XOR 或 trie。\n\n## 核心直覺\n\n對固定右端點，把所有以它結尾的子陣列 OR 值存成集合。每往左多加一個數，OR 的 bit 只能增加，因此不同結果最多約 32 個；AND 同理只能減少。有限 mask 狀態適合字母種類少、集合小、奇偶性小的題目。bitset 則可把一排布林 DP 壓成機器位元並批次位移。\n\n## 典型讀題訊號\n\n- 題目直接出現 AND、OR、XOR、mask、子集。\n- 數值範圍在 2^20 以內或字母種類很少。\n- 需要維護子陣列位元值、前綴 XOR、可達集合。\n\n\n## C++ 模板或偽程式\n\n```cpp\nunordered_map<int, long long> cur, next;\nfor (int x : nums) {\n  next.clear();\n  next[x]++;\n  for (auto [value, cnt] : cur) next[value | x] += cnt;\n  cur.swap(next);\n  // cur contains compressed OR states ending here\n}\n```\n\n## 常見錯誤\n\n- 把 XOR 當成 OR/AND 一樣單調。\n- mask 位數超過 int 範圍，1<<bit 溢位。\n- AND 初始值錯，應由第一個元素開始或用全 1。\n- 滑窗維護 OR 時忘記 bit 頻次。\n\n## 建議練習順序\n\n- 必修：1863、2433、898、1442。\n- 進階：2044、2411、2564、3209。\n- 挑戰：1521、3277。\n\n## 我能認出這個模式嗎？\n\n- 這題是 OR、AND 還是 XOR？它是否單調？\n- 狀態值數量是否被 bit 數限制？\n- mask 需要多少位，會不會溢位？\n- 能否用前綴 XOR 或 bitset 批次處理？",
   },
   93015: {
     title: "資料結構設計",
     description:
       "把每個操作拆成更新與查詢兩種需求，先設定一份權威狀態，再為查詢建立索引。實作上常搭配延遲刪除，同時維護多個視角。",
     overview:
-      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n資料結構設計題不是考某個容器名稱，而是考你能否為每個操作建立「權威狀態」與「查詢索引」。權威狀態保存真實資料；索引用來快速回答最大、最小、某類別第一名、某時間版本等問題。\n\n## 核心直覺\n\n更新常會讓舊索引失效。直接從 heap 或 set 中刪除舊資料可能昂貴或麻煩，所以常採用延遲刪除：允許舊資料留在索引裡，但查詢前檢查它是否仍符合權威狀態。若查詢需要排序，就用有序集合或二分陣列；若查詢需要頻次，就維護 count map。\n\n## 典型讀題訊號\n\n- 多次 update/query 交錯。\n- 依分類找最高、最低、最新或第 k 個。\n- 需要支援改值、刪除、歷史版本、索引查找。\n- heap 裡可能出現舊分數或舊時間。\n\n\n## C++ 模板或偽程式\n\n```cpp\nunordered_map<string, int> current;\npriority_queue<Entry> heap;\n\nvoid update(string id, int score) {\n    current[id] = score;\n    heap.push({score, id});\n}\n\nEntry query() {\n    while (!heap.empty() && current[heap.top().id] != heap.top().score) {\n        heap.pop();\n    }\n    return heap.top();\n}\n```\n\n## 常見錯誤\n\n- 沒有定義 source of truth，導致多份資料互相矛盾。\n- 更新後忘記讓索引同步或查詢時驗證。\n- 操作複雜度只看平均，忽略最壞或總攤還。\n- 字串 tie-break、時間版本邊界、二分位置處理錯。\n\n## 建議練習順序\n\n- 必修：981、1146、2349。\n- 進階：2034、2353、2502。\n- 挑戰：1912、2102、3408，練多索引、有序集合與延遲刪除。\n\n## 我能認出這個模式嗎？\n\n- 每個操作需要讀寫哪些資訊？\n- 哪一份資料是權威狀態？\n- 查詢需要最大/最小、排序、頻次還是版本？\n- 索引可能過期嗎？如果會，如何驗證？",
+      "## 涵蓋主題\n\n以下每個子主題皆有獨立說明頁；建議依序閱讀後，再進入「搭配追蹤題單」練習。\n\n\n## 初學者先懂什麼\n\n資料結構設計題不是考某個容器名稱，而是考你能否為每個操作建立「權威狀態」與「查詢索引」。權威狀態保存真實資料；索引用來快速回答最大、最小、某類別第一名、某時間版本等問題。\n\n## 核心直覺\n\n更新常會讓舊索引失效。直接從 heap 或 set 中刪除舊資料可能昂貴或麻煩，所以常採用延遲刪除：允許舊資料留在索引裡，但查詢前檢查它是否仍符合權威狀態。若查詢需要排序，就用有序集合或二分陣列；若查詢需要頻次，就維護 count map。\n\n## 典型讀題訊號\n\n- 多次 update/query 交錯。\n- 依分類找最高、最低、最新或第 k 個。\n- 需要支援改值、刪除、歷史版本、索引查找。\n- heap 裡可能出現舊分數或舊時間。\n\n\n## C++ 模板或偽程式\n\n```cpp\nunordered_map<string, int> current;\npriority_queue<Entry> heap;\n\nvoid update(string id, int score) {\n  current[id] = score;\n  heap.push({score, id});\n}\n\nEntry query() {\n  while (!heap.empty() && current[heap.top().id] != heap.top().score) {\n    heap.pop();\n  }\n  return heap.top();\n}\n```\n\n## 常見錯誤\n\n- 沒有定義 source of truth，導致多份資料互相矛盾。\n- 更新後忘記讓索引同步或查詢時驗證。\n- 操作複雜度只看平均，忽略最壞或總攤還。\n- 字串 tie-break、時間版本邊界、二分位置處理錯。\n\n## 建議練習順序\n\n- 必修：981、1146、2349。\n- 進階：2034、2353、2502。\n- 挑戰：1912、2102、3408，練多索引、有序集合與延遲刪除。\n\n## 我能認出這個模式嗎？\n\n- 每個操作需要讀寫哪些資訊？\n- 哪一份資料是權威狀態？\n- 查詢需要最大/最小、排序、頻次還是版本？\n- 索引可能過期嗎？如果會，如何驗證？",
   },
 };
 export function overviewSectionId(topicId: number): number {
