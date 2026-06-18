@@ -35,16 +35,13 @@ interface DataBackupActions {
   isBusy: boolean;
   /** Save all of this device's data to a JSON file the user can keep. */
   downloadToDevice: () => void;
-  /**
-   * Load a previously downloaded JSON file back into this device, then upload
-   * it to the cloud when the user is signed in. Rejects on malformed files.
-   */
+  /** Load a previously downloaded JSON file back into this device. */
   uploadFromDevice: (file: File) => Promise<void>;
 }
 
 /**
  * Local backup escape hatch: lets users move their data on and off this device
- * via plain JSON files, independent of the normal cloud sync flow.
+ * via plain JSON files.
  */
 export function useDataBackup(): DataBackupActions {
   const { siteStorage, mergeSiteStorage } = useSiteStorage();
@@ -69,7 +66,7 @@ export function useDataBackup(): DataBackupActions {
         // Bring the file's data onto this device.
         mergeSiteStorage(patch);
 
-        // ...and push it up to the cloud when the user is signed in.
+        // ...and push it up to remote storage when the user is signed in.
         const token = readToken();
         if (API_BASE && token && isTokenValid(token)) {
           const merged: SiteStorageData = { ...siteStorage, ...patch };

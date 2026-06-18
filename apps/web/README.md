@@ -24,12 +24,11 @@ pnpm --filter web lint
 - `components/`：共用元件（`common`、`ui`、`ui-customized`）。
 - `features/`：功能模組（`contest`、`problemset`、`studyplan`、`tutorial`、`learning`、`userData`、`troubleshoot`）。
 - `data/`：講義與題單衍生資料（如 `lectureTopicProfiles.data.ts`）。
-- `hooks/`、`config/`、`types/`、`utils/`、`lib/`：共用邏輯與設定（`config/constants.ts` 含後端 URL）。
+- `hooks/`、`config/`、`types/`、`utils/`、`lib/`：共用邏輯與設定。
 - `public/`：靜態資料（`problemset/`、`studyplan/`、`tutorial/`）。
 - `lc-parser/`：HTML→Markdown 解析器（見 `lc-parser/README.md`）。
 - `lc-maker/`：上游同步與翻譯腳本（Python，見 `lc-maker/README.md`）。
 
 ## 相關文件
 
-- 雲端同步後端：`backend/README.md`
 - 專案總覽：根目錄 `README.md`

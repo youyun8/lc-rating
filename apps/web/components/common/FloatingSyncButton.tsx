@@ -53,7 +53,7 @@ const FloatingSyncButton = () => {
     };
   }, [open]);
 
-  // Cloud sync isn't available here; there's nothing to surface.
+  // Remote sync is not available here; there is nothing to surface.
   if (status === "offline") {
     return null;
   }
@@ -98,7 +98,7 @@ const FloatingSyncButton = () => {
         <div className="w-[min(calc(100vw-2rem),320px)] space-y-3 rounded-2xl border bg-background/95 p-3.5 shadow-xl backdrop-blur supports-[backdrop-filter]:bg-background/85">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-sm font-semibold">雲端同步</p>
+              <p className="text-sm font-semibold">同步</p>
               <p className="truncate text-xs text-muted-foreground">
                 {account ?? "尚未登入"}
               </p>
@@ -153,7 +153,7 @@ const FloatingSyncButton = () => {
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground">
-                上傳會以本機資料覆蓋雲端，下載會將雲端資料合併回本機。
+                上傳會以本機資料覆蓋雲端，下載會將遠端資料合併回本機。
               </p>
             </div>
           ) : (
@@ -175,7 +175,7 @@ const FloatingSyncButton = () => {
         variant={isLoggedIn ? "success" : "outline"}
         className="h-11 w-11 rounded-full shadow-lg sm:h-12 sm:w-12"
         onClick={() => setOpen((prev) => !prev)}
-        aria-label="雲端同步"
+        aria-label="同步"
         aria-expanded={open}
         type="button"
       >

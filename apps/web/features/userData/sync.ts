@@ -13,7 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 type SyncStatus = "offline" | "signed-out" | "synced";
 
 interface SyncState {
-  /** Whether cloud sync is available at all (backend configured). */
+  /** Whether remote sync is available at all. */
   isConfigured: boolean;
   status: SyncStatus;
   /** Signed-in account name, when available. */
@@ -53,7 +53,7 @@ export function markSyncedNow() {
 
 /**
  * User-facing sync state. Hides auth tokens, localStorage keys and the
- * cloud transport behind a small, friendly surface.
+ * remote transport behind a small, friendly surface.
  */
 export function useSyncState(): SyncState {
   const [token, setToken] = useState<string | null>(null);
@@ -125,17 +125,17 @@ export function signOut() {
 }
 
 interface CloudSyncActions {
-  /** Upload this device's data to the cloud, replacing the stored copy. */
+  /** Upload this device's data to remote storage, replacing the stored copy. */
   push: () => Promise<void>;
-  /** Download the cloud copy and merge it into this device. */
+  /** Download the remote copy and merge it into this device. */
   pull: () => Promise<void>;
   /** Whether a push or pull is currently in flight. */
   isSyncing: boolean;
 }
 
 /**
- * Manual cloud sync. Users explicitly push their data to the cloud or pull
- * (and merge) it back — there is no automatic background syncing. Both actions
+ * Manual remote sync. Users explicitly push their data or pull
+ * and merge it back; there is no automatic background syncing. Both actions
  * reject if the user isn't signed in or sync isn't configured.
  */
 export function useCloudSync(): CloudSyncActions {
@@ -163,8 +163,8 @@ export function useCloudSync(): CloudSyncActions {
     }
     setIsSyncing(true);
     try {
-      const cloud = await pullCloudSiteStorage(token);
-      mergeSiteStorage(cloud);
+      const remote = await pullCloudSiteStorage(token);
+      mergeSiteStorage(remote);
       markSyncedNow();
     } finally {
       setIsSyncing(false);

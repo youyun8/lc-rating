@@ -26,7 +26,7 @@ export default function TroubleshootPanel() {
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        檢查同步狀態、Token 有效性和後端連線，協助排除雲端同步問題。
+        檢查同步狀態、Token 有效性和後端連線，協助排除同步問題。
       </p>
 
       {/* Quick status summary */}

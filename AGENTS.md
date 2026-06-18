@@ -5,7 +5,6 @@
 - `apps/web/` is the main Next.js 16 app (App Router). UI lives in `components/`, feature modules in `features/`, shared hooks in `hooks/`, derived data in `data/`, and utilities in `utils/`/`lib/`.
 - `apps/web/public/` contains static data used at runtime (for example `problemset/`, `studyplan/`, and `tutorial/`).
 - `apps/web/lc-parser/` holds the TypeScript HTML→Markdown parser; `apps/web/lc-maker/` holds Python sync/translation scripts.
-- `backend/` is the optional Cloudflare Worker for cloud sync (see `backend/README.md`).
 - `scripts/` holds Python study-plan generation/update scripts.
 - `packages/` holds shared configs and UI primitives (`eslint-config/`, `tailwind-config/`, `typescript-config/`, `ui/`).
 

@@ -32,15 +32,15 @@ const AuthTokenHandler = () => {
           setSiteStorage(siteStorage);
           const now = Date.now();
           localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(now));
-          toast("雲端同步成功");
+          toast("同步成功");
         })
         .catch((error) => {
-          console.error("Error syncing from cloud:", error);
-          toast(`雲端同步失敗: ${getErrorMessage(error)}`);
+          console.error("Error syncing from remote:", error);
+          toast(`同步失敗: ${getErrorMessage(error)}`);
         });
     };
 
-    toast("已登入，可從雲端拉取站點資料", {
+    toast("已登入，可從遠端拉取站點資料", {
       action: {
         label: "拉取",
         onClick: handleSync,

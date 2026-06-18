@@ -14,18 +14,7 @@ export const LC_RATING_PROBLEMSET_TABLE_KEY =
   "lc-rating-problemset-table-state";
 export const STORAGE_VERSION = 1;
 
-// ============================================
-// Backend Configuration for Cloud Sync
-// ============================================
-//
-// To enable cloud sync, you need to:
-// 1. Deploy your own Cloudflare Worker backend (see /backend/README.md)
-// 2. Update YOUR_BACKEND_URL below with your worker URL
-// 3. Set up GitHub OAuth App for authentication
-//
-// Until then, the cloud sync buttons will show a "not configured" message.
-
-const YOUR_BACKEND_URL = "https://lc-rating-backend.youyun8.workers.dev"; // <-- UPDATE THIS AFTER DEPLOYING BACKEND
+const YOUR_BACKEND_URL = "https://lc-rating-backend.youyun8.workers.dev";
 
 // Auto-detect backend based on deployment domain
 const getApiBase = () => {
@@ -39,7 +28,6 @@ const getApiBase = () => {
     return YOUR_BACKEND_URL;
   }
 
-  // Cloud sync not configured - return empty string to disable features
   return "";
 };
 

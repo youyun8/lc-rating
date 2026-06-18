@@ -4,325 +4,119 @@ export const q3Handbook = {
   id: 930,
   title: "LeetCode 競賽 Q3 手冊：第三題模式訓練",
   description:
-    "給已能穩定完成 Q1/Q2、但常在 Q3 卡住的使用者：用模式優先的方式整理讀題訊號、解法轉換與賽後複習。",
+    "把 Q3 常見模式講義與精選追蹤題單整合成同一套章節：先理解模式，再直接用同頁題表練習與記錄進度。",
   src: null,
   last_update: "2026-06-18T00:00:00.000Z",
   summary:
-    "# LeetCode 競賽 Q3 手冊\n\n這份手冊把 Q3 常見考法整理成可辨識的模式。閱讀時先看限制與敘述中的訊號，再決定要嘗試滑動視窗、前綴和、答案二分、堆積貪心、最短路、DP、貢獻法或位元壓縮。\n\n## 學習順序\n\n1. 先讀 Q3 心態與模式識別清單。\n2. 選一個核心模式章節，確認它解決哪種重複工作。\n3. 做 P0 經典題，把不變式講清楚。\n4. 做 P1/P2 近年競賽型題，練習辨認偽裝後的同一個模式。\n5. 每次失敗都寫成一句下次能直接使用的判斷規則。",
+    "# LeetCode 競賽 Q3 手冊\n\n這份手冊把 Q3 模式說明與可追蹤題單整合在同一套章節。每個模式章節先用初學者能理解的方式說明概念、直覺、辨識訊號、模板與常見錯誤，接著在同一頁用可追蹤的題目表安排必修、進階與挑戰題。\n\n## 使用方式\n\n1. 先讀「Q3 解題流程與模式識別」。\n2. 選一個模式章節，確認自己能說出不變式或狀態定義。\n3. 在同一章節完成必修題，再進入進階與挑戰題。\n4. 每題完成後記錄進度；如果做錯，補一句「下次看到什麼訊號要想到這個模式」。\n\n## Q3 的核心判斷\n\nQ3 通常不是要求你硬寫更長的程式，而是要求你把暴力法中的重複工作換成一個可維護的結構：視窗、前綴、二分答案、堆、掃描線、單調結構、最短路、DP、貢獻法、位元壓縮或設計型資料結構。",
   children: [
     {
       id: 93100,
-      title: "1. Q3 心態與識別",
+      title: "1. Q3 解題流程與模式識別",
       summary:
-        "先把 Q3 的決策流程拆清楚：讀限制、拆暴力、找重複工作，並知道什麼時候該換方向。",
-      children: [
-        {
-          id: 93000,
-          title: "1.1 如何使用本手冊",
-          summary:
-            "# 如何使用本手冊\n\n本手冊的目標不是把題目背起來，而是把失敗的 Q3 轉成可重用的判斷規則。\n\n## 建議循環\n\n1. 選一個模式章節。\n2. 先讀題目訊號與不變式，再開題。\n3. 不計時完成兩題 P0 經典題。\n4. 用 35 分鐘計時挑戰兩題 P1 近年競賽型題。\n5. 失敗時寫下「我漏看的訊號」。\n6. 依複習頻率回來重做。\n\n## 賽後筆記要寫什麼\n\n有效的筆記要短、具體，而且能改變下一次開題時的第一個判斷。\n\n- 正數陣列加目標和：先想滑動視窗，再想前綴和。\n- 要最小化最大值：先檢查是否能二分答案。\n- 網格移動代價只有 0/1：先想 0-1 BFS。\n\n避免只寫「多練習」或「小心一點」；這類結論無法在下一場比賽中轉成具體動作。",
-        },
-        {
-          id: 93001,
-          title: "1.2 Q3 競賽心態",
-          summary:
-            "# Q3 競賽心態\n\n## 為什麼 Q3 比 Q1/Q2 難很多\n\nQ1/Q2 多半考直接實作：模擬、簡單計數、或套一個基本資料結構。Q3 則通常要求你把暴力法轉換成某個模式。\n\n常見轉換包括：\n\n- 枚舉所有子陣列 -> 滑動視窗、前綴和、貢獻法。\n- 嘗試每個答案 -> 二分答案加可行性檢查。\n- 遞迴枚舉選擇 -> 定義小狀態 DP。\n- 掃所有路徑 -> 建圖後做 BFS、0-1 BFS 或 Dijkstra。\n- 反覆找最佳前狀態 -> 用堆積、映射表、單調佇列或有序集合。\n\n## 先寫暴力，再找重複工作\n\n先用一句話說清楚：我在枚舉什麼？什麼條件算合法？答案要加總、最大化還是最小化？哪一段重複工作太慢？\n\n重複工作通常就是模式線索。每個右端點都重新往左掃，可能是視窗；每個候選答案都能獨立驗證，可能是答案二分；每條路徑重複到達相同狀態，可能是最短路或 DP。\n\n## 何時換方向\n\n如果 8 到 12 分鐘後仍說不出目前做法的不變式，就要主動切換方向。常見訊號：\n\n- 視窗條件其實不單調。\n- DP 轉移還需要掃全部前狀態。\n- 貪心選擇沒有交換論證。\n- 圖的 visited 少了剩餘資源、奇偶性或上一動作。\n- 二分的 can(x) 不是單調的。",
-        },
-        {
-          id: 93002,
-          title: "1.3 模式識別檢查清單",
-          summary:
-            "# 模式識別檢查清單\n\n## 讀題前三分鐘\n\n- 最大限制是多少？\n- 暴力枚舉的是子陣列、路徑、區間、狀態還是答案值？\n- 數值是全正、可正可負、二元、還是位元範圍很小？\n- 題目要的是計數、最大值、最小值、存在性還是構造？\n\n## 子陣列與子字串\n\n- 全正且有和/乘積限制：先想滑動視窗。\n- 可正可負：先想前綴和或單調前綴結構。\n- 恰好 K：嘗試 atMost(K) - atMost(K - 1)。\n- 計數題：決定是依右端點還是左端點計數。\n\n## 最佳化\n\n- 是否在最小化最大值或最大化最小值？\n- 候選答案變大時，可行性是否單調？\n- can(x) 能否用貪心、計數或一次掃描完成？\n\n## 圖與狀態\n\n- 陣列或網格是否其實是圖？\n- 邊權全為 1、0/1、還是非負？\n- visited 是否需要加入剩餘資源、mask、奇偶性或上一個方向？\n\n## DP 與貢獻\n\n- 是否在選不重疊區間或至多 K 個物件？\n- 是否能排序後找前一個相容狀態？\n- 是否在求所有子陣列/子字串總和，能改成每個元素的貢獻？\n- AND/OR 狀態是否因位元單向變化而很少？",
-        },
-        {
-          id: 93003,
-          title: "1.4 如何練習",
-          summary:
-            "# 如何練習\n\n## 檢討失敗的 Q3\n\n每次失敗後固定記錄五件事：暴力想法、被哪個限制殺掉、漏看的模式訊號、正解的不變式或轉移、下一次可重用的一句規則。\n\n範例：如果候選答案是容量，且一次貪心掃描能數需要幾組，先試答案二分，不要直接寫複雜 DP。\n\n## 建立個人模式筆記\n\n每個模式只保留：一個模板、三個題目訊號、兩個常見陷阱、三題自己錯過訊號的題目、一句自己的規則。\n\n## 計時練習\n\n學習模式不計時，重點是講清楚不變式；競賽模式限時 35 分鐘，8 到 12 分鐘沒有不變式就換方向。練觀念與練速度要分開，否則很難判斷問題出在模式不熟還是賽中決策太慢。",
-        },
-        {
-          id: 93004,
-          title: "1.5 最終競賽檢查清單",
-          summary:
-            "# 最終競賽檢查清單\n\n## 開題後\n\n- 先讀限制。\n- 用一句話寫暴力法。\n- 找出重複工作。\n- 判斷數值特性：全正、可負、二元、位元小、或網格/圖。\n\n## 模式訊號\n\n- 最小化最大值：檢查單調性。\n- 子陣列計數：檢查滑窗、前綴和、貢獻法。\n- 恰好 K：檢查 atMost 差分。\n- 網格帶代價：檢查 BFS / 0-1 BFS / Dijkstra。\n- 不重疊選擇：檢查區間 DP 或前綴最佳值。\n- AND/OR 子陣列：檢查壓縮位元狀態。\n\n## 寫碼前\n\n先說出不變式或轉移，再定義答案邊界、確認完整狀態、決定重複值 tie-break；可能溢位的地方一律改用 long long。",
-        },
-      ],
+        "# Q3 解題流程與模式識別\n\n## 從暴力法開始\n\n開題後先用一句話寫出暴力法：我枚舉什麼？如何判斷合法？答案是計數、最大化還是最小化？接著看哪一步重複到無法承受。這個重複工作通常就是模式訊號。\n\n## 三分鐘檢查\n\n- 連續子陣列或子字串：先想滑動視窗、前綴和、單調佇列或貢獻法。\n- 最小化最大值、最大化最小值、最少時間：先檢查答案二分。\n- 每步要取目前最大/最小，或資源可以反悔：先想堆積貪心。\n- 區間、會議、覆蓋、天數：先想排序、掃描線與差分事件。\n- 網格或狀態移動：先判斷邊權是 1、0/1 還是非負，再選 BFS、0-1 BFS 或 Dijkstra。\n- 選或不選、最多 K 個、不重疊：先定義 DP 狀態。\n- 所有子陣列/子字串總和：先想每個元素的貢獻。\n- AND/OR/XOR/mask：先想位元狀態是否有限。\n\n## 何時換方向\n\n如果 8 到 12 分鐘後仍說不出不變式、check(x) 單調性、DP 狀態或圖狀態，先停下來重讀限制。Q3 最常見的失敗不是少寫一行程式，而是把題目放進錯誤模型。",
     },
     {
       id: 93200,
-      title: "2. 核心 Q3 模式講義",
-      summary: "每個核心模式都整理讀題訊號、可維護的不變式、常見踩坑與代表題。",
+      title: "2. Q3 核心模式與追蹤題單",
+      summary:
+        "# Q3 核心模式與追蹤題單\n\n以下每個章節都是一個完整學習單元，不再把講義與題單拆成兩頁。讀完模式後，回到同頁的追蹤題表，按「必修 -> 進階 -> 挑戰」練習。",
       children: [
         {
           id: 93005,
-          title: "2.1 滑動視窗",
+          title: "滑動視窗",
+          description:
+            "用一段連續區間承載目前狀態，透過右端擴張、左端收縮，把暴力枚舉所有區間降成線性或近線性。",
           summary:
-            "# 滑動視窗\n\n## 為什麼 Q3 常出現\n\n滑動視窗把重複的連續區間掃描壓成一次線性掃描。Q3 常把它偽裝成刪除、替換、頻次限制、至少 K 次事件或依端點計數。\n\n## 核心想法\n\n維護 [left, right] 與一個可恢復的不變式。右端進來後，若條件被破壞，就移動 left 直到恢復。\n\n常見型態：定長視窗、不定長視窗、至多 K、恰好 K = atMost(K) - atMost(K-1)、依右端點計數、依左端點計數。\n\n## 讀題訊號\n\n連續子陣列/子字串、全正數、最長/最短合法區間、至多 K 次修改或刪除、計算每個右端點能形成多少合法區間。\n\n## 模板\n\n```cpp\nlong long countAtMost(vector<int>& nums, int k) {\n    if (k < 0) return 0;\n    long long answer = 0;\n    int left = 0;\n    unordered_map<int, int> freq;\n\n    for (int right = 0; right < (int)nums.size(); ++right) {\n        if (++freq[nums[right]] == 1) --k;\n        while (k < 0) {\n            if (--freq[nums[left]] == 0) ++k;\n            ++left;\n        }\n        answer += right - left + 1;\n    }\n    return answer;\n}\n```\n\n## 常見踩坑\n\n可正可負的和不適合直接滑窗；計數前要確認不變式已恢復；OR 從視窗移出元素時要用位元計數，不能直接相減；有時真正的視窗是在「相同值的位置陣列」上。\n\n## 代表題\n\n| 題號 | 核心 | 難點 |\n| --- | --- | --- |\n| 209 | shrink while valid | 最短合法視窗 |\n| 713 | 依右端點計數 | 正數乘積才有單調性 |\n| 1004 | 至多 K 個 0 | 違規計數比替換過程重要 |\n| 992 | 恰好 K 轉 atMost | 直接維護恰好容易錯 |\n| 2831 | 對位置陣列滑窗 | 原陣列不是最佳座標 |",
+            "# 滑動視窗\n\n## 涵蓋主題\n\n- 滑動視窗\n- 定長視窗\n- 不定長視窗\n- 至多 K\n- 恰好 K\n- 依右端點計數\n- 左端驅動視窗\n- 頻次視窗\n\n## 初學者先懂什麼\n\n視窗就是目前正在考慮的一段連續子陣列或子字串。初學者可以把它想成一把尺：右端點負責把新元素納入，左端點負責丟掉已經不適合的元素。關鍵不是兩個指標本身，而是你能否說清楚視窗內一直維持的條件。定長視窗的長度固定，例如每次只看 k 個元素；不定長視窗則依照條件伸縮。\n\n## 核心直覺\n\n如果右端點往右移時，某個條件只會朝一個方向變化，左端點就不需要回頭。這讓每個元素最多進入一次、離開一次。至多 K 維護「違規量不超過 K」；恰好 K 則常用 atMost(K) - atMost(K - 1)，因為所有至多 K 的集合扣掉至多 K - 1，剩下的正好是 K。\n\n## 典型讀題訊號\n\n- 題目明確要求連續子陣列或子字串。\n- 限制包含最多 K 次替換、刪除、不同值、零或特殊字元。\n- 全為正數時的和、乘積、分數限制常具備單調性。\n- 答案可依每個右端點新增 right - left + 1 個合法區間，或依每個左端點一次加上右側剩餘數量。\n\n## 常見變形\n\n- 定長視窗：先加右端，長度超過 k 就移左端。\n- 不定長視窗：右端擴張後，while 違反不變式就縮左端。\n- 至多 K：維護違規數、不同數或修改數不超過 K。\n- 恰好 K：優先嘗試 atMost(K) - atMost(K - 1)，避免直接維護「剛好」造成邊界混亂。\n- 右端驅動適合「固定右端點，合法左端點形成連續範圍」。左端驅動適合「一旦左端固定，右端達標後更右都達標」。\n- 頻次視窗用 map 或陣列維護每個值的出現次數。\n\n## C++ 模板或偽程式\n\n```cpp\nlong long atMostKDistinct(vector<int>& nums, int k) {\n    if (k < 0) return 0;\n    unordered_map<int, int> freq;\n    long long ans = 0;\n    int left = 0;\n    for (int right = 0; right < (int)nums.size(); ++right) {\n        if (++freq[nums[right]] == 1) --k;\n        while (k < 0) {\n            if (--freq[nums[left]] == 0) ++k;\n            ++left;\n        }\n        ans += right - left + 1;\n    }\n    return ans;\n}\n```\n\n## 常見錯誤\n\n- 含負數的和通常不能直接滑窗，因為右端擴張後和不一定只變大。\n- 計數前必須確認不變式已恢復。\n- OR 視窗移出元素不能直接減掉，要用每個 bit 的頻次重建。\n- 左端驅動與右端驅動的加答案公式不同，混用會多算或少算。\n\n## 建議練習順序\n\n- 必修：先做 209、713、1004、1358，練右端驅動與基本縮窗。\n- 進階：做 992、2024、2302、2516，練 atMost 差分與左端驅動。\n- 挑戰：做 2762、2831、2962、3097，練頻次、位置陣列與位元視窗。\n\n## 我能認出這個模式嗎？\n\n- 我能說出視窗代表哪一段資料嗎？\n- 我知道不變式是「至多」、「至少」還是「固定長度」嗎？\n- 右端加入後，要在什麼條件下縮左端？\n- 答案是加 right-left+1、加 n-right，還是更新最長/最短？\n- 如果題目問恰好 K，我是否先檢查 atMost 差分？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93006,
-          title: "2.2 前綴和與雜湊表",
+          title: "前綴和與雜湊表",
+          description:
+            "把子陣列查詢改寫成兩個前綴值的差，再用雜湊表記住之前出現過的前綴。",
           summary:
-            "# 前綴和與雜湊表\n\n當滑動視窗因負數失去單調性時，前綴和通常接手。把子陣列條件改寫成兩個前綴的關係：若 sum(i..j)=k，則需要先前 prefix = current - k。\n\n## 讀題訊號\n\n可正可負、精確和、模數條件、平衡條件、依目前值查某個先前前綴。\n\n## 模板\n\n```cpp\nlong long countSubarraysWithSum(vector<int>& nums, long long target) {\n    unordered_map<long long, long long> freq;\n    freq[0] = 1;\n    long long prefix = 0, answer = 0;\n    for (int value : nums) {\n        prefix += value;\n        answer += freq[prefix - target];\n        ++freq[prefix];\n    }\n    return answer;\n}\n```\n\n## 檢查重點\n\n先初始化空前綴；判斷要存頻次、最早下標、最新下標還是最佳前綴；遇到 modulo 要處理負餘數。",
+            "# 前綴和與雜湊表\n\n## 涵蓋主題\n\n- 前綴和與雜湊表\n- 前綴頻次\n- 模數前綴\n- 計數差分\n- 子陣列和等於 K\n- 二維前綴和\n\n## 初學者先懂什麼\n\n前綴和 prefix[i] 表示前 i 個元素的總和。子陣列 i..j 的和等於 prefix[j+1] - prefix[i]，所以「找子陣列」會變成「找以前是否有某個前綴」。雜湊表的用途是快速回答：這個需要的前綴以前出現幾次、最早在哪裡、或對應的最佳值是多少。\n\n## 核心直覺\n\n暴力枚舉左端和右端是 O(n^2)。如果右端已固定，合法左端只取決於以前的 prefix 值，就能在 O(1) 平均時間查出答案。模數前綴也是同一件事：兩個前綴除以 k 餘數相同，差值就能被 k 整除。二維前綴把矩形和拆成四塊相加相減。\n\n## 典型讀題訊號\n\n- 子陣列和可以為正也可以為負，滑窗失去單調性。\n- 題目要求和等於 K、和能被 K 整除、奇偶數量剛好 K、平衡 0/1。\n- 需要統計以前有多少狀態與目前狀態配對。\n- 矩陣中反覆查矩形和。\n\n## 常見變形\n\n- 前綴頻次：map[prefix]++，遇到 current-target 就加上出現次數。\n- 模數前綴：保存 ((prefix % k) + k) % k，避免負餘數。\n- 計數差分：把奇數、某字元或大小關係轉成 +1/0/-1。\n- 二維前綴：sum(r1,c1,r2,c2)=P[r2+1][c2+1]-P[r1][c2+1]-P[r2+1][c1]+P[r1][c1]。\n\n## C++ 模板或偽程式\n\n```cpp\nlong long countSubarraySum(vector<int>& nums, long long target) {\n    unordered_map<long long, long long> freq;\n    freq[0] = 1;\n    long long prefix = 0, ans = 0;\n    for (int x : nums) {\n        prefix += x;\n        ans += freq[prefix - target];\n        ++freq[prefix];\n    }\n    return ans;\n}\n```\n\n## 常見錯誤\n\n- 忘記先放空前綴 freq[0]=1。\n- 查答案與加入目前前綴的順序反了，會把空子陣列算進去。\n- C++ 負數取模仍可能是負的。\n- 二維前綴常錯在 +1 偏移與矩形邊界。\n\n## 建議練習順序\n\n- 必修：560、974、1248。\n- 進階：1590、2488、3026。\n- 挑戰：1074、1915、2025。\n\n## 我能認出這個模式嗎？\n\n- 我能寫出子陣列條件對應的 prefix[j]-prefix[i] 嗎？\n- 固定右端時，需要查以前的哪個前綴？\n- map 裡要存頻次、最早下標、最小前綴，還是多個狀態？\n- 是否需要處理負餘數或空前綴？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93007,
-          title: "2.3 答案二分搜尋",
+          title: "答案二分搜尋",
+          description:
+            "不直接求最佳答案，而是猜一個答案 x，判斷 x 是否可行，再利用單調性縮小範圍。",
           summary:
-            "# 答案二分搜尋\n\n## 核心想法\n\n最佳答案難直接構造，但檢查某個候選值 x 是否可行很容易，而且可行性隨 x 單調變化。這時把問題改成找第一個可行值或最後一個可行值。\n\n## 讀題訊號\n\n最小化最大值、最大化最小值、最少時間/天數/速度/容量、候選答案是數值且 can(x) 能用貪心或計數完成。\n\n## 模板\n\n```cpp\nlong long firstFeasible(long long low, long long high) {\n    auto can = [&](long long limit) {\n        return true;\n    };\n    while (low < high) {\n        long long mid = low + (high - low) / 2;\n        if (can(mid)) high = mid;\n        else low = mid + 1;\n    }\n    return low;\n}\n```\n\n## 常見踩坑\n\ncan(x) 不是單調、邊界不包含真答案、first true 與 last true 更新式混用、總和或乘法沒有用 long long。",
+            "# 答案二分搜尋\n\n## 涵蓋主題\n\n- 答案二分搜尋\n- 最小化最大值\n- 最大化最小值\n- 可行性檢查\n- 貪心檢查\n- 計數型檢查\n\n## 初學者先懂什麼\n\n答案二分搜尋用在答案本身是一個數值，而且「候選值變大或變小後，可行性會保持同一方向」的問題。最小化最大值通常找第一個可行值；最大化最小值通常找最後一個可行值。真正的難點不是二分，而是設計 check(x)。\n\n## 核心直覺\n\n如果 x 可行，而所有比 x 更寬鬆的值也可行，就有單調性。二分只負責找邊界；check(x) 需要用貪心、計數或一次掃描回答「用這個限制能不能完成」。\n\n## 典型讀題訊號\n\n- 題目問最小的最大值、最大的最小值、最少時間、最小速度、最小容量。\n- 直接構造最佳值困難，但驗證某個值很容易。\n- 限制值在大範圍整數內，O(log answer * check) 可接受。\n\n## 常見變形\n\n- 最小化最大值：容量越大越容易，找 first true。\n- 最大化最小值：距離越大越難，找 last true。\n- 貪心檢查：排序後能放就放、能配就配、超過限制就開新組。\n- 計數型檢查：在時間 x 內能完成多少趟、多少件、多少合金。\n\n## C++ 模板或偽程式\n\n```cpp\nlong long firstTrue(long long left, long long right) {\n    while (left < right) {\n        long long mid = left + (right - left) / 2;\n        if (check(mid)) right = mid;\n        else left = mid + 1;\n    }\n    return left;\n}\n\nlong long lastTrue(long long left, long long right) {\n    while (left < right) {\n        long long mid = left + (right - left + 1) / 2;\n        if (check(mid)) left = mid;\n        else right = mid - 1;\n    }\n    return left;\n}\n```\n\n## 常見錯誤\n\n- check(x) 沒有單調性卻硬二分。\n- 右邊界不包含答案。\n- first true 與 last true 的 mid 偏移混用。\n- 計數相乘或累加忘記 long long。\n\n## 建議練習順序\n\n- 必修：410、875、1482、1552。\n- 進階：1760、1870、2187、2517。\n- 挑戰：2616、2861。\n\n## 我能認出這個模式嗎？\n\n- 候選答案 x 變大時，題目是更容易還是更難？\n- 我要找 first true 還是 last true？\n- check(x) 是否只回傳可行/不可行，不偷算答案？\n- left/right 是否保證包住答案？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93008,
-          title: "2.4 堆積貪心",
+          title: "堆積貪心",
+          description:
+            "用 priority_queue 保存當前最值得使用或最該反悔的候選，讓局部選擇能快速修正。",
           summary:
-            "# 堆積貪心\n\n堆積貪心常見於「先做選擇，之後再反悔」或「必要時才消耗昂貴資源」。堆積保存目前看過的最佳候選，讓每次反悔都能改掉最不划算的決策。\n\n## 讀題訊號\n\n燃料、磚塊、梯子、操作次數、排程、每次取最大/最小、更新後舊資料可能失效。\n\n## 判斷方式\n\n問自己：堆裡放的是候選、活躍項目還是已分配資源？我要最大堆還是最小堆？舊資料何時變 stale？查答案前是否要延遲刪除？",
+            "# 堆積貪心\n\n## 涵蓋主題\n\n- 堆積貪心\n- 先拿再反悔\n- 必要時才用昂貴資源\n- 延遲刪除\n- 雙堆積\n- 優先級排程\n\n## 初學者先懂什麼\n\n堆積適合「每一步都要從目前候選中取最大或最小」的題目。貪心的核心是定義候選集合與反悔規則：先把可能有用的東西放進堆，真正遇到瓶頸時才拿出最好的，或先做決定，發現資源超量時把最差的決定換掉。\n\n## 核心直覺\n\n如果未來只在乎目前候選中的最大值或最小值，堆積就能讓每次選擇 O(log n)。局部最優能成立通常因為交換論證：把昂貴資源留給更大的缺口，或把最短/最高優先級任務先處理，不會讓後續更差。\n\n## 典型讀題訊號\n\n- 反覆取目前最大/最小。\n- 資源有限，需要必要時才使用。\n- 任務有到達時間、處理時間、房間、伺服器等優先級。\n- 刪除或更新造成堆裡可能有舊資料。\n\n## 常見變形\n\n- 先拿再反悔：先接受候選，超過限制時從堆中踢掉最不划算者。\n- 必要時才用昂貴資源：能用便宜資源就用，撐不住才用堆中最佳補救。\n- 延遲刪除：heap 不支援任意刪除，用 source of truth 驗證堆頂。\n- 雙堆積：一個放可用資源，一個放忙碌資源。\n- 優先級排程：排序事件，再以堆決定下一個執行者。\n\n## C++ 模板或偽程式\n\n```cpp\npriority_queue<int> best;\nfor (auto event : events) {\n    while (can_add_candidate(event)) best.push(candidate_value);\n    if (need_help()) {\n        if (best.empty()) return -1;\n        use(best.top());\n        best.pop();\n    }\n}\n```\n\n## 常見錯誤\n\n- 堆中元素語意不清：到底是候選、已選、還是可反悔項目。\n- min-heap/max-heap 選反。\n- 更新資料後忘記處理 stale entry。\n- 貪心沒有單調或交換理由，只是看起來合理。\n\n## 建議練習順序\n\n- 必修：1642、871、2530。\n- 進階：1834、1882、2402、3066。\n- 挑戰：2163。\n\n## 我能認出這個模式嗎？\n\n- 我需要每次取最大還是最小？\n- 堆裡保存的是候選還是已分配資源？\n- 何時把元素放進堆、何時拿出來？\n- 如果資料會更新，堆頂是否需要驗證過期？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93009,
-          title: "2.5 區間與掃描線",
+          title: "區間與掃描線",
+          description:
+            "把區間邊界排序成事件，依序維護目前覆蓋、重疊或活躍集合。",
           summary:
-            "# 區間與掃描線\n\n把範圍問題壓成排序後的邊界事件。常見答案是合併後長度、最大重疊、最少房間/組數、或未覆蓋部分。\n\n## 讀題訊號\n\n會議、天數、預訂、覆蓋、[l,r] 操作、最少分組、最大同時存在數。\n\n## 檢查重點\n\n區間是閉區間還是半開區間？同一座標 start/end 誰先處理？是否需要座標壓縮？最少組數是否等於最大重疊數？",
+            "# 區間與掃描線\n\n## 涵蓋主題\n\n- 區間與掃描線\n- 合併區間\n- 會議室模型\n- 差分事件\n- 活躍集合\n- 座標壓縮\n\n## 初學者先懂什麼\n\n區間題的第一步通常是排序。合併區間要按左端點排序；選最多不重疊區間常按右端點排序；查詢每個點被哪些區間覆蓋，則把左右端點拆成事件掃描。掃描線的狀態是「目前活著的區間」。\n\n## 核心直覺\n\n排序後，區間的相對關係變得局部：下一個區間只需要和目前合併段、目前活躍集合或目前最早結束者互動。差分事件把很多區間加減轉成在端點處變化。座標很大但事件很少時，先壓縮座標。\n\n## 典型讀題訊號\n\n- 會議、預訂、工作日、天數覆蓋、最少分組。\n- 需要最大同時存在數、合併後長度、未覆蓋區間。\n- 查詢點與區間配對，或需要隨掃描維護最短/最小活躍區間。\n\n## 常見變形\n\n- 合併區間：按 left 排序，若 next.left <= current.right 就合併。\n- 會議室模型：最少房間等於最大重疊數。\n- 差分事件：閉區間 [l,r] 常用 +1 at l, -1 at r+1。\n- 活躍集合：需要知道目前覆蓋查詢點的最小區間、最大右端等。\n- 座標壓縮：座標範圍大但端點少。\n\n## C++ 模板或偽程式\n\n```cpp\nvector<pair<int,int>> events;\nfor (auto [l, r] : intervals) {\n    events.push_back({l, 1});\n    events.push_back({r + 1, -1}); // closed interval\n}\nsort(events.begin(), events.end());\nint active = 0, best = 0;\nfor (auto [x, delta] : events) {\n    active += delta;\n    best = max(best, active);\n}\n```\n\n## 常見錯誤\n\n- 閉區間與半開區間混淆。\n- 同一座標 start/end 處理順序錯。\n- 按左端或右端排序的目的不清。\n- 座標 r+1 可能溢位，要用 long long 或事件排序 tie-break。\n\n## 建議練習順序\n\n- 必修：56、1094、2406。\n- 進階：1288、1943、2054、3169。\n- 挑戰：1851、2589。\n\n## 我能認出這個模式嗎？\n\n- 這題是在合併區間、數重疊，還是回答查詢？\n- 端點是閉區間還是半開區間？\n- 我應該按左端、右端，還是拆事件排序？\n- 是否需要活躍集合或座標壓縮？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93010,
-          title: "2.6 單調堆疊與單調佇列",
+          title: "單調堆疊與單調佇列",
+          description:
+            "維護一個單調的候選集合，當新元素出現時，刪掉未來不可能成為答案的舊元素。",
           summary:
-            "# 單調堆疊與單調佇列\n\n單調結構的本質是刪掉永遠不可能成為答案的候選。它適合找下一個更大/更小、子陣列最大最小貢獻、固定視窗最值、或前綴和限制。\n\n## 讀題訊號\n\nnext greater、next smaller、視窗最大值、子陣列最小值總和、帶負數的最短子陣列。\n\n## 常見踩坑\n\n忘記存下標導致無法算距離；重複值 tie-break 不一致；deque 隊首過期但沒有移除。",
+            "# 單調堆疊與單調佇列\n\n## 涵蓋主題\n\n- 單調堆疊與單調佇列\n- 下一個更小元素\n- 下一個更大元素\n- 滑動視窗最大值\n- 最短子陣列\n- 類凸性轉移\n\n## 初學者先懂什麼\n\n單調性表示資料在結構內保持遞增或遞減。單調堆疊多用來找某元素左/右第一個更大或更小；單調佇列多用在下標會過期的視窗或前綴最佳值。元素能被彈出，是因為新元素在值與位置上都比它更有競爭力。\n\n## 核心直覺\n\n如果一個舊候選比新候選差，而且新候選更靠近未來，它就永遠不會再成為最佳答案。類凸性轉移可以先理解為：DP 轉移裡有一批候選，但它們的優劣順序會隨 i 單調移動，因此可以用 deque 保留可能最佳的少數候選。\n\n## 典型讀題訊號\n\n- 找下一個更大/更小、前一個更大/更小。\n- 固定視窗最大值或最小值。\n- 含負數的最短子陣列不能滑窗，但前綴和可用 deque。\n- DP 轉移要從一段候選中取最優，且候選會過期或被支配。\n\n## 常見變形\n\n- 下一個更大：維護遞減堆疊，遇到更大值就彈出並結算。\n- 下一個更小：維護遞增堆疊。\n- 滑動視窗最大值：deque 內下標值遞減，隊首是最大值。\n- 最短子陣列：前綴和 deque 保持遞增，隊首可達標就更新。\n- 類凸性轉移：用 deque 保存不被支配的 DP 候選。\n\n## C++ 模板或偽程式\n\n```cpp\ndeque<int> dq;\nfor (int i = 0; i < n; ++i) {\n    while (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n    while (!dq.empty() && nums[dq.back()] <= nums[i]) dq.pop_back();\n    dq.push_back(i);\n    if (i >= k - 1) ans.push_back(nums[dq.front()]);\n}\n```\n\n## 常見錯誤\n\n- 忘記存下標，導致無法判斷距離或過期。\n- 重複值比較用 < 還是 <= 沒有統一，貢獻法會重複計算。\n- deque 隊首過期未移除。\n- 把單調堆疊和單調佇列混用：前者不處理過期，後者要處理視窗邊界。\n\n## 建議練習順序\n\n- 必修：739、239、901。\n- 進階：862、907、1673、2104。\n- 挑戰：2945。\n\n## 我能認出這個模式嗎？\n\n- 我要找更大還是更小？往左找還是往右找？\n- 結構內要保持遞增還是遞減？\n- 元素被彈出後，為什麼未來不需要它？\n- 是否有視窗長度或下標過期條件？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93011,
-          title: "2.7 圖論：BFS / 0-1 BFS / Dijkstra",
+          title: "圖論：BFS / 0-1 BFS / Dijkstra",
+          description:
+            "把陣列、網格或操作過程建模成狀態圖，再依邊權選 BFS、0-1 BFS 或 Dijkstra。",
           summary:
-            "# 圖論：BFS / 0-1 BFS / Dijkstra\n\n很多 Q3 的陣列/網格題其實是最短路。格子、下標、mask、剩餘資源都可能是節點狀態；移動或操作是邊。\n\n## 選演算法\n\n- 邊權全 1：BFS。\n- 邊權只有 0/1：0-1 BFS。\n- 邊權非負：Dijkstra。\n- 有剩餘資源、奇偶性、上一方向：把它加入狀態。\n\n## 模板提醒\n\nDijkstra 從 priority_queue 取出狀態時，如果 cost != dist[node]，這筆就是 stale entry，要跳過。",
+            "# 圖論：BFS / 0-1 BFS / Dijkstra\n\n## 涵蓋主題\n\n- 無權 BFS\n- 0-1 BFS\n- Dijkstra\n- 狀態擴展\n- 網格建圖\n- 過期項目\n\n## 初學者先懂什麼\n\n圖建模就是決定「節點代表什麼狀態，邊代表什麼操作」。在網格中，節點可以是 (row, col)，但如果題目有剩餘可消除障礙、目前時間、mask 或上一個方向，這些也可能是狀態的一部分。\n\n## 核心直覺\n\n邊權全是 1 時，BFS 按層擴展，第一次到達就是最短。邊權只有 0/1 時，0-1 BFS 用 deque：0 成本放前面，1 成本放後面。邊權是任意非負數時，用 Dijkstra。priority_queue 可能保留舊距離，取出時若 cost != dist[state] 就是過期項目，必須跳過。\n\n## 典型讀題訊號\n\n- 網格移動、最少步數、最小代價、最小時間。\n- 每一步代價全為 1、只有 0/1，或是非負權重。\n- visited 不能只看位置，還要看剩餘資源或時間條件。\n\n## 常見變形\n\n- 無權 BFS：queue + distance，適合最少步數。\n- 0-1 BFS：deque + dist，適合代價 0/1。\n- Dijkstra：min-heap + dist，適合非負權重。\n- 狀態擴展：把剩餘 k、mask、方向、時間奇偶加入節點。\n- 網格建圖：四方向邊界檢查、障礙處理。\n\n## C++ 模板或偽程式\n\n```cpp\npriority_queue<State, vector<State>, greater<State>> pq;\ndist[start] = 0;\npq.push({0, start});\nwhile (!pq.empty()) {\n    auto [cost, state] = pq.top();\n    pq.pop();\n    if (cost != dist[state]) continue;\n    for (auto [next, w] : neighbors(state)) {\n        if (cost + w < dist[next]) {\n            dist[next] = cost + w;\n            pq.push({dist[next], next});\n        }\n    }\n}\n```\n\n## 常見錯誤\n\n- visited 狀態缺少剩餘資源，導致把不同狀態錯當同一格。\n- 0-1 BFS 邊權為 0 時沒有 push_front。\n- Dijkstra 沒跳過 stale entry，造成重複擴展或錯誤。\n- 網格邊界、起點終點障礙、時間奇偶等待處理錯。\n\n## 建議練習順序\n\n- 必修：1091、1926、1368、1631。\n- 進階：1293、2290、2812。\n- 挑戰：2577。\n\n## 我能認出這個模式嗎？\n\n- 節點狀態除了位置還需要哪些資訊？\n- 邊權是 1、0/1，還是任意非負？\n- 第一次到達是否一定最短？\n- priority_queue 取出時是否檢查過期項目？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93012,
-          title: "2.8 動態規劃",
+          title: "動態規劃",
+          description:
+            "用狀態記住「處理到目前為止的最佳答案」，把重複的選擇樹壓成表格或少數變數。",
           summary:
-            "# 動態規劃\n\nQ3 的 DP 通常不是表很大，而是狀態藏得深。先說清楚 dp[i] 代表「處理完哪個前綴後的最佳值」，再想如何壓縮轉移。\n\n## 讀題訊號\n\n選或不選、不重疊區間/子陣列、至多 K 個、上一個相容物件、目前是否在一段中。\n\n## 常見優化\n\n排序加二分找相容前狀態、前綴最大值替代掃描、堆或 map 保存最佳轉移、狀態壓縮。",
+            "# 動態規劃\n\n## 涵蓋主題\n\n- 動態規劃\n- 選或不選\n- 至多 K 個選擇\n- 不重疊子陣列\n- 狀態壓縮\n- DP 加資料結構\n\n## 初學者先懂什麼\n\nDP 狀態是一句精確定義，例如 dp[i] 表示處理前 i 個物件後的最大值。轉移就是最後一步如何來：選目前、跳過目前、結束一段、延續一段。初學者不要先背公式，要先把暴力遞迴的重複子問題說出來。\n\n## 核心直覺\n\n當未來只需要知道過去的少數摘要，而不需要完整路徑，就能 DP。選或不選是最常見模型；至多 K 個選擇多一維 k；不重疊子陣列需要狀態表示目前是否在一段中。狀態壓縮則是發現轉移只依賴前一層或少數變數。\n\n## 典型讀題訊號\n\n- 每個元素或區間可選可不選。\n- 要求最多 K 個、剛好 K 段、不重疊。\n- 排序後找上一個相容物件。\n- 轉移需要查歷史最佳值，可能用 map、heap、Fenwick tree 優化。\n\n## 常見變形\n\n- 選或不選：dp[i]=max(skip,take)。\n- 至多 K 個選擇：dp[i][k] 表示處理前 i 個選 k 個的最佳值。\n- 不重疊子陣列：分成不在段內、正在段內或已完成幾段。\n- 狀態壓縮：從二維壓到一維或幾個變數。\n- DP 加資料結構：用前綴最大、二分、有序結構查最佳前狀態。\n\n## C++ 模板或偽程式\n\n```cpp\nlong long robLike(vector<int>& a) {\n    long long skip = 0, take = 0;\n    for (int x : a) {\n        long long ntake = skip + x;\n        long long nskip = max(skip, take);\n        take = ntake;\n        skip = nskip;\n    }\n    return max(skip, take);\n}\n```\n\n## 常見錯誤\n\n- dp[i] 定義含糊，導致轉移互相矛盾。\n- 初始化不可能狀態為 0，讓非法方案參與轉移。\n- k 維度倒序/正序更新錯。\n- 不重疊問題忘記找相容前狀態。\n\n## 建議練習順序\n\n- 必修：198、2140、1235。\n- 進階：689、1751、2320、2830、3186。\n- 挑戰：3077。\n\n## 我能認出這個模式嗎？\n\n- dp 狀態代表處理到哪裡、用了多少資源、是否在段內？\n- 最後一步是選、跳過、開始段、還是結束段？\n- 轉移依賴哪些舊狀態？能壓縮嗎？\n- 是否有不可能狀態需要 -INF？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93013,
-          title: "2.9 貢獻法",
+          title: "貢獻法",
+          description:
+            "不枚舉所有子陣列或子字串，而是計算每個元素在多少個答案物件中產生貢獻。",
           summary:
-            "# 貢獻法\n\n當題目要求所有子陣列或子字串的總和時，不要枚舉每個物件；改算每個元素在多少物件中扮演指定角色。\n\n## 讀題訊號\n\n所有子陣列/子字串之和、每個元素作為最小值/最大值/唯一字元、前後邊界決定貢獻範圍。\n\n## 公式\n\n若 index 左邊有 L 種起點、右邊有 R 種終點，貢獻通常是 L * R * value。重複值要用不對稱比較避免重複歸屬。",
+            "# 貢獻法\n\n## 涵蓋主題\n\n- 貢獻法\n- 前後出現位置\n- 前後更小元素\n- 前後更大元素\n- 子字串貢獻\n- 子陣列最小/最大值貢獻\n\n## 初學者先懂什麼\n\n貢獻法把視角從「每個子陣列算一次」換成「每個元素被多少子陣列使用」。如果某元素左邊有 L 種起點、右邊有 R 種終點，那它對答案的出現次數通常是 L*R。難點是找出它在哪些範圍內扮演唯一字元、最小值或最大值。\n\n## 核心直覺\n\n所有子陣列數量是 O(n^2)，但每個元素的有效邊界可用前後出現位置或單調堆疊在 O(n) 找到。前後出現位置處理「唯一」或「第一次/最後一次」；前後更小/更大處理「最小值/最大值」。\n\n## 典型讀題訊號\n\n- 題目問所有子陣列/子字串的總和。\n- 答案可拆成每個元素、字元或數值的影響。\n- 需要計算某元素作為唯一字元、最小值、最大值的次數。\n\n## 常見變形\n\n- 前後出現位置：字元在兩次相鄰出現之間才是唯一。\n- 前後更小元素：決定當前值作為最小值的左右邊界。\n- 前後更大元素：決定當前值作為最大值的左右邊界。\n- 子字串貢獻：常用 last position 或 previous two positions。\n- 子陣列最小/最大值貢獻：用單調堆疊找邊界。\n\n## C++ 模板或偽程式\n\n```cpp\n// nums[i] as minimum: previous strictly less, next less or equal\nlong long contribution = 1LL * (i - prevLess[i]) * (nextLessEq[i] - i) * nums[i];\n```\n\n## 常見錯誤\n\n- 重複值 tie-break 不一致，造成重複歸屬或漏算。\n- 左右距離少算 1。\n- 貢獻值乘法溢位，需 long long。\n- 把每個子陣列枚舉後再優化，錯過換視角的機會。\n\n## 建議練習順序\n\n- 必修：828、907、2104。\n- 進階：1856、2262、2681。\n- 挑戰：2916、3428。\n\n## 我能認出這個模式嗎？\n\n- 答案能否拆成每個元素的加總？\n- 每個元素的左邊界和右邊界由什麼決定？\n- 重複值要歸給左邊還是右邊？\n- 次數是否是 leftChoices * rightChoices？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93014,
-          title: "2.10 位元技巧",
+          title: "位元技巧",
+          description:
+            "利用 AND/OR/XOR 的代數性質，壓縮狀態或把集合表示成整數 mask。",
           summary:
-            "# 位元技巧\n\nOR 只會讓位元從 0 變 1，AND 只會讓位元從 1 變 0，所以每個右端點的不同 OR/AND 值數量通常很小，可用 map 保存「值 -> 次數」。\n\n## 讀題訊號\n\n子陣列 OR/AND/XOR、目標 K、限制允許 O(n * 32)、mask 狀態小、bitset 可表示可達性。\n\n## 注意\n\nXOR 沒有 OR/AND 的單調壓縮特性，常要改用前綴 XOR 或有限狀態。滑窗維護 OR 時，移出元素必須用每個 bit 的計數。",
+            "# 位元技巧\n\n## 涵蓋主題\n\n- 位元技巧\n- OR 狀態壓縮\n- AND 狀態壓縮\n- XOR 狀態\n- bitset 優化\n- 有限 mask 狀態\n\n## 初學者先懂什麼\n\n位元操作包含 &, |, ^, ~, <<, >>。OR 只會把 bit 從 0 變 1；AND 只會把 bit 從 1 變 0；XOR 則是翻轉，沒有單調性。這三者的差異決定解法：OR/AND 子陣列的不同值通常很少，XOR 則常用前綴 XOR 或 trie。\n\n## 核心直覺\n\n對固定右端點，把所有以它結尾的子陣列 OR 值存成集合。每往左多加一個數，OR 的 bit 只能增加，因此不同結果最多約 32 個；AND 同理只能減少。有限 mask 狀態適合字母種類少、集合小、奇偶性小的題目。bitset 則可把一排布林 DP 壓成機器位元並批次位移。\n\n## 典型讀題訊號\n\n- 題目直接出現 AND、OR、XOR、mask、子集。\n- 數值範圍在 2^20 以內或字母種類很少。\n- 需要維護子陣列位元值、前綴 XOR、可達集合。\n\n## 常見變形\n\n- OR 狀態壓縮：保存以目前右端結尾的所有 OR 值與次數。\n- AND 狀態壓縮：保存所有 AND 值，bit 只會從 1 掉到 0。\n- XOR 狀態：常用 prefixXor[i] ^ prefixXor[j]。\n- bitset 優化：可達和、集合轉移可用位移 OR。\n- 有限 mask 狀態：字母集合、奇偶性、選取狀態。\n\n## C++ 模板或偽程式\n\n```cpp\nunordered_map<int, long long> cur, next;\nfor (int x : nums) {\n    next.clear();\n    next[x]++;\n    for (auto [value, cnt] : cur) next[value | x] += cnt;\n    cur.swap(next);\n    // cur contains compressed OR states ending here\n}\n```\n\n## 常見錯誤\n\n- 把 XOR 當成 OR/AND 一樣單調。\n- mask 位數超過 int 範圍，1<<bit 溢位。\n- AND 初始值錯，應由第一個元素開始或用全 1。\n- 滑窗維護 OR 時忘記 bit 頻次。\n\n## 建議練習順序\n\n- 必修：1863、2433、898、1442。\n- 進階：2044、2411、2564、3209。\n- 挑戰：1521、3277。\n\n## 我能認出這個模式嗎？\n\n- 這題是 OR、AND 還是 XOR？它是否單調？\n- 狀態值數量是否被 bit 數限制？\n- mask 需要多少位，會不會溢位？\n- 能否用前綴 XOR 或 bitset 批次處理？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
         {
           id: 93015,
-          title: "2.11 資料結構設計",
+          title: "資料結構設計",
+          description:
+            "把每個操作拆成更新與查詢需求，選擇能同時維護多個視角的資料結構。",
           summary:
-            "# 資料結構設計\n\n資料結構型 Q3 重點是維護多個視角：一份權威狀態，加上一些加速查詢的索引。堆積、set、map 都可能保存過期資料，因此查詢前要驗證。\n\n## 讀題訊號\n\n更新與查詢交錯、依分類找最高/最低、頻次變化、刪除或覆蓋造成舊 heap entry 失效。\n\n## 原則\n\n先定義 source of truth，再定義索引。索引可以有 stale entry，但回傳答案前必須和 source of truth 對齊。",
-        },
-      ],
-    },
-    {
-      id: 93300,
-      title: "3. 精選 Q3 追蹤表與題單",
-      summary: "從經典基礎題到近年競賽型題，保留能訓練遷移能力的精選練習。",
-      children: [
-        {
-          id: 93016,
-          title: "3.1 Q3 總追蹤表",
-          summary:
-            "# Q3 總追蹤表\n\n這張總表把所有 Q3 精選題集中在一起，適合做混合複習。P0 用來校準不變式，P1/P2 用來訓練你在題目偽裝後仍能選對第一方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 209 | [長度最小的子陣列](https://leetcode.cn/problems/minimum-size-subarray-sum) |  | 滑動視窗 / P0 / 最短合法視窗 | P0 |\n| 2 | 713 | [乘積小於 K 的子陣列](https://leetcode.cn/problems/subarray-product-less-than-k) |  | 滑動視窗 / P0 / 依右端點計數 | P0 |\n| 3 | 1004 | [最大連續 1 的個數 III](https://leetcode.cn/problems/max-consecutive-ones-iii) |  | 滑動視窗 / P0 / 至多 K | P0 |\n| 4 | 992 | [K 個不同整數的子陣列](https://leetcode.cn/problems/subarrays-with-k-different-integers) |  | 滑動視窗 / P0 / 恰好 K 轉成 atMost | P0 |\n| 5 | 2831 | [找出最長等值子陣列](https://leetcode.cn/problems/find-the-longest-equal-subarray) | 1800 | 滑動視窗 / P1 / 在位置陣列上滑窗 | P1 |\n| 6 | 2962 | [統計最大元素至少出現 K 次的子陣列](https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times) | 1700 | 滑動視窗 / P1 / 依左端點計數 | P1 |\n| 7 | 3097 | [或值至少為 K 的最短子陣列 II](https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-ii) | 1900 | 滑動視窗 / P1 / 視窗內維護位元計數 | P1 |\n| 8 | 560 | [和為 K 的子陣列](https://leetcode.cn/problems/subarray-sum-equals-k) |  | 前綴和與雜湊表 / P0 / 前綴頻次 | P0 |\n| 9 | 974 | [和可被 K 整除的子陣列](https://leetcode.cn/problems/subarray-sums-divisible-by-k) |  | 前綴和與雜湊表 / P0 / 模數前綴 | P0 |\n| 10 | 1248 | [統計優美子陣列](https://leetcode.cn/problems/count-number-of-nice-subarrays) |  | 前綴和與雜湊表 / P1 / 計數差分 | P1 |\n| 11 | 3026 | [最大好子陣列和](https://leetcode.cn/problems/maximum-good-subarray-sum) | 1800 | 前綴和與雜湊表 / P1 / 依值查最佳前綴 | P1 |\n| 12 | 410 | [分割陣列的最大值](https://leetcode.cn/problems/split-array-largest-sum) |  | 答案二分搜尋 / P0 / 最小化最大值 | P0 |\n| 13 | 875 | [愛吃香蕉的珂珂](https://leetcode.cn/problems/koko-eating-bananas) |  | 答案二分搜尋 / P0 / 最小可行速度 | P0 |\n| 14 | 1482 | [製作 m 束花所需的最少天數](https://leetcode.cn/problems/minimum-number-of-days-to-make-m-bouquets) |  | 答案二分搜尋 / P0 / 可行性檢查 | P0 |\n| 15 | 1552 | [兩球之間的磁力](https://leetcode.cn/problems/magnetic-force-between-two-balls) |  | 答案二分搜尋 / P0 / 最大化最小值 | P0 |\n| 16 | 2187 | [完成旅途的最少時間](https://leetcode.cn/problems/minimum-time-to-complete-trips) |  | 答案二分搜尋 / P0 / 計數型檢查 | P0 |\n| 17 | 2517 | [糖果禮盒的最大甜度](https://leetcode.cn/problems/maximum-tastiness-of-candy-basket) | 1700 | 答案二分搜尋 / P1 / 最大化最小值 | P1 |\n| 18 | 2616 | [最小化數對的最大差值](https://leetcode.cn/problems/minimize-the-maximum-difference-of-pairs) | 1800 | 答案二分搜尋 / P1 / 貪心檢查 | P1 |\n| 19 | 871 | [最低加油次數](https://leetcode.cn/problems/minimum-number-of-refueling-stops) |  | 堆積貪心 / P0 / 先拿再反悔 | P0 |\n| 20 | 1642 | [可以到達的最遠建築](https://leetcode.cn/problems/furthest-building-you-can-reach) |  | 堆積貪心 / P0 / 必要時才用昂貴資源 | P0 |\n| 21 | 2353 | [設計食物評分系統](https://leetcode.cn/problems/design-a-food-rating-system) |  | 資料結構設計 / P0 / 堆積加映射表 | P0 |\n| 22 | 2530 | [執行 K 次操作後的最大分數](https://leetcode.cn/problems/maximal-score-after-applying-k-operations) | 1500 | 堆積貪心 / P1 / 反覆取最佳選擇 | P1 |\n| 23 | 3066 | [超過閾值的最少操作數 II](https://leetcode.cn/problems/minimum-operations-to-exceed-threshold-value-ii) | 1500 | 堆積貪心 / P1 / 合併最小值 | P1 |\n| 24 | 56 | [合併區間](https://leetcode.cn/problems/merge-intervals) |  | 區間與掃描線 / P0 / 合併區間 | P0 |\n| 25 | 253 | [會議室 II](https://leetcode.cn/problems/meeting-rooms-ii) |  | 區間與掃描線 / P0 / 維護活躍區間 | P0 |\n| 26 | 2406 | [將區間分成最少組數](https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups) |  | 區間與掃描線 / P0 / 最大重疊數 | P0 |\n| 27 | 3169 | [無會議的工作日](https://leetcode.cn/problems/count-days-without-meetings) | 1400 | 區間與掃描線 / P1 / 合併區間 | P1 |\n| 28 | 739 | [每日溫度](https://leetcode.cn/problems/daily-temperatures) |  | 單調堆疊與單調佇列 / P0 / 下一個更大元素 | P0 |\n| 29 | 239 | [滑動視窗最大值](https://leetcode.cn/problems/sliding-window-maximum) |  | 單調堆疊與單調佇列 / P0 / 單調佇列 | P0 |\n| 30 | 862 | [和至少為 K 的最短子陣列](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) |  | 單調堆疊與單調佇列 / P1 / 前綴和單調佇列 | P1 |\n| 31 | 1368 | [使網格圖至少有一條有效路徑的最小代價](https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid) |  | 圖論：BFS / 0-1 BFS / Dijkstra / P0 / 0-1 BFS | P0 |\n| 32 | 1631 | [最小體力消耗路徑](https://leetcode.cn/problems/path-with-minimum-effort) |  | 圖論：BFS / 0-1 BFS / Dijkstra / P0 / Dijkstra 最小化最大邊 | P0 |\n| 33 | 1293 | [網格中的最短路徑（可消除障礙）](https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination) |  | 圖論：BFS / 0-1 BFS / Dijkstra / P0 / 狀態擴展 | P0 |\n| 34 | 2290 | [到達角落需要移除障礙物的最小數目](https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner) | 1900 | 圖論：BFS / 0-1 BFS / Dijkstra / P1 / 0-1 BFS | P1 |\n| 35 | 2577 | [在網格中訪問一個格子的最少時間](https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid) | 2300 | 圖論：BFS / 0-1 BFS / Dijkstra / P2 / 含奇偶等待的 Dijkstra | P2 |\n| 36 | 198 | [打家劫舍](https://leetcode.cn/problems/house-robber) |  | 動態規劃 / P0 / 選或不選 | P0 |\n| 37 | 300 | [最長遞增子序列](https://leetcode.cn/problems/longest-increasing-subsequence) |  | 動態規劃 / P0 / 轉移優化 | P0 |\n| 38 | 1235 | [規劃兼職工作](https://leetcode.cn/problems/maximum-profit-in-job-scheduling) |  | 動態規劃 / P0 / 帶權區間排程 | P0 |\n| 39 | 689 | [三個無重疊子陣列的最大和](https://leetcode.cn/problems/maximum-sum-of-3-non-overlapping-subarrays) |  | 動態規劃 / P1 / 不重疊子陣列 | P1 |\n| 40 | 3186 | [施咒的最大總傷害](https://leetcode.cn/problems/maximum-total-damage-with-spell-casting) | 1900 | 動態規劃 / P1 / 值域版打家劫舍 | P1 |\n| 41 | 3077 | [K 個不相交子陣列的最大強度](https://leetcode.cn/problems/maximum-strength-of-k-disjoint-subarrays) | 2500 | 動態規劃 / P2 / 至多 K 段子陣列 | P2 |\n| 42 | 828 | [統計所有子字串中的唯一字元](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string) |  | 貢獻法 / P0 / 前後出現位置 | P0 |\n| 43 | 907 | [子陣列的最小值之和](https://leetcode.cn/problems/sum-of-subarray-minimums) |  | 貢獻法 / P0 / 前後更小元素 | P0 |\n| 44 | 2104 | [子陣列範圍和](https://leetcode.cn/problems/sum-of-subarray-ranges) |  | 貢獻法 / P0 / 最大貢獻減最小貢獻 | P0 |\n| 45 | 2262 | [字串的總吸引力](https://leetcode.cn/problems/total-appeal-of-a-string) | 2000 | 貢獻法 / P1 / 子字串貢獻 | P1 |\n| 46 | 898 | [子陣列按位 OR 的不同結果數](https://leetcode.cn/problems/bitwise-ors-of-subarrays) |  | 位元技巧 / P0 / OR 狀態壓縮 | P0 |\n| 47 | 1521 | [找到最接近目標值的函式值](https://leetcode.cn/problems/find-a-value-of-a-mysterious-function-closest-to-target) |  | 位元技巧 / P0 / AND 狀態壓縮 | P0 |\n| 48 | 3209 | [AND 值為 K 的子陣列數目](https://leetcode.cn/problems/number-of-subarrays-with-and-value-of-k) | 2000 | 位元技巧 / P1 / AND 狀態壓縮 | P1 |\n| 49 | 3095 | [或值至少為 K 的最短子陣列 I](https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-i) | 1400 | 位元技巧 / P1 / OR 維護 | P1 |\n| 50 | 1804 | [實作 Trie II](https://leetcode.cn/problems/implement-trie-ii) |  | 資料結構設計 / P1 / 頻次追蹤 | P1 |\n| 51 | 2034 | [股票價格波動](https://leetcode.cn/problems/stock-price-fluctuation) |  | 資料結構設計 / P0 / 延遲刪除 | P0 |\n| 52 | 2502 | [設計記憶體配置器](https://leetcode.cn/problems/design-memory-allocator) | 1600 | 資料結構設計 / P1 / 區間配置 | P1 |",
-        },
-        {
-          id: 93017,
-          title: "3.2 滑動視窗 題單",
-          summary:
-            "# 滑動視窗 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 209 | [長度最小的子陣列](https://leetcode.cn/problems/minimum-size-subarray-sum) |  | 滑動視窗 / P0 / 最短合法視窗 | P0 |\n| 2 | 713 | [乘積小於 K 的子陣列](https://leetcode.cn/problems/subarray-product-less-than-k) |  | 滑動視窗 / P0 / 依右端點計數 | P0 |\n| 3 | 1004 | [最大連續 1 的個數 III](https://leetcode.cn/problems/max-consecutive-ones-iii) |  | 滑動視窗 / P0 / 至多 K | P0 |\n| 4 | 992 | [K 個不同整數的子陣列](https://leetcode.cn/problems/subarrays-with-k-different-integers) |  | 滑動視窗 / P0 / 恰好 K 轉成 atMost | P0 |\n| 5 | 2831 | [找出最長等值子陣列](https://leetcode.cn/problems/find-the-longest-equal-subarray) | 1800 | 滑動視窗 / P1 / 在位置陣列上滑窗 | P1 |\n| 6 | 2962 | [統計最大元素至少出現 K 次的子陣列](https://leetcode.cn/problems/count-subarrays-where-max-element-appears-at-least-k-times) | 1700 | 滑動視窗 / P1 / 依左端點計數 | P1 |\n| 7 | 3097 | [或值至少為 K 的最短子陣列 II](https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-ii) | 1900 | 滑動視窗 / P1 / 視窗內維護位元計數 | P1 |",
-        },
-        {
-          id: 93018,
-          title: "3.3 前綴和與雜湊表 題單",
-          summary:
-            "# 前綴和與雜湊表 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 560 | [和為 K 的子陣列](https://leetcode.cn/problems/subarray-sum-equals-k) |  | 前綴和與雜湊表 / P0 / 前綴頻次 | P0 |\n| 2 | 974 | [和可被 K 整除的子陣列](https://leetcode.cn/problems/subarray-sums-divisible-by-k) |  | 前綴和與雜湊表 / P0 / 模數前綴 | P0 |\n| 3 | 1248 | [統計優美子陣列](https://leetcode.cn/problems/count-number-of-nice-subarrays) |  | 前綴和與雜湊表 / P1 / 計數差分 | P1 |\n| 4 | 3026 | [最大好子陣列和](https://leetcode.cn/problems/maximum-good-subarray-sum) | 1800 | 前綴和與雜湊表 / P1 / 依值查最佳前綴 | P1 |",
-        },
-        {
-          id: 93019,
-          title: "3.4 答案二分搜尋 題單",
-          summary:
-            "# 答案二分搜尋 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 410 | [分割陣列的最大值](https://leetcode.cn/problems/split-array-largest-sum) |  | 答案二分搜尋 / P0 / 最小化最大值 | P0 |\n| 2 | 875 | [愛吃香蕉的珂珂](https://leetcode.cn/problems/koko-eating-bananas) |  | 答案二分搜尋 / P0 / 最小可行速度 | P0 |\n| 3 | 1482 | [製作 m 束花所需的最少天數](https://leetcode.cn/problems/minimum-number-of-days-to-make-m-bouquets) |  | 答案二分搜尋 / P0 / 可行性檢查 | P0 |\n| 4 | 1552 | [兩球之間的磁力](https://leetcode.cn/problems/magnetic-force-between-two-balls) |  | 答案二分搜尋 / P0 / 最大化最小值 | P0 |\n| 5 | 2187 | [完成旅途的最少時間](https://leetcode.cn/problems/minimum-time-to-complete-trips) |  | 答案二分搜尋 / P0 / 計數型檢查 | P0 |\n| 6 | 2517 | [糖果禮盒的最大甜度](https://leetcode.cn/problems/maximum-tastiness-of-candy-basket) | 1700 | 答案二分搜尋 / P1 / 最大化最小值 | P1 |\n| 7 | 2616 | [最小化數對的最大差值](https://leetcode.cn/problems/minimize-the-maximum-difference-of-pairs) | 1800 | 答案二分搜尋 / P1 / 貪心檢查 | P1 |",
-        },
-        {
-          id: 93020,
-          title: "3.5 堆積貪心 題單",
-          summary:
-            "# 堆積貪心 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 871 | [最低加油次數](https://leetcode.cn/problems/minimum-number-of-refueling-stops) |  | 堆積貪心 / P0 / 先拿再反悔 | P0 |\n| 2 | 1642 | [可以到達的最遠建築](https://leetcode.cn/problems/furthest-building-you-can-reach) |  | 堆積貪心 / P0 / 必要時才用昂貴資源 | P0 |\n| 3 | 2530 | [執行 K 次操作後的最大分數](https://leetcode.cn/problems/maximal-score-after-applying-k-operations) | 1500 | 堆積貪心 / P1 / 反覆取最佳選擇 | P1 |\n| 4 | 3066 | [超過閾值的最少操作數 II](https://leetcode.cn/problems/minimum-operations-to-exceed-threshold-value-ii) | 1500 | 堆積貪心 / P1 / 合併最小值 | P1 |",
-        },
-        {
-          id: 93021,
-          title: "3.6 區間與掃描線 題單",
-          summary:
-            "# 區間與掃描線 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 56 | [合併區間](https://leetcode.cn/problems/merge-intervals) |  | 區間與掃描線 / P0 / 合併區間 | P0 |\n| 2 | 253 | [會議室 II](https://leetcode.cn/problems/meeting-rooms-ii) |  | 區間與掃描線 / P0 / 維護活躍區間 | P0 |\n| 3 | 2406 | [將區間分成最少組數](https://leetcode.cn/problems/divide-intervals-into-minimum-number-of-groups) |  | 區間與掃描線 / P0 / 最大重疊數 | P0 |\n| 4 | 3169 | [無會議的工作日](https://leetcode.cn/problems/count-days-without-meetings) | 1400 | 區間與掃描線 / P1 / 合併區間 | P1 |",
-        },
-        {
-          id: 93022,
-          title: "3.7 單調堆疊與單調佇列 題單",
-          summary:
-            "# 單調堆疊與單調佇列 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 739 | [每日溫度](https://leetcode.cn/problems/daily-temperatures) |  | 單調堆疊與單調佇列 / P0 / 下一個更大元素 | P0 |\n| 2 | 239 | [滑動視窗最大值](https://leetcode.cn/problems/sliding-window-maximum) |  | 單調堆疊與單調佇列 / P0 / 單調佇列 | P0 |\n| 3 | 862 | [和至少為 K 的最短子陣列](https://leetcode.cn/problems/shortest-subarray-with-sum-at-least-k) |  | 單調堆疊與單調佇列 / P1 / 前綴和單調佇列 | P1 |",
-        },
-        {
-          id: 93023,
-          title: "3.8 圖論：BFS / 0-1 BFS / Dijkstra 題單",
-          summary:
-            "# 圖論：BFS / 0-1 BFS / Dijkstra 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 1368 | [使網格圖至少有一條有效路徑的最小代價](https://leetcode.cn/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid) |  | 圖論：BFS / 0-1 BFS / Dijkstra / P0 / 0-1 BFS | P0 |\n| 2 | 1631 | [最小體力消耗路徑](https://leetcode.cn/problems/path-with-minimum-effort) |  | 圖論：BFS / 0-1 BFS / Dijkstra / P0 / Dijkstra 最小化最大邊 | P0 |\n| 3 | 1293 | [網格中的最短路徑（可消除障礙）](https://leetcode.cn/problems/shortest-path-in-a-grid-with-obstacles-elimination) |  | 圖論：BFS / 0-1 BFS / Dijkstra / P0 / 狀態擴展 | P0 |\n| 4 | 2290 | [到達角落需要移除障礙物的最小數目](https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner) | 1900 | 圖論：BFS / 0-1 BFS / Dijkstra / P1 / 0-1 BFS | P1 |\n| 5 | 2577 | [在網格中訪問一個格子的最少時間](https://leetcode.cn/problems/minimum-time-to-visit-a-cell-in-a-grid) | 2300 | 圖論：BFS / 0-1 BFS / Dijkstra / P2 / 含奇偶等待的 Dijkstra | P2 |",
-        },
-        {
-          id: 93024,
-          title: "3.9 動態規劃 題單",
-          summary:
-            "# 動態規劃 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 198 | [打家劫舍](https://leetcode.cn/problems/house-robber) |  | 動態規劃 / P0 / 選或不選 | P0 |\n| 2 | 300 | [最長遞增子序列](https://leetcode.cn/problems/longest-increasing-subsequence) |  | 動態規劃 / P0 / 轉移優化 | P0 |\n| 3 | 1235 | [規劃兼職工作](https://leetcode.cn/problems/maximum-profit-in-job-scheduling) |  | 動態規劃 / P0 / 帶權區間排程 | P0 |\n| 4 | 689 | [三個無重疊子陣列的最大和](https://leetcode.cn/problems/maximum-sum-of-3-non-overlapping-subarrays) |  | 動態規劃 / P1 / 不重疊子陣列 | P1 |\n| 5 | 3186 | [施咒的最大總傷害](https://leetcode.cn/problems/maximum-total-damage-with-spell-casting) | 1900 | 動態規劃 / P1 / 值域版打家劫舍 | P1 |\n| 6 | 3077 | [K 個不相交子陣列的最大強度](https://leetcode.cn/problems/maximum-strength-of-k-disjoint-subarrays) | 2500 | 動態規劃 / P2 / 至多 K 段子陣列 | P2 |",
-        },
-        {
-          id: 93025,
-          title: "3.10 貢獻法 題單",
-          summary:
-            "# 貢獻法 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 828 | [統計所有子字串中的唯一字元](https://leetcode.cn/problems/count-unique-characters-of-all-substrings-of-a-given-string) |  | 貢獻法 / P0 / 前後出現位置 | P0 |\n| 2 | 907 | [子陣列的最小值之和](https://leetcode.cn/problems/sum-of-subarray-minimums) |  | 貢獻法 / P0 / 前後更小元素 | P0 |\n| 3 | 2104 | [子陣列範圍和](https://leetcode.cn/problems/sum-of-subarray-ranges) |  | 貢獻法 / P0 / 最大貢獻減最小貢獻 | P0 |\n| 4 | 2262 | [字串的總吸引力](https://leetcode.cn/problems/total-appeal-of-a-string) | 2000 | 貢獻法 / P1 / 子字串貢獻 | P1 |",
-        },
-        {
-          id: 93026,
-          title: "3.11 位元技巧 題單",
-          summary:
-            "# 位元技巧 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 898 | [子陣列按位 OR 的不同結果數](https://leetcode.cn/problems/bitwise-ors-of-subarrays) |  | 位元技巧 / P0 / OR 狀態壓縮 | P0 |\n| 2 | 1521 | [找到最接近目標值的函式值](https://leetcode.cn/problems/find-a-value-of-a-mysterious-function-closest-to-target) |  | 位元技巧 / P0 / AND 狀態壓縮 | P0 |\n| 3 | 3209 | [AND 值為 K 的子陣列數目](https://leetcode.cn/problems/number-of-subarrays-with-and-value-of-k) | 2000 | 位元技巧 / P1 / AND 狀態壓縮 | P1 |\n| 4 | 3095 | [或值至少為 K 的最短子陣列 I](https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-i) | 1400 | 位元技巧 / P1 / OR 維護 | P1 |",
-        },
-        {
-          id: 93027,
-          title: "3.12 資料結構設計 題單",
-          summary:
-            "# 資料結構設計 題單\n\n這張題單用 P0 經典題校準核心不變式，再用 P1/P2 競賽題檢查遷移能力。每題完成後，請記下讀題訊號、核心不變式或轉移，以及下次遇到類似敘述時的第一個嘗試方向。\n\n**搭配練習**\n\n| # | ID | Problem | Rating | Technique | Score |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 2353 | [設計食物評分系統](https://leetcode.cn/problems/design-a-food-rating-system) |  | 資料結構設計 / P0 / 堆積加映射表 | P0 |\n| 2 | 1804 | [實作 Trie II](https://leetcode.cn/problems/implement-trie-ii) |  | 資料結構設計 / P1 / 頻次追蹤 | P1 |\n| 3 | 2034 | [股票價格波動](https://leetcode.cn/problems/stock-price-fluctuation) |  | 資料結構設計 / P0 / 延遲刪除 | P0 |\n| 4 | 2502 | [設計記憶體配置器](https://leetcode.cn/problems/design-memory-allocator) | 1600 | 資料結構設計 / P1 / 區間配置 | P1 |",
-        },
-        {
-          id: 93030,
-          title: "3.99 Q3 模式分類表",
-          summary:
-            "# Q3 模式分類表\n\n這份分類是複習時的標籤系統。好的標籤不是為了分類好看，而是要幫你在下一場比賽讀題時知道第一個該嘗試的方向。\n\n## 滑動視窗\n\n- 定長視窗\n- 不定長視窗\n- 至多 K\n- 恰好 K\n- 依右端點計數\n- 左端驅動視窗\n- 頻次視窗\n\n## 前綴和與雜湊表\n\n- 前綴頻次\n- 模數前綴\n- 計數差分\n- 子陣列和等於 K\n- 二維前綴和\n\n## 答案二分搜尋\n\n- 最小化最大值\n- 最大化最小值\n- 可行性檢查\n- 貪心檢查\n- 計數型檢查\n\n## 堆積貪心\n\n- 先拿再反悔\n- 必要時才用昂貴資源\n- 延遲刪除\n- 雙堆積\n- 優先級排程\n\n## 區間與掃描線\n\n- 合併區間\n- 會議室模型\n- 差分事件\n- 活躍集合\n- 座標壓縮\n\n## 單調堆疊與單調佇列\n\n- 下一個更小元素\n- 下一個更大元素\n- 滑動視窗最大值\n- 最短子陣列\n- 類凸性轉移\n\n## 圖論：BFS / 0-1 BFS / Dijkstra\n\n- 無權 BFS\n- 0-1 BFS\n- Dijkstra\n- 狀態擴展\n- 網格建圖\n- 過期項目\n\n## 動態規劃\n\n- 選或不選\n- 至多 K 個選擇\n- 不重疊子陣列\n- 狀態壓縮\n- DP 加資料結構\n\n## 貢獻法\n\n- 前後出現位置\n- 前後更小元素\n- 前後更大元素\n- 子字串貢獻\n- 子陣列最小/最大值貢獻\n\n## 位元技巧\n\n- OR 狀態壓縮\n- AND 狀態壓縮\n- XOR 狀態\n- bitset 優化\n- 有限 mask 狀態\n\n## 資料結構設計\n\n- 堆積加映射表\n- 有序集合\n- 頻次追蹤\n- 延遲刪除\n- 索引查找\n\n## 使用方式\n\n每次錯過 Q3 後，只選一個主模式與一個子模式，並寫下「我應該看到哪個題目訊號」。避免把同一題貼上太多標籤，否則賽中無法回想。",
+            "# 資料結構設計\n\n## 涵蓋主題\n\n- 資料結構設計\n- 堆積加映射表\n- 有序集合\n- 頻次追蹤\n- 延遲刪除\n- 索引查找\n\n## 初學者先懂什麼\n\n資料結構設計題不是考某個容器名稱，而是考你能否為每個操作建立「權威狀態」與「查詢索引」。權威狀態保存真實資料；索引用來快速回答最大、最小、某類別第一名、某時間版本等問題。\n\n## 核心直覺\n\n更新常會讓舊索引失效。直接從 heap 或 set 中刪除舊資料可能昂貴或麻煩，所以常採用延遲刪除：允許舊資料留在索引裡，但查詢前檢查它是否仍符合權威狀態。若查詢需要排序，就用有序集合或二分陣列；若查詢需要頻次，就維護 count map。\n\n## 典型讀題訊號\n\n- 多次 update/query 交錯。\n- 依分類找最高、最低、最新或第 k 個。\n- 需要支援改值、刪除、歷史版本、索引查找。\n- heap 裡可能出現舊分數或舊時間。\n\n## 常見變形\n\n- 堆積加映射表：heap 負責候選，map 負責真實目前值。\n- 有序集合：需要依順序查最小、最大、前驅、後繼。\n- 頻次追蹤：值到次數、次數到值集合。\n- 延遲刪除：查詢時 while 堆頂過期就彈出。\n- 索引查找：id->位置、時間->價格、key->版本列表。\n\n## C++ 模板或偽程式\n\n```cpp\nunordered_map<string, int> current;\npriority_queue<Entry> heap;\n\nvoid update(string id, int score) {\n    current[id] = score;\n    heap.push({score, id});\n}\n\nEntry query() {\n    while (!heap.empty() && current[heap.top().id] != heap.top().score) {\n        heap.pop();\n    }\n    return heap.top();\n}\n```\n\n## 常見錯誤\n\n- 沒有定義 source of truth，導致多份資料互相矛盾。\n- 更新後忘記讓索引同步或查詢時驗證。\n- 操作複雜度只看平均，忽略最壞或總攤還。\n- 字串 tie-break、時間版本邊界、二分位置處理錯。\n\n## 建議練習順序\n\n- 必修：981、1146、2349。\n- 進階：2034、2353、2502。\n- 挑戰：1912、2102、3408，練多索引、有序集合與延遲刪除。\n\n## 我能認出這個模式嗎？\n\n- 每個操作需要讀寫哪些資訊？\n- 哪一份資料是權威狀態？\n- 查詢需要最大/最小、排序、頻次還是版本？\n- 索引可能過期嗎？如果會，如何驗證？\n\n## 搭配追蹤題單\n\n本章的題目表就在同一頁的「必修 / 進階 / 挑戰」區塊。每列都保留 LeetCode ID、題名、難度、評分、模式、歸類理由、關鍵想法、建議順序與進度欄位；進度仍使用站內既有的本機與同步資料。",
         },
       ],
     },
     {
       id: 93400,
-      title: "4. C++ 競賽模板",
-      summary: "整理競賽中可直接改寫的 C++ 模板，重點放在邊界與不變式。",
-      children: [
-        {
-          id: 93031,
-          title: "4.1 答案二分模板",
-          summary:
-            "# 4.1 答案二分模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nlong long firstFeasible(long long low, long long high) {\n    auto can = [&](long long candidate) {\n        // Replace with a monotonic feasibility check.\n        return candidate >= 0;\n    };\n\n    while (low < high) {\n        long long mid = low + (high - low) / 2;\n        if (can(mid)) high = mid;\n        else low = mid + 1;\n    }\n    return low;\n}\n\n```",
-        },
-        {
-          id: 93032,
-          title: "4.2 Dijkstra 模板",
-          summary:
-            "# 4.2 Dijkstra 模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nvector<long long> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {\n    const long long kInf = 4e18;\n    vector<long long> dist(n, kInf);\n    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<pair<long long, int>>> pq;\n\n    dist[source] = 0;\n    pq.push({0, source});\n\n    while (!pq.empty()) {\n        auto [cost, node] = pq.top();\n        pq.pop();\n        if (cost != dist[node]) continue;\n\n        for (auto [next_node, weight] : graph[node]) {\n            long long next_cost = cost + weight;\n            if (next_cost < dist[next_node]) {\n                dist[next_node] = next_cost;\n                pq.push({next_cost, next_node});\n            }\n        }\n    }\n    return dist;\n}\n\n```",
-        },
-        {
-          id: 93033,
-          title: "4.3 DP 轉移模板",
-          summary:
-            "# 4.3 DP 轉移模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nlong long takeSkipDp(vector<int>& values) {\n    long long skip = 0;\n    long long take = 0;\n\n    for (int value : values) {\n        long long next_take = skip + value;\n        long long next_skip = max(skip, take);\n        take = next_take;\n        skip = next_skip;\n    }\n    return max(skip, take);\n}\n\n```",
-        },
-        {
-          id: 93034,
-          title: "4.4 堆積貪心模板",
-          summary:
-            "# 4.4 堆積貪心模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nint minimumStops(int target, int start_fuel, vector<vector<int>>& stations) {\n    priority_queue<int> fuels;\n    long long reachable = start_fuel;\n    int index = 0;\n    int answer = 0;\n\n    while (reachable < target) {\n        while (index < (int)stations.size() && stations[index][0] <= reachable) {\n            fuels.push(stations[index][1]);\n            ++index;\n        }\n        if (fuels.empty()) return -1;\n        reachable += fuels.top();\n        fuels.pop();\n        ++answer;\n    }\n    return answer;\n}\n\n```",
-        },
-        {
-          id: 93035,
-          title: "4.5 區間掃描模板",
-          summary:
-            "# 4.5 區間掃描模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nint maxClosedIntervalOverlap(vector<vector<int>>& intervals) {\n    vector<pair<int, int>> events;\n    for (auto& interval : intervals) {\n        events.push_back({interval[0], 1});\n        events.push_back({interval[1] + 1, -1});\n    }\n    sort(events.begin(), events.end());\n\n    int active = 0;\n    int answer = 0;\n    for (auto [position, delta] : events) {\n        active += delta;\n        answer = max(answer, active);\n    }\n    return answer;\n}\n\n```",
-        },
-        {
-          id: 93036,
-          title: "4.6 單調佇列模板",
-          summary:
-            "# 4.6 單調佇列模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nvector<int> maxSlidingWindow(vector<int>& nums, int k) {\n    deque<int> dq;\n    vector<int> answer;\n\n    for (int i = 0; i < (int)nums.size(); ++i) {\n        while (!dq.empty() && dq.front() <= i - k) dq.pop_front();\n        while (!dq.empty() && nums[dq.back()] <= nums[i]) dq.pop_back();\n        dq.push_back(i);\n        if (i >= k - 1) answer.push_back(nums[dq.front()]);\n    }\n    return answer;\n}\n\n```",
-        },
-        {
-          id: 93037,
-          title: "4.7 單調堆疊模板",
-          summary:
-            "# 4.7 單調堆疊模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nvector<int> previousLess(vector<int>& nums) {\n    vector<int> answer(nums.size(), -1);\n    vector<int> stack_indices;\n\n    for (int i = 0; i < (int)nums.size(); ++i) {\n        while (!stack_indices.empty() && nums[stack_indices.back()] >= nums[i]) {\n            stack_indices.pop_back();\n        }\n        if (!stack_indices.empty()) answer[i] = stack_indices.back();\n        stack_indices.push_back(i);\n    }\n    return answer;\n}\n\n```",
-        },
-        {
-          id: 93038,
-          title: "4.8 滑動視窗模板",
-          summary:
-            "# 4.8 滑動視窗模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nlong long countAtMost(vector<int>& nums, int k) {\n    if (k < 0) return 0;\n    unordered_map<int, int> freq;\n    int left = 0;\n    long long answer = 0;\n\n    for (int right = 0; right < (int)nums.size(); ++right) {\n        if (++freq[nums[right]] == 1) --k;\n        while (k < 0) {\n            if (--freq[nums[left]] == 0) ++k;\n            ++left;\n        }\n        answer += right - left + 1;\n    }\n    return answer;\n}\n\n```",
-        },
-        {
-          id: 93039,
-          title: "4.9 0-1 BFS 模板",
-          summary:
-            "# 4.9 0-1 BFS 模板\n\n這段模板保留競賽中可直接改寫的骨架；套用時先替換狀態語意，再補上題目自己的邊界條件。\n\n```cpp\n#include <bits/stdc++.h>\nusing namespace std;\n\nvector<int> zeroOneBfs(int n, vector<vector<pair<int, int>>>& graph, int source) {\n    const int kInf = 1e9;\n    vector<int> dist(n, kInf);\n    deque<int> dq;\n\n    dist[source] = 0;\n    dq.push_front(source);\n\n    while (!dq.empty()) {\n        int node = dq.front();\n        dq.pop_front();\n\n        for (auto [next_node, weight] : graph[node]) {\n            int next_dist = dist[node] + weight;\n            if (next_dist >= dist[next_node]) continue;\n            dist[next_node] = next_dist;\n            if (weight == 0) dq.push_front(next_node);\n            else dq.push_back(next_node);\n        }\n    }\n    return dist;\n}\n\n```",
-        },
-      ],
-    },
-    {
-      id: 93500,
-      title: "5. 學習計畫與複習模板",
-      summary: "提供兩週、四週與賽後檢討模板，方便把練習節奏固定下來。",
-      children: [
-        {
-          id: 93040,
-          title: "5.1 兩週衝刺課表",
-          summary:
-            "# 兩週衝刺課表\n\n## 第一週\n\n| 天 | 主題 | 任務 |\n| --- | --- | --- |\n| 1 | Q3 心態 | 讀 1.2 與 1.3，檢討兩題最近錯過的 Q3。 |\n| 2 | 滑動視窗 | 做 209、713、1004，再做一題近年滑窗題。 |\n| 3 | 答案二分 | 做 410、875、1552，再做一題近年答案二分題。 |\n| 4 | 前綴與貢獻 | 做 560、974、907，寫邊界筆記。 |\n| 5 | 圖最短路 | 做 1368、1631，說清楚邊權。 |\n| 6 | 混合計時 | 三題 P1，每題 35 分鐘。 |\n| 7 | 複習 | 更新筆記並重做失敗題。 |\n\n## 第二週\n\n堆積貪心、DP、位元技巧各排一天，最後用混合題與模擬賽檢查決策速度。",
-        },
-        {
-          id: 93041,
-          title: "5.2 四週 Q3 訓練計畫",
-          summary:
-            "# 四週 Q3 訓練計畫\n\n## 第 1 週：連續資料\n\n滑動視窗與前綴和。重點是判斷什麼時候不能滑窗。\n\n## 第 2 週：最佳化與貪心\n\n答案二分與堆積貪心。每題先寫 can(x) 或 heap invariant。\n\n## 第 3 週：圖、區間、DP\n\n練習完整狀態、相容前狀態與不重疊選擇。\n\n## 第 4 週：貢獻、位元、混合題\n\n用混合計時題檢查是否能在題目偽裝下選對第一方向。",
-        },
-        {
-          id: 93042,
-          title: "5.3 賽後檢討模板",
-          summary:
-            "# 賽後檢討模板\n\n## 題目\n\n- 競賽：\n- 題號：\n- 題名：\n- 比賽中結果：\n\n## 第一想法\n\n- 暴力法：\n- 複雜度：\n- 被哪個限制擋住：\n\n## 漏看的訊號\n\n- 讀題線索：\n- 主模式：\n- 子模式：\n\n## 正確轉換\n\n- 不變式或轉移：\n- 資料結構：\n- 複雜度：\n\n## 下一次規則\n\n當我看到……，我應該先嘗試……。",
-        },
-      ],
-    },
-    {
-      id: 93600,
-      title: "6. 選讀：後端同步備忘",
+      title: "3. 兩週 Q3 練習安排",
       summary:
-        "保留原全端版本的雲端同步設計備忘；只閱讀 lc-rating 講義時可以略過。",
-      children: [
-        {
-          id: 93043,
-          title: "6.1 後端設計備忘",
-          summary:
-            "# 後端設計備忘\n\n原全端版本曾規劃用 Cloudflare Workers、Hono 與 D1 保存使用者進度。若只是閱讀 lc-rating 講義與刷題，這一段可以略過。\n\n同步模型是 localStorage 優先；登入後下載遠端進度，用 updated_at 做 最後寫入優先 合併，再批次上傳。",
-        },
-        {
-          id: 93044,
-          title: "6.2 API 備忘",
-          summary:
-            "# API 備忘\n\n原規劃端點包含 GitHub OAuth 登入、登出、/api/me、進度 CRUD、批次同步與統計；保留作為未來重新接入雲端同步時的參考。",
-        },
-        {
-          id: 93045,
-          title: "6.3 資料庫與安全備忘",
-          summary:
-            "# 資料庫與安全備忘\n\n資料表包含 users、user_progress、review_events。正式部署時，OAuth 密鑰與 JWT 密鑰必須放在 Wrangler secret，不可提交到 Git。CORS 應限制前端 origin，JWT 優先放 HttpOnly cookie。",
-        },
-        {
-          id: 93046,
-          title: "6.4 部署備忘",
-          summary:
-            "# 部署備忘\n\n只使用 lc-rating 版本時，不需要建立新的 Worker。若未來要恢復雲端同步，可再部署 Cloudflare Worker 與 D1，並設定 GitHub OAuth 回呼。",
-        },
-      ],
+        "# 兩週 Q3 練習安排\n\n## 第一週：連續資料與最佳化\n\n- Day 1：滑動視窗必修題，重點是說清楚 left/right 的移動理由。\n- Day 2：前綴和與雜湊表必修題，重點是空前綴、查詢順序與模數。\n- Day 3：答案二分必修題，重點是 first true / last true。\n- Day 4：堆積貪心必修題，重點是堆裡到底放候選還是已選資源。\n- Day 5：區間與掃描線必修題，重點是端點開閉與排序目的。\n- Day 6：混合計時三題，每題 35 分鐘。\n- Day 7：重做錯題，補模式訊號筆記。\n\n## 第二週：狀態、轉移與高頻技巧\n\n- Day 8：單調堆疊與單調佇列。\n- Day 9：圖論 BFS / 0-1 BFS / Dijkstra。\n- Day 10：動態規劃。\n- Day 11：貢獻法。\n- Day 12：位元技巧。\n- Day 13：資料結構設計。\n- Day 14：挑戰題與最近失敗 Q3 復盤。\n\n每一天只要求一件事：做完題後能用一句話說出「這題的模式訊號與核心不變式」。",
     },
   ],
-} as TutorialData.Root;
+} satisfies TutorialData.Root;

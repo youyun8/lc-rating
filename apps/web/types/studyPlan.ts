@@ -6,6 +6,12 @@ export interface Item {
   solution: string | null;
   score: number | null;
   difficulty?: number | null;
+  difficultyLabel?: string;
+  stage?: string;
+  pattern?: string;
+  why?: string;
+  insight?: string;
+  practiceOrder?: string | number;
   isPremium: boolean;
   subsection?: string;
 }

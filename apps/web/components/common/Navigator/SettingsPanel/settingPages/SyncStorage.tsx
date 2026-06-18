@@ -162,7 +162,7 @@ export default function SyncStorage() {
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">
-              上傳會以本機資料覆蓋雲端，下載會將雲端資料合併回本機。
+              上傳會以本機資料覆蓋雲端，下載會將遠端資料合併回本機。
             </p>
           </>
         ) : status === "signed-out" ? (
@@ -183,9 +183,9 @@ export default function SyncStorage() {
           <div className="flex items-start gap-2">
             <CloudOff className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
             <div>
-              <h3 className="text-sm font-semibold">雲端同步未啟用</h3>
+              <h3 className="text-sm font-semibold">同步未啟用</h3>
               <p className="mt-1 text-xs text-muted-foreground">
-                目前無法使用雲端同步，你的進度仍會安全地保存在這台裝置上。
+                目前無法使用同步，你的進度仍會安全地保存在這台裝置上。
               </p>
             </div>
           </div>

@@ -1,6 +1,6 @@
 // User-data facade: the single entry point UI should use to read and update
-// a user's progress, solutions and cloud-sync state. It deliberately hides
-// the underlying zustand stores, localStorage keys, auth tokens and cloud
+// a user's progress, solutions and sync state. It deliberately hides the
+// underlying zustand stores, localStorage keys, auth tokens and remote
 // transport so the UI can speak purely in user terms.
 
 export {

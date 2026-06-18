@@ -111,9 +111,52 @@ function normalizedStudyPlanSlug(slug: string) {
 function getSubsectionLabels(problem: StudyPlanData.Item) {
   return (
     problem.subsection
-      ?.split(" / ")
+      ?.split(/\s*(?:\/|·)\s*/)
       .map((label) => label.trim())
       .filter(Boolean) ?? []
+  );
+}
+
+function getDifficultyLabel(problem: StudyPlanData.Item) {
+  if (problem.difficultyLabel) {
+    return problem.difficultyLabel;
+  }
+
+  if (problem.difficulty === 1) return "Easy";
+  if (problem.difficulty === 2) return "Medium";
+  if (problem.difficulty === 3) return "Hard";
+  return "難度 TODO";
+}
+
+function hasExtendedProblemMeta(problem: StudyPlanData.Item) {
+  return Boolean(
+    problem.pattern ||
+      problem.why ||
+      problem.insight ||
+      problem.practiceOrder ||
+      problem.stage ||
+      problem.difficultyLabel,
+  );
+}
+
+function ProblemMetaLine({
+  label,
+  value,
+}: {
+  label: string;
+  value?: string | number | null;
+}) {
+  if (value === undefined || value === null || value === "") {
+    return null;
+  }
+
+  return (
+    <div className="min-w-0 rounded-lg border border-border/50 bg-muted/20 px-2.5 py-2">
+      <div className="text-[11px] font-medium text-muted-foreground">
+        {label}
+      </div>
+      <div className="mt-0.5 text-xs leading-5 text-foreground">{value}</div>
+    </div>
   );
 }
 
@@ -261,6 +304,7 @@ const ProblemList = React.memo(
           const problemsetTags = getProblemsetTags(problem, problemMap, tagMap);
           const statusKey = problemId ? progress[problemId] : undefined;
           const statusOption = getOption(statusKey);
+          const showExtendedMeta = hasExtendedProblemMeta(problem);
           const hasStarted =
             typeof statusKey !== "undefined" &&
             statusOption.key !== pendingOption.key;
@@ -317,6 +361,24 @@ const ProblemList = React.memo(
                       ))}
                     </div>
                   )}
+                {showExtendedMeta && (
+                  <div className="mt-2 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                    <ProblemMetaLine
+                      label="難度"
+                      value={getDifficultyLabel(problem)}
+                    />
+                    <ProblemMetaLine
+                      label="模式 / 子模式"
+                      value={problem.pattern}
+                    />
+                    <ProblemMetaLine
+                      label="建議順序"
+                      value={problem.practiceOrder}
+                    />
+                    <ProblemMetaLine label="為什麼歸類" value={problem.why} />
+                    <ProblemMetaLine label="關鍵想法" value={problem.insight} />
+                  </div>
+                )}
               </div>
               <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
                 <div className="flex items-center gap-2">

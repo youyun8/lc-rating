@@ -1,7 +1,7 @@
 {
   "name": "lc-rating-backend",
   "version": "1.0.0",
-  "description": "Cloudflare Worker backend for lc-rating cloud sync",
+  "description": "Cloudflare Worker backend for lc-rating",
   "main": "src/index.ts",
   "scripts": {
     "build": "wrangler deploy --dry-run --outdir dist",
