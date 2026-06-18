@@ -13,6 +13,7 @@ import { LectureSectionCards } from "@/features/tutorial/LectureSectionCards";
 import {
   getProblemIds,
   getStudyPlanProblemsForSection,
+  parseDescriptionBullets,
 } from "@/features/tutorial/LectureSectionCards/cardModel";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 
@@ -23,6 +24,7 @@ interface LectureSectionPageProps {
 export function LectureSectionPage({ section }: LectureSectionPageProps) {
   const hasChildren = section.children.length > 0;
   const studyPlan = studyPlanDataMap[section.planKey];
+  const descriptionBullets = parseDescriptionBullets(section.description);
   const childItems = section.children.map((child) => {
     const problemIds = getProblemIds(
       getStudyPlanProblemsForSection(studyPlan, child.id),
@@ -78,12 +80,23 @@ export function LectureSectionPage({ section }: LectureSectionPageProps) {
               <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
                 {section.title}
               </h1>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-                {section.description ??
-                  (hasChildren
-                    ? "先選擇此單元底下的子單元；到最細層後會顯示完整講義與搭配題目。"
-                    : "依序展開觀念、模式、例題推導與 C++ 實作骨架。")}
-              </p>
+              {descriptionBullets ? (
+                <ul className="mt-3 space-y-1.5 text-sm leading-6 text-muted-foreground sm:text-base">
+                  {descriptionBullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-2">
+                      <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />
+                      <span className="min-w-0 break-words">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
+                  {section.description ??
+                    (hasChildren
+                      ? "先選擇此單元底下的子單元；到最細層後會顯示完整講義與搭配題目。"
+                      : "依序展開觀念、模式、例題推導與 C++ 實作骨架。")}
+                </p>
+              )}
             </div>
 
             <Button asChild variant="outline" className="w-fit">

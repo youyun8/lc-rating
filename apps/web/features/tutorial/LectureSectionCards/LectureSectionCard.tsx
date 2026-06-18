@@ -7,6 +7,7 @@ import { type CSSProperties } from "react";
 import {
   getLevelLabel,
   getSummaryPreview,
+  parseDescriptionBullets,
   type CardProgressState,
   type LectureSectionCardItem,
 } from "./cardModel";
@@ -23,6 +24,7 @@ export function LectureSectionCard({
   const isLeaf = item.childCount === 0;
   const ProgressIcon = progressState.Icon;
   const isActive = progressState.key !== "pending";
+  const descriptionBullets = parseDescriptionBullets(item.description);
 
   return (
     <Link
@@ -95,9 +97,20 @@ export function LectureSectionCard({
         <h3 className="break-words text-base font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-[var(--section-progress-color-dark)] sm:text-lg">
           {item.title}
         </h3>
-        <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">
-          {getSummaryPreview(item.description ?? item.summary)}
-        </p>
+        {descriptionBullets ? (
+          <ul className="mt-3 space-y-1 text-sm leading-6 text-muted-foreground">
+            {descriptionBullets.map((bullet) => (
+              <li key={bullet} className="flex gap-2">
+                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />
+                <span className="min-w-0 break-words">{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">
+            {getSummaryPreview(item.description ?? item.summary)}
+          </p>
+        )}
 
         <div className="mt-auto flex flex-wrap gap-2 pt-5 text-xs text-muted-foreground">
           {!isLeaf && (

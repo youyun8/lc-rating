@@ -43,6 +43,23 @@ export function getSummaryPreview(summary?: string) {
     .slice(0, 96);
 }
 
+/**
+ * Splits a description authored as a markdown bullet list ("- item" per line)
+ * into its items. Returns null when the text is not a bullet list so callers
+ * can fall back to plain-text rendering.
+ */
+export function parseDescriptionBullets(text?: string): string[] | null {
+  if (!text) return null;
+  const lines = text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  if (lines.length === 0 || !lines.every((line) => /^[-*]\s+/.test(line))) {
+    return null;
+  }
+  return lines.map((line) => line.replace(/^[-*]\s+/, "").trim());
+}
+
 export function getLevelLabel(depth: number) {
   if (depth === 0) return "單元";
   if (depth === 1) return "子單元";
