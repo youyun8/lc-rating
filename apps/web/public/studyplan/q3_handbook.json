@@ -1,0 +1,679 @@
+{
+  "id": 930,
+  "title": "LeetCode 競賽 Q3 手冊：第三題模式訓練",
+  "src": null,
+  "last_update": "2026-06-18T00:00:00.000Z",
+  "children": [
+    {
+      "id": 93005,
+      "title": "滑動視窗",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "209",
+          "title": "長度最小的子陣列",
+          "slug": "minimum-size-subarray-sum",
+          "src": "https://leetcode.com/problems/minimum-size-subarray-sum/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 最短合法視窗"
+        },
+        {
+          "id": "713",
+          "title": "乘積小於 K 的子陣列",
+          "slug": "subarray-product-less-than-k",
+          "src": "https://leetcode.com/problems/subarray-product-less-than-k/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 依右端點計數"
+        },
+        {
+          "id": "1004",
+          "title": "最大連續 1 的個數 III",
+          "slug": "max-consecutive-ones-iii",
+          "src": "https://leetcode.com/problems/max-consecutive-ones-iii/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 至多 K"
+        },
+        {
+          "id": "992",
+          "title": "K 個不同整數的子陣列",
+          "slug": "subarrays-with-k-different-integers",
+          "src": "https://leetcode.com/problems/subarrays-with-k-different-integers/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 恰好 K 轉成 atMost"
+        },
+        {
+          "id": "2831",
+          "title": "找出最長等值子陣列",
+          "slug": "find-the-longest-equal-subarray",
+          "src": "https://leetcode.com/problems/find-the-longest-equal-subarray/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 在位置陣列上滑窗"
+        },
+        {
+          "id": "2962",
+          "title": "統計最大元素至少出現 K 次的子陣列",
+          "slug": "count-subarrays-where-max-element-appears-at-least-k-times",
+          "src": "https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 依左端點計數"
+        },
+        {
+          "id": "3097",
+          "title": "或值至少為 K 的最短子陣列 II",
+          "slug": "shortest-subarray-with-or-at-least-k-ii",
+          "src": "https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 視窗內維護位元計數"
+        }
+      ],
+      "children": [],
+      "summary": "滑動視窗 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93006,
+      "title": "前綴和與雜湊表",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "560",
+          "title": "和為 K 的子陣列",
+          "slug": "subarray-sum-equals-k",
+          "src": "https://leetcode.com/problems/subarray-sum-equals-k/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 前綴頻次"
+        },
+        {
+          "id": "974",
+          "title": "和可被 K 整除的子陣列",
+          "slug": "subarray-sums-divisible-by-k",
+          "src": "https://leetcode.com/problems/subarray-sums-divisible-by-k/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 模數前綴"
+        },
+        {
+          "id": "1248",
+          "title": "統計優美子陣列",
+          "slug": "count-number-of-nice-subarrays",
+          "src": "https://leetcode.com/problems/count-number-of-nice-subarrays/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P1 · 計數差分"
+        },
+        {
+          "id": "3026",
+          "title": "最大好子陣列和",
+          "slug": "maximum-good-subarray-sum",
+          "src": "https://leetcode.com/problems/maximum-good-subarray-sum/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 依值查最佳前綴"
+        }
+      ],
+      "children": [],
+      "summary": "前綴和與雜湊表 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93007,
+      "title": "答案二分搜尋",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "410",
+          "title": "分割陣列的最大值",
+          "slug": "split-array-largest-sum",
+          "src": "https://leetcode.com/problems/split-array-largest-sum/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 最小化最大值"
+        },
+        {
+          "id": "875",
+          "title": "愛吃香蕉的珂珂",
+          "slug": "koko-eating-bananas",
+          "src": "https://leetcode.com/problems/koko-eating-bananas/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 最小可行速度"
+        },
+        {
+          "id": "1482",
+          "title": "製作 m 束花所需的最少天數",
+          "slug": "minimum-number-of-days-to-make-m-bouquets",
+          "src": "https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 可行性檢查"
+        },
+        {
+          "id": "1552",
+          "title": "兩球之間的磁力",
+          "slug": "magnetic-force-between-two-balls",
+          "src": "https://leetcode.com/problems/magnetic-force-between-two-balls/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 最大化最小值"
+        },
+        {
+          "id": "2187",
+          "title": "完成旅途的最少時間",
+          "slug": "minimum-time-to-complete-trips",
+          "src": "https://leetcode.com/problems/minimum-time-to-complete-trips/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 計數型檢查"
+        },
+        {
+          "id": "2517",
+          "title": "糖果禮盒的最大甜度",
+          "slug": "maximum-tastiness-of-candy-basket",
+          "src": "https://leetcode.com/problems/maximum-tastiness-of-candy-basket/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 最大化最小值"
+        },
+        {
+          "id": "2616",
+          "title": "最小化數對的最大差值",
+          "slug": "minimize-the-maximum-difference-of-pairs",
+          "src": "https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 貪心檢查"
+        }
+      ],
+      "children": [],
+      "summary": "答案二分搜尋 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93008,
+      "title": "堆積貪心",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "871",
+          "title": "最低加油次數",
+          "slug": "minimum-number-of-refueling-stops",
+          "src": "https://leetcode.com/problems/minimum-number-of-refueling-stops/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 先拿再反悔"
+        },
+        {
+          "id": "1642",
+          "title": "可以到達的最遠建築",
+          "slug": "furthest-building-you-can-reach",
+          "src": "https://leetcode.com/problems/furthest-building-you-can-reach/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 必要時才用昂貴資源"
+        },
+        {
+          "id": "2530",
+          "title": "執行 K 次操作後的最大分數",
+          "slug": "maximal-score-after-applying-k-operations",
+          "src": "https://leetcode.com/problems/maximal-score-after-applying-k-operations/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 反覆取最佳選擇"
+        },
+        {
+          "id": "3066",
+          "title": "超過閾值的最少操作數 II",
+          "slug": "minimum-operations-to-exceed-threshold-value-ii",
+          "src": "https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 合併最小值"
+        }
+      ],
+      "children": [],
+      "summary": "堆積貪心 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93009,
+      "title": "區間與掃描線",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "56",
+          "title": "合併區間",
+          "slug": "merge-intervals",
+          "src": "https://leetcode.com/problems/merge-intervals/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 合併區間"
+        },
+        {
+          "id": "253",
+          "title": "會議室 II",
+          "slug": "meeting-rooms-ii",
+          "src": "https://leetcode.com/problems/meeting-rooms-ii/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 維護活躍區間"
+        },
+        {
+          "id": "2406",
+          "title": "將區間分成最少組數",
+          "slug": "divide-intervals-into-minimum-number-of-groups",
+          "src": "https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 最大重疊數"
+        },
+        {
+          "id": "3169",
+          "title": "無會議的工作日",
+          "slug": "count-days-without-meetings",
+          "src": "https://leetcode.com/problems/count-days-without-meetings/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 合併區間"
+        }
+      ],
+      "children": [],
+      "summary": "區間與掃描線 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93010,
+      "title": "單調堆疊與單調佇列",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "739",
+          "title": "每日溫度",
+          "slug": "daily-temperatures",
+          "src": "https://leetcode.com/problems/daily-temperatures/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 下一個更大元素"
+        },
+        {
+          "id": "239",
+          "title": "滑動視窗最大值",
+          "slug": "sliding-window-maximum",
+          "src": "https://leetcode.com/problems/sliding-window-maximum/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 單調佇列"
+        },
+        {
+          "id": "862",
+          "title": "和至少為 K 的最短子陣列",
+          "slug": "shortest-subarray-with-sum-at-least-k",
+          "src": "https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P1 · 前綴和單調佇列"
+        }
+      ],
+      "children": [],
+      "summary": "單調堆疊與單調佇列 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93011,
+      "title": "圖論：BFS / 0-1 BFS / Dijkstra",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "1368",
+          "title": "使網格圖至少有一條有效路徑的最小代價",
+          "slug": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+          "src": "https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 0-1 BFS"
+        },
+        {
+          "id": "1631",
+          "title": "最小體力消耗路徑",
+          "slug": "path-with-minimum-effort",
+          "src": "https://leetcode.com/problems/path-with-minimum-effort/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · Dijkstra 最小化最大邊"
+        },
+        {
+          "id": "1293",
+          "title": "網格中的最短路徑（可消除障礙）",
+          "slug": "shortest-path-in-a-grid-with-obstacles-elimination",
+          "src": "https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 狀態擴展"
+        },
+        {
+          "id": "2290",
+          "title": "到達角落需要移除障礙物的最小數目",
+          "slug": "minimum-obstacle-removal-to-reach-corner",
+          "src": "https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 0-1 BFS"
+        },
+        {
+          "id": "2577",
+          "title": "在網格中訪問一個格子的最少時間",
+          "slug": "minimum-time-to-visit-a-cell-in-a-grid",
+          "src": "https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P2 · 含奇偶等待的 Dijkstra"
+        }
+      ],
+      "children": [],
+      "summary": "圖論：BFS / 0-1 BFS / Dijkstra 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93012,
+      "title": "動態規劃",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "198",
+          "title": "打家劫舍",
+          "slug": "house-robber",
+          "src": "https://leetcode.com/problems/house-robber/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 選或不選"
+        },
+        {
+          "id": "300",
+          "title": "最長遞增子序列",
+          "slug": "longest-increasing-subsequence",
+          "src": "https://leetcode.com/problems/longest-increasing-subsequence/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 轉移優化"
+        },
+        {
+          "id": "1235",
+          "title": "規劃兼職工作",
+          "slug": "maximum-profit-in-job-scheduling",
+          "src": "https://leetcode.com/problems/maximum-profit-in-job-scheduling/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 帶權區間排程"
+        },
+        {
+          "id": "689",
+          "title": "三個無重疊子陣列的最大和",
+          "slug": "maximum-sum-of-3-non-overlapping-subarrays",
+          "src": "https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P1 · 不重疊子陣列"
+        },
+        {
+          "id": "3186",
+          "title": "施咒的最大總傷害",
+          "slug": "maximum-total-damage-with-spell-casting",
+          "src": "https://leetcode.com/problems/maximum-total-damage-with-spell-casting/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 值域版打家劫舍"
+        },
+        {
+          "id": "3077",
+          "title": "K 個不相交子陣列的最大強度",
+          "slug": "maximum-strength-of-k-disjoint-subarrays",
+          "src": "https://leetcode.com/problems/maximum-strength-of-k-disjoint-subarrays/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P2 · 至多 K 段子陣列"
+        }
+      ],
+      "children": [],
+      "summary": "動態規劃 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93013,
+      "title": "貢獻法",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "828",
+          "title": "統計所有子字串中的唯一字元",
+          "slug": "count-unique-characters-of-all-substrings-of-a-given-string",
+          "src": "https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 前後出現位置"
+        },
+        {
+          "id": "907",
+          "title": "子陣列的最小值之和",
+          "slug": "sum-of-subarray-minimums",
+          "src": "https://leetcode.com/problems/sum-of-subarray-minimums/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 前後更小元素"
+        },
+        {
+          "id": "2104",
+          "title": "子陣列範圍和",
+          "slug": "sum-of-subarray-ranges",
+          "src": "https://leetcode.com/problems/sum-of-subarray-ranges/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 最大貢獻減最小貢獻"
+        },
+        {
+          "id": "2262",
+          "title": "字串的總吸引力",
+          "slug": "total-appeal-of-a-string",
+          "src": "https://leetcode.com/problems/total-appeal-of-a-string/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 子字串貢獻"
+        }
+      ],
+      "children": [],
+      "summary": "貢獻法 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93014,
+      "title": "位元技巧",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "898",
+          "title": "子陣列按位 OR 的不同結果數",
+          "slug": "bitwise-ors-of-subarrays",
+          "src": "https://leetcode.com/problems/bitwise-ors-of-subarrays/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · OR 狀態壓縮"
+        },
+        {
+          "id": "1521",
+          "title": "找到最接近目標值的函式值",
+          "slug": "find-a-value-of-a-mysterious-function-closest-to-target",
+          "src": "https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · AND 狀態壓縮"
+        },
+        {
+          "id": "3209",
+          "title": "AND 值為 K 的子陣列數目",
+          "slug": "number-of-subarrays-with-and-value-of-k",
+          "src": "https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/",
+          "solution": null,
+          "score": null,
+          "difficulty": 3,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · AND 狀態壓縮"
+        },
+        {
+          "id": "3095",
+          "title": "或值至少為 K 的最短子陣列 I",
+          "slug": "shortest-subarray-with-or-at-least-k-i",
+          "src": "https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-i/",
+          "solution": null,
+          "score": null,
+          "difficulty": 1,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · OR 維護"
+        }
+      ],
+      "children": [],
+      "summary": "位元技巧 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    },
+    {
+      "id": 93015,
+      "title": "資料結構設計",
+      "isLeaf": true,
+      "problems": [
+        {
+          "id": "2353",
+          "title": "設計食物評分系統",
+          "slug": "design-a-food-rating-system",
+          "src": "https://leetcode.com/problems/design-a-food-rating-system/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 堆積加映射表"
+        },
+        {
+          "id": "1804",
+          "title": "實作 Trie II",
+          "slug": "implement-trie-ii",
+          "src": "https://leetcode.com/problems/implement-trie-ii/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P1 · 頻次追蹤"
+        },
+        {
+          "id": "2034",
+          "title": "股票價格波動",
+          "slug": "stock-price-fluctuation",
+          "src": "https://leetcode.com/problems/stock-price-fluctuation/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "經典基礎 · P0 · 延遲刪除"
+        },
+        {
+          "id": "2502",
+          "title": "設計記憶體配置器",
+          "slug": "design-memory-allocator",
+          "src": "https://leetcode.com/problems/design-memory-allocator/",
+          "solution": null,
+          "score": null,
+          "difficulty": 2,
+          "isPremium": false,
+          "subsection": "近年競賽型 · P1 · 區間配置"
+        }
+      ],
+      "children": [],
+      "summary": "資料結構設計 的 Q3 精選練習：先完成 P0 經典題，再挑戰近年競賽型題。"
+    }
+  ]
+}

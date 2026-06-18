@@ -32,35 +32,45 @@ export const HANDBOOK_GROUP_ORDER: HandbookGroup[] = [
 
 export const HANDBOOK_GROUP_DESCRIPTIONS: Record<HandbookGroup, string> = {
   "Problem-Solving Mindset":
-    "How to read constraints, move from brute force to optimized patterns, and reason with invariants and proofs.",
+    "如何閱讀限制、從暴力法轉成可通過的模式，並用不變式與證明檢查正確性。",
   "Enumeration and Counting":
-    "Choosing the right owner, endpoint, pivot, or contribution unit so large candidate sets become countable.",
-  "Core Array/String Patterns":
-    "High-frequency contiguous and value-space techniques for arrays and strings.",
-  "String Patterns":
-    "Linear-time matching and prefix-tree techniques: failure functions, hashing, and tries.",
-  "Recursion and Search":
-    "Systematic exploration of choice trees with pruning, and divide-and-conquer decompositions.",
-  "Tree Patterns":
-    "Traversal orders and return-value-vs-parameter design for rooted-tree recursion and level-order search.",
-  "Graph Patterns":
-    "Graph correctness ideas for connectivity, cuts, traversal, ordering, and safe edge choices.",
+    "選對負責者、端點、中心點或貢獻單位，讓龐大的候選集合變得可計數。",
+  "Core Array/String Patterns": "陣列與字串中高頻出現的連續區間與值域技巧。",
+  "String Patterns": "線性字串匹配與前綴樹技巧：失配函數、雜湊與 Trie。",
+  "Recursion and Search": "有系統地探索選擇樹、剪枝，以及分治拆解。",
+  "Tree Patterns": "樹遞迴中的遍歷順序、回傳值與參數設計，以及層序搜尋。",
+  "Graph Patterns": "連通性、割、遍歷、拓撲順序與安全選邊的圖論正確性思路。",
   "Data Structure Patterns":
-    "Compact structures that preserve only the candidates, ranks, and boundaries needed for fast updates.",
-  "Greedy Patterns":
-    "Local-choice patterns backed by exchange, feasibility, and stays-ahead proofs.",
-  "Dynamic Programming":
-    "State and transition design for overlapping subproblems, interval decisions, and optimized recurrences.",
+    "只保留快速更新所需候選、排名與邊界的精簡資料結構。",
+  "Greedy Patterns": "以交換論證、可行性與領先性證明支撐的局部選擇模式。",
+  "Dynamic Programming": "重疊子問題、區間決策與優化遞推中的狀態與轉移設計。",
   "Range Query and Offline Techniques":
-    "Reordering events and queries so range state can be maintained incrementally.",
+    "重新排序事件與查詢，讓區間狀態能被增量維護。",
   "Bit and Math Patterns":
-    "Mask-based state compression and small-domain encodings for exponential-looking problems.",
+    "用 mask 壓縮狀態，或把看似指數的問題編碼到小狀態空間。",
   "Math Patterns":
-    "Number-theory toolkit and adversarial game analysis: GCD/modular arithmetic, sieves, Nim, and Grundy values.",
-  "Advanced Mixed Patterns":
-    "Cross-cutting proof and implementation contracts that make multiple patterns reliable.",
+    "數論工具與對抗遊戲分析：GCD、模運算、篩法、Nim 與 Grundy 值。",
+  "Advanced Mixed Patterns": "跨模式的證明與實作約定，讓多種技巧能穩定組合。",
   "ML Performance System Design":
-    "Interview-focused ML performance system design: serving, scheduling, profiling, distributed training, optimization, and tradeoffs.",
+    "面試導向的 ML 效能系統設計：服務、排程、profiling、分散式訓練、優化與取捨。",
+};
+
+export const HANDBOOK_GROUP_TITLES: Record<HandbookGroup, string> = {
+  "Problem-Solving Mindset": "解題心法",
+  "Enumeration and Counting": "枚舉與計數",
+  "Core Array/String Patterns": "陣列與字串核心模式",
+  "String Patterns": "字串模式",
+  "Recursion and Search": "遞迴與搜尋",
+  "Tree Patterns": "樹模式",
+  "Graph Patterns": "圖論模式",
+  "Data Structure Patterns": "資料結構模式",
+  "Greedy Patterns": "貪心模式",
+  "Dynamic Programming": "動態規劃",
+  "Range Query and Offline Techniques": "區間查詢與離線技巧",
+  "Bit and Math Patterns": "位元與數學模式",
+  "Math Patterns": "數學模式",
+  "Advanced Mixed Patterns": "進階混合模式",
+  "ML Performance System Design": "ML 效能系統設計",
 };
 
 const TOPIC_BY_SLUG = new Map(HANDBOOK_TOPICS.map((t) => [t.slug, t]));

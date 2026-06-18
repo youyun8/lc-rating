@@ -51,6 +51,7 @@ export const BILIBILI_0X3F_SPACE = {
 };
 
 export const STUDYPLANS = {
+  q3_handbook: "LeetCode 競賽 Q3 手冊",
   technical_interview: "技術面試準備",
   rating_2100: "Rating 2100",
   binary_search: "二分搜尋",

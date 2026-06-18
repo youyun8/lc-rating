@@ -12,6 +12,7 @@ import {
   Type,
   Trees,
   Trophy,
+  Target,
   ArrowDownWideNarrow,
   type LucideIcon,
 } from "lucide-react";
@@ -23,6 +24,7 @@ export interface StudyPlanTheme {
 }
 
 export const studyPlanIcons: Record<string, LucideIcon> = {
+  q3_handbook: Target,
   technical_interview: Cpu,
   rating_2100: Trophy,
   binary_search: Search,
@@ -47,6 +49,11 @@ export const defaultTheme: StudyPlanTheme = {
 };
 
 export const studyPlanThemes: Record<string, StudyPlanTheme> = {
+  q3_handbook: {
+    gradient: "linear-gradient(135deg, #0f766e 0%, #b45309 100%)",
+    accent: "#0f766e",
+    accentDark: "#115e59",
+  },
   technical_interview: {
     gradient: "linear-gradient(135deg, #2563eb 0%, #16a34a 100%)",
     accent: "#2563eb",

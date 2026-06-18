@@ -57,7 +57,7 @@ export function HandbookTopicPage({
         {/* Breadcrumb */}
         <nav className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground">
           <Link href="/handbook" className="hover:text-foreground">
-            Handbook
+            手冊
           </Link>
           <ChevronRight className="h-3.5 w-3.5" />
           <span className="font-medium text-foreground">{topic.title}</span>
@@ -94,7 +94,7 @@ export function HandbookTopicPage({
             <nav className="sticky top-[calc(var(--navbar-height)+1rem)] max-h-[calc(100vh-var(--navbar-height)-2rem)] overflow-y-auto rounded-2xl border border-border/60 bg-card p-3 text-sm shadow-sm">
               <div className="mb-2 flex items-center gap-2 px-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 <List className="h-3.5 w-3.5" />
-                On this page
+                本頁目錄
               </div>
               <ul className="space-y-0.5">
                 {topic.sections.map((s) => (
@@ -144,7 +144,7 @@ export function HandbookTopicPage({
                   <ArrowLeft className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-0.5" />
                   <span className="min-w-0">
                     <span className="block text-xs text-muted-foreground">
-                      Previous
+                      上一篇
                     </span>
                     <span className="block truncate font-medium text-foreground">
                       {prev.title}
@@ -161,7 +161,7 @@ export function HandbookTopicPage({
                 >
                   <span className="min-w-0">
                     <span className="block text-xs text-muted-foreground">
-                      Next
+                      下一篇
                     </span>
                     <span className="block truncate font-medium text-foreground">
                       {next.title}
