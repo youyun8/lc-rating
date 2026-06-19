@@ -3,16 +3,25 @@
  * Section titles consistently start with a numeric prefix such as
  * "1. 連結串列" or "1.6 快慢指針", so we extract that prefix and
  * convert dots to dashes: "1.6 ..." → "s-1-6".
- * Falls back to a slugified version (non-ASCII chars stripped) if no
- * numeric prefix is found. Titles with no usable ASCII characters (for
- * example pure-Chinese section names like "滑動視窗") fall back to a
- * deterministic hash so distinct titles never collapse onto the same
- * anchor and links stay unique.
+ *
+ * Titles without a numeric prefix (for example Chinese-only names like
+ * "模式總覽") cannot be disambiguated from each other by text alone, and
+ * several distinct sections can legitimately share the same title — e.g.
+ * every pattern chapter in the Q3 手冊 has its own "模式總覽" and
+ * "搭配追蹤題單" page. To keep their anchors (and therefore their lecture
+ * routes) unique, callers that own the section pass its stable numeric `id`,
+ * which is then used as the anchor. When no id is available we fall back to a
+ * slugified ASCII form, and finally to a deterministic hash of the title.
  */
-export function sectionAnchor(title: string): string {
+export function sectionAnchor(title: string, id?: number | string): string {
   const match = title.match(/^(\d+(?:\.\d+)*)/);
   if (match) {
     return `s-${match[1]!.replace(/\./g, "-")}`;
+  }
+  // Non-numeric title: prefer the stable section id so that distinct sections
+  // sharing the same title never collapse onto the same anchor.
+  if (id !== undefined && id !== null && `${id}`.length > 0) {
+    return `s-${id}`;
   }
   // Fallback: keep only ASCII alphanumerics and hyphens
   const slug = title

@@ -159,7 +159,7 @@ function walkLectureSections(
       section.summary,
       groupTitle,
       section.title,
-      `/lecture/${category}/${sectionAnchor(section.title)}`,
+      `/lecture/${category}/${sectionAnchor(section.title, section.id)}`,
     );
     walkLectureSections(map, section.children, category, groupTitle);
   }

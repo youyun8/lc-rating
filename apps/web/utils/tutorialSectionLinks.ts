@@ -25,7 +25,7 @@ function flattenTutorialSectionLinks(
   const planTitle = LECTURE_CATEGORIES[planKey] ?? planKey;
 
   return sections.flatMap((section) => {
-    const slug = sectionAnchor(section.title);
+    const slug = sectionAnchor(section.title, section.id);
     const currentPath = [...pathTitles, section.title];
     const link: TutorialSectionLink = {
       id: section.id,

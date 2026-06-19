@@ -16,13 +16,26 @@ import { sectionAnchor } from "@/utils/sectionAnchor";
 export type PageType = "lecture" | "studyplan";
 export type AnySection = StudyPlanData.Section | TutorialData.Section;
 
+/**
+ * Anchor for a section in the sidebar. Lecture pages route to dedicated
+ * section pages whose slugs fold in the stable section id (so distinct
+ * sections sharing a title, e.g. each pattern's "模式總覽", stay unique).
+ * Studyplan pages scroll to in-page DOM ids that are derived from the title
+ * alone, so they must keep using the title-only anchor.
+ */
+function sectionSlug(section: AnySection, pageType: PageType) {
+  return pageType === "lecture"
+    ? sectionAnchor(section.title, section.id)
+    : sectionAnchor(section.title);
+}
+
 export function getSectionHref(
   section: AnySection,
   pageType: PageType,
   currentPlanKey: string | null,
 ) {
   if (pageType === "lecture" && currentPlanKey) {
-    return `/lecture/${currentPlanKey}/${sectionAnchor(section.title)}`;
+    return `/lecture/${currentPlanKey}/${sectionSlug(section, pageType)}`;
   }
 
   return `#${sectionAnchor(section.title)}`;
@@ -80,13 +93,14 @@ function countLeafSections(section: AnySection): number {
 function hasActiveSection(
   section: AnySection,
   activeSlug: string | null,
+  pageType: PageType,
 ): boolean {
   if (!activeSlug) return false;
 
-  if (sectionAnchor(section.title) === activeSlug) return true;
+  if (sectionSlug(section, pageType) === activeSlug) return true;
 
   return (section.children ?? []).some((child) =>
-    hasActiveSection(child, activeSlug),
+    hasActiveSection(child, activeSlug, pageType),
   );
 }
 
@@ -125,9 +139,9 @@ export function SectionTreeItem({
   const hasChildren = children.length > 0;
   const href = getSectionHref(section, pageType, currentPlanKey);
   const isLectureLink = pageType === "lecture" && Boolean(currentPlanKey);
-  const slug = sectionAnchor(section.title);
+  const slug = sectionSlug(section, pageType);
   const isActive = activeSlug === slug;
-  const containsActiveSection = hasActiveSection(section, activeSlug);
+  const containsActiveSection = hasActiveSection(section, activeSlug, pageType);
   const metric = sectionMetric(section, pageType);
   const branchIsOpen = depth === 0 || containsActiveSection;
   const [isOpen, setIsOpen] = useState(branchIsOpen);

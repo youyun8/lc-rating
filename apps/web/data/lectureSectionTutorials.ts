@@ -48,7 +48,7 @@ function flattenTutorialSections(
     const item: IndexedTutorialSection = {
       id: section.id,
       title: section.title,
-      slug: sectionAnchor(section.title),
+      slug: sectionAnchor(section.title, section.id),
       depth,
       section,
       pathTitles: [...pathTitles, section.title],
@@ -129,7 +129,7 @@ export function getLectureSectionTutorial(
       id: child.id,
       title: child.title,
       description: child.description,
-      slug: sectionAnchor(child.title),
+      slug: sectionAnchor(child.title, child.id),
       depth: indexed.depth + 1,
       summary: child.summary,
       childCount: child.children?.length ?? 0,

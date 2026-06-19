@@ -123,7 +123,7 @@ export function makeLectureSectionCardItem(
   depth = 0,
   problems: StudyPlanData.Item[] = [],
 ): LectureSectionCardItem {
-  const slug = sectionAnchor(section.title);
+  const slug = sectionAnchor(section.title, section.id);
   const problemIds = getProblemIds(problems);
   const totalSections =
     1 +
