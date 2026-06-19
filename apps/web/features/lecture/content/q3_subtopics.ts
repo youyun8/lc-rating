@@ -547,7 +547,7 @@ export const Q3_SUBTOPICS: Record<number, Q3Subtopic[]> = {
       what: "會議室模型：給定多個 [start, end)，求同時進行最多幾個會議（最少房間數）。按 start 排序，用 min-heap 存各房間的結束時間；新會議來時若最早結束 ≤ start 就重用，否則開新房。",
       intuition:
         "最大重疊數 = 最少房間數。堆維護「目前佔用房間的結束時間」，只關心最早釋放的那間。",
-      when: "- 253（會議室 II）、1094（拼车）、2406（將區間分為最少組數）。\n- 問最少資源數、最大同時進行數。\n- 區間有開始與結束時間。",
+      when: "- 253（會議室 II）、1094（拼車）、2406（將區間分為最少組數）。\n- 問最少資源數、最大同時進行數。\n- 區間有開始與結束時間。",
       how: "```cpp\nsort(intervals.begin(), intervals.end());\npriority_queue<int, vector<int>, greater<int>> ends;\nfor (auto& iv : intervals) {\n  if (!ends.empty() && ends.top() <= iv[0]) ends.pop();\n  ends.push(iv[1]);\n}\nreturn ends.size();\n```",
       mistakes:
         "- 用 max-heap 而非 min-heap 存結束時間。\n- 重用條件寫成 < 而非 <=。\n- 未按 start 排序。\n- 把「分組」與「房間數」模型搞混。",
