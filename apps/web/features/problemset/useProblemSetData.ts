@@ -108,6 +108,10 @@ export function useProblemSetData() {
         progress: {
           problemId: problem.id,
         },
+        note: {
+          problemId: problem.id,
+          title: problem.title,
+        },
         solution: {
           id: problem.solution?.id || "",
           title: problem.solution?.title || "",

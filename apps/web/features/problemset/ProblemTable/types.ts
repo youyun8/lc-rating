@@ -30,6 +30,10 @@ export type TableCol = {
   progress: {
     problemId: string;
   };
+  note: {
+    problemId: string;
+    title: string;
+  };
   solution: {
     id: string;
     title: string;
@@ -47,5 +51,6 @@ export const key2Label: { [K in keyof TableCol]: string } = {
   rating: "難度",
   tags: "演算法標籤",
   progress: "進度",
+  note: "筆記",
   solution: "0x3F 題解",
 };

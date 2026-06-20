@@ -1,5 +1,6 @@
 import { I18NLink } from "@/components/common/I18NLink";
 import { I18NTag } from "@/components/common/I18NTag";
+import { ProblemNoteButton } from "@/components/common/ProblemNoteButton";
 import { ProgressSelector } from "@/components/common/ProgressSelector";
 import { ratingInfo } from "@/components/common/RatingCircle";
 import { SortIndicator } from "@/components/common/SortIndicator";
@@ -112,6 +113,24 @@ export const getColumns = () => [
           <ProgressSelector
             problemId={progress.problemId}
             triggerClassName="min-w-[6.5rem] max-w-[9rem]"
+          />
+        </div>
+      );
+    },
+    enableSorting: false,
+    enableHiding: true,
+  }),
+  columnHelper.accessor("note", {
+    size: 70,
+    header: () => <div>{key2Label["note"]}</div>,
+    cell: ({ row }) => {
+      const note = row.getValue<TableCol["note"]>("note");
+      return (
+        <div className="mx-auto w-fit">
+          <ProblemNoteButton
+            problemId={note.problemId}
+            title={note.title}
+            triggerClassName="size-8 px-0"
           />
         </div>
       );

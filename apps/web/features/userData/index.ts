@@ -22,4 +22,6 @@ export {
 
 export { useProblemSolutions, type ProblemSolution } from "./solutions";
 
+export { useProblemNote } from "./notes";
+
 export { useDataBackup } from "./backup";

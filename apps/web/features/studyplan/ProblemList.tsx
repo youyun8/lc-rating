@@ -1,4 +1,5 @@
 import { I18NTag } from "@/components/common/I18NTag";
+import { ProblemNoteButton } from "@/components/common/ProblemNoteButton";
 import { ProgressSelector } from "@/components/common/ProgressSelector";
 import { ratingInfo } from "@/components/common/RatingCircle";
 import { useProgressMap } from "@/features/userData";
@@ -400,6 +401,11 @@ const ProblemList = React.memo(
                 </div>
                 {problemId ? (
                   <>
+                    <ProblemNoteButton
+                      problemId={problemId}
+                      title={problem.title}
+                      triggerClassName="size-9 px-0"
+                    />
                     <ProblemSolution
                       problemId={problemId}
                       title={problem.title}

@@ -57,7 +57,7 @@ export const DataTable = genericMemo(function <TData extends TableCol>({
       columns={columns}
       key2Label={key2Label}
       highlightKey={highlightKey}
-      minWidth="min-w-[760px]"
+      minWidth="min-w-[840px]"
       applySizeStyles
       headerClassName="flex items-center justify-center text-xs font-medium tracking-wide text-muted-foreground"
       cellBorderClassName="align-middle"
