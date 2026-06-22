@@ -200,10 +200,11 @@ export function useSiteStorage() {
 
   /**
    * Merge cloud data with local data per-item using timestamps,
-   * then apply non-progress settings from cloud.
+   * then apply non-progress settings from cloud. Returns the fully merged
+   * site storage so callers can push the merged result back to the cloud.
    */
   const mergeSiteStorage = useCallback(
-    (cloud: SiteStoragePatch) => {
+    (cloud: SiteStoragePatch): SiteStorageData => {
       const merged = mergeProgress({ progress, progressUpdatedAt }, cloud);
       const mergedNotes = mergeProblemNotes(
         { problemNotes, problemNotesUpdatedAt },
@@ -213,6 +214,12 @@ export function useSiteStorage() {
         { problemSolutions, problemSolutionsUpdatedAt },
         cloud,
       );
+
+      const mergedTheme = cloud.theme ?? siteTheme;
+      const mergedTagLanguage = cloud.tagLanguage ?? tagLanguage;
+      const mergedLinkLanguage = cloud.linkLanguage ?? linkLanguage;
+      const mergedPremium = cloud.premium ?? premium;
+      const mergedOptions = cloud.options ?? options;
 
       // Apply non-progress cloud settings
       if (cloud.theme !== undefined) setTheme(cloud.theme);
@@ -233,6 +240,21 @@ export function useSiteStorage() {
         mergedSolutions.problemSolutions ?? {},
         mergedSolutions.problemSolutionsUpdatedAt ?? {},
       );
+
+      return {
+        theme: mergedTheme,
+        tagLanguage: mergedTagLanguage,
+        linkLanguage: mergedLinkLanguage,
+        premium: mergedPremium,
+        options: mergedOptions,
+        progress: merged.progress ?? {},
+        progressUpdatedAt: merged.progressUpdatedAt ?? {},
+        problemNotes: mergedNotes.problemNotes ?? {},
+        problemNotesUpdatedAt: mergedNotes.problemNotesUpdatedAt ?? {},
+        problemSolutions: mergedSolutions.problemSolutions ?? {},
+        problemSolutionsUpdatedAt:
+          mergedSolutions.problemSolutionsUpdatedAt ?? {},
+      };
     },
     [
       progress,
@@ -241,6 +263,11 @@ export function useSiteStorage() {
       problemNotesUpdatedAt,
       problemSolutions,
       problemSolutionsUpdatedAt,
+      siteTheme,
+      tagLanguage,
+      linkLanguage,
+      premium,
+      options,
       clearAllProgress,
       clearAllProblemNotes,
       clearAllProblemSolutions,

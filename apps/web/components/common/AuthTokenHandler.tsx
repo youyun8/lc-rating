@@ -1,18 +1,16 @@
 "use client";
 
-import {
-  LC_RATING_AUTH_TOKEN_KEY,
-  LC_RATING_LAST_SYNC_AT_KEY,
-} from "@/config/constants";
-import { useSiteStorage } from "@/hooks/useSiteStorage";
-import { pullCloudSiteStorage } from "@/utils/cloudSync";
-import { getErrorMessage } from "@/utils/auth";
+import { LC_RATING_AUTH_TOKEN_KEY } from "@/config/constants";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
+/**
+ * Captures the `token` query param returned from the GitHub OAuth redirect,
+ * stores it and announces the login. The actual pull-merge-push is handled
+ * automatically by `useAutoSync` (mounted via `SyncStatusIndicator`), which
+ * reacts to the resulting transition into the signed-in state.
+ */
 const AuthTokenHandler = () => {
-  const { setSiteStorage } = useSiteStorage();
-
   useEffect(() => {
     const currentUrl = new URL(window.location.href);
     const token = currentUrl.searchParams.get("token");
@@ -26,27 +24,8 @@ const AuthTokenHandler = () => {
     currentUrl.searchParams.delete("token");
     window.history.replaceState({}, "", currentUrl.toString());
 
-    const handleSync = () => {
-      pullCloudSiteStorage(token)
-        .then((siteStorage) => {
-          setSiteStorage(siteStorage);
-          const now = Date.now();
-          localStorage.setItem(LC_RATING_LAST_SYNC_AT_KEY, String(now));
-          toast("同步成功");
-        })
-        .catch((error) => {
-          console.error("Error syncing from remote:", error);
-          toast(`同步失敗: ${getErrorMessage(error)}`);
-        });
-    };
-
-    toast("已登入，可從遠端拉取站點資料", {
-      action: {
-        label: "拉取",
-        onClick: handleSync,
-      },
-    });
-  }, [setSiteStorage]);
+    toast("已登入，正在與雲端同步…");
+  }, []);
 
   return null;
 };
