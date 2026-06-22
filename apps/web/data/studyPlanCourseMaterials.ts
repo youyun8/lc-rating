@@ -90,7 +90,7 @@ const studyPlanCourseMaterials: Record<string, string> = {
     "**競程課程講義：數學題 Pattern**",
     "**Pattern 1：GCD / LCM / Euclid**\n\n整除、週期、最大公因數。注意 `lcm(a, b)=a/gcd(a, b)*b` 避免溢位。",
     "```cpp\nlong long gcdLl(long long a, long long b) {\n  while (b) {\n    tie(a, b) = pair(b, a % b);\n  }\n  return a;\n}\n```",
-    "**Pattern 2：快速冪與模逆元**\n\n訊號：大指數、組合數取模。若 mod 是質數，`inv(x)=x^(mod-2)`。",
+    "**Pattern 2：快速冪與模逆元**\n\n訊號：大指數、組合數取模。若 mod 是質數，`inv(x) = x ^ (mod - 2)`。",
     "```cpp\nlong long modPow(long long a, long long e, long long mod) {\n  long long r = 1;\n  while (e) {\n    if (e & 1) {\n      r = r * a % mod;\n    }\n    a = a * a % mod;\n    e >>= 1;\n  }\n  return r;\n}\n```",
     "**Pattern 3：篩法**\n\n求質數、最小質因數、分解多個數。多次 factor query 時先預處理 SPF。",
     "**Pattern 4：組合計數**\n\n先判斷是排列、組合、隔板法、容斥還是 DP 計數。取模時預處理 factorial 和 inverse factorial。",
