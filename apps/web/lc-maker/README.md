@@ -35,7 +35,7 @@ Dry-run the problemset sync against local files:
 
 ```bash
 LC_RATING_UPSTREAM_BASE="file:///absolute/path/to/apps/web/public/problemset" \
-  python sync_upstream.py --dry-run
+    python sync_upstream.py --dry-run
 ```
 
 Skip formatting only when debugging formatter issues:
@@ -48,7 +48,7 @@ Dry-run the study-plan merge against local files:
 
 ```bash
 LC_RATING_UPSTREAM_STUDYPLAN_BASE="file:///absolute/path/to/apps/web/public/studyplan" \
-  python merge_upstream_to_local.py --dry-run
+    python merge_upstream_to_local.py --dry-run
 ```
 
 ## GitHub Actions

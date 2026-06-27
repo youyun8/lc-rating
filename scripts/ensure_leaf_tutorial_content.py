@@ -122,7 +122,7 @@ FAMILIES: dict[str, FamilyContent] = {
         state="堆元素要包含排序鍵與必要的定位資訊，例如值、下標、過期邊界或來源序列。",
         update="每次加入候選後只調整堆的局部結構；若堆大小有上限，立刻彈出不需要的候選。",
         answer="堆頂代表目前最優候選；若可能過期，讀取前必須先清理堆頂。",
-        pitfall="C++ `priority_queue` 預設大根堆；自訂比較器要符合嚴格弱序。",
+        pitfall="C++ `priority_queue` 預設 max-heap；自訂比較器要符合嚴格弱序。",
     ),
     "lazy_heap": FamilyContent(
         principle="處理堆不能刪除任意元素的限制：真實狀態存在 hash map、版本號或 alive 標記中，堆只保存候選快照。",
@@ -140,7 +140,7 @@ FAMILIES: dict[str, FamilyContent] = {
     ),
     "dual_heap": FamilyContent(
         principle="用兩個堆或兩側容器維護分界，讓第 K 小/大、中位數或滑動窗口統計能在動態更新下保持平衡。",
-        state="小的一側通常用大根堆，大的一側用小根堆，並維護兩側大小與順序關係。",
+        state="小的一側通常用 max-heap，大的一側用小根堆，並維護兩側大小與順序關係。",
         update="插入或刪除後先放到對應側，再透過 rebalance 移動堆頂，必要時配合懶刪除清理過期元素。",
         answer="平衡後的堆頂就是中位數、第 K 小/大或分界值；若需總和，兩側還要同步維護 sum。",
         pitfall="刪除元素時要先判斷它屬於哪一側並修正有效 size，不能只看 heap 的實際長度。",

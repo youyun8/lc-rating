@@ -11,6 +11,7 @@ import markedKatex from "marked-katex-extension";
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import React, { useEffect, useMemo, useRef } from "react";
+import { normalizeMarkdownCodeBlockIndentation } from "./normalizeCodeBlockIndentation";
 import { normalizeExampleContainers } from "./normalizeExampleContainers";
 
 const marked = new Marked(
@@ -241,7 +242,9 @@ function shouldRenderAsPlainText(math: string) {
 
 function createMarkup(md: string) {
   const normalizedMarkdown = normalizeInlineMath(
-    normalizeCppCodeBlocks(normalizeExampleContainers(md)),
+    normalizeCppCodeBlocks(
+      normalizeMarkdownCodeBlockIndentation(normalizeExampleContainers(md)),
+    ),
   );
   const parsed = marked.parse(normalizedMarkdown);
   if (typeof parsed === "string") {
