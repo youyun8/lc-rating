@@ -1,4 +1,5 @@
 import type { StudyPlanData, TutorialData } from "@/types";
+import { stripExampleContainerMarkers } from "@/features/studyplan/normalizeExampleContainers";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import {
   CheckCircle2,
@@ -34,7 +35,7 @@ export function getSummaryPreview(summary?: string) {
   if (!summary)
     return "進入此單元後，可依下一層子單元繼續閱讀，或直接開啟完整講義與搭配練習。";
 
-  return summary
+  return stripExampleContainerMarkers(summary)
     .replace(/!\[[^\]]*]\([^)]+\)/g, "")
     .replace(/\*\*/g, "")
     .replace(/[#>`*_~]/g, "")

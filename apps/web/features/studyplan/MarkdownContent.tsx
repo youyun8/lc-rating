@@ -11,6 +11,7 @@ import markedKatex from "marked-katex-extension";
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import React, { useEffect, useMemo, useRef } from "react";
+import { normalizeExampleContainers } from "./normalizeExampleContainers";
 
 const marked = new Marked(
   markedHighlight({
@@ -239,7 +240,9 @@ function shouldRenderAsPlainText(math: string) {
 }
 
 function createMarkup(md: string) {
-  const normalizedMarkdown = normalizeInlineMath(normalizeCppCodeBlocks(md));
+  const normalizedMarkdown = normalizeInlineMath(
+    normalizeCppCodeBlocks(normalizeExampleContainers(md)),
+  );
   const parsed = marked.parse(normalizedMarkdown);
   if (typeof parsed === "string") {
     // Tag code as English so Chrome resolves the generic `monospace` via the

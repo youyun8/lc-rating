@@ -11,6 +11,7 @@ import React, { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { ProblemList } from "./ProblemList";
 import { extractImageUrls, stripDuplicateImages } from "./dedupe";
+import { normalizeExampleContainers } from "./normalizeExampleContainers";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { countStudyPlanProblems } from "@/features/learning/utils/sectionTree";
 
@@ -37,6 +38,10 @@ const SectionContainer = React.memo(
     const dedupedSummary = useMemo(
       () => stripDuplicateImages(rawSummary, parentImageUrls),
       [rawSummary, parentImageUrls],
+    );
+    const normalizedSummary = useMemo(
+      () => normalizeExampleContainers(dedupedSummary),
+      [dedupedSummary],
     );
 
     // Merge parent + current section images so children won't repeat them either
@@ -99,7 +104,7 @@ const SectionContainer = React.memo(
               <CollapsibleContent>
                 <div className="mt-3 rounded-[1.5rem] border border-border/60 bg-muted/20 p-4 sm:p-5">
                   <StudyPlanMarkdownContent
-                    content={dedupedSummary}
+                    content={normalizedSummary}
                     variant="section"
                   />
                 </div>
