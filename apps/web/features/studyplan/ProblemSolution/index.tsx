@@ -14,7 +14,8 @@ import {
   useProblemSolutions,
   type ProblemSolution as ProblemSolutionType,
 } from "@/features/userData";
-import { Code2, Pencil, Plus } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Code2, Pencil, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { SolutionEditCard, SolutionViewCard } from "./SolutionCards";
 import { createEmptySolution, type DialogMode } from "./solutionUtils";
@@ -25,7 +26,8 @@ interface ProblemSolutionProps {
 }
 
 export function ProblemSolution({ problemId, title }: ProblemSolutionProps) {
-  const { solutions, setSolutions } = useProblemSolutions(problemId);
+  const { solutions, setSolutions, delSolutions } =
+    useProblemSolutions(problemId);
 
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<DialogMode>("view");
@@ -77,6 +79,11 @@ export function ProblemSolution({ problemId, title }: ProblemSolutionProps) {
     } else {
       setOpen(false);
     }
+  };
+
+  const handleDeleteAll = () => {
+    delSolutions();
+    setOpen(false);
   };
 
   const handleCancel = () => {
@@ -154,12 +161,28 @@ export function ProblemSolution({ problemId, title }: ProblemSolutionProps) {
           )}
         </div>
 
-        <DialogFooter className="border-t border-border/60 px-5 py-4 sm:justify-end">
+        <DialogFooter
+          className={cn(
+            "border-t border-border/60 px-5 py-4",
+            mode === "view" ? "sm:justify-between" : "sm:justify-end",
+          )}
+        >
           {mode === "view" ? (
-            <Button type="button" onClick={startEditing}>
-              <Pencil className="h-4 w-4" />
-              編輯題解
-            </Button>
+            <>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={handleDeleteAll}
+                className="text-muted-foreground hover:text-destructive"
+              >
+                <Trash2 className="h-4 w-4" />
+                刪除所有題解
+              </Button>
+              <Button type="button" onClick={startEditing}>
+                <Pencil className="h-4 w-4" />
+                編輯題解
+              </Button>
+            </>
           ) : (
             <>
               <Button type="button" variant="outline" onClick={handleCancel}>

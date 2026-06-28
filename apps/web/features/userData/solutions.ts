@@ -16,11 +16,19 @@ export function useProblemSolutions(problemId: string) {
   const setProblemSolutions = useProblemSolutionsStore(
     (state) => state.setProblemSolutions,
   );
+  const delProblemSolutions = useProblemSolutionsStore(
+    (state) => state.delProblemSolutions,
+  );
 
   const setSolutions = useCallback(
     (next: ProblemSolution[]) => setProblemSolutions(problemId, next),
     [problemId, setProblemSolutions],
   );
 
-  return { solutions, setSolutions };
+  const delSolutions = useCallback(
+    () => delProblemSolutions(problemId),
+    [problemId, delProblemSolutions],
+  );
+
+  return { solutions, setSolutions, delSolutions };
 }
