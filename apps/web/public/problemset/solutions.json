@@ -2010,7 +2010,7 @@
   },
   "1431886903": {
     "id": "1431886903",
-    "title": "簡單題，簡單做，O(n) 做法（Python/Java/C++/Go）",
+    "title": "簡單題，簡單做，兩種 O(n) 方法（Python/Java/C++/Go）",
     "titleSlug": "jian-dan-ti-jian-dan-zuo-on-zuo-fa-pytho-q0ng",
     "time": 1788063965530,
     "problemId": "4038"
@@ -2211,6 +2211,13 @@
     "time": 1646539768205,
     "problemId": "2194"
   },
+  "1478600712": {
+    "id": "1478600712",
+    "title": "兩種方法：正序遍歷+堆疊 / 倒序遍歷（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-fang-fa-zheng-xu-bian-li-zha-bl8z",
+    "time": 1788683938863,
+    "problemId": "853"
+  },
   "1478713962": {
     "id": "1478713962",
     "title": "兩種方法：兩次遍歷/一次遍歷（Python/Java/C++/C/Go/JS/Rust）",
@@ -2231,6 +2238,13 @@
     "titleSlug": "jian-dan-ti-jian-dan-zuo-pythonjavacgojs-b8ns",
     "time": 1754228708817,
     "problemId": "872"
+  },
+  "1480774126": {
+    "id": "1480774126",
+    "title": "兩種方法：前字尾分解 / 列舉右維護左（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-fang-fa-qian-hou-zhui-fen-ji-pm1t",
+    "time": 1788510014888,
+    "problemId": "1477"
   },
   "148243933": {
     "id": "148243933",
@@ -2752,7 +2766,7 @@
   },
   "1589710386": {
     "id": "1589710386",
-    "title": "【影片】一個思路解決兩種變形：一般樹 / 點權樹（Python/Java/C++/Go/JS/Rust）",
+    "title": "【影片】一個思路解決兩種變形：一般樹 / 點權樹（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "shi-pin-ru-he-si-kao-shu-xing-dpgai-chen-uqsf",
     "time": 1695286950443,
     "problemId": "968"
@@ -3351,6 +3365,13 @@
     "titleSlug": "liang-chong-dfs-xie-fa-pythonjavacgojsru-wzb2",
     "time": 1707353587748,
     "problemId": "993"
+  },
+  "1715829539": {
+    "id": "1715829539",
+    "title": "兩種方法：Dijkstra / 動態規劃（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-fang-fa-dijkstra-dong-tai-gu-ozqt",
+    "time": 1788668383696,
+    "problemId": "4046"
   },
   "1716064379": {
     "id": "1716064379",
@@ -4220,6 +4241,13 @@
     "time": 1680392733447,
     "problemId": "2605"
   },
+  "1927890458": {
+    "id": "1927890458",
+    "title": "兩種 O(n) 方法：定長滑動視窗 / 分類討論（Python/Java/C++/Go）",
+    "titleSlug": "on-ding-chang-hua-dong-chuang-kou-python-1d6t",
+    "time": 1788668756500,
+    "problemId": "4043"
+  },
   "1931217342": {
     "id": "1931217342",
     "title": "計數+遍歷（Python/Java/C++/Go）",
@@ -4408,6 +4436,13 @@
     "titleSlug": "mei-ju-shu-wei-bu-yong-zi-fu-chuan-pytho-nq8n",
     "time": 1733203661182,
     "problemId": "1281"
+  },
+  "1961138257": {
+    "id": "1961138257",
+    "title": "倒序遍歷（Python/Java/C++/Go）",
+    "titleSlug": "dao-xu-bian-li-pythonjavacgo-by-endlessc-49w7",
+    "time": 1788694538919,
+    "problemId": "1776"
   },
   "1962061945": {
     "id": "1962061945",
@@ -5937,7 +5972,7 @@
   },
   "2311001320": {
     "id": "2311001320",
-    "title": "統計子樹的節點和及節點數",
+    "title": "統計子樹元素和 & 子樹大小（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "tong-ji-zi-shu-de-jie-dian-he-ji-jie-dia-va8t",
     "time": 1651982844676,
     "problemId": "2265"
@@ -6593,6 +6628,13 @@
     "time": 1709439002078,
     "problemId": "3071"
   },
+  "2471281747": {
+    "id": "2471281747",
+    "title": "滑動視窗 + 異或雜湊（Python/Java/C++/Go）",
+    "titleSlug": "hua-dong-chuang-kou-yi-huo-ha-xi-pythonj-egme",
+    "time": 1788307185024,
+    "problemId": "4042"
+  },
   "2471647745": {
     "id": "2471647745",
     "title": "O(n) 做法，腦筋急轉彎（Python/Java/C++/Go）",
@@ -7034,6 +7076,13 @@
     "time": 1736654818412,
     "problemId": "3419"
   },
+  "2567881020": {
+    "id": "2567881020",
+    "title": "兩種方法：字首和 / 定長滑動視窗（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-fang-fa-qian-zhui-he-ding-ch-wh1y",
+    "time": 1788669551940,
+    "problemId": "4044"
+  },
   "2569057399": {
     "id": "2569057399",
     "title": "利用位運算簡化程式碼",
@@ -7159,6 +7208,13 @@
     "titleSlug": "on-zuo-fa-pythonjavacgo-by-endlesscheng-fc5k",
     "time": 1702181397623,
     "problemId": "2960"
+  },
+  "2595882232": {
+    "id": "2595882232",
+    "title": "兩種方法：暴力列舉 / 卷積（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-fang-fa-bao-li-mei-ju-juan-j-6bqq",
+    "time": 1788442966953,
+    "problemId": "835"
   },
   "2597818588": {
     "id": "2597818588",
@@ -9444,7 +9500,7 @@
   },
   "3071565639": {
     "id": "3071565639",
-    "title": "【影片】分類討論亂如麻？一個影片講透！（Python/Java/C++/Go/JS/Rust）",
+    "title": "【影片】分類討論亂如麻？一個影片講透！（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "zui-jin-gong-gong-zu-xian-yi-ge-shi-pin-8h2zc",
     "time": 1671267388423,
     "problemId": "235"
@@ -9504,6 +9560,13 @@
     "titleSlug": "yi-xing-gong-shi-by-endlesscheng-ixss",
     "time": 1663474357496,
     "problemId": "2413"
+  },
+  "3081794904": {
+    "id": "3081794904",
+    "title": "組合數學（Python/Java/C++/Go）",
+    "titleSlug": "zu-he-shu-xue-pythonjavacgo-by-endlessch-p8wu",
+    "time": 1788504181098,
+    "problemId": "1621"
   },
   "3085052835": {
     "id": "3085052835",
@@ -13544,6 +13607,13 @@
     "time": 1650257305795,
     "problemId": "2235"
   },
+  "3971472476": {
+    "id": "3971472476",
+    "title": "兩種方法：正序遍歷+堆疊 / 倒序遍歷（Python/Java/C++/Go）",
+    "titleSlug": "dan-diao-zhan-pythonjavacgo-by-endlessch-nqiu",
+    "time": 1788667378747,
+    "problemId": "4045"
+  },
   "397181519": {
     "id": "397181519",
     "title": "【圖解】一張圖秒懂跳躍遊戲！（Python/Java/C++/C/Go/JS/Rust）",
@@ -13959,7 +14029,7 @@
   },
   "4056669643": {
     "id": "4056669643",
-    "title": "只需列舉 O(log U) 個刪除位置，然後前字尾分解（Python/Java/C++/Go）",
+    "title": "證明：至多有一個位置需要考慮刪除（Python/Java/C++/Go）",
     "titleSlug": "zhi-xu-mei-ju-olog-u-ge-shan-chu-wei-zhi-1bc7",
     "time": 1788053879353,
     "problemId": "4037"
@@ -14131,6 +14201,13 @@
     "titleSlug": "liang-chong-fang-fa-o1-gong-shi-ji-yi-hu-7fdi",
     "time": 1687654828839,
     "problemId": "2745"
+  },
+  "4086617748": {
+    "id": "4086617748",
+    "title": "轉化成一維問題（Python/Java/C++/C/Go/JS/Rust）",
+    "titleSlug": "zhuan-hua-cheng-yi-wei-wen-ti-pythonjava-osoq",
+    "time": 1788340041598,
+    "problemId": "836"
   },
   "4088708677": {
     "id": "4088708677",
