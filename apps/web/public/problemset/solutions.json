@@ -4129,6 +4129,13 @@
     "time": 1705798097463,
     "problemId": "3011"
   },
+  "1892614897": {
+    "id": "1892614897",
+    "title": "記錄每個元素的所有出現位置（Python/Java/C++/Go）",
+    "titleSlug": "ji-lu-mei-ge-yuan-su-de-suo-you-chu-xian-wcxr",
+    "time": 1789259082960,
+    "problemId": "4049"
+  },
   "1894806233": {
     "id": "1894806233",
     "title": "線性做法（Python/Java/C++/Go/JS/Rust）",
@@ -4173,7 +4180,7 @@
   },
   "1911968707": {
     "id": "1911968707",
-    "title": "簡潔寫法！（Python/Java/C++/C/Go/JS/Rust）",
+    "title": "簡潔寫法（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "jian-ji-xie-fa-pythonjavaccgojsrust-by-e-1ms0",
     "time": 1719099410150,
     "problemId": "520"
@@ -7699,6 +7706,13 @@
     "time": 1693714897025,
     "problemId": "2843"
   },
+  "268274286": {
+    "id": "268274286",
+    "title": "【套路】合法括號字串，附相似題目（Python/Java/C++/C/Go/JS/Rust）",
+    "titleSlug": "tao-lu-he-fa-gua-hao-zi-fu-chuan-fu-xian-0of7",
+    "time": 1789171820213,
+    "problemId": "1541"
+  },
   "268471907": {
     "id": "268471907",
     "title": "兩種方法：排序/最小堆（Python/Java/C++/Go）",
@@ -8307,6 +8321,13 @@
     "titleSlug": "mo-ni-by-endlesscheng-burh",
     "time": 1652615224327,
     "problemId": "2269"
+  },
+  "2814237548": {
+    "id": "2814237548",
+    "title": "兩種方法：完全揹包 / Dijkstra 最短路（Python/Java/C++/Go）",
+    "titleSlug": "wan-quan-bei-bao-pythonjavacgo-by-endles-21aw",
+    "time": 1789254598411,
+    "problemId": "4050"
   },
   "281585212": {
     "id": "281585212",
@@ -9134,6 +9155,13 @@
     "time": 1725167948991,
     "problemId": "3274"
   },
+  "2999580121": {
+    "id": "2999580121",
+    "title": "列舉右維護左 + 單調堆疊（Python/Java/C++/Go）",
+    "titleSlug": "mei-ju-you-wei-hu-zuo-dan-diao-zhan-pyth-hmvp",
+    "time": 1789272339621,
+    "problemId": "4054"
+  },
   "3005449097": {
     "id": "3005449097",
     "title": "非暴力做法（Python/Java/C++/Go）",
@@ -9322,6 +9350,13 @@
     "titleSlug": "go-san-xing-jie-jue-by-endlesscheng-jfzf",
     "time": 1634387485987,
     "problemId": "537"
+  },
+  "3035372283": {
+    "id": "3035372283",
+    "title": "字首和 + 值域樹狀陣列 / 有序集合（Python/Java/C++/Go）",
+    "titleSlug": "qian-zhui-he-zhi-yu-shu-zhuang-shu-zu-yo-jn06",
+    "time": 1789258432020,
+    "problemId": "4051"
   },
   "3036702868": {
     "id": "3036702868",
@@ -11558,7 +11593,7 @@
   },
   "3513036702": {
     "id": "3513036702",
-    "title": "中心擴充套件 + DP（Python/Java/C++/Go）",
+    "title": "三種方法：DP / 貪心 / Manacher 最佳化（Python/Java/C++/Go）",
     "titleSlug": "zhong-xin-kuo-zhan-dppythonjavacgo-by-en-1yt1",
     "time": 1668312747046,
     "problemId": "2472"
@@ -12038,6 +12073,13 @@
     "titleSlug": "qian-zhui-he-zuo-fa-ben-zhi-shi-mai-mai-abu71",
     "time": 1700439137437,
     "problemId": "53"
+  },
+  "3619796334": {
+    "id": "3619796334",
+    "title": "一圖秒懂（Python/Java/C++/Go）",
+    "titleSlug": "yi-tu-miao-dong-pythonjavacgo-by-endless-5exs",
+    "time": 1789014065501,
+    "problemId": "1111"
   },
   "3620228313": {
     "id": "3620228313",
@@ -13390,6 +13432,13 @@
     "time": 1626581386461,
     "problemId": "1935"
   },
+  "3927232293": {
+    "id": "3927232293",
+    "title": "兩種方法：預處理迴文數 / 至多考慮 5 個數（Python/Java/C++/Go）",
+    "titleSlug": "yu-chu-li-hui-wen-shu-er-fen-cha-zhao-py-45qi",
+    "time": 1789272555987,
+    "problemId": "4053"
+  },
   "3927702135": {
     "id": "3927702135",
     "title": "為什麼先手必勝？",
@@ -14365,7 +14414,7 @@
   },
   "41269413": {
     "id": "41269413",
-    "title": "數學（Python/Java/C++/Go）",
+    "title": "數學公式（Python/Java/C++/Go）",
     "titleSlug": "shu-xue-pythonjavacgo-by-endlesscheng-he7b",
     "time": 1780637175430,
     "problemId": "1344"
@@ -14698,6 +14747,13 @@
     "titleSlug": "ji-yi-hua-sou-suo-di-tui-chang-shu-you-h-czvx",
     "time": 1682086362550,
     "problemId": "1027"
+  },
+  "4193962882": {
+    "id": "4193962882",
+    "title": "記錄每個元素的所有出現位置（Python/Java/C++/Go）",
+    "titleSlug": "ji-lu-mei-ge-yuan-su-de-suo-you-chu-xian-6pro",
+    "time": 1789259247738,
+    "problemId": "4048"
   },
   "4196353378": {
     "id": "4196353378",
@@ -15847,6 +15903,13 @@
     "time": 1703376631998,
     "problemId": "1954"
   },
+  "602784784": {
+    "id": "602784784",
+    "title": "值域分治 + 單調堆疊二分（Python/Java/C++/Go）",
+    "titleSlug": "zhi-yu-fen-zhi-dan-diao-zhan-shu-zhuang-c4sct",
+    "time": 1789278777288,
+    "problemId": "4055"
+  },
   "608419542": {
     "id": "608419542",
     "title": "【圖解】f[n]=2*f[n-1]+f[n-3]（Python/Java/C++/Go）",
@@ -16364,6 +16427,13 @@
     "titleSlug": "dong-hua-jian-ji-xie-fa-cong-di-gui-dao-oe0di",
     "time": 1688254702642,
     "problemId": "2"
+  },
+  "725763807": {
+    "id": "725763807",
+    "title": "兩種寫法：模擬 / 直接計算（Python/Java/C++/Go）",
+    "titleSlug": "mo-ni-pythonjavacgo-by-endlesscheng-kd65",
+    "time": 1789273202244,
+    "problemId": "4052"
   },
   "728229560": {
     "id": "728229560",
