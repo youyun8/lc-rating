@@ -244,6 +244,13 @@
     "time": 1716907301324,
     "problemId": "1486"
   },
+  "1038307939": {
+    "id": "1038307939",
+    "title": "兩種方法：遞迴 / 左右橫跳（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-fang-fa-di-gui-zuo-you-heng-s8zmg",
+    "time": 1789094055324,
+    "problemId": "1190"
+  },
   "103871786": {
     "id": "103871786",
     "title": "巧妙利用位運算最佳化空間複雜度：從 O(n) 到 O(log U) 到 O(1)",
@@ -992,6 +999,13 @@
     "titleSlug": "ji-yi-hua-sou-suo-di-tui-kong-jian-you-h-hz2m",
     "time": 1773365077617,
     "problemId": "1594"
+  },
+  "1192302071": {
+    "id": "1192302071",
+    "title": "找距離圓心最近的點，三行程式碼（Python/Java/C++/C/Go/JS/Rust）",
+    "titleSlug": "zhao-ju-chi-yuan-xin-zui-jin-de-dian-san-1rns",
+    "time": 1789774511317,
+    "problemId": "1401"
   },
   "1192605817": {
     "id": "1192605817",
@@ -3240,6 +3254,13 @@
     "time": 1748489285704,
     "problemId": "1061"
   },
+  "1692344381": {
+    "id": "1692344381",
+    "title": "兩種方法：排序 + 二分/雙指標（Python/Java/C++/Go）",
+    "titleSlug": "pai-xu-shuang-zhi-zhen-pythonjavacgo-by-turw4",
+    "time": 1789876903584,
+    "problemId": "4057"
+  },
   "169260234": {
     "id": "169260234",
     "title": "三種方法：記憶化搜尋 -> 遞推 -> 單調佇列最佳化（Python/Java/C++/Go）",
@@ -3359,6 +3380,13 @@
     "time": 1783812012634,
     "problemId": "1331"
   },
+  "1714415118": {
+    "id": "1714415118",
+    "title": "從高到低貪心 + 最佳化（Python/Java/C++/Go）",
+    "titleSlug": "cong-gao-dao-di-tan-xin-pythonjavacgo-by-boq4",
+    "time": 1789883228034,
+    "problemId": "4059"
+  },
   "1715714434": {
     "id": "1715714434",
     "title": "DFS+記錄深度和父節點（Python/Java/C++/Go）",
@@ -3477,6 +3505,13 @@
     "titleSlug": "by-endlesscheng-dwja",
     "time": 1652604775001,
     "problemId": "2275"
+  },
+  "1730213489": {
+    "id": "1730213489",
+    "title": "兩種寫法：遞迴 / 用堆疊模擬遞迴（Python/Java/C++/Go）",
+    "titleSlug": "liang-chong-xie-fa-di-gui-yong-zhan-mo-n-n2do",
+    "time": 1789801856480,
+    "problemId": "1096"
   },
   "1730741094": {
     "id": "1730741094",
@@ -4656,7 +4691,7 @@
   },
   "2013773941": {
     "id": "2013773941",
-    "title": "【模板】恰好裝滿型 0-1 揹包（Python/Java/C++/Go）",
+    "title": "兩種方法：0-1 揹包 / BFS（Python/Java/C++/Go）",
     "titleSlug": "mo-ban-qia-hao-zhuang-man-xing-0-1-bei-b-llbw",
     "time": 1774152867696,
     "problemId": "3877"
@@ -6999,6 +7034,13 @@
     "time": 1635637127922,
     "problemId": "2054"
   },
+  "2546536982": {
+    "id": "2546536982",
+    "title": "轉化成最大子陣列和（Python/Java/C++/Go）",
+    "titleSlug": "zhuan-hua-cheng-zui-da-zi-shu-zu-he-pyth-xbt4",
+    "time": 1789877903660,
+    "problemId": "4058"
+  },
   "2547825081": {
     "id": "2547825081",
     "title": "等價轉換 + 定長滑動視窗 + 最佳化（Python/Java/C++/Go）",
@@ -7225,7 +7267,7 @@
   },
   "2597818588": {
     "id": "2597818588",
-    "title": "兩種方法：二分答案 / 倒推，附思考題（Python/Java/C++/Go）",
+    "title": "兩種方法：二分答案 / 逆向思維，附思考題（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-fang-fa-er-fen-da-an-dao-tui-oake",
     "time": 1785637263195,
     "problemId": "4008"
@@ -7516,6 +7558,13 @@
     "titleSlug": "ji-lu-mei-xing-mei-lie-mei-gong-zhong-de-qa0x",
     "time": 1756512254705,
     "problemId": "36"
+  },
+  "2647963782": {
+    "id": "2647963782",
+    "title": "非暴力做法（Python/Java/C++/Go）",
+    "titleSlug": "fei-bao-li-zuo-fa-pythonjavacgo-by-endle-0ijr",
+    "time": 1789876970400,
+    "problemId": "4056"
   },
   "2648057035": {
     "id": "2648057035",
@@ -8737,7 +8786,7 @@
   },
   "2905880554": {
     "id": "2905880554",
-    "title": "暴力列舉（Python/Java/C++/Go）",
+    "title": "兩種方法：暴力列舉 / 組合數學（Python/Java/C++/Go）",
     "titleSlug": "bao-li-pythonjavacgo-by-endlesscheng-uqp5",
     "time": 1742089680153,
     "problemId": "3483"
@@ -11516,7 +11565,7 @@
   },
   "3498345039": {
     "id": "3498345039",
-    "title": "教你一步步思考 DP：從記憶化搜尋到遞推，附題單！（Python/Java/C++/Go/JS/Rust）",
+    "title": "教你一步步思考 DP：從記憶化搜尋到遞推（Python/Java/C++/Go/JS/Rust）",
     "titleSlug": "jiao-ni-yi-bu-bu-si-kao-dpcong-ji-yi-hua-chrs",
     "time": 1730083040080,
     "problemId": "139"
@@ -12951,7 +13000,7 @@
   },
   "3823656539": {
     "id": "3823656539",
-    "title": "動態規劃：從記憶化搜尋到遞推，附題單！（Python/Java/C++/Go/JS/Rust）",
+    "title": "兩種方法：完全揹包 / BFS 最短路（Python/Java/C++/Go/JS/Rust）",
     "titleSlug": "dong-tai-gui-hua-cong-ji-yi-hua-sou-suo-3kz1g",
     "time": 1720063172243,
     "problemId": "279"
@@ -14337,7 +14386,7 @@
   },
   "4103794198": {
     "id": "4103794198",
-    "title": "只需考慮 5 個數字（Python/Java/C++/Go）",
+    "title": "只需考慮 5 個數（Python/Java/C++/Go）",
     "titleSlug": "zhi-xu-kao-lu-5-ge-shu-zi-pythonjavacgo-3td25",
     "time": 1765529589741,
     "problemId": "564"
@@ -17340,7 +17389,7 @@
   },
   "928385815": {
     "id": "928385815",
-    "title": "【影片】教你一步步思考動態規劃！附題單！（Python/Java/C++/Go）",
+    "title": "兩種方法：完全揹包 / BFS 最短路（Python/Java/C++/Go）",
     "titleSlug": "jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-21m5",
     "time": 1676724346201,
     "problemId": "322"
