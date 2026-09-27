@@ -1392,10 +1392,16 @@ function kmpFigure(): string {
   body += text(
     x0,
     y + 172,
-    `t[5]='${t.charAt(5)}' ≠ p[5]='${p.charAt(5)}'：令 j ← π[4] = ${at(pi, 4)}。p 的前 ${at(pi, 4)} 個字元（藍）已知與 t 相等，t 的指標不回退，下一步比較 t[5] 與 p[${at(pi, 4)}]。`,
+    `t[5]='${t.charAt(5)}' ≠ p[5]='${p.charAt(5)}'：令 j ← π[4] = ${at(pi, 4)}。p 的前 ${at(pi, 4)} 個字元（藍）已知與 t 相等，`,
     { anchor: "start", size: 12 },
   );
-  return svg(720, y + 188, body);
+  body += text(
+    x0,
+    y + 194,
+    `t 的指標不回退，下一步直接比較 t[5] 與 p[${at(pi, 4)}]。整體 O(n + m)。`,
+    { anchor: "start", size: 12 },
+  );
+  return svg(720, y + 210, body);
 }
 
 function zFigure(): string {

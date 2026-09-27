@@ -833,37 +833,41 @@ async function main() {
     assignPages(builder.headings, readOutline(doc));
     log(`pass 1: ${doc.getPageCount()} pages`);
 
-    // Pass 2: every part / chapter opens on a recto (odd page = even index).
+    // Later passes: every part / chapter opens on a recto (odd page = even
+    // index), and the problem index carries the pages of the previous pass.
+    // Chromium's pagination is not perfectly stable across passes (a blank
+    // verso flips every following page between left and right), so repeat
+    // until the pages printed in the index match the pages they point to.
     const blanks = new Set<string>();
-    const predicted = new Map<string, number>();
-    let shift = 0;
-    for (const h of builder.headings) {
-      if (h.level <= 1 && ((h.page ?? 0) + shift) % 2 === 1) {
-        blanks.add(h.id);
-        shift++;
+    for (let pass = 2; pass <= 5; pass++) {
+      const predicted = new Map<string, number>();
+      let shift = 0;
+      for (const h of builder.headings) {
+        if (h.level <= 1 && ((h.page ?? 0) + shift) % 2 === 1) {
+          if (blanks.has(h.id)) blanks.delete(h.id);
+          else blanks.add(h.id);
+          shift += blanks.has(h.id) ? 1 : -1;
+        }
+        predicted.set(h.id, (h.page ?? 0) + shift + 1);
       }
-      predicted.set(h.id, (h.page ?? 0) + shift + 1);
-    }
-    {
       html = builder.mainHtml(blanks, predicted);
       pdf = await printPdf(browser, html, mainPath);
       doc = await PDFDocument.load(pdf);
       assignPages(builder.headings, readOutline(doc));
-      const bad = builder.headings.filter(
+      const verso = builder.headings.filter(
         (h) => h.level <= 1 && (h.page ?? 0) % 2 === 1,
       );
-      if (bad.length)
-        console.warn(
-          `[book] ${bad.length} openers still on a verso: ${bad.map((b) => b.title).join(", ")}`,
-        );
       const moved = builder.headings.filter(
         (h) => predicted.get(h.id) !== (h.page ?? 0) + 1,
       );
-      if (moved.length)
+      log(
+        `pass ${pass}: ${doc.getPageCount()} pages (${blanks.size} blank versos, ${moved.length} headings moved, ${verso.length} openers on a verso)`,
+      );
+      if (!moved.length && !verso.length) break;
+      if (pass === 5)
         console.warn(
-          `[book] ${moved.length} headings moved between passes; problem-index page numbers may be off (first: ${moved[0]!.num} ${moved[0]!.title})`,
+          "[book] pagination did not converge; problem-index page numbers may be off by one",
         );
-      log(`pass 2: ${doc.getPageCount()} pages (${blanks.size} blank versos)`);
     }
     const unused = ALL_FIGURES.filter(
       (f) =>
@@ -875,7 +879,7 @@ async function main() {
         `[book] figures with no matching section: ${unused.map((f) => `${f.id} (${f.category} / ${f.section})`).join(", ")}`,
       );
 
-    // Front matter (page numbers come from pass 2).
+    // Front matter (page numbers come from the final pass).
     const figureTotal = builder.figures.length + 1;
     let frontPdf = await printPdf(
       browser,
