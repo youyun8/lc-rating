@@ -1,0 +1,634 @@
+/*
+ * Print stylesheet for the lecture book (Chromium paged media).
+ * Page geometry and per-chapter running heads are generated in html.ts;
+ * this file holds the typography.
+ */
+
+:root {
+  --ink: #1f2933;
+  --muted: #616e7c;
+  --rule: #cbd2d9;
+  --accent: #1d4ed8;
+  --accent-soft: #eef3ff;
+  --warm: #c2410c;
+  --warm-soft: #fff4ea;
+  --code-bg: #f6f8fa;
+  --serif: "Noto Serif TC", "Noto Serif CJK TC", serif;
+  --sans: "Noto Sans TC", "Noto Sans CJK TC", sans-serif;
+  --mono: "JetBrains Mono", "Noto Sans Mono", monospace;
+}
+
+html {
+  font-family: var(--serif);
+  font-size: 9.6pt;
+  line-height: 1.72;
+  color: var(--ink);
+  background: #fff;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  orphans: 2;
+  widows: 2;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+}
+
+p {
+  margin: 0 0 0.62em;
+}
+
+strong {
+  font-family: var(--sans);
+  font-weight: 700;
+}
+
+em {
+  font-style: normal;
+  text-emphasis: dot;
+  text-emphasis-position: under;
+}
+
+/* ---------------------------------------------------------------- */
+/* Structural headings (these feed the PDF outline)                  */
+/* ---------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--sans);
+  font-weight: 700;
+  break-after: avoid;
+  text-align: left;
+}
+
+.chapter {
+  break-before: page;
+}
+
+.chapter-opener {
+  break-after: page;
+}
+
+.chapter-opener .chapter-num {
+  font-family: var(--sans);
+  font-size: 11pt;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-top: 18mm;
+}
+
+.chapter-opener .chapter-num b {
+  display: block;
+  font-size: 64pt;
+  line-height: 1;
+  letter-spacing: 0;
+  margin-top: 2mm;
+  font-family: var(--sans);
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.chapter-opener h2 {
+  font-size: 26pt;
+  line-height: 1.25;
+  margin: 6mm 0 3mm;
+  padding-bottom: 4mm;
+  border-bottom: 2.5pt solid var(--ink);
+}
+
+.chapter-opener .chapter-src {
+  font-family: var(--sans);
+  font-size: 8.5pt;
+  color: var(--muted);
+  margin-bottom: 6mm;
+}
+
+.chapter-opener .chapter-map {
+  margin-top: 4mm;
+}
+
+.chapter-intro {
+  break-before: page;
+}
+
+.chapter-intro > .intro-label,
+.box-label {
+  font-family: var(--sans);
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  margin-bottom: 2mm;
+}
+
+.section {
+  margin-top: 0;
+}
+
+h3.sec.top {
+  font-size: 17pt;
+  line-height: 1.35;
+  margin: 14mm 0 5mm;
+  padding: 3mm 0 2.5mm;
+  border-top: 2pt solid var(--ink);
+  border-bottom: 0.6pt solid var(--rule);
+}
+
+.chapter-intro + .section > h3.sec.top,
+.section.d0:first-of-type > h3.sec.top {
+  margin-top: 0;
+}
+
+h4.sec {
+  font-size: 13.5pt;
+  line-height: 1.4;
+  margin: 9mm 0 3.5mm;
+  padding-left: 3mm;
+  border-left: 3pt solid var(--accent);
+}
+
+h5.sec.deep {
+  font-size: 12pt;
+  line-height: 1.4;
+  margin: 8mm 0 3mm;
+  font-family: var(--sans);
+  font-weight: 700;
+  border-left: 3pt solid var(--warm);
+  break-after: avoid;
+}
+
+.secnum {
+  color: var(--accent);
+  margin-right: 0.6em;
+  font-family: var(--sans);
+}
+
+/* ---------------------------------------------------------------- */
+/* Lecture skeleton headings (inside a section, not in the outline)  */
+/* ---------------------------------------------------------------- */
+
+.kh {
+  font-family: var(--sans);
+  font-weight: 700;
+  break-after: avoid;
+  text-align: left;
+}
+
+.kh2 {
+  font-size: 11.2pt;
+  margin: 6.5mm 0 2.4mm;
+  padding: 1.1mm 0 1.1mm 3mm;
+  background: var(--accent-soft);
+  border-left: 2.4pt solid var(--accent);
+}
+
+.kh3 {
+  font-size: 10.2pt;
+  margin: 4.5mm 0 1.8mm;
+  color: var(--accent);
+}
+
+.kh4,
+.kh1 {
+  font-size: 9.8pt;
+  margin: 3.5mm 0 1.4mm;
+}
+
+/* ---------------------------------------------------------------- */
+/* Lists, quotes, tables                                            */
+/* ---------------------------------------------------------------- */
+
+ul,
+ol {
+  margin: 0 0 0.7em;
+  padding-left: 1.7em;
+}
+
+li {
+  margin: 0.12em 0;
+}
+
+li > p {
+  margin: 0 0 0.25em;
+}
+
+blockquote {
+  margin: 0.6em 0 0.9em;
+  padding: 0.4em 0.9em;
+  border-left: 2.5pt solid var(--warm);
+  background: var(--warm-soft);
+  color: #3e4c59;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 0.6pt solid var(--rule);
+  margin: 1.2em 0;
+}
+
+.table-wrap {
+  margin: 0.6em 0 1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.2pt;
+  line-height: 1.45;
+  font-family: var(--sans);
+  text-align: left;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  break-inside: avoid;
+}
+
+th {
+  font-weight: 700;
+  background: #eef1f4;
+  border-top: 1pt solid var(--ink);
+  border-bottom: 0.7pt solid var(--ink);
+}
+
+th,
+td {
+  padding: 1.2mm 1.8mm;
+  vertical-align: top;
+}
+
+td {
+  border-bottom: 0.4pt solid var(--rule);
+}
+
+tbody tr:last-child td {
+  border-bottom: 1pt solid var(--ink);
+}
+
+.lc-link {
+  color: var(--accent);
+}
+
+.ext-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 0.4pt;
+  text-underline-offset: 1.5pt;
+}
+
+/* ---------------------------------------------------------------- */
+/* Code                                                              */
+/* ---------------------------------------------------------------- */
+
+code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--code-bg);
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+  font-variant-ligatures: none;
+}
+
+pre {
+  font-family: var(--mono);
+  font-size: 7.6pt;
+  line-height: 1.5;
+  background: var(--code-bg);
+  border: 0.5pt solid #d9dee3;
+  border-left: 2.2pt solid #9aa5b1;
+  border-radius: 2px;
+  padding: 2.2mm 3mm;
+  margin: 0.6em 0 1em;
+  white-space: pre-wrap;
+  word-break: break-all;
+  text-align: left;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------------------- */
+/* Example boxes                                                     */
+/* ---------------------------------------------------------------- */
+
+.example {
+  margin: 0.8em 0 1.1em;
+  padding: 2.4mm 3.4mm 1mm;
+  border: 0.7pt solid #b9c7e8;
+  border-radius: 3px;
+  background: #fbfcff;
+}
+
+.example-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 9.2pt;
+  margin-bottom: 1.6mm;
+  break-after: avoid;
+  text-align: left;
+}
+
+.example-tag {
+  display: inline-block;
+  font-size: 7.4pt;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 2px;
+  padding: 0 1.6mm;
+  margin-right: 2mm;
+  vertical-align: 1px;
+}
+
+.example pre {
+  background: #fff;
+}
+
+/* ---------------------------------------------------------------- */
+/* Figures                                                           */
+/* ---------------------------------------------------------------- */
+
+figure.fig {
+  margin: 1em 0 1.3em;
+  break-inside: avoid;
+  text-align: center;
+}
+
+figure.fig svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+figure.fig figcaption {
+  font-family: var(--sans);
+  font-size: 8.3pt;
+  color: var(--muted);
+  margin-top: 2mm;
+  text-align: center;
+}
+
+figure.fig figcaption b {
+  color: var(--ink);
+  margin-right: 0.8em;
+}
+
+/* ---------------------------------------------------------------- */
+/* Front matter                                                      */
+/* ---------------------------------------------------------------- */
+
+.front-page {
+  break-after: page;
+}
+
+.half-title {
+  padding-top: 70mm;
+  text-align: center;
+  font-family: var(--sans);
+}
+
+.half-title .t {
+  font-size: 26pt;
+  font-weight: 700;
+}
+
+.half-title .s {
+  font-size: 11pt;
+  color: var(--muted);
+  margin-top: 4mm;
+}
+
+.copyright {
+  padding-top: 118mm;
+  font-size: 8pt;
+  line-height: 1.75;
+  color: #3e4c59;
+  text-align: left;
+}
+
+.copyright table {
+  font-size: 8pt;
+  width: auto;
+  margin-bottom: 4mm;
+}
+
+.copyright td {
+  border: 0;
+  padding: 0.3mm 4mm 0.3mm 0;
+}
+
+.copyright tbody tr:last-child td {
+  border: 0;
+}
+
+.front-title {
+  font-family: var(--sans);
+  font-size: 20pt;
+  font-weight: 700;
+  margin: 8mm 0 7mm;
+  padding-bottom: 3mm;
+  border-bottom: 2pt solid var(--ink);
+}
+
+.toc-part {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 10.5pt;
+  margin: 5mm 0 1.5mm;
+  color: var(--accent);
+  break-after: avoid;
+}
+
+.toc-row {
+  display: flex;
+  align-items: baseline;
+  font-size: 9pt;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.toc-row .lbl {
+  flex: 0 1 auto;
+}
+
+.toc-row .dots {
+  flex: 1 1 auto;
+  border-bottom: 0.8pt dotted #9aa5b1;
+  margin: 0 1.5mm;
+  transform: translateY(-0.28em);
+  min-width: 6mm;
+}
+
+.toc-row .pg {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 8.4pt;
+  min-width: 8mm;
+  text-align: right;
+}
+
+.toc-row.l0 .n {
+  min-width: 17mm;
+}
+
+.toc-row.l0 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 10pt;
+  margin-top: 2.2mm;
+  break-after: avoid;
+}
+
+.toc-row.l1 {
+  padding-left: 7mm;
+}
+
+.toc-row.l2 {
+  padding-left: 14mm;
+  font-size: 8.4pt;
+  color: #3e4c59;
+}
+
+.toc-row .n {
+  display: inline-block;
+  min-width: 11mm;
+  font-family: var(--sans);
+  color: var(--accent);
+}
+
+.toc-row.l2 .n {
+  min-width: 13mm;
+}
+
+.lof .toc-row {
+  font-size: 8.4pt;
+}
+
+.lof .toc-row .n {
+  min-width: 13mm;
+}
+
+/* ---------------------------------------------------------------- */
+/* Part pages                                                        */
+/* ---------------------------------------------------------------- */
+
+.part-page {
+  break-before: page;
+  break-after: page;
+  padding-top: 62mm;
+  text-align: left;
+}
+
+.part-page .pnum {
+  font-family: var(--sans);
+  font-size: 12pt;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+}
+
+.part-page h1 {
+  font-size: 28pt;
+  margin: 3mm 0 6mm;
+  line-height: 1.3;
+}
+
+.part-page .psub {
+  font-size: 10.5pt;
+  color: var(--muted);
+  max-width: 120mm;
+  border-top: 1pt solid var(--rule);
+  padding-top: 4mm;
+}
+
+.part-page .pchapters {
+  margin-top: 12mm;
+  font-family: var(--sans);
+  font-size: 10pt;
+  line-height: 2;
+}
+
+.blank-page {
+  break-before: page;
+  break-after: page;
+  height: 10mm;
+}
+
+.katex {
+  font-size: 1.04em;
+}
+
+.katex-display {
+  margin: 0.6em 0;
+}
+
+/* ---------------------------------------------------------------- */
+/* Problem index (back matter)                                       */
+/* ---------------------------------------------------------------- */
+
+.appendix-title {
+  font-size: 20pt;
+  margin: 8mm 0 4mm;
+  padding-bottom: 3mm;
+  border-bottom: 2pt solid var(--ink);
+}
+
+.ix-note {
+  font-size: 8.4pt;
+  color: var(--muted);
+}
+
+.ix {
+  column-count: 2;
+  column-gap: 7mm;
+  font-family: var(--sans);
+  font-size: 7.4pt;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.ix-row {
+  break-inside: avoid;
+  display: flex;
+  gap: 1.5mm;
+  align-items: baseline;
+}
+
+.ix-id {
+  flex: 0 0 8mm;
+  font-family: var(--mono);
+  color: var(--accent);
+  text-align: right;
+}
+
+.ix-title {
+  flex: 1 1 auto;
+}
+
+.ix-refs {
+  flex: 0 0 auto;
+  max-width: 30mm;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 6.8pt;
+}
+
+.ix-pg {
+  color: var(--muted);
+  margin-left: 0.8mm;
+}

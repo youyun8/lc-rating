@@ -15,6 +15,9 @@
 # production
 /build
 
+# lecture book PDF output (scripts/book)
+/book-dist/
+
 # misc
 .DS_Store
 *.pem
