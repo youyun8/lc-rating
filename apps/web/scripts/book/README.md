@@ -13,7 +13,7 @@ pnpm book:pdf --chapters binary_search,graph --out book-dist/preview.pdf  # 只�
 pnpm book:figures                     # 所有圖解排在同一個 HTML 頁面上檢查
 ```
 
-需要 Chromium。預設使用 Playwright 管理的 Chromium（`$PLAYWRIGHT_BROWSERS_PATH`，雲端環境為 `/opt/pw-browsers`）；也可以用 `--chrome <path>` 或 `$CHROME_PATH` 指定。全書約 2,300 頁，排版兩遍，約 10 分鐘。
+需要 Chromium。預設使用 Playwright 管理的 Chromium（`$PLAYWRIGHT_BROWSERS_PATH`，雲端環境為 `/opt/pw-browsers`）；也可以用 `--chrome <path>` 或 `$CHROME_PATH` 指定。全書約 2,330 頁；排版會重複到頁碼收斂（通常 3 遍），約 25 分鐘。
 
 字型全部來自 `@fontsource`（Noto Serif TC 內文、Noto Sans TC 標題、JetBrains Mono 程式碼），會完整嵌入 PDF，不依賴系統字型。
 
@@ -21,7 +21,7 @@ pnpm book:figures                     # 所有圖解排在同一個 HTML 頁面�
 
 1. `buildLectureBook.ts` 依 `config.ts` 的篇章順序走訪講義樹。每一小節的 Markdown 用與網站相同的 marked + KaTeX + highlight.js 轉成 HTML（`markdown.ts`），`:::example` 轉成範例框，骨架標題（`## 核心想法與直覺` 等）轉成不進書籤的樣式標題。
 2. `figures/` 登記的圖依「主題 + 小節標題」插進對應小節，預設放在「核心想法與直覺」第一段之後。
-3. Chromium 以 paged media 列印主文：`@page` 命名頁提供每章的書眉，margin box 提供頁碼。第一遍讀回 PDF 書籤得到每個標題的頁碼；第二遍在需要的地方插入空白頁，讓每一篇、每一章都從奇數頁（右頁）開始，並把頁碼填進題號索引。
+3. Chromium 以 paged media 列印主文：`@page` 命名頁提供每章的書眉，margin box 提供頁碼。第一遍讀回 PDF 書籤得到每個標題的頁碼；之後在需要的地方插入空白頁，讓每一篇、每一章都從奇數頁（右頁）開始，並把頁碼填進題號索引，重複排版直到頁碼不再變動。
 4. 前置頁（羅馬數字頁碼）另外列印，再用 pdf-lib 合併：重建書籤樹、把目錄與圖目錄變成可點擊的內部連結、設定頁碼標籤（i, ii, … / 1, 2, …）與文件資訊。
 
 ## 開本與樣式
