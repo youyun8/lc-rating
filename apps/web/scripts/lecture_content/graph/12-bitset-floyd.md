@@ -32,22 +32,22 @@ constexpr int kMaxN = 3000;
 // 回傳傳遞閉包：reach[i][j] 表示 i 是否能到達 j。
 vector<bitset<kMaxN>> transitiveClosure(int n,
                                         const vector<vector<int>>& edges) {
-  vector<bitset<kMaxN>> reach(n);
-  for (int i = 0; i < n; ++i) {
-    reach[i][i] = true;                 // 自己到自己
-  }
-  for (const auto& e : edges) {
-    reach[e[0]][e[1]] = true;
-  }
-
-  for (int k = 0; k < n; ++k) {         // 中繼點仍在最外層
+    vector<bitset<kMaxN>> reach(n);
     for (int i = 0; i < n; ++i) {
-      if (reach[i][k]) {
-        reach[i] |= reach[k];           // 一次處理 64 個 j
-      }
+        reach[i][i] = true;  // 自己到自己
     }
-  }
-  return reach;
+    for (const auto& e : edges) {
+        reach[e[0]][e[1]] = true;
+    }
+
+    for (int k = 0; k < n; ++k) {  // 中繼點仍在最外層
+        for (int i = 0; i < n; ++i) {
+            if (reach[i][k]) {
+                reach[i] |= reach[k];  // 一次處理 64 個 j
+            }
+        }
+    }
+    return reach;
 }
 ```
 

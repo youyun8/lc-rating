@@ -25,15 +25,17 @@
 ```cpp
 // 質數 p 在 n! 中的指數（勒壤得公式）。
 long long legendre(long long n, long long p) {
-  long long count = 0;
-  while (n > 0) {
-    n /= p;          // 逐層：n/p, n/p^2, ...
-    count += n;
-  }
-  return count;
+    long long count = 0;
+    while (n > 0) {
+        n /= p;  // 逐層：n/p, n/p^2, ...
+        count += n;
+    }
+    return count;
 }
 
-int trailingZeroes(int n) { return static_cast<int>(legendre(n, 5)); }
+int trailingZeroes(int n) {
+    return static_cast<int>(legendre(n, 5));
+}
 ```
 
 ## 常見錯誤與邊界條件

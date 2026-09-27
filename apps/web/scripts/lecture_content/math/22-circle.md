@@ -24,16 +24,16 @@
 // 點是否在圓內（含邊界）：比平方，不開根號。
 bool inCircle(long long px, long long py, long long cx, long long cy,
               long long r) {
-  const long long dx = px - cx, dy = py - cy;
-  return dx * dx + dy * dy <= r * r;
+    const long long dx = px - cx, dy = py - cy;
+    return dx * dx + dy * dy <= r * r;
 }
 
 // 圓與軸對齊矩形是否重疊。
 bool circleOverlapsRect(long long cx, long long cy, long long r, long long x1,
                         long long y1, long long x2, long long y2) {
-  const long long nx = max(x1, min(cx, x2));   // 把圓心夾進矩形
-  const long long ny = max(y1, min(cy, y2));
-  return inCircle(nx, ny, cx, cy, r);
+    const long long nx = max(x1, min(cx, x2));  // 把圓心夾進矩形
+    const long long ny = max(y1, min(cy, y2));
+    return inCircle(nx, ny, cx, cy, r);
 }
 ```
 

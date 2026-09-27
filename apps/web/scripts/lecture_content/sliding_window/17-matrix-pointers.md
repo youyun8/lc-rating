@@ -35,19 +35,27 @@
 
 ```cpp
 class Solution {
- public:
-  bool searchMatrix(vector<vector<int>>& matrix, int target) {
-    if (matrix.empty() || matrix[0].empty()) { return false; }
-    int row = 0, col = matrix[0].size() - 1;      // 從右上角出發
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if (matrix.empty() || matrix[0].empty()) {
+            return false;
+        }
+        int row = 0, col = matrix[0].size() - 1;  // 從右上角出發
 
-    while (row < static_cast<int>(matrix.size()) && col >= 0) {
-      const int value = matrix[row][col];
-      if (value == target) { return true; }
-      if (value > target) { --col; }              // 整列作廢
-      else { ++row; }                             // 整行作廢
+        while (row < static_cast<int>(matrix.size()) && col >= 0) {
+            const int value = matrix[row][col];
+            if (value == target) {
+                return true;
+            }
+            if (value > target) {
+                --col;
+            }  // 整列作廢
+            else {
+                ++row;
+            }  // 整行作廢
+        }
+        return false;
     }
-    return false;
-  }
 };
 ```
 

@@ -30,27 +30,29 @@
 // 回傳起點到各點的最短距離；不可達為 LLONG_MAX。要求邊權非負。
 vector<long long> dijkstra(int n, const vector<vector<pair<int, int>>>& g,
                            int start) {
-  const long long kInf = LLONG_MAX;
-  vector<long long> dis(n, kInf);
-  dis[start] = 0;
+    const long long kInf = LLONG_MAX;
+    vector<long long> dis(n, kInf);
+    dis[start] = 0;
 
-  using Node = pair<long long, int>;   // (距離, 節點)
-  priority_queue<Node, vector<Node>, greater<Node>> heap;
-  heap.emplace(0LL, start);
+    using Node = pair<long long, int>;  // (距離, 節點)
+    priority_queue<Node, vector<Node>, greater<Node>> heap;
+    heap.emplace(0LL, start);
 
-  while (!heap.empty()) {
-    const auto [d, x] = heap.top();
-    heap.pop();
-    if (d > dis[x]) { continue; }      // 懶刪除：過期項目
-    for (const auto& [y, w] : g[x]) {
-      const long long next = d + w;
-      if (next < dis[y]) {
-        dis[y] = next;
-        heap.emplace(next, y);
-      }
+    while (!heap.empty()) {
+        const auto [d, x] = heap.top();
+        heap.pop();
+        if (d > dis[x]) {
+            continue;
+        }  // 懶刪除：過期項目
+        for (const auto& [y, w] : g[x]) {
+            const long long next = d + w;
+            if (next < dis[y]) {
+                dis[y] = next;
+                heap.emplace(next, y);
+            }
+        }
     }
-  }
-  return dis;
+    return dis;
 }
 ```
 

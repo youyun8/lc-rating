@@ -25,16 +25,18 @@
 ```cpp
 // 隨機化找出現次數超過一半的元素（配合 O(n) 驗證）。
 int majorityElement(const vector<int>& nums) {
-  mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-  uniform_int_distribution<int> pick(0, nums.size() - 1);
-  const int need = nums.size() / 2;
+    mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+    uniform_int_distribution<int> pick(0, nums.size() - 1);
+    const int need = nums.size() / 2;
 
-  for (int round = 0; round < 30; ++round) {     // 失敗機率約 2^-30
-    const int candidate = nums[pick(rng)];
-    const int count = std::count(nums.begin(), nums.end(), candidate);
-    if (count > need) { return candidate; }
-  }
-  return -1;                                     // 實務上不會走到
+    for (int round = 0; round < 30; ++round) {  // 失敗機率約 2^-30
+        const int candidate = nums[pick(rng)];
+        const int count = std::count(nums.begin(), nums.end(), candidate);
+        if (count > need) {
+            return candidate;
+        }
+    }
+    return -1;  // 實務上不會走到
 }
 ```
 

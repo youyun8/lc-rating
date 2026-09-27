@@ -25,19 +25,21 @@
 ```cpp
 // 劃分字母區間：同一字母只能出現在同一段。
 vector<int> partitionLabels(string s) {
-  array<int, 26> last{};
-  for (int i = 0; i < static_cast<int>(s.size()); ++i) { last[s[i] - 'a'] = i; }
-
-  vector<int> result;
-  int start = 0, end = 0;
-  for (int i = 0; i < static_cast<int>(s.size()); ++i) {
-    end = max(end, last[s[i] - 'a']);      // 這段至少要延伸到這裡
-    if (i == end) {                        // 門檻到了，可以切
-      result.push_back(i - start + 1);
-      start = i + 1;
+    array<int, 26> last{};
+    for (int i = 0; i < static_cast<int>(s.size()); ++i) {
+        last[s[i] - 'a'] = i;
     }
-  }
-  return result;
+
+    vector<int> result;
+    int start = 0, end = 0;
+    for (int i = 0; i < static_cast<int>(s.size()); ++i) {
+        end = max(end, last[s[i] - 'a']);  // 這段至少要延伸到這裡
+        if (i == end) {                    // 門檻到了，可以切
+            result.push_back(i - start + 1);
+            start = i + 1;
+        }
+    }
+    return result;
 }
 ```
 
@@ -62,9 +64,9 @@ vector<int> partitionLabels(string s) {
 vector<long long> dp(n + 1, INF);
 dp[0] = 0;
 for (int i = 1; i <= n; ++i) {
-  for (int j = 0; j < i; ++j) {
-    dp[i] = min(dp[i], dp[j] + cost(j, i));
-  }
+    for (int j = 0; j < i; ++j) {
+        dp[i] = min(dp[i], dp[j] + cost(j, i));
+    }
 }
 ```
 

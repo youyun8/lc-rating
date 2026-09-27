@@ -28,38 +28,38 @@
 
 ```cpp
 class Solution {
- public:
-  // 回傳連通塊個數，並在 component_size 中記錄每塊大小。
-  int countComponents(int n, vector<vector<int>>& edges) {
-    vector<vector<int>> g(n);
-    for (const auto& e : edges) {
-      g[e[0]].push_back(e[1]);
-      g[e[1]].push_back(e[0]);  // 有向圖刪掉這行
-    }
-
-    vector<int> visited(n, 0);
-    int components = 0;
-
-    // 回傳以 x 為根走到的節點數（後序統計）。
-    function<int(int)> dfs = [&](int x) -> int {
-      visited[x] = 1;
-      int size = 1;
-      for (int y : g[x]) {
-        if (!visited[y]) {
-          size += dfs(y);
+public:
+    // 回傳連通塊個數，並在 component_size 中記錄每塊大小。
+    int countComponents(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> g(n);
+        for (const auto& e : edges) {
+            g[e[0]].push_back(e[1]);
+            g[e[1]].push_back(e[0]);  // 有向圖刪掉這行
         }
-      }
-      return size;
-    };
 
-    for (int i = 0; i < n; ++i) {
-      if (!visited[i]) {
-        dfs(i);
-        ++components;
-      }
+        vector<int> visited(n, 0);
+        int components = 0;
+
+        // 回傳以 x 為根走到的節點數（後序統計）。
+        function<int(int)> dfs = [&](int x) -> int {
+            visited[x] = 1;
+            int size = 1;
+            for (int y : g[x]) {
+                if (!visited[y]) {
+                    size += dfs(y);
+                }
+            }
+            return size;
+        };
+
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                dfs(i);
+                ++components;
+            }
+        }
+        return components;
     }
-    return components;
-  }
 };
 ```
 
@@ -67,20 +67,26 @@ class Solution {
 
 ```cpp
 bool hasCycle(int n, const vector<vector<int>>& g) {
-  vector<int> color(n, 0);  // 0 未訪問 / 1 在路徑上 / 2 已完成
-  function<bool(int)> dfs = [&](int x) -> bool {
-    color[x] = 1;
-    for (int y : g[x]) {
-      if (color[y] == 1) { return true; }               // 回邊，成環
-      if (color[y] == 0 && dfs(y)) { return true; }
+    vector<int> color(n, 0);  // 0 未訪問 / 1 在路徑上 / 2 已完成
+    function<bool(int)> dfs = [&](int x) -> bool {
+        color[x] = 1;
+        for (int y : g[x]) {
+            if (color[y] == 1) {
+                return true;
+            }  // 回邊，成環
+            if (color[y] == 0 && dfs(y)) {
+                return true;
+            }
+        }
+        color[x] = 2;
+        return false;
+    };
+    for (int i = 0; i < n; ++i) {
+        if (color[i] == 0 && dfs(i)) {
+            return true;
+        }
     }
-    color[x] = 2;
     return false;
-  };
-  for (int i = 0; i < n; ++i) {
-    if (color[i] == 0 && dfs(i)) { return true; }
-  }
-  return false;
 }
 ```
 

@@ -33,23 +33,25 @@ $$\big((B-A)\times(C-A)\big)\cdot\big((B-A)\times(D-A)\big) < 0$$
 ## C++17 模板
 
 ```cpp
-struct Point { long long x, y; };
+struct Point {
+    long long x, y;
+};
 
 // 叉積：正為逆時針、負為順時針、零為共線。
 long long cross(const Point& o, const Point& a, const Point& b) {
-  return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+    return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
 }
 
 // 鞋帶公式：回傳兩倍有向面積，取絕對值再除以 2 即為面積。
 long long doubleArea(const vector<Point>& poly) {
-  long long sum = 0;
-  const int n = poly.size();
-  for (int i = 0; i < n; ++i) {
-    const Point& p = poly[i];
-    const Point& q = poly[(i + 1) % n];      // 首尾相接
-    sum += p.x * q.y - q.x * p.y;
-  }
-  return llabs(sum);
+    long long sum = 0;
+    const int n = poly.size();
+    for (int i = 0; i < n; ++i) {
+        const Point& p = poly[i];
+        const Point& q = poly[(i + 1) % n];  // 首尾相接
+        sum += p.x * q.y - q.x * p.y;
+    }
+    return llabs(sum);
 }
 ```
 

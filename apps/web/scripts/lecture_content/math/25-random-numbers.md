@@ -28,33 +28,38 @@ Fisher-Yates 洗牌的正確性：由後往前，對每個 `i` 從 `[0, i]` 中�
 
 ```cpp
 class RandomizedSet {
- public:
-  bool insert(int val) {
-    if (index_.count(val)) { return false; }
-    index_[val] = values_.size();
-    values_.push_back(val);
-    return true;
-  }
+public:
+    bool insert(int val) {
+        if (index_.count(val)) {
+            return false;
+        }
+        index_[val] = values_.size();
+        values_.push_back(val);
+        return true;
+    }
 
-  bool remove(int val) {
-    auto it = index_.find(val);
-    if (it == index_.end()) { return false; }
-    const int pos = it->second;
-    values_[pos] = values_.back();          // 與尾端交換
-    index_[values_[pos]] = pos;             // 更新被搬過來的元素
-    values_.pop_back();
-    index_.erase(it);
-    return true;
-  }
+    bool remove(int val) {
+        auto it = index_.find(val);
+        if (it == index_.end()) {
+            return false;
+        }
+        const int pos = it->second;
+        values_[pos] = values_.back();  // 與尾端交換
+        index_[values_[pos]] = pos;     // 更新被搬過來的元素
+        values_.pop_back();
+        index_.erase(it);
+        return true;
+    }
 
-  int getRandom() {
-    return values_[uniform_int_distribution<int>(0, values_.size() - 1)(rng_)];
-  }
+    int getRandom() {
+        return values_[uniform_int_distribution<int>(0,
+                                                     values_.size() - 1)(rng_)];
+    }
 
- private:
-  vector<int> values_;
-  unordered_map<int, int> index_;
-  mt19937 rng_{random_device{}()};
+private:
+    vector<int> values_;
+    unordered_map<int, int> index_;
+    mt19937 rng_{random_device{}()};
 };
 ```
 

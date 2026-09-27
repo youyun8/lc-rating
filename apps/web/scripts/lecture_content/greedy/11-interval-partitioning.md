@@ -25,15 +25,17 @@
 ```cpp
 // 最少會議室數量。
 int minMeetingRooms(vector<vector<int>>& intervals) {
-  sort(intervals.begin(), intervals.end(),
-       [](const auto& a, const auto& b) { return a[0] < b[0]; });  // 按左端點
+    sort(intervals.begin(), intervals.end(),
+         [](const auto& a, const auto& b) { return a[0] < b[0]; });  // 按左端點
 
-  priority_queue<int, vector<int>, greater<int>> ends;   // 小根堆：最早結束
-  for (const auto& it : intervals) {
-    if (!ends.empty() && ends.top() <= it[0]) { ends.pop(); }  // 重用該組
-    ends.push(it[1]);
-  }
-  return ends.size();
+    priority_queue<int, vector<int>, greater<int>> ends;  // 小根堆：最早結束
+    for (const auto& it : intervals) {
+        if (!ends.empty() && ends.top() <= it[0]) {
+            ends.pop();
+        }  // 重用該組
+        ends.push(it[1]);
+    }
+    return ends.size();
 }
 ```
 

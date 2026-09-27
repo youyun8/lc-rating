@@ -29,12 +29,13 @@ $$\sum_{\text{對象}} f(\text{對象}) = \sum_{\text{元素}} (\text{該元素�
 ```cpp
 // 所有子陣列的元素和之總和。
 long long sumOfAllSubarrays(const vector<int>& a) {
-  const long long n = a.size();
-  long long total = 0;
-  for (long long i = 0; i < n; ++i) {
-    total += 1LL * a[i] * (i + 1) * (n - i);   // 左端點 i+1 種、右端點 n-i 種
-  }
-  return total;
+    const long long n = a.size();
+    long long total = 0;
+    for (long long i = 0; i < n; ++i) {
+        total +=
+            1LL * a[i] * (i + 1) * (n - i);  // 左端點 i+1 種、右端點 n-i 種
+    }
+    return total;
 }
 ```
 

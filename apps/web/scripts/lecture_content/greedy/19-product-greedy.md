@@ -30,23 +30,25 @@
 ```cpp
 // 三個數的最大乘積。
 int maximumProduct(vector<int>& nums) {
-  sort(nums.begin(), nums.end());
-  const int n = nums.size();
-  return max(nums[n - 1] * nums[n - 2] * nums[n - 3],   // 三個最大
-             nums[0] * nums[1] * nums[n - 1]);          // 兩個最小負數配最大
+    sort(nums.begin(), nums.end());
+    const int n = nums.size();
+    return max(nums[n - 1] * nums[n - 2] * nums[n - 3],  // 三個最大
+               nums[0] * nums[1] * nums[n - 1]);  // 兩個最小負數配最大
 }
 
 // 乘積最大子陣列。
 int maxProduct(vector<int>& nums) {
-  int answer = nums[0], maxProd = nums[0], minProd = nums[0];
-  for (size_t i = 1; i < nums.size(); ++i) {
-    const int x = nums[i];
-    if (x < 0) { swap(maxProd, minProd); }              // 負數翻轉角色
-    maxProd = max(x, maxProd * x);
-    minProd = min(x, minProd * x);
-    answer = max(answer, maxProd);
-  }
-  return answer;
+    int answer = nums[0], maxProd = nums[0], minProd = nums[0];
+    for (size_t i = 1; i < nums.size(); ++i) {
+        const int x = nums[i];
+        if (x < 0) {
+            swap(maxProd, minProd);
+        }  // 負數翻轉角色
+        maxProd = max(x, maxProd * x);
+        minProd = min(x, minProd * x);
+        answer = max(answer, maxProd);
+    }
+    return answer;
 }
 ```
 

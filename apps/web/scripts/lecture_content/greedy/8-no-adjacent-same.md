@@ -29,14 +29,16 @@ $$\max\left(n,\; (c_{\max}-1)(k+1) + m\right)$$
 ```cpp
 // 任務排程器：相同任務之間至少間隔 k，求最短總時間。
 int leastInterval(vector<char>& tasks, int k) {
-  array<int, 26> count{};
-  for (char c : tasks) { ++count[c - 'A']; }
+    array<int, 26> count{};
+    for (char c : tasks) {
+        ++count[c - 'A'];
+    }
 
-  const int maxCount = *max_element(count.begin(), count.end());
-  const int maxKinds = std::count(count.begin(), count.end(), maxCount);
+    const int maxCount = *max_element(count.begin(), count.end());
+    const int maxKinds = std::count(count.begin(), count.end(), maxCount);
 
-  const int framed = (maxCount - 1) * (k + 1) + maxKinds;
-  return max(static_cast<int>(tasks.size()), framed);   // 空檔被填滿時就是 n
+    const int framed = (maxCount - 1) * (k + 1) + maxKinds;
+    return max(static_cast<int>(tasks.size()), framed);  // 空檔被填滿時就是 n
 }
 ```
 

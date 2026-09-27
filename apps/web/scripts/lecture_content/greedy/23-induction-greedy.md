@@ -27,13 +27,15 @@
 ```cpp
 // 用 nums 中的元素（可各取一次）能湊出的最小正整數。
 long long minUnreachable(vector<int>& nums) {
-  sort(nums.begin(), nums.end());
-  long long reach = 0;                       // [1, reach] 都湊得出
-  for (int x : nums) {
-    if (x > reach + 1) { break; }            // 出現斷層
-    reach += x;
-  }
-  return reach + 1;
+    sort(nums.begin(), nums.end());
+    long long reach = 0;  // [1, reach] 都湊得出
+    for (int x : nums) {
+        if (x > reach + 1) {
+            break;
+        }  // 出現斷層
+        reach += x;
+    }
+    return reach + 1;
 }
 ```
 

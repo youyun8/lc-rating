@@ -25,19 +25,21 @@
 ```cpp
 // 最少射出幾支箭能引爆所有氣球（區間閉合）。
 int findMinArrowShots(vector<vector<int>>& points) {
-  if (points.empty()) { return 0; }
-  sort(points.begin(), points.end(),
-       [](const auto& a, const auto& b) { return a[1] < b[1]; });  // 按右端點
-
-  int arrows = 0;
-  long long lastPoint = LLONG_MIN;
-  for (const auto& p : points) {
-    if (p[0] > lastPoint) {          // 尚未被覆蓋，放新點
-      ++arrows;
-      lastPoint = p[1];
+    if (points.empty()) {
+        return 0;
     }
-  }
-  return arrows;
+    sort(points.begin(), points.end(),
+         [](const auto& a, const auto& b) { return a[1] < b[1]; });  // 按右端點
+
+    int arrows = 0;
+    long long lastPoint = LLONG_MIN;
+    for (const auto& p : points) {
+        if (p[0] > lastPoint) {  // 尚未被覆蓋，放新點
+            ++arrows;
+            lastPoint = p[1];
+        }
+    }
+    return arrows;
 }
 ```
 

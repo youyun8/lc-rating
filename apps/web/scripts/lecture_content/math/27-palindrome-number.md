@@ -18,24 +18,28 @@
 
 ```cpp
 bool isPalindrome(int x) {
-  if (x < 0 || (x % 10 == 0 && x != 0)) { return false; }   // 負數與尾零
-  int rev = 0;
-  while (x > rev) {
-    rev = rev * 10 + x % 10;
-    x /= 10;
-  }
-  return x == rev || x == rev / 10;      // 偶數位 / 奇數位
+    if (x < 0 || (x % 10 == 0 && x != 0)) {
+        return false;
+    }  // 負數與尾零
+    int rev = 0;
+    while (x > rev) {
+        rev = rev * 10 + x % 10;
+        x /= 10;
+    }
+    return x == rev || x == rev / 10;  // 偶數位 / 奇數位
 }
 
 // 由前半段 half 鏡射出迴文；odd 表示總長度為奇數。
 long long buildPalindrome(long long half, bool odd) {
-  long long result = half;
-  if (odd) { half /= 10; }               // 奇數長度時中間位不重複
-  while (half > 0) {
-    result = result * 10 + half % 10;
-    half /= 10;
-  }
-  return result;
+    long long result = half;
+    if (odd) {
+        half /= 10;
+    }  // 奇數長度時中間位不重複
+    while (half > 0) {
+        result = result * 10 + half % 10;
+        half /= 10;
+    }
+    return result;
 }
 ```
 
@@ -43,39 +47,51 @@ long long buildPalindrome(long long half, bool odd) {
 
 ```cpp
 bool buildBounded(long long half, bool odd, long long limit, long long& value) {
-  value = half;
-  long long tail = odd ? half / 10 : half;
-  while (tail > 0) {
-    const int digit = tail % 10;
-    if (value > (limit - digit) / 10) { return false; }
-    value = value * 10 + digit;
-    tail /= 10;
-  }
-  return value <= limit;
+    value = half;
+    long long tail = odd ? half / 10 : half;
+    while (tail > 0) {
+        const int digit = tail % 10;
+        if (value > (limit - digit) / 10) {
+            return false;
+        }
+        value = value * 10 + digit;
+        tail /= 10;
+    }
+    return value <= limit;
 }
 
 vector<long long> palindromesUpTo(long long limit) {
-  vector<long long> result;
-  if (limit < 1) { return result; }
+    vector<long long> result;
+    if (limit < 1) {
+        return result;
+    }
 
-  for (long long base = 1;;) {
-    // base=1 產生 1 位、2 位；base=10 產生 3 位、4 位；依此類推。
-    const long long decadeEnd =
-        base > LLONG_MAX / 10 ? LLONG_MAX : base * 10 - 1;
-    for (long long half = base; half <= limit && half <= decadeEnd; ++half) {
-      long long value;
-      if (!buildBounded(half, true, limit, value)) { break; }
-      result.push_back(value);
+    for (long long base = 1;;) {
+        // base=1 產生 1 位、2 位；base=10 產生 3 位、4 位；依此類推。
+        const long long decadeEnd =
+            base > LLONG_MAX / 10 ? LLONG_MAX : base * 10 - 1;
+        for (long long half = base; half <= limit && half <= decadeEnd;
+             ++half) {
+            long long value;
+            if (!buildBounded(half, true, limit, value)) {
+                break;
+            }
+            result.push_back(value);
+        }
+        for (long long half = base; half <= limit && half <= decadeEnd;
+             ++half) {
+            long long value;
+            if (!buildBounded(half, false, limit, value)) {
+                break;
+            }
+            result.push_back(value);
+        }
+        if (base > limit / 10 || base > LLONG_MAX / 10) {
+            break;
+        }
+        base *= 10;
     }
-    for (long long half = base; half <= limit && half <= decadeEnd; ++half) {
-      long long value;
-      if (!buildBounded(half, false, limit, value)) { break; }
-      result.push_back(value);
-    }
-    if (base > limit / 10 || base > LLONG_MAX / 10) { break; }
-    base *= 10;
-  }
-  return result;
+    return result;
 }
 ```
 

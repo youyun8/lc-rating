@@ -207,9 +207,11 @@ $$\textbf{先判 }v=\mathrm{goal}\textbf{，再判 }v\in[0,1000].$$
 class Solution {
 public:
     int minimumOperationsToMakeEqual(int x, int y) {
-        if (x <= y) { return y - x; }                 // 只能靠 +1，直接算（定理 3 命題 a 同型）
+        if (x <= y) {
+            return y - x;
+        }  // 只能靠 +1，直接算（定理 3 命題 a 同型）
 
-        const int LIM = x + (x - y);                  // 定理 5：平凡解代價 x-y，每步最多 +1
+        const int LIM = x + (x - y);  // 定理 5：平凡解代價 x-y，每步最多 +1
         std::vector<int> dist(LIM + 1, -1);
         std::queue<int> q;
         dist[x] = 0;
@@ -218,19 +220,27 @@ public:
         while (!q.empty()) {
             const int u = q.front();
             q.pop();
-            if (u == y) { return dist[u]; }
+            if (u == y) {
+                return dist[u];
+            }
 
             auto relax = [&](int v) {
-                if (v < 0 || v > LIM || dist[v] != -1) { return; }
+                if (v < 0 || v > LIM || dist[v] != -1) {
+                    return;
+                }
                 dist[v] = dist[u] + 1;
                 q.push(v);
             };
-            if (u % 11 == 0) { relax(u / 11); }
-            if (u % 5 == 0) { relax(u / 5); }
+            if (u % 11 == 0) {
+                relax(u / 11);
+            }
+            if (u % 5 == 0) {
+                relax(u / 5);
+            }
             relax(u - 1);
             relax(u + 1);
         }
-        return -1;                                    // 平凡解保證走不到這裡
+        return -1;  // 平凡解保證走不到這裡
     }
 };
 ```
@@ -243,7 +253,9 @@ public:
 class Solution {
 public:
     int minimumOperations(const std::vector<int>& nums, int start, int goal) {
-        if (start == goal) { return 0; }
+        if (start == goal) {
+            return 0;
+        }
 
         constexpr int LIM = 1000;
         std::vector<int> dist(LIM + 1, -1);
@@ -256,9 +268,15 @@ public:
             q.pop();
             for (const int a : nums) {
                 for (const int v : {u + a, u - a, u ^ a}) {
-                    if (v == goal) { return dist[u] + 1; }   // ⚠ 先判 goal
-                    if (v < 0 || v > LIM) { continue; }      // 再判界：出界就是死路
-                    if (dist[v] != -1) { continue; }
+                    if (v == goal) {
+                        return dist[u] + 1;
+                    }  // ⚠ 先判 goal
+                    if (v < 0 || v > LIM) {
+                        continue;
+                    }  // 再判界：出界就是死路
+                    if (dist[v] != -1) {
+                        continue;
+                    }
                     dist[v] = dist[u] + 1;
                     q.push(v);
                 }
@@ -282,9 +300,13 @@ private:
     std::unordered_map<int, int> memo;
 
     int dfs(int n) {
-        if (n <= 1) { return n; }                     // f(0) = 0, f(1) = 1
+        if (n <= 1) {
+            return n;
+        }  // f(0) = 0, f(1) = 1
         const auto it = memo.find(n);
-        if (it != memo.end()) { return it->second; }
+        if (it != memo.end()) {
+            return it->second;
+        }
 
         // 定理 2：只需要「補到 2 的倍數」與「補到 3 的倍數」兩個分支
         const int res = 1 + std::min(n % 2 + dfs(n / 2), n % 3 + dfs(n / 3));
@@ -303,17 +325,17 @@ class Solution {
 public:
     // 397：偶數強制減半；奇數看 mod 4（定理 4），n = 3 是唯一例外
     int integerReplacement(int n) {
-        long long x = n;                              // ⚠ n = INT_MAX 時 x + 1 會溢位 int
+        long long x = n;  // ⚠ n = INT_MAX 時 x + 1 會溢位 int
         int ans = 0;
         while (x > 1) {
             if (x % 2 == 0) {
                 x /= 2;
             } else if (x == 3) {
-                x -= 1;                               // 例外：f(1) = 0 是定義值，引理在此斷掉
+                x -= 1;  // 例外：f(1) = 0 是定義值，引理在此斷掉
             } else if (x % 4 == 1) {
-                x -= 1;                               // (x-1)/2 為偶 ⇒ 不劣
+                x -= 1;  // (x-1)/2 為偶 ⇒ 不劣
             } else {
-                x += 1;                               // x % 4 == 3 ⇒ (x+1)/2 為偶 ⇒ 不劣
+                x += 1;  // x % 4 == 3 ⇒ (x+1)/2 為偶 ⇒ 不劣
             }
             ++ans;
         }
@@ -328,7 +350,8 @@ public:
             t = (t % 2 == 0) ? (t / 2) : (t + 1);
             ++ans;
         }
-        return ans + static_cast<int>(startValue - t);   // t <= startValue：剩下只能一路 +1
+        return ans + static_cast<int>(startValue -
+                                      t);  // t <= startValue：剩下只能一路 +1
     }
 };
 ```
@@ -337,8 +360,8 @@ public:
 
 ```cpp
 // g[u] = {(v, w)}，w 只能是 0 或 1
-std::vector<int> zeroOneBfs(int n, int src,
-                            const std::vector<std::vector<std::pair<int, int>>>& g) {
+std::vector<int> zeroOneBfs(
+    int n, int src, const std::vector<std::vector<std::pair<int, int>>>& g) {
     constexpr int INF = std::numeric_limits<int>::max();
     std::vector<int> dist(n, INF);
     std::deque<int> dq;
@@ -349,12 +372,12 @@ std::vector<int> zeroOneBfs(int n, int src,
         const int u = dq.front();
         dq.pop_front();
         for (const auto& [v, w] : g[u]) {
-            if (dist[u] + w < dist[v]) {              // 這個檢查同時擋掉了過期的重複節點
+            if (dist[u] + w < dist[v]) {  // 這個檢查同時擋掉了過期的重複節點
                 dist[v] = dist[u] + w;
                 if (w == 0) {
-                    dq.push_front(v);                 // 同一層 ⇒ 插隊首
+                    dq.push_front(v);  // 同一層 ⇒ 插隊首
                 } else {
-                    dq.push_back(v);                  // 下一層 ⇒ 排隊尾
+                    dq.push_back(v);  // 下一層 ⇒ 排隊尾
                 }
             }
         }

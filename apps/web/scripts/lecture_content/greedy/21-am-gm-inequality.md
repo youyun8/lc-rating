@@ -28,24 +28,23 @@ $$\frac{x_1 + \cdots + x_n}{n} \ge \sqrt[n]{x_1 \cdots x_n}$$
 
 ```cpp
 long long modPow(long long base, long long exponent, long long mod) {
-  long long result = 1 % mod;
-  while (exponent > 0) {
-    if (exponent & 1) {
-      result = static_cast<long long>((__int128)result * base % mod);
+    long long result = 1 % mod;
+    while (exponent > 0) {
+        if (exponent & 1) {
+            result = static_cast<long long>((__int128)result * base % mod);
+        }
+        base = static_cast<long long>((__int128)base * base % mod);
+        exponent >>= 1;
     }
-    base = static_cast<long long>((__int128)base * base % mod);
-    exponent >>= 1;
-  }
-  return result;
+    return result;
 }
 
 // 把 n 拆成 k 個正整數，使乘積最大（盡量平均）。
 long long maxProductSplit(long long n, long long k, long long mod) {
-  const long long base = n / k, remainder = n % k;
-  // remainder 份是 base + 1，其餘 k - remainder 份是 base
-  return static_cast<long long>(
-      (__int128)modPow(base + 1, remainder, mod) *
-      modPow(base, k - remainder, mod) % mod);
+    const long long base = n / k, remainder = n % k;
+    // remainder 份是 base + 1，其餘 k - remainder 份是 base
+    return static_cast<long long>((__int128)modPow(base + 1, remainder, mod) *
+                                  modPow(base, k - remainder, mod) % mod);
 }
 ```
 

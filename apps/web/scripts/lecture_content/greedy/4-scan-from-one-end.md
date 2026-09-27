@@ -25,12 +25,14 @@
 ```cpp
 // 跳躍遊戲：能否從第 0 格到達最後一格。
 bool canJump(vector<int>& nums) {
-  int reach = 0;
-  for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
-    if (i > reach) { return false; }          // 這一格根本到不了
-    reach = max(reach, i + nums[i]);
-  }
-  return true;
+    int reach = 0;
+    for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
+        if (i > reach) {
+            return false;
+        }  // 這一格根本到不了
+        reach = max(reach, i + nums[i]);
+    }
+    return true;
 }
 ```
 

@@ -25,24 +25,34 @@
 ```cpp
 constexpr long long kMod = 1'000'000'007;
 
-long long add(long long a, long long b) { return (a + b) % kMod; }
-long long sub(long long a, long long b) { return ((a - b) % kMod + kMod) % kMod; }
-long long mul(long long a, long long b) { return a % kMod * (b % kMod) % kMod; }
+long long add(long long a, long long b) {
+    return (a + b) % kMod;
+}
+long long sub(long long a, long long b) {
+    return ((a - b) % kMod + kMod) % kMod;
+}
+long long mul(long long a, long long b) {
+    return a % kMod * (b % kMod) % kMod;
+}
 
 // 快速冪：a^e mod kMod
 long long power(long long a, long long e) {
-  long long result = 1;
-  a %= kMod;
-  while (e > 0) {
-    if (e & 1) { result = result * a % kMod; }
-    a = a * a % kMod;
-    e >>= 1;
-  }
-  return result;
+    long long result = 1;
+    a %= kMod;
+    while (e > 0) {
+        if (e & 1) {
+            result = result * a % kMod;
+        }
+        a = a * a % kMod;
+        e >>= 1;
+    }
+    return result;
 }
 
 // kMod 為質數時的逆元（費馬小定理）
-long long inverse(long long a) { return power(a, kMod - 2); }
+long long inverse(long long a) {
+    return power(a, kMod - 2);
+}
 ```
 
 ## 常見錯誤與邊界條件

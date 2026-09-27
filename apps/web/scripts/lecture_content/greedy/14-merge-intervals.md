@@ -22,20 +22,23 @@
 
 ```cpp
 vector<vector<int>> merge(vector<vector<int>>& intervals) {
-  if (intervals.empty()) { return {}; }
-  sort(intervals.begin(), intervals.end(),
-       [](const auto& a, const auto& b) { return a[0] < b[0]; });
-
-  vector<vector<int>> result{intervals[0]};
-  for (size_t i = 1; i < intervals.size(); ++i) {
-    auto& last = result.back();
-    if (intervals[i][0] <= last[1]) {
-      last[1] = max(last[1], intervals[i][1]);   // 可能被完全包含，故取 max
-    } else {
-      result.push_back(intervals[i]);
+    if (intervals.empty()) {
+        return {};
     }
-  }
-  return result;
+    sort(intervals.begin(), intervals.end(),
+         [](const auto& a, const auto& b) { return a[0] < b[0]; });
+
+    vector<vector<int>> result{intervals[0]};
+    for (size_t i = 1; i < intervals.size(); ++i) {
+        auto& last = result.back();
+        if (intervals[i][0] <= last[1]) {
+            last[1] =
+                max(last[1], intervals[i][1]);  // 可能被完全包含，故取 max
+        } else {
+            result.push_back(intervals[i]);
+        }
+    }
+    return result;
 }
 ```
 

@@ -28,11 +28,17 @@ DP 版本用 `f[i]` 表示「把 `i` 拆成至少兩個正整數後的最大乘�
 
 ```cpp
 int integerBreak(int n) {
-  if (n <= 3) { return n - 1; }        // 2->1, 3->2（必須拆成至少兩段）
-  const int quotient = n / 3, remainder = n % 3;
-  if (remainder == 0) { return pow3(quotient); }
-  if (remainder == 1) { return pow3(quotient - 1) * 4; }   // 退一個 3 換兩個 2
-  return pow3(quotient) * 2;
+    if (n <= 3) {
+        return n - 1;
+    }  // 2->1, 3->2（必須拆成至少兩段）
+    const int quotient = n / 3, remainder = n % 3;
+    if (remainder == 0) {
+        return pow3(quotient);
+    }
+    if (remainder == 1) {
+        return pow3(quotient - 1) * 4;
+    }  // 退一個 3 換兩個 2
+    return pow3(quotient) * 2;
 }
 ```
 

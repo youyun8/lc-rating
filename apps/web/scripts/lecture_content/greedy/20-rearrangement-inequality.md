@@ -29,20 +29,24 @@ $$(a_i b_i + a_j b_j) - (a_i b_j + a_j b_i) = (a_j - a_i)(b_j - b_i) \ge 0$$
 ```cpp
 // 同序配對：總和最大。
 long long maxPairSum(vector<int> a, vector<int> b) {
-  sort(a.begin(), a.end());
-  sort(b.begin(), b.end());
-  long long total = 0;
-  for (size_t i = 0; i < a.size(); ++i) { total += 1LL * a[i] * b[i]; }
-  return total;
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    long long total = 0;
+    for (size_t i = 0; i < a.size(); ++i) {
+        total += 1LL * a[i] * b[i];
+    }
+    return total;
 }
 
 // 逆序配對：總和最小。
 long long minPairSum(vector<int> a, vector<int> b) {
-  sort(a.begin(), a.end());
-  sort(b.begin(), b.end(), greater<int>());          // 一組反向
-  long long total = 0;
-  for (size_t i = 0; i < a.size(); ++i) { total += 1LL * a[i] * b[i]; }
-  return total;
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end(), greater<int>());  // 一組反向
+    long long total = 0;
+    for (size_t i = 0; i < a.size(); ++i) {
+        total += 1LL * a[i] * b[i];
+    }
+    return total;
 }
 ```
 

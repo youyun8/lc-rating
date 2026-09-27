@@ -24,12 +24,12 @@
 
 ```cpp
 long long gcd(long long a, long long b) {
-  while (b != 0) {
-    const long long r = a % b;
-    a = b;
-    b = r;
-  }
-  return a;      // b 為 0 時 a 即答案
+    while (b != 0) {
+        const long long r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;  // b 為 0 時 a 即答案
 }
 ```
 

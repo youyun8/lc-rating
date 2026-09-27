@@ -23,19 +23,21 @@
 ```cpp
 // 統計滿足 i < j < k 且 (i,j)、(j,k) 各自滿足某條件的三元組個數。
 long long countTriples(const vector<int>& a) {
-  const int n = a.size();
-  vector<long long> right(n, 0);
-  // 先算每個 j 右側的合法數量
-  for (int j = n - 2; j >= 0; --j) {
-    right[j] = right[j + 1] + (okRight(a[j + 1]) ? 1 : 0);
-  }
+    const int n = a.size();
+    vector<long long> right(n, 0);
+    // 先算每個 j 右側的合法數量
+    for (int j = n - 2; j >= 0; --j) {
+        right[j] = right[j + 1] + (okRight(a[j + 1]) ? 1 : 0);
+    }
 
-  long long total = 0, left = 0;
-  for (int j = 0; j < n; ++j) {
-    total += left * right[j];         // 以 j 為中間元素的三元組數
-    if (okLeft(a[j])) { ++left; }     // j 處理完才併入左側統計
-  }
-  return total;
+    long long total = 0, left = 0;
+    for (int j = 0; j < n; ++j) {
+        total += left * right[j];  // 以 j 為中間元素的三元組數
+        if (okLeft(a[j])) {
+            ++left;
+        }  // j 處理完才併入左側統計
+    }
+    return total;
 }
 ```
 

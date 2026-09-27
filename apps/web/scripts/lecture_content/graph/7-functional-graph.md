@@ -30,42 +30,50 @@
 
 ```cpp
 class Solution {
- public:
-  // 回傳最長環的長度（內向基環樹森林）。
-  int longestCycle(vector<int>& g) {
-    const int n = g.size();
-    vector<int> indeg(n, 0);
-    for (int x = 0; x < n; ++x) {
-      if (g[x] >= 0) { ++indeg[g[x]]; }
-    }
+public:
+    // 回傳最長環的長度（內向基環樹森林）。
+    int longestCycle(vector<int>& g) {
+        const int n = g.size();
+        vector<int> indeg(n, 0);
+        for (int x = 0; x < n; ++x) {
+            if (g[x] >= 0) {
+                ++indeg[g[x]];
+            }
+        }
 
-    // 一、拓撲剝除所有樹枝
-    queue<int> q;
-    for (int i = 0; i < n; ++i) {
-      if (indeg[i] == 0) { q.push(i); }
-    }
-    vector<int> removed(n, 0);
-    while (!q.empty()) {
-      const int x = q.front();
-      q.pop();
-      removed[x] = 1;
-      const int y = g[x];
-      if (y >= 0 && --indeg[y] == 0) { q.push(y); }
-    }
+        // 一、拓撲剝除所有樹枝
+        queue<int> q;
+        for (int i = 0; i < n; ++i) {
+            if (indeg[i] == 0) {
+                q.push(i);
+            }
+        }
+        vector<int> removed(n, 0);
+        while (!q.empty()) {
+            const int x = q.front();
+            q.pop();
+            removed[x] = 1;
+            const int y = g[x];
+            if (y >= 0 && --indeg[y] == 0) {
+                q.push(y);
+            }
+        }
 
-    // 二、剩下的都在環上，逐環量長度
-    int answer = -1;
-    for (int i = 0; i < n; ++i) {
-      if (removed[i]) { continue; }
-      int length = 0;
-      for (int x = i; !removed[x]; x = g[x]) {
-        removed[x] = 1;      // 邊走邊標記，每個環只量一次
-        ++length;
-      }
-      answer = max(answer, length);
+        // 二、剩下的都在環上，逐環量長度
+        int answer = -1;
+        for (int i = 0; i < n; ++i) {
+            if (removed[i]) {
+                continue;
+            }
+            int length = 0;
+            for (int x = i; !removed[x]; x = g[x]) {
+                removed[x] = 1;  // 邊走邊標記，每個環只量一次
+                ++length;
+            }
+            answer = max(answer, length);
+        }
+        return answer;
     }
-    return answer;
-  }
 };
 ```
 

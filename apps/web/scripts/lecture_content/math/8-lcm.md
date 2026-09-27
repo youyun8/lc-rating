@@ -24,15 +24,19 @@ $$\gcd(a,b) = \prod p_i^{\min(e_i,f_i)}, \qquad \operatorname{lcm}(a,b) = \prod 
 
 ```cpp
 long long lcm(long long a, long long b) {
-  if (a == 0 || b == 0) { return 0; }
-  return a / gcd(a, b) * b;      // 先除後乘，避免中間溢位
+    if (a == 0 || b == 0) {
+        return 0;
+    }
+    return a / gcd(a, b) * b;  // 先除後乘，避免中間溢位
 }
 
 // 多個數的 LCM：逐個折疊，過程中留意是否超出題目上界
 long long lcmAll(const vector<long long>& nums) {
-  long long result = 1;
-  for (long long v : nums) { result = lcm(result, v); }
-  return result;
+    long long result = 1;
+    for (long long v : nums) {
+        result = lcm(result, v);
+    }
+    return result;
 }
 ```
 

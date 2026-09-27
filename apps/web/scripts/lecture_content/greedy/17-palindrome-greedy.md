@@ -27,16 +27,20 @@
 ```cpp
 // 用給定字元能組成的最長迴文長度。
 int longestPalindrome(string s) {
-  array<int, 128> count{};
-  for (char c : s) { ++count[static_cast<unsigned char>(c)]; }
+    array<int, 128> count{};
+    for (char c : s) {
+        ++count[static_cast<unsigned char>(c)];
+    }
 
-  int length = 0;
-  bool hasOdd = false;
-  for (int c : count) {
-    length += c / 2 * 2;                 // 只取偶數部分
-    if (c % 2 == 1) { hasOdd = true; }
-  }
-  return length + (hasOdd ? 1 : 0);      // 任一奇數字元可放正中央
+    int length = 0;
+    bool hasOdd = false;
+    for (int c : count) {
+        length += c / 2 * 2;  // 只取偶數部分
+        if (c % 2 == 1) {
+            hasOdd = true;
+        }
+    }
+    return length + (hasOdd ? 1 : 0);  // 任一奇數字元可放正中央
 }
 ```
 

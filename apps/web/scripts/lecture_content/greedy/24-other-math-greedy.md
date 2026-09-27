@@ -29,16 +29,20 @@
 ```cpp
 // 典型形態：先用守恆量判定可行性，再用一次掃描算出答案。
 long long minOperations(vector<int>& nums) {
-  const long long total = accumulate(nums.begin(), nums.end(), 0LL);
-  const int n = nums.size();
-  if (total % n != 0) { return -1; }          // 總和守恆：不整除即無解
+    const long long total = accumulate(nums.begin(), nums.end(), 0LL);
+    const int n = nums.size();
+    if (total % n != 0) {
+        return -1;
+    }  // 總和守恆：不整除即無解
 
-  const long long target = total / n;
-  long long moves = 0;
-  for (int x : nums) {
-    if (x > target) { moves += x - target; }  // 只數「搬出」的量，避免重複計
-  }
-  return moves;
+    const long long target = total / n;
+    long long moves = 0;
+    for (int x : nums) {
+        if (x > target) {
+            moves += x - target;
+        }  // 只數「搬出」的量，避免重複計
+    }
+    return moves;
 }
 ```
 

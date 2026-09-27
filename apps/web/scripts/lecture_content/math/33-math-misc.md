@@ -29,14 +29,17 @@
 ```cpp
 // 等差數列求和：首項 a、公差 d、共 n 項。
 long long arithmeticSum(long long a, long long d, long long n) {
-  return n * (2 * a + (n - 1) * d) / 2;     // 先乘後除，n 與 (2a+(n-1)d) 必有一偶
+    return n * (2 * a + (n - 1) * d) /
+           2;  // 先乘後除，n 與 (2a+(n-1)d) 必有一偶
 }
 
 // 模意義下的等比求和：a * (r^n - 1) / (r - 1)，用逆元取代除法。
 long long geometricSum(long long a, long long r, long long n, long long mod) {
-  if (r % mod == 1) { return a % mod * (n % mod) % mod; }   // 公比為 1 要特判
-  const long long numerator = (power(r, n, mod) - 1 + mod) % mod;
-  return a % mod * numerator % mod * power(r - 1, mod - 2, mod) % mod;
+    if (r % mod == 1) {
+        return a % mod * (n % mod) % mod;
+    }  // 公比為 1 要特判
+    const long long numerator = (power(r, n, mod) - 1 + mod) % mod;
+    return a % mod * numerator % mod * power(r - 1, mod - 2, mod) % mod;
 }
 ```
 

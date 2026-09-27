@@ -27,13 +27,13 @@
 ```cpp
 // 計算 sum_{i=1}^{n} floor(n / i)
 long long divideBlocks(long long n) {
-  long long total = 0;
-  for (long long l = 1, r; l <= n; l = r + 1) {
-    const long long q = n / l;
-    r = n / q;                     // 商仍為 q 的最大下標
-    total += q * (r - l + 1);      // 整段一次計入
-  }
-  return total;
+    long long total = 0;
+    for (long long l = 1, r; l <= n; l = r + 1) {
+        const long long q = n / l;
+        r = n / q;                 // 商仍為 q 的最大下標
+        total += q * (r - l + 1);  // 整段一次計入
+    }
+    return total;
 }
 ```
 

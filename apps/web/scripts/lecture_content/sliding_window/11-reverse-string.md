@@ -32,20 +32,20 @@
 
 ```cpp
 void reverseRange(vector<int>& nums, int left, int right) {
-  while (left < right) {
-    swap(nums[left], nums[right]);
-    ++left;
-    --right;
-  }
+    while (left < right) {
+        swap(nums[left], nums[right]);
+        ++left;
+        --right;
+    }
 }
 
 // 向右輪轉 k 步：三次反轉，O(n) 時間、O(1) 空間。
 void rotate(vector<int>& nums, int k) {
-  const int n = nums.size();
-  k %= n;                                  // k 可能大於 n
-  reverseRange(nums, 0, n - 1);
-  reverseRange(nums, 0, k - 1);
-  reverseRange(nums, k, n - 1);
+    const int n = nums.size();
+    k %= n;  // k 可能大於 n
+    reverseRange(nums, 0, n - 1);
+    reverseRange(nums, 0, k - 1);
+    reverseRange(nums, k, n - 1);
 }
 ```
 
@@ -53,9 +53,15 @@ void rotate(vector<int>& nums, int k) {
 
 ```cpp
 while (left < right) {
-  while (left < right && !isVowel(s[left])) { ++left; }
-  while (left < right && !isVowel(s[right])) { --right; }
-  if (left < right) { swap(s[left++], s[right--]); }
+    while (left < right && !isVowel(s[left])) {
+        ++left;
+    }
+    while (left < right && !isVowel(s[right])) {
+        --right;
+    }
+    if (left < right) {
+        swap(s[left++], s[right--]);
+    }
 }
 ```
 

@@ -27,18 +27,20 @@
 ```cpp
 // 最少需刪除多少區間，才能使剩下的互不重疊。
 int eraseOverlapIntervals(vector<vector<int>>& intervals) {
-  if (intervals.empty()) { return 0; }
-  sort(intervals.begin(), intervals.end(),
-       [](const auto& a, const auto& b) { return a[1] < b[1]; });  // 按右端點
-
-  int kept = 0, lastEnd = INT_MIN;
-  for (const auto& it : intervals) {
-    if (it[0] >= lastEnd) {          // 不重疊就選
-      ++kept;
-      lastEnd = it[1];
+    if (intervals.empty()) {
+        return 0;
     }
-  }
-  return intervals.size() - kept;
+    sort(intervals.begin(), intervals.end(),
+         [](const auto& a, const auto& b) { return a[1] < b[1]; });  // 按右端點
+
+    int kept = 0, lastEnd = INT_MIN;
+    for (const auto& it : intervals) {
+        if (it[0] >= lastEnd) {  // 不重疊就選
+            ++kept;
+            lastEnd = it[1];
+        }
+    }
+    return intervals.size() - kept;
 }
 ```
 

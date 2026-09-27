@@ -37,23 +37,25 @@
 ```cpp
 // 用最少的區間覆蓋 [0, target]；無法覆蓋回傳 -1。
 int videoStitching(vector<vector<int>>& clips, int target) {
-  sort(clips.begin(), clips.end(),
-       [](const auto& a, const auto& b) { return a[0] < b[0]; });
+    sort(clips.begin(), clips.end(),
+         [](const auto& a, const auto& b) { return a[0] < b[0]; });
 
-  int count = 0, covered = 0, i = 0;
-  const int n = clips.size();
+    int count = 0, covered = 0, i = 0;
+    const int n = clips.size();
 
-  while (covered < target) {
-    int farthest = covered;
-    while (i < n && clips[i][0] <= covered) {      // 所有能接上的候選
-      farthest = max(farthest, clips[i][1]);
-      ++i;
+    while (covered < target) {
+        int farthest = covered;
+        while (i < n && clips[i][0] <= covered) {  // 所有能接上的候選
+            farthest = max(farthest, clips[i][1]);
+            ++i;
+        }
+        if (farthest == covered) {
+            return -1;
+        }  // 卡住了，無解
+        covered = farthest;
+        ++count;
     }
-    if (farthest == covered) { return -1; }        // 卡住了，無解
-    covered = farthest;
-    ++count;
-  }
-  return count;
+    return count;
 }
 ```
 

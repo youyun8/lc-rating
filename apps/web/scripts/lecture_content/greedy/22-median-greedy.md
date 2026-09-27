@@ -27,11 +27,13 @@
 ```cpp
 // 讓所有元素相等的最小總移動代價。
 long long minMoves(vector<int>& nums) {
-  sort(nums.begin(), nums.end());
-  const long long median = nums[nums.size() / 2];
-  long long cost = 0;
-  for (int x : nums) { cost += llabs(x - median); }
-  return cost;
+    sort(nums.begin(), nums.end());
+    const long long median = nums[nums.size() / 2];
+    long long cost = 0;
+    for (int x : nums) {
+        cost += llabs(x - median);
+    }
+    return cost;
 }
 ```
 

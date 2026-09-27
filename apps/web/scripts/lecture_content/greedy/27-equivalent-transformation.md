@@ -29,14 +29,16 @@
 // 差分：把「對 [l, r] 全部加 v」變成兩點修改，最後一次前綴和還原。
 vector<long long> applyRangeUpdates(int n,
                                     const vector<array<int, 3>>& updates) {
-  vector<long long> diff(n + 1, 0);
-  for (const auto& [l, r, v] : updates) {
-    diff[l] += v;
-    diff[r + 1] -= v;                    // 右端點外一格扣回
-  }
-  for (int i = 1; i < n; ++i) { diff[i] += diff[i - 1]; }   // 還原
-  diff.resize(n);
-  return diff;
+    vector<long long> diff(n + 1, 0);
+    for (const auto& [l, r, v] : updates) {
+        diff[l] += v;
+        diff[r + 1] -= v;  // 右端點外一格扣回
+    }
+    for (int i = 1; i < n; ++i) {
+        diff[i] += diff[i - 1];
+    }  // 還原
+    diff.resize(n);
+    return diff;
 }
 ```
 

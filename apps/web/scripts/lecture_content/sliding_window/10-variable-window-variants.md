@@ -40,20 +40,20 @@
 
 ```cpp
 class Solution {
- public:
-  int longestNiceSubarray(vector<int>& nums) {
-    int answer = 0, left = 0, mask = 0;
+public:
+    int longestNiceSubarray(vector<int>& nums) {
+        int answer = 0, left = 0, mask = 0;
 
-    for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
-      while ((mask & nums[right]) != 0) {   // 有共同位元就收縮
-        mask ^= nums[left];                 // 無共同位元時 XOR 等同於清除
-        ++left;
-      }
-      mask |= nums[right];
-      answer = max(answer, right - left + 1);
+        for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
+            while ((mask & nums[right]) != 0) {  // 有共同位元就收縮
+                mask ^= nums[left];  // 無共同位元時 XOR 等同於清除
+                ++left;
+            }
+            mask |= nums[right];
+            answer = max(answer, right - left + 1);
+        }
+        return answer;
     }
-    return answer;
-  }
 };
 ```
 
@@ -61,17 +61,17 @@ class Solution {
 
 ```cpp
 int characterReplacement(string s, int k) {
-  array<int, 26> count{};
-  int answer = 0, left = 0, maxCount = 0;
-  for (int right = 0; right < static_cast<int>(s.size()); ++right) {
-    maxCount = max(maxCount, ++count[s[right] - 'A']);
-    while (right - left + 1 - maxCount > k) {
-      --count[s[left] - 'A'];               // 注意 maxCount 不必回退
-      ++left;
+    array<int, 26> count{};
+    int answer = 0, left = 0, maxCount = 0;
+    for (int right = 0; right < static_cast<int>(s.size()); ++right) {
+        maxCount = max(maxCount, ++count[s[right] - 'A']);
+        while (right - left + 1 - maxCount > k) {
+            --count[s[left] - 'A'];  // 注意 maxCount 不必回退
+            ++left;
+        }
+        answer = max(answer, right - left + 1);
     }
-    answer = max(answer, right - left + 1);
-  }
-  return answer;
+    return answer;
 }
 ```
 

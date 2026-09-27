@@ -26,13 +26,13 @@
 
 ```cpp
 // 貪心的骨架幾乎總是這個形狀：排序（或不排序）後單次掃描累積。
-sort(items.begin(), items.end(), rule);      // rule 由交換論證推出
+sort(items.begin(), items.end(), rule);  // rule 由交換論證推出
 long long answer = 0;
 for (const auto& item : items) {
-  if (feasible(item)) {                      // 當下可取就取
-    take(item);
-    answer += gain(item);
-  }
+    if (feasible(item)) {  // 當下可取就取
+        take(item);
+        answer += gain(item);
+    }
 }
 ```
 

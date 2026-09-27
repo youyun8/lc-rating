@@ -31,17 +31,21 @@
 ```cpp
 // f 為鄰接矩陣：無邊填 kInf，對角線填 0。就地變成全源最短路。
 void floyd(vector<vector<int>>& f) {
-  const int n = f.size();
-  const int kInf = 1e9;
-  for (int k = 0; k < n; ++k) {          // 中繼點必須在最外層
-    for (int i = 0; i < n; ++i) {
-      if (f[i][k] == kInf) { continue; }  // 剪枝：i 到不了 k
-      for (int j = 0; j < n; ++j) {
-        if (f[k][j] == kInf) { continue; }
-        f[i][j] = min(f[i][j], f[i][k] + f[k][j]);
-      }
+    const int n = f.size();
+    const int kInf = 1e9;
+    for (int k = 0; k < n; ++k) {  // 中繼點必須在最外層
+        for (int i = 0; i < n; ++i) {
+            if (f[i][k] == kInf) {
+                continue;
+            }  // 剪枝：i 到不了 k
+            for (int j = 0; j < n; ++j) {
+                if (f[k][j] == kInf) {
+                    continue;
+                }
+                f[i][j] = min(f[i][j], f[i][k] + f[k][j]);
+            }
+        }
     }
-  }
 }
 ```
 
@@ -50,9 +54,9 @@ void floyd(vector<vector<int>>& f) {
 ```cpp
 // 新增節點 k 後：先用 k 的邊更新矩陣，再以 k 為中繼跑一輪
 for (int i = 0; i < n; ++i) {
-  for (int j = 0; j < n; ++j) {
-    f[i][j] = min(f[i][j], f[i][k] + f[k][j]);
-  }
+    for (int j = 0; j < n; ++j) {
+        f[i][j] = min(f[i][j], f[i][k] + f[k][j]);
+    }
 }
 ```
 

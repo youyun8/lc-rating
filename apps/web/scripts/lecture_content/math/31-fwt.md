@@ -31,27 +31,31 @@ $$T(a)[k]\,T(b)[k] = \sum_{i,j} (-1)^{|i \wedge k| + |j \wedge k|} a[i]b[j]$$
 ```cpp
 // XOR 卷積的沃爾什變換；invert 時整體除以 n。
 void fwtXor(vector<long long>& a, bool invert) {
-  const int n = a.size();
-  for (int len = 1; len < n; len <<= 1) {
-    for (int i = 0; i < n; i += len << 1) {
-      for (int j = i; j < i + len; ++j) {
-        const long long x = a[j], y = a[j + len];
-        a[j] = x + y;                    // 蝴蝶運算
-        a[j + len] = x - y;
-      }
+    const int n = a.size();
+    for (int len = 1; len < n; len <<= 1) {
+        for (int i = 0; i < n; i += len << 1) {
+            for (int j = i; j < i + len; ++j) {
+                const long long x = a[j], y = a[j + len];
+                a[j] = x + y;  // 蝴蝶運算
+                a[j + len] = x - y;
+            }
+        }
     }
-  }
-  if (invert) {
-    for (long long& v : a) { v /= n; }
-  }
+    if (invert) {
+        for (long long& v : a) {
+            v /= n;
+        }
+    }
 }
 
 vector<long long> xorConvolution(vector<long long> a, vector<long long> b) {
-  fwtXor(a, false);
-  fwtXor(b, false);
-  for (size_t i = 0; i < a.size(); ++i) { a[i] *= b[i]; }
-  fwtXor(a, true);
-  return a;
+    fwtXor(a, false);
+    fwtXor(b, false);
+    for (size_t i = 0; i < a.size(); ++i) {
+        a[i] *= b[i];
+    }
+    fwtXor(a, true);
+    return a;
 }
 ```
 

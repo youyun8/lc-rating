@@ -238,13 +238,13 @@ public:
         const int n = static_cast<int>(nums.size());
         std::vector<int> ans(n, 1);
 
-        int pre = 1;                                  // nums[0 .. i-1] 的乘積
+        int pre = 1;  // nums[0 .. i-1] 的乘積
         for (int i = 0; i < n; ++i) {
-            ans[i] = pre;                             // 先寫入，再吃掉自己
+            ans[i] = pre;  // 先寫入，再吃掉自己
             pre *= nums[i];
         }
 
-        int suf = 1;                                  // nums[i+1 .. n-1] 的乘積
+        int suf = 1;  // nums[i+1 .. n-1] 的乘積
         for (int i = n - 1; i >= 0; --i) {
             ans[i] *= suf;
             suf *= nums[i];
@@ -265,17 +265,25 @@ public:
     // 版本 A：前後綴最大值，O(n) 空間，最貼近定理 2 的證明
     int trap(const std::vector<int>& height) {
         const int n = static_cast<int>(height.size());
-        if (n == 0) { return 0; }
+        if (n == 0) {
+            return 0;
+        }
 
-        std::vector<int> L(n), R(n);                  // 都「含自身」
+        std::vector<int> L(n), R(n);  // 都「含自身」
         L[0] = height[0];
-        for (int i = 1; i < n; ++i) { L[i] = std::max(L[i - 1], height[i]); }
+        for (int i = 1; i < n; ++i) {
+            L[i] = std::max(L[i - 1], height[i]);
+        }
         R[n - 1] = height[n - 1];
-        for (int i = n - 2; i >= 0; --i) { R[i] = std::max(R[i + 1], height[i]); }
+        for (int i = n - 2; i >= 0; --i) {
+            R[i] = std::max(R[i + 1], height[i]);
+        }
 
         int ans = 0;
-        for (int i = 0; i < n; ++i) { ans += std::min(L[i], R[i]) - height[i]; }
-        return ans;                                   // 含自身 ⇒ 每項恆 >= 0，不需要 max(0, ...)
+        for (int i = 0; i < n; ++i) {
+            ans += std::min(L[i], R[i]) - height[i];
+        }
+        return ans;  // 含自身 ⇒ 每項恆 >= 0，不需要 max(0, ...)
     }
 
     // 版本 B：雙指標，O(1) 空間（推論 2.1）
@@ -285,7 +293,7 @@ public:
         while (l < r) {
             lmax = std::max(lmax, height[l]);
             rmax = std::max(rmax, height[r]);
-            if (lmax < rmax) {                        // 右邊一定有比 lmax 高的牆
+            if (lmax < rmax) {  // 右邊一定有比 lmax 高的牆
                 ans += lmax - height[l];
                 ++l;
             } else {
@@ -305,9 +313,11 @@ class Solution {
 public:
     int maxProfit(const std::vector<int>& prices) {
         const int n = static_cast<int>(prices.size());
-        if (n < 2) { return 0; }
+        if (n < 2) {
+            return 0;
+        }
 
-        std::vector<int> pre(n, 0), suf(n + 1, 0);    // suf[n] = 0：右半段不交易
+        std::vector<int> pre(n, 0), suf(n + 1, 0);  // suf[n] = 0：右半段不交易
 
         int lo = prices[0];
         for (int i = 1; i < n; ++i) {
@@ -322,7 +332,7 @@ public:
         }
 
         int ans = 0;
-        for (int i = 0; i < n; ++i) {                 // i 是第一段的右界
+        for (int i = 0; i < n; ++i) {  // i 是第一段的右界
             ans = std::max(ans, pre[i] + suf[i + 1]);
         }
         return ans;
@@ -342,10 +352,11 @@ public:
         const int n = static_cast<int>(a.size());
         std::vector<int> left(n, 0), right(n, 0);
 
-        for (int i = 0; i < n; ++i) {                 // left[i]：以 i-1 結尾的連續 1 長度
+        for (int i = 0; i < n; ++i) {  // left[i]：以 i-1 結尾的連續 1 長度
             left[i] = (i == 0 || a[i - 1] == 0) ? 0 : left[i - 1] + 1;
         }
-        for (int i = n - 1; i >= 0; --i) {            // right[i]：從 i+1 開始的連續 1 長度
+        for (int i = n - 1; i >= 0;
+             --i) {  // right[i]：從 i+1 開始的連續 1 長度
             right[i] = (i == n - 1 || a[i + 1] == 0) ? 0 : right[i + 1] + 1;
         }
 
@@ -354,7 +365,7 @@ public:
         for (int i = 0; i < n; ++i) {
             if (a[i] == 0) {
                 hasZero = true;
-                ans = std::max(ans, left[i] + 1 + right[i]);   // 把這個 0 翻成 1
+                ans = std::max(ans, left[i] + 1 + right[i]);  // 把這個 0 翻成 1
             }
         }
         // 全是 1：487 沒有 0 可翻 => 答案是 n；1493 規定必須刪一個 => 改成 n - 1

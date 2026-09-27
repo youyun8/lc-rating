@@ -38,33 +38,47 @@
 
 ```cpp
 class Solution {
- public:
-  vector<int> findAnagrams(string s, string p) {
-    if (s.size() < p.size()) { return {}; }
-    array<int, 26> need{}, window{};
-    for (char c : p) { ++need[c - 'a']; }
+public:
+    vector<int> findAnagrams(string s, string p) {
+        if (s.size() < p.size()) {
+            return {};
+        }
+        array<int, 26> need{}, window{};
+        for (char c : p) {
+            ++need[c - 'a'];
+        }
 
-    int diff = 0;
-    for (int c = 0; c < 26; ++c) {
-      if (need[c] != 0) { ++diff; }        // 一開始 window 全為 0
+        int diff = 0;
+        for (int c = 0; c < 26; ++c) {
+            if (need[c] != 0) {
+                ++diff;
+            }  // 一開始 window 全為 0
+        }
+
+        auto add = [&](int c, int delta) {
+            if (window[c] == need[c]) {
+                ++diff;
+            }  // 本來相符，要變不符
+            window[c] += delta;
+            if (window[c] == need[c]) {
+                --diff;
+            }  // 變成相符
+        };
+
+        vector<int> answer;
+        const int k = p.size();
+        for (int right = 0; right < static_cast<int>(s.size()); ++right) {
+            add(s[right] - 'a', 1);  // 入
+            if (right < k - 1) {
+                continue;
+            }
+            if (diff == 0) {
+                answer.push_back(right - k + 1);
+            }  // 更新
+            add(s[right - k + 1] - 'a', -1);  // 出
+        }
+        return answer;
     }
-
-    auto add = [&](int c, int delta) {
-      if (window[c] == need[c]) { ++diff; }        // 本來相符，要變不符
-      window[c] += delta;
-      if (window[c] == need[c]) { --diff; }        // 變成相符
-    };
-
-    vector<int> answer;
-    const int k = p.size();
-    for (int right = 0; right < static_cast<int>(s.size()); ++right) {
-      add(s[right] - 'a', 1);                      // 入
-      if (right < k - 1) { continue; }
-      if (diff == 0) { answer.push_back(right - k + 1); }   // 更新
-      add(s[right - k + 1] - 'a', -1);             // 出
-    }
-    return answer;
-  }
 };
 ```
 

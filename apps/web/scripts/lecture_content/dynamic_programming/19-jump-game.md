@@ -230,12 +230,18 @@ class Solution {
 public:
     bool canCross(const std::vector<int>& stones) {
         n_ = static_cast<int>(stones.size());
-        if (n_ <= 1) { return true; }
-        if (stones[1] != 1) { return false; }         // 第一步只能跳 1，題目硬規定
+        if (n_ <= 1) {
+            return true;
+        }
+        if (stones[1] != 1) {
+            return false;
+        }  // 第一步只能跳 1，題目硬規定
 
         stones_ = &stones;
         idx_.clear();
-        for (int i = 0; i < n_; ++i) { idx_[stones[i]] = i; }
+        for (int i = 0; i < n_; ++i) {
+            idx_[stones[i]] = i;
+        }
 
         // memo[i][k]：站在第 i 顆石頭、上一步跳了 k，能否過河；-1 = 未算
         memo_.assign(n_, std::vector<signed char>(n_ + 1, -1));
@@ -245,19 +251,30 @@ public:
 private:
     int n_ = 0;
     const std::vector<int>* stones_ = nullptr;
-    std::unordered_map<int, int> idx_;                // 座標 -> 下標
+    std::unordered_map<int, int> idx_;  // 座標 -> 下標
     std::vector<std::vector<signed char>> memo_;
 
     bool dfs(int i, int k) {
-        if (i == n_ - 1) { return true; }
-        if (memo_[i][k] != -1) { return memo_[i][k] == 1; }
+        if (i == n_ - 1) {
+            return true;
+        }
+        if (memo_[i][k] != -1) {
+            return memo_[i][k] == 1;
+        }
 
-        memo_[i][k] = 0;                              // 先寫 false（此圖無環，純粹省一次查找）
+        memo_[i][k] = 0;  // 先寫 false（此圖無環，純粹省一次查找）
         for (int d = k - 1; d <= k + 1; ++d) {
-            if (d <= 0) { continue; }                 // 跳躍距離必須為正
+            if (d <= 0) {
+                continue;
+            }  // 跳躍距離必須為正
             const auto it = idx_.find((*stones_)[i] + d);
-            if (it == idx_.end()) { continue; }
-            if (dfs(it->second, d)) { memo_[i][k] = 1; break; }
+            if (it == idx_.end()) {
+                continue;
+            }
+            if (dfs(it->second, d)) {
+                memo_[i][k] = 1;
+                break;
+            }
         }
         return memo_[i][k] == 1;
     }
@@ -274,25 +291,34 @@ public:
     int oddEvenJumps(const std::vector<int>& arr) {
         const int n = static_cast<int>(arr.size());
         std::vector<int> nxtHi(n, -1), nxtLo(n, -1);
-        std::map<int, int> seen;                      // 值 -> 該值在右側的「最小」下標
+        std::map<int, int> seen;  // 值 -> 該值在右側的「最小」下標
 
         for (int i = n - 1; i >= 0; --i) {
-            const auto hi = seen.lower_bound(arr[i]);            // 第一個 >= arr[i]
-            if (hi != seen.end()) { nxtHi[i] = hi->second; }
+            const auto hi = seen.lower_bound(arr[i]);  // 第一個 >= arr[i]
+            if (hi != seen.end()) {
+                nxtHi[i] = hi->second;
+            }
 
-            const auto up = seen.upper_bound(arr[i]);            // 退一格 = 最後一個 <= arr[i]
-            if (up != seen.begin()) { nxtLo[i] = std::prev(up)->second; }
+            const auto up =
+                seen.upper_bound(arr[i]);  // 退一格 = 最後一個 <= arr[i]
+            if (up != seen.begin()) {
+                nxtLo[i] = std::prev(up)->second;
+            }
 
-            seen[arr[i]] = i;                         // ⚠ 覆蓋，不是 insert：保證存最小下標
+            seen[arr[i]] = i;  // ⚠ 覆蓋，不是 insert：保證存最小下標
         }
 
         std::vector<char> odd(n, 0), even(n, 0);
         odd[n - 1] = 1;
         even[n - 1] = 1;
-        int ans = 1;                                  // 終點自己一定算一個
+        int ans = 1;  // 終點自己一定算一個
         for (int i = n - 2; i >= 0; --i) {
-            if (nxtHi[i] != -1) { odd[i] = even[nxtHi[i]]; }
-            if (nxtLo[i] != -1) { even[i] = odd[nxtLo[i]]; }
+            if (nxtHi[i] != -1) {
+                odd[i] = even[nxtHi[i]];
+            }
+            if (nxtLo[i] != -1) {
+                even[i] = odd[nxtLo[i]];
+            }
             ans += odd[i];
         }
         return ans;
@@ -308,14 +334,18 @@ public:
     int maxResult(const std::vector<int>& nums, int k) {
         const int n = static_cast<int>(nums.size());
         std::vector<int> f(n);
-        std::deque<int> dq;                           // 存下標；對應的 f 值嚴格遞減
+        std::deque<int> dq;  // 存下標；對應的 f 值嚴格遞減
 
         f[0] = nums[0];
         dq.push_back(0);
         for (int i = 1; i < n; ++i) {
-            while (!dq.empty() && dq.front() < i - k) { dq.pop_front(); }   // 過期
+            while (!dq.empty() && dq.front() < i - k) {
+                dq.pop_front();
+            }  // 過期
             f[i] = nums[i] + f[dq.front()];
-            while (!dq.empty() && f[dq.back()] <= f[i]) { dq.pop_back(); }  // 被支配
+            while (!dq.empty() && f[dq.back()] <= f[i]) {
+                dq.pop_back();
+            }  // 被支配
             dq.push_back(i);
         }
         return f[n - 1];
@@ -332,16 +362,20 @@ class Solution {
 public:
     bool canReach(const std::string& s, int minJump, int maxJump) {
         const int n = static_cast<int>(s.size());
-        if (s[n - 1] != '0') { return false; }
+        if (s[n - 1] != '0') {
+            return false;
+        }
 
-        std::vector<int> g(n, 0), pre(n + 1, 0);      // pre[i] = g[0..i-1] 的和
+        std::vector<int> g(n, 0), pre(n + 1, 0);  // pre[i] = g[0..i-1] 的和
         g[0] = 1;
         pre[1] = 1;
         for (int i = 1; i < n; ++i) {
             if (s[i] == '0') {
                 const int lo = std::max(0, i - maxJump);
-                const int hi = i - minJump;           // 閉區間 [lo, hi]
-                if (lo <= hi && pre[hi + 1] - pre[lo] > 0) { g[i] = 1; }
+                const int hi = i - minJump;  // 閉區間 [lo, hi]
+                if (lo <= hi && pre[hi + 1] - pre[lo] > 0) {
+                    g[i] = 1;
+                }
             }
             pre[i + 1] = pre[i] + g[i];
         }
@@ -362,22 +396,30 @@ public:
         dist[0] = 0;
         q.push(0);
 
-        int mx = 1;                                   // 不變量：所有下標 < mx 的節點都已入隊
+        int mx = 1;  // 不變量：所有下標 < mx 的節點都已入隊
         while (!q.empty()) {
             const int u = q.front();
             q.pop();
             const int d = dist[u];
 
             const int r = u + jump[u];
-            if (r >= n) { return d + 1; }             // 跳出彈簧區
-            if (dist[r] == -1) { dist[r] = d + 1; q.push(r); }
+            if (r >= n) {
+                return d + 1;
+            }  // 跳出彈簧區
+            if (dist[r] == -1) {
+                dist[r] = d + 1;
+                q.push(r);
+            }
 
-            for (int v = mx; v < u; ++v) {            // 往左：每個下標一生只會被掃到一次
-                if (dist[v] == -1) { dist[v] = d + 1; q.push(v); }
+            for (int v = mx; v < u; ++v) {  // 往左：每個下標一生只會被掃到一次
+                if (dist[v] == -1) {
+                    dist[v] = d + 1;
+                    q.push(v);
+                }
             }
             mx = std::max(mx, u);
         }
-        return -1;                                    // jump[i] >= 1 保證走不到這裡
+        return -1;  // jump[i] >= 1 保證走不到這裡
     }
 };
 ```

@@ -36,14 +36,14 @@
 
 ```cpp
 int removeDuplicates(vector<int>& nums) {
-  int slow = 0;
-  for (int fast = 0; fast < static_cast<int>(nums.size()); ++fast) {
-    if (slow == 0 || nums[fast] != nums[slow - 1]) {   // 比對已定稿的值
-      nums[slow] = nums[fast];
-      ++slow;
+    int slow = 0;
+    for (int fast = 0; fast < static_cast<int>(nums.size()); ++fast) {
+        if (slow == 0 || nums[fast] != nums[slow - 1]) {  // 比對已定稿的值
+            nums[slow] = nums[fast];
+            ++slow;
+        }
     }
-  }
-  return slow;
+    return slow;
 }
 ```
 
@@ -51,18 +51,24 @@ int removeDuplicates(vector<int>& nums) {
 
 ```cpp
 void moveZeroes(vector<int>& nums) {
-  int slow = 0;
-  for (int fast = 0; fast < static_cast<int>(nums.size()); ++fast) {
-    if (nums[fast] != 0) { nums[slow++] = nums[fast]; }
-  }
-  while (slow < static_cast<int>(nums.size())) { nums[slow++] = 0; }
+    int slow = 0;
+    for (int fast = 0; fast < static_cast<int>(nums.size()); ++fast) {
+        if (nums[fast] != 0) {
+            nums[slow++] = nums[fast];
+        }
+    }
+    while (slow < static_cast<int>(nums.size())) {
+        nums[slow++] = 0;
+    }
 }
 ```
 
 允許每個值最多保留兩個時，判斷改為與 `nums[slow - 2]` 比較：
 
 ```cpp
-if (slow < 2 || nums[fast] != nums[slow - 2]) { nums[slow++] = nums[fast]; }
+if (slow < 2 || nums[fast] != nums[slow - 2]) {
+    nums[slow++] = nums[fast];
+}
 ```
 
 ## 時間與空間複雜度

@@ -29,33 +29,35 @@
 以「最多可讓 `k` 條邊免費」為例：
 
 ```cpp
-long long shortestPathWithFreeEdges(
-    int n, const vector<vector<pair<int, int>>>& g, int start, int target,
-    int k) {
-  const long long kInf = LLONG_MAX;
-  vector<vector<long long>> dis(n, vector<long long>(k + 1, kInf));
-  dis[start][0] = 0;
+long long shortestPathWithFreeEdges(int n,
+                                    const vector<vector<pair<int, int>>>& g,
+                                    int start, int target, int k) {
+    const long long kInf = LLONG_MAX;
+    vector<vector<long long>> dis(n, vector<long long>(k + 1, kInf));
+    dis[start][0] = 0;
 
-  using Node = tuple<long long, int, int>;   // (距離, 節點, 已用次數)
-  priority_queue<Node, vector<Node>, greater<Node>> heap;
-  heap.emplace(0LL, start, 0);
+    using Node = tuple<long long, int, int>;  // (距離, 節點, 已用次數)
+    priority_queue<Node, vector<Node>, greater<Node>> heap;
+    heap.emplace(0LL, start, 0);
 
-  while (!heap.empty()) {
-    const auto [d, x, j] = heap.top();
-    heap.pop();
-    if (d > dis[x][j]) { continue; }
-    for (const auto& [y, w] : g[x]) {
-      if (d + w < dis[y][j]) {              // 照常付費，留在本層
-        dis[y][j] = d + w;
-        heap.emplace(dis[y][j], y, j);
-      }
-      if (j < k && d < dis[y][j + 1]) {     // 用掉一次免費，上一層
-        dis[y][j + 1] = d;
-        heap.emplace(dis[y][j + 1], y, j + 1);
-      }
+    while (!heap.empty()) {
+        const auto [d, x, j] = heap.top();
+        heap.pop();
+        if (d > dis[x][j]) {
+            continue;
+        }
+        for (const auto& [y, w] : g[x]) {
+            if (d + w < dis[y][j]) {  // 照常付費，留在本層
+                dis[y][j] = d + w;
+                heap.emplace(dis[y][j], y, j);
+            }
+            if (j < k && d < dis[y][j + 1]) {  // 用掉一次免費，上一層
+                dis[y][j + 1] = d;
+                heap.emplace(dis[y][j + 1], y, j + 1);
+            }
+        }
     }
-  }
-  return *min_element(dis[target].begin(), dis[target].end());
+    return *min_element(dis[target].begin(), dis[target].end());
 }
 ```
 

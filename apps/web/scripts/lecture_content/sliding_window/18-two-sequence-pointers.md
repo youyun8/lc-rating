@@ -36,17 +36,23 @@
 
 ```cpp
 vector<int> intersect(vector<int>& a, vector<int>& b) {
-  sort(a.begin(), a.end());
-  sort(b.begin(), b.end());
-  vector<int> answer;
-  size_t i = 0, j = 0;
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    vector<int> answer;
+    size_t i = 0, j = 0;
 
-  while (i < a.size() && j < b.size()) {
-    if (a[i] < b[j]) { ++i; }
-    else if (a[i] > b[j]) { ++j; }
-    else { answer.push_back(a[i]); ++i; ++j; }
-  }
-  return answer;
+    while (i < a.size() && j < b.size()) {
+        if (a[i] < b[j]) {
+            ++i;
+        } else if (a[i] > b[j]) {
+            ++j;
+        } else {
+            answer.push_back(a[i]);
+            ++i;
+            ++j;
+        }
+    }
+    return answer;
 }
 ```
 
@@ -54,10 +60,16 @@ vector<int> intersect(vector<int>& a, vector<int>& b) {
 
 ```cpp
 while (i < A.size() && j < B.size()) {
-  const int low = max(A[i][0], B[j][0]);
-  const int high = min(A[i][1], B[j][1]);
-  if (low <= high) { answer.push_back({low, high}); }
-  if (A[i][1] < B[j][1]) { ++i; } else { ++j; }   // 先結束的先退場
+    const int low = max(A[i][0], B[j][0]);
+    const int high = min(A[i][1], B[j][1]);
+    if (low <= high) {
+        answer.push_back({low, high});
+    }
+    if (A[i][1] < B[j][1]) {
+        ++i;
+    } else {
+        ++j;
+    }  // 先結束的先退場
 }
 ```
 

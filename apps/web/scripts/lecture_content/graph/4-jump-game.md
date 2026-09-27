@@ -28,31 +28,32 @@
 
 ```cpp
 class Solution {
- public:
-  int jump(vector<int>& nums) {
-    const int n = nums.size();
-    int steps = 0, right = 0, farthest = 0;
+public:
+    int jump(vector<int>& nums) {
+        const int n = nums.size();
+        int steps = 0, right = 0, farthest = 0;
 
-    // 只掃到 n - 2：踏到最後一格就不需要再跳。
-    for (int i = 0; i < n - 1; ++i) {
-      farthest = max(farthest, i + nums[i]);
-      if (i == right) {      // 本層掃完，換層
-        right = farthest;
-        ++steps;
-      }
+        // 只掃到 n - 2：踏到最後一格就不需要再跳。
+        for (int i = 0; i < n - 1; ++i) {
+            farthest = max(farthest, i + nums[i]);
+            if (i == right) {  // 本層掃完，換層
+                right = farthest;
+                ++steps;
+            }
+        }
+        return steps;
     }
-    return steps;
-  }
 };
 ```
 
 當跳躍目標不是連續區間（例如相同數字可互相傳送）時，回到一般 BFS，並在用過某組傳送後清空該組以免重複展開：
 
 ```cpp
-unordered_map<int, vector<int>> same;   // 值 -> 下標
+unordered_map<int, vector<int>> same;  // 值 -> 下標
 // ... BFS 展開 x 時
-for (int y : same[arr[x]]) { /* 入隊 */ }
-same[arr[x]].clear();   // 關鍵：整組只展開一次，總複雜度才是 O(n)
+for (int y : same[arr[x]]) { /* 入隊 */
+}
+same[arr[x]].clear();  // 關鍵：整組只展開一次，總複雜度才是 O(n)
 ```
 
 ## 時間與空間複雜度

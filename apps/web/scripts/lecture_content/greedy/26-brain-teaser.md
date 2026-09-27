@@ -30,19 +30,21 @@
 ```cpp
 // 典型形態：找到不變量後，答案往往只是一次掃描。
 int lastStoneWeight(vector<int>& stones) {
-  const int total = accumulate(stones.begin(), stones.end(), 0);
-  // 奇偶性守恆 + 分成兩堆使差最小 -> 背包
-  vector<bool> reachable(total / 2 + 1, false);
-  reachable[0] = true;
-  for (int s : stones) {
-    for (int j = total / 2; j >= s; --j) {
-      reachable[j] = reachable[j] || reachable[j - s];
+    const int total = accumulate(stones.begin(), stones.end(), 0);
+    // 奇偶性守恆 + 分成兩堆使差最小 -> 背包
+    vector<bool> reachable(total / 2 + 1, false);
+    reachable[0] = true;
+    for (int s : stones) {
+        for (int j = total / 2; j >= s; --j) {
+            reachable[j] = reachable[j] || reachable[j - s];
+        }
     }
-  }
-  for (int j = total / 2; j >= 0; --j) {
-    if (reachable[j]) { return total - 2 * j; }
-  }
-  return total;
+    for (int j = total / 2; j >= 0; --j) {
+        if (reachable[j]) {
+            return total - 2 * j;
+        }
+    }
+    return total;
 }
 ```
 

@@ -20,14 +20,18 @@
 
 ```cpp
 vector<long long> divisors(long long n) {
-  vector<long long> small, large;
-  for (long long i = 1; i * i <= n; ++i) {
-    if (n % i != 0) { continue; }
-    small.push_back(i);
-    if (i != n / i) { large.push_back(n / i); }   // 完全平方數只取一次
-  }
-  small.insert(small.end(), large.rbegin(), large.rend());
-  return small;   // 已由小到大
+    vector<long long> small, large;
+    for (long long i = 1; i * i <= n; ++i) {
+        if (n % i != 0) {
+            continue;
+        }
+        small.push_back(i);
+        if (i != n / i) {
+            large.push_back(n / i);
+        }  // 完全平方數只取一次
+    }
+    small.insert(small.end(), large.rbegin(), large.rend());
+    return small;  // 已由小到大
 }
 ```
 
@@ -36,7 +40,9 @@ vector<long long> divisors(long long n) {
 ```cpp
 vector<int> count(n + 1, 0);
 for (int d = 1; d <= n; ++d) {
-  for (int multiple = d; multiple <= n; multiple += d) { ++count[multiple]; }
+    for (int multiple = d; multiple <= n; multiple += d) {
+        ++count[multiple];
+    }
 }
 ```
 
@@ -44,13 +50,13 @@ for (int d = 1; d <= n; ++d) {
 
 ```cpp
 vector<vector<int>> buildDivisorLists(int n) {
-  vector<vector<int>> divisors(n + 1);
-  for (int d = 1; d <= n; ++d) {
-    for (int multiple = d; multiple <= n; multiple += d) {
-      divisors[multiple].push_back(d);
+    vector<vector<int>> divisors(n + 1);
+    for (int d = 1; d <= n; ++d) {
+        for (int multiple = d; multiple <= n; multiple += d) {
+            divisors[multiple].push_back(d);
+        }
     }
-  }
-  return divisors;  // 每個列表自然由小到大
+    return divisors;  // 每個列表自然由小到大
 }
 ```
 

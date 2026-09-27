@@ -25,21 +25,29 @@
 ```cpp
 // 回傳第 k 小（k 由 0 起算）。期望 O(n)。
 int quickSelect(vector<int>& a, int k) {
-  static mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-  int l = 0, r = a.size() - 1;
-  while (l < r) {
-    const int pivot = a[uniform_int_distribution<int>(l, r)(rng)];
-    int i = l, j = r, p = l;
-    while (p <= j) {                       // 三向分割，處理大量重複值
-      if (a[p] < pivot) { swap(a[i++], a[p++]); }
-      else if (a[p] > pivot) { swap(a[p], a[j--]); }
-      else { ++p; }
+    static mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+    int l = 0, r = a.size() - 1;
+    while (l < r) {
+        const int pivot = a[uniform_int_distribution<int>(l, r)(rng)];
+        int i = l, j = r, p = l;
+        while (p <= j) {  // 三向分割，處理大量重複值
+            if (a[p] < pivot) {
+                swap(a[i++], a[p++]);
+            } else if (a[p] > pivot) {
+                swap(a[p], a[j--]);
+            } else {
+                ++p;
+            }
+        }
+        if (k < i) {
+            r = i - 1;
+        } else if (k > j) {
+            l = j + 1;
+        } else {
+            return pivot;
+        }  // 落在等於 pivot 的區段
     }
-    if (k < i) { r = i - 1; }
-    else if (k > j) { l = j + 1; }
-    else { return pivot; }                 // 落在等於 pivot 的區段
-  }
-  return a[l];
+    return a[l];
 }
 ```
 

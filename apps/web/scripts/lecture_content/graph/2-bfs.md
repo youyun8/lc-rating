@@ -28,22 +28,22 @@
 
 ```cpp
 vector<int> bfs(int n, const vector<vector<int>>& g, int start) {
-  vector<int> dist(n, -1);
-  dist[start] = 0;
-  queue<int> q;
-  q.push(start);
+    vector<int> dist(n, -1);
+    dist[start] = 0;
+    queue<int> q;
+    q.push(start);
 
-  while (!q.empty()) {
-    const int x = q.front();
-    q.pop();
-    for (int y : g[x]) {
-      if (dist[y] == -1) {      // 入隊即標記，避免重複排入
-        dist[y] = dist[x] + 1;
-        q.push(y);
-      }
+    while (!q.empty()) {
+        const int x = q.front();
+        q.pop();
+        for (int y : g[x]) {
+            if (dist[y] == -1) {  // 入隊即標記，避免重複排入
+                dist[y] = dist[x] + 1;
+                q.push(y);
+            }
+        }
     }
-  }
-  return dist;
+    return dist;
 }
 ```
 
@@ -52,12 +52,12 @@ vector<int> bfs(int n, const vector<vector<int>>& g, int start) {
 ```cpp
 int steps = 0;
 while (!q.empty()) {
-  for (int sz = q.size(); sz > 0; --sz) {  // 先取尺寸，凍結本層
-    const int x = q.front();
-    q.pop();
-    // ... 展開 x 的鄰居並入隊
-  }
-  ++steps;
+    for (int sz = q.size(); sz > 0; --sz) {  // 先取尺寸，凍結本層
+        const int x = q.front();
+        q.pop();
+        // ... 展開 x 的鄰居並入隊
+    }
+    ++steps;
 }
 ```
 

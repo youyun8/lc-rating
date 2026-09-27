@@ -34,21 +34,21 @@
 
 ```cpp
 class Solution {
- public:
-  int findLengthOfLCIS(vector<int>& nums) {
-    const int n = nums.size();
-    int answer = 0, i = 0;
+public:
+    int findLengthOfLCIS(vector<int>& nums) {
+        const int n = nums.size();
+        int answer = 0, i = 0;
 
-    while (i < n) {
-      const int start = i;                       // 一、準備
-      ++i;
-      while (i < n && nums[i] > nums[i - 1]) {   // 二、找出這組的終點
-        ++i;
-      }
-      answer = max(answer, i - start);           // 三、統計，不必特判最後一組
+        while (i < n) {
+            const int start = i;  // 一、準備
+            ++i;
+            while (i < n && nums[i] > nums[i - 1]) {  // 二、找出這組的終點
+                ++i;
+            }
+            answer = max(answer, i - start);  // 三、統計，不必特判最後一組
+        }
+        return answer;
     }
-    return answer;
-  }
 };
 ```
 
