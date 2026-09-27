@@ -52,6 +52,15 @@ lc-rating 另有三個 handbook 沒有的標題，位置固定：`## 程式碼�
 
 尚未補齊的小節仍只有骨架的一部分；補寫時整節一次補到齊，並用 `--strict` 確認。
 
+## 講義書籍版（PDF）
+
+`apps/web/scripts/book/` 把 13 個講義主題排成一本可送印的書（封面、目錄、圖目錄、四篇十三章、題號索引、約 180 幅圖解）。在 `apps/web/` 下：
+
+- `pnpm book:pdf` 產生 `book-dist/lc-lecture-book.pdf`（`--volumes` 另拆分冊、`--chapters a,b` 只排部分章節）。`book-dist/` 已列入 `.gitignore`，不要提交 PDF。
+- `pnpm book:figures` 把所有圖解輸出到一個 HTML 頁面檢查。
+- 圖解登記在 `scripts/book/figures/part*.ts`，以「主題 + 小節標題（含編號）」對應；**改小節標題時要同步改圖的 `section`**，否則建置會警告找不到小節。圖中數值一律由程式跑演算法計算。
+- 細節見 `apps/web/scripts/book/README.md`。
+
 ## Coding Style & Naming Conventions
 
 - Use TypeScript, React, and Tailwind CSS conventions already in the codebase.
