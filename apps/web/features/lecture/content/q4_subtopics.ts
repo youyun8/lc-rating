@@ -117,7 +117,7 @@ Q4 的 DP 通常分兩層難點。第一層是**建模**：從最後一步反推
 for (int len = 2; len <= n; ++len) {
     for (int l = 0; l + len - 1 < n; ++l) {
         int r = l + len - 1;
-        for (int k = l; k < r; ++k)              // 枚舉最後一步的分割點
+        for (int k = l; k < r; ++k)  // 枚舉最後一步的分割點
             dp[l][r] = min(dp[l][r], dp[l][k] + dp[k + 1][r] + cost(l, k, r));
     }
 }
@@ -126,7 +126,8 @@ for (int len = 2; len <= n; ++len) {
 for (int mask = 0; mask < (1 << n); ++mask)
     for (int j = 0; j < n; ++j)
         if (!(mask >> j & 1))
-            dp[mask | (1 << j)] = best(dp[mask | (1 << j)], dp[mask] + w(mask, j));
+            dp[mask | (1 << j)] =
+                best(dp[mask | (1 << j)], dp[mask] + w(mask, j));
 \`\`\`
 
 ## 常見錯誤
@@ -181,10 +182,17 @@ for (int mask = 0; mask < (1 << n); ++mask)
 \`\`\`cpp
 // 樹狀陣列：單點加、前綴和查詢
 struct BIT {
-    int n; vector<long long> t;
+    int n;
+    vector<long long> t;
     BIT(int n) : n(n), t(n + 1, 0) {}
-    void add(int i, long long v) { for (; i <= n; i += i & -i) t[i] += v; }
-    long long sum(int i) { long long s = 0; for (; i > 0; i -= i & -i) s += t[i]; return s; }
+    void add(int i, long long v) {
+        for (; i <= n; i += i & -i) t[i] += v;
+    }
+    long long sum(int i) {
+        long long s = 0;
+        for (; i > 0; i -= i & -i) s += t[i];
+        return s;
+    }
     long long range(int l, int r) { return sum(r) - sum(l - 1); }  // 1-indexed
 };
 
@@ -246,19 +254,29 @@ for (int i = n - 1; i >= 0; --i) {
 
 \`\`\`cpp
 // Dijkstra：非負權重，取出時驗證是否為過期項目
-priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<>> pq;
+using PLI = pair<long long, int>;
+priority_queue<PLI, vector<PLI>, greater<>> pq;
 vector<long long> dist(n, LLONG_MAX);
-dist[s] = 0; pq.push({0, s});
+dist[s] = 0;
+pq.push({0, s});
 while (!pq.empty()) {
-    auto [d, u] = pq.top(); pq.pop();
-    if (d > dist[u]) continue;                 // 過期項目，跳過
+    auto [d, u] = pq.top();
+    pq.pop();
+    if (d > dist[u]) continue;  // 過期項目，跳過
     for (auto [v, w] : g[u])
-        if (d + w < dist[v]) { dist[v] = d + w; pq.push({dist[v], v}); }
+        if (d + w < dist[v]) {
+            dist[v] = d + w;
+            pq.push({dist[v], v});
+        }
 }
 
 // 併查集：路徑壓縮
-int find(int x) { return f[x] == x ? x : f[x] = find(f[x]); }
-void uni(int a, int b) { f[find(a)] = find(b); }
+int find(int x) {
+    return f[x] == x ? x : f[x] = find(f[x]);
+}
+void uni(int a, int b) {
+    f[find(a)] = find(b);
+}
 \`\`\`
 
 ## 常見錯誤
@@ -318,7 +336,7 @@ for (int i = 0; i < n; ++i) {
     h[i + 1] = h[i] * B + s[i];
     p[i + 1] = p[i] * B;
 }
-auto sub = [&](int l, int r) {                  // [l, r) 的雜湊
+auto sub = [&](int l, int r) {  // [l, r) 的雜湊
     return h[r] - h[l] * p[r - l];
 };
 
@@ -383,12 +401,16 @@ for (int i = 1, j = 0; i < m; ++i) {
 \`\`\`cpp
 const long long MOD = 1e9 + 7;
 long long qpow(long long a, long long b, long long m) {
-    long long r = 1; a %= m;
+    long long r = 1;
+    a %= m;
     for (; b; b >>= 1, a = a * a % m)
         if (b & 1) r = r * a % m;
     return r;
 }
-long long inv(long long a) { return qpow(a, MOD - 2, MOD); }  // 費馬小定理求逆元
+// 費馬小定理求逆元
+long long inv(long long a) {
+    return qpow(a, MOD - 2, MOD);
+}
 
 // 預處理階乘與逆元後 O(1) 查組合數
 long long C(int n, int k) {
@@ -448,22 +470,24 @@ long long C(int n, int k) {
 
 \`\`\`cpp
 // 樹形 DP：打家劫舍 III 型（選 / 不選）
-pair<long long,long long> dfs(int u, int parent) {
-    long long rob = val[u], skip = 0;             // rob: 選 u；skip: 不選 u
-    for (int v : g[u]) if (v != parent) {
-        auto [r, s] = dfs(v, u);
-        rob += s;                                 // 選 u 則子節點不能選
-        skip += max(r, s);                        // 不選 u 則子節點自由
-    }
+pair<long long, long long> dfs(int u, int parent) {
+    long long rob = val[u], skip = 0;  // rob: 選 u；skip: 不選 u
+    for (int v : g[u])
+        if (v != parent) {
+            auto [r, s] = dfs(v, u);
+            rob += s;           // 選 u 則子節點不能選
+            skip += max(r, s);  // 不選 u 則子節點自由
+        }
     return {rob, skip};
 }
 
 // 換根 DP 第二次 DFS 的骨架
 void reroot(int u, int parent) {
-    for (int v : g[u]) if (v != parent) {
-        ans[v] = ans[u] + shift(u, v);            // 由父答案 O(1) 推子答案
-        reroot(v, u);
-    }
+    for (int v : g[u])
+        if (v != parent) {
+            ans[v] = ans[u] + shift(u, v);  // 由父答案 O(1) 推子答案
+            reroot(v, u);
+        }
 }
 \`\`\`
 
@@ -519,17 +543,19 @@ void reroot(int u, int parent) {
 \`\`\`cpp
 // 折半枚舉：左半所有子集和排序，右半枚舉後二分
 vector<long long> L, R;
-for (int m = 0; m < (1 << a); ++m) {            // 左半 a 個元素
+for (int m = 0; m < (1 << a); ++m) {  // 左半 a 個元素
     long long s = 0;
-    for (int i = 0; i < a; ++i) if (m >> i & 1) s += nums[i];
+    for (int i = 0; i < a; ++i)
+        if (m >> i & 1) s += nums[i];
     L.push_back(s);
 }
 sort(L.begin(), L.end());
 long long best = LLONG_MAX;
-for (int m = 0; m < (1 << b); ++m) {            // 右半 b 個元素
+for (int m = 0; m < (1 << b); ++m) {  // 右半 b 個元素
     long long s = 0;
-    for (int i = 0; i < b; ++i) if (m >> i & 1) s += nums[a + i];
-    auto it = lower_bound(L.begin(), L.end(), target - s);   // 在左半找最佳搭配
+    for (int i = 0; i < b; ++i)
+        if (m >> i & 1) s += nums[a + i];
+    auto it = lower_bound(L.begin(), L.end(), target - s);  // 在左半找最佳搭配
     if (it != L.end()) best = min(best, *it + s - target);
 }
 \`\`\`
@@ -585,7 +611,9 @@ for (int m = 0; m < (1 << b); ++m) {            // 右半 b 個元素
 
 \`\`\`cpp
 // 枚舉 mask 的所有子集
-for (int s = mask; s; s = (s - 1) & mask) { /* s 是 mask 的一個非空子集 */ }
+for (int s = mask; s; s = (s - 1) & mask) {
+    // s 是 mask 的一個非空子集
+}
 
 // 以每個右端點維護「所有子陣列 OR 值」的集合（去重後至多 ~30 個）
 unordered_set<int> ors;
@@ -593,7 +621,7 @@ int cur = 0;
 for (int x : nums) {
     unordered_set<int> next{x};
     for (int v : ors) next.insert(v | x);
-    ors = move(next);                            // ors 內是以當前元素結尾的所有 OR 值
+    ors = move(next);  // ors 內是以當前元素結尾的所有 OR 值
 }
 
 // SOS DP：把每個 mask 累加其所有子集的值

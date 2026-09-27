@@ -44,8 +44,8 @@ for (const f of listFiles()) {
   let src = fs.readFileSync(f, "utf8");
   const md = f.endsWith(".md");
   src = src.replace(
-    /```(cpp|c\+\+)(\\n|\n)([\s\S]*?)```/g,
-    (all, lang, sep, body) => {
+    /((?:\\`){3}|```)(cpp|c\+\+)(\\n|\n)([\s\S]*?)((?:\\`){3}|```)/g,
+    (all, open, lang, sep, body, close) => {
       total++;
       const esc = sep === "\\n";
       let code = body;
@@ -80,7 +80,7 @@ for (const f of listFiles()) {
           .replace(/`/g, "\\`")
           .replace(/\$\{/g, "\\${");
       }
-      return "```" + lang + sep + enc + "```";
+      return open + lang + sep + enc + close;
     },
   );
   fs.writeFileSync(f, src);
