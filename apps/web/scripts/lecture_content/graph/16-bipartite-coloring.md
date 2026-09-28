@@ -30,30 +30,36 @@
 
 ```cpp
 class Solution {
- public:
-  // 是二分圖時回傳染色結果（值為 1 或 2）；否則回傳空陣列。
-  vector<int> colorBipartite(int n, vector<vector<int>>& edges) {
-    vector<vector<int>> g(n);
-    for (const auto& e : edges) {
-      g[e[0]].push_back(e[1]);
-      g[e[1]].push_back(e[0]);
-    }
+public:
+    // 是二分圖時回傳染色結果（值為 1 或 2）；否則回傳空陣列。
+    vector<int> colorBipartite(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> g(n);
+        for (const auto& e : edges) {
+            g[e[0]].push_back(e[1]);
+            g[e[1]].push_back(e[0]);
+        }
 
-    vector<int> color(n, 0);
-    function<bool(int, int)> dfs = [&](int x, int c) -> bool {
-      color[x] = c;
-      for (int y : g[x]) {
-        if (color[y] == c) { return false; }              // 同色，出現奇環
-        if (color[y] == 0 && !dfs(y, 3 - c)) { return false; }
-      }
-      return true;
-    };
+        vector<int> color(n, 0);
+        function<bool(int, int)> dfs = [&](int x, int c) -> bool {
+            color[x] = c;
+            for (int y : g[x]) {
+                if (color[y] == c) {
+                    return false;
+                }  // 同色，出現奇環
+                if (color[y] == 0 && !dfs(y, 3 - c)) {
+                    return false;
+                }
+            }
+            return true;
+        };
 
-    for (int i = 0; i < n; ++i) {                          // 圖可能不連通
-      if (color[i] == 0 && !dfs(i, 1)) { return {}; }
+        for (int i = 0; i < n; ++i) {  // 圖可能不連通
+            if (color[i] == 0 && !dfs(i, 1)) {
+                return {};
+            }
+        }
+        return color;
     }
-    return color;
-  }
 };
 ```
 

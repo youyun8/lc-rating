@@ -27,12 +27,12 @@
 
 ```cpp
 // 打表骨架：先用暴力產生前若干項，再觀察規律。
-int bruteForce(int n);        // 指數級也無所謂，只跑小 n
+int bruteForce(int n);  // 指數級也無所謂，只跑小 n
 
 void printTable(int maxN) {
-  for (int n = 1; n <= maxN; ++n) {
-    cout << n << " -> " << bruteForce(n) << '\n';
-  }
+    for (int n = 1; n <= maxN; ++n) {
+        cout << n << " -> " << bruteForce(n) << '\n';
+    }
 }
 ```
 

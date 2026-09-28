@@ -27,15 +27,21 @@
 ```cpp
 // 猜數字：guess(x) 回傳 -1（偏大）、1（偏小）、0（猜中）。
 int guessNumber(int n) {
-  int lo = 1, hi = n;
-  while (lo <= hi) {
-    const int mid = lo + (hi - lo) / 2;      // 避免相加溢位
-    const int result = guess(mid);
-    if (result == 0) { return mid; }
-    if (result < 0) { hi = mid - 1; }        // 偏大，答案在左半
-    else { lo = mid + 1; }
-  }
-  return -1;
+    int lo = 1, hi = n;
+    while (lo <= hi) {
+        const int mid = lo + (hi - lo) / 2;  // 避免相加溢位
+        const int result = guess(mid);
+        if (result == 0) {
+            return mid;
+        }
+        if (result < 0) {
+            hi = mid - 1;
+        }  // 偏大，答案在左半
+        else {
+            lo = mid + 1;
+        }
+    }
+    return -1;
 }
 ```
 

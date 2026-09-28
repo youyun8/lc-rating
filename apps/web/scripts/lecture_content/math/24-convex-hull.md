@@ -25,30 +25,32 @@ Andrew 單調鏈用一個堆疊存放目前的鏈。先把點依 `x` 座標（�
 ```cpp
 // Andrew 單調鏈：回傳逆時針排列的凸包頂點。
 vector<Point> convexHull(vector<Point> pts) {
-  sort(pts.begin(), pts.end(), [](const Point& a, const Point& b) {
-    return a.x != b.x ? a.x < b.x : a.y < b.y;
-  });
-  pts.erase(unique(pts.begin(), pts.end(),
-                   [](const Point& a, const Point& b) {
-                     return a.x == b.x && a.y == b.y;
-                   }),
-            pts.end());
-  if (pts.size() < 3) { return pts; }
-
-  vector<Point> hull;
-  for (int pass = 0; pass < 2; ++pass) {        // 第一遍下鏈，第二遍上鏈
-    const size_t base = hull.size();
-    for (const Point& p : pts) {
-      while (hull.size() >= base + 2 &&
-             cross(hull[hull.size() - 2], hull.back(), p) <= 0) {
-        hull.pop_back();                        // 非逆時針就彈出
-      }
-      hull.push_back(p);
+    sort(pts.begin(), pts.end(), [](const Point& a, const Point& b) {
+        return a.x != b.x ? a.x < b.x : a.y < b.y;
+    });
+    pts.erase(unique(pts.begin(), pts.end(),
+                     [](const Point& a, const Point& b) {
+                         return a.x == b.x && a.y == b.y;
+                     }),
+              pts.end());
+    if (pts.size() < 3) {
+        return pts;
     }
-    hull.pop_back();                            // 去掉重複的端點
-    reverse(pts.begin(), pts.end());            // 反向再掃一次
-  }
-  return hull;
+
+    vector<Point> hull;
+    for (int pass = 0; pass < 2; ++pass) {  // 第一遍下鏈，第二遍上鏈
+        const size_t base = hull.size();
+        for (const Point& p : pts) {
+            while (hull.size() >= base + 2 &&
+                   cross(hull[hull.size() - 2], hull.back(), p) <= 0) {
+                hull.pop_back();  // 非逆時針就彈出
+            }
+            hull.push_back(p);
+        }
+        hull.pop_back();                  // 去掉重複的端點
+        reverse(pts.begin(), pts.end());  // 反向再掃一次
+    }
+    return hull;
 }
 ```
 

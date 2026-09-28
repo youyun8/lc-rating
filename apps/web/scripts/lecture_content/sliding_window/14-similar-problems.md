@@ -32,25 +32,31 @@
 
 ```cpp
 class Solution {
- public:
-  int findUnsortedSubarray(vector<int>& nums) {
-    const int n = nums.size();
-    int left = -1, right = -1;
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        const int n = nums.size();
+        int left = -1, right = -1;
 
-    int maxSoFar = INT_MIN;
-    for (int i = 0; i < n; ++i) {          // 正向：找右界
-      if (nums[i] < maxSoFar) { right = i; }
-      else { maxSoFar = nums[i]; }
+        int maxSoFar = INT_MIN;
+        for (int i = 0; i < n; ++i) {  // 正向：找右界
+            if (nums[i] < maxSoFar) {
+                right = i;
+            } else {
+                maxSoFar = nums[i];
+            }
+        }
+
+        int minSoFar = INT_MAX;
+        for (int i = n - 1; i >= 0; --i) {  // 反向：找左界
+            if (nums[i] > minSoFar) {
+                left = i;
+            } else {
+                minSoFar = nums[i];
+            }
+        }
+
+        return right == -1 ? 0 : right - left + 1;
     }
-
-    int minSoFar = INT_MAX;
-    for (int i = n - 1; i >= 0; --i) {     // 反向：找左界
-      if (nums[i] > minSoFar) { left = i; }
-      else { minSoFar = nums[i]; }
-    }
-
-    return right == -1 ? 0 : right - left + 1;
-  }
 };
 ```
 

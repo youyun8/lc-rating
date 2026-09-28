@@ -24,26 +24,31 @@
 
 ```cpp
 // 兩個軸對齊矩形的重疊面積（只碰到邊界視為 0）。
-long long overlapArea(long long ax1, long long ay1, long long ax2, long long ay2,
-                      long long bx1, long long by1, long long bx2,
-                      long long by2) {
-  const long long w = min(ax2, bx2) - max(ax1, bx1);
-  const long long h = min(ay2, by2) - max(ay1, by1);
-  return (w > 0 && h > 0) ? w * h : 0;      // 不重疊時為 0
+long long overlapArea(long long ax1, long long ay1, long long ax2,
+                      long long ay2, long long bx1, long long by1,
+                      long long bx2, long long by2) {
+    const long long w = min(ax2, bx2) - max(ax1, bx1);
+    const long long h = min(ay2, by2) - max(ay1, by1);
+    return (w > 0 && h > 0) ? w * h : 0;  // 不重疊時為 0
 }
 
 // 射線法：點是否在多邊形內。
 bool inPolygon(const vector<Point>& poly, long long px, long long py) {
-  bool inside = false;
-  const int n = poly.size();
-  for (int i = 0, j = n - 1; i < n; j = i++) {
-    const auto& a = poly[i];
-    const auto& b = poly[j];
-    if ((a.y > py) == (b.y > py)) { continue; }          // 不跨越水平線
-    const long long cross = (b.x - a.x) * (py - a.y) - (b.y - a.y) * (px - a.x);
-    if ((cross > 0) == (b.y > a.y)) { inside = !inside; }
-  }
-  return inside;
+    bool inside = false;
+    const int n = poly.size();
+    for (int i = 0, j = n - 1; i < n; j = i++) {
+        const auto& a = poly[i];
+        const auto& b = poly[j];
+        if ((a.y > py) == (b.y > py)) {
+            continue;
+        }  // 不跨越水平線
+        const long long cross =
+            (b.x - a.x) * (py - a.y) - (b.y - a.y) * (px - a.x);
+        if ((cross > 0) == (b.y > a.y)) {
+            inside = !inside;
+        }
+    }
+    return inside;
 }
 ```
 

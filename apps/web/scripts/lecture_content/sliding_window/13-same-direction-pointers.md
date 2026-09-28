@@ -34,14 +34,14 @@
 
 ```cpp
 int removeElement(vector<int>& nums, int val) {
-  int slow = 0;
-  for (int fast = 0; fast < static_cast<int>(nums.size()); ++fast) {
-    if (nums[fast] != val) {          // 應保留
-      nums[slow] = nums[fast];
-      ++slow;
+    int slow = 0;
+    for (int fast = 0; fast < static_cast<int>(nums.size()); ++fast) {
+        if (nums[fast] != val) {  // 應保留
+            nums[slow] = nums[fast];
+            ++slow;
+        }
     }
-  }
-  return slow;                        // 前 slow 個即為結果
+    return slow;  // 前 slow 個即為結果
 }
 ```
 
@@ -49,7 +49,7 @@ int removeElement(vector<int>& nums, int val) {
 
 ```cpp
 if (slow == 0 || nums[fast] != nums[slow - 1]) {
-  nums[slow++] = nums[fast];
+    nums[slow++] = nums[fast];
 }
 ```
 

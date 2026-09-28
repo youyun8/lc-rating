@@ -32,13 +32,19 @@
 
 ```cpp
 vector<int> twoSum(const vector<int>& nums, int target) {
-  int left = 0, right = nums.size() - 1;
-  while (left < right) {
-    const int sum = nums[left] + nums[right];
-    if (sum == target) { return {left, right}; }
-    if (sum < target) { ++left; } else { --right; }
-  }
-  return {};
+    int left = 0, right = nums.size() - 1;
+    while (left < right) {
+        const int sum = nums[left] + nums[right];
+        if (sum == target) {
+            return {left, right};
+        }
+        if (sum < target) {
+            ++left;
+        } else {
+            --right;
+        }
+    }
+    return {};
 }
 ```
 
@@ -47,20 +53,28 @@ vector<int> twoSum(const vector<int>& nums, int target) {
 ```cpp
 sort(nums.begin(), nums.end());
 for (int i = 0; i + 2 < n; ++i) {
-  if (i > 0 && nums[i] == nums[i - 1]) { continue; }   // 去重
-  int left = i + 1, right = n - 1;
-  while (left < right) {
-    const long long sum = 1LL * nums[i] + nums[left] + nums[right];
-    if (sum < 0) { ++left; }
-    else if (sum > 0) { --right; }
-    else {
-      answer.push_back({nums[i], nums[left], nums[right]});
-      ++left;
-      --right;
-      while (left < right && nums[left] == nums[left - 1]) { ++left; }
-      while (left < right && nums[right] == nums[right + 1]) { --right; }
+    if (i > 0 && nums[i] == nums[i - 1]) {
+        continue;
+    }  // 去重
+    int left = i + 1, right = n - 1;
+    while (left < right) {
+        const long long sum = 1LL * nums[i] + nums[left] + nums[right];
+        if (sum < 0) {
+            ++left;
+        } else if (sum > 0) {
+            --right;
+        } else {
+            answer.push_back({nums[i], nums[left], nums[right]});
+            ++left;
+            --right;
+            while (left < right && nums[left] == nums[left - 1]) {
+                ++left;
+            }
+            while (left < right && nums[right] == nums[right + 1]) {
+                --right;
+            }
+        }
     }
-  }
 }
 ```
 

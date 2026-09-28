@@ -30,34 +30,40 @@
 
 ```cpp
 class Solution {
- public:
-  // 回傳一個合法拓撲序；若有環則回傳空陣列。
-  vector<int> topoSort(int n, vector<vector<int>>& edges) {
-    vector<vector<int>> g(n);
-    vector<int> indeg(n, 0);
-    for (const auto& e : edges) {   // e = {a, b} 表示 a 必須先於 b
-      g[e[0]].push_back(e[1]);
-      ++indeg[e[1]];
-    }
+public:
+    // 回傳一個合法拓撲序；若有環則回傳空陣列。
+    vector<int> topoSort(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> g(n);
+        vector<int> indeg(n, 0);
+        for (const auto& e : edges) {  // e = {a, b} 表示 a 必須先於 b
+            g[e[0]].push_back(e[1]);
+            ++indeg[e[1]];
+        }
 
-    queue<int> q;
-    for (int i = 0; i < n; ++i) {
-      if (indeg[i] == 0) { q.push(i); }
-    }
+        queue<int> q;
+        for (int i = 0; i < n; ++i) {
+            if (indeg[i] == 0) {
+                q.push(i);
+            }
+        }
 
-    vector<int> order;
-    while (!q.empty()) {
-      const int x = q.front();
-      q.pop();
-      order.push_back(x);
-      for (int y : g[x]) {
-        if (--indeg[y] == 0) { q.push(y); }
-      }
-    }
+        vector<int> order;
+        while (!q.empty()) {
+            const int x = q.front();
+            q.pop();
+            order.push_back(x);
+            for (int y : g[x]) {
+                if (--indeg[y] == 0) {
+                    q.push(y);
+                }
+            }
+        }
 
-    if (static_cast<int>(order.size()) < n) { return {}; }  // 有環
-    return order;
-  }
+        if (static_cast<int>(order.size()) < n) {
+            return {};
+        }  // 有環
+        return order;
+    }
 };
 ```
 

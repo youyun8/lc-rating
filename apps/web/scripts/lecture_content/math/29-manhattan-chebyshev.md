@@ -27,16 +27,18 @@ $$|a| + |b| = \max(|a+b|,\; |a-b|)$$
 ```cpp
 // 平面上曼哈頓距離的最大值。
 long long maxManhattan(const vector<Point>& pts) {
-  long long maxU = LLONG_MIN, minU = LLONG_MAX;
-  long long maxV = LLONG_MIN, minV = LLONG_MAX;
+    long long maxU = LLONG_MIN, minU = LLONG_MAX;
+    long long maxV = LLONG_MIN, minV = LLONG_MAX;
 
-  for (const auto& p : pts) {
-    const long long u = p.x + p.y;      // 旋轉 45 度
-    const long long v = p.x - p.y;
-    maxU = max(maxU, u); minU = min(minU, u);
-    maxV = max(maxV, v); minV = min(minV, v);
-  }
-  return max(maxU - minU, maxV - minV);
+    for (const auto& p : pts) {
+        const long long u = p.x + p.y;  // 旋轉 45 度
+        const long long v = p.x - p.y;
+        maxU = max(maxU, u);
+        minU = min(minU, u);
+        maxV = max(maxV, v);
+        minV = min(minV, v);
+    }
+    return max(maxU - minU, maxV - minV);
 }
 ```
 

@@ -25,18 +25,26 @@ $$\varphi(n) = n \prod_{p \mid n} \left(1 - \frac{1}{p}\right)$$
 ## C++17 模板
 
 ```cpp
-bool coprime(long long a, long long b) { return gcd(a, b) == 1; }
+bool coprime(long long a, long long b) {
+    return gcd(a, b) == 1;
+}
 
 // 歐拉函數：[1, n] 中與 n 互質的數的個數。
 long long phi(long long n) {
-  long long result = n;
-  for (long long p = 2; p * p <= n; ++p) {
-    if (n % p != 0) { continue; }
-    while (n % p == 0) { n /= p; }      // 只算一次，指數不影響
-    result = result / p * (p - 1);      // 先除後乘
-  }
-  if (n > 1) { result = result / n * (n - 1); }   // 剩下的大質因數
-  return result;
+    long long result = n;
+    for (long long p = 2; p * p <= n; ++p) {
+        if (n % p != 0) {
+            continue;
+        }
+        while (n % p == 0) {
+            n /= p;
+        }  // 只算一次，指數不影響
+        result = result / p * (p - 1);  // 先除後乘
+    }
+    if (n > 1) {
+        result = result / n * (n - 1);
+    }  // 剩下的大質因數
+    return result;
 }
 ```
 

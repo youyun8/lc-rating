@@ -16,6 +16,7 @@
   --serif: "Noto Serif TC", "Noto Serif CJK TC", serif;
   --sans: "Noto Sans TC", "Noto Sans CJK TC", sans-serif;
   --mono: "JetBrains Mono", "Noto Sans Mono", monospace;
+  --code: "Ubuntu Mono", "Noto Sans Mono", monospace;
 }
 
 html {
@@ -294,8 +295,8 @@ tbody tr:last-child td {
 /* ---------------------------------------------------------------- */
 
 code {
-  font-family: var(--mono);
-  font-size: 0.86em;
+  font-family: var(--code);
+  font-size: 0.95em;
   background: var(--code-bg);
   padding: 0.05em 0.3em;
   border-radius: 2px;
@@ -303,8 +304,8 @@ code {
 }
 
 pre {
-  font-family: var(--mono);
-  font-size: 7.6pt;
+  font-family: var(--code);
+  font-size: 8.4pt;
   line-height: 1.5;
   background: var(--code-bg);
   border: 0.5pt solid #d9dee3;

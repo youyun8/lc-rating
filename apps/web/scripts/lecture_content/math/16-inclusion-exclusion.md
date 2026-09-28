@@ -28,23 +28,30 @@ $$\sum_{j=1}^{t} (-1)^{j+1}\binom{t}{j} = 1 - \sum_{j=0}^{t} (-1)^{j}\binom{t}{j
 
 ```cpp
 long long countDivisibleByAny(long long n, const vector<long long>& nums) {
-  const int m = nums.size();
-  long long total = 0;
+    const int m = nums.size();
+    long long total = 0;
 
-  for (int mask = 1; mask < (1 << m); ++mask) {
-    long long lcmValue = 1;
-    bool overflow = false;
-    for (int i = 0; i < m; ++i) {
-      if (!(mask >> i & 1)) { continue; }
-      lcmValue = lcmValue / gcd(lcmValue, nums[i]) * nums[i];
-      if (lcmValue > n) { overflow = true; break; }   // 已無倍數，提前結束
+    for (int mask = 1; mask < (1 << m); ++mask) {
+        long long lcmValue = 1;
+        bool overflow = false;
+        for (int i = 0; i < m; ++i) {
+            if (!(mask >> i & 1)) {
+                continue;
+            }
+            lcmValue = lcmValue / gcd(lcmValue, nums[i]) * nums[i];
+            if (lcmValue > n) {
+                overflow = true;
+                break;
+            }  // 已無倍數，提前結束
+        }
+        if (overflow) {
+            continue;
+        }
+        const long long count = n / lcmValue;
+        // 子集大小為奇數則加、偶數則減
+        total += (__builtin_popcount(mask) & 1) ? count : -count;
     }
-    if (overflow) { continue; }
-    const long long count = n / lcmValue;
-    // 子集大小為奇數則加、偶數則減
-    total += (__builtin_popcount(mask) & 1) ? count : -count;
-  }
-  return total;
+    return total;
 }
 ```
 

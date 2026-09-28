@@ -30,19 +30,21 @@
 
 ```cpp
 class Solution {
- public:
-  int maxSum(vector<int>& nums, int k) {
-    long long sum = 0;
-    long long answer = LLONG_MIN;
+public:
+    int maxSum(vector<int>& nums, int k) {
+        long long sum = 0;
+        long long answer = LLONG_MIN;
 
-    for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
-      sum += nums[right];                       // 一、入
-      if (right < k - 1) { continue; }          // 視窗還沒滿
-      answer = max(answer, sum);                // 二、更新
-      sum -= nums[right - k + 1];               // 三、出
+        for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
+            sum += nums[right];  // 一、入
+            if (right < k - 1) {
+                continue;
+            }  // 視窗還沒滿
+            answer = max(answer, sum);   // 二、更新
+            sum -= nums[right - k + 1];  // 三、出
+        }
+        return static_cast<int>(answer);
     }
-    return static_cast<int>(answer);
-  }
 };
 ```
 
@@ -50,7 +52,7 @@ class Solution {
 
 ```cpp
 if (--count[nums[right - k + 1]] == 0) {
-  count.erase(nums[right - k + 1]);
+    count.erase(nums[right - k + 1]);
 }
 ```
 

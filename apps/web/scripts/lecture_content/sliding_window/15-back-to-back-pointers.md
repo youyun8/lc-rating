@@ -32,29 +32,29 @@
 
 ```cpp
 class Solution {
- public:
-  string longestPalindrome(string s) {
-    int start = 0, best = 0;
+public:
+    string longestPalindrome(string s) {
+        int start = 0, best = 0;
 
-    auto expand = [&](int left, int right) {
-      while (left >= 0 && right < static_cast<int>(s.size()) &&
-             s[left] == s[right]) {
-        --left;
-        ++right;
-      }
-      // 迴圈結束時 [left+1, right-1] 是迴文
-      if (right - left - 1 > best) {
-        best = right - left - 1;
-        start = left + 1;
-      }
-    };
+        auto expand = [&](int left, int right) {
+            while (left >= 0 && right < static_cast<int>(s.size()) &&
+                   s[left] == s[right]) {
+                --left;
+                ++right;
+            }
+            // 迴圈結束時 [left+1, right-1] 是迴文
+            if (right - left - 1 > best) {
+                best = right - left - 1;
+                start = left + 1;
+            }
+        };
 
-    for (int i = 0; i < static_cast<int>(s.size()); ++i) {
-      expand(i, i);        // 奇數長度
-      expand(i, i + 1);    // 偶數長度
+        for (int i = 0; i < static_cast<int>(s.size()); ++i) {
+            expand(i, i);      // 奇數長度
+            expand(i, i + 1);  // 偶數長度
+        }
+        return s.substr(start, best);
     }
-    return s.substr(start, best);
-  }
 };
 ```
 

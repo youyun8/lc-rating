@@ -16,13 +16,21 @@
 
 ```cpp
 bool isPrime(long long n) {
-  if (n < 2) { return false; }
-  if (n % 2 == 0) { return n == 2; }
-  if (n % 3 == 0) { return n == 3; }
-  for (long long i = 5; i <= n / i; i += 6) {
-    if (n % i == 0 || n % (i + 2) == 0) { return false; }  // 6k-1、6k+1
-  }
-  return true;
+    if (n < 2) {
+        return false;
+    }
+    if (n % 2 == 0) {
+        return n == 2;
+    }
+    if (n % 3 == 0) {
+        return n == 3;
+    }
+    for (long long i = 5; i <= n / i; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0) {
+            return false;
+        }  // 6k-1、6k+1
+    }
+    return true;
 }
 ```
 

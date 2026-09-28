@@ -34,28 +34,28 @@
 
 ```cpp
 class Solution {
- public:
-  vector<string> findItinerary(vector<vector<string>>& tickets) {
-    map<string, multiset<string>> g;
-    for (const auto& t : tickets) {
-      g[t[0]].insert(t[1]);
+public:
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        map<string, multiset<string>> g;
+        for (const auto& t : tickets) {
+            g[t[0]].insert(t[1]);
+        }
+
+        vector<string> path;
+        function<void(const string&)> dfs = [&](const string& x) {
+            auto& outs = g[x];
+            while (!outs.empty()) {
+                const string y = *outs.begin();
+                outs.erase(outs.begin());  // 取走即刪除，保證每條邊只用一次
+                dfs(y);
+            }
+            path.push_back(x);  // 後序：卡住才記錄
+        };
+
+        dfs("JFK");
+        reverse(path.begin(), path.end());
+        return path;
     }
-
-    vector<string> path;
-    function<void(const string&)> dfs = [&](const string& x) {
-      auto& outs = g[x];
-      while (!outs.empty()) {
-        const string y = *outs.begin();
-        outs.erase(outs.begin());   // 取走即刪除，保證每條邊只用一次
-        dfs(y);
-      }
-      path.push_back(x);            // 後序：卡住才記錄
-    };
-
-    dfs("JFK");
-    reverse(path.begin(), path.end());
-    return path;
-  }
 };
 ```
 

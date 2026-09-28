@@ -30,35 +30,39 @@ Kruskal：所有邊依權重升序排序；依序嘗試合併兩端點，合併�
 
 ```cpp
 struct UnionFind {
-  vector<int> fa;
-  int cc;
-  explicit UnionFind(int n) : fa(n), cc(n) { iota(fa.begin(), fa.end(), 0); }
+    vector<int> fa;
+    int cc;
+    explicit UnionFind(int n) : fa(n), cc(n) { iota(fa.begin(), fa.end(), 0); }
 
-  int find(int x) { return fa[x] == x ? x : fa[x] = find(fa[x]); }
+    int find(int x) { return fa[x] == x ? x : fa[x] = find(fa[x]); }
 
-  bool merge(int a, int b) {
-    const int x = find(a), y = find(b);
-    if (x == y) { return false; }
-    fa[x] = y;
-    --cc;
-    return true;
-  }
+    bool merge(int a, int b) {
+        const int x = find(a), y = find(b);
+        if (x == y) {
+            return false;
+        }
+        fa[x] = y;
+        --cc;
+        return true;
+    }
 };
 
 // 回傳最小生成樹的邊權和；圖不連通時回傳 -1。
 long long mstKruskal(int n, vector<vector<int>>& edges) {
-  sort(edges.begin(), edges.end(),
-       [](const auto& a, const auto& b) { return a[2] < b[2]; });
+    sort(edges.begin(), edges.end(),
+         [](const auto& a, const auto& b) { return a[2] < b[2]; });
 
-  UnionFind uf(n);
-  long long total = 0;
-  for (const auto& e : edges) {
-    if (uf.merge(e[0], e[1])) {
-      total += e[2];
-      if (uf.cc == 1) { break; }     // 已連通，提前結束
+    UnionFind uf(n);
+    long long total = 0;
+    for (const auto& e : edges) {
+        if (uf.merge(e[0], e[1])) {
+            total += e[2];
+            if (uf.cc == 1) {
+                break;
+            }  // 已連通，提前結束
+        }
     }
-  }
-  return uf.cc == 1 ? total : -1;
+    return uf.cc == 1 ? total : -1;
 }
 ```
 

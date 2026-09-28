@@ -32,14 +32,16 @@ constexpr long long kMod = 1'000'000'007;
 // 多項式乘法，只保留次數不超過 limit 的項。
 vector<long long> multiply(const vector<long long>& a,
                            const vector<long long>& b, int limit) {
-  vector<long long> c(limit + 1, 0);
-  for (int i = 0; i < static_cast<int>(a.size()) && i <= limit; ++i) {
-    if (a[i] == 0) { continue; }
-    for (int j = 0; j + i <= limit && j < static_cast<int>(b.size()); ++j) {
-      c[i + j] = (c[i + j] + a[i] * b[j]) % kMod;
+    vector<long long> c(limit + 1, 0);
+    for (int i = 0; i < static_cast<int>(a.size()) && i <= limit; ++i) {
+        if (a[i] == 0) {
+            continue;
+        }
+        for (int j = 0; j + i <= limit && j < static_cast<int>(b.size()); ++j) {
+            c[i + j] = (c[i + j] + a[i] * b[j]) % kMod;
+        }
     }
-  }
-  return c;
+    return c;
 }
 ```
 

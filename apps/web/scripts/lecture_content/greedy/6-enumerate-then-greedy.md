@@ -25,16 +25,18 @@
 ```cpp
 // 枚舉分割點：把陣列切成兩段，最大化「左段最大值 - 右段最小值」之類的量。
 int bestSplit(const vector<int>& a) {
-  const int n = a.size();
-  vector<int> suffixMin(n + 1, INT_MAX);
-  for (int i = n - 1; i >= 0; --i) { suffixMin[i] = min(suffixMin[i + 1], a[i]); }
+    const int n = a.size();
+    vector<int> suffixMin(n + 1, INT_MAX);
+    for (int i = n - 1; i >= 0; --i) {
+        suffixMin[i] = min(suffixMin[i + 1], a[i]);
+    }
 
-  int best = INT_MIN, prefixMax = INT_MIN;
-  for (int i = 0; i + 1 < n; ++i) {          // i 為左段最後一格
-    prefixMax = max(prefixMax, a[i]);
-    best = max(best, prefixMax - suffixMin[i + 1]);
-  }
-  return best;
+    int best = INT_MIN, prefixMax = INT_MIN;
+    for (int i = 0; i + 1 < n; ++i) {  // i 為左段最後一格
+        prefixMax = max(prefixMax, a[i]);
+        best = max(best, prefixMax - suffixMin[i + 1]);
+    }
+    return best;
 }
 ```
 

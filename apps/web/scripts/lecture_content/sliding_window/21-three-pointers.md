@@ -34,28 +34,32 @@
 
 ```cpp
 class Solution {
- public:
-  int subarraysWithKDistinct(vector<int>& nums, int k) {
-    unordered_map<int, int> count1, count2;
-    long long answer = 0;
-    int left1 = 0, left2 = 0;
+public:
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
+        unordered_map<int, int> count1, count2;
+        long long answer = 0;
+        int left1 = 0, left2 = 0;
 
-    for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
-      ++count1[nums[right]];
-      ++count2[nums[right]];
+        for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
+            ++count1[nums[right]];
+            ++count2[nums[right]];
 
-      while (static_cast<int>(count1.size()) > k) {        // 維持至多 k
-        if (--count1[nums[left1]] == 0) { count1.erase(nums[left1]); }
-        ++left1;
-      }
-      while (static_cast<int>(count2.size()) > k - 1) {    // 維持至多 k-1
-        if (--count2[nums[left2]] == 0) { count2.erase(nums[left2]); }
-        ++left2;
-      }
-      answer += left2 - left1;                             // 恰好 k 的個數
+            while (static_cast<int>(count1.size()) > k) {  // 維持至多 k
+                if (--count1[nums[left1]] == 0) {
+                    count1.erase(nums[left1]);
+                }
+                ++left1;
+            }
+            while (static_cast<int>(count2.size()) > k - 1) {  // 維持至多 k-1
+                if (--count2[nums[left2]] == 0) {
+                    count2.erase(nums[left2]);
+                }
+                ++left2;
+            }
+            answer += left2 - left1;  // 恰好 k 的個數
+        }
+        return static_cast<int>(answer);
     }
-    return static_cast<int>(answer);
-  }
 };
 ```
 

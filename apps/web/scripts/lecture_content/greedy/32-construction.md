@@ -29,14 +29,14 @@
 ```cpp
 // 擺動排序 II：a[0] < a[1] > a[2] < a[3] ...
 void wiggleSort(vector<int>& nums) {
-  vector<int> sorted = nums;
-  sort(sorted.begin(), sorted.end());
+    vector<int> sorted = nums;
+    sort(sorted.begin(), sorted.end());
 
-  const int n = nums.size();
-  int small = (n + 1) / 2 - 1, large = n - 1;   // 兩半段各自從尾端取
-  for (int i = 0; i < n; ++i) {
-    nums[i] = (i % 2 == 0) ? sorted[small--] : sorted[large--];   // 倒序填入
-  }
+    const int n = nums.size();
+    int small = (n + 1) / 2 - 1, large = n - 1;  // 兩半段各自從尾端取
+    for (int i = 0; i < n; ++i) {
+        nums[i] = (i % 2 == 0) ? sorted[small--] : sorted[large--];  // 倒序填入
+    }
 }
 ```
 

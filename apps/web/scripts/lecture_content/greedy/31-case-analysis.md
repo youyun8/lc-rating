@@ -28,16 +28,17 @@
 ```cpp
 // 依判別量分支，每個分支獨立處理，最後必有 return。
 long long solve(const vector<int>& a) {
-  const int negatives = count_if(a.begin(), a.end(), [](int x) { return x < 0; });
-  const bool hasZero = find(a.begin(), a.end(), 0) != a.end();
+    const int negatives =
+        count_if(a.begin(), a.end(), [](int x) { return x < 0; });
+    const bool hasZero = find(a.begin(), a.end(), 0) != a.end();
 
-  if (negatives % 2 == 0) {
-    return handleEvenNegatives(a);          // 負數成對，可全部轉正
-  }
-  if (hasZero) {
-    return handleOddWithZero(a);            // 有零可吸收掉一個負號
-  }
-  return handleOddNoZero(a);                // 必須犧牲絕對值最小的負數
+    if (negatives % 2 == 0) {
+        return handleEvenNegatives(a);  // 負數成對，可全部轉正
+    }
+    if (hasZero) {
+        return handleOddWithZero(a);  // 有零可吸收掉一個負號
+    }
+    return handleOddNoZero(a);  // 必須犧牲絕對值最小的負數
 }
 ```
 

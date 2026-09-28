@@ -24,23 +24,29 @@
 
 ```cpp
 long long power(long long a, long long e, long long mod) {
-  long long result = 1;
-  a %= mod;
-  while (e > 0) {
-    if (e & 1) { result = result * a % mod; }
-    a = a * a % mod;
-    e >>= 1;
-  }
-  return result;
+    long long result = 1;
+    a %= mod;
+    while (e > 0) {
+        if (e & 1) {
+            result = result * a % mod;
+        }
+        a = a * a % mod;
+        e >>= 1;
+    }
+    return result;
 }
 
 bool isPerfectSquare(long long n) {
-  if (n < 0) { return false; }
-  long long r = static_cast<long long>(sqrtl(static_cast<long double>(n)));
-  for (long long c = max(0LL, r - 1); c <= r + 1; ++c) {   // 校正浮點誤差
-    if (c * c == n) { return true; }
-  }
-  return false;
+    if (n < 0) {
+        return false;
+    }
+    long long r = static_cast<long long>(sqrtl(static_cast<long double>(n)));
+    for (long long c = max(0LL, r - 1); c <= r + 1; ++c) {  // 校正浮點誤差
+        if (c * c == n) {
+            return true;
+        }
+    }
+    return false;
 }
 ```
 

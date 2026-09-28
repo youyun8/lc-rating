@@ -36,28 +36,30 @@ $$\text{恰好}(k) = \text{至多}(k) - \text{至多}(k-1)$$
 
 ```cpp
 class Solution {
- public:
-  int numberOfSubarrays(vector<int>& nums, int k) {
-    return atMost(nums, k) - atMost(nums, k - 1);
-  }
-
- private:
-  // 奇數個數不超過 k 的子陣列個數。
-  long long atMost(const vector<int>& nums, int k) {
-    if (k < 0) { return 0; }               // 邊界：k 為 0 時會呼叫到 -1
-    long long answer = 0;
-    int left = 0, odd = 0;
-
-    for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
-      odd += nums[right] & 1;
-      while (odd > k) {
-        odd -= nums[left] & 1;
-        ++left;
-      }
-      answer += right - left + 1;
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        return atMost(nums, k) - atMost(nums, k - 1);
     }
-    return answer;
-  }
+
+private:
+    // 奇數個數不超過 k 的子陣列個數。
+    long long atMost(const vector<int>& nums, int k) {
+        if (k < 0) {
+            return 0;
+        }  // 邊界：k 為 0 時會呼叫到 -1
+        long long answer = 0;
+        int left = 0, odd = 0;
+
+        for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
+            odd += nums[right] & 1;
+            while (odd > k) {
+                odd -= nums[left] & 1;
+                ++left;
+            }
+            answer += right - left + 1;
+        }
+        return answer;
+    }
 };
 ```
 

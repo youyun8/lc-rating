@@ -23,14 +23,16 @@
 ```cpp
 // 在總預算內盡量多買：由小到大取。
 int maxCount(vector<int>& costs, int budget) {
-  sort(costs.begin(), costs.end());
-  int taken = 0;
-  for (int c : costs) {
-    if (budget < c) { break; }     // 之後只會更貴，可提前結束
-    budget -= c;
-    ++taken;
-  }
-  return taken;
+    sort(costs.begin(), costs.end());
+    int taken = 0;
+    for (int c : costs) {
+        if (budget < c) {
+            break;
+        }  // 之後只會更貴，可提前結束
+        budget -= c;
+        ++taken;
+    }
+    return taken;
 }
 ```
 

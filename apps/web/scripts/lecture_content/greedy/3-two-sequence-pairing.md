@@ -25,14 +25,16 @@
 ```cpp
 // 分發餅乾：g 為孩子胃口，s 為餅乾尺寸，求最多滿足幾個孩子。
 int findContentChildren(vector<int>& g, vector<int>& s) {
-  sort(g.begin(), g.end());
-  sort(s.begin(), s.end());
-  size_t i = 0;                                  // 孩子指標
+    sort(g.begin(), g.end());
+    sort(s.begin(), s.end());
+    size_t i = 0;  // 孩子指標
 
-  for (size_t j = 0; j < s.size() && i < g.size(); ++j) {
-    if (s[j] >= g[i]) { ++i; }                   // 滿足了就換下一個孩子
-  }
-  return static_cast<int>(i);
+    for (size_t j = 0; j < s.size() && i < g.size(); ++j) {
+        if (s[j] >= g[i]) {
+            ++i;
+        }  // 滿足了就換下一個孩子
+    }
+    return static_cast<int>(i);
 }
 ```
 

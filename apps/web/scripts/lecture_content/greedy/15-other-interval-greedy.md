@@ -25,7 +25,7 @@
 
 ```cpp
 // 依題型選擇排序鍵——這是區間貪心唯一需要記牢的決策。
-auto byEnd   = [](const auto& a, const auto& b) { return a[1] < b[1]; };
+auto byEnd = [](const auto& a, const auto& b) { return a[1] < b[1]; };
 auto byStart = [](const auto& a, const auto& b) { return a[0] < b[0]; };
 ```
 

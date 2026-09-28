@@ -28,11 +28,15 @@
 
 ```cpp
 // 貪心題的通用骨架與檢驗流程。
-sort(items.begin(), items.end(), rule);   // rule 必須由交換論證推出
+sort(items.begin(), items.end(), rule);  // rule 必須由交換論證推出
 long long answer = 0;
 for (const auto& item : items) {
-  if (canTake(item)) { take(item); answer += gain(item); }
-  else if (betterThanWorstTaken(item)) { swapOutWorst(item); }   // 需要反悔時
+    if (canTake(item)) {
+        take(item);
+        answer += gain(item);
+    } else if (betterThanWorstTaken(item)) {
+        swapOutWorst(item);
+    }  // 需要反悔時
 }
 ```
 

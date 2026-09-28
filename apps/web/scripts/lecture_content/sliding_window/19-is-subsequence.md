@@ -32,14 +32,16 @@
 
 ```cpp
 class Solution {
- public:
-  bool isSubsequence(string s, string t) {
-    size_t i = 0;
-    for (size_t j = 0; j < t.size() && i < s.size(); ++j) {
-      if (s[i] == t[j]) { ++i; }     // 配對成功才推進 s
+public:
+    bool isSubsequence(string s, string t) {
+        size_t i = 0;
+        for (size_t j = 0; j < t.size() && i < s.size(); ++j) {
+            if (s[i] == t[j]) {
+                ++i;
+            }  // 配對成功才推進 s
+        }
+        return i == s.size();
     }
-    return i == s.size();
-  }
 };
 ```
 
@@ -50,8 +52,8 @@ class Solution {
 vector<array<int, 26>> next(t.size() + 1);
 next[t.size()].fill(t.size());
 for (int j = t.size() - 1; j >= 0; --j) {
-  next[j] = next[j + 1];
-  next[j][t[j] - 'a'] = j;
+    next[j] = next[j + 1];
+    next[j][t[j] - 'a'] = j;
 }
 ```
 

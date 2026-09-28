@@ -32,21 +32,21 @@
 
 ```cpp
 class Solution {
- public:
-  long long countSubarrays(vector<int>& nums, long long k) {
-    long long answer = 0, sum = 0;
-    int left = 0;
+public:
+    long long countSubarrays(vector<int>& nums, long long k) {
+        long long answer = 0, sum = 0;
+        int left = 0;
 
-    for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
-      sum += nums[right];        // 入
-      while (sum >= k) {         // 合法就收縮
-        sum -= nums[left];
-        ++left;
-      }
-      answer += left;            // 左端點取 0..left-1 都合法
+        for (int right = 0; right < static_cast<int>(nums.size()); ++right) {
+            sum += nums[right];  // 入
+            while (sum >= k) {   // 合法就收縮
+                sum -= nums[left];
+                ++left;
+            }
+            answer += left;  // 左端點取 0..left-1 都合法
+        }
+        return answer;
     }
-    return answer;
-  }
 };
 ```
 

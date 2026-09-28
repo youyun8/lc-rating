@@ -29,19 +29,25 @@ $$b x_1 + \left(a - \lfloor a/b \rfloor b\right) y_1 = a y_1 + b\left(x_1 - \lfl
 ```cpp
 // 回傳 gcd(a, b)，並令 a * x + b * y = gcd(a, b)。
 long long exgcd(long long a, long long b, long long& x, long long& y) {
-  if (b == 0) { x = 1; y = 0; return a; }
-  long long x1, y1;
-  const long long g = exgcd(b, a % b, x1, y1);
-  x = y1;
-  y = x1 - (a / b) * y1;
-  return g;
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    long long x1, y1;
+    const long long g = exgcd(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - (a / b) * y1;
+    return g;
 }
 
 // a 在模 m 下的乘法逆元；僅當 gcd(a, m) == 1 時存在。
 long long modInverse(long long a, long long m) {
-  long long x, y;
-  if (exgcd(a, m, x, y) != 1) { return -1; }
-  return (x % m + m) % m;      // 轉成非負代表元
+    long long x, y;
+    if (exgcd(a, m, x, y) != 1) {
+        return -1;
+    }
+    return (x % m + m) % m;  // 轉成非負代表元
 }
 ```
 

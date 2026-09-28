@@ -27,16 +27,22 @@ constexpr long long kMod = 1'000'000'007;
 vector<long long> fact, invFact;
 
 void initCombinatorics(int n) {
-  fact.assign(n + 1, 1);
-  invFact.assign(n + 1, 1);
-  for (int i = 1; i <= n; ++i) { fact[i] = fact[i - 1] * i % kMod; }
-  invFact[n] = power(fact[n], kMod - 2, kMod);          // 只做一次快速冪
-  for (int i = n; i > 0; --i) { invFact[i - 1] = invFact[i] * i % kMod; }
+    fact.assign(n + 1, 1);
+    invFact.assign(n + 1, 1);
+    for (int i = 1; i <= n; ++i) {
+        fact[i] = fact[i - 1] * i % kMod;
+    }
+    invFact[n] = power(fact[n], kMod - 2, kMod);  // 只做一次快速冪
+    for (int i = n; i > 0; --i) {
+        invFact[i - 1] = invFact[i] * i % kMod;
+    }
 }
 
 long long comb(int n, int k) {
-  if (k < 0 || k > n) { return 0; }                     // 邊界視為 0
-  return fact[n] * invFact[k] % kMod * invFact[n - k] % kMod;
+    if (k < 0 || k > n) {
+        return 0;
+    }  // 邊界視為 0
+    return fact[n] * invFact[k] % kMod * invFact[n - k] % kMod;
 }
 ```
 

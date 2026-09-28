@@ -36,30 +36,34 @@ SPFA：起點距離設 0 入隊；取出節點鬆弛其所有出邊；被成功�
 // 回傳 false 表示存在負環（差分約束即為無解）。
 bool spfa(int n, const vector<vector<pair<int, int>>>& g, int start,
           vector<long long>& dis) {
-  dis.assign(n, LLONG_MAX);
-  vector<int> in_queue(n, 0), count(n, 0);
-  dis[start] = 0;
-  queue<int> q;
-  q.push(start);
-  in_queue[start] = 1;
+    dis.assign(n, LLONG_MAX);
+    vector<int> in_queue(n, 0), count(n, 0);
+    dis[start] = 0;
+    queue<int> q;
+    q.push(start);
+    in_queue[start] = 1;
 
-  while (!q.empty()) {
-    const int x = q.front();
-    q.pop();
-    in_queue[x] = 0;
-    for (const auto& [y, w] : g[x]) {
-      if (dis[x] == LLONG_MAX) { continue; }
-      if (dis[x] + w < dis[y]) {
-        dis[y] = dis[x] + w;
-        if (!in_queue[y]) {
-          if (++count[y] >= n) { return false; }   // 負環
-          q.push(y);
-          in_queue[y] = 1;
+    while (!q.empty()) {
+        const int x = q.front();
+        q.pop();
+        in_queue[x] = 0;
+        for (const auto& [y, w] : g[x]) {
+            if (dis[x] == LLONG_MAX) {
+                continue;
+            }
+            if (dis[x] + w < dis[y]) {
+                dis[y] = dis[x] + w;
+                if (!in_queue[y]) {
+                    if (++count[y] >= n) {
+                        return false;
+                    }  // 負環
+                    q.push(y);
+                    in_queue[y] = 1;
+                }
+            }
         }
-      }
     }
-  }
-  return true;
+    return true;
 }
 ```
 

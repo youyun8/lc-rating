@@ -28,33 +28,37 @@
 
 ```cpp
 class Solution {
- public:
-  int ladderLength(string begin, string end, vector<string>& wordList) {
-    unordered_set<string> dict(wordList.begin(), wordList.end());
-    if (dict.count(end) == 0) { return 0; }
-
-    unordered_map<string, int> dist{{begin, 1}};
-    queue<string> q;
-    q.push(begin);
-
-    while (!q.empty()) {
-      const string x = q.front();
-      q.pop();
-      if (x == end) { return dist[x]; }
-
-      for (size_t i = 0; i < x.size(); ++i) {   // 即時生成鄰居
-        string next = x;
-        for (char c = 'a'; c <= 'z'; ++c) {
-          next[i] = c;
-          if (dict.count(next) && dist.count(next) == 0) {
-            dist[next] = dist[x] + 1;
-            q.push(next);
-          }
+public:
+    int ladderLength(string begin, string end, vector<string>& wordList) {
+        unordered_set<string> dict(wordList.begin(), wordList.end());
+        if (dict.count(end) == 0) {
+            return 0;
         }
-      }
+
+        unordered_map<string, int> dist{{begin, 1}};
+        queue<string> q;
+        q.push(begin);
+
+        while (!q.empty()) {
+            const string x = q.front();
+            q.pop();
+            if (x == end) {
+                return dist[x];
+            }
+
+            for (size_t i = 0; i < x.size(); ++i) {  // 即時生成鄰居
+                string next = x;
+                for (char c = 'a'; c <= 'z'; ++c) {
+                    next[i] = c;
+                    if (dict.count(next) && dist.count(next) == 0) {
+                        dist[next] = dist[x] + 1;
+                        q.push(next);
+                    }
+                }
+            }
+        }
+        return 0;
     }
-    return 0;
-  }
 };
 ```
 

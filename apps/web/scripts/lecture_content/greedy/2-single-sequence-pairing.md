@@ -23,15 +23,17 @@
 ```cpp
 // 每艘船最多兩人、載重上限 limit，求最少船數。
 int numRescueBoats(vector<int>& people, int limit) {
-  sort(people.begin(), people.end());
-  int left = 0, right = people.size() - 1, boats = 0;
+    sort(people.begin(), people.end());
+    int left = 0, right = people.size() - 1, boats = 0;
 
-  while (left <= right) {
-    if (people[left] + people[right] <= limit) { ++left; }  // 最輕者一起上
-    --right;                                                // 最重者必定上船
-    ++boats;
-  }
-  return boats;
+    while (left <= right) {
+        if (people[left] + people[right] <= limit) {
+            ++left;
+        }  // 最輕者一起上
+        --right;  // 最重者必定上船
+        ++boats;
+    }
+    return boats;
 }
 ```
 

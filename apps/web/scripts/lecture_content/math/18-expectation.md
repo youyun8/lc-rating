@@ -30,13 +30,13 @@ constexpr long long kMod = 1'000'000'007;
 // 期望值在模意義下：分數 a/b 表示為 a * b^{-1} mod p
 long long expectedValue(const vector<long long>& values,
                         const vector<pair<long long, long long>>& probs) {
-  long long result = 0;
-  for (size_t i = 0; i < values.size(); ++i) {
-    const auto [num, den] = probs[i];                  // 機率 num/den
-    const long long p = num % kMod * power(den, kMod - 2, kMod) % kMod;
-    result = (result + values[i] % kMod * p) % kMod;
-  }
-  return result;
+    long long result = 0;
+    for (size_t i = 0; i < values.size(); ++i) {
+        const auto [num, den] = probs[i];  // 機率 num/den
+        const long long p = num % kMod * power(den, kMod - 2, kMod) % kMod;
+        result = (result + values[i] % kMod * p) % kMod;
+    }
+    return result;
 }
 ```
 

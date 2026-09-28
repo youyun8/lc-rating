@@ -117,7 +117,7 @@ Q4 的 DP 通常分兩層難點。第一層是**建模**：從最後一步反推
 for (int len = 2; len <= n; ++len) {
     for (int l = 0; l + len - 1 < n; ++l) {
         int r = l + len - 1;
-        for (int k = l; k < r; ++k)              // 枚舉最後一步的分割點
+        for (int k = l; k < r; ++k)  // 枚舉最後一步的分割點
             dp[l][r] = min(dp[l][r], dp[l][k] + dp[k + 1][r] + cost(l, k, r));
     }
 }
@@ -126,7 +126,8 @@ for (int len = 2; len <= n; ++len) {
 for (int mask = 0; mask < (1 << n); ++mask)
     for (int j = 0; j < n; ++j)
         if (!(mask >> j & 1))
-            dp[mask | (1 << j)] = best(dp[mask | (1 << j)], dp[mask] + w(mask, j));
+            dp[mask | (1 << j)] =
+                best(dp[mask | (1 << j)], dp[mask] + w(mask, j));
 \`\`\`
 
 ## 常見錯誤
@@ -181,10 +182,17 @@ for (int mask = 0; mask < (1 << n); ++mask)
 \`\`\`cpp
 // 樹狀陣列：單點加、前綴和查詢
 struct BIT {
-    int n; vector<long long> t;
+    int n;
+    vector<long long> t;
     BIT(int n) : n(n), t(n + 1, 0) {}
-    void add(int i, long long v) { for (; i <= n; i += i & -i) t[i] += v; }
-    long long sum(int i) { long long s = 0; for (; i > 0; i -= i & -i) s += t[i]; return s; }
+    void add(int i, long long v) {
+        for (; i <= n; i += i & -i) t[i] += v;
+    }
+    long long sum(int i) {
+        long long s = 0;
+        for (; i > 0; i -= i & -i) s += t[i];
+        return s;
+    }
     long long range(int l, int r) { return sum(r) - sum(l - 1); }  // 1-indexed
 };
 
@@ -246,19 +254,29 @@ for (int i = n - 1; i >= 0; --i) {
 
 \`\`\`cpp
 // Dijkstra：非負權重，取出時驗證是否為過期項目
-priority_queue<pair<long long,int>, vector<pair<long long,int>>, greater<>> pq;
+using PLI = pair<long long, int>;
+priority_queue<PLI, vector<PLI>, greater<>> pq;
 vector<long long> dist(n, LLONG_MAX);
-dist[s] = 0; pq.push({0, s});
+dist[s] = 0;
+pq.push({0, s});
 while (!pq.empty()) {
-    auto [d, u] = pq.top(); pq.pop();
-    if (d > dist[u]) continue;                 // 過期項目，跳過
+    auto [d, u] = pq.top();
+    pq.pop();
+    if (d > dist[u]) continue;  // 過期項目，跳過
     for (auto [v, w] : g[u])
-        if (d + w < dist[v]) { dist[v] = d + w; pq.push({dist[v], v}); }
+        if (d + w < dist[v]) {
+            dist[v] = d + w;
+            pq.push({dist[v], v});
+        }
 }
 
 // 併查集：路徑壓縮
-int find(int x) { return f[x] == x ? x : f[x] = find(f[x]); }
-void uni(int a, int b) { f[find(a)] = find(b); }
+int find(int x) {
+    return f[x] == x ? x : f[x] = find(f[x]);
+}
+void uni(int a, int b) {
+    f[find(a)] = find(b);
+}
 \`\`\`
 
 ## 常見錯誤
@@ -318,7 +336,7 @@ for (int i = 0; i < n; ++i) {
     h[i + 1] = h[i] * B + s[i];
     p[i + 1] = p[i] * B;
 }
-auto sub = [&](int l, int r) {                  // [l, r) 的雜湊
+auto sub = [&](int l, int r) {  // [l, r) 的雜湊
     return h[r] - h[l] * p[r - l];
 };
 
@@ -383,12 +401,16 @@ for (int i = 1, j = 0; i < m; ++i) {
 \`\`\`cpp
 const long long MOD = 1e9 + 7;
 long long qpow(long long a, long long b, long long m) {
-    long long r = 1; a %= m;
+    long long r = 1;
+    a %= m;
     for (; b; b >>= 1, a = a * a % m)
         if (b & 1) r = r * a % m;
     return r;
 }
-long long inv(long long a) { return qpow(a, MOD - 2, MOD); }  // 費馬小定理求逆元
+// 費馬小定理求逆元
+long long inv(long long a) {
+    return qpow(a, MOD - 2, MOD);
+}
 
 // 預處理階乘與逆元後 O(1) 查組合數
 long long C(int n, int k) {
@@ -448,22 +470,24 @@ long long C(int n, int k) {
 
 \`\`\`cpp
 // 樹形 DP：打家劫舍 III 型（選 / 不選）
-pair<long long,long long> dfs(int u, int parent) {
-    long long rob = val[u], skip = 0;             // rob: 選 u；skip: 不選 u
-    for (int v : g[u]) if (v != parent) {
-        auto [r, s] = dfs(v, u);
-        rob += s;                                 // 選 u 則子節點不能選
-        skip += max(r, s);                        // 不選 u 則子節點自由
-    }
+pair<long long, long long> dfs(int u, int parent) {
+    long long rob = val[u], skip = 0;  // rob: 選 u；skip: 不選 u
+    for (int v : g[u])
+        if (v != parent) {
+            auto [r, s] = dfs(v, u);
+            rob += s;           // 選 u 則子節點不能選
+            skip += max(r, s);  // 不選 u 則子節點自由
+        }
     return {rob, skip};
 }
 
 // 換根 DP 第二次 DFS 的骨架
 void reroot(int u, int parent) {
-    for (int v : g[u]) if (v != parent) {
-        ans[v] = ans[u] + shift(u, v);            // 由父答案 O(1) 推子答案
-        reroot(v, u);
-    }
+    for (int v : g[u])
+        if (v != parent) {
+            ans[v] = ans[u] + shift(u, v);  // 由父答案 O(1) 推子答案
+            reroot(v, u);
+        }
 }
 \`\`\`
 
@@ -519,17 +543,19 @@ void reroot(int u, int parent) {
 \`\`\`cpp
 // 折半枚舉：左半所有子集和排序，右半枚舉後二分
 vector<long long> L, R;
-for (int m = 0; m < (1 << a); ++m) {            // 左半 a 個元素
+for (int m = 0; m < (1 << a); ++m) {  // 左半 a 個元素
     long long s = 0;
-    for (int i = 0; i < a; ++i) if (m >> i & 1) s += nums[i];
+    for (int i = 0; i < a; ++i)
+        if (m >> i & 1) s += nums[i];
     L.push_back(s);
 }
 sort(L.begin(), L.end());
 long long best = LLONG_MAX;
-for (int m = 0; m < (1 << b); ++m) {            // 右半 b 個元素
+for (int m = 0; m < (1 << b); ++m) {  // 右半 b 個元素
     long long s = 0;
-    for (int i = 0; i < b; ++i) if (m >> i & 1) s += nums[a + i];
-    auto it = lower_bound(L.begin(), L.end(), target - s);   // 在左半找最佳搭配
+    for (int i = 0; i < b; ++i)
+        if (m >> i & 1) s += nums[a + i];
+    auto it = lower_bound(L.begin(), L.end(), target - s);  // 在左半找最佳搭配
     if (it != L.end()) best = min(best, *it + s - target);
 }
 \`\`\`
@@ -585,7 +611,9 @@ for (int m = 0; m < (1 << b); ++m) {            // 右半 b 個元素
 
 \`\`\`cpp
 // 枚舉 mask 的所有子集
-for (int s = mask; s; s = (s - 1) & mask) { /* s 是 mask 的一個非空子集 */ }
+for (int s = mask; s; s = (s - 1) & mask) {
+    // s 是 mask 的一個非空子集
+}
 
 // 以每個右端點維護「所有子陣列 OR 值」的集合（去重後至多 ~30 個）
 unordered_set<int> ors;
@@ -593,7 +621,7 @@ int cur = 0;
 for (int x : nums) {
     unordered_set<int> next{x};
     for (int v : ors) next.insert(v | x);
-    ors = move(next);                            // ors 內是以當前元素結尾的所有 OR 值
+    ors = move(next);  // ors 內是以當前元素結尾的所有 OR 值
 }
 
 // SOS DP：把每個 mask 累加其所有子集的值
@@ -641,7 +669,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "戳氣球把 k 當成「最後戳破的那顆」，此時它的左右鄰居是 `l-1` 與 `r+1`（區間外的邊界），代價是 `nums[l-1]*nums[k]*nums[r+1]`。",
         "## 遍歷順序：短區間先算",
         "`dp[l][r]` 依賴更短的子區間 `dp[l][k-1]`、`dp[k+1][r]`，所以必須**按區間長度由小到大**填表，或按 l 從大到小、r 從小到大。順序錯就會讀到還沒算好的值。",
-        "```cpp\nfor (int len = 1; len <= n; ++len)\n    for (int l = 0; l + len - 1 < n; ++l) {\n        int r = l + len - 1;\n        for (int k = l; k <= r; ++k)\n            dp[l][r] = max(dp[l][r],\n                (l ? dp[l][k-1] : 0) + val(l-1, k, r+1) + (k < r ? dp[k+1][r] : 0));\n    }\n```",
+        "```cpp\nfor (int len = 1; len <= n; ++len)\n    for (int l = 0; l + len - 1 < n; ++l) {\n        int r = l + len - 1;\n        for (int k = l; k <= r; ++k)\n            dp[l][r] =\n                max(dp[l][r], (l ? dp[l][k - 1] : 0) + val(l - 1, k, r + 1) +\n                                  (k < r ? dp[k + 1][r] : 0));\n    }\n```",
         "## 什麼時候用區間 DP",
         "- 對一段連續區間做決策，答案取決於「先處理／最後處理哪一個」。",
         "- 合併、戳破、插入、括號匹配、回文分割。",
@@ -665,7 +693,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "- `state`：題目要求的額外資訊，例如「已用過哪些數字的 mask」「前一位是什麼」「目前是否還是前導零」。",
         "## 記憶化的關鍵：只快取 tight=false 的狀態",
         "當 `tight=true` 時每條路徑上界不同，無法共用；只有 `tight=false`（已自由）的子問題才能被不同前綴重複利用，快取它們即可。前導零要單獨用一個 flag，避免把 007 當成用了數字 0。",
-        "```cpp\nint dp[12][1 << 10];   // pos, used-mask；僅在 !tight && !lead 時有效\nint dfs(int pos, int mask, bool tight, bool lead) {\n    if (pos == len) return lead ? 0 : 1;\n    if (!tight && !lead && dp[pos][mask] != -1) return dp[pos][mask];\n    int up = tight ? digit[pos] : 9, res = 0;\n    for (int d = 0; d <= up; ++d) {\n        if (mask >> d & 1) continue;              // 該數字已用過\n        bool nlead = lead && d == 0;\n        res += dfs(pos + 1, nlead ? 0 : mask | (1 << d), tight && d == up, nlead);\n    }\n    if (!tight && !lead) dp[pos][mask] = res;\n    return res;\n}\n```",
+        "```cpp\nint dp[12][1 << 10];  // pos, used-mask；僅在 !tight && !lead 時有效\nint dfs(int pos, int mask, bool tight, bool lead) {\n    if (pos == len) return lead ? 0 : 1;\n    if (!tight && !lead && dp[pos][mask] != -1) return dp[pos][mask];\n    int up = tight ? digit[pos] : 9, res = 0;\n    for (int d = 0; d <= up; ++d) {\n        if (mask >> d & 1) continue;  // 該數字已用過\n        bool nlead = lead && d == 0;\n        res +=\n            dfs(pos + 1, nlead ? 0 : mask | (1 << d), tight && d == up, nlead);\n    }\n    if (!tight && !lead) dp[pos][mask] = res;\n    return res;\n}\n```",
         "## 什麼時候用數位 DP",
         "- 問「[0, N] 或 [L, R] 內滿足某數位性質的數字個數」。",
         "- 性質只跟各位數字有關：不含連續 1、各位不同、數位和、含某數字。",
@@ -688,7 +716,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "從右往左掃描，維護一個「已經看過的元素」的值域計數器。處理到 `a[i]` 時，「右邊比 `a[i]` 小的個數」就是值域中 `[min, a[i]-1]` 的計數總和——這是一個前綴查詢。每看完一個元素就把它加進值域計數器（單點加）。樹狀陣列讓這兩個操作都是 O(log n)。",
         "## 離散化：值域太大先壓縮",
         "值可能高達 1e9，不能直接開陣列。把所有出現過的值排序去重，用它們的排名（rank）當作樹狀陣列的下標，值域大小就降到 n。",
-        "```cpp\nvector<int> vals(a.begin(), a.end());\nsort(vals.begin(), vals.end());\nvals.erase(unique(vals.begin(), vals.end()), vals.end());\nauto rk = [&](int x){ return lower_bound(vals.begin(), vals.end(), x) - vals.begin() + 1; };\n\nBIT bit(vals.size());\nvector<int> ans(n);\nfor (int i = n - 1; i >= 0; --i) {\n    ans[i] = bit.sum(rk(a[i]) - 1);   // 右邊已出現、且比 a[i] 小的個數\n    bit.add(rk(a[i]), 1);\n}\n```",
+        "```cpp\nvector<int> vals(a.begin(), a.end());\nsort(vals.begin(), vals.end());\nvals.erase(unique(vals.begin(), vals.end()), vals.end());\nauto rk = [&](int x) {\n    return lower_bound(vals.begin(), vals.end(), x) - vals.begin() + 1;\n};\n\nBIT bit(vals.size());\nvector<int> ans(n);\nfor (int i = n - 1; i >= 0; --i) {\n    ans[i] = bit.sum(rk(a[i]) - 1);  // 右邊已出現、且比 a[i] 小的個數\n    bit.add(rk(a[i]), 1);\n}\n```",
         "## 這個框架能解的變形",
         "- 逆序對總數：從右往左，累加 `sum(rk-1)`。",
         "- 翻轉對（`a[i] > 2*a[j]`）：查詢時對 `2*a[i]` 做離散化後的邊界查詢。",
@@ -707,7 +735,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "反覆對區間 `[l, r]` 整段加一個值，又要隨時查某段的區間和或最大值。樹狀陣列做區間加區間和要技巧，線段樹則天生支援。",
         "## 關鍵觀察：懶標記——先記帳，晚下推",
         "區間加時，如果某個線段樹節點完整覆蓋在更新區間內，就不必遞迴到葉子，只在這個節點記一筆「懶標記」表示「我這棵子樹每個元素都還欠加 v」，並直接更新這個節點的區間和。等到之後查詢或更新需要進入它的子節點時，才把懶標記**下推**給兩個孩子。這讓區間更新也是 O(log n)。",
-        "```cpp\nvoid pushDown(int node, int len) {\n    if (!lazy[node]) return;\n    for (int c : {node*2, node*2+1}) {\n        lazy[c] += lazy[node];\n        sum[c]  += lazy[node] * (len / 2);   // 子區間長度\n    }\n    lazy[node] = 0;\n}\nvoid update(int node, int lo, int hi, int l, int r, long long v) {\n    if (r < lo || hi < l) return;\n    if (l <= lo && hi <= r) { sum[node] += v * (hi - lo + 1); lazy[node] += v; return; }\n    pushDown(node, hi - lo + 1);\n    int mid = (lo + hi) / 2;\n    update(node*2, lo, mid, l, r, v);\n    update(node*2+1, mid+1, hi, l, r, v);\n    sum[node] = sum[node*2] + sum[node*2+1];\n}\n```",
+        "```cpp\nvoid pushDown(int node, int len) {\n    if (!lazy[node]) return;\n    for (int c : {node * 2, node * 2 + 1}) {\n        lazy[c] += lazy[node];\n        sum[c] += lazy[node] * (len / 2);  // 子區間長度\n    }\n    lazy[node] = 0;\n}\nvoid update(int node, int lo, int hi, int l, int r, long long v) {\n    if (r < lo || hi < l) return;\n    if (l <= lo && hi <= r) {\n        sum[node] += v * (hi - lo + 1);\n        lazy[node] += v;\n        return;\n    }\n    pushDown(node, hi - lo + 1);\n    int mid = (lo + hi) / 2;\n    update(node * 2, lo, mid, l, r, v);\n    update(node * 2 + 1, mid + 1, hi, l, r, v);\n    sum[node] = sum[node * 2] + sum[node * 2 + 1];\n}\n```",
         "## 什麼時候用線段樹而非樹狀陣列",
         "- 需要區間賦值、區間最大／最小、區間 gcd 等樹狀陣列難做的操作。",
         "- 掃描線問題：把矩形／區間事件排序後，用線段樹維護當前覆蓋。",
@@ -731,7 +759,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "## 分層圖的兩種實作",
         "- 顯式分層：真的建 `k+1` 層圖，第 t 層到第 t+1 層連特殊邊。",
         "- 隱式狀態：不建圖，直接讓 `dist[state]` 的 state 帶上附加維度。收集鑰匙用 `dist[row][col][mask]`，BFS 逐層擴展。",
-        "```cpp\n// 收集所有鑰匙：狀態 BFS，visited 帶上鑰匙 mask\nqueue<tuple<int,int,int>> q;    // row, col, keyMask\nq.push({sr, sc, 0});\nseen.insert({sr, sc, 0});\nint steps = 0, full = (1 << numKeys) - 1;\nwhile (!q.empty()) {\n    for (int sz = q.size(); sz; --sz) {\n        auto [r, c, mask] = q.front(); q.pop();\n        if (mask == full) return steps;\n        for (auto [nr, nc] : neighbors(r, c)) {\n            int nmask = mask;\n            if (isKey(nr, nc)) nmask |= keyBit(nr, nc);\n            if (isLock(nr, nc) && !(mask >> lockBit(nr, nc) & 1)) continue;\n            if (seen.insert({nr, nc, nmask}).second) q.push({nr, nc, nmask});\n        }\n    }\n    ++steps;\n}\n```",
+        "```cpp\n// 收集所有鑰匙：狀態 BFS，visited 帶上鑰匙 mask\nqueue<tuple<int, int, int>> q;  // row, col, keyMask\nq.push({sr, sc, 0});\nseen.insert({sr, sc, 0});\nint steps = 0, full = (1 << numKeys) - 1;\nwhile (!q.empty()) {\n    for (int sz = q.size(); sz; --sz) {\n        auto [r, c, mask] = q.front();\n        q.pop();\n        if (mask == full) return steps;\n        for (auto [nr, nc] : neighbors(r, c)) {\n            int nmask = mask;\n            if (isKey(nr, nc)) nmask |= keyBit(nr, nc);\n            if (isLock(nr, nc) && !(mask >> lockBit(nr, nc) & 1)) continue;\n            if (seen.insert({nr, nc, nmask}).second) q.push({nr, nc, nmask});\n        }\n    }\n    ++steps;\n}\n```",
         "## 什麼時候用分層／狀態最短路",
         "- 有「最多 k 次某操作」「必須先收集某些東西」的限制。",
         "- 附加狀態的取值數量不大（次數 ≤ 幾百、鑰匙 ≤ 6～10 個）。",
@@ -750,7 +778,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "給一堆連線，問把整個網路連通至少要移動幾條多餘的線（連通網路的操作次數）；或每次合併兩個集合，隨時查連通塊數量與大小。這些都只「加邊、查連通」，不刪邊。",
         "## 關鍵觀察：只在乎連通性時，別建完整圖",
         "如果題目只問「這兩點連不連通」「有幾個連通塊」「最大連通塊多大」，而且邊只增不減，那併查集比 BFS/DFS 更輕。每個元素記一個「父指標」，同一集合的元素最終指向同一個根。",
-        "```cpp\nint f[N], sz[N], comps;\nvoid init(int n){ comps=n; for(int i=0;i<n;++i){ f[i]=i; sz[i]=1; } }\nint find(int x){ return f[x]==x ? x : f[x]=find(f[x]); }  // 路徑壓縮\nbool uni(int a,int b){\n    a=find(a); b=find(b);\n    if(a==b) return false;                 // 已連通\n    if(sz[a]<sz[b]) swap(a,b);              // 按秩合併\n    f[b]=a; sz[a]+=sz[b]; --comps;\n    return true;\n}\n```",
+        "```cpp\nint f[N], sz[N], comps;\nvoid init(int n) {\n    comps = n;\n    for (int i = 0; i < n; ++i) {\n        f[i] = i;\n        sz[i] = 1;\n    }\n}\nint find(int x) {\n    return f[x] == x ? x : f[x] = find(f[x]);\n}  // 路徑壓縮\nbool uni(int a, int b) {\n    a = find(a);\n    b = find(b);\n    if (a == b) return false;       // 已連通\n    if (sz[a] < sz[b]) swap(a, b);  // 按秩合併\n    f[b] = a;\n    sz[a] += sz[b];\n    --comps;\n    return true;\n}\n```",
         "## 這個框架能解的變形",
         "- 連通網路操作次數：若「多餘邊數 ≥ 連通塊數 - 1」則答案是 `comps - 1`，否則 -1。",
         "- 惡意軟體傳播：刪掉某節點後看連通塊，用併查集算每個塊的大小與「初始感染數」。",
@@ -778,7 +806,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "把字串看成一個 base 進制的大數，前綴雜湊 `h[i]` 是前 i 個字元組成的數。任意子串 `[l, r)` 的雜湊值可以 O(1) 由 `h[r] - h[l] * base^(r-l)` 算出。於是「兩段子串是否相等」變成「兩個數是否相等」，O(1)。",
         "## 二分答案 + 雜湊：長度具單調性",
         "如果存在長度 L 的重複子串，那長度 L-1 的也一定存在（取其前綴）。這個單調性讓我們二分答案 L：對每個 L，把所有長度 L 的子串雜湊丟進雜湊表，看有沒有碰撞。",
-        "```cpp\nauto check = [&](int L) -> int {   // 回傳某個長度 L 的重複子串起點，或 -1\n    unordered_set<unsigned long long> seen;\n    for (int i = 0; i + L <= n; ++i) {\n        unsigned long long hv = sub(i, i + L);\n        if (!seen.insert(hv).second) return i;\n    }\n    return -1;\n};\nint lo = 1, hi = n, ansPos = -1, ansLen = 0;\nwhile (lo <= hi) {\n    int mid = (lo + hi) / 2, pos = check(mid);\n    if (pos >= 0) { ansLen = mid; ansPos = pos; lo = mid + 1; }\n    else hi = mid - 1;\n}\n```",
+        "```cpp\nauto check = [&](int L) -> int {  // 回傳某個長度 L 的重複子串起點，或 -1\n    unordered_set<unsigned long long> seen;\n    for (int i = 0; i + L <= n; ++i) {\n        unsigned long long hv = sub(i, i + L);\n        if (!seen.insert(hv).second) return i;\n    }\n    return -1;\n};\nint lo = 1, hi = n, ansPos = -1, ansLen = 0;\nwhile (lo <= hi) {\n    int mid = (lo + hi) / 2, pos = check(mid);\n    if (pos >= 0) {\n        ansLen = mid;\n        ansPos = pos;\n        lo = mid + 1;\n    } else\n        hi = mid - 1;\n}\n```",
         "## 降低碰撞：雙雜湊",
         "單一底數／模數容易被構造資料卡出碰撞。比賽建議用兩組不同的 (base, mod)，把兩個雜湊值拼成一個 pair 或一個 128 位數比較。",
         "## 什麼時候用字串雜湊",
@@ -799,7 +827,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "給一組數，問任兩個數異或的最大值（陣列中兩個數的最大異或值）。暴力兩兩配對是 O(n²)。",
         "## 關鍵觀察：異或最大 ⇒ 每一位盡量取 1",
         "異或的每一位獨立：要讓結果大，就從最高位開始，每一位都希望兩數在該位不同（異或得 1）。把所有數按二進位從高位到低位插入一棵 01-Trie（每個節點兩個孩子：0 和 1）。查詢某個數 x 的最佳搭配時，在每一位都優先走「與 x 該位相反」的分支；走得通就這一位得 1。",
-        "```cpp\nstruct Trie {\n    int ch[MAXBIT * N][2], idx = 0;\n    void insert(int x) {\n        int u = 0;\n        for (int b = MAXBIT - 1; b >= 0; --b) {\n            int bit = x >> b & 1;\n            if (!ch[u][bit]) ch[u][bit] = ++idx;\n            u = ch[u][bit];\n        }\n    }\n    int query(int x) {                 // 與 x 異或的最大值\n        int u = 0, res = 0;\n        for (int b = MAXBIT - 1; b >= 0; --b) {\n            int bit = x >> b & 1;\n            if (ch[u][bit ^ 1]) { res |= 1 << b; u = ch[u][bit ^ 1]; }\n            else u = ch[u][bit];\n        }\n        return res;\n    }\n};\n```",
+        "```cpp\nstruct Trie {\n    int ch[MAXBIT * N][2], idx = 0;\n    void insert(int x) {\n        int u = 0;\n        for (int b = MAXBIT - 1; b >= 0; --b) {\n            int bit = x >> b & 1;\n            if (!ch[u][bit]) ch[u][bit] = ++idx;\n            u = ch[u][bit];\n        }\n    }\n    int query(int x) {  // 與 x 異或的最大值\n        int u = 0, res = 0;\n        for (int b = MAXBIT - 1; b >= 0; --b) {\n            int bit = x >> b & 1;\n            if (ch[u][bit ^ 1]) {\n                res |= 1 << b;\n                u = ch[u][bit ^ 1];\n            } else\n                u = ch[u][bit];\n        }\n        return res;\n    }\n};\n```",
         "## 進階：帶限制與範圍統計",
         "- 1707 與陣列中元素的最大異或值：對查詢按上限離線排序，逐步把 ≤ 限制的數插入 Trie。",
         "- 1803 統計異或值在範圍內的數對：在 Trie 節點記子樹大小，用「異或 < 上界」的計數技巧，`count(high) - count(low-1)`。",
@@ -823,10 +851,10 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "算 `a^n mod p`，n 高達 1e9；或在計數題裡要算 `C(n, k) mod p`，其中涉及除以階乘。直接連乘會超時，直接除法在取模下也不成立。",
         "## 關鍵觀察：指數的二進位分解",
         "`a^13 = a^8 · a^4 · a^1`，因為 13 = 1101₂。逐位處理指數：底數不斷平方（`a, a², a⁴, a⁸…`），當指數該位是 1 時就把當前底數乘進答案。這樣只要 O(log n) 次乘法。",
-        "```cpp\nlong long qpow(long long a, long long b, long long m) {\n    long long r = 1; a %= m;\n    for (; b; b >>= 1, a = a * a % m)\n        if (b & 1) r = r * a % m;\n    return r;\n}\n```",
+        "```cpp\nlong long qpow(long long a, long long b, long long m) {\n    long long r = 1;\n    a %= m;\n    for (; b; b >>= 1, a = a * a % m)\n        if (b & 1) r = r * a % m;\n    return r;\n}\n```",
         "## 取模除法 = 乘上逆元",
         "在模質數 p 下，`a / b mod p` 不能直接整除，要乘上 b 的模逆元 `b^(p-2)`（費馬小定理，p 為質數）。所以組合數 `C(n,k) = n! / (k!(n-k)!)` 取模時，預處理階乘 `fac[]` 與階乘逆元 `ifac[]`，就能 O(1) 查詢。",
-        "```cpp\nvector<long long> fac(N), ifac(N);\nfac[0] = 1;\nfor (int i = 1; i < N; ++i) fac[i] = fac[i-1] * i % MOD;\nifac[N-1] = qpow(fac[N-1], MOD - 2, MOD);\nfor (int i = N-1; i > 0; --i) ifac[i-1] = ifac[i] * i % MOD;\nauto C = [&](int n, int k){ return k<0||k>n ? 0 : fac[n]*ifac[k]%MOD*ifac[n-k]%MOD; };\n```",
+        "```cpp\nvector<long long> fac(N), ifac(N);\nfac[0] = 1;\nfor (int i = 1; i < N; ++i) fac[i] = fac[i - 1] * i % MOD;\nifac[N - 1] = qpow(fac[N - 1], MOD - 2, MOD);\nfor (int i = N - 1; i > 0; --i) ifac[i - 1] = ifac[i] * i % MOD;\nauto C = [&](int n, int k) {\n    return k < 0 || k > n ? 0 : fac[n] * ifac[k] % MOD * ifac[n - k] % MOD;\n};\n```",
         "## 延伸：矩陣快速冪",
         "線性遞推（如費波那契、學生出勤記錄 II）可以寫成「狀態向量乘一個轉移矩陣」。要算第 n 項就是把轉移矩陣做 n 次冪——用同樣的快速冪骨架，把「乘法」換成「矩陣乘法」，O(k³ log n)。",
         "## 常見錯誤",
@@ -844,7 +872,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "求第 N 個能被 a 或 b 整除的數（第 N 個神奇數字）；或 `[1, X]` 內是 2、3、5 任一倍數的個數。直接列舉太慢。",
         "## 關鍵觀察：先數出 [1, X] 內的個數，再二分",
         "`[1, X]` 內是 a 或 b 倍數的個數 = `X/a + X/b − X/lcm(a,b)`——加上各自的倍數，再減去被重複計算的公倍數。這個計數對 X 單調遞增，於是可以二分 X，找「恰好累積到第 N 個」的位置。",
-        "```cpp\nlong long lcm(long long a, long long b){ return a / __gcd(a, b) * b; }\nauto count = [&](long long x){ return x/a + x/b - x/lcm(a,b); };\nlong long lo = 1, hi = (long long)N * min(a, b);\nwhile (lo < hi) {\n    long long mid = (lo + hi) / 2;\n    if (count(mid) >= N) hi = mid; else lo = mid + 1;\n}\n// lo 即第 N 個神奇數字\n```",
+        "```cpp\nlong long lcm(long long a, long long b) {\n    return a / __gcd(a, b) * b;\n}\nauto count = [&](long long x) { return x / a + x / b - x / lcm(a, b); };\nlong long lo = 1, hi = (long long)N * min(a, b);\nwhile (lo < hi) {\n    long long mid = (lo + hi) / 2;\n    if (count(mid) >= N)\n        hi = mid;\n    else\n        lo = mid + 1;\n}\n// lo 即第 N 個神奇數字\n```",
         "## 多集合容斥的符號規律",
         "三個以上集合時：加上所有單集合、減去所有兩兩交集、加回所有三集合交集……奇數個集合的交是加、偶數個是減。可以用枚舉子集 mask，依 popcount 的奇偶決定正負。",
         "## 什麼時候用容斥",
@@ -869,7 +897,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "先隨便選一個根（例如 0），一次 DFS 算出 `ans[0]`（根到所有點的距離和）以及每棵子樹的大小 `sz[u]`。接著考慮把根從 u 換到它的孩子 v：v 這一側的所有 `sz[v]` 個節點離根近了 1，另一側的 `n - sz[v]` 個節點遠了 1。於是：",
         "```text\nans[v] = ans[u] - sz[v] + (n - sz[v])\n```",
         "第二次 DFS 就用這條 O(1) 公式，從父節點的答案推出每個子節點的答案。",
-        "```cpp\nvoid dfs1(int u, int p, int depth) {           // 算 sz 與 ans[root]\n    sz[u] = 1; ans[0] += depth;\n    for (int v : g[u]) if (v != p) { dfs1(v, u, depth + 1); sz[u] += sz[v]; }\n}\nvoid dfs2(int u, int p) {                       // 換根推每個節點\n    for (int v : g[u]) if (v != p) {\n        ans[v] = ans[u] - sz[v] + (n - sz[v]);\n        dfs2(v, u);\n    }\n}\n```",
+        "```cpp\nvoid dfs1(int u, int p, int depth) {  // 算 sz 與 ans[root]\n    sz[u] = 1;\n    ans[0] += depth;\n    for (int v : g[u])\n        if (v != p) {\n            dfs1(v, u, depth + 1);\n            sz[u] += sz[v];\n        }\n}\nvoid dfs2(int u, int p) {  // 換根推每個節點\n    for (int v : g[u])\n        if (v != p) {\n            ans[v] = ans[u] - sz[v] + (n - sz[v]);\n            dfs2(v, u);\n        }\n}\n```",
         "## 換根 DP 的一般步驟",
         "1. 第一次 DFS（後序）：算出以固定根的答案，以及各子樹的摘要（大小、最大深度、計數…）。",
         "2. 推導「父 → 子」的換根轉移：移出當前子樹的貢獻、加上父側的貢獻。",
@@ -894,7 +922,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "從任意點出發找最遠點 A，再從 A 出發找最遠點 B，`A–B` 就是直徑。直覺是：離任意點最遠的點，必是某條直徑的端點。這個方法簡潔，但只適用邊權非負的樹。",
         "## 解法二：一次 DFS 維護最長 + 次長",
         "更通用的是樹形 DP。對每個節點 u，計算「從 u 往下走能到的最長路徑」`down[u]`。經過 u 的最長路徑，是它兩個孩子方向的「最長 + 次長」向下路徑接起來。一邊 DFS 一邊用所有節點的「最長 + 次長」更新全域答案。",
-        "```cpp\nint diameter = 0;\nint dfs(int u, int p) {                 // 回傳 u 往下的最長路徑長度（邊數）\n    int max1 = 0, max2 = 0;\n    for (int v : g[u]) if (v != p) {\n        int d = dfs(v, u) + 1;\n        if (d > max1) { max2 = max1; max1 = d; }\n        else if (d > max2) max2 = d;\n    }\n    diameter = max(diameter, max1 + max2);   // 經過 u 的最長路徑\n    return max1;\n}\n```",
+        "```cpp\nint diameter = 0;\nint dfs(int u, int p) {  // 回傳 u 往下的最長路徑長度（邊數）\n    int max1 = 0, max2 = 0;\n    for (int v : g[u])\n        if (v != p) {\n            int d = dfs(v, u) + 1;\n            if (d > max1) {\n                max2 = max1;\n                max1 = d;\n            } else if (d > max2)\n                max2 = d;\n        }\n    diameter = max(diameter, max1 + max2);  // 經過 u 的最長路徑\n    return max1;\n}\n```",
         "## 為什麼要「最長 + 次長」",
         "經過某節點的最長路徑要往兩個不同的孩子方向延伸，所以需要它向下的前兩長路徑；只維護最長會漏掉「拐彎經過該節點」的情形。這也是 543 二元樹直徑、2246 最長路徑的統一框架。",
         "## 什麼時候用直徑技巧",
@@ -917,7 +945,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "從 n（約 40）個數裡選一個子集，使子集和最接近 target（最接近目標值的子序列和）。`2^40` 太大，但 `2^20 ≈ 1e6` 完全可行。",
         "## 關鍵觀察：一個子集 = 左半子集 + 右半子集",
         "把 n 個數分成兩半 A、B（各約 n/2 個）。任何一個全集子集，都能唯一拆成「A 的某子集」加「B 的某子集」，兩者獨立。所以：先枚舉 A 的所有 `2^|A|` 個子集和，存進陣列並排序；再枚舉 B 的每個子集和 s，在排好序的 A 和裡二分找最接近 `target - s` 的值。",
-        "```cpp\nvector<long long> sumsA;                  // A 的所有子集和\nfor (int m = 0; m < (1 << a); ++m) {\n    long long s = 0;\n    for (int i = 0; i < a; ++i) if (m >> i & 1) s += A[i];\n    sumsA.push_back(s);\n}\nsort(sumsA.begin(), sumsA.end());\nlong long best = LLONG_MAX;\nfor (int m = 0; m < (1 << b); ++m) {\n    long long s = 0;\n    for (int i = 0; i < b; ++i) if (m >> i & 1) s += B[i];\n    long long need = target - s;\n    auto it = lower_bound(sumsA.begin(), sumsA.end(), need);\n    if (it != sumsA.end())      best = min(best, llabs(*it + s - target));\n    if (it != sumsA.begin())    best = min(best, llabs(*prev(it) + s - target));\n}\n```",
+        "```cpp\nvector<long long> sumsA;  // A 的所有子集和\nfor (int m = 0; m < (1 << a); ++m) {\n    long long s = 0;\n    for (int i = 0; i < a; ++i)\n        if (m >> i & 1) s += A[i];\n    sumsA.push_back(s);\n}\nsort(sumsA.begin(), sumsA.end());\nlong long best = LLONG_MAX;\nfor (int m = 0; m < (1 << b); ++m) {\n    long long s = 0;\n    for (int i = 0; i < b; ++i)\n        if (m >> i & 1) s += B[i];\n    long long need = target - s;\n    auto it = lower_bound(sumsA.begin(), sumsA.end(), need);\n    if (it != sumsA.end()) best = min(best, llabs(*it + s - target));\n    if (it != sumsA.begin()) best = min(best, llabs(*prev(it) + s - target));\n}\n```",
         "## 配對階段要檢查兩側",
         "`lower_bound` 找到的是第一個 ≥ need 的位置，但最接近的值也可能是它前一個（< need）。所以命中點和它前一位都要比。",
         "## 什麼時候用折半枚舉",
@@ -940,7 +968,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "把陣列從中間切成左右兩半。任何一對 `(i, j)` 要嘛都在左半、都在右半（遞迴解決），要嘛 i 在左、j 在右（跨中點，在合併階段統計）。分治的精髓就是：遞迴解決兩側，再高效地數出跨中點的貢獻。",
         "## 合併階段用雙指標，因為兩半已排好序",
         "歸併排序在合併前，左右兩半各自已排序。統計翻轉對時，對左半每個 i，右半中滿足 `a[i] > 2*a[j]` 的 j 是一個前綴——因為右半有序，用一個隨 i 單調前進的指標線性數出，不必重掃。數完再做標準歸併把兩半合併成有序。",
-        "```cpp\nlong long merge_count(vector<int>& a, int lo, int mid, int hi) {\n    long long cnt = 0;\n    int j = mid + 1;\n    for (int i = lo; i <= mid; ++i) {                 // 統計跨中點翻轉對\n        while (j <= hi && (long long)a[i] > 2LL * a[j]) ++j;\n        cnt += j - (mid + 1);\n    }\n    inplace_merge(a.begin()+lo, a.begin()+mid+1, a.begin()+hi+1);  // 保持有序\n    return cnt;\n}\n```",
+        "```cpp\nlong long merge_count(vector<int>& a, int lo, int mid, int hi) {\n    long long cnt = 0;\n    int j = mid + 1;\n    for (int i = lo; i <= mid; ++i) {  // 統計跨中點翻轉對\n        while (j <= hi && (long long)a[i] > 2LL * a[j]) ++j;\n        cnt += j - (mid + 1);\n    }\n    inplace_merge(a.begin() + lo, a.begin() + mid + 1,\n                  a.begin() + hi + 1);  // 保持有序\n    return cnt;\n}\n```",
         "## 什麼時候用分治合併統計",
         "- 逆序對、翻轉對、區間和落在某範圍的個數。",
         "- 「所有加括號方式」「按運算子拆分」用分治遞迴 + 記憶化（241）。",
@@ -985,7 +1013,7 @@ export const Q4_SUBTOPICS: Record<number, Q4Subtopic[]> = {
         "固定右端點 r，考慮所有以 r 結尾的子陣列 `[l, r]` 的 OR 值。當 l 從 r 往左移，OR 值只可能把某些 bit 從 0 變 1，絕不會變回去。一個數最多 ~30 個 bit，所以「以 r 結尾的不同 OR 值」最多約 30 個。AND 同理只會把 bit 從 1 變 0，種類也 ≤ 30。",
         "## 維護「以當前元素結尾的所有 OR 值」集合",
         "從左到右掃，維護一個集合 `cur`，表示以前一個元素結尾的所有子陣列 OR 值。加入新元素 x 時，新的集合是 `{x} ∪ {v | x : v ∈ cur}`。這個集合大小 ≤ 30，所以每步 O(30)，總體 O(n·30)。把每步產生的值丟進全域集合即可統計不同值個數。",
-        "```cpp\nunordered_set<int> distinct;\nvector<int> cur;                       // 以上一個元素結尾的所有 OR 值（去重）\nfor (int x : nums) {\n    vector<int> next{x};\n    for (int v : cur) {\n        int nv = v | x;\n        if (nv != next.back()) next.push_back(nv);   // OR 值遞增，相鄰去重\n    }\n    cur = move(next);\n    for (int v : cur) distinct.insert(v);\n}\n// distinct.size() 即不同 OR 值的個數\n```",
+        "```cpp\nunordered_set<int> distinct;\nvector<int> cur;  // 以上一個元素結尾的所有 OR 值（去重）\nfor (int x : nums) {\n    vector<int> next{x};\n    for (int v : cur) {\n        int nv = v | x;\n        if (nv != next.back()) next.push_back(nv);  // OR 值遞增，相鄰去重\n    }\n    cur = move(next);\n    for (int v : cur) distinct.insert(v);\n}\n// distinct.size() 即不同 OR 值的個數\n```",
         "## 這個框架能解的變形",
         "- 統計不同的子陣列 OR / AND 值個數。",
         "- 找「OR 值 ≥ 目標」的最短子陣列。",

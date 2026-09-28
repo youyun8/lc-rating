@@ -47,3 +47,16 @@ test("normalizeCodeBlockIndentation halves doubled 8-space indents", () => {
     "sort(a.begin(), a.end(),\n          [](auto& a, auto& b) { return a[1] < b[1]; });\nfor (auto& it : a) {\n    if (it[0] >= last) {\n        ++cnt;\n    }\n}",
   );
 });
+
+test("normalizeCodeBlockIndentation keeps 4-space code with aligned continuation lines", () => {
+  const input = [
+    "long long solve(const vector<int>& w,",
+    "                const vector<int>& v) {",
+    "    for (int i = 0; i < n; i++) {",
+    "        g[i] = w[i];",
+    "    }",
+    "}",
+  ].join("\n");
+
+  assert.equal(normalizeCodeBlockIndentation(input), input);
+});

@@ -18,15 +18,22 @@
 
 ```cpp
 vector<pair<long long, int>> factorize(long long n) {
-  vector<pair<long long, int>> factors;
-  for (long long p = 2; p * p <= n; ++p) {
-    if (n % p != 0) { continue; }
-    int exponent = 0;
-    while (n % p == 0) { n /= p; ++exponent; }   // 除盡才換下一個
-    factors.emplace_back(p, exponent);
-  }
-  if (n > 1) { factors.emplace_back(n, 1); }     // 剩下的必是大質數
-  return factors;
+    vector<pair<long long, int>> factors;
+    for (long long p = 2; p * p <= n; ++p) {
+        if (n % p != 0) {
+            continue;
+        }
+        int exponent = 0;
+        while (n % p == 0) {
+            n /= p;
+            ++exponent;
+        }  // 除盡才換下一個
+        factors.emplace_back(p, exponent);
+    }
+    if (n > 1) {
+        factors.emplace_back(n, 1);
+    }  // 剩下的必是大質數
+    return factors;
 }
 ```
 
@@ -48,14 +55,16 @@ vector<pair<long long, int>> factorize(long long n) {
 
 ```cpp
 vector<vector<int>> distinctPrimeFactors(int limit) {
-  vector<vector<int>> factors(limit + 1);
-  for (int p = 2; p <= limit; ++p) {
-    if (!factors[p].empty()) { continue; }  // 尚未被較小質數標過，p 是質數
-    for (int multiple = p; multiple <= limit; multiple += p) {
-      factors[multiple].push_back(p);
+    vector<vector<int>> factors(limit + 1);
+    for (int p = 2; p <= limit; ++p) {
+        if (!factors[p].empty()) {
+            continue;
+        }  // 尚未被較小質數標過，p 是質數
+        for (int multiple = p; multiple <= limit; multiple += p) {
+            factors[multiple].push_back(p);
+        }
     }
-  }
-  return factors;
+    return factors;
 }
 ```
 
@@ -66,28 +75,32 @@ $\sum_{p\le N}\lfloor N/p\rfloor = O(N\log\log N)$；列表只記不同質因數
 
 ```cpp
 vector<int> buildSpf(int limit) {
-  vector<int> spf(limit + 1);
-  for (int p = 2; p <= limit; ++p) {
-    if (spf[p] != 0) { continue; }
-    for (int multiple = p; multiple <= limit; multiple += p) {
-      if (spf[multiple] == 0) { spf[multiple] = p; }
+    vector<int> spf(limit + 1);
+    for (int p = 2; p <= limit; ++p) {
+        if (spf[p] != 0) {
+            continue;
+        }
+        for (int multiple = p; multiple <= limit; multiple += p) {
+            if (spf[multiple] == 0) {
+                spf[multiple] = p;
+            }
+        }
     }
-  }
-  return spf;
+    return spf;
 }
 
 vector<pair<int, int>> factorizeWithSpf(int x, const vector<int>& spf) {
-  vector<pair<int, int>> result;
-  while (x > 1) {
-    const int p = spf[x];
-    int exponent = 0;
-    do {
-      x /= p;
-      ++exponent;
-    } while (x > 1 && spf[x] == p);
-    result.emplace_back(p, exponent);
-  }
-  return result;
+    vector<pair<int, int>> result;
+    while (x > 1) {
+        const int p = spf[x];
+        int exponent = 0;
+        do {
+            x /= p;
+            ++exponent;
+        } while (x > 1 && spf[x] == p);
+        result.emplace_back(p, exponent);
+    }
+    return result;
 }
 ```
 

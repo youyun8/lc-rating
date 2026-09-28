@@ -34,23 +34,28 @@
 
 ```cpp
 class Solution {
- public:
-  bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
-    if (k <= 0 || t < 0) { return false; }
-    multiset<long long> window;
+public:
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
+        if (k <= 0 || t < 0) {
+            return false;
+        }
+        multiset<long long> window;
 
-    for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
-      const long long x = nums[i];
-      auto it = window.lower_bound(x - t);          // 第一個 >= x - t
-      if (it != window.end() && *it <= x + t) { return true; }
+        for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
+            const long long x = nums[i];
+            auto it = window.lower_bound(x - t);  // 第一個 >= x - t
+            if (it != window.end() && *it <= x + t) {
+                return true;
+            }
 
-      window.insert(x);
-      if (static_cast<int>(window.size()) > k) {
-        window.erase(window.find(nums[i - k]));     // 只刪一份，不可用 erase(value)
-      }
+            window.insert(x);
+            if (static_cast<int>(window.size()) > k) {
+                window.erase(
+                    window.find(nums[i - k]));  // 只刪一份，不可用 erase(value)
+            }
+        }
+        return false;
     }
-    return false;
-  }
 };
 ```
 
@@ -58,7 +63,7 @@ class Solution {
 
 ```cpp
 auto bucketOf = [&](long long v) {
-  return v >= 0 ? v / (t + 1) : (v + 1) / (t + 1) - 1;   // 負數要向下取整
+    return v >= 0 ? v / (t + 1) : (v + 1) / (t + 1) - 1;  // 負數要向下取整
 };
 ```
 

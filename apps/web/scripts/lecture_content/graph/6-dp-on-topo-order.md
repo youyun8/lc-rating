@@ -30,33 +30,37 @@ DAG 最長路（邊權為 1，等價於最長鏈長度）：
 
 ```cpp
 class Solution {
- public:
-  int longestPath(int n, vector<vector<int>>& edges) {
-    vector<vector<int>> g(n);
-    vector<int> indeg(n, 0);
-    for (const auto& e : edges) {
-      g[e[0]].push_back(e[1]);
-      ++indeg[e[1]];
-    }
+public:
+    int longestPath(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> g(n);
+        vector<int> indeg(n, 0);
+        for (const auto& e : edges) {
+            g[e[0]].push_back(e[1]);
+            ++indeg[e[1]];
+        }
 
-    vector<int> f(n, 0);      // f[x]：以 x 結尾的最長路徑邊數
-    queue<int> q;
-    for (int i = 0; i < n; ++i) {
-      if (indeg[i] == 0) { q.push(i); }
-    }
+        vector<int> f(n, 0);  // f[x]：以 x 結尾的最長路徑邊數
+        queue<int> q;
+        for (int i = 0; i < n; ++i) {
+            if (indeg[i] == 0) {
+                q.push(i);
+            }
+        }
 
-    int answer = 0;
-    while (!q.empty()) {
-      const int x = q.front();
-      q.pop();
-      answer = max(answer, f[x]);       // 此時 f[x] 已定型
-      for (int y : g[x]) {
-        f[y] = max(f[y], f[x] + 1);     // 推式鬆弛
-        if (--indeg[y] == 0) { q.push(y); }
-      }
+        int answer = 0;
+        while (!q.empty()) {
+            const int x = q.front();
+            q.pop();
+            answer = max(answer, f[x]);  // 此時 f[x] 已定型
+            for (int y : g[x]) {
+                f[y] = max(f[y], f[x] + 1);  // 推式鬆弛
+                if (--indeg[y] == 0) {
+                    q.push(y);
+                }
+            }
+        }
+        return answer;
     }
-    return answer;
-  }
 };
 ```
 

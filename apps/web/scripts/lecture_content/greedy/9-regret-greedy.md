@@ -29,22 +29,22 @@
 ```cpp
 // 課程表 III：每門課 (時長, 截止日)，求最多能修幾門。
 int scheduleCourse(vector<vector<int>>& courses) {
-  sort(courses.begin(), courses.end(),
-       [](const auto& a, const auto& b) { return a[1] < b[1]; });  // 按截止日
+    sort(courses.begin(), courses.end(),
+         [](const auto& a, const auto& b) { return a[1] < b[1]; });  // 按截止日
 
-  priority_queue<int> heap;      // 大根堆：堆頂是最長的已選課
-  long long elapsed = 0;
+    priority_queue<int> heap;  // 大根堆：堆頂是最長的已選課
+    long long elapsed = 0;
 
-  for (const auto& course : courses) {
-    const int duration = course[0], deadline = course[1];
-    heap.push(duration);
-    elapsed += duration;
-    if (elapsed > deadline) {    // 違規，撤銷最長的一門
-      elapsed -= heap.top();
-      heap.pop();
+    for (const auto& course : courses) {
+        const int duration = course[0], deadline = course[1];
+        heap.push(duration);
+        elapsed += duration;
+        if (elapsed > deadline) {  // 違規，撤銷最長的一門
+            elapsed -= heap.top();
+            heap.pop();
+        }
     }
-  }
-  return heap.size();
+    return heap.size();
 }
 ```
 
@@ -66,20 +66,24 @@ int scheduleCourse(vector<vector<int>>& courses) {
 
 ```cpp
 int magicTower(vector<int>& nums) {
-  if (accumulate(nums.begin(), nums.end(), 0LL) < 0) { return -1; }
-  priority_queue<int, vector<int>, greater<int>> negative;
-  long long hp = 1;
-  int moved = 0;
-  for (int x : nums) {
-    hp += x;
-    if (x < 0) { negative.push(x); }
-    if (hp <= 0) {
-      hp -= negative.top();  // 撤銷目前最傷的房間，延後到最後
-      negative.pop();
-      ++moved;
+    if (accumulate(nums.begin(), nums.end(), 0LL) < 0) {
+        return -1;
     }
-  }
-  return moved;
+    priority_queue<int, vector<int>, greater<int>> negative;
+    long long hp = 1;
+    int moved = 0;
+    for (int x : nums) {
+        hp += x;
+        if (x < 0) {
+            negative.push(x);
+        }
+        if (hp <= 0) {
+            hp -= negative.top();  // 撤銷目前最傷的房間，延後到最後
+            negative.pop();
+            ++moved;
+        }
+    }
+    return moved;
 }
 ```
 

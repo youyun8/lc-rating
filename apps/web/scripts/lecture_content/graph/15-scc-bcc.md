@@ -33,38 +33,42 @@ SCC 的判定：`low[x] == dfn[x]` 表示 `x` 的子樹無法回到比 `x` 更�
 ```cpp
 // Tarjan 求強連通分量：comp[x] 為 x 所屬分量編號，回傳分量總數。
 int tarjanScc(int n, const vector<vector<int>>& g, vector<int>& comp) {
-  vector<int> dfn(n, 0), low(n, 0), in_stack(n, 0), stk;
-  comp.assign(n, -1);
-  int timer = 0, count = 0;
+    vector<int> dfn(n, 0), low(n, 0), in_stack(n, 0), stk;
+    comp.assign(n, -1);
+    int timer = 0, count = 0;
 
-  function<void(int)> dfs = [&](int x) {
-    dfn[x] = low[x] = ++timer;
-    stk.push_back(x);
-    in_stack[x] = 1;
-    for (int y : g[x]) {
-      if (!dfn[y]) {
-        dfs(y);
-        low[x] = min(low[x], low[y]);       // 樹邊：用子樹的 low
-      } else if (in_stack[y]) {
-        low[x] = min(low[x], dfn[y]);       // 回邊：只用 dfn，且必須在堆疊內
-      }
-    }
-    if (low[x] == dfn[x]) {                 // x 是分量的根
-      while (true) {
-        const int y = stk.back();
-        stk.pop_back();
-        in_stack[y] = 0;
-        comp[y] = count;
-        if (y == x) { break; }
-      }
-      ++count;
-    }
-  };
+    function<void(int)> dfs = [&](int x) {
+        dfn[x] = low[x] = ++timer;
+        stk.push_back(x);
+        in_stack[x] = 1;
+        for (int y : g[x]) {
+            if (!dfn[y]) {
+                dfs(y);
+                low[x] = min(low[x], low[y]);  // 樹邊：用子樹的 low
+            } else if (in_stack[y]) {
+                low[x] = min(low[x], dfn[y]);  // 回邊：只用 dfn，且必須在堆疊內
+            }
+        }
+        if (low[x] == dfn[x]) {  // x 是分量的根
+            while (true) {
+                const int y = stk.back();
+                stk.pop_back();
+                in_stack[y] = 0;
+                comp[y] = count;
+                if (y == x) {
+                    break;
+                }
+            }
+            ++count;
+        }
+    };
 
-  for (int i = 0; i < n; ++i) {
-    if (!dfn[i]) { dfs(i); }
-  }
-  return count;
+    for (int i = 0; i < n; ++i) {
+        if (!dfn[i]) {
+            dfs(i);
+        }
+    }
+    return count;
 }
 ```
 

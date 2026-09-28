@@ -30,30 +30,33 @@
 
 ```cpp
 class Solution {
- public:
-  int minSubArrayLen(int target, vector<int>& nums) {
-    const int n = nums.size();
-    long long sum = 0;
-    int answer = n + 1, left = 0;
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        const int n = nums.size();
+        long long sum = 0;
+        int answer = n + 1, left = 0;
 
-    for (int right = 0; right < n; ++right) {
-      sum += nums[right];                       // 入
-      while (sum >= target) {                   // 合法就收縮
-        answer = min(answer, right - left + 1); // 收縮時更新
-        sum -= nums[left];
-        ++left;
-      }
+        for (int right = 0; right < n; ++right) {
+            sum += nums[right];                          // 入
+            while (sum >= target) {                      // 合法就收縮
+                answer = min(answer, right - left + 1);  // 收縮時更新
+                sum -= nums[left];
+                ++left;
+            }
+        }
+        return answer <= n ? answer : 0;  // 沒有解回傳 0
     }
-    return answer <= n ? answer : 0;            // 沒有解回傳 0
-  }
 };
 ```
 
 最小覆蓋子字串的差別只在「是否合法」的判斷方式——用一個 `need` 計數表示還缺幾種字元，減到 0 表示已覆蓋：
 
 ```cpp
-if (--need[c] == 0) { --missing; }   // 加入時
-while (missing == 0) { /* 更新答案並移出左端 */ }
+if (--need[c] == 0) {
+    --missing;
+}  // 加入時
+while (missing == 0) { /* 更新答案並移出左端 */
+}
 ```
 
 ## 時間與空間複雜度

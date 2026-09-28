@@ -1,25 +1,44 @@
-/** Re-indent fenced code from 2-space steps to 4-space steps when needed. */
+/**
+ * Indent step of a code block, measured only where a line ending in `{` opens
+ * a block. Continuation lines (arguments aligned under an opening bracket)
+ * start at arbitrary columns and must not influence the guess.
+ */
+function blockIndentSteps(lines: string[]): number[] {
+  const steps: number[] = [];
+  const indentOf = (line: string) => line.match(/^ */)![0].length;
+  for (let i = 0; i < lines.length; i++) {
+    if (!lines[i]!.trimEnd().endsWith("{")) continue;
+    const next = lines.slice(i + 1).find((line) => line.trim() !== "");
+    if (next === undefined) continue;
+    const step = indentOf(next) - indentOf(lines[i]!);
+    if (step > 0) steps.push(step);
+  }
+  return steps;
+}
+
+/** Re-indent fenced code from 2-space (or doubled 8-space) steps to 4-space steps. */
 export function normalizeCodeBlockIndentation(code: string): string {
   const lines = code.split("\n");
-  const indents = lines
-    .map((line) => line.match(/^(\s+)\S/)?.[1]?.length ?? 0)
-    .filter((n) => n > 0);
-
-  if (indents.length === 0) {
-    return code;
-  }
-
-  const doubledIndentation =
-    indents.every((n) => n % 4 === 0) && Math.min(...indents) >= 8;
-  if (doubledIndentation) {
+  if (code.includes("\t")) {
     return lines
-      .map((line) => line.replace(/^( {8,})/, (m) => " ".repeat(m.length / 2)))
+      .map((line) => line.replace(/^\s+/, (ws) => ws.replace(/\t/g, "    ")))
       .join("\n");
   }
 
-  const alreadyFourSpace =
-    indents.every((n) => n % 4 === 0) && Math.min(...indents) >= 4;
-  if (alreadyFourSpace) {
+  const steps = blockIndentSteps(lines);
+  if (steps.length === 0 || steps.includes(4)) {
+    return code;
+  }
+
+  if (steps.every((n) => n === 8)) {
+    return lines
+      .map((line) =>
+        line.replace(/^ +/, (m) => " ".repeat(Math.floor(m.length / 2))),
+      )
+      .join("\n");
+  }
+
+  if (!steps.every((n) => n === 2)) {
     return code;
   }
 

@@ -27,9 +27,11 @@ constexpr long long kMod = 1'000'000'007;
 
 // 各步驟選法數相乘；choices[i] 為第 i 步的選法數。
 long long countWays(const vector<long long>& choices) {
-  long long result = 1;
-  for (long long c : choices) { result = result * (c % kMod) % kMod; }
-  return result;
+    long long result = 1;
+    for (long long c : choices) {
+        result = result * (c % kMod) % kMod;
+    }
+    return result;
 }
 ```
 
