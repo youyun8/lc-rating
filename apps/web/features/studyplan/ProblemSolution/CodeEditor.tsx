@@ -13,7 +13,7 @@ const GUTTER_WIDTH = 48;
  * the highlighted layer behind it, otherwise the caret drifts from the text.
  */
 const SHARED_TEXT_STYLE: CSSProperties = {
-  fontFamily: "monospace",
+  fontFamily: "var(--font-code)",
   fontSize: 13,
   lineHeight: 1.6,
   tabSize: 2,

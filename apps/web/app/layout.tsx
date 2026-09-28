@@ -5,6 +5,8 @@ import { FloatingSyncButton } from "@/components/common/FloatingSyncButton";
 import { SyncStatusIndicator } from "@/components/common/SyncStatusIndicator";
 import { BASE_PATH } from "@/config/constants";
 import type { Metadata, Viewport } from "next";
+import "@fontsource/ubuntu-mono/400.css";
+import "@fontsource/ubuntu-mono/700.css";
 import "./globals.css";
 import "katex/dist/katex.min.css";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";

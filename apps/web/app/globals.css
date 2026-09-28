@@ -9,6 +9,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-han);
   --font-mono: monospace;
+  /* Code snippets (blocks, inline code, solution editor) use Ubuntu Mono. */
+  --font-code: "Ubuntu Mono", monospace;
   /* 與 competitive-programming-handbook 相同的字體堆疊：拉丁字用 Inter（數字、
      複雜度符號與程式碼旁的識別字才會與 handbook 一致），中日韓字自然落到後面
      的思源黑體／Noto Sans CJK 系列。 */
@@ -493,14 +495,13 @@ html[data-reading-width="full"] {
     outline-offset: 3px;
   }
 
-  /* Use the generic monospace keyword so code honors the browser's
-     configured fixed-width font, overriding Tailwind preflight's concrete
-     mono stack (which resolves to an installed font first). */
+  /* Code snippets use Ubuntu Mono (bundled via @fontsource), falling back to
+     the browser's configured fixed-width font. */
   code,
   kbd,
   samp,
   pre {
-    font-family: monospace;
+    font-family: var(--font-code);
   }
 }
 
@@ -707,7 +708,7 @@ html[data-reading-width="full"] {
 /* handbook 的行內程式碼是「淺底 + 細框」的小晶片，與段落文字區隔但不搶眼。 */
 .prose code,
 [data-slot="card-description"] code {
-  @apply font-mono;
+  font-family: var(--font-code);
   border: 1px solid var(--border);
   border-radius: 0.3rem;
   background: var(--muted);
