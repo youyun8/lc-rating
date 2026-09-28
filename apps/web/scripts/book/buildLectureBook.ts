@@ -394,6 +394,8 @@ function documentHtml(pageCss: string, body: string) {
     "@fontsource/noto-sans-tc/900.css",
     "@fontsource/jetbrains-mono/400.css",
     "@fontsource/jetbrains-mono/700.css",
+    "@fontsource/ubuntu-mono/400.css",
+    "@fontsource/ubuntu-mono/700.css",
     "katex/dist/katex.min.css",
     "highlight.js/styles/github.css",
   ]
