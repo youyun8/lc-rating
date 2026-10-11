@@ -30,7 +30,7 @@ export const C = {
 } as const;
 
 export const FONT_SANS = `'Noto Sans TC', 'Noto Sans CJK TC', sans-serif`;
-export const FONT_MONO = `'JetBrains Mono', 'Noto Sans Mono', monospace`;
+export const FONT_MONO = `'JetBrains Mono', 'Noto Sans TC', monospace`;
 
 export function esc(text: string | number): string {
   return String(text)

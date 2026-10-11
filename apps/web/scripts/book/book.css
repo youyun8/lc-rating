@@ -15,8 +15,8 @@
   --code-bg: #f6f8fa;
   --serif: "Noto Serif TC", "Noto Serif CJK TC", serif;
   --sans: "Noto Sans TC", "Noto Sans CJK TC", sans-serif;
-  --mono: "JetBrains Mono", "Noto Sans Mono", monospace;
-  --code: "Ubuntu Mono", "Noto Sans Mono", monospace;
+  --mono: "JetBrains Mono", "Noto Sans TC", monospace;
+  --code: "JetBrains Mono", "Noto Sans TC", monospace;
 }
 
 html {
@@ -296,7 +296,7 @@ tbody tr:last-child td {
 
 code {
   font-family: var(--code);
-  font-size: 0.95em;
+  font-size: 0.86em;
   background: var(--code-bg);
   padding: 0.05em 0.3em;
   border-radius: 2px;
@@ -305,7 +305,7 @@ code {
 
 pre {
   font-family: var(--code);
-  font-size: 8.4pt;
+  font-size: 7.6pt;
   line-height: 1.5;
   background: var(--code-bg);
   border: 0.5pt solid #d9dee3;
@@ -315,6 +315,7 @@ pre {
   margin: 0.6em 0 1em;
   white-space: pre-wrap;
   word-break: break-all;
+  tab-size: 4;
   text-align: left;
 }
 
@@ -632,4 +633,68 @@ figure.fig figcaption b {
 .ix-pg {
   color: var(--muted);
   margin-left: 0.8mm;
+}
+
+/* ---------------------------------------------------------------- */
+/* Syntax colours for print                                          */
+/* (overrides highlight.js github.css; saturated enough to survive   */
+/*  offset printing, and distinct in lightness for grayscale)        */
+/* ---------------------------------------------------------------- */
+
+pre code.hljs {
+  color: #1f2933;
+  background: none;
+}
+
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-type,
+.hljs-variable.language_ {
+  color: #a626a4;
+  font-weight: 700;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-title.class_.inherited__ {
+  color: #0e7490;
+}
+
+.hljs-title,
+.hljs-title.function_ {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-meta .hljs-string {
+  color: #15803d;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-symbol {
+  color: #c2410c;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #6b7785;
+  font-style: normal;
+}
+
+.hljs-meta,
+.hljs-meta .hljs-keyword.hljs-meta {
+  color: #b45309;
+}
+
+.hljs-params,
+.hljs-variable,
+.hljs-attr,
+.hljs-property,
+.hljs-operator,
+.hljs-punctuation {
+  color: #1f2933;
 }

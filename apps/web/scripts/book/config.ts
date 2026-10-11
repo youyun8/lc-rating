@@ -7,7 +7,7 @@ export const BOOK = {
   title: "演算法講義",
   subtitle: "從題型訊號、不變量到 C++17 模板",
   series: "LeetCode 分級題單・講義合集",
-  authors: "lc-rating 講義編寫組　編著",
+  authors: "LeetCode 講義小組　編著",
   edition: "初版",
   lang: "zh-Hant",
   site: "https://youyun8.github.io/lc-rating/lecture/",
