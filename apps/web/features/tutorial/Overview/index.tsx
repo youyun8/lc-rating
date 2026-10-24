@@ -9,7 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { StatCard } from "@/components/common/StatCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
-import { BookOpen, FolderTree, LayoutGrid, Search } from "lucide-react";
+import { BookOpen, FolderTree, Search } from "lucide-react";
 import Link from "next/link";
 import { useState, useMemo } from "react";
 import { tutorialDataMap } from "@/utils/tutorialIndex";
@@ -70,8 +70,6 @@ function TutorialOverview() {
     );
   }, []);
 
-  const totalPlans = Object.keys(LECTURE_CATEGORIES).length;
-
   const originalPlans = filteredPlans.filter(
     ([key]) => !CUSTOM_STUDYPLAN_KEYS.has(key),
   );
@@ -102,17 +100,10 @@ function TutorialOverview() {
                   <BookOpen className="h-3.5 w-3.5" />
                   完整講義索引
                 </Link>
-                <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
-                  <span className="shrink-0">資料來源</span>
-                  <span className="font-medium text-foreground">
-                    靈茶山艾府（0x3F）題單整理
-                  </span>
-                </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 2xl:gap-4">
-              <StatCard icon={LayoutGrid} label="講義主題" value={totalPlans} />
+            <div className="grid grid-cols-2 gap-3 sm:max-w-xl 2xl:gap-4">
               <StatCard
                 icon={FolderTree}
                 label="章節總數"

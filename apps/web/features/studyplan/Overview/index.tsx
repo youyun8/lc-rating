@@ -12,8 +12,6 @@ import { SectionDivider } from "@/components/common/SectionDivider";
 import {
   BookOpen,
   CheckCircle2,
-  FolderTree,
-  LayoutGrid,
   Search,
 } from "lucide-react";
 import { useState, useMemo } from "react";
@@ -121,25 +119,13 @@ function StudyPlanOverview() {
                   由靈茶山艾府（0x3F）整理的演算法主題題單，按知識點分層規劃。
                 </p>
               </div>
-              <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 self-start rounded-full border border-border/60 bg-background/85 px-3 py-1.5 text-xs text-muted-foreground">
-                <span className="shrink-0">資料來源</span>
-                <span className="font-medium text-foreground">
-                  靈茶山艾府（0x3F）題單
-                </span>
-              </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 xl:grid-cols-4 2xl:gap-4">
-              <StatCard icon={LayoutGrid} label="題單總數" value={counts.all} />
+            <div className="grid grid-cols-2 gap-3 sm:max-w-xl 2xl:gap-4">
               <StatCard
                 icon={BookOpen}
                 label="題目總數"
                 value={overviewStats.totalProblems}
-              />
-              <StatCard
-                icon={FolderTree}
-                label="章節覆蓋"
-                value={overviewStats.totalSections}
               />
               <StatCard
                 icon={CheckCircle2}

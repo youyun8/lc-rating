@@ -112,7 +112,7 @@ const Navigator = React.memo(() => {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="rounded-lg p-2 transition-colors hover:bg-accent md:hidden"
+            className="rounded-lg p-2 transition-colors hover:bg-accent lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -139,14 +139,14 @@ const Navigator = React.memo(() => {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="ml-6 hidden items-center gap-1 md:flex">
+          <div className="ml-6 hidden items-center gap-1 lg:flex">
             {navLinks.map(({ href, label, match, icon: Icon }) => {
               const isActive = pathname.startsWith(match);
               return (
                 <Link
                   key={href}
                   href={href}
-                  className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[15px] transition-colors ${
+                  className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[15px] transition-colors ${
                     isActive
                       ? "bg-accent font-medium text-accent-foreground"
                       : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
@@ -163,7 +163,7 @@ const Navigator = React.memo(() => {
         {/* Right section */}
         <div className="flex items-center gap-1 sm:gap-2">
           <AppearanceMenu />
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <SettingsPanel show={show} onOpenChange={setShow} />
           </div>
           <GithubBadge />
@@ -175,11 +175,11 @@ const Navigator = React.memo(() => {
         <>
           <button
             type="button"
-            className="fixed inset-0 top-[var(--navbar-height)] bg-black/20 md:hidden"
+            className="fixed inset-0 top-[var(--navbar-height)] bg-black/20 lg:hidden"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute inset-x-0 top-full border-b border-border/60 bg-background/95 shadow-xl backdrop-blur-md md:hidden">
+          <div className="absolute inset-x-0 top-full border-b border-border/60 bg-background/95 shadow-xl backdrop-blur-md lg:hidden">
             <div className="flex flex-col gap-4 px-4 py-4">
               <div className="rounded-2xl border border-border/60 bg-muted/30 p-1.5">
                 {navLinks.map(({ href, label, match, icon: Icon }) => {
