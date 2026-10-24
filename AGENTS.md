@@ -93,8 +93,8 @@ the TypeScript lectures, including `graph` and `sliding_window`.
 
 Do not hand-edit the 12 shared JSON files. Synchronize them through
 `apps/web/lc-maker/merge_upstream_to_local.py`; use `--dry-run` to preview and
-`--check` to verify idempotence. The seven plans with no upstream counterpart
-(`weekly_contest`, `rating_2100`, `q3_handbook`, `q4_handbook`,
+`--check` to verify idempotence. The six plans with no upstream counterpart
+(`rating_2100`, `q3_handbook`, `q4_handbook`,
 `technical_interview`, `interview_sprint`, and `sorting`) remain local-owned.
 
 Content rules:

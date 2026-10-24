@@ -3,7 +3,7 @@ import { studyPlanDataMap } from "@/utils/studyPlanIndex";
 import type { StudyPlanData, TutorialData } from "@/types";
 
 /**
- * Self-authored learning paths (週賽 AK 之路, 進階刷題衝刺, 手冊, 面試準備…) used
+ * Self-authored learning paths (進階刷題衝刺, 手冊, 面試準備…) used
  * to have a separate「講義」page. Their prose now lives inside the matching
  * 題單: this module folds the authored `TutorialData` tree into the studyplan
  * problem tree so every 章節敘述 shows next to its tracked problems, and any

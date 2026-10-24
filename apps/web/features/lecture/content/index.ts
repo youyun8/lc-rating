@@ -17,12 +17,11 @@ import { q4Handbook } from "./q4_handbook";
 import { slidingWindow } from "./sliding_window";
 import { string } from "./string";
 import { trees } from "./trees";
-import { weeklyContest } from "./weekly_contest";
 
 /**
  * Lecture category key -> display title. Lecture-owned; independent of
  * STUDYPLANS. Only the upstream 靈茶山艾府（0x3F）主題保留獨立「講義」頁；
- * 自製學習路線（週賽 AK 之路等）的講義內容已合併進對應題單，因此不再列於此。
+ * 自製學習路線的講義內容已合併進對應題單，因此不再列於此。
  */
 export const LECTURE_CATEGORIES: Record<string, string> = {
   binary_search: "二分搜尋",
@@ -65,7 +64,6 @@ export const lectureContentMap: Record<string, TutorialData.Root> = {
  * 而是由題單頁依 id 合併進對應的練習題樹（含根摘要與各章節敘述）。
  */
 export const studyPlanContentMap: Record<string, TutorialData.Root> = {
-  weekly_contest: weeklyContest,
   q3_handbook: q3Handbook,
   q4_handbook: q4Handbook,
   technical_interview: technicalInterview,

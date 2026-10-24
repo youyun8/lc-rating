@@ -40,7 +40,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
   const { tutorial } = useTutorial(plan);
   const progress = useProgressMap();
 
-  // Self-authored learning paths (週賽 AK 之路 等) no longer have a standalone
+  // Self-authored learning paths (進階刷題衝刺 等) no longer have a standalone
   // 講義 page; their prose is folded into the 題單 tree here. Upstream-backed
   // plans render their localized JSON summaries and link to standalone lectures.
   const merged = useMemo(() => getMergedStudyPlan(plan), [plan]);

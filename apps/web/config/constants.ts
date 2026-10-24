@@ -44,7 +44,6 @@ export const BILIBILI_0X3F_SPACE = {
  * render three labeled sections in order: 0x3F 題單 -> 學習路線 -> 面試準備.
  */
 export const LEARNING_PATH_KEYS: ReadonlySet<string> = new Set([
-  "weekly_contest",
   "rating_2100",
   "q3_handbook",
   "q4_handbook",
@@ -82,7 +81,6 @@ export const LECTURE_KEYS = [
 ] as const;
 
 export const STUDYPLANS = {
-  weekly_contest: "週賽 AK 之路",
   q3_handbook: "LeetCode 競賽 Q3 手冊",
   q4_handbook: "LeetCode 競賽 Q4 手冊",
   technical_interview: "技術面試準備",
