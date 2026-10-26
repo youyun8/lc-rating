@@ -2241,7 +2241,7 @@
   },
   "14750873": {
     "id": "14750873",
-    "title": "兩種方法：遍歷/列舉因子",
+    "title": "兩種方法：遍歷/列舉因子（Python/Java/C++/Go/JS）",
     "titleSlug": "bian-li-by-endlesscheng-kst7",
     "time": 1689480701074,
     "problemId": "2778"
@@ -3345,6 +3345,13 @@
     "time": 1787458187276,
     "problemId": "4033"
   },
+  "1698009771": {
+    "id": "1698009771",
+    "title": "相鄰相同的個數（Python/Java/C++/Go）",
+    "titleSlug": "xiang-lin-xiang-tong-de-ge-shu-pythonjav-cwp4",
+    "time": 1792297928791,
+    "problemId": "4083"
+  },
   "1698302709": {
     "id": "1698302709",
     "title": "教你一步步思考動態規劃：從記憶化搜尋到遞推（Python/Java/C++/Go/JS/Rust）",
@@ -4149,6 +4156,13 @@
     "titleSlug": "tu-jie-dan-diao-zhan-liang-chong-fang-fa-v9ab",
     "time": 1681055539531,
     "problemId": "1019"
+  },
+  "1875402253": {
+    "id": "1875402253",
+    "title": "區間覆蓋問題（Python/Java/C++/Go）",
+    "titleSlug": "qu-jian-he-bing-qu-jian-fu-gai-pythonjav-05u0",
+    "time": 1792296695064,
+    "problemId": "4086"
   },
   "1876544260": {
     "id": "1876544260",
@@ -7971,6 +7985,13 @@
     "titleSlug": "bian-li-pythonjavacgo-by-endlesscheng-emtn",
     "time": 1734831607724,
     "problemId": "3392"
+  },
+  "2711078963": {
+    "id": "2711078963",
+    "title": "模擬（Python/Java/C++/Go）",
+    "titleSlug": "mo-ni-pythonjavacgo-by-endlesscheng-hcfr",
+    "time": 1792297542220,
+    "problemId": "4084"
   },
   "2711761019": {
     "id": "2711761019",
@@ -16231,6 +16252,13 @@
     "titleSlug": "by-endlesscheng-97i9",
     "time": 1668312435929,
     "problemId": "2471"
+  },
+  "631885299": {
+    "id": "631885299",
+    "title": "答案是唯一的（Python/Java/C++/Go）",
+    "titleSlug": "zhi-you-yi-ge-dian-neng-zuo-wei-gen-by-e-d0s5",
+    "time": 1792296299639,
+    "problemId": "4085"
   },
   "63406553": {
     "id": "63406553",
