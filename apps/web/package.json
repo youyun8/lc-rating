@@ -16,6 +16,7 @@
     "test:unit": "tsx --test \"./**/*.test.ts\"",
     "validate:content": "tsx ./scripts/validateContentFormatting.mjs",
     "book:pdf": "tsx ./scripts/book/buildLectureBook.ts",
+    "book:pdf:levels": "tsx ./scripts/book/buildLectureBook.ts --difficulty --print",
     "book:figures": "tsx ./scripts/book/renderFigureGallery.ts"
   },
   "dependencies": {

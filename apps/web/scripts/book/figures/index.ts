@@ -5,6 +5,7 @@ import { part3Figures } from "./part3";
 import { part4Figures } from "./part4";
 import { part5Figures } from "./part5";
 import { part6Figures } from "./part6";
+import { part7Figures } from "./part7";
 import { C, box, line, measure, rect, svg, text } from "./svg";
 
 export const ALL_FIGURES: BookFigure[] = [
@@ -14,6 +15,7 @@ export const ALL_FIGURES: BookFigure[] = [
   ...part4Figures,
   ...part5Figures,
   ...part6Figures,
+  ...part7Figures,
 ];
 
 export interface ChapterMapItem {

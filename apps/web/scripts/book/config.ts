@@ -68,3 +68,19 @@ export const PAGE = {
   inner: 22,
   outer: 17,
 } as const;
+
+/**
+ * Print production settings for the difficulty edition's `--print` files.
+ * Spine width = leaves × leaf thickness + allowance; ask the printer for the
+ * real caliper of the chosen paper and adjust `leafThicknessMm`.
+ */
+export const PRINT = {
+  /** Bleed on every outer edge of the cover spread (mm). */
+  bleedMm: 3,
+  /** Thickness of one leaf (two pages); ~0.1 mm for 80 g woodfree paper. */
+  leafThicknessMm: 0.1,
+  /** Extra spine width for the glue of a perfect binding (mm). */
+  spineAllowanceMm: 1,
+  /** Interior page count is padded with blank pages to a multiple of this. */
+  padPagesTo: 4,
+} as const;

@@ -59,6 +59,7 @@ lc-rating 另有三個 handbook 沒有的標題，位置固定：`## 程式碼�
 - `pnpm book:pdf` 產生 `book-dist/lc-lecture-book.pdf`（`--volumes` 另拆分冊、`--chapters a,b` 只排部分章節）。`book-dist/` 已列入 `.gitignore`，不要提交 PDF。
 - `pnpm book:figures` 把所有圖解輸出到一個 HTML 頁面檢查。
 - 圖解登記在 `scripts/book/figures/part*.ts`，以「主題 + 小節標題（含編號）」對應；**改小節標題時要同步改圖的 `section`**，否則建置會警告找不到小節。圖中數值一律由程式跑演算法計算。
+- `pnpm book:pdf:levels` 另排「難度分冊版」三冊（簡單篇／中等篇／困難篇，依各小節練習題難度分數中位數分冊，規則在 `scripts/book/difficulty.ts`），並輸出送印檔（無封面內頁、含書背與出血的封面展開、CMYK 版、規格單）。新增沒有評分題目的小節時，要在 `difficulty.ts` 的 `OVERRIDES` 指定所屬冊別，否則建置會失敗。
 - 細節見 `apps/web/scripts/book/README.md`。
 
 ## Coding Style & Naming Conventions
