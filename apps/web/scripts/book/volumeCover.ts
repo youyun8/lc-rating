@@ -65,7 +65,7 @@ export function wrap(s: string, maxW: number, size: number): string[] {
   return lines;
 }
 
-function defs(v: VolumeInfo, id: string): string {
+function defs(v: CoverTheme, id: string): string {
   return `<defs>
 <linearGradient id="${id}-bg" x1="0" y1="0" x2="0.35" y2="1">
   <stop offset="0" stop-color="${v.coverDark}"/>
@@ -450,10 +450,30 @@ export function frontCoverSvg(
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${FW} ${FH}" preserveAspectRatio="xMidYMid slice">${defs(v, id)}<rect width="${FW}" height="${FH}" fill="url(#${id}-bg)"/>${dotGrid(0, 0, FW, FH, v.coverGlow)}${frontPanel(v, id, title, authors)}</svg>`;
 }
 
-function backPanel(v: VolumeInfo, stats: CoverStats, blurb: string[]): string {
+/** Colours a cover needs; a `VolumeInfo` satisfies it. */
+export type CoverTheme = Pick<
+  VolumeInfo,
+  "coverDark" | "coverMid" | "coverGlow"
+>;
+
+export interface BackCoverContent {
+  heading: string;
+  blurb: string[];
+  stats: CoverStats;
+  /** Highlight this volume in the "全套三冊" list; `null` shows `outline` instead. */
+  series: Level | null;
+  /** Used when `series` is null: a labelled list of rows, e.g. the book's parts. */
+  outline?: { label: string; rows: [string, string][] };
+  /** Print covers keep a white ISBN barcode area; reading PDFs show the site. */
+  barcode: boolean;
+  site?: string;
+}
+
+function backPanel(v: CoverTheme, c: BackCoverContent): string {
+  const { stats, blurb } = c;
   let out = "";
   const x = 70;
-  out += t(x, 120, `${v.name}\u3000本冊內容`, {
+  out += t(x, 120, c.heading, {
     size: 30,
     fill: "#ffffff",
     weight: 900,
@@ -507,31 +527,44 @@ function backPanel(v: VolumeInfo, stats: CoverStats, blurb: string[]): string {
     if (i)
       out += `<line x1="${x + i * cw}" y1="${sy - 36}" x2="${x + i * cw}" y2="${sy + 34}" stroke="#ffffff" stroke-opacity="0.2"/>`;
   });
-  // Series overview.
+  // Series overview (or the book's own outline).
   const ty = sy + 96;
-  out += t(x, ty, "全套三冊", {
+  out += t(x, ty, c.series ? "全套三冊" : (c.outline?.label ?? ""), {
     size: 18,
     fill: v.coverGlow,
     weight: 700,
     spacing: 2,
   });
-  LEVELS.forEach((l, i) => {
-    const sv = VOLUMES[l];
-    const yy = ty + 40 + i * 40;
-    const cur = l === v.level;
-    out += `<rect x="${x}" y="${yy - 22}" width="10" height="28" rx="3" fill="${sv.coverGlow}" opacity="${cur ? 1 : 0.4}"/>`;
-    out += t(x + 24, yy, `${sv.ordinal}\u3000${sv.name}`, {
-      size: 20,
+  c.outline?.rows.forEach(([a, b], i) => {
+    if (c.series) return;
+    const yy = ty + 40 + i * 36;
+    out += `<rect x="${x}" y="${yy - 20}" width="10" height="26" rx="3" fill="${v.coverGlow}" opacity="${0.4 + 0.2 * (i % 4)}"/>`;
+    out += t(x + 24, yy, a, {
+      size: 18,
       fill: "#ffffff",
-      weight: cur ? 700 : 400,
-      opacity: cur ? 1 : 0.6,
+      weight: 700,
+      opacity: 0.9,
     });
-    out += t(x + 210, yy, sv.ratingRange, {
-      size: 17,
-      fill: "#ffffff",
-      opacity: cur ? 0.9 : 0.5,
-    });
+    out += t(x + 110, yy, b, { size: 18, fill: "#ffffff", opacity: 0.75 });
   });
+  if (c.series)
+    LEVELS.forEach((l, i) => {
+      const sv = VOLUMES[l];
+      const yy = ty + 40 + i * 40;
+      const cur = l === c.series;
+      out += `<rect x="${x}" y="${yy - 22}" width="10" height="28" rx="3" fill="${sv.coverGlow}" opacity="${cur ? 1 : 0.4}"/>`;
+      out += t(x + 24, yy, `${sv.ordinal}\u3000${sv.name}`, {
+        size: 20,
+        fill: "#ffffff",
+        weight: cur ? 700 : 400,
+        opacity: cur ? 1 : 0.6,
+      });
+      out += t(x + 210, yy, sv.ratingRange, {
+        size: 17,
+        fill: "#ffffff",
+        opacity: cur ? 0.9 : 0.5,
+      });
+    });
   // Audience + barcode area.
   out += t(x, FH - 120, "適讀對象", {
     size: 16,
@@ -549,15 +582,36 @@ function backPanel(v: VolumeInfo, stats: CoverStats, blurb: string[]): string {
     fill: "#ffffff",
     opacity: 0.6,
   });
-  const bw = 200;
-  const bh = 128;
-  out += `<rect x="${FW - x - bw}" y="${FH - 70 - bh}" width="${bw}" height="${bh}" fill="#ffffff"/>`;
-  out += t(FW - x - bw / 2, FH - 70 - bh / 2 + 6, "ISBN 條碼位置", {
-    size: 15,
-    fill: "#9aa5b1",
-    anchor: "middle",
-  });
+  if (c.barcode) {
+    const bw = 200;
+    const bh = 128;
+    out += `<rect x="${FW - x - bw}" y="${FH - 70 - bh}" width="${bw}" height="${bh}" fill="#ffffff"/>`;
+    out += t(FW - x - bw / 2, FH - 70 - bh / 2 + 6, "ISBN 條碼位置", {
+      size: 15,
+      fill: "#9aa5b1",
+      anchor: "middle",
+    });
+  } else if (c.site) {
+    out += `<line x1="${x}" y1="${FH - 44}" x2="${FW - x}" y2="${FH - 44}" stroke="#ffffff" stroke-opacity="0.18"/>`;
+    out += t(
+      x,
+      FH - 18,
+      `線上講義\u3000${c.site.replace(/^https?:\/\//, "")}`,
+      {
+        size: 14,
+        fill: "#ffffff",
+        opacity: 0.6,
+        mono: true,
+      },
+    );
+  }
   return out;
+}
+
+/** Reading-edition back cover (trim size, no bleed, no barcode area). */
+export function backCoverSvg(theme: CoverTheme, c: BackCoverContent): string {
+  const id = "bk";
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${FW} ${FH}" preserveAspectRatio="xMidYMid slice">${defs(theme, id)}<rect width="${FW}" height="${FH}" fill="url(#${id}-bg)"/>${dotGrid(0, 0, FW, FH, theme.coverGlow)}<rect width="${FW}" height="${FH}" fill="${theme.coverDark}" opacity="0.55"/>${backPanel(theme, c)}</svg>`;
 }
 
 function spinePanel(
@@ -649,7 +703,7 @@ export function coverSpreadSvg(
   out += dotGrid(0, 0, W, H, v.coverGlow);
   // Back cover: a darker veil so the blurb reads well.
   out += `<rect x="0" y="0" width="${b + FW}" height="${H}" fill="${v.coverDark}" opacity="0.55"/>`;
-  out += `<g transform="translate(${b}, ${b})">${backPanel(v, stats, blurb)}</g>`;
+  out += `<g transform="translate(${b}, ${b})">${backPanel(v, { heading: `${v.name}\u3000本冊內容`, blurb, stats, series: level, barcode: true })}</g>`;
   // Spine.
   out += `<rect x="${b + FW}" y="0" width="${s}" height="${H}" fill="${v.coverDark}" opacity="0.85"/>`;
   out += `<g transform="translate(${b + FW}, ${b})">${spinePanel(v, s, FH, title)}</g>`;

@@ -84,3 +84,12 @@ export const PRINT = {
   /** Interior page count is padded with blank pages to a multiple of this. */
   padPagesTo: 4,
 } as const;
+
+/** Back cover of the topic edition (palette matches `cover.ts`). */
+export const TOPIC_BACK = {
+  theme: { coverDark: "#0f1f44", coverMid: "#1c3370", coverGlow: "#f59e0b" },
+  blurb: [
+    "本書把 LeetCode 分級題單的十三個主題整理成一本演算法講義：從滑動視窗、二分搜尋、單調堆疊，到圖論、動態規劃、線段樹、數論與字串演算法。",
+    "每一小節都遵循同一個十五段骨架：從「暴力為何不夠」講起，經過題型訊號與不變量證明，走到可以直接套用的 C++17 模板，最後附上依難度分數排序的練習題。書中圖解都由程式實際執行演算法後繪製。",
+  ],
+} as const;

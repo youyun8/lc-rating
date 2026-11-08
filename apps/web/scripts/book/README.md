@@ -28,6 +28,7 @@ npx tsx scripts/book/buildLectureBook.ts --difficulty --chapters graph,dynamic_p
 - **分冊依據**（`difficulty.ts`）：每個葉節點小節取練習表中有難度分數題目的中位數，`< 1600` 歸上冊「簡單篇」、`1600–2099` 歸中冊「中等篇」、`≥ 2100` 歸下冊「困難篇」。代表題是無評分經典題（爬樓梯、反轉連結串列…）或整節沒有評分題的小節，在 `OVERRIDES` 人工指定；新增這類小節而未指定時建置會直接報錯。各章的「常見面試模式」三冊都收。
 - 每冊保留四篇的章節順序，只收屬於該冊的小節（及其上層導讀）；章首有「本主題在三冊中的小節數」色條，章末「本主題的其他小節」列出另外兩冊的對應編號。
 - 每冊的前置頁是「本冊導讀」（分冊表、三冊難度分布圖、讀法），書末有附錄 A「C++17 面試速查」、B「複雜度估算與面試答題流程」（`appendices.ts`）、C「面試高頻題對照」（取自 `public/studyplan/interview_sprint.json` 的高優題單）、D「題號索引」。
+- 閱讀版 PDF（兩種版本都是）最前面是封面，最後一頁是封底（偶數頁、前面留一頁封底裡）；封底列出本書內容、主題、統計數字與線上講義網址。主題版封底文字在 `config.ts` 的 `TOPIC_BACK`。
 - 封面在 `volumeCover.ts`：三冊各有主色與一幅由演算法實際計算的主圖（雙指標、BFS 分層、線段樹查詢）。
 
 ### 印刷檔（`--print`）
@@ -36,7 +37,7 @@ npx tsx scripts/book/buildLectureBook.ts --difficulty --chapters graph,dynamic_p
 
 | 檔案                                 | 內容                                                            |
 | ------------------------------------ | --------------------------------------------------------------- |
-| `lc-lecture-<冊>.pdf`                | 閱讀版：封面、書籤、可點目錄、頁碼標籤                          |
+| `lc-lecture-<冊>.pdf`                | 閱讀版：封面與封底、書籤、可點目錄、頁碼標籤                    |
 | `lc-lecture-<冊>-print-interior.pdf` | 送印內頁：不含封面，頁數補到 4 的倍數，設定 TrimBox／BleedBox   |
 | `lc-lecture-<冊>-print-cover.pdf`    | 封面展開：封底＋書背＋封面，四邊 3 mm 出血；書背寬依頁數計算    |
 | `*-cmyk.pdf`                         | 上兩者的 CMYK 版本（需要 Ghostscript `gs`；找不到時略過並警告） |

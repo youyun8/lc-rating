@@ -55,7 +55,7 @@ import {
 } from "../../features/lecture/content";
 import type { TutorialData } from "../../types";
 import { AUTHORED_APPENDICES } from "./appendices";
-import { BOOK, PAGE, PARTS, PRINT, type BookPart } from "./config";
+import { BOOK, PAGE, PARTS, PRINT, TOPIC_BACK, type BookPart } from "./config";
 import { coverSvg } from "./cover";
 import {
   LEVELS,
@@ -79,7 +79,13 @@ import {
   relinkContents,
   setPageLabels,
 } from "./pdf";
-import { coverSpreadSvg, frontCoverSvg, type CoverStats } from "./volumeCover";
+import {
+  backCoverSvg,
+  coverSpreadSvg,
+  frontCoverSvg,
+  type BackCoverContent,
+  type CoverStats,
+} from "./volumeCover";
 
 const WEB_ROOT = path.resolve(
   path.dirname(new URL(import.meta.url).pathname),
@@ -1071,11 +1077,34 @@ async function printFront(
   return frontDoc;
 }
 
+/** Print one trim-size cover SVG into a one-page PDF. */
+async function svgPage(
+  browser: Browser,
+  svgText: string,
+  htmlFile: string,
+): Promise<PDFDocument> {
+  return PDFDocument.load(
+    await printPdf(
+      browser,
+      coverHtml(svgText, PAGE.width, PAGE.height),
+      htmlFile,
+    ),
+  );
+}
+
+/** Pages of the bound interior: front + main, padded for printing. */
+function interiorPages(front: PDFDocument, main: PDFDocument) {
+  const n = front.getPageCount() + main.getPageCount();
+  return Math.ceil(n / PRINT.padPagesTo) * PRINT.padPagesTo;
+}
+
 interface Assemble {
   outFile: string;
   title: string;
   subject: string;
   cover: PDFDocument | null;
+  /** Back cover page, placed last on a verso after an inside-back blank. */
+  back?: PDFDocument | null;
   front: PDFDocument;
   main: PDFDocument;
   headings: HeadingRef[];
@@ -1110,6 +1139,17 @@ async function assemble(a: Assemble, log: Log): Promise<number> {
     while (book.getPageCount() % a.padTo)
       book.addPage([PAGE.width * MM_PT, PAGE.height * MM_PT]);
   }
+  let backIndex = -1;
+  if (a.back) {
+    // At least one blank (inside back cover), then the back cover on an
+    // even page so it closes the book as a verso in two-page view.
+    book.addPage([PAGE.width * MM_PT, PAGE.height * MM_PT]);
+    if (book.getPageCount() % 2 === 0)
+      book.addPage([PAGE.width * MM_PT, PAGE.height * MM_PT]);
+    const [bp] = await book.copyPages(a.back, [0]);
+    book.addPage(bp!);
+    backIndex = book.getPageCount() - 1;
+  }
   const offset = coverPages + frontPages - (range ? range[0] : 0);
   const inRange = a.headings.filter(
     (h) => !range || ((h.page ?? 0) >= range[0] && (h.page ?? 0) < range[1]),
@@ -1125,6 +1165,7 @@ async function assemble(a: Assemble, log: Log): Promise<number> {
     from: coverPages + frontPages,
     arabicStart: range ? range[0] + 1 : 1,
   });
+  if (backIndex >= 0) labels.push({ from: backIndex, prefix: "封底" });
   setPageLabels(book, labels);
   const targets = new Map<string, number>();
   for (const h of inRange) targets.set(h.id, (h.page ?? 0) + offset);
@@ -1236,16 +1277,41 @@ async function buildTopicEdition(browser: Browser, opts: Options, log: Log) {
     null,
   );
   log(`front matter: ${frontDoc.getPageCount()} pages`);
-  const coverDoc = await PDFDocument.load(
-    await printPdf(
-      browser,
-      coverHtml(coverSvg(), PAGE.width, PAGE.height),
-      path.join(outDir, "cover.html"),
-    ),
+  const coverDoc = await svgPage(
+    browser,
+    coverSvg(),
+    path.join(outDir, "cover.html"),
+  );
+  const back: BackCoverContent = {
+    heading: "本書內容",
+    blurb: [...TOPIC_BACK.blurb],
+    stats: {
+      chapters: chapters.map((c) => c.title),
+      sections: secCount,
+      figures: figureTotal,
+      problems: builder.problems.size,
+      pages: interiorPages(frontDoc, doc),
+    },
+    series: null,
+    outline: {
+      label: "全書四篇",
+      rows: parts.map((p) => {
+        const [a = "", b = p.title] = p.title.split("\u3000");
+        return [a, b];
+      }),
+    },
+    barcode: false,
+    site: BOOK.site,
+  };
+  const backDoc = await svgPage(
+    browser,
+    backCoverSvg(TOPIC_BACK.theme, back),
+    path.join(outDir, "back.html"),
   );
   const common = {
     subject: BOOK.subtitle,
     cover: coverDoc,
+    back: backDoc,
     front: frontDoc,
     main: doc,
     headings: builder.headings,
@@ -1272,7 +1338,7 @@ async function buildTopicEdition(browser: Browser, opts: Options, log: Log) {
     }
   }
   if (!opts.keepHtml)
-    for (const f of ["main.html", "front.html", "cover.html"])
+    for (const f of ["main.html", "front.html", "cover.html", "back.html"])
       fs.rmSync(path.join(outDir, f), { force: true });
 }
 
@@ -1308,16 +1374,29 @@ async function buildDifficultyEdition(
       volume,
     );
     vlog(`front matter: ${frontDoc.getPageCount()} pages`);
-    const coverDoc = await PDFDocument.load(
-      await printPdf(
-        browser,
-        coverHtml(
-          frontCoverSvg(level, BOOK.title, BOOK.authors),
-          PAGE.width,
-          PAGE.height,
-        ),
-        `${base}-cover.html`,
-      ),
+    const coverDoc = await svgPage(
+      browser,
+      frontCoverSvg(level, BOOK.title, BOOK.authors),
+      `${base}-cover.html`,
+    );
+    const stats: CoverStats = {
+      chapters: chapters.map((c) => c.title),
+      sections: series.sectionCounts[level],
+      figures: figureTotal,
+      problems: builder.problems.size,
+      pages: interiorPages(frontDoc, doc),
+    };
+    const backDoc = await svgPage(
+      browser,
+      backCoverSvg(volume, {
+        heading: `${volume.name}\u3000本冊內容`,
+        blurb: volume.blurb,
+        stats,
+        series: level,
+        barcode: false,
+        site: BOOK.site,
+      }),
+      `${base}-back.html`,
     );
     const title = `${BOOK.title}（${volume.ordinal}・${volume.name}）`;
     const common = {
@@ -1329,7 +1408,7 @@ async function buildDifficultyEdition(
       figures: builder.figures,
     };
     await assemble(
-      { ...common, outFile: `${base}.pdf`, cover: coverDoc },
+      { ...common, outFile: `${base}.pdf`, cover: coverDoc, back: backDoc },
       vlog,
     );
 
@@ -1342,13 +1421,8 @@ async function buildDifficultyEdition(
       const spineMm =
         Math.round((pages / 2) * PRINT.leafThicknessMm * 10) / 10 +
         PRINT.spineAllowanceMm;
-      const stats: CoverStats = {
-        chapters: chapters.map((c) => c.title),
-        sections: series.sectionCounts[level],
-        figures: figureTotal,
-        problems: builder.problems.size,
-        pages,
-      };
+      if (pages !== stats.pages)
+        throw new Error(`interior has ${pages} pages, expected ${stats.pages}`);
       const spread = coverSpreadSvg(
         level,
         BOOK.title,
@@ -1415,7 +1489,7 @@ async function buildDifficultyEdition(
       if (!opts.keepHtml) fs.rmSync(`${base}-spread.html`, { force: true });
     }
     if (!opts.keepHtml)
-      for (const f of ["main", "front", "cover"])
+      for (const f of ["main", "front", "cover", "back"])
         fs.rmSync(`${base}-${f}.html`, { force: true });
   }
   if (opts.levels.length === LEVELS.length) {
