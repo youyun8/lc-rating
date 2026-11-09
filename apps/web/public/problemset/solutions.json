@@ -3396,7 +3396,7 @@
   },
   "1702716426": {
     "id": "1702716426",
-    "title": "兩種方法：恰好型滑動視窗 / LogTrick（Python/Java/C++/Go）",
+    "title": "三種方法：恰好型滑動視窗 / LogTrick / 最近字母位置（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-fang-fa-qia-hao-xing-hua-don-61cn",
     "time": 1792887976421,
     "problemId": "4091"
@@ -8224,6 +8224,13 @@
     "time": 1622304545375,
     "problemId": "1876"
   },
+  "2756018494": {
+    "id": "2756018494",
+    "title": "不用字串的做法（Python/Java/C++/Go）",
+    "titleSlug": "bu-yong-zi-fu-chuan-de-zuo-fa-pythonjava-yk87",
+    "time": 1793512513133,
+    "problemId": "4097"
+  },
   "275752382": {
     "id": "275752382",
     "title": "二分第 m 大價值（Python/Java/C++/Go）",
@@ -9547,6 +9554,13 @@
     "time": 1634387485987,
     "problemId": "537"
   },
+  "3035232683": {
+    "id": "3035232683",
+    "title": "貪心構造（Python/Java/C++/Go）",
+    "titleSlug": "tan-xin-gou-zao-pythonjavacgo-by-endless-pk9j",
+    "time": 1793506076678,
+    "problemId": "4098"
+  },
   "3035372283": {
     "id": "3035372283",
     "title": "字首和 + 值域樹狀陣列 / 有序集合（Python/Java/C++/Go）",
@@ -10569,6 +10583,13 @@
     "time": 1641701553175,
     "problemId": "2133"
   },
+  "3246928465": {
+    "id": "3246928465",
+    "title": "雙堆模擬，附相似題目（Python/Java/C++/Go）",
+    "titleSlug": "shuang-dui-mo-ni-fu-xiang-si-ti-mu-pytho-zpn2",
+    "time": 1792840842089,
+    "problemId": "1606"
+  },
   "3248412457": {
     "id": "3248412457",
     "title": "排序不等式",
@@ -11201,7 +11222,7 @@
   },
   "3382065767": {
     "id": "3382065767",
-    "title": "兩種非暴力做法：恰好型滑動視窗 / LogTrick（Python/Java/C++/Go）",
+    "title": "三種非暴力方法：恰好型滑動視窗 / LogTrick / 最近字母位置（Python/Java/C++/Go）",
     "titleSlug": "liang-chong-fei-bao-li-zuo-fa-qia-hao-xi-yobq",
     "time": 1792888055394,
     "problemId": "4090"
@@ -11478,6 +11499,13 @@
     "titleSlug": "fei-bao-li-zuo-fa-kmper-fen-cha-zhao-pyt-0o8y",
     "time": 1705206597834,
     "problemId": "3006"
+  },
+  "3439912083": {
+    "id": "3439912083",
+    "title": "兩種方法：位運算恆等式 + 樹形DP/腦筋急轉彎（Python/Java/C++/Go）",
+    "titleSlug": "wei-yun-suan-heng-deng-shi-pin-jie-lu-ji-i2he",
+    "time": 1793507832728,
+    "problemId": "4100"
   },
   "3444064187": {
     "id": "3444064187",
@@ -12909,7 +12937,7 @@
   },
   "3761575610": {
     "id": "3761575610",
-    "title": "模擬 + 計算區間交集（Python/Java/C++/Go）",
+    "title": "計算區間交集（Python/Java/C++/Go）",
     "titleSlug": "by-endlesscheng-3r0d",
     "time": 1663463165616,
     "problemId": "2409"
@@ -13424,6 +13452,13 @@
     "titleSlug": "by-endlesscheng-6yvy",
     "time": 1662264848539,
     "problemId": "2400"
+  },
+  "3870986357": {
+    "id": "3870986357",
+    "title": "O(nlogn) 分組迴圈+逆序對（Python/Java/C++/Go）",
+    "titleSlug": "onlogn-fen-zu-xun-huan-ni-xu-dui-pythonj-iicc",
+    "time": 1793512117012,
+    "problemId": "4099"
   },
   "3871311053": {
     "id": "3871311053",
@@ -15478,7 +15513,7 @@
   },
   "443405892": {
     "id": "443405892",
-    "title": "講清楚為什麼一開始要把 (i,0) 都入堆！兩種理解角度（Python/Java/C++/Go）",
+    "title": "轉化成 23 題，簡單易懂（Python/Java/C++/Go）",
     "titleSlug": "jiang-qing-chu-wei-shi-yao-yi-kai-shi-ya-i0dj",
     "time": 1685200651006,
     "problemId": "373"
