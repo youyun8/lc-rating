@@ -3704,7 +3704,7 @@
   },
   "1757955047": {
     "id": "1757955047",
-    "title": "字首和 + 維護偶數奇數個數（Python/Java/C++/Go）",
+    "title": "兩種方法：字首和 + 列舉右維護左 / 乘法原理（Python/Java/C++/Go）",
     "titleSlug": "qian-zhui-he-wei-hu-ou-shu-qi-shu-ge-shu-hcpd",
     "time": 1793927122702,
     "problemId": "1524"
@@ -3904,6 +3904,13 @@
     "titleSlug": "mei-ju-shang-xia-bian-jie-zhuan-hua-chen-h6i4",
     "time": 1750466251088,
     "problemId": "1074"
+  },
+  "1806855852": {
+    "id": "1806855852",
+    "title": "樹形 DP（Python/Java/C++/Go）",
+    "titleSlug": "shu-xing-dppythonjavacgo-by-endlesscheng-ybbr",
+    "time": 1794715375384,
+    "problemId": "4112"
   },
   "1808920633": {
     "id": "1808920633",
@@ -5207,6 +5214,13 @@
     "time": 1642868032541,
     "problemId": "2145"
   },
+  "2111221864": {
+    "id": "2111221864",
+    "title": "非暴力做法（Python/Java/C++/Go）",
+    "titleSlug": "fei-bao-li-zuo-fa-pythonjavacgo-by-endle-ydgs",
+    "time": 1794716856254,
+    "problemId": "4111"
+  },
   "2112448521": {
     "id": "2112448521",
     "title": "最小表示法 + 雜湊集合去重（Python/Java/C++/Go）",
@@ -5668,6 +5682,13 @@
     "titleSlug": "liang-chong-fang-fa-liang-ci-bian-li-yi-8tpos",
     "time": 1779587467157,
     "problemId": "3936"
+  },
+  "2211962756": {
+    "id": "2211962756",
+    "title": "博弈 DP（Python/Java/C++/Go）",
+    "titleSlug": "bo-yi-dppythonjavacgo-by-endlesscheng-3aa9",
+    "time": 1794715473091,
+    "problemId": "4113"
   },
   "2213463441": {
     "id": "2213463441",
@@ -9192,7 +9213,7 @@
   },
   "2946534771": {
     "id": "2946534771",
-    "title": "簡潔寫法：不出現 ba 即可",
+    "title": "簡潔寫法：不出現 ba 即可（Python/Java/C++/C/Go/JS/Rust）",
     "titleSlug": "jian-ji-xie-fa-bu-chu-xian-ba-ji-ke-by-e-0ka0",
     "time": 1641096788704,
     "problemId": "2124"
@@ -9203,6 +9224,13 @@
     "titleSlug": "yi-xing-xie-fa-by-endlesscheng-yfe2",
     "time": 1691283090999,
     "problemId": "2806"
+  },
+  "2948668320": {
+    "id": "2948668320",
+    "title": "字首積，注意 0（Python/Java/C++/Go）",
+    "titleSlug": "qian-zhui-ji-zhu-yi-0pythonjavacgo-by-en-4012",
+    "time": 1794374687337,
+    "problemId": "1352"
   },
   "2949409019": {
     "id": "2949409019",
@@ -13959,7 +13987,7 @@
   },
   "3966322416": {
     "id": "3966322416",
-    "title": "兩種方法：暴力匹配 / KMP（Python/Java/C++/Go）",
+    "title": "只需比較 n+m 個字母，結合 KMP 做到 O(n+m)（Python/Java/C++/Go）",
     "titleSlug": "bao-li-pythonjavacgo-by-endlesscheng-efnn",
     "time": 1794103365246,
     "problemId": "4105"
@@ -15552,6 +15580,13 @@
     "titleSlug": "tu-jie-mei-xiang-ming-bai-yi-zhang-tu-mi-8bn4",
     "time": 1722049546284,
     "problemId": "1227"
+  },
+  "435622291": {
+    "id": "435622291",
+    "title": "兩種方法：LogTrick + 單調堆疊 / 貢獻法，O(n) 時間（Python/Java/C++/Go）",
+    "titleSlug": "logtrick-dan-diao-zhan-pythonjavacgo-by-m1zrb",
+    "time": 1794716709646,
+    "problemId": "4114"
   },
   "435938591": {
     "id": "435938591",
@@ -17715,6 +17750,13 @@
     "titleSlug": "on-yi-ci-bian-li-pythonjavacgo-by-endles-ex38",
     "time": 1791676007549,
     "problemId": "4076"
+  },
+  "920111034": {
+    "id": "920111034",
+    "title": "模擬題，簡潔寫法（Python/Java/C++/Go）",
+    "titleSlug": "mo-ni-ti-jian-ji-xie-fa-pythonjavacgo-by-ikf2",
+    "time": 1794528243709,
+    "problemId": "1357"
   },
   "922086852": {
     "id": "922086852",
