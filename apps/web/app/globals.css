@@ -615,6 +615,67 @@ html[data-reading-width="full"] {
     }
   }
 
+  /* 破關模式 */
+  @keyframes quest-confetti-fall {
+    from {
+      transform: translate3d(0, -10vh, 0) rotate(0deg);
+      opacity: 1;
+    }
+    to {
+      transform: translate3d(var(--drift, 0), 105vh, 0) rotate(var(--spin, 360deg));
+      opacity: 0.2;
+    }
+  }
+
+  .quest-confetti-piece {
+    position: absolute;
+    top: 0;
+    border-radius: 2px;
+    animation-name: quest-confetti-fall;
+    animation-timing-function: cubic-bezier(0.3, 0.6, 0.6, 1);
+    animation-fill-mode: both;
+  }
+
+  @keyframes quest-pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 var(--quest-ring, rgb(59 130 246 / 0.55));
+    }
+    70% {
+      box-shadow: 0 0 0 14px rgb(0 0 0 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgb(0 0 0 / 0);
+    }
+  }
+
+  .quest-node-current {
+    animation: quest-pulse-ring 1.8s ease-out infinite;
+  }
+
+  @keyframes quest-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .quest-bob {
+    animation: quest-bob 1.6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quest-confetti {
+      display: none;
+    }
+    .quest-node-current,
+    .quest-bob {
+      animation: none;
+    }
+  }
+
   .empty-state {
     @apply flex flex-col items-center justify-center rounded-3xl border border-dashed border-primary/30 bg-card/60 px-6 py-16 text-center text-muted-foreground;
   }

@@ -16,6 +16,7 @@ import {
   ChevronRight,
   ExternalLink,
   FolderTree,
+  Gamepad2,
   GraduationCap,
   Layers3,
 } from "lucide-react";
@@ -25,6 +26,7 @@ import { extractImageUrls } from "./dedupe";
 import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { SectionQuickLinks } from "@/features/learning/components/SectionQuickLinks";
 import { SidebarVisibilityButtons } from "@/features/learning/components/SidebarVisibilityButtons";
+import { QuestCelebrations } from "@/features/quest/QuestCelebrations";
 import { getStudyPlanPracticeStats } from "@/features/learning/utils/sectionTree";
 import {
   getMergedStudyPlan,
@@ -68,6 +70,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background font-han">
+      <QuestCelebrations />
       {studyPlan && (
         <div className="page-shell px-3 pt-4 sm:px-4 sm:pt-6 md:px-6 md:pt-8 xl:px-8">
           <div
@@ -193,6 +196,13 @@ function StudyPlan({ plan }: StudyPlanProps) {
                         className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
                       >
                         返回題單列表
+                      </Link>
+                      <Link
+                        href={`/quest/${plan}`}
+                        className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/20 px-3 py-1 font-medium text-white transition-colors hover:bg-white/30"
+                      >
+                        <Gamepad2 className="h-3.5 w-3.5" />
+                        破關模式
                       </Link>
                       {studyPlan.src && (
                         <a

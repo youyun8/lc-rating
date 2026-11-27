@@ -4,6 +4,7 @@ import { BILIBILI_0X3F_SPACE, ROUTERS, STUDYPLANS } from "@/config/constants";
 import {
   BookOpen,
   CalendarRange,
+  Gamepad2,
   CircleUser,
   Code2,
   GraduationCap,
@@ -66,6 +67,12 @@ const navLinks: {
     label: ROUTERS.studyPlans.title,
     match: "/studyplan",
     icon: ListChecks,
+  },
+  {
+    href: ROUTERS.quest.href,
+    label: ROUTERS.quest.title,
+    match: "/quest",
+    icon: Gamepad2,
   },
   {
     href: ROUTERS.tutorials.href,

@@ -10,10 +10,13 @@ import { Input } from "@/components/ui/input";
 import { StatCard } from "@/components/common/StatCard";
 import { SectionDivider } from "@/components/common/SectionDivider";
 import {
+  ArrowRight,
   BookOpen,
   CheckCircle2,
+  Gamepad2,
   Search,
 } from "lucide-react";
+import Link from "next/link";
 import { useState, useMemo } from "react";
 import { useProgressMap } from "@/features/userData";
 import { studyPlanDataMap } from "@/utils/studyPlanIndex";
@@ -120,6 +123,24 @@ function StudyPlanOverview() {
                 </p>
               </div>
             </div>
+
+            <Link
+              href="/quest"
+              className="group flex items-center gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-3.5 transition-colors hover:bg-primary/10 sm:max-w-xl"
+            >
+              <span className="brand-gradient inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white">
+                <Gamepad2 className="h-5 w-5" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold">
+                  試試破關模式
+                </span>
+                <span className="block text-xs text-muted-foreground">
+                  把題單變成關卡地圖：收集星星、打倒魔王、升級稱號
+                </span>
+              </span>
+              <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
+            </Link>
 
             <div className="grid grid-cols-2 gap-3 sm:max-w-xl 2xl:gap-4">
               <StatCard
