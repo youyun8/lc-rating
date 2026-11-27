@@ -115,6 +115,7 @@ export const ROUTERS = {
       [],
     ),
   },
+  quest: { title: "破關", href: `/quest` },
   tutorials: {
     title: "講義",
     href: `/lecture`,
