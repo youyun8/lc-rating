@@ -94,7 +94,7 @@ export const LECTURE_KEYS = [
 ] as const;
 
 export const STUDYPLANS = {
-  adventure: "冒險路線：從面試到競賽 Q4",
+  adventure: "冒險路線：靈茶分類精選",
   q3_handbook: "LeetCode 競賽 Q3 手冊",
   q4_handbook: "LeetCode 競賽 Q4 手冊",
   technical_interview: "技術面試準備",

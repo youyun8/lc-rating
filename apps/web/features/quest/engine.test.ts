@@ -248,3 +248,46 @@ test("world depth 2 makes worlds from each chapter's sections", () => {
     ],
   );
 });
+
+test("with world depth 2, each chapter's first world starts open", () => {
+  const route: StudyPlanData.Root = {
+    id: 0,
+    title: "route",
+    src: null,
+    last_update: null,
+    children: [
+      {
+        id: 1,
+        title: "1. 滑動視窗",
+        children: [
+          {
+            id: 11,
+            title: "1.1 A",
+            children: [leaf(111, "1.1.1 a", [item(1)])],
+          },
+          {
+            id: 12,
+            title: "1.2 B",
+            children: [leaf(121, "1.2.1 b", [item(2)])],
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "2. 二分",
+        children: [
+          {
+            id: 21,
+            title: "2.1 C",
+            children: [leaf(211, "2.1.1 c", [item(3)])],
+          },
+        ],
+      },
+    ],
+  };
+  const map = buildQuestMap("r", route, {}, false, undefined, 2);
+  assert.deepEqual(
+    map.worlds.map((w) => w.unlocked),
+    [true, false, true],
+  );
+});

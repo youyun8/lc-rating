@@ -3,7 +3,7 @@
 import { useStudyPlan } from "@/hooks/useStudyPlan";
 import { useTutorial } from "@/hooks/useTutorial";
 import { useProgressMap } from "@/features/userData";
-import { STUDYPLANS } from "@/config/constants";
+import { HIDDEN_STUDYPLAN_KEYS, STUDYPLANS } from "@/config/constants";
 import {
   studyPlanIcons,
   studyPlanThemes,
@@ -28,8 +28,6 @@ import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { SectionQuickLinks } from "@/features/learning/components/SectionQuickLinks";
 import { SidebarVisibilityButtons } from "@/features/learning/components/SidebarVisibilityButtons";
 import { QuestCelebrations } from "@/features/quest/QuestCelebrations";
-import { adventureChapterFor } from "@/utils/adventurePlan";
-import { sectionAnchor } from "@/utils/sectionAnchor";
 import { getStudyPlanPracticeStats } from "@/features/learning/utils/sectionTree";
 import {
   getMergedStudyPlan,
@@ -49,7 +47,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
   const { studyPlan: fetchedStudyPlan } = useStudyPlan(plan, !mergedPath);
   const { tutorial } = useTutorial(plan);
   const progress = useProgressMap();
-  const adventureChapter = adventureChapterFor(plan);
+  const mergedIntoAdventure = HIDDEN_STUDYPLAN_KEYS.has(plan);
   const studyPlan = mergedPath ? merged?.root : fetchedStudyPlan;
 
   const planTitle =
@@ -231,7 +229,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
                         返回題單列表
                       </Link>
                       <Link
-                        href={`/quest/${adventureChapter ? "adventure" : plan}`}
+                        href={`/quest/${mergedIntoAdventure ? "adventure" : plan}`}
                         className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/20 px-3 py-1 font-medium text-white transition-colors hover:bg-white/30"
                       >
                         <Gamepad2 className="h-3.5 w-3.5" />
@@ -259,19 +257,16 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
       <div className="page-shell px-3 py-5 pb-24 sm:px-4 sm:py-6 md:px-6 md:py-8 md:pb-20 xl:px-8">
         <div className="flex flex-col gap-8">
-          {adventureChapter && (
+          {mergedIntoAdventure && (
             <Link
-              href={`/studyplan/adventure#${sectionAnchor(`${adventureChapter.number}. ${adventureChapter.title}`)}`}
+              href="/studyplan/adventure"
               className="group flex items-center gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-4 text-sm transition-colors hover:bg-primary/10"
             >
               <Compass className="h-5 w-5 shrink-0 text-primary" />
               <span className="min-w-0 flex-1">
-                這份題單已整合進
-                <span className="font-semibold">
-                  「冒險路線」第 {adventureChapter.number} 章：
-                  {adventureChapter.title}
-                </span>
-                ，重複題目只保留第一次出現；進度會自動帶過去。
+                這份題單的題目已整合進
+                <span className="font-semibold">「冒險路線」</span>
+                ，依靈茶山艾府的分類重新排列，講解也搬到對應主題的導讀；進度會自動帶過去。
               </span>
               <ChevronRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
             </Link>

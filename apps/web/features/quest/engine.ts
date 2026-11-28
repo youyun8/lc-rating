@@ -151,6 +151,11 @@ function collectLeafStages(section: StudyPlanData.Section): RawStage[] {
 interface RawWorld {
   title: string;
   stages: RawStage[];
+  /**
+   * Worlds sharing a group unlock one after another; the first world of each
+   * group (a 冒險路線 topic) is always open, so topics are independent.
+   */
+  group?: number;
 }
 
 /**
@@ -202,7 +207,7 @@ function groupWorlds(root: StudyPlanData.Root, worldDepth = 1): RawWorld[] {
   }
 
   const worlds: RawWorld[] = [];
-  for (const chapter of root.children) {
+  for (const [group, chapter] of root.children.entries()) {
     const own: RawStage[] =
       (chapter.problems?.length ?? 0) > 0
         ? [{ section: chapter, items: chapter.problems ?? [] }]
@@ -217,7 +222,7 @@ function groupWorlds(root: StudyPlanData.Root, worldDepth = 1): RawWorld[] {
         world.title =
           untitled === 1 ? chapter.title : `${chapter.title}（${area}）`;
       }
-      worlds.push(world);
+      worlds.push({ ...world, group });
     }
   }
   return worlds;
@@ -247,6 +252,7 @@ export function buildQuestMap(
   const worlds: QuestWorld[] = [];
   const stages: QuestStage[] = [];
   let previousWorld: QuestWorld | null = null;
+  let previousGroup: number | undefined;
 
   for (const [worldIndex, rawWorld] of groupWorlds(
     root,
@@ -280,9 +286,12 @@ export function buildQuestMap(
       ? previousWorld.stages.filter((s) => s.stars > 0).length /
         previousWorld.stages.length
       : 1;
+    const startsGroup =
+      rawWorld.group !== undefined && rawWorld.group !== previousGroup;
     const unlocked =
       freeMode ||
       previousWorld === null ||
+      startsGroup ||
       previousClearedRatio >= WORLD_UNLOCK_RATIO ||
       worldStages.some((s) => s.solved > 0);
 
@@ -327,6 +336,7 @@ export function buildQuestMap(
     };
     for (const stage of worldStages) stage.worldIndex = world.index;
     worlds.push(world);
+    previousGroup = rawWorld.group;
     stages.push(...worldStages);
     previousWorld = world;
   }

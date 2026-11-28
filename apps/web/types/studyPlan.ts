@@ -27,17 +27,6 @@ export interface Section {
   summary?: string;
   children?: Section[];
   problems?: Item[];
-  /**
-   * 冒險路線 only: problems this section originally listed that were already
-   * assigned earlier on the route, with the title of that earlier section.
-   */
-  repeats?: RepeatedItem[];
-}
-
-export interface RepeatedItem {
-  id?: string | number;
-  title: string;
-  firstSeenIn: string;
 }
 
 export interface Root {

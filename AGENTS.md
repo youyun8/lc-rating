@@ -97,13 +97,25 @@ Do not hand-edit the 12 shared JSON files. Synchronize them through
 (`rating_2100`, `q3_handbook`, `q4_handbook`,
 `technical_interview`, `interview_sprint`, and `sorting`) remain local-owned.
 
-`adventure`（冒險路線）is not a JSON file: `utils/adventurePlan.ts` builds it at
-load time from five local plans in route order (`interview_sprint` →
-`technical_interview` → `q3_handbook` → `rating_2100` → `q4_handbook`), keeps
-each problem only at its first appearance, and lists later appearances as
-`repeats`. Those five plans stay the source of truth and their pages still
-build, but `HIDDEN_STUDYPLAN_KEYS` keeps them out of lists, navigation and
-破關模式 (`LISTED_STUDYPLANS`). Edit the source plans, not the merged route.
+`adventure`（冒險路線）is generated, not hand-written. `pnpm adventure:build`
+(in `apps/web/`) runs `scripts/buildAdventurePlan.ts`, which takes every problem
+of the five self-authored plans (`interview_sprint`, `technical_interview`,
+`q3_handbook`, `rating_2100`, `q4_handbook`), places each once in 靈茶山艾府's
+taxonomy (topic → 靈茶 chapter → local 0x3F section), and moves the plans'
+prose into each topic's「導讀」. It writes `public/studyplan/adventure.json`
+(with prose) and `data/adventureTree.json` (problems only, bundled). Re-run it
+after syncing upstream or editing a source plan, and use `pnpm adventure:check`
+to confirm the output is current.
+
+- Taxonomy and our deliberate departures from 靈茶 live in
+  `utils/adventureTaxonomy.ts`: chapter grouping by local section number,
+  dispersed「其他」sections, hand-picked `PROBLEM_HOMES`, the regrouped 貪心
+  「思維題」, and the stage packing/splitting thresholds.
+- A problem goes to the topic its old plan filed it under when 0x3F lists it
+  there, else its earliest 0x3F topic. Each problem shows its old plan as a chip.
+- The five source plans stay the source of truth and their pages still build,
+  but `HIDDEN_STUDYPLAN_KEYS` keeps them out of lists, navigation and 破關模式.
+  Never edit the generated JSON by hand.
 
 Content rules:
 
