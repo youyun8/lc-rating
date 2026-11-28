@@ -2,7 +2,7 @@ import type { StudyPlanData } from "@/types";
 import { fetchApi } from "@/utils/fetch";
 import { useQuery } from "@tanstack/react-query";
 
-export function useStudyPlan(plan: string) {
+export function useStudyPlan(plan: string, enabled = true) {
   const {
     data: studyPlan,
     isPending,
@@ -17,6 +17,7 @@ export function useStudyPlan(plan: string) {
         { cache: "no-store" },
       ).then((res) => res.json()),
     staleTime: 0,
+    enabled,
   });
 
   return { studyPlan, isPending, error };

@@ -1,7 +1,8 @@
 "use client";
 
+import { ProgressRing } from "@/components/common/ProgressRing";
 import { cn } from "@/lib/utils";
-import { Flame, Sparkles, Star, Target } from "lucide-react";
+import { Flame, Star } from "lucide-react";
 
 import type { PlayerLevel, StreakInfo } from "./engine";
 import { DAILY_GOAL } from "./hooks";
@@ -26,8 +27,8 @@ export function StarRow({
           className={cn(
             size,
             i < stars
-              ? "fill-amber-400 text-amber-400"
-              : "fill-transparent text-current opacity-35",
+              ? "fill-gold text-gold"
+              : "fill-transparent text-current opacity-30",
           )}
         />
       ))}
@@ -35,7 +36,42 @@ export function StarRow({
   );
 }
 
-interface PlayerCardProps {
+/** Level number inside an XP ring. */
+export function LevelBadge({
+  level,
+  size = 56,
+  className,
+}: {
+  level: PlayerLevel;
+  size?: number;
+  className?: string;
+}) {
+  return (
+    <ProgressRing
+      value={level.xpIntoLevel / level.xpForNext}
+      size={size}
+      stroke={Math.max(3, size / 14)}
+      color="var(--xp)"
+      trackClassName="stroke-xp-soft"
+      className={className}
+      label={`Lv.${level.level}`}
+    >
+      <span
+        className="flex flex-col items-center leading-none"
+        style={{ fontSize: size * 0.32 }}
+      >
+        <span className="text-[0.45em] font-semibold uppercase tracking-wider text-xp">
+          Lv
+        </span>
+        <span className="font-num font-bold text-foreground">
+          {level.level}
+        </span>
+      </span>
+    </ProgressRing>
+  );
+}
+
+interface PlayerHudProps {
   xp: number;
   level: PlayerLevel;
   streak: StreakInfo;
@@ -44,7 +80,7 @@ interface PlayerCardProps {
   className?: string;
 }
 
-/** Level, XP bar, streak and today's quest in one compact card. */
+/** One-line heads-up display: level, XP, streak, today's quest and stars. */
 export function PlayerCard({
   xp,
   level,
@@ -52,113 +88,108 @@ export function PlayerCard({
   totalStars,
   maxStars,
   className,
-}: PlayerCardProps) {
-  const levelPct = Math.round((level.xpIntoLevel / level.xpForNext) * 100);
+}: PlayerHudProps) {
   const dailyDone = Math.min(streak.solvedToday, DAILY_GOAL);
-  const dailyPct = Math.round((dailyDone / DAILY_GOAL) * 100);
+  const levelPct = (level.xpIntoLevel / level.xpForNext) * 100;
 
   return (
     <div
       className={cn(
-        "grid gap-3 sm:grid-cols-2 xl:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]",
+        "grid gap-px overflow-hidden rounded-2xl border border-border/70 bg-border/70 sm:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))]",
         className,
       )}
     >
-      <div className="rounded-2xl border border-border/60 bg-card p-4 shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="brand-gradient flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl text-white shadow-sm">
-            <span className="text-[10px] font-semibold uppercase leading-none opacity-80">
-              Lv
-            </span>
-            <span className="text-xl font-bold leading-tight tabular-nums">
-              {level.level}
-            </span>
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-base font-bold">{level.title}</p>
-            <p className="text-xs text-muted-foreground tabular-nums">
-              總經驗 {xp.toLocaleString()} XP
+      <div className="flex items-center gap-3.5 bg-card p-3.5 sm:p-4">
+        <LevelBadge level={level} size={54} />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-baseline justify-between gap-2">
+            <p className="truncate font-bold">{level.title}</p>
+            <p className="font-num shrink-0 text-xs text-muted-foreground">
+              {xp.toLocaleString()} XP
             </p>
           </div>
-        </div>
-        <div className="mt-3">
-          <div className="mb-1 flex justify-between text-xs text-muted-foreground tabular-nums">
-            <span>升級進度</span>
-            <span>
-              {level.xpIntoLevel.toLocaleString()} /{" "}
-              {level.xpForNext.toLocaleString()}
-            </span>
-          </div>
-          <div className="h-2.5 overflow-hidden rounded-full bg-muted">
+          <div className="mt-2 h-2 overflow-hidden rounded-full bg-xp-soft">
             <div
-              className="brand-gradient h-full rounded-full transition-all duration-700"
+              className="h-full rounded-full bg-xp transition-[width] duration-700"
               style={{ width: `${levelPct}%` }}
             />
           </div>
+          <p className="font-num mt-1 text-[11px] text-muted-foreground">
+            再 {(level.xpForNext - level.xpIntoLevel).toLocaleString()} XP 升到
+            Lv.{level.level + 1}
+          </p>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-border/60 bg-card p-4 shadow-sm">
-        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+      <div className="grid grid-cols-3 gap-px sm:contents">
+        <HudCell
+          label="連續天數"
+          hint={
+            streak.activeToday
+              ? "今天已點燃"
+              : streak.streak > 0
+                ? "今天 AC 一題延續"
+                : "AC 一題開始累積"
+          }
+        >
           <Flame
             className={cn(
-              "h-4 w-4",
-              streak.activeToday ? "text-orange-500" : "text-muted-foreground",
+              "h-6 w-6",
+              streak.activeToday
+                ? "fill-streak/25 text-streak"
+                : "text-muted-foreground/60",
             )}
           />
-          連續天數
-        </div>
-        <p className="mt-2 text-2xl font-semibold tabular-nums">
-          {streak.streak}
-          <span className="ml-1 text-sm font-normal text-muted-foreground">
-            天
-          </span>
-        </p>
-        <p className="mt-1 text-xs text-muted-foreground">
-          {streak.activeToday
-            ? "今天已點燃火焰 🔥"
-            : streak.streak > 0
-              ? "今天 AC 一題就能延續！"
-              : "今天 AC 一題開始累積"}
-        </p>
-      </div>
+          <span className="font-num text-2xl font-bold">{streak.streak}</span>
+          <span className="text-xs text-muted-foreground">天</span>
+        </HudCell>
 
-      <div className="rounded-2xl border border-border/60 bg-card p-4 shadow-sm">
-        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-          <Target className="h-4 w-4 text-emerald-500" />
-          今日任務
-        </div>
-        <p className="mt-2 text-2xl font-semibold tabular-nums">
-          {dailyDone}
-          <span className="text-sm font-normal text-muted-foreground">
-            {" "}
-            / {DAILY_GOAL} 題
-          </span>
-        </p>
-        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
-          <div
-            className="h-full rounded-full bg-emerald-500 transition-all duration-700"
-            style={{ width: `${dailyPct}%` }}
+        <HudCell
+          label="今日任務"
+          hint={
+            dailyDone >= DAILY_GOAL ? "完成！明天見" : `AC ${DAILY_GOAL} 題`
+          }
+        >
+          <ProgressRing
+            value={dailyDone / DAILY_GOAL}
+            size={30}
+            stroke={4}
+            color="var(--success)"
           />
-        </div>
-      </div>
-
-      <div className="rounded-2xl border border-border/60 bg-card p-4 shadow-sm">
-        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-          <Sparkles className="h-4 w-4 text-amber-500" />
-          收集星星
-        </div>
-        <p className="mt-2 text-2xl font-semibold tabular-nums">
-          {totalStars}
-          <span className="text-sm font-normal text-muted-foreground">
-            {" "}
-            / {maxStars}
+          <span className="font-num text-2xl font-bold">{dailyDone}</span>
+          <span className="font-num text-xs text-muted-foreground">
+            /{DAILY_GOAL}
           </span>
-        </p>
-        <p className="mt-1 text-xs text-muted-foreground">
-          每關完成 ⅓、⅔、全部各得一星
-        </p>
+        </HudCell>
+
+        <HudCell label="星星" hint="⅓・⅔・全部 AC 各一顆">
+          <Star className="h-6 w-6 fill-gold text-gold" />
+          <span className="font-num text-2xl font-bold">{totalStars}</span>
+          <span className="font-num text-xs text-muted-foreground">
+            /{maxStars}
+          </span>
+        </HudCell>
       </div>
+    </div>
+  );
+}
+
+function HudCell({
+  label,
+  hint,
+  children,
+}: {
+  label: string;
+  hint: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col justify-center bg-card px-3 py-3 sm:px-4">
+      <p className="text-[11px] font-medium text-muted-foreground">{label}</p>
+      <div className="mt-1 flex items-center gap-1.5">{children}</div>
+      <p className="mt-0.5 hidden truncate text-[11px] text-muted-foreground sm:block">
+        {hint}
+      </p>
     </div>
   );
 }

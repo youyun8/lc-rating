@@ -1,11 +1,11 @@
-import { STUDYPLANS } from "@/config/constants";
+import { LISTED_STUDYPLANS, STUDYPLANS } from "@/config/constants";
 import type { Metadata } from "next";
 import { lazy } from "react";
 
 const StageMap = lazy(() => import("@/features/quest/StageMap"));
 
 export async function generateStaticParams() {
-  return Object.keys(STUDYPLANS).map((plan) => ({ plan }));
+  return Object.keys(LISTED_STUDYPLANS).map((plan) => ({ plan }));
 }
 
 interface PageProps {

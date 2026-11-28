@@ -4,6 +4,7 @@ import test from "node:test";
 import type { StudyPlanData } from "@/types";
 
 import {
+  activityCalendar,
   buildQuestMap,
   computeAchievements,
   computeStreak,
@@ -215,4 +216,100 @@ test("suggestion skips premium problems when a free one is left", () => {
   };
   const map = buildQuestMap("p", plan, {});
   assert.equal(nextProblem(map.stages[0]!)?.id, "2");
+});
+
+test("world depth 2 makes worlds from each chapter's sections", () => {
+  const route: StudyPlanData.Root = {
+    id: 0,
+    title: "route",
+    src: null,
+    last_update: null,
+    children: [
+      {
+        id: 1,
+        title: "1. 章一",
+        children: [
+          {
+            id: 11,
+            title: "1.1 A",
+            children: [leaf(111, "1.1.1 x", [item(1)])],
+          },
+          leaf(12, "1.2 B", [item(2)]),
+          leaf(13, "1.3 C", [item(3)]),
+        ],
+      },
+    ],
+  };
+  const map = buildQuestMap("r", route, {}, false, undefined, 2);
+  assert.deepEqual(
+    map.worlds.map((w) => [w.title, w.stages.length]),
+    [
+      ["1.1 A", 1],
+      ["1. 章一", 2],
+    ],
+  );
+});
+
+test("with world depth 2, each chapter's first world starts open", () => {
+  const route: StudyPlanData.Root = {
+    id: 0,
+    title: "route",
+    src: null,
+    last_update: null,
+    children: [
+      {
+        id: 1,
+        title: "1. 滑動視窗",
+        children: [
+          {
+            id: 11,
+            title: "1.1 A",
+            children: [leaf(111, "1.1.1 a", [item(1)])],
+          },
+          {
+            id: 12,
+            title: "1.2 B",
+            children: [leaf(121, "1.2.1 b", [item(2)])],
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "2. 二分",
+        children: [
+          {
+            id: 21,
+            title: "2.1 C",
+            children: [leaf(211, "2.1.1 c", [item(3)])],
+          },
+        ],
+      },
+    ],
+  };
+  const map = buildQuestMap("r", route, {}, false, undefined, 2);
+  assert.deepEqual(
+    map.worlds.map((w) => w.unlocked),
+    [true, false, true],
+  );
+});
+
+test("regions group worlds by chapter for depth-2 plans", () => {
+  const flat = buildQuestMap("p", nestedPlan, {});
+  assert.equal(flat.regions.length, 1);
+  assert.equal(flat.regions[0]!.worlds.length, flat.worlds.length);
+});
+
+test("activity calendar counts solves per day and ends today", () => {
+  const now = new Date(2026, 10, 28, 15).getTime(); // a Saturday
+  const day = 24 * 60 * 60 * 1000;
+  const days = activityCalendar(
+    { a: "SOLVED", b: "SOLVED", c: "TRIED" },
+    { a: now, b: now - day, c: now },
+    2,
+    now,
+  );
+  assert.equal(days.length, 7 + 7);
+  assert.equal(days[0]!.date.getDay(), 0);
+  assert.equal(days.at(-1)!.solved, 1);
+  assert.equal(days.at(-2)!.solved, 1);
 });

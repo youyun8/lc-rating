@@ -1,6 +1,6 @@
 "use client";
 
-import { STUDYPLANS } from "@/config/constants";
+import { ADVENTURE_KEY, LISTED_STUDYPLANS } from "@/config/constants";
 import { useProblems } from "@/hooks/useProblems";
 import { useProgressStore } from "@/hooks/useProgress";
 import type { ProblemMap } from "@/types";
@@ -18,7 +18,10 @@ import {
 } from "./engine";
 import { useQuestStore } from "./store";
 
-export const QUEST_PLAN_KEYS = Object.keys(STUDYPLANS);
+export const QUEST_PLAN_KEYS = Object.keys(LISTED_STUDYPLANS);
+
+/** Plans whose top level is a list of chapters rather than worlds. */
+const WORLD_DEPTH: Record<string, number> = { [ADVENTURE_KEY]: 2 };
 
 /** Quest maps for every plan, rebuilt whenever progress changes. */
 export function useQuestMaps(): Record<string, QuestMap> {
@@ -63,6 +66,7 @@ function buildAllMaps(
       progress,
       freeMode,
       ratingOf,
+      WORLD_DEPTH[key] ?? 1,
     );
   }
   lastBuild = { progress, freeMode, problemMap, maps };

@@ -16,7 +16,9 @@
     "test:unit": "tsx --test \"./**/*.test.ts\"",
     "validate:content": "tsx ./scripts/validateContentFormatting.mjs",
     "book:pdf": "tsx ./scripts/book/buildLectureBook.ts",
-    "book:figures": "tsx ./scripts/book/renderFigureGallery.ts"
+    "book:figures": "tsx ./scripts/book/renderFigureGallery.ts",
+    "adventure:build": "tsx ./scripts/buildAdventurePlan.ts",
+    "adventure:check": "tsx ./scripts/buildAdventurePlan.ts --check"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^1.0.28",

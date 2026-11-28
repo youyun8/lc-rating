@@ -12,6 +12,7 @@ import {
   Type,
   Trees,
   Trophy,
+  Compass,
   Target,
   Medal,
   ArrowDownWideNarrow,
@@ -25,6 +26,7 @@ export interface StudyPlanTheme {
 }
 
 export const studyPlanIcons: Record<string, LucideIcon> = {
+  adventure: Compass,
   q3_handbook: Target,
   q4_handbook: Medal,
   technical_interview: Cpu,
@@ -51,6 +53,11 @@ export const defaultTheme: StudyPlanTheme = {
 };
 
 export const studyPlanThemes: Record<string, StudyPlanTheme> = {
+  adventure: {
+    gradient: "linear-gradient(135deg, #0f766e 0%, #7c3aed 100%)",
+    accent: "#0f766e",
+    accentDark: "#115e59",
+  },
   q3_handbook: {
     gradient: "linear-gradient(135deg, #0f766e 0%, #b45309 100%)",
     accent: "#0f766e",

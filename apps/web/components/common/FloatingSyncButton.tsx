@@ -18,7 +18,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const wrapperClass =
-  "fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-[9999] flex flex-col items-end gap-2 pointer-events-auto sm:right-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]";
+  "fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom)+var(--mobile-tabbar-height))] z-[9999] flex flex-col items-end gap-2 pointer-events-auto sm:right-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom)+var(--mobile-tabbar-height))]";
 
 function formatLastSynced(timestamp: number | null) {
   if (!timestamp) return "尚未同步";

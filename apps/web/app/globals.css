@@ -9,6 +9,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-han);
   --font-mono: monospace;
+  /* Numbers in stats and the game layer: tabular JetBrains Mono. */
+  --font-num: "JetBrains Mono", ui-monospace, monospace;
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-ink: var(--gold-ink);
+  --color-xp: var(--xp);
+  --color-xp-soft: var(--xp-soft);
+  --color-streak: var(--streak);
+  --color-streak-soft: var(--streak-soft);
   /* Code snippets (blocks, inline code, solution editor) use Ubuntu Mono. */
   --font-code: "Ubuntu Mono", monospace;
   /* 與 competitive-programming-handbook 相同的字體堆疊：拉丁字用 Inter（數字、
@@ -115,7 +127,18 @@
   --sidebar-accent-foreground: #075766;
   --sidebar-border: #d7e0e7;
   --sidebar-ring: #3d7eff;
-  --navbar-height: 64px;
+  --navbar-height: 56px;
+  /* 遊戲層色票：金（星星／魔王）、紫（經驗值）、橘（連續天數）。與主題色分離，
+     使用者換主題色時遊戲元素仍保持一致的語意。 */
+  --gold: #e9a100;
+  --gold-soft: #fff4d6;
+  --gold-ink: #8a5a00;
+  --xp: #7c3aed;
+  --xp-soft: #efe7ff;
+  --streak: #f2620f;
+  --streak-soft: #ffeadb;
+  --map-dot: rgb(23 33 43 / 0.07);
+  --mobile-tabbar-height: 0px;
   --lecture-reading-width: 100%;
   /* 導航欄高度 */
 }
@@ -183,6 +206,20 @@
   --sidebar-accent-foreground: #8edce7;
   --sidebar-border: #33414d;
   --sidebar-ring: #8ab4ff;
+  --gold: #ffc53d;
+  --gold-soft: #3a2c0a;
+  --gold-ink: #ffd877;
+  --xp: #b794ff;
+  --xp-soft: #2a1f45;
+  --streak: #ff8a4c;
+  --streak-soft: #3d2212;
+  --map-dot: rgb(231 237 242 / 0.06);
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --mobile-tabbar-height: 64px;
+  }
 }
 
 /* 主題色彩：使用者可在「站點設定 → 主題色彩」換掉全站主色，選擇會被寫進
@@ -527,17 +564,23 @@ html[data-reading-width="full"] {
     color: transparent;
   }
 
-  .brand-glow::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(
-      80% 60% at 50% 0%,
-      color-mix(in oklab, var(--brand-start) 14%, transparent),
-      transparent 70%
-    );
+  /* Page heroes are open headers on the page background rather than boxed
+     cards: element + class specificity beats the Tailwind classes each page
+     still carries (border, bg, shadow, padding). */
+  section.brand-glow,
+  div.brand-glow {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  section.brand-glow > div,
+  div.brand-glow > div {
+    padding-inline: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.25rem;
   }
 
   .brand-glow > * {
@@ -546,7 +589,7 @@ html[data-reading-width="full"] {
   }
 
   .stat-card {
-    @apply relative overflow-hidden rounded-2xl border border-border/60 bg-card p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md;
+    @apply relative overflow-hidden rounded-xl border border-border/70 bg-card px-3.5 py-3 transition-colors duration-200 hover:border-primary/40;
   }
 
   .stat-card::after {
@@ -565,7 +608,7 @@ html[data-reading-width="full"] {
   }
 
   .stat-card-chip {
-    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-200;
+    @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors duration-200;
   }
 
   .stat-card:hover .stat-card-chip {
@@ -581,17 +624,7 @@ html[data-reading-width="full"] {
   }
 
   .page-title {
-    @apply flex items-center gap-3 font-serif text-3xl font-semibold tracking-tight text-foreground sm:text-4xl;
-  }
-
-  .page-title::before {
-    content: "";
-    @apply h-7 w-1.5 shrink-0 rounded-full sm:h-8;
-    background-image: linear-gradient(
-      180deg,
-      var(--brand-start, #2a9db1),
-      var(--brand-mid, #0c7183)
-    );
+    @apply flex items-center gap-2.5 text-2xl font-bold tracking-tight text-foreground sm:text-3xl;
   }
 
   @keyframes motion-rise {
@@ -613,6 +646,74 @@ html[data-reading-width="full"] {
     .motion-rise {
       animation: none;
     }
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .font-num {
+    font-family: var(--font-num);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* 破關地圖的點陣底紋 */
+  .quest-map-bg {
+    background-image: radial-gradient(var(--map-dot) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
+
+  .quest-path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @keyframes quest-pop {
+    0% {
+      transform: scale(0.6);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .quest-pop {
+    animation: quest-pop 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes quest-shine {
+    from {
+      transform: translateX(-120%) skewX(-20deg);
+    }
+    to {
+      transform: translateX(220%) skewX(-20deg);
+    }
+  }
+
+  .quest-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quest-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.45), transparent);
+    animation: quest-shine 2.8s ease-in-out infinite;
+    pointer-events: none;
   }
 
   /* 破關模式 */
@@ -671,7 +772,9 @@ html[data-reading-width="full"] {
       display: none;
     }
     .quest-node-current,
-    .quest-bob {
+    .quest-bob,
+    .quest-pop,
+    .quest-shine::after {
       animation: none;
     }
   }
