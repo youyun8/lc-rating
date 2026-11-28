@@ -80,12 +80,31 @@ SECTION_ROUTE_OVERRIDES: dict[
     "binary_search": {
         ("一、二分查找",):
             "find-first-and-last-position-of-element-in-sorted-array",
+        # Overlap ties between 求最小／求最大／第 K 小 flip as upstream adds
+        # problems; pin the chapter intro to where 二分答案 starts.
+        ("二、二分答案",): ("3. 求最小",),
+    },
+    "data_structure": {
+        ("九、根号算法", "§9.1 分块"): (
+            "11. 根號演算法",
+            "11.1 根號分解（Sqrt Decomposition）",
+        ),
+    },
+    # Upstream closes these plans with a prose-only Q&A / exercise node.
+    # Keep it in the same place: the last local section.
+    "greedy": {
+        ("答疑",): ("34. 其他",),
     },
     "grid": {
         ("介绍", "思考题"): ("1. 網格圖 DFS",),
+        ("思考题",): ("4. 綜合應用",),
+    },
+    "sliding_window": {
+        ("思考",): ("22. 分組迴圈",),
     },
     "string": {
         ("介绍", "六、字典树"): ("6. 字典樹",),
+        ("六、字典树",): ("6. 字典樹",),
     },
 }
 
@@ -738,6 +757,9 @@ _BANNER_IMG_TAG_RE = re.compile(r"<img\b[^>]*(?:題單|题单)[^>]*>\n*")
 _DANGLING_TEMPLATE_RE = re.compile(r"\n*[^\n]*模板[^\n]*[：:]\s*\Z")
 
 
+_UNESCAPED_TEXTTT_HASH_RE = re.compile(r"\\texttt\{#\}")
+
+
 def sanitize_summary(text: str) -> str:
     """Strip upstream keyword-spam banners and dangling template labels."""
     if not text:
@@ -745,6 +767,8 @@ def sanitize_summary(text: str) -> str:
     cleaned = _BANNER_IMAGE_RE.sub("", text)
     cleaned = _BANNER_IMG_TAG_RE.sub("", cleaned)
     cleaned = _DANGLING_TEMPLATE_RE.sub("", cleaned)
+    # KaTeX treats a bare "#" as a macro parameter; upstream writes \texttt{#}.
+    cleaned = _UNESCAPED_TEXTTT_HASH_RE.sub(r"\\texttt{\\#}", cleaned)
     if cleaned == text:
         # Preserve untouched prose byte-for-byte; only normalize whitespace
         # around content we actually removed.

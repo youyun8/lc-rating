@@ -443,6 +443,13 @@ class SanitizeSummaryTests(unittest.TestCase):
         )
         self.assertEqual(sync.sanitize_summary(text), "正文")
 
+    def test_escapes_hash_inside_texttt_for_katex(self) -> None:
+        text = "$\\textit{p} + \\texttt{#} + \\textit{s}$"
+        self.assertEqual(
+            sync.sanitize_summary(text),
+            "$\\textit{p} + \\texttt{\\#} + \\textit{s}$",
+        )
+
     def test_removes_banner_when_alt_is_simplified(self) -> None:
         text = "![位運算题单 力扣](https://pic.leetcode.cn/and.png)\n\n正文"
         self.assertEqual(sync.sanitize_summary(text), "正文")
