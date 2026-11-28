@@ -297,7 +297,7 @@ const ProblemList = React.memo(
       return (
         <li
           key={`${problem.slug}-${problemId}`}
-          className="group/row grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-start gap-x-2.5 gap-y-2 px-4 py-3 transition-colors hover:bg-muted/30 sm:px-5 lg:items-center lg:gap-x-3"
+          className="group/row grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-start gap-x-2.5 gap-y-2 px-4 py-3 transition-colors hover:bg-muted/30 sm:px-5 md:items-center md:gap-x-3"
         >
           {problemId ? (
             <button
@@ -314,7 +314,7 @@ const ProblemList = React.memo(
                     : "標記為已解題"
               }
               className={cn(
-                "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-all lg:mt-0",
+                "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-all md:mt-0",
                 solved
                   ? "border-success bg-success text-white"
                   : "border-border text-transparent hover:border-success hover:text-success",
@@ -428,7 +428,7 @@ const ProblemList = React.memo(
           </div>
 
           <span
-            className="font-num mt-1 w-12 shrink-0 text-right text-sm font-semibold lg:mt-0"
+            className="font-num mt-1 w-12 shrink-0 text-right text-sm font-semibold md:mt-0"
             style={problem.score ? { color: info.color } : undefined}
             title={problem.score ? "競賽難度分" : unratedLabel}
           >
@@ -440,9 +440,9 @@ const ProblemList = React.memo(
           </span>
 
           {problemId && (
-            // Phones fold the per-problem tools behind 「⋯」 to keep rows short.
+            // Phones fold the per-problem tools behind 「⋯」; tablets and up show them inline.
             <label
-              className="mt-0.5 flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground hover:bg-muted lg:hidden"
+              className="mt-0.5 flex h-7 w-7 cursor-pointer items-center justify-center rounded-lg text-muted-foreground hover:bg-muted md:hidden"
               aria-label="更多操作"
             >
               <input type="checkbox" className="sr-only" />
@@ -451,7 +451,7 @@ const ProblemList = React.memo(
           )}
 
           {problemId ? (
-            <div className="col-start-2 col-end-5 hidden items-center gap-1.5 group-has-[input:checked]/row:flex lg:col-start-auto lg:col-end-auto lg:flex">
+            <div className="col-start-2 col-end-5 hidden items-center gap-1.5 group-has-[input:checked]/row:flex md:col-start-auto md:col-end-auto md:flex">
               <ProblemNoteButton
                 problemId={problemId}
                 title={problem.title}
@@ -464,7 +464,7 @@ const ProblemList = React.memo(
               />
             </div>
           ) : (
-            <span className="hidden lg:block" />
+            <span className="hidden md:block" />
           )}
         </li>
       );
