@@ -1061,6 +1061,11 @@ def merge_plan(
         stats,
         overrides,
     )
+    # The page shows last_update as 「更新於」; follow upstream so readers can
+    # tell the plan is current.
+    upstream_update = upstream_root.get("last_update")
+    if isinstance(upstream_update, str) and upstream_update:
+        merged["last_update"] = upstream_update
     return MergeResult(data=merged, changed=merged != local_root, stats=stats)
 
 

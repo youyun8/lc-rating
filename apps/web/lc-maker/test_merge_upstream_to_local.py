@@ -443,6 +443,15 @@ class SanitizeSummaryTests(unittest.TestCase):
         )
         self.assertEqual(sync.sanitize_summary(text), "正文")
 
+    def test_follows_upstream_last_update(self) -> None:
+        local = {"id": 1, "title": "t", "last_update": "2026-02-24",
+                 "children": []}
+        upstream = {"id": 1, "title": "t", "last_update": "2026-11-21",
+                    "children": []}
+        result = sync.merge_plan(local, upstream, "graph")
+        self.assertEqual(result.data["last_update"], "2026-11-21")
+        self.assertTrue(result.changed)
+
     def test_escapes_hash_inside_texttt_for_katex(self) -> None:
         text = "$\\textit{p} + \\texttt{#} + \\textit{s}$"
         self.assertEqual(
