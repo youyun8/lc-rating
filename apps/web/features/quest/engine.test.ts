@@ -216,3 +216,35 @@ test("suggestion skips premium problems when a free one is left", () => {
   const map = buildQuestMap("p", plan, {});
   assert.equal(nextProblem(map.stages[0]!)?.id, "2");
 });
+
+test("world depth 2 makes worlds from each chapter's sections", () => {
+  const route: StudyPlanData.Root = {
+    id: 0,
+    title: "route",
+    src: null,
+    last_update: null,
+    children: [
+      {
+        id: 1,
+        title: "1. 章一",
+        children: [
+          {
+            id: 11,
+            title: "1.1 A",
+            children: [leaf(111, "1.1.1 x", [item(1)])],
+          },
+          leaf(12, "1.2 B", [item(2)]),
+          leaf(13, "1.3 C", [item(3)]),
+        ],
+      },
+    ],
+  };
+  const map = buildQuestMap("r", route, {}, false, undefined, 2);
+  assert.deepEqual(
+    map.worlds.map((w) => [w.title, w.stages.length]),
+    [
+      ["1.1 A", 1],
+      ["1. 章一", 2],
+    ],
+  );
+});

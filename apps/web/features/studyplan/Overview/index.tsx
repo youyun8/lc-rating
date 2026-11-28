@@ -1,10 +1,9 @@
 "use client";
 
 import {
+  ADVENTURE_KEY,
   CUSTOM_STUDYPLAN_KEYS,
-  INTERVIEW_PREP_KEYS,
-  LEARNING_PATH_KEYS,
-  STUDYPLANS,
+  LISTED_STUDYPLANS,
 } from "@/config/constants";
 import { Input } from "@/components/ui/input";
 import { StatCard } from "@/components/common/StatCard";
@@ -35,7 +34,7 @@ function StudyPlanOverview() {
 
   const planStats = useMemo(() => {
     const stats: Record<string, PlanSummary> = {};
-    for (const planKey of Object.keys(STUDYPLANS)) {
+    for (const planKey of Object.keys(LISTED_STUDYPLANS)) {
       stats[planKey] = getPlanSummary(studyPlanDataMap[planKey], progress);
     }
     return stats;
@@ -60,7 +59,7 @@ function StudyPlanOverview() {
   const planSearchMatches = useMemo(() => {
     if (!trimmedQuery) return {};
 
-    return Object.entries(STUDYPLANS).reduce<
+    return Object.entries(LISTED_STUDYPLANS).reduce<
       Record<string, StudyPlanSearchMatch[]>
     >((acc, [key, title]) => {
       const data = studyPlanDataMap[key];
@@ -70,7 +69,7 @@ function StudyPlanOverview() {
   }, [trimmedQuery]);
 
   const filteredPlans = useMemo(() => {
-    return Object.entries(STUDYPLANS).filter(([key]) => {
+    return Object.entries(LISTED_STUDYPLANS).filter(([key]) => {
       if (trimmedQuery) {
         const matches = planSearchMatches[key];
         if (!matches || matches.length === 0) return false;
@@ -84,7 +83,7 @@ function StudyPlanOverview() {
   }, [trimmedQuery, filter, planSearchMatches, planStats]);
 
   const counts = useMemo(() => {
-    const all = Object.keys(STUDYPLANS).length;
+    const all = Object.keys(LISTED_STUDYPLANS).length;
     const inProgress = Object.values(planStats).filter(
       (s) => s.pct > 0 && s.pct < 100,
     ).length;
@@ -103,12 +102,7 @@ function StudyPlanOverview() {
   const originalPlans = filteredPlans.filter(
     ([key]) => !CUSTOM_STUDYPLAN_KEYS.has(key),
   );
-  const learningPathPlans = filteredPlans.filter(([key]) =>
-    LEARNING_PATH_KEYS.has(key),
-  );
-  const interviewPrepPlans = filteredPlans.filter(([key]) =>
-    INTERVIEW_PREP_KEYS.has(key),
-  );
+  const adventurePlans = filteredPlans.filter(([key]) => key === ADVENTURE_KEY);
 
   return (
     <div className="min-h-screen bg-background font-han">
@@ -217,9 +211,8 @@ function StudyPlanOverview() {
           <>
             {(
               [
+                ["冒險路線", adventurePlans],
                 ["0x3F 題單", originalPlans],
-                ["學習路線", learningPathPlans],
-                ["面試準備", interviewPrepPlans],
               ] as const
             ).map(
               ([label, plans]) =>

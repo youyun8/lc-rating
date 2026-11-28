@@ -54,9 +54,22 @@ export const INTERVIEW_PREP_KEYS: ReadonlySet<string> = new Set([
   "technical_interview",
 ]);
 
+/** 冒險路線: the five self-authored plans merged into one route. */
+export const ADVENTURE_KEY = "adventure";
+
+/**
+ * Plans folded into 冒險路線. Their pages still build so old links and the
+ * 集訓 references keep working, but they're no longer listed anywhere.
+ */
+export const HIDDEN_STUDYPLAN_KEYS: ReadonlySet<string> = new Set([
+  ...LEARNING_PATH_KEYS,
+  ...INTERVIEW_PREP_KEYS,
+]);
+
 export const CUSTOM_STUDYPLAN_KEYS: ReadonlySet<string> = new Set([
   ...LEARNING_PATH_KEYS,
   ...INTERVIEW_PREP_KEYS,
+  ADVENTURE_KEY,
 ]);
 
 /**
@@ -81,6 +94,7 @@ export const LECTURE_KEYS = [
 ] as const;
 
 export const STUDYPLANS = {
+  adventure: "冒險路線：從面試到競賽 Q4",
   q3_handbook: "LeetCode 競賽 Q3 手冊",
   q4_handbook: "LeetCode 競賽 Q4 手冊",
   technical_interview: "技術面試準備",
@@ -101,13 +115,18 @@ export const STUDYPLANS = {
   trees: "樹和二元樹",
 };
 
+/** Plans shown in lists, navigation and 破關模式 (excludes merged-away plans). */
+export const LISTED_STUDYPLANS = Object.fromEntries(
+  Object.entries(STUDYPLANS).filter(([key]) => !HIDDEN_STUDYPLAN_KEYS.has(key)),
+) as Record<string, string>;
+
 export const ROUTERS = {
   contest: { title: "競賽", href: `/contest` },
   problemset: { title: "題庫", href: `/problemset` },
   studyPlans: {
     title: "題單",
     href: `/studyplan`,
-    children: Object.entries(STUDYPLANS).reduce(
+    children: Object.entries(LISTED_STUDYPLANS).reduce(
       (acc: { title: string; href: string }[], [key, title]) => [
         ...acc,
         { title, href: `/studyplan/${key}` },

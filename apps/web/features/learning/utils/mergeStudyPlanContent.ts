@@ -1,5 +1,11 @@
 import { studyPlanContentMap } from "@/features/lecture/content";
-import { studyPlanDataMap } from "@/utils/studyPlanIndex";
+import { adventureRawSources, studyPlanDataMap } from "@/utils/studyPlanIndex";
+import {
+  ADVENTURE_CHAPTERS,
+  ADVENTURE_PLAN_KEY,
+  ADVENTURE_SUMMARY,
+  buildAdventurePlan,
+} from "@/utils/adventurePlan";
 import type { StudyPlanData, TutorialData } from "@/types";
 
 /**
@@ -105,6 +111,7 @@ export interface MergedStudyPlan {
  * a self-authored learning path; otherwise returns the plain studyplan tree.
  */
 export function getMergedStudyPlan(planKey: string): MergedStudyPlan | null {
+  if (planKey === ADVENTURE_PLAN_KEY) return getMergedAdventurePlan();
   const base = studyPlanDataMap[planKey];
   if (!base) return null;
 
@@ -131,7 +138,29 @@ export function getMergedStudyPlan(planKey: string): MergedStudyPlan | null {
   };
 }
 
+let adventureCache: MergedStudyPlan | null = null;
+
+/** 冒險路線 with every chapter's 講義 prose folded in. */
+function getMergedAdventurePlan(): MergedStudyPlan {
+  if (adventureCache) return adventureCache;
+  const sources = ADVENTURE_CHAPTERS.map(({ key }) => {
+    const merged = getMergedStudyPlan(key);
+    return {
+      key,
+      root: merged?.root ?? studyPlanDataMap[key]!,
+      summary: merged?.summary,
+    };
+  });
+  adventureCache = {
+    root: buildAdventurePlan(sources, adventureRawSources),
+    summary: ADVENTURE_SUMMARY,
+  };
+  return adventureCache;
+}
+
 /** Whether a plan carries merged 講義 prose (i.e. has no standalone 講義 page). */
 export function isMergedLearningPath(planKey: string): boolean {
-  return Boolean(studyPlanContentMap[planKey]);
+  return (
+    planKey === ADVENTURE_PLAN_KEY || Boolean(studyPlanContentMap[planKey])
+  );
 }

@@ -1,4 +1,9 @@
 import type { StudyPlanData } from "@/types";
+import {
+  ADVENTURE_CHAPTERS,
+  ADVENTURE_PLAN_KEY,
+  buildAdventurePlan,
+} from "@/utils/adventurePlan";
 
 import technicalInterviewData from "@/public/studyplan/technical_interview.json";
 import rating2100Data from "@/public/studyplan/rating_2100.json";
@@ -39,3 +44,11 @@ export const studyPlanDataMap: Record<string, StudyPlanData.Root> = {
   string: stringData as StudyPlanData.Root,
   trees: treesData as StudyPlanData.Root,
 };
+
+/** 冒險路線 is assembled from the five self-authored plans at load time. */
+export const adventureRawSources = ADVENTURE_CHAPTERS.map(({ key }) => ({
+  key,
+  root: studyPlanDataMap[key]!,
+}));
+
+studyPlanDataMap[ADVENTURE_PLAN_KEY] = buildAdventurePlan(adventureRawSources);

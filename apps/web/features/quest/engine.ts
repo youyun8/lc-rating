@@ -153,7 +153,11 @@ interface RawWorld {
   stages: RawStage[];
 }
 
-function groupWorlds(root: StudyPlanData.Root): RawWorld[] {
+/**
+ * Group sections into worlds. Non-leaf sections become worlds; runs of
+ * neighbouring leaf sections are bundled into areas of LEAF_WORLD_SIZE.
+ */
+function groupLevel(sections: StudyPlanData.Section[]): RawWorld[] {
   const worlds: RawWorld[] = [];
   let pendingLeaves: RawStage[] = [];
 
@@ -167,26 +171,56 @@ function groupWorlds(root: StudyPlanData.Root): RawWorld[] {
     pendingLeaves = [];
   };
 
-  for (const top of root.children) {
-    const hasChildren = (top.children?.length ?? 0) > 0;
+  for (const section of sections) {
+    const hasChildren = (section.children?.length ?? 0) > 0;
     if (!hasChildren) {
       // A plan made of flat leaf sections (e.g. 滑動視窗) would otherwise be
       // one world per stage; bundle neighbours into areas instead.
-      if ((top.problems?.length ?? 0) > 0) {
-        pendingLeaves.push({ section: top, items: top.problems ?? [] });
+      if ((section.problems?.length ?? 0) > 0) {
+        pendingLeaves.push({ section, items: section.problems ?? [] });
       }
       continue;
     }
     flushLeaves();
-    const stages = collectLeafStages(top);
-    if (stages.length > 0) worlds.push({ title: top.title, stages });
+    const stages = collectLeafStages(section);
+    if (stages.length > 0) worlds.push({ title: section.title, stages });
   }
   flushLeaves();
+  return worlds;
+}
 
-  return worlds.map((world, index) => ({
-    ...world,
-    title: world.title || `第 ${index + 1} 區`,
-  }));
+/**
+ * `worldDepth` 2 treats the top level as chapters (e.g. 冒險路線) and makes
+ * worlds out of each chapter's sections instead of one giant world per chapter.
+ */
+function groupWorlds(root: StudyPlanData.Root, worldDepth = 1): RawWorld[] {
+  if (worldDepth <= 1) {
+    return groupLevel(root.children).map((world, index) => ({
+      ...world,
+      title: world.title || `第 ${index + 1} 區`,
+    }));
+  }
+
+  const worlds: RawWorld[] = [];
+  for (const chapter of root.children) {
+    const own: RawStage[] =
+      (chapter.problems?.length ?? 0) > 0
+        ? [{ section: chapter, items: chapter.problems ?? [] }]
+        : [];
+    const level = groupLevel(chapter.children ?? []);
+    if (own.length > 0) level.unshift({ title: "", stages: own });
+    const untitled = level.filter((w) => !w.title).length;
+    let area = 0;
+    for (const world of level) {
+      if (!world.title) {
+        area += 1;
+        world.title =
+          untitled === 1 ? chapter.title : `${chapter.title}（${area}）`;
+      }
+      worlds.push(world);
+    }
+  }
+  return worlds;
 }
 
 export function buildQuestMap(
@@ -195,6 +229,7 @@ export function buildQuestMap(
   progress: ProgressMap,
   freeMode = false,
   ratingOf?: RatingLookup,
+  worldDepth = 1,
 ): QuestMap {
   const empty: QuestMap = {
     planKey,
@@ -213,7 +248,10 @@ export function buildQuestMap(
   const stages: QuestStage[] = [];
   let previousWorld: QuestWorld | null = null;
 
-  for (const [worldIndex, rawWorld] of groupWorlds(root).entries()) {
+  for (const [worldIndex, rawWorld] of groupWorlds(
+    root,
+    worldDepth,
+  ).entries()) {
     const worldStages: QuestStage[] = [];
     for (const raw of rawWorld.stages) {
       const problems = toQuestProblems(raw.items, progress, ratingOf);

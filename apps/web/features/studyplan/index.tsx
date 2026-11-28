@@ -14,6 +14,7 @@ import {
   BookOpen,
   CheckCircle2,
   ChevronRight,
+  Compass,
   ExternalLink,
   FolderTree,
   Gamepad2,
@@ -21,12 +22,14 @@ import {
   Layers3,
 } from "lucide-react";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { extractImageUrls } from "./dedupe";
 import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { SectionQuickLinks } from "@/features/learning/components/SectionQuickLinks";
 import { SidebarVisibilityButtons } from "@/features/learning/components/SidebarVisibilityButtons";
 import { QuestCelebrations } from "@/features/quest/QuestCelebrations";
+import { adventureChapterFor } from "@/utils/adventurePlan";
+import { sectionAnchor } from "@/utils/sectionAnchor";
 import { getStudyPlanPracticeStats } from "@/features/learning/utils/sectionTree";
 import {
   getMergedStudyPlan,
@@ -38,15 +41,15 @@ interface StudyPlanProps {
 }
 
 function StudyPlan({ plan }: StudyPlanProps) {
-  const { studyPlan: fetchedStudyPlan } = useStudyPlan(plan);
-  const { tutorial } = useTutorial(plan);
-  const progress = useProgressMap();
-
   // Self-authored learning paths (進階刷題衝刺 等) no longer have a standalone
   // 講義 page; their prose is folded into the 題單 tree here. Upstream-backed
   // plans render their localized JSON summaries and link to standalone lectures.
   const merged = useMemo(() => getMergedStudyPlan(plan), [plan]);
   const mergedPath = isMergedLearningPath(plan);
+  const { studyPlan: fetchedStudyPlan } = useStudyPlan(plan, !mergedPath);
+  const { tutorial } = useTutorial(plan);
+  const progress = useProgressMap();
+  const adventureChapter = adventureChapterFor(plan);
   const studyPlan = mergedPath ? merged?.root : fetchedStudyPlan;
 
   const planTitle =
@@ -62,6 +65,36 @@ function StudyPlan({ plan }: StudyPlanProps) {
     () => (rootSummary ? extractImageUrls(rootSummary) : new Set<string>()),
     [rootSummary],
   );
+
+  // Deep links (#s-3, from 破關模式 or a merged plan's banner) arrive before
+  // the sections render, so the browser's own jump finds nothing. Retry
+  // briefly once the plan is on screen.
+  const hasPlan = Boolean(studyPlan);
+  useEffect(() => {
+    if (!hasPlan) return;
+    let attempts = 0;
+    let timer = 0;
+    // Client-side navigation may reset the scroll position right after we
+    // jump, so keep checking until the target stays near the top.
+    const tryScroll = () => {
+      // Read the hash each time: on client-side navigation the URL may only
+      // gain it after this effect first runs.
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!id) {
+        if (attempts++ < 5) timer = window.setTimeout(tryScroll, 100);
+        return;
+      }
+      const target = document.getElementById(id);
+      const settled =
+        target !== null && Math.abs(target.getBoundingClientRect().top) < 120;
+      if (target && !settled) target.scrollIntoView({ block: "start" });
+      if (!settled && attempts++ < 30) {
+        timer = window.setTimeout(tryScroll, 100);
+      }
+    };
+    timer = window.setTimeout(tryScroll, 50);
+    return () => window.clearTimeout(timer);
+  }, [hasPlan, plan]);
 
   const stats = useMemo(
     () => getStudyPlanPracticeStats(studyPlan, progress),
@@ -198,7 +231,7 @@ function StudyPlan({ plan }: StudyPlanProps) {
                         返回題單列表
                       </Link>
                       <Link
-                        href={`/quest/${plan}`}
+                        href={`/quest/${adventureChapter ? "adventure" : plan}`}
                         className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/20 px-3 py-1 font-medium text-white transition-colors hover:bg-white/30"
                       >
                         <Gamepad2 className="h-3.5 w-3.5" />
@@ -226,6 +259,23 @@ function StudyPlan({ plan }: StudyPlanProps) {
 
       <div className="page-shell px-3 py-5 pb-24 sm:px-4 sm:py-6 md:px-6 md:py-8 md:pb-20 xl:px-8">
         <div className="flex flex-col gap-8">
+          {adventureChapter && (
+            <Link
+              href={`/studyplan/adventure#${sectionAnchor(`${adventureChapter.number}. ${adventureChapter.title}`)}`}
+              className="group flex items-center gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-4 text-sm transition-colors hover:bg-primary/10"
+            >
+              <Compass className="h-5 w-5 shrink-0 text-primary" />
+              <span className="min-w-0 flex-1">
+                這份題單已整合進
+                <span className="font-semibold">
+                  「冒險路線」第 {adventureChapter.number} 章：
+                  {adventureChapter.title}
+                </span>
+                ，重複題目只保留第一次出現；進度會自動帶過去。
+              </span>
+              <ChevronRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+            </Link>
+          )}
           {rootSummary && (
             <section className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm">
               <div className="flex items-center gap-3 border-b border-border/60 bg-muted/20 px-4 py-3 sm:px-5">

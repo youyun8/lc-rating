@@ -10,6 +10,7 @@ import { ChevronDown } from "lucide-react";
 import React, { useMemo } from "react";
 import { StudyPlanMarkdownContent } from "./MarkdownContent";
 import { ProblemList } from "./ProblemList";
+import { RepeatedProblems } from "./RepeatedProblems";
 import { extractImageUrls, stripDuplicateImages } from "./dedupe";
 import { sectionAnchor } from "@/utils/sectionAnchor";
 import { countStudyPlanProblems } from "@/features/learning/utils/sectionTree";
@@ -115,6 +116,9 @@ const SectionContainer = React.memo(
               <div className="w-full">
                 <ProblemList problems={section.problems} />
               </div>
+            ) : null}
+            {section.repeats && section.repeats.length > 0 ? (
+              <RepeatedProblems repeats={section.repeats} />
             ) : null}
             {section.children && section.children.length > 0 && (
               <div className="flex w-full flex-col gap-4 border-t border-border/50 pt-1">

@@ -97,6 +97,14 @@ Do not hand-edit the 12 shared JSON files. Synchronize them through
 (`rating_2100`, `q3_handbook`, `q4_handbook`,
 `technical_interview`, `interview_sprint`, and `sorting`) remain local-owned.
 
+`adventure`（冒險路線）is not a JSON file: `utils/adventurePlan.ts` builds it at
+load time from five local plans in route order (`interview_sprint` →
+`technical_interview` → `q3_handbook` → `rating_2100` → `q4_handbook`), keeps
+each problem only at its first appearance, and lists later appearances as
+`repeats`. Those five plans stay the source of truth and their pages still
+build, but `HIDDEN_STUDYPLAN_KEYS` keeps them out of lists, navigation and
+破關模式 (`LISTED_STUDYPLANS`). Edit the source plans, not the merged route.
+
 Content rules:
 
 - Inline math uses `$…$` (KaTeX runs with `nonStandard: true`).

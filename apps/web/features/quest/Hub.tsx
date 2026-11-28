@@ -2,9 +2,9 @@
 
 import { SectionDivider } from "@/components/common/SectionDivider";
 import {
+  ADVENTURE_KEY,
   CUSTOM_STUDYPLAN_KEYS,
-  INTERVIEW_PREP_KEYS,
-  LEARNING_PATH_KEYS,
+  LISTED_STUDYPLANS,
   STUDYPLANS,
 } from "@/config/constants";
 import {
@@ -121,7 +121,7 @@ function QuestHub() {
   const profile = usePlayerProfile(maps);
   const mapList = useMemo(
     () =>
-      Object.keys(STUDYPLANS)
+      Object.keys(LISTED_STUDYPLANS)
         .map((key) => maps[key]!)
         .filter(Boolean),
     [maps],
@@ -150,9 +150,8 @@ function QuestHub() {
   const unlockedCount = profile.achievements.filter((a) => a.unlocked).length;
 
   const groups = [
+    ["冒險路線", mapList.filter((m) => m.planKey === ADVENTURE_KEY)],
     ["0x3F 題單", mapList.filter((m) => !CUSTOM_STUDYPLAN_KEYS.has(m.planKey))],
-    ["學習路線", mapList.filter((m) => LEARNING_PATH_KEYS.has(m.planKey))],
-    ["面試準備", mapList.filter((m) => INTERVIEW_PREP_KEYS.has(m.planKey))],
   ] as const;
 
   const resumeStage = resume?.currentStage ?? null;
