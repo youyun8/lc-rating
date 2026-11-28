@@ -9,10 +9,13 @@ import {
   studyPlanThemes,
   defaultTheme,
 } from "@/config/studyPlanThemes";
+import { ChapterNav } from "./ChapterNav";
 import { SectionContainer } from "./SectionContainer";
+import { cn } from "@/lib/utils";
 import {
   BookOpen,
   CheckCircle2,
+  ChevronDown,
   ChevronRight,
   Compass,
   ExternalLink,
@@ -21,17 +24,92 @@ import {
   GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { extractImageUrls } from "./dedupe";
 import { StudyPlanMarkdownContent } from "./MarkdownContent";
-import { SectionQuickLinks } from "@/features/learning/components/SectionQuickLinks";
-import { SidebarVisibilityButtons } from "@/features/learning/components/SidebarVisibilityButtons";
 import { QuestCelebrations } from "@/features/quest/QuestCelebrations";
 import { getStudyPlanPracticeStats } from "@/features/learning/utils/sectionTree";
 import {
   getMergedStudyPlan,
   isMergedLearningPath,
 } from "@/features/learning/utils/mergeStudyPlanContent";
+
+/** The plan's introduction, folded to a preview until the reader asks. */
+function PlanOverview({
+  summary,
+  lectureHref,
+  accent,
+  gradient,
+  merged,
+}: {
+  summary: string;
+  lectureHref: string | null;
+  accent: string;
+  gradient: string;
+  merged: boolean;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <section className="overflow-hidden rounded-2xl border border-border/70 bg-card">
+      <div className="flex items-center gap-3 px-4 py-3 sm:px-5">
+        <span
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white"
+          style={{ background: gradient }}
+        >
+          <GraduationCap className="h-4.5 w-4.5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h2 className="font-bold">課程總覽</h2>
+          <p className="truncate text-xs text-muted-foreground">
+            {merged
+              ? "觀念說明已整合進各章節，展開「本章導讀」與「重點整理」即可閱讀。"
+              : "先讀導讀，再依章節順序練習；完整觀念與模板在講義。"}
+          </p>
+        </div>
+        {lectureHref && (
+          <Link
+            href={lectureHref}
+            className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-border/70 px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
+            style={{ color: accent }}
+          >
+            講義
+            <ChevronRight className="h-4 w-4" />
+          </Link>
+        )}
+      </div>
+      {summary && (
+        <div className="relative border-t border-border/60">
+          <div
+            className={cn(
+              "px-4 py-4 sm:px-5",
+              !expanded && "max-h-40 overflow-hidden",
+            )}
+          >
+            <StudyPlanMarkdownContent content={summary} variant="section" />
+          </div>
+          {!expanded && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent" />
+          )}
+          <div className="relative flex justify-center pb-3">
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="inline-flex items-center gap-1 rounded-full border border-border/70 bg-card px-3.5 py-1 text-xs font-semibold text-muted-foreground shadow-sm hover:text-foreground"
+            >
+              {expanded ? "收起" : "展開全文"}
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 transition-transform",
+                  expanded && "rotate-180",
+                )}
+              />
+            </button>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
 
 interface StudyPlanProps {
   plan: string;
@@ -183,8 +261,16 @@ function StudyPlan({ plan }: StudyPlanProps) {
         </div>
       )}
 
-      <div className="page-shell px-3 py-5 pb-24 sm:px-4 sm:py-6 md:px-6 md:py-8 md:pb-20 xl:px-8">
-        <div className="flex flex-col gap-8">
+      <div
+        className="page-shell px-3 pb-24 pt-5 sm:px-4 sm:pt-6 md:px-6 md:pb-20 xl:px-8"
+        style={
+          {
+            "--plan-accent": theme.accent,
+            "--plan-gradient": theme.gradient,
+          } as React.CSSProperties
+        }
+      >
+        <div className="flex flex-col gap-4">
           {mergedIntoAdventure && (
             <Link
               href="/studyplan/adventure"
@@ -199,110 +285,37 @@ function StudyPlan({ plan }: StudyPlanProps) {
               <ChevronRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
             </Link>
           )}
-          {rootSummary && (
-            <section className="overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm">
-              <div className="flex items-center gap-3 border-b border-border/60 bg-muted/20 px-4 py-3 sm:px-5">
-                <div
-                  className="shrink-0 rounded-2xl p-2.5 ring-1 ring-border/60"
-                  style={{ background: theme.gradient }}
-                >
-                  <GraduationCap className="h-5 w-5 text-white drop-shadow-sm" />
-                </div>
-                <div className="min-w-0">
-                  <h2 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
-                    課程總覽
-                  </h2>
-                  <p className="mt-0.5 text-sm text-muted-foreground">
-                    {mergedPath
-                      ? "觀念說明已整合進本題單；下方各章節同時附上重點講解與練習題。"
-                      : "先閱讀原題單導讀，再依下方章節順序完成練習；完整觀念與模板請前往講義。"}
-                  </p>
-                </div>
-              </div>
-              <div className="p-4 sm:p-5">
-                <StudyPlanMarkdownContent
-                  content={rootSummary}
-                  variant="section"
-                />
-              </div>
-            </section>
-          )}
 
-          {!mergedPath && tutorial && (
-            <Link
-              href={`/lecture/${plan}`}
-              className="group block overflow-hidden rounded-[1.75rem] border border-border/60 bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-            >
-              <div className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-5">
-                <div className="flex items-start gap-3 sm:items-center">
-                  <div
-                    className="shrink-0 rounded-2xl p-3 ring-1 ring-border/60"
-                    style={{ background: theme.gradient }}
-                  >
-                    <GraduationCap className="h-5 w-5 text-white drop-shadow-sm" />
-                  </div>
-                  <div className="min-w-0">
-                    <h2 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
-                      想看觀念說明？前往對應講義
-                    </h2>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      此頁專注題目練習；題型概念、模板與例題請至講義頁閱讀。
-                    </p>
-                  </div>
-                </div>
-                <span
-                  className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-border/60 bg-background px-3 py-1.5 text-sm font-medium transition-colors group-hover:border-primary/40 sm:self-auto"
-                  style={{ color: theme.accent }}
-                >
-                  閱讀講義
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </div>
-            </Link>
-          )}
-
-          {studyPlan && (
-            <section className="rounded-2xl border border-border/60 bg-muted/20 p-4 shadow-sm sm:p-5">
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                <div>
-                  <h2 className="text-base font-semibold tracking-tight text-foreground">
-                    章節導覽
-                  </h2>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    依照章節順序循序練習；也可用側欄導覽快速跳轉到指定章節。
-                  </p>
-                </div>
-                <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                  <SidebarVisibilityButtons />
-                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-                    {stats.rootSections} 個主章節
-                  </span>
-                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-                    {stats.sections} 個總章節
-                  </span>
-                  <span className="rounded-full border border-border/60 bg-background px-2.5 py-1">
-                    {stats.total} 題
-                  </span>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {studyPlan && (
-            <SectionQuickLinks
-              sections={studyPlan.children}
-              description="可先打開側欄查看完整章節樹，或直接用下方章節捷徑快速跳轉。"
+          {(rootSummary || (!mergedPath && tutorial)) && (
+            <PlanOverview
+              summary={rootSummary}
+              lectureHref={!mergedPath && tutorial ? `/lecture/${plan}` : null}
+              accent={theme.accent}
+              gradient={theme.gradient}
+              merged={mergedPath}
             />
           )}
-
-          {studyPlan?.children.map((section) => (
-            <SectionContainer
-              key={section.id}
-              section={section}
-              parentImageUrls={topLevelImageUrls}
-            />
-          ))}
         </div>
+
+        {studyPlan && (
+          <>
+            <div className="mt-4">
+              <ChapterNav sections={studyPlan.children} variant="bar" />
+            </div>
+            <div className="mt-6 grid gap-8 xl:grid-cols-[15rem_minmax(0,1fr)]">
+              <ChapterNav sections={studyPlan.children} variant="rail" />
+              <div className="min-w-0 space-y-12">
+                {studyPlan.children.map((section) => (
+                  <SectionContainer
+                    key={section.id}
+                    section={section}
+                    parentImageUrls={topLevelImageUrls}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

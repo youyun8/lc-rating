@@ -648,6 +648,14 @@ html[data-reading-width="full"] {
     }
   }
 
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
   .font-num {
     font-family: var(--font-num);
     font-variant-numeric: tabular-nums;

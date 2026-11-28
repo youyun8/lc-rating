@@ -73,10 +73,17 @@ const ProgressSelector = React.memo(
         <SelectTrigger
           className={cn(
             "rounded-md dark:border-muted-foreground/20 dark:bg-muted/30",
+            optValue.key === todoOption.key && "text-muted-foreground",
             triggerClassName ?? "min-w-[7rem] max-w-[12rem]",
           )}
           title={optValue.label || optValue.key}
-          style={{ color: optValue.color }}
+          // The default (未開始) colour is a fixed grey that vanishes on dark
+          // backgrounds; let it use the theme's muted text instead.
+          style={
+            optValue.key === todoOption.key
+              ? undefined
+              : { color: optValue.color }
+          }
         >
           <SelectValue />
         </SelectTrigger>
