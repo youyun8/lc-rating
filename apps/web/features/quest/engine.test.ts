@@ -4,6 +4,7 @@ import test from "node:test";
 import type { StudyPlanData } from "@/types";
 
 import {
+  activityCalendar,
   buildQuestMap,
   computeAchievements,
   computeStreak,
@@ -290,4 +291,25 @@ test("with world depth 2, each chapter's first world starts open", () => {
     map.worlds.map((w) => w.unlocked),
     [true, false, true],
   );
+});
+
+test("regions group worlds by chapter for depth-2 plans", () => {
+  const flat = buildQuestMap("p", nestedPlan, {});
+  assert.equal(flat.regions.length, 1);
+  assert.equal(flat.regions[0]!.worlds.length, flat.worlds.length);
+});
+
+test("activity calendar counts solves per day and ends today", () => {
+  const now = new Date(2026, 10, 28, 15).getTime(); // a Saturday
+  const day = 24 * 60 * 60 * 1000;
+  const days = activityCalendar(
+    { a: "SOLVED", b: "SOLVED", c: "TRIED" },
+    { a: now, b: now - day, c: now },
+    2,
+    now,
+  );
+  assert.equal(days.length, 7 + 7);
+  assert.equal(days[0]!.date.getDay(), 0);
+  assert.equal(days.at(-1)!.solved, 1);
+  assert.equal(days.at(-2)!.solved, 1);
 });

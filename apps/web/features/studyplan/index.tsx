@@ -19,7 +19,6 @@ import {
   FolderTree,
   Gamepad2,
   GraduationCap,
-  Layers3,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo } from "react";
@@ -103,152 +102,81 @@ function StudyPlan({ plan }: StudyPlanProps) {
     <div className="flex min-h-screen w-full flex-col bg-background font-han">
       <QuestCelebrations />
       {studyPlan && (
-        <div className="page-shell px-3 pt-4 sm:px-4 sm:pt-6 md:px-6 md:pt-8 xl:px-8">
+        <div className="page-shell px-3 pt-4 sm:px-4 sm:pt-6 md:px-6 xl:px-8">
           <div
-            className="motion-rise relative overflow-hidden rounded-[1.75rem] shadow-[0_30px_70px_-40px_rgba(0,0,0,0.35)] sm:rounded-[2rem]"
+            className="motion-rise relative overflow-hidden rounded-3xl text-white shadow-lg"
             style={{ background: theme.gradient }}
           >
-            <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-white/10" />
-            <div className="absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-white/5" />
-            <div className="absolute top-8 right-1/4 h-24 w-24 rounded-full bg-white/5" />
+            <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-white/10" />
+            <div className="relative flex flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="min-w-0">
+                <nav className="mb-3 flex items-center gap-1.5 text-xs text-white/70">
+                  <Link href="/studyplan" className="hover:text-white">
+                    題單
+                  </Link>
+                  <ChevronRight className="h-3 w-3" />
+                  <span className="truncate text-white/90">{planTitle}</span>
+                </nav>
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/20">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <h1 className="text-xl font-bold leading-tight tracking-tight sm:text-2xl xl:text-3xl">
+                    {studyPlan.title}
+                  </h1>
+                </div>
+                <div className="font-num mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/80">
+                  <span className="inline-flex items-center gap-1">
+                    <BookOpen className="h-3.5 w-3.5" />
+                    {stats.total} 題
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <FolderTree className="h-3.5 w-3.5" />
+                    {stats.sections} 節
+                  </span>
+                  {studyPlan.last_update && (
+                    <span>
+                      更新於{" "}
+                      {new Date(studyPlan.last_update).toLocaleDateString()}
+                    </span>
+                  )}
+                  {studyPlan.src && (
+                    <a
+                      href={studyPlan.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 hover:text-white"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      原文
+                    </a>
+                  )}
+                </div>
+              </div>
 
-            <div className="relative p-4 sm:p-6 md:p-8 xl:p-10">
-              <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-sm text-white/70">
+              <div className="w-full shrink-0 lg:w-80">
+                <div className="flex items-baseline justify-between text-sm">
+                  <span className="inline-flex items-center gap-1.5 text-white/85">
+                    <CheckCircle2 className="h-4 w-4" />
+                    已完成
+                  </span>
+                  <span className="font-num font-bold">
+                    {stats.completed}/{stats.total} · {stats.pct}%
+                  </span>
+                </div>
+                <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/25">
+                  <div
+                    className="h-full rounded-full bg-white transition-[width] duration-700"
+                    style={{ width: `${stats.pct}%` }}
+                  />
+                </div>
                 <Link
-                  href="/studyplan"
-                  className="transition-colors hover:text-white"
+                  href={`/quest/${mergedIntoAdventure ? "adventure" : plan}`}
+                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white py-2.5 text-sm font-bold text-foreground shadow-md transition-transform hover:-translate-y-px"
                 >
-                  題單
+                  <Gamepad2 className="h-4 w-4" />
+                  用破關模式玩這份題單
                 </Link>
-                <ChevronRight className="h-3.5 w-3.5" />
-                <span className="font-medium text-white">{planTitle}</span>
-              </nav>
-
-              <div className="flex flex-col gap-5 lg:gap-6 2xl:grid 2xl:grid-cols-[minmax(0,1.5fr)_minmax(20rem,28rem)] 2xl:items-start 2xl:gap-8">
-                <div className="min-w-0">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="shrink-0 rounded-2xl bg-white/15 p-3 backdrop-blur-sm ring-1 ring-white/20 sm:p-3.5">
-                      <Icon className="h-7 w-7 text-white drop-shadow-sm sm:h-8 sm:w-8" />
-                    </div>
-                    <div className="min-w-0">
-                      <h1 className="text-xl font-bold tracking-tight text-white sm:text-3xl xl:text-4xl">
-                        {studyPlan.title}
-                      </h1>
-                      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-white/70 sm:text-sm">
-                        {studyPlan.src && (
-                          <>
-                            <a
-                              href={studyPlan.src}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 transition-colors hover:text-white"
-                            >
-                              <ExternalLink className="h-3.5 w-3.5" />
-                              查看原文
-                            </a>
-                            <span className="hidden sm:inline">·</span>
-                          </>
-                        )}
-                        {studyPlan.last_update && (
-                          <>
-                            <span>
-                              更新於{" "}
-                              {new Date(
-                                studyPlan.last_update,
-                              ).toLocaleDateString()}
-                            </span>
-                            <span className="hidden sm:inline">·</span>
-                          </>
-                        )}
-                        <span>{stats.rootSections} 個主章節</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] 2xl:grid-cols-1 2xl:self-stretch">
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2 2xl:grid-cols-2">
-                    <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/10 sm:p-4">
-                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
-                        <BookOpen className="h-4 w-4" />
-                        題目
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">
-                        {stats.total}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/10 sm:p-4">
-                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
-                        <FolderTree className="h-4 w-4" />
-                        章節
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">
-                        {stats.sections}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/10 sm:p-4">
-                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
-                        <CheckCircle2 className="h-4 w-4" />
-                        已完成
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">
-                        {stats.completed}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/10 sm:p-4">
-                      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-white/65">
-                        <Layers3 className="h-4 w-4" />
-                        完成率
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">
-                        {stats.pct}%
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl bg-white/12 p-4 backdrop-blur-sm ring-1 ring-white/10 2xl:h-full">
-                    <div className="mb-2 flex items-center justify-between gap-3 text-xs text-white/70">
-                      <span>
-                        已完成 {stats.completed} / {stats.total} 題
-                      </span>
-                      <span className="font-semibold text-white">
-                        {stats.pct}%
-                      </span>
-                    </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-white/20">
-                      <div
-                        className="h-full rounded-full bg-white/90 transition-all duration-500"
-                        style={{ width: `${stats.pct}%` }}
-                      />
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-white/75">
-                      <Link
-                        href="/studyplan"
-                        className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
-                      >
-                        返回題單列表
-                      </Link>
-                      <Link
-                        href={`/quest/${mergedIntoAdventure ? "adventure" : plan}`}
-                        className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/20 px-3 py-1 font-medium text-white transition-colors hover:bg-white/30"
-                      >
-                        <Gamepad2 className="h-3.5 w-3.5" />
-                        破關模式
-                      </Link>
-                      {studyPlan.src && (
-                        <a
-                          href={studyPlan.src}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 py-1 transition-colors hover:bg-white/15"
-                        >
-                          原文連結
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

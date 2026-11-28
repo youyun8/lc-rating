@@ -7,6 +7,8 @@ import { BASE_PATH } from "@/config/constants";
 import type { Metadata, Viewport } from "next";
 import "@fontsource/ubuntu-mono/400.css";
 import "@fontsource/ubuntu-mono/700.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "@fontsource/jetbrains-mono/700.css";
 import "./globals.css";
 import "katex/dist/katex.min.css";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
@@ -37,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="zh" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden font-han`}
+        className={`mt-[var(--navbar-height)] min-h-screen overflow-x-hidden pb-[calc(var(--mobile-tabbar-height)+env(safe-area-inset-bottom))] font-han`}
       >
         <Provider>
           <AuthTokenHandler />

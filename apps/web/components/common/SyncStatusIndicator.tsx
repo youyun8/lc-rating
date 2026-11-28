@@ -37,7 +37,7 @@ const SyncStatusIndicator = () => {
 
   return (
     <div
-      className="pointer-events-none fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-4 z-[9998] flex items-center gap-1.5 rounded-full border bg-background/95 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur transition-opacity supports-[backdrop-filter]:bg-background/85 sm:left-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]"
+      className="pointer-events-none fixed bottom-[calc(1rem+env(safe-area-inset-bottom)+var(--mobile-tabbar-height))] left-4 z-[9998] flex items-center gap-1.5 rounded-full border bg-background/95 px-3 py-1.5 text-xs font-medium shadow-lg backdrop-blur transition-opacity supports-[backdrop-filter]:bg-background/85 sm:left-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom)+var(--mobile-tabbar-height))]"
       role="status"
       aria-live="polite"
     >

@@ -65,27 +65,27 @@ export function StudyPlanCard({
   return (
     <Link href={`/studyplan/${planKey}`} className="block h-full">
       <div
-        className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--card-accent-dark)]/50 hover:shadow-lg"
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--card-accent-dark)]/50 hover:shadow-lg"
         style={
           { "--card-accent-dark": theme.accentDark } as React.CSSProperties
         }
       >
         {/* Gradient Banner */}
         <div
-          className="relative h-28 overflow-hidden sm:h-32"
+          className="relative h-16 overflow-hidden"
           style={{ background: theme.gradient }}
         >
           <div className="absolute -top-6 -right-6 h-24 w-24 rounded-full bg-white/10" />
           <div className="absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-white/5" />
           <div className="absolute top-3 right-3 h-16 w-16 rounded-full bg-white/5" />
-          <div className="absolute right-3 top-3">
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
             <Badge className="border-white/15 bg-white/15 text-white backdrop-blur-sm">
               {pct === 100 ? "已完成" : pct > 0 ? `${pct}% 進行中` : "未開始"}
             </Badge>
           </div>
-          <div className="relative flex h-full items-center justify-center">
-            <div className="rounded-2xl bg-white/15 p-3.5 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-110">
-              <Icon className="h-8 w-8 text-white drop-shadow-sm" />
+          <div className="relative flex h-full items-center px-4 sm:px-5">
+            <div className="rounded-xl bg-white/15 p-2 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-110">
+              <Icon className="h-5 w-5 text-white drop-shadow-sm" />
             </div>
           </div>
         </div>

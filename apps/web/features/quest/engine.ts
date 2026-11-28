@@ -52,6 +52,19 @@ export interface QuestWorld {
   cleared: boolean;
   /** Highest-rated problem of the world: the 魔王題. */
   boss: QuestProblem | null;
+  /** Region index (a 冒險路線 topic); 0 for plans without regions. */
+  region: number;
+}
+
+/** A group of worlds: a 冒險路線 topic, or the whole plan otherwise. */
+export interface QuestRegion {
+  index: number;
+  title: string;
+  worlds: QuestWorld[];
+  solved: number;
+  total: number;
+  stars: number;
+  maxStars: number;
 }
 
 export interface QuestMap {
@@ -63,6 +76,8 @@ export interface QuestMap {
   stars: number;
   maxStars: number;
   clearedStages: number;
+  /** Worlds grouped by region; a single region for plans without topics. */
+  regions: QuestRegion[];
   /** The stage the player should play next (null when everything is perfect). */
   currentStage: QuestStage | null;
 }
@@ -156,6 +171,7 @@ interface RawWorld {
    * group (a 冒險路線 topic) is always open, so topics are independent.
    */
   group?: number;
+  groupTitle?: string;
 }
 
 /**
@@ -222,7 +238,7 @@ function groupWorlds(root: StudyPlanData.Root, worldDepth = 1): RawWorld[] {
         world.title =
           untitled === 1 ? chapter.title : `${chapter.title}（${area}）`;
       }
-      worlds.push({ ...world, group });
+      worlds.push({ ...world, group, groupTitle: chapter.title });
     }
   }
   return worlds;
@@ -245,6 +261,7 @@ export function buildQuestMap(
     stars: 0,
     maxStars: 0,
     clearedStages: 0,
+    regions: [],
     currentStage: null,
   };
   if (!root) return empty;
@@ -253,6 +270,7 @@ export function buildQuestMap(
   const stages: QuestStage[] = [];
   let previousWorld: QuestWorld | null = null;
   let previousGroup: number | undefined;
+  const regionTitles = new Map<number, string>();
 
   for (const [worldIndex, rawWorld] of groupWorlds(
     root,
@@ -333,7 +351,9 @@ export function buildQuestMap(
       unlocked,
       cleared: worldStages.every((s) => s.stars > 0),
       boss,
+      region: rawWorld.group ?? 0,
     };
+    regionTitles.set(world.region, rawWorld.groupTitle ?? root.title);
     for (const stage of worldStages) stage.worldIndex = world.index;
     worlds.push(world);
     previousGroup = rawWorld.group;
@@ -355,8 +375,34 @@ export function buildQuestMap(
     stars: stages.reduce((acc, s) => acc + s.stars, 0),
     maxStars: stages.length * 3,
     clearedStages: stages.filter((s) => s.stars > 0).length,
+    regions: buildRegions(worlds, regionTitles),
     currentStage,
   };
+}
+
+function buildRegions(
+  worlds: QuestWorld[],
+  titles: Map<number, string>,
+): QuestRegion[] {
+  const regions = new Map<number, QuestRegion>();
+  for (const world of worlds) {
+    const region = regions.get(world.region) ?? {
+      index: regions.size,
+      title: titles.get(world.region) ?? "",
+      worlds: [],
+      solved: 0,
+      total: 0,
+      stars: 0,
+      maxStars: 0,
+    };
+    region.worlds.push(world);
+    region.solved += world.solved;
+    region.total += world.total;
+    region.stars += world.stars;
+    region.maxStars += world.maxStars;
+    regions.set(world.region, region);
+  }
+  return [...regions.values()];
 }
 
 /**
@@ -447,7 +493,7 @@ export function computeXp(maps: QuestMap[]): number {
   return xp;
 }
 
-function dayKey(time: number): string {
+export function dayKey(time: number): string {
   const d = new Date(time);
   return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 }
@@ -488,6 +534,42 @@ export function computeStreak(
     cursor.setDate(cursor.getDate() - 1);
   }
   return { streak, solvedToday, activeToday: solvedToday > 0 };
+}
+
+export interface ActivityDay {
+  key: string;
+  /** Local midnight of the day. */
+  date: Date;
+  solved: number;
+}
+
+/**
+ * Problems marked solved per day over the last `weeks` weeks, oldest first,
+ * aligned so the grid ends on today's weekday column (Sunday-first rows).
+ */
+export function activityCalendar(
+  progress: ProgressMap,
+  updatedAt: Record<string, number>,
+  weeks = 18,
+  now = Date.now(),
+): ActivityDay[] {
+  const counts = new Map<string, number>();
+  for (const [id, status] of Object.entries(progress)) {
+    const time = updatedAt[id];
+    if (status !== SOLVED_KEY || !time) continue;
+    const key = dayKey(time);
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  const today = new Date(now);
+  const end = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const start = new Date(end);
+  start.setDate(end.getDate() - (weeks - 1) * 7 - end.getDay());
+  const days: ActivityDay[] = [];
+  for (const d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+    const key = dayKey(d.getTime());
+    days.push({ key, date: new Date(d), solved: counts.get(key) ?? 0 });
+  }
+  return days;
 }
 
 export interface Achievement {
